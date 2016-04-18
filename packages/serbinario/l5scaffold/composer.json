@@ -1,0 +1,17 @@
+{
+    "name": "serbinario/l5scaffold",
+    "description": "Generate crud",
+    "authors": [
+        {
+            "name": "Paulo Vaz",
+            "email": "paulo@serbinario.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Serbinario\\L5scaffold\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

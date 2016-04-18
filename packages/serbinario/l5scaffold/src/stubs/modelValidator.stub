@@ -1,0 +1,21 @@
+<?php
+
+namespace $NAMESPACE$Validators;
+
+use \Prettus\Validator\Contracts\ValidatorInterface;
+use \Prettus\Validator\LaravelValidator;
+
+class $CLASS$Validator extends LaravelValidator
+{
+    use TraitReplaceRulesValidator;
+
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            $VALIDATORS$
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            $VALIDATORS$
+        ],
+   ];
+
+}
