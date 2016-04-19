@@ -193,6 +193,15 @@ class AlunoService
         //$data['data_exame_nacional_um']   = $this->convertDate($data['data_exame_nacional_um'], 'pt-BR');
         //$data['data_exame_nacional_dois'] = $this->convertDate($data['data_exame_nacional_dois'], 'pt-BR');
 
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
         #retorno
         return $data;
     }

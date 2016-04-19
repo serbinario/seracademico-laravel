@@ -69,8 +69,6 @@ class UtilController extends Controller
 
             #preparando a consulta
             $qb = DB::table($tableName)->select('id', 'nome');
-            $qb->skip($pageValue);
-            $qb->take(10);
             $qb->orderBy('nome', 'asc');
             $qb->where($fieldName,'like', "%$searchValue%");
 
@@ -93,6 +91,13 @@ class UtilController extends Controller
             }
 
             #executando a consulta e recuperando os dados
+            $resultTotal = $qb->get();
+
+            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
+
+            $qb->skip($pageValue);
+            $qb->take(5);
+
             $resultItems = $qb->get();
 
             #criando o array de retorno
@@ -103,8 +108,13 @@ class UtilController extends Controller
                 ];
             }
 
+            $resultRetorno = [
+                'data' => $result,
+                'more' => ($pageValue + 5) < count($resultTotal)
+            ];
+
             #retorno
-            return $result;
+            return $resultRetorno;
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json([
                 'error' => $e->getMessage()

@@ -183,7 +183,7 @@
                         'search':         params.term, // search term
                         'tableName':      'fac_disciplinas',
                         'fieldName':      'nome',
-                        'page':           params.page,
+                        'page':           params.page || 1,
                         'tableNotIn':     'fac_curriculo_disciplina',
                         'columnWhere' :   'curriculo_id',
                         'columnNotWhere': 'id',
@@ -203,9 +203,9 @@
                     params.page = params.page || 1;
 
                     return {
-                        results: data,
+                        results: data.data,
                         pagination: {
-                            more: (params.page * 30) < data.total_count
+                            more: data.more
                         }
                     };
                 }

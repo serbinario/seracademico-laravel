@@ -112,11 +112,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
-                                {!! Form::select('cores_racas_id', $loadFields['corraca'], Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
+                                {!! Form::select('cores_racas_id', ([null => 'Selecione uma opção'] + $loadFields['corraca']->toArray()), Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('tipos_sanguinios_id', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('tipos_sanguinios_id', $loadFields['tiposanguinio'] , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
+                                {!! Form::select('tipos_sanguinios_id', ([null => 'Selecione uma opção'] + $loadFields['tiposanguinio']->toArray()) , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">

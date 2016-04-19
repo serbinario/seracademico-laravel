@@ -131,22 +131,6 @@ class CalendarioDisciplinaTurmaService
      * @param array $data
      * @return mixed
      */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['data']         = $data['data'] ? Carbon::createFromFormat("d/m/Y", $data['data']) : "";
-        $data['data_final']   = $data['data_final'] ? Carbon::createFromFormat("d/m/Y", $data['data_final']) : "";
-        $data['hora_inicial'] = $data['hora_inicial'] ? Carbon::createFromFormat("H:i:s", $data['hora_inicial']) : "";
-        $data['hora_final']   = $data['hora_final'] ? Carbon::createFromFormat("H:i:s", $data['hora_final']) : "";
-
-        #retorno
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
     public function tratamentoCampos(array &$data) : array
     {
         $data['professor_id'] = $data['professor_id'] == "" ? null : $data['professor_id'];

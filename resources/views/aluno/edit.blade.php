@@ -135,7 +135,7 @@
                             'fieldName':  'nome',
                             'fieldWhere':  'nivel',
                             'valueWhere':  '3',
-                            'page':       params.page
+                            'page':       params.page || 1
                         };
                     },
                     headers: {
@@ -150,9 +150,9 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
-                                more: (params.page * 30) < data.total_count
+                                more: data.more
                             }
                         };
                     }
@@ -175,7 +175,7 @@
                             'search':     params.term, // search term
                             'tableName':  'fac_cursos_superiores',
                             'fieldName':  'nome',
-                            'page':       params.page
+                            'page':       params.page || 1
                         };
                     },
                     headers: {
@@ -190,9 +190,9 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
-                                more: (params.page * 30) < data.total_count
+                                more: data.more
                             }
                         };
                     }
