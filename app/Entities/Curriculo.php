@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Uteis\SerbinarioDateFormat;
+use Carbon\Carbon;
 
 class Curriculo extends Model implements Transformable
 {
@@ -68,4 +69,35 @@ class Curriculo extends Model implements Transformable
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['valido_fim']);
     }
+
+    /**
+     * @return string
+     */
+    public function setValidoInicioAttribute($value)
+    {
+        if($value) {
+            $date = Carbon::createFromFormat('d/m/Y', $value);
+            $date->format('Y-m-d');
+        } else {
+            $date = null;
+        }
+
+        $this->attributes['valido_inicio'] = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function setValidoFimAttribute($value)
+    {
+        if($value) {
+            $date = Carbon::createFromFormat('d/m/Y', $value);
+            $date->format('Y-m-d');
+        } else {
+            $date = null;
+        }
+
+        $this->attributes['valido_fim'] = $date;
+    }
+
 }

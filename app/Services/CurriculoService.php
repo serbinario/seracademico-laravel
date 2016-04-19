@@ -61,8 +61,8 @@ class CurriculoService
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
-        $this->tratamentoDatas($data);
-
+        //$this->tratamentoDatas($data);
+        //dd($data);
         #Salvando o registro pincipal
         $curriculo =  $this->repository->create($data);
 
@@ -199,8 +199,8 @@ class CurriculoService
     public function tratamentoDatas(array &$data) : array
     {
         #tratando as datas
-        $data['valido_inicio'] = $data['valido_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['valido_inicio']) : "";
-        $data['valido_fim']    = $data['valido_fim'] ? Carbon::createFromFormat("d/m/Y", $data['valido_fim']) : "";
+        $data['valido_inicio'] = $data['valido_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['valido_inicio']) : null;
+        $data['valido_fim']    = $data['valido_fim'] ? Carbon::createFromFormat("d/m/Y", $data['valido_fim']) : null;
 
         #retorno
         return $data;
