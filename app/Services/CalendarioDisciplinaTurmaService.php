@@ -58,7 +58,6 @@ class CalendarioDisciplinaTurmaService
     public function store(array $data) : CalendarioDisciplinaTurma
     {
         #Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoCampos($data);
 
         #Salvando o registro pincipal
@@ -81,7 +80,6 @@ class CalendarioDisciplinaTurmaService
     public function update(array $data, int $id) : CalendarioDisciplinaTurma
     {
         #Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoCampos($data);
 
         #Atualizando no banco de dados

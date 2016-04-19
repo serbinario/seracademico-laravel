@@ -106,7 +106,6 @@ class AlunoTurmaService
     {
         # Aplicação de regras de negócio
         $this->tratamentoCampos($data);
-        $this->tratamentoDatas($data);
 
         #Recuperando o aluno e a turma
         $aluno = $this->alunoRepository->find($data['aluno_id']);
@@ -188,22 +187,6 @@ class AlunoTurmaService
         #Retorno
         return $data;
     }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['defesa']         = $data['defesa'] ? Carbon::createFromFormat("d/m/Y", $data['defesa']) : "";
-        $data['data_conclusao'] = $data['data_conclusao'] ? Carbon::createFromFormat("d/m/Y", $data['data_conclusao']) : "";
-        $data['data_colacao']   = $data['data_colacao'] ? Carbon::createFromFormat("d/m/Y", $data['data_colacao']) : "";
-
-        #retorno
-        return $data;
-    }
-
 
     /**
      * @param int $idAluno

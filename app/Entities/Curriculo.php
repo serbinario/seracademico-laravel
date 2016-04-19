@@ -75,14 +75,7 @@ class Curriculo extends Model implements Transformable
      */
     public function setValidoInicioAttribute($value)
     {
-        if($value) {
-            $date = Carbon::createFromFormat('d/m/Y', $value);
-            $date->format('Y-m-d');
-        } else {
-            $date = null;
-        }
-
-        $this->attributes['valido_inicio'] = $date;
+        $this->attributes['valido_inicio'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
@@ -90,14 +83,6 @@ class Curriculo extends Model implements Transformable
      */
     public function setValidoFimAttribute($value)
     {
-        if($value) {
-            $date = Carbon::createFromFormat('d/m/Y', $value);
-            $date->format('Y-m-d');
-        } else {
-            $date = null;
-        }
-
-        $this->attributes['valido_fim'] = $date;
+        $this->attributes['valido_fim'] = SerbinarioDateFormat::toUsa($value);
     }
-
 }

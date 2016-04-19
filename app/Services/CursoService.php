@@ -47,7 +47,7 @@ class CursoService
     public function store(array $data) : Curso
     {
         #Salvando o registro pincipal
-        $curso =  $this->repository->create($this->tratamentoDatas($data));
+        $curso =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
         if(!$curso) {
@@ -66,7 +66,7 @@ class CursoService
     public function update(array $data, int $id) : Curso
     {
         #Atualizando no banco de dados
-        $curso = $this->repository->update($this->tratamentoDatas($data), $id);
+        $curso = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$curso) {
@@ -116,26 +116,5 @@ class CursoService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array $data) : array
-    {
-        #tratando as datas
-        $data['data_decreto_rec']      = $data['data_decreto_rec'] ? Carbon::createFromFormat("d/m/Y", $data['data_decreto_rec']) : "";
-        $data['data_dou_rec']          = $data['data_dou_rec'] ? Carbon::createFromFormat("d/m/Y", $data['data_dou_rec']) : "";
-        $data['data_decreto_aut']      = $data['data_decreto_aut'] ? Carbon::createFromFormat("d/m/Y", $data['data_decreto_aut']) : "";
-        $data['data_dou_aut']          = $data['data_dou_aut'] ? Carbon::createFromFormat("d/m/Y", $data['data_dou_aut']) : "";
-        $data['data_matricula_inicio'] = $data['data_matricula_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['data_matricula_inicio']) : "";
-        $data['data_matricula_fim']    = $data['data_matricula_fim'] ? Carbon::createFromFormat("d/m/Y", $data['data_matricula_fim']) : "";
-        $data['inicio_aula']           = $data['inicio_aula'] ? Carbon::createFromFormat("d/m/Y", $data['inicio_aula']) : "";
-        $data['fim_aula']              = $data['fim_aula'] ? Carbon::createFromFormat("d/m/Y", $data['fim_aula']) : "";
-        $data['vencimento_inicial']    = $data['vencimento_inicial'] ? Carbon::createFromFormat("d/m/Y", $data['vencimento_inicial']) : "";
-
-        #retorno
-        return $data;
     }
 }

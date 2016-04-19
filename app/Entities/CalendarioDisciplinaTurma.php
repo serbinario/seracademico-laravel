@@ -64,11 +64,27 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
     }
 
     /**
+     * @param $value
+     */
+    public function setDataAttribute($value)
+    {
+        $this->attributes['data'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDataFinalAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_final']);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDataFinalAttribute($value)
+    {
+        $this->attributes['data_final'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
@@ -80,10 +96,26 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
     }
 
     /**
+     * @param $value
+     */
+    public function setHoraInicialAttribute($value)
+    {
+        $this->attributes['hora_inicial'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
      * @return \DateTime
      */
     public function getHoraFinalAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['hora_final'], true);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setHoraFinalAttribute($value)
+    {
+        $this->attributes['hora_final'] = SerbinarioDateFormat::toUsa($value);
     }
 }

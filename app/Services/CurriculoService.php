@@ -4,7 +4,6 @@ namespace Seracademico\Services;
 
 use Seracademico\Repositories\CurriculoRepository;
 use Seracademico\Entities\Curriculo;
-use Carbon\Carbon;
 use Seracademico\Repositories\CursoRepository;
 use Seracademico\Repositories\DisciplinaRepository;
 
@@ -61,8 +60,7 @@ class CurriculoService
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
-        //$this->tratamentoDatas($data);
-        //dd($data);
+
         #Salvando o registro pincipal
         $curriculo =  $this->repository->create($data);
 
@@ -87,11 +85,9 @@ class CurriculoService
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
-        $this->tratamentoDatas($data);
 
         #Atualizando no banco de dados
         $curriculo = $this->repository->update($data, $id);
-
 
         #Verificando se foi atualizado no banco de dados
         if(!$curriculo) {
@@ -190,20 +186,6 @@ class CurriculoService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['valido_inicio'] = $data['valido_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['valido_inicio']) : null;
-        $data['valido_fim']    = $data['valido_fim'] ? Carbon::createFromFormat("d/m/Y", $data['valido_fim']) : null;
-
-        #retorno
-        return $data;
     }
 
     /**

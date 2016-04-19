@@ -63,9 +63,27 @@ class AlunoTurma extends Pivot implements Transformable
      *
      * @return \DateTime
      */
+    public function setDataConclusaoAttribute($value)
+    {
+        $this->attributes['data_conclusao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
     public function getDataColacaoAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_colacao']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataColacaoAttribute($value)
+    {
+        $this->attributes['data_colacao'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**

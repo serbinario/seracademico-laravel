@@ -64,7 +64,6 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $this->tratamentoDoCurso($data);
-        $this->tratamentoDatas($data);
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -89,7 +88,6 @@ class TurmaService
     public function update(array $data, int $id) : Turma
     {
         # Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoDoCurso($data, $id);
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
@@ -257,26 +255,6 @@ class TurmaService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['matricula_inicio']   = $data['matricula_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['matricula_inicio']) : "";
-        $data['matricula_fim']      = $data['matricula_fim'] ? Carbon::createFromFormat("d/m/Y", $data['matricula_fim']) : "";
-        $data['aula_inicio']        = $data['aula_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['aula_inicio']) : "";
-        $data['aula_final']         = $data['aula_final'] ? Carbon::createFromFormat("d/m/Y", $data['aula_final']) : "";
-        $data['vencimento_inicial'] = $data['vencimento_inicial'] ? Carbon::createFromFormat("d/m/Y", $data['vencimento_inicial']) : "";
-
-        #tratamento campos
-        $data['sala_id'] = $data['sala_id'] == "" ? null : $data['sala_id'];
-
-        #retorno
-        return $data;
     }
 
     /**
