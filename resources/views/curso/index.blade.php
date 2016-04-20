@@ -38,6 +38,7 @@
                                 <th>Código</th>
                                 <th>Nome</th>
                                 <th>Tipo do Curso</th>
+                                <th>Ativo</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -47,6 +48,7 @@
                                 <th>Código</th>
                                 <th>Nome</th>
                                 <th>Tipo do Curso</th>
+                                <th>Ativo</th>
                                 <th style="width: 10%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -69,6 +71,7 @@
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
                 {data: 'tipocurso', name: 'fac_tipo_cursos.nome'},
+                {data: 'ativo', name: 'fac_cursos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

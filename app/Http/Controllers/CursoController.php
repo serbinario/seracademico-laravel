@@ -58,7 +58,14 @@ class CursoController extends Controller
         $rows = \DB::table('fac_cursos')
             ->join('fac_tipo_cursos', 'fac_cursos.tipo_curso_id', '=', 'fac_tipo_cursos.id')
             ->leftJoin('sedes', 'fac_cursos.sede_id', '=', 'sedes.id')
-            ->select(['fac_cursos.id', 'fac_cursos.nome', 'fac_cursos.codigo', 'sedes.nome as sede', 'fac_tipo_cursos.nome as tipocurso']);
+            ->select([
+                'fac_cursos.id',
+                'fac_cursos.nome',
+                'fac_cursos.codigo',
+                'sedes.nome as sede',
+                'fac_tipo_cursos.nome as tipocurso',
+                \DB::raw('IF(fac_cursos.ativo = 1,"SIM","NÃO") as ativo'),
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
