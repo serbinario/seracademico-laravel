@@ -146,7 +146,7 @@
         /*Responsável em abrir modal*/
         $(document).on("click", '.grid-curricular', function () {
             $("#modal-grade-curricular").modal({show: true});
-            idCurriculo = table.row($(this).parent().parent().index()).data().id;
+            idCurriculo = table.row($(this).parent().parent().parent().index()).data().id;
 
             /*Datatable da grid Modal*/
             table2 = $('#disciplina-grid').DataTable({
