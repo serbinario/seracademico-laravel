@@ -18,7 +18,7 @@ function getDisciplinasOfCurriculoAndLoadGrid(idTurma)
 
             $("#table-incluir-disciplinas tbody tr").remove();
             $("#table-incluir-disciplinas tbody").append(html);
-            $("#modal-incluir-disciplinas").modal({'show' : true});
+            $("#modal-incluir-disciplinas").modal({'show' : true, keyboard: true});
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }

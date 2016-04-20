@@ -47,7 +47,7 @@ $(document).on('click', '#btnEditarCalendario', function () {
             $('select#sala_id_editar option[value="' + retorno.dados.calendario.sala_id + '"]').prop('selected', true);
             $('#idCalendario').val(retorno.dados.calendario.id_calendario);
 
-            $('#modal-editar-calendario').modal({show: true});
+            $('#modal-editar-calendario').modal({show: true, keyboard: true});
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }

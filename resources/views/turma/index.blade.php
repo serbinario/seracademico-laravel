@@ -94,7 +94,7 @@
 
             $("#modal-disciplina-calendario").find('.modal-dialog').css("width", "100%");
             $("#modal-disciplina-calendario").find('.modal-dialog').css("max-height", "100%");
-            $("#modal-disciplina-calendario").modal({show: true});
+            $("#modal-disciplina-calendario").modal({show: true, keyboard: true});
         });
 
     </script>
