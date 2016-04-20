@@ -221,10 +221,19 @@ class Curso extends Model implements Transformable
      * @param $value
      * @return mixed
      */
-    public function scopeByCurriculoAtivo($query)
+    public function scopeByCurriculoAtivo($query, $value)
     {
         return $query->select('fac_cursos.nome', 'fac_cursos.id')
             ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_curriculos.ativo', 1);
+            ->where('fac_curriculos.ativo', $value);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAtivo($query, $value)
+    {
+        return $query->where("ativo", $value);
     }
 }

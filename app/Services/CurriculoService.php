@@ -173,15 +173,33 @@ class CurriculoService
     public function load(array $models) : array
     {
         #Declarando variáveis de uso
-        $result = [];
+        $result    = [];
+        $expressao = [];
 
         #Criando e executando as consultas
         foreach ($models as $model) {
-            #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\$model";
+            # separando as strings
+            $explode   = explode("|", $model);
 
-            #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Seracademico\\Entities\\$model";
+
+            if(count($expressao) > 1) {
+                #Recuperando o registro e armazenando no array
+                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+            } else {
+                #Recuperando o registro e armazenando no array
+                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            }
+
+            # Limpando a expressão
+            $expressao = [];
         }
 
         #retorno
