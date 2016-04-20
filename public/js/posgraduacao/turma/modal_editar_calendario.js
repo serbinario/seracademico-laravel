@@ -48,6 +48,9 @@ $(document).on('click', '#btnEditarCalendario', function () {
             $('#idCalendario').val(retorno.dados.calendario.id_calendario);
 
             $('#modal-editar-calendario').modal({show: true, keyboard: true});
+            $('#modal-editar-calendario').on('hidden.bs.modal', function (e) {
+                $("#modal-disciplina-calendario").focus();
+            });
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
