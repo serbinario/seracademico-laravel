@@ -19,6 +19,9 @@ function getDisciplinasOfCurriculoAndLoadGrid(idTurma)
             $("#table-incluir-disciplinas tbody tr").remove();
             $("#table-incluir-disciplinas tbody").append(html);
             $("#modal-incluir-disciplinas").modal({'show' : true, keyboard: true});
+            $("#modal-incluir-disciplinas").on('hidden.bs.modal', function (e) {
+                $("#modal-disciplina-calendario").focus();
+            });
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }

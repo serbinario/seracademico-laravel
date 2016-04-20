@@ -1,5 +1,5 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-incluir-disciplinas" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+<div id="modal-incluir-disciplinas" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
