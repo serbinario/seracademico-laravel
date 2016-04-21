@@ -9,7 +9,8 @@
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300" rel="stylesheet">    
     <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">    
     <link href="{{ asset('/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/animate.css')}}" rel="stylesheet">
@@ -31,6 +32,7 @@
     {{--<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">--}}
 
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
+    <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
 
     @yield('css')
 </head>
@@ -79,7 +81,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li>
                             <a href="#">Secretaria <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
+                            <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
@@ -213,26 +215,8 @@
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
 <script src="{{ asset('/messages.js')}}"></script>
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
-<script type="text/javascript">
-    $(document).on({
-        'show.bs.modal': function () {
-            var zIndex = 1040 + (10 * $('.modal:visible').length);
-            $(this).css('z-index', zIndex);
-            setTimeout(function() {
-                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-            }, 0);
-        },
-        'hidden.bs.modal': function() {
-            if ($('.modal:visible').length > 0) {
-                // restore the modal-open class to the body element, so that scrolling works
-                // properly after de-stacking a modal.
-                setTimeout(function() {
-                    $(document.body).addClass('modal-open');
-                }, 0);
-            }
-        }
-    }, '.modal');
-</script>
+<script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
+
 @yield('javascript')
 </body>
 

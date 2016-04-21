@@ -105,6 +105,7 @@ $(document).on("click", "#curso-turma-grid tbody tr", function () {
         $(this).find("td").addClass("row_selected");
 
         //Recuperando o id da turma selecionada e o index da linha selecionada
+        console.log("ddddddddd");
         idAlunoTurma = tableCursoTurma.row($(this).index()).data().id;
         //indexRowSelectedDisciplina =  $(this).index();
 

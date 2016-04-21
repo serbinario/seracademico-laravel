@@ -38,7 +38,7 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
-                                <th style="width: 17%;">Acão</th>
+                                <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -59,6 +59,7 @@
         var table = $('#aluno-grid').DataTable({
             processing: true,
             serverSide: true,
+            autoWidth: false,
             ajax: "{!! route('seracademico.posgraduacao.aluno.grid') !!}",
             columns: [
                 {data: 'nome', name: 'nome'},
