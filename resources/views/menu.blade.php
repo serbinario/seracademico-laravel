@@ -9,9 +9,10 @@
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     {{--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300" rel="stylesheet">    
-    <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">    
+
+    <link href="{{ asset('/fonts/iconfont/material-icons.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300" rel="stylesheet">
+    <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/animate.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/style.css')}}" rel="stylesheet">

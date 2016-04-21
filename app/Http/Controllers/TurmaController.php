@@ -79,9 +79,15 @@ class TurmaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<div class="btn-group btn-group-justified">
-                    <a href="edit/'.$row->id.'"  title="Editar da turma" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                    <a title="Calendário da turma" data-id="'. $row->id  .'" href="#" class="modal-calendario btn btn-xs btn-primary"><i class="glyphicon glyphicon-book"></i></a></div>';
+
+            return '<div class="fixed-action-btn horizontal click-to-toggle">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
+                        <li><a class="modal-calendario btn-floating green" data-id="'.$row->id.'" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
+                    </ul>
+                    </div>';
+
         })->make(true);
     }
 

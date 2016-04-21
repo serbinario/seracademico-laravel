@@ -69,9 +69,9 @@ class AlunoController extends Controller
             return '<div class="fixed-action-btn horizontal click-to-toggle">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
-                        <li><a class="btn-floating red" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">account_circle</i></a></li>
-                        <li><a class="btn-floating amber" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">description</i></a></li>
-                        <li><a class="btn-floating green" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">recent_actors</i></a></li>
+                        <li><a class="btn-floating indigo" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating amber" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
+                        <li><a class="btn-floating green" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>
                     </ul>
                     </div>';
         })->make(true);

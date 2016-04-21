@@ -29,7 +29,7 @@
                                 <th>Fechamento</th>
                                 <th>Valor Integral</th>
                                 <th>Valor Isolado</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -42,7 +42,7 @@
                                 <th>Fechamento</th>
                                 <th>Valor Integral</th>
                                 <th>Valor Isolado</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th >Acão</th>
                             </tr>
                             </tfoot>
                         </table>

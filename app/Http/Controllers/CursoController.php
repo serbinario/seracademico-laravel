@@ -69,11 +69,17 @@ class CursoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html  = '<div class="btn-group btn-group-justified"><a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
+
+            $html       = '<div class="fixed-action-btn horizontal click-to-toggle">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>
+                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
             $curso = $this->service->find($row->id);
 
             if(count($curso->curriculos) == 0) {
-                $html .= '<a href="delete/'.$row->id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a></div>';
+                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
+                            </ul>
+                           </div>';
             }
 
             return $html;

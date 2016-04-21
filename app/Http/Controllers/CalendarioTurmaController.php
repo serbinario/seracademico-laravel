@@ -66,7 +66,7 @@ class CalendarioTurmaController extends Controller
             $objsCalendario = $this->service->findByField('turma_disciplina_id', $row->id);
 
             if(count($objsCalendario) == 0) {
-                $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
             }
 
             return $html;
@@ -97,8 +97,9 @@ class CalendarioTurmaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                    <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a></a>
+                    <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
 

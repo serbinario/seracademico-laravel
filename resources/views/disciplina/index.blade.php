@@ -43,7 +43,7 @@
                                 <th>Tipo da disciplina</th>
                                 <th>Carga Horaria</th>
                                 {{--<th>Tipo de avaliação</th>--}}
-                                <th >Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -53,7 +53,7 @@
                                 <th>Tipo da disciplina</th>
                                 <th>Carga Horaria</th>
                                 {{--<th>Tipo de avaliação</th>--}}
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
