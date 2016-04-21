@@ -4,14 +4,14 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
+            <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-users"></i>
                     Listar Salas
                 </h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.sala.create')}}" class="btn-sm btn-primary">Nova Sala</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.sala.create')}}" class="btn-sm btn-primary pull-right">Nova Sala</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 @stop
 

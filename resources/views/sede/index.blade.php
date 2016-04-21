@@ -3,14 +3,11 @@
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
-                <h4>
-                    <i class="fa fa-users"></i>
-                    Listar Sedes
-                </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="fa fa-users"></i>Listar Sedes</h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.sede.create')}}" class="btn-sm btn-primary">Nova Sede</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.sede.create')}}" class="btn-sm btn-primary pull-right">Nova Sede</a>
             </div>
         </div>
 
@@ -40,7 +37,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 @stop
 

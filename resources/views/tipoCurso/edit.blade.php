@@ -29,9 +29,9 @@
             @endif
 
             {!! Form::model($model, ['route'=> ['seracademico.tipoCurso.update', $model->id], 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormTipoAvaliacao')
+            @include('tamplatesForms.tamplateFormTipoCurso')
             {!! Form::close() !!}
         </div>
-        
+
     </div>
 @stop
