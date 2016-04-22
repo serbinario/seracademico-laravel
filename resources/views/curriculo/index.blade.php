@@ -59,7 +59,7 @@
                                 {{--<th>Validade (Início)</th>--}}
                                 {{--<th>Validade (Fim)</th>--}}
                                 <th>Ativo</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

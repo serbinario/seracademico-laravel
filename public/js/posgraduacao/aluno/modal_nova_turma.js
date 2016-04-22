@@ -28,7 +28,7 @@ function loadFields()
     });
 }
 
-// Função para montar o html
+// Função a montar o html
 function builderHtmlFields (dados) {
     // Variáveis que armazenaram o html
     var htmlSituacao    = "<option value=''>Selecione uma situação</option>";

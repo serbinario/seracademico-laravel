@@ -625,7 +625,6 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   background-color: #1ab394;
   border-color: #18A085;
   color: #FFFFFF;
-  font-weight: 800;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -3403,7 +3402,7 @@ video {
   background-clip: padding-box;
   background-color: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 0px;
+  border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   outline: 0 none;
   position: relative;
@@ -8258,22 +8257,15 @@ label{
   display: inline-flex !important;
   font-weight: 400 !important;
 }
-/*Ajustes Modais*/
-.modal-header {
-  border-top: 3px solid #1AB394 !important;
-  background: #27313A;
+.modal-header{
+  background: #27313A !important;
+  border-top: 2px solid #1AB394 !important;
   color: white !important;
 }
 .modal-header .close {
-  margin-top: -2px;
   color: white !important;
   opacity: 1 !important;
 }
-
-/*Ajustes DataTable*/
-table.dataTable thead th, table.dataTable thead td {
-  padding: 10px 10px !important;
-}
-table.dataTable.no-footer {
-  border-bottom: 1px solid #E7E7E7 !important;
+table.dataTable.no-footer{
+      border-bottom: 1px solid #EBEBEB !important;
 }

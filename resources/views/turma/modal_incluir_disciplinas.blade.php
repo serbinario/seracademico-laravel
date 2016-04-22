@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">×</button>
                 <h4 class="modal-title">Incluir Disciplinas (De um duplo click na disciplina que quiser incluir)</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
@@ -21,9 +22,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal" id="btnVoltarIncluirDisciplina">Voltar</button>
             </div>
         </div>
     </div>

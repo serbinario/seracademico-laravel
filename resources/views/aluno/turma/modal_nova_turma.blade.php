@@ -1,5 +1,6 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-nova-turma-aluno" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+<div id="modal-nova-turma-aluno" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,13 +36,17 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active">
-                                        <a href="#monografia" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Monografia / Gerais</a>
+                                        <a href="#monografia" aria-controls="dados" data-toggle="tab"><i
+                                                    class="fa fa-male"></i> Monografia / Gerais</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#banca_exam" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Monografia / Banca Examinadora</a>
+                                        <a href="#banca_exam" aria-controls="documentosObrig" role="tab"
+                                           data-toggle="tab"><i class="fa fa-file-text"></i> Monografia / Banca
+                                            Examinadora</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#formatura" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i> Formatura</a>
+                                        <a href="#formatura" aria-controls="contato" role="tab" data-toggle="tab"><i
+                                                    class="fa fa-globe"></i> Formatura</a>
                                     </li>
                                 </ul>
                                 <!-- End Nav tabs -->
@@ -54,33 +59,37 @@
                                         <br/>
 
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="titulo">Título</label>
-                                                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Informe um título">
+                                                    <input type="text" class="form-control" name="titulo" id="titulo"
+                                                           placeholder="Informe um título">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="nota_final">Nota Final</label>
-                                                    <input type="text" class="form-control" name="nota_final" id="nota_final" placeholder="Informe a nota final">
+                                                    <input type="text" class="form-control" name="nota_final"
+                                                           id="nota_final" placeholder="Informe a nota final">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="madia">Média</label>
-                                                    <input type="text" class="form-control" name="madia" id="madia" placeholder="Média">
+                                                    <input type="text" class="form-control" name="madia" id="madia"
+                                                           placeholder="Média">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="media_conceito">Média Conceito</label>
-                                                    <select name="media_conceito" id="media_conceito" class="form-control">
+                                                    <select name="media_conceito" id="media_conceito"
+                                                            class="form-control">
                                                         <option>Selecione</option>
                                                         <option value="1">CUMPRIO</option>
                                                         <option value="0">NÃO CUMPRIO</option>
@@ -88,7 +97,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="defendeu">Defendeu</label>
                                                     <select name="defendeu" id="defendeu" class="form-control">
@@ -101,18 +110,20 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label for="professor_orientador_id">Professor orientador</label>
-                                                    <select name="professor_orientador_id" class="form-control" id="professor_orientador_id">
+                                                    <select name="professor_orientador_id" class="form-control"
+                                                            id="professor_orientador_id">
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="defesa">Defesar</label>
-                                                    <input type="text" name="defesa" class="form-control datepicker" id="defesa" placeholder="Data">
+                                                    <label for="defesa">Defesa</label>
+                                                    <input type="text" name="defesa" class="form-control datepicker"
+                                                           id="defesa" placeholder="Data">
                                                 </div>
                                             </div>
                                         </div>
@@ -127,14 +138,16 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="professor_banca_1_id">Professor 01</label>
-                                                    <select name="professor_banca_1_id" class="form-control" id="professor_banca_1_id">
+                                                    <select name="professor_banca_1_id" class="form-control"
+                                                            id="professor_banca_1_id">
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inst_ensino_banca_1_id">Instituição 01</label>
-                                                    <select name="inst_ensino_banca_1_id" class="form-control" id="inst_ensino_banca_1_id">
+                                                    <select name="inst_ensino_banca_1_id" class="form-control"
+                                                            id="inst_ensino_banca_1_id">
                                                     </select>
                                                 </div>
                                             </div>
@@ -144,14 +157,16 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="professor_banca_2_id">Professor 02</label>
-                                                    <select name="professor_banca_2_id" class="form-control" id="professor_banca_2_id">
+                                                    <select name="professor_banca_2_id" class="form-control"
+                                                            id="professor_banca_2_id">
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inst_ensino_banca_2_id">Instituição 02</label>
-                                                    <select name="inst_ensino_banca_2_id" class="form-control" id="inst_ensino_banca_2_id">
+                                                    <select name="inst_ensino_banca_2_id" class="form-control"
+                                                            id="inst_ensino_banca_2_id">
                                                     </select>
                                                 </div>
                                             </div>
@@ -161,14 +176,16 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="professor_banca_3_id">Professor 03</label>
-                                                    <select name="professor_banca_3_id" class="form-control" id="professor_banca_3_id">
+                                                    <select name="professor_banca_3_id" class="form-control"
+                                                            id="professor_banca_3_id">
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inst_ensino_banca_3_id">Instituição 03</label>
-                                                    <select name="inst_ensino_banca_3_id" class="form-control" id="inst_ensino_banca_3_id">
+                                                    <select name="inst_ensino_banca_3_id" class="form-control"
+                                                            id="inst_ensino_banca_3_id">
                                                     </select>
                                                 </div>
                                             </div>
@@ -178,14 +195,16 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="professor_banca_4_id">Professor 04</label>
-                                                    <select name="professor_banca_4_id" class="form-control" id="professor_banca_4_id">
+                                                    <select name="professor_banca_4_id" class="form-control"
+                                                            id="professor_banca_4_id">
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="inst_ensino_banca_4_id">Instituição 04</label>
-                                                    <select name="inst_ensino_banca_4_id" class="form-control" id="inst_ensino_banca_4_id">
+                                                    <select name="inst_ensino_banca_4_id" class="form-control"
+                                                            id="inst_ensino_banca_4_id">
                                                     </select>
                                                 </div>
                                             </div>
@@ -201,14 +220,18 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="data_conclusao">Data Conclusão</label>
-                                                    <input type="text" name="data_conclusao" class="form-control datepicker" id="data_conclusao" placeholder="Data">
+                                                    <input type="text" name="data_conclusao"
+                                                           class="form-control datepicker" id="data_conclusao"
+                                                           placeholder="Data">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="data_colacao">Data Colação</label>
-                                                    <input type="text" name="data_colacao" class="form-control datepicker" id="data_colacao" placeholder="Data">
+                                                    <input type="text" name="data_colacao"
+                                                           class="form-control datepicker" id="data_colacao"
+                                                           placeholder="Data">
                                                 </div>
                                             </div>
                                         </div>
@@ -224,13 +247,10 @@
 
                     </div>
 
-
-
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" id="btnSalvarTurmaAluno">Salvar</button>
-                <button class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>

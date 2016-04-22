@@ -70,8 +70,14 @@ class CurriculoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<div class="btn-group btn-group-justified"><a title="Editar Currículo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-            <a title="Adicionar Disciplinas ao Currículo" data-id="'. $row->id  .'" href="#" class="grid-curricular btn btn-xs btn-primary"><i class="glyphicon glyphicon-book"></i></a></div>';
+
+            return '<div class="fixed-action-btn horizontal click-to-toggle">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
+                        <li><a class="grid-curricular btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
+                    </ul>
+                    </div>';
         })->make(true);
     }
 

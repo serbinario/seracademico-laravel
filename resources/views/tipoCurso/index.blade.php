@@ -2,21 +2,18 @@
 
 @section('content')
     <div class="ibox float-e-margins">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <div class="col-md-10">
-                    <h4>
-                        <i class="fa fa-users"></i>
-                        Listar Tipos de Cursos
-                    </h4>
-                </div>
-                <div class="col-md-2">
-                    <a href="{{ route('seracademico.tipoCurso.create')}}" class="btn-sm btn-primary">Novo Tipo de Curso</a>
-                </div>
+
+        <div class="ibox-title">
+            <div class="col-sm-6 col-md-9">
+                <h4>
+                    <i class="fa fa-users"></i>
+                    Listar Tipos de Cursos
+                </h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.tipoCurso.create')}}" class="btn-sm btn-primary pull-right">Novo Tipo de Curso</a>
             </div>
         </div>
-
-
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
@@ -41,7 +38,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 @stop
 

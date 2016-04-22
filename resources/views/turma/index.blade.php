@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="ibox float-e-margins">        
+    <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div class="col-sm-6 col-md-9">
                     <h4><i class="fa fa-users"></i>Listar Turmas</h4>
@@ -13,7 +13,7 @@
                 <div class="col-sm-6 col-md-3">
                     <a href="{{ route('seracademico.posgraduacao.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
                 </div>
-            </div>        
+            </div>
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
@@ -29,7 +29,7 @@
                                 <th>Fechamento</th>
                                 <th>Valor Integral</th>
                                 <th>Valor Isolado</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -42,14 +42,14 @@
                                 <th>Fechamento</th>
                                 <th>Valor Integral</th>
                                 <th>Valor Isolado</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th >Acão</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
     @include('turma.modal_calendario')
     @include('turma.modal_novo_calendario')
