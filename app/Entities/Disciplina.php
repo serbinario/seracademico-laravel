@@ -18,7 +18,6 @@ class Disciplina extends Model implements Transformable
 		'carga_horaria',
 		'qtd_falta',
 		'tipo_disciplina_id',
-		'tipo_avaliacao_id',
 		'tipo_nivel_sistema_id'
 	];
 
