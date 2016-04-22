@@ -146,7 +146,7 @@
         /*Responsável em abrir modal*/
         $(document).on("click", '.grid-curricular', function () {
             $("#modal-grade-curricular").modal({show: true, keyboard: true});
-            idCurriculo = table.row($(this).parent().parent().parent().index()).data().id;
+            idCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             /*Datatable da grid Modal*/
             table2 = $('#disciplina-grid').DataTable({
@@ -251,8 +251,8 @@
 
         //Evento de remover a disciplina
         $(document).on('click', '.removerDisciplina', function () {
-            idCurriculo  = table2.row($(this).parent().parent().index()).data().idCurriculo;
-            idDisciplina = table2.row($(this).parent().parent().index()).data().id;
+            idCurriculo  = table2.row($(this).parent().parent().parent().parent().parent().index()).data().idCurriculo;
+            idDisciplina = table2.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             //Setando o o json para envio
             var dados = {
