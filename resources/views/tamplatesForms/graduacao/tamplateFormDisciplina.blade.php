@@ -53,12 +53,12 @@
 				{!! Form::select('tipo_disciplina_id', $loadFields['tipodisciplina'], null, array('class' => 'form-control')) !!}
                 </div>
             </div>
-            {{--<div class="col-md-4">
+            <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('tipo_avaliacao_id', 'Tipo Avaliação') !!}
 				{!! Form::select('tipo_avaliacao_id', $loadFields['tipoavaliacao'], null, array('class' => 'form-control')) !!}
                 </div>
-            </div>--}}
+            </div>
 		</div>
 
         {{--Buttons Submit e Voltar--}}
