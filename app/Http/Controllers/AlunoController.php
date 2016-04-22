@@ -66,7 +66,7 @@ class AlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-            return '<div class="fixed-action-btn horizontal click-to-toggle">
+            return '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
