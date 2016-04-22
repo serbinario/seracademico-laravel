@@ -236,7 +236,6 @@
             }
         }
     }, '.modal');
-    });
 </script>
 
 @yield('javascript')
