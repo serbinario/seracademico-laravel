@@ -72,7 +72,7 @@ class DisciplinaController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html       = '<div class="fixed-action-btn horizontal click-to-toggle">
+            $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
                             <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
