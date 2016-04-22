@@ -46,6 +46,7 @@
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
+            autoWidth: false,
             ajax: "{!! route('seracademico.sede.grid') !!}",
             columns: [
                 {data: 'nome', name: 'nome'},
