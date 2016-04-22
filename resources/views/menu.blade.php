@@ -84,7 +84,7 @@
                             <a href="#">Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}">Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>

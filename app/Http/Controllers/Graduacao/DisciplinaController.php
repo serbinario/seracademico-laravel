@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\DisciplinaService;
+use Seracademico\Services\Graduacao\DisciplinaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\DisciplinaValidator;
+use Seracademico\Validators\Graduacao\DisciplinaValidator;
+use Seracademico\Http\Controllers\Controller;
 
 class DisciplinaController extends Controller
 {
@@ -46,7 +47,7 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        return view('disciplina.index');
+        return view('graduacao.disciplina.index');
     }
 
     /**
@@ -58,7 +59,7 @@ class DisciplinaController extends Controller
         $rows = \DB::table('fac_disciplinas')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             //->leftjoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 2)
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 1)
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
@@ -98,7 +99,7 @@ class DisciplinaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('disciplina.create', compact('loadFields'));
+        return view('graduacao.disciplina.create', compact('loadFields'));
     }
 
     /**
@@ -143,7 +144,7 @@ class DisciplinaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('disciplina.edit', compact('model', 'loadFields'));
+            return view('graduacao.disciplina.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

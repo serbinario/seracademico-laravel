@@ -16,7 +16,6 @@ class Disciplina extends Model implements Transformable
 		'nome',
         'codigo',
 		'carga_horaria',
-		'qtd_credito',
 		'qtd_falta',
 		'tipo_disciplina_id',
 		'tipo_avaliacao_id',
