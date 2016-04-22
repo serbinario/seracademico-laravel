@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestão Acadêmica</title>
+
+    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
+    {{--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
+
+    <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/animate.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/style.css')}}" rel="stylesheet">
+
+    <link href="{{ asset('/css/jquery-ui.css')}}" rel="stylesheet">
+    {{--<link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">--}}
+
+    <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
+    <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
+    <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
+
+    <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
+    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
+
+    <link href="{{ asset('/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
+    {{--<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">--}}
+
+
+    @yield('css')
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
+                </li>
+
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Pós-Graduação</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#">Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
+                            </ul>
+                        </li>
+                        {{--<li>
+                            <a href="#">Tesouraria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
+                            </ul>
+                        </li>--}}
+                    </ul>
+                </li>
+
+                @role('admin')
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Graduação</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#">Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
+                            </ul>
+                        </li>
+                        {{--<li>
+                            <a href="#">Tesouraria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
+                            </ul>
+                        </li>--}}
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Segurança</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
+                    </ul>
+                </li>
+                @endrole
+
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Parâmetros</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.empresa.check') }}">Empresa</a></li>
+                        <li><a href="{{ route('seracademico.sede.index') }}">Sedes</a></li>
+                        <li><a href="{{ route('seracademico.departamento.index') }}">Departamentos / Sede</a></li>
+                        <li><a href="{{ route('seracademico.sala.index') }}">Salas</a></li>
+                        <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}">Tipos de Avaliações</a></li>
+                        <li><a href="{{ route('seracademico.tipoDisciplina.index') }}">Tipos de Disciplinas</a></li>
+                        <li><a href="{{ route('seracademico.tipoCurso.index') }}">Tipos de Cursos</a></li>
+                        <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}">Professor</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Biblioteca</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}">Responsável</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}">Editora</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}">Acervo</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}">Exemplar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <div class="profile-img">
+                    <span>
+                        @if(isset(Session::get("user")['img']))
+                            <img alt="image" class="img-circle" src="{{asset('/uploads/fotos/'.Session::get("user")['img'])}}" alt="Foto"  height="50" width="50">
+                        @endif
+                    </span>
+                </div>
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <div class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="text-muted text-xs block">Linguage<b class="caret"></b></span></a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <li>
+                                        <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                            {{{ $properties['native'] }}}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <div class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="text-muted text-xs block">{{ Auth::user()->name }}<b class="caret"></b></span></a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                {{-- <li><a href="profile.html">Perfil</a></li>
+                                 <li><a href="contacts.html">Notificações</a></li>--}}
+                                {{--<li class="divider"></li>--}}
+                                <li><a href="{{ url('auth/logout') }}">Sair</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="{{ asset('/js/jquery-2.1.1.js')}}"></script>
+<script src="{{ asset('/js/jquery-ui.js')}}"></script>
+<script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
+<script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
+<script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+
+<script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
+
+<script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{ asset('/js/inspinia.js')}}"></script>
+<script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
+<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
+<script src="{{ asset('/js/jquery.mask.js')}}"></script>
+<script src="{{ asset('/js/mascaras.js')}}"></script>
+<script src="{{ asset('/js/sb-admin-2.js')}}"></script>
+<script src="{{ asset('/messages.js')}}"></script>
+
+@yield('javascript')
+</body>
+
+</html>
