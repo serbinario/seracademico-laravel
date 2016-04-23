@@ -68,19 +68,19 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#autMec" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Autorização MEC</a>
+                        <a href="#autMec" aria-controls="dados" data-toggle="tab"><i class="material-icons">playlist_add</i> Autorização MEC</a>
                     </li>
                     <li role="presentation">
-                        <a href="#recMec" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i> Reconhecimento MEC</a>
+                        <a href="#recMec" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Reconhecimento MEC</a>
                     </li>
                     <li role="presentation">
-                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Vagas</a>
+                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#datas" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Datas</a>
+                        <a href="#datas" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Datas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#finan" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Financeiro</a>
+                        <a href="#finan" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Financeiro</a>
                     </li>
 
                 </ul>

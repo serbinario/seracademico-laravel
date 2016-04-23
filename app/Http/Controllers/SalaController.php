@@ -57,7 +57,14 @@ class SalaController extends Controller
 
         #Editando a grid
         return Datatables::of($salas)->addColumn('action', function ($sala) {
-            return '<a href="edit/'.$sala->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating" href="edit/'.$sala->id.'" title="Editar sala"><i class="material-icons">edit</i></a></li>                        
+                    </ul>
+                    </div>';
+
+                /*'<a href="edit/'.$sala->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';*/
         })->make(true);
     }
 

@@ -5,7 +5,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h4>
-                    <i class="fa fa-user"></i>
+                    <i class="material-icons">view_module</i>
                     Cadastrar Departamento
                 </h4>
             </div>

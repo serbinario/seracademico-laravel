@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="fa fa-users"></i>Listar Tipos de Disciplinas</h4>
+                <h4><i class="fa fa-tags"></i> Listar Tipos de Disciplinas</h4>
             </div>
             <div class="col-sm-6 col-md-3">
                 <a href="{{ route('seracademico.tipoDisciplina.create')}}" class="btn-sm btn-primary pull-right">Novo Tipo de Disciplina</a>
@@ -26,7 +26,7 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

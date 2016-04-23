@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
+                <i class="fa fa-star-half-empty"></i>
                 Cadastrar Avaliação
             </h4>
         </div>

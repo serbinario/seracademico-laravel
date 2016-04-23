@@ -3,10 +3,15 @@
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h4>
-                <i class="fa fa-user"></i>
-                Cadastrar Empresa
-            </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4>
+                    <i class="fa fa-university"></i>
+                    Editar Empresa
+                </h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+
+            </div>
         </div>
 
         <div class="ibox-content">

@@ -36,17 +36,15 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active">
-                                        <a href="#monografia" aria-controls="dados" data-toggle="tab"><i
-                                                    class="fa fa-male"></i> Monografia / Gerais</a>
+                                        <a href="#monografia" aria-controls="dados" data-toggle="tab">Monografia / Gerais</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="#banca_exam" aria-controls="documentosObrig" role="tab"
-                                           data-toggle="tab"><i class="fa fa-file-text"></i> Monografia / Banca
+                                           data-toggle="tab">Monografia / Banca
                                             Examinadora</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#formatura" aria-controls="contato" role="tab" data-toggle="tab"><i
-                                                    class="fa fa-globe"></i> Formatura</a>
+                                        <a href="#formatura" aria-controls="contato" role="tab" data-toggle="tab">Formatura</a>
                                     </li>
                                 </ul>
                                 <!-- End Nav tabs -->

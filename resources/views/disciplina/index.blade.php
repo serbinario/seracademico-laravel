@@ -6,7 +6,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="material-icons">collections_bookmark</i>
                     Listar disciplinas
                 </h4>
             </div>

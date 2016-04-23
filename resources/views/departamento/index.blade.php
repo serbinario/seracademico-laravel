@@ -6,7 +6,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="material-icons">view_module</i>
                     Listar Departamento
                 </h4>
             </div>
@@ -32,7 +32,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Sede</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

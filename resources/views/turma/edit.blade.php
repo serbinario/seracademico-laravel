@@ -5,7 +5,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
+                <i class="material-icons">turned_in</i>
                 Editar Turma
             </h4>
         </div>
