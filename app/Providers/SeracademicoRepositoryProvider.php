@@ -211,6 +211,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\NotaRepository::class,
 			\Seracademico\Repositories\NotaRepositoryEloquent::class
 		);
+
         $this->app->bind(
             \Seracademico\Repositories\ResponsavelRepository::class,
             \Seracademico\Repositories\ResponsavelRepositoryEloquent::class

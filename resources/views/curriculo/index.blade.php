@@ -21,7 +21,7 @@
 
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="fa fa-users"></i>Listar Currículos</h4>
+                <h4><i class="material-icons">library_books</i> Listar Currículos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
                 <a href="{{ route('seracademico.posgraduacao.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
@@ -80,9 +80,12 @@
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
                         <div class="col-md-12">
-                           <select  id="select-disciplina" multiple="multiple" class="form-control">
-                           </select>
-                            <button class="btn btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
+                            <div class="input-group">
+                                <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -102,15 +105,12 @@
                                     <th>Nome</th>
                                     <th style="width: 5%;">Qtd. Faltas</th>
                                     <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th style="width: 10%;">Acão</th>
+                                    <th style="width: 5%;">Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
          //consulta via select2
          $("#select-disciplina").select2({
              placeholder: 'Selecione uma ou mais disciplinas',
-             width: 300,
+             width: 700,
              ajax: {
                  type: 'POST',
                  url: "{{ route('seracademico.util.select2')  }}",

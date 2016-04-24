@@ -6,7 +6,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="material-icons">class</i>
                     Listar Salas
                 </h4>
             </div>
@@ -37,7 +37,7 @@
                                 <th>Andar</th>
                                 <th>Número</th>
                                 <th>Capacidade</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

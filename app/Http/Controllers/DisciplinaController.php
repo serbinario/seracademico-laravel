@@ -58,6 +58,7 @@ class DisciplinaController extends Controller
         $rows = \DB::table('fac_disciplinas')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             //->leftjoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 2)
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
@@ -71,14 +72,14 @@ class DisciplinaController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variáveis de uso
-            $html       = '<div class="fixed-action-btn horizontal click-to-toggle">
+            $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
+                            <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
             $disciplina = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
             if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
-                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
+                $html .= '<li><a class="btn-floating" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
                             </ul>
                            </div>';
             }

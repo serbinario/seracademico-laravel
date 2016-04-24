@@ -5,10 +5,11 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h4>
-                <i class="fa fa-user"></i>
-                Cadastrar Professor
-            </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">rate_review</i> Cadastrar Professor</h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+            </div>
         </div>
 
         <div class="ibox-content">

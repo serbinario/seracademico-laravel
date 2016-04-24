@@ -3302,7 +3302,7 @@ body.tour-open .animated {
 }
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2f4050;
+  background-color: #2f5286;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;
@@ -3585,7 +3585,7 @@ body.body-small .footer.fixed {
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  background: #4D6274;
+  background: #2F5286;
   border-top: 2px solid #1AB394;
   border-bottom: #f3f3f4;
   border-image: none;
@@ -3742,7 +3742,7 @@ code {
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  background-color: #4D6274;
+  background-color: #2F5286;
   border-color: #1AB394;
   border-image: none;
   border-style: solid solid none;
@@ -3756,7 +3756,7 @@ code {
   background-color: #ffffff;
   color: inherit;
   padding: 15px 20px 20px 20px;
-  border: 1px solid #4D6274;
+  border: 1px solid #2F5286;
 }
 .ibox-footer {
   color: inherit;
@@ -8244,7 +8244,7 @@ legend{
   font-size: 15px !important;
   font-weight: 600;
   border: 0;
-  color:#4D6274 !important;
+  color:#2F5286 !important;
   border-bottom: 1px solid #e5e5e5;
 }
 .ajuste-img {

@@ -2,38 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5264dc21-f7d8-4da1-96e2-594a5bcf8ddf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Aluno.php" afterPath="$PROJECT_DIR$/app/Entities/Aluno.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Graduacao/Disciplina.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/DisciplinaRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/DisciplinaRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/DisciplinaService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/disciplina/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/disciplina/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/disciplina/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/congruent_pentagon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/header-profile-skin-2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/header-profile-skin-3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/otis_redding.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/shattered.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/triangular.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/AlunoService.php" afterPath="$PROJECT_DIR$/app/Services/AlunoService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/CalendarioDisciplinaTurma.php" afterPath="$PROJECT_DIR$/app/Entities/CalendarioDisciplinaTurma.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CalendarioDisciplinaTurmaService.php" afterPath="$PROJECT_DIR$/app/Services/CalendarioDisciplinaTurmaService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CalendarioTurmaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CalendarioTurmaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Curriculo.php" afterPath="$PROJECT_DIR$/app/Entities/Curriculo.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CurriculoService.php" afterPath="$PROJECT_DIR$/app/Services/CurriculoService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/CurriculoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/CurriculoValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Curso.php" afterPath="$PROJECT_DIR$/app/Entities/Curso.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CursoService.php" afterPath="$PROJECT_DIR$/app/Services/CursoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Disciplina.php" afterPath="$PROJECT_DIR$/app/Entities/Disciplina.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/DisciplinaService.php" afterPath="$PROJECT_DIR$/app/Services/DisciplinaService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/DisciplinaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/DisciplinaValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" afterPath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Uteis/SerbinarioDateFormat.php" afterPath="$PROJECT_DIR$/app/Uteis/SerbinarioDateFormat.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Turma.php" afterPath="$PROJECT_DIR$/app/Entities/Turma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TurmaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TurmaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TurmaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TurmaRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TurmaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TurmaRepositoryEloquent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/TurmaService.php" afterPath="$PROJECT_DIR$/app/Services/TurmaService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TurmaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TurmaValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UtilController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UtilController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" afterPath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/create.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/create.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/create.blade.php" />
@@ -46,63 +51,40 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/create.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/create.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/disciplina/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/disciplina/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/empresa/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/empresa/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/professor/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/professor/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sala/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/sala/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sede/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/sede/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoAvaliacao/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoAvaliacao/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/disciplina/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/disciplina/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/professor/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/professor/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sala/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/sala/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sede/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/sede/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoAvaliacao/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoAvaliacao/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/mascaras.js" afterPath="$PROJECT_DIR$/public/js/mascaras.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" afterPath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/menu.blade.php" afterPath="$PROJECT_DIR$/resources/views/menu.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/messages.js" afterPath="$PROJECT_DIR$/public/messages.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/modal_calendario.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/modal_calendario.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/css/modal_calendario.css" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/css/modal_calendario.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_calendario.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/modal_editar_calendario.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/modal_editar_calendario.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_editar_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_editar_calendario.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/modal_novo_calendario.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/modal_novo_calendario.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelController.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelController.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelService.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelService.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelValidator.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelValidator.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/phpspec.yml" afterPath="$PROJECT_DIR$/phpspec.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/turma/modal_aluno_turma.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/turma/modal_aluno_turma.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/turma/modal_nova_turma.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/turma/modal_nova_turma.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/style.css" afterPath="$PROJECT_DIR$/public/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormAluno.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormAluno.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurriculo.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurriculo.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDepartamento.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDepartamento.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDisciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDisciplina.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormEmpresa.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormEmpresa.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormProfessor.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormProfessor.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormSala.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormSala.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormSede.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormSede.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoAvaliacao.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoAvaliacao.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoCurso.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoCurso.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoDisciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTipoDisciplina.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/lang/pt-BR/validation.php" afterPath="$PROJECT_DIR$/resources/lang/pt-BR/validation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="seracademico-laravel.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -127,7 +109,7 @@
       <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.333334">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="283" column="45" selection-start-line="283" selection-start-column="45" selection-end-line="283" selection-end-column="45" />
               <folding />
             </state>
@@ -137,7 +119,7 @@
       <file leaf-file-name="tamplateFormArcevo.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6666665">
+            <state vertical-scroll-proportion="0.0">
               <caret line="261" column="34" selection-start-line="261" selection-start-column="34" selection-end-line="261" selection-end-column="34" />
               <folding>
                 <marker date="1461502655559" expanded="true" signature="8687:8900" placeholder="..." />
@@ -161,18 +143,8 @@
       <file leaf-file-name="ArcevoService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/ArcevoService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22222222">
-              <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="219" column="45" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="45" />
+              <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -220,7 +192,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php" />
         <option value="$PROJECT_DIR$/resources/views/curriculo/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/turma/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
         <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/biblioteca/exemplar/create.blade.php" />
@@ -228,6 +199,7 @@
         <option value="$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php" />
         <option value="$PROJECT_DIR$/app/Services/ArcevoService.php" />
+        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
       </list>
     </option>
   </component>
@@ -497,6 +469,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Providers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SerAcademico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SerAcademico" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Http" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -608,9 +598,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27348486" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -918,13 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8412697">
-          <caret line="280" column="10" selection-start-line="280" selection-start-column="10" selection-end-line="280" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.0">
@@ -953,25 +936,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="219" column="45" selection-start-line="219" selection-start-column="25" selection-end-line="219" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UtilController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.3333335">
           <caret line="184" column="28" selection-start-line="184" selection-start-column="28" selection-end-line="184" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.333334">
+        <state vertical-scroll-proportion="-0.0">
           <caret line="283" column="45" selection-start-line="283" selection-start-column="45" selection-end-line="283" selection-end-column="45" />
           <folding />
         </state>
@@ -979,7 +953,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6666665">
+        <state vertical-scroll-proportion="0.0">
           <caret line="261" column="34" selection-start-line="261" selection-start-column="34" selection-end-line="261" selection-end-column="34" />
           <folding>
             <marker date="1461502655559" expanded="true" signature="8687:8900" placeholder="..." />
@@ -999,9 +973,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.031746">
+          <caret line="219" column="0" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74603176">
+          <caret line="281" column="10" selection-start-line="281" selection-start-column="10" selection-end-line="281" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/ArcevoService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22222222">
+        <state vertical-scroll-proportion="-0.0">
           <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
           <folding />
         </state>

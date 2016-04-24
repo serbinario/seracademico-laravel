@@ -76,16 +76,16 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Dados pessoais</a>
+                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="material-icons">contacts</i> Dados pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">contact_phone</i>Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Superior</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">school</i> Ensino Superior</a>
             </li>
             <li role="presentation">
-                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">subtitles</i>Documentos Obrigatórios</a>
             </li>
 
         </ul>
@@ -138,8 +138,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i
-                                            class="fa fa-plus-circle"></i> Filiação</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i class="material-icons">arrow_drop_down_circle</i> Filiação</a>
                                         </h4>
                                     </div>
                                     <div id="filiacao" class="panel-collapse collapse">
@@ -159,8 +158,7 @@
 
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i
-                                                class="fa fa-plus-circle"></i> Documentos</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="material-icons">arrow_drop_down_circle</i> Documentos</a>
                                             </h4>
                                         </div>
                                         <div id="collapseTwo" class="panel-collapse collapse">
@@ -214,8 +212,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i
-                                                    class="fa fa-plus-circle"></i> Deficiencia</a>
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i class="material-icons">arrow_drop_down_circle</i> Deficiencia</a>
                                                 </h4>
                                             </div>
                                             <div id="deficiencia" class="panel-collapse collapse">
