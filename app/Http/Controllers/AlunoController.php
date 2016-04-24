@@ -66,8 +66,14 @@ class AlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-                return '<a href="edit/'.$aluno->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>
-                        <a href="contrato/'.$aluno->id.'" target="__blanck" class="btn btn-xs btn-warning"><i class="fa fa-file-text"></i> Contrato</a>';
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating indigo" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating amber" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
+                        <li><a class="btn-floating green" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>
+                    </ul>
+                    </div>';
         })->make(true);
     }
 

@@ -20,15 +20,13 @@
             </div>
 
             <div class="col-md-2">
-                <div class="form-group">
-                    
+                <div class="form-group">                    
 				{!! Form::label('turno_id', 'Turno *') !!}
 				{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                 </div>
             </div>
         </div>
-
-        {{--Linha da da Habas--}}
+        <hr class="hr-line-dashed"/>
         <div class="row">
             <div class="col-md-12">
                 <!-- Nav tabs -->
@@ -67,8 +65,6 @@
                                     {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('aula_inicio', 'Aula (Início)') !!}
@@ -81,7 +77,7 @@
                                     {!! Form::text('aula_final', Session::getOldInput('aula_final'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     {{--FIM Datas--}}
 
@@ -92,15 +88,21 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    {!! Form::label('valor', 'Valor') !!}
-                                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control money')) !!}
+                                    {!! Form::label('valor_turma', 'Valor Turma') !!}
+                                    {!! Form::text('valor_turma', Session::getOldInput('valor_turma')  , array('class' => 'form-control money')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('valor_disciplina', 'Valor Disciplina') !!}
+                                    {!! Form::text('valor_disciplina', Session::getOldInput('valor_disciplina')  , array('class' => 'form-control money')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
-                                    {!! Form::label('parcelas', 'Qtd. Parcelas') !!}
-                                    {!! Form::text('parcelas', Session::getOldInput('parcelas')  , array('class' => 'form-control number')) !!}
+                                    {!! Form::label('qtd_parcelas', 'Qtd. Parcelas') !!}
+                                    {!! Form::text('qtd_parcelas', Session::getOldInput('qtd_parcelas')  , array('class' => 'form-control numberThree')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -122,22 +124,22 @@
                                 <div class="form-group">
 
                                     {!! Form::label('maximo_vagas', 'Máximo Vagas') !!}
-                                    {!! Form::text('maximo_vagas', Session::getOldInput('maximo_vagas')  , array('class' => 'form-control number')) !!}
+                                    {!! Form::text('maximo_vagas', Session::getOldInput('maximo_vagas')  , array('class' => 'form-control numberThree')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
                                     {!! Form::label('minimo_vagas', 'Mínimo Vagas') !!}
-                                    {!! Form::text('minimo_vagas', Session::getOldInput('minimo_vagas')  , array('class' => 'form-control number')) !!}
+                                    {!! Form::text('minimo_vagas', Session::getOldInput('minimo_vagas')  , array('class' => 'form-control numberThree')) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {!! Form::label('obs_vagas', 'Observação Vagas') !!}
-                                    {!! Form::textarea('obs_vagas', Session::getOldInput('obs_vagas')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
+                                    {!! Form::label('observacao_vagas', 'Observação Vagas') !!}
+                                    {!! Form::textarea('observacao_vagas', Session::getOldInput('observacao_vagas')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -153,7 +155,7 @@
                                 <div class="form-group">
 
                                     {!! Form::label('sala_id', 'Sala') !!}
-                                    {!! Form::select('sala_id', $loadFields['sala'], null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('sala_id', ([null => 'Selecione uma sala'] + $loadFields['sala']->toArray()), null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -188,12 +190,17 @@
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                <a href="{{ route('seracademico.posgraduacao.turma.index') }}" class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i>   Voltar</a></div>
+                <div class="btn-group">
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                </div>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.posgraduacao.turma.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
-            </div>
+            
+            
         </div>
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
@@ -202,11 +209,10 @@
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function () {
-
             console.log(Lang.getLocale());
             Lang.setLocale('pt-BR');
 
-            $('#regexpForm').bootstrapValidator({
+            $('#formTurma').bootstrapValidator({
                 fields: {
                     hora_inicial: {
                         validators: {
@@ -225,14 +231,8 @@
                                 message: Lang.get('validation.required', { attribute: 'Código' })
                             }
                         }
-                    },
-                    ano: {
-                        validators: {
-                            numeric: {
-                                message: Lang.get('validation.numeric', { attribute: 'Ano' })
-                            }
-                        }
                     }
+
                 }
             });
 

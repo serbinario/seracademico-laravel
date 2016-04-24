@@ -31,12 +31,6 @@
             {!! Form::open(['route'=>'seracademico.posgraduacao.disciplina.store', 'id' => 'formDisciplina', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormDisciplina')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 @stop

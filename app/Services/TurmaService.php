@@ -3,6 +3,7 @@
 namespace Seracademico\Services;
 
 use Seracademico\Repositories\CurriculoRepository;
+use Seracademico\Repositories\DisciplinaRepository;
 use Seracademico\Repositories\TurmaRepository;
 use Seracademico\Entities\Turma;
 use Carbon\Carbon;
@@ -20,13 +21,20 @@ class TurmaService
     private $curriculoRepository;
 
     /**
+     * @var DisciplinaRepository
+     */
+    private $disciplinaRepository;
+
+    /**
      * @param TurmaRepository $repository
      * @param CurriculoRepository $curriculoRepository
+     * @param DisciplinaRepository $disciplinaRepository
      */
-    public function __construct(TurmaRepository $repository, CurriculoRepository $curriculoRepository)
+    public function __construct(TurmaRepository $repository, CurriculoRepository $curriculoRepository, DisciplinaRepository $disciplinaRepository)
     {
-        $this->repository          = $repository;
-        $this->curriculoRepository = $curriculoRepository;
+        $this->repository           = $repository;
+        $this->curriculoRepository  = $curriculoRepository;
+        $this->disciplinaRepository = $disciplinaRepository;
     }
 
     /**
@@ -56,7 +64,6 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $this->tratamentoDoCurso($data);
-        $this->tratamentoDatas($data);
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -81,7 +88,6 @@ class TurmaService
     public function update(array $data, int $id) : Turma
     {
         # Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoDoCurso($data, $id);
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
@@ -109,6 +115,109 @@ class TurmaService
     }
 
     /**
+     * @param $idTurma
+     * @return array
+     * @throws \Exception
+     */
+    public function getDisciplinasDiferrentOfCurriculo($idTurma)
+    {
+        #Recuperando a turma
+        $turma = $this->repository->find($idTurma);
+
+        #Verificando se a turma foi recuperada
+        if (!$turma) {
+            throw new \Exception('Turma não encontrada!');
+        }
+
+        #Array de retorno
+        $disciplinas = [];
+
+        #Recupernando as disciplinas
+        $disciplinasTurma     = $turma->disciplinas->lists(['id'])->toArray();
+        $disciplinasCurriculo = $turma->curriculo->disciplinas;
+
+        #Algorítmo para verificar a existência das disciplinas na turma
+        foreach ($disciplinasCurriculo as $disciplinaCurriculo) {
+            #Verificando qual discipplina não está no array das disciplina da turma
+            if( !in_array($disciplinaCurriculo->id, $disciplinasTurma)) {
+                $disciplinas[] = $disciplinaCurriculo;
+            }
+        }
+
+        #Retorno
+        return $disciplinas;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function incluirDisciplina(array $data) : bool
+    {
+        # Validando a requisição
+        if(!(isset($data['idDisciplina']) && is_numeric($data['idDisciplina'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        # Recuperando os parametros da requisição
+        $idTurma      = $data['idTurma'];
+        $idDisciplina = $data['idDisciplina'];
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($idTurma);
+        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Incluindo e salvando a disciplina
+        $objTurma->disciplinas()->attach($objDisciplina->id);
+        $objTurma->save();
+
+        #Retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function removerDisciplina(array $data)
+    {
+        # Validando a requisição
+        if(!(isset($data['idDisciplina']) && is_numeric($data['idDisciplina'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        # Recuperando os parametros da requisição
+        $idTurma      = $data['idTurma'];
+        $idDisciplina = $data['idDisciplina'];
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($idTurma);
+        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Incluindo e salvando a disciplina
+        $objTurma->disciplinas()->detach($objDisciplina->id);
+        $objTurma->save();
+
+        #Retorno
+        return true;
+    }
+
+
+    /**
      * @param array $models
      * @return array
      */
@@ -134,7 +243,7 @@ class TurmaService
 
             if(count($expressao) > 1) {
                 #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::situacao(1)->lists('nome', 'id');
+                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
             } else {
                 #Recuperando o registro e armazenando no array
                 $result[strtolower($model)] = $nameModel::lists('nome', 'id');
@@ -146,22 +255,6 @@ class TurmaService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['matricula_inicio'] = $data['matricula_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['matricula_inicio']) : "";
-        $data['matricula_fim']    = $data['matricula_fim'] ? Carbon::createFromFormat("d/m/Y", $data['matricula_fim']) : "";
-        $data['aula_inicio']      = $data['aula_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['aula_inicio']) : "";
-        $data['aula_final']       = $data['aula_final'] ? Carbon::createFromFormat("d/m/Y", $data['aula_final']) : "";
-
-        #retorno
-        return $data;
     }
 
     /**

@@ -31,12 +31,6 @@
             {!! Form::model($model, ['route'=> ['seracademico.departamento.update', $model->id], 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormDepartamento')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 @stop

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\CalendarioDisciplinaTurmaService;
+use Seracademico\Services\TurmaService;
 use Seracademico\Validators\CalendarioDisciplinaTurmaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -17,6 +18,11 @@ class CalendarioTurmaController extends Controller
      * @var CalendarioDisciplinaTurmaService
      */
     private $service;
+
+    /**
+     * @var TurmaService
+     */
+    private $turmaService;
 
     /**
      * @var CalendarioDisciplinaTurmaValidator
@@ -35,11 +41,13 @@ class CalendarioTurmaController extends Controller
      * @param CalendarioDisciplinaTurmaService $service
      * @param CalendarioDisciplinaTurmaValidator $validator
      */
-    public function __construct(CalendarioDisciplinaTurmaService $service, CalendarioDisciplinaTurmaValidator $validator)
+    public function __construct(CalendarioDisciplinaTurmaService $service, CalendarioDisciplinaTurmaValidator $validator, TurmaService $turmaService)
     {
-        $this->service    = $service;
-        $this->validator  = $validator;
+        $this->service      = $service;
+        $this->validator    = $validator;
+        $this->turmaService = $turmaService;
     }
+
     /**
      * @return mixed
      */
@@ -49,11 +57,20 @@ class CalendarioTurmaController extends Controller
         $rows = \DB::table('fac_turmas_disciplinas')
             ->join('fac_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
-            ->select(['fac_turmas_disciplinas.id','fac_disciplinas.nome'])
+            ->select(['fac_disciplinas.codigo', 'fac_turmas_disciplinas.id','fac_disciplinas.nome', 'fac_disciplinas.id as idDisciplina'])
             ->where('fac_turmas.id', '=', $idTurma);
 
         #Editando a grid
-        return Datatables::of($rows)->make(true);
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = '';
+            $objsCalendario = $this->service->findByField('turma_disciplina_id', $row->id);
+
+            if(count($objsCalendario) == 0) {
+                $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            }
+
+            return $html;
+        })->make(true);
     }
 
     /**
@@ -80,8 +97,9 @@ class CalendarioTurmaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                    <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+
+            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a></a>
+                    <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
 
@@ -102,13 +120,13 @@ class CalendarioTurmaController extends Controller
             $this->service->store($data);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => true,'msg' => 'Cadastro realizado com sucesso!']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso!']);
         } catch (ValidatorException $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => false,'msg' => $e->getMessage()]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => false,'msg' => $e->getMessage()]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
@@ -165,13 +183,13 @@ class CalendarioTurmaController extends Controller
             $this->service->update($data, $id);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => true,'msg' => 'Edição realizada com sucesso!']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
         } catch (ValidatorException $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => false,'msg' => $e->getMessage()]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['sucess' => false,'msg' => $e->getMessage()]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
@@ -190,6 +208,60 @@ class CalendarioTurmaController extends Controller
         } catch (ValidatorException $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idTurma
+     * @return mixed
+     */
+    public function disciplinasOfCurriculo($idTurma)
+    {
+        try {
+            #Recupernado as Disciplinas
+            $disciplinas = $this->turmaService->getDisciplinasDiferrentOfCurriculo($idTurma);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $disciplinas]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function incluirDisciplina(Request $request)
+    {
+        try {
+            #incluindo disciplina as Disciplinas
+            $this->turmaService->incluirDisciplina($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function removerDisciplina(Request $request)
+    {
+        try {
+            #incluindo disciplina as Disciplinas
+            $this->turmaService->removerDisciplina($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Remoção realizada com sucesso!']);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);

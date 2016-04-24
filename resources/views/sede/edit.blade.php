@@ -30,13 +30,7 @@
             {!! Form::model($model, ['route'=> ['seracademico.sede.update', $model->id], 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormSede')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 
     @section('javascript')

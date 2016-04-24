@@ -20,7 +20,7 @@ class DisciplinaValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  'required|max:200|serbinario_alpha_space|unique:fac_disciplinas,nome',
+			'nome' =>  'required|max:200|unique:fac_disciplinas,nome',
 			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo',
 			'carga_horaria' => 'digits_between:1,5|numeric' ,
 			'qtd_credito' =>  'numeric' ,
@@ -31,7 +31,7 @@ class DisciplinaValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-			'nome' =>  'required|max:200|serbinario_alpha_space|unique:fac_disciplinas,nome,:id',
+			'nome' =>  'required|max:200|unique:fac_disciplinas,nome,:id',
 			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo,:id',
 			'carga_horaria' => 'digits_between:1,5|numeric' ,
 			'qtd_credito' =>  'numeric' ,

@@ -31,13 +31,7 @@
             {!! Form::model($model, ['route'=> ['seracademico.posgraduacao.curriculo.update', $model->id], 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormCurriculo')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 @stop
 

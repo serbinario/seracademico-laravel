@@ -30,11 +30,5 @@
                 @include('tamplatesForms.tamplateFormSala')
             {!! Form::close() !!}
         </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
     </div>
 @stop

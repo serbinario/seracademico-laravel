@@ -86,8 +86,9 @@
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
+            <div class="col-md-10"></div>
             <div class="col-md-2">
-                {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
+                {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right')) !!}
             </div>
 
         </div>

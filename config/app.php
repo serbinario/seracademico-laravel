@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,10 +161,10 @@ return [
         * Laravel Framework Service Providers...
          * https://github.com/romanbican/roles
         */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
-        Illuminate\Auth\AuthServiceProvider::class,
-        Bican\Roles\RolesServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+       Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+       Illuminate\Auth\AuthServiceProvider::class,
+       Bican\Roles\RolesServiceProvider::class,
+       Yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
         * Application Service Providers...

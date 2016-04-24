@@ -24,6 +24,14 @@ class Disciplina extends Model implements Transformable
 	];
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function curriculos()
+	{
+		return $this->belongsToMany(Curriculo::class, "fac_curriculo_disciplina", "disciplina_id", "curriculo_id");
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public function turmas()

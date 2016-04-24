@@ -17,7 +17,8 @@ class Turma extends Model implements Transformable
         'matricula_inicio',
         'matricula_fim',
         'aula_inicio',
-        'aula_final'
+        'aula_final',
+        'vencimento_inicial'
     ];
 
     protected $fillable = [ 
@@ -32,7 +33,12 @@ class Turma extends Model implements Transformable
         'matricula_inicio',
         'matricula_fim',
         'aula_inicio',
-        'aula_final'
+        'aula_final',
+        'qtd_parcelas',
+        'maximo_vagas',
+        'minimo_vagas',
+        'observacao_vagas',
+        'vencimento_inicial'
 	];
 
     /**
@@ -46,9 +52,25 @@ class Turma extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setMatriculaInicioAttribute($value)
+    {
+        $this->attributes['matricula_inicio'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getMatriculaFimAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['matricula_fim']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setMatriculaFimAttribute($value)
+    {
+        $this->attributes['matricula_fim'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
@@ -62,9 +84,41 @@ class Turma extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setAulaInicioAttribute($value)
+    {
+        $this->attributes['aula_inicio'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getAulaFinalAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['aula_final']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setAulaFinalAttribute($value)
+    {
+        $this->attributes['aula_final'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getVencimentoInicialAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['vencimento_inicial']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setVencimentoInicialAttribute($value)
+    {
+        $this->attributes['vencimento_inicial'] = SerbinarioDateFormat::toUsa($value);;
     }
 
     /**
@@ -101,6 +155,15 @@ class Turma extends Model implements Transformable
     }
 
     /**
+     * @return $this
+     */
+    public function alunos()
+    {
+        return $this->belongsToMany(Aluno::class, "fac_alunos_turmas", "turma_id", "aluno_id")
+            ->withPivot(['id', 'aluno_id', 'disciplina_id']);
+    }
+
+    /**
      * @param Model $parent
      * @param array $attributes
      * @param string $table
@@ -109,10 +172,17 @@ class Turma extends Model implements Transformable
      */
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
+        # Pivot para disciplina
         if ($parent instanceof Disciplina) {
             return new TurmaDisciplina($parent, $attributes, $table, $exists);
         }
 
+        # Pivot para Aluno
+        if($parent instanceof Aluno) {
+            return new AlunoTurma($parent, $attributes, $table, $exists);
+        }
+
+        # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
 

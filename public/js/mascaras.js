@@ -19,6 +19,21 @@ $(document).ready(function(){
     //Numeros
     $('.number').mask('#0' , {reverse: true});
 
+    //Numeros
+    $('.numberTwo').mask('00');
+
+    //Numeros
+    $('.numberThree').mask('000');
+
+    //Numeros
+    $('.numberFor').mask('0000');
+
+    //Numeros
+    $('.numberFive').mask('00000');
+
+    //código
+    $('.codigo').mask('###');
+
     //Data
     $('.date').mask('00/00/0000');
 

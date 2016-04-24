@@ -3,3 +3,7 @@
     color: #FFF;
     font-weight: bold;
 }
+
+#calendario-disciplina-grid tbody tr td {
+    font-size: 12px;
+}

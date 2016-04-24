@@ -58,11 +58,31 @@ class CursoController extends Controller
         $rows = \DB::table('fac_cursos')
             ->join('fac_tipo_cursos', 'fac_cursos.tipo_curso_id', '=', 'fac_tipo_cursos.id')
             ->leftJoin('sedes', 'fac_cursos.sede_id', '=', 'sedes.id')
-            ->select(['fac_cursos.id', 'fac_cursos.nome', 'fac_cursos.codigo', 'sedes.nome as sede', 'fac_tipo_cursos.nome as tipocurso']);
+            ->select([
+                'fac_cursos.id',
+                'fac_cursos.nome',
+                'fac_cursos.codigo',
+                'sedes.nome as sede',
+                'fac_tipo_cursos.nome as tipocurso',
+                \DB::raw('IF(fac_cursos.ativo = 1,"SIM","NÃO") as ativo'),
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+
+            $html       = '<div class="fixed-action-btn horizontal click-to-toggle">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>
+                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
+            $curso = $this->service->find($row->id);
+
+            if(count($curso->curriculos) == 0) {
+                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
+                            </ul>
+                           </div>';
+            }
+
+            return $html;
         })->make(true);
     }
 
@@ -150,6 +170,23 @@ class CursoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

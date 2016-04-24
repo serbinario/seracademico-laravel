@@ -1,8 +1,9 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-editar-calendario" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+<div id="modal-editar-calendario" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">×</button>
                 <h4 class="modal-title">Edição do calendário</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">

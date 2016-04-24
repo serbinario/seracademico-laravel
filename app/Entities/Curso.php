@@ -50,7 +50,8 @@ class Curso extends Model implements Transformable
         'tipo_curso_id',
         'cordenador_id',
         'tipo_nivel_sistema_id',
-        'carga_horaria'
+        'carga_horaria',
+        'ativo'
     ];
 
     /**
@@ -79,11 +80,28 @@ class Curso extends Model implements Transformable
     }
 
     /**
+     *
+     * @return \DateTime
+     */
+    public function setDataDecretoRecAttribute($value)
+    {
+        $this->attributes['data_decreto_rec'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDataDouRecAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_dou_rec']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDataDouRecAttribute($value)
+    {
+        $this->attributes['data_dou_rec'] = SerbinarioDateFormat::toUsa($value);;
     }
 
     /**
@@ -97,9 +115,25 @@ class Curso extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setDataDecretoAutAttribute($value)
+    {
+        $this->attributes['data_decreto_aut'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getDataDouAutAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_dou_aut']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDataDouAutAttribute($value)
+    {
+        $this->attributes['data_dou_aut'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
@@ -113,9 +147,25 @@ class Curso extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setDataMatriculaInicioAttribute($value)
+    {
+        $this->attributes['data_matricula_inicio'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getDataMatriculaFimAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula_fim']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDataMatriculaFimAttribute($value)
+    {
+        $this->attributes['data_matricula_fim'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
@@ -129,6 +179,14 @@ class Curso extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setInicioAulaAttribute($value)
+    {
+        $this->attributes['inicio_aula'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getFimAulaAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['fim_aula']);
@@ -137,8 +195,45 @@ class Curso extends Model implements Transformable
     /**
      * @return \DateTime
      */
+    public function setFimAulaAttribute($value)
+    {
+        $this->attributes['fim_aula'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
     public function getVencimentoInicialAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['vencimento_inicial']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setVencimentoInicialAttribute($value)
+    {
+        $this->attributes['vencimento_inicial'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeByCurriculoAtivo($query, $value)
+    {
+        return $query->select('fac_cursos.nome', 'fac_cursos.id')
+            ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('fac_curriculos.ativo', $value);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAtivo($query, $value)
+    {
+        return $query->where("ativo", $value);
     }
 }

@@ -70,7 +70,21 @@ class DisciplinaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+            # Variáveis de uso
+            $html       = '<div class="fixed-action-btn horizontal click-to-toggle">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>
+                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
+            $disciplina = $this->service->find($row->id);
+            # Verificando se existe vinculo com o currículo
+            if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
+                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
+                            </ul>
+                           </div>';
+            }
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
@@ -163,4 +177,20 @@ class DisciplinaController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

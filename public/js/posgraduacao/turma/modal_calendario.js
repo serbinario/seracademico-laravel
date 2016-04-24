@@ -1,13 +1,17 @@
 // Função para carregar a grid
+var tableDisciplina;
 function loadTableDisciplina (idTurma) {
     tableDisciplina = $('#calendario-disciplina-grid').DataTable({
         processing: true,
         serverSide: true,
         retrieve: true,
-        ajax: "/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/grid/" + idTurma,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        ajax: "/index.php/seracademico/posgraduacao/turma/calendario/grid/" + idTurma,
         columns: [
-            {data: 'id', name: 'fac_turmas_disciplinas.id'},
-            {data: 'nome', name: 'fac_disciplinas.nome'}
+            {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -21,7 +25,11 @@ function runtableCargaHoraria () {
         processing: true,
         serverSide: true,
         retrieve: true,
-        ajax: "/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + idTurmaDisciplina,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+
+        ajax: "/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + idTurmaDisciplina,
         columns: [
             {data: 'data', name: 'fac_calendarios.data'},
             {data: 'data_final', name: 'fac_calendarios.data_final'},
@@ -49,11 +57,12 @@ $(document).on('click', '#calendario-disciplina-grid tbody tr', function () {
         //Ativando o botão de adicionar disciplina
         $("#btnAddCalendario").prop("disabled", false);
 
-        //Recuperando o id da turma selecionada
+        //Recuperando o id da turma selecionada e o index da linha selecionada
         idTurmaDisciplina = tableDisciplina.row($(this).index()).data().id;
+        indexRowSelectedDisciplina =  $(this).index();
 
         var tableCargaHoraria = runtableCargaHoraria();
-        tableCargaHoraria.ajax.url( "/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + idTurmaDisciplina).load();
+        tableCargaHoraria.ajax.url( "/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + idTurmaDisciplina).load();
     }
 });
 
@@ -61,8 +70,8 @@ $(document).on('click', '#calendario-disciplina-grid tbody tr', function () {
 // Função para executar a grid
 function runTableDisciplina(idTurma) {
     $("#btnAddCalendario").attr("disabled", true);
-    loadTableDisciplina().ajax.url( "/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/grid/" + idTurma).load();
+    loadTableDisciplina().ajax.url( "/index.php/seracademico/posgraduacao/turma/calendario/grid/" + idTurma).load();
     if(tableCargaHoraria != null) {
-        tableCargaHoraria.ajax.url( "/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + 0).load();
+        tableCargaHoraria.ajax.url( "/index.php/seracademico/posgraduacao/turma/calendario/gridCalendario/" + 0).load();
     }
 }

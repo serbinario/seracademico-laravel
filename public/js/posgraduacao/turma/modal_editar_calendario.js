@@ -9,18 +9,25 @@ $(document).on('click', '#btnRemoverCalendario', function () {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/delete/' + idCalendario,
+        url: '/index.php/seracademico/posgraduacao/turma/calendario/delete/' + idCalendario,
         datatype: 'json'
     }).done(function (retorno) {
+        tableCargaHoraria.load();
+
+        if(tableCargaHoraria.rows().data().length == 1) {
+            $("#btnAddCalendario").attr("disabled", true);
+            tableDisciplina.load();
+        }
+
         if(retorno.success) {
-            tableCargaHoraria.load();
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
 });
 
+// Evento para editar o calendário
 $(document).on('click', '#btnEditarCalendario', function () {
     //Recuperando o id do calendário
     var idCalendario = tableCargaHoraria.row($(this).parent().parent().index()).data().id;
@@ -28,7 +35,7 @@ $(document).on('click', '#btnEditarCalendario', function () {
     //Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/edit/' + idCalendario,
+        url: '/index.php/seracademico/posgraduacao/turma/calendario/edit/' + idCalendario,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -40,13 +47,17 @@ $(document).on('click', '#btnEditarCalendario', function () {
             $('select#sala_id_editar option[value="' + retorno.dados.calendario.sala_id + '"]').prop('selected', true);
             $('#idCalendario').val(retorno.dados.calendario.id_calendario);
 
-            $('#modal-editar-calendario').modal({show: true});
+            $('#modal-editar-calendario').modal({show: true, keyboard: true});
+            $('#modal-editar-calendario').on('hidden.bs.modal', function (e) {
+                $("#modal-disciplina-calendario").focus();
+            });
         } else {
-            window.alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
 });
 
+// Evento para o update do calendario
 $(document).on('click', '#btnUpdateCalendario', function () {
     var data         = $("#data_editar").val();
     var data_final   = $("#data_final_editar").val();
@@ -67,7 +78,7 @@ $(document).on('click', '#btnUpdateCalendario', function () {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/update/' + idCalendario,
+        url: '/index.php/seracademico/posgraduacao/turma/calendario/update/' + idCalendario,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -75,9 +86,9 @@ $(document).on('click', '#btnUpdateCalendario', function () {
         tableCargaHoraria.load();
 
         if(retorno.success) {
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
 });

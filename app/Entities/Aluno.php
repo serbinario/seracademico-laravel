@@ -74,73 +74,142 @@ class Aluno extends Model implements Transformable
         'ativo'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function endereco()
     {
         return $this->belongsTo(Endereco::class, 'enderecos_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function sexo()
     {
         return $this->belongsTo(Sexo::class, 'sexos_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function turno()
     {
         return $this->belongsTo(Turno::class, 'turnos_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function grauInstrucao()
     {
         return $this->belongsTo(GrauInstrucao::class, 'grau_instrucoes_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function profissao()
     {
         return $this->belongsTo(Profissao::class, 'profissoes_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function religiao()
     {
         return $this->belongsTo(Religiao::class, 'religioes_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function estadoCivil()
     {
         return $this->belongsTo(EstadoCivil::class, 'estados_civis_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tipoSanguinio()
     {
         return $this->belongsTo(TipoSanguinio::class, 'tipos_sanguinios_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function corRaca()
     {
         return $this->belongsTo(CorRaca::class, 'cores_racas_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function ufNascimento()
     {
         return $this->belongsTo(Estado::class, 'uf_nascimento_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function exame1()
     {
         return $this->belongsTo(Exame::class, 'exames1_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function exame2()
     {
         return $this->belongsTo(Exame::class, 'exames2_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function instituicao()
     {
         return $this->belongsTo(Instituicao::class, "fac_instituicoes_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function cursoSuperior()
     {
         return $this->belongsTo(CursoSuperior::class, 'fac_cursos_superiores_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function turmas()
+    {
+        return $this->belongsToMany(Turma::class, "fac_alunos_turmas", "aluno_id", "turma_id")
+            ->withPivot(['id', 'aluno_id', 'turma_id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        # Criando um pivot para Turma
+        if ($parent instanceof Turma) {
+            return new AlunoTurma($parent, $attributes, $table, $exists);
+        }
+
+        # Retorno do novo Pivot
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 }

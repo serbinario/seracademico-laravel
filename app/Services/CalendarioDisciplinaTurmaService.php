@@ -41,6 +41,16 @@ class CalendarioDisciplinaTurmaService
     }
 
     /**
+     * @param $field
+     * @param $value
+     * @return mixed
+     */
+    public function findByField($field, $value)
+    {
+        return $this->repository->findByField($field, $value);
+    }
+
+    /**
      * @param array $data
      * @return CalendarioDisciplinaTurma
      * @throws \Exception
@@ -48,7 +58,6 @@ class CalendarioDisciplinaTurmaService
     public function store(array $data) : CalendarioDisciplinaTurma
     {
         #Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoCampos($data);
 
         #Salvando o registro pincipal
@@ -71,7 +80,6 @@ class CalendarioDisciplinaTurmaService
     public function update(array $data, int $id) : CalendarioDisciplinaTurma
     {
         #Aplicação das regras de negócios
-        $this->tratamentoDatas($data);
         $this->tratamentoCampos($data);
 
         #Atualizando no banco de dados
@@ -117,22 +125,6 @@ class CalendarioDisciplinaTurmaService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['data']         = $data['data'] ? Carbon::createFromFormat("d/m/Y", $data['data']) : "";
-        $data['data_final']   = $data['data_final'] ? Carbon::createFromFormat("d/m/Y", $data['data_final']) : "";
-        $data['hora_inicial'] = $data['hora_inicial'] ? Carbon::createFromFormat("H:i:s", $data['hora_inicial']) : "";
-        $data['hora_final']   = $data['hora_final'] ? Carbon::createFromFormat("H:i:s", $data['hora_final']) : "";
-
-        #retorno
-        return $data;
     }
 
     /**

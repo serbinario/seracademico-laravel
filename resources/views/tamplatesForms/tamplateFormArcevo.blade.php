@@ -85,7 +85,7 @@
                             {!! Form::select('corredor_id', (["" => "Selecione o corredor"] + $loadFields['corredor']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('exemplar_ref', 0) !!}
                             {!! Form::hidden('tipo_periodico', 1) !!}
@@ -178,11 +178,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-1">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('etial_autor', 0) !!}
                             {!! Form::checkbox('etial_autor', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('etial_autor', 'Etial', false) !!}
+                            {!! Form::label('etial_autor', 'Etal', false) !!}
                         </div>
                     </div>
                 </div>
@@ -259,11 +259,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-1">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('etial_outros', 0) !!}
                             {!! Form::checkbox('etial_outros', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('etial_outros', 'Etial', false) !!}
+                            {!! Form::label('etial_outros', 'Etal', false) !!}
                         </div>
                     </div>
                 </div>

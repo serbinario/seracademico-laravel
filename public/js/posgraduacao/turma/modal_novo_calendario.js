@@ -1,7 +1,9 @@
+// Evento para cancelar
 $('#btnCancelarNovoCalendario').click( function() {
     $('#modal-novo-calendario').modal('toggle');
 });
 
+// Evento para salvar
 $('#btnSalvarCalendario').click(function() {
     var data         = $("#data").val();
     var data_final   = $("#data_final").val();
@@ -22,18 +24,21 @@ $('#btnSalvarCalendario').click(function() {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/seracademico-laravel/public/index.php/seracademico/posgraduacao/turma/calendario/store',
+        url: '/index.php/seracademico/posgraduacao/turma/calendario/store',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
         $('#modal-novo-calendario').modal('toggle');
         tableCargaHoraria.load();
+        tableDisciplina.load();
 
         if(retorno.success) {
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
-            alert(retorno.msg);
+            swal(retorno.msg, "Click no botão abaixo!", "error");
         }
+
+        $("#calendario-disciplina-grid tbody tr").eq(indexRowSelectedDisciplina).find("td").addClass("row_selected");
     });
 });
 

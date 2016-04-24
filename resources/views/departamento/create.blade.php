@@ -31,12 +31,6 @@
             {!! Form::open(['route'=>'seracademico.departamento.store', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormDepartamento')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 @stop

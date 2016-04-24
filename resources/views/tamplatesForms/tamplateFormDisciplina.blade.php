@@ -20,7 +20,7 @@
             <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('carga_horaria', 'Carga Horária') !!}
-				{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control number')) !!}
+				{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
             {{--<div class="col-md-4">
@@ -32,7 +32,7 @@
             <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('qtd_falta', 'Qtd. Faltas') !!}
-				{!! Form::text('qtd_falta', Session::getOldInput('qtd_falta')  , array('class' => 'form-control number')) !!}
+				{!! Form::text('qtd_falta', Session::getOldInput('qtd_falta')  , array('class' => 'form-control numberThree')) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -51,12 +51,18 @@
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
-            <div class="col-md-2">
-                {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <a href="{{ route('seracademico.posgraduacao.disciplina.index') }}" class="btn btn-primary btn-block"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                    </div>
+                    <div class="btn-group">
+                        {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.posgraduacao.disciplina.index') }}" class="btn btn-primary btn-block">Voltar</a>
-            </div>
+
         </div>
         {{--Fim Buttons Submit e Voltar--}}
 
@@ -92,8 +98,8 @@
                     carga_horaria: {
                         validators: {
                             stringLength: {
-                                max: 4,
-                                message: Lang.get('validation.max', { attribute: 'Carga Horária' })
+                                max: 6,
+                                message: Lang.get('validation.max.numeric', { attribute: 'Carga Horária', max: '4' })
                             }
                         }
                     },

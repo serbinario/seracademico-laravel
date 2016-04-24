@@ -2,7 +2,17 @@
 
 @section('css')
     <style type="text/css">
-        .select2-close-mask{ z-index: 2099; } .select2-dropdown{ z-index: 3051; }
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
+
+        #disciplina-grid tbody tr{
+            font-size: 10px;
+        }
     </style>
 @stop
 
@@ -10,14 +20,11 @@
     <div class="ibox float-e-margins">
 
         <div class="ibox-title">
-            <div class="col-md-10">
-                <h4>
-                    <i class="fa fa-users"></i>
-                    Listar Currículos
-                </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="fa fa-users"></i>Listar Currículos</h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.posgraduacao.curriculo.create')}}" class="btn-sm btn-primary">Novo Curriculo</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.posgraduacao.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
             </div>
         </div>
 
@@ -33,8 +40,9 @@
                                 <th>Código Curso</th>
                                 <th>Curso</th>
                                 <th>Ano</th>
-                                <th>Validade (Início)</th>
-                                <th>Validade (Fim)</th>
+                                {{--<th>Validade (Início)</th>--}}
+                                {{--<th>Validade (Fim)</th>--}}
+                                <th>Ativo</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -48,22 +56,17 @@
                                 <th>Código Curso</th>
                                 <th>Curso</th>
                                 <th>Ano</th>
-                                <th>Validade (Início)</th>
-                                <th>Validade (Fim)</th>
-                                <th style="width: 10%;">Acão</th>
+                                {{--<th>Validade (Início)</th>--}}
+                                {{--<th>Validade (Fim)</th>--}}
+                                <th>Ativo</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                The righ side of the footer
-            </span>
-            This is simple footer example
-        </div>
+        </div>        
     </div>
 
     <!-- Modal de cadastro das Disciplinas-->
@@ -88,8 +91,8 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Qtd. Faltas</th>
-                                    <th>Tipo da disciplina</th>
+                                    <th style="width: 5%;">Qtd. Faltas</th>
+                                    <th style="width: 10%;">Tipo da disciplina</th>
                                     <th >Acão</th>
                                 </tr>
                                 </thead>
@@ -97,8 +100,8 @@
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Qtd. Faltas</th>
-                                    <th>Tipo da disciplina</th>
+                                    <th style="width: 5%;">Qtd. Faltas</th>
+                                    <th style="width: 10%;">Tipo da disciplina</th>
                                     <th style="width: 10%;">Acão</th>
                                 </tr>
                                 </tfoot>
@@ -121,6 +124,7 @@
         var table = $('#curriculo-grid').DataTable({
             processing: true,
             serverSide: true,
+            autoWidth: false,
             ajax: "{!! route('seracademico.posgraduacao.curriculo.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'fac_curriculos.codigo'},
@@ -128,8 +132,9 @@
                 {data: 'codigo_curso', name: 'fac_cursos.codigo'},
                 {data: 'curso', name: 'fac_cursos.nome'},
                 {data: 'ano', name: 'fac_curriculos.ano'},
-                {data: 'valido_inicio', name: 'fac_curriculos.valido_inicio'},
-                {data: 'valido_fim', name: 'fac_curriculos.valido_fim'},
+//                {data: 'valido_inicio', name: 'fac_curriculos.valido_inicio'},
+//                {data: 'valido_fim', name: 'fac_curriculos.valido_fim'},
+                {data: 'ativo', name: 'fac_curriculos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -140,15 +145,17 @@
 
         /*Responsável em abrir modal*/
         $(document).on("click", '.grid-curricular', function () {
-            $("#modal-grade-curricular").modal({show: true});
-            idCurriculo = table.row($(this).parent().parent().index()).data().id;
+            $("#modal-grade-curricular").modal({show: true, keyboard: true});
+            idCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             /*Datatable da grid Modal*/
             table2 = $('#disciplina-grid').DataTable({
                 retrieve: true,
                 processing: true,
                 serverSide: true,
-                ajax: "/seracademico-laravel/public/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo,
+                iDisplayLength: 5,
+                bLengthChange: false,
+                ajax: "/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo,
                 columns: [
                     {data: 'nome', name: 'fac_disciplinas.nome'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
@@ -158,7 +165,7 @@
             });
 
             //Carregando a datatable
-            table2.ajax.url("/seracademico-laravel/public/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo).load();
+            table2.ajax.url("/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo).load();
         });
 
          //consulta via select2
@@ -176,10 +183,12 @@
                         'search':         params.term, // search term
                         'tableName':      'fac_disciplinas',
                         'fieldName':      'nome',
-                        'page':           params.page,
+                        'page':           params.page || 1,
                         'tableNotIn':     'fac_curriculo_disciplina',
+                        'columnWhere' :   'curriculo_id',
                         'columnNotWhere': 'id',
-                        'culmnNotGet':    'disciplina_id'
+                        'culmnNotGet':    'disciplina_id',
+                        'valueNotWhere':    idCurriculo
                     };
                 },
                 headers: {
@@ -194,9 +203,9 @@
                     params.page = params.page || 1;
 
                     return {
-                        results: data,
+                        results: data.data,
                         pagination: {
-                            more: (params.page * 30) < data.total_count
+                            more: data.more
                         }
                     };
                 }
@@ -204,8 +213,15 @@
         });
 
         //Evento do click no botão adicionar disciplina
-        $(document).on('click', '#addDisciplina', function () {
+        $(document).on('click', '#addDisciplina', function (event) {
             var array   = $('#select-disciplina').select2('data');
+
+            // Verificando se alguma disciplina foi selecionada
+            if (!array.length > 0) {
+                sweetAlert("Oops...", "Você deve selecionar uma disciplina!", "error");
+                return false;
+            }
+
             var arrayId = [];
 
             for (var i = 0; i < array.length; i++) {
@@ -228,15 +244,15 @@
                 datatype: 'json'
             }).done(function (json) {
                 $('#select-disciplina').select2("val", "");
-                window.alert("Disciplina(s) adicionada(s) com sucesso!");
+                swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
                 table2.ajax.reload();
             });
         });
 
         //Evento de remover a disciplina
         $(document).on('click', '.removerDisciplina', function () {
-            idCurriculo  = table2.row($(this).parent().parent().index()).data().idCurriculo;
-            idDisciplina = table2.row($(this).parent().parent().index()).data().id;
+            idCurriculo  = table2.row($(this).parent().parent().parent().parent().parent().index()).data().idCurriculo;
+            idDisciplina = table2.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             //Setando o o json para envio
             var dados = {
@@ -252,9 +268,9 @@
                 },
                 data: dados,
                 datatype: 'json'
-            }).done(function (json) {
+            }).done(function (retorno) {
                 $('#select-disciplina').select2("val", "");
-                window.alert("Disciplina(s) removida(s) com sucesso!");
+                swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
                 table2.ajax.reload();
             });
         });

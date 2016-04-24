@@ -11,6 +11,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
         //Rotas de pos-graduação
         Route::group(['prefix' => 'posgraduacao', 'as' => 'posgraduacao.'], function () {
+
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'AlunoController@grid']);
@@ -19,6 +20,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'AlunoController@contrato']);
+
+                Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+                    Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'AlunoTurmaController@grid']);
+                    Route::get('gridACursar/{idAlunoTurma}', ['as' => 'gridACursar', 'uses' => 'AlunoTurmaController@gridACursar']);
+                    Route::get('gridCursadas/{idAlunoTurma}', ['as' => 'gridCursadas', 'uses' => 'AlunoTurmaController@gridCursadas']);
+                    Route::get('gridDispensadas/{idAlunoTurma}', ['as' => 'gridDispensadas', 'uses' => 'AlunoTurmaController@gridDispensadas']);
+                    Route::get('getCursos', ['as' => 'getCursos', 'uses' => 'AlunoTurmaController@getCursos']);
+                    Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'AlunoTurmaController@getTurmas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'AlunoTurmaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'AlunoTurmaController@store']);
+                });
             });
 
             Route::group(['prefix' => 'professor', 'as' => 'professor.'], function () {
@@ -38,6 +50,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'DisciplinaController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'DisciplinaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'DisciplinaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'DisciplinaController@delete']);
             });
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
@@ -47,6 +60,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'CursoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CursoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'CursoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'CursoController@delete']);
             });
 
             Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
@@ -72,10 +86,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@grid']);
                     Route::get('gridCalendario/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@gridCalendario']);
+                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@disciplinasOfCurriculo']);
                     Route::post('store', ['as' => 'store', 'uses' => 'CalendarioTurmaController@store']);
                     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendarioTurmaController@edit']);
                     Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendarioTurmaController@update']);
                     Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioTurmaController@delete']);
+                    Route::post('incluir', ['as' => 'incluir', 'uses' => 'CalendarioTurmaController@incluirDisciplina']);
+                    Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'CalendarioTurmaController@removerDisciplina']);
                 });
 
             });
@@ -200,6 +217,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
             Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
+            Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
         });
     });
 });

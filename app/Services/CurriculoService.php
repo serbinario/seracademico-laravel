@@ -4,7 +4,6 @@ namespace Seracademico\Services;
 
 use Seracademico\Repositories\CurriculoRepository;
 use Seracademico\Entities\Curriculo;
-use Carbon\Carbon;
 use Seracademico\Repositories\CursoRepository;
 use Seracademico\Repositories\DisciplinaRepository;
 
@@ -61,7 +60,6 @@ class CurriculoService
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
-        $this->tratamentoDatas($data);
 
         #Salvando o registro pincipal
         $curriculo =  $this->repository->create($data);
@@ -87,11 +85,9 @@ class CurriculoService
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
-        $this->tratamentoDatas($data);
 
         #Atualizando no banco de dados
         $curriculo = $this->repository->update($data, $id);
-
 
         #Verificando se foi atualizado no banco de dados
         if(!$curriculo) {
@@ -177,15 +173,33 @@ class CurriculoService
     public function load(array $models) : array
     {
         #Declarando variáveis de uso
-        $result = [];
+        $result    = [];
+        $expressao = [];
 
         #Criando e executando as consultas
         foreach ($models as $model) {
-            #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\$model";
+            # separando as strings
+            $explode   = explode("|", $model);
 
-            #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Seracademico\\Entities\\$model";
+
+            if(count($expressao) > 1) {
+                #Recuperando o registro e armazenando no array
+                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+            } else {
+                #Recuperando o registro e armazenando no array
+                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            }
+
+            # Limpando a expressão
+            $expressao = [];
         }
 
         #retorno
@@ -196,24 +210,10 @@ class CurriculoService
      * @param array $data
      * @return mixed
      */
-    public function tratamentoDatas(array &$data) : array
-    {
-        #tratando as datas
-        $data['valido_inicio'] = $data['valido_inicio'] ? Carbon::createFromFormat("d/m/Y", $data['valido_inicio']) : "";
-        $data['valido_fim']    = $data['valido_fim'] ? Carbon::createFromFormat("d/m/Y", $data['valido_fim']) : "";
-
-        #retorno
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
     private function tratamentoCurriculoAtivo(array &$data): array
     {
         #Verificando se a condição é válida
-        if($data['ativo'] == 1 && $data['curso_id']) {
+        if($data['ativo'] == 1 && isset($data['curso_id'])) {
             #Recuperando o(s) currículo(s) ativo(s)
             $rows = $this->repository->getCurriculoAtivo($data['curso_id']);
 

@@ -30,12 +30,6 @@
             {!! Form::open(['route'=>'seracademico.posgraduacao.turma.store' , 'id' => 'formTurma', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormTurma')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
+        </div>        
     </div>
 @stop

@@ -82,14 +82,29 @@
                 }
             });
 
+            function formatRepo (repo) {
+                if (repo.loading) return repo.text;
+
+                var markup = '<option value="' + repo.id + '">' + repo.name + '</option>';
+                return markup;
+            }
+
+            function formatRepoSelection (repo) {
+
+                return repo.name || repo.text
+            }
+
             //consulta via select2 segunda entrada 1
             $("#autor-1").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -106,9 +121,6 @@
                     },
                     processResults: function (data, params) {
 
-
-                        console.log(data);
-
                         // parse the results into the format expected by Select2
                         // since we are using custom formatting functions we do not need to
                         // alter the remote JSON data, except to indicate that infinite
@@ -116,7 +128,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }
@@ -129,10 +141,13 @@
             $("#autor-2").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -156,7 +171,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }
@@ -169,10 +184,13 @@
             $("#autor-3").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -196,7 +214,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }
@@ -210,10 +228,13 @@
             $("#responsavel-1").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -237,7 +258,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }
@@ -250,10 +271,13 @@
             $("#responsavel-2").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -277,7 +301,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }
@@ -290,10 +314,13 @@
             $("#responsavel-3").select2({
                 placeholder: 'Selecione um responsável',
                 minimumInputLength: 3,
+                escapeMarkup: function (markup) { return markup; },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2personalizado')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,
@@ -317,7 +344,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }

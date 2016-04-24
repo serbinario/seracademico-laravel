@@ -27,7 +27,7 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Curso'
+        'Curso|ativo,1'
     ];
 
     /**
@@ -61,6 +61,7 @@ class CurriculoController extends Controller
                 'fac_curriculos.nome',
                 'fac_curriculos.codigo',
                 'fac_curriculos.ano',
+                \DB::raw('IF(fac_curriculos.ativo = 1,"SIM","NÃO") as ativo'),
                 \DB::raw('DATE_FORMAT(fac_curriculos.valido_inicio, "%d/%m/%Y") as valido_inicio'),
                 \DB::raw('DATE_FORMAT(fac_curriculos.valido_fim, "%d/%m/%Y") as valido_fim'),
                 'fac_cursos.nome as curso',
@@ -69,8 +70,14 @@ class CurriculoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a title="Editar Currículo" href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-            <a title="Adicionar Disciplinas ao Currículo" data-id="'. $row->id  .'" href="#" class="grid-curricular btn btn-xs btn-primary"><i class="glyphicon glyphicon-book"></i></a>';
+
+            return '<div class="fixed-action-btn horizontal click-to-toggle">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
+                        <li><a class="grid-curricular btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
+                    </ul>
+                    </div>';
         })->make(true);
     }
 
@@ -97,7 +104,27 @@ class CurriculoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
+            # variáveis de uso
+            $html       = '';
+            $curriculo  = $this->service->find($row->idCurriculo);
+            $tumas      = $curriculo->turmas;
+            $boolReturn = true;
+
+            # percorre as turmas
+            foreach ($tumas as $turma) {
+                if(count($turma->disciplinas) > 0) {
+                    $boolReturn = false;
+                    break;
+                }
+            }
+
+            # Verifica a se a condição é válida
+            if($boolReturn) {
+                $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
+            }
+
+            # retorno
+            return $html;
         })->make(true);
     }
 
@@ -133,7 +160,7 @@ class CurriculoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {dd($e); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

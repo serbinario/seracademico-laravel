@@ -7,12 +7,15 @@ use \Prettus\Validator\LaravelValidator;
 
 class $CLASS$Validator extends LaravelValidator
 {
+    use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             $VALIDATORS$
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+            $VALIDATORS$
+        ],
    ];
 
 }
