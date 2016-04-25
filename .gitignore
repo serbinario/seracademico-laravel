@@ -6,3 +6,6 @@ Homestead.json
 .env
 /.idea
 .idea/
+/public/images/*
+/public/images/
+.gitignore

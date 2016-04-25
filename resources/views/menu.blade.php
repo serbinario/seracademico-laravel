@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
 
     @yield('css')
 </head>
@@ -127,6 +128,16 @@
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Biblioteca</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}">Responsável</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}">Editora</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}">Acervo</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}">Exemplar</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -202,6 +213,7 @@
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 
