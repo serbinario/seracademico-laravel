@@ -11,6 +11,7 @@ class DisciplinaValidator extends LaravelValidator
 	use TraitReplaceRulesValidator;
 
 	protected $messages   = [
+
 	];
 
 	protected $attributes = [
