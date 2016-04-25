@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
 
     @yield('css')
 </head>
@@ -49,17 +50,17 @@
                 </li>
 
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Pós-Graduação</span> <span
+                    <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="#">Secretaria <span class="fa arrow"></span></a>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
-                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                             </ul>
                         </li>
                         {{--<li>
@@ -77,18 +78,17 @@
 
                 @role('admin')
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Graduação</span> <span
+                    <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="#">Secretaria <span class="fa arrow"></span></a>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
-                                <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}">Disciplinas</a></li>
-                                <li><a href="{{ route('seracademico.graduacao.periodo.index') }}">Períodos</a></li>
-                                <li><a href="{{ route('seracademico.graduacao.curso.index') }}">Cursos</a></li>
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
+                                <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
+                                {{--  <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                  <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                  <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
                             </ul>
                         </li>
                         {{--<li>
@@ -105,27 +105,37 @@
                 </li>
 
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Segurança</span> <span
+                    <a href="index.html"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.user.index') }}">Usuários</a></li>
-                        <li><a href="{{ route('seracademico.role.index') }}">Perfís</a></li>
+                        <li><a href="{{ route('seracademico.user.index') }}"><i class="material-icons">account_circle</i> Usuários</a></li>
+                        <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
                 @endrole
 
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Parâmetros</span> <span
+                    <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.empresa.check') }}">Empresa</a></li>
-                        <li><a href="{{ route('seracademico.sede.index') }}">Sedes</a></li>
-                        <li><a href="{{ route('seracademico.departamento.index') }}">Departamentos / Sede</a></li>
-                        <li><a href="{{ route('seracademico.sala.index') }}">Salas</a></li>
-                        <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}">Tipos de Avaliações</a></li>
-                        <li><a href="{{ route('seracademico.tipoDisciplina.index') }}">Tipos de Disciplinas</a></li>
-                        <li><a href="{{ route('seracademico.tipoCurso.index') }}">Tipos de Cursos</a></li>
-                        <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}">Professor</a></li>
+                        <li><a href="{{ route('seracademico.empresa.check') }}"><i class="fa fa-university"></i> Empresa</a></li>
+                        <li><a href="{{ route('seracademico.sede.index') }}"><i class="fa fa-building"></i> Sedes</a></li>
+                        <li><a href="{{ route('seracademico.departamento.index') }}"><i class="material-icons">view_module</i> Dpts/Sede</a></li>
+                        <li><a href="{{ route('seracademico.sala.index') }}"><i class="material-icons">class</i> Salas</a></li>
+                        <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}"><i class="fa fa-star-half-empty"></i> Tipos de Avaliações</a></li>
+                        <li><a href="{{ route('seracademico.tipoDisciplina.index') }}"><i class="fa fa-tags"></i> Tipos de Disciplinas</a></li>
+                        <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="material-icons">next_week</i> Tipos de Cursos</a></li>
+                        <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Biblioteca</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}">Responsável</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}">Editora</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}">Acervo</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}">Exemplar</a></li>
                     </ul>
                 </li>
             </ul>
@@ -203,6 +213,7 @@
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 

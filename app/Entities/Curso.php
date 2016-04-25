@@ -236,4 +236,12 @@ class Curso extends Model implements Transformable
     {
         return $query->where("ativo", $value);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function acervos()
+    {
+        return $this->belongsToMany(Arcevo::class, 'bib_arcevos_cursos', 'cursos_id', "arcevos_id");
+    }
 }

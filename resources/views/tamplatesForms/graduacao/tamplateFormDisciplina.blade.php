@@ -23,22 +23,11 @@
 				{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('carga_horaria_pratica', 'Carga Horária Prática') !!}
-                    {!! Form::text('carga_horaria_pratica', Session::getOldInput('carga_horaria_pratica')  , array('class' => 'form-control numberFor')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('carga_horaria_teorica', 'Carga Horária Teórica') !!}
-                    {!! Form::text('carga_horaria_teorica', Session::getOldInput('carga_horaria_teorica')  , array('class' => 'form-control numberFor')) !!}
-                </div>
-            </div>
+
             <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('qtd_credito', 'Qtd Crédito') !!}
-				{!! Form::text('qtd_credito', Session::getOldInput('qtd_credito')  , array('class' => 'form-control')) !!}
+				{!! Form::text('qtd_credito', Session::getOldInput('qtd_credito')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -60,6 +49,47 @@
                 </div>
             </div>
 		</div>
+
+
+        <hr class="hr-line-dashed"/>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#cargahoraria" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Carga Horária</a>
+                    </li>
+                </ul>
+                <!-- End Nav tabs -->
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    {{--Aba Carga Horária--}}
+                    <div role="tabpanel" class="tab-pane active" id="datas">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label('carga_horaria_pratica', 'Carga Horária Prática') !!}
+                                    {!! Form::text('carga_horaria_pratica', Session::getOldInput('carga_horaria_pratica')  , array('class' => 'form-control numberFor')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label('carga_horaria_teorica', 'Carga Horária Teórica') !!}
+                                    {!! Form::text('carga_horaria_teorica', Session::getOldInput('carga_horaria_teorica')  , array('class' => 'form-control numberFor')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--FIM Carga Horária--}}
+
+                </div>
+                <!-- FIM Tab panes -->
+            </div>
+        </div>
+        {{--FIM Linha da da Abas--}}
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
@@ -107,22 +137,6 @@
                             }
                         }
                     },
-                    carga_horaria: {
-                        validators: {
-                            stringLength: {
-                                max: 6,
-                                message: Lang.get('validation.max.numeric', { attribute: 'Carga Horária', max: '4' })
-                            }
-                        }
-                    },
-                    qtd_falta: {
-                        validators: {
-                            stringLength: {
-                                max: 4,
-                                message: Lang.get('validation.max', { attribute: 'Quantidade de Faltas' })
-                            }
-                        }
-                    }
                 }
             });
 

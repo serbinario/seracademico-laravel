@@ -207,6 +207,36 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'DepartamentoController@update']);
         });
 
+        Route::group(['prefix' => 'biblioteca', 'as' => 'biblioteca.'], function () {
+            Route::get('indexResponsavel', ['as' => 'indexResponsavel', 'uses' => 'ResponsavelController@index']);
+            Route::get('createResponsavel', ['as' => 'createResponsavel', 'uses' => 'ResponsavelController@create']);
+            Route::get('gridResponsavel', ['as' => 'gridResponsavel', 'uses' => 'ResponsavelController@grid']);
+            Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'ResponsavelController@edit']);
+            Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'ResponsavelController@store']);
+            Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'ResponsavelController@update']);
+
+            Route::get('indexEditora', ['as' => 'indexEditora', 'uses' => 'EditoraController@index']);
+            Route::get('createEditora', ['as' => 'createEditora', 'uses' => 'EditoraController@create']);
+            Route::get('gridEditora', ['as' => 'gridEditora', 'uses' => 'EditoraController@grid']);
+            Route::get('editEditora/{id}', ['as' => 'editEditora', 'uses' => 'EditoraController@edit']);
+            Route::post('storeEditora', ['as' => 'storeEditora', 'uses' => 'EditoraController@store']);
+            Route::post('updateEditora/{id}', ['as' => 'updateEditora', 'uses' => 'EditoraController@update']);
+
+            Route::get('indexAcervo', ['as' => 'indexAcervo', 'uses' => 'ArcevoController@index']);
+            Route::get('createAcervo', ['as' => 'createAcervo', 'uses' => 'ArcevoController@create']);
+            Route::get('gridAcervo', ['as' => 'gridAcervo', 'uses' => 'ArcevoController@grid']);
+            Route::get('editAcervo/{id}', ['as' => 'editAcervo', 'uses' => 'ArcevoController@edit']);
+            Route::post('storeAcervo', ['as' => 'storeAcervo', 'uses' => 'ArcevoController@store']);
+            Route::post('updateAcervo/{id}', ['as' => 'updateAcervo', 'uses' => 'ArcevoController@update']);
+
+            Route::get('indexExemplar', ['as' => 'indexExemplar', 'uses' => 'ExemplarController@index']);
+            Route::get('createExemplar', ['as' => 'createExemplar', 'uses' => 'ExemplarController@create']);
+            Route::get('gridExemplar', ['as' => 'gridExemplar', 'uses' => 'ExemplarController@grid']);
+            Route::get('editExemplar/{id}', ['as' => 'editExemplar', 'uses' => 'ExemplarController@edit']);
+            Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'ExemplarController@store']);
+            Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'ExemplarController@update']);
+        });
+
         //Rotas para componentes de segurança
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
@@ -230,6 +260,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
             Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
+            Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
         });
     });
 });

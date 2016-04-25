@@ -2,20 +2,249 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5264dc21-f7d8-4da1-96e2-594a5bcf8ddf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/TabelaPrecoCursoService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_tabela_precos.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/graduacao/curso/modal_editar_tabela_precos.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_tabela_precos.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/graduacao/curso/modal_inserir_tabela_precos.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img-exemplar/a661e6c66513948a7c78543e0ba17968.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img-exemplar/d55cd559f2a52aa9244b1f3c816e59cb.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img-exemplar/de379e597442fc86588f793d9209cb65.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img-exemplar/e8270e3e13e43edf75d26532be80caa3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_04_06_112116_create_bib_tipos_acervos_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Aquisicao.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/AquisicaoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/AquisicaoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Arcevo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArcevoController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ArcevoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ArcevoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/ArcevoService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/ArcevoValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Transformers/BibTiposAcervosTransformer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Colecao.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ColecaoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ColecaoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Corredor.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/CorredorRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/CorredorRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Editora.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/EditoraController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EditoraRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EditoraRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/EditoraService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/EditoraValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Emprestimo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EmprestimoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EmprestimoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Estante.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EstanteRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/EstanteRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Exemplar.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExemplarController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ExemplarRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ExemplarRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/ExemplarService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/ExemplarValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Genero.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/GeneroRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/GeneroRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Idioma.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/IdiomaRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/IdiomaRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Ilustracao.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/IlustracaoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/IlustracaoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/PrimeiraEntrada.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/PrimeiraEntradaRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/PrimeiraEntradaRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/PrimeiraEntradaService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/PrimeiraEntradaValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Responsavel.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResponsavelController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ResponsavelRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ResponsavelRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/ResponsavelService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/ResponsavelValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/SegundaEntrada.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/SegundaEntradaRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/SegundaEntradaRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/SegundaEntradaService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/SegundaEntradaValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Situacao.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/SituacaoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/SituacaoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/TipoAcervo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/TipoAcervoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/TipoAcervoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/TipoAcervoValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/TipoAutor.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/TipoAutorRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/TipoAutorRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/TipoAutorValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/bootstrap-multiselect.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap-multiselect.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/acervo/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/editora/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/exemplar/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/responsavel/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/acervo/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/editora/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/exemplar/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/responsavel/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/acervo/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/editora/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/exemplar/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/biblioteca/responsavel/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormArcevo.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormEditora.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormExemplar.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormResponsavel.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/README.md" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/CalendarioDisciplinaTurma.php" afterPath="$PROJECT_DIR$/app/Entities/CalendarioDisciplinaTurma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CalendarioDisciplinaTurmaEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/CalendarioDisciplinaTurmaEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CalendarioDisciplinaTurmaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/CalendarioDisciplinaTurmaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CalendarioDisciplinaTurmaService.php" afterPath="$PROJECT_DIR$/app/Services/CalendarioDisciplinaTurmaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/CalendarioDisciplinaTurmaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/CalendarioDisciplinaTurmaValidator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CalendarioTurmaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CalendarioTurmaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudControllerCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudControllerCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudGeneratorCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudGeneratorCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/CrudGeneratorService.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/CrudGeneratorService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudModelCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudModelCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudRepositoryCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudRepositoryCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudServiceCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudServiceCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudValidatorsCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudValidatorsCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudViewCommand.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/Console/Commands/CrudViewCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Curriculo.php" afterPath="$PROJECT_DIR$/app/Entities/Curriculo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CurriculoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/CurriculoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CurriculoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/CurriculoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CurriculoService.php" afterPath="$PROJECT_DIR$/app/Services/CurriculoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/CurriculoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/CurriculoValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Curso.php" afterPath="$PROJECT_DIR$/app/Entities/Curso.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CursoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/CursoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/CursoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/CursoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/CursoService.php" afterPath="$PROJECT_DIR$/app/Services/CursoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/CursoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/CursoValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Departamento.php" afterPath="$PROJECT_DIR$/app/Entities/Departamento.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/DepartamentoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/DepartamentoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/DepartamentoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/DepartamentoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/DepartamentoService.php" afterPath="$PROJECT_DIR$/app/Services/DepartamentoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/DepartamentoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/DepartamentoValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Disciplina.php" afterPath="$PROJECT_DIR$/app/Entities/Disciplina.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/DisciplinaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/DisciplinaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/DisciplinaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/DisciplinaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/DisciplinaService.php" afterPath="$PROJECT_DIR$/app/Services/DisciplinaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/DisciplinaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/DisciplinaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Empresa.php" afterPath="$PROJECT_DIR$/app/Entities/Empresa.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/EmpresaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/EmpresaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/EmpresaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/EmpresaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/EmpresaService.php" afterPath="$PROJECT_DIR$/app/Services/EmpresaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/EmpresaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/EmpresaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/GeneratorsServiceProvider.php" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/GeneratorsServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Professor.php" afterPath="$PROJECT_DIR$/app/Entities/Professor.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfessorController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfessorController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/ProfessorRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/ProfessorRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/ProfessorRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/ProfessorRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ProfessorService.php" afterPath="$PROJECT_DIR$/app/Services/ProfessorService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/ProfessorValidator.php" afterPath="$PROJECT_DIR$/app/Validators/ProfessorValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/RoleService.php" afterPath="$PROJECT_DIR$/app/Services/RoleService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Sala.php" afterPath="$PROJECT_DIR$/app/Entities/Sala.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/SalaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/SalaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/SalaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/SalaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/SalaService.php" afterPath="$PROJECT_DIR$/app/Services/SalaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/SalaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/SalaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Sede.php" afterPath="$PROJECT_DIR$/app/Entities/Sede.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/SedeRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/SedeRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/SedeRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/SedeRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/SedeService.php" afterPath="$PROJECT_DIR$/app/Services/SedeService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/SedeValidator.php" afterPath="$PROJECT_DIR$/app/Validators/SedeValidator.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" afterPath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Uteis/SerbinarioDateFormat.php" afterPath="$PROJECT_DIR$/app/Uteis/SerbinarioDateFormat.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/TipoAvaliacao.php" afterPath="$PROJECT_DIR$/app/Entities/TipoAvaliacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoAvaliacaoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoAvaliacaoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoAvaliacaoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoAvaliacaoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/TipoAvaliacaoService.php" afterPath="$PROJECT_DIR$/app/Services/TipoAvaliacaoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TipoAvaliacaoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TipoAvaliacaoValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/TipoCurso.php" afterPath="$PROJECT_DIR$/app/Entities/TipoCurso.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoCursoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoCursoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoCursoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoCursoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/TipoCursoService.php" afterPath="$PROJECT_DIR$/app/Services/TipoCursoService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TipoCursoValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TipoCursoValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/TipoDisciplina.php" afterPath="$PROJECT_DIR$/app/Entities/TipoDisciplina.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoDisciplinaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoDisciplinaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoDisciplinaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoDisciplinaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/TipoDisciplinaService.php" afterPath="$PROJECT_DIR$/app/Services/TipoDisciplinaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TipoDisciplinaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TipoDisciplinaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/TipoNivelSistema.php" afterPath="$PROJECT_DIR$/app/Entities/TipoNivelSistema.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoNivelSistemaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoNivelSistemaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TipoNivelSistemaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TipoNivelSistemaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Titulacao.php" afterPath="$PROJECT_DIR$/app/Entities/Titulacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TitulacaoRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TitulacaoRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TitulacaoRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TitulacaoRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TraitReplaceRulesValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TraitReplaceRulesValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Turma.php" afterPath="$PROJECT_DIR$/app/Entities/Turma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TurmaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TurmaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/TurmaDisciplina.php" afterPath="$PROJECT_DIR$/app/Entities/TurmaDisciplina.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TurmaRepository.php" afterPath="$PROJECT_DIR$/app/Repositories/TurmaRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Repositories/TurmaRepositoryEloquent.php" afterPath="$PROJECT_DIR$/app/Repositories/TurmaRepositoryEloquent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/TurmaService.php" afterPath="$PROJECT_DIR$/app/Services/TurmaService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/TurmaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/TurmaValidator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UtilController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UtilController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/application.blade.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/application.blade.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/buttons.dataTables.min.css" afterPath="$PROJECT_DIR$/public/css/buttons.dataTables.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/buttons.dataTables.min.css" afterPath="$PROJECT_DIR$/public/js/buttons.dataTables.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/composer.json" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/reports/contrato.blade.php" afterPath="$PROJECT_DIR$/resources/views/reports/contrato.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/create.blade.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/create.blade.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/dataTables.buttons.min.js" afterPath="$PROJECT_DIR$/public/js/dataTables.buttons.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/edit.blade.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/edit.blade.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/index.blade.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/index.blade.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/jquery-ui.css" afterPath="$PROJECT_DIR$/public/css/jquery-ui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery-ui.js" afterPath="$PROJECT_DIR$/public/js/jquery-ui.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/jquery.dataTables.min.css" afterPath="$PROJECT_DIR$/public/css/jquery.dataTables.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery.dataTables.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.dataTables.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/laravellocalization.php" afterPath="$PROJECT_DIR$/config/laravellocalization.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/menu.blade.php" afterPath="$PROJECT_DIR$/resources/views/menu.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/messages.js" afterPath="$PROJECT_DIR$/public/messages.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/migration.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/migration.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/css/modal_calendario.css" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/css/modal_calendario.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_calendario.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/modal_editar_calendario.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/modal_editar_calendario.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_editar_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_editar_calendario.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/modal_novo_calendario.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/modal_novo_calendario.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js" afterPath="$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/model.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/model.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelController.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelController.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelRepository.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelRepository.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelRepositoryEloquent.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelRepositoryEloquent.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelService.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelService.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelValidator.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/modelValidator.stub" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/sb-admin-2.js" afterPath="$PROJECT_DIR$/public/js/sb-admin-2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/show.blade.stub" afterPath="$PROJECT_DIR$/packages/serbinario/l5scaffold/src/stubs/show.blade.stub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/snappy.php" afterPath="$PROJECT_DIR$/config/snappy.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurriculo.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurriculo.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDisciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDisciplina.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormProfessor.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormProfessor.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" />
     </list>
     <ignored path="seracademico-laravel.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +265,18 @@
     <favorites_list name="seracademico-laravel" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SeracademicoRepositoryProvider.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2791762">
+              <caret line="224" column="10" selection-start-line="224" selection-start-column="10" selection-end-line="224" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -81,7 +321,6 @@
         <option value="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Graduacao/PrecoCursoRepository.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Graduacao/PrecoCursoRepositoryEloquent.php" />
-        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
         <option value="$PROJECT_DIR$/app/Entities/Graduacao/TipoPrecoCurso.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.php" />
@@ -102,6 +341,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" />
         <option value="$PROJECT_DIR$/app/Services/Graduacao/TabelaPrecoCursoService.php" />
         <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_editar_tabela_precos.js" />
+        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
       </list>
     </option>
   </component>
@@ -151,7 +391,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -198,35 +437,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seracademico-laravel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seracademico-laravel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Services" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Graduacao" />
+              <option name="myItemId" value="Providers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -296,28 +514,28 @@
     <option name="totallyTimeSpent" value="3160000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="24" width="1368" height="616" extended-state="7" />
+    <frame x="-1" y="24" width="1368" height="616" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2931818" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2931818" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32586557" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299389" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -371,7 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5">
           <caret line="4" column="57" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -379,7 +596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.75">
           <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -387,7 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25">
           <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -395,7 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -403,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.7083335">
           <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -411,7 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5295203">
           <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -419,9 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30442804">
           <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
-          <folding>
-            <element signature="e#59#87#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -429,7 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.027675277">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -437,7 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16605166">
           <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -445,7 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -453,7 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -461,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16605166">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -469,7 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -477,9 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="45" />
-          <folding>
-            <element signature="e#55#102#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -487,9 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="45" />
-          <folding>
-            <element signature="e#55#102#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -497,7 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.107551485">
           <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -505,7 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06864989">
           <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -513,9 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.166667">
           <caret line="93" column="7" selection-start-line="93" selection-start-column="7" selection-end-line="93" selection-end-column="7" />
-          <folding>
-            <element signature="e#51#90#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -523,7 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19372694">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -531,7 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.44649446">
           <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -539,9 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.74354243">
           <caret line="77" column="63" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="63" />
-          <folding>
-            <element signature="e#59#87#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -549,7 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -557,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.055350553">
           <caret line="147" column="77" selection-start-line="147" selection-start-column="77" selection-end-line="148" selection-end-column="108" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -565,7 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44622424">
           <caret line="66" column="74" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -573,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41512915">
           <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -581,7 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -589,15 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29704797">
           <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5194508">
-          <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,7 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6507592">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -613,7 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.416667">
           <caret line="211" column="110" selection-start-line="211" selection-start-column="12" selection-end-line="211" selection-end-column="110" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -621,7 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4805492">
           <caret line="176" column="5" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -629,7 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3837638">
           <caret line="69" column="52" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -637,7 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34686348">
           <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -645,7 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -653,7 +820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38177875">
           <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -661,7 +827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9110629">
           <caret line="40" column="33" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -669,7 +834,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875">
           <caret line="69" column="82" selection-start-line="69" selection-start-column="82" selection-end-line="69" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -677,7 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45553145">
           <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -685,7 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72540045">
           <caret line="165" column="7" selection-start-line="165" selection-start-column="7" selection-end-line="165" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -693,7 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48512587">
           <caret line="20" column="17" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -701,7 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.034324944">
           <caret line="1" column="75" selection-start-line="1" selection-start-column="75" selection-end-line="1" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -709,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7208238">
           <caret line="21" column="91" selection-start-line="21" selection-start-column="91" selection-end-line="21" selection-end-column="91" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -717,7 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5856833">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -725,7 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.9934924">
           <caret line="92" column="74" selection-start-line="92" selection-start-column="74" selection-end-line="92" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -733,7 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4805492">
           <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -749,7 +905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03253796">
           <caret line="1" column="20" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -757,7 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41189933">
           <caret line="137" column="39" selection-start-line="137" selection-start-column="33" selection-end-line="137" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -766,7 +920,7 @@
         <state vertical-scroll-proportion="0.5491991">
           <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
-            <element signature="e#51#98#0#PHP" expanded="true" />
+            <element signature="e#51#98#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -775,6 +929,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34324944">
           <caret line="150" column="39" selection-start-line="150" selection-start-column="25" selection-end-line="150" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2791762">
+          <caret line="224" column="10" selection-start-line="224" selection-start-column="10" selection-end-line="224" selection-end-column="10" />
           <folding />
         </state>
       </provider>
