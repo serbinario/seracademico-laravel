@@ -86,9 +86,9 @@
                             <ul class="nav nav-third-level collapse">
                                 {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
-                              {{--  <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
-                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
+                                {{--  <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>
+                                  <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>
+                                  <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
                             </ul>
                         </li>
                         {{--<li>

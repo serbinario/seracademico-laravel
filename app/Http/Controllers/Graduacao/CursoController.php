@@ -4,23 +4,23 @@ namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\Graduacao\DisciplinaService;
+use Seracademico\Services\Graduacao\CursoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Graduacao\DisciplinaValidator;
-use Seracademico\Http\Controllers\Controller;
+use Seracademico\Validators\Graduacao\CursoValidator;
 
-class DisciplinaController extends Controller
+class CursoController extends Controller
 {
     /**
-    * @var DisciplinaService
+    * @var CursoService
     */
     private $service;
 
     /**
-    * @var DisciplinaValidator
+    * @var CursoValidator
     */
     private $validator;
 
@@ -28,15 +28,15 @@ class DisciplinaController extends Controller
     * @var array
     */
     private $loadFields = [
-        'TipoDisciplina',
-        'TipoAvaliacao'
+        'TipoCurso',
+        'TipoNivelSistema'
     ];
 
     /**
-    * @param DisciplinaService $service
-    * @param DisciplinaValidator $validator
+    * @param CursoService $service
+    * @param CursoValidator $validator
     */
-    public function __construct(DisciplinaService $service, DisciplinaValidator $validator)
+    public function __construct(CursoService $service, CursoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -47,7 +47,7 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        return view('graduacao.disciplina.index');
+        return view('graduacao.curso.index');
     }
 
     /**
@@ -56,36 +56,34 @@ class DisciplinaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_disciplinas')
-            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
-            //->leftjoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 1)
+        $rows = \DB::table('fac_cursos')
+            ->join('fac_tipo_cursos', 'fac_cursos.tipo_curso_id', '=', 'fac_tipo_cursos.id')
+            ->leftJoin('sedes', 'fac_cursos.sede_id', '=', 'sedes.id')
+            ->where('fac_cursos.tipo_nivel_sistema_id', 2)
             ->select([
-                'fac_disciplinas.id',
-                'fac_disciplinas.nome',
-                'fac_disciplinas.codigo',
-                'fac_disciplinas.carga_horaria',
-                'fac_disciplinas.qtd_falta',
-                'fac_tipo_disciplinas.nome as tipo_disciplina']
-                //'fac_tipo_avaliacoes.nome as tipo_avaliacao']
-            );
+                'fac_cursos.id',
+                'fac_cursos.nome',
+                'fac_cursos.codigo',
+                'sedes.nome as sede',
+                'fac_tipo_cursos.nome as tipocurso',
+                \DB::raw('IF(fac_cursos.ativo = 1,"SIM","NÃO") as ativo'),
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Variáveis de uso
+
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                           <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
-            $disciplina = $this->service->find($row->id);
-            # Verificando se existe vinculo com o currículo
-            if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
-                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
+                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
+            $curso = $this->service->find($row->id);
+
+            if(count($curso->curriculos) == 0) {
+                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
                             </ul>
                            </div>';
             }
 
-            # Retorno
             return $html;
         })->make(true);
     }
@@ -99,7 +97,7 @@ class DisciplinaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('graduacao.disciplina.create', compact('loadFields'));
+        return view('graduacao.curso.create', compact('loadFields'));
     }
 
     /**
@@ -144,7 +142,7 @@ class DisciplinaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('graduacao.disciplina.edit', compact('model', 'loadFields'));
+            return view('graduacao.curso.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -195,4 +193,5 @@ class DisciplinaController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
 }

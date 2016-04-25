@@ -5,38 +5,35 @@ namespace Seracademico\Http\Controllers\Graduacao;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\Graduacao\DisciplinaService;
+use Seracademico\Services\Graduacao\PeriodoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Graduacao\DisciplinaValidator;
+use Seracademico\Validators\Graduacao\PeriodoValidator;
 use Seracademico\Http\Controllers\Controller;
 
-class DisciplinaController extends Controller
+class PeriodoController extends Controller
 {
     /**
-    * @var DisciplinaService
-    */
+     * @var PeriodoService
+     */
     private $service;
 
     /**
-    * @var DisciplinaValidator
-    */
+     * @var PeriodoValidator
+     */
     private $validator;
 
     /**
     * @var array
     */
-    private $loadFields = [
-        'TipoDisciplina',
-        'TipoAvaliacao'
-    ];
+    private $loadFields = [];
 
     /**
-    * @param DisciplinaService $service
-    * @param DisciplinaValidator $validator
-    */
-    public function __construct(DisciplinaService $service, DisciplinaValidator $validator)
+     * @param PeriodoService $service
+     * @param PeriodoValidator $validator
+     */
+    public function __construct(PeriodoService $service, PeriodoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -47,7 +44,7 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        return view('graduacao.disciplina.index');
+        return view('graduacao.periodo.index');
     }
 
     /**
@@ -56,37 +53,21 @@ class DisciplinaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_disciplinas')
-            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
-            //->leftjoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 1)
-            ->select([
-                'fac_disciplinas.id',
-                'fac_disciplinas.nome',
-                'fac_disciplinas.codigo',
-                'fac_disciplinas.carga_horaria',
-                'fac_disciplinas.qtd_falta',
-                'fac_tipo_disciplinas.nome as tipo_disciplina']
-                //'fac_tipo_avaliacoes.nome as tipo_avaliacao']
-            );
+        $rows = \DB::table('fac_periodos')->select([
+            'fac_periodos.id',
+            'fac_periodos.nome',
+            \DB::raw('IF(fac_periodos.ativo = 1,"SIM","NÃO") as ativo'),
+        ]);
 
-        #Editando a grid
+        // Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Variáveis de uso
-            $html       = '<div class="fixed-action-btn horizontal">
-                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                            <ul>
-                           <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
-            $disciplina = $this->service->find($row->id);
-            # Verificando se existe vinculo com o currículo
-            if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
-                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
-                            </ul>
-                           </div>';
-            }
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar departamento"><i class="material-icons">edit</i></a></li>
+                    </ul>
+                    </div>';
 
-            # Retorno
-            return $html;
         })->make(true);
     }
 
@@ -99,7 +80,7 @@ class DisciplinaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('graduacao.disciplina.create', compact('loadFields'));
+        return view('graduacao.periodo.create', compact('loadFields'));
     }
 
     /**
@@ -144,7 +125,7 @@ class DisciplinaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('graduacao.disciplina.edit', compact('model', 'loadFields'));
+            return view('graduacao.periodo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -160,9 +141,6 @@ class DisciplinaController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
-            #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);

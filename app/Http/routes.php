@@ -110,6 +110,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\DisciplinaController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\DisciplinaController@delete']);
             });
+
+            Route::group(['prefix' => 'periodo', 'as' => 'periodo.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\PeriodoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\PeriodoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\PeriodoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PeriodoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\PeriodoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\PeriodoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\PeriodoController@delete']);
+            });
+
+            Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\CursoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\CursoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\CursoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CursoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\CursoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CursoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\CursoController@delete']);
+            });
         });
 
 
