@@ -2,10 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5264dc21-f7d8-4da1-96e2-594a5bcf8ddf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Graduacao/Curso.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Graduacao/Periodo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepositoryEloquent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/CursoService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/PeriodoService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/CursoValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/PeriodoValidator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormCurso.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormPeriodo.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.eot" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ttf" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff2" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" afterPath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/botao-fab.css" afterPath="$PROJECT_DIR$/public/css/botao-fab.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" afterPath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ijmap" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ijmap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.svg" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/README.md" afterPath="$PROJECT_DIR$/public/fonts/iconfont/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/codepoints" afterPath="$PROJECT_DIR$/public/fonts/iconfont/codepoints" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" afterPath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/materialize.min.js" afterPath="$PROJECT_DIR$/public/js/materialize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/plugins/botao/materialize.min.js" afterPath="$PROJECT_DIR$/public/js/plugins/botao/materialize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/menu.blade.php" afterPath="$PROJECT_DIR$/resources/views/menu.blade.php" />
     </list>
     <ignored path="seracademico-laravel.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,7 +72,7 @@
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/disciplina/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
+            <state relative-caret-position="960">
               <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
               <folding />
             </state>
@@ -50,14 +82,14 @@
       <file leaf-file-name="tamplateFormDisciplina.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
+            <state relative-caret-position="2040">
               <caret line="136" column="29" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DisciplinaValidator.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DisciplinaValidator.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Validators/Graduacao/DisciplinaValidator.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -65,6 +97,16 @@
               <folding>
                 <element signature="e#53#105#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,7 +217,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -305,6 +346,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -353,6 +395,13 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -370,14 +419,15 @@
       <workItem from="1460989923798" duration="3160000" />
       <workItem from="1461340504713" duration="2000" />
       <workItem from="1461584261190" duration="3507000" />
+      <workItem from="1461590776338" duration="63000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6669000" />
+    <option name="totallyTimeSpent" value="6732000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1602" height="901" extended-state="7" />
+    <frame x="-1" y="0" width="1602" height="901" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -472,13 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="236" column="44" selection-start-line="236" selection-start-column="44" selection-end-line="236" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -723,7 +766,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/disciplina/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
+        <state relative-caret-position="960">
           <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
           <folding />
         </state>
@@ -733,7 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-150">
           <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -741,7 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="27" column="47" selection-start-line="22" selection-start-column="12" selection-end-line="27" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -749,7 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -757,7 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -765,7 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -773,7 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -781,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,7 +831,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
+        <state relative-caret-position="2040">
           <caret line="136" column="29" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
           <folding />
         </state>
@@ -808,6 +844,14 @@
           <folding>
             <element signature="e#53#105#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
