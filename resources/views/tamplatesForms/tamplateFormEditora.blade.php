@@ -4,21 +4,40 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais dados</a></li>
+            <li role="presentation"><a href="#contato" aria-controls="endereco" role="tab" data-toggle="tab">Contato</a></li>
             <li role="presentation"><a href="#endereco" aria-controls="endereco" role="tab" data-toggle="tab">Endereço</a></li>
+            <li role="presentation"><a href="#dadosbancario" aria-controls="dadosbancario" role="tab" data-toggle="tab">Dados Bancário</a></li>
         </ul>
 
-        <!-- Tab panes -->
+
         <div class="tab-content">
+            <!-- Tab Pricipais dados -->
             <div role="tabpanel" class="tab-pane active" id="dados">
                 <br />
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-10">
                         <div class="form-group">
 
                             {!! Form::label('nome', 'Nome') !!}
                             {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('cnpj', 'CNPJ') !!}
+                            {!! Form::text('cnpj', Session::getOldInput('cnpj')  , array('class' => 'form-control cnpj')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('razao_social', 'Razão Social') !!}
+                            {!! Form::text('razao_social', Session::getOldInput('razao_social')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('email', 'E-mail') !!}
@@ -31,32 +50,14 @@
                             {!! Form::text('site', Session::getOldInput('site')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('cnpj', 'CNPJ') !!}
-                            {!! Form::text('cnpj', Session::getOldInput('cnpj')  , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('razao_social', 'Razão Social') !!}
-                            {!! Form::text('razao_social', Session::getOldInput('razao_social')  , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('agencia', 'Agência') !!}
-                            {!! Form::text('agencia', Session::getOldInput('agencia')  , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('conta', 'Conta') !!}
-                            {!! Form::text('conta', Session::getOldInput('conta')  , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
+
+
+
                 </div>
             </div>
+            <!-- FIM aba Pricipais dados -->
+
+            <!-- Tab Endereço -->
             <div role="tabpanel" class="tab-pane" id="endereco">
                 <br />
                 <div class="row">
@@ -112,6 +113,44 @@
 
                 </div>
             </div>
+            <!-- aba Endereço -->
+
+            <!-- aba Contato -->
+            <div role="tabpanel" class="tab-pane" id="contato">
+                <br />
+                <div class="row">
+
+                </div>
+            </div>
+            <!-- FIM aba contato -->
+
+            <!-- aba Contato -->
+            <div role="tabpanel" class="tab-pane" id="dadosbancario">
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('banco', 'Banco') !!}
+                            {!! Form::text('banco', Session::getOldInput('banco')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('agencia', 'Agência') !!}
+                            {!! Form::text('agencia', Session::getOldInput('agencia')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('conta', 'Conta') !!}
+                            {!! Form::text('conta', Session::getOldInput('conta')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- FIM aba contato -->
+
         </div>
 	</div>
     <div class="col-md-12">
