@@ -8,7 +8,7 @@
     <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div class="col-sm-6 col-md-9">
-                    <h4><i class="fa fa-users"></i>Listar Turmas</h4>
+                    <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <a href="{{ route('seracademico.posgraduacao.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>

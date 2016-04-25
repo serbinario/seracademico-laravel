@@ -5,8 +5,8 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h4>
-                    <i class="material-icons">view_module</i>
-                    Cadastrar Departamento
+                    <i class="fa fa-user"></i>
+                    Editar Período
                 </h4>
             </div>
 
@@ -28,8 +28,8 @@
                     </div>
                 @endif
 
-            {!! Form::open(['route'=>'seracademico.departamento.store', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormDepartamento')
+            {!! Form::model($model, ['route'=> ['seracademico.graduacao.periodo.update', $model->id], 'id' => 'formPeriodo', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.graduacao.tamplateFormPeriodo')
             {!! Form::close() !!}
         </div>        
     </div>

@@ -1,26 +1,27 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\TipoCursoService;
-use Seracademico\Validators\TipoCursoValidator;
+use Seracademico\Services\Graduacao\PeriodoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Seracademico\Validators\Graduacao\PeriodoValidator;
+use Seracademico\Http\Controllers\Controller;
 
-class TipoCursoController extends Controller
+class PeriodoController extends Controller
 {
     /**
-    * @var TipoCursoService
-    */
+     * @var PeriodoService
+     */
     private $service;
 
     /**
-    * @var TipoCursoValidator
-    */
+     * @var PeriodoValidator
+     */
     private $validator;
 
     /**
@@ -29,10 +30,10 @@ class TipoCursoController extends Controller
     private $loadFields = [];
 
     /**
-    * @param TipoCursoService $service
-    * @param TipoCursoValidator $validator
-    */
-    public function __construct(TipoCursoService $service, TipoCursoValidator $validator)
+     * @param PeriodoService $service
+     * @param PeriodoValidator $validator
+     */
+    public function __construct(PeriodoService $service, PeriodoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -43,7 +44,7 @@ class TipoCursoController extends Controller
      */
     public function index()
     {
-        return view('tipoCurso.index');
+        return view('graduacao.periodo.index');
     }
 
     /**
@@ -52,17 +53,21 @@ class TipoCursoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_tipo_cursos')->select(['id', 'nome']);
+        $rows = \DB::table('fac_periodos')->select([
+            'fac_periodos.id',
+            'fac_periodos.nome',
+            \DB::raw('IF(fac_periodos.ativo = 1,"SIM","NÃO") as ativo'),
+        ]);
 
-        #Editando a grid
+        // Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             return '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
-                        <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar tipo de curso"><i class="material-icons">edit</i></a></li>                        
+                        <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar departamento"><i class="material-icons">edit</i></a></li>
                     </ul>
                     </div>';
-                /*'<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';*/
+
         })->make(true);
     }
 
@@ -75,7 +80,7 @@ class TipoCursoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('tipoCurso.create', compact('loadFields'));
+        return view('graduacao.periodo.create', compact('loadFields'));
     }
 
     /**
@@ -120,7 +125,7 @@ class TipoCursoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('tipoCurso.edit', compact('model', 'loadFields'));
+            return view('graduacao.periodo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -138,7 +143,7 @@ class TipoCursoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
@@ -152,4 +157,20 @@ class TipoCursoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

@@ -1,19 +1,21 @@
 @extends('menu')
 
 @section('content')
-    <div class="ibox float-e-margins">
 
+    <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">next_week</i>
-                     Listar Cursos</h4>
+                <h4>
+                    <i class="fa fa-users"></i>
+                    Listar Períodos
+                </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.posgraduacao.curso.create')}}" class="btn-sm btn-primary pull-right">Novo Curso</a>
+                <a href="{{ route('seracademico.graduacao.periodo.create')}}" class="btn-sm btn-primary pull-right">Novo Periodo</a>
             </div>
         </div>
-
         <div class="ibox-content">
+
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -33,23 +35,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
-                        <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="periodo-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Código</th>
                                 <th>Nome</th>
-                                <th>Tipo do Curso</th>
                                 <th>Ativo</th>
-                                <th >Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
-
                             <tfoot>
                             <tr>
                                 <th>Código</th>
                                 <th>Nome</th>
-                                <th>Tipo do Curso</th>
                                 <th>Ativo</th>
+                                {{--<th>Tipo de avaliação</th>--}}
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -63,16 +63,15 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#sala-grid').DataTable({
+        var table = $('#periodo-grid').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.curso.grid') !!}",
+            ajax: "{!! route('seracademico.graduacao.periodo.grid') !!}",
             columns: [
-                {data: 'codigo', name: 'fac_cursos.codigo'},
-                {data: 'nome', name: 'fac_cursos.nome'},
-                {data: 'tipocurso', name: 'fac_tipo_cursos.nome'},
-                {data: 'ativo', name: 'fac_cursos.ativo'},
+                {data: 'id', name: 'fac_periodos.id'},
+                {data: 'nome', name: 'fac_periodos.nome'},
+                {data: 'ativo', name: 'fac_periodos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

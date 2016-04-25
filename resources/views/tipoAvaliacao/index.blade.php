@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="fa fa-star-half-empty"></i>
                     Listar Tipos de Avaliaçao
                 </h4>
             </div>
@@ -32,7 +32,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Nome</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

@@ -33,16 +33,13 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#acursar" aria-controls="acursar" data-toggle="tab"><i class="fa fa-male"></i>
-                                    A cursar</a>
+                                <a href="#acursar" aria-controls="acursar" data-toggle="tab">A cursar</a>
                             </li>
                             <li role="presentation">
-                                <a href="#cursando" aria-controls="cursando" role="tab" data-toggle="tab"><i
-                                            class="fa fa-file-text"></i> Cursadas</a>
+                                <a href="#cursando" aria-controls="cursando" role="tab" data-toggle="tab">Cursadas</a>
                             </li>
                             <li role="presentation">
-                                <a href="#dispensadas" aria-controls="dispensadas" role="tab" data-toggle="tab"><i
-                                            class="fa fa-globe"></i> Dispensadas</a>
+                                <a href="#dispensadas" aria-controls="dispensadas" role="tab" data-toggle="tab">Dispensadas</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->

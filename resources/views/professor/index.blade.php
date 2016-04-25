@@ -4,14 +4,11 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
-                <h4>
-                    <i class="fa fa-users"></i>
-                    Listar Professores
-                </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">rate_review</i> Listar Professores</h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.posgraduacao.professor.create')}}" class="btn-sm btn-primary">Novo Professor</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.posgraduacao.professor.create')}}" class="btn-sm btn-primary pull-right">Novo Professor</a>
             </div>
         </div>
         <div class="ibox-content">

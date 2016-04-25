@@ -2,19 +2,91 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5264dc21-f7d8-4da1-96e2-594a5bcf8ddf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Graduacao/Curso.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepositoryEloquent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/CursoService.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Validators/Graduacao/CursoValidator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/create.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/edit.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormCurso.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Services/Graduacao/PeriodoService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/graduacao/periodo/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormPeriodo.blade.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/congruent_pentagon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/header-profile-skin-2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/header-profile-skin-3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/otis_redding.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/shattered.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/patterns/triangular.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.eot" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ttf" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff2" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AlunoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DisciplinaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ijmap" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.ijmap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.svg" afterPath="$PROJECT_DIR$/public/fonts/iconfont/MaterialIcons-Regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/README.md" afterPath="$PROJECT_DIR$/public/fonts/iconfont/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SalaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SedeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" afterPath="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoAvaliacaoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoCursoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TipoDisciplinaController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/botao-fab.css" afterPath="$PROJECT_DIR$/public/css/botao-fab.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" afterPath="$PROJECT_DIR$/public/css/plugins/botao/botao-fab.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/codepoints" afterPath="$PROJECT_DIR$/public/fonts/iconfont/codepoints" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/disciplina/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/disciplina/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/empresa/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/empresa/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/professor/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/professor/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sala/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/sala/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sede/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/sede/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoAvaliacao/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoAvaliacao/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/disciplina/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/disciplina/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/empresa/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/empresa/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/professor/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/professor/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sala/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/sala/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sede/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/sede/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoAvaliacao/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoAvaliacao/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curriculo/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/curriculo/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/curso/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/curso/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/departamento/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/departamento/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/disciplina/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/disciplina/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/professor/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/professor/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sala/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/sala/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sede/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/sede/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoAvaliacao/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoAvaliacao/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoCurso/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoCurso/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tipoDisciplina/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/tipoDisciplina/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/turma/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/turma/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" afterPath="$PROJECT_DIR$/public/fonts/iconfont/material-icons.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/materialize.min.js" afterPath="$PROJECT_DIR$/public/js/materialize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/plugins/botao/materialize.min.js" afterPath="$PROJECT_DIR$/public/js/plugins/botao/materialize.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/menu.blade.php" afterPath="$PROJECT_DIR$/resources/views/menu.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/turma/modal_aluno_turma.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/turma/modal_aluno_turma.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/aluno/turma/modal_nova_turma.blade.php" afterPath="$PROJECT_DIR$/resources/views/aluno/turma/modal_nova_turma.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/style.css" afterPath="$PROJECT_DIR$/public/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormAluno.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormAluno.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormCurso.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDepartamento.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormDepartamento.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" afterPath="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormTurma.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="seracademico-laravel.iws" />
@@ -36,7 +108,30 @@
     <favorites_list name="seracademico-laravel" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="PeriodoController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4704797">
+              <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+              <folding>
+                <element signature="e#59#87#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Periodo.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Entities/Graduacao/Periodo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.875">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,16 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/tamplatesForms/tamplateFormAluno.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UtilController.php" />
-        <option value="$PROJECT_DIR$/resources/views/aluno/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/aluno/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/professor/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TurmaController.php" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CursoController.php" />
-        <option value="$PROJECT_DIR$/resources/views/curso/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Services/CurriculoService.php" />
         <option value="$PROJECT_DIR$/app/Entities/Curso.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/resources/views/aluno/index.blade.php" />
@@ -84,17 +169,27 @@
         <option value="$PROJECT_DIR$/app/Entities/Disciplina.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepositoryEloquent.php" />
         <option value="$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepository.php" />
-        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
         <option value="$PROJECT_DIR$/app/Entities/Graduacao/Curso.php" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
         <option value="$PROJECT_DIR$/app/Services/Graduacao/CursoService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php" />
         <option value="$PROJECT_DIR$/app/Validators/Graduacao/CursoValidator.php" />
         <option value="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormCurso.blade.php" />
+        <option value="$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php" />
+        <option value="$PROJECT_DIR$/resources/views/graduacao/periodo/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/graduacao/periodo/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
+        <option value="$PROJECT_DIR$/app/Services/Graduacao/PeriodoService.php" />
+        <option value="$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepository.php" />
+        <option value="$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepositoryEloquent.php" />
+        <option value="$PROJECT_DIR$/app/Validators/Graduacao/PeriodoValidator.php" />
+        <option value="$PROJECT_DIR$/app/Entities/Graduacao/Periodo.php" />
+        <option value="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormPeriodo.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php" />
+        <option value="$PROJECT_DIR$/resources/views/graduacao/periodo/index.blade.php" />
       </list>
     </option>
   </component>
@@ -173,7 +268,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -187,11 +286,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entities" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graduacao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="periodo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -205,15 +312,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entities" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Graduacao" />
+              <option name="myItemId" value="graduacao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="seracademico-laravel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="seracademico-laravel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -229,16 +350,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/graduacao" />
-      <recent name="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao" />
       <recent name="$PROJECT_DIR$/app/Services/Graduacao" />
-      <recent name="$PROJECT_DIR$/app/Validators/Graduacao" />
-      <recent name="$PROJECT_DIR$/app/Repositories/Graduacao" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Graduacao" />
+      <recent name="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao" />
+      <recent name="$PROJECT_DIR$/resources/views/graduacao/periodo" />
+      <recent name="$PROJECT_DIR$/resources/views/graduacao" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Validators/Graduacao" />
+      <recent name="$PROJECT_DIR$/app/Repositories/Graduacao" />
+      <recent name="$PROJECT_DIR$/app/Entities/Graduacao" />
       <recent name="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao" />
       <recent name="$PROJECT_DIR$/resources/views/graduacao" />
-      <recent name="$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tempateForm" />
     </key>
   </component>
   <component name="RunManager">
@@ -287,13 +410,13 @@
     <option name="totallyTimeSpent" value="3160000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="24" width="1368" height="721" extended-state="7" />
-    <editor active="false" />
+    <frame x="-1" y="24" width="1368" height="721" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2651515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26363635" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32790223" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -350,104 +473,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22776572">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TurmaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04347826">
-          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/CurriculoService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65675056">
-          <caret line="192" column="39" selection-start-line="192" selection-start-column="39" selection-end-line="192" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/aluno/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6224256">
-          <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/turma/modal_calendario.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="84" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/turma/modal_editar_calendario.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="81" selection-start-line="1" selection-start-column="81" selection-end-line="1" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/turma/modal_novo_calendario.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.034324944">
-          <caret line="1" column="78" selection-start-line="1" selection-start-column="78" selection-end-line="1" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/turma/modal_incluir_disciplinas.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.034324944">
-          <caret line="1" column="69" selection-start-line="1" selection-start-column="69" selection-end-line="1" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/posgraduacao/turma/modal_editar_calendario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/posgraduacao/turma/modal_calendario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4310954">
-          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/posgraduacao/turma/modal_incluir_disciplinas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="83" selection-start-line="20" selection-start-column="83" selection-end-line="20" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CurriculoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3523985">
-          <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/curriculo/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8333333">
-          <caret line="253" column="46" selection-start-line="253" selection-start-column="46" selection-end-line="253" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/turma/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55719554">
@@ -553,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Entities/Graduacao/Disciplina.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2693727">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/Graduacao/DisciplinaService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.027675277">
@@ -588,13 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27675277">
-          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormDisciplina.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73985237">
@@ -609,26 +620,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8627002">
-          <caret line="223" column="49" selection-start-line="223" selection-start-column="49" selection-end-line="223" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepositoryEloquent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20594966">
           <caret line="6" column="37" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17162472">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -645,22 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.583334">
           <caret line="68" column="52" selection-start-line="68" selection-start-column="52" selection-end-line="68" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875">
-          <caret line="120" column="82" selection-start-line="120" selection-start-column="82" selection-end-line="120" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.583333">
-          <caret line="87" column="77" selection-start-line="87" selection-start-column="77" selection-end-line="87" selection-end-column="77" />
           <folding />
         </state>
       </provider>
@@ -689,24 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Validators/Graduacao/CursoValidator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22140221">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35977858">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-          <folding>
-            <element signature="e#59#87#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/Graduacao/CursoService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8339483">
@@ -722,7 +683,189 @@
         <state vertical-scroll-proportion="0.16605166">
           <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
           <folding>
+            <element signature="e#51#90#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Aluno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Graduacao/Disciplina.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14187643">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
             <element signature="e#51#90#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/periodo/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.125">
+          <caret line="30" column="97" selection-start-line="30" selection-start-column="97" selection-end-line="30" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/periodo/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.958333">
+          <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AlunoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44622424">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/CursoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5766591">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+          <folding>
+            <element signature="e#59#87#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/DisciplinaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29290617">
+          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65217394">
+          <caret line="120" column="89" selection-start-line="120" selection-start-column="89" selection-end-line="120" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DepartamentoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.625">
+          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.166667">
+          <caret line="87" column="106" selection-start-line="87" selection-start-column="106" selection-end-line="87" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Graduacao/PeriodoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5">
+          <caret line="4" column="57" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/CursoRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13729978">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/SeracademicoRepositoryProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.958333">
+          <caret line="227" column="66" selection-start-line="227" selection-start-column="49" selection-end-line="227" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Validators/Graduacao/CursoValidator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.75">
+          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Validators/Graduacao/PeriodoValidator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepositoryEloquent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16605166">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.055350553">
+          <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Graduacao/Periodo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tamplatesForms/graduacao/tamplateFormPeriodo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.7083335">
+          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CursoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="66" column="74" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/periodo/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5295203">
+          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4704797">
+          <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+          <folding>
+            <element signature="e#59#87#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

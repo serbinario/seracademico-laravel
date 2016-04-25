@@ -6,7 +6,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="material-icons">next_week</i>
                     Listar Tipos de Cursos
                 </h4>
             </div>
@@ -30,7 +30,7 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

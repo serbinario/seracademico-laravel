@@ -73,11 +73,11 @@ class CursoController extends Controller
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
+                            <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
             $curso = $this->service->find($row->id);
 
             if(count($curso->curriculos) == 0) {
-                $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
+                $html .= '<li><a class="btn-floating" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
                             </ul>
                            </div>';
             }

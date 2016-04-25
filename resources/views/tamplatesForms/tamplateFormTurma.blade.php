@@ -32,16 +32,16 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#datas" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Datas</a>
+                        <a href="#datas" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Datas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i> Valores </a>
+                        <a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>
                     </li>
                     <li role="presentation">
-                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Vagas</a>
+                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Sala de Aula</a>
+                        <a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">label</i> Sala de Aula</a>
                     </li>
                 </ul>
                 <!-- End Nav tabs -->

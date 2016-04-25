@@ -18,7 +18,12 @@ body {
   vertical-align: middle;
 }
 .btn-main {
-  border-bottom: 2px solid #4D6274;
+  border-bottom: 2px solid #69AAA6;
+  background: #2F5286;
+}
+.btn-main:hover {
+  border-bottom: 2px solid #2F5286;
+  background: #3B70BF !important;
 }
 
 .btn-floating i {
@@ -102,28 +107,3 @@ button.btn-floating {
   opacity: 0;
 }
 
-/*Cores*/
-.red {
-  background-color: #F44336 !important;
-}
-.yellow {
-  background-color: #ffeb3b !important;
-}
-.orange {
-  background-color: #ff9800 !important;
-}
-.green {
-  background-color: #4CAF50 !important;
-}
-.blue-grey {
-  background-color: #607d8b !important;
-}
-.purple {
-  background-color: #9c27b0 !important;
-}
-.indigo {
-  background-color: #3f51b5 !important;
-}
-.amber {
-  background-color: #ffc107 !important;
-}
