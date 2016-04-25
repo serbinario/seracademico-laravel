@@ -64,6 +64,8 @@ class EditoraService
         #Criando no banco de dados
         $endereco = $this->enderecoRepository->create($data['endereco']);
 
+        //dd($endereco);
+
         #setando o endereco
         $data['enderecos_id'] = $endereco->id;
 

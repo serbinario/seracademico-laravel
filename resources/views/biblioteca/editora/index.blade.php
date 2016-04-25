@@ -31,7 +31,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>CNPJ</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

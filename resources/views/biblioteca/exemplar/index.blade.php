@@ -35,7 +35,7 @@
                                 <th>Edição</th>
                                 <th>Situação</th>
                                 <th>Emprestimo</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

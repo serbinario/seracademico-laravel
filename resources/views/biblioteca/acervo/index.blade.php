@@ -31,7 +31,7 @@
                             <tr>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
-                                <th style="width: 10%;">Acão</th>
+                                <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>

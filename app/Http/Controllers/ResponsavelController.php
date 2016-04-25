@@ -56,7 +56,12 @@ class ResponsavelController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="editResponsavel/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating" href="editResponsavel/'.$row->id.'" title="Editar sede"><i class="material-icons">edit</i></a></li>
+                    </ul>
+                    </div>';
         })->make(true);
     }
 
