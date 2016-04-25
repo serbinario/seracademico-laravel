@@ -234,6 +234,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\TipoPrecoCursoRepositoryEloquent::class);
 
         $this->app->bind(
+            \Seracademico\Repositories\Graduacao\PrecoCursoRepository::class,
+            \Seracademico\Repositories\Graduacao\PrecoCursoRepositoryEloquent::class);
+
+        $this->app->bind(
             \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepository::class,
             \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepositoryEloquent::class);
 	}
