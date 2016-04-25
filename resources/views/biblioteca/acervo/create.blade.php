@@ -30,19 +30,16 @@
                 @include('tamplatesForms.tamplateFormArcevo')
             {!! Form::close() !!}
         </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
-        </div>
     </div>
 @stop
 
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#cursos').multiselect();
+            $('#cursos').multiselect({
+                buttonClass: 'btn-default',
+                nonSelectedText: 'Selecione um Curso'
+            });
 
             //consulta via select2
             $("#primeira-entrada").select2({
