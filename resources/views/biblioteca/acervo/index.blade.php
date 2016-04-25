@@ -39,12 +39,6 @@
                 </div>
             </div>
         </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                The righ side of the footer
-            </span>
-            This is simple footer example
-        </div>
     </div>
 @stop
 
