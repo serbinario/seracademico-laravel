@@ -75,6 +75,7 @@ class CursoController extends Controller
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
+                            <li><a class="btn-floating indigo" title="Tabela de precos" id="tabela-precos"><i class="glyphicon glyphicon-list-alt"></i></a></li>
                             <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
             $curso = $this->service->find($row->id);
 
