@@ -64,8 +64,6 @@ class EditoraService
         #Criando no banco de dados
         $endereco = $this->enderecoRepository->create($data['endereco']);
 
-        //dd($endereco);
-
         #setando o endereco
         $data['enderecos_id'] = $endereco->id;
 
@@ -93,9 +91,17 @@ class EditoraService
         #Atualizando no banco de dados
         $editora = $this->repository->update($data, $id);
 
+        if($editora->endereco != null) {
+            $endereco = $this->enderecoRepository->update($data['endereco'], $editora->endereco->id);
+        } else {
+            $endereco = $this->enderecoRepository->create($data['endereco']);
+            $data['enderecos_id'] = $endereco->id;
+            $editora = $this->repository->update($data, $id);
+        }
+
 
         #Verificando se foi atualizado no banco de dados
-        if(!$editora) {
+        if(!$editora || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
