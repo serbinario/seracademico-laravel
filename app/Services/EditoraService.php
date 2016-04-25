@@ -58,6 +58,9 @@ class EditoraService
      */
     public function store(array $data) : Editora
     {
+
+        $this->tratamentoCampos($data);
+
         #Criando no banco de dados
         $endereco = $this->enderecoRepository->create($data['endereco']);
 
@@ -83,6 +86,8 @@ class EditoraService
      */
     public function update(array $data, int $id) : Editora
     {
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $editora = $this->repository->update($data, $id);
 
@@ -129,6 +134,24 @@ class EditoraService
 
          #retorno
          return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data['endereco'] as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                unset($data['endereco'][$key]);
+            }
+        }
+        #Retorno
+        return $data;
     }
 
 }

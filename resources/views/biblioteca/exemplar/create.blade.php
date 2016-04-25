@@ -26,7 +26,7 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplar', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplar', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormExemplar')
             {!! Form::close() !!}
         </div>
@@ -75,7 +75,7 @@
                         params.page = params.page || 1;
 
                         return {
-                            results: data,
+                            results: data.data,
                             pagination: {
                                 more: (params.page * 30) < data.total_count
                             }

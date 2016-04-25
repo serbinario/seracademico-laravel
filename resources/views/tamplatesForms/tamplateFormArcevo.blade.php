@@ -85,6 +85,28 @@
                             {!! Form::select('corredor_id', (["" => "Selecione o corredor"] + $loadFields['corredor']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('cursos', 'Cursos') !!}
+                            {{--{{dd($model->cursos->lists('id')->all())}}--}}
+                            @if(isset($model->id))
+                                <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
+                                    @foreach($loadFields['curso'] as $key => $value)
+                                        <option value="{{$key}}" @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                {!! Form::select('cursos[]', $loadFields['curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('uso_global', 0) !!}
+                            {!! Form::checkbox('uso_global', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('uso_global', 'Este livro serve para todos os cursos?', false) !!}
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('exemplar_ref', 0) !!}
@@ -94,7 +116,7 @@
                         </div>
                     </div>
                     @if(isset($model->id))
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 {!! Form::label('cdd', 'Número de chamada') !!}
                                 {!! Form::text('', $model->numero_chamada  , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
@@ -109,13 +131,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('obs_geral', 'Observação Geral') !!}
-                            {!! Form::textarea('obs_geral', Session::getOldInput('obs_geral')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('obs_geral', Session::getOldInput('obs_geral')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('palavras_chaves', 'Palavras chave') !!}
-                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                 </div>

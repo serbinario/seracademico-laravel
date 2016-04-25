@@ -21,6 +21,11 @@ class ExemplarService
     private $repoAcervo;
 
     /**
+     * @var string
+     */
+    private $destinationPath = "img-exemplar/";
+
+    /**
      * @param ExemplarRepository $repository
      */
     public function __construct(ExemplarRepository $repository, ArcevoRepository $repoAcervo)
@@ -54,6 +59,7 @@ class ExemplarService
      */
     public function store(array $data) : Exemplar
     {
+
         $data = $this->tratamentoDatas($data);
 
         //recupera o acervo
@@ -65,7 +71,7 @@ class ExemplarService
 
         //trata a quantidade de exemplar caso o valor informado seja 0
         $qtdExemplar = $data['registros'] == '0' ? $qtdExemplar = 1 : $qtdExemplar = $data['registros'];
-
+        //dd($codigoMax);
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
                 if($i == 0){
@@ -75,15 +81,15 @@ class ExemplarService
                     $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo;
+                    $codigoMax = $exemplar->codigo + 1;
                 } else {
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
-                    $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
+                    $data['codigo'] = $codigoMax;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo;
+                    $codigoMax = $exemplar->codigo + 1;
                 }
             }
         } else {
@@ -95,15 +101,15 @@ class ExemplarService
                     $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo;
+                    $codigoMax = $exemplar->codigo + 1;
                 } else {
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '1';
                     $data['situacao_id'] = '1';
-                    $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
+                    $data['codigo'] = $codigoMax;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo;
+                    $codigoMax = $exemplar->codigo + 1;
                 }
             }
         }
@@ -124,8 +130,31 @@ class ExemplarService
      */
     public function update(array $data, int $id) : Exemplar
     {
+
         #Atualizando no banco de dados
         $exemplar = $this->repository->update($data, $id);
+
+        #tratando a imagem
+        /*if(isset($data['img'])) {
+            $file     = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+
+            #removendo a imagem antiga
+            if ($exemplar->path_image != null) {
+                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $exemplar->path_image);
+            }
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $exemplar->path_image = $fileName;
+            $exemplar->save();
+
+            #destruindo o img do array
+            unset($data['img']);
+        }*/
 
         #Verificando se foi atualizado no banco de dados
         if(!$exemplar) {
@@ -178,8 +207,7 @@ class ExemplarService
     public function tratamentoDatas($data) : array
     {
          #tratando as datas
-         $data['data_catagolacao'] = $data['data_catagolacao'] ? $this->convertDate($data['data_catagolacao'], 'en') : "";
-        $data['data_aquisicao'] = $data['data_aquisicao'] ? $this->convertDate($data['data_aquisicao'], 'en') : "";
+         $data['data_aquisicao'] = $data['data_aquisicao'] ? $this->convertDate($data['data_aquisicao'], 'en') : "";
 
          #retorno
          return $data;
@@ -215,11 +243,9 @@ class ExemplarService
     {
         #validando as datas
         $entity->data_aquisicao   = $entity->data_aquisicao == '0000-00-00' ? "" : $entity->data_aquisicao;
-        $entity->data_catagolacao = $entity->data_catagolacao == '0000-00-00' ? "" : $entity->data_catagolacao;
 
         #tratando as datas
         $entity->data_aquisicao   = date('d/m/Y', strtotime($entity->data_aquisicao));
-        $entity->data_catagolacao = date('d/m/Y', strtotime($entity->data_catagolacao));
         //$aluno->data_exame_nacional_um   = date('d/m/Y', strtotime($aluno->data_exame_nacional_um));
         //$aluno->data_exame_nacional_dois = date('d/m/Y', strtotime($aluno->data_exame_nacional_dois));
 
@@ -242,6 +268,30 @@ class ExemplarService
         $newCod = str_pad($newCod,6,"0",STR_PAD_LEFT);
 
         return $newCod;
+    }
+
+    /**
+     * @param $data
+     */
+    public function insertImg($data, $img)
+    {
+        #tratando a imagem
+        if(isset($img) && $img != null) {
+            $file     = $img;
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $data['path_image'] = $fileName;
+
+            #destruindo o img do array
+            unset($data['img']);
+
+        }
+
+        return $data;
     }
 
 }

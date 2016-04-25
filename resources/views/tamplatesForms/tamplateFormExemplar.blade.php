@@ -57,12 +57,6 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                {!! Form::label('data_catagolacao', 'Data Catagolação') !!}
-                                {!! Form::text('data_catagolacao', Session::getOldInput('data_catagolacao'), array('class' => 'form-control datepicker date')) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
                                 {!! Form::label('aquisicao_id', 'Aquisição') !!}
                                 {!! Form::select('aquisicao_id', $loadFields['aquisicao'], Session::getOldInput('aquisicao_id'), array('class' => 'form-control')) !!}
                             </div>
@@ -100,11 +94,30 @@
                         @if(!isset($model->id))
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {!! Form::label('registros', 'Quantidade de Exemplares') !!}
+                                    {!! Form::label('registros', 'Quantidade de Exemplares (Registros)') !!}
                                     {!! Form::text('registros', Session::getOldInput('registros')  , array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         @endif
+                        {{--<div class="col-md-2">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                                    @if (isset($model) && $model->path_image != null)
+                                        <div id="midias">
+                                            <img id="logo" src="/images/{{$model->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div>
+                                     <span class="btn btn-primary btn-xs btn-block btn-file">
+                                         <span class="fileinput-new">Selecionar</span>
+                                         <span class="fileinput-exists">Mudar</span>
+                                         <input type="file" name="img">
+                                     </span>
+                                    <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                                </div>
+                            </div>
+                        </div>--}}
                     </div>
 
                 </div>

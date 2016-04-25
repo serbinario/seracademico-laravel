@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateExemplar', $model->id], 'method' => "POST" ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateExemplar', $model->id], 'method' => "POST", 'enctype' => 'multipart/form-data' ]) !!}
                 @include('tamplatesForms.tamplateFormExemplar')
             {!! Form::close() !!}
         </div>

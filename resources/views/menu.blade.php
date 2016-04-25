@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
 
     @yield('css')
 </head>
@@ -212,6 +213,7 @@
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 

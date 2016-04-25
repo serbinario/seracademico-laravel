@@ -42,6 +42,8 @@
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function(){
+            $('#cursos').multiselect();
+
             //consulta via select2
             $("#primeira-entrada").select2({
                 placeholder: 'Selecione um responsável',

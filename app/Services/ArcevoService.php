@@ -51,6 +51,7 @@ class ArcevoService
             'situacao',
             'corredor',
             'estante',
+            'cursos'
         ];
 
         #Recuperando o registro no banco de dados
@@ -79,6 +80,12 @@ class ArcevoService
      */
     public function store(array $data) : Arcevo
     {
+
+        $this->tratamentoCampos($data);
+        $this->tratamentoCampos2($data);
+
+        //dd($data);
+
         //campos da tabela de segunda entrada dos acervos
         $entradas = [
             'tipo_autor_id' => "",
@@ -92,6 +99,8 @@ class ArcevoService
 
         #Salvando o registro pincipal
         $arcevo =  $this->repository->create($data);
+
+        $arcevo->cursos()->attach($data['cursos']);
 
         //Inserir primeira entrada do acervos
         if(count($data['primeira']['responsaveis_id']) > 0 ) {
@@ -115,6 +124,7 @@ class ArcevoService
             }
         }
 
+
         #Verificando se foi criado no banco de dados
         if(!$arcevo) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -131,6 +141,9 @@ class ArcevoService
      */
     public function update(array $data, int $id) : Arcevo
     {
+        $this->tratamentoCampos($data);
+        $this->tratamentoCampos2($data);
+
         //campos da tabela de segunda entrada dos acervos
         $entradas = [
             'tipo_autor_id' => "",
@@ -142,6 +155,10 @@ class ArcevoService
 
         #Atualizando no banco de dados
         $arcevo = $this->repository->update($data, $id);
+
+        $arcevo->cursos()->detach();
+
+        $arcevo->cursos()->attach($data['cursos']);
 
         //Inserir segunda entrada do acervos
         if(count($data['primeira']['responsaveis_id']) > 0) {
@@ -218,6 +235,57 @@ class ArcevoService
 
          #retorno
          return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                unset($data[$key]);
+            }
+        }
+        #Retorno
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos2(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data['primeira']['responsaveis_id'] as $key => $value) {
+
+            if ($value == null) {
+                unset($data['primeira']['responsaveis_id'][$key]);
+            }
+        }
+
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data['segunda']['responsaveis_id'] as $key => $value) {
+
+            if ($value == null ) {
+                unset($data['segunda']['responsaveis_id'][$key]);
+            }
+        }
+
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data['segunda']['tipo_autor_id'] as $key => $value) {
+
+            if ($value == null ) {
+                unset($data['segunda']['tipo_autor_id'][$key]);
+            }
+        }
+        #Retorno
+        return $data;
     }
 
 }

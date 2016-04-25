@@ -35,6 +35,7 @@ class ArcevoController extends Controller
         'Colecao',
         'Genero',
         'Situacao',
+        'Curso'
     ];
 
     /**

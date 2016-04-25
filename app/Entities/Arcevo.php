@@ -34,6 +34,7 @@ class Arcevo extends Model implements Transformable
 		'volume',
 		'palavras_chaves',
 		'cdd',
+		'uso_global'
 	];
 
 	public function tipoAcervo()
@@ -74,5 +75,14 @@ class Arcevo extends Model implements Transformable
 	public function primeiraEntrada()
 	{
 		return $this->hasMany(PrimeiraEntrada::class);
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function cursos()
+	{
+		return $this->belongsToMany(Curso::class, 'bib_arcevos_cursos', 'arcevos_id', "cursos_id")
+			->withPivot([ 'arcevos_id', 'cursos_id']);;
 	}
 }

@@ -15,7 +15,6 @@ class Exemplar extends Model implements Transformable
     protected $fillable = [ 
 		'ano',
 		'registros',
-		'data_catagolacao',
 		'editoras_id',
 		'ilustracoes_id',
 		'idiomas_id',
@@ -35,6 +34,7 @@ class Exemplar extends Model implements Transformable
 		'valor',
 		'codigo_barra',
 		'codigo',
+		'path_image',
 	];
 
 	public function acervo()
