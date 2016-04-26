@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
-                        <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="curso-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Código</th>
@@ -58,11 +58,18 @@
             </div>
         </div>        
     </div>
+
+    @include('graduacao.curso.modal_tabela_precos')
+    @include('graduacao.curso.modal_inserir_tabela_precos')
+    @include('graduacao.curso.modal_editar_tabela_precos')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_tabela_precos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_inserir_tabela_precos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_editar_tabela_precos.js') }}"></script>
     <script type="text/javascript">
-        var table = $('#sala-grid').DataTable({
+        var table = $('#curso-grid').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
@@ -74,6 +81,18 @@
                 {data: 'ativo', name: 'fac_cursos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Id do curso selecionado
+        var idCurso;
+
+        // Evento para abrir modal de tabela de precos
+        $(document).on("click", "#tabela-precos", function () {
+            // Recuperando o id do curso selecionado
+            idCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            //Carregando a grid de tabela de preços
+            runTablePrecosCurso(idCurso);
         });
     </script>
 @stop

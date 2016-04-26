@@ -162,6 +162,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\DisciplinaRepository::class,
 			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
 		);
+
 		$this->app->bind(
 			\Seracademico\Repositories\DisciplinaRepository::class,
 			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
@@ -212,10 +213,34 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\NotaRepositoryEloquent::class
 		);
 
+        // Repositórios de graduação
         $this->app->bind(
-            \Seracademico\Repositories\ResponsavelRepository::class,
-            \Seracademico\Repositories\ResponsavelRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\DisciplinaRepository::class,
+            \Seracademico\Repositories\Graduacao\DisciplinaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\CursoRepository::class,
+            \Seracademico\Repositories\Graduacao\CursoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\PeriodoRepository::class,
+            \Seracademico\Repositories\Graduacao\PeriodoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\TipoPrecoCursoRepository::class,
+            \Seracademico\Repositories\Graduacao\TipoPrecoCursoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\PrecoCursoRepository::class,
+            \Seracademico\Repositories\Graduacao\PrecoCursoRepositoryEloquent::class);
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepository::class,
+            \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepositoryEloquent::class);
+
         $this->app->bind(
             \Seracademico\Repositories\EditoraRepository::class,
             \Seracademico\Repositories\EditoraRepositoryEloquent::class
@@ -280,19 +305,12 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\ExemplarRepository::class,
             \Seracademico\Repositories\ExemplarRepositoryEloquent::class
         );
-
         $this->app->bind(
-            \Seracademico\Repositories\Graduacao\CursoRepository::class,
-            \Seracademico\Repositories\Graduacao\CursoRepositoryEloquent::class
+            \Seracademico\Repositories\ResponsavelRepository::class,
+            \Seracademico\Repositories\ResponsavelRepositoryEloquent::class
         );
 
-        $this->app->bind(
-            \Seracademico\Repositories\Graduacao\PeriodoRepository::class,
-            \Seracademico\Repositories\Graduacao\PeriodoRepositoryEloquent::class
-        );
-        $this->app->bind(
-            \Seracademico\Repositories\Graduacao\DisciplinaRepository::class,
-            \Seracademico\Repositories\Graduacao\DisciplinaRepositoryEloquent::class
-        );
-	}
+
+    }
+
 }

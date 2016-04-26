@@ -11,14 +11,15 @@ body {
   height: 33px;
   line-height: 33px;
   padding: 0;
-  background-color: #26a69a;
+
   border-radius: 5%;
   transition: .3s;
   cursor: pointer;
   vertical-align: middle;
 }
 .btn-main {
-  border-bottom: 2px solid #4D6274;
+  border-bottom: 2px solid #69AAA6;
+  background: #2F5286 !important;
 }
 
 .btn-floating i {

@@ -98,7 +98,7 @@ class CalendarioTurmaController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a></a>
+            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a>
                     <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
@@ -151,6 +151,7 @@ class CalendarioTurmaController extends Controller
             $calendario['hora_final']          = $model->hora_final;
             $calendario['professor_id']        = $model->professor_id;
             $calendario['id_calendario']       = $model->id;
+            $calendario['sala_id']             = $model->sala_id;
 
             # Dados de retorno
             $dados      = compact('calendario', 'loadFields');
