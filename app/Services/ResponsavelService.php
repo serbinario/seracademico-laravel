@@ -79,6 +79,25 @@ class ResponsavelService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #deletando o curso
+        $result = $this->repository->delete($id);
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
+    }
+
+    /**
      * @param array $models
      * @return array
      */

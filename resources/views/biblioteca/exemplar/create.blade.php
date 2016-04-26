@@ -43,6 +43,13 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
+            <?php
+                $data = new \DateTime('now');
+                $data = $data->format('d/m/Y');
+            ?>
+            var  data2 = '{{$data}}';
+            $('.data2').val(data2);
+
             //consulta via select2 segunda entrada 1
             $("#obra").select2({
                 placeholder: 'Selecione uma obra',

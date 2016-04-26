@@ -26,6 +26,21 @@ class ExemplarService
     private $destinationPath = "img-exemplar/";
 
     /**
+     * @var
+     */
+    private $anoAtual;
+
+    /**
+     * @var
+     */
+    private $ultimoAno;
+
+    /**
+     * @var
+     */
+    private $tombo;
+
+    /**
      * @param ExemplarRepository $repository
      */
     public function __construct(ExemplarRepository $repository, ArcevoRepository $repoAcervo)
@@ -67,7 +82,11 @@ class ExemplarService
 
         //recupera o maior código ja registrado
         $codigo = \DB::table('bib_exemplares')->max('codigo');
-        $codigoMax = $codigo != null ? $codigoMax = $codigo : $codigoMax = '1';
+        $dataObj  = new \DateTime('now');
+        $this->anoAtual = $dataObj->format('Y');
+        $codigoMax = $codigo != null ? $codigoMax = $codigo : $codigoMax = "0001{$this->anoAtual}";
+        $codigoAtual = substr($codigoMax, 0, -4);
+        $this->ultimoAno = substr($codigo, -4);
 
         //trata a quantidade de exemplar caso o valor informado seja 0
         $qtdExemplar = $data['registros'] == '0' ? $qtdExemplar = 1 : $qtdExemplar = $data['registros'];
@@ -78,10 +97,13 @@ class ExemplarService
                     $data['exemp_principal'] = '1';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
-                    $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
+                    $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
+                    $data['codigo'] = $this->tombo;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo + 1;
+                    $ultCodigo = substr($exemplar->codigo, 0, -4);
+                    $codNovo = $ultCodigo + 1;
+                    $this->tombo = $codNovo.$this->anoAtual;
                 } else {
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '2';
@@ -89,7 +111,9 @@ class ExemplarService
                     $data['codigo'] = $codigoMax;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo + 1;
+                    $ultCodigo = substr($exemplar->codigo, 0, -4);
+                    $codNovo = $ultCodigo + 1;
+                    $this->tombo = $codNovo.$this->anoAtual;
                 }
             }
         } else {
@@ -98,18 +122,24 @@ class ExemplarService
                     $data['exemp_principal'] = '1';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
-                    $data['codigo'] = $this->tratarCodigoExemplar($codigoMax);
+                    $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
+                    $data['codigo'] = $this->tombo;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo + 1;
+                    $ultCodigo = substr($exemplar->codigo, 0, -4);
+                    $codNovo = $ultCodigo + 1;
+                    $this->tombo = $codNovo.$this->anoAtual;
                 } else {
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '1';
                     $data['situacao_id'] = '1';
-                    $data['codigo'] = $codigoMax;
+                   // dd($this->tombo);
+                    $data['codigo'] = $this->tombo;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
-                    $codigoMax = $exemplar->codigo + 1;
+                    $ultCodigo = substr($exemplar->codigo, 0, -4);
+                    $codNovo = $ultCodigo + 1;
+                    $this->tombo = $codNovo.$this->anoAtual;
                 }
             }
         }
@@ -259,15 +289,16 @@ class ExemplarService
      */
     public function tratarCodigoExemplar($codigo)
     {
-        if($codigo <= 1) {
-            $newCod  = $codigo;
+        if($codigo <= 1 || $this->anoAtual != $this->ultimoAno) {
+            $newCod2  = '1'.$this->anoAtual;
         } else {
             $newCod = $codigo + 1;
+            $newCod2 = $newCod.$this->anoAtual;
         }
 
-        $newCod = str_pad($newCod,6,"0",STR_PAD_LEFT);
+        $newCod2 = str_pad($newCod2,8,"0",STR_PAD_LEFT);
 
-        return $newCod;
+        return $newCod2;
     }
 
     /**
