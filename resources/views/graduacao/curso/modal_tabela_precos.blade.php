@@ -18,7 +18,7 @@
                                 <th>Período</th>
                                 <th>Turno</th>
                                 <th>Tipo</th>
-                                <th>Ação</th>
+                                <th style="width: 12%">Ação</th>
                             </tr>
                             </thead>
                         </table>
