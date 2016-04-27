@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5264dc21-f7d8-4da1-96e2-594a5bcf8ddf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js" afterPath="$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_preco_disciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_preco_disciplina.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php" afterPath="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php" />
     </list>
     <ignored path="seracademico-laravel.iws" />
@@ -34,21 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="modal_inserir_preco_disciplina.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php">
+      <file leaf-file-name="modal_tabela_precos.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
+            <state relative-caret-position="270">
+              <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal_editar_preco_disciplina.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_preco_disciplina.blade.php">
+      <file leaf-file-name="TabelaPrecoCursoController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="149" selection-start-line="15" selection-start-column="149" selection-end-line="15" selection-end-column="149" />
+            <state relative-caret-position="585">
+              <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -108,7 +107,6 @@
         <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/PrecoDisciplinaCursoController.php" />
         <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_editar_preco_disciplina.js" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" />
         <option value="$PROJECT_DIR$/app/Entities/Graduacao/PrecoCurso.php" />
         <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_inserir_preco_disciplina.js" />
         <option value="$PROJECT_DIR$/app/Entities/Graduacao/Curso.php" />
@@ -116,10 +114,11 @@
         <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_editar_tabela_precos.js" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/index.blade.php" />
         <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_inserir_tabela_precos.js" />
-        <option value="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_preco_disciplina.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php" />
       </list>
     </option>
   </component>
@@ -138,9 +137,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1365" />
-    <option name="width" value="1602" />
-    <option name="height" value="901" />
+    <option name="x" value="1366" />
+    <option name="width" value="1600" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -167,7 +166,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -179,6 +177,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -252,15 +251,15 @@
       <option name="presentableId" value="Default" />
       <updated>1460989921636</updated>
       <workItem from="1460989923798" duration="3160000" />
-      <workItem from="1461776809909" duration="274000" />
+      <workItem from="1461777203829" duration="9000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3434000" />
+    <option name="totallyTimeSpent" value="3169000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1365" y="0" width="1602" height="901" extended-state="6" />
+    <frame x="1366" y="0" width="1600" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -323,13 +322,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/PeriodoRepositoryEloquent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="45" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Graduacao/DisciplinaRepositoryEloquent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -582,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/posgraduacao/turma/modal_novo_calendario.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -645,21 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_tabela_precos.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -667,18 +637,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_editar_preco_disciplina.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="0">
           <caret line="15" column="149" selection-start-line="15" selection-start-column="149" selection-end-line="15" selection-end-column="149" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_tabela_precos.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/PeriodoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/graduacao/curso/modal_tabela_precos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/graduacao/curso/modal_inserir_preco_disciplina.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Graduacao/TabelaPrecoCursoController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
+        <state relative-caret-position="585">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
           <folding />
         </state>
       </provider>
