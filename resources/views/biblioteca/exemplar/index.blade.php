@@ -21,7 +21,7 @@
                                 <th>Título</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
-                                <th>Emprestimo</th>
+                                <th>Tombo</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -31,7 +31,7 @@
                                 <th>Título</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
-                                <th>Emprestimo</th>
+                                <th>Tombo</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -53,7 +53,7 @@
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
-                {data: 'nome_emp', name: 'bib_situacao.nome'},
+                {data: 'tombo', name: 'bib_arcevos.numero_chamada'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
