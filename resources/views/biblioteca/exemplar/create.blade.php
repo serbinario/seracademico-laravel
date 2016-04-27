@@ -3,10 +3,10 @@
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h4>
-                <i class="fa fa-user"></i>
-                Cadastrar Exemplar
-            </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">receipt</i> Cadastrar Exemplar</h4>
+            </div>
+            <div class="col-sm-6 col-md-3"></div>
         </div>
 
         <div class="ibox-content">
@@ -29,12 +29,6 @@
             {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplar', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormExemplar')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
         </div>
     </div>
 @stop

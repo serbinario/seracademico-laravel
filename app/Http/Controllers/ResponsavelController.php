@@ -59,11 +59,11 @@ class ResponsavelController extends Controller
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                            <li><a class="btn-floating" href="editResponsavel/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
+                            <li><a class="btn-floating" href="editResponsavel/'.$row->id.'" title="Editar responsável"><i class="material-icons">edit</i></a></li>';
             $reponsavel = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
             if(count($reponsavel->autores) == 0 && count($reponsavel->outros) == 0) {
-                $html .= '<li><a class="btn-floating" href="deleteResponsavel/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
+                $html .= '<li><a class="btn-floating" href="deleteResponsavel/'.$row->id.'" title="Excluir responsável"><i class="material-icons">delete</i></a></li>
                             </ul>
                            </div>';
             }

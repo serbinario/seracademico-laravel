@@ -6,12 +6,12 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="fa fa-calendar"></i>
                     Listar Períodos
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.graduacao.periodo.create')}}" class="btn-sm btn-primary pull-right">Novo Periodo</a>
+                <a href="{{ route('seracademico.graduacao.periodo.create')}}" class="btn-sm btn-primary pull-right">Novo Período</a>
             </div>
         </div>
         <div class="ibox-content">
