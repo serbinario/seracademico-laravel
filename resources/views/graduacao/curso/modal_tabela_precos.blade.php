@@ -34,7 +34,6 @@
                                 <th>Código</th>
                                 <th>Qtd. Disciplina</th>
                                 <th>Preço</th>
-                                <th>Qtd Disciplina</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
