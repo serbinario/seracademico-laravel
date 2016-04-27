@@ -111,7 +111,6 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
-                @endrole
 
                 <li>
                     <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -128,6 +127,9 @@
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
                     </ul>
                 </li>
+                @endrole
+
+                @role('biblioteca')
                 <li>
                     <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Biblioteca</span> <span
                                 class="fa arrow"></span></a>
@@ -138,6 +140,7 @@
                         <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="material-icons">receipt</i> Exemplar</a></li>
                     </ul>
                 </li>
+                @endrole
             </ul>
         </div>
     </nav>
