@@ -213,6 +213,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('gridResponsavel', ['as' => 'gridResponsavel', 'uses' => 'ResponsavelController@grid']);
             Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'ResponsavelController@edit']);
             Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'ResponsavelController@store']);
+            Route::post('storeAjaxResponsavel', ['as' => 'storeAjaxResponsavel', 'uses' => 'ResponsavelController@storeAjax']);
             Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'ResponsavelController@update']);
             Route::get('deleteResponsavel/{id}', ['as' => 'deleteResponsavel', 'uses' => 'ResponsavelController@delete']);
 
@@ -221,7 +222,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('gridEditora', ['as' => 'gridEditora', 'uses' => 'EditoraController@grid']);
             Route::get('editEditora/{id}', ['as' => 'editEditora', 'uses' => 'EditoraController@edit']);
             Route::post('storeEditora', ['as' => 'storeEditora', 'uses' => 'EditoraController@store']);
+            Route::post('storeAjaxEditora', ['as' => 'storeAjaxEditora', 'uses' => 'EditoraController@storeAjax']);
             Route::post('updateEditora/{id}', ['as' => 'updateEditora', 'uses' => 'EditoraController@update']);
+            Route::get('deleteEditora/{id}', ['as' => 'deleteEditora', 'uses' => 'EditoraController@delete']);
 
             Route::get('indexAcervo', ['as' => 'indexAcervo', 'uses' => 'ArcevoController@index']);
             Route::get('createAcervo', ['as' => 'createAcervo', 'uses' => 'ArcevoController@create']);
@@ -229,6 +232,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('editAcervo/{id}', ['as' => 'editAcervo', 'uses' => 'ArcevoController@edit']);
             Route::post('storeAcervo', ['as' => 'storeAcervo', 'uses' => 'ArcevoController@store']);
             Route::post('updateAcervo/{id}', ['as' => 'updateAcervo', 'uses' => 'ArcevoController@update']);
+            Route::get('deleteAcervo/{id}', ['as' => 'deleteAcervo', 'uses' => 'ArcevoController@delete']);
 
             Route::get('indexExemplar', ['as' => 'indexExemplar', 'uses' => 'ExemplarController@index']);
             Route::get('createExemplar', ['as' => 'createExemplar', 'uses' => 'ExemplarController@create']);

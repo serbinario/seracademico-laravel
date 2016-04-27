@@ -176,4 +176,29 @@ class ResponsavelController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function storeAjax(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Validando a requisição
+            $this->validator->with($data['dados'])->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            #Executando a ação
+            $this->service->store($data['dados']);
+
+            #Retorno para a view
+            return array('msg' => 'Cadastro realizado com sucesso!');
+        } catch (ValidatorException $e) {
+            return $this->validator->errors();
+        } catch (\Throwable $e) { dd($e);
+            return $e->getMessage();
+        }
+    }
+
 }

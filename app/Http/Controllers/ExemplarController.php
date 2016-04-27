@@ -33,7 +33,8 @@ class ExemplarController extends Controller
         'Situacao',
         'Emprestimo',
         'Genero',
-        'Editora'
+        'Editora',
+        'Responsavel'
     ];
 
     /**
