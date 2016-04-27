@@ -14,7 +14,6 @@
                         <table id="grid-tabela-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
                                 <th>Vigência</th>
                                 <th>Período</th>
                                 <th>Tipo</th>
@@ -31,8 +30,7 @@
                         <table id="grid-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Qtd. Disciplina</th>
+                                <th>Quantidade</th>
                                 <th>Preço</th>
                                 <th>Ação</th>
                             </tr>

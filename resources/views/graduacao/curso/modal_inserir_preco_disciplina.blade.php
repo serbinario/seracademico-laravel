@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="qtd_disciplinas">Qtd. Disciplinas</label>
-                            <input type="text" name="qtd_disciplinas" class="form-control" id="qtd_disciplinas" placeholder="Qtd.Disciplinas">
+                            <label for="qtd_disciplinas">Quantidade</label>
+                            <input type="text" name="qtd_disciplinas" class="form-control" id="qtd_disciplinas" placeholder="Quantidade">
                         </div>
                     </div>
 
