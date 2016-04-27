@@ -214,6 +214,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'ResponsavelController@edit']);
             Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'ResponsavelController@store']);
             Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'ResponsavelController@update']);
+            Route::get('deleteResponsavel/{id}', ['as' => 'deleteResponsavel', 'uses' => 'ResponsavelController@delete']);
 
             Route::get('indexEditora', ['as' => 'indexEditora', 'uses' => 'EditoraController@index']);
             Route::get('createEditora', ['as' => 'createEditora', 'uses' => 'EditoraController@create']);

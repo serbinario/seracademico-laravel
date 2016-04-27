@@ -17,4 +17,18 @@ class Responsavel extends Model implements Transformable
 		'sobrenome',
 	];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function autores(){
+        return $this->hasMany(PrimeiraEntrada::class, 'responsaveis_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outros(){
+        return $this->hasMany(SegundaEntrada::class, 'responsaveis_id', 'id');
+    }
+
 }

@@ -4,14 +4,11 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
-                <h4>
-                    <i class="fa fa-users"></i>
-                    Listar Editoras
-                </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">card_travel</i> Listar Editoras</h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.biblioteca.createEditora')}}" class="btn-sm btn-primary">Nova Editora</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.biblioteca.createEditora')}}" class="btn-sm btn-primary pull-right">Nova Editora</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -38,12 +35,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                The righ side of the footer
-            </span>
-            This is simple footer example
         </div>
     </div>
 @stop

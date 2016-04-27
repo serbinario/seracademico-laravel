@@ -134,122 +134,6 @@
                             </div>
                         </div>
                         <legend><i class="fa fa-archive"></i> Outros dados</legend>
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i class="material-icons">arrow_drop_down_circle</i> Filiação</a>
-                                        </h4>
-                                    </div>
-                                    <div id="filiacao" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    {!! Form::label('nome_pai', 'Nome Pai *') !!}
-                                                    {!! Form::text('nome_pai', Session::getOldInput('nome_pai'), array('class' => 'form-control')) !!}
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    {!! Form::label('nome_mae', 'Nome Mãe *') !!}
-                                                    {!! Form::text('nome_mae',Session::getOldInput('nome_mae'), array('class' => 'form-control')) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <i class="material-icons">arrow_drop_down_circle</i> Documentos</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('identidade', 'Identidade *') !!}
-                                                        {!! Form::text('identidade', Session::getOldInput('identidade'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('orgao_rg', 'Orgão RG ') !!}
-                                                        {!! Form::text('orgao_rg', Session::getOldInput('orgao_rg'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('uf_exp', 'UF') !!}
-                                                        {!! Form::text('uf_exp', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('data_expedicao', 'Data expedição') !!}
-                                                        {!! Form::text('data_expedicao', null , array('class' => 'form-control datepicker date')) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('cpf', 'CPF *') !!}
-                                                        {!! Form::text('cpf', Session::getOldInput('cpf'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        {!! Form::label('titulo_eleitoral', 'Título Eleitoral') !!}
-                                                        {!! Form::text('titulo_eleitoral', Session::getOldInput('titulo_eleitoral'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-1">
-                                                        {!! Form::label('zona', 'Zona') !!}
-                                                        {!! Form::text('zona', Session::getOldInput('zona'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-1">
-                                                        {!! Form::label('secao', 'Seção') !!}
-                                                        {!! Form::text('secao', Session::getOldInput('secao') , array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-2">
-                                                        {!! Form::label('resevista', 'Reservista') !!}
-                                                        {!! Form::text('resevista', Session::getOldInput('resevista'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        {!! Form::label('catagoria_resevista', 'Categoria Reservista') !!}
-                                                        {!! Form::text('catagoria_resevista', Session::getOldInput('catagoria_resevista'), array('class' => 'form-control')) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i class="material-icons">arrow_drop_down_circle</i> Deficiencia</a>
-                                                </h4>
-                                            </div>
-                                            <div id="deficiencia" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <div class="row">
-
-                                                        <div class="form-group col-md-12">
-                                                            {!! Form::label('tipoDef', 'Deficiências') !!}
-                                                            <div class="checkbox checkbox-primary">
-                                                                {!! Form::hidden('deficiencia_fisica', 0) !!}
-                                                                {!! Form::checkbox('deficiencia_fisica', 1, null, array('class' => 'form-control')) !!}
-                                                                {!! Form::label('deficiencia_fisica', 'Física') !!}
-                                                                <div class="checkbox checkbox-primary checkbox-inline">
-                                                                    {!! Form::hidden('deficiencia_auditiva', 0) !!}
-                                                                    {!! Form::checkbox('deficiencia_auditiva', 1, null, array('class' => 'form-control')) !!}
-                                                                    {!! Form::label('deficiencia_auditiva', 'Auditivas', false) !!}
-                                                                </div>
-                                                                <div class="checkbox checkbox-primary checkbox-inline">
-                                                                    {!! Form::hidden('deficiencia_visual', 0) !!}
-                                                                    {!! Form::checkbox('deficiencia_visual', 1, null, array('class' => 'form-control')) !!}
-                                                                    {!! Form::label('deficiencia_visual', 'Visuais', false) !!}
-                                                                </div>
-                                                                <div class="checkbox checkbox-primary checkbox-inline">
-                                                                    {!! Form::hidden('deficiencia_outra', 0) !!}
-                                                                    {!! Form::checkbox('deficiencia_outra', 1, null,array('class' => 'form-control')) !!}
-                                                                    {!! Form::label('deficiencia_outra', 'Outras') !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div role="tabpanel" class="tab-pane" id="contato">
                             <br/>
@@ -379,7 +263,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="ensMedio">
+                        <div role="tabpanel" class="tab-pane" id="ensMedio">
                                     <br/>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -419,7 +303,7 @@
                             </div>
 
                             {{--Aba Documentos Obrigatorios--}}
-                            <div role="tabpanel" class="tab-pane" id="documentosObrig">
+                        <div role="tabpanel" class="tab-pane" id="documentosObrig">
                                 <br/>
 
                                 <div class="row">

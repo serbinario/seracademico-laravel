@@ -4,17 +4,33 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
+            <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="material-icons">supervisor_account</i>
                     Listar Responsáveis
                 </h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.biblioteca.createResponsavel')}}" class="btn-sm btn-primary">Novo Responsável</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.biblioteca.createResponsavel')}}" class="btn-sm btn-primary pull-right">Novo Responsável</a>
             </div>
         </div>
         <div class="ibox-content">
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <em> {!! session('message') !!}</em>
+                </div>
+            @endif
+
+            @if(Session::has('errors'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
@@ -38,12 +54,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                The righ side of the footer
-            </span>
-            This is simple footer example
         </div>
     </div>
 @stop
