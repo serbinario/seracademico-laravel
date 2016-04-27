@@ -38,7 +38,6 @@
                         <table id="periodo-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
                                 <th>Nome</th>
                                 <th>Ativo</th>
                                 <th style="width: 5%;">Acão</th>
@@ -46,7 +45,6 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Código</th>
                                 <th>Nome</th>
                                 <th>Ativo</th>
                                 {{--<th>Tipo de avaliação</th>--}}
@@ -69,7 +67,6 @@
             autoWidth: false,
             ajax: "{!! route('seracademico.graduacao.periodo.grid') !!}",
             columns: [
-                {data: 'id', name: 'fac_periodos.id'},
                 {data: 'nome', name: 'fac_periodos.nome'},
                 {data: 'ativo', name: 'fac_periodos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
