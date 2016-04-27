@@ -65,8 +65,12 @@ class ExemplarController extends Controller
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
-            ->select('bib_exemplares.id as id', 'bib_arcevos.titulo', 'bib_exemplares.edicao',
-                 'bib_situacao.nome as nome_sit', 'bib_arcevos.numero_chamada as tombo');
+            ->select('bib_exemplares.id as id',
+                'bib_arcevos.titulo',
+                'bib_exemplares.edicao',
+                 'bib_situacao.nome as nome_sit',
+                \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
+                );
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
