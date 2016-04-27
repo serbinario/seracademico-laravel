@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
+                <button class="close" type="button" id="closeModalPrecoCurso" data-dismiss="modal">×</button>
                 <h4 class="modal-title">Tabela de Preços</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
@@ -33,7 +33,7 @@
                             <tr>
                                 <th>Quantidade</th>
                                 <th>Preço</th>
-                                <th>Ação</th>
+                                <th  style="width: 12%">Ação</th>
                             </tr>
                             </thead>
                         </table>
