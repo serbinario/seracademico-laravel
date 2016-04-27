@@ -3,11 +3,11 @@ $(document).on("click", "#adicionar-tabela-precos", function () {
     $("#modal-precos").modal({ show:true });
 
     // carregandos os campos pre-carregados
-    loadFields();
+    loadFieldsTabela();
 });
 
 // carregando todos os campos preenchidos
-function loadFields()
+function loadFieldsTabela()
 {
     // Definindo os models
     var dados =  {
@@ -27,7 +27,7 @@ function loadFields()
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno) {
-            builderHtmlFields(retorno);
+            builderHtmlFieldsTabela(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -37,7 +37,7 @@ function loadFields()
 };
 
 // Função a montar o html
-function builderHtmlFields (dados) {
+function builderHtmlFieldsTabela (dados) {
     // limpando os campos
     $("#virgencia").val("");
 
@@ -124,6 +124,10 @@ $(document).on('click', '#btnRemoverTabelaPreco', function () {
         datatype: 'json'
     }).done(function (retorno) {
         swal(retorno.msg, "Click no botão abaixo!", "success");
+
+        //Desativando o botão de adicionar preço por disciplinas
+        $("#btnAddPrecoDisciplina").prop("disabled", true);
+        table.ajax.reload();
         tablePrecosCurso.load();
     });
 });

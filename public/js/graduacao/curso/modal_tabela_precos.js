@@ -1,3 +1,6 @@
+//Desativando o botão de adicionar preço por disciplinas
+$("#btnAddPrecoDisciplina").prop("disabled", true);
+
 // Função para carregar a grid
 var tablePrecosCurso;
 function loadTablePrecosCurso (idCurso) {
@@ -51,10 +54,13 @@ function runTablePrecosCurso(idCurso) {
     $("#modal-tabela-precos").modal({show:true});
 }
 
+// Id da tabela de preço selecionada
+var idPrecoCurso;
+
 // Evento para carregar grid de precos por disciplinas
-$(document).on('click', '#grid-tabela-precos tbody tr', function () {
+$(document).on('click', '#grid-tabela-precos tbody tr', function (event) {
     // Verificando se existe linhas na tabela
-    if (tablePrecosCurso.rows().data().length > 0) {
+    if (tablePrecosCurso.rows().data().length > 0 && $(event.target).is("td")) {
         $(this).parent().find("tr td").removeClass('row_selected');
         $(this).find("td").addClass("row_selected");
 

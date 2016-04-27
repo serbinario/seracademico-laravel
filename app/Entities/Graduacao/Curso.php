@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\TipoCurso;
+use Seracademico\Repositories\Graduacao\PrecoCursoRepository;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Curso extends Model implements Transformable
@@ -69,6 +70,14 @@ class Curso extends Model implements Transformable
     public function tipoCurso()
     {
         return $this->belongsTo(TipoCurso::class, "tipo_curso_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function precosCursos()
+    {
+        return $this->hasMany(PrecoCurso::class, "curso_id", "id");
     }
 
     /**

@@ -27,7 +27,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <button href="#" id="btnAddPrecoDisciplina" disabled="disabled"  class="btn-sm btn-primary pull-right">Adicionar preços</button><br><br>
+                        <button href="#" id="btnAddPrecoDisciplina" class="btn-sm btn-primary pull-right">Adicionar preços</button><br><br>
                         <table id="grid-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
