@@ -17,7 +17,6 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="form-group">
-
                             {!! Form::label('nome', 'Nome') !!}
                             {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                         </div>
@@ -119,7 +118,18 @@
             <div role="tabpanel" class="tab-pane" id="contato">
                 <br />
                 <div class="row">
-
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('telefone', 'Telefone') !!}
+                            {!! Form::text('telefone', Session::getOldInput('telefone')  , array('class' => 'form-control phone')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            {!! Form::label('pessoa_contato', 'Pessoa para contato') !!}
+                            {!! Form::text('pessoa_contato', Session::getOldInput('pessoa_contato')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- FIM aba contato -->

@@ -59,13 +59,16 @@ class EditoraService
     public function store(array $data) : Editora
     {
 
-        $this->tratamentoCampos($data);
+        if(isset($data['endereco'])) {
 
-        #Criando no banco de dados
-        $endereco = $this->enderecoRepository->create($data['endereco']);
+            $this->tratamentoCampos($data);
 
-        #setando o endereco
-        $data['enderecos_id'] = $endereco->id;
+            #Criando no banco de dados
+            $endereco = $this->enderecoRepository->create($data['endereco']);
+
+            #setando o endereco
+            $data['enderecos_id'] = $endereco->id;
+        }
 
         #Salvando o registro pincipal
         $editora =  $this->repository->create($data);
@@ -107,6 +110,25 @@ class EditoraService
 
         #Retorno
         return $editora;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #deletando o curso
+        $result = $this->repository->delete($id);
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
     }
 
     /**
