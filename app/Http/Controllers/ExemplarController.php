@@ -33,7 +33,8 @@ class ExemplarController extends Controller
         'Situacao',
         'Emprestimo',
         'Genero',
-        'Editora'
+        'Editora',
+        'Responsavel'
     ];
 
     /**
@@ -65,7 +66,7 @@ class ExemplarController extends Controller
             ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
             ->select('bib_exemplares.id as id', 'bib_arcevos.titulo', 'bib_exemplares.edicao',
-                'bib_emprestimo.nome as nome_emp', 'bib_situacao.nome as nome_sit');
+                 'bib_situacao.nome as nome_sit', 'bib_arcevos.numero_chamada as tombo');
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {

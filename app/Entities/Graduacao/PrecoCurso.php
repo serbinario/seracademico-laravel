@@ -42,4 +42,11 @@ class PrecoCurso extends Model implements Transformable
         return SerbinarioDateFormat::toBrazil($this->attributes['virgencia']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function precosDisciplaCurso()
+    {
+        return $this->hasMany(PrecoDisciplinaCurso::class, "preco_curso_id", "id");
+    }
 }

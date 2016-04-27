@@ -1,5 +1,5 @@
 // carregando todos os campos preenchidos
-function loadFieldsEditar()
+function loadFieldsTabelaEditar()
 {
     // Definindo os models
     var dados =  {
@@ -19,7 +19,7 @@ function loadFieldsEditar()
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno) {
-            builderHtmlFieldsEditar(retorno);
+            builderHtmlFieldsTabelaEditar(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -29,7 +29,7 @@ function loadFieldsEditar()
 };
 
 // Função a montar o html
-function builderHtmlFieldsEditar (dados) {
+function builderHtmlFieldsTabelaEditar (dados) {
     // limpando os campos
     $("#virgencia_editar").val("");
 
@@ -73,7 +73,7 @@ function builderHtmlFieldsEditar (dados) {
 // Evento para editar a tabela de preços
 $(document).on('click', '#btnEditarTabelaPreco', function () {
     //carregando o formulário
-    loadFieldsEditar();
+    loadFieldsTabelaEditar();
 
     //Recuperando o id do calendário
     var idPrecoCurso = tablePrecosCurso.row($(this).parent().parent().index()).data().id;

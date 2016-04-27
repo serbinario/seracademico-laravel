@@ -21,11 +21,17 @@ class Editora extends Model implements Transformable
 		'agencia',
 		'conta',
 		'enderecos_id',
+		'telefone',
+		'pessoa_contato',
 	];
 
 	public function endereco()
 	{
 		return $this->belongsTo(Endereco::class, 'enderecos_id');
+	}
+
+	public function exemplares(){
+		return $this->hasMany(Exemplar::class, 'editoras_id', 'id');
 	}
 
 }

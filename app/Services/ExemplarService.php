@@ -76,6 +76,7 @@ class ExemplarService
     {
 
         $data = $this->tratamentoDatas($data);
+        $data = $this->tratamentoCampos($data);
 
         //recupera o acervo
         $acervo = $this->repoAcervo->find($data['arcevos_id']);
@@ -160,6 +161,9 @@ class ExemplarService
      */
     public function update(array $data, int $id) : Exemplar
     {
+
+        $data = $this->tratamentoDatas($data);
+        $data = $this->tratamentoCampos($data);
 
         #Atualizando no banco de dados
         $exemplar = $this->repository->update($data, $id);
@@ -322,6 +326,24 @@ class ExemplarService
 
         }
 
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                unset($data[$key]);
+            }
+        }
+        #Retorno
         return $data;
     }
 

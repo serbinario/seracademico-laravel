@@ -2,16 +2,21 @@
     <div class="col-md-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais dados</a></li>
-            <li role="presentation"><a href="#infoAdd" aria-controls="infoAdd" role="tab" data-toggle="tab">Informações adicionais</a></li>
-            <li role="presentation"><a href="#autores" aria-controls="autores" role="tab" data-toggle="tab">Autores</a></li>
-            <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Outros reponsáveis</a></li>
+            <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais
+                    dados</a></li>
+            <li role="presentation"><a href="#infoAdd" aria-controls="infoAdd" role="tab" data-toggle="tab">Informações
+                    adicionais</a></li>
+            <li role="presentation"><a href="#autores" aria-controls="autores" role="tab" data-toggle="tab">Autores</a>
+            </li>
+            <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Outros
+                    reponsáveis</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="dados">
                 <br/>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -97,7 +102,8 @@
                             @if(isset($model->id))
                                 <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
                                     @foreach($loadFields['curso'] as $key => $value)
-                                        <option value="{{$key}}" @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
+                                        <option value="{{$key}}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
                                     @endforeach
                                 </select>
                             @else
@@ -131,7 +137,8 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="infoAdd">
-                <br />
+                <br/>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -165,13 +172,14 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="autores">
                 <br/>
+
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
                             {!! Form::label('primeira[responsaveis_id]', 'Autor 1') !!}
                             @if(isset($primeiraEntrada[0]))
                                 {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $primeiraEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-1')) !!}
-                                <input type="hidden"  name="primeira[id][]" value="{{$primeiraEntrada[0]->id}}">
+                                <input type="hidden" name="primeira[id][]" value="{{$primeiraEntrada[0]->id}}">
                             @else
                                 {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), array(" " => 'teste'), array('class' => 'form-control', "id" => 'autor-1')) !!}
                             @endif
@@ -213,9 +221,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                            Novo Responsável
+                        </button>
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="outros">
                 <br/>
+
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
@@ -294,6 +310,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                            Novo Responsável
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -304,11 +327,44 @@
         <div class="col-md-3">
             <div class="btn-group btn-group-justified">
                 <div class="btn-group">
-                    <a href="{{ route('seracademico.biblioteca.indexAcervo') }}" class="btn btn-primary btn-block"><i class="fa fa-long-arrow-left"></i>  Voltar</a></div>
+                    <a href="{{ route('seracademico.biblioteca.indexAcervo') }}" class="btn btn-primary btn-block"><i
+                                class="fa fa-long-arrow-left"></i> Voltar</a></div>
                 <div class="btn-group">
                     {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
                 </div>
             </div>
         </div>
-        {{--Fim Buttons Submit e Voltar--}}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastrar Responsável</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                {!! Form::label('nome', 'Nome') !!}
+                                {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'onkeyup' => 'maiuscula("nome")', 'id' => 'nome')) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('sobrenome', 'Último Sobrenome') !!}
+                                {!! Form::text('sobrenome', Session::getOldInput('sobrenome')  , array('class' => 'form-control', 'id' => 'sobrenome')) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="save" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

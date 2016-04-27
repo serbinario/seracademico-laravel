@@ -85,4 +85,11 @@ class Arcevo extends Model implements Transformable
 		return $this->belongsToMany(Curso::class, 'bib_arcevos_cursos', 'arcevos_id', "cursos_id")
 			->withPivot([ 'arcevos_id', 'cursos_id']);;
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function exemplares(){
+		return $this->hasMany(Exemplar::class, 'arcevos_id', 'id');
+	}
 }
