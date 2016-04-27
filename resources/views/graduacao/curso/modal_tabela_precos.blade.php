@@ -16,6 +16,7 @@
                             <tr>
                                 <th>Vigência</th>
                                 <th>Período</th>
+                                <th>Turno</th>
                                 <th>Tipo</th>
                                 <th>Ação</th>
                             </tr>

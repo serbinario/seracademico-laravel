@@ -48,7 +48,8 @@ class TabelaPrecoCursoController extends Controller
                 'fac_precos_cursos.id',
                 \DB::raw('DATE_FORMAT(fac_precos_cursos.virgencia, "%d/%m/%Y") as virgencia'),
                 'fac_periodos.nome as periodo',
-                'fac_tipos_precos_cursos.nome as tipo'
+                'fac_tipos_precos_cursos.nome as tipo',
+                'fac_turnos.nome as turno'
             ]);
 
         #Editando a grid
