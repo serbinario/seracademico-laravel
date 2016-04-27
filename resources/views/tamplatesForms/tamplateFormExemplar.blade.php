@@ -89,8 +89,8 @@
                             </div>
                         </div>
                     @endif
-                    <div class="col-md-3">
-                        <div class="btn-group btn-group-justified">
+                    <div class="col-md-5">
+                        <div class="btn-group">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                                     Nova Editora
