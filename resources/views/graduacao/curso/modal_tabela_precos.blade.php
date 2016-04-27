@@ -10,7 +10,7 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="#" id="adicionar-tabela-precos" class="btn-sm btn-primary pull-right">Adicionar Tabela de preços</a><br><br>
+                        <button href="#" id="adicionar-tabela-precos" class="btn-sm btn-primary pull-right">Adicionar Tabela de preços</button><br><br>
                         <table id="grid-tabela-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -27,11 +27,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="#" id="adicionar-curso" class="btn-sm btn-primary pull-right">Adicionar preços</a><br><br>
+                        <button href="#" id="btnAddPrecoDisciplina" disabled="disabled"  class="btn-sm btn-primary pull-right">Adicionar preços</button><br><br>
                         <table id="grid-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Código</th>
+                                <th>Qtd. Disciplina</th>
                                 <th>Preço</th>
                                 <th>Ação</th>
                             </tr>

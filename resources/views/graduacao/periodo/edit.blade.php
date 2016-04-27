@@ -4,10 +4,15 @@
     <div class="ibox float-e-margins">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
+                <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-user"></i>
+                    <i class="fa fa-calendar"></i>
                     Editar Período
                 </h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+
+            </div>
             </div>
 
             <div class="ibox-content">

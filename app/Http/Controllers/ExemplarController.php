@@ -73,7 +73,7 @@ class ExemplarController extends Controller
             return '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
-                        <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar sede"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar exemplar"><i class="material-icons">edit</i></a></li>
                     </ul>
                     </div>';
         })->make(true);

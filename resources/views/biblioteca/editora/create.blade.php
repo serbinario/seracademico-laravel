@@ -3,10 +3,12 @@
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h4>
-                <i class="fa fa-user"></i>
-                Cadastrar Editora
-            </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">card_travel</i> Cadastrar Editora</h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+
+            </div>
         </div>
 
         <div class="ibox-content">
@@ -29,12 +31,6 @@
             {!! Form::open(['route'=>'seracademico.biblioteca.storeEditora', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormEditora')
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
         </div>
     </div>
 @stop

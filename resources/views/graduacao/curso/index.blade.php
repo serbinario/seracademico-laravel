@@ -1,5 +1,9 @@
 @extends('menu')
 
+@section("css")
+    <link rel="stylesheet" href="{{ asset('/js/graduacao/curso/css/modal_tabela_preco.css') }}">
+@stop
+
 @section('content')
     <div class="ibox float-e-margins">
 

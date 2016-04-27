@@ -4,14 +4,11 @@
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <div class="col-md-10">
-                <h4>
-                    <i class="fa fa-users"></i>
-                    Listar Acervos
-                </h4>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">find_in_page</i> Listar Acervos</h4>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('seracademico.biblioteca.createAcervo')}}" class="btn-sm btn-primary">Novo Acervo</a>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.biblioteca.createAcervo')}}" class="btn-sm btn-primary pull-right">Novo Acervo</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -42,7 +39,6 @@
                                 <th >Acão</th>
                             </tr>
                             </thead>
-
                             <tfoot>
                             <tr>
                                 <th>Título</th>
