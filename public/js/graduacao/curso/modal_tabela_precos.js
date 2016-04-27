@@ -14,7 +14,6 @@ function loadTablePrecosCurso (idCurso) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/curso/precos/grid/" + idCurso,
         columns: [
-            {data: 'id', name: 'fac_precos_cursos.id'},
             {data: 'virgencia', name: 'fac_precos_cursos.virgencia'},
             {data: 'periodo', name: 'fac_periodos.periodo'},
             {data: 'tipo', name: 'fac_tipos_precos_cursos.nome'},
@@ -38,7 +37,6 @@ function loadTablePrecosDisciplinaCurso (idPrecoCurso) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/curso/precos/disciplina/grid/" + idPrecoCurso,
         columns: [
-            {data: 'id', name: 'fac_precos_discplina_curso.id'},
             {data: 'qtd_disciplinas', name: 'fac_precos_discplina_curso.qtd_disciplinas'},
             {data: 'preco', name: 'fac_precos_discplina_curso.preco'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
