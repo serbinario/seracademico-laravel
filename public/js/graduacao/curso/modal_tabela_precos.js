@@ -1,6 +1,12 @@
 //Desativando o botão de adicionar preço por disciplinas
 $("#btnAddPrecoDisciplina").prop("disabled", true);
 
+// Evento quando fechar a modal
+$(document).on('click', '#closeModalPrecoCurso', function () {
+    $("#btnAddPrecoDisciplina").prop("disabled", true);
+    loadTablePrecosDisciplinaCurso(0).ajax.url("/index.php/seracademico/graduacao/curso/precos/disciplina/grid/" + 0).load();
+});
+
 // Função para carregar a grid
 var tablePrecosCurso;
 function loadTablePrecosCurso (idCurso) {
