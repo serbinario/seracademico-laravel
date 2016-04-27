@@ -137,6 +137,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('delete', ['as' => 'store', 'uses' => 'Graduacao\TabelaPrecoCursoController@delete']);
                     Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\TabelaPrecoCursoController@update']);
                     Route::get('edit/{idPrecoCurso}', ['as' => 'edit', 'uses' => 'Graduacao\TabelaPrecoCursoController@edit']);
+
+                    Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+                        Route::get('grid/{idPrecoCurso}', ['as' => 'grid', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@grid']);
+                        Route::post('getLoadFields', ['as' => 'grid', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@getLoadFields']);
+                        Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@store']);
+                        Route::post('delete', ['as' => 'store', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@delete']);
+                        Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@update']);
+                        Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\PrecoDisciplinaCursoController@edit']);
+                    });
                 });
             });
         });
@@ -214,6 +223,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'ResponsavelController@edit']);
             Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'ResponsavelController@store']);
             Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'ResponsavelController@update']);
+            Route::get('deleteResponsavel/{id}', ['as' => 'deleteResponsavel', 'uses' => 'ResponsavelController@delete']);
 
             Route::get('indexEditora', ['as' => 'indexEditora', 'uses' => 'EditoraController@index']);
             Route::get('createEditora', ['as' => 'createEditora', 'uses' => 'EditoraController@create']);

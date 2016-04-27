@@ -49,6 +49,7 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
+                @role('admin')
                 <li>
                     <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -76,7 +77,6 @@
                     </ul>
                 </li>
 
-                @role('admin')
                 <li>
                     <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -111,7 +111,6 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
-                @endrole
 
                 <li>
                     <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -123,21 +122,25 @@
                         <li><a href="{{ route('seracademico.sala.index') }}"><i class="material-icons">class</i> Salas</a></li>
                         <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}"><i class="fa fa-star-half-empty"></i> Tipos de Avaliações</a></li>
                         <li><a href="{{ route('seracademico.tipoDisciplina.index') }}"><i class="fa fa-tags"></i> Tipos de Disciplinas</a></li>
-                        <li><a href="{{ route('seracademico.graduacao.periodo.index') }}"><i class="fa fa-tags"></i> Período</a></li>
+                        <li><a href="{{ route('seracademico.graduacao.periodo.index') }}"><i class="fa fa-calendar"></i> Período</a></li>
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="material-icons">next_week</i> Tipos de Cursos</a></li>
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
                     </ul>
                 </li>
+                @endrole
+
+                @role('biblioteca')
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Biblioteca</span> <span
+                    <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Biblioteca</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}">Responsável</a></li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}">Editora</a></li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}">Acervo</a></li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}">Exemplar</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}"><i class="material-icons">perm_identity</i> Responsável</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}"><i class="material-icons">card_travel</i> Editora</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}"><i class="material-icons">find_in_page</i> Acervo</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="material-icons">receipt</i> Exemplar</a></li>
                     </ul>
                 </li>
+                @endrole
             </ul>
         </div>
     </nav>

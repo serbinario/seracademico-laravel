@@ -12,7 +12,7 @@ class Disciplina extends Model implements Transformable
 
     protected $table    = 'fac_disciplinas';
 
-    protected $fillable = [ 
+    protected $fillable = [
 		'nome',
         'codigo',
 		'carga_horaria',

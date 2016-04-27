@@ -21,7 +21,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 {!! Form::label('ano', 'Ano') !!}
-                                {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control date')) !!}
+                                {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -153,7 +153,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 {!! Form::label('data_aquisicao', 'Data Aquisição') !!}
-                                {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date')) !!}
+                                {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date data2')) !!}
                             </div>
                         </div>
 

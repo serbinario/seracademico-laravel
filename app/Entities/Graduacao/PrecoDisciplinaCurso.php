@@ -10,7 +10,7 @@ class PrecoDisciplinaCurso extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = "fac_precos_cursos";
+    protected $table    = "fac_precos_discplina_curso";
 
     protected $fillable = [
         'preco',

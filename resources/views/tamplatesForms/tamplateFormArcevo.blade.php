@@ -309,8 +309,6 @@
                     {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
                 </div>
             </div>
-
-
         </div>
         {{--Fim Buttons Submit e Voltar--}}
 </div>
