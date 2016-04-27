@@ -79,7 +79,7 @@ class CursoController extends Controller
                             <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Curso"><i class="material-icons">edit</i></a></li>';
             $curso = $this->service->find($row->id);
 
-            if(count($curso->curriculos) == 0) {
+            if(count($curso->curriculos) == 0 && count($curso->precosCursos) == 0) {
                 $html .= '<li><a class="btn-floating red" href="delete/'.$row->id.'" title="Excluir Curso"><i class="material-icons">delete</i></a></li>                        
                             </ul>
                            </div>';

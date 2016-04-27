@@ -66,12 +66,16 @@
     @include('graduacao.curso.modal_tabela_precos')
     @include('graduacao.curso.modal_inserir_tabela_precos')
     @include('graduacao.curso.modal_editar_tabela_precos')
+    @include('graduacao.curso.modal_inserir_preco_disciplina')
+    @include('graduacao.curso.modal_editar_preco_disciplina')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_tabela_precos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_inserir_tabela_precos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_editar_tabela_precos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_inserir_preco_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curso/modal_editar_preco_disciplina.js') }}"></script>
     <script type="text/javascript">
         var table = $('#curso-grid').DataTable({
             processing: true,

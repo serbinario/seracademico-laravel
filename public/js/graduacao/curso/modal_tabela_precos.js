@@ -1,3 +1,6 @@
+//Desativando o botão de adicionar preço por disciplinas
+$("#btnAddPrecoDisciplina").prop("disabled", true);
+
 // Função para carregar a grid
 var tablePrecosCurso;
 function loadTablePrecosCurso (idCurso) {
@@ -11,9 +14,9 @@ function loadTablePrecosCurso (idCurso) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/curso/precos/grid/" + idCurso,
         columns: [
-            {data: 'id', name: 'fac_precos_cursos.id'},
             {data: 'virgencia', name: 'fac_precos_cursos.virgencia'},
             {data: 'periodo', name: 'fac_periodos.periodo'},
+            {data: 'turno', name: 'fac_turnos.nome'},
             {data: 'tipo', name: 'fac_tipos_precos_cursos.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
@@ -35,7 +38,6 @@ function loadTablePrecosDisciplinaCurso (idPrecoCurso) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/curso/precos/disciplina/grid/" + idPrecoCurso,
         columns: [
-            {data: 'id', name: 'fac_precos_discplina_curso.id'},
             {data: 'qtd_disciplinas', name: 'fac_precos_discplina_curso.qtd_disciplinas'},
             {data: 'preco', name: 'fac_precos_discplina_curso.preco'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -51,10 +53,13 @@ function runTablePrecosCurso(idCurso) {
     $("#modal-tabela-precos").modal({show:true});
 }
 
+// Id da tabela de preço selecionada
+var idPrecoCurso;
+
 // Evento para carregar grid de precos por disciplinas
-$(document).on('click', '#grid-tabela-precos tbody tr', function () {
+$(document).on('click', '#grid-tabela-precos tbody tr', function (event) {
     // Verificando se existe linhas na tabela
-    if (tablePrecosCurso.rows().data().length > 0) {
+    if (tablePrecosCurso.rows().data().length > 0 && $(event.target).is("td")) {
         $(this).parent().find("tr td").removeClass('row_selected');
         $(this).find("td").addClass("row_selected");
 

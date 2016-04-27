@@ -48,13 +48,18 @@ class TabelaPrecoCursoController extends Controller
                 'fac_precos_cursos.id',
                 \DB::raw('DATE_FORMAT(fac_precos_cursos.virgencia, "%d/%m/%Y") as virgencia'),
                 'fac_periodos.nome as periodo',
-                'fac_tipos_precos_cursos.nome as tipo'
+                'fac_tipos_precos_cursos.nome as tipo',
+                'fac_turnos.nome as turno'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html  = '<a title="Editar Curso" id="btnEditarTabelaPreco" class="btn-floating indigo"><i class="material-icons">edit</i></a>';
-            $html .= '<a title="Remover Calendário" id="btnRemoverTabelaPreco" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            $html     = '<a title="Editar Curso" id="btnEditarTabelaPreco" class="btn-floating indigo"><i class="material-icons">edit</i></a>';
+            $objPreco = $this->service->find($row->id);
+
+            if(count($objPreco->precosDisciplaCurso) == 0) {
+                $html .= '<a title="Remover Calendário" id="btnRemoverTabelaPreco" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            }
 
             return $html;
         })->make(true);

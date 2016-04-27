@@ -50,7 +50,7 @@ class PrecoDisciplinaCursoController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html  = '<a title="Editar Curso" id="btnEditarPrecoDisciplinaCurso" class="btn-floating indigo"><i class="material-icons">edit</i></a>';
-            $html .= '<a title="Remover Calendário" id="btnPrecoDisciplinaCurso" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            $html .= '<a title="Remover Calendário" id="btnRemoverPrecoDisciplinaCurso" class="btn-floating red"><i class="material-icons">delete</i></a>';
 
             return $html;
         })->make(true);
@@ -139,13 +139,13 @@ class PrecoDisciplinaCursoController extends Controller
             $precoDisciplina = [];
 
             # Preparando o array de retorno
-            $precoCurso['preco']            = $model->preco;
-            $precoCurso['qtd_disciplinas']  = $model->qtd_disciplinas;
-            $precoCurso['idPrecoDisciplina']= $model->id;
+            $precoDisciplina['preco']            = $model->preco;
+            $precoDisciplina['qtd_disciplinas']  = $model->qtd_disciplinas;
+            $precoDisciplina['idPrecoDisciplina']= $model->id;
 
 
             # Dados de retorno
-            $dados = compact('precoCurso');
+            $dados = compact('precoDisciplina');
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
@@ -162,7 +162,7 @@ class PrecoDisciplinaCursoController extends Controller
     {
         try {
             #Executando a ação
-            $this->service->delete($request->get('idPrecoCurso'));
+            $this->service->delete($request->get('idPrecoDisciplinaCurso'));
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Remoção realizada com sucesso"]);
