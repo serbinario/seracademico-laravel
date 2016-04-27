@@ -53,7 +53,7 @@
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
-                {data: 'tombo', name: 'tombo'},
+                {data: 'tombo', name: 'bib_exemplares.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
