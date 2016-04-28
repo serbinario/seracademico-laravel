@@ -10,6 +10,7 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="col-md-12">
+                        <h3 id="nomeCursoModal" class="pull-left">Curso</h3>
                         <button href="#" id="adicionar-tabela-precos" class="btn-sm btn-primary pull-right">Adicionar Tabela de preços</button><br><br>
                         <table id="grid-tabela-precos" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>

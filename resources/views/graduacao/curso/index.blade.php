@@ -96,8 +96,12 @@
 
         // Evento para abrir modal de tabela de precos
         $(document).on("click", "#tabela-precos", function () {
-            // Recuperando o id do curso selecionado
-            idCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            // Recuperando o id e o nome do curso selecionado
+            idCurso   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            nomeCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+
+            // Alterando o nome do modal
+            $("#nomeCursoModal").text(nomeCurso);
 
             //Carregando a grid de tabela de preços
             runTablePrecosCurso(idCurso);
