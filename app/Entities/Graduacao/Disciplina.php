@@ -5,7 +5,6 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Curriculo;
 use Seracademico\Entities\Turma;
 
 class Disciplina extends Model implements Transformable
@@ -28,11 +27,18 @@ class Disciplina extends Model implements Transformable
 	];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @param Model $parent
+	 * @param array $attributes
+	 * @param string $table
+	 * @param bool $exists
+	 * @return \Illuminate\Database\Eloquent\Relations\Pivot|Curriculo
 	 */
-	public function curriculos()
+	public function newPivot(Model $parent, array $attributes, $table, $exists)
 	{
-		return $this->belongsToMany(Curriculo::class, "fac_curriculo_disciplina", "disciplina_id", "curriculo_id");
-	}
+		if ($parent instanceof Curriculo) {
+			return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
+		}
 
+		return parent::newPivot($parent, $attributes, $table, $exists);
+	}
 }

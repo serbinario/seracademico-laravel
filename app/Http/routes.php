@@ -148,6 +148,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     });
                 });
             });
+
+            Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\CurriculoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\CurriculoController@grid']);
+                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Graduacao\CurriculoController@gridByCurriculo']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\CurriculoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CurriculoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@update']);
+                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'Graduacao\CurriculoController@adicionarDisciplinas']);
+                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Graduacao\CurriculoController@removerDisciplina']);
+            });
         });
 
 

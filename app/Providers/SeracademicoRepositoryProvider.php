@@ -310,7 +310,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\ResponsavelRepositoryEloquent::class
         );
 
-
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\CurriculoRepository::class,
+            \Seracademico\Repositories\Graduacao\CurriculoRepositoryEloquent::class
+        );
     }
 
 }
