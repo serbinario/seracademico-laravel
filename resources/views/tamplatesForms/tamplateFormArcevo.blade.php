@@ -156,7 +156,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="form-group">
-                            {!! Form::label('resumo', 'Resumo') !!}
+                            {!! Form::label('resumo', 'Notas') !!}
                             {!! Form::textarea('resumo', Session::getOldInput('resumo')  ,['size' => '117x6'] , array('class' => 'form-control')) !!}
                         </div>
                     </div>

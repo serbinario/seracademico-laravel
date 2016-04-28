@@ -109,7 +109,8 @@ class ExemplarService
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
-                    $data['codigo'] = $codigoMax;
+                    // dd($this->tombo);
+                    $data['codigo'] = $this->tombo;
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
                     $ultCodigo = substr($exemplar->codigo, 0, -4);
@@ -164,6 +165,11 @@ class ExemplarService
 
         $data = $this->tratamentoDatas($data);
         $data = $this->tratamentoCampos($data);
+
+        $codigo = $data['codigo'];
+        $ano    = $data['ano'];
+
+        $data['codigo'] = $codigo.$ano;
 
         #Atualizando no banco de dados
         $exemplar = $this->repository->update($data, $id);
