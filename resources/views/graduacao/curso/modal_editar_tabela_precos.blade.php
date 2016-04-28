@@ -19,9 +19,9 @@
 
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="periodo_id_editar">Período</label>
-                            <select name="periodo_id_editar" class="form-control" id="periodo_id_editar">
-                                {{--@foreach($loadFields['periodo'] as $key => $value)--}}
+                            <label for="semestre_id_editar">Semestre</label>
+                            <select name="semestre_id_editar" class="form-control" id="semestre_id_editar">
+                                {{--@foreach($loadFields['semestre'] as $key => $value)--}}
                                     {{--<option value="{{ $key  }}">{{ $value  }}</option>--}}
                                 {{--@endforeach--}}
                             </select>

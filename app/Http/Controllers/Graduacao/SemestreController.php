@@ -5,22 +5,22 @@ namespace Seracademico\Http\Controllers\Graduacao;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\Graduacao\PeriodoService;
+use Seracademico\Services\Graduacao\SemestreService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Graduacao\PeriodoValidator;
+use Seracademico\Validators\Graduacao\SemestreValidator;
 use Seracademico\Http\Controllers\Controller;
 
-class PeriodoController extends Controller
+class SemestreController extends Controller
 {
     /**
-     * @var PeriodoService
+     * @var SemestreService
      */
     private $service;
 
     /**
-     * @var PeriodoValidator
+     * @var SemestreValidator
      */
     private $validator;
 
@@ -30,10 +30,10 @@ class PeriodoController extends Controller
     private $loadFields = [];
 
     /**
-     * @param PeriodoService $service
-     * @param PeriodoValidator $validator
+     * @param SemestreService $service
+     * @param SemestreValidator $validator
      */
-    public function __construct(PeriodoService $service, PeriodoValidator $validator)
+    public function __construct(SemestreService $service, SemestreValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -44,7 +44,7 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        return view('graduacao.periodo.index');
+        return view('graduacao.semestre.index');
     }
 
     /**
@@ -53,10 +53,10 @@ class PeriodoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_periodos')->select([
-            'fac_periodos.id',
-            'fac_periodos.nome',
-            \DB::raw('IF(fac_periodos.ativo = 1,"SIM","NÃO") as ativo'),
+        $rows = \DB::table('fac_semestres')->select([
+            'fac_semestres.id',
+            'fac_semestres.nome',
+            \DB::raw('IF(fac_semestres.ativo = 1,"SIM","NÃO") as ativo'),
         ]);
 
         // Editando a grid
@@ -80,7 +80,7 @@ class PeriodoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('graduacao.periodo.create', compact('loadFields'));
+        return view('graduacao.semestre.create', compact('loadFields'));
     }
 
     /**
@@ -125,7 +125,7 @@ class PeriodoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('graduacao.periodo.edit', compact('model', 'loadFields'));
+            return view('graduacao.semestre.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

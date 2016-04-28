@@ -15,7 +15,7 @@
                             <thead>
                             <tr>
                                 <th>Vigência</th>
-                                <th>Período</th>
+                                <th>Semestre</th>
                                 <th>Turno</th>
                                 <th>Tipo</th>
                                 <th style="width: 12%">Ação</th>

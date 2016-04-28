@@ -7,7 +7,7 @@
                 <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-calendar"></i>
-                    Editar Período
+                    Editar Semestre
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
@@ -33,8 +33,8 @@
                     </div>
                 @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.graduacao.periodo.update', $model->id], 'id' => 'formPeriodo', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.graduacao.tamplateFormPeriodo')
+            {!! Form::model($model, ['route'=> ['seracademico.graduacao.semestre.update', $model->id], 'id' => 'formSemestre', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.graduacao.tamplateFormSemestre')
             {!! Form::close() !!}
         </div>        
     </div>

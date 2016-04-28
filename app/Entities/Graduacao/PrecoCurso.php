@@ -20,7 +20,7 @@ class PrecoCurso extends Model implements Transformable
     protected $fillable = [
         'turno_id',
         'tipo_preco_curso_id',
-        'periodo_id',
+        'semestre_id',
         'curso_id',
         'virgencia'
     ];
