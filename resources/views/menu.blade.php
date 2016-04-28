@@ -129,7 +129,7 @@
                 </li>
                 @endrole
 
-                {{--@role('biblioteca')--}}
+                @role('biblioteca')
                 <li>
                     <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Biblioteca</span> <span
                                 class="fa arrow"></span></a>
@@ -140,7 +140,7 @@
                         <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="material-icons">receipt</i> Exemplar</a></li>
                     </ul>
                 </li>
-                {{--@endrole--}}
+                @endrole
             </ul>
         </div>
     </nav>
