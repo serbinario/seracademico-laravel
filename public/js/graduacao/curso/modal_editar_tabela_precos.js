@@ -34,9 +34,9 @@ function builderHtmlFieldsTabelaEditar (dados) {
     $("#virgencia_editar").val("");
 
     // Variáveis que armazenaram o html
-    var htmlSemestre    = "<option value=''>Selecione uma situação</option>";
-    var htmlTipoPreco  = "<option value=''>Selecione uma situação</option>";
-    var htmlTurno      = "<option value=''>Selecione uma situação</option>";
+    var htmlSemestre    = "<option value=''>Selecione um Semestre</option>";
+    var htmlTipoPreco  = "<option value=''>Selecione um Tipo</option>";
+    var htmlTurno      = "<option value=''>Selecione um Turno</option>";
 
     // Percorrendo o array de situacaoaluno
     for(var i = 0; i < dados['graduacao\\semestre'].length; i++) {

@@ -30,7 +30,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="tipo_preco_curso_id_editar">Tipo Preço</label>
+                            <label for="tipo_preco_curso_id_editar">Tipo</label>
                             <select name="tipo_preco_curso_id_editar" class="form-control" id="tipo_preco_curso_id_editar">
                                 {{--@foreach($loadFields['tipoprecocurso'] as $key => $value)--}}
                                     {{--<option value="{{ $key  }}">{{ $value  }}</option>--}}
