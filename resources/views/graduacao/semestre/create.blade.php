@@ -7,7 +7,7 @@
                 <div class="col-sm-6 col-md-9">
                     <h4>
                         <i class="fa fa-calendar"></i>
-                        Cadastrar Período
+                        Cadastrar Semestre
                     </h4>
                 </div>
                 <div class="col-sm-6 col-md-3">
@@ -33,8 +33,8 @@
                     </div>
                 @endif
 
-            {!! Form::open(['route'=>'seracademico.graduacao.periodo.store', 'id' => 'formPeriodo', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.graduacao.tamplateFormPeriodo')
+            {!! Form::open(['route'=>'seracademico.graduacao.semestre.store', 'id' => 'formSemestre', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.graduacao.tamplateFormSemestre')
             {!! Form::close() !!}
         </div>        
     </div>

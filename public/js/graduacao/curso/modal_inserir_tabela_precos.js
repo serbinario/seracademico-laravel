@@ -12,7 +12,7 @@ function loadFieldsTabela()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Periodo',
+            'Graduacao\\Semestre',
             'Graduacao\\TipoPrecoCurso',
             'Turno'
         ]
@@ -42,14 +42,14 @@ function builderHtmlFieldsTabela (dados) {
     $("#virgencia").val("");
 
     // Variáveis que armazenaram o html
-    var htmlPeriodo    = "<option value=''>Selecione uma situação</option>";
-    var htmlTipoPreco  = "<option value=''>Selecione uma situação</option>";
-    var htmlTurno      = "<option value=''>Selecione uma situação</option>";
+    var htmlSemestre    = "<option value=''>Selecione um Semestre</option>";
+    var htmlTipoPreco  = "<option value=''>Selecione um Tipo</option>";
+    var htmlTurno      = "<option value=''>Selecione um Turno</option>";
 
     // Percorrendo o array de situacaoaluno
-    for(var i = 0; i < dados['graduacao\\periodo'].length; i++) {
+    for(var i = 0; i < dados['graduacao\\semestre'].length; i++) {
         // Criando as options
-        htmlPeriodo += "<option value='" + dados['graduacao\\periodo'][i].id + "'>"  + dados['graduacao\\periodo'][i].nome + "</option>";
+        htmlSemestre += "<option value='" + dados['graduacao\\semestre'][i].id + "'>"  + dados['graduacao\\semestre'][i].nome + "</option>";
     }
 
     // Percorrendo o array de tipoprecoturno
@@ -65,8 +65,8 @@ function builderHtmlFieldsTabela (dados) {
     }
 
     // Removendo e adicionando as options de período
-    $("#periodo_id option").remove();
-    $("#periodo_id").append(htmlPeriodo);
+    $("#semestre_id option").remove();
+    $("#semestre_id").append(htmlSemestre);
 
     // Removendo e adicionando as options de tipo preco
     $("#tipo_preco_curso_id option").remove();
@@ -81,14 +81,14 @@ function builderHtmlFieldsTabela (dados) {
 // Evento para salvar tabela de preços
 $('#btnSalvarTabelaPrecos').click(function() {
     var virgencia     = $("#virgencia").val();
-    var periodo_id   = $("#periodo_id").val();
+    var semestre_id   = $("#semestre_id").val();
     var turno_id     = $("#turno_id").val();
     var tipo_preco_curso_id = $("#tipo_preco_curso_id").val();
 
     var dados = {
         'curso_id': idCurso,
         'virgencia': virgencia,
-        'periodo_id' : periodo_id,
+        'semestre_id' : semestre_id,
         'tipo_preco_curso_id' : tipo_preco_curso_id,
         'turno_id' : turno_id
     };

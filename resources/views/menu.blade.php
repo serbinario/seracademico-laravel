@@ -122,7 +122,7 @@
                         <li><a href="{{ route('seracademico.sala.index') }}"><i class="material-icons">class</i> Salas</a></li>
                         <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}"><i class="fa fa-star-half-empty"></i> Tipos de Avaliações</a></li>
                         <li><a href="{{ route('seracademico.tipoDisciplina.index') }}"><i class="fa fa-tags"></i> Tipos de Disciplinas</a></li>
-                        <li><a href="{{ route('seracademico.graduacao.periodo.index') }}"><i class="fa fa-calendar"></i> Período</a></li>
+                        <li><a href="{{ route('seracademico.graduacao.semestre.index') }}"><i class="fa fa-calendar"></i> Semestres</a></li>
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="material-icons">next_week</i> Tipos de Cursos</a></li>
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
                     </ul>

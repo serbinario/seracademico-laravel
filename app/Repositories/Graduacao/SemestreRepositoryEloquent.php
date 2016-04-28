@@ -4,15 +4,15 @@ namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Graduacao\PeriodoRepository;
-use Seracademico\Entities\Graduacao\Periodo;
-use Seracademico\Validators\Graduacao\PeriodoValidator;
+use Seracademico\Repositories\Graduacao\SemestreRepository;
+use Seracademico\Entities\Graduacao\Semestre;
+use Seracademico\Validators\Graduacao\SemestreValidator;
 
 /**
- * Class PeriodoRepositoryEloquent
+ * Class SemestreRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class PeriodoRepositoryEloquent extends BaseRepository implements PeriodoRepository
+class SemestreRepositoryEloquent extends BaseRepository implements SemestreRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class PeriodoRepositoryEloquent extends BaseRepository implements PeriodoReposit
      */
     public function model()
     {
-        return Periodo::class;
+        return Semestre::class;
     }
 
     /**
@@ -32,7 +32,7 @@ class PeriodoRepositoryEloquent extends BaseRepository implements PeriodoReposit
     public function validator()
     {
 
-        return PeriodoValidator::class;
+        return SemestreValidator::class;
     }
 
 

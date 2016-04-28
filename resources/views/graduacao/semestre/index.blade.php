@@ -7,11 +7,11 @@
             <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-calendar"></i>
-                    Listar Períodos
+                    Listar Semestres
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.graduacao.periodo.create')}}" class="btn-sm btn-primary pull-right">Novo Período</a>
+                <a href="{{ route('seracademico.graduacao.semestre.create')}}" class="btn-sm btn-primary pull-right">Novo Semestre</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
-                        <table id="periodo-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="semestre-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Código</th>
@@ -63,15 +63,15 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#periodo-grid').DataTable({
+        var table = $('#semestre-grid').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.graduacao.periodo.grid') !!}",
+            ajax: "{!! route('seracademico.graduacao.semestre.grid') !!}",
             columns: [
-                {data: 'id', name: 'fac_periodos.id'},
-                {data: 'nome', name: 'fac_periodos.nome'},
-                {data: 'ativo', name: 'fac_periodos.ativo'},
+                {data: 'id', name: 'fac_semestres.id'},
+                {data: 'nome', name: 'fac_semestres.nome'},
+                {data: 'ativo', name: 'fac_semestres.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

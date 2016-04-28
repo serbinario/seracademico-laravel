@@ -2,20 +2,20 @@
 
 namespace Seracademico\Services\Graduacao;
 
-use Seracademico\Repositories\Graduacao\PeriodoRepository;
-use Seracademico\Entities\Graduacao\Periodo;
+use Seracademico\Repositories\Graduacao\SemestreRepository;
+use Seracademico\Entities\Graduacao\Semestre;
 
-class PeriodoService
+class SemestreService
 {
     /**
-     * @var PeriodoRepository
+     * @var SemestreRepository
      */
     private $repository;
 
     /**
-     * @param PeriodoRepository $repository
+     * @param SemestreRepository $repository
      */
-    public function __construct(PeriodoRepository $repository)
+    public function __construct(SemestreRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -28,33 +28,33 @@ class PeriodoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $disciplina = $this->repository->find($id);
+        $semestre = $this->repository->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$disciplina) {
-            throw new \Exception('Período não encontrada!');
+        if(!$semestre) {
+            throw new \Exception('Semestre não encontrada!');
         }
 
         #retorno
-        return $disciplina;
+        return $semestre;
     }
 
     /**
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Periodo
+    public function store(array $data) : Semestre
     {
         #Salvando o registro pincipal
-        $periodo =  $this->repository->create($data);
+        $semestre =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$periodo) {
+        if(!$semestre) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $periodo;
+        return $semestre;
     }
 
     /**
@@ -62,18 +62,18 @@ class PeriodoService
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Periodo
+    public function update(array $data, int $id) : Semestre
     {
         #Atualizando no banco de dados
-        $periodo = $this->repository->update($data, $id);
+        $semestre = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
-        if(!$periodo) {
+        if(!$semestre) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $periodo;
+        return $semestre;
     }
 
     /**

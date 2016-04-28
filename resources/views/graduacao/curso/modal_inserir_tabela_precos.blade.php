@@ -18,9 +18,9 @@
 
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="periodo_id">Período</label>
-                            <select name="periodo_id" class="form-control" id="periodo_id">
-                                {{--@foreach($loadFields['periodo'] as $key => $value)--}}
+                            <label for="semestre_id">Semestre</label>
+                            <select name="semestre_id" class="form-control" id="semestre_id">
+                                {{--@foreach($loadFields['semestre'] as $key => $value)--}}
                                     {{--<option value="{{ $key  }}">{{ $value  }}</option>--}}
                                 {{--@endforeach--}}
                             </select>
@@ -29,7 +29,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="tipo_preco_curso_id">Tipo Preço</label>
+                            <label for="tipo_preco_curso_id">Tipo</label>
                             <select name="tipo_preco_curso_id" class="form-control" id="tipo_preco_curso_id">
                                 {{--@foreach($loadFields['tipoprecocurso'] as $key => $value)--}}
                                     {{--<option value="{{ $key  }}">{{ $value  }}</option>--}}

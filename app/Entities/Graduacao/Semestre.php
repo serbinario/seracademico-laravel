@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Periodo extends Model implements Transformable
+class Semestre extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = "fac_periodos";
+    protected $table    = "fac_semestres";
 
     protected $fillable = [
         'nome',

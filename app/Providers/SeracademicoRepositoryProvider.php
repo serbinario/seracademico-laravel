@@ -225,8 +225,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\Graduacao\PeriodoRepository::class,
-            \Seracademico\Repositories\Graduacao\PeriodoRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\SemestreRepository::class,
+            \Seracademico\Repositories\Graduacao\SemestreRepositoryEloquent::class
         );
 
         $this->app->bind(

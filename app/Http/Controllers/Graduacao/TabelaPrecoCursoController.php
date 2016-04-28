@@ -41,13 +41,13 @@ class TabelaPrecoCursoController extends Controller
         $rows = \DB::table('fac_precos_cursos')
             ->join('fac_cursos', 'fac_precos_cursos.curso_id', '=', 'fac_cursos.id')
             ->join('fac_turnos', 'fac_precos_cursos.turno_id', '=', 'fac_turnos.id')
-            ->join('fac_periodos', 'fac_precos_cursos.periodo_id', '=', 'fac_periodos.id')
+            ->join('fac_semestres', 'fac_precos_cursos.semestre_id', '=', 'fac_semestres.id')
             ->join('fac_tipos_precos_cursos', 'fac_precos_cursos.tipo_preco_curso_id', '=', 'fac_tipos_precos_cursos.id')
             ->where('fac_cursos.id', $idCurso)
             ->select([
                 'fac_precos_cursos.id',
                 \DB::raw('DATE_FORMAT(fac_precos_cursos.virgencia, "%d/%m/%Y") as virgencia'),
-                'fac_periodos.nome as periodo',
+                'fac_semestres.nome as semestre',
                 'fac_tipos_precos_cursos.nome as tipo',
                 'fac_turnos.nome as turno'
             ]);
@@ -150,7 +150,7 @@ class TabelaPrecoCursoController extends Controller
             # Preparando o array de retorno
             $precoCurso['virgencia']           = $model->virgencia;
             $precoCurso['curso_id']            = $model->curso_id;
-            $precoCurso['periodo_id']          = $model->periodo_id;
+            $precoCurso['semestre_id']          = $model->semestre_id;
             $precoCurso['tipo_preco_curso_id'] = $model->tipo_preco_curso_id;
             $precoCurso['turno_id']            = $model->turno_id;
             $precoCurso['preco_curso_id']      = $model->id;

@@ -21,7 +21,7 @@ function loadTablePrecosCurso (idCurso) {
         ajax: "/index.php/seracademico/graduacao/curso/precos/grid/" + idCurso,
         columns: [
             {data: 'virgencia', name: 'fac_precos_cursos.virgencia'},
-            {data: 'periodo', name: 'fac_periodos.periodo'},
+            {data: 'semestre', name: 'fac_semestres.semestre'},
             {data: 'turno', name: 'fac_turnos.nome'},
             {data: 'tipo', name: 'fac_tipos_precos_cursos.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
