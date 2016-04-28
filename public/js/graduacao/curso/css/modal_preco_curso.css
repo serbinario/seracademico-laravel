@@ -1,9 +1,0 @@
-.row_selected {
-    background-color: #1ab394 !important;
-    color: #FFF;
-    font-weight: bold;
-}
-
-#calendario-disciplina-grid tbody tr td {
-    font-size: 12px;
-}
