@@ -261,6 +261,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('editExemplar/{id}', ['as' => 'editExemplar', 'uses' => 'ExemplarController@edit']);
             Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'ExemplarController@store']);
             Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'ExemplarController@update']);
+            Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'ExemplarController@delete']);
         });
 
         //Rotas para componentes de segurança

@@ -74,12 +74,20 @@ class ExemplarController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar exemplar"><i class="material-icons">edit</i></a></li>
-                    </ul>
-                    </div>';
+            $html       = '<div class="fixed-action-btn horizontal">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>
+                            <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
+            //$obra = $this->service->find($row->id);
+            # Verificando se existe vinculo com o currículo
+           // if(count($obra['acervo']->exemplares) == 0) {
+                $html .= '<li><a class="btn-floating" href="deleteExemplar/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
+                            </ul>
+                           </div>';
+           // }
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
@@ -166,6 +174,23 @@ class ExemplarController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
