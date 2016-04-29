@@ -41,4 +41,32 @@ class Disciplina extends Model implements Transformable
 
 		return parent::newPivot($parent, $attributes, $table, $exists);
 	}
+
+	/**
+	 * @param $query
+	 * @param $value
+	 * @return mixed
+	 */
+	public function scopeUniqueDisciplina($query, $value)
+	{
+		return $query
+            ->select(['fac_disciplinas.id', 'fac_disciplinas.nome'])
+			->whereNotIn('fac_disciplinas.id', function ($query) use ($value) {
+                $query->from('fac_curriculo_disciplina')
+                    ->select('fac_curriculo_disciplina.disciplina_id')
+                    ->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->where('fac_curriculos.id', $value)->get();
+            })
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 1);
+	}
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeTipoNivelSistema($query, $value)
+    {
+        return $query->select('id', 'nome')->where('tipo_nivel_sistema_id', $value);
+    }
 }

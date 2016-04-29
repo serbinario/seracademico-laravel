@@ -78,7 +78,7 @@ class CurriculoController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
-                        <li><a class="grid-curricular btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
+                        <li><a class="grid-curricular btn-floating green" href="#" id="btnGraduacaoAddDisciplinaCurriculo" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
                     </ul>
                     </div>';
         })->make(true);
@@ -114,16 +114,19 @@ class CurriculoController extends Controller
             $boolReturn = true;
 
             # percorre as turmas
-            foreach ($tumas as $turma) {
-                if(count($turma->disciplinas) > 0) {
-                    $boolReturn = false;
-                    break;
+            if($tumas) {
+                foreach ($tumas as $turma) {
+                    if(count($turma->disciplinas) > 0) {
+                        $boolReturn = false;
+                        break;
+                    }
                 }
             }
 
+
             # Verifica a se a condição é válida
             if($boolReturn) {
-                $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
+                $html .= '<a href="#" id="removeGraduacaoDisciplina" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
             }
 
             # retorno
@@ -253,6 +256,63 @@ class CurriculoController extends Controller
         } catch (\Throwable $e) {
             #retorno falido
             return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function disciplinaStore(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Validando a requisição
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            #Executando a ação
+            $this->service->disciplinaStore($data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
+            // } catch (ValidatorException $e) {
+            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function disciplinaDelete(Request $request)
+    {
+        try {
+            #Executando a ação
+            $this->service->disciplinaDelete($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Remoção realizada com sucesso"]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

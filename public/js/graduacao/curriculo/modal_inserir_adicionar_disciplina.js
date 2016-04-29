@@ -1,0 +1,156 @@
+// Evento para chamar o modal de inserir adicionar disciplina
+$(document).on("click", "#graduacaoAddDisciplina", function () {
+    loadFields();
+});
+
+// carregando todos os campos preenchidos
+function loadFields()
+{
+    // Definindo os models
+    var dados =  {
+        'models' : [
+            'Graduacao\\Disciplina|uniqueDisciplina,' + idCurriculo,
+            'Graduacao\\Disciplina|tipoNivelSistema,1,disciplinadefault'
+        ]
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: dados,
+        url: '/index.php/seracademico/graduacao/curriculo/getLoadFields',
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Verificando o retorno da requisição
+        if(retorno) {
+            builderHtmlFields(retorno);
+        } else {
+            // Retorno caso não tenha currículo em uma turma ou algum erro
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+            $('#modal-inserir-adicinar-disciplina').modal('toggle');
+        }
+    });
+};
+
+// Função a montar o html
+function builderHtmlFields (dados) {
+    // limpando os campos
+    $("#periodo").find("option").eq(0).prop("selected", true);
+
+    // Variáveis que armazenaram o html
+    var htmlDisciplina     = "<option value=''>Selecione uma disciplina</option>";
+    var htmlPreDisciplina1 = "<option value=''>Selecione uma disciplina</option>";
+    var htmlPreDisciplina2 = "<option value=''>Selecione uma disciplina</option>";
+    var htmlPreDisciplina3 = "<option value=''>Selecione uma disciplina</option>";
+    var htmlPreDisciplina4 = "<option value=''>Selecione uma disciplina</option>";
+    var htmlPreDisciplina5 = "<option value=''>Selecione uma disciplina</option>";
+    var htmlCoDisciplina1  = "<option value=''>Selecione uma disciplina</option>";
+
+    // validado as disciplinas do currículo
+    if(dados['graduacao\\disciplina'].length == 0) {
+        swal("Desculpe não existe disciplinas disponíveis", "Click no botão abaixo!", "error");
+        return;
+    }
+
+    // Percorrendo o array de disciplinacurriculo
+    for(var i = 0; i < dados['graduacao\\disciplina'].length; i++) {
+        // Criando as options
+        htmlDisciplina     += "<option value='" + dados['graduacao\\disciplina'][i].id + "'>"  + dados['graduacao\\disciplina'][i].nome + "</option>";
+    }
+
+    // Percorrendo o array de disciplinadefault
+    for (var i = 0; i < dados['disciplinadefault'].length; i++) {
+        htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina3 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+    }
+
+    // Removendo e adicionando as options de período
+    $("#disciplina_id option").remove();
+    $("#disciplina_id").append(htmlDisciplina);
+
+    $("#pre_disciplina_1 option").remove();
+    $("#pre_disciplina_1").append(htmlPreDisciplina1);
+
+    $("#pre_disciplina_2 option").remove();
+    $("#pre_disciplina_2").append(htmlPreDisciplina2);
+
+    $("#pre_disciplina_3 option").remove();
+    $("#pre_disciplina_3").append(htmlPreDisciplina3);
+
+    $("#pre_disciplina_4 option").remove();
+    $("#pre_disciplina_4").append(htmlPreDisciplina4);
+
+    $("#pre_disciplina_5 option").remove();
+    $("#pre_disciplina_5").append(htmlPreDisciplina5);
+
+    $("#co_disciplina_1 option").remove();
+    $("#co_disciplina_1").append(htmlCoDisciplina1);
+
+    // Abrindo o modal de inserir disciplina
+    $("#modal-inserir-adicionar-disciplina").modal({show : true});
+}
+
+// Evento para salvar tabela de preços
+$('#btnSalvarAdicionarDisciplina').click(function() {
+    var disciplina_id    = $("#disciplina_id").val();
+    var periodo          = $("#periodo").val();
+    var dom_pre_discip   = $("select[name='pre_disciplinas'] option:selected").toArray();
+    var dom_co_discip    = $("select[name='co_disciplinas'] option:selected").toArray();
+    var pre_disciplina   = [];
+    var co_disciplina    = [];
+
+    $(dom_pre_discip).each(function (index) {
+        pre_disciplina[index] = $(this).val();
+    });
+
+    $(dom_co_discip).each(function (index) {
+        co_disciplina[index] = $(this).val();
+    });
+
+    var dados = {
+        'curriculo_id' : idCurriculo,
+        'disciplina_id': disciplina_id,
+        'periodo': periodo,
+        'pre_disciplina' : pre_disciplina,
+        'co_disciplina' : co_disciplina
+    };
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/graduacao/curriculo/disciplina/store',
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            tableAdicionarDisciplina.load();
+            loadFields();
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
+
+// Evento para o click no botão de remover disciplina
+$(document).on('click', '#removeGraduacaoDisciplina', function () {
+    var idDisciplina = tableAdicionarDisciplina.row($(this).parent().parent().index()).data().id;
+
+    var dadosAjax    = {
+        'idCurriculo'  : idCurriculo,
+        'idDisciplina' : idDisciplina
+    };
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/graduacao/curriculo/disciplina/delete',
+        data: dadosAjax,
+        datatype: 'json'
+    }).done(function (retorno) {
+        tableAdicionarDisciplina.ajax.reload();
+        swal(retorno.msg, "Click no botão abaixo!", "success");
+    });
+});

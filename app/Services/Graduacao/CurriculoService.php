@@ -2,6 +2,7 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Illuminate\Support\Facades\DB;
 use Seracademico\Repositories\Graduacao\CurriculoRepository;
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Repositories\Graduacao\CursoRepository;
@@ -170,7 +171,7 @@ class CurriculoService
      * @param array $models
      * @return array
      */
-    public function load(array $models) : array
+    public function load(array $models, $ajax = false) : array
     {
         #Declarando variáveis de uso
         $result    = [];
@@ -190,12 +191,25 @@ class CurriculoService
             #qualificando o namespace
             $nameModel = "\\Seracademico\\Entities\\$model";
 
-            if(count($expressao) > 1) {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+            #Verificando se existe sobrescrita do nome do model
+            $model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->get(['nome', 'id']);
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::get(['nome', 'id']);
+                }
             } else {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
             }
 
             # Limpando a expressão
@@ -228,5 +242,73 @@ class CurriculoService
 
         #retorno
         return $data;
+    }
+
+    /**
+     * @param array $data
+     * @throws \Exception
+     */
+    public function disciplinaStore(array $data)
+    {
+        # Recuperando o currículo
+        $curriculo     = $this->repository->find($data['curriculo_id']);
+        $objDisciplina = $this->disciplinaRepository->find($data['disciplina_id']);
+
+        # Verificando se o currículo foi recuperado
+        if(!$curriculo && !$objDisciplina) {
+            throw new \Exception("Curriculo não encontrado!");
+        }
+
+        # atrelando os valores
+        $curriculo->disciplinas()->attach($objDisciplina, ['periodo' => $data['periodo']]);
+
+        # Varrendo o array
+        foreach ($curriculo->disciplinas as $disciplina) {
+            if($disciplina->id == $objDisciplina->id) {
+                # Tratamento pre disciplina
+                if(isset($data['pre_disciplina'])) {
+                    $disciplina->pivot->disciplinasPreRequisitos()->attach($data['pre_disciplina']);
+                }
+
+                # Tratamento co disciplina
+                if(isset($data['co_disciplina'])) {
+                    $disciplina->pivot->disciplinasCoRequisitos()->attach($data['co_disciplina']);
+                }
+            }
+        }
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param $idCurriculo
+     * @param $idDisciplina
+     * @throws \Exception
+     */
+    public function disciplinaDelete($data)
+    {
+        # Recuperando o currículo
+        $curriculo  = $this->repository->find($data['idCurriculo']);
+        $disciplina = $this->disciplinaRepository->find($data['idDisciplina']);
+
+        # Verificando se o currículo foi recuperado
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Curriculo não encontrado!");
+        }
+
+        #Deletando as dependências
+        foreach ($curriculo->disciplinas as $objDisciplina) {
+            if($disciplina->id === $objDisciplina->id) {
+                $objDisciplina->pivot->disciplinasPreRequisitos()->detach();
+                $objDisciplina->pivot->disciplinasCoRequisitos()->detach();
+            }
+        }
+
+        #Disvinculando a disciplina do currículo
+        $curriculo->disciplinas()->detach($disciplina->id);
+
+        #Retorno
+        return true;
     }
 }
