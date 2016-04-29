@@ -89,6 +89,19 @@
                             </div>
                         </div>
                     @endif
+                    @if(isset($model->id))
+                        <?php
+                            $codigo = substr($model->codigo, 0, -4);
+                            $ano    = substr($model->codigo, -4);
+                        ?>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('codigo', 'Tombo') !!}
+                                {!! Form::text('codigo', $codigo  , array('class' => 'form-control')) !!}
+                                <input type="hidden" name="ano" value="{{$ano}}">
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-md-5">
                         <div class="btn-group">
                             <div class="btn-group">
