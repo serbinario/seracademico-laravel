@@ -262,16 +262,17 @@ class CurriculoService
         # atrelando os valores
         $curriculo->disciplinas()->attach($objDisciplina, ['periodo' => $data['periodo']]);
 
+
         # Varrendo o array
         foreach ($curriculo->disciplinas as $disciplina) {
             if($disciplina->id == $objDisciplina->id) {
                 # Tratamento pre disciplina
-                if(isset($data['pre_disciplina'])) {
+                if(isset($data['pre_disciplina']) && count($data['pre_disciplina']) > 0) {
                     $disciplina->pivot->disciplinasPreRequisitos()->attach($data['pre_disciplina']);
                 }
 
                 # Tratamento co disciplina
-                if(isset($data['co_disciplina'])) {
+                if(isset($data['co_disciplina']) && count($data['co_disciplina']) > 0) {
                     $disciplina->pivot->disciplinasCoRequisitos()->attach($data['co_disciplina']);
                 }
             }

@@ -20,13 +20,13 @@ function loadFields()
         data: dados,
         url: '/index.php/seracademico/graduacao/curriculo/getLoadFields',
         datatype: 'json'
-    }).done(function (retorno) {
+    }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
-        if(retorno) {
+        if(retorno['graduacao\\disciplina'].length > 0) {
             builderHtmlFields(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
-            swal(retorno.msg, "Click no botão abaixo!", "error");
+            swal("Desculpe não existe disciplinas disponíveis", "Click no botão abaixo!", "error");
             $('#modal-inserir-adicinar-disciplina').modal('toggle');
         }
     });
@@ -45,12 +45,6 @@ function builderHtmlFields (dados) {
     var htmlPreDisciplina4 = "<option value=''>Selecione uma disciplina</option>";
     var htmlPreDisciplina5 = "<option value=''>Selecione uma disciplina</option>";
     var htmlCoDisciplina1  = "<option value=''>Selecione uma disciplina</option>";
-
-    // validado as disciplinas do currículo
-    if(dados['graduacao\\disciplina'].length == 0) {
-        swal("Desculpe não existe disciplinas disponíveis", "Click no botão abaixo!", "error");
-        return;
-    }
 
     // Percorrendo o array de disciplinacurriculo
     for(var i = 0; i < dados['graduacao\\disciplina'].length; i++) {
@@ -104,11 +98,16 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
     var co_disciplina    = [];
 
     $(dom_pre_discip).each(function (index) {
-        pre_disciplina[index] = $(this).val();
+        if($(this).val() != "") {
+            pre_disciplina[index] = $(this).val();
+        }
+
     });
 
     $(dom_co_discip).each(function (index) {
-        co_disciplina[index] = $(this).val();
+        if($(this).val() != "") {
+            co_disciplina[index] = $(this).val();
+        }
     });
 
     var dados = {
@@ -127,7 +126,7 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
     }).done(function (retorno) {
         if(retorno.success) {
             tableAdicionarDisciplina.load();
-            loadFields();
+            $('#modal-inserir-adicionar-disciplina').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
