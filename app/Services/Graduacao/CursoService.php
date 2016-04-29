@@ -46,7 +46,7 @@ class CursoService
     public function store(array $data) : Curso
     {
         # setando o nível do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
+        $data['tipo_nivel_sistema_id'] = 1;
 
         #Salvando o registro pincipal
         $curso =  $this->repository->create($data);
@@ -68,7 +68,7 @@ class CursoService
     public function update(array $data, int $id) : Curso
     {
         # setando o nível do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
+        $data['tipo_nivel_sistema_id'] = 1;
 
         #Atualizando no banco de dados
         $curso = $this->repository->update($data, $id);
