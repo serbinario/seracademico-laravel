@@ -61,6 +61,7 @@
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
+            order: [[ 1, "asc" ]],
             ajax: "{!! route('seracademico.biblioteca.gridAcervo') !!}",
             columns: [
                 {data: 'id', name: 'id'},
