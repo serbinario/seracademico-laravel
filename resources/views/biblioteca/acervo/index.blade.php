@@ -37,6 +37,9 @@
                                 <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Cutter</th>
+                                <th>CDD</th>
+                                <th>Qtd Exemplar</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -45,6 +48,9 @@
                                 <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Cutter</th>
+                                <th>CDD</th>
+                                <th>Qtd Exemplar</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -64,9 +70,12 @@
             order: [[ 1, "asc" ]],
             ajax: "{!! route('seracademico.biblioteca.gridAcervo') !!}",
             columns: [
-                {data: 'id', name: 'id'},
-                {data: 'titulo', name: 'titulo'},
-                {data: 'subtitulo', name: 'subtitulo'},
+                {data: 'id', name: 'bib_arcevos.id'},
+                {data: 'titulo', name: 'bib_arcevos.titulo'},
+                {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
+                {data: 'cutter', name: 'bib_arcevos.cutter'},
+                {data: 'cdd', name: 'bib_arcevos.cdd'},
+                {data: 'qtd_exemplares', name: 'qtd_exemplares'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
