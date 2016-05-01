@@ -45,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
             #retorno
             return false;
         });
+
+        Validator::extend('serbinario_unique', '\\Seracademico\\Providers\\Validators\\UniqueValidator@validate');
     }
 
     /**
