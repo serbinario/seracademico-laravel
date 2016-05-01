@@ -13,7 +13,12 @@ function loadTableAdicionarDisciplina (idCurriculo) {
         ajax: "/index.php/seracademico/graduacao/curriculo/gridByCurriculo/" + idCurriculo,
         columns: [
             {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
             {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
+            {data: 'carga_horaria_pratica', name: 'fac_disciplinas.carga_horaria_pratica'},
+            {data: 'carga_horaria_teorica', name: 'fac_disciplinas.carga_horaria_teorica'},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
             {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

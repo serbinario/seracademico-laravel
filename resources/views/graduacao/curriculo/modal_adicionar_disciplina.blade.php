@@ -14,7 +14,12 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th style="width: 5%;">Período</th>
                                     <th style="width: 5%;">Qtd. Faltas</th>
+                                    <th style="width: 5%;">CH. Total</th>
+                                    <th style="width: 5%;">CH. Prática</th>
+                                    <th style="width: 5%;">CH. Teórica</th>
+                                    <th style="width: 5%;">Crédito</th>
                                     <th style="width: 10%;">Tipo da disciplina</th>
                                     <th >Acão</th>
                                 </tr>
@@ -23,9 +28,14 @@
                                 <tfoot>
                                 <tr>
                                     <th>Nome</th>
+                                    <th style="width: 5%;">Período</th>
                                     <th style="width: 5%;">Qtd. Faltas</th>
+                                    <th style="width: 5%;">CH. Total</th>
+                                    <th style="width: 5%;">CH. Prática</th>
+                                    <th style="width: 5%;">CH. Teórica</th>
+                                    <th style="width: 5%;">Crédito</th>
                                     <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th style="width: 5%;">Acão</th>
+                                    <th >Acão</th>
                                 </tr>
                                 </tfoot>
                             </table>
