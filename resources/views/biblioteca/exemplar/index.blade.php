@@ -35,6 +35,7 @@
                             <thead>
                             <tr>
                                 <th>Título</th>
+                                <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
@@ -45,6 +46,7 @@
                             <tfoot>
                             <tr>
                                 <th>Título</th>
+                                <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
@@ -67,11 +69,24 @@
             ajax: "{!! route('seracademico.biblioteca.gridExemplar') !!}",
             columns: [
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
+                {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        $(document).on('click', 'a.excluir', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
         });
     </script>
 @stop

@@ -142,6 +142,14 @@
                     </ul>
                 </li>
                 @endrole
+
+                <li>
+                    <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Dashboards</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.biblioteca.dashboardBliblioteca') }}"><i class="material-icons">perm_identity</i> Dashboard Biblioteca</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -218,6 +226,7 @@
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 

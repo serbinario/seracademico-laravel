@@ -28,6 +28,7 @@
                     @endforeach
                 </div>
             @endif
+
             {!! Form::open(['route'=>'seracademico.biblioteca.storeEditora', 'method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormEditora')
             {!! Form::close() !!}

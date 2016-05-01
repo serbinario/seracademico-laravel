@@ -69,6 +69,23 @@ class ExemplarService
     }
 
     /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function countExemplar()
+    {
+        $exemplar = $this->repository->all();
+
+        #Verificando se o registro foi encontrado
+        if(!$exemplar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $exemplar;
+    }
+
+    /**
      * @param array $data
      * @return array
      */

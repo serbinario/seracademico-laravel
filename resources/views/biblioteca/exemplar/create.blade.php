@@ -44,14 +44,31 @@
             var  data2 = '{{$data}}';
             $('.data2').val(data2);
 
+            function formatRepo2(repo) {
+                if (repo.loading) return repo.text;
+
+                var markup = '<option value="' + repo.id + '"><b>' + repo.titulo + '</b><br />'+ repo.subtitulo +'</option>';
+                return markup;
+            }
+
+            function formatRepoSelection2(repo) {
+
+                return repo.titulo || repo.text
+            }
+
             //consulta via select2 segunda entrada 1
             $("#obra").select2({
                 placeholder: 'Selecione uma obra',
                 minimumInputLength: 3,
                 width: 400,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                templateResult: formatRepo2,
+                templateSelection: formatRepoSelection2,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.select2Obra')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,

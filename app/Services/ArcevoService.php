@@ -75,6 +75,23 @@ class ArcevoService
     }
 
     /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function countAcervo()
+    {
+        $arcevo = $this->repository->all();
+
+        #Verificando se o registro foi encontrado
+        if(!$arcevo) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $arcevo;
+    }
+
+    /**
      * @param array $data
      * @return array
      */

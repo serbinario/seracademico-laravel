@@ -36,6 +36,7 @@
                             <tr>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Código</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -43,6 +44,7 @@
                             <tr>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Código</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -63,8 +65,21 @@
             columns: [
                 {data: 'titulo', name: 'titulo'},
                 {data: 'subtitulo', name: 'subtitulo'},
+                {data: 'id', name: 'id'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        $(document).on('click', 'a.excluir', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
         });
     </script>
 @stop

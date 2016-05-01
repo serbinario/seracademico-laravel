@@ -262,6 +262,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'ExemplarController@store']);
             Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'ExemplarController@update']);
             Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'ExemplarController@delete']);
+
+            Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
         });
 
         //Rotas para componentes de segurança
@@ -287,6 +289,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
             Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
+            Route::post('select2Obra', ['as' => 'select2Obra', 'uses' => 'UtilController@queryByselect2Obra']);
             Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
         });
     });

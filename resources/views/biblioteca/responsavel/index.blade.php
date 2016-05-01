@@ -70,5 +70,17 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
+        $(document).on('click', 'a.excluir', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
+        });
     </script>
 @stop

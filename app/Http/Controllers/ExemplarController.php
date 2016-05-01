@@ -69,6 +69,7 @@ class ExemplarController extends Controller
                 'bib_arcevos.titulo',
                 'bib_exemplares.edicao',
                  'bib_situacao.nome as nome_sit',
+                'bib_arcevos.subtitulo as subtitulo',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
                 );
 
@@ -81,7 +82,7 @@ class ExemplarController extends Controller
             //$obra = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
            // if(count($obra['acervo']->exemplares) == 0) {
-                $html .= '<li><a class="btn-floating" href="deleteExemplar/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
+                $html .= '<li><a class="btn-floating excluir" href="deleteExemplar/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
                             </ul>
                            </div>';
            // }
