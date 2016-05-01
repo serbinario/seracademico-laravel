@@ -59,7 +59,7 @@ class CursoController extends Controller
         $rows = \DB::table('fac_cursos')
             ->join('fac_tipo_cursos', 'fac_cursos.tipo_curso_id', '=', 'fac_tipo_cursos.id')
             ->leftJoin('sedes', 'fac_cursos.sede_id', '=', 'sedes.id')
-            ->where('fac_cursos.tipo_nivel_sistema_id', 2)
+            ->where('fac_cursos.tipo_nivel_sistema_id', 1)
             ->select([
                 'fac_cursos.id',
                 'fac_cursos.nome',

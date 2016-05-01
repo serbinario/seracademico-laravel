@@ -150,6 +150,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                Route::post('getLoadFields', ['as' => 'grid', 'uses' => 'Graduacao\CurriculoController@getLoadFields']);
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\CurriculoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\CurriculoController@grid']);
                 Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Graduacao\CurriculoController@gridByCurriculo']);
@@ -157,8 +158,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CurriculoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@update']);
-                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'Graduacao\CurriculoController@adicionarDisciplinas']);
-                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Graduacao\CurriculoController@removerDisciplina']);
+
+                Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CurriculoController@disciplinaStore']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\CurriculoController@disciplinaDelete']);
+                });
+
             });
         });
 
