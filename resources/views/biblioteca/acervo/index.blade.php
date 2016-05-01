@@ -34,17 +34,17 @@
                         <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
-                                <th>Código</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
-                                <th>Código</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -63,9 +63,9 @@
             serverSide: true,
             ajax: "{!! route('seracademico.biblioteca.gridAcervo') !!}",
             columns: [
+                {data: 'id', name: 'id'},
                 {data: 'titulo', name: 'titulo'},
                 {data: 'subtitulo', name: 'subtitulo'},
-                {data: 'id', name: 'id'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -62,7 +62,7 @@ class ArcevoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('bib_arcevos')->select(['id', 'titulo', 'subtitulo']);
+        $rows = \DB::table('bib_arcevos')->select(['id', 'titulo', 'subtitulo'])->orderBy('titulo', 'asc');
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
