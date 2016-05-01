@@ -63,7 +63,7 @@ class ResponsavelController extends Controller
             $reponsavel = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
             if(count($reponsavel->autores) == 0 && count($reponsavel->outros) == 0) {
-                $html .= '<li><a class="btn-floating" href="deleteResponsavel/'.$row->id.'" title="Excluir responsável"><i class="material-icons">delete</i></a></li>
+                $html .= '<li><a class="btn-floating excluir" href="deleteResponsavel/'.$row->id.'" title="Excluir responsável"><i class="material-icons">delete</i></a></li>
                             </ul>
                            </div>';
             }

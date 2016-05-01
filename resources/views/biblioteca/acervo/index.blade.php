@@ -34,6 +34,7 @@
                         <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
                                 <th >Acão</th>
@@ -41,6 +42,7 @@
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
                                 <th style="width: 5%;">Acão</th>
@@ -59,12 +61,26 @@
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
+            order: [[ 1, "asc" ]],
             ajax: "{!! route('seracademico.biblioteca.gridAcervo') !!}",
             columns: [
+                {data: 'id', name: 'id'},
                 {data: 'titulo', name: 'titulo'},
                 {data: 'subtitulo', name: 'subtitulo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        $(document).on('click', 'a.excluir', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            bootbox.confirm("Tem certeza da exclusão do item?", function (result) {
+                if (result) {
+                    location.href = url
+                } else {
+                    false;
+                }
+            });
         });
     </script>
 @stop

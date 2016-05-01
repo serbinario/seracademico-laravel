@@ -73,7 +73,7 @@ class ArcevoController extends Controller
             $obra = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
             if(count($obra['acervo']->exemplares) == 0) {
-                $html .= '<li><a class="btn-floating" href="deleteAcervo/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
+                $html .= '<li><a class="btn-floating excluir" href="deleteAcervo/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
                             </ul>
                            </div>';
             }

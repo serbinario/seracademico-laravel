@@ -58,7 +58,7 @@
             //consulta via select2 segunda entrada 1
             $("#autor-1").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
@@ -103,7 +103,7 @@
             //consulta via select2 segunda entrada 2
             $("#autor-2").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
@@ -148,7 +148,7 @@
             //consulta via select2 segunda entrada 3
             $("#autor-3").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
@@ -194,7 +194,7 @@
             //consulta via select2 segunda entrada 1
             $("#responsavel-1").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
@@ -239,7 +239,7 @@
             //consulta via select2 segunda entrada 2
             $("#responsavel-2").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
@@ -284,7 +284,7 @@
             //consulta via select2 segunda entrada 3
             $("#responsavel-3").select2({
                 placeholder: 'Selecione um responsável',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },

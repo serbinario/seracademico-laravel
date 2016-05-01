@@ -13,4 +13,6 @@ class DefaultController extends Controller
     {
         return view('default.index');
     }
+    
+    
 }
