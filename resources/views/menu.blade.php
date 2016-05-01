@@ -141,8 +141,6 @@
                         <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="material-icons">receipt</i> Exemplar</a></li>
                     </ul>
                 </li>
-                @endrole
-
                 <li>
                     <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Dashboards</span> <span
                                 class="fa arrow"></span></a>
@@ -150,6 +148,7 @@
                         <li><a href="{{ route('seracademico.biblioteca.dashboardBliblioteca') }}"><i class="material-icons">perm_identity</i> Dashboard Biblioteca</a></li>
                     </ul>
                 </li>
+                @endrole
             </ul>
         </div>
     </nav>
