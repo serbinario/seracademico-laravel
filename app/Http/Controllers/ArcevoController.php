@@ -61,16 +61,21 @@ class ArcevoController extends Controller
      */
     public function grid()
     {
+        # subquery
+        $subquery = \DB::table('bib_exemplares')
+            ->where('bib_arcevos.id', 'bib_exemplares.arcevos_id')
+            ->select([
+                \DB::raw('count(*)')
+            ]);
+
         #Criando a consulta
         $rows = \DB::table('bib_arcevos')
-            ->leftJoin('bib_exemplares', 'bib_exemplares.arcevos_id', "=" , 'bib_arcevos.id')
             ->select([
             'bib_arcevos.id',
             'bib_arcevos.titulo',
             'bib_arcevos.subtitulo',
             'bib_arcevos.cutter',
             'bib_arcevos.cdd',
-            \DB::raw("count(bib_exemplares.id) as qtd_exemplares")
             ]);
 
         #Editando a grid
