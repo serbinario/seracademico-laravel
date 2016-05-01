@@ -59,7 +59,7 @@
             //consulta via select2 segunda entrada 1
             $("#obra").select2({
                 placeholder: 'Selecione uma obra',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 width: 400,
                 escapeMarkup: function (markup) {
                     return markup;
@@ -105,7 +105,7 @@
             //consulta via select2 responsável
             $("#editora").select2({
                 placeholder: 'Selecione uma editora',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 width: 400,
                 ajax: {
                     type: 'POST',
@@ -158,7 +158,7 @@
             //consulta via select2 segunda entrada 1
             $("#responsavel").select2({
                 placeholder: 'Selecione um editor',
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 escapeMarkup: function (markup) {
                     return markup;
                 },
