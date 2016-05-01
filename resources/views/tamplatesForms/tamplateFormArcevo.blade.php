@@ -24,11 +24,12 @@
                             {!! Form::text('titulo', Session::getOldInput('titulo') , array('class' => 'form-control')) !!}
                         </div>
                     </div>
-
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('subtitulo', 'Subtítulo') !!}
-                            {!! Form::text('subtitulo', Session::getOldInput('subtitulo') , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('subtitulo', Session::getOldInput('subtitulo') , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                 </div>
@@ -37,6 +38,24 @@
                         <div class="form-group">
                             {!! Form::label('assunto', 'Assunto') !!}
                             {!! Form::text('assunto', Session::getOldInput('assunto') , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('cursos', 'Cursos') !!}
+                            {{--{{dd($model->cursos->lists('id')->all())}}--}}
+                            @if(isset($model->id))
+                                <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
+                                    @foreach($loadFields['curso'] as $key => $value)
+                                        <option value="{{$key}}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                {!! Form::select('cursos[]', $loadFields['curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -93,22 +112,6 @@
                         <div class="form-group">
                             {!! Form::label('corredor_id', 'Corredor') !!}
                             {!! Form::select('corredor_id', (["" => "Selecione o corredor"] + $loadFields['corredor']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('cursos', 'Cursos') !!}
-                            {{--{{dd($model->cursos->lists('id')->all())}}--}}
-                            @if(isset($model->id))
-                                <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
-                                    @foreach($loadFields['curso'] as $key => $value)
-                                        <option value="{{$key}}"
-                                                @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
-                                    @endforeach
-                                </select>
-                            @else
-                                {!! Form::select('cursos[]', $loadFields['curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
-                            @endif
                         </div>
                     </div>
                     <div class="col-md-4">
