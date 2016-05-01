@@ -29,7 +29,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('subtitulo', 'Subtítulo') !!}
-                            {!! Form::textarea('subtitulo', Session::getOldInput('subtitulo') , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('subtitulo', Session::getOldInput('subtitulo') , ['size' => '55x5'], array('class' => 'form-control')) !!}
                         </div>
                     </div>
                 </div>
