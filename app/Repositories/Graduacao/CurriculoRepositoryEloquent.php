@@ -46,6 +46,7 @@ class CurriculoRepositoryEloquent extends BaseRepository implements CurriculoRep
     }
 
     /**
+     * 
      * @param $cursoId
      * @return mixed
      */
