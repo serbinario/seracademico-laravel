@@ -47,7 +47,7 @@
             function formatRepo2(repo) {
                 if (repo.loading) return repo.text;
 
-                var markup = '<option value="' + repo.id + '"><b>' + repo.titulo + '</b><br />'+ repo.subtitulo +'</option>';
+                var markup = '<option value="' + repo.id + '"><b>' + repo.id + repo.titulo + '</b><br />'+ repo.subtitulo +'</option>';
                 return markup;
             }
 
