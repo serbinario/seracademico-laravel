@@ -63,17 +63,12 @@ class ArcevoController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('bib_arcevos')
-            ->distinct()
-            ->join(\DB::raw('(SELECT arcevos_id, count(*) as qtd_exemplares FROM bib_exemplares)exemplares'), function ($join) {
-                $join->on('exemplares.arcevos_id', '=', 'bib_arcevos.id');
-            })
             ->select([
             'bib_arcevos.id',
             'bib_arcevos.titulo',
             'bib_arcevos.subtitulo',
             'bib_arcevos.cutter',
             'bib_arcevos.cdd',
-            'exemplares.qtd_exemplares'
             ]);
 
         #Editando a grid

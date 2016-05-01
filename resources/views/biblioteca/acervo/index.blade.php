@@ -39,7 +39,6 @@
                                 <th>Subtítulo</th>
                                 <th>Cutter</th>
                                 <th>CDD</th>
-                                <th>Qtd. Exemplares</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -50,7 +49,6 @@
                                 <th>Subtítulo</th>
                                 <th>Cutter</th>
                                 <th>CDD</th>
-                                <th>Qtd. Exemplares</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -75,7 +73,6 @@
                 {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'cutter', name: 'bib_arcevos.cutter'},
                 {data: 'cdd', name: 'bib_arcevos.cdd'},
-                {data: 'qtd_exemplares', name: 'exemplares.qtd_exemplares'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
