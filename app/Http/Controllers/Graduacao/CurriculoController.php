@@ -131,7 +131,7 @@ class CurriculoController extends Controller
 
             # Verifica a se a condição é válida
             if($boolReturn) {
-                $html .= '<a href="#" id="removeGraduacaoDisciplina" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
+                $html .= '<a href="#" id="removeGraduacaoDisciplina" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # retorno
