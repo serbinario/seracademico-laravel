@@ -69,8 +69,9 @@ class ArcevoController extends Controller
             'bib_arcevos.titulo',
             'bib_arcevos.subtitulo',
             'bib_arcevos.cutter',
-            'bib_arcevos.cdd'])
-            ->selectRaw("count(bib_exemplares.id) as qtd_exemplares");
+            'bib_arcevos.cdd',
+            \DB::raw("count(bib_exemplares.id) as qtd_exemplares")
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
