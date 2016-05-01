@@ -34,7 +34,7 @@
                         <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Título</th>
+                                <th>Obra - Título</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
@@ -45,7 +45,7 @@
 
                             <tfoot>
                             <tr>
-                                <th>Título</th>
+                                <th>Obra - Título</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>

@@ -2,10 +2,9 @@
     <div class="col-md-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#dado" aria-controls="dado" role="tab" data-toggle="tab">Dados
-                    Principais</a></li>
-            <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Informação
-                    adicional</a></li>
+            <li role="presentation" class="active"><a href="#dado" aria-controls="dado" role="tab" data-toggle="tab">Dados Principais</a></li>
+            <li role="presentation"><a href="#publicacao" aria-controls="outros" role="tab" data-toggle="tab">Publicação</a></li>
+            <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Informação adicional</a></li>
             <li role="presentation"><a href="#aquisicao" aria-controls="aquisicao" role="tab" data-toggle="tab">Aquisição</a>
             </li>
         </ul>
@@ -22,52 +21,22 @@
                             {!! Form::select('arcevos_id',(["" => "Selecione uma obra"] + $acervo['arcevo']->toArray()), Session::getOldInput('arcevos_id'), array('class' => 'form-control', "id" => 'obra')) !!}
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('ano', 'Ano') !!}
-                            {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control numberFor')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('editoras_id', 'Editora') !!}
-                            {!! Form::select('editoras_id',(["" => "Selecione uma editora"] + $loadFields['editora']->toArray()), Session::getOldInput('editoras_id'), array('class' => 'form-control', "id" => 'editora')) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('edicao', 'Edição') !!}
-                            {!! Form::text('edicao', Session::getOldInput('edicao')  , array('class' => 'form-control numberFive')) !!}
-                        </div>
-                    </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             {!! Form::label('responsaveis_id', 'Editor') !!}
                             {!! Form::select('responsaveis_id', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), Session::getOldInput('responsaveis_id'), array('class' => 'form-control', "id" => 'responsavel')) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+
+                    <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('local', 'Local') !!}
-                            {!! Form::text('local', Session::getOldInput('local')  , array('class' => 'form-control')) !!}
+                            {!! Form::label('isbn', 'ISBN') !!}
+                            {!! Form::text('isbn', Session::getOldInput('isbn')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
+
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('emprestimo_id', 'Emprestimo') !!}
-                            {!! Form::select('emprestimo_id', $loadFields['emprestimo'], Session::getOldInput('emprestimo_id'), array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('situacao_id', 'Situação') !!}
-                            {!! Form::select('situacao_id', $loadFields['situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
@@ -75,12 +44,7 @@
                             {!! Form::text('codigo_barra', Session::getOldInput('codigo_barra')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('isbn', 'ISBN') !!}
-                            {!! Form::text('isbn', Session::getOldInput('isbn')  , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
+
                     @if(!isset($model->id))
                         <div class="col-md-3">
                             <div class="form-group">
@@ -102,6 +66,20 @@
                             </div>
                         </div>
                     @endif
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('emprestimo_id', 'Emprestimo') !!}
+                            {!! Form::select('emprestimo_id', $loadFields['emprestimo'], Session::getOldInput('emprestimo_id'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('situacao_id', 'Situação') !!}
+                            {!! Form::select('situacao_id', $loadFields['situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+
                     <div class="col-md-5">
                         <div class="btn-group">
                             <div class="btn-group">
@@ -170,6 +148,43 @@
                 </div>
             </div>
             <!-- FIM Aba Outros -->
+
+            <!-- Aba Publicacao -->
+            <div role="tabpanel" class="tab-pane" id="publicacao">
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('ano', 'Ano') !!}
+                            {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control numberFor')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('edicao', 'Número da Edição') !!}
+                            {!! Form::text('edicao', Session::getOldInput('edicao')  , array('class' => 'form-control numberFive')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('editoras_id', 'Editora') !!}
+                            {!! Form::select('editoras_id',(["" => "Selecione uma editora"] + $loadFields['editora']->toArray()), Session::getOldInput('editoras_id'), array('class' => 'form-control', "id" => 'editora')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('local', 'Local') !!}
+                            {!! Form::text('local', Session::getOldInput('local')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM Aba Publicacao -->
 
             <!-- Aba Aquisição -->
             <div role="tabpanel" class="tab-pane" id="aquisicao">
