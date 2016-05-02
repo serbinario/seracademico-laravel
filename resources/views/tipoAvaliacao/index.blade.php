@@ -30,7 +30,7 @@
 
                             <tfoot>
                             <tr>
-                                <th>Código</th>
+                                <th style="width: 5%;">Código</th>
                                 <th>Nome</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
