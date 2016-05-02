@@ -109,6 +109,7 @@ return [
     'attributes' => [],
 
     'alpha_spaces'     => 'The :attribute may only contain letters and spaces.',
+    'serbinario_unique' => 'The :attribute has already been taken.',
 
 
 

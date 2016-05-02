@@ -30,9 +30,6 @@
                         <div class="form-group">
                             {!! Form::label('subtitulo', 'Subtítulo') !!}
                             {!! Form::textarea('subtitulo', Session::getOldInput('subtitulo') , ['size' => '120x5'], array('class' => 'form-control')) !!}
-
-
-
                         </div>
                     </div>
                 </div>

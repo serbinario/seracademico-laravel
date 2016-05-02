@@ -21,8 +21,9 @@ class DisciplinaValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            
-			'nome' =>  'required|max:200|unique:fac_disciplinas,nome',
+
+			//'nome' =>  'required|max:200|unique:fac_disciplinas,nome',
+			'nome' =>  'required|max:200',
 			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo,NULL,NULL,tipo_nivel_sistema_id,1',
 			'carga_horaria' => 'digits_between:1,5|numeric' ,
 			'carga_horaria_teorica' => 'digits_between:1,5|numeric' ,
@@ -35,8 +36,9 @@ class DisciplinaValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-			'nome' =>  'required|max:200|unique:fac_disciplinas,nome,:id',
-			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo,:id,id,tipo_nivel_sistema_id,1',
+			//'nome' =>  'required|max:200|unique:fac_disciplinas,nome,:id',
+			'nome' =>  'required|max:200',
+			'codigo' => 'required|max:15|serbinario_unique:fac_disciplinas,codigo,id,:id,tipo_nivel_sistema_id,1',
 			'carga_horaria' => 'digits_between:1,5|numeric' ,
 			'carga_horaria_teorica' => 'digits_between:1,5|numeric' ,
 			'carga_horaria_pratica' => 'digits_between:1,5|numeric' ,
