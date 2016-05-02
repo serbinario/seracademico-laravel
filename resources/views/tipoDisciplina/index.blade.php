@@ -18,6 +18,7 @@
                         <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
                                 <th>Acão</th>
                             </tr>
@@ -25,8 +26,9 @@
 
                             <tfoot>
                             <tr>
+                                <th style="width: 5%" >Código</th>
                                 <th>Nome</th>
-                                <th style="width: 5%;">Acão</th>
+                                <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -43,8 +45,10 @@
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
+
             ajax: "{!! route('seracademico.tipoDisciplina.grid') !!}",
             columns: [
+                {data: 'codigo', name: 'codigo'},
                 {data: 'nome', name: 'nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
