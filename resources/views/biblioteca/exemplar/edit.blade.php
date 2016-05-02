@@ -48,7 +48,7 @@
             function formatRepo2(repo) {
                 if (repo.loading) return repo.text;
 
-                var markup = '<option value="' + repo.id + '"><b>' + repo.id + repo.titulo + '</b><br />'+ repo.subtitulo +'</option>';
+                var markup = '<option value="' + repo.id + '"><b>' + repo.id + ' - '+ repo.titulo + '</b><br />'+ repo.subtitulo +'</option>';
                 return markup;
             }
 
@@ -62,6 +62,9 @@
                 placeholder: 'Selecione uma obra',
                 minimumInputLength: 1,
                 width: 400,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
                 templateResult: formatRepo2,
                 templateSelection: formatRepoSelection2,
                 ajax: {
