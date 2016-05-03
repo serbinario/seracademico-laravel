@@ -341,6 +341,7 @@ class CurriculoController extends Controller
             $pivot['qtd_credito']            = $model['model']->qtd_credito;
             $pivot['qtd_faltas']             = $model['model']->qtd_faltas;
             $pivot['nomeDisciplina']         = $model['nomeDisciplina'];
+            $pivot['codigoDisciplina']       = $model['codigoDisciplina'];
             $pivot['disciplina_id']          = $model['model']->disciplina_id;
             $pivot['carga_horaria_total']    = $model['model']->carga_horaria_total;
             $pivot['carga_horaria_teorica']  = $model['model']->carga_horaria_teorica;

@@ -50,7 +50,7 @@ class Disciplina extends Model implements Transformable
 	public function scopeUniqueDisciplina($query, $value)
 	{
 		return $query
-            ->select(['fac_disciplinas.id', 'fac_disciplinas.nome'])
+            ->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
 			->whereNotIn('fac_disciplinas.id', function ($query) use ($value) {
                 $query->from('fac_curriculo_disciplina')
                     ->select('fac_curriculo_disciplina.disciplina_id')
@@ -67,6 +67,6 @@ class Disciplina extends Model implements Transformable
      */
     public function scopeTipoNivelSistema($query, $value)
     {
-        return $query->select('id', 'nome')->where('tipo_nivel_sistema_id', $value);
+        return $query->select('id', 'nome', 'codigo')->where('tipo_nivel_sistema_id', $value);
     }
 }

@@ -10,7 +10,7 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
                             <label for="disciplina_id_editar">Disciplina</label>
                             <select name="disciplina_id_editar" class="form-control" id="disciplina_id_editar">
                             </select>

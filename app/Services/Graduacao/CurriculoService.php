@@ -133,10 +133,10 @@ class CurriculoService
             if ($ajax) {
                 if(count($expressao) > 1) {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id']);
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
                 }
             } else {
                 if(count($expressao) > 1) {
@@ -198,7 +198,11 @@ class CurriculoService
         $pivotDisciplina = $disciplina->pivot;
 
         # Retorno
-        return ['model' => $pivotDisciplina, 'nomeDisciplina' => $disciplina->nome];
+        return [
+            'model' => $pivotDisciplina,
+            'nomeDisciplina' => $disciplina->nome,
+            'codigoDisciplina' => $disciplina->codigo
+        ];
     }
 
     /**

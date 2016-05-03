@@ -54,17 +54,17 @@ function builderHtmlFields (dados) {
     // Percorrendo o array de disciplinacurriculo
     for(var i = 0; i < dados['graduacao\\disciplina'].length; i++) {
         // Criando as options
-        htmlDisciplina     += "<option value='" + dados['graduacao\\disciplina'][i].id + "'>"  + dados['graduacao\\disciplina'][i].nome + "</option>";
+        htmlDisciplina     += "<option value='" + dados['graduacao\\disciplina'][i].id + "'>"  + dados['graduacao\\disciplina'][i].codigo + " : " + dados['graduacao\\disciplina'][i].nome + "</option>";
     }
 
     // Percorrendo o array de disciplinadefault
     for (var i = 0; i < dados['disciplinadefault'].length; i++) {
-        htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
         htmlPreDisciplina3 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-        htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+        htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+        htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de período

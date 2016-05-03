@@ -55,12 +55,12 @@ function builderHtmlFieldsEditar (dados) {
 
             // Percorrendo o array de disciplinadefault
             for (var i = 0; i < dados['disciplinadefault'].length; i++) {
-                htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-                htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-                htmlPreDisciplina3 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-                htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-                htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-                htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
+                htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+                htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+                htmlPreDisciplina3 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+                htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+                htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
+                htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
             }
 
             $("#pre_disciplina_1_editar option").remove();
@@ -82,7 +82,7 @@ function builderHtmlFieldsEditar (dados) {
             $("#co_disciplina_1_editar").append(htmlCoDisciplina1);
 
             // Setando os valores do model no formulário
-            $('#disciplina_id_editar').html('<option value="' + retorno.data.disciplina_id + '">' + retorno.data.nomeDisciplina + '</option>');
+            $('#disciplina_id_editar').html('<option value="' + retorno.data.disciplina_id + '">'  + retorno.data.codigoDisciplina + " : " + retorno.data.nomeDisciplina + '</option>');
             $('#periodo_editar option[value=' + retorno.data.periodo + ']').attr('selected', true);
             $('#carga_horaria_total_editar').val(retorno.data.carga_horaria_total);
             $('#carga_horaria_teorica_editar').val(retorno.data.carga_horaria_teorica);
