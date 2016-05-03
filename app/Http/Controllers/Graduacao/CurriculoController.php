@@ -96,6 +96,7 @@ class CurriculoController extends Controller
             ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->leftJoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
             ->select([
+                    'fac_curriculo_disciplina.id as idCurriculoDisciplina',
                     'fac_curriculos.id as idCurriculo',
                     'fac_disciplinas.id',
                     'fac_disciplinas.nome',
@@ -113,7 +114,7 @@ class CurriculoController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # variáveis de uso
-            $html       = '';
+            $html       = '<a class="btn-floating indigo" id="editarAdicionarDisicplina" title="Editar Currículo"><i class="material-icons">edit</i></a>';
             $curriculo  = $this->service->find($row->idCurriculo);
             $tumas      = $curriculo->turmas;
             $boolReturn = true;
@@ -317,6 +318,57 @@ class CurriculoController extends Controller
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Remoção realizada com sucesso"]);
         } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function disciplinaEdit($idDisciplina, $idCurriculo)
+    {
+        try {
+            # Recuperando a empresa
+            $model = $this->service->disciplinaFind($idDisciplina, $idCurriculo);
+
+            # Array de retorno
+            $pivot = [];
+
+            # Preenchendo o array de retorno
+            $pivot['nomeDisciplina'] = $model['nomeDisciplina'];
+            $pivot['disciplina_id']   = $model['model']->disciplina_id;
+            $pivot['periodo']        = $model['model']->periodo;
+            $pivot['preRequisitos']  = $model['model']->disciplinasPreRequisitos;
+            $pivot['cosRequisitos']  = $model['model']->disciplinasCoRequisitos;
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $pivot]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function disciplinaUpdate(Request $request, $idDisciplina, $idCurriculo)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Validando a requisição
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            #Executando a ação
+            $this->service->disciplinaUpdate($idDisciplina, $idCurriculo, $data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Edição realizada com sucesso"]);
+            // } catch (ValidatorException $e) {
+            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }

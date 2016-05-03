@@ -7,6 +7,7 @@ use Seracademico\Repositories\Graduacao\CurriculoRepository;
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Repositories\Graduacao\CursoRepository;
 use Seracademico\Repositories\Graduacao\DisciplinaRepository;
+use Seracademico\Repositories\Graduacao\PivotCurriculoDisciplinaRepository;
 
 class CurriculoService
 {
@@ -23,9 +24,11 @@ class CurriculoService
     /**
      * @param CurriculoRepository $repository
      * @param DisciplinaRepository $disciplinaRepository
-     * @param CursoRepository $cursoRepository
+     * @param PivotCurriculoDisciplinaRepository $pivotCurriculoDisciplinaRepository
      */
-    public function __construct(CurriculoRepository $repository, DisciplinaRepository $disciplinaRepository)
+    public function __construct(
+        CurriculoRepository $repository,
+        DisciplinaRepository $disciplinaRepository)
     {
         $this->repository           = $repository;
         $this->disciplinaRepository = $disciplinaRepository;
@@ -99,73 +102,6 @@ class CurriculoService
         return $curriculo;
     }
 
-    /**
-     * @param array $data
-     * @return bool|\Exception
-     */
-    public function adicionarDisciplinas(array $data)
-    {
-        #Validando os parametros de entrada
-        if(!isset($data['idCurriculo']) && !isset($data['idDisciplinas'])) {
-            return new \Exception("Parâmetros inválidos");
-        }
-
-        #Recuperando a entidade
-        $curriculo = $this->repository->find($data['idCurriculo']);
-
-        #Percorrendo os id das disciplinas
-        foreach($data['idDisciplinas'] as $id) {
-            #Recuperando a entidade
-            $disciplina = $this->disciplinaRepository->find($id);
-
-            #Válidando a disciplina
-            if(!$disciplina) {
-                return new \Exception("Disciplina não existe");
-            }
-
-            #Adicionando a entidade principal
-            $curriculo->disciplinas()->attach($disciplina->id);
-        }
-
-        #Salvando as adições
-        $curriculo->save();
-
-        #Retorno
-        return true;
-    }
-
-    /**
-     * @param array $data
-     * @return bool|\Exception
-     */
-    public function removerDisciplina(array $data)
-    {
-        #Validando os parametros de entrada
-        if(!isset($data['idCurriculo']) && !isset($data['idDisciplina'])) {
-            return new \Exception("Parâmetros inválidos");
-        }
-
-        #Recuperando a entidade
-        $curriculo = $this->repository->find($data['idCurriculo']);
-
-        #Recuperando a entidade
-        $disciplina = $this->disciplinaRepository->find($data['idDisciplina']);
-
-        #Válidando a disciplina
-        if(!$disciplina) {
-            return new \Exception("Disciplina não existe");
-        }
-
-        #Adicionando a entidade principal
-        $curriculo->disciplinas()->detach($disciplina->id);
-
-
-        #Salvando as adições
-        $curriculo->save();
-
-        #Retorno
-        return true;
-    }
 
     /**
      * @param array $models
@@ -245,6 +181,27 @@ class CurriculoService
     }
 
     /**
+     * @param $idCurriculoDisciplina
+     */
+    public function disciplinaFind($idDisciplina, $idCurriculo)
+    {
+        # Recuperando a disciplina
+        $curriculo       = $this->repository->find($idCurriculo);
+        $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
+
+        # Verificando a existência da disciplina
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Disciplina não encontrada!");
+        }
+
+        # Recuperando o pivot
+        $pivotDisciplina = $disciplina->pivot;
+
+        # Retorno
+        return ['model' => $pivotDisciplina, 'nomeDisciplina' => $disciplina->nome];
+    }
+
+    /**
      * @param array $data
      * @throws \Exception
      */
@@ -262,18 +219,25 @@ class CurriculoService
         # atrelando os valores
         $curriculo->disciplinas()->attach($objDisciplina, ['periodo' => $data['periodo']]);
 
+        # Contadores úteis
+        $countPre = 0;
+        $countCos = 0;
 
         # Varrendo o array
         foreach ($curriculo->disciplinas as $disciplina) {
             if($disciplina->id == $objDisciplina->id) {
                 # Tratamento pre disciplina
                 if(isset($data['pre_disciplina']) && count($data['pre_disciplina']) > 0) {
-                    $disciplina->pivot->disciplinasPreRequisitos()->attach($data['pre_disciplina']);
+                    foreach ($data['pre_disciplina'] as $pre) {
+                        $disciplina->pivot->disciplinasPreRequisitos()->attach($pre, ['index' => ++$countPre]);
+                    }
                 }
 
                 # Tratamento co disciplina
                 if(isset($data['co_disciplina']) && count($data['co_disciplina']) > 0) {
-                    $disciplina->pivot->disciplinasCoRequisitos()->attach($data['co_disciplina']);
+                    foreach ($data['co_disciplina'] as $cos) {
+                        $disciplina->pivot->disciplinasCoRequisitos()->attach($cos, ['index' => ++$countCos]);
+                    }
                 }
             }
         }
@@ -310,6 +274,54 @@ class CurriculoService
         $curriculo->disciplinas()->detach($disciplina->id);
 
         #Retorno
+        return true;
+    }
+
+    /**
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function disciplinaUpdate($idDisciplina, $idCurriculo, $data)
+    {
+        # Recuperando a disciplina
+        $curriculo       = $this->repository->find($idCurriculo);
+        $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
+        
+        # Verificando a existência da disciplina
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Disciplina não encontrada!");
+        }
+
+        # Processo de atualização do pivot
+        $disciplina->pivot->periodo = $data['periodo'];
+        $disciplina->pivot->disciplinasPreRequisitos()->detach();
+        $disciplina->pivot->disciplinasCoRequisitos()->detach();
+
+        # Contadores úteis
+        $countPre = 0;
+        $countCos = 0;
+
+        # Cadastrando as disciplinas de prerequisitos
+        if(isset($data['pre_disciplina']) && count($data['pre_disciplina']) > 0) {
+            foreach ($data['pre_disciplina'] as $pre) {
+                $disciplina->pivot->disciplinasPreRequisitos()->attach($pre, ['index' => ++$countPre]);
+            }
+        }
+
+        # Cadastrando as disciplinas de costrquisitos
+        if(isset($data['co_disciplina']) && count($data['co_disciplina']) > 0) {
+            foreach ($data['co_disciplina'] as $cos) {
+                $disciplina->pivot->disciplinasCoRequisitos()->attach($cos, ['index' => ++$countCos]);
+            }
+        }
+
+        #Salvando mudanças
+        $disciplina->pivot->save();
+
+        #retorno
         return true;
     }
 }

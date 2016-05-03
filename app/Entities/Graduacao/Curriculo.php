@@ -44,7 +44,7 @@ class Curriculo extends Model implements Transformable
      */
     public function disciplinas()
     {
-        return $this->belongsToMany(Disciplina::class, 'fac_curriculo_disciplina', 'curriculo_id', 'disciplina_id')->withPivot(['id', 'periodo']);
+        return $this->belongsToMany(Disciplina::class, 'fac_curriculo_disciplina', 'curriculo_id', 'disciplina_id')->withPivot(['id', 'periodo', 'disciplina_id']);
     }
 
     /**

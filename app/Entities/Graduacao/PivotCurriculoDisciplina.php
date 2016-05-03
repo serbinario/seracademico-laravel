@@ -30,7 +30,7 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
      */
     public function disciplinasPreRequisitos()
     {
-        return $this->belongsToMany(Disciplina::class, "fac_disciplina_pre_requisitos", "curriculo_disciplina_id", "disciplina_id");
+        return $this->belongsToMany(Disciplina::class, "fac_disciplina_pre_requisitos", "curriculo_disciplina_id", "disciplina_id")->withPivot(['index']);
     }
 
     /**
@@ -38,6 +38,6 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
      */
     public function disciplinasCoRequisitos()
     {
-        return $this->belongsToMany(Disciplina::class, "fac_disciplina_co_requisito", "curriculo_disciplina_id", "disciplina_id");
+        return $this->belongsToMany(Disciplina::class, "fac_disciplina_co_requisito", "curriculo_disciplina_id", "disciplina_id")->withPivot(['index']);
     }
 }
