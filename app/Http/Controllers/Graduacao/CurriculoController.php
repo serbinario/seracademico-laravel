@@ -100,11 +100,12 @@ class CurriculoController extends Controller
                     'fac_curriculos.id as idCurriculo',
                     'fac_disciplinas.id',
                     'fac_disciplinas.nome',
+                    'fac_disciplinas.codigo',
                     'fac_disciplinas.qtd_falta',
                     'fac_curriculo_disciplina.periodo',
-                    'fac_disciplinas.carga_horaria',
-                    'fac_disciplinas.carga_horaria_pratica',
-                    'fac_disciplinas.carga_horaria_teorica',
+                    'fac_curriculo_disciplina.carga_horaria_total',
+                    'fac_curriculo_disciplina.carga_horaria_pratica',
+                    'fac_curriculo_disciplina.carga_horaria_teorica',
                     'fac_disciplinas.qtd_credito',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
@@ -336,11 +337,14 @@ class CurriculoController extends Controller
             $pivot = [];
 
             # Preenchendo o array de retorno
-            $pivot['nomeDisciplina'] = $model['nomeDisciplina'];
-            $pivot['disciplina_id']   = $model['model']->disciplina_id;
-            $pivot['periodo']        = $model['model']->periodo;
-            $pivot['preRequisitos']  = $model['model']->disciplinasPreRequisitos;
-            $pivot['cosRequisitos']  = $model['model']->disciplinasCoRequisitos;
+            $pivot['nomeDisciplina']         = $model['nomeDisciplina'];
+            $pivot['disciplina_id']          = $model['model']->disciplina_id;
+            $pivot['carga_horaria_total']    = $model['model']->carga_horaria_total;
+            $pivot['carga_horaria_teorica']  = $model['model']->carga_horaria_teorica;
+            $pivot['carga_horaria_pratica']  = $model['model']->carga_horaria_pratica;
+            $pivot['periodo']                = $model['model']->periodo;
+            $pivot['preRequisitos']          = $model['model']->disciplinasPreRequisitos;
+            $pivot['cosRequisitos']          = $model['model']->disciplinasCoRequisitos;
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $pivot]);

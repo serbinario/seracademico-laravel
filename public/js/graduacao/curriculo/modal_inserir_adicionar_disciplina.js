@@ -36,6 +36,9 @@ function loadFields()
 function builderHtmlFields (dados) {
     // limpando os campos
     $("#periodo").find("option").eq(0).prop("selected", true);
+    $("#carga_horaria_total").val("");
+    $("#carga_horaria_teorica").val("");
+    $("#carga_horaria_pratica").val("");
 
     // Variáveis que armazenaram o html
     var htmlDisciplina     = "<option value=''>Selecione uma disciplina</option>";
@@ -90,12 +93,15 @@ function builderHtmlFields (dados) {
 
 // Evento para salvar tabela de preços
 $('#btnSalvarAdicionarDisciplina').click(function() {
-    var disciplina_id    = $("#disciplina_id").val();
-    var periodo          = $("#periodo").val();
-    var dom_pre_discip   = $("select[name='pre_disciplinas'] option:selected").toArray();
-    var dom_co_discip    = $("select[name='co_disciplinas'] option:selected").toArray();
-    var pre_disciplina   = [];
-    var co_disciplina    = [];
+    var disciplina_id         = $("#disciplina_id").val();
+    var periodo               = $("#periodo").val();
+    var carga_horaria_total   = $("#carga_horaria_total").val();
+    var carga_horaria_teorica = $("#carga_horaria_teorica").val();
+    var carga_horaria_pratica = $("#carga_horaria_pratica").val();
+    var dom_pre_discip        = $("select[name='pre_disciplinas'] option:selected").toArray();
+    var dom_co_discip         = $("select[name='co_disciplinas'] option:selected").toArray();
+    var pre_disciplina        = [];
+    var co_disciplina         = [];
 
     $(dom_pre_discip).each(function (index) {
         if($(this).val() != "") {
@@ -114,6 +120,9 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
         'curriculo_id' : idCurriculo,
         'disciplina_id': disciplina_id,
         'periodo': periodo,
+        'carga_horaria_total': carga_horaria_total,
+        'carga_horaria_teorica' : carga_horaria_teorica,
+        'carga_horaria_pratica' : carga_horaria_pratica,
         'pre_disciplina' : pre_disciplina,
         'co_disciplina' : co_disciplina
     };

@@ -15,9 +15,7 @@
                             <select name="disciplina_id" class="form-control" id="disciplina_id">
                             </select>
                         </div>
-                    </div>
 
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <label for="periodo">Período</label>
                             <select name="periodo" class="form-control" id="periodo">
@@ -37,6 +35,23 @@
                                 <option value="14">14</option>
                                 <option value="15">15</option>
                             </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="carga_horaria_total">CH. Total</label>
+                            <input type="text" class="form-control" name="carga_horaria_total" id="carga_horaria_total">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="carga_horaria_teorica">CH. Teórica</label>
+                            <input type="text" class="form-control" name="carga_horaria_teorica" id="carga_horaria_teorica">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="carga_horaria_pratica">CH. Prática</label>
+                            <input type="text" class="form-control" name="carga_horaria_pratica" id="carga_horaria_pratica">
                         </div>
                     </div>
 

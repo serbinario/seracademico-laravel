@@ -22,7 +22,10 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
     protected $fillable = [
         'curriculo_id',
         'disciplina_id',
-        'periodo'
+        'periodo',
+        'carga_horaria_total',
+        'carga_horaria_teorica',
+        'carga_horaria_pratica'
     ];
 
     /**

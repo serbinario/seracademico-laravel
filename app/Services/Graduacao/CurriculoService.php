@@ -217,7 +217,14 @@ class CurriculoService
         }
 
         # atrelando os valores
-        $curriculo->disciplinas()->attach($objDisciplina, ['periodo' => $data['periodo']]);
+        $curriculo->disciplinas()->attach($objDisciplina,
+            [
+                'periodo' => $data['periodo'],
+                'carga_horaria_total' => $data['carga_horaria_total'],
+                'carga_horaria_teorica' => $data['carga_horaria_teorica'],
+                'carga_horaria_pratica' => $data['carga_horaria_pratica'],
+            ]
+        );
 
         # Contadores úteis
         $countPre = 0;
@@ -289,7 +296,7 @@ class CurriculoService
         # Recuperando a disciplina
         $curriculo       = $this->repository->find($idCurriculo);
         $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
-        
+
         # Verificando a existência da disciplina
         if(!$curriculo && !$disciplina) {
             throw new \Exception("Disciplina não encontrada!");
@@ -297,6 +304,9 @@ class CurriculoService
 
         # Processo de atualização do pivot
         $disciplina->pivot->periodo = $data['periodo'];
+        $disciplina->pivot->carga_horaria_total   = $data['carga_horaria_total'];
+        $disciplina->pivot->carga_horaria_teorica = $data['carga_horaria_teorica'];
+        $disciplina->pivot->carga_horaria_pratica = $data['carga_horaria_pratica'];
         $disciplina->pivot->disciplinasPreRequisitos()->detach();
         $disciplina->pivot->disciplinasCoRequisitos()->detach();
 

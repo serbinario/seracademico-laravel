@@ -84,6 +84,10 @@ function builderHtmlFieldsEditar (dados) {
             // Setando os valores do model no formulário
             $('#disciplina_id_editar').html('<option value="' + retorno.data.disciplina_id + '">' + retorno.data.nomeDisciplina + '</option>');
             $('#periodo_editar option[value=' + retorno.data.periodo + ']').attr('selected', true);
+            $('#carga_horaria_total_editar').val(retorno.data.carga_horaria_total);
+            $('#carga_horaria_teorica_editar').val(retorno.data.carga_horaria_teorica);
+            $('#carga_horaria_pratica_editar').val(retorno.data.carga_horaria_pratica);
+
 
             // Setando as disciplinas de pre requisitos
             $.each(retorno.data.preRequisitos, function (index, value) {
@@ -114,12 +118,15 @@ function builderHtmlFieldsEditar (dados) {
 
 // Evento para salvar tabela de preços
 $('#btnUpdateAdicionarDisciplina').click(function() {
-    var idDisciplina     = $("#disciplina_id_editar").val();
-    var periodo          = $("#periodo_editar").val();
-    var dom_pre_discip   = $("select[name='pre_disciplinas_editar'] option:selected").toArray();
-    var dom_co_discip    = $("select[name='co_disciplinas_editar'] option:selected").toArray();
-    var pre_disciplina   = [];
-    var co_disciplina    = [];
+    var idDisciplina          = $("#disciplina_id_editar").val();
+    var periodo               = $("#periodo_editar").val();
+    var carga_horaria_total   = $("#carga_horaria_total_editar").val();
+    var carga_horaria_teorica = $("#carga_horaria_teorica_editar").val();
+    var carga_horaria_pratica = $("#carga_horaria_pratica_editar").val();
+    var dom_pre_discip        = $("select[name='pre_disciplinas_editar'] option:selected").toArray();
+    var dom_co_discip         = $("select[name='co_disciplinas_editar'] option:selected").toArray();
+    var pre_disciplina        = [];
+    var co_disciplina         = [];
 
     $(dom_pre_discip).each(function (index) {
         if($(this).val() != "") {
@@ -136,6 +143,9 @@ $('#btnUpdateAdicionarDisciplina').click(function() {
 
     var dados = {
         'periodo': periodo,
+        'carga_horaria_total': carga_horaria_total,
+        'carga_horaria_teorica' : carga_horaria_teorica,
+        'carga_horaria_pratica' : carga_horaria_pratica,
         'pre_disciplina' : pre_disciplina,
         'co_disciplina' : co_disciplina
     };

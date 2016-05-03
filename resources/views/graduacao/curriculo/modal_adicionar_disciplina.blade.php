@@ -1,6 +1,6 @@
     <!-- Modal de cadastro das Disciplinas-->
-    <div id="modal-adicionar-disciplina-curriculo" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div  id="modal-adicionar-disciplina-curriculo" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+        <div class="modal-dialog" style="width: 100%; height: 100%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" type="button" data-dismiss="modal">×</button>
@@ -13,6 +13,7 @@
                             <table id="add-disciplina-curriculo" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
+                                    <th style="width: 5%;">Código</th>
                                     <th>Nome</th>
                                     <th style="width: 5%;">Período</th>
                                     <th style="width: 5%;">Qtd. Faltas</th>
@@ -27,6 +28,7 @@
 
                                 <tfoot>
                                 <tr>
+                                    <th style="width: 5%;">Código</th>
                                     <th>Nome</th>
                                     <th style="width: 5%;">Período</th>
                                     <th style="width: 5%;">Qtd. Faltas</th>
