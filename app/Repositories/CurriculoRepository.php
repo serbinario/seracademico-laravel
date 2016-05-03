@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CurriculoRepository extends RepositoryInterface
 {
-    public abstract function getCurriculoAtivo($cursoId);
+    public function getCurriculoAtivo($cursoId);
 }

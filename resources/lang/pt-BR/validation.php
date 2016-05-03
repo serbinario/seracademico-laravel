@@ -76,6 +76,7 @@ return [
     'unique'               => 'O :attribute já encontra-se cadastrado.',
     'url'                  => 'The :attribute format is invalid.',
     'serbinario_alpha_space' => 'O campo :attribute só pode conter letras e espaços',
+    'serbinario_unique' => 'O campo :attribute já encontra-se cadastrado.',
 
     /*
     |--------------------------------------------------------------------------

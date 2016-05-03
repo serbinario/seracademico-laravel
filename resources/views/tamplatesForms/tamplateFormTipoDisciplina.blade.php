@@ -1,7 +1,14 @@
 <div class="row">
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {!! Form::label('codigo', 'Codigo *') !!}
+                    {!! Form::text('codigo', null, array('class' => 'form-control')) !!}
+                </div>
+            </div>
+
+            <div class="col-md-10">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome *') !!}
                     {!! Form::text('nome', null, array('class' => 'form-control')) !!}
