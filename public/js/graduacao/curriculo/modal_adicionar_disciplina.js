@@ -10,7 +10,12 @@ function loadTableAdicionarDisciplina (idCurriculo) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/graduacao/curriculo/gridByCurriculo/" + idCurriculo,
+        ajax: {
+            url: "/index.php/seracademico/graduacao/curriculo/gridByCurriculo/" + idCurriculo,
+            data: function (d) {
+                d.periodo = $('input[name=periodoSearch]').val();
+            }
+        },
         columns: [
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
@@ -23,6 +28,11 @@ function loadTableAdicionarDisciplina (idCurriculo) {
             {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
+    });
+
+    $('#search-form').on('submit', function(e) {
+        tableAdicionarDisciplina.draw();
+        e.preventDefault();
     });
 
     // Retorno

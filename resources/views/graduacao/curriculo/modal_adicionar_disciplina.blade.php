@@ -8,6 +8,26 @@
                 </div>
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Filtro personalizado</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form id="search-form" class="form-inline" role="form" method="GET">
+                                        <div class="form-group">
+                                            <label for="periodoSearch">Período: </label>
+                                            <input id="periodoSearch" class="form-control" type="text" placeholder="search período" name="periodoSearch">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <button class="btn btn-sm btn-primary pull-right" type="button" id="graduacaoAddDisciplina">Adicionar Disciplinas</button>
                             <table id="add-disciplina-curriculo" class="display table table-bordered" cellspacing="0" width="100%">

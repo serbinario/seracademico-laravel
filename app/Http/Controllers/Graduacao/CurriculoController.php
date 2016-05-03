@@ -87,7 +87,7 @@ class CurriculoController extends Controller
     /**
      * @return mixed
      */
-    public function gridByCurriculo($id)
+    public function gridByCurriculo(Request $request, $id)
     {
         #Criando a consulta
         $rows = \DB::table('fac_curriculo_disciplina')
@@ -107,14 +107,20 @@ class CurriculoController extends Controller
                     'fac_curriculo_disciplina.carga_horaria_total',
                     'fac_curriculo_disciplina.carga_horaria_pratica',
                     'fac_curriculo_disciplina.carga_horaria_teorica',
-                    'fac_disciplinas.qtd_credito',
+                    'fac_curriculo_disciplina.qtd_credito',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
             )
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
+        return Datatables::of($rows)
+            ->filter(function ($query) use ($request) {
+                if ($request->has('periodo')) {
+                    $query->where('periodo', '=', $request->get('periodo'));
+                }
+            })
+            ->addColumn('action', function ($row) {
             # variáveis de uso
             $html       = '<a class="btn-floating indigo" id="editarAdicionarDisicplina" title="Editar Currículo"><i class="material-icons">edit</i></a>';
             $curriculo  = $this->service->find($row->idCurriculo);
