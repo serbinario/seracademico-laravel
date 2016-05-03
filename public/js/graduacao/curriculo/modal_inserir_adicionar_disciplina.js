@@ -128,7 +128,7 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
         'carga_horaria_teorica' : carga_horaria_teorica,
         'carga_horaria_pratica' : carga_horaria_pratica,
         'qtd_credito': qtd_credito,
-        'qtd_faltas' : qtd_credito,
+        'qtd_faltas' : qtd_faltas,
         'pre_disciplina' : pre_disciplina,
         'co_disciplina' : co_disciplina
     };
