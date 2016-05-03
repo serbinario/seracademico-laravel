@@ -15,11 +15,11 @@ function loadTableAdicionarDisciplina (idCurriculo) {
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
-            {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
+            {data: 'qtd_faltas', name: 'fac_curriculo_disciplina.qtd_faltas'},
             {data: 'carga_horaria_total', name: 'fac_curriculo_disciplina.carga_horaria_total'},
             {data: 'carga_horaria_pratica', name: 'fac_curriculo_disciplina.carga_horaria_pratica'},
             {data: 'carga_horaria_teorica', name: 'fac_curriculo_disciplina.carga_horaria_teorica'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
+            {data: 'qtd_credito', name: 'fac_curriculo_disciplina.qtd_credito'},
             {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

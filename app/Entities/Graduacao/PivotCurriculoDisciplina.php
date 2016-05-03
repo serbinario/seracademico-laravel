@@ -25,7 +25,9 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
         'periodo',
         'carga_horaria_total',
         'carga_horaria_teorica',
-        'carga_horaria_pratica'
+        'carga_horaria_pratica',
+        'qtd_credito',
+        'qtd_faltas'
     ];
 
     /**

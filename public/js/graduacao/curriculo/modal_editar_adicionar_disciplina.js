@@ -87,6 +87,9 @@ function builderHtmlFieldsEditar (dados) {
             $('#carga_horaria_total_editar').val(retorno.data.carga_horaria_total);
             $('#carga_horaria_teorica_editar').val(retorno.data.carga_horaria_teorica);
             $('#carga_horaria_pratica_editar').val(retorno.data.carga_horaria_pratica);
+            $('#qtd_credito_editar').val(retorno.data.qtd_credito);
+            $('#qtd_faltas_editar').val(retorno.data.qtd_faltas);
+            $('#carga_horaria_pratica_editar').val(retorno.data.carga_horaria_pratica);
 
 
             // Setando as disciplinas de pre requisitos
@@ -123,6 +126,8 @@ $('#btnUpdateAdicionarDisciplina').click(function() {
     var carga_horaria_total   = $("#carga_horaria_total_editar").val();
     var carga_horaria_teorica = $("#carga_horaria_teorica_editar").val();
     var carga_horaria_pratica = $("#carga_horaria_pratica_editar").val();
+    var qtd_credito           = $("#qtd_credito_editar").val();
+    var qtd_faltas            = $("#qtd_faltas_editar").val();
     var dom_pre_discip        = $("select[name='pre_disciplinas_editar'] option:selected").toArray();
     var dom_co_discip         = $("select[name='co_disciplinas_editar'] option:selected").toArray();
     var pre_disciplina        = [];
@@ -146,6 +151,8 @@ $('#btnUpdateAdicionarDisciplina').click(function() {
         'carga_horaria_total': carga_horaria_total,
         'carga_horaria_teorica' : carga_horaria_teorica,
         'carga_horaria_pratica' : carga_horaria_pratica,
+        'qtd_credito' : qtd_credito,
+        'qtd_faltas' : qtd_faltas,
         'pre_disciplina' : pre_disciplina,
         'co_disciplina' : co_disciplina
     };

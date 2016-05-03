@@ -39,6 +39,8 @@ function builderHtmlFields (dados) {
     $("#carga_horaria_total").val("");
     $("#carga_horaria_teorica").val("");
     $("#carga_horaria_pratica").val("");
+    $("#qtd_credito").val("");
+    $("#qtd_faltas").val("");
 
     // Variáveis que armazenaram o html
     var htmlDisciplina     = "<option value=''>Selecione uma disciplina</option>";
@@ -98,6 +100,8 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
     var carga_horaria_total   = $("#carga_horaria_total").val();
     var carga_horaria_teorica = $("#carga_horaria_teorica").val();
     var carga_horaria_pratica = $("#carga_horaria_pratica").val();
+    var qtd_credito           = $("#qtd_credito").val();
+    var qtd_faltas            = $("#qtd_faltas").val();
     var dom_pre_discip        = $("select[name='pre_disciplinas'] option:selected").toArray();
     var dom_co_discip         = $("select[name='co_disciplinas'] option:selected").toArray();
     var pre_disciplina        = [];
@@ -123,6 +127,8 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
         'carga_horaria_total': carga_horaria_total,
         'carga_horaria_teorica' : carga_horaria_teorica,
         'carga_horaria_pratica' : carga_horaria_pratica,
+        'qtd_credito': qtd_credito,
+        'qtd_faltas' : qtd_credito,
         'pre_disciplina' : pre_disciplina,
         'co_disciplina' : co_disciplina
     };
@@ -162,3 +168,24 @@ $(document).on('click', '#removeGraduacaoDisciplina', function () {
         swal(retorno.msg, "Click no botão abaixo!", "success");
     });
 });
+
+// Evento para preencher os valores de carga horária e quantidade des
+$("#disciplina_id").on('change', function () {
+    // Recuperando o id da disciplina
+    var idDisciplina = $(this).find('option:selected').val();
+
+    // fazendo a consulta ajax
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/graduacao/curriculo/disciplina/get/' + idDisciplina,
+        datatype: 'json'
+    }).done(function (retorno) {
+       if(retorno.success) {
+           $("#carga_horaria_total").val(retorno.data.carga_horaria_total);
+           $("#carga_horaria_teorica").val(retorno.data.carga_horaria_teorica);
+           $("#carga_horaria_pratica").val(retorno.data.carga_horaria_pratica);
+           $("#qtd_credito").val(retorno.data.qtd_credito);
+           $("#qtd_faltas").val(retorno.data.qtd_faltas);
+       }
+    });
+})

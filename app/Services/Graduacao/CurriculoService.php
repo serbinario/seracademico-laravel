@@ -223,6 +223,8 @@ class CurriculoService
                 'carga_horaria_total' => $data['carga_horaria_total'],
                 'carga_horaria_teorica' => $data['carga_horaria_teorica'],
                 'carga_horaria_pratica' => $data['carga_horaria_pratica'],
+                'qtd_credito' => $data['qtd_credito'],
+                'qtd_faltas'  => $data['qtd_faltas']
             ]
         );
 
@@ -307,6 +309,8 @@ class CurriculoService
         $disciplina->pivot->carga_horaria_total   = $data['carga_horaria_total'];
         $disciplina->pivot->carga_horaria_teorica = $data['carga_horaria_teorica'];
         $disciplina->pivot->carga_horaria_pratica = $data['carga_horaria_pratica'];
+        $disciplina->pivot->qtd_credito           = $data['qtd_credito'];
+        $disciplina->pivot->qtd_faltas            = $data['qtd_faltas'];
         $disciplina->pivot->disciplinasPreRequisitos()->detach();
         $disciplina->pivot->disciplinasCoRequisitos()->detach();
 
@@ -333,5 +337,24 @@ class CurriculoService
 
         #retorno
         return true;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getDisciplina($id)
+    {
+        #Recuperando o registro no banco de dados
+        $disciplina = $this->disciplinaRepository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$disciplina) {
+            throw new \Exception('Disciplina não encontrada!');
+        }
+
+        #retorno
+        return $disciplina;
     }
 }

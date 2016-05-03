@@ -15,7 +15,9 @@
                             <select name="disciplina_id" class="form-control" id="disciplina_id">
                             </select>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label for="periodo">Período</label>
                             <select name="periodo" class="form-control" id="periodo">
@@ -36,23 +38,6 @@
                                 <option value="15">15</option>
                             </select>
                         </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="carga_horaria_total">CH. Total</label>
-                            <input type="text" class="form-control" name="carga_horaria_total" id="carga_horaria_total">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="carga_horaria_teorica">CH. Teórica</label>
-                            <input type="text" class="form-control" name="carga_horaria_teorica" id="carga_horaria_teorica">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="carga_horaria_pratica">CH. Prática</label>
-                            <input type="text" class="form-control" name="carga_horaria_pratica" id="carga_horaria_pratica">
-                        </div>
                     </div>
 
                     {{--Linha da da Abas--}}
@@ -61,11 +46,15 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
+                                    <a href="#configuracoes" aria-controls="configuracoes" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Configurações</a>
+                                </li>
+                                <li role="presentation">
                                     <a href="#prerequisitos" aria-controls="prerequisitos" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Pré-requisitos</a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#corequisitos" aria-controls="corequisitos" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Co-requisitos</a>
                                 </li>
+
                             </ul>
                             <!-- End Nav tabs -->
 
@@ -73,9 +62,43 @@
                             <div class="tab-content">
 
                                 {{--Aba Pré - Reuisitos--}}
-                                <div role="tabpanel" class="tab-pane active" id="prerequisitos">
+                                <div role="tabpanel" class="tab-pane active" id="configuracoes">
                                     <br/>
 
+                                    <!-- Configurações da disciplina -->
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="carga_horaria_total">CH. Teórica</label>
+                                            <input type="text" class="form-control" name="carga_horaria_total" id="carga_horaria_total">
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="carga_horaria_teorica">CH. Teórica</label>
+                                            <input type="text" class="form-control" name="carga_horaria_teorica" id="carga_horaria_teorica">
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="carga_horaria_pratica">CH. Prática</label>
+                                            <input type="text" class="form-control" name="carga_horaria_pratica" id="carga_horaria_pratica">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="qtd_credito">Qtd. Crédito</label>
+                                            <input type="text" class="form-control" name="qtd_credito" id="qtd_credito">
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="qtd_faltas">Qtd. Faltas</label>
+                                            <input type="text" class="form-control" name="qtd_faltas" id="qtd_faltas">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--FIM Aba configurações da disciplina MEC--}}
+
+                                {{--FIM Inicio aba prerequisitos--}}
+                                <div role="tabpanel" class="tab-pane" id="prerequisitos">
                                     <!-- Disciplias Pre-requisitos -->
                                     <div class="row">
                                         <div class="form-group col-md-4">

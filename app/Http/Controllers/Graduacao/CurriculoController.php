@@ -101,7 +101,8 @@ class CurriculoController extends Controller
                     'fac_disciplinas.id',
                     'fac_disciplinas.nome',
                     'fac_disciplinas.codigo',
-                    'fac_disciplinas.qtd_falta',
+                    'fac_curriculo_disciplina.qtd_credito',
+                    'fac_curriculo_disciplina.qtd_faltas',
                     'fac_curriculo_disciplina.periodo',
                     'fac_curriculo_disciplina.carga_horaria_total',
                     'fac_curriculo_disciplina.carga_horaria_pratica',
@@ -337,6 +338,8 @@ class CurriculoController extends Controller
             $pivot = [];
 
             # Preenchendo o array de retorno
+            $pivot['qtd_credito']            = $model['model']->qtd_credito;
+            $pivot['qtd_faltas']             = $model['model']->qtd_faltas;
             $pivot['nomeDisciplina']         = $model['nomeDisciplina'];
             $pivot['disciplina_id']          = $model['model']->disciplina_id;
             $pivot['carga_horaria_total']    = $model['model']->carga_horaria_total;
@@ -373,6 +376,33 @@ class CurriculoController extends Controller
             // } catch (ValidatorException $e) {
             //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function getDisciplina($idDisciplina)
+    {
+        try {
+            # Recuperando a empresa
+            $model  = $this->service->getDisciplina($idDisciplina);
+
+            #array de retorno
+            $result = [];
+
+            # Preenchendo o array de retorno
+            $result['qtd_credito']            = $model->qtd_credito;
+            $result['qtd_faltas']             = $model->qtd_falta;
+            $result['carga_horaria_total']    = $model->carga_horaria;
+            $result['carga_horaria_teorica']  = $model->carga_horaria_teorica;
+            $result['carga_horaria_pratica']  = $model->carga_horaria_pratica;
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $result]);
+        } catch (\Throwable $e) { dd($e);
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
