@@ -28,7 +28,7 @@ class TurmaController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Curso|byCurriculoAtivo,1',
+        'Graduacao\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
         'Professor',
