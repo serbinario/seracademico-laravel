@@ -87,7 +87,7 @@ class CurriculoController extends Controller
     /**
      * @return mixed
      */
-    public function gridByCurriculo($id)
+    public function gridByCurriculo(Request $request, $id)
     {
         #Criando a consulta
         $rows = \DB::table('fac_curriculo_disciplina')
@@ -96,24 +96,33 @@ class CurriculoController extends Controller
             ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->leftJoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
             ->select([
+                    'fac_curriculo_disciplina.id as idCurriculoDisciplina',
                     'fac_curriculos.id as idCurriculo',
                     'fac_disciplinas.id',
                     'fac_disciplinas.nome',
-                    'fac_disciplinas.qtd_falta',
+                    'fac_disciplinas.codigo',
+                    'fac_curriculo_disciplina.qtd_credito',
+                    'fac_curriculo_disciplina.qtd_faltas',
                     'fac_curriculo_disciplina.periodo',
-                    'fac_disciplinas.carga_horaria',
-                    'fac_disciplinas.carga_horaria_pratica',
-                    'fac_disciplinas.carga_horaria_teorica',
-                    'fac_disciplinas.qtd_credito',
+                    'fac_curriculo_disciplina.carga_horaria_total',
+                    'fac_curriculo_disciplina.carga_horaria_pratica',
+                    'fac_curriculo_disciplina.carga_horaria_teorica',
+                    'fac_curriculo_disciplina.qtd_credito',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
             )
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
+        return Datatables::of($rows)
+            ->filter(function ($query) use ($request) {
+                if ($request->has('periodo')) {
+                    $query->where('periodo', '=', $request->get('periodo'));
+                }
+            })
+            ->addColumn('action', function ($row) {
             # variáveis de uso
-            $html       = '';
+            $html       = '<a class="btn-floating indigo" id="editarAdicionarDisicplina" title="Editar Currículo"><i class="material-icons">edit</i></a>';
             $curriculo  = $this->service->find($row->idCurriculo);
             $tumas      = $curriculo->turmas;
             $boolReturn = true;
@@ -316,6 +325,90 @@ class CurriculoController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Remoção realizada com sucesso"]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function disciplinaEdit($idDisciplina, $idCurriculo)
+    {
+        try {
+            # Recuperando a empresa
+            $model = $this->service->disciplinaFind($idDisciplina, $idCurriculo);
+
+            # Array de retorno
+            $pivot = [];
+
+            # Preenchendo o array de retorno
+            $pivot['qtd_credito']            = $model['model']->qtd_credito;
+            $pivot['qtd_faltas']             = $model['model']->qtd_faltas;
+            $pivot['nomeDisciplina']         = $model['nomeDisciplina'];
+            $pivot['codigoDisciplina']       = $model['codigoDisciplina'];
+            $pivot['disciplina_id']          = $model['model']->disciplina_id;
+            $pivot['carga_horaria_total']    = $model['model']->carga_horaria_total;
+            $pivot['carga_horaria_teorica']  = $model['model']->carga_horaria_teorica;
+            $pivot['carga_horaria_pratica']  = $model['model']->carga_horaria_pratica;
+            $pivot['periodo']                = $model['model']->periodo;
+            $pivot['preRequisitos']          = $model['model']->disciplinasPreRequisitos;
+            $pivot['cosRequisitos']          = $model['model']->disciplinasCoRequisitos;
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $pivot]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function disciplinaUpdate(Request $request, $idDisciplina, $idCurriculo)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Validando a requisição
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            #Executando a ação
+            $this->service->disciplinaUpdate($idDisciplina, $idCurriculo, $data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Edição realizada com sucesso"]);
+            // } catch (ValidatorException $e) {
+            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function getDisciplina($idDisciplina)
+    {
+        try {
+            # Recuperando a empresa
+            $model  = $this->service->getDisciplina($idDisciplina);
+
+            #array de retorno
+            $result = [];
+
+            # Preenchendo o array de retorno
+            $result['qtd_credito']            = $model->qtd_credito;
+            $result['qtd_faltas']             = $model->qtd_falta;
+            $result['carga_horaria_total']    = $model->carga_horaria;
+            $result['carga_horaria_teorica']  = $model->carga_horaria_teorica;
+            $result['carga_horaria_pratica']  = $model->carga_horaria_pratica;
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $result]);
         } catch (\Throwable $e) { dd($e);
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
