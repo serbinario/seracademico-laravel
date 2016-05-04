@@ -88,6 +88,7 @@
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="material-icons">collections_bookmark</i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
 
                             </ul>
                         </li>
