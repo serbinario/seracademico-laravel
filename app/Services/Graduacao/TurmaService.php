@@ -93,11 +93,11 @@ class TurmaService
     {
         # Aplicação das regras de negócios
         $data['tipo_nivel_sistema_id'] = 1;
-        //$this->tratamentoDoCurso($data, $id);
+        $this->tratamentoDoCurso($data, $id);
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
         # Se não poder ser alterado lançará uma exception.
-        //$resultTratamentoCurriculo = $this->tratamentoCurriculo($id, $data);
+        $resultTratamentoCurriculo = $this->tratamentoCurriculo($id, $data);
 
         # Atualizando no banco de dados
         $turma = $this->repository->update($data, $id);
@@ -110,10 +110,10 @@ class TurmaService
         # Verifica se é um currículo diferente.
         # true -> currículo diferente e válido para ser alterado
         # false -> currículo igual
-       // if ($resultTratamentoCurriculo) {
+        if ($resultTratamentoCurriculo) {
             # Aplicação das regras de negócios
-       //     $this->tratamentoDisciplinasUpdate($turma);
-       // }
+            $this->tratamentoDisciplinasUpdate($turma);
+        }
 
         # Retorno
         return $turma;
@@ -251,7 +251,7 @@ class TurmaService
                 $objTurmaBanco      = $this->repository->find($id);
                 $objCurriculoUpdate = $this->curriculoRepository->find($curriculo[0]->id);
 
-                # Verificando se o o curso do currículo do banco
+                # Verificando se  o curso do currículo do banco
                 # é o mesmo do currículo passado
                 if($objTurmaBanco->curriculo->curso->id == $objCurriculoUpdate->curso->id) {
                     #Permanecendo o currículo do banco de dados (Que já estava vinculado na turma)
