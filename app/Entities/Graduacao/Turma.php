@@ -117,14 +117,15 @@ class Turma extends Model implements Transformable
         return $this->belongsTo(Turno::class);
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function disciplinas()
-//    {
-//        return $this->belongsToMany(Disciplina::class, "fac_turmas_disciplinas", "turma_id", "disciplina_id")
-//            ->withPivot(['id', 'turma_id', 'disciplina_id']);
-//    }
+    /**
+     * @return mixed
+     */
+    public function disciplinas()
+    {
+        return $this->belongsToMany(Disciplina::class, "fac_turmas_disciplinas", "turma_id", "disciplina_id")
+            ->withPivot(['id', 'turma_id', 'disciplina_id']);
+    }
+
 //
 //    /**
 //     * @return $this

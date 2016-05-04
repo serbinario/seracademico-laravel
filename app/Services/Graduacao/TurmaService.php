@@ -67,7 +67,7 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $data['tipo_nivel_sistema_id'] = 1;
-       // $this->tratamentoDoCurso($data);
+        $this->tratamentoDoCurso($data);
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -78,7 +78,7 @@ class TurmaService
         }
 
         #Aplicação das regras de negócios
-        //$this->tratamentoDisciplinas($turma);
+        $this->tratamentoDisciplinas($turma);
 
         #Retorno
         return $turma;
@@ -124,7 +124,7 @@ class TurmaService
      * @return array
      * @throws \Exception
      */
-    public function getDisciplinasDiferrentOfCurriculo($idTurma)
+    public function getDisciplinasDiferentOfCurriculo($idTurma)
     {
         #Recuperando a turma
         $turma = $this->repository->find($idTurma);
@@ -151,40 +151,6 @@ class TurmaService
 
         #Retorno
         return $disciplinas;
-    }
-
-    /**
-     * @param array $data
-     * @return bool
-     * @throws \Exception
-     */
-    public function incluirDisciplina(array $data) : bool
-    {
-        # Validando a requisição
-        if(!(isset($data['idDisciplina']) && is_numeric($data['idDisciplina'])) &&
-            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
-            throw new \Exception("Parametros inválidos");
-        }
-
-        # Recuperando os parametros da requisição
-        $idTurma      = $data['idTurma'];
-        $idDisciplina = $data['idDisciplina'];
-
-        # Recuperando a turma e a disciplina
-        $objTurma      = $this->repository->find($idTurma);
-        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
-
-        # Verificando se foi encontrada uma turma e disciplina
-        if(!$objTurma && !$objDisciplina) {
-            throw new \Exception("Turma ou disciplina informada não encontrada");
-        }
-
-        #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->attach($objDisciplina->id);
-        $objTurma->save();
-
-        #Retorno
-        return true;
     }
 
     /**
@@ -345,26 +311,28 @@ class TurmaService
      */
     private function tratamentoDisciplinas(Turma $turma)
     {
-        #Verificando se disciplinas vinculadas ao currículo
-        if(!count($turma->curriculo->disciplinas) > 0) {
-            #retorno se não tiver disciplinas vinculadas ao currículo
-            return false;
-        }
-
-        #percorrendo as disciplinas
-        foreach ($turma->curriculo->disciplinas as $disciplina) {
-            $turma->disciplinas()->attach($disciplina);
-        }
-
-        #Salvando no as disciplinas
         try {
+            #Verificando se disciplinas vinculadas ao currículo
+            if(!count($turma->curriculo->disciplinas) > 0) {
+                #retorno se não tiver disciplinas vinculadas ao currículo
+                return false;
+            }
+
+            #percorrendo as disciplinas
+            foreach ($turma->curriculo->disciplinas as $disciplina) {
+                if($disciplina->pivot->periodo == $turma->periodo) {
+                    $turma->disciplinas()->attach($disciplina);
+                }
+            }
+
+            #Salvando no as disciplinas
             $turma->save();
+
+            #Retorno se tudo der certo
+            return true;
         } catch (\Throwable $e) {
             throw new \Exception($e->getMessage());
         }
-
-        #Retorno se tudo der certo
-        return true;
     }
 
     /**
