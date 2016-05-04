@@ -141,14 +141,10 @@
 
             $('#formTurma').bootstrapValidator({
                 fields: {
-                    hora_inicial: {
+                    descricao: {
                         validators: {
                             notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 200,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
+                                message: Lang.get('validation.required', { attribute: 'Descrição' })
                             }
                         }
                     },

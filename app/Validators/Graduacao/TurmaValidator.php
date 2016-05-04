@@ -18,32 +18,24 @@ class TurmaValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
 
 			'curriculo_id' => 'integer',
+			'codigo' => 'required|max:15',
 			'turno_id' => 'integer',
 			'sigla' => '',
-			'valor_turma' => '',
-			'valor_disciplina' => '',
-			'sala_id' => 'integer',
-			'obs_sala' => 'max:1000',
+			'descricao' => 'required|max:200',
 			//'codigo' => 'required|max:15|unique:fac_turmas,codigo',
 			'matricula_inicio' => 'serbinario_date_format:"d/m/Y"',
 			'matricula_fim' => 'serbinario_date_format:"d/m/Y"',
 			'aula_inicio' => 'serbinario_date_format:"d/m/Y"',
 			'aula_final' => 'serbinario_date_format:"d/m/Y"',
-			'qtd_parcelas' => 'digits_between:0,3|numeric',
 			'maximo_vagas' => 'digits_between:0,3|numeric',
-			'minimo_vagas' => 'digits_between:0,3|numeric',
-			'observacao_vagas' => 'max:1000',
-			'vencimento_inicial' => 'serbinario_date_format:"d/m/Y"',
 
         ],
         ValidatorInterface::RULE_UPDATE => [
 			'curriculo_id' => 'integer',
+			'codigo' => 'required|max:15',
 			'turno_id' => 'integer',
 			'sigla' => '',
-			'valor_turma' => '',
-			'valor_disciplina' => '',
-			'sala_id' => 'integer',
-			'obs_sala' => 'max:1000',
+			'descricao' => 'required|max:200',
 			//'codigo' => 'required|max:15|unique:fac_turmas,codigo,:id',
 			'matricula_inicio' => 'serbinario_date_format:"d/m/Y"',
 			'matricula_fim' => 'serbinario_date_format:"d/m/Y"',
@@ -51,9 +43,7 @@ class TurmaValidator extends LaravelValidator
 			'aula_final' => 'serbinario_date_format:"d/m/Y"',
 			'qtd_parcelas' => 'digits_between:0,3|numeric',
 			'maximo_vagas' => 'digits_between:0,3|numeric',
-			'minimo_vagas' => 'digits_between:0,3|numeric',
-			'observacao_vagas' => 'max:1000',
-			'vencimento_inicial' => 'serbinario_date_format:"d/m/Y"',
+
 		],
    ];
 
