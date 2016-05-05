@@ -5,9 +5,9 @@
                 <div class="form-group">
 				{!! Form::label('curso_id', 'Curso *') !!}
                 @if(isset($model->curriculo->curso->id))
-				    {!! Form::select('curso_id', $loadFields['curso'], $model->curriculo->curso->id, array('class' => 'form-control')) !!}
+				    {!! Form::select('curso_id', $loadFields['graduacao\\curso'], $model->curriculo->curso->id, array('class' => 'form-control')) !!}
                 @else
-                    {!! Form::select('curso_id', $loadFields['curso'], null, array('class' => 'form-control')) !!}
+                    {!! Form::select('curso_id', $loadFields['graduacao\\curso'], null, array('class' => 'form-control')) !!}
                 @endif
                 </div>
             </div>

@@ -226,17 +226,18 @@ class Curso extends Model implements Transformable
         $this->attributes['vencimento_inicial'] = SerbinarioDateFormat::toUsa($value);
     }
 
-//    /**
-//     * @param $query
-//     * @param $value
-//     * @return mixed
-//     */
-//    public function scopeByCurriculoAtivo($query, $value)
-//    {
-//        return $query->select('fac_cursos.nome', 'fac_cursos.id')
-//            ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-//            ->where('fac_curriculos.ativo', $value);
-//    }
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeByCurriculoAtivo($query, $value)
+    {
+        return $query->select('fac_cursos.nome', 'fac_cursos.id')
+            ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('fac_cursos.tipo_nivel_sistema_id', 1)
+            ->where('fac_curriculos.ativo', $value);
+    }
 
     /**
      * @param $query
@@ -244,6 +245,6 @@ class Curso extends Model implements Transformable
      */
     public function scopeAtivo($query, $value)
     {
-        return $query->where("ativo", $value);
+        return $query->where('tipo_nivel_sistema_id', 1)->where("ativo", $value);
     }
 }
