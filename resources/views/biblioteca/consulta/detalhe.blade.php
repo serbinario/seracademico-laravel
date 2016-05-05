@@ -21,7 +21,7 @@
     <li><a href="#!">Ajuda</a></li>
 </ul>
 <nav>
-    <div class="container">
+    <div class="container">{{----}}
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo"><i class="material-icons left">book</i> Biblioteca</a>
             <ul class="right hide-on-med-and-down">
@@ -215,76 +215,56 @@
 
 <div class="container">
     <!-- Info Resalt-->
-    {{--<div class="row">
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="row section">
+                <div class="col s9">
+                    <section class="">
+                        <div class="row">
+                            <div class="col s12">
+                                <ul class="tabs">
+                                    <li class="tab col s3"><a class="active" href="#test1">Detalhes</a></li>
+                                    <li class="tab col s3"><a href="#test2">MARCS tags</a></li>
+                                    <li class="tab col s3"><a href="#test4">Dublin Core</a></li>
+                                </ul>
+                            </div>
+                            <div id="test1" class="col s12">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><b>Inf. publicação</b></td>
+                                        <td>{{$acervo['tipoAcervo']['nome']}} - {{$acervo['tipoAcervo']['nome']}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="test2" class="col s12">Test 2</div>
+                            <div id="test4" class="col s12">Test 4</div>
+                        </div>
+                    </section>
                 </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 1<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 2<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 3<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 4<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <div class="col s3">
+                    <section class="arg-list">
+                        <div class="col s12">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../img/Capa-Livro-Propague-2.jpg">
+                                </div>
+                                <div class="card-content">
+                                    <!-- <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>   -->
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Detalhes do livro<i
+                                                class="material-icons right">close</i></span>
+                                    <p>Aqui são mostradas mais informações</p>
+                                </div>
+                            </div>
+                    </section>
                 </div>
             </div>
         </div>
-    </div>--}}
-<br />
-    <br />
+    </div>
     <!-- End Info Resalt-->
-
 </div>
 <br><br>
 </div>

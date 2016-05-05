@@ -75,7 +75,7 @@ class Arcevo extends Model implements Transformable
 
 	public function primeiraEntrada()
 	{
-		return $this->hasMany(PrimeiraEntrada::class);
+		return $this->hasMany(PrimeiraEntrada::class, 'arcevos_id', 'id');
 	}
 
 	/**

@@ -21,7 +21,7 @@
     <li><a href="#!">Ajuda</a></li>
 </ul>
 <nav>
-    <div class="container">
+    <div class="container">{{----}}
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo"><i class="material-icons left">book</i> Biblioteca</a>
             <ul class="right hide-on-med-and-down">
@@ -215,74 +215,36 @@
 
 <div class="container">
     <!-- Info Resalt-->
-    {{--<div class="row">
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 1<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
+    <div class="row">
+        @foreach($resultado->items() as $f)
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="{{ asset('/biblioteca/img/2204_Biblioteca_.jpg')}}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ $f->titulo }}<i
+                                    class="material-icons right">more_vert</i></span>
+                        <span class="card-title activator grey-text text-darken-4">{{ $f->subtitulo }}</span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Detalhes<i
                                 class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        <p><b>Autor: </b> {{$f->sobrenome}}, {{$f->nome}}</p>
+                        <p><b>Edição: </b> {{$f->edicao}}.ed.</p>
+                        <p><b>Ano: </b> {{$f->ano}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+    </div>
+    <div class="row">
         <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 2<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
+            {!!  $resultado->render() !!}
         </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 3<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 4<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-    </div>--}}
-<br />
-    <br />
+    </div>
+
     <!-- End Info Resalt-->
 
 </div>

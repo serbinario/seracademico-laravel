@@ -21,7 +21,7 @@
     <li><a href="#!">Ajuda</a></li>
 </ul>
 <nav>
-    <div class="container">
+    <div class="container">{{----}}
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo"><i class="material-icons left">book</i> Biblioteca</a>
             <ul class="right hide-on-med-and-down">
@@ -215,74 +215,62 @@
 
 <div class="container">
     <!-- Info Resalt-->
-    {{--<div class="row">
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 1<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col s12 m12">
+        <div class="table-responsive no-padding">
+            <table id="sala-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>CDD</th>
+                    <th>CUTTER</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Assunto</th>
+                    <th>Detalhes</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($resultado->items() as $f)
+                    <tr>
+                        <td>{{ $f->cdd }}</td>
+                        <td>{{ $f->cutter }}</td>
+                        <?php $data =  explode(" ", $f->subtitulo); $subtitulo = "";?>
+                        <td>
+                            <b>{{ $f->titulo }}</b> <br />
+                            @if(count($data) <= 3)
+                                @foreach($data as $d)
+                                    {!!   $d  !!}
+                                @endforeach
+                            @else
+                                {{$data[0]}} {{$data[1]}} {{$data[2]}}...
+                            @endif
+                        </td>
+                        <td>{{$f->sobrenome}}, {{$f->nome}}</td>
+                        <td>{{$f->assunto}}</td>
+                        <td><a href="{{url("/seracademico/biblioteca/seachDetalhe/acervo/$f->id_acervo")}}" class="btn btn-primary">Detalhes</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>CDD</th>
+                    <th>CUTTER</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Assunto</th>
+                    <th>Detalhes</th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 2<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
             </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12">
+            {!!  $resultado->render() !!}
         </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 3<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 4<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Detalhes<i
-                                class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-    </div>--}}
-<br />
-    <br />
+    </div>
+
     <!-- End Info Resalt-->
 
 </div>

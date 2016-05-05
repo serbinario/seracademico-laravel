@@ -92,6 +92,35 @@ class ArcevoService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function detalheAcervo($id)
+    {
+        $relacionamentos = [
+            'tipoAcervo',
+            'colecao',
+            'genero',
+            'situacao',
+            'corredor',
+            'estante',
+            'exemplares',
+            'primeiraEntrada.responsaveis'
+        ];
+
+        $arcevo = $this->repository->with($relacionamentos)->find($id);
+        
+        #Verificando se o registro foi encontrado
+        if(!$arcevo) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $arcevo;
+    }
+
+    /**
      * @param array $data
      * @return array
      */
@@ -253,7 +282,7 @@ class ArcevoService
         #Criando e executando as consultas
         foreach ($models as $model) {
             #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\Biblioteca\\$model";
+            $nameModel = "Seracademico\\Entities\\$model";
 
             #Recuperando o registro e armazenando no array
             $result[strtolower($model)] = $nameModel::orderBy('nome')->lists('nome', 'id');
@@ -326,5 +355,6 @@ class ArcevoService
         #Retorno
         return $data;
     }
-
+    
+    
 }

@@ -37,6 +37,7 @@
                                 <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Autor</th>
                                 <th>Cutter</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
@@ -48,6 +49,7 @@
                                 <th>Código</th>
                                 <th>Título</th>
                                 <th>Subtítulo</th>
+                                <th>Autor</th>
                                 <th>Cutter</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
@@ -73,6 +75,7 @@
                 {data: 'id', name: 'bib_arcevos.id'},
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
                 {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
+                {data: 'autor', name: 'responsaveis.sobrenome'},
                 {data: 'cutter', name: 'bib_arcevos.cutter'},
                 {data: 'cdd', name: 'bib_arcevos.cdd'},
                 {data: 'qtd_exemplares', name: 'exemplares.qtd_exemplares'},
