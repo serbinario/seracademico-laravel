@@ -70,7 +70,7 @@ class Arcevo extends Model implements Transformable
 
 	public function segundaEntrada()
 	{
-		return $this->hasMany(SegundaEntrada::class);
+		return $this->hasMany(SegundaEntrada::class, 'arcevos_id', 'id');
 	}
 
 	public function primeiraEntrada()
@@ -84,7 +84,7 @@ class Arcevo extends Model implements Transformable
 	public function cursos()
 	{
 		return $this->belongsToMany(Curso::class, 'bib_arcevos_cursos', 'arcevos_id', "cursos_id")
-			->withPivot([ 'arcevos_id', 'cursos_id']);;
+			->withPivot([ 'arcevos_id', 'cursos_id']);
 	}
 
 	/**

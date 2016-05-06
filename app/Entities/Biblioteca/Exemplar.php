@@ -43,4 +43,38 @@ class Exemplar extends Model implements Transformable
 		return $this->belongsTo(Arcevo::class, 'arcevos_id');
 	}
 
+	public function idioma()
+	{
+		return $this->belongsTo(Idioma::class, 'idiomas_id');
+	}
+
+	public function editora()
+	{
+		return $this->belongsTo(Editora::class, 'editoras_id');
+	}
+
+	public function ilustracoes()
+	{
+		return $this->belongsTo(Ilustracao::class, 'ilustracoes_id');
+	}
+
+	public function aquisicao()
+	{
+		return $this->belongsTo(Aquisicao::class, 'aquisicao_id');
+	}
+
+	public function situacao()
+	{
+		return $this->belongsTo(Situacao::class, 'situacao_id');
+	}
+
+	public function emprestimo()
+	{
+		return $this->belongsTo(Editora::class, 'emprestimo_id');
+	}
+
+	public function editor()
+	{
+		return $this->belongsTo(Responsavel::class, 'responsaveis_id');
+	}
 }

@@ -226,6 +226,8 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Assunto</th>
+                    <th>Edição</th>
+                    <th>Material</th>
                     <th>Detalhes</th>
                 </tr>
                 </thead>
@@ -247,7 +249,15 @@
                         </td>
                         <td>{{$f->sobrenome}}, {{$f->nome}}</td>
                         <td>{{$f->assunto}}</td>
-                        <td><a href="{{url("/seracademico/biblioteca/seachDetalhe/acervo/$f->id_acervo")}}" class="btn btn-primary">Detalhes</a></td>
+                        <td>@if($f->edicao){{$f->edicao}} .ed @endif</td>
+                        <td>
+                            @if($f->tipos_acervos_id == '1')
+                                Livro
+                            @elseif($f->tipos_acervos_id == '2')
+                                Revista
+                            @endif
+                        </td>
+                        <td><a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn btn-primary">Detalhes</a></td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -258,6 +268,8 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Assunto</th>
+                    <th>Edição</th>
+                    <th>Material</th>
                     <th>Detalhes</th>
                 </tr>
                 </tfoot>

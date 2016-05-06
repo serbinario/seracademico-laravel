@@ -9,15 +9,24 @@ use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\Biblioteca\ArcevoRepository;
 use Seracademico\Services\Biblioteca\ArcevoService;
+use Seracademico\Services\Biblioteca\ExemplarService;
 
 class ConsultaController extends Controller
 {
 
     /**
+     * @var ExemplarService
+     */
+    private $serviceExem;
+
+    /**
      * @var ArcevoService
      */
-    private $service;
+    private $serviceAcer;
 
+    /**
+     * @var
+     */
     private $data;
 
     /**
@@ -28,12 +37,12 @@ class ConsultaController extends Controller
     ];
 
     /**
-     * @param ArcevoService $service
-     * @param ArcevoValidator $validator
+     * @param ExemplarService $service
      */
-    public function __construct(ArcevoService $service)
+    public function __construct(ExemplarService $serviceExem, ArcevoService $serviceAcer)
     {
-        $this->service   =  $service;
+        $this->serviceExem   =  $serviceExem;
+        $this->serviceAcer   =  $serviceAcer;
     }
 
     /**
@@ -43,7 +52,7 @@ class ConsultaController extends Controller
     public function index(Request $request)
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        $loadFields = $this->serviceAcer->load($this->loadFields);
 
         return view('biblioteca.consulta.index', compact('loadFields'));
 
@@ -56,7 +65,7 @@ class ConsultaController extends Controller
     public function seachSimple(Request $request)
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        $loadFields = $this->serviceAcer->load($this->loadFields);
 
         $dados = $request->request->all();
 
@@ -78,7 +87,7 @@ class ConsultaController extends Controller
     public function seachSimplePage(Request $request)
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        $loadFields = $this->serviceAcer->load($this->loadFields);
 
         $dados = $request->request->all();
 
@@ -91,11 +100,7 @@ class ConsultaController extends Controller
 
     }
 
-    /**
-     * @param $dados
-     * @return mixed
-     */
-    public function query($dados){
+    /*public function query($dados){
 
         $this->data = $dados;
         $campoLike = "";
@@ -140,22 +145,74 @@ class ConsultaController extends Controller
 
         return $my_query;
 
+    }*/
+
+    /**
+     * @param $dados
+     * @return mixed
+     */
+    public function query($dados){
+
+        $this->data = $dados;
+        $campoLike = "";
+
+        if($this->data['busca_por'] == '2') {
+            $campoLike = 'bib_arcevos.titulo';
+        } else if ($this->data['busca_por'] == '3') {
+            $campoLike = 'bib_arcevos.assunto';
+        } else if ($this->data['busca_por'] == '4') {
+            $campoLike = 'responsaveis.nome';
+        }
+
+        if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' || $this->data['busca_por'] == '4') {
+            $my_query = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->join('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
+                ->join('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
+                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
+                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
+                ->where($campoLike, 'like', "%{$this->data['busca']}%")
+                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano')
+                ->orderBy('bib_arcevos.titulo','DESC')
+                ->paginate(10);
+        } else {
+            $my_query = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->join('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
+                ->join('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
+                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo','bib_exemplares.*')
+                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
+                ->Where(function ($query) {
+                    $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%");
+                })
+                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano')
+                ->orderBy('bib_arcevos.titulo','DESC')
+                ->paginate(10);
+        }
+
+        $my_query->setPath(url('seracademico/biblioteca/seachSimplePage'));
+
+        return $my_query;
+
     }
 
     /**
      * @param Request $request
      * @return mixed
      */
-    public function seachDetalhe($acervo)
+    public function seachDetalhe($exemplar)
     {
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        $loadFields = $this->serviceAcer->load($this->loadFields);
 
-        $acervo = $this->service->detalheAcervo($acervo);
+        $data = $this->serviceExem->detalheAcervo($exemplar);
+        $exemplar = $data['exemplar'];
+        $exemplares = $data['exemplares'];
+       //dd($exemplares);
 
-        //dd(compact('acervo'));
-
-        return view('biblioteca.consulta.detalhe', compact('loadFields', 'acervo'));
+        return view('biblioteca.consulta.detalhe', compact('loadFields', 'exemplar', 'exemplares'));
 
     }
 }

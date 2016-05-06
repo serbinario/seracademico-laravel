@@ -56,8 +56,12 @@ class ExemplarService
      */
     public function find($id)
     {
+        $relacionamentos = [
+            'acervo',
+        ];
+        
         #Recuperando o registro no banco de dados
-        $exemplar = $this->repository->find($id);
+        $exemplar = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$exemplar) {
@@ -83,6 +87,70 @@ class ExemplarService
 
         #retorno
         return $exemplar;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function detalheAcervo($id)
+    {
+        $relacionamentos = [
+            'acervo.primeiraEntrada.responsaveis',
+        ];
+
+        $exemplar = $this->repository->with($relacionamentos)->find($id);
+
+        if($exemplar->edicao && $exemplar->ano) {
+            $exemplares = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_exemplares.arcevos_id', '=', $exemplar->arcevos_id)
+                ->where('bib_exemplares.edicao', '=', $exemplar->edicao)
+                ->where('bib_exemplares.ano', '=', $exemplar->ano)
+                ->where('bib_exemplares.exemp_principal', '!=', '1')
+                ->select('bib_arcevos.*', 'bib_exemplares.*')
+                ->get();
+        } else if($exemplar->edicao && !$exemplar->ano) {
+            $exemplares = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_exemplares.arcevos_id', '=', $exemplar->arcevos_id)
+                ->where('bib_exemplares.edicao', '=', $exemplar->edicao)
+                ->where('bib_exemplares.exemp_principal', '!=', '1')
+                ->select('bib_arcevos.*', 'bib_exemplares.*')
+                ->get();
+        } else if(!$exemplar->edicao && $exemplar->ano) {
+            $exemplares = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_exemplares.arcevos_id', '=', $exemplar->arcevos_id)
+                ->where('bib_exemplares.ano', '=', $exemplar->ano)
+                ->where('bib_exemplares.exemp_principal', '!=', '1')
+                ->select('bib_arcevos.*', 'bib_exemplares.*')
+                ->get();
+        } else {
+            $exemplares = \DB::table('bib_exemplares')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_exemplares.arcevos_id', '=', $exemplar->arcevos_id)
+                ->where('bib_exemplares.edicao', '=', "")
+                ->where('bib_exemplares.ano', '=', "")
+                ->where('bib_exemplares.exemp_principal', '!=', '1')
+                ->select('bib_arcevos.*', 'bib_exemplares.*')
+                ->get();
+        }
+
+
+        $data = [
+            'exemplar' => $exemplar,
+            'exemplares' => $exemplares
+        ];
+
+        #Verificando se o registro foi encontrado
+        if(!$exemplar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $data;
     }
 
     /**

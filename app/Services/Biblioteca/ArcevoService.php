@@ -51,7 +51,8 @@ class ArcevoService
             'situacao',
             'corredor',
             'estante',
-            'cursos'
+            'exemplares',
+            'primeiraEntrada.responsaveis'
         ];
 
         #Recuperando o registro no banco de dados
@@ -91,34 +92,6 @@ class ArcevoService
         return $arcevo;
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     * @throws \Exception
-     */
-    public function detalheAcervo($id)
-    {
-        $relacionamentos = [
-            'tipoAcervo',
-            'colecao',
-            'genero',
-            'situacao',
-            'corredor',
-            'estante',
-            'exemplares',
-            'primeiraEntrada.responsaveis'
-        ];
-
-        $arcevo = $this->repository->with($relacionamentos)->find($id);
-        
-        #Verificando se o registro foi encontrado
-        if(!$arcevo) {
-            throw new \Exception('Empresa não encontrada!');
-        }
-
-        #retorno
-        return $arcevo;
-    }
 
     /**
      * @param array $data
