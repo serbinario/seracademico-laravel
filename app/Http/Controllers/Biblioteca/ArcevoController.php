@@ -67,18 +67,18 @@ class ArcevoController extends Controller
             ->leftJoin(\DB::raw('(SELECT arcevos_id, count(*) as qtd_exemplares FROM bib_exemplares GROUP BY arcevos_id)exemplares'), function ($join) {
                 $join->on('exemplares.arcevos_id', '=', 'bib_arcevos.id');
             })
-            ->join(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada ORDER BY id ASC LIMIT 1)entrada'), function ($join) {
+            ->leftJoin(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada ORDER BY id ASC LIMIT 1)entrada'), function ($join) {
                 $join->on('entrada.arcevos_id', '=', 'bib_arcevos.id');
             })
-            //->join('primeira_entrada', 'primeira_entrada.arcevos_id', '=', 'bib_arcevos.id')
-            ->join('responsaveis', 'responsaveis.id', '=', 'entrada.responsaveis_id')
+//            ->join('primeira_entrada', 'primeira_entrada.arcevos_id', '=', 'bib_arcevos.id')
+            ->leftJoin('responsaveis', 'responsaveis.id', '=', 'entrada.responsaveis_id')
             ->select([
             'bib_arcevos.id',
             'bib_arcevos.titulo',
             'bib_arcevos.subtitulo',
             'bib_arcevos.cutter',
             'bib_arcevos.cdd',
-            'exemplares.qtd_exemplares', 
+            'exemplares.qtd_exemplares',
             \DB::raw('CONCAT (responsaveis.sobrenome, ", ", responsaveis.nome) as autor'),
             ]);
 
