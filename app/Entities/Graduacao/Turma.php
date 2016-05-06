@@ -123,7 +123,7 @@ class Turma extends Model implements Transformable
     public function disciplinas()
     {
         return $this->belongsToMany(Disciplina::class, "fac_turmas_disciplinas", "turma_id", "disciplina_id")
-            ->withPivot(['id', 'turma_id', 'disciplina_id']);
+            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva_id']);
     }
 
 //
@@ -135,27 +135,27 @@ class Turma extends Model implements Transformable
 //        return $this->belongsToMany(Aluno::class, "fac_alunos_turmas", "turma_id", "aluno_id")
 //            ->withPivot(['id', 'aluno_id', 'disciplina_id']);
 //    }
-//
-//    /**
-//     * @param Model $parent
-//     * @param array $attributes
-//     * @param string $table
-//     * @param bool $exists
-//     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-//     */
-//    public function newPivot(Model $parent, array $attributes, $table, $exists)
-//    {
-//        # Pivot para disciplina
-//        if ($parent instanceof Disciplina) {
-//            return new TurmaDisciplina($parent, $attributes, $table, $exists);
-//        }
-//
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        # Pivot para disciplina
+        if ($parent instanceof Disciplina) {
+            return new TurmaDisciplina($parent, $attributes, $table, $exists);
+        }
+
 //        # Pivot para Aluno
 //        if($parent instanceof Aluno) {
 //            return new AlunoTurma($parent, $attributes, $table, $exists);
 //        }
-//
-//        # Retorno do novo pivot
-//        return parent::newPivot($parent, $attributes, $table, $exists);
-//    }
+
+        # Retorno do novo pivot
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
 }

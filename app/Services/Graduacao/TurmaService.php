@@ -153,46 +153,12 @@ class TurmaService
         return $disciplinas;
     }
 
-    /**
-     * @param array $data
-     * @return bool
-     * @throws \Exception
-     */
-    public function removerDisciplina(array $data)
-    {
-        # Validando a requisição
-        if(!(isset($data['idDisciplina']) && is_numeric($data['idDisciplina'])) &&
-            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
-            throw new \Exception("Parametros inválidos");
-        }
-
-        # Recuperando os parametros da requisição
-        $idTurma      = $data['idTurma'];
-        $idDisciplina = $data['idDisciplina'];
-
-        # Recuperando a turma e a disciplina
-        $objTurma      = $this->repository->find($idTurma);
-        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
-
-        # Verificando se foi encontrada uma turma e disciplina
-        if(!$objTurma && !$objDisciplina) {
-            throw new \Exception("Turma ou disciplina informada não encontrada");
-        }
-
-        #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->detach($objDisciplina->id);
-        $objTurma->save();
-
-        #Retorno
-        return true;
-    }
-
 
     /**
      * @param array $models
      * @return array
      */
-    public function load(array $models) : array
+    public function load(array $models, $ajax = false) : array
     {
         #Declarando variáveis de uso
         $result    = [];
@@ -212,12 +178,34 @@ class TurmaService
             #qualificando o namespace
             $nameModel = "\\Seracademico\\Entities\\$model";
 
-            if(count($expressao) > 1) {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+            #Verificando se existe sobrescrita do nome do model
+            //$model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    switch (count($expressao)) {
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                        break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                        break;
+                    }
+
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                }
             } else {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
             }
 
             # Limpando a expressão
@@ -347,5 +335,75 @@ class TurmaService
 
         #retorno
         return $this->tratamentoDisciplinas($turma);
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function incluirDisciplina(array $data) : bool
+    {
+        # Validando a requisição
+        if(!(isset($data['disciplina_id']) && is_numeric($data['disciplina_id'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        # Recuperando os parametros da requisição
+        $idTurma      = $data['idTurma'];
+        $idDisciplina = $data['disciplina_id'];
+       // $idEletiva    = (isset($data['eletiva_id']) &&  is_numeric($data['eletiva_id'])) ? $data['eletiva_id'] : null;
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($idTurma);
+        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
+        //$objEletiva    = $this->disciplinaRepository->find($idEletiva);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Incluindo e salvando a disciplina
+        $objTurma->disciplinas()->attach($objDisciplina->id);
+        $objTurma->save();
+
+        #Retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function removerDisciplina(array $data)
+    {
+        # Validando a requisição
+        if(!(isset($data['idDisciplina']) && is_numeric($data['idDisciplina'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        # Recuperando os parametros da requisição
+        $idTurma      = $data['idTurma'];
+        $idDisciplina = $data['idDisciplina'];
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($idTurma);
+        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Incluindo e salvando a disciplina
+        $objTurma->disciplinas()->detach($objDisciplina->id);
+        $objTurma->save();
+
+        #Retorno
+        return true;
     }
 }

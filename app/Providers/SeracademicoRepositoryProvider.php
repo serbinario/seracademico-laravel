@@ -318,6 +318,16 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\TurmaRepository::class,
             \Seracademico\Repositories\Graduacao\TurmaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\DiaRepository::class,
+            \Seracademico\Repositories\DiaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\HoraRepository::class,
+            \Seracademico\Repositories\HoraRepositoryEloquent::class
+        );
     }
 
 }

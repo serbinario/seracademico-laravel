@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Turma;
+use Seracademico\Entities\Graduacao\Turma;
 
 class Disciplina extends Model implements Transformable
 {
@@ -26,6 +26,12 @@ class Disciplina extends Model implements Transformable
 		'tipo_nivel_sistema_id'
 	];
 
+    public function turmas()
+    {
+        return $this->belongsToMany(Turma::class, "fac_turmas_disciplinas", "disciplina_id", "turma_id")
+            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva_id']);
+    }
+
 	/**
 	 * @param Model $parent
 	 * @param array $attributes
@@ -39,6 +45,10 @@ class Disciplina extends Model implements Transformable
 			return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
 		}
 
+        if($parent instanceof Turma) {
+            return new TurmaDisciplina($parent, $attributes, $table, $exists);
+        }
+
 		return parent::newPivot($parent, $attributes, $table, $exists);
 	}
 
@@ -51,6 +61,7 @@ class Disciplina extends Model implements Transformable
 	{
 		return $query
             ->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
+			->where('tipo_nivel_sistema_id', 1)
 			->whereNotIn('fac_disciplinas.id', function ($query) use ($value) {
                 $query->from('fac_curriculo_disciplina')
                     ->select('fac_curriculo_disciplina.disciplina_id')
@@ -58,6 +69,28 @@ class Disciplina extends Model implements Transformable
                     ->where('fac_curriculos.id', $value)->get();
             })
             ->where('fac_disciplinas.tipo_nivel_sistema_id', 1);
+	}
+
+	/**
+	 * @param $query
+	 * @param $value
+	 * @return mixed
+	 */
+	public function scopeUniqueDisciplinaTurma($query, $idTurma, $periodo)
+	{
+		return $query
+			->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
+			->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+			->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
+			->where('fac_turmas.id', $idTurma)
+			->where('fac_curriculo_disciplina.periodo', $periodo)
+			->where('fac_disciplinas.tipo_nivel_sistema_id', 1)
+			->whereNotIn('fac_disciplinas.id', function ($query) use ($idTurma) {
+				$query->from('fac_turmas_disciplinas')
+					->select('fac_turmas_disciplinas.disciplina_id')
+					->where('turma_id', $idTurma)->get();
+			});
 	}
 
     /**

@@ -51,15 +51,16 @@
             </div>
         </div>
     </div>
-    {{--@include('turma.modal_calendario')--}}
-    {{--@include('turma.modal_novo_calendario')--}}
+    @include('graduacao.turma.modal_disciplina')
+    @include('graduacao.turma.modal_disciplina_store')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
 
 @section('javascript')
-    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_calendario.js')  }}"></script>--}}
-    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_novo_calendario.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina_store.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>--}}
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>--}}
     <script type="text/javascript">
@@ -81,21 +82,23 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-//        //Id da turma corrente
-//        var idTurma;
-//
-//        /*Responsável em abrir modal*/
-//        $(document).on("click", '.modal-calendario', function () {
-//            //Recuperando o id da turma selecionada
-//            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-//
-//            //Executando a grid
-//            runTableDisciplina(idTurma);
-//
-//            $("#modal-disciplina-calendario").find('.modal-dialog').css("width", "100%");
-//            $("#modal-disciplina-calendario").find('.modal-dialog').css("max-height", "100%");
-//            $("#modal-disciplina-calendario").modal({show: true, keyboard: true});
-//        });
+        //Id da turma corrente
+        var idTurma;
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-horario', function () {
+            //Recuperando o id da turma selecionada
+            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+
+            //Executando as grids
+            runTableDisciplina(idTurma);
+            runTableHorario(idTurma);
+
+            $("#modal-disciplina-horario").find('.modal-dialog').css("width", "100%");
+            $("#modal-disciplina-horario").find('.modal-dialog').css("max-height", "100%");
+            $("#modal-disciplina-horario").modal({show: true, keyboard: true});
+        });
 
     </script>
 @stop
