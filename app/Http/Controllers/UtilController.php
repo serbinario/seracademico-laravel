@@ -56,7 +56,7 @@ class UtilController extends Controller
             $valueWhere  = $request->get('valueWhere');
             $columnSelect = $request->get('columnSelect');
 
-            //Consulta para not in que precisarão de outra tabela para recuperar os dados
+            //consulta para not in que precisarão de outra tabela para recuperar os dados
             $tableNotIn     = $request->get('tableNotIn');
             $columnNotWhere = $request->get('columnNotWhere');
             $culmnNotGet    = $request->get('culmnNotGet');
@@ -163,7 +163,7 @@ class UtilController extends Controller
             $valueWhere  = $request->get('valueWhere');
             $columnSelect = $request->get('columnSelect');
 
-            //Consulta para not in que precisarão de outra tabela para recuperar os dados
+            //consulta para not in que precisarão de outra tabela para recuperar os dados
             $tableNotIn     = $request->get('tableNotIn');
             $columnNotWhere = $request->get('columnNotWhere');
             $culmnNotGet    = $request->get('culmnNotGet');
@@ -272,7 +272,7 @@ class UtilController extends Controller
             $valueWhere  = $request->get('valueWhere');
             $columnSelect = $request->get('columnSelect');
 
-            //Consulta para not in que precisarão de outra tabela para recuperar os dados
+            //consulta para not in que precisarão de outra tabela para recuperar os dados
             $tableNotIn     = $request->get('tableNotIn');
             $columnNotWhere = $request->get('columnNotWhere');
             $culmnNotGet    = $request->get('culmnNotGet');

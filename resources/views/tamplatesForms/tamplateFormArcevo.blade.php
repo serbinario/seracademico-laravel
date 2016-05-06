@@ -81,37 +81,37 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('tipos_acervos_id', 'Tipo do acervo') !!}
-                            {!! Form::select('tipos_acervos_id', (["" => "Selecione o tipo"] + $loadFields['tipoacervo']->toArray()), Session::getOldInput('tipos_acervos_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('tipos_acervos_id', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoacervo']->toArray()), Session::getOldInput('tipos_acervos_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('colecao_id', 'Coleção') !!}
-                            {!! Form::select('colecao_id', (["" => "Selecione a coleção"] + $loadFields['colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('colecao_id', (["" => "Selecione a coleção"] + $loadFields['biblioteca\colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('genero_id', 'Genero') !!}
-                            {!! Form::select('genero_id', (["" => "Selecione o genero"] + $loadFields['genero']->toArray()), Session::getOldInput('genero_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('genero_id', (["" => "Selecione o genero"] + $loadFields['biblioteca\genero']->toArray()), Session::getOldInput('genero_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('situacao_id', 'Situação') !!}
-                            {!! Form::select('situacao_id', $loadFields['situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('situacao_id', $loadFields['biblioteca\situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('estante_id', 'Estante') !!}
-                            {!! Form::select('estante_id', (["" => "Selecione a estante"] + $loadFields['estante']->toArray()), Session::getOldInput('estante_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('estante_id', (["" => "Selecione a estante"] + $loadFields['biblioteca\estante']->toArray()), Session::getOldInput('estante_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('corredor_id', 'Corredor') !!}
-                            {!! Form::select('corredor_id', (["" => "Selecione o corredor"] + $loadFields['corredor']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control')) !!}
+                            {!! Form::select('corredor_id', (["" => "Selecione o corredor"] + $loadFields['biblioteca\corredor']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -181,10 +181,10 @@
                         <div class="form-group">
                             {!! Form::label('primeira[responsaveis_id]', 'Autor 1') !!}
                             @if(isset($primeiraEntrada[0]))
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $primeiraEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-1')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $primeiraEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-1')) !!}
                                 <input type="hidden" name="primeira[id][]" value="{{$primeiraEntrada[0]->id}}">
                             @else
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), array(" " => 'teste'), array('class' => 'form-control', "id" => 'autor-1')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), array(" " => 'teste'), array('class' => 'form-control', "id" => 'autor-1')) !!}
                             @endif
                         </div>
                     </div>
@@ -194,10 +194,10 @@
                         <div class="form-group">
                             {!! Form::label('primeira[responsaveis_id]', 'Autor 2') !!}
                             @if(isset($primeiraEntrada[1]))
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $primeiraEntrada[1]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-2')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $primeiraEntrada[1]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-2')) !!}
                                 <input type="hidden" name="primeira[id][]" value="{{$primeiraEntrada[1]->id}}">
                             @else
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'autor-2')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'autor-2')) !!}
                             @endif
                         </div>
                     </div>
@@ -207,10 +207,10 @@
                         <div class="form-group">
                             {!! Form::label('primeira[responsaveis_id]', 'Autor 3') !!}
                             @if(isset($primeiraEntrada[2]))
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $primeiraEntrada[2]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-3')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $primeiraEntrada[2]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-3')) !!}
                                 <input type="hidden" name="primeira[id][]" value="{{$primeiraEntrada[2]->id}}">
                             @else
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'autor-3')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'autor-3')) !!}
                             @endif
                         </div>
                     </div>
@@ -240,10 +240,10 @@
                         <div class="form-group">
                             {!! Form::label('segunda[responsaveis_id]', 'Responsável 1') !!}
                             @if(isset($segundaEntrada[0]))
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $segundaEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-1')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $segundaEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-1')) !!}
                                 <input type="hidden" name="segunda[id][]" value="{{$segundaEntrada[0]->id}}">
                             @else
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-1')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-1')) !!}
                             @endif
                         </div>
                     </div>
@@ -251,9 +251,9 @@
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[0]))
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), $segundaEntrada[0]->tipo_autor_id, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), $segundaEntrada[0]->tipo_autor_id, array('class' => 'form-control')) !!}
                             @else
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
                             @endif
                         </div>
                     </div>
@@ -263,10 +263,10 @@
                         <div class="form-group">
                             {!! Form::label('segunda[responsaveis_id]', 'Responsável 2') !!}
                             @if(isset($segundaEntrada[1]))
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $segundaEntrada[1]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-2')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $segundaEntrada[1]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-2')) !!}
                                 <input type="hidden" name="segunda[id][]" value="{{$segundaEntrada[1]->id}}">
                             @else
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-2')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-2')) !!}
                             @endif
                         </div>
                     </div>
@@ -274,9 +274,9 @@
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[1]))
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), $segundaEntrada[1]->tipo_autor_id, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), $segundaEntrada[1]->tipo_autor_id, array('class' => 'form-control')) !!}
                             @else
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
                             @endif
                         </div>
                     </div>
@@ -286,10 +286,10 @@
                         <div class="form-group">
                             {!! Form::label('segunda[responsaveis_id]', 'Responsável 3') !!}
                             @if(isset($segundaEntrada[2]))
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), $segundaEntrada[2]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-3')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $segundaEntrada[2]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-3')) !!}
                                 <input type="hidden" name="segunda[id][]" value="{{$segundaEntrada[2]->id}}">
                             @else
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-3')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-3')) !!}
                             @endif
                         </div>
                     </div>
@@ -297,9 +297,9 @@
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[2]))
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), $segundaEntrada[2]->tipo_autor_id, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), $segundaEntrada[2]->tipo_autor_id, array('class' => 'form-control')) !!}
                             @else
-                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
+                                {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
                             @endif
                         </div>
                     </div>

@@ -241,72 +241,72 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepositoryEloquent::class);
 
         $this->app->bind(
-            \Seracademico\Repositories\EditoraRepository::class,
-            \Seracademico\Repositories\EditoraRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\EditoraRepository::class,
+            \Seracademico\Repositories\Biblioteca\EditoraRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\ArcevoRepository::class,
-            \Seracademico\Repositories\ArcevoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\ArcevoRepository::class,
+            \Seracademico\Repositories\Biblioteca\ArcevoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\TipoAcervoRepository::class,
-            \Seracademico\Repositories\TipoAcervoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\TipoAcervoRepository::class,
+            \Seracademico\Repositories\Biblioteca\TipoAcervoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\TipoAutorRepository::class,
-            \Seracademico\Repositories\TipoAutorRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\TipoAutorRepository::class,
+            \Seracademico\Repositories\Biblioteca\TipoAutorRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\SegundaEntradaRepository::class,
-            \Seracademico\Repositories\SegundaEntradaRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\SegundaEntradaRepository::class,
+            \Seracademico\Repositories\Biblioteca\SegundaEntradaRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\PrimeiraEntradaRepository::class,
-            \Seracademico\Repositories\PrimeiraEntradaRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\PrimeiraEntradaRepository::class,
+            \Seracademico\Repositories\Biblioteca\PrimeiraEntradaRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\ColecaoRepository::class,
-            \Seracademico\Repositories\ColecaoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\ColecaoRepository::class,
+            \Seracademico\Repositories\Biblioteca\ColecaoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\GeneroRepository::class,
-            \Seracademico\Repositories\GeneroRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\GeneroRepository::class,
+            \Seracademico\Repositories\Biblioteca\GeneroRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\CorredorRepository::class,
-            \Seracademico\Repositories\CorredorRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\CorredorRepository::class,
+            \Seracademico\Repositories\Biblioteca\CorredorRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\EstanteRepository::class,
-            \Seracademico\Repositories\EstanteRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\EstanteRepository::class,
+            \Seracademico\Repositories\Biblioteca\EstanteRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\SituacaoRepository::class,
-            \Seracademico\Repositories\SituacaoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\SituacaoRepository::class,
+            \Seracademico\Repositories\Biblioteca\SituacaoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\IdiomaRepository::class,
-            \Seracademico\Repositories\IdiomaRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\IdiomaRepository::class,
+            \Seracademico\Repositories\Biblioteca\IdiomaRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\AquisicaoRepository::class,
-            \Seracademico\Repositories\AquisicaoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\AquisicaoRepository::class,
+            \Seracademico\Repositories\Biblioteca\AquisicaoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\IlustracaoRepository::class,
-            \Seracademico\Repositories\IlustracaoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\IlustracaoRepository::class,
+            \Seracademico\Repositories\Biblioteca\IlustracaoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\EmprestimoRepository::class,
-            \Seracademico\Repositories\EmprestimoRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\EmprestimoRepository::class,
+            \Seracademico\Repositories\Biblioteca\EmprestimoRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\ExemplarRepository::class,
-            \Seracademico\Repositories\ExemplarRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\ExemplarRepository::class,
+            \Seracademico\Repositories\Biblioteca\ExemplarRepositoryEloquent::class
         );
         $this->app->bind(
-            \Seracademico\Repositories\ResponsavelRepository::class,
-            \Seracademico\Repositories\ResponsavelRepositoryEloquent::class
+            \Seracademico\Repositories\Biblioteca\ResponsavelRepository::class,
+            \Seracademico\Repositories\Biblioteca\ResponsavelRepositoryEloquent::class
         );
 
         $this->app->bind(

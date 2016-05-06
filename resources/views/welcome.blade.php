@@ -248,7 +248,7 @@
     {{--validateUniqueField(parameters, "#emailAlunos");--}}
     {{--});--}}
 
-    {{--//Consulta da instituição de 2 grau--}}
+    {{--//consulta da instituição de 2 grau--}}
     {{--$("#instituicao").select2({--}}
     {{--data: {"id": 1, "text": "text"},--}}
     {{--placeholder: 'Selecione uma instituição',--}}

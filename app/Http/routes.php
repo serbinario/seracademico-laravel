@@ -263,41 +263,46 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'biblioteca', 'as' => 'biblioteca.'], function () {
-            Route::get('indexResponsavel', ['as' => 'indexResponsavel', 'uses' => 'ResponsavelController@index']);
-            Route::get('createResponsavel', ['as' => 'createResponsavel', 'uses' => 'ResponsavelController@create']);
-            Route::get('gridResponsavel', ['as' => 'gridResponsavel', 'uses' => 'ResponsavelController@grid']);
-            Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'ResponsavelController@edit']);
-            Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'ResponsavelController@store']);
-            Route::post('storeAjaxResponsavel', ['as' => 'storeAjaxResponsavel', 'uses' => 'ResponsavelController@storeAjax']);
-            Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'ResponsavelController@update']);
-            Route::get('deleteResponsavel/{id}', ['as' => 'deleteResponsavel', 'uses' => 'ResponsavelController@delete']);
+            Route::get('indexResponsavel', ['as' => 'indexResponsavel', 'uses' => 'Biblioteca\ResponsavelController@index']);
+            Route::get('createResponsavel', ['as' => 'createResponsavel', 'uses' => 'Biblioteca\ResponsavelController@create']);
+            Route::get('gridResponsavel', ['as' => 'gridResponsavel', 'uses' => 'Biblioteca\ResponsavelController@grid']);
+            Route::get('editResponsavel/{id}', ['as' => 'editResponsavel', 'uses' => 'Biblioteca\ResponsavelController@edit']);
+            Route::post('storeResponsavel', ['as' => 'storeResponsavel', 'uses' => 'Biblioteca\ResponsavelController@store']);
+            Route::post('storeAjaxResponsavel', ['as' => 'storeAjaxResponsavel', 'uses' => 'Biblioteca\ResponsavelController@storeAjax']);
+            Route::post('updateResponsavel/{id}', ['as' => 'updateResponsavel', 'uses' => 'Biblioteca\ResponsavelController@update']);
+            Route::get('deleteResponsavel/{id}', ['as' => 'deleteResponsavel', 'uses' => 'Biblioteca\ResponsavelController@delete']);
 
-            Route::get('indexEditora', ['as' => 'indexEditora', 'uses' => 'EditoraController@index']);
-            Route::get('createEditora', ['as' => 'createEditora', 'uses' => 'EditoraController@create']);
-            Route::get('gridEditora', ['as' => 'gridEditora', 'uses' => 'EditoraController@grid']);
-            Route::get('editEditora/{id}', ['as' => 'editEditora', 'uses' => 'EditoraController@edit']);
-            Route::post('storeEditora', ['as' => 'storeEditora', 'uses' => 'EditoraController@store']);
-            Route::post('storeAjaxEditora', ['as' => 'storeAjaxEditora', 'uses' => 'EditoraController@storeAjax']);
-            Route::post('updateEditora/{id}', ['as' => 'updateEditora', 'uses' => 'EditoraController@update']);
-            Route::get('deleteEditora/{id}', ['as' => 'deleteEditora', 'uses' => 'EditoraController@delete']);
+            Route::get('indexEditora', ['as' => 'indexEditora', 'uses' => 'Biblioteca\EditoraController@index']);
+            Route::get('createEditora', ['as' => 'createEditora', 'uses' => 'Biblioteca\EditoraController@create']);
+            Route::get('gridEditora', ['as' => 'gridEditora', 'uses' => 'Biblioteca\EditoraController@grid']);
+            Route::get('editEditora/{id}', ['as' => 'editEditora', 'uses' => 'Biblioteca\EditoraController@edit']);
+            Route::post('storeEditora', ['as' => 'storeEditora', 'uses' => 'Biblioteca\EditoraController@store']);
+            Route::post('storeAjaxEditora', ['as' => 'storeAjaxEditora', 'uses' => 'Biblioteca\EditoraController@storeAjax']);
+            Route::post('updateEditora/{id}', ['as' => 'updateEditora', 'uses' => 'Biblioteca\EditoraController@update']);
+            Route::get('deleteEditora/{id}', ['as' => 'deleteEditora', 'uses' => 'Biblioteca\EditoraController@delete']);
 
-            Route::get('indexAcervo', ['as' => 'indexAcervo', 'uses' => 'ArcevoController@index']);
-            Route::get('createAcervo', ['as' => 'createAcervo', 'uses' => 'ArcevoController@create']);
-            Route::get('gridAcervo', ['as' => 'gridAcervo', 'uses' => 'ArcevoController@grid']);
-            Route::get('editAcervo/{id}', ['as' => 'editAcervo', 'uses' => 'ArcevoController@edit']);
-            Route::post('storeAcervo', ['as' => 'storeAcervo', 'uses' => 'ArcevoController@store']);
-            Route::post('updateAcervo/{id}', ['as' => 'updateAcervo', 'uses' => 'ArcevoController@update']);
-            Route::get('deleteAcervo/{id}', ['as' => 'deleteAcervo', 'uses' => 'ArcevoController@delete']);
+            Route::get('indexAcervo', ['as' => 'indexAcervo', 'uses' => 'Biblioteca\ArcevoController@index']);
+            Route::get('createAcervo', ['as' => 'createAcervo', 'uses' => 'Biblioteca\ArcevoController@create']);
+            Route::get('gridAcervo', ['as' => 'gridAcervo', 'uses' => 'Biblioteca\ArcevoController@grid']);
+            Route::get('editAcervo/{id}', ['as' => 'editAcervo', 'uses' => 'Biblioteca\ArcevoController@edit']);
+            Route::post('storeAcervo', ['as' => 'storeAcervo', 'uses' => 'Biblioteca\ArcevoController@store']);
+            Route::post('updateAcervo/{id}', ['as' => 'updateAcervo', 'uses' => 'Biblioteca\ArcevoController@update']);
+            Route::get('deleteAcervo/{id}', ['as' => 'deleteAcervo', 'uses' => 'Biblioteca\ArcevoController@delete']);
 
-            Route::get('indexExemplar', ['as' => 'indexExemplar', 'uses' => 'ExemplarController@index']);
-            Route::get('createExemplar', ['as' => 'createExemplar', 'uses' => 'ExemplarController@create']);
-            Route::get('gridExemplar', ['as' => 'gridExemplar', 'uses' => 'ExemplarController@grid']);
-            Route::get('editExemplar/{id}', ['as' => 'editExemplar', 'uses' => 'ExemplarController@edit']);
-            Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'ExemplarController@store']);
-            Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'ExemplarController@update']);
-            Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'ExemplarController@delete']);
+            Route::get('indexExemplar', ['as' => 'indexExemplar', 'uses' => 'Biblioteca\ExemplarController@index']);
+            Route::get('createExemplar', ['as' => 'createExemplar', 'uses' => 'Biblioteca\ExemplarController@create']);
+            Route::get('gridExemplar', ['as' => 'gridExemplar', 'uses' => 'Biblioteca\ExemplarController@grid']);
+            Route::get('editExemplar/{id}', ['as' => 'editExemplar', 'uses' => 'Biblioteca\ExemplarController@edit']);
+            Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'Biblioteca\ExemplarController@store']);
+            Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'Biblioteca\ExemplarController@update']);
+            Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'Biblioteca\ExemplarController@delete']);
 
             Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
+
+            Route::get('indexConsulta', ['as' => 'indexConsulta', 'uses' => 'Biblioteca\ConsultaController@index']);
+            Route::post('seachSimple', ['as' => 'seachSimple', 'uses' => 'Biblioteca\ConsultaController@seachSimple']);
+            Route::get('seachSimplePage', ['as' => 'seachSimplePage', 'uses' => 'Biblioteca\ConsultaController@seachSimplePage']);
+            Route::get('seachDetalhe/acervo/{id}', ['as' => 'seachDetalhe', 'uses' => 'Biblioteca\ConsultaController@seachDetalhe']);
         });
 
         //Rotas para componentes de segurança

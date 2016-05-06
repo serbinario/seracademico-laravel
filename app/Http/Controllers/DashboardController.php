@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Repositories\ArcevoRepository;
-use Seracademico\Services\ArcevoService;
-use Seracademico\Services\ExemplarService;
+use Seracademico\Repositories\Biblioteca\ArcevoRepository;
+use Seracademico\Services\Biblioteca\ArcevoService;
+use Seracademico\Services\Biblioteca\ExemplarService;
 
 class DashboardController extends Controller
 {
