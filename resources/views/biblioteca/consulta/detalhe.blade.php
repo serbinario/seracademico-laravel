@@ -23,7 +23,8 @@
 <nav>
     <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><i class="material-icons left">book</i> Biblioteca</a>
+            <a href="#!" class="brand-logo"><img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
+    margin-top: -20%;"></a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Navegue<i
@@ -67,7 +68,7 @@
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s2" style="margin-top: 30px;">
+                            <div class="col s2" >
                                 <input type="submit" class="waves-effect waves-light btn" value="Buscar">
                             </div>
                             <div class="col s3" style="margin-top: 3px;">
