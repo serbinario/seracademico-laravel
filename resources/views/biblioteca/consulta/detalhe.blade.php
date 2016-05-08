@@ -15,19 +15,19 @@
 <body>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Autoridades</a></li>
-    <li><a href="#!">Minha Seleção</a></li>
-    <li class="divider"></li>
     <li><a href="#!">Ajuda</a></li>
+    <li><a href="#!">Sobre</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Sair</a></li>
 </ul>
 <nav>
     <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
-    margin-top: -20%;"></a>
+            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
+    margin-top: -20%;"> </a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Navegue<i
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </div>
@@ -69,7 +69,7 @@
                                 <label for="icon_prefix">Busque</label>
                             </div>
                             <div class="col s2" >
-                                <input type="submit" class="waves-effect waves-light btn" value="Buscar">
+                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                             </div>
                             <div class="col s3" style="margin-top: 3px;">
                                 {!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}
@@ -219,7 +219,7 @@
     <div class="row">
         <div class="col s12 m12">
             <div class="row section">
-                <div class="col s9">
+                <div class="col s12 m9">
                     <section class="">
                         <div class="row">
                             <div class="col s12">
@@ -230,93 +230,115 @@
                                 </ul>
                             </div>
                             <div id="test1" class="col s12">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td><b>Inf. publicação</b></td>
-                                        <td>{{$exemplar['acervo']['tipoAcervo']['nome']}} - {{$exemplar['idioma']['nome']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>ISBN</b></td>
-                                        <td>{{$exemplar['isbn']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Classificação Dewey</b></td>
-                                        <td>{{$exemplar['acervo']['cdd']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Cutter</b></td>
-                                        <td>{{$exemplar['acervo']['cutter']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Número de chamada</b></td>
-                                        <td>{{$exemplar['acervo']['numero_chamada']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Edição</b></td>
-                                        <td>@if($exemplar['edicao']){{$exemplar['edicao']}} .ed @endif</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Título</b></td>
-                                        <td><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}}</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Ent. princ.</b></td>
-                                        <td>
-                                            @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
-                                                @if($exemplar['acervo']['etial_autor'] == '1')
-                                                    {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
-                                                    {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']}}. etal
-                                                @else
-                                                    @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
-                                                        <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
-                                                    @endforeach
-                                                @endif
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Imprenta</b></td>
-                                        <td>{{$exemplar['local']}}@if($exemplar['ano']), {{$exemplar['ano']}}.@endif</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Desc. física</b></td>
-                                        <td>{{$exemplar['numero_pag']}}p. @if($exemplar['ilustracoes_id'] == '1') : il.@endif</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Notas</b></td>
-                                        <td>{{$exemplar['acervo']['resumo']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Assunto</b></td>
-                                        <td>{{$exemplar['acervo']['assunto']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Ent. sec.</b></td>
-                                        <td>
-                                            @if(count($exemplar['acervo']['segundaEntrada']) > 0)
-                                                @if($exemplar['acervo']['etial_outros'] == '1')
-                                                    <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome']}}. etal
-                                                @else
-                                                    @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
-                                                        <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
-                                                    @endforeach
-                                                @endif
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <br>
+                                <div class="collection">
+                                    <a class="collection-item">
+                                        <div class="row">
+                                        <div class="col s4"><b>Inf. publicação</b></div>
+                                        <div class="col s8">{{$exemplar['acervo']['tipoAcervo']['nome']}} - {{$exemplar['idioma']['nome']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>ISBN</b></div>
+                                            <div class="col s8">{{$exemplar['isbn']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Classificação Dewey</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['cdd']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Cutter</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['cutter']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Número de chamada</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['numero_chamada']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Edição</b></div>
+                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}} .ed @endif</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item active">
+                                        <div class="row">
+                                            <div class="col s4"><b>Título</b></div>
+                                            <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}}</b></div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Ent. princ.</b></div>
+                                            <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
+                                                    @if($exemplar['acervo']['etial_autor'] == '1')
+                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
+                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']}}. etal
+                                                    @else
+                                                        @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
+                                                        @endforeach
+                                                    @endif
+                                                @endif</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Imprenta</b></div>
+                                            <div class="col s8">{{$exemplar['local']}}@if($exemplar['ano']), {{$exemplar['ano']}}.@endif</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Desc. física</b></div>
+                                            <div class="col s8">{{$exemplar['numero_pag']}}p. @if($exemplar['ilustracoes_id'] == '1') : il.@endif</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Notas</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['resumo']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Assunto</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['assunto']}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Ent. sec.</b></div>
+                                            <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
+                                                    @if($exemplar['acervo']['etial_outros'] == '1')
+                                                        <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome']}}. etal
+                                                    @else
+                                                        @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
+                                                        @endforeach
+                                                    @endif
+                                                @endif</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             <div id="test2" class="col s12">
+                                <br>
                                 @if(count($exemplares) > 0)
-                                    <table class="table table-bordered">
+                                    <table class="table striped responsive-table">
                                         <thead>
                                             <tr>
                                                 <th>Tombo</th>
                                                 <th>Edição</th>
                                                 <th>Ano</th>
-                                                <th>Velume</th>
+                                                <th>Volume</th>
                                                 <th>CDD</th>
                                                 <th>Cutter</th>
                                                 <th>Número de chamada</th>
@@ -339,6 +361,7 @@
                                 @endif
                             </div>
                             <div id="test4" class="col s12">
+                                <br>
                                 <?php $count = 0; ?>
                                 @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                     @if($exemplar['acervo']['etial_autor'] == '1')
@@ -357,20 +380,15 @@
                         </div>
                     </section>
                 </div>
-                <div class="col s3">
+                <div class="col s12 m3">
                     <section class="arg-list">
                         <div class="col s12">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">
-                                </div>
-                                <div class="card-content">
-                                    <!-- <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>   -->
-                                </div>
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">Detalhes do livro<i
-                                                class="material-icons right">close</i></span>
-                                    <p>Aqui são mostradas mais informações</p>
+                            <div class="card" style="margin-top: 0px;">
+                                <div class="card-image waves-effect waves-block waves-light" style="padding: 0 40px;">
+                                    <div class="book-search">
+                                            <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 110px;margin-top: -30%;">
+                                    </div>
+                                   {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
                                 </div>
                             </div>
                     </section>
@@ -382,10 +400,29 @@
 </div>
 <br><br>
 </div>
-<footer class="page-footer indigo">
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <a href="">
+                    <img src="{{ asset('/biblioteca/img/logo-alpha-b.png')}}" style="width: 180px;position: relative;float: left;">
+                </a>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text"><b>Alpha Faculdade</b></h5>
+                <p class="grey-text text-lighten-4">Biblioteca Institucional</p>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Sobre</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Ajuda</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="footer-copyright">
         <div class="container">
-            <p>SerBinário</p>
+            © 2016 Desenvolvimento por: SerBinário
+            <a class="grey-text text-lighten-4 right" href="#!"> <img src="{{ asset('/biblioteca/img/s1-b.png')}}" style="width: 130px;position: relative;
+    float: right;margin-top: 12px;"></a>
         </div>
     </div>
 </footer>

@@ -55,9 +55,12 @@ nav {
 	    height: 25px;
     line-height: 25px;
 }
-
+.tabs{
+    background-color: #E3E3E3;
+}
 .tabs .tab a{
-	color: #3B63A0;
+	color: #325DA8;
+    font-weight: 600;
 }
 .tabs .tab a:hover{
 	    color: #5F8CD0;
@@ -139,8 +142,8 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 }
 .book-search {
     width: auto;
-    height: 120px;
-    background-color: #8c8c8c;
+    height: 150px;
+    background-color: #e0e0e0;
     text-align: center;
     color: white;
     padding-top: 50px;
@@ -179,11 +182,25 @@ nav ul a {
     border-radius: 0px !important;
     border-top: 3px solid #283278;
 }
+.card .card-image{
+    height: 150px;
+}
+.card .card-content{
+    padding: 10px;
+    border-radius: 0;
+}
 .chip{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 95%;
+}
+footer.page-footer {
+    background-color: #325DA8;
+}
+.pagination li.active{
+    background-color: #325DA8 !important;
+    color: white !important;
 }
 /* .btn {
   display: inline-block;
