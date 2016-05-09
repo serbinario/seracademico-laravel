@@ -1,10 +1,10 @@
 // Evento para chamar o modal de inserir adicionar disciplina
 $(document).on("click", "#btnIncluirDisciplinas", function () {
-    loadFields();
+    loadFieldsDisciplina();
 });
 
 // carregando todos os campos preenchidos
-function loadFields()
+function loadFieldsDisciplina()
 {
     // Definindo os models
     var dados =  {
@@ -22,7 +22,7 @@ function loadFields()
     }).done(function (retorno) {;
         // Verificando o retorno da requisição
         if(retorno['graduacao\\disciplina'].length > 0) {
-            builderHtmlFields(retorno);
+            builderHtmlFieldsDisciplina(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             //$('#modal-disciplina-store').modal('hide');
@@ -33,7 +33,7 @@ function loadFields()
 };
 
 // Função a montar o html
-function builderHtmlFields (dados) {
+function builderHtmlFieldsDisciplina (dados) {
     // limpando os campos
     $("#disciplina_id").find("option").eq(0).prop("selected", true);
 
