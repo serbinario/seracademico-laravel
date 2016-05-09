@@ -54,7 +54,7 @@
 
             function formatRepoSelection2(repo) {
 
-                return repo.titulo || repo.text
+                return repo.titulo || repo.id + ' - ' + repo.text
             }
 
             //consulta via select2 segunda entrada 1
