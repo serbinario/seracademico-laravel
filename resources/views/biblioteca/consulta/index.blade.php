@@ -15,18 +15,19 @@
 <body>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Autoridades</a></li>
-    <li><a href="#!">Minha Seleção</a></li>
-    <li class="divider"></li>
     <li><a href="#!">Ajuda</a></li>
+    <li><a href="#!">Sobre</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Sair</a></li>
 </ul>
 <nav>
-    <div class="container">
+    <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><i class="material-icons left">book</i> Biblioteca</a>
+            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
+    margin-top: -20%;"> </a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Navegue<i
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </div>
@@ -42,7 +43,6 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        <br>
         <div class="row">
             <div class="card col s12">
                 <div class="card-content">
@@ -67,8 +67,8 @@
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s2" style="margin-top: 30px;">
-                                <input type="submit" class="waves-effect waves-light btn" value="Buscar">
+                            <div class="col s2" >
+                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                             </div>
                             <div class="col s3" style="margin-top: 3px;">
                                 {!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}
@@ -215,15 +215,16 @@
 
 <div class="container">
     <!-- Info Resalt-->
-    {{--<div class="row">
+    {{--<h5>Últimos livros adicionados</h5>
+    <hr>
+   <div class="row">
         <div class="col s12 m3">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/2204_Biblioteca_.jpg">
+                    <img class="activator" src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Livro 1<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
+                    <span class="card-title activator grey-text text-darken-4"><p style="font-size: 12px;"><b>SOCIOLOGIA GERAL: ANTROPOLOGIA</b></p></span>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Detalhes<i
@@ -280,18 +281,38 @@
                 </div>
             </div>
         </div>
-    </div>--}}
+    </div>
 <br />
-    <br />
+    <br />--}}
     <!-- End Info Resalt-->
 
 </div>
 <br><br>
 </div>
-<footer class="page-footer indigo">
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <a href="">
+                    <img src="{{ asset('/biblioteca/img/logo-alpha-b.png')}}" style="width: 180px;position: relative;float: left;">
+                </a>
+
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text"><b>Alpha Faculdade</b></h5>
+                <p class="grey-text text-lighten-4">Biblioteca Institucional</p>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Sobre</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Ajuda</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="footer-copyright">
         <div class="container">
-            <p>SerBinário</p>
+            © 2016 Desenvolvimento por: SerBinário
+            <a class="grey-text text-lighten-4 right" href="#!"> <img src="{{ asset('/biblioteca/img/s1-b.png')}}" style="width: 130px;position: relative;
+    float: right;margin-top: 12px;"></a>
         </div>
     </div>
 </footer>
