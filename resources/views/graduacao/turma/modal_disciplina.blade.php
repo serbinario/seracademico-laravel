@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Horário das disciplinas</h4>
+                <h4 class="modal-title">Gerenciamento das disciplinas</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -52,6 +52,22 @@
                                     </tr>
                                     </thead>
                                 </table>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-md-offset-7">
+                                        <div class="btn-group btn-group-justified">
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary pull-right" id="btnAdicionarHorario" style="margin-bottom: 3%;">Adicionar</button>
+                                            </div>
+                                            {{--<div class="btn-group">--}}
+                                                {{--<button class="btn btn-primary pull-right" id="btnEditarHorario" style="margin-bottom: 3%;">Editar</button>--}}
+                                            {{--</div>--}}
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary pull-right" id="btnRemoverHorario" style="margin-bottom: 3%;">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             {{--FIM Aba Horario--}}
                         </div>

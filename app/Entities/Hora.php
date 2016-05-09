@@ -14,12 +14,12 @@ class Hora extends Model implements Transformable
     protected $table    = 'fac_horas';
 
     protected $dates    = [
-        'hora_inicial'
-        'hora_final',
+        'hora_inicial',
+        'hora_final'
     ];
 
     protected $fillable = [
-        'hora_inicial'
+        'hora_inicial',
         'hora_final',
         'turno_id'
     ];

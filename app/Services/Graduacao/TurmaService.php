@@ -155,7 +155,7 @@ class TurmaService
 
 
     /**
-     * @param array $models
+     * @param array $models || Melhorar esse código
      * @return array
      */
     public function load(array $models, $ajax = false) : array
@@ -180,7 +180,7 @@ class TurmaService
 
             #Verificando se existe sobrescrita do nome do model
             //$model     = isset($expressao[2]) ? $expressao[2] : $model;
-
+            
             if ($ajax) {
                 if(count($expressao) > 1) {
                     switch (count($expressao)) {
@@ -196,7 +196,7 @@ class TurmaService
 
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
                 }
             } else {
                 if(count($expressao) > 1) {
@@ -405,5 +405,118 @@ class TurmaService
 
         #Retorno
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function incluirHorario(array $data) : bool
+    {
+        # Validando a requisição
+        if(!(isset($data['disciplina_id']) && is_numeric($data['disciplina_id'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        #Tratamento dos campos
+        $this->tratamentoCampos($data);
+
+        # Recuperando os parametros da requisição
+        $idTurma      = $data['idTurma'];
+        $idDisciplina = $data['disciplina_id'];
+
+        # Removendo o idTurma do array
+        unset($data['idTurma']);
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($idTurma);
+        $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Incluindo e salvando a disciplina
+        $disciplina = $objTurma->disciplinas()->find($objDisciplina->id);
+        $pivot      = $disciplina->pivot;
+
+        # Salvando o horário
+        $pivot->horarios()->create($data);
+
+        #Retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function removerHorario(array $data)
+    {
+        # Validando a requisição
+        if(!(isset($data['idDia']) && is_numeric($data['idDia'])) &&
+            !(isset($data['idHora']) && is_numeric($data['idHora'])) &&
+            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
+            throw new \Exception("Parametros inválidos");
+        }
+
+        # Recuperando os parametros da requisição
+        $idTurma = $data['idTurma'];
+        $idDia   = $data['idDia'];
+        $idHora  = $data['idHora'];
+
+        # Recuperando a turma e a disciplina
+        $objTurma   = $this->repository->find($idTurma);
+        $resultId   = \DB::table('fac_horarios')
+                            ->select(['fac_turmas_disciplinas.disciplina_id', 'fac_horarios.id'])
+                            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+                            ->where('fac_turmas.id', $idTurma)
+                            ->where('fac_horarios.dia_id', $idDia)
+                            ->where('fac_horarios.hora_id', $idHora)
+                            ->get();
+
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && count($resultId) == 0) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        #Recuperando o pivot e remocvendo o horário
+        $disciplina  = $objTurma->disciplinas()->find($resultId[0]->disciplina_id);
+        $pivot       = $disciplina->pivot;
+        $horario     = $pivot->horarios()->find($resultId[0]->id);
+
+        # Removendo o horário
+        $horario->delete();
+
+        # Salvando mudanças
+        $objTurma->save();
+
+        #Retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                unset($data[$key]);
+            }
+        }
+
+        #Retorno
+        return $data;
     }
 }

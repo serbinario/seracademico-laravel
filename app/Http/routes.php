@@ -185,7 +185,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 });
 
                 Route::group(['prefix' => 'horario', 'as' => 'horario.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\HorarioTurmaController@getLoadFields']);
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\HorarioTurmaController@grid']);
+                    Route::post('horasDisponiveis', ['as' => 'delete', 'uses' => 'Graduacao\HorarioTurmaController@horasDisponiveis']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\HorarioTurmaController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\HorarioTurmaController@store']);
 //                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@disciplinasOfCurriculo']);
 //                    Route::post('store', ['as' => 'store', 'uses' => 'CalendarioTurmaController@store']);
 //                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendarioTurmaController@edit']);

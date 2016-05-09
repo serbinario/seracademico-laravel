@@ -70,7 +70,7 @@ class TurmaDisciplinaController extends Controller
             $disciplina      = $turma->disciplinas()->find($row->idDisciplina);
             $turmaDisciplina = $disciplina->pivot;
 
-            if(isset($turmaDisciplina->horarios) && count($turmaDisciplina->horarios) == 0) {
+            if(count($turmaDisciplina->horarios) == 0) {
                 $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
             }
 

@@ -1,8 +1,8 @@
 @extends('menu')
 
-{{--@section("css")--}}
-    {{--<link rel="stylesheet" href="{{ asset('/js/posgraduacao/turma/css/modal_calendario.css') }}">--}}
-{{--@stop--}}
+@section("css")--}}
+    <link rel="stylesheet" href="{{ asset('/js/graduacao/turma/css/modal_horario.css') }}">
+@stop
 
 @section('content')
     <div class="ibox float-e-margins">
@@ -53,6 +53,7 @@
     </div>
     @include('graduacao.turma.modal_disciplina')
     @include('graduacao.turma.modal_disciplina_store')
+    @include('graduacao.turma.modal_horario_store')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -61,7 +62,8 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina_store.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>--}}
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({

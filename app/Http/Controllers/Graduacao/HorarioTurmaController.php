@@ -44,13 +44,17 @@ class HorarioTurmaController extends Controller
         $rows = \DB::table('fac_horarios')
             ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
             ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
             ->where('fac_turmas.id', $idTurma)
             ->groupBy('fac_horas.id')
+            ->orderBy('fac_horas.id')
             ->select([
                 'fac_horarios.id',
                 'fac_horas.id as hora',
-                'fac_turmas.id as idTurma'
+                'fac_horas.nome as codigoHora',
+                'fac_turmas.id as idTurma',
+                'fac_disciplinas.id as idDisciplinaHorario'
             ]);
 
         #Editando a grid
@@ -61,6 +65,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 1)->get();
 
@@ -72,6 +78,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 2)->get();
 
@@ -83,6 +91,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 3)->get();
 
@@ -94,6 +104,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 4)->get();
 
@@ -105,6 +117,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 5)->get();
 
@@ -116,6 +130,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 6)->get();
 
@@ -127,6 +143,8 @@ class HorarioTurmaController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                     ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                    ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                    ->where('fac_horas.id', $row->hora)
                     ->where('fac_turmas.id', $row->idTurma)
                     ->where('fac_horarios.dia_id', 7)->get();
 
@@ -256,26 +274,101 @@ class HorarioTurmaController extends Controller
 //        }
 //    }
 //
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function delete($id)
-//    {
-//        try {
-//            #Executando a ação
-//            $this->service->delete($id);
-//
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Calendário removido com sucesso!']);
-//        } catch (ValidatorException $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        } catch (\Throwable $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        try {
+            #incluindo disciplina as Disciplinas
+            $this->turmaService->incluirHorario($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->turmaService->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete(Request $request)
+    {
+        try {
+            #Executando a ação
+            $this->turmaService->removerHorario($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Horário removido com sucesso!']);
+        } catch (ValidatorException $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function horasDisponiveis(Request $request)
+    {
+        try {
+            # Recuperando a requisição
+            $dados = $request->all();
+
+            # Validando a requisição
+            if(!isset($dados['idTurma']) || !isset($dados['idDia'])) {
+                throw new \Exception('Parametros inválidos');
+            }
+
+            # Recuperando os dados da requisição
+            $idTurma = $dados['idTurma'];
+            $idDia   = $dados['idDia'];
+
+            # Fazendo a consulta
+            $rows = \DB::table("fac_horas")
+                        ->select('fac_horas.id', 'fac_horas.nome')
+                        ->whereNotIn('fac_horas.id', function ($query) use ($idTurma, $idDia) {
+                            $query->from('fac_horarios')
+                                ->select('fac_horarios.hora_id')
+                                ->leftJoin('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+                                ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+                                ->where('fac_turmas.id', $idTurma)
+                                ->where('fac_horarios.dia_id', $idDia)
+                                ->get();
+                        })->get();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $rows]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 //
 //    /**
 //     * @param $idTurma
@@ -295,23 +388,4 @@ class HorarioTurmaController extends Controller
 //        }
 //    }
 //
-//    /**
-//     * @param Request $request
-//     * @return mixed
-//     */
-//    public function incluirDisciplina(Request $request)
-//    {
-//        try {
-//            #incluindo disciplina as Disciplinas
-//            $this->turmaService->incluirDisciplina($request->all());
-//
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);
-//        } catch (\Throwable $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
-
-
 }
