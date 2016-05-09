@@ -99,7 +99,7 @@
     margin-top: -30%;"></a>
                                 </div>
                             </div>
-                            <span class="ed-bdg">@if($f->edicao){{$f->edicao}} .ed @endif</span>
+                            <span class="ed-bdg">@if($f->edicao){{$f->edicao}}.ed @endif</span>
 
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                                         {{$data[0]}} {{$data[1]}} {{$data[2]}}...
                                     @endif</h5></a>
                             </div>
-                            <div class="col s12">{{$f->sobrenome}}, {{$f->nome}}</div>
+                            <div class="col s12"><b>{{$f->sobrenome}}</b>, {{$f->nome}}</div>
                         </div>
                     </div>
                     <div class="col s4">

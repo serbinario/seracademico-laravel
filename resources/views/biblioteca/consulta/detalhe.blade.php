@@ -268,7 +268,7 @@
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Edição</b></div>
-                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}} .ed @endif</div>
+                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif</div>
                                         </div>
                                     </a>
                                     <a class="collection-item active">
@@ -282,11 +282,11 @@
                                             <div class="col s4"><b>Ent. princ.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
-                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']}}. etal
+                                                        <b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b>,
+                                                        <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. etal
                                                     @else
                                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
+                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -295,7 +295,7 @@
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Imprenta</b></div>
-                                            <div class="col s8">{{$exemplar['local']}}@if($exemplar['ano']), {{$exemplar['ano']}}.@endif</div>
+                                            <div class="col s8"><?php echo ucwords(mb_strtolower($exemplar['local'])) ?> @if($exemplar['ano']), {{$exemplar['ano']}}.@endif</div>
                                         </div>
                                     </a>
                                     <a class="collection-item">
@@ -321,10 +321,10 @@
                                             <div class="col s4"><b>Ent. sec.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_outros'] == '1')
-                                                        <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome']}}. etal
+                                                        <b>1</b>. <b>{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>. etal
                                                     @else
                                                         @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}<br />
+                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -359,7 +359,7 @@
                                                         ?>
                                                         {{$tombo}}
                                                     </td>
-                                                    <td>@if($e->edicao){{$e->edicao}} .ed @endif</td>
+                                                    <td>@if($e->edicao){{$e->edicao}}.ed @endif</td>
                                                     <td>@if($e->ano){{$e->ano}} @endif</td>
                                                     <td>{{$e->volume}}</td>
                                                     <td>{{$e->cdd}}</td>
