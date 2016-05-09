@@ -76,7 +76,7 @@ class ConsultaController extends Controller
 
         //dd($resultado);
 
-        return \View::make('biblioteca.consulta.resultado2')->with(compact('resultado', 'loadFields'));
+        return \View::make('biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
     }
 
@@ -96,56 +96,10 @@ class ConsultaController extends Controller
 
         $resultado = $this->query($data);
 
-        return \View::make('biblioteca.consulta.resultado2')->with(compact('resultado', 'loadFields'));
+        return \View::make('biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
     }
-
-    /*public function query($dados){
-
-        $this->data = $dados;
-        $campoLike = "";
-
-        if($this->data['busca_por'] == '2') {
-            $campoLike = 'bib_arcevos.titulo';
-        } else if ($this->data['busca_por'] == '3') {
-            $campoLike = 'bib_arcevos.assunto';
-        } else if ($this->data['busca_por'] == '4') {
-            $campoLike = 'responsaveis.nome';
-        }
-
-        if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' || $this->data['busca_por'] == '4') {
-            $my_query = \DB::table('bib_arcevos')
-                ->join(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada ORDER BY id ASC LIMIT 1)entrada'), function ($join) {
-                    $join->on('entrada.arcevos_id', '=', 'bib_arcevos.id');
-                })
-                ->join('responsaveis', 'responsaveis.id', '=', 'entrada.responsaveis_id')
-                ->select('bib_arcevos.*', 'bib_arcevos.id as id_acervo','responsaveis.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                ->where($campoLike, 'like', "%{$this->data['busca']}%")
-                ->orderBy('bib_arcevos.titulo','DESC')
-                ->paginate(10);
-        } else {
-            $my_query = \DB::table('bib_arcevos')
-                ->join(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada ORDER BY id ASC LIMIT 1)entrada'), function ($join) {
-                    $join->on('entrada.arcevos_id', '=', 'bib_arcevos.id');
-                })
-                ->join('responsaveis', 'responsaveis.id', '=', 'entrada.responsaveis_id')
-                ->select('bib_arcevos.*', 'bib_arcevos.id as id_acervo','responsaveis.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                ->Where(function ($query) {
-                    $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
-                        ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
-                        ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%");
-                })
-                ->orderBy('bib_arcevos.titulo','DESC')
-                ->paginate(10);
-        }
-
-        $my_query->setPath(url('seracademico/biblioteca/seachSimplePage'));
-
-        return $my_query;
-
-    }*/
+    
 
     /**
      * @param $dados
@@ -170,8 +124,9 @@ class ConsultaController extends Controller
                 ->join('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->join('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
+                ->where('bib_arcevos.tipos_acervos_id', '=', '1')
                 ->where($campoLike, 'like', "%{$this->data['busca']}%")
+                ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
@@ -181,9 +136,10 @@ class ConsultaController extends Controller
                 ->join('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->join('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo','bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
+                ->where('bib_arcevos.tipos_acervos_id', '=', '1')
                 ->Where(function ($query) {
                     $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%");
                 })

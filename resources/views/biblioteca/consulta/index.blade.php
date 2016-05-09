@@ -71,7 +71,10 @@
                                 <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                             </div>
                             <div class="col s3" style="margin-top: 3px;">
-                                {!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}
+                                {{--{!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}--}}
+                                <select name="tipo_obra" class="form-control">
+                                    <option value="1" selected>Livro</option>
+                                </select>
                             </div>
                         </div>
                         {{--<div class="row">

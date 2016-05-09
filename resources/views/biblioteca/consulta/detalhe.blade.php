@@ -72,9 +72,12 @@
                                 <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                             </div>
                             <div class="col s3" style="margin-top: 3px;">
-                                {!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}
+                                <select name="tipo_obra" class="form-control">
+                                    <option value="1" selected>Livro</option>
+                                </select>
                             </div>
                         </div>
+
                         {{--<div class="row">
                             <ul class="collapsible col s12" data-collapsible="accordion">
                                 <li>
@@ -342,40 +345,49 @@
                                                 <th>CDD</th>
                                                 <th>Cutter</th>
                                                 <th>Número de chamada</th>
+                                                <th>Situação</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($exemplares as $e)
                                                 <tr>
-                                                    <td>{{$e->codigo}}</td>
+                                                    <td>
+                                                        <?php
+                                                            $codigo = str_pad(substr($e->codigo, 0, -4),4,"0",STR_PAD_LEFT);
+                                                            $ano    = substr($e->codigo, -4);
+                                                            $tombo = $codigo.'/'.$ano;
+                                                        ?>
+                                                        {{$tombo}}
+                                                    </td>
                                                     <td>@if($e->edicao){{$e->edicao}} .ed @endif</td>
                                                     <td>@if($e->ano){{$e->ano}} @endif</td>
                                                     <td>{{$e->volume}}</td>
                                                     <td>{{$e->cdd}}</td>
                                                     <td>{{$e->cutter}}</td>
                                                     <td>{{$e->numero_chamada}}</td>
+                                                    <td>{{$e->nome}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 @endif
                             </div>
-                            <div id="test4" class="col s12">
+                            <div id="test4" class="col s12" style="font-size: 15px;">
                                 <br>
                                 <?php $count = 0; ?>
                                 @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
-                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']}}. etal.
+                                        <span style="text-transform: uppercase"><b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b></span>,
+                                        <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. etal.
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                             <?php $count++ ?>
-                                            {{$autor['responsaveis']['sobrenome']}}, {{$autor['responsaveis']['nome']}}@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                                <span style="text-transform: uppercase"><b>{{$autor['responsaveis']['sobrenome']}}</b></span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                         @endforeach
                                     @endif
                                 @endif
-                                <b>{{$exemplar['acervo']['titulo']}}</b> {{$exemplar['acervo']['subtitulo']}}.
-                                    @if($exemplar['edicao']){{$exemplar['edicao']}} .ed @endif @if($exemplar['local']){{$exemplar['local']}}: @endif @if($exemplar['editora']['nome']){{$exemplar['editora']['nome']}}, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?>:</b> <?php echo mb_strtolower($exemplar['acervo']['subtitulo']) ?>.
+                                    @if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
                         </div>
                     </section>
@@ -440,6 +452,7 @@
     $(document).ready(function () {
         $('select').material_select();
     });
+
 </script>
 
 
