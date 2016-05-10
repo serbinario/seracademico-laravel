@@ -245,6 +245,9 @@
 
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 
+<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>
+j
+
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>

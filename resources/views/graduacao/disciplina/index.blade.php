@@ -34,6 +34,7 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    <div id="container"></div>
                     <div class="table-responsive no-padding">
                         <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -66,9 +67,9 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#disciplina-grid').DataTable({
+        var table = $('#disciplina-grid').dataTable({
             processing: true,
-            serverSide: true,
+//            serverSide: true,
             autoWidth: false,
             ajax: "{!! route('seracademico.graduacao.disciplina.grid') !!}",
             columns: [
@@ -78,6 +79,16 @@
                 {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
                 /*{data: 'tipo_avaliacao', name: 'fac_tipo_avaliacoes.nome'},*/
                 {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        }).customSearch({
+            container: '#container',
+            fields: [
+                {
+                    columns: [1],
+                    advanced: true,
+                    caseInsensitive: false
+                },
+
             ]
         });
     </script>
