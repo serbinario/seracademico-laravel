@@ -398,7 +398,7 @@ class TurmaService
         if(!$objTurma && !$objDisciplina) {
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
-
+       
         #Incluindo e salvando a disciplina
         $objTurma->disciplinas()->detach($objDisciplina->id);
         $objTurma->save();

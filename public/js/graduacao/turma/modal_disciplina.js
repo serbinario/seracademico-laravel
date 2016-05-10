@@ -83,7 +83,8 @@ function runTableDisciplina(idTurma) {
 
 // Evento para o click no botão de remover disciplina graduação
 $(document).on('click', '#removerDisciplina', function () {
-    var idDisciplina = tableDisciplina.row($(this).index()).data().idDisciplina;
+    var idDisciplina = tableDisciplina.row($(this).parent().parent().index()).data().idDisciplina;
+
     var dadosAjax    = {
         'idDisciplina' : idDisciplina,
         'idTurma'      : idTurma
