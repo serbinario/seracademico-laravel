@@ -10,6 +10,7 @@ function loadTableDisciplina (idTurma) {
         bFilter: false,
         ajax: "/index.php/seracademico/graduacao/turma/disciplina/grid/" + idTurma,
         columns: [
+            {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
