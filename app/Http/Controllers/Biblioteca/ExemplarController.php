@@ -68,6 +68,7 @@ class ExemplarController extends Controller
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
+                'bib_arcevos.cutter',
                 'bib_exemplares.edicao',
                  'bib_situacao.nome as nome_sit',
                 'bib_arcevos.subtitulo as subtitulo',

@@ -35,6 +35,7 @@
                             <thead>
                             <tr>
                                 <th>Acervo - Título</th>
+                                <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
@@ -46,6 +47,7 @@
                             <tfoot>
                             <tr>
                                 <th>Acervo - Título</th>
+                                <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
                                 <th>Situação</th>
@@ -69,6 +71,7 @@
             ajax: "{!! route('seracademico.biblioteca.gridExemplar') !!}",
             columns: [
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
+                {data: 'cutter', name: 'bib_arcevos.cutter'},
                 {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
