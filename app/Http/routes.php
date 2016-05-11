@@ -309,6 +309,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'VestibularController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibularController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibularController@update']);
+
+            Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
+                Route::get('grid/{idVestibular}', ['as' => 'grid', 'uses' => 'VestibularCursoController@grid']);
+                Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoController@delete']);
+                Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoController@store']);
+
+                Route::group(['prefix' => 'materia', 'as' => 'materia.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibularCursoMateriaController@getLoadFields']);
+                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'VestibularCursoMateriaController@grid']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoMateriaController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoMateriaController@store']);
+                });
+
+                Route::group(['prefix' => 'turno', 'as' => 'turno.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibularCursoTurnoController@getLoadFields']);
+                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'VestibularCursoTurnoController@grid']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoTurnoController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoTurnoController@store']);
+                });
+            });
         });
 
 

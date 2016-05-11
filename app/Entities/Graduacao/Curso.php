@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\TipoCurso;
+use Seracademico\Entities\Vestibular;
 use Seracademico\Repositories\Graduacao\PrecoCursoRepository;
 use Seracademico\Uteis\SerbinarioDateFormat;
+use Seracademico\Entities\PivotVestibularCurso;
 
 class Curso extends Model implements Transformable
 {
@@ -78,6 +80,33 @@ class Curso extends Model implements Transformable
     public function precosCursos()
     {
         return $this->hasMany(PrecoCurso::class, "curso_id", "id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function vestibulares()
+    {
+        return $this->belongsToMany(Vestibular::class, 'vestibulares_cursos', 'curso_id', 'vestibular_id')
+            ->withPivot(['id']);;
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        # Pivot para Vestibular
+        if ($parent instanceof Vestibular) {
+            return new PivotVestibularCurso($parent, $attributes, $table, $exists);
+        }
+
+        # Retorno do novo pivot
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
     /**

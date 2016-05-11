@@ -2,9 +2,11 @@
 
 namespace Seracademico\Services;
 
+use Seracademico\Repositories\Graduacao\CursoRepository;
+use Seracademico\Repositories\MateriaRepository;
+use Seracademico\Repositories\TurnoRepository;
 use Seracademico\Repositories\VestibularRepository;
 use Seracademico\Entities\Vestibular;
-//use Carbon\Carbon;
 
 class VestibularService
 {
@@ -14,11 +16,36 @@ class VestibularService
     private $repository;
 
     /**
-     * @param VestibularRepository $repository
+     * @var CursoRepository
      */
-    public function __construct(VestibularRepository $repository)
+    private $cursoRepository;
+
+    /**
+     * @var MateriaRepository
+     */
+    private $materiaRepository;
+
+    /**
+     * @var TurnoRepository
+     */
+    private $turnoRepository;
+
+    /**
+     * @param VestibularRepository $repository
+     * @param CursoRepository $cursoRepository
+     * @param MateriaRepository $materiaRepository
+     * @param TurnoRepository $turnoRepository
+     */
+    public function __construct(
+        VestibularRepository $repository,
+        CursoRepository $cursoRepository,
+        MateriaRepository $materiaRepository,
+        TurnoRepository $turnoRepository)
     {
-        $this->repository = $repository;
+        $this->repository        = $repository;
+        $this->cursoRepository   = $cursoRepository;
+        $this->materiaRepository = $materiaRepository;
+        $this->turnoRepository   = $turnoRepository;
     }
 
     /**
@@ -79,17 +106,17 @@ class VestibularService
     }
 
     /**
-     * @param array $models
+     * @param array $models || Melhorar esse código
      * @return array
      */
-    public function load(array $models) : array
+    public function load(array $models, $ajax = false) : array
     {
-         #Declarando variáveis de uso
-         $result    = [];
-         $expressao = [];
+        #Declarando variáveis de uso
+        $result    = [];
+        $expressao = [];
 
-         #Criando e executando as consultas
-         foreach ($models as $model) {
+        #Criando e executando as consultas
+        foreach ($models as $model) {
             # separando as strings
             $explode   = explode("|", $model);
 
@@ -102,20 +129,42 @@ class VestibularService
             #qualificando o namespace
             $nameModel = "\\Seracademico\\Entities\\$model";
 
-            if(count($expressao) > 1) {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+            #Verificando se existe sobrescrita do nome do model
+            //$model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    switch (count($expressao)) {
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                    }
+
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+                }
             } else {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
             }
 
             # Limpando a expressão
             $expressao = [];
-         }
+        }
 
-         #retorno
-         return $result;
+        #retorno
+        return $result;
     }
 
     /**
@@ -131,4 +180,194 @@ class VestibularService
          return $data;
     }
 
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function storeCurso($data)
+    {
+        # Validando os dados
+        if(!isset($data['arrayCursoId']) && !(count($data['arrayCursoId']) > 0) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular) {
+            throw new \Exception('Curso ou vestibular não existe!');
+        }
+
+        # adicionado os curso ao vestibular
+        $objVestibular->cursos()->attach($data['arrayCursoId']);
+
+        # Retono
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteCurso($data)
+    {
+        # Validando os dados
+        if(!isset($data['idCurso']) && is_numeric($data['idCurso']) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+        $objCurso      = $this->cursoRepository->find($data['idCurso']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular || !$objCurso) {
+            throw new \Exception('Curso ou vestibular não existe!');
+        }
+
+        # removendo o curso do vestibular
+        $objVestibular->cursos()->detach($objCurso->id);
+
+        # Retono
+        return true;
+    }
+
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function storeCursoMateria($data)
+    {
+        # Validando os dados
+        if(!isset($data['idCurso']) && !is_numeric($data['idCurso']) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+        $objCurso      = $this->cursoRepository->find($data['idCurso']);
+        $objMateria    = $this->materiaRepository->find($data['materia_id']);
+
+        # Deletando os indexs
+        unset($data['idCurso'], $data['idVestibular'], $data['materia_id']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular && !$objCurso && !$objMateria) {
+            throw new \Exception('Curso ou vestibular não existe!');
+        }
+
+        # adicionado os curso ao vestibular
+        $pivot = $objVestibular->cursos()->find($objCurso->id)->pivot;
+        $pivot->materias()->attach($objMateria->id, $data);
+
+        # Retono
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteCursoMateria($data)
+    {
+        # Validando os dados
+        if(!isset($data['idCurso']) && is_numeric($data['idCurso']) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular']) &&
+            !isset($data['idMateria']) && is_numeric($data['idMateria'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+        $objCurso      = $this->cursoRepository->find($data['idCurso']);
+        $objMateria    = $this->materiaRepository->find($data['idMateria']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular || !$objCurso || !$objMateria) {
+            throw new \Exception('vestibular, curso ou matéria não existe!');
+        }
+
+        # removendo a matéria do curso de um vestibular
+        $pivot = $objVestibular->cursos()->find($objCurso->id)->pivot;
+        $pivot->materias()->detach($objMateria->id);
+
+        # Retono
+        return true;
+    }
+
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function storeCursoTurno($data)
+    {
+        # Validando os dados
+        if(!isset($data['idCurso']) && !is_numeric($data['idCurso']) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+        $objCurso      = $this->cursoRepository->find($data['idCurso']);
+        $objTurno      = $this->turnoRepository->find($data['turno_id']);
+
+        # Deletando os indexs
+        unset($data['idCurso'], $data['idVestibular'], $data['turno_id']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular && !$objCurso && !$objTurno) {
+            throw new \Exception('Curso ou vestibular não existe!');
+        }
+
+        # adicionado os curso ao vestibular
+        $pivot = $objVestibular->cursos()->find($objCurso->id)->pivot;
+        $pivot->turnos()->attach($objTurno->id, $data);
+
+        # Retono
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteCursoTurno($data)
+    {
+        # Validando os dados
+        if(!isset($data['idCurso']) && is_numeric($data['idCurso']) &&
+            !isset($data['idVestibular']) && is_numeric($data['idVestibular']) &&
+            !isset($data['idTurno']) && is_numeric($data['idTurno'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando os objetos
+        $objVestibular = $this->repository->find($data['idVestibular']);
+        $objCurso      = $this->cursoRepository->find($data['idCurso']);
+        $objTurno      = $this->turnoRepository->find($data['idTurno']);
+
+        # Validando a existência dos objetos
+        if(!$objVestibular || !$objCurso || !$objTurno) {
+            throw new \Exception('vestibular, curso ou turno não existe!');
+        }
+
+        # removendo a matéria do curso de um vestibular
+        $pivot = $objVestibular->cursos()->find($objCurso->id)->pivot;
+        $pivot->turnos()->detach($objTurno->id);
+
+        # Retono
+        return true;
+    }
 }
