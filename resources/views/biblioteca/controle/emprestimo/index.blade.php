@@ -46,6 +46,7 @@
                                 <th>Edição</th>
                                 <th>Tombo</th>
                                 <th>Situação</th>
+                                <th>Emprestimo</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -58,6 +59,7 @@
                                 <th>Edição</th>
                                 <th>Tombo</th>
                                 <th>Situação</th>
+                                <th>Emprestimo</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -70,7 +72,7 @@
                             {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
                         </div>
                         <div class="form-group col-md-2">
-                            {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega')) !!}
+                            {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data')) !!}
                         </div>
                         <input type="submit" class="btn btn-success" value="Confirmar emprestimo">
                     </div>
@@ -85,6 +87,7 @@
                                     <th>Edição</th>
                                     <th>Tombo</th>
                                     <th>Situação</th>
+                                    <th>Emprestimo</th>
                                     <th>Ação</th>
                                 </tr>
                                 </thead>
@@ -102,6 +105,8 @@
 
 @section('javascript')
     <script type="text/javascript">
+        var id_emp1 = "";
+        var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -115,6 +120,7 @@
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
+                {data: 'nome_emp', name: 'bib_emprestimo.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -131,20 +137,49 @@
 
             var data = table.rows('.selected').data()[0];
             var html = "";
-            console.log(data);
-            html += "<tr>"
-            html += "<td>" + data['titulo'] + "</td>"
-            html += "<td>" + data['cutter'] + "</td>"
-            html += "<td>" + data['subtitulo'] + "</td>"
-            html += "<td>" + data['edicao'] + "</td>"
-            html += "<td>" + data['tombo'] + "</td>"
-            html += "<td>" + data['nome_sit'] + "</td>"
-            html += "<td>" +
-                    "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                    "<input type='hidden' name='id[]' value='" + data['id'] + "'>"
-            html += "</tr>"
 
-            $('#emprestimos tbody').append(html);
+            dadosAjax = {
+                'id_emp': data['id_emp']
+            }
+
+            jQuery.ajax({
+                type: 'POST',
+                url: "{!! route('seracademico.biblioteca.dataDevolucaoEmprestimo') !!}",
+                data: dadosAjax,
+                datatype: 'json'
+            }).done(function (retorno) {
+                if($('#emprestimos tbody tr').length <= 0) {
+                    id_emp1 = "";
+                    id_emp2 = "";
+                }
+                if(data['id_emp'] == '1'){ id_emp1 = data['id_emp']}
+                if(data['id_emp'] == '2'){ id_emp2 = data['id_emp']}
+
+                if(id_emp1 && id_emp2) {
+                    if(data['id_emp'] == '1'){ id_emp1 = ""}
+                    if(data['id_emp'] == '2'){ id_emp2 = ""}
+                    bootbox.alert("Vocẽ selecionou exemplares tanto de consulta quanto para empréstimo, decida apenas entre um dos dois tipo!");
+                    return false;
+                } else {
+                    //console.log(data);
+                    html += "<tr>"
+                    html += "<td>" + data['titulo'] + "</td>"
+                    html += "<td>" + data['cutter'] + "</td>"
+                    html += "<td>" + data['subtitulo'] + "</td>"
+                    html += "<td>" + data['edicao'] + "</td>"
+                    html += "<td>" + data['tombo'] + "</td>"
+                    html += "<td>" + data['nome_sit'] + "</td>"
+                    html += "<td>" + data['nome_emp'] + "</td>"
+                    html += "<td>" +
+                            "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                            "<input type='hidden' name='id[]' value='" + data['id'] + "'>"
+                    html += "</tr>"
+
+                    $('#emprestimos tbody').append(html);
+                    $('#data').val(retorno['data']);
+                }
+
+            });
         });
 
         //Excluir tr da tabela

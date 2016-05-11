@@ -69,20 +69,24 @@ class EmprestarController extends Controller
             ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
             ->where('bib_exemplares.exemp_principal', '!=', '1')
-            ->where('bib_exemplares.situacao_id', '=', '1')
+            ->where('bib_exemplares.situacao_id', '!=', '5')
+            ->where('bib_exemplares.situacao_id', '!=', '4')
+            ->where('bib_exemplares.situacao_id', '!=', '2')
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
                 'bib_arcevos.cutter',
                 'bib_exemplares.edicao',
                 'bib_situacao.nome as nome_sit',
+                'bib_situacao.id as id_sit',
                 'bib_arcevos.subtitulo as subtitulo',
+                'bib_emprestimo.nome as nome_emp',
+                'bib_emprestimo.id as id_emp',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
             );
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
-            
 
             # Retorno
             return $html;
@@ -123,7 +127,7 @@ class EmprestarController extends Controller
             $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+            return redirect()->back()->with("message", "Emprestimo realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
@@ -132,23 +136,15 @@ class EmprestarController extends Controller
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @param Request $request
      */
-    public function edit($id)
+    public function dataDevolucao(Request $request)
     {
-        try {
-            #Recuperando a empresa
-            $model = $this->service->find($id);
-
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
-
-            #retorno para view
-            return view('emprestimo.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
-        }
+        $request = $request->request->all();
+        
+        $data = $this->service->dataDevolucao($request);
+        
+        return $data;
     }
 
     /**
