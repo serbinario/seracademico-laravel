@@ -386,7 +386,7 @@
                                         @endforeach
                                     @endif
                                 @endif
-                                <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?>:</b> <?php echo mb_strtolower($exemplar['acervo']['subtitulo']) ?>.
+                                <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
                                     @if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
                         </div>

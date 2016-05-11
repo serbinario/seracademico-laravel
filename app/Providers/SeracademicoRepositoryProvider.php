@@ -328,6 +328,25 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\HoraRepository::class,
             \Seracademico\Repositories\HoraRepositoryEloquent::class
         );
-    }
-
+		$this->app->bind(
+			\Seracademico\Repositories\Biblioteca\EmprestarRepository::class,
+			\Seracademico\Repositories\Biblioteca\EmprestarRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\Biblioteca\EmprestimoExemplarRepository::class,
+			\Seracademico\Repositories\Biblioteca\EmprestimoExemplarRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\Biblioteca\ReservaRepository::class,
+			\Seracademico\Repositories\Biblioteca\ReservaRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\Biblioteca\ReservaExemplarRepository::class,
+			\Seracademico\Repositories\Biblioteca\ReservaExemplarRepositoryEloquent::class
+		);
+		$this->app->bind(
+			\Seracademico\Repositories\TaxaRepository::class,
+			\Seracademico\Repositories\TaxaRepositoryEloquent::class
+		);
+	}
 }

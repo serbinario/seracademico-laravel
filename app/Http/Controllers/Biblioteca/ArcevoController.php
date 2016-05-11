@@ -67,7 +67,7 @@ class ArcevoController extends Controller
             ->leftJoin(\DB::raw('(SELECT arcevos_id, count(*) as qtd_exemplares FROM bib_exemplares GROUP BY arcevos_id)exemplares'), function ($join) {
                 $join->on('exemplares.arcevos_id', '=', 'bib_arcevos.id');
             })
-            ->leftJoin(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada ORDER BY id ASC LIMIT 1)entrada'), function ($join) {
+            ->leftJoin(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada GROUP BY arcevos_id)entrada'), function ($join) {
                 $join->on('entrada.arcevos_id', '=', 'bib_arcevos.id');
             })
 //            ->join('primeira_entrada', 'primeira_entrada.arcevos_id', '=', 'bib_arcevos.id')
