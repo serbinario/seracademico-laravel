@@ -14,6 +14,7 @@
                         <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Disciplina</th>
                                 <th>Ação</th>
                             </tr>

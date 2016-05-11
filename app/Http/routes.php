@@ -266,6 +266,52 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'DepartamentoController@update']);
         });
 
+        Route::group(['prefix' => 'materia', 'as' => 'materia.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'MateriaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'MateriaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'MateriaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'MateriaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'MateriaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'MateriaController@update']);
+        });
+
+        Route::group(['prefix' => 'banco', 'as' => 'banco.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'BancoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'BancoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'BancoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'BancoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'BancoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'BancoController@update']);
+        });
+
+        Route::group(['prefix' => 'tipoVencimento', 'as' => 'tipoVencimento.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TipoVencimentoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'TipoVencimentoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TipoVencimentoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TipoVencimentoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TipoVencimentoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TipoVencimentoController@update']);
+        });
+
+        Route::group(['prefix' => 'taxa', 'as' => 'taxa.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'TaxaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'TaxaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'TaxaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'TaxaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TaxaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'TaxaController@update']);
+        });
+
+        Route::group(['prefix' => 'vestibular', 'as' => 'vestibular.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'VestibularController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'VestibularController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'VestibularController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'VestibularController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibularController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibularController@update']);
+        });
+
+
         Route::group(['prefix' => 'biblioteca', 'as' => 'biblioteca.'], function () {
             Route::get('indexResponsavel', ['as' => 'indexResponsavel', 'uses' => 'Biblioteca\ResponsavelController@index']);
             Route::get('createResponsavel', ['as' => 'createResponsavel', 'uses' => 'Biblioteca\ResponsavelController@create']);

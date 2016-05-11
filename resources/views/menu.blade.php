@@ -106,6 +106,15 @@
                 </li>
 
                 <li>
+                    <a href="index.html"><i class="material-icons">style</i> <span class="nav-label">Vestibular</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
+                        <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
+                    </ul>
+                </li>
+
+                <li>
                     <a href="index.html"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -127,6 +136,9 @@
                         <li><a href="{{ route('seracademico.graduacao.semestre.index') }}"><i class="fa fa-calendar"></i> Semestres</a></li>
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="material-icons">next_week</i> Tipos de Cursos</a></li>
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="material-icons">rate_review</i> Professor</a></li>
+                        <li><a href="{{ route('seracademico.banco.index') }}"><i class="material-icons">rate_review</i> Bancos</a></li>
+                        <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="material-icons">rate_review</i> Tipo de Vencimento</a></li>
+                        <li><a href="{{ route('seracademico.taxa.index') }}"><i class="material-icons">rate_review</i> Taxas</a></li>
                     </ul>
                 </li>
                 @endrole
@@ -239,6 +251,9 @@
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
+
+<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>
+j
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>

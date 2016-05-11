@@ -10,6 +10,7 @@ function loadTableDisciplina (idTurma) {
         bFilter: false,
         ajax: "/index.php/seracademico/graduacao/turma/disciplina/grid/" + idTurma,
         columns: [
+            {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
@@ -82,7 +83,8 @@ function runTableDisciplina(idTurma) {
 
 // Evento para o click no botão de remover disciplina graduação
 $(document).on('click', '#removerDisciplina', function () {
-    var idDisciplina = tableDisciplina.row($(this).index()).data().idDisciplina;
+    var idDisciplina = tableDisciplina.row($(this).parent().parent().index()).data().idDisciplina;
+
     var dadosAjax    = {
         'idDisciplina' : idDisciplina,
         'idTurma'      : idTurma

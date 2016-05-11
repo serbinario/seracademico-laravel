@@ -5,7 +5,7 @@ namespace Seracademico\Validators;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 
-class TaxaValidator extends LaravelValidator
+class TipoVencimentoValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Taxa extends Model implements Transformable
+class Banco extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'taxas';
+    protected $table    = 'bancos';
 
-    protected $fillable = [ 
-		'codigo',
+    protected $fillable = [
+        'codigo',
 		'nome',
 	];
 

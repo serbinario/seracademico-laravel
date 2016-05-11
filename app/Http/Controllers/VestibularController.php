@@ -5,34 +5,38 @@ namespace Seracademico\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\TaxaService;
+use Seracademico\Services\VestibularService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\TaxaValidator;
+use Seracademico\Validators\VestibularValidator;
 
-class TaxaController extends Controller
+class VestibularController extends Controller
 {
     /**
-    * @var TaxaService
+    * @var VestibularService
     */
     private $service;
 
     /**
-    * @var TaxaValidator
+    * @var VestibularValidator
     */
     private $validator;
 
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Taxa',
+        'Banco',
+        'TipoVencimento'
+    ];
 
     /**
-    * @param TaxaService $service
-    * @param TaxaValidator $validator
+    * @param VestibularService $service
+    * @param VestibularValidator $validator
     */
-    public function __construct(TaxaService $service, TaxaValidator $validator)
+    public function __construct(VestibularService $service, VestibularValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -43,7 +47,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        return view('taxa.index');
+        return view('vestibular.index');
     }
 
     /**
@@ -52,7 +56,7 @@ class TaxaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('taxas')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('vestibulares')->select(['id', 'nome', 'codigo']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -69,7 +73,7 @@ class TaxaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('taxa.create', compact('loadFields'));
+        return view('vestibular.create', compact('loadFields'));
     }
 
     /**
@@ -92,7 +96,7 @@ class TaxaController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -111,7 +115,7 @@ class TaxaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('taxa.edit', compact('model', 'loadFields'));
+            return view('vestibular.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

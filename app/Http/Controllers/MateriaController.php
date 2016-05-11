@@ -5,21 +5,21 @@ namespace Seracademico\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Services\TaxaService;
+use Seracademico\Services\MateriaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\TaxaValidator;
+use Seracademico\Validators\MateriaValidator;
 
-class TaxaController extends Controller
+class MateriaController extends Controller
 {
     /**
-    * @var TaxaService
+    * @var MateriaService
     */
     private $service;
 
     /**
-    * @var TaxaValidator
+    * @var MateriaValidator
     */
     private $validator;
 
@@ -29,10 +29,10 @@ class TaxaController extends Controller
     private $loadFields = [];
 
     /**
-    * @param TaxaService $service
-    * @param TaxaValidator $validator
+    * @param MateriaService $service
+    * @param MateriaValidator $validator
     */
-    public function __construct(TaxaService $service, TaxaValidator $validator)
+    public function __construct(MateriaService $service, MateriaValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -43,7 +43,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        return view('taxa.index');
+        return view('materia.index');
     }
 
     /**
@@ -52,7 +52,7 @@ class TaxaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('taxas')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('fac_materias')->select(['id', 'nome', 'codigo']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -69,7 +69,7 @@ class TaxaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('taxa.create', compact('loadFields'));
+        return view('materia.create', compact('loadFields'));
     }
 
     /**
@@ -111,7 +111,7 @@ class TaxaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('taxa.edit', compact('model', 'loadFields'));
+            return view('materia.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
