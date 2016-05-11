@@ -11,9 +11,9 @@ class VestibularValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            
-			'codigo' =>  '' ,
-			'nome' =>  '' ,
+
+			'nome' =>  'required|max:200|unique:vestibulares,nome',
+			'codigo' =>  'required|max:15|unique:vestibulares,codigo',
 			'data_inicial' =>  '' ,
 			'data_final' =>  '' ,
 			'hora_inicial' =>  '' ,
@@ -29,9 +29,9 @@ class VestibularValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-            
-			'codigo' =>  '' ,
-			'nome' =>  '' ,
+
+			'nome' =>  'required|max:200|unique:vestibulares,nome,:id',
+			'codigo' =>  'required|max:15|unique:vestibulares,codigo,:id',
 			'data_inicial' =>  '' ,
 			'data_final' =>  '' ,
 			'hora_inicial' =>  '' ,
