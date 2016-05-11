@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="material-icons">class</i>
-                Cadastrar Sala
+                Cadastrar Matéria
             </h4>
         </div>
 
