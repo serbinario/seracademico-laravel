@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="material-icons">class</i>
-                Editar Banco
+                Editar Vestibular
             </h4>
         </div>
 
