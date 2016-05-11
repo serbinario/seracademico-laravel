@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="material-icons">class</i>
-                Editar Sala
+                Editar Matéira
             </h4>
         </div>
 

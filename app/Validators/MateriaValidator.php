@@ -11,14 +11,16 @@ class MateriaValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            
-			'nome' =>  '' ,
+
+            'nome' =>  'required|max:200|unique:fac_materias,nome',
+            'codigo' =>  'required|max:15|unique:fac_materias,codigo',
 			'anotacao' =>  '' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-            
-			'nome' =>  '' ,
+
+            'nome' =>  'required|max:200|unique:fac_materias,nome,:id',
+            'codigo' =>  'required|max:15|unique:fac_materias,codigo,:id',
 			'anotacao' =>  '' ,
 
         ],

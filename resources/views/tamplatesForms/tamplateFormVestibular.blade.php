@@ -1,114 +1,191 @@
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div class="row">
-            <div class="col-md-4">
+            <div class="col-md-10">
                 <div class="form-group">
-                    
+                    {!! Form::label('nome', 'Nome') !!}
+                    {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
 				{!! Form::label('codigo', 'Codigo') !!}
 				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('nome', 'Nome') !!}
-				{!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('data_inicial', 'Data Inicial') !!}
-				{!! Form::text('data_inicial', null , array('class' => 'form-control datepicker date')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('data_final', 'Data Final') !!}
-				{!! Form::text('data_final', null, array('class' => 'form-control datepicker date')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('hora_inicial', 'Hora Inicial') !!}
-				{!! Form::text('hora_inicial', null , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('hora_final', 'Hora Final') !!}
-				{!! Form::text('hora_final',null , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('qtd_vagas', 'Qtd. Vagas') !!}
-				{!! Form::text('qtd_vagas', Session::getOldInput('qtd_vagas')  , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('instrucoes_boleto', 'Instruções de boleto') !!}
-				{!! Form::text('instrucoes_boleto', Session::getOldInput('instrucoes_boleto')  , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('confirmacao_inscricao', 'Confirmação de Inscrição') !!}
-				{!! Form::text('confirmacao_inscricao', Session::getOldInput('confirmacao_inscricao')  , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('banco_id', 'Banco *') !!}
-                    @if(isset($model->banco))
-                        {!! Form::select('banco_id', $loadFields['banco'] , $model->banco->id, array('class' => 'form-control')) !!}
-                    @else
-                        {!! Form::select('banco_id', $loadFields['banco'] , null, array('class' => 'form-control')) !!}
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('taxa_id', 'Taxa *') !!}
-                    @if(isset($model->taxa))
-                        {!! Form::select('taxa_id', $loadFields['taxa'] , $model->taxa->id, array('class' => 'form-control')) !!}
-                    @else
-                        {!! Form::select('taxa_id', $loadFields['taxa'] , null, array('class' => 'form-control')) !!}
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('tipo_vencimento_id', 'Tipo de Vencimento') !!}
-                    @if(isset($model->tipoVencimento))
-                        {!! Form::select('tipo_vencimento_id', $loadFields['tipovencimento'] , $model->tipoVencimento->id, array('class' => 'form-control')) !!}
-                    @else
-                        {!! Form::select('tipo_vencimento_id', $loadFields['tipovencimento'] , null, array('class' => 'form-control')) !!}
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('qtd_dias', 'Qtd. Dias') !!}
-				{!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-				{!! Form::label('data_prova', 'Data da prova') !!}
-				{!! Form::text('data_prova', null, array('class' => 'form-control datepicker date')) !!}
-                </div>
-            </div>
 		</div>
+
+        <hr class="hr-line-dashed"/>
+
+        {{--Linha da da Abas--}}
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#prova" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Prova</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#inscricoes" aria-controls="dados" data-toggle="tab"><i class="material-icons">playlist_add</i> Inscrições</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#dadosBoleto" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Dados Boleto</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#dadosConfirInscricao" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Dados Inscrição</a>
+                    </li>
+
+
+                    <li role="presentation">
+                        <a href="#taxa" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Taxa</a>
+                    </li>
+
+
+
+                </ul>
+                <!-- End Nav tabs -->
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    {{--Aba Prova--}}
+                    <div role="tabpanel" class="tab-pane active" id="prova">
+                        <br/>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {!! Form::label('data_prova', 'Data da prova') !!}
+                                {!! Form::text('data_prova', null, array('class' => 'form-control datepicker date')) !!}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Prova --}}
+
+                    {{--Aba Inscrições--}}
+                    <div role="tabpanel" class="tab-pane" id="inscricoes">
+                        <br/>
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('data_inicial', 'Data Inicial') !!}
+                                    {!! Form::text('data_inicial', null , array('class' => 'form-control datepicker date')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('data_final', 'Data Final') !!}
+                                    {!! Form::text('data_final', null, array('class' => 'form-control datepicker date')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('hora_inicial', 'Hora Inicial') !!}
+                                    {!! Form::text('hora_inicial', null , array('class' => 'form-control time')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('hora_final', 'Hora Final') !!}
+                                    {!! Form::text('hora_final',null , array('class' => 'form-control time')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('qtd_vagas', 'Qtd. Vagas') !!}
+                                    {!! Form::text('qtd_vagas', Session::getOldInput('qtd_vagas')  , array('class' => 'form-control numberFor')) !!}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Inscrições --}}
+
+                    {{--Aba Dados do Boleto--}}
+                    <div role="tabpanel" class="tab-pane" id="dadosBoleto">
+                        <br/>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('instrucoes_boleto', 'Instruções de boleto') !!}
+                                {!! Form::text('instrucoes_boleto', Session::getOldInput('instrucoes_boleto')  , array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Dados do Boleto --}}
+
+                    {{--Aba Dados de Confimação de Inscrição--}}
+                    <div role="tabpanel" class="tab-pane" id="dadosConfirInscricao">
+                        <br/>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('confirmacao_inscricao', 'Confirmação de Inscrição') !!}
+                                {!! Form::text('confirmacao_inscricao', Session::getOldInput('confirmacao_inscricao')  , array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Dados de Confimação de Inscrição --}}
+
+                    {{--Aba Taxa--}}
+                    <div role="tabpanel" class="tab-pane" id="taxa">
+                        <br/>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('banco_id', 'Banco *') !!}
+                                @if(isset($model->banco))
+                                    {!! Form::select('banco_id', $loadFields['banco'] , $model->banco->id, array('class' => 'form-control')) !!}
+                                @else
+                                    {!! Form::select('banco_id', $loadFields['banco'] , null, array('class' => 'form-control')) !!}
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('taxa_id', 'Taxa *') !!}
+                                @if(isset($model->taxa))
+                                    {!! Form::select('taxa_id', $loadFields['taxa'] , $model->taxa->id, array('class' => 'form-control')) !!}
+                                @else
+                                    {!! Form::select('taxa_id', $loadFields['taxa'] , null, array('class' => 'form-control')) !!}
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('tipo_vencimento_id', 'Tipo de Vencimento') !!}
+                                @if(isset($model->tipoVencimento))
+                                    {!! Form::select('tipo_vencimento_id', $loadFields['tipovencimento'] , $model->tipoVencimento->id, array('class' => 'form-control')) !!}
+                                @else
+                                    {!! Form::select('tipo_vencimento_id', $loadFields['tipovencimento'] , null, array('class' => 'form-control')) !!}
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                {!! Form::label('qtd_dias', 'Qtd. Dias') !!}
+                                {!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control numberTwo')) !!}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Taxa --}}
+
+
+                </div>
+                <!-- FIM Tab panes -->
+            </div>
+        </div>
+
+
 	</div>
 </div>
 
