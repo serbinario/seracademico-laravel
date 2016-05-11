@@ -4,63 +4,63 @@
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('codigo', 'codigo') !!}
+				{!! Form::label('codigo', 'Codigo') !!}
 				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('nome', 'nome') !!}
+				{!! Form::label('nome', 'Nome') !!}
 				{!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('data_inicial', 'data_inicial') !!}
+				{!! Form::label('data_inicial', 'Data Inicial') !!}
 				{!! Form::text('data_inicial', null , array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('data_final', 'data_final') !!}
+				{!! Form::label('data_final', 'Data Final') !!}
 				{!! Form::text('data_final', null, array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('hora_inicial', 'hora_inicial') !!}
+				{!! Form::label('hora_inicial', 'Hora Inicial') !!}
 				{!! Form::text('hora_inicial', null , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('hora_final', 'hora_final') !!}
+				{!! Form::label('hora_final', 'Hora Final') !!}
 				{!! Form::text('hora_final',null , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('qtd_vagas', 'qtd_vagas') !!}
+				{!! Form::label('qtd_vagas', 'Qtd. Vagas') !!}
 				{!! Form::text('qtd_vagas', Session::getOldInput('qtd_vagas')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('instrucoes_boleto', 'instrucoes_boleto') !!}
+				{!! Form::label('instrucoes_boleto', 'Instruções de boleto') !!}
 				{!! Form::text('instrucoes_boleto', Session::getOldInput('instrucoes_boleto')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('confirmacao_inscricao', 'confirmacao_inscricao') !!}
+				{!! Form::label('confirmacao_inscricao', 'Confirmação de Inscrição') !!}
 				{!! Form::text('confirmacao_inscricao', Session::getOldInput('confirmacao_inscricao')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('tipo_vencimento_id', 'Taxa *') !!}
+                    {!! Form::label('tipo_vencimento_id', 'Tipo de Vencimento') !!}
                     @if(isset($model->tipoVencimento))
                         {!! Form::select('tipo_vencimento_id', $loadFields['tipovencimento'] , $model->tipoVencimento->id, array('class' => 'form-control')) !!}
                     @else
@@ -97,14 +97,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('qtd_dias', 'qtd_dias') !!}
+				{!! Form::label('qtd_dias', 'Qtd. Dias') !!}
 				{!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     
-				{!! Form::label('data_prova', 'data_prova') !!}
+				{!! Form::label('data_prova', 'Data da prova') !!}
 				{!! Form::text('data_prova', null, array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
