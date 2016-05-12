@@ -12,6 +12,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\Biblioteca\EmprestarValidator;
 use Seracademico\Services\Biblioteca\ExemplarService;
+use Seracademico\Entities\Biblioteca\Emprestar;
 
 class EmprestarController extends Controller
 {
@@ -148,29 +149,53 @@ class EmprestarController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param $id
-     * @return $this|\Illuminate\Http\RedirectResponse
+     * @return mixed
      */
-    public function update(Request $request, $id)
+    public function viewDevolucao(){
+
+        return view('biblioteca.controle.emprestimo.devolucao');
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function gridDevolucao(Request $request)
+    {
+        #Criando a consulta
+        $rows = Emprestar::join('fac_alunos', 'fac_alunos.id', '=', 'bib_emprestimos.alunos_id')
+            ->with(['emprestimoExemplar.acervo'])
+            ->select(
+                ['bib_emprestimos.codigo',
+                    'bib_emprestimos.*',
+                    'fac_alunos.nome',
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                ]);
+        
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = "";
+            if (!$row->data_devolucao_real) {
+                $html       = '<a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+            }
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     *
+     */
+    public function confirmarDevolucao($id)
     {
         try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
             #Executando a ação
-            $this->service->update($data, $id);
+            $this->service->devolucao($id);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
