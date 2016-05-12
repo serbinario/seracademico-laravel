@@ -158,7 +158,7 @@
                             <a href="#">Controle <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexEmprestimo') }}">Emprestimo</a></li>
-                                <li><a href="">Devolução</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.viewDevolucaoEmprestimo') }}">Devolução</a></li>
                             </ul>
                         </li>
                     </ul>

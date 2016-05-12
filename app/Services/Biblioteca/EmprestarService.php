@@ -47,7 +47,7 @@ class EmprestarService
         #retorno
         return $emprestar;
     }
-
+    
     /**
      * @param $id
      * @return mixed
@@ -117,23 +117,41 @@ class EmprestarService
     }
 
     /**
-     * @param array $data
      * @param int $id
-     * @return mixed
+     * @return bool
+     * @throws \Exception
      */
-    public function update(array $data, int $id) : Emprestar
+    public function devolucao(int $id)
     {
-        #Atualizando no banco de dados
-        $emprestar = $this->repository->update($data, $id);
+        #deletando o curso
+        $emprestimo = $this->repository->find($id);
 
+        $dataObj = new \DateTime("now");
+        $data = $dataObj->format('Y-m-d');
 
-        #Verificando se foi atualizado no banco de dados
-        if(!$emprestar) {
-            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        $emprestimo->data_devolucao_real = $data;
+        $emprestimo->save();
+
+        //dd($emprestimo->emprestimoExemplar);
+        
+        foreach ($emprestimo->emprestimoExemplar as $e) {
+            $exemplar =  $this->repoExemplar->find($e->id);
+            if($exemplar->emprestimo_id == '1') {
+                $exemplar->situacao_id = '1';
+                $exemplar->save();
+            } elseif ($exemplar->emprestimo_id == '2') {
+                $exemplar->situacao_id = '3';
+                $exemplar->save();
+            }
         }
 
-        #Retorno
-        return $emprestar;
+        # Verificando se a execução foi bem sucessida
+        if(!$emprestimo) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
     }
 
     /**

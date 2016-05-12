@@ -72,7 +72,7 @@
                             {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
                         </div>
                         <div class="form-group col-md-2">
-                            {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data')) !!}
+                            {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                         </div>
                         <input type="submit" class="btn btn-success" value="Confirmar emprestimo">
                     </div>
