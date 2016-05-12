@@ -59,15 +59,14 @@ $('#btnSalvarPrecoDisciplina').click(function() {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            tablePrecosCurso.load(function () {
-                tablePrecosCurso.row(indexRowSelectedPrecoCurso).columns().nodes().to$().each(function () {
-                    $(this).addClass("row_selected");
-                });
-            });
-            tablePrecosDisciplinaCurso.load();
             builderHtmlFields();
+            tablePrecosDisciplinaCurso.load();
+            tablePrecosCurso.load(function () {
+                tablePrecosCurso.row(indexRowSelectedPrecoCurso).nodes().to$().find('td').addClass("row_selected");
+            });
 
             swal(retorno.msg, "Click no botão abaixo!", "success");
+            $("#modal-inserir-preco-disciplina").modal('hide');
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
@@ -88,12 +87,10 @@ $(document).on('click', '#btnRemoverPrecoDisciplinaCurso', function () {
         data: dadosAjax,
         datatype: 'json'
     }).done(function (retorno) {
-        tablePrecosCurso.load(function () {
-            tablePrecosCurso.row(indexRowSelectedPrecoCurso).columns().nodes().to$().each(function () {
-                $(this).addClass("row_selected");
-            });
-        });
         tablePrecosDisciplinaCurso.load();
+        tablePrecosCurso.load(function () {
+            tablePrecosCurso.row(indexRowSelectedPrecoCurso).nodes().to$().find('td').addClass("row_selected");
+        });
 
         swal(retorno.msg, "Click no botão abaixo!", "success");
     });
