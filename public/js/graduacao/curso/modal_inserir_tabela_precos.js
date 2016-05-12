@@ -82,7 +82,7 @@ function builderHtmlFieldsTabela (dados) {
 $('#btnSalvarTabelaPrecos').click(function() {
     var virgencia     = $("#virgencia").val();
     var semestre_id   = $("#semestre_id").val();
-    var turno_id     = $("#turno_id").val();
+    var turno_id      = $("#turno_id").val();
     var tipo_preco_curso_id = $("#tipo_preco_curso_id").val();
 
     var dados = {
@@ -101,8 +101,8 @@ $('#btnSalvarTabelaPrecos').click(function() {
     }).done(function (retorno) {
         if(retorno.success) {
             tablePrecosCurso.load();
-            loadFields();
             swal(retorno.msg, "Click no botão abaixo!", "success");
+            $("#modal-precos").modal('hide');
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
@@ -127,6 +127,8 @@ $(document).on('click', '#btnRemoverTabelaPreco', function () {
 
         //Desativando o botão de adicionar preço por disciplinas
         $("#btnAddPrecoDisciplina").prop("disabled", true);
+
+        // Recarregando as grids
         table.ajax.reload();
         tablePrecosCurso.load();
     });

@@ -34,7 +34,7 @@ function builderHtmlFieldsTabelaEditar (dados) {
     $("#virgencia_editar").val("");
 
     // Variáveis que armazenaram o html
-    var htmlSemestre    = "<option value=''>Selecione um Semestre</option>";
+    var htmlSemestre   = "<option value=''>Selecione um Semestre</option>";
     var htmlTipoPreco  = "<option value=''>Selecione um Tipo</option>";
     var htmlTurno      = "<option value=''>Selecione um Turno</option>";
 
@@ -67,7 +67,6 @@ function builderHtmlFieldsTabelaEditar (dados) {
     // Removendo e adicionando as options de tipo preco
     $("#turno_id_editar option").remove();
     $("#turno_id_editar").append(htmlTurno);
-
 }
 
 // Evento para editar a tabela de preços
@@ -125,6 +124,7 @@ $('#btnUpdateTabelaPrecos').click(function() {
         if(retorno.success) {
             tablePrecosCurso.load();
             swal(retorno.msg, "Click no botão abaixo!", "success");
+            $('#editar-modal-precos').modal('hide');
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
