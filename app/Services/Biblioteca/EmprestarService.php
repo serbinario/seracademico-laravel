@@ -65,7 +65,9 @@ class EmprestarService
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
         }
 
-        $dataObj->add(new \DateInterval("P{$dias[0]->valor}D"));
+        $dia = $dias[0]->valor - 1;
+
+        $dataObj->add(new \DateInterval("P{$dia}D"));
         $data = $dataObj->format('d/m/Y');
 
         $dados = [
@@ -89,12 +91,10 @@ class EmprestarService
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
         $codigo = \DB::table('bib_emprestimos')->max('codigo');
-        //dd($codigo);
         $codigoMax = $codigo != null ? $codigoMax = $codigo + 1 : $codigoMax = "1";
-       // dd($codigoMax);
+
         $data['data'] = $dataFormat;
         $data['codigo'] = $codigoMax;
-        //dd($data);
 
         #Salvando o registro pincipal
         $emprestar =  $this->repository->create($data);
