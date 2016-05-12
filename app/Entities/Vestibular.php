@@ -5,6 +5,8 @@ namespace Seracademico\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Graduacao\Curso;
+use Seracademico\Entities\PivotVestibularCurso;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Vestibular extends Model implements Transformable
@@ -138,5 +140,32 @@ class Vestibular extends Model implements Transformable
     public function tipoVencimento()
     {
         return $this->belongsTo(TipoVencimento::class, 'tipo_vencimento_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'vestibulares_cursos', 'vestibular_id', 'curso_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        # Pivot para Curso
+        if ($parent instanceof Curso) {
+            return new PivotVestibularCurso($parent, $attributes, $table, $exists);
+        }
+
+        # Retorno do novo pivot
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 }

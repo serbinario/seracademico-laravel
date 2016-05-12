@@ -185,6 +185,4 @@ class Turma extends Model implements Transformable
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
-
-
 }

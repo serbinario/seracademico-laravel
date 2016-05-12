@@ -96,7 +96,7 @@ class UtilController extends Controller
                 #Tratando o retorno dos dados not in
                 $arrayId   = [];
                 foreach ($dadosNoIn as $rowNotIN) {
-                   $arrayId[] =  $rowNotIN->disciplina_id;
+                   $arrayId[] =  $rowNotIN->$culmnNotGet;
                 }
 
                 $qb->whereNotIn($columnNotWhere, $arrayId);

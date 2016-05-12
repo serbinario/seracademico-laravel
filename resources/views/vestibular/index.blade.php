@@ -1,5 +1,22 @@
 @extends('menu')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/js/vestibular/css/modal_curso_materia_turno.css') }}">
+    <style type="text/css">
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
+
+        #disciplina-grid tbody tr{
+            font-size: 10px;
+        }
+    </style>
+@stop
+
 @section('content')
 
     <div class="ibox float-e-margins">
@@ -40,9 +57,18 @@
             </div>
         </div>
     </div>
+
+    @include('vestibular.modal_curso_materia_turno')
+    @include('vestibular.modal_materia_store')
+    @include('vestibular.modal_turno_store')
 @stop
 
 @section('javascript')
+    <script src="{{ asset('/js/vestibular/modal_curso.js')  }}"></script>
+    <script src="{{ asset('/js/vestibular/modal_materia.js')  }}"></script>
+    <script src="{{ asset('/js/vestibular/modal_turno.js')  }}"></script>
+    <script src="{{ asset('/js/vestibular/modal_materia_store.js')  }}"></script>
+    <script src="{{ asset('/js/vestibular/modal_turno_store.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#vestibular-grid').DataTable({
             processing: true,
@@ -53,6 +79,25 @@
                 {data: 'nome', name: 'nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        //declaração de variáveis úteis
+        var idVestibular;
+
+        // Ouvinte para evento de click no link de adicionar cursos
+        $(document).on('click', '#btnAdicionarCursos', function () {
+            // Recuperando o id do vestibular
+            idVestibular = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            // Carregando a grid de Cursos
+            runTableCurso(idVestibular);
+
+            // Estado inicial dos botões de adicionar
+            $("#btnAdicionarCursoMateria").attr("disabled", true);
+            $("#btnAdicionarCursoTurno").attr("disabled", true);
+
+            // Carregando a modal
+            $('#modal-curso-materia-turno').modal({ show:true });
         });
     </script>
 @stop
