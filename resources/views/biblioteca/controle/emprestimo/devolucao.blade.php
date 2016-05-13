@@ -107,21 +107,21 @@
                         "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Tombo</td></tr>" +
                         "</thead>";
                 for (var i = 0; i < exemplar.length; i++) {
-                    html += "<tr>"
-                    html += "<td>" + exemplar[i]['acervo']['titulo'] + "</td>"
-                    html += "<td>" + exemplar[i]['acervo']['subtitulo'] + "</td>"
-                    html += "<td>" + exemplar[i]['acervo']['numero_chamada'] + "</td>"
+                    html += "<tr>";
+                    html += "<td>" + exemplar[i]['acervo']['titulo'] + "</td>";
+                    html += "<td>" + exemplar[i]['acervo']['subtitulo'] + "</td>";
+                    html += "<td>" + exemplar[i]['acervo']['numero_chamada'] + "</td>";
                     var codFull    = "" + exemplar[i]['codigo'];
-                    var pad = "00000000"
-                    codFull = pad.substring(0, pad.length - codFull.length) + codFull
+                    var pad = "00000000";
+                    codFull = pad.substring(0, pad.length - codFull.length) + codFull;
                     var cod = codFull.toString().substring(0,4);
                     var ano    = exemplar[i]['codigo'];
                     ano = codFull.toString().substring(4, 8);
                     var tombo  = cod.concat("/"+ano);
-                    html += "<td>" + tombo + "</td>"
+                    html += "<td>" + tombo + "</td>";
                     html += "</tr>"
                  }
-                html += "</table>"
+                html += "</table>";
 
                 return  html;
             }
@@ -170,7 +170,9 @@
             var url = $(this).attr('href');
             bootbox.confirm("Tem certeza que deseja devolver esse emprestimo?", function (result) {
                 if (result) {
-                    location.href = url
+                    window.open(url, '_blank');
+                    location.reload();
+                    //location.href = url
                 } else {
                     false;
                 }

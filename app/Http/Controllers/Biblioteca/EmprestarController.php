@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\Biblioteca;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Route;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\Biblioteca\EmprestarService;
@@ -177,7 +178,7 @@ class EmprestarController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
             if (!$row->data_devolucao_real) {
-                $html       = '<a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+                $html       = '<a class="btn-floating excluir" target="_blank" href="confirmarDevolucao/'.$row->id.'" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
             }
 
             # Retorno
@@ -186,7 +187,7 @@ class EmprestarController extends Controller
     }
 
     /**
-     *
+     * @return mixed
      */
     public function confirmarDevolucao($id)
     {
@@ -195,7 +196,7 @@ class EmprestarController extends Controller
             $this->service->devolucao($id);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+            return view('biblioteca.controle.emprestimo.cupomDevolucao');
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

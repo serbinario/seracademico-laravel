@@ -74,7 +74,7 @@
                         <div class="form-group col-md-2">
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                         </div>
-                        <input type="submit" class="btn btn-success" value="Confirmar emprestimo">
+                        <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
@@ -197,7 +197,7 @@
         $(document).ready(function(){
             //consulta via select2 responsável
             $("#aluno").select2({
-                placeholder: 'Selecione uma editora',
+                placeholder: 'Selecione um aluno',
                 minimumInputLength: 1,
                 width: 400,
                 ajax: {
