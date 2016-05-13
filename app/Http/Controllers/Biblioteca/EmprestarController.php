@@ -196,7 +196,8 @@ class EmprestarController extends Controller
             $this->service->devolucao($id);
 
             #Retorno para a view
-            return view('biblioteca.controle.emprestimo.cupomDevolucao');
+            //return view('biblioteca.controle.emprestimo.cupomDevolucao');
+            return redirect()->back()->with("message", "Devolução realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
