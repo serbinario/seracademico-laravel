@@ -71,7 +71,36 @@ class Aluno extends Model implements Transformable
         'fotos_3x4_doc_obrigatorio',
         'comp_residencia_doc_obrigatorio',
         'histo_gradu_autentic_obrigatorio',
-        'ativo'
+        'ativo',
+        'tipo_aluno_id',
+        'instituicao_escolar_id',
+
+        // Vestibular
+        'vestibular_id',
+        'inscricao',
+        'lingua_estrangeira_id',
+        'pre_matricula',
+        'data_insricao_vestibular',
+        'sala_vestibular_id',
+
+        'ano_enem',
+        'inscricao_enem',
+        'nota_humanas',
+        'nota_natureza',
+        'nota_matematica',
+        'nota_linguagem',
+        'nota_redacao',
+
+        'ano_conclusao_medio',
+        'outra_escola_medio',
+
+        'primeira_opcao_curso_id',
+        'segunda_opcao_curso_id',
+        'terceira_opcao_curso_id',
+        'primeira_opcao_turno_id',
+        'segunda_opcao_turno_id',
+        'terceira_opcao_turno_id',
+
     ];
 
     /**
@@ -176,6 +205,14 @@ class Aluno extends Model implements Transformable
     public function instituicao()
     {
         return $this->belongsTo(Instituicao::class, "fac_instituicoes_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function instituicaoEscolar()
+    {
+        return $this->belongsTo(Instituicao::class, "instituicao_escolar_id");
     }
 
     /**

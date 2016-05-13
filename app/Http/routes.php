@@ -8,7 +8,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('logout', 'Auth\AuthController@getLogout');
     });
 
+
+
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
+
+        Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'VestibulandoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'VestibulandoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'VestibulandoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'VestibulandoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibulandoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@update']);
+        });
+
         //Rotas de pos-graduação
         Route::group(['prefix' => 'posgraduacao', 'as' => 'posgraduacao.'], function () {
 

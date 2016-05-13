@@ -111,6 +111,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
                         <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
+                        <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
                     </ul>
                 </li>
 
