@@ -398,11 +398,13 @@
                             <div class="card" style="margin-top: 0px;">
                                 <div class="card-image waves-effect waves-block waves-light" style="padding: 0 40px;">
                                     <div class="book-search">
-                                            <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 110px;margin-top: -30%;">
+                                        <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 110px;margin-top: -30%;">
                                     </div>
-                                   {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
+                                    {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
                                 </div>
                             </div>
+                            <br/>
+                            <button class="btn waves-effect waves-light"><i class="material-icons left">arrow_back</i>Voltar</button>
                     </section>
                 </div>
             </div>
