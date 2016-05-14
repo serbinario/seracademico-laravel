@@ -23,7 +23,8 @@
 <nav>
     <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
+            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}"
+                                                  style="width: 130px;
     margin-top: -20%;"> </a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
@@ -67,8 +68,10 @@
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s2" >
-                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
+                            <div class="col s2">
+                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i
+                                            class="material-icons left">search</i> Buscar
+                                </button>
                             </div>
                             <div class="col s2">
                                 <select name="tipo_obra" class="form-control">
@@ -86,41 +89,51 @@
 
 <div class="container">
     <!-- Info Resalt-->
+    <br/>
     <div class="row">
-        <div class="col s12 m12">
-            @foreach($resultado->items() as $f)
-                <div class="collection">
-                    <div class="col s2">
+        @foreach($resultado->items() as $f)
+            <div class="col s12 m3">
+                <div class="box-book">
+                    <div class="col s12">
                         <div class="row">
                             <div class="col s12">
                                 <div class="book-search">
                                     <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
-                                    <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 120px;
-    margin-top: -30%;"></a>
+                                        <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                    </a>
                                 </div>
                             </div>
                             <span class="ed-bdg">@if($f->edicao){{$f->edicao}}.ed @endif</span>
-
+                            <span class="badge mybdg" >@if($f->tipos_acervos_id == '1')
+                                    Livro
+                                @elseif($f->tipos_acervos_id == '2')
+                                    Revista
+                                @endif</span>
                         </div>
                     </div>
-                    <div class="col s5">
-                        <div class="row" style="margin-top: 10px;">
-                            <div class="col s12">
-                                <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
-                                <?php $data =  explode(" ", $f->subtitulo); $subtitulo = "";?>
-                                <h5 style="font-size: 1.5rem;color: #424242;"><b>{{ $f->titulo }}</b><br />
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
+                                <?php $data = explode(" ", $f->subtitulo); $subtitulo = "";?>
+                                <p style="font-size: 13px;color: #325DA8;"><b>{{ $f->titulo }}</b><br/>
                                     @if(count($data) <= 3)
                                         @foreach($data as $d)
                                             {!!   $d  !!}
                                         @endforeach
                                     @else
                                         {{$data[0]}} {{$data[1]}} {{$data[2]}}...
-                                    @endif</h5></a>
-                            </div>
-                            <div class="col s12"><b>{{$f->sobrenome}}</b>, {{$f->nome}}</div>
+                                    @endif</p></a>
+                            <p style="font-size: 12px;color: #8c8c8c;"><b>{{$f->sobrenome}}</b>, {{$f->nome}}</p>
                         </div>
                     </div>
-                    <div class="col s4">
+
+                    <div class="row center">
+                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light tooltipped"
+                               data-position="bottom" data-delay="40" data-tooltip="Ver detalhes"><i class="material-icons left">launch</i>Detalhes</a>
+                    </div>
+
+                    {{--<div class="col s4">
                         <br />
                         <div class="row">
                             <div class="col s12"><div class="chip tooltipped" data-position="bottom" data-delay="30" data-tooltip="{{$f->assunto}}">{{$f->assunto}}</div></div>
@@ -129,22 +142,22 @@
                             <div class="col s6"><p><b>CDD</b><br/>{{ $f->cdd }}</p></div>
                             <div class="col s6"><p><b>CUTTER</b><br/>{{ $f->cutter }}</p></div>
                         </div>
-                    </div>
-                    <div class="col s1"><span class="badge mybdg" >@if($f->tipos_acervos_id == '1')
+                    </div>--}}
+                    {{--<div class="col s1"><span class="badge mybdg" >@if($f->tipos_acervos_id == '1')
                                 Livro
                             @elseif($f->tipos_acervos_id == '2')
                                 Revista
                             @endif</span>
                         <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn-floating waves-effect waves-light tooltipped" style="top: 75px;"
                            data-position="right" data-delay="40" data-tooltip="Ver detalhes"><i class="material-icons">launch</i></a>
-                    </div>
+                    </div>--}}
                 </div>
-            @endforeach
-                <div class="row">
-                    <div class="col s12 m12 center">
-                        {!!  $resultado->render() !!}
-                    </div>
-                </div>
+            </div>
+        @endforeach
+        <div class="row">
+            <div class="col s12 m12 center">
+                {!!  $resultado->render() !!}
+            </div>
         </div>
     </div>
 </div>
@@ -160,7 +173,8 @@
         <div class="row">
             <div class="col l6 s12">
                 <a href="">
-                    <img src="{{ asset('/biblioteca/img/logo-alpha-b.png')}}" style="width: 180px;position: relative;float: left;">
+                    <img src="{{ asset('/biblioteca/img/logo-alpha-b.png')}}"
+                         style="width: 180px;position: relative;float: left;">
                 </a>
 
             </div>
@@ -177,7 +191,8 @@
     <div class="footer-copyright">
         <div class="container">
             © 2016 Desenvolvimento por: SerBinário
-            <a class="grey-text text-lighten-4 right" href="#!"> <img src="{{ asset('/biblioteca/img/s1-b.png')}}" style="width: 130px;position: relative;
+            <a class="grey-text text-lighten-4 right" href="#!"> <img src="{{ asset('/biblioteca/img/s1-b.png')}}"
+                                                                      style="width: 130px;position: relative;
     float: right;margin-top: 12px;"></a>
         </div>
     </div>
