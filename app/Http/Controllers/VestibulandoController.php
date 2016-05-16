@@ -39,7 +39,7 @@ class VestibulandoController extends Controller
         'Estado',
         'CorRaca',
         'Vestibular',
-        'Graduacao\\Curso',
+        'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
         'LinguaExtrangeira'
