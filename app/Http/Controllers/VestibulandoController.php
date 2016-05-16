@@ -79,8 +79,33 @@ class VestibulandoController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
                     </ul>
                     </div>';
+        })->make(true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function gridNotas($idVestibulando)
+    {
+        #Criando a consulta
+        $alunos = \DB::table('aluno_notas_vestibular')
+            ->join('fac_materias', 'fac_materias.id', '=', 'aluno_notas_vestibular.materia_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'aluno_notas_vestibular.aluno_id')
+            ->where('fac_alunos.id', $idVestibulando)
+            ->select([
+                'aluno_notas_vestibular.id',
+                'fac_materias.codigo',
+                'fac_materias.nome',
+                'aluno_notas_vestibular.acertos',
+                'aluno_notas_vestibular.pontuacao'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($alunos)->addColumn('action', function ($aluno) {
+            return '<a class="btn-floating" id="editarNotas" title="Editar aluno"><i class="material-icons">edit</i></a>';
         })->make(true);
     }
 
@@ -174,14 +199,51 @@ class VestibulandoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return mixed
      */
-    public function contrato(Request $request, $id)
+    public function editNota(Request $request)
     {
-        $aluno = $this->service->find($id);
+        try {
+            #Recuperando o aluno
+            $nota  = $this->service->findNota($request->all());
 
-        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno])->stream();
+            # Preparando o array de retorno
+            $dados = [
+                'codigo' => $nota->materia->codigo,
+                'materia' => $nota->materia->nome,
+                'acertos' => $nota->acertos,
+                'pontuacao' => $nota->pontuacao,
+            ];
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function updateNota(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->updateNota($data, $id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Alteração realizada com sucesso']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
 }

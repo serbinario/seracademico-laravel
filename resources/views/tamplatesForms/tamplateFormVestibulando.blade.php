@@ -521,7 +521,13 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 {!! Form::label('vestibular_id', 'Vestibular * ') !!}
-                                {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['vestibular']->toArray()), Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}
+                               
+                                @if(isset($aluno->vestibular->id))
+                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['vestibular']->toArray()), null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
+                                @else
+                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['vestibular']->toArray()), null, array('class' => 'form-control')) !!}
+                                @endif
+
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira * ') !!}
@@ -654,7 +660,7 @@
             <div class="form-group col-md-4">
                 <div class="checkbox checkbox-primary">
                     {!! Form::hidden('gerar_inscricao', 0) !!}
-                    @if($aluno->gerar_inscricao == 1)
+                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
                         {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
                     @else
                         {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}

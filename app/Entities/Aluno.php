@@ -234,6 +234,22 @@ class Aluno extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function vestibular()
+    {
+        return $this->belongsTo(Vestibular::class, 'vestibular_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function notasVestibular()
+    {
+        return $this->hasMany(AlunoNotaVestibular::class, 'aluno_id');
+    }
+
+    /**
      * @param Model $parent
      * @param array $attributes
      * @param string $table

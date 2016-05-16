@@ -3,8 +3,10 @@
 namespace Seracademico\Services;
 
 use Seracademico\Entities\Aluno;
+use Seracademico\Repositories\AlunoNotaVestibularRepository;
 use Seracademico\Repositories\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
+use Seracademico\Repositories\VestibularRepository;
 use Seracademico\Validators\AlunoValidator;
 use Seracademico\Entities;
 
@@ -21,6 +23,16 @@ class VestibulandoService
     private $enderecoRepository;
 
     /**
+     * @var VestibularRepository
+     */
+    private $vestibularRepository;
+
+    /**
+     * @var AlunoNotaVestibularRepository
+     */
+    private $notaRepository;
+
+    /**
      * @var string
      */
     private $destinationPath = "images/";
@@ -28,11 +40,19 @@ class VestibulandoService
     /**
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
+     * @param VestibularRepository $vestibularRepository
+     * @param AlunoNotaVestibularRepository $notaRepository
      */
-    public function __construct(AlunoRepository $repository, EnderecoRepository $enderecoRepository)
+    public function __construct(
+        AlunoRepository $repository,
+        EnderecoRepository $enderecoRepository,
+        VestibularRepository $vestibularRepository,
+        AlunoNotaVestibularRepository $notaRepository)
     {
-        $this->repository         = $repository;
-        $this->enderecoRepository = $enderecoRepository;
+        $this->repository           = $repository;
+        $this->enderecoRepository   = $enderecoRepository;
+        $this->vestibularRepository = $vestibularRepository;
+        $this->notaRepository       = $notaRepository;
     }
 
     /**
@@ -73,7 +93,7 @@ class VestibulandoService
     public function store(array $data) : Aluno
     {
         #tratamento de dados do aluno
-        $data     = $this->tratamentoCamposAluno($data);
+        $data = $this->tratamentoCamposAluno($data);
         $this->tratamentoCampos($data);
         $this->tratamentoInscricao($data);
 
@@ -109,6 +129,9 @@ class VestibulandoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
+        #tratamento vestibular
+        $this->tratamentoVestibular($aluno);
+
         #Retorno
         return $aluno;
     }
@@ -121,7 +144,7 @@ class VestibulandoService
     public function update(array $data, int $id) : Aluno
     {
         #tratamento de dados do aluno
-        $data     = $this->tratamentoCamposAluno($data);
+        $data = $this->tratamentoCamposAluno($data);
         $this->tratamentoCampos($data);
         $this->tratamentoInscricao($data, $id);
 
@@ -348,5 +371,90 @@ class VestibulandoService
 
         # Retorno
         return $dataNow->format('YmdHis');
+    }
+
+    /**
+     * @param Aluno $aluno
+     * @throws \Exception
+     */
+    public function tratamentoVestibular(Aluno $aluno)
+    {
+        # Verificando o vestibular
+        if(!$aluno->vestibular) {
+            throw new \Exception('Vestibular não existe');
+        }
+
+        # Verificando se o aluno já possui notas
+        if(count($aluno->notasVestibular) > 0) {
+            return false;
+        }
+
+        # Recuperando as matérias
+        $idVestibular = $aluno->vestibular->id;
+        $materias     = \DB::table('fac_materias')
+                        ->select('id')
+                        ->whereIn('id', function ($query) use ($idVestibular) {
+                            $query->from('vestibular_curso_materia')
+                                ->distinct()
+                                ->select('vestibular_curso_materia.materia_id')
+                                ->join('vestibulares_cursos', 'vestibulares_cursos.id', '=', 'vestibular_curso_materia.vestibular_curso_id')
+                                ->join('fac_cursos', 'fac_cursos.id', '=', 'vestibulares_cursos.curso_id')
+                                ->join('vestibulares', 'vestibulares.id', '=', 'vestibulares_cursos.vestibular_id')
+                                ->where('vestibulares.id', $idVestibular)
+                                ->get();
+                        })->get();
+
+        # Criando as notas dos alunos
+        foreach ($materias as $materia) {
+            $aluno->notasVestibular()->create(['materia_id' => $materia->id]);
+        }
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findNota(array $data)
+    {
+        # Validando os dados da requisição
+        if(!isset($data['idNota']) && !is_numeric($data['idNota']) &&
+            !isset($data['idVestibulando']) && !is_numeric($data['idVestibulando'])) {
+            throw new \Exception('Dados inválidos');
+        }
+
+        # Recuperando a nota
+        $nota = $this->notaRepository->find($data['idNota']);
+
+        # Verificando se a nota existe
+        if(!$nota) {
+            throw new \Exception('Nota não existe');
+        }
+
+        # Retorno
+        return $nota;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return mixed
+     */
+    public function updateNota(array $data, int $id) : Entities\AlunoNotaVestibular
+    {
+        #Atualizando no banco de dados
+        $nota = $this->notaRepository->update($data, $id);
+
+
+        #$nota se foi atualizado no banco de dados
+        if(!$nota) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $nota;
     }
 }

@@ -27,4 +27,4 @@ $(document).on('click', '#btnRemoverHorario', function (event) {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
-})
+});
