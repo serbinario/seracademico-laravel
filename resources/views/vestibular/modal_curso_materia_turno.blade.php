@@ -1,6 +1,6 @@
 <!-- Modal principal de disciplinas -->
 <div id="modal-curso-materia-turno" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
-    <div class="modal-dialog" style="width: 100%;">
+    <div class="modal-dialog" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
@@ -43,11 +43,11 @@
                                 <table id="materia-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Código</th>
+                                        <th style="width: 10%">Código</th>
                                         <th>Matéria</th>
-                                        <th>Peso</th>
-                                        <th>Qtd. Questões</th>
-                                        <th>Ação</th>
+                                        <th style="width: 10%">Peso</th>
+                                        <th style="width: 15%">Qtd. Quest.</th>
+                                        <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>
                                 </table>
