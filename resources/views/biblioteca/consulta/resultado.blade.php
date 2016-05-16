@@ -116,7 +116,7 @@
                         <div class="col s12">
                             <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
                                 <?php $data = explode(" ", $f->subtitulo); $subtitulo = "";?>
-                                <p style="font-size: 13px;color: #325DA8;"><b>{{ $f->titulo }}</b><br/>
+                                <p style="font-size: 13px;color: #182d52;"><b>{{ $f->titulo }}</b><br/>
                                     @if(count($data) <= 3)
                                         @foreach($data as $d)
                                             {!!   $d  !!}
@@ -124,13 +124,16 @@
                                     @else
                                         {{$data[0]}} {{$data[1]}} {{$data[2]}}...
                                     @endif</p></a>
-                            <p style="font-size: 12px;color: #8c8c8c;"><b>{{$f->sobrenome}}</b>, {{$f->nome}}</p>
+                            <p style="font-size: 11px;color: #0c0c0c;"><b>{{$f->sobrenome}}</b>, {{$f->nome}}</p>
+                            <div class="col s6"><p class="labels-cc"><b>CDD</b><br/>{{ $f->cdd }}</p></div>
+                            <div class="col s6"><p class="labels-cc"><b>CUTTER</b><br/>{{ $f->cutter }}</p></div>
+                            <div class="col s12"><div class="chip tooltipped" data-position="bottom" data-delay="30" data-tooltip="{{$f->assunto}}" style="font-size: 10px;">{{$f->assunto}}</div></div>
+
                         </div>
                     </div>
 
                     <div class="row center">
-                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light tooltipped"
-                               data-position="bottom" data-delay="40" data-tooltip="Ver detalhes"><i class="material-icons left">launch</i>Detalhes</a>
+                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light"><i class="material-icons left">launch</i>Detalhes</a>
                     </div>
 
                     {{--<div class="col s4">
