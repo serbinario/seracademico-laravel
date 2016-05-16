@@ -76,6 +76,7 @@ class Aluno extends Model implements Transformable
         'instituicao_escolar_id',
 
         // Vestibular
+        'gerar_inscricao',
         'vestibular_id',
         'inscricao',
         'lingua_estrangeira_id',
