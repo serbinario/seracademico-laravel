@@ -282,11 +282,11 @@
                                             <div class="col s4"><b>Ent. princ.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                                        <b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b>,
+                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
                                                         <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. et al
                                                     @else
                                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -321,10 +321,10 @@
                                             <div class="col s4"><b>Ent. sec.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_outros'] == '1')
-                                                        <b>1</b>. <b>{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>. et al
+                                                        <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>. et al
                                                     @else
                                                         @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -344,7 +344,7 @@
                                             <th>Volume</th>
                                             <th>CDD</th>
                                             <th>Cutter</th>
-                                            <th>Número de chamada</th>
+                                            <th>Nº de chamada</th>
                                             <th>Situação</th>
                                         </tr>
                                         </thead>
@@ -377,12 +377,12 @@
                                 <?php $count = 0; ?>
                                 @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                        <span style="text-transform: uppercase"><b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b></span>,
+                                        <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
                                         <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. et al.
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                             <?php $count++ ?>
-                                            <span style="text-transform: uppercase"><b>{{$autor['responsaveis']['sobrenome']}}</b></span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                            <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                         @endforeach
                                     @endif
                                 @endif
