@@ -529,11 +529,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('inscricao', 'Inscricao * ') !!}
-                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pre_matricula', 'Pré-Matrícula * ') !!}
-                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('pre_matricula', Session::getOldInput('pre_matricula'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 
@@ -648,6 +648,22 @@
         </div>
     </div>
     <div class="col-md-10"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group col-md-4">
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('gerar_inscricao', 0) !!}
+                    @if($aluno->gerar_inscricao == 1)
+                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                    @else
+                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
+                    @endif
+                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{--Buttons Submit e Voltar--}}
     <div class="row">

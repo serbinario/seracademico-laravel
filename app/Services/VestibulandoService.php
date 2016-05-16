@@ -75,6 +75,7 @@ class VestibulandoService
         #tratamento de dados do aluno
         $data     = $this->tratamentoCamposAluno($data);
         $this->tratamentoCampos($data);
+        $this->tratamentoInscricao($data);
 
         #setando o nivel do sistema
         $data['tipo_nivel_sistema_id'] = 2;
@@ -122,6 +123,7 @@ class VestibulandoService
         #tratamento de dados do aluno
         $data     = $this->tratamentoCamposAluno($data);
         $this->tratamentoCampos($data);
+        $this->tratamentoInscricao($data, $id);
 
         #setando o nivel do sistema
         $data['tipo_nivel_sistema_id'] = 2;
@@ -310,5 +312,41 @@ class VestibulandoService
 
         #Retorno
         return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function tratamentoInscricao(array &$data, $id = "") : array
+    {
+        # Validando o parâmetro
+        if(isset($data['gerar_inscricao']) && $data['gerar_inscricao'] == 1) {
+            if($id) {
+                $vestibulando = $this->repository->find($id);
+                if($vestibulando->gerar_inscricao == 1) {
+                    unset($data['gerar_inscricao']);
+                    return $data;
+                }
+            }
+
+            # Gerando a inscrição
+            $data['inscricao'] = $this->gerarInscricao();
+        }
+
+        # retorno
+        return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function gerarInscricao()
+    {
+        # Recuperndo a data atual
+        $dataNow = new \DateTime('now');
+
+        # Retorno
+        return $dataNow->format('YmdHis');
     }
 }
