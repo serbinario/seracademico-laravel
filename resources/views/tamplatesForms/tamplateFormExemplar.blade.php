@@ -234,14 +234,14 @@
                         <div class="col-md-10">
                             <div class="form-group">
                                 {!! Form::label('nome', 'Nome') !!}
-                                {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                                {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control' , 'id' => 'nome')) !!}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" id="save" class="btn btn-primary">Salvar</button>
+                    <button type="button" id="save" class="btn btn-primary save">Salvar</button>
                 </div>
             </div>
         </div>

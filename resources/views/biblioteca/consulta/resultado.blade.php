@@ -103,7 +103,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <span class="ed-bdg">@if($f->edicao){{$f->edicao}}.ed @endif</span>
+                            <span class="ed-bdg">@if($f->edicao){{$f->edicao}}. ed. @endif</span>
                             <span class="badge mybdg" >@if($f->tipos_acervos_id == '1')
                                     Livro
                                 @elseif($f->tipos_acervos_id == '2')

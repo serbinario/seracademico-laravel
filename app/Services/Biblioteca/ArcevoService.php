@@ -2,6 +2,8 @@
 
 namespace Seracademico\Services\Biblioteca;
 
+use Seracademico\Entities\Biblioteca\PrimeiraEntrada;
+use Seracademico\Entities\Biblioteca\SegundaEntrada;
 use Seracademico\Repositories\Biblioteca\ArcevoRepository;
 use Seracademico\Entities\Biblioteca\Arcevo;
 use Seracademico\Repositories\Biblioteca\PrimeiraEntradaRepository;
@@ -182,19 +184,20 @@ class ArcevoService
             $arcevo->cursos()->attach($data['cursos']);
         }
 
+        //dd($data['primeira']['responsaveis_id']);
         //Inserir segunda entrada do acervos
         if(count($data['primeira']['responsaveis_id']) > 0) {
 
-            for($i = 0; $i < count($data['primeira']['responsaveis_id']); $i++) {
+            PrimeiraEntrada::where('arcevos_id', $arcevo->id)->delete();
+            //$this->primeiraRepository->delete($data['primeira']['responsaveis_id']);
+
+            for($i = 0; $i < count($data['primeira']['responsaveis_id']); $i++){
                 $entradas['responsaveis_id'] = $data['primeira']['responsaveis_id'][$i];
                 $entradas['arcevos_id'] = $arcevo->id;
-                if(isset($data['primeira']['id'][$i])) {
-                    $this->primeiraRepository->update($entradas, $data['primeira']['id'][$i]);
-                } else {
-                    $this->primeiraRepository->create($entradas);
-                }
-
+                $this->primeiraRepository->create($entradas);
             }
+        } else if (count($data['primeira']['responsaveis_id']) <= 0) {
+            PrimeiraEntrada::where('arcevos_id', $arcevo->id)->delete();
         }
 
         //Inserir segunda entrada do acervos
@@ -202,17 +205,16 @@ class ArcevoService
             count($data['segunda']['tipo_autor_id']) > 0  &&
             count($data['segunda']['responsaveis_id']) == count($data['segunda']['tipo_autor_id'])) {
 
-            for($i = 0; $i < count($data['segunda']['responsaveis_id']); $i++) {
+            SegundaEntrada::where('arcevos_id', $arcevo->id)->delete();
+
+            for($i = 0; $i < count($data['segunda']['responsaveis_id']); $i++){
                 $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
                 $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
                 $entradas['arcevos_id'] = $arcevo->id;
-                if(isset($data['segunda']['id'][$i])) {
-                    $this->segundaRepository->update($entradas, $data['segunda']['id'][$i]);
-                } else {
-                    $this->segundaRepository->create($entradas);
-                }
-
+                $this->segundaRepository->create($entradas);
             }
+        } else if(count($data['segunda']['responsaveis_id']) <= 0) {
+            SegundaEntrada::where('arcevos_id', $arcevo->id)->delete();
         }
 
         #Verificando se foi atualizado no banco de dados

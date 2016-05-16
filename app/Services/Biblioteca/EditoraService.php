@@ -90,13 +90,13 @@ class EditoraService
     {
         #Recuperando o registro no banco de dados
         $resultado = $this->repository->findWhere(['nome' => $data['nome']]);
-        dd($resultado);
+       // dd($resultado);
         $dados = [
             'resultado' => "",
             'msg'       => ''
         ];
         
-        if($resultado) {
+        if(count($resultado) > 0) {
             $dados['resultado'] = true;
             $dados['msg'] = "Já existe uma editora cadastrada com este nome";
             return $dados;

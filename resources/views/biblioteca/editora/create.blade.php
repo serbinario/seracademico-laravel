@@ -136,13 +136,20 @@
                         'X-CSRF-TOKEN' : '{{  csrf_token() }}'
                     },
                 }).done(function (json) {
-                    var option = "";
+                    var html = "";
 
-                    console.log(json);
+                    console.log(json['resultado']);
 
-                    option += '<option value="">Selecione uma cidade</option>';
-                    for (var i = 0; i < json.length; i++) {
-                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    if(json['resultado'] == true) {
+                        $('#nome').parent().addClass('has-feedback has-error');
+                        html = "<span class='help-block'>"+ json['msg'] +"</span>";
+                        $('.help-block').remove();
+                        $('#nome').parent().append(html);
+                        $('.save').attr('disabled', true);
+                    } else {
+                        $('#nome').parent().removeClass('has-feedback has-error');
+                        $('.help-block').remove();
+                        $('.save').attr('disabled', false);
                     }
 
                 });
