@@ -61,13 +61,27 @@ class VestibularController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">edit</i></a></li>
-                        <li><a class="btn-floating green" href="#" id="btnAdicionarCursos" title="Adicionar Cursos ao vestibular"><i class="material-icons">add_to_photos</i></a></li>
-                    </ul>
-                    </div>';
+            # Objeto vestibular
+            $vestibular = $this->service->find($row->id);
+
+            # Html principal
+            $html =  '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating green" href="#" id="btnAdicionarCursos" title="Adicionar Cursos ao vestibular"><i class="material-icons">add_to_photos</i></a></li>
+                        ';
+
+            # Verificando a possibilida de deleção
+            if(count($vestibular->vestibulandos) > 0) {
+                $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">delete</i></a></li>';
+            }
+
+            # Html Principal
+            $html .= '</ul></div>';
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
@@ -124,6 +138,23 @@ class VestibularController extends Controller
             #retorno para view
             return view('vestibular.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            #Recuperando a empresa
+            $model = $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -106,6 +106,28 @@ class VestibularService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #Recuperando o registro no banco de dados
+        $vestibular = $this->repository->find($id);
+
+        #Verificando se foi atualizado no banco de dados
+        if(!$vestibular) {
+            throw new \Exception('Vestibular não existe!');
+        }
+
+        # Deletando o registro
+        $this->repository->delete($vestibular->id);
+
+        # retorno
+        return true;
+    }
+
+    /**
      * @param array $models || Melhorar esse código
      * @return array
      */
