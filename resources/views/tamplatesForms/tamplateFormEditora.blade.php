@@ -18,7 +18,7 @@
                     <div class="col-md-10">
                         <div class="form-group">
                             {!! Form::label('nome', 'Nome') !!}
-                            {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                            {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'id' => 'nome')) !!}
                         </div>
                     </div>
 
@@ -172,7 +172,7 @@
             <div class="btn-group">
                 <a href="{{ route('seracademico.biblioteca.indexEditora') }}" class="btn btn-primary btn-block"><i class="fa fa-long-arrow-left"></i>  Voltar</a></div>
             <div class="btn-group">
-                {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
+                {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block save')) !!}
             </div>
         </div>
     </div>

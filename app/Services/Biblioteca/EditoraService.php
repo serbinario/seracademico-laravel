@@ -83,6 +83,30 @@ class EditoraService
     }
 
     /**
+     * @param $data
+     * @return bool
+     */
+    public function validarNome($data)
+    {
+        #Recuperando o registro no banco de dados
+        $resultado = $this->repository->findWhere(['nome' => $data['nome']]);
+       // dd($resultado);
+        $dados = [
+            'resultado' => "",
+            'msg'       => ''
+        ];
+        
+        if(count($resultado) > 0) {
+            $dados['resultado'] = true;
+            $dados['msg'] = "Já existe uma editora cadastrada com este nome";
+            return $dados;
+        } else {
+            $dados['resultado'] = false;
+            return $dados;
+        }
+    }
+
+    /**
      * @param array $data
      * @param int $id
      * @return mixed

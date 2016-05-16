@@ -114,5 +114,46 @@
                 });
             }
         });
+
+
+        //Validar nome duplicado
+        $(document).on('blur', "#nome", function () {
+
+            //Recuperando o estado
+            var nome = $(this).val();
+
+            if (nome !== "") {
+                var dados = {
+                    'nome' : nome,
+                }
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.biblioteca.validarNome')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var html = "";
+
+                    console.log(json['resultado']);
+
+                    if(json['resultado'] == true) {
+                        $('#nome').parent().addClass('has-feedback has-error');
+                        html = "<span class='help-block'>"+ json['msg'] +"</span>";
+                        $('.help-block').remove();
+                        $('#nome').parent().append(html);
+                        $('.save').attr('disabled', true);
+                    } else {
+                        $('#nome').parent().removeClass('has-feedback has-error');
+                        $('.help-block').remove();
+                        $('.save').attr('disabled', false);
+                    }
+
+                });
+            }
+        });
     </script>
 @stop
