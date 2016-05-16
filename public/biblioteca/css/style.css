@@ -131,24 +131,31 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     line-height: 85px;
 }
 .mybdg{
-    background: #283278;
+    background: #9e9e9e;
     color: white !important;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-left: 20px;
     right: 0px !important;
     font-size: 14px !important;
     padding-right: 35px !important;
 }
+.labels-cc{
+    font-size: 10px;
+    color: #8c8c8c;
+    margin-top: -10px;
+}
 .book-search {
-    width: auto;
-    height: 150px;
+    width: 130px;
+    height: 165px;
     background-color: #e0e0e0;
-    text-align: center;
-    color: white;
-    padding-top: 50px;
+    /* text-align: center; */
+    /* color: white; */
+    /* padding-top: 57px; */
+    /* margin-top: 27px; */
+    /* margin-bottom: 10px; */
+    margin: 0 auto;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 .ed-bdg{
 
@@ -171,6 +178,7 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
     transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
 }
+
 .collection:hover{
     box-shadow: 0px 3px 10px #CCC;
 
@@ -194,6 +202,8 @@ nav ul a {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 95%;
+    line-height: 25px;
+    height: 25px;
 }
 footer.page-footer {
     background-color: #325DA8;
@@ -202,6 +212,22 @@ footer.page-footer {
     background-color: #325DA8 !important;
     color: white !important;
 }
+.box-book{
+    margin: 0.5rem 0 1rem 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+    -webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    -moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+}
+.box-book:hover{
+    box-shadow: 0px 3px 10px #CCC;
+}
+
 /* .btn {
   display: inline-block;
   padding: 6px 12px;

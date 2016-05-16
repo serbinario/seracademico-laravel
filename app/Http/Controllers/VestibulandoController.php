@@ -9,13 +9,14 @@ use Seracademico\Entities\Aluno;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\AlunoService;
+use Seracademico\Services\VestibulandoService;
 use Seracademico\Validators\AlunoValidator;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
 {
     /**
-     * @var AlunoService
+     * @var VestibulandoService
      */
     private $service;
 
@@ -45,9 +46,10 @@ class VestibulandoController extends Controller
     ];
 
     /**
-     * @param AlunoService $service
+     * @param VestibulandoService $service
+     * @param AlunoValidator $validator
      */
-    public function __construct(AlunoService $service, AlunoValidator $validator)
+    public function __construct(VestibulandoService $service, AlunoValidator $validator)
     {
         $this->service    = $service;
         $this->validator  = $validator;
