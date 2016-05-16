@@ -73,7 +73,7 @@ class VestibularController extends Controller
                         ';
 
             # Verificando a possibilida de deleção
-            if(count($vestibular->vestibulandos) > 0) {
+            if(count($vestibular->vestibulandos) == 0) {
                 $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">delete</i></a></li>';
             }
 

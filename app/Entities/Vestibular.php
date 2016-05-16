@@ -161,6 +161,14 @@ class Vestibular extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vestibulandos()
+    {
+        return $this->hasMany(Aluno::class, 'vestibular_id');
+    }
+
+    /**
      * @param Model $parent
      * @param array $attributes
      * @param string $table
