@@ -36,6 +36,7 @@ class Vestibular extends Model implements Transformable
 		'tipo_vencimento_id',
 		'qtd_dias',
 		'data_prova',
+        'semestre_id'
 	];
 
     /**
@@ -116,6 +117,14 @@ class Vestibular extends Model implements Transformable
     public function setDataProvaAttribute($value)
     {
         $this->attributes['data_prova'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class);
     }
 
     /**

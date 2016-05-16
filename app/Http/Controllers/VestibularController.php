@@ -29,7 +29,8 @@ class VestibularController extends Controller
     private $loadFields = [
         'Taxa',
         'Banco',
-        'TipoVencimento'
+        'TipoVencimento',
+        'Graduacao\\Semestre'
     ];
 
     /**

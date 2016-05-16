@@ -167,18 +167,6 @@ class VestibularService
         return $result;
     }
 
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
-
-         #retorno
-         return $data;
-    }
 
     /**
      * @param $data
@@ -303,7 +291,6 @@ class VestibularService
         # Retono
         return true;
     }
-
 
     /**
      * @param $data
