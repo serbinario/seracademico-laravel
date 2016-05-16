@@ -114,5 +114,39 @@
                 });
             }
         });
+
+
+        //Validar nome duplicado
+        $(document).on('blur', "#nome", function () {
+
+            //Recuperando o estado
+            var nome = $(this).val();
+
+            if (nome !== "") {
+                var dados = {
+                    'nome' : nome,
+                }
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.biblioteca.validarNome')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    console.log(json);
+
+                    option += '<option value="">Selecione uma cidade</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                });
+            }
+        });
     </script>
 @stop
