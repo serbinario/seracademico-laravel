@@ -170,9 +170,9 @@
             var url = $(this).attr('href');
             bootbox.confirm("Tem certeza que deseja devolver esse emprestimo?", function (result) {
                 if (result) {
-                    window.open(url, '_blank');
-                    location.reload();
-                    //location.href = url
+                    //window.open(url, '_blank');
+                    //location.reload();
+                    location.href = url
                 } else {
                     false;
                 }

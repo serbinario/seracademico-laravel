@@ -58,14 +58,15 @@ class EmprestarService
         $dados     = $request;
         $dataObj   = new \DateTime('now');
         $dias      = "";
+        $dia       = 0;
 
         if($dados['id_emp'] == '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
+            $dia = $dias[0]->valor - 1;
         } else if ($dados['id_emp'] == '2') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
+            $dia = $dias[0]->valor - 1;
         }
-
-        $dia = $dias[0]->valor - 1;
 
         $dataObj->add(new \DateInterval("P{$dia}D"));
         $data = $dataObj->format('d/m/Y');

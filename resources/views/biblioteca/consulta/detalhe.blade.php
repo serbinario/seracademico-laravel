@@ -237,8 +237,8 @@
                                 <div class="collection">
                                     <a class="collection-item">
                                         <div class="row">
-                                        <div class="col s4"><b>Inf. publicação</b></div>
-                                        <div class="col s8">{{$exemplar['acervo']['tipoAcervo']['nome']}} - {{$exemplar['idioma']['nome']}}</div>
+                                            <div class="col s4"><b>Inf. publicação</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['tipoAcervo']['nome']}} - {{$exemplar['idioma']['nome']}}</div>
                                         </div>
                                     </a>
                                     <a class="collection-item">
@@ -337,37 +337,37 @@
                                 @if(count($exemplares) > 0)
                                     <table class="table striped responsive-table">
                                         <thead>
-                                            <tr>
-                                                <th>Tombo</th>
-                                                <th>Edição</th>
-                                                <th>Ano</th>
-                                                <th>Volume</th>
-                                                <th>CDD</th>
-                                                <th>Cutter</th>
-                                                <th>Número de chamada</th>
-                                                <th>Situação</th>
-                                            </tr>
+                                        <tr>
+                                            <th>Tombo</th>
+                                            <th>Edição</th>
+                                            <th>Ano</th>
+                                            <th>Volume</th>
+                                            <th>CDD</th>
+                                            <th>Cutter</th>
+                                            <th>Número de chamada</th>
+                                            <th>Situação</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($exemplares as $e)
-                                                <tr>
-                                                    <td>
-                                                        <?php
-                                                            $codigo = str_pad(substr($e->codigo, 0, -4),4,"0",STR_PAD_LEFT);
-                                                            $ano    = substr($e->codigo, -4);
-                                                            $tombo = $codigo.'/'.$ano;
-                                                        ?>
-                                                        {{$tombo}}
-                                                    </td>
-                                                    <td>@if($e->edicao){{$e->edicao}}.ed @endif</td>
-                                                    <td>@if($e->ano){{$e->ano}} @endif</td>
-                                                    <td>{{$e->volume}}</td>
-                                                    <td>{{$e->cdd}}</td>
-                                                    <td>{{$e->cutter}}</td>
-                                                    <td>{{$e->numero_chamada}}</td>
-                                                    <td>{{$e->nome}}</td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach($exemplares as $e)
+                                            <tr>
+                                                <td>
+                                                    <?php
+                                                    $codigo = str_pad(substr($e->codigo, 0, -4),4,"0",STR_PAD_LEFT);
+                                                    $ano    = substr($e->codigo, -4);
+                                                    $tombo = $codigo.'/'.$ano;
+                                                    ?>
+                                                    {{$tombo}}
+                                                </td>
+                                                <td>@if($e->edicao){{$e->edicao}}.ed @endif</td>
+                                                <td>@if($e->ano){{$e->ano}} @endif</td>
+                                                <td>{{$e->volume}}</td>
+                                                <td>{{$e->cdd}}</td>
+                                                <td>{{$e->cutter}}</td>
+                                                <td>{{$e->numero_chamada}}</td>
+                                                <td>{{$e->nome}}</td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 @endif
@@ -382,12 +382,12 @@
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                             <?php $count++ ?>
-                                                <span style="text-transform: uppercase"><b>{{$autor['responsaveis']['sobrenome']}}</b></span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                            <span style="text-transform: uppercase"><b>{{$autor['responsaveis']['sobrenome']}}</b></span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                         @endforeach
                                     @endif
                                 @endif
                                 <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
-                                    @if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
                         </div>
                     </section>
@@ -396,13 +396,15 @@
                     <section class="arg-list">
                         <div class="col s12">
                             <div class="card" style="margin-top: 0px;">
-                                <div class="card-image waves-effect waves-block waves-light" style="padding: 0 40px;">
+                                <div class="card-image waves-effect waves-block waves-light" >
                                     <div class="book-search">
-                                            <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 110px;margin-top: -30%;">
+                                        <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
                                     </div>
-                                   {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
+                                    {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
                                 </div>
                             </div>
+                            <br/>
+                            <button class="btn waves-effect waves-light"><i class="material-icons left">arrow_back</i>Voltar</button>
                     </section>
                 </div>
             </div>
