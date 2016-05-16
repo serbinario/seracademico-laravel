@@ -8,7 +8,7 @@ use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Validators\AlunoValidator;
 use Seracademico\Entities;
 
-class AlunoService
+class VestibulandoService
 {
     /**
      * @var AlunoRepository
@@ -59,7 +59,7 @@ class AlunoService
 
         #Verificando se o registro foi encontrado
         if(!$aluno) {
-            throw new \Exception('Aluno não encontrado!');
+            throw new \Exception('Vestibulando não encontrado!');
         }
 
         #retorno
@@ -237,10 +237,13 @@ class AlunoService
         #validando as datas
         $aluno->data_expedicao   = $aluno->data_expedicao == '0000-00-00' ? "" : $aluno->data_expedicao;
         $aluno->data_nasciemento = $aluno->data_nasciemento == '0000-00-00' ? "" : $aluno->data_nasciemento;
+        $aluno->data_insricao_vestibular = $aluno->data_insricao_vestibular == '0000-00-00' ? "" : $aluno->data_insricao_vestibular;
+
 
         #tratando as datas
         $aluno->data_expedicao   = date('d/m/Y', strtotime($aluno->data_expedicao));
         $aluno->data_nasciemento = date('d/m/Y', strtotime($aluno->data_nasciemento));
+        $aluno->data_insricao_vestibular = date('d/m/Y', strtotime($aluno->data_insricao_vestibular));
         //$aluno->data_exame_nacional_um   = date('d/m/Y', strtotime($aluno->data_exame_nacional_um));
         //$aluno->data_exame_nacional_dois = date('d/m/Y', strtotime($aluno->data_exame_nacional_dois));
 
