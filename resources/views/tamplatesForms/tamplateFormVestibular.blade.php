@@ -1,18 +1,30 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome') !!}
+                    {!! Form::label('nome', 'Nome *') !!}
                     {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-				{!! Form::label('codigo', 'Codigo') !!}
+				{!! Form::label('codigo', 'Codigo *') !!}
 				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control')) !!}
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('semestre_id', 'Semestre *') !!}
+                    @if(isset($model->banco))
+                        {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , $model->banco->id, array('class' => 'form-control')) !!}
+                    @else
+                        {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , null, array('class' => 'form-control')) !!}
+                    @endif
+                </div>
+            </div>
+
 		</div>
 
         <hr class="hr-line-dashed"/>
@@ -59,16 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('semestre_id', 'Semestre *') !!}
-                                @if(isset($model->banco))
-                                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , $model->banco->id, array('class' => 'form-control')) !!}
-                                @else
-                                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , null, array('class' => 'form-control')) !!}
-                                @endif
-                            </div>
-                        </div>
+
 
                     </div>
                     {{--FIM Aba Prova --}}

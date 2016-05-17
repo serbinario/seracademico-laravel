@@ -49,7 +49,7 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
-                @role('admin')
+                @role('posgraduacao')
                 <li>
                     <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -76,23 +76,32 @@
                         </li>--}}
                     </ul>
                 </li>
+                @endrole
 
+                @role('graduacao')
                 <li>
                     <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                        @permission('secretaria.view')
                         <li>
                             <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
+                                @permission('graduacao.aluno.view')
                                 {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
+                                @endpermission
+
+                                @permission('secretaria.other')
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="material-icons">collections_bookmark</i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
-
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
 
+                        @permission('vestibular.view')
                         <li>
                             <a href="#"><i class="material-icons">style</i> Vestibular <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
@@ -101,6 +110,8 @@
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
                             </ul>
                         </li>
+                        @endpermission
+
                         {{--<li>
                             <a href="#">Tesouraria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
@@ -113,7 +124,9 @@
                         </li>--}}
                     </ul>
                 </li>
+                @endrole
 
+                @role('admin')
                 <li>
                     <a href="index.html"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
                                 class="fa arrow"></span></a>
@@ -122,6 +135,7 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
+
 
                 <li>
                     <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -142,6 +156,7 @@
                     </ul>
                 </li>
                 @endrole
+
 
                 @role('biblioteca')
                 <li>
