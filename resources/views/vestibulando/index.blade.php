@@ -2,6 +2,11 @@
 
 @section("css")
     <link rel="stylesheet" href="{{ asset('/js/posgraduacao/turma/css/modal_calendario.css') }}">
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
 @stop
 
 @section('content')

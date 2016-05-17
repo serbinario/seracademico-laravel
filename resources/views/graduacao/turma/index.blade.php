@@ -1,6 +1,6 @@
 @extends('menu')
 
-@section("css")--}}
+@section("css")
     <link rel="stylesheet" href="{{ asset('/js/graduacao/turma/css/modal_horario.css') }}">
     <style type="text/css">
         table.dataTable tbody th, table.dataTable tbody td {
