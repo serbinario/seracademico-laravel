@@ -68,6 +68,7 @@
                             </div>--}}
                         </div>
                         <hr class="hr-dashline">
+
                         <div class="row">
                             <div class="input-field col s5 m3">
                                 <select name="busca_por" class="form-control">
@@ -90,6 +91,7 @@
                                     <option value="1" selected>Livro</option>
                                 </select>
                             </div>
+
                         </div>
                     </form>
                 </div>
