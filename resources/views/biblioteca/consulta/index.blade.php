@@ -67,7 +67,7 @@
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s5 m2 >
+                            <div class="col s5 m2" >
                                 <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                             </div>
                             <div class="col s5 m2" style="margin-top: 3px;">
