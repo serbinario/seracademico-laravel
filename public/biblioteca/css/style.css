@@ -227,7 +227,18 @@ footer.page-footer {
 .box-book:hover{
     box-shadow: 0px 3px 10px #CCC;
 }
-
+nav a {
+    color: darkblue;
+}
+.btn-box{
+    position: absolute;
+    margin-bottom: 10%;
+    margin-left: 20%;
+    bottom: 0;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #283278;
+}
 /* .btn {
   display: inline-block;
   padding: 6px 12px;

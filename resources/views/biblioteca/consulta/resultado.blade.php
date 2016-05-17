@@ -16,18 +16,31 @@
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="#!">Ajuda</a></li>
-    <li><a href="#!">Sobre</a></li>
+    <li><a href="#!">Perfil</a></li>
     <li class="divider"></li>
     <li><a href="#!">Sair</a></li>
 </ul>
 <nav>
     <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}"
-                                                  style="width: 130px;
-    margin-top: -20%;"> </a>
+            <a href="#!" class="brand-logo">
+                <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;margin-top: -20%;"> </a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons" style="color: #283277;">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
+                <li><a href="#!">Principal</a></li>
+                <li><a href="#!">Acadêmico</a></li>
+                <li><a href="#!">Financeiro</a></li>
+                <li><a href="#!">Secretaria</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <!-- Dropdown Trigger -->
+                <li><a href="#!">Principal</a></li>
+                <li><a href="#!">Acadêmico</a></li>
+                <li><a href="#!">Financeiro</a></li>
+                <li><a href="#!">Secretaria</a></li>
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
@@ -56,7 +69,7 @@
                         </div>
                         <hr class="hr-dashline">
                         <div class="row">
-                            <div class="input-field col s3">
+                            <div class="input-field col s5 m3">
                                 <select name="busca_por" class="form-control">
                                     <option value="1" selected>Todos os campos</option>
                                     <option value="2">Título</option>
@@ -64,16 +77,15 @@
                                     <option value="4">Autor</option>
                                 </select>
                             </div>
-                            <div class="input-field col s5">
+                            <div class="input-field col s7 m5">
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s2">
-                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i
-                                            class="material-icons left">search</i> Buscar
-                                </button>
+                            <div class="col s5 m2">
+                                <a type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;">Buscar
+                                </a>
                             </div>
-                            <div class="col s2">
+                            <div class="col s7 m2">
                                 <select name="tipo_obra" class="form-control">
                                     <option value="1" selected>Livro</option>
                                 </select>
@@ -92,7 +104,7 @@
     <br/>
     <div class="row">
         @foreach($resultado->items() as $f)
-            <div class="col s12 m3">
+            <div class="col s12 m4 l3">
                 <div class="box-book">
                     <div class="col s12">
                         <div class="row">
@@ -132,28 +144,9 @@
                         </div>
                     </div>
 
-                    <div class="row center">
-                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light"><i class="material-icons left">launch</i>Detalhes</a>
+                    <div class="row">
+                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light btn-box"><i class="material-icons left">launch</i>Detalhes</a>
                     </div>
-
-                    {{--<div class="col s4">
-                        <br />
-                        <div class="row">
-                            <div class="col s12"><div class="chip tooltipped" data-position="bottom" data-delay="30" data-tooltip="{{$f->assunto}}">{{$f->assunto}}</div></div>
-                        </div>
-                        <div class="row">
-                            <div class="col s6"><p><b>CDD</b><br/>{{ $f->cdd }}</p></div>
-                            <div class="col s6"><p><b>CUTTER</b><br/>{{ $f->cutter }}</p></div>
-                        </div>
-                    </div>--}}
-                    {{--<div class="col s1"><span class="badge mybdg" >@if($f->tipos_acervos_id == '1')
-                                Livro
-                            @elseif($f->tipos_acervos_id == '2')
-                                Revista
-                            @endif</span>
-                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn-floating waves-effect waves-light tooltipped" style="top: 75px;"
-                           data-position="right" data-delay="40" data-tooltip="Ver detalhes"><i class="material-icons">launch</i></a>
-                    </div>--}}
                 </div>
             </div>
         @endforeach
