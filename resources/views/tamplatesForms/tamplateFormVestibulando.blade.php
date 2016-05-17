@@ -83,9 +83,9 @@
             <li role="presentation">
                 <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Médio</a>
             </li>
-            <li role="presentation">
+            {{--<li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
-            </li>
+            </li>--}}
             <li role="presentation">
                 <a href="#vestibular" aria-controls="vestibular" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Vestibular</a>
             </li>
@@ -107,10 +107,10 @@
                                 {{--{!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}--}}
                                 {{--{!! Form::select('grau_instrucoes_id', $loadFields['grauinstrucao'], Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
-                            <div class="form-group col-md-4">
+                            {{--<div class="form-group col-md-4">
                                 {!! Form::label('profissoes_id', 'Profissão ') !!}
                                 {!! Form::select('profissoes_id', array(), Session::getOldInput('profissoes_id'),array('class' => 'form-control')) !!}
-                            </div>
+                            </div>--}}
                             <div class="form-group col-md-2">
                                 {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
                                 {!! Form::select('cores_racas_id', (['' => 'Selecione uma opção'] + $loadFields['corraca']->toArray()), Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
@@ -344,7 +344,7 @@
                                                 {!! Form::text('nome_emp',Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
-                                        <div class="row">
+                                       {{-- <div class="row">
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('uf_pro', 'UF ') !!}
                                                 {!! Form::select('uf_pro', array(), Session::getOldInput('nome'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}
@@ -361,7 +361,7 @@
                                                 {!! Form::label('cep_pro', 'CEP') !!}
                                                 {!! Form::text('cep_pro',Session::getOldInput('nome') , array('class' => 'form-control')) !!}
                                             </div>
-                                        </div>
+                                        </div>--}}
                                         <div class="row">
                                             <div class="form-group col-md-8">
                                                 {!! Form::label('email_institucional', 'E-mail institucional') !!}
@@ -422,12 +422,12 @@
                 </div>
             </div>
 
-            {{--Aba Documentos Obrigatorios--}}
+            {{--Aba Documentos Obrigatorios--}}{{--
             <div role="tabpanel" class="tab-pane" id="documentosObrig">
                 <br/>
 
                 <div class="row">
-                    {{--Primeria coluna--}}
+                    --}}{{--Primeria coluna--}}{{--
                     <div class="col-md-6">
 
                         <div class="checkbox checkbox-primary">
@@ -467,9 +467,9 @@
                         <!-- Fim Histórico Graduação Autenticado -->
 
                     </div>
-                    {{--Fim da Primeria coluna--}}
+                    --}}{{--Fim da Primeria coluna--}}{{--
 
-                    {{--Segunda coluna--}}
+                    --}}{{--Segunda coluna--}}{{--
                     <div class="col-md-6">
 
                         <!-- Título de Eleitor e último comprovante de votação -->
@@ -507,10 +507,10 @@
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                     </div>
-                    {{--Fim da Segunda coluna--}}
+                    --}}{{--Fim da Segunda coluna--}}{{--
                 </div>
             </div>
-            {{--Aba Documentos Obrigatorios--}}
+            --}}{{--Aba Documentos Obrigatorios--}}
 
             {{-- Aba vestibular --}}
             <div role="tabpanel" class="tab-pane" id="vestibular">
@@ -530,7 +530,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                {!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira * ') !!}
+                                {!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira ') !!}
                                 {!! Form::select('linguagem_estrangeira_id', $loadFields['linguaextrangeira'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
@@ -538,7 +538,7 @@
                                 {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pre_matricula', 'Pré-Matrícula * ') !!}
+                                {!! Form::label('pre_matricula', 'Pré-Matrícula ') !!}
                                 {!! Form::text('pre_matricula', Session::getOldInput('pre_matricula'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
@@ -549,7 +549,7 @@
                                 {!! Form::text('data_insricao_vestibular', Session::getOldInput('data_insricao_vestibular'), array('class' => 'form-control datepicker')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                {!! Form::label('sala_vestibular_id', 'Sala * ') !!}
+                                {!! Form::label('sala_vestibular_id', 'Sala ') !!}
                                 {!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
@@ -582,22 +582,22 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
-                                        {!! Form::label('segunda_opcao_curso_id', '2º Opção * ') !!}
+                                        {!! Form::label('segunda_opcao_curso_id', '2º Opção ') !!}
                                         {!! Form::select('segunda_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('segunda_opcao_curso_id'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('segunda_opcao_turno_id', 'Opção Turno *') !!}
+                                        {!! Form::label('segunda_opcao_turno_id', 'Opção Turno') !!}
                                         {!! Form::select('segunda_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('segunda_opcao_turno_id'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
-                                        {!! Form::label('terceira_opcao_curso_id', '3º Opção * ') !!}
+                                        {!! Form::label('terceira_opcao_curso_id', '3º Opção ') !!}
                                         {!! Form::select('terceira_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('terceira_opcao_curso_id'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('terceira_opcao_turno_id', 'Opção Turno *') !!}
+                                        {!! Form::label('terceira_opcao_turno_id', 'Opção Turno') !!}
                                         {!! Form::select('terceira_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('terceira_opcao_turno_id'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
@@ -608,40 +608,40 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('ano_enem', 'Ano * ') !!}
+                                        {!! Form::label('ano_enem', 'Ano ') !!}
                                         {!! Form::text('ano_enem', Session::getOldInput('ano_enem'), array('class' => 'form-control')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('inscricao_enem', 'Inscrição * ') !!}
+                                        {!! Form::label('inscricao_enem', 'Inscrição ') !!}
                                         {!! Form::text('inscricao_enem', Session::getOldInput('inscricao_enem'), array('class' => 'form-control')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('nota_redacao', 'Redação * ') !!}
+                                        {!! Form::label('nota_redacao', 'Redação ') !!}
                                         {!! Form::text('nota_redacao', Session::getOldInput('inscricao_enem'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias * ') !!}
+                                        {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
                                         {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias * ') !!}
+                                        {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias ') !!}
                                         {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias * ') !!}
+                                        {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias ') !!}
                                         {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias * ') !!}
+                                        {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
                                         {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
@@ -673,17 +673,22 @@
 
     {{--Buttons Submit e Voltar--}}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                    <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
+                </div>
+                <div class="btn-group">
+                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                </div>
+            </div>
+        </div>
 
-        </div>
-        <div class="col-md-2">
-            {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
-        </div>
-        <div class="col-md-2">
-            <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
-        </div>
     </div>
     {{--Fim Buttons Submit e Voltar--}}
+
+   
 </div>
 
 </div>
