@@ -401,6 +401,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('viewDevolucaoEmprestimo', ['as' => 'viewDevolucaoEmprestimo', 'uses' => 'Biblioteca\EmprestarController@viewDevolucao']);
             Route::get('devolucaoEmprestimo', ['as' => 'devolucaoEmprestimo', 'uses' => 'Biblioteca\EmprestarController@gridDevolucao']);
             Route::get('confirmarDevolucao/{id}', ['as' => 'confirmarDevolucao', 'uses' => 'Biblioteca\EmprestarController@confirmarDevolucao']);
+            
+        });
+
+        //Rotas para componentes de segurança
+        Route::group(['prefix' => 'portal', 'as' => 'portal.'], function () {
+            Route::get('indexPortal', ['as' => 'indexPortal', 'uses' => 'Portal\PortalController@index']);
+            Route::post('login', ['as' => 'login', 'uses' => 'Portal\PortalController@login']);
+            Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'Portal\PortalController@Dashboard']);
+            Route::get('academico', ['as' => 'academico', 'uses' => 'Portal\PortalController@Academico']);
+            Route::get('financeiro', ['as' => 'financeiro', 'uses' => 'Portal\PortalController@Financeiro']);
+            Route::get('secretaria', ['as' => 'secretaria', 'uses' => 'Portal\PortalController@Secretaria']);
         });
 
         //Rotas para componentes de segurança

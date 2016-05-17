@@ -1,0 +1,266 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+/* Ajustes para biblioteca */
+
+body{
+	font-family: font-family: 'Roboto', sans-serif !important;
+	
+}
+html {
+    font-size: 12px !important;
+}
+.dropdown-content li > a, .dropdown-content li > span {
+	font-size: 13px !important;
+}
+.select-wrapper input.select-dropdown {
+	font-size: 13px;
+}
+.input-field {
+	margin-top: 0px !important;  
+}
+.row{
+	margin-bottom: 0px !important;
+}
+nav {
+	background-color: #FFF;
+}
+
+.parallax-container {
+      height: 150px;
+      background: rgba(80, 80, 154, 0.69);
+    }
+
+.hr-dashline {
+	margin-bottom: -4px;
+	margin-top: -17px;
+	height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.btn, .btn-large, .btn-flat {
+	    height: 25px;
+    line-height: 25px;
+}
+.tabs{
+    background-color: #E3E3E3;
+}
+.tabs .tab a{
+	color: #325DA8;
+    font-weight: 600;
+}
+.tabs .tab a:hover{
+	    color: #5F8CD0;
+}
+.tabs .indicator {
+	background-color: #3B63A0;
+}
+.hr-simple{
+  border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+
+}
+.action-bar{
+  background: red;
+}
+.content-list{
+  background-color: #ccc;
+}
+.arg-list{
+  background-color: #ccc;
+}
+    
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.btn-primary .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 85px;
+    line-height: 85px;
+}
+.mybdg{
+    background: #283278;
+    color: white !important;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 20px;
+    right: 0px !important;
+    font-size: 14px !important;
+    padding-right: 35px !important;
+}
+.book-search {
+    width: auto;
+    height: 150px;
+    background-color: #e0e0e0;
+    text-align: center;
+    color: white;
+    padding-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.ed-bdg{
+
+    background: #325DA8;
+    box-shadow: -1px 2px 4px #135650;
+    color: white;
+    position: relative;
+    float: left;
+    padding: 3px;
+    padding-left: 10px;
+    font-weight: 600;
+    margin-top: -50px;
+}
+.btn-floating{
+    background-color: #325DA8 !important;
+}
+.collection{
+    -webkit-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    -moz-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    -o-transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+    transition: all 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750); /* linear */
+}
+.collection:hover{
+    box-shadow: 0px 3px 10px #CCC;
+
+}
+nav ul a {
+    color: #283277 !important;
+}
+.card{
+    border-radius: 0px !important;
+    border-top: 3px solid #283278;
+}
+.card .card-image{
+    height: 150px;
+}
+.card .card-content{
+    padding: 10px;
+    border-radius: 0;
+}
+.chip{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 95%;
+}
+footer.page-footer {
+    background-color: #325DA8;
+}
+.pagination li.active{
+    background-color: #325DA8 !important;
+    color: white !important;
+}
+
+.box-dash{
+  border: 1px solid rgba(204, 204, 204, 0);
+}
+.box-dash:hover{
+  box-shadow: 0px 1px 10px #ccc;
+  cursor: pointer;
+}
+
+.img-dash{
+  width: 30%;
+}
+
+/* .btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+} */
