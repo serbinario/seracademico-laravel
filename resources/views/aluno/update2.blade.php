@@ -366,7 +366,7 @@
                 if (estado !== "") {
                     var dados = {
                         estado: estado
-                    }
+                    };
 
                     jQuery.ajax({
                         type: 'POST',
@@ -398,7 +398,7 @@
                 if (cidade !== "") {
                     var dados = {
                         cidade: cidade
-                    }
+                    };
 
                     jQuery.ajax({
                         type: 'POST',

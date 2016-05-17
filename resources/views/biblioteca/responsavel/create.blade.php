@@ -47,7 +47,7 @@
             var str = $('#'+id).val();
             var getWords = function(str) {
                 return str.match(/\S+\s*/g);
-            }
+            };
             $('#'+id).each(function () {
                 var words = getWords(this.value);
                 $.each(words, function (i, word) {
@@ -59,8 +59,7 @@
                 });
                 this.value = words.join("");
             });
-        };
-
+        }
         //Deixar letra maiúscula
         $(document).ready(function ($) {
             // Chamada da funcao upperText(); ao carregar a pagina

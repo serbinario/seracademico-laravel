@@ -232,7 +232,7 @@
             var dados = {
                 'idCurriculo' : idCurriculo,
                 'idDisciplinas' : arrayId
-            }
+            };
 
             jQuery.ajax({
                 type: 'POST',
@@ -258,7 +258,7 @@
             var dados = {
                 'idCurriculo' : idCurriculo,
                 'idDisciplina' : idDisciplina
-            }
+            };
 
             jQuery.ajax({
                 type: 'POST',

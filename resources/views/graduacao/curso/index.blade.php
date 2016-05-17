@@ -2,6 +2,12 @@
 
 @section("css")
     <link rel="stylesheet" href="{{ asset('/js/graduacao/curso/css/modal_tabela_preco.css') }}">
+
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
 @stop
 
 @section('content')

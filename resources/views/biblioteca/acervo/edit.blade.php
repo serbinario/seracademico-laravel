@@ -340,7 +340,7 @@
                 var dados = {
                     'nome': $('#nome').val(),
                     'sobrenome': $('#sobrenome').val(),
-                }
+                };
 
                 if($('#nome').val() != "" && $('#sobrenome').val() != "") {
                     $.ajax({
@@ -355,8 +355,8 @@
                         type: "POST",
                         success: function (data) {
                             swal(data['msg'], "Click no botão abaixo!", "success");
-                            $('#nome').val("")
-                            $('#sobrenome').val("")
+                            $('#nome').val("");
+                            $('#sobrenome').val("");
                             //location.href = "/serbinario/calendario/index/";
                         }
                     });
@@ -373,7 +373,7 @@
             var str = $('#' + id).val();
             var getWords = function (str) {
                 return str.match(/\S+\s*/g);
-            }
+            };
             $('#' + id).each(function () {
                 var words = getWords(this.value);
                 $.each(words, function (i, word) {
@@ -387,8 +387,6 @@
                 this.value = words.join("");
             });
         }
-        ;
-
         //Deixar letra maiúscula
         $(document).ready(function ($) {
             // Chamada da funcao upperText(); ao carregar a pagina

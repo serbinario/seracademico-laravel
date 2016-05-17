@@ -140,7 +140,7 @@
 
             dadosAjax = {
                 'id_emp': data['id_emp']
-            }
+            };
 
             jQuery.ajax({
                 type: 'POST',
@@ -162,18 +162,18 @@
                     return false;
                 } else {
                     //console.log(data);
-                    html += "<tr>"
-                    html += "<td>" + data['titulo'] + "</td>"
-                    html += "<td>" + data['cutter'] + "</td>"
-                    html += "<td>" + data['subtitulo'] + "</td>"
-                    html += "<td>" + data['edicao'] + "</td>"
-                    html += "<td>" + data['tombo'] + "</td>"
-                    html += "<td>" + data['nome_sit'] + "</td>"
-                    html += "<td>" + data['nome_emp'] + "</td>"
+                    html += "<tr>";
+                    html += "<td>" + data['titulo'] + "</td>";
+                    html += "<td>" + data['cutter'] + "</td>";
+                    html += "<td>" + data['subtitulo'] + "</td>";
+                    html += "<td>" + data['edicao'] + "</td>";
+                    html += "<td>" + data['tombo'] + "</td>";
+                    html += "<td>" + data['nome_sit'] + "</td>";
+                    html += "<td>" + data['nome_emp'] + "</td>";
                     html += "<td>" +
                             "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                            "<input type='hidden' name='id[]' value='" + data['id'] + "'>"
-                    html += "</tr>"
+                            "<input type='hidden' name='id[]' value='" + data['id'] + "'>";
+                    html += "</tr>";
 
                     $('#emprestimos tbody').append(html);
                     $('#data').val(retorno['data']);

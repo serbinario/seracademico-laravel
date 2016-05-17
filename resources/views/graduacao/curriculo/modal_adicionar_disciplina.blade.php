@@ -1,6 +1,6 @@
     <!-- Modal de cadastro das Disciplinas-->
     <div  id="modal-adicionar-disciplina-curriculo" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
-        <div class="modal-dialog" style="width: 100%; height: 100%;">
+        <div class="modal-dialog" style="width: 98%; height: 90%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" type="button" data-dismiss="modal">×</button>
@@ -9,22 +9,15 @@
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Filtro personalizado</h3>
+                            <form id="search-form" class="form-inline" role="form" method="GET">
+                                <div class="form-group">
+                                    <label for="periodoSearch">Período: </label>
+                                    <input id="periodoSearch" class="form-control" type="text" placeholder="search período" name="periodoSearch">
                                 </div>
-                                <div class="panel-body">
-                                    <form id="search-form" class="form-inline" role="form" method="GET">
-                                        <div class="form-group">
-                                            <label for="periodoSearch">Período: </label>
-                                            <input id="periodoSearch" class="form-control" type="text" placeholder="search período" name="periodoSearch">
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" type="submit">Pesquisar</button>
-                                        </div>
-                                    </form>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Pesquisar</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="row">

@@ -59,7 +59,7 @@
                     'table' : 'cidades',
                     'field_search' : 'estados_id',
                     'value_search': estado,
-                }
+                };
 
                 jQuery.ajax({
                     type: 'POST',
@@ -96,7 +96,7 @@
                     'table' : 'bairros',
                     'field_search' : 'cidades_id',
                     'value_search': cidade,
-                }
+                };
 
                 jQuery.ajax({
                     type: 'POST',
