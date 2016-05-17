@@ -23,10 +23,24 @@
 <nav>
     <div class="container">{{----}}
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"> <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;
-    margin-top: -20%;"> </a>
+            <a href="#!" class="brand-logo">
+                <img src="{{ asset('/biblioteca/img/logo_alpha_faculdade-01.png')}}" style="width: 130px;margin-top: -20%;"> </a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons" style="color: #283277;">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <!-- Dropdown Trigger -->
+                <li><a href="#!">Principal</a></li>
+                <li><a href="#!">Acadêmico</a></li>
+                <li><a href="#!">Financeiro</a></li>
+                <li><a href="#!">Secretaria</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <!-- Dropdown Trigger -->
+                <li><a href="#!">Principal</a></li>
+                <li><a href="#!">Acadêmico</a></li>
+                <li><a href="#!">Financeiro</a></li>
+                <li><a href="#!">Secretaria</a></li>
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">account_circle</i>Usuário<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
@@ -56,7 +70,7 @@
                         </div>
                         <hr class="hr-dashline">
                         <div class="row">
-                            <div class="input-field col s2">
+                            <div class="input-field col s5 m3">
                                 <select name="busca_por" class="form-control">
                                     <option value="1" selected>Todos os campos</option>
                                     <option value="2">Título</option>
@@ -64,14 +78,15 @@
                                     <option value="4">Autor</option>
                                 </select>
                             </div>
-                            <div class="input-field col s5">
+                            <div class="input-field col s7 m5">
                                 <input id="icon_prefix" type="text" name="busca" class="validate">
                                 <label for="icon_prefix">Busque</label>
                             </div>
-                            <div class="col s2" >
-                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
+                            <div class="col s5 m2">
+                                <a type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;">Buscar
+                                </a>
                             </div>
-                            <div class="col s3" style="margin-top: 3px;">
+                            <div class="col s7 m2">
                                 <select name="tipo_obra" class="form-control">
                                     <option value="1" selected>Livro</option>
                                 </select>
