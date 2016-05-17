@@ -2,6 +2,11 @@
 
 @section("css")--}}
     <link rel="stylesheet" href="{{ asset('/js/graduacao/turma/css/modal_horario.css') }}">
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
 @stop
 
 @section('content')
@@ -97,8 +102,8 @@
             runTableDisciplina(idTurma);
             runTableHorario(idTurma);
 
-            $("#modal-disciplina-horario").find('.modal-dialog').css("width", "100%");
-            $("#modal-disciplina-horario").find('.modal-dialog').css("max-height", "100%");
+            $("#modal-disciplina-horario").find('.modal-dialog').css("width", "97%");
+            $("#modal-disciplina-horario").find('.modal-dialog').css("max-height", "97%");
             $("#modal-disciplina-horario").modal({show: true, keyboard: true});
         });
 
