@@ -76,6 +76,7 @@ class Aluno extends Model implements Transformable
         'instituicao_escolar_id',
 
         // Vestibular
+        'gerar_inscricao',
         'vestibular_id',
         'inscricao',
         'lingua_estrangeira_id',
@@ -230,6 +231,22 @@ class Aluno extends Model implements Transformable
     {
         return $this->belongsToMany(Turma::class, "fac_alunos_turmas", "aluno_id", "turma_id")
             ->withPivot(['id', 'aluno_id', 'turma_id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function vestibular()
+    {
+        return $this->belongsTo(Vestibular::class, 'vestibular_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function notasVestibular()
+    {
+        return $this->hasMany(AlunoNotaVestibular::class, 'aluno_id');
     }
 
     /**

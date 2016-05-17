@@ -234,7 +234,7 @@ class Curso extends Model implements Transformable
      */
     public function scopeAtivo($query, $value)
     {
-        return $query->where("ativo", $value);
+        return $query->where("ativo", $value)->where('tipo_nivel_sistema_id', 1);
     }
 
     /**

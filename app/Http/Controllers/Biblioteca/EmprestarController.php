@@ -126,10 +126,10 @@ class EmprestarController extends Controller
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
-            $this->service->store($data);
+            $result = $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Emprestimo realizado com sucesso!");
+            return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
@@ -196,8 +196,8 @@ class EmprestarController extends Controller
             $this->service->devolucao($id);
 
             #Retorno para a view
-            //return view('biblioteca.controle.emprestimo.cupomDevolucao');
-            return redirect()->back()->with("message", "Devolução realizada com sucesso!");
+            return view('biblioteca.controle.emprestimo.cupomDevolucao');
+            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

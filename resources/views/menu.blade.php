@@ -92,6 +92,15 @@
 
                             </ul>
                         </li>
+
+                        <li>
+                            <a href="#"><i class="material-icons">style</i> Vestibular <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse">
+                                <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
+                                <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
+                                <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
+                            </ul>
+                        </li>
                         {{--<li>
                             <a href="#">Tesouraria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
@@ -102,16 +111,6 @@
                                 <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>
                             </ul>
                         </li>--}}
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="index.html"><i class="material-icons">style</i> <span class="nav-label">Vestibular</span> <span
-                                class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
-                        <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
-                        <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
                     </ul>
                 </li>
 
@@ -253,8 +252,7 @@
 
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 
-<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>
-j
+{{--<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>--}}
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>

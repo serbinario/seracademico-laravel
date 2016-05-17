@@ -46,10 +46,10 @@ function builderHtmlFields (dados) {
 
     // Variáveis que armazenaram o html
     var htmlDisciplina = "";
-    var htmlsala       = "";
-    var htmlDia        = "<option>Selecione um dia</option>";
+    var htmlsala       = "<option value=''>Selecione uma Sala</option>";
+    var htmlDia        = "<option value=''>Selecione um dia</option>";
     var htmlHora       = "";
-    var htmlprofessor  = "";
+    var htmlprofessor  = "<option value=''>Selecione um Professor</option>";
 
     // Percorrendo o array de disciplinacurriculo
     for(var i = 0; i < dados['graduacao\\disciplina'].length; i++) {

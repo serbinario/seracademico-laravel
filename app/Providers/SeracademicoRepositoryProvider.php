@@ -369,6 +369,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\VestibularRepository::class,
             \Seracademico\Repositories\VestibularRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\AlunoNotaVestibularRepository::class,
+            \Seracademico\Repositories\AlunoNotaVestibularRepositoryEloquent::class
+        );
 	}
 	
 }

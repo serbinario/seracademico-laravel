@@ -46,9 +46,13 @@
         </div>
     </div>
 
+    @include('vestibulando.modal_notas')
+    @include('vestibulando.modal_notas_update')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas_update.js') }}"></script>
     <script type="text/javascript">
         var table = $('#vestibulando-grid').DataTable({
             processing: true,
@@ -61,6 +65,18 @@
                 {data: 'cpf', name: 'cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Id do vestibulando
+        var idVestibulando;
+
+        // Evento para modal de notas
+        $(document).on('click', '#notas', function () {
+            // Recuperando o id do vestibulando
+            idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
+
+            // Executando a tabela de notas
+            runTableNotas(idVestibulando);
         });
     </script>
 @stop

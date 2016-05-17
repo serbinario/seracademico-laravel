@@ -36,6 +36,7 @@ class Vestibular extends Model implements Transformable
 		'tipo_vencimento_id',
 		'qtd_dias',
 		'data_prova',
+        'semestre_id'
 	];
 
     /**
@@ -121,6 +122,14 @@ class Vestibular extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function banco()
     {
         return $this->belongsTo(Banco::class);
@@ -149,6 +158,14 @@ class Vestibular extends Model implements Transformable
     {
         return $this->belongsToMany(Curso::class, 'vestibulares_cursos', 'vestibular_id', 'curso_id')
             ->withPivot(['id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vestibulandos()
+    {
+        return $this->hasMany(Aluno::class, 'vestibular_id');
     }
 
     /**

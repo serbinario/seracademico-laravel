@@ -106,6 +106,28 @@ class VestibularService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #Recuperando o registro no banco de dados
+        $vestibular = $this->repository->find($id);
+
+        #Verificando se foi atualizado no banco de dados
+        if(!$vestibular) {
+            throw new \Exception('Vestibular não existe!');
+        }
+
+        # Deletando o registro
+        $this->repository->delete($vestibular->id);
+
+        # retorno
+        return true;
+    }
+
+    /**
      * @param array $models || Melhorar esse código
      * @return array
      */
@@ -167,18 +189,6 @@ class VestibularService
         return $result;
     }
 
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
-
-         #retorno
-         return $data;
-    }
 
     /**
      * @param $data
@@ -303,7 +313,6 @@ class VestibularService
         # Retono
         return true;
     }
-
 
     /**
      * @param $data

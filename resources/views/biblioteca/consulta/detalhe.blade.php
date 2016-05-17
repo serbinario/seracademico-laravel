@@ -283,7 +283,7 @@
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Edição</b></div>
-                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif</div>
+                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
                                         </div>
                                     </a>
                                     <a class="collection-item active">
@@ -297,11 +297,11 @@
                                             <div class="col s4"><b>Ent. princ.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                                        <b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b>,
-                                                        <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. etal
+                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
+                                                        <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                     @else
                                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -336,10 +336,10 @@
                                             <div class="col s4"><b>Ent. sec.</b></div>
                                             <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
                                                     @if($exemplar['acervo']['etial_outros'] == '1')
-                                                        <b>1</b>. <b>{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>. etal
+                                                        <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                     @else
                                                         @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. <b>{{$autor['responsaveis']['sobrenome']}}</b>, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                         @endforeach
                                                     @endif
                                                 @endif</div>
@@ -359,7 +359,7 @@
                                             <th>Volume</th>
                                             <th>CDD</th>
                                             <th>Cutter</th>
-                                            <th>Número de chamada</th>
+                                            <th>Nº de chamada</th>
                                             <th>Situação</th>
                                         </tr>
                                         </thead>
@@ -370,11 +370,11 @@
                                                     <?php
                                                     $codigo = str_pad(substr($e->codigo, 0, -4),4,"0",STR_PAD_LEFT);
                                                     $ano    = substr($e->codigo, -4);
-                                                    $tombo = $codigo.'/'.$ano;
+                                                    $tombo  = $codigo.'/'.$ano;
                                                     ?>
                                                     {{$tombo}}
                                                 </td>
-                                                <td>@if($e->edicao){{$e->edicao}}.ed @endif</td>
+                                                <td>@if($e->edicao){{$e->edicao}}. ed. @endif</td>
                                                 <td>@if($e->ano){{$e->ano}} @endif</td>
                                                 <td>{{$e->volume}}</td>
                                                 <td>{{$e->cdd}}</td>
@@ -392,17 +392,17 @@
                                 <?php $count = 0; ?>
                                 @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                     @if($exemplar['acervo']['etial_autor'] == '1')
-                                        <span style="text-transform: uppercase"><b>{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</b></span>,
-                                        <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?>. etal.
+                                        <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
+                                        <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al.
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                             <?php $count++ ?>
-                                            <span style="text-transform: uppercase"><b>{{$autor['responsaveis']['sobrenome']}}</b></span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                            <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                         @endforeach
                                     @endif
                                 @endif
                                 <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
-                                @if($exemplar['edicao']){{$exemplar['edicao']}}.ed @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
                         </div>
                     </section>

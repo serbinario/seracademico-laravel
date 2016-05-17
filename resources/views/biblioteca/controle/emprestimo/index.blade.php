@@ -66,7 +66,7 @@
                         </table>
                     </div>
                 </div>
-                {!! Form::open(['route'=>'seracademico.biblioteca.storeEmprestimo', 'method' => "POST" ]) !!}
+                {!! Form::open(['route'=>'seracademico.biblioteca.storeEmprestimo', 'method' => "POST", 'id' => 'form', 'target' => '__blank' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
                             {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
@@ -234,6 +234,10 @@
                     }
                 }
             });
+        });
+
+        $(document).on('submit', '#form', function (event) {
+            location.reload();
         });
     </script>
 @stop

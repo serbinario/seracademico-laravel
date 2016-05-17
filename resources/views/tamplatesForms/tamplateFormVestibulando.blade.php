@@ -100,8 +100,8 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                {!! Form::label('estado_civis_id', 'Estado Civil ') !!}
-                                {!! Form::select('estado_civis_id', $loadFields['estadocivil'], Session::getOldInput('estado_civis_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('estados_civis_id', 'Estado Civil ') !!}
+                                {!! Form::select('estados_civis_id', (['' => 'Selecione uma opção'] + $loadFields['estadocivil']->toArray()), null, array('class' => 'form-control')) !!}
                             </div>
                             {{--<div class="form-group col-md-2">--}}
                                 {{--{!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}--}}
@@ -113,11 +113,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
-                                {!! Form::select('cores_racas_id', $loadFields['corraca'], Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
+                                {!! Form::select('cores_racas_id', (['' => 'Selecione uma opção'] + $loadFields['corraca']->toArray()), Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('tipos_sanguinios_id', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('tipos_sanguinios_id', $loadFields['tiposanguinio'] , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
+                                {!! Form::select('tipos_sanguinios_id', (['' => 'Selecione uma opção'] + $loadFields['tiposanguinio']->toArray()) , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -521,7 +521,13 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 {!! Form::label('vestibular_id', 'Vestibular * ') !!}
-                                {!! Form::select('vestibular_id', $loadFields['vestibular'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}
+                               
+                                @if(isset($aluno->vestibular->id))
+                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['vestibular']->toArray()), null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
+                                @else
+                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['vestibular']->toArray()), null, array('class' => 'form-control')) !!}
+                                @endif
+
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira * ') !!}
@@ -529,11 +535,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('inscricao', 'Inscricao * ') !!}
-                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pre_matricula', 'Pré-Matrícula * ') !!}
-                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('pre_matricula', Session::getOldInput('pre_matricula'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 
@@ -544,7 +550,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('sala_vestibular_id', 'Sala * ') !!}
-                                {!! Form::select('sala_vestibular_id', $loadFields['sala'], Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}
+                                {!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 
@@ -566,33 +572,33 @@
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('primeira_opcao_curso_id', '1º Opção * ') !!}
-                                        {!! Form::select('primeira_opcao_curso_id', $loadFields['graduacao\\curso'], Session::getOldInput('primeira_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('primeira_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('primeira_opcao_curso_id'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('primeira_opcao_turno_id', 'Opção Turno *') !!}
-                                        {!! Form::select('primeira_opcao_turno_id', $loadFields['turno'], Session::getOldInput('primeira_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('primeira_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('primeira_opcao_turno_id'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('segunda_opcao_curso_id', '2º Opção * ') !!}
-                                        {!! Form::select('segunda_opcao_curso_id', $loadFields['graduacao\\curso'], Session::getOldInput('segunda_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('segunda_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('segunda_opcao_curso_id'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('segunda_opcao_turno_id', 'Opção Turno *') !!}
-                                        {!! Form::select('segunda_opcao_turno_id', $loadFields['turno'], Session::getOldInput('segunda_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('segunda_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('segunda_opcao_turno_id'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('terceira_opcao_curso_id', '3º Opção * ') !!}
-                                        {!! Form::select('terceira_opcao_curso_id', $loadFields['graduacao\\curso'], Session::getOldInput('terceira_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('terceira_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('terceira_opcao_curso_id'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('terceira_opcao_turno_id', 'Opção Turno *') !!}
-                                        {!! Form::select('terceira_opcao_turno_id', $loadFields['turno'], Session::getOldInput('terceira_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('terceira_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('terceira_opcao_turno_id'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -648,6 +654,22 @@
         </div>
     </div>
     <div class="col-md-10"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group col-md-4">
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('gerar_inscricao', 0) !!}
+                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
+                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                    @else
+                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
+                    @endif
+                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{--Buttons Submit e Voltar--}}
     <div class="row">

@@ -59,6 +59,17 @@
                             </div>
                         </div>
 
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('semestre_id', 'Semestre *') !!}
+                                @if(isset($model->banco))
+                                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , $model->banco->id, array('class' => 'form-control')) !!}
+                                @else
+                                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , null, array('class' => 'form-control')) !!}
+                                @endif
+                            </div>
+                        </div>
+
                     </div>
                     {{--FIM Aba Prova --}}
 

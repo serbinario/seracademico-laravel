@@ -8,8 +8,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('logout', 'Auth\AuthController@getLogout');
     });
 
-
-
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
 
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
@@ -19,6 +17,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'VestibulandoController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibulandoController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@update']);
+
+            Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'VestibulandoController@gridNotas']);
+                Route::post('edit', ['as' => 'edit', 'uses' => 'VestibulandoController@editNota']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@updateNota']);
+            });
         });
 
         //Rotas de pos-graduação
@@ -321,6 +325,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'VestibularController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibularController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibularController@update']);
+            Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'VestibularController@delete']);
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
                 Route::get('grid/{idVestibular}', ['as' => 'grid', 'uses' => 'VestibularCursoController@grid']);
@@ -362,6 +367,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeAjaxEditora', ['as' => 'storeAjaxEditora', 'uses' => 'Biblioteca\EditoraController@storeAjax']);
             Route::post('updateEditora/{id}', ['as' => 'updateEditora', 'uses' => 'Biblioteca\EditoraController@update']);
             Route::get('deleteEditora/{id}', ['as' => 'deleteEditora', 'uses' => 'Biblioteca\EditoraController@delete']);
+            Route::post('validarNome', ['as' => 'validarNome', 'uses' => 'Biblioteca\EditoraController@validarNome']);
 
             Route::get('indexAcervo', ['as' => 'indexAcervo', 'uses' => 'Biblioteca\ArcevoController@index']);
             Route::get('createAcervo', ['as' => 'createAcervo', 'uses' => 'Biblioteca\ArcevoController@create']);

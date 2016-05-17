@@ -206,4 +206,19 @@ class EditoraController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function validarNome(Request $request)
+    {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $dados = $this->service->validarNome($data);
+
+            return $dados;
+    }
+
 }
