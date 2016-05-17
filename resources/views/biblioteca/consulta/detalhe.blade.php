@@ -83,8 +83,8 @@
                                 <label for="icon_prefix">Busque</label>
                             </div>
                             <div class="col s5 m2">
-                                <a type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;">Buscar
-                                </a>
+                                <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;">Buscar
+                                </button>
                             </div>
                             <div class="col s7 m2">
                                 <select name="tipo_obra" class="form-control">
