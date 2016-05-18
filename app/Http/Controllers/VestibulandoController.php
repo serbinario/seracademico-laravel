@@ -72,7 +72,7 @@ class VestibulandoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->where('tipo_aluno_id', 1)
-            ->select(['id', 'nome', 'cpf', 'matricula', 'celular']);
+            ->select(['id', 'nome', 'cpf', 'matricula', 'celular', 'inscricao']);
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {

@@ -330,7 +330,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-heading">
+                                {{--<div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i
                                                     class="fa fa-plus-circle"></i> Contato profissional</a>
@@ -344,7 +344,7 @@
                                                 {!! Form::text('nome_emp',Session::getOldInput('nome'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
-                                       {{-- <div class="row">
+                                       --}}{{-- <div class="row">
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('uf_pro', 'UF ') !!}
                                                 {!! Form::select('uf_pro', array(), Session::getOldInput('nome'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}
@@ -361,7 +361,7 @@
                                                 {!! Form::label('cep_pro', 'CEP') !!}
                                                 {!! Form::text('cep_pro',Session::getOldInput('nome') , array('class' => 'form-control')) !!}
                                             </div>
-                                        </div>--}}
+                                        </div>--}}{{--
                                         <div class="row">
                                             <div class="form-group col-md-8">
                                                 {!! Form::label('email_institucional', 'E-mail institucional') !!}
@@ -377,7 +377,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>

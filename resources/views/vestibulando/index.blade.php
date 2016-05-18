@@ -31,6 +31,7 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
+                                <th>Inscrição</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Acão</th>
@@ -39,6 +40,7 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
+                                <th>Inscrição</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th style="width: 5%">Acão</th>
@@ -68,6 +70,7 @@
             ajax: "{!! route('seracademico.vestibulando.grid') !!}",
             columns: [
                 {data: 'nome', name: 'nome'},
+                {data: 'inscricao', name: 'inscricao'},
                 {data: 'celular', name: 'celular'},
                 {data: 'cpf', name: 'cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

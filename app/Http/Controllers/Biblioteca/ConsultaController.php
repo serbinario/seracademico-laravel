@@ -54,7 +54,7 @@ class ConsultaController extends Controller
         #Carregando os dados para o cadastro
         $loadFields = $this->serviceAcer->load($this->loadFields);
 
-        return view('biblioteca.consulta.index', compact('loadFields'));
+        return view('portal.biblioteca.consulta.index', compact('loadFields'));
 
     }
 
@@ -76,7 +76,7 @@ class ConsultaController extends Controller
 
         //dd($resultado);
 
-        return \View::make('biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
+        return \View::make('portal.biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
     }
 
@@ -96,7 +96,7 @@ class ConsultaController extends Controller
 
         $resultado = $this->query($data);
 
-        return \View::make('biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
+        return \View::make('portal.biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
     }
     
@@ -168,12 +168,12 @@ class ConsultaController extends Controller
         $exemplares = $data['exemplares'];
        //dd($exemplares);
 
-        return view('biblioteca.consulta.detalhe', compact('loadFields', 'exemplar', 'exemplares'));
+        return view('portal.biblioteca.consulta.detalhe', compact('loadFields', 'exemplar', 'exemplares'));
 
     }
 
     public function meusEmprestimos()
     {
-        return view('biblioteca.consulta.emprestimos');
+        return view('portal.biblioteca.consulta.emprestimos');
     }
 }
