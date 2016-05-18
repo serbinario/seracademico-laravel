@@ -18,7 +18,7 @@
 
         <!--   Icon Section   -->
         <div class="row">
-            <div class="col s12 m3">
+            <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
                         <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/png/clapperboard.png')}}" alt="" class="img-dash"></h2>
@@ -28,27 +28,17 @@
                 </div>
             </div>
 
-            <div class="col s12 m3">
-                <div class="box-dash">
-                    <div class="icon-block">
-                        <h2 class="center"><img src="{{ asset('/portal/img/icons/png/video-player-2.png')}}" alt="" class="img-dash"></h2>
-                        <h5 class="center">Horários</h5>
-                        <p class="center">Consulte o horário das disciplinas em que está cadastrado</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m3">
+            <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
                         <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/png/film.png')}}" alt="" class="img-dash"></h2>
-                        <h5 class="center">Notas</h5>
-                        <p class="center">Consulte suas notas</p>
+                        <h5 class="center">Avaliação acadêmica</h5></a>
+                        <p class="center">Consulte seu desempenho</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col s12 m3">
+            <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
                         <h2 class="center light-blue-text"><a href="{{ route('seracademico.biblioteca.indexConsulta') }}"><img src="{{ asset('/portal/img/icons/png/video-player.png')}}" alt="" class="img-dash"></a></h2>
