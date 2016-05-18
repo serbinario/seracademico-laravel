@@ -457,4 +457,37 @@ class VestibulandoService
         #Retorno
         return $nota;
     }
+
+    /**
+     * @param $dados
+     * @param $idVestibulando
+     * @return bool
+     * @throws \Exception
+     */
+    public function updateInclusao($dados, $idVestibulando)
+    {
+        # Recuperando o vestibulando e o currículo
+        $vestibulando = $this->repository->find($idVestibulando);
+        $curriculo    = Entities\Graduacao\Curriculo::byCurso($dados['curso_id']);
+
+        # Verificando se o vestibulando existe
+        if(!$vestibulando && !$curriculo) {
+            throw new \Exception('Vestibulando não existe');
+        }
+
+        # Regra de negócio do currículo
+        unset($dados['curso_id']);
+        $dados['curriculo_id'] = $curriculo[0]->id;
+
+        # Atualizando a inclusão
+        $inclusao = $vestibulando->inclusao;
+        $inclusao->curriculo_id = $dados['curriculo_id'];
+        $inclusao->forma_admissao_id = $dados['forma_admissao_id'];
+        $inclusao->data_inclusao = $dados['data_inclusao'];
+        $inclusao->turno_id = $dados['turno_id'];
+        $inclusao->save();
+
+        #retorno
+        return true;
+    }
 }

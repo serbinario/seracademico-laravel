@@ -57,11 +57,13 @@
 
     @include('vestibulando.modal_notas')
     @include('vestibulando.modal_notas_update')
+    @include('vestibulando.modal_inclusao')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas_update.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_inclusao.js') }}"></script>
     <script type="text/javascript">
         var table = $('#vestibulando-grid').DataTable({
             processing: true,
@@ -88,6 +90,15 @@
 
             // Executando a tabela de notas
             runTableNotas(idVestibulando);
+        });
+
+        // Evento para modal de notas
+        $(document).on('click', '#inclusao', function () {
+            // Recuperando o id do vestibulando
+            idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
+
+            // Executando a tabela de notas
+            runInclusao();
         });
     </script>
 @stop
