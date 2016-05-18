@@ -34,6 +34,7 @@
                                 <th>Inscrição</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Vestibular</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -43,6 +44,7 @@
                                 <th>Inscrição</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Vestibular</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -67,10 +69,11 @@
             autoWidth: false,
             ajax: "{!! route('seracademico.vestibulando.grid') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'inscricao', name: 'inscricao'},
-                {data: 'celular', name: 'celular'},
-                {data: 'cpf', name: 'cpf'},
+                {data: 'nome', name: 'fac_alunos.nome'},
+                {data: 'inscricao', name: 'fac_alunos.inscricao'},
+                {data: 'celular', name: 'fac_alunos.celular'},
+                {data: 'cpf', name: 'fac_alunos.cpf'},
+                {data: 'vestibular', name: 'vestibulares.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
