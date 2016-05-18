@@ -57,7 +57,7 @@ class VestibularController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('vestibulares')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('vestibulares')->select(['id', 'nome', 'codigo', 'data_prova', 'data_inicial', 'data_final']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
