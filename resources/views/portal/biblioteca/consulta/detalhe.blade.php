@@ -1,4 +1,4 @@
-@extends('portal.menuportal')
+@extends('portal.menuportal2')
 
 @section('css')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,7 +19,7 @@
     <div class="row">
         <div class="card col s12">
             <div class="card-content">
-                <form action="{{url('seracademico/biblioteca/seachSimple')}}" class="form-horizontal" method="post">
+                <form action="{{url('seachSimple')}}" class="form-horizontal" method="post">
                     <div class="row">
                         <span class="card-title col s12">Busca rápida</span>
                         {{--<div class="input-field col s2">

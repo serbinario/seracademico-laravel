@@ -1,4 +1,4 @@
-@extends('portal.menuportal')
+@extends('portal.menuportal2')
 
 @section('css')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,7 +19,7 @@
     <div class="row">
         <div class="card col s12">
             <div class="card-content">
-                <form action="{{url('seracademico/biblioteca/seachSimple')}}" class="form-horizontal" method="post">
+                <form action="{{url('seachSimple')}}" class="form-horizontal" method="post">
                     <div class="row">
                         <span class="card-title col s12">Busca rápida</span>
                         {{--<div class="input-field col s2">
@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col s12">
                                 <div class="book-search">
-                                    <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
+                                    <a href="{{url("seachDetalhe/exemplar/$f->id")}}">
                                         <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
                                     </a>
                                 </div>
@@ -82,7 +82,7 @@
 
                     <div class="row center">
                         <div class="col s12">
-                            <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}">
+                            <a href="{{url("seachDetalhe/exemplar/$f->id")}}">
                                 <?php $data = explode(" ", $f->subtitulo); $subtitulo = "";?>
                                 <p style="font-size: 13px;color: #182d52;"><b>{{ $f->titulo }}</b><br/>
                                     @if(count($data) <= 3)
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="row">
-                        <a href="{{url("/seracademico/biblioteca/seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light btn-box"><i class="material-icons left">launch</i>Detalhes</a>
+                        <a href="{{url("seachDetalhe/exemplar/$f->id")}}" class="btn waves-effect waves-light btn-box"><i class="material-icons left">launch</i>Detalhes</a>
                     </div>
                 </div>
             </div>
