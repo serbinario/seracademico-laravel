@@ -21,7 +21,7 @@
             <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
-                        <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/printer.png')}}" alt="" class="img-dash">
+                        <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/pen.png')}}" alt="" class="img-dash">
                         </h2>
                         <h5 class="center">Boletos</h5>
                         <p class="center">Consulte e gerencie seus boletos pagos e a pagar</p>
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            {{--<div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
                         <h2 class="center"><img src="{{ asset('/portal/img/icons/pen.png')}}" alt="" class="img-dash"></h2>
@@ -48,7 +48,7 @@
                         <p class="center">Gerencie o pagamento de taxas extras</p>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <br><br>
