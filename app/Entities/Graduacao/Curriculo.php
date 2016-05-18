@@ -104,4 +104,14 @@ class Curriculo extends Model implements Transformable
 
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeByCurso($query, $value)
+    {
+        return $query->where('curso_id', $value)->where('ativo', 1)->get();
+    }
 }

@@ -1,11 +1,25 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
+use Seracademico\Entities\CorRaca;
+use Seracademico\Entities\Curso;
+use Seracademico\Entities\CursoSuperior;
+use Seracademico\Entities\Endereco;
+use Seracademico\Entities\Estado;
+use Seracademico\Entities\EstadoCivil;
+use Seracademico\Entities\Exame;
+use Seracademico\Entities\GrauInstrucao;
+use Seracademico\Entities\InclusaoALuno;
+use Seracademico\Entities\Instituicao;
+use Seracademico\Entities\Profissao;
+use Seracademico\Entities\Religiao;
+use Seracademico\Entities\Sexo;
+use Seracademico\Entities\TipoSanguinio;
+use Seracademico\Entities\Turno;
 
 
 class Aluno extends Model implements Transformable
@@ -72,37 +86,7 @@ class Aluno extends Model implements Transformable
         'fotos_3x4_doc_obrigatorio',
         'comp_residencia_doc_obrigatorio',
         'histo_gradu_autentic_obrigatorio',
-        'ativo',
-        'tipo_aluno_id',
-        'instituicao_escolar_id',
-
-        // Vestibular
-        'gerar_inscricao',
-        'vestibular_id',
-        'inscricao',
-        'lingua_estrangeira_id',
-        'pre_matricula',
-        'data_insricao_vestibular',
-        'sala_vestibular_id',
-
-        'ano_enem',
-        'inscricao_enem',
-        'nota_humanas',
-        'nota_natureza',
-        'nota_matematica',
-        'nota_linguagem',
-        'nota_redacao',
-
-        'ano_conclusao_medio',
-        'outra_escola_medio',
-
-        'primeira_opcao_curso_id',
-        'segunda_opcao_curso_id',
-        'terceira_opcao_curso_id',
-        'primeira_opcao_turno_id',
-        'segunda_opcao_turno_id',
-        'terceira_opcao_turno_id',
-
+        'ativo'
     ];
 
     /**
@@ -212,75 +196,26 @@ class Aluno extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function instituicaoEscolar()
-    {
-        return $this->belongsTo(Instituicao::class, "instituicao_escolar_id");
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function cursoSuperior()
     {
         return $this->belongsTo(CursoSuperior::class, 'fac_cursos_superiores_id');
     }
 
-    /**
-     * @return mixed
-     */
-    public function turmas()
-    {
-        return $this->belongsToMany(Turma::class, "fac_alunos_turmas", "aluno_id", "turma_id")
-            ->withPivot(['id', 'aluno_id', 'turma_id']);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function vestibular()
-    {
-        return $this->belongsTo(Vestibular::class, 'vestibular_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function notasVestibular()
-    {
-        return $this->hasMany(AlunoNotaVestibular::class, 'aluno_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function inclusao()
-    {
-        return $this->hasOne(InclusaoAluno::class, 'aluno_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function horarios()
-    {
-        return $this->belongsToMany(HorarioDisciplinaTurma::class, "alunos_horarios", "aluno_id", "horario_id");
-    }
-
-    /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-     */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
-    {
-        # Criando um pivot para Turma
-        if ($parent instanceof Turma) {
-            return new AlunoTurma($parent, $attributes, $table, $exists);
-        }
-
-        # Retorno do novo Pivot
-        return parent::newPivot($parent, $attributes, $table, $exists);
-    }
+//    /**
+//     * @param Model $parent
+//     * @param array $attributes
+//     * @param string $table
+//     * @param bool $exists
+//     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+//     */
+//    public function newPivot(Model $parent, array $attributes, $table, $exists)
+//    {
+//        # Criando um pivot para Turma
+//        if ($parent instanceof Turma) {
+//            return new AlunoTurma($parent, $attributes, $table, $exists);
+//        }
+//
+//        # Retorno do novo Pivot
+//        return parent::newPivot($parent, $attributes, $table, $exists);
+//    }
 }

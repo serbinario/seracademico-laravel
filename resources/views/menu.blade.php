@@ -36,6 +36,10 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
 
+    <!-- zTree-->
+    <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
+    {{--<link rel="stylesheet" href="{{ asset('/css/plugins/zTree/demo.css')  }}">--}}
+
     @yield('css')
 </head>
 
@@ -88,7 +92,8 @@
                             <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 @permission('graduacao.aluno.view')
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
+                                <li><a href="{{ route('seracademico.matricula.index') }}"><i class="fa fa-users"></i>Matricular Aluno</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
                                 @endpermission
 
                                 @permission('secretaria.other')
@@ -268,6 +273,9 @@
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 
 {{--<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>--}}
+
+<!-- zTree -->
+<script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>

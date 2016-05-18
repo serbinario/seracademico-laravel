@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Aluno;
+use Seracademico\Entities\Curriculo;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\AlunoService;
@@ -79,6 +80,7 @@ class VestibulandoController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>
                         <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
                     </ul>
                     </div>';
@@ -246,4 +248,68 @@ class VestibulandoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function editInclusao($idVestibulando)
+    {
+        try {
+            # Recuperando o vestibulando
+            $vestibulando = $this->service->find($idVestibulando);
+            $dadosRetorno = [];
+
+            # Validando se existe uma inclusão cadastrada
+            if(!$vestibulando->inclusao) {
+                $inclusao = $vestibulando->inclusao()->create(['data_inclusao'=>null]);
+            } else {
+                $inclusao = $vestibulando->inclusao;
+            }
+
+            # Populando o array de retorno
+            $dadosRetorno['curso_id'] = isset($inclusao->curriculo->id) ? $inclusao->curriculo->curso->id : null;
+            $dadosRetorno['turno_id'] = isset($inclusao->turno->id) ? $inclusao->turno->id : null;
+            $dadosRetorno['data_inclusao'] = $inclusao->data_inclusao;
+            $dadosRetorno['forma_admissao_id'] = isset($inclusao->formaAdmissao->id) ? $inclusao->formaAdmissao->id : null;
+
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dadosRetorno]);
+        } catch (\Throwable $e) {dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function updateInclusao(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->updateInclusao($data, $id);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Vestibulando transferido com sucesso!']);
+        } catch (\Throwable $e) {dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }
