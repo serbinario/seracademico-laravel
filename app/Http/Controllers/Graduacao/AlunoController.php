@@ -62,7 +62,16 @@ class AlunoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $alunos = \DB::table('fac_alunos')->select(['id', 'nome', 'cpf', 'matricula', 'celular']);
+        $alunos = \DB::table('fac_alunos')
+            ->join('inclusao_aluno', 'inclusao_aluno.aluno_id', '=', 'fac_alunos.id')
+            ->where('inclusao_aluno.data_inclusao', '!=', '')
+            ->select([
+                'fac_alunos.id',
+                'fac_alunos.nome',
+                'fac_alunos.cpf',
+                'fac_alunos.matricula',
+                'fac_alunos.celular'
+            ]);
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {

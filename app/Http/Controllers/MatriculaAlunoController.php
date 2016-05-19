@@ -49,6 +49,7 @@ class MatriculaAlunoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('inclusao_aluno', 'inclusao_aluno.aluno_id', '=', 'fac_alunos.id')
+            ->where('inclusao_aluno.data_inclusao', '!=', '')
             ->select([
                 'fac_alunos.id',
                 'fac_alunos.nome',
