@@ -107,6 +107,7 @@ class MatriculaAlunoController extends Controller
                 ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                 ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                 ->whereIn('fac_disciplinas.id', $request->get('dados'))
+                ->groupBy('fac_disciplinas.id')
                 ->select(['fac_disciplinas.id', 'fac_disciplinas.codigo as codigoDisciplina', 'fac_disciplinas.nome as nomeDisciplina'])->get();
 
             # Tratanto os dados de retorno
