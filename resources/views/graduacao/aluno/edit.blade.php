@@ -121,7 +121,7 @@
             $("#instituicao").select2({
                 placeholder: 'Selecione uma instituição',
                 minimumInputLength: 3,
-                width: 400,
+                width: 750,
                 ajax: {
                     type: 'POST',
                     url: "{{ route('seracademico.util.select2')  }}",
@@ -134,7 +134,7 @@
                             'tableName':  'fac_instituicoes',
                             'fieldName':  'nome',
                             'fieldWhere':  'nivel',
-                            'valueWhere':  '3',
+                            'valueWhere':  '2',
                             'page':       params.page || 1
                         };
                     },

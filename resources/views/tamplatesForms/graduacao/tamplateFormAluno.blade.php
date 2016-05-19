@@ -36,13 +36,9 @@
                 {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
-            <div class="form-group col-md-1">
-                {!! Form::label('ativar', 'Ativar') !!}
-                <div class="checkbox checkbox-primary">
-                    {!! Form::hidden('ativo', 0) !!}
-                    {!! Form::checkbox('ativo', 1, null, array('class' => 'form-control')) !!}
-                    {!! Form::label('ativo', 'Ativar', false) !!}
-                </div>
+            <div class="form-group col-md-2">
+                {!! Form::label('situacao_id', 'Situacao') !!}
+                {!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
             </div>
 
         </div>
@@ -82,7 +78,7 @@
                 <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Superior</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> 2º Grau</a>
             </li>
             <li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
@@ -387,18 +383,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-5">
-                                <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
-                                <select id="formacao" name="fac_cursos_superiores_id" class="form-control">
-                                    @if(isset($aluno->id) && $aluno->cursoSuperior != null)
-                                        <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
-                                    @endif
-                                </select>
-                            </div>
+                            {{--<div class="form-group col-md-5">--}}
+                            {{--<label for="fac_cursos_superiores_id">Formação Acadêmica</label>--}}
+                            {{--<select id="formacao" name="fac_cursos_superiores_id" class="form-control">--}}
+                            {{--@if(isset($aluno->id) && $aluno->cursoSuperior != null)--}}
+                            {{--<option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>--}}
+                            {{--@endif--}}
+                            {{--</select>--}}
+                            {{--</div>--}}
 
-                            <div class="form-group col-md-5">
-                                <label for="instituicao">Instituição</label>
-                                <select id="instituicao" class="form-control" name="fac_instituicoes_id">
+                            <div class="form-group col-md-10">
+                                <label for="instituicao">Instituição</label><br>
+                                <select id="instituicao" class="form-control" name="instituicao_escolar_id">
                                     @if(isset($aluno->id) && $aluno->instituicao != null)
                                         <option value="{{ $aluno->instituicao->id  }}" selected="selected">{{ $aluno->instituicao->nome }}</option>
                                     @endif

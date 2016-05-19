@@ -478,7 +478,7 @@ class VestibulandoService
         # Regra de negócio do currículo
         unset($dados['curso_id']);
         $dados['curriculo_id'] = $curriculo[0]->id;
-        $dados['situacao_id']  = 1;
+        $dados['situacao_id']  = 3;
         $dados['periodo']      = 1;
 
         #Regrade negócio matrícula

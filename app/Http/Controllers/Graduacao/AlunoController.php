@@ -36,7 +36,8 @@ class AlunoController extends Controller
         'CorRaca',
         'TipoSanguinio',
         'Estado',
-        'CorRaca'
+        'CorRaca',
+        'SituacaoAluno'
     ];
 
     /**
