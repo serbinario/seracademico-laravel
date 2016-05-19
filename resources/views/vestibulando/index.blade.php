@@ -6,6 +6,13 @@
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
+        td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            cursor: pointer;
+        }
+        tr.details td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
+        }
     </style>
 @stop
 
@@ -30,6 +37,7 @@
                         <table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Detalhe</th>
                                 <th>Nome</th>
                                 <th>Inscrição</th>
                                 <th>Telefones</th>
@@ -40,6 +48,7 @@
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Detalhe</th>
                                 <th>Nome</th>
                                 <th>Inscrição</th>
                                 <th>Telefones</th>
@@ -65,12 +74,48 @@
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas_update.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_inclusao.js') }}"></script>
     <script type="text/javascript">
+        // função para criação da linha de detalhe
+        function format ( d ) {
+            return '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th style="width: 5%">Opção</th>' +
+                                '<th>Curso</th>' +
+                                '<th style="width: 20%">Turno</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td style="width: 5%">1º</td>' +
+                                '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
+                                '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td style="width: 5%">2º</td>' +
+                                '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
+                                '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td style="width: 5%">2º</td>' +
+                                '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
+                                '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>';
+        }
+
         var table = $('#vestibulando-grid').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
             ajax: "{!! route('seracademico.vestibulando.grid') !!}",
             columns: [
+                {
+                    "className":      'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
                 {data: 'nome', name: 'fac_alunos.nome'},
                 {data: 'inscricao', name: 'fac_alunos.inscricao'},
                 {data: 'celular', name: 'fac_alunos.celular'},
@@ -79,6 +124,38 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
+        var detailRows = [];
+
+        $('#vestibulando-grid tbody').on( 'click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+            var idx = $.inArray( tr.attr('id'), detailRows );
+
+            if ( row.child.isShown() ) {
+                tr.removeClass( 'details' );
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice( idx, 1 );
+            }
+            else {
+                tr.addClass( 'details' );
+                row.child( format( row.data() ) ).show();
+
+                // Add to the 'open' array
+                if ( idx === -1 ) {
+                    detailRows.push( tr.attr('id') );
+                }
+            }
+        } );
+
+        // On each draw, loop over the `detailRows` array and show any child rows
+        table.on( 'draw', function () {
+            $.each( detailRows, function ( i, id ) {
+                $('#'+id+' td.details-control').trigger( 'click' );
+            } );
+        } );
 
         // Id do vestibulando
         var idVestibulando;
@@ -100,5 +177,22 @@
             // Executando a tabela de notas
             runInclusao();
         });
+    </script>
+
+    <script id="details-template" type="text/x-handlebars-template">
+        <table class="table">
+            <tr>
+                <td>Full name:</td>
+                <td>dsa</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>dsa</td>
+            </tr>
+            <tr>
+                <td>Extra info:</td>
+                <td>And any further details here (images etc)...</td>
+            </tr>
+        </table>
     </script>
 @stop

@@ -72,10 +72,28 @@ class VestibulandoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('vestibulares', 'vestibulares.id', '=' , 'fac_alunos.vestibular_id')
+            ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_alunos.primeira_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_alunos.segunda_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_alunos.terceira_opcao_curso_id')
+            ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_alunos.primeira_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_alunos.segunda_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_alunos.terceira_opcao_turno_id')
             ->where('fac_alunos.tipo_aluno_id', 1)
-
-            ->select(['fac_alunos.id', 'fac_alunos.nome', 'fac_alunos.cpf', 'fac_alunos.matricula', 'fac_alunos.celular', 'fac_alunos.inscricao',
-            'vestibulares.nome as vestibular' ]);
+            ->select([
+                'fac_alunos.id',
+                'fac_alunos.nome',
+                'fac_alunos.cpf',
+                'fac_alunos.matricula',
+                'fac_alunos.celular',
+                'fac_alunos.inscricao',
+                'curso1.nome as nomeCurso1',
+                'curso2.nome as nomeCurso2',
+                'curso3.nome as nomeCurso3',
+                'turno1.nome as nomeTurno1',
+                'turno2.nome as nomeTurno2',
+                'turno3.nome as nomeTurno3',
+                'vestibulares.nome as vestibular'
+            ]);
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {
