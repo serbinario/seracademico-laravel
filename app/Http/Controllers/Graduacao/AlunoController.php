@@ -64,13 +64,16 @@ class AlunoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('inclusao_aluno', 'inclusao_aluno.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_situacao_aluno', 'fac_situacao_aluno.id', '=', 'fac_alunos.situacao_id')
             ->where('inclusao_aluno.data_inclusao', '!=', '')
             ->select([
                 'fac_alunos.id',
                 'fac_alunos.nome',
                 'fac_alunos.cpf',
                 'fac_alunos.matricula',
-                'fac_alunos.celular'
+                'fac_alunos.celular',
+                'fac_situacao_aluno.nome as situacao',
+                'fac_alunos.periodo'
             ]);
 
         #Editando a grid

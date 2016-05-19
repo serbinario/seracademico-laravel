@@ -75,6 +75,8 @@ class Aluno extends Model implements Transformable
         'ativo',
         'tipo_aluno_id',
         'instituicao_escolar_id',
+        'situacao_id',
+        'periodo',
 
         // Vestibular
         'gerar_inscricao',
@@ -264,6 +266,14 @@ class Aluno extends Model implements Transformable
     public function horarios()
     {
         return $this->belongsToMany(HorarioDisciplinaTurma::class, "alunos_horarios", "aluno_id", "horario_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function situacao()
+    {
+        return $this->belongsTo(SituacaoAluno::class, 'situacao_id');
     }
 
     /**

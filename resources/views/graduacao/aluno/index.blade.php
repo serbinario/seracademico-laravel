@@ -25,6 +25,8 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Situação</th>
+                                <th>Período</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -34,6 +36,8 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Situação</th>
+                                <th>Período</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -56,10 +60,12 @@
             autoWidth: false,
             ajax: "{!! route('seracademico.graduacao.aluno.grid') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'matricula', name: 'matricula'},
-                {data: 'celular', name: 'celular'},
-                {data: 'cpf', name: 'cpf'},
+                {data: 'nome', name: 'fac_alunos.nome'},
+                {data: 'matricula', name: 'fac_alunos.matricula'},
+                {data: 'celular', name: 'fac_alunos.celular'},
+                {data: 'cpf', name: 'fac_alunos.cpf'},
+                {data: 'situacao', name: 'fac_situacao_aluno.nome'},
+                {data: 'periodo', name: 'fac_alunos.periodo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

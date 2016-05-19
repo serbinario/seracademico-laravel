@@ -478,6 +478,19 @@ class VestibulandoService
         # Regra de negócio do currículo
         unset($dados['curso_id']);
         $dados['curriculo_id'] = $curriculo[0]->id;
+        $dados['situacao_id']  = 1;
+        $dados['periodo']      = 1;
+
+        #Regrade negócio matrícula
+        $dataNow = new \DateTime('now');
+        $dados['matricula']    = $dataNow->format('YmdHis');
+
+        #atualizando o matriculando
+        $vestibulando->situacao_id = $dados['situacao_id'];
+        $vestibulando->periodo     = $dados['periodo'];
+        $vestibulando->matricula   = $dados['matricula'];
+        $vestibulando->save();
+
 
         # Atualizando a inclusão
         $inclusao = $vestibulando->inclusao;

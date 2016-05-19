@@ -18,6 +18,7 @@ use Seracademico\Entities\Instituicao;
 use Seracademico\Entities\Profissao;
 use Seracademico\Entities\Religiao;
 use Seracademico\Entities\Sexo;
+use Seracademico\Entities\SituacaoAluno;
 use Seracademico\Entities\TipoSanguinio;
 use Seracademico\Entities\Turno;
 
@@ -86,7 +87,9 @@ class Aluno extends Model implements Transformable
         'fotos_3x4_doc_obrigatorio',
         'comp_residencia_doc_obrigatorio',
         'histo_gradu_autentic_obrigatorio',
-        'ativo'
+        'ativo',
+        'situacao_id',
+        'periodo'
     ];
 
     /**
@@ -201,6 +204,13 @@ class Aluno extends Model implements Transformable
         return $this->belongsTo(CursoSuperior::class, 'fac_cursos_superiores_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function situacao()
+    {
+        return $this->belongsTo(SituacaoAluno::class, 'situacao_id');
+    }
 //    /**
 //     * @param Model $parent
 //     * @param array $attributes
