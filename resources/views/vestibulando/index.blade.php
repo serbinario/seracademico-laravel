@@ -96,7 +96,7 @@
                                 '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
                             '</tr>' +
                             '<tr>' +
-                                '<td style="width: 5%">2º</td>' +
+                                '<td style="width: 5%">3º</td>' +
                                 '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
                                 '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
                             '</tr>' +
