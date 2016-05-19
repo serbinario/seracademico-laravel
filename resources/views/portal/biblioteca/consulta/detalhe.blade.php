@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                             <br/>
-                            <button class="btn waves-effect waves-light"><i class="material-icons left">arrow_back</i>Voltar</button>
+                            <a href="javascript:window.history.go(-1)" class="btn waves-effect waves-light"><i class="material-icons left">arrow_back</i>Voltar</a>
                     </section>
                 </div>
             </div>
