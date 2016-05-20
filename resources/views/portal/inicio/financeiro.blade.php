@@ -21,7 +21,7 @@
             <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
-                        <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/pen.png')}}" alt="" class="img-dash">
+                        <h2 class="center light-blue-text"><a href="{{ route('seracademico.portal.boleto') }}"><img src="{{ asset('/portal/img/icons/pen.png')}}" alt="" class="img-dash"></a>
                         </h2>
                         <h5 class="center">Boletos</h5>
                         <p class="center">Consulte e gerencie seus boletos pagos e a pagar</p>

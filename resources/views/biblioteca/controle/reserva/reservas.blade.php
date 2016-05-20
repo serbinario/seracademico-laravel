@@ -37,7 +37,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">find_in_page</i> Devolução de livros</h4>
+                <h4><i class="material-icons">find_in_page</i> Reservas dos livros</h4>
             </div>
             <div class="col-sm-6 col-md-3">
             </div>
@@ -68,8 +68,7 @@
                                 <th>Detalhe</th>
                                 <th>Código</th>
                                 <th>Data</th>
-                                <th>Data de devolução</th>
-                                <th>Data real de devolução</th>
+                                <th>Data de vencimento</th>
                                 <th>Aluno</th>
                                 <th >Acão</th>
                             </tr>
@@ -79,10 +78,9 @@
                                 <th>Detalhe</th>
                                 <th>Código</th>
                                 <th>Data</th>
-                                <th>Data de devolução</th>
-                                <th>Data real de devolução</th>
+                                <th>Data de vencimento</th>
                                 <th>Aluno</th>
-                                <th style="width: 5%;">Acão</th>
+                                <th >Acão</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -100,26 +98,28 @@
 
             function format(d) {
 
-                var exemplar = d['emprestimo_exemplar'];
-
+                var acervo = d['reserva_exemplar'];
+console.log(acervo[0]['exemplares'])
                 var html = "<table class='table table-bordered'>";
                 html += "<thead>" +
-                        "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Tombo</td></tr>" +
+                        "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td></tr>" +
                         "</thead>";
-                for (var i = 0; i < exemplar.length; i++) {
+                var qtdExemplar = 0;
+                for (var i = 0; i < acervo.length; i++) {
+
+                    for(var j = 0; j < acervo[i]['exemplares'].length; j++){
+                        if(acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
+                                (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] != '1')){
+                            qtdExemplar++;
+                        }
+                    }
                     html += "<tr>";
-                    html += "<td>" + exemplar[i]['acervo']['titulo'] + "</td>";
-                    html += "<td>" + exemplar[i]['acervo']['subtitulo'] + "</td>";
-                    html += "<td>" + exemplar[i]['acervo']['numero_chamada'] + "</td>";
-                    var codFull    = "" + exemplar[i]['codigo'];
-                    var pad = "00000000";
-                    codFull = pad.substring(0, pad.length - codFull.length) + codFull;
-                    var cod = codFull.toString().substring(0,4);
-                    var ano    = exemplar[i]['codigo'];
-                    ano = codFull.toString().substring(4, 8);
-                    var tombo  = cod.concat("/"+ano);
-                    html += "<td>" + tombo + "</td>";
-                    html += "</tr>"
+                    html += "<td>" + acervo[i]['titulo'] + "</td>";
+                    html += "<td>" + acervo[i]['subtitulo'] + "</td>";
+                    html += "<td>" + acervo[i]['numero_chamada'] + "</td>";
+                    html += "<td>" + qtdExemplar + "</td>";
+                    html += "</tr>";
+                    qtdExemplar = 0;
                  }
                 html += "</table>";
 
@@ -130,7 +130,7 @@
                 processing: true,
                 serverSide: true,
                 order: [[ 1, "asc" ]],
-                ajax: "{!! route('seracademico.biblioteca.devolucaoEmprestimo') !!}",
+                ajax: "{!! route('seracademico.biblioteca.gridReservados') !!}",
                 columns: [
                     {
                         "className":      'details-control',
@@ -138,10 +138,9 @@
                         "data":           'fac_alunos.nome',
                         "defaultContent": ''
                     },
-                    {data: 'codigo', name: 'bib_emprestimos.codigo'},
-                    {data: 'data', name: 'bib_emprestimos.data'},
-                    {data: 'data_devolucao', name: 'bib_emprestimos.data_devolucao'},
-                    {data: 'data_devolucao_real', name: 'bib_emprestimos.data_devolucao_real'},
+                    {data: 'codigo', name: 'bib_reservas.codigo'},
+                    {data: 'data', name: 'bib_reservas.data'},
+                    {data: 'data_vencimento', name: 'bib_reservas.data_vencimento'},
                     {data: 'nome', name: 'fac_alunos.nome'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]

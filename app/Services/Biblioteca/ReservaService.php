@@ -2,8 +2,11 @@
 
 namespace Seracademico\Services\Biblioteca;
 
+use Seracademico\Repositories\Biblioteca\ArcevoRepository;
+use Seracademico\Repositories\Biblioteca\ReservaExemplarRepository;
 use Seracademico\Repositories\Biblioteca\ReservaRepository;
 use Seracademico\Entities\Biblioteca\Reserva;
+use Seracademico\Entities\Biblioteca\ReservaExemplar;
 //use Carbon\Carbon;
 
 class ReservaService
@@ -14,11 +17,23 @@ class ReservaService
     private $repository;
 
     /**
+     * @var ArcevoRepository
+     */
+    private $repoAcervo;
+
+    /**
+     * @var ReservaExemplarRepository
+     */
+    private $repoReseExemp;
+
+    /**
      * @param ReservaRepository $repository
      */
-    public function __construct(ReservaRepository $repository)
+    public function __construct(ReservaRepository $repository, ArcevoRepository $repoAcervo, ReservaExemplarRepository $repoReseExemp)
     {
         $this->repository = $repository;
+        $this->repoAcervo = $repoAcervo;
+        $this->repoReseExemp = $repoReseExemp;
     }
 
     /**
@@ -46,8 +61,34 @@ class ReservaService
      */
     public function store(array $data) : Reserva
     {
+        //dd($data);
+
+        $date = new \DateTime('now');
+        $dataFormat = $date->format('Y-m-d');
+       
+        $codigo = $date->format('YmdHis');
+        $data['data'] = $dataFormat;
+        $data['data_vencimento'] = $dataFormat;
+        $data['codigo'] = $codigo;
+
         #Salvando o registro pincipal
         $reserva =  $this->repository->create($data);
+
+        $reserva->reservaExemplar()->attach($data['id']);
+
+        for ($i = 0; $i < count($data['edicao']); $i++) {
+            if($data['edicao'][$i] != 'null') {
+                $reservaExem =  $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id'][$i]]);
+                $reservaExem[0]->edicao = $data['edicao'][$i];
+                $reservaExem[0]->save();
+            }
+        }
+        
+        foreach ($data['id'] as $id) {
+            $acervo =  $this->repoAcervo->find($id);
+            $acervo->situacao_id = '3';
+            $acervo->save();
+        }
 
         #Verificando se foi criado no banco de dados
         if(!$reserva) {

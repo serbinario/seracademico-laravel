@@ -2,6 +2,7 @@
 
 namespace Seracademico\Http\Controllers\Biblioteca;
 
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,11 @@ class EmprestarController extends Controller
     * @var EmprestarValidator
     */
     private $validator;
+
+    /**
+     * @var
+     */
+    private $data;
 
     /**
     * @var array
@@ -162,6 +168,9 @@ class EmprestarController extends Controller
      */
     public function gridDevolucao(Request $request)
     {
+        $dataObj = new \DateTime('now');
+        $this->data    = $dataObj->format('d/m/Y');
+
         #Criando a consulta
         $rows = Emprestar::join('fac_alunos', 'fac_alunos.id', '=', 'bib_emprestimos.alunos_id')
             ->with(['emprestimoExemplar.acervo'])
@@ -177,8 +186,16 @@ class EmprestarController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
-            if (!$row->data_devolucao_real) {
-                $html       = '<a class="btn-floating excluir" target="_blank" href="confirmarDevolucao/'.$row->id.'" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+            if(!$row->data_devolucao_real) {
+            $html .= '<div class="fixed-action-btn horizontal">
+                      <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                       <ul>
+                       <li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">delete</i></a></li>';
+                if($row->tipo_emprestimo == '1' && strtotime($row->data_devolucao) > strtotime($this->data)) {
+                    $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">edit</i></a></li>
+                </ul>
+                </div>';
+                }
             }
 
             # Retorno
@@ -197,6 +214,23 @@ class EmprestarController extends Controller
 
             #Retorno para a view
             return view('biblioteca.controle.emprestimo.cupomDevolucao');
+            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function renovacao($id)
+    {
+        try {
+            #Executando a ação
+            $result = $this->service->renovacao($id);
+
+            #Retorno para a view
+            return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
             //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());

@@ -12,7 +12,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">receipt</i> Realizar emprestimo</h4>
+                <h4><i class="material-icons">receipt</i> Realizar reserva</h4>
             </div>
             <div class="col-sm-6 col-md-3">
             </div>
@@ -44,9 +44,6 @@
                                 <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
-                                <th>Tombo</th>
-                                <th>Situação</th>
-                                <th>Emprestimo</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -57,23 +54,17 @@
                                 <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
-                                <th>Tombo</th>
-                                <th>Situação</th>
-                                <th>Emprestimo</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
-                {!! Form::open(['route'=>'seracademico.biblioteca.storeEmprestimo', 'method' => "POST", 'id' => 'form', 'target' => '__blank' ]) !!}
+                {!! Form::open(['route'=>'seracademico.biblioteca.storeReserva', 'method' => "POST", 'id' => 'form' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
                             {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
-                        </div>
-                        <div class="form-group col-md-2">
-                            {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
-                            <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
+                            <input type="hidden" name="edicao" id="edicao">
                         </div>
                         <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
@@ -86,9 +77,6 @@
                                     <th>Cutter</th>
                                     <th>Subtítulo</th>
                                     <th>Edição</th>
-                                    <th>Tombo</th>
-                                    <th>Situação</th>
-                                    <th>Emprestimo</th>
                                     <th>Ação</th>
                                 </tr>
                                 </thead>
@@ -106,22 +94,17 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var id_emp1 = "";
-        var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
             iDisplayLength: 5,
             bLengthChange: false,
-            ajax: "{!! route('seracademico.biblioteca.gridEmprestimo') !!}",
+            ajax: "{!! route('seracademico.biblioteca.gridReserva') !!}",
             columns: [
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
                 {data: 'cutter', name: 'bib_arcevos.cutter'},
                 {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
-                {data: 'tombo', name: 'bib_exemplares.codigo'},
-                {data: 'nome_sit', name: 'bib_emprestimo.nome'},
-                {data: 'nome_emp', name: 'bib_emprestimo.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -138,50 +121,27 @@
 
             var data = table.rows('.selected').data()[0];
             var html = "";
+            var edicao = "";
 
-            dadosAjax = {
-                'id_emp': data['id_emp']
-            };
+            if(data['edicao'] == "") {
+                edicao = 'null'
+            } else {
+                edicao = data['edicao'];
+            }
 
-            jQuery.ajax({
-                type: 'POST',
-                url: "{!! route('seracademico.biblioteca.dataDevolucaoEmprestimo') !!}",
-                data: dadosAjax,
-                datatype: 'json'
-            }).done(function (retorno) {
-                if($('#emprestimos tbody tr').length <= 0) {
-                    id_emp1 = "";
-                    id_emp2 = "";
-                    $('#id_emprestimo').val("");
-                }
-                if(data['id_emp'] == '1'){ id_emp1 = data['id_emp']; $('#id_emprestimo').val(id_emp1);}
-                if(data['id_emp'] == '2'){ id_emp2 = data['id_emp']; $('#id_emprestimo').val(id_emp2);}
+            //console.log(data);
+            html += "<tr>";
+            html += "<td>" + data['titulo'] + "</td>";
+            html += "<td>" + data['cutter'] + "</td>";
+            html += "<td>" + data['subtitulo'] + "</td>";
+            html += "<td>" + data['edicao'] + "</td>";
+            html += "<td>" +
+                    "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                    "<input type='hidden' name='id[]' value='" + data['id'] + "'>" +
+                    "<input type='hidden' name='edicao[]' value='" + edicao + "'>";
+            html += "</tr>";
 
-                if(id_emp1 && id_emp2) {
-                    if(data['id_emp'] == '1'){ id_emp1 = ""; $('#id_emprestimo').val(id_emp2)}
-                    if(data['id_emp'] == '2'){ id_emp2 = ""; $('#id_emprestimo').val(id_emp1)}
-                    bootbox.alert("Vocẽ selecionou exemplares tanto de consulta quanto para empréstimo, decida apenas entre um dos dois tipo!");
-                    return false;
-                } else {
-                    //console.log(data);
-                    html += "<tr>";
-                    html += "<td>" + data['titulo'] + "</td>";
-                    html += "<td>" + data['cutter'] + "</td>";
-                    html += "<td>" + data['subtitulo'] + "</td>";
-                    html += "<td>" + data['edicao'] + "</td>";
-                    html += "<td>" + data['tombo'] + "</td>";
-                    html += "<td>" + data['nome_sit'] + "</td>";
-                    html += "<td>" + data['nome_emp'] + "</td>";
-                    html += "<td>" +
-                            "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                            "<input type='hidden' name='id[]' value='" + data['id'] + "'>";
-                    html += "</tr>";
-
-                    $('#emprestimos tbody').append(html);
-                    $('#data').val(retorno['data']);
-                }
-
-            });
+            $('#emprestimos tbody').append(html);
         });
 
         //Excluir tr da tabela

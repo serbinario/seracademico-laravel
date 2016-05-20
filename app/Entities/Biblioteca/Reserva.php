@@ -5,6 +5,7 @@ namespace Seracademico\Entities\Biblioteca;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Aluno;
 
 class Reserva extends Model implements Transformable
 {
@@ -16,7 +17,17 @@ class Reserva extends Model implements Transformable
 		'codigo',
 		'data',
 		'data_vencimento',
-		'user_id',
+		'alunos_id',
 	];
+
+	public function aluno()
+	{
+		return $this->belongsTo(Aluno::class, 'alunos_id');
+	}
+
+	public function reservaExemplar()
+	{
+		return $this->belongsToMany(Arcevo::class, 'bib_reservas_exemplares', 'reserva_id', "arcevos_id");
+	}
 
 }

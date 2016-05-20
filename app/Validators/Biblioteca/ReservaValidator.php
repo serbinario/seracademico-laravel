@@ -7,7 +7,6 @@ use \Prettus\Validator\LaravelValidator;
 
 class ReservaValidator extends LaravelValidator
 {
-    use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
