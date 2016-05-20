@@ -265,6 +265,7 @@ class Curso extends Model implements Transformable
         return $query->select('fac_cursos.nome', 'fac_cursos.id')
             ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->where('fac_cursos.tipo_nivel_sistema_id', 1)
+            ->where("fac_cursos.ativo", $value)
             ->where('fac_curriculos.ativo', $value);
     }
 

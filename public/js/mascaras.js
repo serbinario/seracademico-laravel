@@ -52,6 +52,13 @@ $(document).ready(function(){
         $('.phone').unmask();
     });
 
+    //##### Submeter formulário
+    $('#formVestibulando').submit(function() {
+        $('.cpf').unmask();
+        $('.phone').unmask();
+    });
+
+
 
      
     //######## Mascaras para formulário empreendedor ##########

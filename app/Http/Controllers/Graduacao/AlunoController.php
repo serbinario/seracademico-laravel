@@ -1,46 +1,52 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
-
-use Seracademico\Http\Requests;
-use Seracademico\Services\VestibularService;
-use Yajra\Datatables\Datatables;
-use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\VestibularValidator;
+use Prettus\Validator\Exceptions\ValidatorException;
+use Seracademico\Entities\Graduacao\Aluno;
+use Seracademico\Http\Requests;
+use Seracademico\Http\Controllers\Controller;
+use Seracademico\Services\Graduacao\AlunoService;
+use Seracademico\Validators\Graduacao\AlunoValidator;
+use Yajra\Datatables\Datatables;
 
-class VestibularController extends Controller
+class AlunoController extends Controller
 {
     /**
-    * @var VestibularService
-    */
+     * @var AlunoService
+     */
     private $service;
 
     /**
-    * @var VestibularValidator
-    */
+     * @var AlunoValidator
+     */
     private $validator;
 
     /**
-    * @var array
-    */
+     * @var array
+     */
     private $loadFields = [
-        'Taxa',
-        'Banco',
-        'TipoVencimento',
-        'Graduacao\\Semestre'
+        'Turno',
+        'Sexo',
+        'EstadoCivil',
+        'GrauInstrucao',
+        'Profissao',
+        'CorRaca',
+        'TipoSanguinio',
+        'Estado',
+        'CorRaca',
+        'SituacaoAluno'
     ];
 
     /**
-    * @param VestibularService $service
-    * @param VestibularValidator $validator
-    */
-    public function __construct(VestibularService $service, VestibularValidator $validator)
+     * @param AlunoService $service
+     */
+    public function __construct(AlunoService $service, AlunoValidator $validator)
     {
-        $this->service   =  $service;
-        $this->validator =  $validator;
+        $this->service    = $service;
+        $this->validator  = $validator;
     }
 
     /**
@@ -48,7 +54,7 @@ class VestibularController extends Controller
      */
     public function index()
     {
-        return view('vestibular.index');
+        return view('graduacao.aluno.index');
     }
 
     /**
@@ -57,31 +63,29 @@ class VestibularController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('vestibulares')->select(['id', 'nome', 'codigo', 'data_prova', 'data_inicial', 'data_final']);
+        $alunos = \DB::table('fac_alunos')
+            ->join('inclusao_aluno', 'inclusao_aluno.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_situacao_aluno', 'fac_situacao_aluno.id', '=', 'fac_alunos.situacao_id')
+            ->where('inclusao_aluno.data_inclusao', '!=', '')
+            ->select([
+                'fac_alunos.id',
+                'fac_alunos.nome',
+                'fac_alunos.cpf',
+                'fac_alunos.matricula',
+                'fac_alunos.celular',
+                'fac_situacao_aluno.nome as situacao',
+                'fac_alunos.periodo'
+            ]);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            # Objeto vestibular
-            $vestibular = $this->service->find($row->id);
-
-            # Html principal
-            $html =  '<div class="fixed-action-btn horizontal">
-                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>
-                            <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating green" href="#" id="btnAdicionarCursos" title="Adicionar Cursos ao vestibular"><i class="material-icons">add_to_photos</i></a></li>
-                        ';
-
-            # Verificando a possibilida de deleção
-            if(count($vestibular->vestibulandos) == 0) {
-                $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">delete</i></a></li>';
-            }
-
-            # Html Principal
-            $html .= '</ul></div>';
-
-            # Retorno
-            return $html;
+        return Datatables::of($alunos)->addColumn('action', function ($aluno) {
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
+                    </ul>
+                    </div>';
         })->make(true);
     }
 
@@ -94,12 +98,12 @@ class VestibularController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('vestibular.create', compact('loadFields'));
+        return view('graduacao.aluno.create', compact('loadFields'));
     }
 
     /**
      * @param Request $request
-     * @return $this|array|\Illuminate\Http\RedirectResponse
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -117,7 +121,7 @@ class VestibularController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {var_dump($e); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -129,32 +133,18 @@ class VestibularController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando a empresa
-            $model = $this->service->find($id);
+            #Recuperando o aluno
+            $aluno = $this->service->find($id);
+
+            #Tratando as datas
+            $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('vestibular.edit', compact('model', 'loadFields'));
+            return view('graduacao.aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete($id)
-    {
-        try {
-            #Recuperando a empresa
-            $model = $this->service->delete($id);
-
-            #Retorno para a view
-            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -188,4 +178,16 @@ class VestibularController extends Controller
         }
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contrato(Request $request, $id)
+    {
+        $aluno = $this->service->find($id);
+
+        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno])->stream();
+    }
 }

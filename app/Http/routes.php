@@ -9,8 +9,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     });
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
+        Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'MatriculaAlunoController@index']);
+            Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'MatriculaAlunoController@gridAluno']);
+            Route::get('gridDisciplina/{idAluno}', ['as' => 'gridDisciplina', 'uses' => 'MatriculaAlunoController@gridDisciplina']);
+            Route::get('gridHorario/{idAluno}', ['as' => 'gridHorario', 'uses' => 'MatriculaAlunoController@gridHorario']);
+            Route::post('getTurmas', ['as' => 'getTurmas', 'uses' => 'MatriculaAlunoController@getTurmas']);
+            Route::post('adicionarHorarioAluno', ['as' => 'adicionarHorarioAluno', 'uses' => 'MatriculaAlunoController@adicionarHorarioAluno']);
+        });
 
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
+            Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibulandoController@getLoadFields']);
             Route::get('index', ['as' => 'index', 'uses' => 'VestibulandoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'VestibulandoController@grid']);
             Route::get('create', ['as' => 'create', 'uses' => 'VestibulandoController@create']);
@@ -22,6 +31,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'VestibulandoController@gridNotas']);
                 Route::post('edit', ['as' => 'edit', 'uses' => 'VestibulandoController@editNota']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@updateNota']);
+            });
+
+            Route::group(['prefix' => 'inclusao', 'as' => 'inclusao.'], function () {
+                Route::post('edit/{idVestibulando}', ['as' => 'edit', 'uses' => 'VestibulandoController@editInclusao']);
+                Route::post('update/{idVestibulando}', ['as' => 'update', 'uses' => 'VestibulandoController@updateInclusao']);
             });
         });
 
@@ -117,6 +131,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas para graduação
         Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduacao.'], function () {
+            Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\AlunoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\AlunoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\AlunoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\AlunoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\AlunoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\AlunoController@update']);
+                Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'Graduacao\AlunoController@contrato']);
+            });
+
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\DisciplinaController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\DisciplinaController@grid']);

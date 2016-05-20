@@ -45,6 +45,9 @@
                             <tr>
                                 <th style="width: 20%;">Código</th>
                                 <th>Nome</th>
+                                <th>Data Prova</th>
+                                <th>Data Inic. Insc.</th>
+                                <th>Data Fim. Insc.</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
@@ -53,6 +56,9 @@
                             <tr>
                                 <th style="width: 20%;">Código</th>
                                 <th>Nome</th>
+                                <th>Data Prova</th>
+                                <th>Data Prova</th>
+                                <th>Data Prova</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -82,6 +88,9 @@
             columns: [
                 {data: 'codigo', name: 'codigo'},
                 {data: 'nome', name: 'nome'},
+                {data: 'data_prova', name: 'data_prova'},
+                {data: 'data_inicial', name: 'data_inicial'},
+                {data: 'data_final', name: 'data_final'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
