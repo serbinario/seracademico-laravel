@@ -65,6 +65,37 @@ class ReservaController extends Controller
     public function grid()
     {
         #Criando a consulta
+        $rows = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
+            //->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
+            ->where('bib_exemplares.exemp_principal', '=', '0')
+            ->select(
+                'bib_arcevos.titulo',
+                'bib_arcevos.id as id_acervo',
+                'bib_arcevos.cutter',
+                'bib_exemplares.edicao',
+                'bib_exemplares.situacao_id',
+                'bib_exemplares.emprestimo_id as id_emp',
+                'bib_arcevos.subtitulo as subtitulo'
+                )
+            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
+            ->having(\DB::raw('sum(bib_exemplares.situacao_id) = count(*) * 5'), '=', '1');
+
+        //dd($rows);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /*public function grid()
+    {
+        #Criando a consulta
         $rows = \DB::table('bib_arcevos')
             ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
@@ -80,7 +111,7 @@ class ReservaController extends Controller
                 'bib_arcevos.cutter',
                 'bib_exemplares.edicao',
                 'bib_arcevos.subtitulo as subtitulo'
-                )
+            )
             ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn');
 
         #Editando a grid
@@ -90,7 +121,7 @@ class ReservaController extends Controller
             # Retorno
             return $html;
         })->make(true);
-    }
+    }*/
 
     /**
      * @param Request $request
@@ -195,6 +226,36 @@ class ReservaController extends Controller
             # Retorno
             return $html;
         })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function saveEmprestimo(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            //dd($data);
+
+            if(!isset($data['id'])){
+                return redirect()->back()->with("error", "É preciso informar pelo menos um acervo!");
+            }
+
+           // dd($data);
+
+            #Executando a ação
+            $this->service->saveEmprestimo($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Emprestimo realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 
 }

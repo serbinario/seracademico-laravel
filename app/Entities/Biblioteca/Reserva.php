@@ -18,6 +18,7 @@ class Reserva extends Model implements Transformable
 		'data',
 		'data_vencimento',
 		'alunos_id',
+		'tipo_emprestimo',
 	];
 
 	public function aluno()
@@ -27,7 +28,8 @@ class Reserva extends Model implements Transformable
 
 	public function reservaExemplar()
 	{
-		return $this->belongsToMany(Arcevo::class, 'bib_reservas_exemplares', 'reserva_id', "arcevos_id");
+		return $this->belongsToMany(Arcevo::class, 'bib_reservas_exemplares', 'reserva_id', "arcevos_id")
+			->withPivot([ 'reserva_id', 'arcevos_id', 'edicao', 'status']);
 	}
 
 }

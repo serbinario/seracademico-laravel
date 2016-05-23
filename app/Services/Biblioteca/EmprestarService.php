@@ -88,7 +88,7 @@ class EmprestarService
         $emprestimo = $this->repository->find($id);
         $dataObj   = \DateTime::createFromFormat('Y-m-d H:i:s', $emprestimo->data_devolucao);
         $dia       = 0;
-//dd($dataObj);
+        //dd($dataObj);
         if($emprestimo->tipo_emprestimo == '1') {
             $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
             $dia = $query[0]->valor - 1;

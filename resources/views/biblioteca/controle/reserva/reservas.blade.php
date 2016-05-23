@@ -50,6 +50,13 @@
                 </div>
             @endif
 
+                @if(Session::has('error'))
+                    <div class="alert alert-warning">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('error') !!}</em>
+                    </div>
+                @endif
+
             @if(Session::has('errors'))
                 <div class="alert alert-danger">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -97,31 +104,66 @@
         $(document).ready(function () {
 
             function format(d) {
-
                 var acervo = d['reserva_exemplar'];
-console.log(acervo[0]['exemplares'])
-                var html = "<table class='table table-bordered'>";
-                html += "<thead>" +
-                        "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td></tr>" +
-                        "</thead>";
+                var tipoEmprestimo = d['tipo_emprestimo'];
+                var alunoId = d['alunos_id'];
+                var reservaId = d['id'];
                 var qtdExemplar = 0;
+                var qtdExemplarAll = 0;
+                var qtdExempEmprestado = 0;
+                var url = "{!! route('seracademico.biblioteca.saveEmprestimo') !!}";
+
+                var html = "<form action='"+url+"' method='post'>";
+                html += "<table class='table table-bordered'>";
+                html += "<thead>" +
+                        "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td>" +
+                        "<td>Selecionar</td></tr>" +
+                        "</thead>";
+
                 for (var i = 0; i < acervo.length; i++) {
 
+                    //vericando quantidade exemplares por acervo
                     for(var j = 0; j < acervo[i]['exemplares'].length; j++){
-                        if(acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
-                                (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] != '1')){
+                        if(acervo[i]['exemplares'][j]['edicao'] == acervo[i]['pivot']['edicao'] && acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
+                                (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] == '0')){
                             qtdExemplar++;
+                            qtdExemplarAll = qtdExemplarAll + qtdExemplar;
                         }
                     }
+
+                    //verificando a quantidade de exemplares já emprestados
+                    if(acervo[i]['pivot']['status'] == '1') {
+                        qtdExempEmprestado++;
+                    }
+
                     html += "<tr>";
                     html += "<td>" + acervo[i]['titulo'] + "</td>";
                     html += "<td>" + acervo[i]['subtitulo'] + "</td>";
                     html += "<td>" + acervo[i]['numero_chamada'] + "</td>";
                     html += "<td>" + qtdExemplar + "</td>";
+                    if(qtdExemplar == 0 || acervo[i]['pivot']['status'] == '1'){
+                        html += "<td></td>";
+                    } else {
+                        html += "<td><input type='checkbox' name='id[]' value='"+acervo[i]['id']+"'></td>";
+                        html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
+                    }
                     html += "</tr>";
+                    //if(acervo[i]['pivot']['edicao'] == "" && (qtdExemplar == 0 || acervo[i]['pivot']['status'] == '1')){
+                    //    html += "<input type='hidden' name='edicao[]' value='null'>";
+                   // } else {
+                  //      html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
+                  //  }
                     qtdExemplar = 0;
                  }
+                
                 html += "</table>";
+                html += "<input type='hidden' name='tipo_emprestimo' value='"+tipoEmprestimo+"'>";
+                html += "<input type='hidden' name='id_aluno' value='"+alunoId+"'>";
+                html += "<input type='hidden' name='id_reserva' value='"+reservaId+"'>";
+                if(qtdExemplarAll > 0 || qtdExempEmprestado < acervo.length) {
+                    html += "<input type='submit' class='btn btn-primary' value='Confirmar'>";
+                }
+                html += "</form>";
 
                 return  html;
             }

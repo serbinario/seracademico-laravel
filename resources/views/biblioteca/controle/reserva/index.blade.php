@@ -65,6 +65,7 @@
                         <div class="form-group col-md-5">
                             {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
                             <input type="hidden" name="edicao" id="edicao">
+                            <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
                         <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
@@ -94,6 +95,8 @@
 
 @section('javascript')
     <script type="text/javascript">
+        var id_emp1 = "";
+        var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -129,19 +132,34 @@
                 edicao = data['edicao'];
             }
 
-            //console.log(data);
-            html += "<tr>";
-            html += "<td>" + data['titulo'] + "</td>";
-            html += "<td>" + data['cutter'] + "</td>";
-            html += "<td>" + data['subtitulo'] + "</td>";
-            html += "<td>" + data['edicao'] + "</td>";
-            html += "<td>" +
-                    "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                    "<input type='hidden' name='id[]' value='" + data['id'] + "'>" +
-                    "<input type='hidden' name='edicao[]' value='" + edicao + "'>";
-            html += "</tr>";
+            if($('#emprestimos tbody tr').length <= 0) {
+                id_emp1 = "";
+                id_emp2 = "";
+                $('#id_emprestimo').val("");
+            }
+            if(data['id_emp'] == '1'){ id_emp1 = data['id_emp']; $('#id_emprestimo').val(id_emp1);}
+            if(data['id_emp'] == '2'){ id_emp2 = data['id_emp']; $('#id_emprestimo').val(id_emp2);}
 
-            $('#emprestimos tbody').append(html);
+            if(id_emp1 && id_emp2) {
+                if(data['id_emp'] == '1'){ id_emp1 = ""; $('#id_emprestimo').val(id_emp2)}
+                if(data['id_emp'] == '2'){ id_emp2 = ""; $('#id_emprestimo').val(id_emp1)}
+                bootbox.alert("Vocẽ selecionou acervos tanto de consulta quanto para empréstimo, decida apenas entre um dos dois tipo!");
+                return false;
+            } else {
+                //console.log(data);
+                html += "<tr>";
+                html += "<td>" + data['titulo'] + "</td>";
+                html += "<td>" + data['cutter'] + "</td>";
+                html += "<td>" + data['subtitulo'] + "</td>";
+                html += "<td>" + data['edicao'] + "</td>";
+                html += "<td>" +
+                        "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                        "<input type='hidden' name='id[]' value='" + data['id_acervo'] + "'>" +
+                        "<input type='hidden' name='edicao[]' value='" + edicao + "'>";
+                html += "</tr>";
+
+                $('#emprestimos tbody').append(html);
+            }
         });
 
         //Excluir tr da tabela
