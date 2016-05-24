@@ -1,15 +1,15 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\VestibularService;
+use Seracademico\Services\Graduacao\VestibularService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\VestibularValidator;
 
 class VestibularCursoController extends Controller
 {
@@ -27,7 +27,7 @@ class VestibularCursoController extends Controller
     /**
     * @param VestibularService $service
     */
-    public function __construct(VestibularService $service, VestibularValidator $validator)
+    public function __construct(VestibularService $service)
     {
         $this->service   =  $service;
     }
@@ -39,12 +39,12 @@ class VestibularCursoController extends Controller
     public function grid($idVestibular)
     {
         #Criando a consulta
-        $rows = \DB::table('vestibulares_cursos')
-            ->join('fac_cursos', 'fac_cursos.id', '=', 'vestibulares_cursos.curso_id')
-            ->join('vestibulares', 'vestibulares.id', '=', 'vestibulares_cursos.vestibular_id')
-            ->where('vestibulares.id', $idVestibular)
+        $rows = \DB::table('fac_vestibulares_cursos')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulares_cursos.vestibular_id')
+            ->where('fac_vestibulares.id', $idVestibular)
             ->select([
-                'vestibulares_cursos.id',
+                'fac_vestibulares_cursos.id',
                 'fac_cursos.nome',
                 'fac_cursos.codigo',
                 'fac_cursos.id as idCurso'

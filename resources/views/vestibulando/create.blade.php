@@ -30,7 +30,7 @@
             @endif
 
             {!! Form::open(['route'=>'seracademico.vestibulando.store', 'method' => "POST", 'id' => 'formVestibulando', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.tamplateFormVestibulando')
+                @include('tamplatesForms.graduacao.tamplateFormVestibulando')
             {!! Form::close() !!}
         </div>
     </div>
@@ -199,7 +199,7 @@
 
             $('#formVestibulando').bootstrapValidator({
                 fields: {
-                    nome: {
+                    'pessoa[nome]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'Nome' })
@@ -210,35 +210,35 @@
                             }
                         }
                     },
-                    data_nasciemento: {
+                    'pessoa[data_nasciemento]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
                             }
                         }
                     },
-                    cpf: {
+                    'pessoa[cpf]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'CPF' })
                             }
                         }
                     },
-                    nome_pai: {
+                    'pessoa[nome_pai]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'Nome Pai' })
                             }
                         }
                     },
-                    nome_mae: {
+                    'pessoa[nome_mae]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'Nome Mae' })
                             }
                         }
                     },
-                    identidade: {
+                    'pessoa[identidade]': {
                         validators: {
                             notEmpty: {
                                 message: Lang.get('validation.required', { attribute: 'Identidade' })

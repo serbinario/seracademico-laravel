@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -8,7 +8,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Interface AlunoRepository
  * @package namespace App\Repositories;
  */
-interface AlunoRepository extends RepositoryInterface
+interface VestibulandoRepository extends RepositoryInterface
 {
     //
 }

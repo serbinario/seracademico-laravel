@@ -1,9 +1,9 @@
 <?php
 
-namespace Seracademico\Services;
+namespace Seracademico\Services\Graduacao;
 
-use Seracademico\Repositories\MateriaRepository;
-use Seracademico\Entities\Materia;
+use Seracademico\Repositories\Graduacao\MateriaRepository;
+use Seracademico\Entities\Graduacao\Materia;
 
 class MateriaService
 {

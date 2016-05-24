@@ -14,8 +14,8 @@ function loadTableNotas(idVestibulando) {
         columns: [
             {data: 'codigo', name: 'fac_materias.codigo'},
             {data: 'nome', name: 'fac_materias.nome'},
-            {data: 'acertos', name: 'aluno_notas_vestibular.acertos'},
-            {data: 'pontuacao', name: 'aluno_notas_vestibular.pontuacao'},
+            {data: 'acertos', name: 'fac_vestibulandos_notas_vestibulares.acertos'},
+            {data: 'pontuacao', name: 'fac_vestibulandos_notas_vestibulares.pontuacao'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

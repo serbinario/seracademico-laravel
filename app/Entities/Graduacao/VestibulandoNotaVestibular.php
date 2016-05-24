@@ -1,19 +1,19 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class AlunoNotaVestibular extends Model implements Transformable
+class VestibulandoNotaVestibular extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'aluno_notas_vestibular';
+    protected $table    = 'fac_vestibulandos_notas_vestibulares';
 
     protected $fillable = [
-        'aluno_id',
+        'vestibulando_id',
         'materia_id',
         'acertos',
         'pontuacao'

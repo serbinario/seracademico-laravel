@@ -1,18 +1,18 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\VestibularValidator;
-use Seracademico\Repositories\VestibularRepository;
-use Seracademico\Entities\Vestibular;
+use Seracademico\Validators\Graduacao\MateriaValidator;
+use Seracademico\Repositories\Graduacao\MateriaRepository;
+use Seracademico\Entities\Graduacao\Materia;
 
 /**
- * Class VestibularRepositoryEloquent
+ * Class MateriaRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class VestibularRepositoryEloquent extends BaseRepository implements VestibularRepository
+class MateriaRepositoryEloquent extends BaseRepository implements MateriaRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class VestibularRepositoryEloquent extends BaseRepository implements VestibularR
      */
     public function model()
     {
-        return Vestibular::class;
+        return Materia::class;
     }
 
     /**
@@ -31,11 +31,8 @@ class VestibularRepositoryEloquent extends BaseRepository implements VestibularR
     */
     public function validator()
     {
-
-         return VestibularValidator::class;
+         return MateriaValidator::class;
     }
-
-
 
     /**
      * Boot up the repository, pushing criteria

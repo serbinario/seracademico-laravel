@@ -24,8 +24,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \Seracademico\Repositories\AlunoRepository::class,
-            \Seracademico\Repositories\AlunoRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\VestibulandoRepository::class,
+            \Seracademico\Repositories\Graduacao\VestibulandoRepositoryEloquent::class
         );
 
         $this->app->bind(
@@ -347,8 +347,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
         $this->app->bind(
-            \Seracademico\Repositories\MateriaRepository::class,
-            \Seracademico\Repositories\MateriaRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\MateriaRepository::class,
+            \Seracademico\Repositories\Graduacao\MateriaRepositoryEloquent::class
         );
 
         $this->app->bind(
@@ -366,13 +366,13 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\VestibularRepository::class,
-            \Seracademico\Repositories\VestibularRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\VestibularRepository::class,
+            \Seracademico\Repositories\Graduacao\VestibularRepositoryEloquent::class
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\AlunoNotaVestibularRepository::class,
-            \Seracademico\Repositories\AlunoNotaVestibularRepositoryEloquent::class
+            \Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepository::class,
+            \Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepositoryEloquent::class
         );
 
         $this->app->bind(
@@ -381,8 +381,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\InclusaoAlunoRepository::class,
-            \Seracademico\Repositories\InclusaoAlunoRepositoryEloquent::class
+            \Seracademico\Repositories\PessoaRepository::class,
+            \Seracademico\Repositories\PessoaRepositoryEloquent::class
         );
 	}
 	

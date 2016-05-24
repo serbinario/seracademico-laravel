@@ -5,10 +5,10 @@ namespace Seracademico\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface AlunoRepository
+ * Interface BairroRepository
  * @package namespace App\Repositories;
  */
-interface AlunoNotaVestibularRepository extends RepositoryInterface
+interface PessoaRepository extends RepositoryInterface
 {
     //
 }

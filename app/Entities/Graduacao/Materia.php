@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
@@ -29,10 +29,10 @@ class Materia extends Model implements Transformable
             ->select(['fac_materias.id', 'fac_materias.nome'])
             ->whereNotIn('fac_materias.id', function ($query) use($value) {
                 return $query
-                    ->from('vestibular_curso_materia')
-                    ->select(['vestibular_curso_materia.materia_id'])
-                    ->join('vestibulares_cursos', 'vestibulares_cursos.id', '=', 'vestibular_curso_materia.vestibular_curso_id')
-                    ->where('vestibulares_cursos.id', $value)->get();
+                    ->from('fac_vestibular_curso_materia')
+                    ->select(['fac_vestibular_curso_materia.materia_id'])
+                    ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_materia.vestibular_curso_id')
+                    ->where('fac_vestibulares_cursos.id', $value)->get();
             });
     }
 }

@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\VestibularService;
+use Seracademico\Services\Graduacao\VestibularService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\VestibularValidator;
+use Seracademico\Validators\Graduacao\VestibularValidator;
 
 class VestibularController extends Controller
 {
@@ -57,7 +58,15 @@ class VestibularController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('vestibulares')->select(['id', 'nome', 'codigo', 'data_prova', 'data_inicial', 'data_final']);
+        $rows = \DB::table('fac_vestibulares')
+            ->select([
+                'id',
+                'nome',
+                'codigo',
+                'data_prova',
+                'data_inicial',
+                'data_final'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -73,7 +82,7 @@ class VestibularController extends Controller
                         ';
 
             # Verificando a possibilida de deleção
-            if(count($vestibular->vestibulandos) == 0) {
+            if(count($vestibular->vestibulandos) == 0 && count($vestibular->cursos) == 0) {
                 $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id.'" title="Editar Vestibular"><i class="material-icons">delete</i></a></li>';
             }
 

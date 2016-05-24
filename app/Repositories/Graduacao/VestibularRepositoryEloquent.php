@@ -1,17 +1,18 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Entities\Aluno;
-use Seracademico\Validators\AlunoValidator;;
+use Seracademico\Validators\Graduacao\VestibularValidator;
+use Seracademico\Repositories\Graduacao\VestibularRepository;
+use Seracademico\Entities\Graduacao\Vestibular;
 
 /**
- * Class AlunoRepositoryEloquent
+ * Class VestibularRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
+class VestibularRepositoryEloquent extends BaseRepository implements VestibularRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +21,7 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
      */
     public function model()
     {
-        return Aluno::class;
+        return Vestibular::class;
     }
 
     /**
@@ -31,8 +32,9 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
     public function validator()
     {
 
-        return AlunoValidator::class;
+         return VestibularValidator::class;
     }
+
 
 
     /**

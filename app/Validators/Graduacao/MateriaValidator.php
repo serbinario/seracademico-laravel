@@ -1,9 +1,10 @@
 <?php
 
-namespace Seracademico\Validators;
+namespace Seracademico\Validators\Graduacao;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
+use Seracademico\Validators\TraitReplaceRulesValidator;
 
 class MateriaValidator extends LaravelValidator
 {

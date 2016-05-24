@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Services;
+namespace Seracademico\Services\Graduacao;
 
 use Seracademico\Repositories\Graduacao\CursoRepository;
-use Seracademico\Repositories\MateriaRepository;
+use Seracademico\Repositories\Graduacao\MateriaRepository;
 use Seracademico\Repositories\TurnoRepository;
-use Seracademico\Repositories\VestibularRepository;
-use Seracademico\Entities\Vestibular;
+use Seracademico\Repositories\Graduacao\VestibularRepository;
+use Seracademico\Entities\Graduacao\Vestibular;
 
 class VestibularService
 {

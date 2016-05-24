@@ -1,17 +1,15 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Seracademico\Entities\Aluno;
-use Seracademico\Entities\Curriculo;
+use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\AlunoService;
-use Seracademico\Services\VestibulandoService;
-use Seracademico\Validators\AlunoValidator;
+use Seracademico\Services\Graduacao\VestibulandoService;
+use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
@@ -22,7 +20,7 @@ class VestibulandoController extends Controller
     private $service;
 
     /**
-     * @var AlunoValidator
+     * @var VestibulandoValidator
      */
     private $validator;
 
@@ -39,7 +37,7 @@ class VestibulandoController extends Controller
         'TipoSanguinio',
         'Estado',
         'CorRaca',
-        'Vestibular',
+        'Graduacao\\Vestibular',
         'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
@@ -48,9 +46,9 @@ class VestibulandoController extends Controller
 
     /**
      * @param VestibulandoService $service
-     * @param AlunoValidator $validator
+     * @param VestibulandoValidator $validator
      */
-    public function __construct(VestibulandoService $service, AlunoValidator $validator)
+    public function __construct(VestibulandoService $service, VestibulandoValidator $validator)
     {
         $this->service    = $service;
         $this->validator  = $validator;
@@ -70,29 +68,28 @@ class VestibulandoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $alunos = \DB::table('fac_alunos')
-            ->join('vestibulares', 'vestibulares.id', '=' , 'fac_alunos.vestibular_id')
-            ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_alunos.primeira_opcao_curso_id')
-            ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_alunos.segunda_opcao_curso_id')
-            ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_alunos.terceira_opcao_curso_id')
-            ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_alunos.primeira_opcao_turno_id')
-            ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_alunos.segunda_opcao_turno_id')
-            ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_alunos.terceira_opcao_turno_id')
-            ->where('fac_alunos.tipo_aluno_id', 1)
+        $alunos = \DB::table('fac_vestibulandos')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
+            ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
+            ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_vestibulandos.primeira_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
             ->select([
-                'fac_alunos.id',
-                'fac_alunos.nome',
-                'fac_alunos.cpf',
-                'fac_alunos.matricula',
-                'fac_alunos.celular',
-                'fac_alunos.inscricao',
+                'fac_vestibulandos.id',
+                'pessoas.nome',
+                'pessoas.cpf',
+                'pessoas.celular',
+                'fac_vestibulandos.inscricao',
                 'curso1.nome as nomeCurso1',
                 'curso2.nome as nomeCurso2',
                 'curso3.nome as nomeCurso3',
                 'turno1.nome as nomeTurno1',
                 'turno2.nome as nomeTurno2',
                 'turno3.nome as nomeTurno3',
-                'vestibulares.nome as vestibular'
+                'fac_vestibulares.nome as vestibular'
             ]);
 
         #Editando a grid
@@ -114,21 +111,21 @@ class VestibulandoController extends Controller
     public function gridNotas($idVestibulando)
     {
         #Criando a consulta
-        $alunos = \DB::table('aluno_notas_vestibular')
-            ->join('fac_materias', 'fac_materias.id', '=', 'aluno_notas_vestibular.materia_id')
-            ->join('fac_alunos', 'fac_alunos.id', '=', 'aluno_notas_vestibular.aluno_id')
-            ->where('fac_alunos.id', $idVestibulando)
+        $alunos = \DB::table('fac_vestibulandos_notas_vestibulares')
+            ->join('fac_materias', 'fac_materias.id', '=', 'fac_vestibulandos_notas_vestibulares.materia_id')
+            ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=', 'fac_vestibulandos_notas_vestibulares.vestibulando_id')
+            ->where('fac_vestibulandos.id', $idVestibulando)
             ->select([
-                'aluno_notas_vestibular.id',
+                'fac_vestibulandos_notas_vestibulares.id',
                 'fac_materias.codigo',
                 'fac_materias.nome',
-                'aluno_notas_vestibular.acertos',
-                'aluno_notas_vestibular.pontuacao'
+                'fac_vestibulandos_notas_vestibulares.acertos',
+                'fac_vestibulandos_notas_vestibulares.pontuacao'
             ]);
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-            return '<a class="btn-floating" id="editarNotas" title="Editar aluno"><i class="material-icons">edit</i></a>';
+            return '<a class="btn-floating" id="editarNotas" title="Editar notas do vestibulando"><i class="material-icons">edit</i></a>';
         })->make(true);
     }
 
@@ -178,9 +175,6 @@ class VestibulandoController extends Controller
         try {
             #Recuperando o aluno
             $aluno = $this->service->find($id);
-
-            #Tratando as datas
-            $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);

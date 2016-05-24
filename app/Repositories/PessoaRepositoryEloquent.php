@@ -4,15 +4,15 @@ namespace Seracademico\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\MateriaValidator;
-use Seracademico\Repositories\MateriaRepository;
-use Seracademico\Entities\Materia;
+use Seracademico\Repositories\PessoaRepository;
+use Seracademico\Entities\Pessoa;
+use Seracademico\Validators\PessoaValidator;
 
 /**
- * Class MateriaRepositoryEloquent
+ * Class BairroRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class MateriaRepositoryEloquent extends BaseRepository implements MateriaRepository
+class PessoaRepositoryEloquent extends BaseRepository implements PessoaRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class MateriaRepositoryEloquent extends BaseRepository implements MateriaReposit
      */
     public function model()
     {
-        return Materia::class;
+        return Pessoa::class;
     }
 
     /**
@@ -32,9 +32,8 @@ class MateriaRepositoryEloquent extends BaseRepository implements MateriaReposit
     public function validator()
     {
 
-         return MateriaValidator::class;
+        return PessoaValidator::class;
     }
-
 
 
     /**

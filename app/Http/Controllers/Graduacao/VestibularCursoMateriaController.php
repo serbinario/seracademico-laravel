@@ -1,11 +1,12 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\VestibularService;
+use Seracademico\Services\Graduacao\VestibularService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -39,19 +40,19 @@ class VestibularCursoMateriaController extends Controller
     public function grid($idVestibularCurso)
     {
         #Criando a consulta
-        $rows = \DB::table('vestibular_curso_materia')
-            ->join('fac_materias', 'fac_materias.id', '=', 'vestibular_curso_materia.materia_id')
-            ->join('vestibulares_cursos', 'vestibulares_cursos.id', '=', 'vestibular_curso_materia.vestibular_curso_id')
-            ->join('fac_cursos', 'fac_cursos.id', '=', 'vestibulares_cursos.curso_id')
-            ->where('vestibulares_cursos.id', $idVestibularCurso)
+        $rows = \DB::table('fac_vestibular_curso_materia')
+            ->join('fac_materias', 'fac_materias.id', '=', 'fac_vestibular_curso_materia.materia_id')
+            ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_materia.vestibular_curso_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+            ->where('fac_vestibulares_cursos.id', $idVestibularCurso)
             ->select([
-                'vestibular_curso_materia.id',
+                'fac_vestibular_curso_materia.id',
                 'fac_materias.id as idMateria',
                 'fac_materias.nome',
                 'fac_materias.codigo',
                 'fac_cursos.id as idCurso',
-                'vestibular_curso_materia.peso',
-                'vestibular_curso_materia.qtd_questoes'
+                'fac_vestibular_curso_materia.peso',
+                'fac_vestibular_curso_materia.qtd_questoes'
             ]);
 
         #Editando a grid

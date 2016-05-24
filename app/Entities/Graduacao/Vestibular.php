@@ -1,19 +1,20 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Graduacao\Curso;
-use Seracademico\Entities\PivotVestibularCurso;
+use Seracademico\Entities\Banco;
+use Seracademico\Entities\Taxa;
+use Seracademico\Entities\TipoVencimento;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Vestibular extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table    = 'vestibulares';
+    protected $table    = 'fac_vestibulares';
 
 	protected $dates    = [
         'data_inicial',
@@ -156,7 +157,7 @@ class Vestibular extends Model implements Transformable
      */
     public function cursos()
     {
-        return $this->belongsToMany(Curso::class, 'vestibulares_cursos', 'vestibular_id', 'curso_id')
+        return $this->belongsToMany(Curso::class, 'fac_vestibulares_cursos', 'vestibular_id', 'curso_id')
             ->withPivot(['id']);
     }
 
@@ -165,7 +166,7 @@ class Vestibular extends Model implements Transformable
      */
     public function vestibulandos()
     {
-        return $this->hasMany(Aluno::class, 'vestibular_id');
+        return $this->hasMany(Vestibulando::class, 'vestibular_id');
     }
 
     /**

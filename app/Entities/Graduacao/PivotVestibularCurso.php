@@ -1,11 +1,11 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Materia;
+use Seracademico\Entities\Turno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class PivotVestibularCurso extends Pivot implements Transformable
@@ -15,7 +15,7 @@ class PivotVestibularCurso extends Pivot implements Transformable
     /**
      * @var string
      */
-    protected $table = 'vestibulares_cursos';
+    protected $table = 'fac_vestibulares_cursos';
 
     /**
      * @var array
@@ -30,7 +30,7 @@ class PivotVestibularCurso extends Pivot implements Transformable
      */
     public function materias()
     {
-        return $this->belongsToMany(Materia::class, "vestibular_curso_materia", "vestibular_curso_id", "materia_id")
+        return $this->belongsToMany(Materia::class, "fac_vestibular_curso_materia", "vestibular_curso_id", "materia_id")
             ->withPivot(['id', 'peso', 'qtd_questoes']);
     }
 
@@ -39,7 +39,7 @@ class PivotVestibularCurso extends Pivot implements Transformable
      */
     public function turnos()
     {
-        return $this->belongsToMany(Turno::class, "vestibular_curso_turno", "vestibular_curso_id", "turno_id")
+        return $this->belongsToMany(Turno::class, "fac_vestibular_curso_turno", "vestibular_curso_id", "turno_id")
             ->withPivot(['id', 'qtd_vagas', 'descricao']);
     }
 }

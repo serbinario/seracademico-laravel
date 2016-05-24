@@ -12,8 +12,8 @@ function loadTableMateria (idVestibularCurso) {
         columns: [
             {data: 'codigo', name: 'fac_materias.codigo'},
             {data: 'nome', name: 'fac_materia.nome'},
-            {data: 'peso', name: 'vestibular_curso_materia.peso'},
-            {data: 'qtd_questoes', name: 'vestibular_curso_materia.qtd_questoes'},
+            {data: 'peso', name: 'fac_vestibular_curso_materia.peso'},
+            {data: 'qtd_questoes', name: 'fac_vestibular_curso_materia.qtd_questoes'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

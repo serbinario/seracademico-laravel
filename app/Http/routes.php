@@ -19,18 +19,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
-            Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibulandoController@getLoadFields']);
-            Route::get('index', ['as' => 'index', 'uses' => 'VestibulandoController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'VestibulandoController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'VestibulandoController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'VestibulandoController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibulandoController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@update']);
+            Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibulandoController@getLoadFields']);
+            Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\VestibulandoController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\VestibulandoController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\VestibulandoController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibulandoController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@update']);
 
             Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
-                Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'VestibulandoController@gridNotas']);
-                Route::post('edit', ['as' => 'edit', 'uses' => 'VestibulandoController@editNota']);
-                Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibulandoController@updateNota']);
+                Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'Graduacao\VestibulandoController@gridNotas']);
+                Route::post('edit', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@editNota']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@updateNota']);
             });
 
             Route::group(['prefix' => 'inclusao', 'as' => 'inclusao.'], function () {
@@ -307,12 +307,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'materia', 'as' => 'materia.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'MateriaController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'MateriaController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'MateriaController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'MateriaController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'MateriaController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'MateriaController@update']);
+            Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MateriaController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\MateriaController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\MateriaController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\MateriaController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\MateriaController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\MateriaController@update']);
         });
 
         Route::group(['prefix' => 'banco', 'as' => 'banco.'], function () {
@@ -343,31 +343,31 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         Route::group(['prefix' => 'vestibular', 'as' => 'vestibular.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'VestibularController@index']);
-            Route::get('grid', ['as' => 'grid', 'uses' => 'VestibularController@grid']);
-            Route::get('create', ['as' => 'create', 'uses' => 'VestibularController@create']);
-            Route::post('store', ['as' => 'store', 'uses' => 'VestibularController@store']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'VestibularController@edit']);
-            Route::post('update/{id}', ['as' => 'update', 'uses' => 'VestibularController@update']);
-            Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'VestibularController@delete']);
+            Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\VestibularController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\VestibularController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\VestibularController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibularController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibularController@update']);
+            Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@delete']);
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
-                Route::get('grid/{idVestibular}', ['as' => 'grid', 'uses' => 'VestibularCursoController@grid']);
-                Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoController@delete']);
-                Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoController@store']);
+                Route::get('grid/{idVestibular}', ['as' => 'grid', 'uses' => 'Graduacao\VestibularCursoController@grid']);
+                Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\VestibularCursoController@delete']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibularCursoController@store']);
 
                 Route::group(['prefix' => 'materia', 'as' => 'materia.'], function () {
-                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibularCursoMateriaController@getLoadFields']);
-                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'VestibularCursoMateriaController@grid']);
-                    Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoMateriaController@delete']);
-                    Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoMateriaController@store']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibularCursoMateriaController@getLoadFields']);
+                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'Graduacao\VestibularCursoMateriaController@grid']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\VestibularCursoMateriaController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibularCursoMateriaController@store']);
                 });
 
                 Route::group(['prefix' => 'turno', 'as' => 'turno.'], function () {
-                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'VestibularCursoTurnoController@getLoadFields']);
-                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'VestibularCursoTurnoController@grid']);
-                    Route::post('delete', ['as' => 'delete', 'uses' => 'VestibularCursoTurnoController@delete']);
-                    Route::post('store', ['as' => 'store', 'uses' => 'VestibularCursoTurnoController@store']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibularCursoTurnoController@getLoadFields']);
+                    Route::get('grid/{idVestibularCurso}', ['as' => 'grid', 'uses' => 'Graduacao\VestibularCursoTurnoController@grid']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\VestibularCursoTurnoController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibularCursoTurnoController@store']);
                 });
             });
         });
