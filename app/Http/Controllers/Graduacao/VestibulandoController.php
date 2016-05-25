@@ -279,6 +279,10 @@ class VestibulandoController extends Controller
         }
     }
 
+    /**
+     * @param $idVestibulando
+     * @return mixed
+     */
     public function editInclusao($idVestibulando)
     {
         try {
@@ -324,6 +328,26 @@ class VestibulandoController extends Controller
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Vestibulando transferido com sucesso!']);
         } catch (\Throwable $e) {dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function search(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $dados = $this->service->search(key($data), $data[key($data)]);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }

@@ -1,5 +1,20 @@
 <div class="row">
     <div class="col-md-12">
+        @if(!isset($aluno))
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label for="searchCpf">DIGITE O CPF SE POSSUIR CADASTRO</label>
+                <input type="text" id="searchCpf" class="form-control">
+            </div>
+
+            <div class="col-md-4">
+                <a style="margin-top: 6%;" id="btnSearchCpf" class="btn btn-primary">
+                    Buscar
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="form-group col-md-7">
                 {!! Form::label('pessoa[nome]', 'Nome *') !!}
@@ -670,8 +685,6 @@
 
     </div>
     {{--Fim Buttons Submit e Voltar--}}
-
-
 </div>
 
 </div>

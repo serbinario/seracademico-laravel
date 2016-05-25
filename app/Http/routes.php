@@ -26,6 +26,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\VestibulandoController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@update']);
+            Route::post('search', ['as' => 'search', 'uses' => 'Graduacao\VestibulandoController@search']);
 
             Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
                 Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'Graduacao\VestibulandoController@gridNotas']);
@@ -350,6 +351,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibularController@update']);
             Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@delete']);
+
+            Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
+                Route::get('relatorio1', ['as' => 'relatorio1', 'uses' => 'Graduacao\VestibularController@relatorio1']);
+                Route::get('relatorio2', ['as' => 'relatorio2', 'uses' => 'Graduacao\VestibularController@relatorio2']);
+            });
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
                 Route::get('grid/{idVestibular}', ['as' => 'grid', 'uses' => 'Graduacao\VestibularCursoController@grid']);

@@ -106,17 +106,24 @@ class VestibulandoService
         $this->tratamentoInscricao($data);
         $this->tratamentoImagem($data);
 
-        #Criando o endereco
-        $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+        # Recuperando a pessoa pelo cpf
+        $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+        $endereco  = null;
+
+        # Verificando se a pesso já existe
+        if($objPessoa) {
+            #aAlterando a pessoa e o endereço
+            $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
+            $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+        } else {
+            #Criando o endereco e pessoa
+            $pessoa   = $this->pessoaRepository->create($data['pessoa']);
+            $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+        }
 
         #setando as chaves estrageiras
         $data['pessoa']['enderecos_id'] = $endereco->id;
-
-        #Criando a pessoa
-        $pessoa   = $this->pessoaRepository->create($data['pessoa']);
-
-        #setando as chaves estrageiras
-        $data['pessoa_id']    = $pessoa->id;
+        $data['pessoa_id'] = $pessoa->id;
 
         #Salvando o registro pincipal
         $vestibulando =  $this->repository->create($data);
@@ -232,10 +239,20 @@ class VestibulandoService
     {
         # Tratamento de campos de chaves estrangeira
         foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
             $explodeKey = explode("_", $key);
 
             if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
-                unset($data[$key]);
+                $data[$key] = null;
             }
         }
 
@@ -438,5 +455,31 @@ class VestibulandoService
 
         #retorno
         return true;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public function search($key, $value)
+    {
+        # Joins
+        $relacionamentos = [
+            'instituicaoEscolar',
+            'endereco.bairro.cidade.estado',
+        ];
+
+        # Fazendo a consulta
+        $vestibulando = $this->pessoaRepository->with($relacionamentos)->findWhere([ $key =>$value ]);
+
+        # Verificando o se o vestibulando foi recuperado
+        if(count($vestibulando) == 0) {
+            throw new \Exception("Dados não encontrados");
+        }
+
+        # Retorno
+        return $vestibulando;
     }
 }

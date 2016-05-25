@@ -114,7 +114,7 @@
                 }
             });
 
-            //consulta via select2
+            //consulta via select2 da instituição
             $("#instituicao").select2({
                 placeholder: 'Selecione uma instituição',
                 minimumInputLength: 3,
@@ -156,7 +156,7 @@
                 }
             });
 
-            //consulta via select2
+            //consulta via select2 da formação acadêmica
             $("#formacao").select2({
                 placeholder: 'Selecione uma formação acadêmica',
                 minimumInputLength: 3,
@@ -197,55 +197,133 @@
                 }
             });
 
-            $('#formVestibulando').bootstrapValidator({
-                fields: {
-                    'pessoa[nome]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 50,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
+            // Validações
+//            $('#formVestibulando').bootstrapValidator({
+//                fields: {
+//                    'nome': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome' })
+//                            },
+//                            stringLength: {
+//                                max: 50,
+//                                message: Lang.get('validation.max', { attribute: 'Nome' })
+//                            }
+//                        }
+//                    },
+//                    'data_nasciemento': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+//                            }
+//                        }
+//                    },
+//                    'cpf': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'CPF' })
+//                            }
+//                        }
+//                    },
+//                    'nome_pai': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+//                            }
+//                        }
+//                    },
+//                    'nome_mae': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+//                            }
+//                        }
+//                    },
+//                    'identidade': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Identidade' })
+//                            }
+//                        }
+//                    }
+//                },
+//            });
+
+            // Evento para pesquisar o cpf do digito no search
+            $(document).on('click', '#btnSearchCpf', function () {
+                // Recuperndo o valor da consulta
+                var serachValue = $("#searchCpf").val();
+
+                // Verificando se algum valor foi digitado
+                if(!serachValue) {
+                    swal("Você precisa digitar um cpf", "Click no botão ok para voltar a página", "error");
+                    return false;
+                }
+
+                // Requisição ajax
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.vestibulando.search')  }}',
+                    data: {'cpf' : serachValue},
+                    datatype: 'json'
+                }).done(function (json) {
+                    if(json.success) {
+                        $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
+                        $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
+                        $("select[name='pessoa[sexos_id]'] option[value='"+ json.dados[0].sexos_id +"']").attr("selected", "selected");
+                        $("select[name='pessoa[estados_civis_id]'] option[value='"+ json.dados[0].estados_civis_id +"']").attr("selected", "selected");
+                        $("select[name='pessoa[cores_racas_id]'] option[value='"+ json.dados[0].cores_racas_id +"']").attr("selected", "selected");
+                        $("select[name='pessoa[tipos_sanguinios_id]'] option[value='"+ json.dados[0].tipos_sanguinios_id +"']").attr("selected", "selected");
+                        $("input:text[name='pessoa[nacionalidade]']").val(json.dados[0].nacionalidade);
+                        $("select[name='pessoa[uf_nascimento_id]'] option[value='"+ json.dados[0].uf_nascimento_id +"']").attr("selected", "selected");
+                        $("input:text[name='pessoa[naturalidade]']").val(json.dados[0].naturalidade);
+                        $("input:text[name='pessoa[nome_pai]']").val(json.dados[0].nome_pai);
+                        $("input:text[name='pessoa[nome_mae]']").val(json.dados[0].nome_mae);
+                        $("input:text[name='pessoa[identidade]']").val(json.dados[0].identidade);
+                        $("input:text[name='pessoa[orgao_rg]']").val(json.dados[0].orgao_rg);
+                        $("input:text[name='pessoa[data_expedicao]']").val(json.dados[0].data_expedicao);
+                        $("input:text[name='pessoa[cpf]']").val(json.dados[0].cpf);
+                        $("input:text[name='pessoa[cpf]']").prop('readonly', true);
+                        $("input:text[name='pessoa[titulo_eleitoral]']").val(json.dados[0].titulo_eleitoral);
+                        $("input:text[name='pessoa[zona]']").val(json.dados[0].zona);
+                        $("input:text[name='pessoa[secao]']").val(json.dados[0].secao);
+                        $("input:text[name='pessoa[resevista]']").val(json.dados[0].resevista);
+                        $("input:text[name='pessoa[catagoria_resevista]']").val(json.dados[0].catagoria_resevista);
+                        $("input:checkbox[name='pessoa[deficiencia_fisica]']").attr('checked', json.dados[0].deficiencia_fisica);
+                        $("input:checkbox[name='pessoa[deficiencia_auditiva]']").attr('checked', json.dados[0].deficiencia_auditiva);
+                        $("input:checkbox[name='pessoa[deficiencia_visual]']").attr('checked', json.dados[0].deficiencia_visual);
+                        $("input:checkbox[name='pessoa[deficiencia_outra]']").attr('checked', json.dados[0].deficiencia_outra);
+                        $("input:text[name='pessoa[endereco][logradouro]']").val(json.dados[0].endereco.logradouro);
+                        $("input:text[name='pessoa[endereco][cep]']").val(json.dados[0].endereco.cep);
+                        $("input:text[name='pessoa[endereco][numero]']").val(json.dados[0].endereco.numero);
+
+                        // Validando o estado
+                        if(json.dados[0].endereco.bairro) {
+                            $("select[name='estado'] option[value='"+ json.dados[0].endereco.bairro.cidade.estado.id +"']").attr("selected", "selected");
+                            $("select[name='cidade']").append("<option value='"+ json.dados[0].endereco.bairro.cidade.id +"'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
+                            $("select[name='pessoa[endereco][bairros_id]']").append("<option value='"+ json.dados[0].endereco.bairro.id +"'>" + json.dados[0].endereco.bairro.nome + "</option>");
                         }
-                    },
-                    'pessoa[data_nasciemento]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-                            }
+
+                        $("input:text[name='pessoa[endereco][complemento]']").val(json.dados[0].endereco.complemento);
+                        $("input:text[name='pessoa[email]']").val(json.dados[0].email);
+                        $("input:text[name='pessoa[telefone_fixo]']").val(json.dados[0].telefone_fixo);
+                        $("input:text[name='pessoa[celular]']").val(json.dados[0].celular);
+                        $("input:text[name='pessoa[celular2]']").val(json.dados[0].celular2);
+                        $("input:text[name='pessoa[ano_conclusao_medio]']").val(json.dados[0].ano_conclusao_medio);
+                        $("input:text[name='pessoa[outra_escola]']").val(json.dados[0].outra_escola);
+
+                        // Validando a instituição escolar
+                        if(json.dados[0].instituicao_escolar) {
+                            $("#instituicao").append($('<option>', {value: json.dados[0].instituicao_escolar.id, text: json.dados[0].instituicao_escolar.nome}));
+                            $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected',true);
+                            $('#instituicao').trigger('change');
                         }
-                    },
-                    'pessoa[cpf]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'CPF' })
-                            }
-                        }
-                    },
-                    'pessoa[nome_pai]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-                            }
-                        }
-                    },
-                    'pessoa[nome_mae]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-                            }
-                        }
-                    },
-                    'pessoa[identidade]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Identidade' })
-                            }
-                        }
+                    } else {
+                        swal(json.msg, "Click no botão ok para voltar a página", "error");
+                        return false;
                     }
-                },
+                });
+
             });
         </script>
     @stop

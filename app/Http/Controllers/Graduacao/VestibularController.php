@@ -197,4 +197,23 @@ class VestibularController extends Controller
         }
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function relatorio1(Request $request)
+    {
+        return \PDF::loadView('reports.vestibulares.relatorio1')->stream();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function relatorio2(Request $request)
+    {
+        return \PDF::loadView('reports.vestibulares.relatorio2')->stream();
+    }
 }
