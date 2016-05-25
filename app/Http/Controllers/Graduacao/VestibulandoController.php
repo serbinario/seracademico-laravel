@@ -28,6 +28,7 @@ class VestibulandoController extends Controller
      * @var array
      */
     private $loadFields = [
+        'Graduacao\\Semestre',
         'Turno',
         'Sexo',
         'EstadoCivil',
@@ -59,18 +60,22 @@ class VestibulandoController extends Controller
      */
     public function index()
     {
-        return view('vestibulando.index');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        return view('vestibulando.index', compact('loadFields'));
     }
 
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid(Request $request)
     {
         #Criando a consulta
         $alunos = \DB::table('fac_vestibulandos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
             ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
             ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
             ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
@@ -93,16 +98,22 @@ class VestibulandoController extends Controller
             ]);
 
         #Editando a grid
-        return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                        <li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>
-                        <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
-                    </ul>
-                    </div>';
-        })->make(true);
+        return Datatables::of($alunos)
+            ->filter(function ($query) use ($request) {
+                if ($request->has('semestre')) {
+                    $query->where('fac_semestres.id', '=', $request->get('semestre'));
+                }
+            })
+            ->addColumn('action', function ($aluno) {
+                return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>
+                            <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
+                        </ul>
+                        </div>';
+            })->make(true);
     }
 
     /**

@@ -32,6 +32,19 @@
         </div>
         <div class="ibox-content">
             <div class="row">
+                <div class="col-md-6">
+                    <form id="search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('semestreSearch', (['' => 'Todos os semestres'] + $loadFields['graduacao\\semestre']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
                         <table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">
@@ -108,7 +121,12 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.vestibulando.grid') !!}",
+            ajax: {
+                url: "{!! route('seracademico.vestibulando.grid') !!}",
+                data: function (d) {
+                    d.semestre = $('select[name=semestreSearch] option:selected').val();
+                }
+            },
             columns: [
                 {
                     "className":      'details-control',
@@ -123,6 +141,11 @@
                 {data: 'vestibular', name: 'vestibulares.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        $('#search-form').on('submit', function(e) {
+            table.draw();
+            e.preventDefault();
         });
 
         var detailRows = [];
