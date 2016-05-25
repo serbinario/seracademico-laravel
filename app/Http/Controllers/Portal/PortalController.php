@@ -59,4 +59,28 @@ class PortalController extends Controller
     {
         return view('portal.inicio.secretaria');
     }
+
+    /**
+     * @return mixed
+     */
+    public function Disciplina()
+    {
+        return view('portal.inicio.disciplina');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function Avaliacao()
+    {
+        return view('portal.inicio.avaliacao');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function Boleto()
+    {
+        return view('portal.inicio.boleto');
+    }
 }

@@ -21,7 +21,7 @@
             <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
-                        <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/png/clapperboard.png')}}" alt="" class="img-dash"></h2>
+                        <h2 class="center light-blue-text"><a href="{{ route('seracademico.portal.disciplina') }}"><img src="{{ asset('/portal/img/icons/png/clapperboard.png')}}" alt="" class="img-dash"></a></h2>
                         <h5 class="center">Disciplinas</h5>
                         <p class="center">Consulte e matricule-se em disciplinas</p>
                     </div>
@@ -31,7 +31,7 @@
             <div class="col s12 m4">
                 <div class="box-dash">
                     <div class="icon-block">
-                        <h2 class="center light-blue-text"><img src="{{ asset('/portal/img/icons/png/film.png')}}" alt="" class="img-dash"></h2>
+                        <h2 class="center light-blue-text"><a href="{{ route('seracademico.portal.avaliacao') }}"><img src="{{ asset('/portal/img/icons/png/film.png')}}" alt="" class="img-dash"></a></h2>
                         <h5 class="center">Avaliação acadêmica</h5></a>
                         <p class="center">Consulte seu desempenho</p>
                     </div>

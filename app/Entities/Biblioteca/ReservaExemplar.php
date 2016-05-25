@@ -14,7 +14,19 @@ class ReservaExemplar extends Model implements Transformable
 
     protected $fillable = [ 
 		'reserva_id',
-		'exemplar_id',
+		'arcevos_id',
+        'edicao',
+        'status',
 	];
+
+    public function reserva()
+    {
+        return $this->belongsTo(Reserva::class, 'reserva_id');
+    }
+
+    public function acervo()
+    {
+        return $this->belongsTo(Arcevo::class, 'arcevos_id');
+    }
 
 }

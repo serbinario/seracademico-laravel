@@ -186,6 +186,8 @@
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexEmprestimo') }}">Emprestimo</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.viewDevolucaoEmprestimo') }}">Devolução</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexReserva') }}">Reservar</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.reservados') }}">Reservas</a></li>
                             </ul>
                         </li>
                     </ul>

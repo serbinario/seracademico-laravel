@@ -4,8 +4,10 @@ namespace Seracademico\Http\Controllers\Biblioteca;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Entities\Biblioteca\Reserva;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
+use Seracademico\Services\Biblioteca\ArcevoService;
 use Seracademico\Services\Biblioteca\ReservaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -20,22 +22,30 @@ class ReservaController extends Controller
     private $service;
 
     /**
+     * @var ArcevoService
+     */
+    private $serviceAcervo;
+
+    /**
     * @var ReservaValidator
     */
     private $validator;
 
     /**
-    * @var array
-    */
-    private $loadFields = [];
+     * @var array
+     */
+    private $loadFields = [
+        'Aluno'
+    ];
 
     /**
     * @param ReservaService $service
     * @param ReservaValidator $validator
     */
-    public function __construct(ReservaService $service, ReservaValidator $validator)
+    public function __construct(ReservaService $service, ArcevoService $serviceAcervo, ReservaValidator $validator)
     {
         $this->service   =  $service;
+        $this->serviceAcervo   =  $serviceAcervo;
         $this->validator =  $validator;
     }
 
@@ -44,7 +54,9 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        return view('reserva.index');
+        $loadFields = $this->service->load($this->loadFields);
+
+        return view('biblioteca.controle.reserva.index', compact('loadFields'));
     }
 
     /**
@@ -53,25 +65,63 @@ class ReservaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('bib_reservas')->select(['id', 'nome']);
+        $rows = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
+            //->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
+            ->where('bib_exemplares.exemp_principal', '=', '0')
+            ->select(
+                'bib_arcevos.titulo',
+                'bib_arcevos.id as id_acervo',
+                'bib_arcevos.cutter',
+                'bib_exemplares.edicao',
+                'bib_exemplares.situacao_id',
+                'bib_exemplares.emprestimo_id as id_emp',
+                'bib_arcevos.subtitulo as subtitulo'
+                )
+            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
+            ->having(\DB::raw('sum(bib_exemplares.situacao_id) = count(*) * 5'), '=', '1');
+
+        //dd($rows);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
+    /*public function grid()
     {
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        #Criando a consulta
+        $rows = \DB::table('bib_arcevos')
+            ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
+            //->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
+            ->where('bib_exemplares.situacao_id', '=', '5')
+            ->where('bib_exemplares.situacao_id', '!=', '1')
+            ->where('bib_exemplares.situacao_id', '!=', '3')
+            ->where('bib_exemplares.situacao_id', '!=', '2')
+            ->where('bib_exemplares.exemp_principal', '!=', '1')
+            ->select(
+                'bib_arcevos.titulo',
+                'bib_arcevos.id',
+                'bib_arcevos.cutter',
+                'bib_exemplares.edicao',
+                'bib_arcevos.subtitulo as subtitulo'
+            )
+            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn');
 
-        #Retorno para view
-        return view('reserva.create', compact('loadFields'));
-    }
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }*/
 
     /**
      * @param Request $request
@@ -84,7 +134,7 @@ class ReservaController extends Controller
             $data = $request->all();
 
             #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -93,33 +143,14 @@ class ReservaController extends Controller
             $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+            return redirect()->back()->with("message", "Reserva realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        try {
-            #Recuperando a empresa
-            $model = $this->service->find($id);
-
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
-
-            #retorno para view
-            return view('reserva.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }
+    
 
     /**
      * @param Request $request
@@ -146,6 +177,83 @@ class ReservaController extends Controller
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function reservados(){
+
+        return view('biblioteca.controle.reserva.reservas');
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function gridReservados(Request $request)
+    {
+        //$dataObj = new \DateTime('now');
+        //$this->data    = $dataObj->format('d/m/Y');
+
+        #Criando a consulta
+        $rows = Reserva::join('fac_alunos', 'fac_alunos.id', '=', 'bib_reservas.alunos_id')
+            ->with(['reservaExemplar.exemplares'])
+            ->select(
+                ['bib_reservas.codigo',
+                    'bib_reservas.*',
+                    'fac_alunos.nome',
+                    \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
+                    \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
+                ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = "";
+            //if(!$row->data_devolucao_real) {
+                $html .= '<div class="fixed-action-btn horizontal">
+                      <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                       <ul>
+                       <li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">delete</i></a></li>';
+                //if($row->tipo_emprestimo == '1' && strtotime($row->data_devolucao) > strtotime($this->data)) {
+                    $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">edit</i></a></li>
+                </ul>
+                </div>';
+               // }
+            //}
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function saveEmprestimo(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            //dd($data);
+
+            if(!isset($data['id'])){
+                return redirect()->back()->with("error", "É preciso informar pelo menos um acervo!");
+            }
+
+           // dd($data);
+
+            #Executando a ação
+            $this->service->saveEmprestimo($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Emprestimo realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

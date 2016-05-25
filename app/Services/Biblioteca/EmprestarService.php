@@ -80,6 +80,33 @@ class EmprestarService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function renovacao($id){
+
+        $emprestimo = $this->repository->find($id);
+        $dataObj   = \DateTime::createFromFormat('Y-m-d H:i:s', $emprestimo->data_devolucao);
+        $dia       = 0;
+        //dd($dataObj);
+        if($emprestimo->tipo_emprestimo == '1') {
+            $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
+            $dia = $query[0]->valor - 1;
+        } else if ($emprestimo->tipo_emprestimo == '2') {
+            $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
+            $dia = $query[0]->valor - 1;
+        }
+
+        $dataObj->add(new \DateInterval("P{$dia}D"));
+        $data = $dataObj->format('Y-m-d');
+
+        $emprestimo->data_devolucao = $data;
+        $emprestimo->save();
+
+        return $emprestimo;
+    }
+
+    /**
      * @param array $data
      * @return array
      */
@@ -91,11 +118,10 @@ class EmprestarService
 
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
-        $codigo = \DB::table('bib_emprestimos')->max('codigo');
-        $codigoMax = $codigo != null ? $codigoMax = $codigo + 1 : $codigoMax = "1";
-
+        //$codigo = \DB::table('bib_emprestimos')->max('codigo');
+        $codigo = $date->format('YmdHis');
         $data['data'] = $dataFormat;
-        $data['codigo'] = $codigoMax;
+        $data['codigo'] = $codigo;
 
         #Salvando o registro pincipal
         $emprestar =  $this->repository->create($data);
