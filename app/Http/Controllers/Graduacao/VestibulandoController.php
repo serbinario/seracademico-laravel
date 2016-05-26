@@ -100,8 +100,8 @@ class VestibulandoController extends Controller
         #Editando a grid
         return Datatables::of($alunos)
             ->filter(function ($query) use ($request) {
-                if ($request->has('semestre')) {
-                    $query->where('fac_semestres.id', '=', $request->get('semestre'));
+                if ($request->has('vestibular')) {
+                    $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
                 }
             })
             ->addColumn('action', function ($aluno) {

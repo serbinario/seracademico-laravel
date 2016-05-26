@@ -50,6 +50,15 @@ class Vestibulando extends Model implements Transformable
      *
      * @return \DateTime
      */
+    public function getInscricaoAttribute()
+    {
+        return $this->vestibular->codigo . $this->attributes['inscricao'];
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
     public function getDataInsricaoVestibularAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_insricao_vestibular']);

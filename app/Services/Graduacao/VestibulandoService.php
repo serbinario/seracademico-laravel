@@ -316,7 +316,7 @@ class VestibulandoService
             }
 
             # Gerando a inscrição
-            $data['inscricao'] = $this->gerarInscricao($idVestibular, $id);
+            $data['inscricao'] = $this->gerarInscricao($idVestibular);
         }
 
         # retorno
@@ -326,7 +326,7 @@ class VestibulandoService
     /**
      * @return string
      */
-    public function gerarInscricao($idVestibular, $idVestibulando = "")
+    public function gerarInscricao($idVestibular)
     {
         # Recuperando o vestibular
         $objVestibular = $this->vestibularRepository->find($idVestibular);

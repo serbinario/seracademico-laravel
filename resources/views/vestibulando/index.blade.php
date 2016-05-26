@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
-                            {!! Form::select('semestreSearch', (['' => 'Todos os semestres'] + $loadFields['graduacao\\semestre']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Pesquisar</button>
@@ -124,7 +124,7 @@
             ajax: {
                 url: "{!! route('seracademico.vestibulando.grid') !!}",
                 data: function (d) {
-                    d.semestre = $('select[name=semestreSearch] option:selected').val();
+                    d.vestibular = $('select[name=vestibularSearch] option:selected').val();
                 }
             },
             columns: [
@@ -135,7 +135,7 @@
                     "defaultContent": ''
                 },
                 {data: 'nome', name: 'fac_alunos.nome'},
-                {data: 'inscricao', name: 'fac_alunos.inscricao'},
+                {data: 'inscricao', name: 'fac_vestibulandos.inscricao'},
                 {data: 'celular', name: 'fac_alunos.celular'},
                 {data: 'cpf', name: 'fac_alunos.cpf'},
                 {data: 'vestibular', name: 'vestibulares.nome'},
