@@ -134,11 +134,11 @@
                     "data":           null,
                     "defaultContent": ''
                 },
-                {data: 'nome', name: 'fac_alunos.nome'},
+                {data: 'nome', name: 'fac_vestibulandos.nome'},
                 {data: 'inscricao', name: 'fac_vestibulandos.inscricao'},
-                {data: 'celular', name: 'fac_alunos.celular'},
-                {data: 'cpf', name: 'fac_alunos.cpf'},
-                {data: 'vestibular', name: 'vestibulares.nome'},
+                {data: 'celular', name: 'fac_vestibulandos.celular'},
+                {data: 'cpf', name: 'fac_vestibulandos.cpf'},
+                {data: 'vestibular', name: 'fac_vestibulares.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
