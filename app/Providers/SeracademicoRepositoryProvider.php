@@ -389,5 +389,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\ParametroRepository::class,
 			\Seracademico\Repositories\ParametroRepositoryEloquent::class
 		);
+
+        $this->app->bind(
+            \Seracademico\Repositories\ItemParametroRepository::class,
+            \Seracademico\Repositories\ItemParametroRepositoryEloquent::class
+        );
 	}
 }

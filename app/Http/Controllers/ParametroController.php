@@ -70,6 +70,36 @@ class ParametroController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function gridItens($idParametro)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_parametros_itens')
+            ->join('fac_parametros', 'fac_parametros.id', '=', 'fac_parametros_itens.parametro_id')
+            ->where('fac_parametros.id', $idParametro)
+            ->select([
+            'fac_parametros_itens.id',
+            'fac_parametros_itens.nome',
+            'fac_parametros_itens.valor'
+        ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a id="btnEditarItensParametros" class="btn-floating"><i class="material-icons">edit</i></a></li>
+                            <li><a id="btnRemoverItensParametros" class="btn-floating"><i class="material-icons">delete</i></a></li>
+                        </ul>
+                     </div>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -152,6 +182,23 @@ class ParametroController extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteItem($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->deleteItem($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Remoção realizada com sucesso"]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }
