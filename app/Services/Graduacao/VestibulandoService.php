@@ -329,19 +329,17 @@ class VestibulandoService
     public function gerarInscricao($idVestibular, $idVestibulando = "")
     {
         # Recuperando o vestibular
-        $objVestibular    = $this->vestibularRepository->find($idVestibular);
-        $lastVestibulando = $objVestibular->vestibulandos->last(function ($key, $value) use ($idVestibulando) {
-            return ($value->id != $idVestibulando && $value->inscricao != "");
-        });
+        $objVestibular = $this->vestibularRepository->find($idVestibular);
+        $lastIncricao  = $objVestibular->vestibulandos->max('inscricao');
 
         # Verificando se o vestibular possui vestibulando
-        if(!$lastVestibulando) {
+        if(!$lastIncricao) {
             return '0001';
         }
 
         # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
         # para nova inscrição
-        $lastIncricao = (int) $lastVestibulando->inscricao;
+        $lastIncricao = (int) $lastIncricao;
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
 
         # retorno
