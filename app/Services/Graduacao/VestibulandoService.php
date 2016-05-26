@@ -316,7 +316,7 @@ class VestibulandoService
             }
 
             # Gerando a inscrição
-            $data['inscricao'] = $this->gerarInscricao($idVestibular);
+            $data['inscricao'] = $this->gerarInscricao($idVestibular, $id);
         }
 
         # retorno
@@ -326,11 +326,13 @@ class VestibulandoService
     /**
      * @return string
      */
-    public function gerarInscricao($idVestibular)
+    public function gerarInscricao($idVestibular, $idVestibulando = "")
     {
         # Recuperando o vestibular
         $objVestibular    = $this->vestibularRepository->find($idVestibular);
-        $lastVestibulando = $objVestibular->vestibulandos->last();
+        $lastVestibulando = $objVestibular->vestibulandos->last(function ($key, $value) use ($idVestibulando) {
+            return $value->id != $idVestibulando;
+        });
 
         # Verificando se o vestibular possui vestibulando
         if(!$lastVestibulando) {
