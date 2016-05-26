@@ -18,6 +18,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('adicionarHorarioAluno', ['as' => 'adicionarHorarioAluno', 'uses' => 'MatriculaAlunoController@adicionarHorarioAluno']);
         });
 
+        Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ParametroController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ParametroController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ParametroController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ParametroController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@update']);
+        });
+
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
             Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibulandoController@getLoadFields']);
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\VestibulandoController@index']);
