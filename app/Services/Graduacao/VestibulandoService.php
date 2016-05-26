@@ -117,12 +117,14 @@ class VestibulandoService
             $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
         } else {
             #Criando o endereco e pessoa
-            $pessoa   = $this->pessoaRepository->create($data['pessoa']);
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+
+            # setando a chave estrangeira e criando a pessoa
+            $data['pessoa']['enderecos_id'] = $endereco->id;
+            $pessoa   = $this->pessoaRepository->create($data['pessoa']);
         }
 
         #setando as chaves estrageiras
-        $data['pessoa']['enderecos_id'] = $endereco->id;
         $data['pessoa_id'] = $pessoa->id;
 
         #Salvando o registro pincipal
