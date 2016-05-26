@@ -38,9 +38,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Modais -->
+    @include('parametro.modal_itens')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/parametro/modal_itens.js') }}"></script>
     <script type="text/javascript">
         var table = $('#parametro-grid').DataTable({
             processing: true,
@@ -50,6 +54,23 @@
                 {data: 'nome', name: 'nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // variável que armazenará o id de parâmetro
+        var idParametro;
+        var nomeParametro;
+
+        // evento para o click de btnItensParametros
+        $(document).on('click', '#btnItensParametros', function () {
+            // reuperando o id do parêmetro
+            idParametro   = table.row($(this).parent().parent().parent().parent().parent()).data().id;
+            nomeParametro =table.row($(this).parent().parent().parent().parent().parent()).data().nome;
+
+            // Colocando o nome do parametro no título
+            $("#tituloParametro").text("Parâmetro: " + nomeParametro);
+
+            // executando o modal
+            runTableItens(idParametro);
         });
     </script>
 @stop

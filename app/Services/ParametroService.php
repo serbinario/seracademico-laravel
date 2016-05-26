@@ -2,6 +2,7 @@
 
 namespace Seracademico\Services;
 
+use Seracademico\Repositories\ItemParametroRepository;
 use Seracademico\Repositories\ParametroRepository;
 use Seracademico\Entities\Parametro;
 //use Carbon\Carbon;
@@ -14,11 +15,18 @@ class ParametroService
     private $repository;
 
     /**
-     * @param ParametroRepository $repository
+     * @var ItemParametroRepository
      */
-    public function __construct(ParametroRepository $repository)
+    private $itemRepository;
+
+    /**
+     * @param ParametroRepository $repository
+     * @param ItemParametroRepository $itemRepository
+     */
+    public function __construct(ParametroRepository $repository, ItemParametroRepository $itemRepository)
     {
-        $this->repository = $repository;
+        $this->repository     = $repository;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -119,16 +127,12 @@ class ParametroService
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param $id
+     * @return int
      */
-    public function tratamentoDatas(array &$data) : array
+    public function deleteItem($id)
     {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
-
-         #retorno
-         return $data;
+        return $this->itemRepository->delete($id);
     }
 
 }

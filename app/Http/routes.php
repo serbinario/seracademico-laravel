@@ -25,6 +25,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'ParametroController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@update']);
+
+            Route::group(['prefix' => 'itens', 'as' => 'itens.'], function () {
+                Route::get('grid/{idParametro}', ['as' => 'grid', 'uses' => 'ParametroController@gridItens']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'ParametroController@deleteItem']);
+            });
         });
 
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
