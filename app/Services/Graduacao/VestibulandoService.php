@@ -296,18 +296,25 @@ class VestibulandoService
      */
     public function tratamentoInscricao(array &$data, $id = "") : array
     {
+        # Variáveis
+        $idVestibular = 0;
+
         # Validando o parâmetro
         if(isset($data['gerar_inscricao']) && $data['gerar_inscricao'] == 1) {
             if($id) {
                 $vestibulando = $this->repository->find($id);
+                $idVestibular = $vestibulando->vestibular->id;
+
                 if($vestibulando->gerar_inscricao == 1) {
                     unset($data['gerar_inscricao']);
                     return $data;
                 }
+            } else {
+                $idVestibular = $data['vestibular_id'];
             }
 
             # Gerando a inscrição
-            $data['inscricao'] = $this->gerarInscricao();
+            $data['inscricao'] = $this->gerarInscricao($idVestibular);
         }
 
         # retorno
@@ -317,13 +324,24 @@ class VestibulandoService
     /**
      * @return string
      */
-    public function gerarInscricao()
+    public function gerarInscricao($idVestibular)
     {
-        # Recuperndo a data atual
-        $dataNow = new \DateTime('now');
+        # Recuperando o vestibular
+        $objVestibular    = $this->vestibularRepository->find($idVestibular);
+        $lastVestibulando = $objVestibular->vestibulandos->last();
 
-        # Retorno
-        return $dataNow->format('YmdHis');
+        # Verificando se o vestibular possui vestibulando
+        if(!$lastVestibulando) {
+            return '001';
+        }
+
+        # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
+        # para nova inscrição
+        $lastIncricao = (int) $lastVestibulando->inscricao;
+        $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
+
+        # retorno
+        return $newInscricao;
     }
 
     /**

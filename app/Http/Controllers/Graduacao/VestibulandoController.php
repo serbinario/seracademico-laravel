@@ -87,7 +87,7 @@ class VestibulandoController extends Controller
                 'pessoas.nome',
                 'pessoas.cpf',
                 'pessoas.celular',
-                'fac_vestibulandos.inscricao',
+                \DB::raw('IF(fac_vestibulandos.inscricao,CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao), "Pendente") as inscricao'),
                 'curso1.nome as nomeCurso1',
                 'curso2.nome as nomeCurso2',
                 'curso3.nome as nomeCurso3',
