@@ -334,7 +334,7 @@ class VestibulandoService
 
         # Verificando se o vestibular possui vestibulando
         if(!$lastVestibulando) {
-            return '001';
+            return '0001';
         }
 
         # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
