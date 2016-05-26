@@ -111,7 +111,7 @@ class VestibulandoService
         $endereco  = null;
 
         # Verificando se a pesso já existe
-        if($objPessoa) {
+        if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
             $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
@@ -337,7 +337,7 @@ class VestibulandoService
             throw new \Exception('Vestibular não existe');
         }
 
-        # Verificando se o aluno já possui notas
+        # Verificando se o vestibulando já possui notas
         if(count($vestibulando->notasVestibular) > 0) {
             return false;
         }
@@ -359,7 +359,7 @@ class VestibulandoService
 
         # Criando as notas dos alunos
         foreach ($materias as $materia) {
-            $aluno->notasVestibular()->create(['materia_id' => $materia->id]);
+            $vestibulando->notasVestibular()->create(['materia_id' => $materia->id]);
         }
 
         # Retorno
