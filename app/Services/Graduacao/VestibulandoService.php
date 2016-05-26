@@ -331,7 +331,7 @@ class VestibulandoService
         # Recuperando o vestibular
         $objVestibular    = $this->vestibularRepository->find($idVestibular);
         $lastVestibulando = $objVestibular->vestibulandos->last(function ($key, $value) use ($idVestibulando) {
-            return $value->id != $idVestibulando;
+            return ($value->id != $idVestibulando && $value->inscricao != "");
         });
 
         # Verificando se o vestibular possui vestibulando
