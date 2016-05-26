@@ -134,10 +134,10 @@
                     "data":           null,
                     "defaultContent": ''
                 },
-                {data: 'nome', name: 'fac_vestibulandos.nome'},
+                {data: 'nome', name: 'pessoas.nome'},
                 {data: 'inscricao', name: 'fac_vestibulandos.inscricao'},
-                {data: 'celular', name: 'fac_vestibulandos.celular'},
-                {data: 'cpf', name: 'fac_vestibulandos.cpf'},
+                {data: 'celular', name: 'pessoas.celular'},
+                {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'vestibular', name: 'fac_vestibulares.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
