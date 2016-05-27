@@ -246,7 +246,36 @@
                                 message: Lang.get('validation.required', { attribute: 'Identidade' })
                             }
                         }
+                    },
+                    'vestibular_id': {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Vestibular' })
+                            }
+                        }
+                    },
+                    'data_insricao_vestibular': {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
+                            }
+                        }
+                    },
+                    'primeira_opcao_curso_id': {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
+                            }
+                        }
+                    },
+                    'primeira_opcao_turno_id': {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
+                            }
+                        }
                     }
+
                 },
             });
         </script>
