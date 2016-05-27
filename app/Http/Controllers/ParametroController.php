@@ -196,7 +196,7 @@ class ParametroController extends Controller
             $dados = $this->service->findItem($id);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, compact('dados')]);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados ]);
         } catch (\Throwable $e) { dd($e);
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
