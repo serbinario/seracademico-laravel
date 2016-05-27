@@ -29,6 +29,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::group(['prefix' => 'itens', 'as' => 'itens.'], function () {
                 Route::get('grid/{idParametro}', ['as' => 'grid', 'uses' => 'ParametroController@gridItens']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'ParametroController@deleteItem']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@editItem']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@updateItem']);
             });
         });
 

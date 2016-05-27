@@ -2,6 +2,7 @@
 
 namespace Seracademico\Services;
 
+use Seracademico\Entities\ItemParametro;
 use Seracademico\Repositories\ItemParametroRepository;
 use Seracademico\Repositories\ParametroRepository;
 use Seracademico\Entities\Parametro;
@@ -124,6 +125,45 @@ class ParametroService
 
          #retorno
          return $result;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findItem($id)
+    {
+        #Recuperando o registro no banco de dados
+        $item = $this->itemRepository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$item) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $item;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return mixed
+     */
+    public function updateItem(array $data, int $id) : ItemParametro
+    {
+        #Atualizando no banco de dados
+        $item = $this->itemRepository->update($data, $id);
+
+
+        #Verificando se foi atualizado no banco de dados
+        if(!$item) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $item;
     }
 
     /**

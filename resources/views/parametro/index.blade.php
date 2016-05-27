@@ -41,10 +41,12 @@
 
     <!-- Modais -->
     @include('parametro.modal_itens')
+    @include('parametro.modal_itens_update')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/parametro/modal_itens.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/parametro/modal_itens_update.js') }}"></script>
     <script type="text/javascript">
         var table = $('#parametro-grid').DataTable({
             processing: true,

@@ -90,7 +90,7 @@ class ParametroController extends Controller
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a id="btnEditarItensParametros" class="btn-floating"><i class="material-icons">edit</i></a></li>
-                            <li><a id="btnRemoverItensParametros" class="btn-floating"><i class="material-icons">delete</i></a></li>
+                           <!-- <li><a id="btnRemoverItensParametros" class="btn-floating"><i class="material-icons">delete</i></a></li> -->
                         </ul>
                      </div>';
 
@@ -182,6 +182,43 @@ class ParametroController extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function editItem($id)
+    {
+        try {
+            #Executando a ação
+            $dados = $this->service->findItem($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, compact('dados')]);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function updateItem(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->updateItem($data, $id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Alteração realizada com sucesso!']);
+        } catch (\Throwable $e) { dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 

@@ -11,10 +11,6 @@
                     <div class="col-md-6">
                         <h2 style="margin-bottom: 10px;" id="tituloParametro"></h2>
                     </div>
-
-                    <div class="col-md-6">
-                        <button style="margin-top: 10px;" class="btn btn-primary pull-right" id="btnAddItesParametros" style="margin-bottom: 3%;">Novo Item</button>
-                    </div>
                 </div>
 
                 <div class="row">
