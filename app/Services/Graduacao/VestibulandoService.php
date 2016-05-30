@@ -2,9 +2,11 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Entities\Graduacao\Vestibulando;
 use Seracademico\Entities\Graduacao\VestibulandoNotaVestibular;
 use Seracademico\Repositories\EnderecoRepository;
+use Seracademico\Repositories\Graduacao\AlunoRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
 use Seracademico\Repositories\Graduacao\VestibularRepository;
@@ -38,29 +40,33 @@ class VestibulandoService
     private $pessoaRepository;
 
     /**
-     * @var string
+     * @var AlunoRepository
      */
-    private $destinationPath = "images/";
+    private $alunoRepository;
 
     /**
+     * VestibulandoService constructor.
      * @param PessoaRepository $pessoaRepository
      * @param VestibulandoRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param VestibularRepository $vestibularRepository
      * @param VestibulandoNotaVestibularRepository $notaRepository
+     * @param AlunoRepository $alunoRepository
      */
     public function __construct(
         PessoaRepository $pessoaRepository,
         VestibulandoRepository $repository,
         EnderecoRepository $enderecoRepository,
         VestibularRepository $vestibularRepository,
-        VestibulandoNotaVestibularRepository $notaRepository)
+        VestibulandoNotaVestibularRepository $notaRepository,
+        AlunoRepository $alunoRepository)
     {
         $this->repository           = $repository;
         $this->pessoaRepository     = $pessoaRepository;
         $this->enderecoRepository   = $enderecoRepository;
         $this->vestibularRepository = $vestibularRepository;
         $this->notaRepository       = $notaRepository;
+        $this->alunoRepository      = $alunoRepository;
     }
 
     /**
@@ -82,6 +88,7 @@ class VestibulandoService
             'pessoa.profissao',
             'pessoa.corRaca',
             'pessoa.ufNascimento',
+            'aluno'
         ];
 
         $vestibulando = $this->repository->with($relacionamentos)->find($id);
@@ -94,6 +101,7 @@ class VestibulandoService
         #retorno
         return $vestibulando;
     }
+    
 
     /**
      * @param array $data
@@ -441,7 +449,7 @@ class VestibulandoService
     {
         # Recuperando o vestibulando e o currículo
         $vestibulando = $this->repository->find($idVestibulando);
-        $curriculo    = Entities\Graduacao\Curriculo::byCurso($dados['curso_id']);
+        $curriculo    = Curriculo::byCurso($dados['curso_id']);
 
         # Verificando se o vestibulando existe
         if(!$vestibulando && !$curriculo) {
@@ -451,27 +459,19 @@ class VestibulandoService
         # Regra de negócio do currículo
         unset($dados['curso_id']);
         $dados['curriculo_id'] = $curriculo[0]->id;
-        $dados['situacao_id']  = 3;
-        $dados['periodo']      = 1;
 
-        #Regrade negócio matrícula
-        $dataNow = new \DateTime('now');
-        $dados['matricula']    = $dataNow->format('YmdHis');
+        # Regra de negócio da data
+        $dados['data_transferencia'] = new \DateTime('now');
 
-        #atualizando o matriculando
-        $vestibulando->situacao_id = $dados['situacao_id'];
-        $vestibulando->periodo     = $dados['periodo'];
-        $vestibulando->matricula   = $dados['matricula'];
-        $vestibulando->save();
+        # Regra de negócio de pessoa
+        $dados['pessoa_id'] = $vestibulando->pessoa->id;
 
-
-        # Atualizando a inclusão
-        $inclusao = $vestibulando->inclusao;
-        $inclusao->curriculo_id = $dados['curriculo_id'];
-        $inclusao->forma_admissao_id = $dados['forma_admissao_id'];
-        $inclusao->data_inclusao = $dados['data_inclusao'];
-        $inclusao->turno_id = $dados['turno_id'];
-        $inclusao->save();
+        # Verificando se o aluno já foi transferido
+        if($vestibulando->aluno) {
+            $this->alunoRepository->update($vestibulando->aluno->id, $dados);
+        } else {
+            $this->alunoRepository->create($dados);
+        }
 
         #retorno
         return true;

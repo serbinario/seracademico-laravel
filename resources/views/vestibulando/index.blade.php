@@ -117,6 +117,7 @@
                     '</table>';
         }
 
+        // criação da grid principal
         var table = $('#vestibulando-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -143,13 +144,16 @@
             ]
         });
 
+        // Função do submit do search da grid principal
         $('#search-form').on('submit', function(e) {
             table.draw();
             e.preventDefault();
         });
 
+        // array de detalhes da grid
         var detailRows = [];
 
+        // evento para criação dos detalhes da grid
         $('#vestibulando-grid tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = table.row( tr );

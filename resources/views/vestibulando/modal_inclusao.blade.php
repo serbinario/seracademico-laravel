@@ -31,12 +31,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="data_inclusao">Data</label>
-                                <input type="text" class="form-control datepicker" name="data_inclusao" id="data_inclusao">
-                            </div>
-                        </div>
+                        {{--<div class="row">--}}
+                            {{--<div class="form-group col-md-6">--}}
+                                {{--<label for="data_inclusao">Data</label>--}}
+                                {{--<input type="text" class="form-control datepicker" name="data_inclusao" id="data_inclusao">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                 </div>
             </div>
             <div class="modal-footer">

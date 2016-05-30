@@ -51,8 +51,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             Route::group(['prefix' => 'inclusao', 'as' => 'inclusao.'], function () {
-                Route::post('edit/{idVestibulando}', ['as' => 'edit', 'uses' => 'VestibulandoController@editInclusao']);
-                Route::post('update/{idVestibulando}', ['as' => 'update', 'uses' => 'VestibulandoController@updateInclusao']);
+                Route::post('edit/{idVestibulando}', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@editInclusao']);
+                Route::post('update/{idVestibulando}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@updateInclusao']);
             });
         });
 

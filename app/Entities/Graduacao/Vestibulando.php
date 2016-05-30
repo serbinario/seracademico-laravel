@@ -104,4 +104,12 @@ class Vestibulando extends Model implements Transformable
     {
         return $this->belongsToMany(HorarioDisciplinaTurma::class, "alunos_horarios", "aluno_id", "horario_id");
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function aluno()
+    {
+        return $this->hasOne(Aluno::class, 'vestibulando_id');
+    }
 }

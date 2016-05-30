@@ -301,23 +301,15 @@ class VestibulandoController extends Controller
             $vestibulando = $this->service->find($idVestibulando);
             $dadosRetorno = [];
 
-            # Validando se existe uma inclusão cadastrada
-            if(!$vestibulando->inclusao) {
-                $inclusao = $vestibulando->inclusao()->create(['data_inclusao'=>null]);
-            } else {
-                $inclusao = $vestibulando->inclusao;
-            }
-
             # Populando o array de retorno
-            $dadosRetorno['curso_id'] = isset($inclusao->curriculo->id) ? $inclusao->curriculo->curso->id : null;
-            $dadosRetorno['turno_id'] = isset($inclusao->turno->id) ? $inclusao->turno->id : null;
-            $dadosRetorno['data_inclusao'] = $inclusao->data_inclusao;
-            $dadosRetorno['forma_admissao_id'] = isset($inclusao->formaAdmissao->id) ? $inclusao->formaAdmissao->id : null;
-
+            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculo->id) ? $vestibulando->aluno->curriculo->id : null;
+            $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
+            $dadosRetorno['data_inclusao'] = isset($vestibulando->aluno->data_transferencia) ? $vestibulando->aluno->data_transferencia : null;
+            $dadosRetorno['forma_admissao_id'] = isset($vestibulando->aluno->formaAdmissao->id) ? $vestibulando->aluno->formaAdmissao->id : null;
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dadosRetorno]);
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {dd($e->getMessage());
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
