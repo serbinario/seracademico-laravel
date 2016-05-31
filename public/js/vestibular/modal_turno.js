@@ -11,8 +11,8 @@ function loadTableTurno (idVestibularCurso) {
         ajax: "/index.php/seracademico/vestibular/curso/turno/grid/" + idVestibularCurso,
         columns: [
             {data: 'nome', name: 'fac_turnos.nome'},
-            {data: 'descricao', name: 'vestibular_curso_turno.descricao'},
-            {data: 'qtd_vagas', name: 'vestibular_curso_turno.qtd_vagas'},
+            {data: 'descricao', name: 'fac_vestibular_curso_turno.descricao'},
+            {data: 'qtd_vagas', name: 'fac_vestibular_curso_turno.qtd_vagas'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

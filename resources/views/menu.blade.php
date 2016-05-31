@@ -113,6 +113,14 @@
                                 <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
                                 <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
+                                <li>
+                                    <a href="#"><i class="material-icons">style</i> Relatórios <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="material-icons">collections_bookmark</i> Relatório 1</a></li>
+                                        <li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>
+                                    </ul>
+                                </li>
+
                             </ul>
                         </li>
                         @endpermission
@@ -158,6 +166,7 @@
                         <li><a href="{{ route('seracademico.banco.index') }}"><i class="material-icons">rate_review</i> Bancos</a></li>
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="material-icons">rate_review</i> Tipo de Vencimento</a></li>
                         <li><a href="{{ route('seracademico.taxa.index') }}"><i class="material-icons">rate_review</i> Taxas</a></li>
+                        <li><a href="{{ route('seracademico.parametro.index') }}"><i class="material-icons">rate_review</i> Configurações</a></li>
                     </ul>
                 </li>
                 @endrole

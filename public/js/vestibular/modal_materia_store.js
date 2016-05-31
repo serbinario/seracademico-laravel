@@ -9,7 +9,7 @@ function loadFieldsMateria()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Materia|uniqueVestibularCurso,' + idVestibularCurso
+            'Graduacao\\Materia|uniqueVestibularCurso,' + idVestibularCurso
         ]
     };
 
@@ -21,7 +21,7 @@ function loadFieldsMateria()
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
-        if(retorno['materia'].length > 0) {
+        if(retorno['graduacao\\materia'].length > 0) {
             builderHtmlFieldsMateria(retorno);
         } else {
             // Retorno caso não matéria disponível
@@ -40,9 +40,9 @@ function builderHtmlFieldsMateria (dados) {
     var htmlMateria     = "";
 
     // Percorrendo o array de disciplinacurriculo
-    for(var i = 0; i < dados['materia'].length; i++) {
+    for(var i = 0; i < dados['graduacao\\materia'].length; i++) {
         // Criando as options
-        htmlMateria += "<option value='" + dados['materia'][i].id + "'>" + dados['materia'][i].nome + "</option>";
+        htmlMateria += "<option value='" + dados['graduacao\\materia'][i].id + "'>" + dados['graduacao\\materia'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de período

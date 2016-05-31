@@ -27,7 +27,7 @@
                 </div>
             @endif
             {!! Form::open(['route'=>'seracademico.vestibular.store', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormVestibular')
+                @include('tamplatesForms.graduacao.tamplateFormVestibular')
             {!! Form::close() !!}
         </div>
     </div>

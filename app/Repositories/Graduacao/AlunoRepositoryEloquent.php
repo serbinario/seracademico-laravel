@@ -28,11 +28,11 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
     *
     * @return mixed
     */
-    public function validator()
-    {
+    //public function validator()
+    //{
 
-        return AlunoValidator::class;
-    }
+    //    return AlunoValidator::class;
+    //}
 
 
     /**

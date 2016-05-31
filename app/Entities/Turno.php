@@ -27,10 +27,10 @@ class Turno extends Model implements Transformable
             ->select(['fac_turnos.id', 'fac_turnos.nome'])
             ->whereNotIn('fac_turnos.id', function ($query) use($value) {
                 return $query
-                    ->from('vestibular_curso_turno')
-                    ->select(['vestibular_curso_turno.turno_id'])
-                    ->join('vestibulares_cursos', 'vestibulares_cursos.id', '=', 'vestibular_curso_turno.vestibular_curso_id')
-                    ->where('vestibulares_cursos.id', $value)->get();
+                    ->from('fac_vestibular_curso_turno')
+                    ->select(['fac_vestibular_curso_turno.turno_id'])
+                    ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_turno.vestibular_curso_id')
+                    ->where('fac_vestibulares_cursos.id', $value)->get();
             });
     }
 

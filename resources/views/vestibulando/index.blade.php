@@ -32,6 +32,19 @@
         </div>
         <div class="ibox-content">
             <div class="row">
+                <div class="col-md-6">
+                    <form id="search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
                         <table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">
@@ -104,11 +117,17 @@
                     '</table>';
         }
 
+        // criação da grid principal
         var table = $('#vestibulando-grid').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.vestibulando.grid') !!}",
+            ajax: {
+                url: "{!! route('seracademico.vestibulando.grid') !!}",
+                data: function (d) {
+                    d.vestibular = $('select[name=vestibularSearch] option:selected').val();
+                }
+            },
             columns: [
                 {
                     "className":      'details-control',
@@ -116,17 +135,25 @@
                     "data":           null,
                     "defaultContent": ''
                 },
-                {data: 'nome', name: 'fac_alunos.nome'},
-                {data: 'inscricao', name: 'fac_alunos.inscricao'},
-                {data: 'celular', name: 'fac_alunos.celular'},
-                {data: 'cpf', name: 'fac_alunos.cpf'},
-                {data: 'vestibular', name: 'vestibulares.nome'},
+                {data: 'nome', name: 'pessoas.nome'},
+                {data: 'inscricao', name: 'fac_vestibulandos.inscricao'},
+                {data: 'celular', name: 'pessoas.celular'},
+                {data: 'cpf', name: 'pessoas.cpf'},
+                {data: 'vestibular', name: 'fac_vestibulares.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
+        // Função do submit do search da grid principal
+        $('#search-form').on('submit', function(e) {
+            table.draw();
+            e.preventDefault();
+        });
+
+        // array de detalhes da grid
         var detailRows = [];
 
+        // evento para criação dos detalhes da grid
         $('#vestibulando-grid tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = table.row( tr );
@@ -177,22 +204,5 @@
             // Executando a tabela de notas
             runInclusao();
         });
-    </script>
-
-    <script id="details-template" type="text/x-handlebars-template">
-        <table class="table">
-            <tr>
-                <td>Full name:</td>
-                <td>dsa</td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>dsa</td>
-            </tr>
-            <tr>
-                <td>Extra info:</td>
-                <td>And any further details here (images etc)...</td>
-            </tr>
-        </table>
     </script>
 @stop

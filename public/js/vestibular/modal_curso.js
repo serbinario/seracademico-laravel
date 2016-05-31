@@ -74,7 +74,7 @@ $('#select_curso').select2({
                 'fieldWhere':     'tipo_nivel_sistema_id',
                 'valueWhere':     '1',
                 'page':           params.page || 1,
-                'tableNotIn':     'vestibulares_cursos',
+                'tableNotIn':     'fac_vestibulares_cursos',
                 'culmnNotGet':    'curso_id',
                 'columnWhere':    'vestibular_id',
                 'valueNotWhere':   idVestibular,
@@ -136,6 +136,7 @@ $(document).on('click', '#btnIncluirCursos', function () {
     }).done(function (retorno) {
         swal(retorno.msg, "Click no botão abaixo!", "success");
         tableCurso.ajax.reload();
+        table.ajax.reload();
         $("#select_curso").select2("val", "");
     });
 });
@@ -159,5 +160,6 @@ $(document).on('click', '#removerCurso', function () {
         $("#btnAdicionarCursoMateria").attr("disabled", true);
         $("#btnAdicionarCursoTurno").attr("disabled", true);
         tableCurso.ajax.reload();
+        table.ajax.reload();
     });
 });

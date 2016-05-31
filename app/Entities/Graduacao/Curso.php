@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\TipoCurso;
-use Seracademico\Entities\Vestibular;
+use Seracademico\Entities\Graduacao\Vestibular;
 use Seracademico\Repositories\Graduacao\PrecoCursoRepository;
 use Seracademico\Uteis\SerbinarioDateFormat;
-use Seracademico\Entities\PivotVestibularCurso;
+use Seracademico\Entities\Graduacao\PivotVestibularCurso;
 
 class Curso extends Model implements Transformable
 {
@@ -87,7 +87,7 @@ class Curso extends Model implements Transformable
      */
     public function vestibulares()
     {
-        return $this->belongsToMany(Vestibular::class, 'vestibulares_cursos', 'curso_id', 'vestibular_id')
+        return $this->belongsToMany(Vestibular::class, 'fac_vestibulares_cursos', 'curso_id', 'vestibular_id')
             ->withPivot(['id']);;
     }
 
