@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Aluno;
+use Seracademico\Entities\Pessoa;
 
 class Emprestar extends Model implements Transformable
 {
@@ -14,7 +15,7 @@ class Emprestar extends Model implements Transformable
     protected $table    = 'bib_emprestimos';
 
     protected $fillable = [ 
-		'alunos_id',
+		'pessoas_id',
 		'codigo',
 		'data',
 		'data_devolucao',
@@ -22,9 +23,9 @@ class Emprestar extends Model implements Transformable
 		'tipo_emprestimo',
 	];
 
-	public function aluno()
+	public function pessoa()
 	{
-		return $this->belongsTo(Aluno::class, 'alunos_id');
+		return $this->belongsTo(Pessoa::class, 'pessoas_id');
 	}
 
 	public function emprestimoExemplar()

@@ -12,7 +12,7 @@ class EmprestarValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'alunos_id' =>  'required' ,
+			'pessoas_id' =>  'required' ,
 			'codigo' =>  '' ,
 			'data' =>  '' ,
 			'data_devolucao' =>  'required' ,

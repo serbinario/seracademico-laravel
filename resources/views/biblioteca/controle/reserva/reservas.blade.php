@@ -106,7 +106,7 @@
             function format(d) {
                 var acervo = d['reserva_exemplar'];
                 var tipoEmprestimo = d['tipo_emprestimo'];
-                var alunoId = d['alunos_id'];
+                var pessoaId = d['pessoas_id'];
                 var reservaId = d['id'];
                 var qtdExemplar = 0;
                 var qtdExemplarAll = 0;
@@ -124,7 +124,7 @@
 
                     //vericando quantidade exemplares por acervo
                     for(var j = 0; j < acervo[i]['exemplares'].length; j++){
-                        if(acervo[i]['exemplares'][j]['edicao'] == acervo[i]['pivot']['edicao'] && acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
+                        if((acervo[i]['exemplares'][j]['edicao'] == acervo[i]['pivot']['edicao'] || acervo[i]['exemplares'][j]['edicao'] == "") && acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
                                 (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] == '0')){
                             qtdExemplar++;
                             qtdExemplarAll = qtdExemplarAll + qtdExemplar;
@@ -158,7 +158,7 @@
 
                 html += "</table>";
                 html += "<input type='hidden' name='tipo_emprestimo' value='"+tipoEmprestimo+"'>";
-                html += "<input type='hidden' name='id_aluno' value='"+alunoId+"'>";
+                html += "<input type='hidden' name='id_pessoa' value='"+pessoaId+"'>";
                 html += "<input type='hidden' name='id_reserva' value='"+reservaId+"'>";
                 if(qtdExemplarAll > 0 || qtdExempEmprestado < acervo.length) {
                     html += "<input type='submit' class='btn btn-primary' value='Confirmar'>";
@@ -177,13 +177,13 @@
                     {
                         "className":      'details-control',
                         "orderable":      false,
-                        "data":           'fac_alunos.nome',
+                        "data":           'pessoas.nome',
                         "defaultContent": ''
                     },
                     {data: 'codigo', name: 'bib_reservas.codigo'},
                     {data: 'data', name: 'bib_reservas.data'},
                     {data: 'data_vencimento', name: 'bib_reservas.data_vencimento'},
-                    {data: 'nome', name: 'fac_alunos.nome'},
+                    {data: 'nome', name: 'pessoas.nome'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });

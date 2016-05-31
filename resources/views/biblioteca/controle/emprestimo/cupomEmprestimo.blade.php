@@ -8,11 +8,11 @@
         <hr style="width: 100%">
         <table style="width: 100%">
             <tr>
-                <td>Aluno: {{$result->aluno->nome}}</td>
-                <td>Matrícula: {{$result->aluno->matricula}}</td>
+                <td>Aluno: {{$result->pessoa->nome}}</td>
+                <td>Matrícula: {{--{{$result->aluno->matricula}}--}}</td>
             </tr>
             <tr>
-                <td>Telefone: {{$result->aluno->celular}}</td>
+                <td>Telefone: {{$result->pessoa->celular}}</td>
             </tr>
             <tr>
                 <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>
@@ -53,11 +53,11 @@
 
         <table style="width: 100%">
             <tr>
-                <td>Aluno: {{$result->aluno->nome}}</td>
-                <td>Matrícula: {{$result->aluno->matricula}}</td>
+                <td>Aluno: {{$result->pessoa->nome}}</td>
+                <td>Matrícula: {{--{{$result->aluno->matricula}}--}}</td>
             </tr>
             <tr>
-                <td>Telefone: {{$result->aluno->celular}}</td>
+                <td>Telefone: {{$result->pessoa->celular}}</td>
             </tr>
             <tr>
                 <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>

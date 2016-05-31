@@ -35,7 +35,7 @@ class ReservaController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Aluno'
+        'Pessoa'
     ];
 
     /**
@@ -92,36 +92,6 @@ class ReservaController extends Controller
             return $html;
         })->make(true);
     }
-
-    /*public function grid()
-    {
-        #Criando a consulta
-        $rows = \DB::table('bib_arcevos')
-            ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-            //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
-            //->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
-            ->where('bib_exemplares.situacao_id', '=', '5')
-            ->where('bib_exemplares.situacao_id', '!=', '1')
-            ->where('bib_exemplares.situacao_id', '!=', '3')
-            ->where('bib_exemplares.situacao_id', '!=', '2')
-            ->where('bib_exemplares.exemp_principal', '!=', '1')
-            ->select(
-                'bib_arcevos.titulo',
-                'bib_arcevos.id',
-                'bib_arcevos.cutter',
-                'bib_exemplares.edicao',
-                'bib_arcevos.subtitulo as subtitulo'
-            )
-            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn');
-
-        #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
-
-            # Retorno
-            return $html;
-        })->make(true);
-    }*/
 
     /**
      * @param Request $request
@@ -198,12 +168,12 @@ class ReservaController extends Controller
         //$this->data    = $dataObj->format('d/m/Y');
 
         #Criando a consulta
-        $rows = Reserva::join('fac_alunos', 'fac_alunos.id', '=', 'bib_reservas.alunos_id')
+        $rows = Reserva::join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
             ->with(['reservaExemplar.exemplares'])
             ->select(
                 ['bib_reservas.codigo',
                     'bib_reservas.*',
-                    'fac_alunos.nome',
+                    'pessoas.nome',
                     \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
                     \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
                 ]);
@@ -215,9 +185,9 @@ class ReservaController extends Controller
                 $html .= '<div class="fixed-action-btn horizontal">
                       <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                        <ul>
-                       <li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">delete</i></a></li>';
+                       <li><a class="btn-floating excluir" href="" title="Devolver"><i class="material-icons">delete</i></a></li>';
                 //if($row->tipo_emprestimo == '1' && strtotime($row->data_devolucao) > strtotime($this->data)) {
-                    $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">edit</i></a></li>
+                    $html .= '<li><a class="btn-floating renovar" href="" title="Renovar"><i class="material-icons">edit</i></a></li>
                 </ul>
                 </div>';
                // }
