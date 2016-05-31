@@ -155,7 +155,7 @@
                   //  }
                     qtdExemplar = 0;
                  }
-                
+
                 html += "</table>";
                 html += "<input type='hidden' name='tipo_emprestimo' value='"+tipoEmprestimo+"'>";
                 html += "<input type='hidden' name='id_aluno' value='"+alunoId+"'>";
