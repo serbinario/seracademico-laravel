@@ -7,6 +7,7 @@ use Seracademico\Entities\Graduacao\Vestibulando;
 use Seracademico\Entities\Graduacao\VestibulandoNotaVestibular;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
+use Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
 use Seracademico\Repositories\Graduacao\VestibularRepository;
@@ -45,6 +46,11 @@ class VestibulandoService
     private $alunoRepository;
 
     /**
+     * @var VestibulandoFinanceiroRepository
+     */
+    private $financeiroRepository;
+
+    /**
      * VestibulandoService constructor.
      * @param PessoaRepository $pessoaRepository
      * @param VestibulandoRepository $repository
@@ -52,6 +58,7 @@ class VestibulandoService
      * @param VestibularRepository $vestibularRepository
      * @param VestibulandoNotaVestibularRepository $notaRepository
      * @param AlunoRepository $alunoRepository
+     * @param VestibulandoFinanceiroRepository $financeiroRepository
      */
     public function __construct(
         PessoaRepository $pessoaRepository,
@@ -59,7 +66,8 @@ class VestibulandoService
         EnderecoRepository $enderecoRepository,
         VestibularRepository $vestibularRepository,
         VestibulandoNotaVestibularRepository $notaRepository,
-        AlunoRepository $alunoRepository)
+        AlunoRepository $alunoRepository,
+        VestibulandoFinanceiroRepository $financeiroRepository)
     {
         $this->repository           = $repository;
         $this->pessoaRepository     = $pessoaRepository;
@@ -67,6 +75,7 @@ class VestibulandoService
         $this->vestibularRepository = $vestibularRepository;
         $this->notaRepository       = $notaRepository;
         $this->alunoRepository      = $alunoRepository;
+        $this->financeiroRepository = $financeiroRepository;
     }
 
     /**
@@ -77,7 +86,6 @@ class VestibulandoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-
         $relacionamentos = [
             'pessoa.instituicaoEscolar',
             'pessoa.endereco.bairro.cidade.estado',
@@ -501,5 +509,73 @@ class VestibulandoService
 
         # Retorno
         return $vestibulando;
+    }
+
+    /**
+     * @param array $dados
+     * @return bool
+     */
+    public function storeDebitosAbertos(array $dados)
+    {
+        # Regra de negócio para págo
+        $dados['pago'] = 0;
+
+        # Cadastrando
+        $this->financeiroRepository->create($dados);
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param array $dados
+     * @return bool
+     */
+    public function updateDebitosAbertos(array $dados, int $id)
+    {
+            # Cadastrando
+        $this->financeiroRepository->update($dados, $id);
+
+        # Retorno
+        return true;
+    }
+
+    public function findDebito(int $id)
+    {
+        #Recuperando o registro no banco de dados
+        $relacionamentos = [
+            'taxa'
+        ];
+
+        $debito = $this->financeiroRepository->with($relacionamentos)->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$debito) {
+            throw new \Exception('Vestibulando não encontrado!');
+        }
+
+        #retorno
+        return $debito;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteDebitosAbertos(int $id)
+    {
+        # Recuperando o débito
+        $debito = $this->financeiroRepository->find($id);
+
+        # Verificando se existe
+        if(!$debito) {
+             throw new \Exception('Débito não encontrado');
+         }
+
+        # Transação de remoção
+        $this->financeiroRepository->delete($id);
+
+        # retorno
+        return true;
     }
 }

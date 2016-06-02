@@ -76,6 +76,7 @@ class VestibulandoController extends Controller
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
+            ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando.id', '=', 'fac_vestibulandos.id')
             ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
             ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
             ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
@@ -103,6 +104,10 @@ class VestibulandoController extends Controller
                 if ($request->has('vestibular')) {
                     $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
                 }
+
+                if ($request->has('pago')) {
+                    $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
+                }
             })
             ->addColumn('action', function ($aluno) {
                 return '<div class="fixed-action-btn horizontal">
@@ -111,6 +116,7 @@ class VestibulandoController extends Controller
                             <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
                             <li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>
                             <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
+                            <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
                         </ul>
                         </div>';
             })->make(true);

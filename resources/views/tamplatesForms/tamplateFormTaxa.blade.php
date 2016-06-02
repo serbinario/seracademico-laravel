@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-10">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome *') !!}
                     {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
@@ -12,6 +12,13 @@
                 <div class="form-group">
                     {!! Form::label('codigo', 'Código *') !!}
                     {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('valor', 'Valor *') !!}
+                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
         </div>

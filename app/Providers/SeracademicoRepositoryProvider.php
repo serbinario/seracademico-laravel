@@ -394,5 +394,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\ItemParametroRepository::class,
             \Seracademico\Repositories\ItemParametroRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepository::class,
+            \Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepositoryEloquent::class
+        );
 	}
 }

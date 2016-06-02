@@ -37,6 +37,11 @@
                         <div class="form-group">
                             {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Págos', 1 => 'Págos'] ), null, array('class' => 'form-control')) !!}
+                        </div>
+
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Pesquisar</button>
                         </div>
@@ -80,12 +85,18 @@
     @include('vestibulando.modal_notas')
     @include('vestibulando.modal_notas_update')
     @include('vestibulando.modal_inclusao')
+    @include('vestibulando.modal_debitos')
+    @include('vestibulando.modal_debitos_abertos_store')
+    @include('vestibulando.modal_debitos_abertos_update')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas_update.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_inclusao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_store.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_update.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format ( d ) {
@@ -126,6 +137,7 @@
                 url: "{!! route('seracademico.vestibulando.grid') !!}",
                 data: function (d) {
                     d.vestibular = $('select[name=vestibularSearch] option:selected').val();
+                    d.pago = $('select[name=pagoSearch] option:selected').val();
                 }
             },
             columns: [
@@ -196,13 +208,22 @@
             runTableNotas(idVestibulando);
         });
 
-        // Evento para modal de notas
+        // Evento para modal de transfência de vestibulando
         $(document).on('click', '#inclusao', function () {
             // Recuperando o id do vestibulando
             idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
 
             // Executando a tabela de notas
             runInclusao();
+        });
+
+        // Evento para modal de financeiro
+        $(document).on('click', '#financeiro', function () {
+            // Recuperando o id do vestibulando
+            idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
+
+            // Executando a tabela de notas
+            runFinanceiro(idVestibulando);
         });
     </script>
 @stop
