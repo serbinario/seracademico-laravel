@@ -131,4 +131,27 @@ class TaxaService
          return $data;
     }
 
+    /**
+     * @param array $dados
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getTaxas(array $dados)
+    {
+        # Verificando a array de entrada
+        if(!isset($dados['idTipoTaxa']) && !is_numeric($dados['idTipoTaxa'])) {
+            throw new \Exception('Valores inválidos');
+        }
+
+        # Recuperando a taxa
+        $taxas = $this->repository->findWhere(['tipo_taxa_id' => $dados['idTipoTaxa']]);
+        
+        # Verificando a existência das taxas
+        if(count($taxas) == 0) {
+            throw new \Exception('Nenhuma taxa foi encontrada');
+        }
+
+        # retorno
+        return $taxas;
+    }
 }

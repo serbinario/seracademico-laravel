@@ -76,7 +76,9 @@ class VestibulandoController extends Controller
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
-            ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando.id', '=', 'fac_vestibulandos.id')
+            ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+            ->leftJoin('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+            ->leftJoin('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
             ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
             ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
             ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
@@ -106,7 +108,8 @@ class VestibulandoController extends Controller
                 }
 
                 if ($request->has('pago')) {
-                    $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
+                    $query->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
+                    $query->where('tipos_taxas.id', '=', 1);
                 }
             })
             ->addColumn('action', function ($aluno) {

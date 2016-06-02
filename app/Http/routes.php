@@ -367,6 +367,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'TaxaController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TaxaController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'TaxaController@update']);
+            Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'TaxaController@getTaxas']);
         });
 
         Route::group(['prefix' => 'vestibular', 'as' => 'vestibular.'], function () {

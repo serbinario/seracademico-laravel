@@ -44,13 +44,14 @@ function builderHtmlFieldsDebitosEditar (dados) {
     }).done(function (retorno) {
         if (retorno.success) {
             // Setando os valores do model no formulário
+            $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
             $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>'); 
             $('#vencimento_editar').val(retorno.data.vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
-            console.log(retorno.data.pago);
+            
             // Tratando a baixa
             if(retorno.data.pago == 1) {
                 $('#pago').attr('checked', true).attr('disabled', true);
@@ -74,7 +75,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
     var mes_referencia = $('#mes_referencia_editar').val();
     var ano_referencia = $('#ano_referencia_editar').val();
     var observacao     = $('#observacao_editar').val();
-    var pago           = $('#pago').val();
+    var pago           = $('#pago:checked').val();
 
     // Dados ajax
     var dados = {

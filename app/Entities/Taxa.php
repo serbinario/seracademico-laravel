@@ -16,6 +16,15 @@ class Taxa extends Model implements Transformable
     protected $fillable = [ 
 		'codigo',
 		'nome',
-        'valor'
+        'valor',
+        'tipo_taxa_id'
 	];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoTaxa()
+    {
+        return $this->belongsTo(TipoTaxa::class, 'tipo_taxa_id');
+    }
 }

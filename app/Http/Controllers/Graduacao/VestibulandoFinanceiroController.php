@@ -117,6 +117,38 @@ class VestibulandoFinanceiroController extends Controller
 
     /**
      * @param Request $request
+     * @return mixed
+     */
+    public function editDebitosAbertos($id)
+    {
+        try {
+            #Recuperando o aluno
+            $debito = $this->service->findDebito($id);
+            
+            # Preparando o array de retorno
+            $dados  = [
+                'tipoTaxaId' => $debito->taxa->tipoTaxa->id,
+                'tipoTaxaNome' => $debito->taxa->tipoTaxa->nome,
+                'taxaId' => $debito->taxa->id,
+                'taxaNome' => $debito->taxa->nome,
+                'vencimento' => $debito->vencimento,
+                'valor_debito' => $debito->valor_debito,
+                'mes_referencia' => $debito->mes_referencia,
+                'ano_referencia' => $debito->ano_referencia,
+                'observacao' => $debito->observacao,
+                'pago' => $debito->pago
+            ];
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
@@ -138,35 +170,9 @@ class VestibulandoFinanceiroController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $id
      * @return mixed
      */
-    public function editDebitosAbertos($id)
-    {
-        try {
-            #Recuperando o aluno
-            $debito  = $this->service->findDebito($id);
-
-            # Preparando o array de retorno
-            $dados = [
-                'taxaId' => $debito->taxa->id,
-                'taxaNome' => $debito->taxa->nome,
-                'vencimento' => $debito->vencimento,
-                'valor_debito' => $debito->valor_debito,
-                'mes_referencia' => $debito->mes_referencia,
-                'ano_referencia' => $debito->ano_referencia,
-                'observacao' => $debito->observacao,
-                'pago' => $debito->pago
-            ];
-
-            #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
-        } catch (\Throwable $e) {
-            #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-        }
-    }
-
     public function deleteDebitosAbertos($id)
     {
         try {

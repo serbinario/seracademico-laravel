@@ -215,8 +215,12 @@ class VestibulandoService
             //$model     = isset($expressao[2]) ? $expressao[2] : $model;
 
             if ($ajax) {
-                if(count($expressao) > 1) {
+                if(count($expressao) > 0) {
                     switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
                         case 2 :
                             #Recuperando o registro e armazenando no array
                             $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
@@ -540,11 +544,17 @@ class VestibulandoService
         return true;
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function findDebito(int $id)
     {
         #Recuperando o registro no banco de dados
         $relacionamentos = [
-            'taxa'
+            'taxa',
+            'taxa.tipoTaxa'
         ];
 
         $debito = $this->financeiroRepository->with($relacionamentos)->find($id);

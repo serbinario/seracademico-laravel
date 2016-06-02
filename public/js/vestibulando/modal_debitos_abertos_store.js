@@ -9,7 +9,7 @@ function loadFieldsDebitos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Taxa'
+            'TipoTaxa|withTaxas'
         ]
     };
 
@@ -21,11 +21,11 @@ function loadFieldsDebitos()
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
-        if(retorno['taxa'].length > 0) {
+        if(retorno['tipotaxa'].length > 0) {
             builderHtmlFieldsDebitos(retorno);
         } else {
             // Retorno caso não matéria disponível
-            swal("Desculpe não existe taxa disponível", "Click no botão abaixo!", "error");
+            swal("Desculpe não existe tipo de taxa disponível", "Click no botão abaixo!", "error");
         }
     });
 };
@@ -40,21 +40,55 @@ function builderHtmlFieldsDebitos (dados) {
     $('#observacao').val("");
 
     // Variáveis que armazenaram o html
-    var htmlTaxa = "";
+    var htmlTipoTaxa = "<option value=''>Selecione um tipo</option>";
 
     // Percorrendo o array de disciplinacurriculo
-    for(var i = 0; i < dados['taxa'].length; i++) {
+    for(var i = 0; i < dados['tipotaxa'].length; i++) {
         // Criando as options
-        htmlTaxa += "<option value='" + dados['taxa'][i].id + "'>" + dados['taxa'][i].nome + "</option>";
+        htmlTipoTaxa += "<option value='" + dados['tipotaxa'][i].id + "'>" + dados['tipotaxa'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de período
-    $("#taxa_id option").remove();
-    $("#taxa_id").append(htmlTaxa);
+    $("#tipo_taxa_id option").remove();
+    $("#tipo_taxa_id").append(htmlTipoTaxa);
 
     // Abrindo o modal de inserir disciplina
     $("#modal-debitos-abertos-store").modal({show : true});
 };
+
+// evento para carregar a taxa
+$(document).on('change', '#tipo_taxa_id', function () {
+    // recuperando o id dataxa
+    var idTipoTaxa = $(this).find('option:selected').val();
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/taxa/getTaxas',
+        data: {'idTipoTaxa' : idTipoTaxa},
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            // html da taxa
+            var htmlTaxa;
+
+            // Recarregando as grids
+            $.each(retorno.data, function (index, value) {
+                htmlTaxa += "<option value='" + value.id +"'>" + value.nome + "</option>";
+            });
+
+            // Removendo e adicionando os htmls
+            $("#taxa_id option").remove();
+            $("#taxa_id").append(htmlTaxa);
+        } else {
+            // Fechando a modal
+            $('#modal-debitos-abertos-store').modal('toggle');
+
+            // Retorno
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
 
 // Evento para salvar tabela de preços
 $('#btnDebitosAbertosSalvar').click(function() {

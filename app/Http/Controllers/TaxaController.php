@@ -26,7 +26,9 @@ class TaxaController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'TipoTaxa'
+    ];
 
     /**
     * @param TaxaService $service
@@ -155,4 +157,36 @@ class TaxaController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getTaxas(Request $request)
+    {
+        try {
+            # array de retorno
+            $arrayTaxas = [];
+
+            #Recuperando os dados da requisição
+            $dados = $request->all();
+
+            #Executando a ação
+            $taxas = $this->service->getTaxas($dados);
+
+            # Populando o array de retorno
+            $count = 0;
+            foreach($taxas as $taxa) {
+                $arrayTaxas[$count]['id'] = $taxa->id;
+                $arrayTaxas[$count]['nome'] = $taxa->nome;
+
+                # contador
+                $count++;
+            }
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $arrayTaxas]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }
