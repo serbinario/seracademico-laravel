@@ -7,6 +7,46 @@
 </head>
 
 <body>
-    <h3>Relatório 1</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Relatório de todos os Vestibulandos</h3>
+            <div class="table-responsive no-padding">
+                <table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Inscrição</th>
+                        <th>Telefones</th>
+                        <th>CPF</th>
+                        <th>Vestibular</th>
+                        <th>Financeiro</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($rows as $row)
+                            <tr>
+                                <td>{{ $row->nome }}</td>
+                                <td>{{ $row->inscricao }}</td>
+                                <td>{{ $row->celular  }}</td>
+                                <td>{{ $row->cpf }}</td>
+                                <td>{{ $row->vestibular }}</td>
+                                <td>{{ $row->financeiro }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Inscrição</th>
+                        <th>Telefones</th>
+                        <th>CPF</th>
+                        <th>Vestibular</th>
+                        <th>Financeiro</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

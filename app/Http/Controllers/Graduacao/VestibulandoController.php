@@ -72,7 +72,7 @@ class VestibulandoController extends Controller
     public function grid(Request $request)
     {
         #Criando a consulta
-        $alunos = \DB::table('fac_vestibulandos')
+        $vestibulandos = \DB::table('fac_vestibulandos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
@@ -85,6 +85,7 @@ class VestibulandoController extends Controller
             ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_vestibulandos.primeira_opcao_turno_id')
             ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
             ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
+            ->groupBy('fac_vestibulandos.id')
             ->select([
                 'fac_vestibulandos.id',
                 'pessoas.nome',
@@ -97,11 +98,13 @@ class VestibulandoController extends Controller
                 'turno1.nome as nomeTurno1',
                 'turno2.nome as nomeTurno2',
                 'turno3.nome as nomeTurno3',
-                'fac_vestibulares.nome as vestibular'
+                'fac_vestibulares.nome as vestibular',
+                'tipos_taxas.id as idTipoTaxa',
+                'fac_vestibulandos_financeiros.pago'
             ]);
 
         #Editando a grid
-        return Datatables::of($alunos)
+        return Datatables::of($vestibulandos)
             ->filter(function ($query) use ($request) {
                 if ($request->has('vestibular')) {
                     $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
@@ -112,16 +115,36 @@ class VestibulandoController extends Controller
                     $query->where('tipos_taxas.id', '=', 1);
                 }
             })
-            ->addColumn('action', function ($aluno) {
-                return '<div class="fixed-action-btn horizontal">
-                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>
-                            <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>
-                            <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
-                            <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
-                        </ul>
+            ->addColumn('action', function ($row) {
+                # inicio do html
+                $html = '<div class="fixed-action-btn horizontal">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>
+                                <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                         ';
+
+                # regra de negócio para transferir o vestibulando
+                # recuperando o vestibulando
+                $vestibulando = $this->service->find($row->id);
+
+                # Varrendo os débitos do vestibulando
+                foreach ($vestibulando->debitos as $debito) {
+                    # Verificando se a matrícula foi pága
+                    if($debito->pago && $debito->taxa->tipoTaxa->id == 2) {
+                        $html .= '<li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        break;
+                    }
+                }
+
+                # Fim do html
+                $html .= '
+                                <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
+                                <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
+                            </ul>
                         </div>';
+
+                # retorno
+                return $html;
             })->make(true);
     }
 

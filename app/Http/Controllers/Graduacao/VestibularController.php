@@ -204,7 +204,40 @@ class VestibularController extends Controller
      */
     public function relatorio1(Request $request)
     {
-        return \PDF::loadView('reports.vestibulares.relatorio1')->stream();
+        #Criando a consulta
+        $vestibulandos = \DB::table('fac_vestibulandos')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
+            ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+            ->leftJoin('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+            ->leftJoin('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
+            ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
+            ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
+            ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_vestibulandos.primeira_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
+            ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
+            ->groupBy('fac_vestibulandos.id')
+            ->select([
+                'fac_vestibulandos.id',
+                'pessoas.nome',
+                'pessoas.cpf',
+                'pessoas.celular',
+                \DB::raw('IF(fac_vestibulandos.inscricao,CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao), "Pendente") as inscricao'),
+                'curso1.nome as nomeCurso1',
+                'curso2.nome as nomeCurso2',
+                'curso3.nome as nomeCurso3',
+                'turno1.nome as nomeTurno1',
+                'turno2.nome as nomeTurno2',
+                'turno3.nome as nomeTurno3',
+                'fac_vestibulares.nome as vestibular',
+                'tipos_taxas.id as idTipoTaxa',
+                \DB::raw('IF(fac_vestibulandos_financeiros.pago, "Pago", "Não Pago") as financeiro')
+            ])->get();
+
+
+        return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $vestibulandos])->stream();
     }
 
     /**

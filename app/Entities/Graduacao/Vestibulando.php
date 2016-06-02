@@ -112,4 +112,12 @@ class Vestibulando extends Model implements Transformable
     {
         return $this->hasOne(Aluno::class, 'vestibulando_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function debitos()
+    {
+        return $this->hasMany(VestibulandoFinanceiro::class, 'vestibulando_id');
+    }
 }
