@@ -482,9 +482,17 @@ class VestibulandoService
         if($vestibulando->aluno) {
             $this->alunoRepository->update($vestibulando->aluno->id, $dados);
         } else {
-            $this->alunoRepository->create($dados);
-        }
+            # Número da matrícula
+            $now = new \DateTime('now');
+            $dados['matricula'] = $now->format('YmdHis');
 
+            # Transferindo para aluno
+            $aluno = $this->alunoRepository->create($dados);
+            
+            # matriculando o aluno
+            $aluno->semestres()->attach($vestibulando->vestibular->semestre->id, ['periodo' => 1]);
+        }        
+        
         #retorno
         return true;
     }
