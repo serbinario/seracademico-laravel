@@ -69,7 +69,7 @@
                 {!! Form::open(['route'=>'seracademico.biblioteca.storeEmprestimo', 'method' => "POST", 'id' => 'form', 'target' => '__blank' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
-                            {!! Form::select('alunos_id', (["" => "Selecione um aluno"] + $loadFields['aluno']->toArray()), null, array('class' => 'form-control', 'id' => 'aluno')) !!}
+                            {!! Form::select('pessoas_id', (["" => "Selecione uma pessoa"] + $loadFields['pessoa']->toArray()), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
                         </div>
                         <div class="form-group col-md-2">
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
@@ -198,8 +198,8 @@
 
         $(document).ready(function(){
             //consulta via select2 responsável
-            $("#aluno").select2({
-                placeholder: 'Selecione um aluno',
+            $("#pessoa").select2({
+                placeholder: 'Selecione uma pessoa',
                 minimumInputLength: 1,
                 width: 400,
                 ajax: {
@@ -211,7 +211,7 @@
                     data: function (params) {
                         return {
                             'search':     params.term, // search term
-                            'tableName':  'fac_alunos',
+                            'tableName':  'pessoas',
                             'fieldName':  'nome',
                             'page':       params.page
                         };

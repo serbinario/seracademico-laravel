@@ -42,7 +42,7 @@ class EmprestarController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Aluno'
+        'Pessoa'
     ];
 
     /**
@@ -172,12 +172,12 @@ class EmprestarController extends Controller
         $this->data    = $dataObj->format('d/m/Y');
 
         #Criando a consulta
-        $rows = Emprestar::join('fac_alunos', 'fac_alunos.id', '=', 'bib_emprestimos.alunos_id')
+        $rows = Emprestar::join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
             ->with(['emprestimoExemplar.acervo'])
             ->select(
                 ['bib_emprestimos.codigo',
                     'bib_emprestimos.*',
-                    'fac_alunos.nome',
+                    'pessoas.nome',
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),

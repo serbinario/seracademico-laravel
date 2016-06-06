@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Aluno;
+use Seracademico\Entities\Pessoa;
 
 class Reserva extends Model implements Transformable
 {
@@ -17,13 +18,13 @@ class Reserva extends Model implements Transformable
 		'codigo',
 		'data',
 		'data_vencimento',
-		'alunos_id',
+		'pessoas_id',
 		'tipo_emprestimo',
 	];
 
-	public function aluno()
+	public function pessoa()
 	{
-		return $this->belongsTo(Aluno::class, 'alunos_id');
+		return $this->belongsTo(Pessoa::class, 'pessoas_id');
 	}
 
 	public function reservaExemplar()

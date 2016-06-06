@@ -136,7 +136,7 @@ class ReservaService
 
         $emprestimo['data'] = $dataFormat;
         $emprestimo['codigo'] = $codigo;
-        $emprestimo['alunos_id'] = $data['id_aluno'];
+        $emprestimo['pessoas_id'] = $data['id_pessoa'];
         $emprestimo['tipo_emprestimo'] = $data['tipo_emprestimo'];
 
         for ($i = 0; $i < count($data['id']); $i++) {

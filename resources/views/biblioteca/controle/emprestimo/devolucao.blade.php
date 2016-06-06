@@ -135,14 +135,14 @@
                     {
                         "className":      'details-control',
                         "orderable":      false,
-                        "data":           'fac_alunos.nome',
+                        "data":           'pessoas.nome',
                         "defaultContent": ''
                     },
                     {data: 'codigo', name: 'bib_emprestimos.codigo'},
                     {data: 'data', name: 'bib_emprestimos.data'},
                     {data: 'data_devolucao', name: 'bib_emprestimos.data_devolucao'},
                     {data: 'data_devolucao_real', name: 'bib_emprestimos.data_devolucao_real'},
-                    {data: 'nome', name: 'fac_alunos.nome'},
+                    {data: 'nome', name: 'pessoas.nome'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
