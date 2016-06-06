@@ -336,6 +336,8 @@ class VestibulandoController extends Controller
             # Populando o array de retorno
             $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculo->id) ? $vestibulando->aluno->curriculo->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
+            $dadosRetorno['semestre_id'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->id : null;
+            $dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
             $dadosRetorno['data_inclusao'] = isset($vestibulando->aluno->data_transferencia) ? $vestibulando->aluno->data_transferencia : null;
             $dadosRetorno['forma_admissao_id'] = isset($vestibulando->aluno->formaAdmissao->id) ? $vestibulando->aluno->formaAdmissao->id : null;
 
@@ -356,7 +358,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+            
             #Executando a ação
             $this->service->updateInclusao($data, $id);
 

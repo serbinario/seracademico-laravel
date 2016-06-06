@@ -12,7 +12,8 @@ function loadFieldsEditar()
         'models' : [
             'Graduacao\\Curso|byCurriculoAtivo,1',
             'Turno',
-            'FormaAdmissao'
+            'FormaAdmissao',
+            'Graduacao\\Semestre'
         ]
     };
 
@@ -53,6 +54,7 @@ function builderHtmlFieldsEditar (dados) {
             var htmlCurso     = "";
             var htmlTurno     = "";
             var htmlFAdmissao = "";
+            var htmlSemestre  = "";
 
             // Percorrendo o array de cursos
             for (var i = 0; i < dados['graduacao\\curso'].length; i++) {
@@ -72,6 +74,12 @@ function builderHtmlFieldsEditar (dados) {
 
             }
 
+            // Percorrendo o array de semestres
+            for (var i = 0; i < dados['graduacao\\semestre'].length; i++) {
+                htmlSemestre += "<option value='" + dados['graduacao\\semestre'][i].id + "'>" + dados['graduacao\\semestre'][i].nome + "</option>";
+
+            }
+
             $("#curso_id option").remove();
             $("#curso_id").append(htmlCurso);
 
@@ -81,12 +89,17 @@ function builderHtmlFieldsEditar (dados) {
             $("#forma_admissao_id option").remove();
             $("#forma_admissao_id").append(htmlFAdmissao);
 
+            $("#semestre_id option").remove();
+            $("#semestre_id").append(htmlSemestre);
+
 
             // Setando os valores do model no formulário
             $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true);
             $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
             $('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);
+            $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
             $('#data_inclusao').val(retorno.dados.data_inclusao);
+            $('#periodo').val(retorno.dados.periodo);
 
             // Abrindo o modal de inserir disciplina
             $("#modal-inclusao").modal({show : true});
@@ -103,8 +116,12 @@ $('#btnUpdateInclusao').click(function() {
     var turno_id  = $("#turno_id").val();
     var forma_admissao_id = $("#forma_admissao_id").val();
     var data_inclusao = $("#data_inclusao").val();
+    var semestre_id   = $("#semestre_id").val();
+    var periodo       = $("#periodo").val();
 
     var dados = {
+        'periodo' : periodo,
+        'semestre_id' : semestre_id,
         'curso_id': curso_id,
         'turno_id': turno_id,
         'forma_admissao_id' : forma_admissao_id,

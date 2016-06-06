@@ -90,7 +90,8 @@ class Aluno extends Model implements Transformable
      */
     public function semestres()
     {
-        return $this->belongsToMany(Semestre::class, 'fac_alunos_semestres', 'aluno_id', 'semestre_id');
+        return $this->belongsToMany(Semestre::class, 'fac_alunos_semestres', 'aluno_id', 'semestre_id')
+            ->withPivot(['periodo']);
     }
 
     /**

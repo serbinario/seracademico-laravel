@@ -8,28 +8,43 @@
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="curso_id">Curso</label>
-                                <select name="curso_id" class="form-control" id="curso_id">
-                                </select>
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="curso_id">Curso</label>
+                            <select name="curso_id" class="form-control" id="curso_id">
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="turno_id">Turno</label>
-                                <select name="turno_id" class="form-control" id="turno_id">
-                                </select>
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="turno_id">Turno</label>
+                            <select name="turno_id" class="form-control" id="turno_id">
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="forma_admissao_id">Forma Admissão</label>
-                                <select name="forma_admissao_id" class="form-control" id="forma_admissao_id">
-                                </select>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="forma_admissao_id">Forma Admissão</label>
+                            <select name="forma_admissao_id" class="form-control" id="forma_admissao_id">
+                            </select>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="semestre_id">Semestre</label>
+                            <select name="semestre_id" class="form-control" id="semestre_id">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="periodo">Período</label>
+                            <input type="text" name="periodo" class="form-control" id="periodo">
+                        </div>
+                    </div>
 
                         {{--<div class="row">--}}
                             {{--<div class="form-group col-md-6">--}}
