@@ -214,6 +214,19 @@ class VestibularService
         # adicionado os curso ao vestibular
         $objVestibular->cursos()->attach($data['arrayCursoId']);
 
+        # Recuperando todas as matérias
+        $materias = $this->materiaRepository->all();
+
+        # Percorrendo todos os cursos cadastrados
+        foreach ($data['arrayCursoId'] as $value) {
+            $curso = $objVestibular->cursos()->find($value);
+
+            # Percorrendo as matérias
+            foreach ($materias as $materia) {
+                $curso->pivot->materias()->attach($materia->id);
+            }
+        }
+
         # Retono
         return true;
     }

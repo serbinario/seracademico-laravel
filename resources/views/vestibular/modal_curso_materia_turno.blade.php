@@ -45,22 +45,22 @@
                                     <tr>
                                         <th style="width: 10%">Código</th>
                                         <th>Matéria</th>
-                                        <th style="width: 10%">Peso</th>
-                                        <th style="width: 15%">Qtd. Quest.</th>
+                                        {{--<th style="width: 10%">Peso</th>--}}
+                                        {{--<th style="width: 15%">Qtd. Quest.</th>--}}
                                         <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>
                                 </table>
 
-                                <div class="row">
-                                    <div class="col-md-5 col-md-offset-7">
-                                        <div class="btn-group btn-group-justified">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary pull-right" id="btnAdicionarCursoMateria" disabled="disabled" style="margin-bottom: 3%;">Adicionar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-5 col-md-offset-7">--}}
+                                        {{--<div class="btn-group btn-group-justified">--}}
+                                            {{--<div class="btn-group">--}}
+                                                {{--<button class="btn btn-primary pull-right" id="btnAdicionarCursoMateria" disabled="disabled" style="margin-bottom: 3%;">Adicionar</button>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                             {{--FIM Aba Horario--}}
 
