@@ -196,6 +196,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\CursoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CursoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\CursoController@delete']);
+                Route::post('getByVestibular', ['as' => 'getByVestibular', 'uses' => 'Graduacao\CursoController@getByVestibular']);
+                Route::post('getTurnosByCurso', ['as' => 'getTurnosByCurso', 'uses' => 'Graduacao\CursoController@getTurnosByCurso']);
 
                 Route::group(['prefix' => 'precos', 'as' => 'precos.'], function () {
                     Route::get('grid/{idCurso}', ['as' => 'grid', 'uses' => 'Graduacao\TabelaPrecoCursoController@grid']);

@@ -195,4 +195,46 @@ class CursoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getByVestibular(Request $request)
+    {
+        try {
+            $dados = \DB::table('fac_cursos')
+                    ->select(['fac_cursos.id', 'fac_cursos.nome'])
+                    ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.curso_id', '=', 'fac_cursos.id')
+                    ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulares_cursos.vestibular_id')
+                    ->where('fac_vestibulares.id', $request->get('vestibularId'))->get();
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getTurnosByCurso(Request $request)
+    {
+        try {
+            $dados = \DB::table('fac_turnos')
+                ->select(['fac_turnos.id', 'fac_turnos.nome'])
+                ->join('fac_vestibular_curso_turno', 'fac_vestibular_curso_turno.turno_id', '=', 'fac_turnos.id')
+                ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_turno.vestibular_curso_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+                ->where('fac_cursos.id', $request->get('idCurso'))->get();
+
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

@@ -137,7 +137,7 @@ $(document).on('click', '#btnIncluirCursos', function () {
         swal(retorno.msg, "Click no botão abaixo!", "success");
         tableCurso.ajax.reload();
         table.ajax.reload();
-        tableMateria.rows().remove().draw();
+        //tableMateria.rows($("#materia-grid tbody tr").index()).remove().draw();
         $("#select_curso").select2("val", "");
     });
 });

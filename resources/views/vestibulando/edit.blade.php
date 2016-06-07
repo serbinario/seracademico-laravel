@@ -199,84 +199,119 @@
                 }
             });
 
-            $('#formVestibulando').bootstrapValidator({
-                fields: {
-                    'pessoa[nome]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 50,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
-                        }
-                    },
-                    'pessoa[data_nasciemento]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-                            }
-                        }
-                    },
-                    'pessoa[cpf]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'CPF' })
-                            }
-                        }
-                    },
-                    'pessoa[nome_pai]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-                            }
-                        }
-                    },
-                    'pessoa[nome_mae]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-                            }
-                        }
-                    },
-                    'pessoa[identidade]': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Identidade' })
-                            }
-                        }
-                    },
-                    'vestibular_id': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Vestibular' })
-                            }
-                        }
-                    },
-                    'data_insricao_vestibular': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
-                            }
-                        }
-                    },
-                    'primeira_opcao_curso_id': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
-                            }
-                        }
-                    },
-                    'primeira_opcao_turno_id': {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
-                            }
-                        }
-                    }
+//            $('#formVestibulando').bootstrapValidator({
+//                fields: {
+//                    'pessoa[nome]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome' })
+//                            },
+//                            stringLength: {
+//                                max: 50,
+//                                message: Lang.get('validation.max', { attribute: 'Nome' })
+//                            }
+//                        }
+//                    },
+//                    'pessoa[data_nasciemento]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+//                            }
+//                        }
+//                    },
+//                    'pessoa[cpf]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'CPF' })
+//                            }
+//                        }
+//                    },
+//                    'pessoa[nome_pai]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+//                            }
+//                        }
+//                    },
+//                    'pessoa[nome_mae]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+//                            }
+//                        }
+//                    },
+//                    'pessoa[identidade]': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Identidade' })
+//                            }
+//                        }
+//                    },
+//                    'vestibular_id': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Vestibular' })
+//                            }
+//                        }
+//                    },
+//                    'data_insricao_vestibular': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
+//                            }
+//                        }
+//                    },
+//                    'primeira_opcao_curso_id': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
+//                            }
+//                        }
+//                    },
+//                    'primeira_opcao_turno_id': {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
+//                            }
+//                        }
+//                    }
+//
+//                },
+//            });
 
-                },
+            // Regra para carregamento dos cursos a partir do vestibular escolhido
+            $(document).on('change', '#vestibular_id', function () {
+                // Recuperando o id do vestibular selecionado
+                var vestibularId = $(this).find("option:selected").val();
+
+                // Verificando o id do vestibular
+                if(vestibularId) {
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '{{ route('seracademico.graduacao.curso.getByVestibular')  }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                        },
+                        data: {'vestibularId' : vestibularId},
+                        datatype: 'json'
+                    }).done(function (json) {
+                        var option = "";
+
+                        option += '<option value="">Selecione um Curso</option>';
+                        for (var i = 0; i < json.data.length; i++) {
+                            option += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                        }
+
+                        $('#primeira_opcao_curso_id option').remove();
+                        $('#primeira_opcao_curso_id').append(option);
+
+                        $('#segunda_opcao_curso_id option').remove();
+                        $('#segunda_opcao_curso_id').append(option);
+
+                        $('#terceira_opcao_curso_id option').remove();
+                        $('#terceira_opcao_curso_id').append(option);
+                    });
+                }
             });
         </script>
 

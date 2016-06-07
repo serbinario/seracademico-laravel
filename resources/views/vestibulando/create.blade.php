@@ -325,6 +325,107 @@
                 });
 
             });
+
+            // Regra para carregamento dos cursos a partir do vestibular escolhido
+            $(document).on('change', '#vestibular_id', function () {
+                // Recuperando o id do vestibular selecionado
+                var vestibularId = $(this).find("option:selected").val();
+
+                // Verificando o id do vestibular
+                if(vestibularId) {
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '{{ route('seracademico.graduacao.curso.getByVestibular')  }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                        },
+                        data: {'vestibularId' : vestibularId},
+                        datatype: 'json'
+                    }).done(function (json) {
+                        var option = "";
+
+                        option += '<option value="">Selecione um Curso</option>';
+                        for (var i = 0; i < json.data.length; i++) {
+                            option += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                        }
+
+                        $('#primeira_opcao_curso_id option').remove();
+                        $('#primeira_opcao_curso_id').append(option);
+
+                        $('#segunda_opcao_curso_id option').remove();
+                        $('#segunda_opcao_curso_id').append(option);
+
+                        $('#terceira_opcao_curso_id option').remove();
+                        $('#terceira_opcao_curso_id').append(option);
+                    });
+                }
+            });
+
+            // Evento para selecionar os turnos da primeira opção de curso
+            $(document).on('change', '#primeira_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // recuperando os options
+                    getTurnosByCurso(idCurso, '#primeira_opcao_turno_id');
+                }
+            });
+
+            // Evento para selecionar os turnos da segunda opção de curso
+            $(document).on('change', '#segunda_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // recuperando os options
+                    getTurnosByCurso(idCurso, '#segunda_opcao_turno_id');
+                }
+            });
+
+            // Evento para selecionar os turnos da segunda opção de curso
+            $(document).on('change', '#terceira_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // Gerando os options
+                    getTurnosByCurso(idCurso, '#terceira_opcao_turno_id');
+                }
+            });
+
+            /**
+             *
+             * @param idCurso
+             */
+            function getTurnosByCurso (idCurso, idHtml) {
+                // Requisição ajax
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.graduacao.curso.getTurnosByCurso')  }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    data: {'idCurso' : idCurso},
+                    datatype: 'json'
+                }).done(function (json) {
+                    // Variável que armazenará o html
+                    var options = '';
+
+                    // Criando os options
+                    options += '<option value="">Selecione um Turno</option>';
+                    for (var i = 0; i < json.data.length; i++) {
+                        options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                    }
+                    
+                    // Gerando o html
+                    $(idHtml).find('option').remove();
+                    $(idHtml).append(options);
+                });
+            }
         </script>
     @stop
 @stop

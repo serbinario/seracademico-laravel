@@ -570,33 +570,33 @@
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('primeira_opcao_curso_id', '1º Opção * ') !!}
-                                        {!! Form::select('primeira_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('primeira_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('primeira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('primeira_opcao_turno_id', 'Opção Turno *') !!}
-                                        {!! Form::select('primeira_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('primeira_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('primeira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_turno_id')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('segunda_opcao_curso_id', '2º Opção ') !!}
-                                        {!! Form::select('segunda_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('segunda_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('segunda_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_curso_id')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('segunda_opcao_turno_id', 'Opção Turno') !!}
-                                        {!! Form::select('segunda_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('segunda_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('segunda_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_turno_id')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('terceira_opcao_curso_id', '3º Opção ') !!}
-                                        {!! Form::select('terceira_opcao_curso_id', (['' => 'Selecione uma opção'] + $loadFields['graduacao\\curso']->toArray()), Session::getOldInput('terceira_opcao_curso_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('terceira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_curso_id')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('terceira_opcao_turno_id', 'Opção Turno') !!}
-                                        {!! Form::select('terceira_opcao_turno_id', (['' => 'Selecione uma opção'] + $loadFields['turno']->toArray()), Session::getOldInput('terceira_opcao_turno_id'), array('class' => 'form-control')) !!}
+                                        {!! Form::select('terceira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_turno_id')) !!}
                                     </div>
                                 </div>
                             </div>
