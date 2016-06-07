@@ -420,7 +420,7 @@
                     for (var i = 0; i < json.data.length; i++) {
                         options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
                     }
-                    
+
                     // Gerando o html
                     $(idHtml).find('option').remove();
                     $(idHtml).append(options);

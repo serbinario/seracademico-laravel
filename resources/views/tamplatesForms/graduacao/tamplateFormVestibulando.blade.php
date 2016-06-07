@@ -543,8 +543,9 @@
 
                         <div class="row">
                             <div class="form-group col-md-4">
+                                <?php $now =  new \DateTime('now'); ?>
                                 {!! Form::label('data_insricao_vestibular', 'Data Inscricao * ') !!}
-                                {!! Form::text('data_insricao_vestibular', Session::getOldInput('data_insricao_vestibular'), array('class' => 'form-control datepicker')) !!}
+                                {!! Form::text('data_insricao_vestibular', $now->format('d/m/Y'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('sala_vestibular_id', 'Sala ') !!}
@@ -559,6 +560,12 @@
                             </li>
                             <li role="presentation">
                                 <a href="#enem" aria-controls="enem" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Enem</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Comprovantes</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#ficha19" aria-controls="ficha19" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Ficha 19</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->
@@ -641,6 +648,130 @@
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
                                         {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="comprovantes">
+                                <br>
+                                <div class="col-md-2">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                                            @if (isset($aluno) && $aluno->path_comprovante_enem != null)
+                                            <div id="midias">
+                                                <img id="img_comprovante_enem" src="/images/{{$aluno->path_comprovante_enem}}"  alt="Foto" height="120" width="100"/><br/>
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <span class="btn btn-primary btn-xs btn-block btn-file">
+                                            <span class="fileinput-new">Anexo (Enem)</span>
+                                            <span class="fileinput-exists">Mudar</span>
+                                            <input type="file" name="path_comprovante_enem">
+                                            </span>
+                                            <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                                            @if (isset($aluno) && $aluno->path_comprovante_endereco != null)
+                                                <div id="midias">
+                                                    <img id="img_comprovante_endereco" src="/images/{{$aluno->path_comprovante_endereco}}"  alt="Foto" height="120" width="100"/><br/>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <span class="btn btn-primary btn-xs btn-block btn-file">
+                                            <span class="fileinput-new">Anexo (Endereço)</span>
+                                            <span class="fileinput-exists">Mudar</span>
+                                            <input type="file" name="path_comprovante_endereco">
+                                            </span>
+                                            <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                                            @if (isset($aluno) && $aluno->path_comprovante_ficha19 != null)
+                                                <div id="midias">
+                                                    <img id="img_comprovante_endereco" src="/images/{{$aluno->path_comprovante_ficha19}}"  alt="Foto" height="120" width="100"/><br/>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <span class="btn btn-primary btn-xs btn-block btn-file">
+                                            <span class="fileinput-new">Anexo (Ficha 19)</span>
+                                            <span class="fileinput-exists">Mudar</span>
+                                            <input type="file" name="path_comprovante_ficha19">
+                                            </span>
+                                            <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="ficha19">
+                                <br>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_portugues', 'Língua Portuguesa') !!}
+                                        {!! Form::text('ficha_nota_portugues', Session::getOldInput('ficha_nota_portugues'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_matematica', 'Matemática') !!}
+                                        {!! Form::text('ficha_nota_matematica', Session::getOldInput('ficha_nota_matematica'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_historia', 'História') !!}
+                                        {!! Form::text('ficha_nota_historia', Session::getOldInput('ficha_nota_historia'), array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_geografia', 'Geografia') !!}
+                                        {!! Form::text('ficha_nota_geografia', Session::getOldInput('ficha_nota_geografia'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_sociologia', 'Sociologia') !!}
+                                        {!! Form::text('ficha_nota_sociologia', Session::getOldInput('ficha_nota_sociologia'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_filosofia', 'Filosofia') !!}
+                                        {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_biologia', 'Biologia') !!}
+                                        {!! Form::text('ficha_nota_biologia', Session::getOldInput('ficha_nota_biologia'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_lingua_estrangeira', 'Lígua estrangeira') !!}
+                                        {!! Form::text('ficha_nota_lingua_estrangeira', Session::getOldInput('ficha_nota_lingua_estrangeira'), array('class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_quimica', 'Química') !!}
+                                        {!! Form::text('ficha_nota_quimica', Session::getOldInput('ficha_nota_quimica'), array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('ficha_nota_fisica', 'Física') !!}
+                                        {!! Form::text('ficha_nota_fisica', Session::getOldInput('ficha_nota_fisica'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>

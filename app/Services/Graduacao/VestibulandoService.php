@@ -51,6 +51,11 @@ class VestibulandoService
     private $financeiroRepository;
 
     /**
+     * @var string
+     */
+    private $destinationPath = "images/";
+
+    /**
      * VestibulandoService constructor.
      * @param PessoaRepository $pessoaRepository
      * @param VestibulandoRepository $repository
@@ -121,6 +126,8 @@ class VestibulandoService
         $this->tratamentoCampos($data);
         $this->tratamentoInscricao($data);
         $this->tratamentoImagem($data);
+        $this->tratamentoMediaEnem($data);
+        $this->tratamentoMediaFicha($data);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
@@ -153,6 +160,7 @@ class VestibulandoService
 
         #tratamento vestibular
         $this->tratamentoVestibular($vestibulando);
+        $this->tratamentoDebitoInscricao($vestibulando);
 
         #Retorno
         return $vestibulando;
@@ -172,6 +180,8 @@ class VestibulandoService
         $this->tratamentoCampos($data);
         $this->tratamentoInscricao($data, $id);
         $this->tratamentoImagem($data, $vestibulando);
+        $this->tratamentoMediaEnem($data);
+        $this->tratamentoMediaFicha($data);
 
         #Atualizando no banco de dados
         $vestibulando = $this->repository->update($data, $id);
@@ -289,23 +299,24 @@ class VestibulandoService
     public function tratamentoImagem(array &$data, $vestibulando = "")
     {
         #tratando a imagem
-        if(isset($data['pessoa']['img'])) {
-            $file     = $data['pessoa']['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+        foreach ($data as $key => $value) {
+            $explode = explode("_", $key);
+            
+            if (count($explode) > 0 && $explode[0] == "path") {
+                $file = $data[$key];
+                $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
 
-            # Validando a atualização
-            if(!empty($vestibulando) && $vestibulando->pessoa->path_image != null) {
-                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $vestibulando->pessoa->path_image);
+                # Validando a atualização
+                if (!empty($vestibulando) && $vestibulando->{$key} != null) {
+                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $vestibulando->{$key});
+                }
+
+                #Movendo a imagem
+                $file->move($this->destinationPath, $fileName);
+
+                #renomeando
+                $data[$key] = $fileName;
             }
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $data['pessoa']['path_image'] = $fileName;
-
-            #destruindo o img do array
-            unset($data['pessoa']['img']);
         }
 
         # retorno
@@ -404,6 +415,84 @@ class VestibulandoService
 
         # Retorno
         return true;
+    }
+
+    /**
+     * @param Vestibulando $vestibulando
+     * @return bool
+     */
+    public function tratamentoDebitoInscricao(Vestibulando $vestibulando)
+    {
+        # Data atual
+        $now = new \DateTime('now');
+
+        # Recuperando o vestibular e a taxa do vestibular
+        $vestibular     = $vestibulando->vestibular;
+        $taxaVestibular = $vestibular->taxa;
+
+        # criando o array do financeiro
+        $dados['vestibulando_id'] = $vestibulando->id;
+        $dados['vencimento']      = $now->format('d/m/Y');
+        $dados['mes_referencia']  = $now->format('m');
+        $dados['ano_referencia']  = $now->format('Y');
+        $dados['taxa_id']         = $taxaVestibular->id;
+
+        # Criação do do débito do vestibulando
+        $this->financeiroRepository->create($dados);
+
+        # retorno
+        return true;
+    }
+
+    /**
+     * @param array $dados
+     */
+    public function tratamentoMediaEnem(array &$dados)
+    {
+        # Tratando as notas
+        $notaHumanas    = !isset($dados['nota_humanas']) || $dados['nota_humanas'] == "" ? 0.0 :  $dados['nota_humanas'];
+        $notaNatureza   = !isset($dados['nota_natureza']) || $dados['nota_natureza'] == "" ? 0.0 :  $dados['nota_natureza'];
+        $notaMatematica = !isset($dados['nota_matematica']) || $dados['nota_matematica'] == "" ? 0.0 :  $dados['nota_matematica'];
+        $notaLinguagem  = !isset($dados['nota_linguagem']) || $dados['nota_linguagem'] == "" ? 0.0 :  $dados['nota_linguagem'];
+        $notaRedacao    = !isset($dados['nota_redacao']) || $dados['nota_redacao'] == "" ? 0.0 :  $dados['nota_redacao'];
+
+        # Calculando a média
+        $mediaEnem      =  ((($notaHumanas + $notaNatureza + $notaMatematica + $notaLinguagem)/4) + $notaRedacao) / 2;
+
+        # setando o array para média do enem
+        $dados['media_enem'] = $mediaEnem;
+    }
+
+    /**
+     * @param array $dados
+     */
+    public function tratamentoMediaFicha(array &$dados)
+    {
+        # Variáveis de uso
+        $somaNotasFicha = 0.0;
+        $mediaFicha     = 0.0;
+
+        # Percorrendo o array
+        $count = 0;
+        foreach ($dados as $key => $value) {
+            # Cortando a string
+            $explode = explode('_', $key);
+
+            # Verificando se é nota da ficha
+            if(count($explode) == 3 && $explode[0] == 'ficha') {
+                # Soma das notas
+                $somaNotasFicha  += $value == "" ? 0.0 : (double) $value;
+
+                # Incremento
+                $count++;
+            }
+        }
+
+        # Calculando a média
+        $mediaFicha     =  $somaNotasFicha/$count;
+
+        # setando o array para média do enem
+        $dados['media_ficha'] = $mediaFicha;
     }
 
     /**

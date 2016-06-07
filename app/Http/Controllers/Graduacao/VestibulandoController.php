@@ -88,6 +88,8 @@ class VestibulandoController extends Controller
             ->groupBy('fac_vestibulandos.id')
             ->select([
                 'fac_vestibulandos.id',
+                'fac_vestibulandos.media_enem',
+                'fac_vestibulandos.media_ficha',
                 'pessoas.nome',
                 'pessoas.cpf',
                 'pessoas.celular',

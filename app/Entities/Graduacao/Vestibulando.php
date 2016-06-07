@@ -43,7 +43,22 @@ class Vestibulando extends Model implements Transformable
         'primeira_opcao_turno_id',
         'segunda_opcao_turno_id',
         'terceira_opcao_turno_id',
-        'pessoa_id'
+        'pessoa_id',
+        'path_comprovante_enem',
+        'path_comprovante_endereco',
+        'path_comprovante_ficha19',
+        'ficha_nota_portugues',
+        'ficha_nota_matematica',
+        'ficha_nota_historia',
+        'ficha_nota_geografia',
+        'ficha_nota_sociologia',
+        'ficha_nota_filosofia',
+        'ficha_nota_biologia',
+        'ficha_nota_lingua_estrangeira',
+        'ficha_nota_quimica',
+        'ficha_nota_fisica',
+        'media_enem',
+        'media_ficha'
     ];
 
     /**
@@ -52,7 +67,7 @@ class Vestibulando extends Model implements Transformable
      */
     public function getInscricaoAttribute()
     {
-        return $this->vestibular->codigo . $this->attributes['inscricao'];
+        //return $this->vestibular->codigo . $this->attributes['inscricao'];
     }
 
     /**

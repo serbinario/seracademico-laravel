@@ -22,6 +22,9 @@ class VestibulandoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
+            'path_comprovante_enem' => 'mimes:pdf',
+            'path_comprovante_endereco' => 'mimes:pdf',
+            'path_comprovante_ficha19' => 'mimes:pdf',
             //'matricula' => 'unique:fac_alunos,matricula|digits_between:4,20|numeric',
 //            'matricula' => '',
 //            'nome' => 'required|max:200|serbinario_alpha_space',
@@ -73,6 +76,9 @@ class VestibulandoValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
+            'path_comprovante_enem' => 'mimes:pdf',
+            'path_comprovante_endereco' => 'mimes:pdf',
+            'path_comprovante_ficha19' => 'mimes:pdf',
             //'matricula' => 'digits_between:4,20|numeric|unique:fac_alunos,matricula,:id',
 //            'matricula' => '',
 //            'nome' => 'required|max:200|serbinario_alpha_space',

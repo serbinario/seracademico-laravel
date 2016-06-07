@@ -100,32 +100,54 @@
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format ( d ) {
-            return '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
-                        '<thead>' +
-                            '<tr>' +
-                                '<th style="width: 5%">Opção</th>' +
-                                '<th>Curso</th>' +
-                                '<th style="width: 20%">Turno</th>' +
-                            '</tr>' +
-                        '</thead>' +
-                        '<tbody>' +
-                            '<tr>' +
-                                '<td style="width: 5%">1º</td>' +
-                                '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
-                                '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                                '<td style="width: 5%">2º</td>' +
-                                '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
-                                '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                                '<td style="width: 5%">3º</td>' +
-                                '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
-                                '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
-                            '</tr>' +
-                        '</tbody>' +
-                    '</table>';
+            return  '<div class="row">' +
+                        '<div class="col-md-12">' +
+                            '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                                '<thead>' +
+                                    '<tr>' +
+                                        '<th>Média Enem</th>' +
+                                        '<th>Média Ficha 19</th>' +
+                                    '</tr>' +
+                                '</thead>' +
+                                '<tbody>' +
+                                    '<tr>' +
+                                        '<td>' + d.media_enem+ '</td>' +
+                                        '<td>' + d.media_ficha+ '</td>' +
+                                    '</tr>' +
+                                '</tbody>' +
+                            '</table>' +
+                        '</div>' +
+                    '</div>'+
+                    '<div class="row">' +
+                        '<div class="col-md-12">' +
+                            '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                                '<thead>' +
+                                    '<tr>' +
+                                        '<th style="width: 5%">Opção</th>' +
+                                        '<th>Curso</th>' +
+                                        '<th style="width: 20%">Turno</th>' +
+                                    '</tr>' +
+                                '</thead>' +
+                                '<tbody>' +
+                                    '<tr>' +
+                                        '<td style="width: 5%">1º</td>' +
+                                        '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
+                                        '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
+                                    '</tr>' +
+                                    '<tr>' +
+                                        '<td style="width: 5%">2º</td>' +
+                                        '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
+                                        '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
+                                    '</tr>' +
+                                    '<tr>' +
+                                        '<td style="width: 5%">3º</td>' +
+                                        '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
+                                        '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
+                                    '</tr>' +
+                                '</tbody>' +
+                            '</table>' +
+                        '</div>' +
+                    '</div>';
         }
 
         // criação da grid principal
