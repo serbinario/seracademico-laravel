@@ -137,10 +137,9 @@ class VestibulandoController extends Controller
                         break;
                     }
                 }
-
+//<li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
                 # Fim do html
-                $html .= '
-                                <li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
+                $html .= '                                
                                 <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
                             </ul>
                         </div>';

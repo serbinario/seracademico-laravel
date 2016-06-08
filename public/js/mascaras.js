@@ -31,6 +31,9 @@ $(document).ready(function(){
     //Numeros
     $('.numberFive').mask('00000');
 
+    //notasComuns
+    $('.notasComuns').mask('00,00');
+    
     //código
     $('.codigo').mask('###');
 

@@ -46,6 +46,26 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
+        // Validator para arquivo pdf
+        Validator::extend('pdf', function($attribute, $value, $formats, $validator) {
+            if(!is_string($value)) {
+                $allowed_mimes = [
+                    // 'image/jpeg', // jpeg/jpg
+                    //'image/png', // png
+                    // 'application/octet-stream', // txt etc
+                    // 'application/msword', // doc
+                    // 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', //docx
+                    // 'application/vnd.ms-excel', // xls
+                    //'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // xlsx
+                    'application/pdf', // pdf
+                ];
+
+                return in_array($value->getMimeType(), $allowed_mimes);
+            }
+
+            return true;
+        });
+
         Validator::extend('serbinario_unique', '\\Seracademico\\Providers\\Validators\\UniqueValidator@validate');
     }
 

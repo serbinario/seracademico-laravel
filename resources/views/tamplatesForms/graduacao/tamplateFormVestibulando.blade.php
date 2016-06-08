@@ -527,13 +527,18 @@
                                 @endif
 
                             </div>
-                            <div class="form-group col-md-4">
-                                {!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira ') !!}
-                                {!! Form::select('linguagem_estrangeira_id', $loadFields['linguaextrangeira'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}
-                            </div>
+                            {{--<div class="form-group col-md-4">--}}
+                                {{--{!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira ') !!}--}}
+                                {{--{!! Form::select('linguagem_estrangeira_id', $loadFields['linguaextrangeira'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
                             <div class="form-group col-md-2">
                                 {!! Form::label('inscricao', 'Inscricao * ') !!}
-                                {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                                @if(isset($aluno->vestibular->codigo))
+                                    {!! Form::text('inscricao', $aluno->vestibular->codigo . "" . $aluno->inscricao , array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                                @else
+                                    {!! Form::text('inscricao', Session::getOldInput('inscricao'), array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                                @endif
+
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pre_matricula', 'Pré-Matrícula ') !!}
@@ -577,33 +582,57 @@
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('primeira_opcao_curso_id', '1º Opção * ') !!}
-                                        {!! Form::select('primeira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
+                                        @if(isset($aluno->primeira_opcao_curso_id))
+                                            {!! Form::select('primeira_opcao_curso_id', [$aluno->primeiraOpcaoCurso->id => $aluno->primeiraOpcaoCurso->nome ], $aluno->primeira_opcao_curso_id, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
+                                        @else
+                                            {!! Form::select('primeira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('primeira_opcao_turno_id', 'Opção Turno *') !!}
-                                        {!! Form::select('primeira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_turno_id')) !!}
+                                        @if(isset($aluno->primeira_opcao_turno_id))
+                                            {!! Form::select('primeira_opcao_turno_id', [$aluno->primeiraOpcaoTurno->id => $aluno->primeiraOpcaoTurno->nome ], $aluno->primeira_opcao_turno_id, array('class' => 'form-control', 'id' => 'primeira_opcao_turno_id')) !!}
+                                        @else
+                                            {!! Form::select('primeira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_turno_id')) !!}
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('segunda_opcao_curso_id', '2º Opção ') !!}
-                                        {!! Form::select('segunda_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_curso_id')) !!}
+                                        @if(isset($aluno->segunda_opcao_curso_id))
+                                            {!! Form::select('segunda_opcao_curso_id', [$aluno->segundaOpcaoCurso->id => $aluno->segundaOpcaoCurso->nome ], $aluno->segunda_opcao_curso_id, array('class' => 'form-control', 'id' => 'segunda_opcao_curso_id')) !!}
+                                        @else
+                                            {!! Form::select('segunda_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_curso_id')) !!}
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('segunda_opcao_turno_id', 'Opção Turno') !!}
-                                        {!! Form::select('segunda_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_turno_id')) !!}
+                                        @if(isset($aluno->segunda_opcao_turno_id))
+                                            {!! Form::select('segunda_opcao_turno_id', [$aluno->segundaOpcaoTurno->id => $aluno->segundaOpcaoTurno->nome ], $aluno->segunda_opcao_turno_id, array('class' => 'form-control', 'id' => 'segunda_opcao_turno_id')) !!}
+                                        @else
+                                            {!! Form::select('segunda_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'segunda_opcao_turno_id')) !!}
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
                                         {!! Form::label('terceira_opcao_curso_id', '3º Opção ') !!}
-                                        {!! Form::select('terceira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_curso_id')) !!}
+                                        @if(isset($aluno->terceira_opcao_curso_id))
+                                            {!! Form::select('terceira_opcao_curso_id', [$aluno->terceiraOpcaoCurso->id => $aluno->terceiraOpcaoCurso->nome ], $aluno->terceira_opcao_curso_id, array('class' => 'form-control', 'id' => 'terceira_opcao_curso_id')) !!}
+                                        @else
+                                            {!! Form::select('terceira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_curso_id')) !!}
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('terceira_opcao_turno_id', 'Opção Turno') !!}
-                                        {!! Form::select('terceira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_turno_id')) !!}
+                                        @if(isset($aluno->terceira_opcao_turno_id))
+                                            {!! Form::select('terceira_opcao_turno_id', [$aluno->terceiraOpcaoTurno->id => $aluno->terceiraOpcaoTurno->nome ], $aluno->terceira_opcao_turno_id, array('class' => 'form-control', 'id' => 'terceira_opcao_turno_id')) !!}
+                                        @else
+                                            {!! Form::select('terceira_opcao_turno_id', [], null, array('class' => 'form-control', 'id' => 'terceira_opcao_turno_id')) !!}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -624,30 +653,30 @@
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_redacao', 'Redação ') !!}
-                                        {!! Form::text('nota_redacao', Session::getOldInput('inscricao_enem'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control numberFor')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control numberFor')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control numberFor')) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -720,58 +749,58 @@
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_portugues', 'Língua Portuguesa') !!}
-                                        {!! Form::text('ficha_nota_portugues', Session::getOldInput('ficha_nota_portugues'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_portugues', Session::getOldInput('ficha_nota_portugues'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_matematica', 'Matemática') !!}
-                                        {!! Form::text('ficha_nota_matematica', Session::getOldInput('ficha_nota_matematica'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_matematica', Session::getOldInput('ficha_nota_matematica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_historia', 'História') !!}
-                                        {!! Form::text('ficha_nota_historia', Session::getOldInput('ficha_nota_historia'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_historia', Session::getOldInput('ficha_nota_historia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_geografia', 'Geografia') !!}
-                                        {!! Form::text('ficha_nota_geografia', Session::getOldInput('ficha_nota_geografia'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_geografia', Session::getOldInput('ficha_nota_geografia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_sociologia', 'Sociologia') !!}
-                                        {!! Form::text('ficha_nota_sociologia', Session::getOldInput('ficha_nota_sociologia'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_sociologia', Session::getOldInput('ficha_nota_sociologia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_filosofia', 'Filosofia') !!}
-                                        {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_biologia', 'Biologia') !!}
-                                        {!! Form::text('ficha_nota_biologia', Session::getOldInput('ficha_nota_biologia'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_biologia', Session::getOldInput('ficha_nota_biologia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_lingua_estrangeira', 'Lígua estrangeira') !!}
-                                        {!! Form::text('ficha_nota_lingua_estrangeira', Session::getOldInput('ficha_nota_lingua_estrangeira'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_lingua_estrangeira', Session::getOldInput('ficha_nota_lingua_estrangeira'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_quimica', 'Química') !!}
-                                        {!! Form::text('ficha_nota_quimica', Session::getOldInput('ficha_nota_quimica'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_quimica', Session::getOldInput('ficha_nota_quimica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('ficha_nota_fisica', 'Física') !!}
-                                        {!! Form::text('ficha_nota_fisica', Session::getOldInput('ficha_nota_fisica'), array('class' => 'form-control')) !!}
+                                        {!! Form::text('ficha_nota_fisica', Session::getOldInput('ficha_nota_fisica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -818,4 +847,428 @@
     {{--Fim Buttons Submit e Voltar--}}
 </div>
 
-</div>
+@section('javascript')
+    {{--<script src="{{ asset('/js/validacoes/validation_form_aluno.js')}}"></script>--}}
+
+    <script type="text/javascript">
+        //Carregando as cidades
+        $(document).on('change', "#estado", function () {
+            //Removendo as cidades
+            $('#cidade option').remove();
+
+            //Removendo as Bairros
+            $('#bairro option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'table' : 'cidades',
+                    'field_search' : 'estados_id',
+                    'value_search': estado,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.util.search')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione uma cidade</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#cidade option').remove();
+                    $('#cidade').append(option);
+                });
+            }
+        });
+
+        //Carregando os bairros
+        $(document).on('change', "#cidade", function () {
+            //Removendo as Bairros
+            $('#bairro option').remove();
+
+            //Recuperando a cidade
+            var cidade = $(this).val();
+
+            if (cidade !== "") {
+                var dados = {
+                    'table' : 'bairros',
+                    'field_search' : 'cidades_id',
+                    'value_search': cidade,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.util.search')  }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um bairro</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#bairro option').remove();
+                    $('#bairro').append(option);
+                });
+            }
+        });
+
+        //consulta via select2
+        $("#instituicao").select2({
+            placeholder: 'Selecione uma instituição',
+            minimumInputLength: 3,
+            width: 750,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_instituicoes',
+                        'fieldName':  'nome',
+                        'fieldWhere':  'nivel',
+                        'valueWhere':  '2',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                }
+            }
+        });
+
+        //consulta via select2
+        $("#formacao").select2({
+            placeholder: 'Selecione uma formação acadêmica',
+            minimumInputLength: 3,
+            width: 400,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_cursos_superiores',
+                        'fieldName':  'nome',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                }
+            }
+        });
+
+        // Validações javascript
+        $('#formVestibulando').bootstrapValidator({
+            fields: {
+                'pessoa[nome]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome' })
+                        },
+                        stringLength: {
+                            max: 50,
+                            message: Lang.get('validation.max', { attribute: 'Nome' })
+                        }
+                    }
+                },
+                'pessoa[data_nasciemento]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+                        }
+                    }
+                },
+                'pessoa[cpf]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'CPF' })
+                        }
+                    }
+                },
+                'pessoa[nome_pai]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+                        }
+                    }
+                },
+                'pessoa[nome_mae]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+                        }
+                    }
+                },
+                'pessoa[identidade]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+                        }
+                    }
+                },
+                'vestibular_id': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
+                        }
+                    }
+                },
+                'data_insricao_vestibular': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
+                        }
+                    }
+                },
+                'primeira_opcao_curso_id': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
+                        }
+                    }
+                },
+                'primeira_opcao_turno_id': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
+                        }
+                    }
+                }
+
+            },
+        });
+
+        // Regra para carregamento dos cursos a partir do vestibular escolhido
+        $(document).on('change', '#vestibular_id', function () {
+            // Recuperando o id do vestibular selecionado
+            var vestibularId = $(this).find("option:selected").val();
+
+            // Verificando o id do vestibular
+            if(vestibularId) {
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.graduacao.curso.getByVestibular')  }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    data: {'vestibularId' : vestibularId},
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um Curso</option>';
+                    for (var i = 0; i < json.data.length; i++) {
+                        option += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                    }
+
+                    $('#primeira_opcao_curso_id option').remove();
+                    $('#primeira_opcao_curso_id').append(option);
+
+                    $('#segunda_opcao_curso_id option').remove();
+                    $('#segunda_opcao_curso_id').append(option);
+
+                    $('#terceira_opcao_curso_id option').remove();
+                    $('#terceira_opcao_curso_id').append(option);
+                });
+            }
+        });
+
+        // Evento para pesquisar o cpf do digito no search
+        $(document).on('click', '#btnSearchCpf', function () {
+            // Recuperndo o valor da consulta
+            var serachValue = $("#searchCpf").val();
+
+            // Verificando se algum valor foi digitado
+            if(!serachValue) {
+                swal("Você precisa digitar um cpf", "Click no botão ok para voltar a página", "error");
+                return false;
+            }
+
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'POST',
+                url: '{{ route('seracademico.vestibulando.search')  }}',
+                data: {'cpf' : serachValue},
+                datatype: 'json'
+            }).done(function (json) {
+                if(json.success) {
+                    $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
+                    $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
+                    $("select[name='pessoa[sexos_id]'] option[value='"+ json.dados[0].sexos_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[estados_civis_id]'] option[value='"+ json.dados[0].estados_civis_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[cores_racas_id]'] option[value='"+ json.dados[0].cores_racas_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[tipos_sanguinios_id]'] option[value='"+ json.dados[0].tipos_sanguinios_id +"']").attr("selected", "selected");
+                    $("input:text[name='pessoa[nacionalidade]']").val(json.dados[0].nacionalidade);
+                    $("select[name='pessoa[uf_nascimento_id]'] option[value='"+ json.dados[0].uf_nascimento_id +"']").attr("selected", "selected");
+                    $("input:text[name='pessoa[naturalidade]']").val(json.dados[0].naturalidade);
+                    $("input:text[name='pessoa[nome_pai]']").val(json.dados[0].nome_pai);
+                    $("input:text[name='pessoa[nome_mae]']").val(json.dados[0].nome_mae);
+                    $("input:text[name='pessoa[identidade]']").val(json.dados[0].identidade);
+                    $("input:text[name='pessoa[orgao_rg]']").val(json.dados[0].orgao_rg);
+                    $("input:text[name='pessoa[data_expedicao]']").val(json.dados[0].data_expedicao);
+                    $("input:text[name='pessoa[cpf]']").val(json.dados[0].cpf);
+                    $("input:text[name='pessoa[cpf]']").prop('readonly', true);
+                    $("input:text[name='pessoa[titulo_eleitoral]']").val(json.dados[0].titulo_eleitoral);
+                    $("input:text[name='pessoa[zona]']").val(json.dados[0].zona);
+                    $("input:text[name='pessoa[secao]']").val(json.dados[0].secao);
+                    $("input:text[name='pessoa[resevista]']").val(json.dados[0].resevista);
+                    $("input:text[name='pessoa[catagoria_resevista]']").val(json.dados[0].catagoria_resevista);
+                    $("input:checkbox[name='pessoa[deficiencia_fisica]']").attr('checked', json.dados[0].deficiencia_fisica);
+                    $("input:checkbox[name='pessoa[deficiencia_auditiva]']").attr('checked', json.dados[0].deficiencia_auditiva);
+                    $("input:checkbox[name='pessoa[deficiencia_visual]']").attr('checked', json.dados[0].deficiencia_visual);
+                    $("input:checkbox[name='pessoa[deficiencia_outra]']").attr('checked', json.dados[0].deficiencia_outra);
+                    $("input:text[name='pessoa[endereco][logradouro]']").val(json.dados[0].endereco.logradouro);
+                    $("input:text[name='pessoa[endereco][cep]']").val(json.dados[0].endereco.cep);
+                    $("input:text[name='pessoa[endereco][numero]']").val(json.dados[0].endereco.numero);
+
+                    // Validando o estado
+                    if(json.dados[0].endereco.bairro) {
+                        $("select[name='estado'] option[value='"+ json.dados[0].endereco.bairro.cidade.estado.id +"']").attr("selected", "selected");
+                        $("select[name='cidade']").append("<option value='"+ json.dados[0].endereco.bairro.cidade.id +"'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
+                        $("select[name='pessoa[endereco][bairros_id]']").append("<option value='"+ json.dados[0].endereco.bairro.id +"'>" + json.dados[0].endereco.bairro.nome + "</option>");
+                    }
+
+                    $("input:text[name='pessoa[endereco][complemento]']").val(json.dados[0].endereco.complemento);
+                    $("input:text[name='pessoa[email]']").val(json.dados[0].email);
+                    $("input:text[name='pessoa[telefone_fixo]']").val(json.dados[0].telefone_fixo);
+                    $("input:text[name='pessoa[celular]']").val(json.dados[0].celular);
+                    $("input:text[name='pessoa[celular2]']").val(json.dados[0].celular2);
+                    $("input:text[name='pessoa[ano_conclusao_medio]']").val(json.dados[0].ano_conclusao_medio);
+                    $("input:text[name='pessoa[outra_escola]']").val(json.dados[0].outra_escola);
+
+                    // Validando a instituição escolar
+                    if(json.dados[0].instituicao_escolar) {
+                        $("#instituicao").append($('<option>', {value: json.dados[0].instituicao_escolar.id, text: json.dados[0].instituicao_escolar.nome}));
+                        $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected',true);
+                        $('#instituicao').trigger('change');
+                    }
+                } else {
+                    swal(json.msg, "Click no botão ok para voltar a página", "error");
+                    return false;
+                }
+            });
+
+            // Evento para selecionar os turnos da primeira opção de curso
+            $(document).on('change', '#primeira_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // recuperando os options
+                    getTurnosByCurso(idCurso, '#primeira_opcao_turno_id');
+                }
+            });
+
+            // Evento para selecionar os turnos da segunda opção de curso
+            $(document).on('change', '#segunda_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // recuperando os options
+                    getTurnosByCurso(idCurso, '#segunda_opcao_turno_id');
+                }
+            });
+
+            // Evento para selecionar os turnos da segunda opção de curso
+            $(document).on('change', '#terceira_opcao_curso_id', function () {
+                // Recuperando o id do curso
+                var idCurso = $(this).find('option:selected').val();
+
+                // verificando se o curso foi selecionado
+                if(idCurso) {
+                    // Gerando os options
+                    getTurnosByCurso(idCurso, '#terceira_opcao_turno_id');
+                }
+            });
+
+            /**
+             *
+             * @param idCurso
+             * @param idHtml
+             */
+            function getTurnosByCurso (idCurso, idHtml) {
+                // Requisição ajax
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.graduacao.curso.getTurnosByCurso')  }}',
+                    headers: {
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    data: {'idCurso' : idCurso},
+                    datatype: 'json'
+                }).done(function (json) {
+                    // Variável que armazenará o html
+                    var options = '';
+
+                    // Criando os options
+                    options += '<option value="">Selecione um Turno</option>';
+                    for (var i = 0; i < json.data.length; i++) {
+                        options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                    }
+
+                    // Gerando o html
+                    $(idHtml).find('option').remove();
+                    $(idHtml).append(options);
+                });
+            }
+        });
+    </script>
+
+@stop
+

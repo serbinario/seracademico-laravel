@@ -8,6 +8,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Entities\Graduacao\Vestibular;
+use Seracademico\Entities\Turno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Vestibulando extends Model implements Transformable
@@ -60,15 +61,6 @@ class Vestibulando extends Model implements Transformable
         'media_enem',
         'media_ficha'
     ];
-
-    /**
-     *
-     * @return \DateTime
-     */
-    public function getInscricaoAttribute()
-    {
-        //return $this->vestibular->codigo . $this->attributes['inscricao'];
-    }
 
     /**
      *
@@ -134,5 +126,53 @@ class Vestibulando extends Model implements Transformable
     public function debitos()
     {
         return $this->hasMany(VestibulandoFinanceiro::class, 'vestibulando_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function primeiraOpcaoCurso()
+    {
+        return $this->belongsTo(Curso::class, 'primeira_opcao_curso_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function segundaOpcaoCurso()
+    {
+        return $this->belongsTo(Curso::class, 'segunda_opcao_curso_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function terceiraOpcaoCurso()
+    {
+        return $this->belongsTo(Curso::class, 'terceira_opcao_curso_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function primeiraOpcaoTurno()
+    {
+        return $this->belongsTo(Turno::class, 'primeira_opcao_turno_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function segundaOpcaoTurno()
+    {
+        return $this->belongsTo(Turno::class, 'segunda_opcao_turno_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function terceiraOpcaoTurno()
+    {
+        return $this->belongsTo(Turno::class, 'terceira_opcao_turno_id');
     }
 }
