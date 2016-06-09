@@ -1132,7 +1132,7 @@
             var serachValue = $("#searchCpf").val();
 
             // Verificando se algum valor foi digitado
-            if(!serachValue) {
+            if (!serachValue) {
                 swal("Você precisa digitar um cpf", "Click no botão ok para voltar a página", "error");
                 return false;
             }
@@ -1141,18 +1141,18 @@
             jQuery.ajax({
                 type: 'POST',
                 url: '{{ route('seracademico.vestibulando.search')  }}',
-                data: {'cpf' : serachValue},
+                data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
-                if(json.success) {
+                if (json.success) {
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
-                    $("select[name='pessoa[sexos_id]'] option[value='"+ json.dados[0].sexos_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[estados_civis_id]'] option[value='"+ json.dados[0].estados_civis_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[cores_racas_id]'] option[value='"+ json.dados[0].cores_racas_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[tipos_sanguinios_id]'] option[value='"+ json.dados[0].tipos_sanguinios_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[sexos_id]'] option[value='" + json.dados[0].sexos_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[estados_civis_id]'] option[value='" + json.dados[0].estados_civis_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[cores_racas_id]'] option[value='" + json.dados[0].cores_racas_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[tipos_sanguinios_id]'] option[value='" + json.dados[0].tipos_sanguinios_id + "']").attr("selected", "selected");
                     $("input:text[name='pessoa[nacionalidade]']").val(json.dados[0].nacionalidade);
-                    $("select[name='pessoa[uf_nascimento_id]'] option[value='"+ json.dados[0].uf_nascimento_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[uf_nascimento_id]'] option[value='" + json.dados[0].uf_nascimento_id + "']").attr("selected", "selected");
                     $("input:text[name='pessoa[naturalidade]']").val(json.dados[0].naturalidade);
                     $("input:text[name='pessoa[nome_pai]']").val(json.dados[0].nome_pai);
                     $("input:text[name='pessoa[nome_mae]']").val(json.dados[0].nome_mae);
@@ -1175,10 +1175,10 @@
                     $("input:text[name='pessoa[endereco][numero]']").val(json.dados[0].endereco.numero);
 
                     // Validando o estado
-                    if(json.dados[0].endereco.bairro) {
-                        $("select[name='estado'] option[value='"+ json.dados[0].endereco.bairro.cidade.estado.id +"']").attr("selected", "selected");
-                        $("select[name='cidade']").append("<option value='"+ json.dados[0].endereco.bairro.cidade.id +"'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
-                        $("select[name='pessoa[endereco][bairros_id]']").append("<option value='"+ json.dados[0].endereco.bairro.id +"'>" + json.dados[0].endereco.bairro.nome + "</option>");
+                    if (json.dados[0].endereco.bairro) {
+                        $("select[name='estado'] option[value='" + json.dados[0].endereco.bairro.cidade.estado.id + "']").attr("selected", "selected");
+                        $("select[name='cidade']").append("<option value='" + json.dados[0].endereco.bairro.cidade.id + "'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
+                        $("select[name='pessoa[endereco][bairros_id]']").append("<option value='" + json.dados[0].endereco.bairro.id + "'>" + json.dados[0].endereco.bairro.nome + "</option>");
                     }
 
                     $("input:text[name='pessoa[endereco][complemento]']").val(json.dados[0].endereco.complemento);
@@ -1190,15 +1190,19 @@
                     $("input:text[name='pessoa[outra_escola]']").val(json.dados[0].outra_escola);
 
                     // Validando a instituição escolar
-                    if(json.dados[0].instituicao_escolar) {
-                        $("#instituicao").append($('<option>', {value: json.dados[0].instituicao_escolar.id, text: json.dados[0].instituicao_escolar.nome}));
-                        $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected',true);
+                    if (json.dados[0].instituicao_escolar) {
+                        $("#instituicao").append($('<option>', {
+                            value: json.dados[0].instituicao_escolar.id,
+                            text: json.dados[0].instituicao_escolar.nome
+                        }));
+                        $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected', true);
                         $('#instituicao').trigger('change');
                     }
                 } else {
                     swal(json.msg, "Click no botão ok para voltar a página", "error");
                     return false;
                 }
+            });
             });
 
             // Evento para selecionar os turnos da primeira opção de curso
@@ -1267,7 +1271,6 @@
                     $(idHtml).append(options);
                 });
             }
-        });
     </script>
 
 @stop

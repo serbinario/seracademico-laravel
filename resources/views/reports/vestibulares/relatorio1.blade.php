@@ -22,7 +22,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Inscrição</th>
-                        <th>Telefones</th>
+                        {{--<th>Telefones</th>--}}
                         <th>CPF</th>
                         <th>Vestibular</th>
                         <th>Financeiro</th>
@@ -33,7 +33,7 @@
                             <tr>
                                 <td>{{ $row->nome }}</td>
                                 <td>{{ $row->inscricao }}</td>
-                                <td>{{ $row->celular  }}</td>
+                                {{--<td>{{ $row->celular  }}</td>--}}
                                 <td>{{ $row->cpf }}</td>
                                 <td>{{ $row->vestibular }}</td>
                                 <td>{{ $row->financeiro }}</td>
