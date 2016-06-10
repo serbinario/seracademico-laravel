@@ -683,12 +683,17 @@
 
                             <div role="tabpanel" class="tab-pane" id="comprovantes">
                                 <br>
-                                <div class="col-md-2">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="form-group col-md-4">
+                                    <label for="path_comprovante_enem">ENEM</label>
+                                    <input class="file-preview-other" name="path_comprovante_enem" id="path_comprovante_enem" type="file">
+
+
+
+                                    {{--<div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                             @if (isset($aluno) && $aluno->path_comprovante_enem != null)
                                             <div id="midias">
-                                                <img id="img_comprovante_enem" src="/images/{{$aluno->path_comprovante_enem}}"  alt="Foto" height="120" width="100"/><br/>
+                                                <img id="img_comprovante_endereco" src="/images/{{$aluno->path_comprovante_endereco}}"  alt="Foto" height="120" width="100"/><br/>
                                             </div>
                                             @endif
                                         </div>
@@ -700,11 +705,13 @@
                                             </span>
                                             <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
 
-                                <div class="col-md-2">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="col-md-4">
+                                    <label for="path_comprovante_endereco">ENDEREÇO</label>
+                                    <input name="path_comprovante_endereco" id="path_comprovante_endereco" type="file">
+                                    {{--<div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                             @if (isset($aluno) && $aluno->path_comprovante_endereco != null)
                                                 <div id="midias">
@@ -720,11 +727,15 @@
                                             </span>
                                             <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
 
-                                <div class="col-md-2">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="col-md-4">
+                                    <label for="path_comprovante_ficha19">FICHA 19</label>
+                                    <input name="path_comprovante_ficha19" id="path_comprovante_ficha19" type="file">
+
+
+                                    {{--<div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                             @if (isset($aluno) && $aluno->path_comprovante_ficha19 != null)
                                                 <div id="midias">
@@ -741,6 +752,7 @@
                                             <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
                                         </div>
                                     </div>
+                                </div>--}}
                                 </div>
                             </div>
 
@@ -848,8 +860,6 @@
 </div>
 
 @section('javascript')
-    {{--<script src="{{ asset('/js/validacoes/validation_form_aluno.js')}}"></script>--}}
-
     <script type="text/javascript">
         //Carregando as cidades
         $(document).on('change', "#estado", function () {
@@ -1132,7 +1142,7 @@
             var serachValue = $("#searchCpf").val();
 
             // Verificando se algum valor foi digitado
-            if(!serachValue) {
+            if (!serachValue) {
                 swal("Você precisa digitar um cpf", "Click no botão ok para voltar a página", "error");
                 return false;
             }
@@ -1141,18 +1151,18 @@
             jQuery.ajax({
                 type: 'POST',
                 url: '{{ route('seracademico.vestibulando.search')  }}',
-                data: {'cpf' : serachValue},
+                data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
-                if(json.success) {
+                if (json.success) {
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
-                    $("select[name='pessoa[sexos_id]'] option[value='"+ json.dados[0].sexos_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[estados_civis_id]'] option[value='"+ json.dados[0].estados_civis_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[cores_racas_id]'] option[value='"+ json.dados[0].cores_racas_id +"']").attr("selected", "selected");
-                    $("select[name='pessoa[tipos_sanguinios_id]'] option[value='"+ json.dados[0].tipos_sanguinios_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[sexos_id]'] option[value='" + json.dados[0].sexos_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[estados_civis_id]'] option[value='" + json.dados[0].estados_civis_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[cores_racas_id]'] option[value='" + json.dados[0].cores_racas_id + "']").attr("selected", "selected");
+                    $("select[name='pessoa[tipos_sanguinios_id]'] option[value='" + json.dados[0].tipos_sanguinios_id + "']").attr("selected", "selected");
                     $("input:text[name='pessoa[nacionalidade]']").val(json.dados[0].nacionalidade);
-                    $("select[name='pessoa[uf_nascimento_id]'] option[value='"+ json.dados[0].uf_nascimento_id +"']").attr("selected", "selected");
+                    $("select[name='pessoa[uf_nascimento_id]'] option[value='" + json.dados[0].uf_nascimento_id + "']").attr("selected", "selected");
                     $("input:text[name='pessoa[naturalidade]']").val(json.dados[0].naturalidade);
                     $("input:text[name='pessoa[nome_pai]']").val(json.dados[0].nome_pai);
                     $("input:text[name='pessoa[nome_mae]']").val(json.dados[0].nome_mae);
@@ -1175,10 +1185,10 @@
                     $("input:text[name='pessoa[endereco][numero]']").val(json.dados[0].endereco.numero);
 
                     // Validando o estado
-                    if(json.dados[0].endereco.bairro) {
-                        $("select[name='estado'] option[value='"+ json.dados[0].endereco.bairro.cidade.estado.id +"']").attr("selected", "selected");
-                        $("select[name='cidade']").append("<option value='"+ json.dados[0].endereco.bairro.cidade.id +"'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
-                        $("select[name='pessoa[endereco][bairros_id]']").append("<option value='"+ json.dados[0].endereco.bairro.id +"'>" + json.dados[0].endereco.bairro.nome + "</option>");
+                    if (json.dados[0].endereco.bairro) {
+                        $("select[name='estado'] option[value='" + json.dados[0].endereco.bairro.cidade.estado.id + "']").attr("selected", "selected");
+                        $("select[name='cidade']").append("<option value='" + json.dados[0].endereco.bairro.cidade.id + "'>" + json.dados[0].endereco.bairro.cidade.nome + "</option>");
+                        $("select[name='pessoa[endereco][bairros_id]']").append("<option value='" + json.dados[0].endereco.bairro.id + "'>" + json.dados[0].endereco.bairro.nome + "</option>");
                     }
 
                     $("input:text[name='pessoa[endereco][complemento]']").val(json.dados[0].endereco.complemento);
@@ -1190,9 +1200,12 @@
                     $("input:text[name='pessoa[outra_escola]']").val(json.dados[0].outra_escola);
 
                     // Validando a instituição escolar
-                    if(json.dados[0].instituicao_escolar) {
-                        $("#instituicao").append($('<option>', {value: json.dados[0].instituicao_escolar.id, text: json.dados[0].instituicao_escolar.nome}));
-                        $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected',true);
+                    if (json.dados[0].instituicao_escolar) {
+                        $("#instituicao").append($('<option>', {
+                            value: json.dados[0].instituicao_escolar.id,
+                            text: json.dados[0].instituicao_escolar.nome
+                        }));
+                        $("#instituicao option[name='" + json.dados[0].instituicao_escolar.id + "']").prop('selected', true);
                         $('#instituicao').trigger('change');
                     }
                 } else {
@@ -1200,73 +1213,134 @@
                     return false;
                 }
             });
+        });
 
-            // Evento para selecionar os turnos da primeira opção de curso
-            $(document).on('change', '#primeira_opcao_curso_id', function () {
-                // Recuperando o id do curso
-                var idCurso = $(this).find('option:selected').val();
+        // Evento para selecionar os turnos da primeira opção de curso
+        $(document).on('change', '#primeira_opcao_curso_id', function () {
+            // Recuperando o id do curso
+            var idCurso = $(this).find('option:selected').val();
 
-                // verificando se o curso foi selecionado
-                if(idCurso) {
-                    // recuperando os options
-                    getTurnosByCurso(idCurso, '#primeira_opcao_turno_id');
-                }
-            });
-
-            // Evento para selecionar os turnos da segunda opção de curso
-            $(document).on('change', '#segunda_opcao_curso_id', function () {
-                // Recuperando o id do curso
-                var idCurso = $(this).find('option:selected').val();
-
-                // verificando se o curso foi selecionado
-                if(idCurso) {
-                    // recuperando os options
-                    getTurnosByCurso(idCurso, '#segunda_opcao_turno_id');
-                }
-            });
-
-            // Evento para selecionar os turnos da segunda opção de curso
-            $(document).on('change', '#terceira_opcao_curso_id', function () {
-                // Recuperando o id do curso
-                var idCurso = $(this).find('option:selected').val();
-
-                // verificando se o curso foi selecionado
-                if(idCurso) {
-                    // Gerando os options
-                    getTurnosByCurso(idCurso, '#terceira_opcao_turno_id');
-                }
-            });
-
-            /**
-             *
-             * @param idCurso
-             * @param idHtml
-             */
-            function getTurnosByCurso (idCurso, idHtml) {
-                // Requisição ajax
-                jQuery.ajax({
-                    type: 'POST',
-                    url: '{{ route('seracademico.graduacao.curso.getTurnosByCurso')  }}',
-                    headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                    },
-                    data: {'idCurso' : idCurso},
-                    datatype: 'json'
-                }).done(function (json) {
-                    // Variável que armazenará o html
-                    var options = '';
-
-                    // Criando os options
-                    options += '<option value="">Selecione um Turno</option>';
-                    for (var i = 0; i < json.data.length; i++) {
-                        options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
-                    }
-
-                    // Gerando o html
-                    $(idHtml).find('option').remove();
-                    $(idHtml).append(options);
-                });
+            // verificando se o curso foi selecionado
+            if(idCurso) {
+                // recuperando os options
+                getTurnosByCurso(idCurso, '#primeira_opcao_turno_id');
             }
+        });
+
+        // Evento para selecionar os turnos da segunda opção de curso
+        $(document).on('change', '#segunda_opcao_curso_id', function () {
+            // Recuperando o id do curso
+            var idCurso = $(this).find('option:selected').val();
+
+            // verificando se o curso foi selecionado
+            if(idCurso) {
+                // recuperando os options
+                getTurnosByCurso(idCurso, '#segunda_opcao_turno_id');
+            }
+        });
+
+        // Evento para selecionar os turnos da segunda opção de curso
+        $(document).on('change', '#terceira_opcao_curso_id', function () {
+            // Recuperando o id do curso
+            var idCurso = $(this).find('option:selected').val();
+
+            // verificando se o curso foi selecionado
+            if(idCurso) {
+                // Gerando os options
+                getTurnosByCurso(idCurso, '#terceira_opcao_turno_id');
+            }
+        });
+
+        /**
+         *
+         * @param idCurso
+         * @param idHtml
+         */
+        function getTurnosByCurso (idCurso, idHtml) {
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'POST',
+                url: '{{ route('seracademico.graduacao.curso.getTurnosByCurso')  }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                },
+                data: {'idCurso' : idCurso},
+                datatype: 'json'
+            }).done(function (json) {
+                // Variável que armazenará o html
+                var options = '';
+
+                // Criando os options
+                options += '<option value="">Selecione um Turno</option>';
+                for (var i = 0; i < json.data.length; i++) {
+                    options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+                }
+
+                // Gerando o html
+                $(idHtml).find('option').remove();
+                $(idHtml).append(options);
+            });
+        }
+
+        $("#path_comprovante_enem").fileinput({
+            @if($aluno->path_comprovante_enem)
+                initialPreviewFileType: 'object',
+                initialPreview:[
+                    '/images/{{$aluno->path_comprovante_enem}}'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{
+                    caption: 'comprovante-enem.pdf',
+                    filetype: 'application/pdf',
+                    url: false,
+                    width: '100%'
+                }],
+            @endif
+
+            language: 'pt-BR',
+            showUpload: false,
+            showCaption: false,
+            allowedFileExtensions : ['pdf'],
+        });
+
+        $("#path_comprovante_endereco").fileinput({
+            @if($aluno->path_comprovante_endereco)
+                initialPreviewFileType: 'object',
+                initialPreview:[
+                    '/images/{{$aluno->path_comprovante_endereco}}'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{
+                    caption: 'comprovante-endereco.pdf',
+                    filetype: 'application/pdf',
+                    url: false,
+                    width: '100%'
+                }],
+            @endif
+            language: 'pt-BR',
+            showUpload: false,
+            showCaption: false,
+            allowedFileExtensions : ['pdf'],
+        });
+
+        $("#path_comprovante_ficha19").fileinput({
+            @if($aluno->path_comprovante_ficha19)
+                initialPreviewFileType: 'object',
+                initialPreview:[
+                    '/images/{{$aluno->path_comprovante_ficha19}}'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{
+                    caption: 'comprovante-ficha19.pdf',
+                    filetype: 'application/pdf',
+                    url: false,
+                    width: '100%'
+                }],
+            @endif
+            language: 'pt-BR',
+            showUpload: false,
+            showCaption: false,
+            allowedFileExtensions : ['pdf'],
         });
     </script>
 

@@ -21,7 +21,7 @@
     {{--<link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">--}}
 
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
-    <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
+    {{--<link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">--}}
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
+
+    <!-- Krajee -->
+    <link rel="stylesheet" href="{{ asset('/css/plugins/Krajee/fileinput.min.css')  }}">
 
     <!-- zTree-->
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
@@ -82,37 +85,55 @@
                 {{--</li>--}}
                 @endrole
 
-                @role('graduacao')
+                @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select|graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
                 <li>
                     <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        @permission('secretaria.view')
+                        @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
                         <li>
                             <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
-                                @permission('graduacao.aluno.view')
+                                @permission('graduacao.aluno.select')
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="fa fa-users"></i>Matricular Aluno</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
                                 @endpermission
 
-                                @permission('secretaria.other')
+                                @permission('graduacao.disciplina.select')
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
+                                @endpermission
+
+                                @permission('graduacao.curso.select')
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="material-icons">collections_bookmark</i> Cursos</a></li>
+                                @endpermission
+
+                                @permission('graduacao.curriculo.select')
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
+                                @endpermission
+
+                                @permission('graduacao.turma.select')
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 @endpermission
                             </ul>
                         </li>
                         @endpermission
 
-                        @permission('vestibular.view')
+                        @permission('graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
                         <li>
                             <a href="#"><i class="material-icons">style</i> Vestibular <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
+                                @permission('graduacao.materia.select')
                                 <li><a href="{{ route('seracademico.materia.index') }}"><i class="material-icons">collections_bookmark</i> Matérias</a></li>
+                                @endpermission
+
+                                @permission('graduacao.vestibular.select')
                                 <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulares</a></li>
+                                @endpermission
+
+                                @permission('graduacao.vestibulando.select')
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="material-icons">collections_bookmark</i> Vestibulando</a></li>
+                                @endpermission
+
                                 <li>
                                     <a href="#"><i class="material-icons">style</i> Relatórios <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
@@ -137,7 +158,7 @@
                         </li>--}}
                     </ul>
                 </li>
-                @endrole
+                @endpermission
 
                 @role('admin')
                 <li>
@@ -291,10 +312,17 @@
 <!-- zTree -->
 <script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
 
+<!-- Krajee -->
+<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>
+<script src="{{ asset('/js/plugins/Krajee/locale/pt-BR.js')}}"></script>
+<script src="{{ asset('/js/plugins/Krajee/plugins/canvas-to-blob.min.js')}}"></script>
+<script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
+<script src="{{ asset('/js/plugins/Krajee/plugins/sortable.min.js')}}"></script>
+
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
-<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
+{{--<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>--}}
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
