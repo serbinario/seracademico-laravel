@@ -517,7 +517,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 {!! Form::label('vestibular_id', 'Vestibular * ') !!}
                                
                                 @if(isset($aluno->vestibular->id))
@@ -542,20 +542,25 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pre_matricula', 'Pré-Matrícula ') !!}
-                                {!! Form::text('pre_matricula', Session::getOldInput('pre_matricula'), array('class' => 'form-control')) !!}
+                                {!! Form::text('pre_matricula', Session::getOldInput('pre_matricula'), array('class' => 'form-control' , 'readonly' => 'readonly')) !!}
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
                                 <?php $now =  new \DateTime('now'); ?>
                                 {!! Form::label('data_insricao_vestibular', 'Data Inscricao * ') !!}
                                 {!! Form::text('data_insricao_vestibular', $now->format('d/m/Y'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
-                            <div class="form-group col-md-4">
+
+                            <div class="form-group col-md-2">
                                 {!! Form::label('sala_vestibular_id', 'Sala ') !!}
                                 {!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}
                             </div>
+
+                        </div>
+
+                        <div class="row">
+
+
                         </div>
 
                         <!-- Nav tabs -->
@@ -641,40 +646,39 @@
                                 <br>
 
                                 <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ano_enem', 'Ano ') !!}
                                         {!! Form::text('ano_enem', Session::getOldInput('ano_enem'), array('class' => 'form-control')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('inscricao_enem', 'Inscrição ') !!}
                                         {!! Form::text('inscricao_enem', Session::getOldInput('inscricao_enem'), array('class' => 'form-control')) !!}
                                     </div>
-
-                                    <div class="form-group col-md-4">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('nota_redacao', 'Redação ') !!}
                                         {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control numberFor')) !!}
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
                                         {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control numberFor')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias ') !!}
                                         {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias ') !!}
                                         {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control numberFor')) !!}
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
                                         {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
                                     </div>
@@ -759,58 +763,56 @@
                             <div role="tabpanel" class="tab-pane" id="ficha19">
                                 <br>
                                 <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_portugues', 'Língua Portuguesa') !!}
                                         {!! Form::text('ficha_nota_portugues', Session::getOldInput('ficha_nota_portugues'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_matematica', 'Matemática') !!}
                                         {!! Form::text('ficha_nota_matematica', Session::getOldInput('ficha_nota_matematica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_historia', 'História') !!}
                                         {!! Form::text('ficha_nota_historia', Session::getOldInput('ficha_nota_historia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_geografia', 'Geografia') !!}
                                         {!! Form::text('ficha_nota_geografia', Session::getOldInput('ficha_nota_geografia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_sociologia', 'Sociologia') !!}
                                         {!! Form::text('ficha_nota_sociologia', Session::getOldInput('ficha_nota_sociologia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_filosofia', 'Filosofia') !!}
                                         {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
+
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_biologia', 'Biologia') !!}
                                         {!! Form::text('ficha_nota_biologia', Session::getOldInput('ficha_nota_biologia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_lingua_estrangeira', 'Lígua estrangeira') !!}
                                         {!! Form::text('ficha_nota_lingua_estrangeira', Session::getOldInput('ficha_nota_lingua_estrangeira'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_quimica', 'Química') !!}
                                         {!! Form::text('ficha_nota_quimica', Session::getOldInput('ficha_nota_quimica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="form-group col-md-4">
+
+                                    <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_fisica', 'Física') !!}
                                         {!! Form::text('ficha_nota_fisica', Session::getOldInput('ficha_nota_fisica'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
@@ -1282,6 +1284,10 @@
             });
         }
 
+        /*
+        *http://plugins.krajee.com/
+        * https://github.com/kartik-v/bootstrap-fileinput
+        */
         $("#path_comprovante_enem").fileinput({
             @if($aluno->path_comprovante_enem)
                 initialPreviewFileType: 'object',
