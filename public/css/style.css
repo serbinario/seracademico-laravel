@@ -8278,3 +8278,8 @@ table.dataTable thead th, table.dataTable thead td {
 table.dataTable.no-footer {
   border-bottom: 1px solid #E7E7E7 !important;
 }
+
+/*Ajustes file upload*/
+.file-preview {
+  width: 70% !important;
+}

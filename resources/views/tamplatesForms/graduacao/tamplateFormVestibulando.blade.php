@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
                                 {!! Form::select('pessoa[estados_civis_id]', (['' => 'Selecione uma opção'] + $loadFields['estadocivil']->toArray()), null, array('class' => 'form-control')) !!}
                             </div>
@@ -104,11 +104,11 @@
                                 {!! Form::label('profissoes_id', 'Profissão ') !!}
                                 {!! Form::select('profissoes_id', array(), Session::getOldInput('profissoes_id'),array('class' => 'form-control')) !!}
                             </div>--}}
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
                                 {!! Form::select('pessoa[cores_racas_id]', (['' => 'Selecione uma opção'] + $loadFields['corraca']->toArray()), Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
                                 {!! Form::select('pessoa[tipos_sanguinios_id]', (['' => 'Selecione uma opção'] + $loadFields['tiposanguinio']->toArray()) , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
                             </div>
@@ -132,8 +132,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i
-                                                    class="fa fa-plus-circle"></i> Filiação</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i class="fa fa-plus-circle"></i> Filiação</a>
                                     </h4>
                                 </div>
                                 <div id="filiacao" class="panel-collapse collapse">
@@ -209,14 +208,14 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#deficiencia"> <i
-                                                    class="fa fa-plus-circle"></i> Deficiencia</a>
+                                                    class="fa fa-plus-circle"></i> Deficiência</a>
                                     </h4>
                                 </div>
                                 <div id="deficiencia" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="row">
 
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-6">
                                                 {!! Form::label('tipoDef', 'Deficiências') !!}
                                                 <div class="checkbox checkbox-primary">
                                                     {!! Form::hidden('pessoa[deficiencia_fisica]', 0) !!}
@@ -247,7 +246,6 @@
                     </div>
                 </div>
             </div>
-
             <div role="tabpanel" class="tab-pane" id="contato">
                 <br/>
                 <div class="row">
@@ -419,101 +417,9 @@
                     </div>
                 </div>
             </div>
-
-            {{--Aba Documentos Obrigatorios--}}{{--
-            <div role="tabpanel" class="tab-pane" id="documentosObrig">
-                <br/>
-
-                <div class="row">
-                    --}}{{--Primeria coluna--}}{{--
-                    <div class="col-md-6">
-
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('rg_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('rg_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('rg_doc_obrigatorio', 'RG', false) !!}
-                        </div>
-
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('cpf_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('cpf_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('cpf_doc_obrigatorio', 'CPF', false) !!}
-                        </div>
-
-                        <!-- Certidão de Nascimento ou Casamento -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('certidao_nasc_cas_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('certidao_nasc_cas_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('certidao_nasc_cas_doc_obrigatorio', 'Certidão de nascimento ou casamento ', false) !!}
-                        </div>
-                        <!-- Fim Certidão de Nascimento ou Casamento -->
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('titulo_eleitor_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('titulo_eleitor_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('titulo_eleitor_doc_obrigatorio', 'Título de eleitor e comprovante de votação', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-                        <!-- Histórico Graduação Autenticado -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('histo_gradu_autentic_obrigatorio', 0) !!}
-                            {!! Form::checkbox('histo_gradu_autentic_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('histo_gradu_autentic_obrigatorio', 'Histórico Graduação Autenticado', false) !!}
-                        </div>
-                        <!-- Fim Histórico Graduação Autenticado -->
-
-                    </div>
-                    --}}{{--Fim da Primeria coluna--}}{{--
-
-                    --}}{{--Segunda coluna--}}{{--
-                    <div class="col-md-6">
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('reservista_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('reservista_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('reservista_doc_obrigatorio', 'Atestado de alaistamento militar ou reservista', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('diploma_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('diploma_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('diploma_doc_obrigatorio', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('fotos_3x4_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('fotos_3x4_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('fotos_3x4_doc_obrigatorio', '2 fotos 3x4', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('comp_residencia_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('comp_residencia_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('comp_residencia_doc_obrigatorio', 'Comprovante de residência ', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-                    </div>
-                    --}}{{--Fim da Segunda coluna--}}{{--
-                </div>
-            </div>
-            --}}{{--Aba Documentos Obrigatorios--}}
-
             {{-- Aba vestibular --}}
             <div role="tabpanel" class="tab-pane" id="vestibular">
                 <br>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -566,16 +472,16 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#cursos" aria-controls="cursos" data-toggle="tab"><i class="fa fa-male"></i>Opções de Cursos</a>
+                                <a href="#cursos" aria-controls="cursos" data-toggle="tab">Opções de Cursos</a>
                             </li>
                             <li role="presentation">
-                                <a href="#enem" aria-controls="enem" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Enem</a>
+                                <a href="#enem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
                             </li>
                             <li role="presentation">
-                                <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Comprovantes</a>
+                                <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab">Comprovantes</a>
                             </li>
                             <li role="presentation">
-                                <a href="#ficha19" aria-controls="ficha19" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Ficha 19</a>
+                                <a href="#ficha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha 19</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->
@@ -646,41 +552,42 @@
                                 <br>
 
                                 <div class="row">
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-3">
                                         {!! Form::label('ano_enem', 'Ano ') !!}
                                         {!! Form::text('ano_enem', Session::getOldInput('ano_enem'), array('class' => 'form-control')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-6">
                                         {!! Form::label('inscricao_enem', 'Inscrição ') !!}
                                         {!! Form::text('inscricao_enem', Session::getOldInput('inscricao_enem'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="row">
-                                    <div class="form-group col-md-3">
-                                        {!! Form::label('nota_redacao', 'Redação ') !!}
-                                        {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control numberFor')) !!}
-                                    </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
                                         {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control numberFor')) !!}
                                     </div>
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
+                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
+                                    </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias ') !!}
                                         {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
                                         {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias ') !!}
                                         {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control numberFor')) !!}
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control numberFor')) !!}
+                                    <div class="form-group col-md-4">
+                                        {!! Form::label('nota_redacao', 'Redação ') !!}
+                                        {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control numberFor')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -690,9 +597,6 @@
                                 <div class="form-group col-md-4">
                                     <label for="path_comprovante_enem">ENEM</label>
                                     <input class="file-preview-other" name="path_comprovante_enem" id="path_comprovante_enem" type="file">
-
-
-
                                     {{--<div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                             @if (isset($aluno) && $aluno->path_comprovante_enem != null)
@@ -788,14 +692,14 @@
                                         {!! Form::text('ficha_nota_sociologia', Session::getOldInput('ficha_nota_sociologia'), array('class' => 'form-control notasComuns')) !!}
                                     </div>
 
-                                    <div class="form-group col-md-2">
-                                        {!! Form::label('ficha_nota_filosofia', 'Filosofia') !!}
-                                        {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control notasComuns')) !!}
-                                    </div>
 
                                 </div>
 
                                 <div class="row">
+                                    <div class="form-group col-md-2">
+                                        {!! Form::label('ficha_nota_filosofia', 'Filosofia') !!}
+                                        {!! Form::text('ficha_nota_filosofia', Session::getOldInput('ficha_nota_filosofia'), array('class' => 'form-control notasComuns')) !!}
+                                    </div>
                                     <div class="form-group col-md-2">
                                         {!! Form::label('ficha_nota_biologia', 'Biologia') !!}
                                         {!! Form::text('ficha_nota_biologia', Session::getOldInput('ficha_nota_biologia'), array('class' => 'form-control notasComuns')) !!}
@@ -824,41 +728,42 @@
             </div>
             {{-- Fim da aba vestibular --}}
         </div>
-    </div>
-    <div class="col-md-10"></div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group col-md-4">
-                <div class="checkbox checkbox-primary">
-                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
-                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                    @else
-                        {!! Form::hidden('gerar_inscricao', 0) !!}
-                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
-                    @endif
-                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{--Buttons Submit e Voltar--}}
-    <div class="row">
-        <div class="col-md-9"></div>
-        <div class="col-md-3">
-            <div class="btn-group btn-group-justified">
-                <div class="btn-group">
-                    <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
-                </div>
-                <div class="btn-group">
-                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group col-md-4">
+                    <div class="checkbox checkbox-primary">
+                        @if(isset($aluno) && $aluno->gerar_inscricao == 1)
+                            {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::hidden('gerar_inscricao', 0) !!}
+                            {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
+                        @endif
+                        {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
+                    </div>
                 </div>
             </div>
         </div>
 
+        {{--Buttons Submit e Voltar--}}
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
+                    </div>
+                    <div class="btn-group">
+                        {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{--Fim Buttons Submit e Voltar--}}
     </div>
-    {{--Fim Buttons Submit e Voltar--}}
+
+
+
 </div>
 
 @section('javascript')
