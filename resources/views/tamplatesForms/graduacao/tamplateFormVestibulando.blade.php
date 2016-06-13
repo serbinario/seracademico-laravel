@@ -28,14 +28,14 @@
                 {!! Form::label('pessoa[sexos_id]', 'Sexo ') !!}
                 {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control')) !!}
             </div>
-            <div class="form-group col-md-1">
-                {!! Form::label('ativar', 'Ativar') !!}
-                <div class="checkbox checkbox-primary">
-                    {!! Form::hidden('pessoa[ativo]', 0) !!}
-                    {!! Form::checkbox('pessoa[ativo]', 1, null, array('class' => 'form-control')) !!}
-                    {!! Form::label('pessoa[ativo]', 'Ativar', false) !!}
-                </div>
-            </div>
+            {{--<div class="form-group col-md-1">--}}
+                {{--{!! Form::label('ativar', 'Ativar') !!}--}}
+                {{--<div class="checkbox checkbox-primary">--}}
+                    {{--{!! Form::hidden('pessoa[ativo]', 0) !!}--}}
+                    {{--{!! Form::checkbox('pessoa[ativo]', 1, null, array('class' => 'form-control')) !!}--}}
+                    {{--{!! Form::label('pessoa[ativo]', 'Ativar', false) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
         </div>
     </div>
@@ -457,11 +457,19 @@
                                 {!! Form::text('data_insricao_vestibular', $now->format('d/m/Y'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
 
-                            <div class="form-group col-md-2">
-                                {!! Form::label('sala_vestibular_id', 'Sala ') !!}
-                                {!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}
-                            </div>
+                            {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('sala_vestibular_id', 'Sala ') !!}--}}
+                                {{--{!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
 
+                            <div class="form-group col-md-1">
+                                {!! Form::label('enem', 'Enem') !!}
+                                <div class="checkbox checkbox-primary">
+                                    {!! Form::hidden('enem', 0, array('id' => 'ingresso_enem')) !!}
+                                    {!! Form::checkbox('enem', 1, null, array('class' => 'form-control', 'id' => 'ingresso_enem')) !!}
+                                    {!! Form::label('enem', 'Enem', false) !!}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -474,14 +482,14 @@
                             <li role="presentation" class="active">
                                 <a href="#cursos" aria-controls="cursos" data-toggle="tab">Opções de Cursos</a>
                             </li>
-                            <li role="presentation">
-                                <a href="#enem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
+                            <li role="presentation" id="liEnem">
+                                <a href="#enem"id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
                             </li>
                             <li role="presentation">
                                 <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab">Comprovantes</a>
                             </li>
-                            <li role="presentation">
-                                <a href="#ficha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha 19</a>
+                            <li role="presentation" id="liFicha19">
+                                <a href="#ficha19" id="aFicha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha 19</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->
@@ -1252,6 +1260,22 @@
             showUpload: false,
             showCaption: false,
             allowedFileExtensions : ['pdf'],
+        });
+
+        // Estado inicial enem
+        $('#liEnem').hide();
+
+        // Regra de negócio aba enem e ficha19
+        $(document).on('change', '#ingresso_enem', function () {
+           if(this.checked) {
+               $('#liEnem').show();
+               $('#aEnem').trigger('click');
+               $('#liFicha19').hide();
+           } else {
+               $('#liEnem').hide();
+               $('#liFicha19').show();
+               $('#aFicha19').trigger('click');
+           }
         });
     </script>
 

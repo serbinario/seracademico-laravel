@@ -59,7 +59,8 @@ class Vestibulando extends Model implements Transformable
         'ficha_nota_quimica',
         'ficha_nota_fisica',
         'media_enem',
-        'media_ficha'
+        'media_ficha',
+        'enem'
     ];
 
     /**
