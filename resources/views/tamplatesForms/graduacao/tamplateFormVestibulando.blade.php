@@ -413,7 +413,6 @@
                                 {!! Form::text('pessoa[outra_escola]', Session::getOldInput('pessoa[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

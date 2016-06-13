@@ -73,7 +73,6 @@ class Pessoa extends Model implements Transformable
         'instituicoes_id',
         'cursos_superiores_id',
         'ano_conclusao_superior',
-        'path_image',
         'tipo_nivel_sistema_id',
         'rg_doc_obrigatorio',
         'cpf_doc_obrigatorio',

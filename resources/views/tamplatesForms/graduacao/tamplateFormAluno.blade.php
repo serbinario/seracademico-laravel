@@ -15,56 +15,30 @@
             </div>
         </div>
         <div class="row">
-            {{--<div class="form-group col-md-3">
-                {!! Form::label('curso', 'Curso') !!}
-                {!! Form::select('curso',  array('1' => 'Curso'), array(),array('class' => 'form-control')) !!}
-            </div>
-            <div class="form-group col-md-2">
-                {!! Form::label('turma', 'Turma ') !!}
-                {!! Form::select('turma',  array('1' => 'Turma'), array(),array('class' => 'form-control')) !!}
-            </div>
-            <div class="form-group col-md-2">
-                {!! Form::label('turno', 'Turno ') !!}
-                {!! Form::select('turno', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
-            </div>
-            <div class="form-group col-md-2">
-                {!! Form::label('currículo', 'Currículo') !!}
-                {!! Form::select('currículo', array(), Session::getOldInput('nome'),array('class' => 'form-control')) !!}
-            </div>--}}
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
-                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 {!! Form::label('situacao_id', 'Situacao') !!}
                 {!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
             </div>
 
         </div>
     </div>
-    <div class="col-md-2">
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
-                @if (isset($aluno) && $aluno->pessoa->path_image != null)
-                    <div id="midias">
-                        <img id="logo" src="/images/{{$aluno->pessoa->path_image}}"  alt="Foto" height="120" width="100"/><br/>
-                    </div>
-                @endif
-            </div>
-            <div>
-               <span class="btn btn-primary btn-xs btn-block btn-file">
-                   <span class="fileinput-new">Selecionar</span>
-                   <span class="fileinput-exists">Mudar</span>
-                   <input type="file" name="img">
-               </span>
-                <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
-            </div>
-        </div>
-    </div>
 </div>
+
 <hr class="hr-line-dashed"/>
 
+<div class="row">
+    <div class="col-md-4">
+        <label for="path_image">IMAGEM</label>
+        <input name="path_image" id="path_image" type="file">
+    </div>
+</div>
+
+<hr class="hr-line-dashed"/>
 
 <div class="row">
     <div class="col-md-12">
@@ -256,42 +230,42 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-10">
-                                {!! Form::label('endereco[logradouro]', 'Endereço ') !!}
-                                {!! Form::text('endereco[logradouro]', Session::getOldInput('endereco[logradouro]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[endereco][logradouro]', 'Endereço ') !!}
+                                {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('endereco[numero]', 'Número') !!}
-                                {!! Form::text('endereco[numero]', Session::getOldInput('endereco[numero]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[endereco][numero]', 'Número') !!}
+                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 {!! Form::label('estado', 'UF ') !!}
-                                @if(isset($aluno->endereco->bairro->cidade->estado->id))
-                                    {!! Form::select('estado', $loadFields['estado'], $aluno->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                @if(isset($aluno->pessoa->endereco->bairro->cidade->estado->id))
+                                    {!! Form::select('estado', $loadFields['estado'], $aluno->pessoa->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
                                 @else
                                     {!! Form::select('estado', $loadFields['estado'], Session::getOldInput('estado'), array('class' => 'form-control', 'id' => 'estado')) !!}
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
-                                @if(isset($aluno->endereco->bairro->cidade->id))
-                                    {!! Form::select('cidade', array($aluno->endereco->bairro->cidade->id => $aluno->endereco->bairro->cidade->nome), $aluno->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                @if(isset($aluno->pessoa->endereco->bairro->cidade->id))
+                                    {!! Form::select('cidade', array($aluno->pessoa->endereco->bairro->cidade->id => $aluno->pessoa->endereco->bairro->cidade->nome), $aluno->pessoa->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @else
                                     {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @endif
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('endereco[bairros_id]', 'Bairro ') !!}
-                                @if(isset($aluno->endereco->bairro->id))
-                                    {!! Form::select('endereco[bairros_id]', array($aluno->endereco->bairro->id => $aluno->endereco->bairro->nome), $aluno->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                {!! Form::label('pessoa[endereco][bairros_id]', 'Bairro ') !!}
+                                @if(isset($aluno->pessoa->endereco->bairro->id))
+                                    {!! Form::select('pessoa[endereco][bairros_id]', array($aluno->pessoa->endereco->bairro->id => $aluno->pessoa->endereco->bairro->nome), $aluno->pessoa->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @else
-                                    {!! Form::select('endereco[bairros_id]', array(), Session::getOldInput('bairro'),array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    {!! Form::select('pessoa[endereco][bairros_id]', array(), null,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @endif
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('endereco[complemento]', 'Complemento ') !!}
-                                {!! Form::text('endereco[complemento]', Session::getOldInput('endereco[complemento]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
+                                {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-phone"></i> Contato</legend>
@@ -325,54 +299,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i
-                                                    class="fa fa-plus-circle"></i> Contato profissional</a>
-                                    </h4>
-                                </div>
-                                <div id="endprof" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="form-group col-md-12">
-                                                {!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}
-                                                {!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('pessoa[uf_pro]', 'UF ') !!}
-                                                {!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                {!! Form::label('pessoa[cidade]', 'Cidade ') !!}
-                                                {!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('pessoa[bairro]', 'Bairro ') !!}
-                                                {!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                {!! Form::label('pessoa[cep_pro]', 'CEP') !!}
-                                                {!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-8">
-                                                {!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}
-                                                {!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                {!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}
-                                                {!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                {!! Form::label('pessoa[cel_pro]', 'Celular') !!}
-                                                {!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {{--<div class="panel-heading">--}}
+                                    {{--<h4 class="panel-title">--}}
+                                        {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
+                                                    {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
+                                    {{--</h4>--}}
+                                {{--</div>--}}
+                                {{--<div id="endprof" class="panel-collapse collapse">--}}
+                                    {{--<div class="panel-body">--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="form-group col-md-12">--}}
+                                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
+                                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="form-group col-md-3">--}}
+                                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
+                                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group col-md-4">--}}
+                                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
+                                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group col-md-3">--}}
+                                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
+                                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group col-md-2">--}}
+                                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
+                                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="form-group col-md-8">--}}
+                                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
+                                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group col-md-2">--}}
+                                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
+                                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group col-md-2">--}}
+                                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
+                                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -395,15 +369,15 @@
                             <div class="form-group col-md-10">
                                 <label for="instituicao">Instituição</label><br>
                                 <select id="instituicao" class="form-control" name="pessoa[instituicao_escolar_id]">
-                                    @if(isset($aluno->id) && $aluno->instituicao != null)
-                                        <option value="{{ $aluno->instituicao->id  }}" selected="selected">{{ $aluno->instituicao->nome }}</option>
+                                    @if(isset($aluno->id) && $aluno->pessoa->instituicaoEscolar != null)
+                                        <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
                                     @endif
                                 </select>
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[ano_conclusao_superior]', 'Ano Conclusão') !!}
-                                {!! Form::text('pessoa[ano_conclusao_superior]', Session::getOldInput('pessoa[ano_conclusao_superior]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[ano_conclusao_medio]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoa[ano_conclusao_medio]', Session::getOldInput('pessoa[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -412,7 +386,6 @@
                                 {!! Form::text('pessoa[outra_escola]', Session::getOldInput('pessoa[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -526,4 +499,235 @@
     {{--Fim Buttons Submit e Voltar--}}
 </div>
 
-</div>
+@section('javascript')
+    <script type="text/javascript">
+        //Carregando as cidades
+        $(document).on('change', "#estado", function () {
+            //Removendo as cidades
+            $('#cidade option').remove();
+
+            //Removendo as Bairros
+            $('#bairro option').remove();
+
+            //Recuperando o estado
+            var estado = $(this).val();
+
+            if (estado !== "") {
+                var dados = {
+                    'table' : 'cidades',
+                    'field_search' : 'estados_id',
+                    'value_search': estado,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.util.search')  }}',
+                    data: dados,
+                    datatype: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione uma cidade</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#cidade option').remove();
+                    $('#cidade').append(option);
+                });
+            }
+        });
+
+        //Carregando os bairros
+        $(document).on('change', "#cidade", function () {
+            //Removendo as Bairros
+            $('#bairro option').remove();
+
+            //Recuperando a cidade
+            var cidade = $(this).val();
+
+            if (cidade !== "") {
+                var dados = {
+                    'table' : 'bairros',
+                    'field_search' : 'cidades_id',
+                    'value_search': cidade,
+                };
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.util.search')  }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    data: dados,
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = "";
+
+                    option += '<option value="">Selecione um bairro</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                    }
+
+                    $('#bairro option').remove();
+                    $('#bairro').append(option);
+                });
+            }
+        });
+
+        //consulta via select2
+        $("#instituicao").select2({
+            placeholder: 'Selecione uma instituição',
+            minimumInputLength: 3,
+            width: 750,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_instituicoes',
+                        'fieldName':  'nome',
+                        'fieldWhere':  'nivel',
+                        'valueWhere':  '2',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                }
+            }
+        });
+
+        //consulta via select2
+        $("#formacao").select2({
+            placeholder: 'Selecione uma formação acadêmica',
+            minimumInputLength: 3,
+            width: 400,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_cursos_superiores',
+                        'fieldName':  'nome',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#formAluno').bootstrapValidator({
+            fields: {
+                'pessoa[nome]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome' })
+                        },
+                        stringLength: {
+                            max: 50,
+                            message: Lang.get('validation.max', { attribute: 'Nome' })
+                        }
+                    }
+                },
+                'pessoa[data_nasciemento]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+                        }
+                    }
+                },
+                'pessoa[cpf]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'CPF' })
+                        }
+                    }
+                },
+                'pessoa[nome_pai]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+                        }
+                    }
+                },
+                'pessoa[nome_mae]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+                        }
+                    }
+                },
+                'pessoa[identidade]': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+                        }
+                    }
+                }
+            },
+        });
+
+        $("#path_image").fileinput({
+            @if(isset($aluno->path_image))
+            initialPreviewFileType: 'object',
+            initialPreview:[
+                '/images/{{$aluno->path_image}}'
+            ],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [{
+                url: false,
+                width: '100%'
+            }],
+            @endif
+            language: 'pt-BR',
+            showUpload: false,
+            showCaption: false,
+            allowedFileExtensions : ['jpeg', 'gif', 'png'],
+        });
+    </script>
+@stop

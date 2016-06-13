@@ -5,6 +5,7 @@ namespace Seracademico\Services\Graduacao;
 use Seracademico\Entities\Graduacao\Aluno;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
+use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Validators\Graduacao\AlunoValidator;
 
 class AlunoService
@@ -20,18 +21,29 @@ class AlunoService
     private $enderecoRepository;
 
     /**
+     * @var PessoaRepository
+     */
+    private $pessoaRepository;
+
+    /**
      * @var string
      */
     private $destinationPath = "images/";
 
     /**
+     * AlunoService constructor.
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
+     * @param PessoaRepository $pessoaRepository
      */
-    public function __construct(AlunoRepository $repository, EnderecoRepository $enderecoRepository)
+    public function __construct(
+        AlunoRepository $repository,
+        EnderecoRepository $enderecoRepository,
+        PessoaRepository $pessoaRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
+        $this->pessoaRepository   = $pessoaRepository;
     }
 
     /**
@@ -71,32 +83,32 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
-        #tratamento de dados do aluno
-        $data     = $this->tratamentoCamposAluno($data);
+        #regras de negócios
+        $this->tratamentoImagem($data);
+//        #setando o nivel do sistema
+//        $data['tipo_nivel_sistema_id'] = 2;
 
-        #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
 
-        #tratando a imagem
-        if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+        # Recuperando a pessoa pelo cpf
+        $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+        $endereco  = null;
 
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
+        # Verificando se a pesso já existe
+        if(count($objPessoa) > 0) {
+            #aAlterando a pessoa e o endereço
+            $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
+            $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+        } else {
+            #Criando o endereco e pessoa
+            $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
 
-            #setando o nome da imagem no model
-            $data['path_image'] = $fileName;
-
-            #destruindo o img do array
-            unset($data['img']);
+            # setando a chave estrangeira e criando a pessoa
+            $data['pessoa']['enderecos_id'] = $endereco->id;
+            $pessoa   = $this->pessoaRepository->create($data['pessoa']);
         }
 
-        #Criando no banco de dados
-        $endereco = $this->enderecoRepository->create($data['endereco']);
-
-        #setando o endereco
-        $data['enderecos_id'] = $endereco->id;
+        #setando as chaves estrageiras
+        $data['pessoa_id'] = $pessoa->id;
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -117,37 +129,16 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
-        #tratamento de dados do aluno
-        $data     = $this->tratamentoCamposAluno($data);
+        # Recuperando o vestibulando
+        $aluno = $this->repository->find($id);
 
-        #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
+        #Regras de negócios
+        $this->tratamentoImagem($data, $aluno);
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
-        $endereco = $this->enderecoRepository->update($data['endereco'], $aluno->endereco->id);
-
-        #tratando a imagem
-        if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-
-            #removendo a imagem antiga
-            if ($aluno->path_image != null) {
-                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $aluno->path_image);
-            }
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $aluno->path_image = $fileName;
-            $aluno->save();
-
-            #destruindo o img do array
-            unset($data['img']);
-        }
+        $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
+        $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
@@ -156,6 +147,37 @@ class AlunoService
 
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoImagem(array &$data, $aluno = "")
+    {
+        #tratando a imagem
+        foreach ($data as $key => $value) {
+            $explode = explode("_", $key);
+
+            if (count($explode) > 0 && $explode[0] == "path") {
+                $file = $data[$key];
+                $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+                # Validando a atualização
+                if (!empty($aluno) && $aluno->{$key} != null) {
+                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $aluno->{$key});
+                }
+
+                #Movendo a imagem
+                $file->move($this->destinationPath, $fileName);
+
+                #renomeando
+                $data[$key] = $fileName;
+            }
+        }
+
+        # retorno
+        return $data;
     }
 
     /**
@@ -178,30 +200,5 @@ class AlunoService
 
         #retorno
         return $result;
-    }
-
-    /**
-     * @param $data
-     * @return mixed
-     */
-    private function tratamentoCamposAluno($data)
-    {
-        #tratamento de datas do aluno
-        $data['data_expedicao']           = $this->convertDate($data['data_expedicao'], 'en');
-        $data['data_nasciemento']         = $this->convertDate($data['data_nasciemento'], 'en');
-        //$data['data_exame_nacional_um']   = $this->convertDate($data['data_exame_nacional_um'], 'pt-BR');
-        //$data['data_exame_nacional_dois'] = $this->convertDate($data['data_exame_nacional_dois'], 'pt-BR');
-
-        # Tratamento de campos de chaves estrangeira
-        foreach ($data as $key => $value) {
-            $explodeKey = explode("_", $key);
-
-            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
-                $data[$key] = null;
-            }
-        }
-
-        #retorno
-        return $data;
     }
 }
