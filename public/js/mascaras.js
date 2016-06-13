@@ -28,6 +28,8 @@ $(document).ready(function(){
     //Numeros
     $('.numberFor').mask('0000');
 
+
+
     //Numeros
     $('.numberFive').mask('00000');
 
@@ -39,6 +41,13 @@ $(document).ready(function(){
 
     //Data
     $('.date').mask('00/00/0000');
+
+    //Enem
+    $('.enem').mask("0##0.00", {reverse: true, maxlength: false});
+
+    //ficha19
+    $('.ficha19').mask("0#.00", {reverse: true, maxlength: false});
+
 
     $('.time').mask('00:00:00' , {reverse: true});
 
