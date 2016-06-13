@@ -30,6 +30,6 @@ class Endereco extends Model implements Transformable
      */
     public function pessoa()
     {
-        return $this->hasOne(Pessoa::class, 'pessoa_id');
+        return $this->hasOne(Pessoa::class, 'enderecos_id');
     }
 }

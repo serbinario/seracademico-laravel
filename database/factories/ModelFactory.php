@@ -33,7 +33,7 @@ $factory->define(Seracademico\Entities\Pessoa::class, function (Faker\Generator 
 });
 
 # Factory para criação de endereco faker
-$factory->define(Seracademico\Entities\Endereco::class, function (Faker\Generator $faker) {
+$factory->define(\Seracademico\Entities\Endereco::class, function (Faker\Generator $faker) {
     return [
     ];
 });

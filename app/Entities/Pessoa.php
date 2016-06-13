@@ -5,22 +5,6 @@ namespace Seracademico\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\CorRaca;
-use Seracademico\Entities\Curso;
-use Seracademico\Entities\CursoSuperior;
-use Seracademico\Entities\Endereco;
-use Seracademico\Entities\Estado;
-use Seracademico\Entities\EstadoCivil;
-use Seracademico\Entities\Exame;
-use Seracademico\Entities\GrauInstrucao;
-use Seracademico\Entities\InclusaoALuno;
-use Seracademico\Entities\Instituicao;
-use Seracademico\Entities\Profissao;
-use Seracademico\Entities\Religiao;
-use Seracademico\Entities\Sexo;
-use Seracademico\Entities\SituacaoAluno;
-use Seracademico\Entities\TipoSanguinio;
-use Seracademico\Entities\Turno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 
