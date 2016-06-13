@@ -88,8 +88,8 @@ class VestibulandoController extends Controller
             ->groupBy('fac_vestibulandos.id')
             ->select([
                 'fac_vestibulandos.id',
-                'fac_vestibulandos.media_enem',
-                'fac_vestibulandos.media_ficha',
+                \DB::raw('FORMAT(fac_vestibulandos.media_enem, 2) as media_enem'),
+                \DB::raw('FORMAT(fac_vestibulandos.media_ficha, 2) as media_ficha'),
                 'pessoas.nome',
                 'pessoas.cpf',
                 'pessoas.celular',
