@@ -31,3 +31,9 @@ $factory->define(Seracademico\Entities\Pessoa::class, function (Faker\Generator 
         'data_nasciemento' => $faker->date('d/m/Y'),
     ];
 });
+
+# Factory para criação de endereco faker
+$factory->define(Seracademico\Entities\Endereco::class, function (Faker\Generator $faker) {
+    return [
+    ];
+});
