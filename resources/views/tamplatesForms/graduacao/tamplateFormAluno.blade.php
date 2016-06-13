@@ -2,16 +2,16 @@
     <div class="col-md-10">
         <div class="row">
             <div class="form-group col-md-8">
-                {!! Form::label('nome', 'Nome *') !!}
-                {!! Form::text('nome',  Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                {!! Form::label('pessoa[nome]', 'Nome *') !!}
+                {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
-                {!! Form::label('data_nasciemento', 'Nascimento *') !!}
-                {!! Form::text('data_nasciemento', null, array('class' => 'form-control datepicker date')) !!}
+                {!! Form::label('pessoa[data_nasciemento]', 'Nascimento *') !!}
+                {!! Form::text('pessoa[data_nasciemento]', null, array('class' => 'form-control datepicker date')) !!}
             </div>
             <div class="form-group col-md-2">
-                {!! Form::label('sexo', 'Sexo ') !!}
-                {!! Form::select('sexos_id', $loadFields['sexo'], Session::getOldInput('sexos_id'), array('class' => 'form-control')) !!}
+                {!! Form::label('pessoa[sexos_id]', 'Sexo ') !!}
+                {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control')) !!}
             </div>
         </div>
         <div class="row">
@@ -46,9 +46,9 @@
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
-                @if (isset($aluno) && $aluno->path_image != null)
+                @if (isset($aluno) && $aluno->pessoa->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="/images/{{$aluno->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo" src="/images/{{$aluno->pessoa->path_image}}"  alt="Foto" height="120" width="100"/><br/>
                     </div>
                 @endif
             </div>
@@ -95,38 +95,38 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                {!! Form::label('estado_civis_id', 'Estado Civil ') !!}
-                                {!! Form::select('estado_civis_id', $loadFields['estadocivil'], Session::getOldInput('estado_civis_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[estado_civis_id]', 'Estado Civil ') !!}
+                                {!! Form::select('pessoa[estado_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estado_civis_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}
-                                {!! Form::select('grau_instrucoes_id', $loadFields['grauinstrucao'], Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
+                                {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                {!! Form::label('profissoes_id', 'Profissão ') !!}
-                                {!! Form::select('profissoes_id', array(), Session::getOldInput('profissoes_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
+                                {!! Form::select('pessoa[profissoes_id]', array(), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('cores_racas_id', 'Cor/Raça') !!}
-                                {!! Form::select('cores_racas_id', $loadFields['corraca'], Session::getOldInput('cores_racas_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
+                                {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('tipos_sanguinios_id', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('tipos_sanguinios_id', $loadFields['tiposanguinio'] , Session::getOldInput('tipos_sanguinios_id'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
+                                {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                {!! Form::label('nacionalidade', 'Nacionalidade ') !!}
-                                {!! Form::text('nacionalidade', Session::getOldInput('nacionalidade'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[nacionalidade]', 'Nacionalidade ') !!}
+                                {!! Form::text('pessoa[nacionalidade]', Session::getOldInput('pessoa[nacionalidade]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('uf_nascimento_id', 'UF Nascimento') !!}
-                                {!! Form::select('uf_nascimento_id', $loadFields['estado'], Session::getOldInput('uf_nascimento_id'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[uf_nascimento_id]', 'UF Nascimento') !!}
+                                {!! Form::select('pessoa[uf_nascimento_id]', $loadFields['estado'], Session::getOldInput('pessoa[uf_nascimento_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('naturalidade', 'Naturalidade ') !!}
-                                {!! Form::text('naturalidade', Session::getOldInput('naturalidade'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[naturalidade]', 'Naturalidade ') !!}
+                                {!! Form::text('pessoa[naturalidade]', Session::getOldInput('pessoa[naturalidade]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-archive"></i> Outros dados</legend>
@@ -142,12 +142,12 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('nome_pai', 'Nome Pai *') !!}
-                                                {!! Form::text('nome_pai', Session::getOldInput('nome_pai'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai *') !!}
+                                                {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('nome_mae', 'Nome Mãe *') !!}
-                                                {!! Form::text('nome_mae',Session::getOldInput('nome_mae'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe *') !!}
+                                                {!! Form::text('pessoa[nome_mae]',Session::getOldInput('pessoa[nome_mae]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -163,46 +163,46 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('identidade', 'Identidade *') !!}
-                                                {!! Form::text('identidade', Session::getOldInput('identidade'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[identidade]', 'Identidade *') !!}
+                                                {!! Form::text('pessoa[identidade]', Session::getOldInput('pessoa[identidade]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('orgao_rg', 'Orgão RG ') !!}
-                                                {!! Form::text('orgao_rg', Session::getOldInput('orgao_rg'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[orgao_rg]', 'Orgão RG ') !!}
+                                                {!! Form::text('pessoa[orgao_rg]', Session::getOldInput('pessoa[orgao_rg]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('uf_exp', 'UF') !!}
-                                                {!! Form::text('uf_exp', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[uf_exp]', 'UF') !!}
+                                                {!! Form::text('pessoa[uf_exp]', Session::getOldInput('pessoa[uf_exp]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('data_expedicao', 'Data expedição') !!}
-                                                {!! Form::text('data_expedicao', null , array('class' => 'form-control datepicker date')) !!}
+                                                {!! Form::label('pessoa[data_expedicao]', 'Data expedição') !!}
+                                                {!! Form::text('pessoa[data_expedicao]', null , array('class' => 'form-control datepicker date')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('cpf', 'CPF *') !!}
-                                                {!! Form::text('cpf', Session::getOldInput('cpf'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
+                                                {!! Form::label('pessoa[cpf]', 'CPF *') !!}
+                                                {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('titulo_eleitoral', 'Título Eleitoral') !!}
-                                                {!! Form::text('titulo_eleitoral', Session::getOldInput('titulo_eleitoral'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[titulo_eleitoral]', 'Título Eleitoral') !!}
+                                                {!! Form::text('pessoa[titulo_eleitoral]', Session::getOldInput('pessoa[titulo_eleitoral]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
-                                                {!! Form::label('zona', 'Zona') !!}
-                                                {!! Form::text('zona', Session::getOldInput('zona'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[zona]', 'Zona') !!}
+                                                {!! Form::text('pessoa[zona]', Session::getOldInput('pessoa[zona]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
-                                                {!! Form::label('secao', 'Seção') !!}
-                                                {!! Form::text('secao', Session::getOldInput('secao') , array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[secao]', 'Seção') !!}
+                                                {!! Form::text('pessoa[secao]', Session::getOldInput('pessoa[secao]') , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('resevista', 'Reservista') !!}
-                                                {!! Form::text('resevista', Session::getOldInput('resevista'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[resevista]', 'Reservista') !!}
+                                                {!! Form::text('pessoa[resevista]', Session::getOldInput('pessoa[resevista]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('catagoria_resevista', 'Categoria Reservista') !!}
-                                                {!! Form::text('catagoria_resevista', Session::getOldInput('catagoria_resevista'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[catagoria_resevista]', 'Categoria Reservista') !!}
+                                                {!! Form::text('pessoa[catagoria_resevista]', Session::getOldInput('pessoa[catagoria_resevista]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -221,23 +221,23 @@
                                             <div class="form-group col-md-4">
                                                 {!! Form::label('tipoDef', 'Deficiências') !!}
                                                 <div class="checkbox checkbox-primary">
-                                                    {!! Form::hidden('deficiencia_fisica', 0) !!}
-                                                    {!! Form::checkbox('deficiencia_fisica', 1, null, array('class' => 'form-control')) !!}
-                                                    {!! Form::label('deficiencia_fisica', 'Física') !!}
+                                                    {!! Form::hidden('pessoa[deficiencia_fisica]', 0) !!}
+                                                    {!! Form::checkbox('pessoa[deficiencia_fisica]', 1, null, array('class' => 'form-control')) !!}
+                                                    {!! Form::label('pessoa[deficiencia_fisica]', 'Física') !!}
                                                     <div class="checkbox checkbox-primary checkbox-inline">
-                                                        {!! Form::hidden('deficiencia_auditiva', 0) !!}
-                                                        {!! Form::checkbox('deficiencia_auditiva', 1, null, array('class' => 'form-control')) !!}
-                                                        {!! Form::label('deficiencia_auditiva', 'Auditivas', false) !!}
+                                                        {!! Form::hidden('pessoa[deficiencia_auditiva]', 0) !!}
+                                                        {!! Form::checkbox('pessoa[deficiencia_auditiva]', 1, null, array('class' => 'form-control')) !!}
+                                                        {!! Form::label('pessoa[deficiencia_auditiva]', 'Auditivas', false) !!}
                                                     </div>
                                                     <div class="checkbox checkbox-primary checkbox-inline">
-                                                        {!! Form::hidden('deficiencia_visual', 0) !!}
-                                                        {!! Form::checkbox('deficiencia_visual', 1, null, array('class' => 'form-control')) !!}
-                                                        {!! Form::label('deficiencia_visual', 'Visuais', false) !!}
+                                                        {!! Form::hidden('pessoa[deficiencia_visual]', 0) !!}
+                                                        {!! Form::checkbox('pessoa[deficiencia_visual]', 1, null, array('class' => 'form-control')) !!}
+                                                        {!! Form::label('pessoa[deficiencia_visual]', 'Visuais', false) !!}
                                                     </div>
                                                     <div class="checkbox checkbox-primary checkbox-inline">
-                                                        {!! Form::hidden('deficiencia_outra', 0) !!}
-                                                        {!! Form::checkbox('deficiencia_outra', 1, null,array('class' => 'form-control')) !!}
-                                                        {!! Form::label('deficiencia_outra', 'Outras') !!}
+                                                        {!! Form::hidden('pessoa[deficiencia_outra]', 0) !!}
+                                                        {!! Form::checkbox('pessoa[deficiencia_outra]', 1, null,array('class' => 'form-control')) !!}
+                                                        {!! Form::label('pessoa[deficiencia_outra]', 'Outras') !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -307,20 +307,20 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-5">
-                                                {!! Form::label('email', 'E-mail') !!}
-                                                {!! Form::text('email', Session::getOldInput('email'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[email]', 'E-mail') !!}
+                                                {!! Form::text('pessoa[email]', Session::getOldInput('pessoa[email]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('telefone_fixo', 'Telefone fixo') !!}
-                                                {!! Form::text('telefone_fixo', Session::getOldInput('telefone_fixo') , array('class' => 'form-control phone')) !!}
+                                                {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
+                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('celular', 'Celular') !!}
-                                                {!! Form::text('celular', Session::getOldInput('celular'), array('class' => 'form-control phone')) !!}
+                                                {!! Form::label('pessoa[celular]', 'Celular') !!}
+                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('celular2', 'Celular 2') !!}
-                                                {!! Form::text('celular2', Session::getOldInput('celular2'), array('class' => 'form-control phone')) !!}
+                                                {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
+                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control phone')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -335,40 +335,40 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-12">
-                                                {!! Form::label('nome_emp', 'Nome da empresa') !!}
-                                                {!! Form::text('nome_emp',Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}
+                                                {!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('uf_pro', 'UF ') !!}
-                                                {!! Form::select('uf_pro', array(), Session::getOldInput('nome'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}
+                                                {!! Form::label('pessoa[uf_pro]', 'UF ') !!}
+                                                {!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}
                                             </div>
                                             <div class="form-group col-md-4">
-                                                {!! Form::label('cidade', 'Cidade ') !!}
-                                                {!! Form::select('cidade', array(), Session::getOldInput('nome'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}
+                                                {!! Form::label('pessoa[cidade]', 'Cidade ') !!}
+                                                {!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('bairro', 'Bairro ') !!}
-                                                {!! Form::select('bairro', array(), Session::getOldInput('nome'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}
+                                                {!! Form::label('pessoa[bairro]', 'Bairro ') !!}
+                                                {!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('cep_pro', 'CEP') !!}
-                                                {!! Form::text('cep_pro',Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[cep_pro]', 'CEP') !!}
+                                                {!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-8">
-                                                {!! Form::label('email_institucional', 'E-mail institucional') !!}
-                                                {!! Form::text('email_institucional',Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                                                {!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}
+                                                {!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('tel_fixo_pro', 'Telefone Fixo') !!}
-                                                {!! Form::text('tel_fixo_pro', Session::getOldInput('nome') , array('class' => 'form-control phone')) !!}
+                                                {!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}
+                                                {!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                {!! Form::label('cel_pro', 'Celular') !!}
-                                                {!! Form::text('cel_pro',Session::getOldInput('nome') , array('class' => 'form-control phone')) !!}
+                                                {!! Form::label('pessoa[cel_pro]', 'Celular') !!}
+                                                {!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -394,7 +394,7 @@
 
                             <div class="form-group col-md-10">
                                 <label for="instituicao">Instituição</label><br>
-                                <select id="instituicao" class="form-control" name="instituicao_escolar_id">
+                                <select id="instituicao" class="form-control" name="pessoa[instituicao_escolar_id]">
                                     @if(isset($aluno->id) && $aluno->instituicao != null)
                                         <option value="{{ $aluno->instituicao->id  }}" selected="selected">{{ $aluno->instituicao->nome }}</option>
                                     @endif
@@ -402,14 +402,14 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('ano_conclusao_superior', 'Ano Conclusão') !!}
-                                {!! Form::text('ano_conclusao_superior', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[ano_conclusao_superior]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoa[ano_conclusao_superior]', Session::getOldInput('pessoa[ano_conclusao_superior]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {!! Form::label('outra_escola', 'Outra Instituição') !!}
-                                {!! Form::text('outra_escola', Session::getOldInput('outra_escola'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[outra_escola]', 'Outra Instituição') !!}
+                                {!! Form::text('pessoa[outra_escola]', Session::getOldInput('pessoa[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 
@@ -426,38 +426,38 @@
                     <div class="col-md-6">
 
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('rg_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('rg_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('rg_doc_obrigatorio', 'RG', false) !!}
+                            {!! Form::hidden('pessoa[rg_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[rg_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[rg_doc_obrigatorio]', 'RG', false) !!}
                         </div>
 
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('cpf_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('cpf_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('cpf_doc_obrigatorio', 'CPF', false) !!}
+                            {!! Form::hidden('pessoa[cpf_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[cpf_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[cpf_doc_obrigatorio]', 'CPF', false) !!}
                         </div>
 
                         <!-- Certidão de Nascimento ou Casamento -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('certidao_nasc_cas_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('certidao_nasc_cas_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('certidao_nasc_cas_doc_obrigatorio', 'Certidão de nascimento ou casamento ', false) !!}
+                            {!! Form::hidden('pessoa[certidao_nasc_cas_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[certidao_nasc_cas_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[certidao_nasc_cas_doc_obrigatorio]', 'Certidão de nascimento ou casamento ', false) !!}
                         </div>
                         <!-- Fim Certidão de Nascimento ou Casamento -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('titulo_eleitor_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('titulo_eleitor_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('titulo_eleitor_doc_obrigatorio', 'Título de eleitor e comprovante de votação', false) !!}
+                            {!! Form::hidden('pessoa[titulo_eleitor_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[titulo_eleitor_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[titulo_eleitor_doc_obrigatorio]', 'Título de eleitor e comprovante de votação', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Histórico Graduação Autenticado -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('histo_gradu_autentic_obrigatorio', 0) !!}
-                            {!! Form::checkbox('histo_gradu_autentic_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('histo_gradu_autentic_obrigatorio', 'Histórico Graduação Autenticado', false) !!}
+                            {!! Form::hidden('pessoa[histo_gradu_autentic_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[histo_gradu_autentic_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[histo_gradu_autentic_obrigatorio]', 'Histórico Graduação Autenticado', false) !!}
                         </div>
                         <!-- Fim Histórico Graduação Autenticado -->
 
@@ -469,35 +469,35 @@
 
                         <!-- Título de Eleitor e último comprovante de votação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('reservista_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('reservista_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('reservista_doc_obrigatorio', 'Atestado de alaistamento militar ou reservista', false) !!}
+                            {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alaistamento militar ou reservista', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('diploma_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('diploma_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('diploma_doc_obrigatorio', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('fotos_3x4_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('fotos_3x4_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('fotos_3x4_doc_obrigatorio', '2 fotos 3x4', false) !!}
+                            {!! Form::hidden('pessoa[diploma_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[diploma_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[diploma_doc_obrigatorio]', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
 
                         <!-- Título de Eleitor e último comprovante de votação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('comp_residencia_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('comp_residencia_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('comp_residencia_doc_obrigatorio', 'Comprovante de residência ', false) !!}
+                            {!! Form::hidden('pessoa[fotos_3x4_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[fotos_3x4_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[fotos_3x4_doc_obrigatorio]', '2 fotos 3x4', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[comp_residencia_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[comp_residencia_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[comp_residencia_doc_obrigatorio]', 'Comprovante de residência ', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 

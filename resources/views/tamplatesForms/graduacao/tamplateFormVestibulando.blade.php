@@ -1262,27 +1262,27 @@
             allowedFileExtensions : ['pdf'],
         });
 
-        // Estado inicial enem
-        @if(isset($aluno->enem) && $aluno->enem)
-            $('#liEnem').show();
-            $('#liFicha19').hide();
-        @else
-            $('#liEnem').hide();
-            $('#liFicha19').show();
-        @endif
+        {{--// Estado inicial enem--}}
+        {{--@if(isset($aluno->enem) && $aluno->enem)--}}
+            {{--$('#liEnem').show();--}}
+            {{--$('#liFicha19').hide();--}}
+        {{--@else--}}
+            {{--$('#liEnem').hide();--}}
+            {{--$('#liFicha19').show();--}}
+        {{--@endif--}}
 
-        // Regra de negócio aba enem e ficha19
-        $(document).on('change', '#ingresso_enem', function () {
-           if(this.checked) {
-               $('#liEnem').show();
-               $('#aEnem').trigger('click');
-               $('#liFicha19').hide();
-           } else {
-               $('#liEnem').hide();
-               $('#liFicha19').show();
-               $('#aFicha19').trigger('click');
-           }
-        });
+        {{--// Regra de negócio aba enem e ficha19--}}
+        {{--$(document).on('change', '#ingresso_enem', function () {--}}
+           {{--if(this.checked) {--}}
+               {{--$('#liEnem').show();--}}
+               {{--$('#aEnem').trigger('click');--}}
+               {{--$('#liFicha19').hide();--}}
+           {{--} else {--}}
+               {{--$('#liEnem').hide();--}}
+               {{--$('#liFicha19').show();--}}
+               {{--$('#aFicha19').trigger('click');--}}
+           {{--}--}}
+        {{--});--}}
     </script>
 
 @stop

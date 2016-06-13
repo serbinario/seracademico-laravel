@@ -13,7 +13,7 @@ class SituacaoAluno extends Model implements Transformable
     /**
      * @var string
      */
-    protected $table    = "fac_situacao_aluno";
+    protected $table    = "fac_situacao";
 
     /**
      * @var array

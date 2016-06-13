@@ -132,9 +132,6 @@ class AlunoController extends Controller
             #Recuperando o aluno
             $aluno = $this->service->find($id);
 
-            #Tratando as datas
-            $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
-
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 

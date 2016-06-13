@@ -44,14 +44,14 @@ class AlunoService
         #Recuperando o registro no banco de dados
 
         $relacionamentos = [
-            'endereco.bairro.cidade.estado',
-            'estadoCivil',
-            'sexo',
-            'turno',
-            'grauInstrucao',
-            'profissao',
-            'corRaca',
-            'ufNascimento',
+            'pessoa.endereco.bairro.cidade.estado',
+            'pessoa.estadoCivil',
+            'pessoa.sexo',
+            'pessoa.turno',
+            'pessoa.grauInstrucao',
+            'pessoa.profissao',
+            'pessoa.corRaca',
+            'pessoa.ufNascimento',
         ];
 
         $aluno = $this->repository->with($relacionamentos)->find($id);
@@ -203,46 +203,5 @@ class AlunoService
 
         #retorno
         return $data;
-    }
-
-    /**
-     * @param $date
-     * @return bool|string
-     */
-    public function convertDate($date, $format)
-    {
-        #declarando variável de retorno
-        $result = "";
-
-        #convertendo a data
-        if (!empty($date) && !empty($format)) {
-            #Fazendo o tratamento por idioma
-            switch ($format) {
-                case 'pt-BR' : $result = date_create_from_format('Y-m-d', $date); break;
-                case 'en'    : $result = date_create_from_format('d/m/Y', $date); break;
-            }
-        }
-
-        #retorno
-        return $result;
-    }
-
-    /**
-     * @param Aluno $aluno
-     */
-    public function getAlunoWithDateFormatPtBr(Aluno $aluno)
-    {
-        #validando as datas
-        $aluno->data_expedicao   = $aluno->data_expedicao == '0000-00-00' ? "" : $aluno->data_expedicao;
-        $aluno->data_nasciemento = $aluno->data_nasciemento == '0000-00-00' ? "" : $aluno->data_nasciemento;
-
-        #tratando as datas
-        $aluno->data_expedicao   = date('d/m/Y', strtotime($aluno->data_expedicao));
-        $aluno->data_nasciemento = date('d/m/Y', strtotime($aluno->data_nasciemento));
-        //$aluno->data_exame_nacional_um   = date('d/m/Y', strtotime($aluno->data_exame_nacional_um));
-        //$aluno->data_exame_nacional_dois = date('d/m/Y', strtotime($aluno->data_exame_nacional_dois));
-
-        #return
-        return $aluno;
     }
 }
