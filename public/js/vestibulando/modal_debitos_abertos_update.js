@@ -98,6 +98,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
         if(retorno.success) {
             tableDebitosAbertos.ajax.reload();
             tableDebitosPagos.ajax.reload();
+            table.ajax.reload();
 
             $('#modal-debitos-abertos-update').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
@@ -118,6 +119,7 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
     }).done(function (retorno) {
         if(retorno.success) {
             tableDebitosAbertos.ajax.reload();
+            table.ajax.reload();
             
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
