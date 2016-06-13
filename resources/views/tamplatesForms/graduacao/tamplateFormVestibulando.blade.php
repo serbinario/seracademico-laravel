@@ -1194,7 +1194,7 @@
         * https://github.com/kartik-v/bootstrap-fileinput
         */
         $("#path_comprovante_enem").fileinput({
-            @if($aluno->path_comprovante_enem)
+            @if(isset($aluno->path_comprovante_enem))
                 initialPreviewFileType: 'object',
                 initialPreview:[
                     '/images/{{$aluno->path_comprovante_enem}}'
@@ -1215,7 +1215,7 @@
         });
 
         $("#path_comprovante_endereco").fileinput({
-            @if($aluno->path_comprovante_endereco)
+            @if(isset($aluno->path_comprovante_endereco))
                 initialPreviewFileType: 'object',
                 initialPreview:[
                     '/images/{{$aluno->path_comprovante_endereco}}'
@@ -1235,7 +1235,7 @@
         });
 
         $("#path_comprovante_ficha19").fileinput({
-            @if($aluno->path_comprovante_ficha19)
+            @if(isset($aluno->path_comprovante_ficha19))
                 initialPreviewFileType: 'object',
                 initialPreview:[
                     '/images/{{$aluno->path_comprovante_ficha19}}'
