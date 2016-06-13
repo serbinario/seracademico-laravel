@@ -28,6 +28,6 @@ $factory->define(Seracademico\Entities\Pessoa::class, function (Faker\Generator 
         'nome_mae' => $faker->name,
         'cpf' => $faker->numerify('###########'),
         'identidade' => $faker->numerify('#######'),
-        'data_nasciemento' => $faker->dateTime
+        'data_nasciemento' => $faker->date('d/m/Y'),
     ];
 });
