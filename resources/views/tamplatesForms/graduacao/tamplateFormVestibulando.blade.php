@@ -1263,7 +1263,13 @@
         });
 
         // Estado inicial enem
-        $('#liEnem').hide();
+        @if(isset($aluno->enem) && $aluno->enem)
+            $('#liEnem').show();
+            $('#liFicha19').hide();
+        @else
+            $('#liEnem').hide();
+            $('#liFicha19').show();
+        @endif
 
         // Regra de negócio aba enem e ficha19
         $(document).on('change', '#ingresso_enem', function () {
