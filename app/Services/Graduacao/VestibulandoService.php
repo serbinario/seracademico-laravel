@@ -569,7 +569,7 @@ class VestibulandoService
 
         # Verificando se o aluno já foi transferido
         if($vestibulando->aluno) {
-            $this->alunoRepository->update($vestibulando->aluno->id, $dados);
+            $this->alunoRepository->update($dados, $vestibulando->aluno->id);
         } else {
             # Recuperando a data atual
             $now = new \DateTime('now');
