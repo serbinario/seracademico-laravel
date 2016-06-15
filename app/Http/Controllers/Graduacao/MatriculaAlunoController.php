@@ -95,6 +95,13 @@ class MatriculaAlunoController extends Controller
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('fac_alunos', 'fac_alunos.curriculo_id', '=', 'fac_curriculos.id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_disciplinas')
+                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->orderBy('fac_curriculo_disciplina.periodo')
             ->select([
@@ -357,8 +364,8 @@ class MatriculaAlunoController extends Controller
             $rows = \DB::table("fac_horarios")
                 ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
                 ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
-                ->select('fac_horarios.id')
-                ->lists('fac_horarios.id');
+                ->select('fac_horarios.id', 'fac_turmas_disciplinas.disciplina_id')
+                ->get();
 
             # Recuperando o aluno
             $aluno = $this->alunoService->find($dados['idAluno']);
@@ -381,8 +388,9 @@ class MatriculaAlunoController extends Controller
                 $semestre->pivot->situacoes()->attach([1]);
             }
            
-            # cadastrando os horários
-            $semestre->pivot->horarios()->attach($rows);
+            # cadastrando os horários e disciplinas
+            $semestre->pivot->horarios()->attach(array_unique(array_column($rows, 'id')));
+            $semestre->pivot->disciplinas()->attach(array_unique(array_column($rows, 'disciplina_id')));
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

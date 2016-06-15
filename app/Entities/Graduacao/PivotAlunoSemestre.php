@@ -50,4 +50,12 @@ class PivotAlunoSemestre extends Pivot implements Transformable
     {
         return $this->belongsToMany(HorarioDisciplinaTurma::class, "fac_alunos_semestres_horarios", "aluno_semestre_id", "horario_id");
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function disciplinas()
+    {
+        return $this->belongsToMany(Disciplina::class, "fac_alunos_semestres_disciplinas", "aluno_semestre_id", "disciplina_id");
+    }
 }
