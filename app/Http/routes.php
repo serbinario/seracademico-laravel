@@ -10,12 +10,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
-            Route::get('index', ['as' => 'index', 'uses' => 'MatriculaAlunoController@index']);
-            Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'MatriculaAlunoController@gridAluno']);
-            Route::get('gridDisciplina/{idAluno}', ['as' => 'gridDisciplina', 'uses' => 'MatriculaAlunoController@gridDisciplina']);
-            Route::get('gridHorario/{idAluno}', ['as' => 'gridHorario', 'uses' => 'MatriculaAlunoController@gridHorario']);
-            Route::post('getTurmas', ['as' => 'getTurmas', 'uses' => 'MatriculaAlunoController@getTurmas']);
-            Route::post('adicionarHorarioAluno', ['as' => 'adicionarHorarioAluno', 'uses' => 'MatriculaAlunoController@adicionarHorarioAluno']);
+            Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
+            Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);
+            Route::get('gridDisciplina/{idAluno}', ['as' => 'gridDisciplina', 'uses' => 'Graduacao\MatriculaAlunoController@gridDisciplina']);
+            Route::get('gridHorario/{idAluno}', ['as' => 'gridHorario', 'uses' => 'Graduacao\MatriculaAlunoController@gridHorario']);
+            Route::post('getTurmas', ['as' => 'getTurmas', 'uses' => 'Graduacao\MatriculaAlunoController@getTurmas']);
+            Route::post('adicionarHorarioAluno', ['as' => 'adicionarHorarioAluno', 'uses' => 'Graduacao\MatriculaAlunoController@adicionarHorarioAluno']);
+            Route::post('finalizarMatricula', ['as' => 'finalizarMatricula', 'uses' => 'Graduacao\MatriculaAlunoController@finalizarMatricula']);
         });
 
         Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
