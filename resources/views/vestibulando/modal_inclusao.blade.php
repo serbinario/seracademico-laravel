@@ -39,12 +39,12 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label for="periodo">Período</label>
-                            <input type="text" name="periodo" class="form-control" id="periodo">
-                        </div>
-                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="form-group col-md-12">--}}
+                            {{--<label for="periodo">Período</label>--}}
+                            {{--<input type="text" name="periodo" class="form-control" id="periodo">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                         {{--<div class="row">--}}
                             {{--<div class="form-group col-md-6">--}}

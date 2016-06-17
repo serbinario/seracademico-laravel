@@ -99,7 +99,7 @@ function builderHtmlFieldsEditar (dados) {
             $('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);
             $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
             $('#data_inclusao').val(retorno.dados.data_inclusao);
-            $('#periodo').val(retorno.dados.periodo);
+            //$('#periodo').val(retorno.dados.periodo);
 
             // Abrindo o modal de inserir disciplina
             $("#modal-inclusao").modal({show : true});

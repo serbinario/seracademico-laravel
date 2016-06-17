@@ -335,10 +335,10 @@ class VestibulandoController extends Controller
             $dadosRetorno = [];
            
             # Populando o array de retorno
-            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculos()->first()->curso->id) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
+            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculos) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
             $dadosRetorno['semestre_id'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->id : null;
-            $dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
+            //$dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
             $dadosRetorno['data_inclusao'] = isset($vestibulando->aluno->data_transferencia) ? $vestibulando->aluno->data_transferencia : null;
             $dadosRetorno['forma_admissao_id'] = isset($vestibulando->aluno->formaAdmissao->id) ? $vestibulando->aluno->formaAdmissao->id : null;
 

@@ -591,7 +591,8 @@ class VestibulandoService
             $aluno = $this->alunoRepository->create($dados);
             
             # matriculando o aluno
-            $aluno->semestres()->attach($dados['semestre_id'], ['periodo' => $dados['periodo']]);
+            //$aluno->semestres()->attach($dados['semestre_id'], ['periodo' => $dados['periodo']]);
+            $aluno->semestres()->attach($dados['semestre_id']);
             $aluno->curriculos()->attach($curriculo[0]->id);
         }        
         
