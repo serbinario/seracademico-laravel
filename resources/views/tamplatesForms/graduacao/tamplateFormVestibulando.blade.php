@@ -481,14 +481,14 @@
                             <li role="presentation" class="active">
                                 <a href="#cursos" aria-controls="cursos" data-toggle="tab">Opções de Cursos</a>
                             </li>
-                            <li role="presentation" id="liEnem">
-                                <a href="#enem"id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
-                            </li>
                             <li role="presentation">
                                 <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab">Comprovantes</a>
                             </li>
                             <li role="presentation" id="liFicha19">
                                 <a href="#ficha19" id="aFicha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha 19</a>
+                            </li>
+                            <li role="presentation" id="liEnem">
+                                <a href="#enem"id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->
@@ -731,25 +731,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-4">
+                                <div class="checkbox checkbox-primary">
+                                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
+                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                                    @else
+                                        {!! Form::hidden('gerar_inscricao', 0) !!}
+                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
+                                    @endif
+                                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             {{-- Fim da aba vestibular --}}
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group col-md-4">
-                    <div class="checkbox checkbox-primary">
-                        @if(isset($aluno) && $aluno->gerar_inscricao == 1)
-                            {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                        @else
-                            {!! Form::hidden('gerar_inscricao', 0) !!}
-                            {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
-                        @endif
-                        {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
