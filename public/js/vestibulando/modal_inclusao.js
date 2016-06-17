@@ -10,9 +10,9 @@ function loadFieldsEditar()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Curso|byCurriculoAtivo,1',
+            'Graduacao\\Curso|byVestibulando,' + idVestibulando,
             'Turno',
-            'FormaAdmissao',
+            'FormaAdmissao|byId,1',
             'Graduacao\\Semestre'
         ]
     };

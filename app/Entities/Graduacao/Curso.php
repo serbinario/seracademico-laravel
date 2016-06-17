@@ -271,6 +271,38 @@ class Curso extends Model implements Transformable
 
     /**
      * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeByVestibulando($query, $value)
+    {
+        return $query->select('fac_cursos.nome', 'fac_cursos.id')
+            ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('fac_cursos.tipo_nivel_sistema_id', 1)
+            ->where("fac_cursos.ativo", 1)
+            ->where('fac_curriculos.ativo', 1)
+            ->whereIn('fac_cursos.id', function ($query) use ($value) {
+                # recuperando o vestibulando
+                $vestibulando = \DB::table('fac_vestibulandos')
+                    ->select([
+                        'fac_vestibulandos.primeira_opcao_curso_id as pOpacao',
+                        'fac_vestibulandos.segunda_opcao_curso_id as sOpcao',
+                        'fac_vestibulandos.terceira_opcao_curso_id as tOpcao'
+                    ])
+                    ->where('fac_vestibulandos.id', $value)->get();
+
+
+                # query principal
+                $query->from('fac_cursos')
+                    ->whereIn('fac_cursos.id', [$vestibulando[0]->pOpacao, $vestibulando[0]->sOpcao, $vestibulando[0]->tOpcao])
+                    ->select([
+                        'fac_cursos.id'
+                    ]);
+            });
+    }
+
+    /**
+     * @param $query
      * @return mixed
      */
     public function scopeAtivo($query, $value)

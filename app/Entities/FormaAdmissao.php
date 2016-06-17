@@ -15,4 +15,14 @@ class FormaAdmissao extends Model implements Transformable
     protected $fillable = [
         'nome'
     ];
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeById($query, $value)
+    {
+        return $query->where('id', $value);
+    }
 }

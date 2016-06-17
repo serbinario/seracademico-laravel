@@ -31,6 +31,7 @@
                         </div>
                     </div>
 
+                    @role('ADMIN')
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="semestre_id">Semestre</label>
@@ -38,6 +39,7 @@
                             </select>
                         </div>
                     </div>
+                    @endrole
 
                     {{--<div class="row">--}}
                         {{--<div class="form-group col-md-12">--}}
