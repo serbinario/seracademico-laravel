@@ -94,7 +94,7 @@ function builderHtmlFieldsEditar (dados) {
 
 
             // Setando os valores do model no formulário
-            $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true);
+            $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
             $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
             $('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);
             $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);

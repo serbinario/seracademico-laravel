@@ -550,16 +550,12 @@ class VestibulandoService
     {
         # Recuperando o vestibulando e o currículo
         $vestibulando = $this->repository->find($idVestibulando);
-        $curriculo    = Curriculo::byCurso($dados['curso_id']);
+
 
         # Verificando se o vestibulando existe
-        if(!$vestibulando && !$curriculo) {
+        if(!$vestibulando && count($curriculo) == 0) {
             throw new \Exception('Vestibulando não existe');
         }
-
-        # Regra de negócio do currículo
-        unset($dados['curso_id']);
-        $dados['curriculo_id'] = $curriculo[0]->id;
 
         # Regra de negócio da data
         $dados['data_transferencia'] = new \DateTime('now');
@@ -571,6 +567,19 @@ class VestibulandoService
         if($vestibulando->aluno) {
             $this->alunoRepository->update($dados, $vestibulando->aluno->id);
         } else {
+            # Verificando se o curso foi passado
+            if(!isset($dados['curso_id'])) {
+                throw new \Exception('Curso não informado.');
+            }
+
+            # recuperando o currúculo
+            $curriculo = Curriculo::byCurso($dados['curso_id']);
+
+            # Verificando se o currículo existe
+            if(count($curriculo) == 0) {
+                throw new \Exception('Currículo não encontrado.');
+            }
+
             # Recuperando a data atual
             $now = new \DateTime('now');
 
@@ -583,6 +592,7 @@ class VestibulandoService
             
             # matriculando o aluno
             $aluno->semestres()->attach($dados['semestre_id'], ['periodo' => $dados['periodo']]);
+            $aluno->curriculos()->attach($curriculo[0]->id);
         }        
         
         #retorno

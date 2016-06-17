@@ -41,7 +41,6 @@ class Aluno extends Model implements Transformable
         'pessoa_id',
         'turno_id',
         'forma_admissao_id',
-        'curriculo_id',
         'vestibulando_id',
         'path_image'
     ];
@@ -93,6 +92,14 @@ class Aluno extends Model implements Transformable
     {
         return $this->belongsToMany(Semestre::class, 'fac_alunos_semestres', 'aluno_id', 'semestre_id')
             ->withPivot(['id', 'periodo']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function curriculos()
+    {
+        return $this->belongsToMany(Curriculo::class, 'fac_alunos_cursos', 'aluno_id', 'curriculo_id');
     }
 
     /**

@@ -333,9 +333,9 @@ class VestibulandoController extends Controller
             # Recuperando o vestibulando
             $vestibulando = $this->service->find($idVestibulando);
             $dadosRetorno = [];
-
+           
             # Populando o array de retorno
-            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculo->id) ? $vestibulando->aluno->curriculo->id : null;
+            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculos()->first()->curso->id) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
             $dadosRetorno['semestre_id'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->id : null;
             $dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
