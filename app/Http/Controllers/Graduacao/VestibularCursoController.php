@@ -60,7 +60,7 @@ class VestibularCursoController extends Controller
             $pivotCurso    = $objVestibular->cursos()->find($row->idCurso)->pivot;
 
             # Regra para remoção do curso
-            if(count($pivotCurso->materias) == 0 && count($pivotCurso->turnos) == 0) {
+            if(count($objVestibular->vestibulandos) == 0 && count($pivotCurso->materias) == 0 && count($pivotCurso->turnos) == 0) {
                 $html .= '<a class="btn-floating indigo" id="removerCurso" title="remover Curso"><i class="material-icons">delete</i></a>';
             }
 

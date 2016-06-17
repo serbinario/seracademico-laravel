@@ -43,6 +43,7 @@ class VestibularCursoTurnoController extends Controller
         $rows = \DB::table('fac_vestibular_curso_turno')
             ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_vestibular_curso_turno.turno_id')
             ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_turno.vestibular_curso_id')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulares_cursos.vestibular_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
             ->where('fac_vestibulares_cursos.id', $idVestibularCurso)
             ->select([
@@ -51,12 +52,25 @@ class VestibularCursoTurnoController extends Controller
                 'fac_turnos.nome',
                 'fac_cursos.id as idCurso',
                 'fac_vestibular_curso_turno.descricao',
-                'fac_vestibular_curso_turno.qtd_vagas'
+                'fac_vestibular_curso_turno.qtd_vagas',
+                'fac_vestibulares.id as idVestibular'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a class="btn-floating indigo" id="removerCursoTurno" title="remover Curso"><i class="material-icons">delete</i></a>';
+            # html de retonto
+            $html = "";
+
+            #recuperando o vestibular
+            $vestibular = $this->service->find($row->idVestibular);
+
+            #regra de negócio
+            if(count($vestibular->vestibulandos) == 0) {
+                $html .= '<a class="btn-floating indigo" id="removerCursoTurno" title="remover Curso"><i class="material-icons">delete</i></a>';
+            }
+
+            #retorno
+            return $html;
         })->make(true);
     }
 
