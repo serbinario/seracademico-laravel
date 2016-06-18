@@ -32,7 +32,8 @@ class PivotAlunoSemestre extends Pivot implements Transformable
      */
     public function situacoes()
     {
-        return $this->belongsToMany(SituacaoAluno::class, "fac_alunos_situacoes", "aluno_semestre_id", "situacao_id");
+        return $this->belongsToMany(SituacaoAluno::class, "fac_alunos_situacoes", "aluno_semestre_id", "situacao_id")
+            ->withPivot(['observacao', 'curriculo_origem_id', 'curriculo_destino_id']);
     }
 
     /**

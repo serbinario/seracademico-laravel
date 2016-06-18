@@ -1,5 +1,15 @@
 @extends('menu')
 
+@section("css")
+    <link rel="stylesheet" href="{{ asset('/js/graduacao/aluno/css/modal_historico.css') }}">
+
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+@stop
+
 @section('content')
 
     <div class="ibox float-e-margins">
@@ -44,11 +54,14 @@
         </div>
     </div>
 
+    @include('graduacao.aluno.modal_historico')
+    @include('graduacao.aluno.modal_create_historico')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_historico.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_historico.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -66,5 +79,21 @@
 
         // Id do aluno corrente
         var idAluno;
+
+        // Evento para abrir o modal de histórico
+        $(document).on("click", "#modalHistorico", function () {
+            // recuperando o id do aluno
+            idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            // Recuperando o nome e a matrícula
+            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+
+            // prenchendo o titulo do nome do aluno
+            $('#nomeDoAluno').text('Nome: ' + nomeAluno);
+
+            // Executando o script de histórico
+            runHistorico(idAluno);
+        });
     </script>
 @stop

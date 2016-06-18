@@ -1,10 +1,10 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-inclusao" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+<div id="modal-create-historico" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 30%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Transfência de vestibulando para aluno</h4>
+                <h4 class="modal-title">Novo Histórico</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -57,8 +57,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="btnUpdateInclusao">Salvar</button>
-                <button class="btn btn-default" data-dismiss="modal" id="btnCancelInclusao">Cancelar</button>
+                <button class="btn btn-primary" id="btnSaveHistorico">Salvar</button>
+                <button class="btn btn-default" data-dismiss="modal" id="btnCancelHistorico">Cancelar</button>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace Seracademico\Services\Graduacao;
 
 use Seracademico\Entities\Graduacao\Aluno;
+use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
@@ -184,21 +185,122 @@ class AlunoService
      * @param array $models
      * @return array
      */
-    public function load(array $models) : array
+    public function load(array $models, $ajax = false) : array
     {
         #Declarando variáveis de uso
-        $result = [];
+        $result    = [];
+        $expressao = [];
 
         #Criando e executando as consultas
         foreach ($models as $model) {
-            #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\$model";
+            # separando as strings
+            $explode   = explode("|", $model);
 
-            #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Seracademico\\Entities\\$model";
+
+            #Verificando se existe sobrescrita do nome do model
+            $model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id']);
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+                }
+            } else {
+                if(count($expressao) > 1) {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
+            }
+
+            # Limpando a expressão
+            $expressao = [];
         }
 
         #retorno
         return $result;
+    }
+
+    /**
+     * @param array $dados
+     * @param $idAluno
+     * @throws \Exception
+     */
+    public function saveHistorico(array $dados, $idAluno)
+    {
+        # Recuperando o aluno
+        $aluno = $this->repository->find($idAluno);
+
+        # Verificando o aluno foi encontrado
+        if(!$aluno) {
+            throw new \Exception('Aluno não encontrado.');
+        }
+
+        # Verificando se curso foi passado
+        if(!isset($dados['curso_id'])) {
+            throw new \Exception('Curso não informado.');
+        }
+
+        # recuperando o currúculo
+        $curriculo = Curriculo::byCurso($dados['curso_id']);
+
+        # Verificando se o currículo existe
+        if(count($curriculo) == 0) {
+            throw new \Exception('Currículo não encontrado.');
+        }
+
+        # Recuperando a data atual
+        $now = new \DateTime('now');
+
+        # Geração da matrícula
+        $dados['matricula'] = $now->format('YmdHis');
+
+        # matriculando o aluno
+        # Regra de negócio para o semestre
+        $aluno->semestres()->attach($dados['semestre_id']);
+
+        #Adicionando o currículo ao aluno
+        $aluno->curriculos()->attach($curriculo[0]->id);
+
+        # cadastrando a situação
+        $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data' => $now->format('YmdHis')]);
+
+        #retorno
+        return true;
+    }
+
+    /**
+     * @param $idAlunoSemestre
+     * @return bool
+     */
+    public function deleteHistorico($idAlunoSemestre)
+    {
+        \DB::table('fac_alunos_semestres')->where('id', $idAlunoSemestre)->delete();
+
+        return true;
+    }
+
+    /**
+     * @param $idAlunoSemestre
+     * @return bool
+     */
+    public function deleteSituacao($idAlunoSituacao)
+    {
+        \DB::table('fac_alunos_situacoes')->where('id', $idAlunoSituacao)->delete();
+
+        return true;
     }
 }

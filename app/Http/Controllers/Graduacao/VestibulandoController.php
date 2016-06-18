@@ -333,9 +333,9 @@ class VestibulandoController extends Controller
             # Recuperando o vestibulando
             $vestibulando = $this->service->find($idVestibulando);
             $dadosRetorno = [];
-           
+
             # Populando o array de retorno
-            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->curriculos) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
+            $dadosRetorno['curso_id'] = isset($vestibulando->aluno->id) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
             $dadosRetorno['semestre_id'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->id : null;
             //$dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
@@ -361,10 +361,10 @@ class VestibulandoController extends Controller
             $data = $request->all();
             
             #Executando a ação
-            $this->service->updateInclusao($data, $id);
+            $mensagem = $this->service->updateInclusao($data, $id);
 
             #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Vestibulando transferido com sucesso!']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => $mensagem]);
         } catch (\Throwable $e) {dd($e);
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }

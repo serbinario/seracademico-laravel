@@ -79,6 +79,7 @@ class AlunoController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating indigo" title="Histórico do aluno" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>                     
                         <li><a class="btn-floating" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
                     </ul>
                     </div>';

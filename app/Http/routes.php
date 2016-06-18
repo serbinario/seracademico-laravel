@@ -167,6 +167,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'Graduacao\AlunoController@contrato']);
+
+                // Histórico do aluno
+                Route::group(['prefix' => 'historico', 'as' => 'historico.'], function () {
+                    Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Graduacao\HistoricoAlunoController@gridHistorico']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\HistoricoAlunoController@getLoadFields']);
+                    Route::post('save/{idAluno}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@saveHistorico']);
+                    Route::post('delete/{idAlunoSemestre}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@deleteHistorico']);
+
+                    // Situações do histórico
+                    Route::group(['prefix' => 'situacao', 'as' => 'situacao.'], function () {
+                        Route::get('grid/{idAlunoSemestre}', ['as' => 'grid', 'uses' => 'Graduacao\HistoricoAlunoController@gridSituacao']);
+                        Route::post('delete/{idAlunoSituacao}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@deleteSituacao']);
+                    });
+                });
             });
 
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {

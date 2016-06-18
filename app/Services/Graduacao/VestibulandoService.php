@@ -548,6 +548,9 @@ class VestibulandoService
      */
     public function updateInclusao($dados, $idVestibulando)
     {
+        # variável que armazenará a mensagem de retorno
+        $mensagem = "";
+
         # Recuperando o vestibulando e o currículo
         $vestibulando = $this->repository->find($idVestibulando);
 
@@ -566,6 +569,9 @@ class VestibulandoService
         # Verificando se o aluno já foi transferido
         if($vestibulando->aluno) {
             $this->alunoRepository->update($dados, $vestibulando->aluno->id);
+
+            # setando a mensagem
+            $mensagem = "Dados de transferência atualizados com sucesso!";
         } else {
             # Verificando se o curso foi passado
             if(!isset($dados['curso_id'])) {
@@ -597,10 +603,16 @@ class VestibulandoService
 
             #Adicionando o currículo ao aluno
             $aluno->curriculos()->attach($curriculo[0]->id);
+
+            # cadastrando a situação
+            $aluno->semestres()->find($semestre)->pivot->situacoes()->attach(1, ['data' => $now->format('YmdHis')]);
+
+            # setando a mensagem
+            $mensagem = "Transferência realizada com sucesso!";
         }        
         
         #retorno
-        return true;
+        return $mensagem;
     }
 
     /**
