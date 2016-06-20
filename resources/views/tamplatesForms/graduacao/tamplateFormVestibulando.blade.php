@@ -1023,6 +1023,21 @@
             // Recuperando o id do vestibular selecionado
             var vestibularId = $(this).find("option:selected").val();
 
+            // carregando os campos
+            loadOpcoesCurso(vestibularId);
+        });
+
+        // Regra para carregamento dos cursos a partir do vestibular escolhido
+        $(document).on('ready', function () {
+            // Recuperando o id do vestibular selecionado
+            var vestibularId = $("#vestibular_id").find("option:selected").val();
+
+            // carregando os campos
+            loadOpcoesCurso(vestibularId);
+        });
+
+        // função para carregar as opções de curso
+        function loadOpcoesCurso(vestibularId) {
             // Verificando o id do vestibular
             if(vestibularId) {
                 jQuery.ajax({
@@ -1034,24 +1049,37 @@
                     data: {'vestibularId' : vestibularId},
                     datatype: 'json'
                 }).done(function (json) {
+                    // Variável que armazenará os options do select
                     var option = "";
 
+                    // Criando os options dos selects
                     option += '<option value="">Selecione um Curso</option>';
                     for (var i = 0; i < json.data.length; i++) {
                         option += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
                     }
 
+                    // recuperando os ids das opções de curso caso seja edit
+                    var idOpcao1 = $('#primeira_opcao_curso_id').find('option:selected').val();
+                    var idOpcao2 = $('#segunda_opcao_curso_id').find('option:selected').val();
+                    var idOpcao3 = $('#terceira_opcao_curso_id').find('option:selected').val();
+
+                    // carregando a primeira opção de curso
                     $('#primeira_opcao_curso_id option').remove();
                     $('#primeira_opcao_curso_id').append(option);
+                    $('#primeira_opcao_curso_id option[value=' + idOpcao1 + ']').prop('selected', true);
 
+                    // carregando a segunda opção de curso
                     $('#segunda_opcao_curso_id option').remove();
                     $('#segunda_opcao_curso_id').append(option);
+                    $('#segunda_opcao_curso_id option[value=' + idOpcao2 + ']').prop('selected', true);
 
+                    // carregando a terceira opção de curso
                     $('#terceira_opcao_curso_id option').remove();
                     $('#terceira_opcao_curso_id').append(option);
+                    $('#terceira_opcao_curso_id option[value=' + idOpcao3 + ']').prop('selected', true);
                 });
             }
-        });
+        }
 
         // Evento para pesquisar o cpf do digito no search
         $(document).on('click', '#btnSearchCpf', function () {
@@ -1193,15 +1221,21 @@
                     options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
                 }
 
+                // recuperando o id da option selecianda caso seja edit
+                //idOption = $(idHtml).find('option:selected').val();
+
                 // Gerando o html
                 $(idHtml).find('option').remove();
                 $(idHtml).append(options);
+                //$(idHtml).find('option[value=' + idOption + ']').prop('selected', true);
             });
         }
 
         /*
-        *http://plugins.krajee.com/
+        * http://plugins.krajee.com/
         * https://github.com/kartik-v/bootstrap-fileinput
+        *
+        * comprovante enem
         */
         $("#path_comprovante_enem").fileinput({
             @if(isset($aluno->path_comprovante_enem))
@@ -1224,6 +1258,7 @@
             allowedFileExtensions : ['pdf'],
         });
 
+        // comprovante endereço
         $("#path_comprovante_endereco").fileinput({
             @if(isset($aluno->path_comprovante_endereco))
                 initialPreviewFileType: 'object',
@@ -1244,6 +1279,7 @@
             allowedFileExtensions : ['pdf'],
         });
 
+        // comprovante ficha 19
         $("#path_comprovante_ficha19").fileinput({
             @if(isset($aluno->path_comprovante_ficha19))
                 initialPreviewFileType: 'object',
