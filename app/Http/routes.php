@@ -162,6 +162,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\AlunoController@grid']);
+                Route::get('search', ['as' => 'search', 'uses' => 'Graduacao\AlunoController@search']);
                 Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\AlunoController@create']);
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\AlunoController@edit']);

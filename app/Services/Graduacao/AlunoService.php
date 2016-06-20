@@ -125,7 +125,7 @@ class AlunoService
 
         #Vinculando o aluno ao semestre vigente
         $aluno->semestres()->attach($semestres[0]->id);
-        $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data', new \DateTime('now')]);
+        $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data'=> new \DateTime('now')]);
 
         #Vinculando o currículo ao aluno
         $aluno->curriculos()->attach($data['curriculo_id']);
@@ -456,5 +456,31 @@ class AlunoService
             #Retorno
             return $e->getMessage();
         }
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public function search($key, $value)
+    {
+        # Joins
+        $relacionamentos = [
+            'instituicaoEscolar',
+            'endereco.bairro.cidade.estado',
+        ];
+
+        # Fazendo a consulta
+        $aluno = $this->pessoaRepository->with($relacionamentos)->findWhere([ $key =>$value ]);
+
+        # Verificando o se o vestibulando foi recuperado
+        if(count($aluno) == 0) {
+            throw new \Exception("Dados não encontrados");
+        }
+
+        # Retorno
+        return $aluno;
     }
 }

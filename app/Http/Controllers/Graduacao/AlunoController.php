@@ -175,6 +175,25 @@ class AlunoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function search(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $dados = $this->service->search(key($data), $data[key($data)]);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 
     /**
      * Display a listing of the resource.
