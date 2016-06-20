@@ -93,7 +93,10 @@ class MatriculaAlunoController extends Controller
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-            ->join('fac_alunos', 'fac_alunos.curriculo_id', '=', 'fac_curriculos.id')
+            ->join(\DB::raw('(SELECT fac_alunos_cursos.* FROM fac_alunos_cursos ORDER BY fac_alunos_cursos.id DESC LIMIT 1)fac_alunos_cursos'), function ($join) {
+                $join->on('fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id');
+            })
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
                 $query->from('fac_alunos_semestres_disciplinas')
@@ -113,9 +116,9 @@ class MatriculaAlunoController extends Controller
                     'fac_curriculo_disciplina.periodo',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'pessoas.nome as nomeAluno',
-                    'fac_cursos.nome as nomeCurso']
-            );
-
+                    'fac_cursos.nome as nomeCurso'
+            ]);
+       
         #Editando a grid
         return Datatables::of($rows)->make(true);
     }

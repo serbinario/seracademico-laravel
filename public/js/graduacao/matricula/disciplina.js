@@ -6,7 +6,11 @@ function loadTableDisciplina(idAluno)
 {
     // Carregando a tabela de disciplina
     tableDisciplina = $('#disciplina-grid').on( 'init.dt', function ( e, settings, data ) {
-        $('#nomeCurso').text(data.data[0].nomeAluno + ' - ' +data.data[0].nomeCurso);
+        if(data.data.length > 0) {
+            $('#nomeCurso').text(data.data[0].nomeAluno + ' - ' +data.data[0].nomeCurso);
+        } else {
+            $('#nomeCurso').text("Nenhuma disciplina encontrada para esse aluno");
+        }
     }).DataTable({
         processing: true,
         serverSide: true,
