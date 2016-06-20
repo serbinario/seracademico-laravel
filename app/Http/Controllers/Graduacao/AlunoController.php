@@ -37,7 +37,10 @@ class AlunoController extends Controller
         'TipoSanguinio',
         'Estado',
         'CorRaca',
-        'SituacaoAluno'
+        'SituacaoAluno',
+        'Graduacao\\Curso|byCurriculoAtivo,1',
+        'Turno',
+        'FormaAdmissao'
     ];
 
     /**

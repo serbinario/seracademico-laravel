@@ -85,10 +85,10 @@ class AlunoService
     public function store(array $data) : Aluno
     {
         #regras de negócios
+        $this->tratamentoSemestre($data);
         $this->tratamentoImagem($data);
-//        #setando o nivel do sistema
-//        $data['tipo_nivel_sistema_id'] = 2;
-
+        $this->tratamentoMatricula($data);
+        $this->tratamentoCurso($data);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
@@ -119,6 +119,17 @@ class AlunoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
+        #Regra de negócio para cadastro do semestre
+        #Recuperando os semestres de configuração
+        $semestres = $this->getParametrosMatricula();
+
+        #Vinculando o aluno ao semestre vigente
+        $aluno->semestres()->attach($semestres[0]->id);
+        $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data', new \DateTime('now')]);
+
+        #Vinculando o currículo ao aluno
+        $aluno->curriculos()->attach($data['curriculo_id']);
+
         #Retorno
         return $aluno;
     }
@@ -130,6 +141,9 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
+        # Regras de negócio
+        $this->tratamentoMatricula($data);
+
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);
 
@@ -148,6 +162,78 @@ class AlunoService
 
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function tratamentoSemestre(array &$data)
+    {
+        # Recuperando os semestres
+        $semestres = $this->getParametrosMatricula();
+
+        # Verificando se os semestres de configuração estão válidos
+        if(count($semestres) == 2) {
+            new \Exception('Semestres não encontrados, por favor verifique na em "Configurações > Matrícula"');
+        }
+
+        #retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function tratamentoCurso(array &$data)
+    {
+        # Verificando se o curso foi informado
+        if(!isset($data['curso_id'])) {
+            throw new \Exception('Curso não informado');
+        }
+
+        # recuperando o currículo
+        $curriculo = Curriculo::byCurso($data['curso_id']);
+
+        # Verificando se o currículo foi encontrado
+        if(!$curriculo && !count($curriculo) == 1) {
+            throw new \Exception('Currículo não encontrado');
+        }
+
+        # tratando o array
+        unset($data['curso_id']);
+        $data['curriculo_id'] = $curriculo[0]->id;
+
+        # retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
     }
 
     /**
@@ -179,6 +265,34 @@ class AlunoService
 
         # retorno
         return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function tratamentoMatricula(array &$data) : array
+    {
+        # Validando o parâmetro
+        if(isset($data['gerar_matricula']) && $data['gerar_matricula'] == 1) {
+            # Gerando a matrícula
+            $data['matricula'] = $this->gerarMatricula();
+        }
+
+        # retorno
+        return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function gerarMatricula()
+    {
+        # recuperando a data atual
+        $now = new \DateTime('now');
+
+        #retorno
+        return $now->format('YmdHis');
     }
 
     /**
@@ -302,5 +416,45 @@ class AlunoService
         \DB::table('fac_alunos_situacoes')->where('id', $idAlunoSituacao)->delete();
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getParametrosMatricula()
+    {
+        try {
+            # Recuperando o item de parâmetro do semestre vigente
+            $queryParameter = \DB::table('fac_parametros')
+                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
+                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
+                ->where('fac_parametros_itens.id', 2)
+                ->orWhere('fac_parametros_itens.id', 3)
+                ->get();
+
+            # Validando o parametro
+            if(count($queryParameter) !== 2) {
+                throw new \Exception('Parâmetro do semestre vigente não configurado');
+            }
+
+            # Recuperando o semestre
+            $querySemestre = \DB::table('fac_semestres')
+                ->select(['fac_semestres.id', 'fac_semestres.nome'])
+                ->where('fac_semestres.nome', $queryParameter[0]->valor)
+                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
+                ->where('fac_semestres.ativo', 1)
+                ->get();
+
+            # Validando o parametro
+            if(count($querySemestre) !== 2) {
+                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
+            }
+
+            #Retorno
+            return $querySemestre;
+        } catch (\Throwable $e) {
+            #Retorno
+            return $e->getMessage();
+        }
     }
 }

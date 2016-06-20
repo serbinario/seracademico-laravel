@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-6">
                 {!! Form::label('pessoa[nome]', 'Nome *') !!}
                 {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
             </div>
@@ -13,17 +13,16 @@
                 {!! Form::label('pessoa[sexos_id]', 'Sexo ') !!}
                 {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control')) !!}
             </div>
-        </div>
-        <div class="row">
+
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
                 {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
-            <div class="form-group col-md-4">
-                {!! Form::label('situacao_id', 'Situacao') !!}
-                {!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
-            </div>
+            {{--<div class="form-group col-md-4">--}}
+                {{--{!! Form::label('situacao_id', 'Situacao') !!}--}}
+                {{--{!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}--}}
+            {{--</div>--}}
 
         </div>
     </div>
@@ -57,7 +56,9 @@
             <li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
             </li>
-
+            <li role="presentation">
+                <a href="#admissao" aria-controls="admissao" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Admissão</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
 
@@ -480,6 +481,39 @@
             </div>
             {{--Aba Documentos Obrigatorios--}}
 
+            {{-- Aba admissão --}}
+            <div role="tabpanel" class="tab-pane" id="admissao">
+                <br>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        {!! Form::label('curso_id', 'Curso') !!}
+                        @if(isset($aluno->id) && count($aluno->curriculos) > 0)
+                            {!! Form::select('curso_id', $loadFields['graduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('curso_id', $loadFields['graduacao\\curso'], null, array('class' => 'form-control')) !!}
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        {!! Form::label('turno_id', 'Turno') !!}
+                        @if(isset($aluno->id))
+                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
+                        @if(isset($aluno->id))
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
+                        @endif
+                    </div>
+                </div>
+            </div>
+            {{-- Fim aba admissão--}}
         </div>
     </div>
     <div class="col-md-10"></div>
@@ -487,7 +521,6 @@
     {{--Buttons Submit e Voltar--}}
     <div class="row">
         <div class="col-md-8">
-
         </div>
         <div class="col-md-2">
             {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
@@ -497,6 +530,22 @@
         </div>
     </div>
     {{--Fim Buttons Submit e Voltar--}}
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group col-md-4">
+            <div class="checkbox checkbox-primary">
+                @if(isset($aluno) && !empty($aluno->matricula))
+                    {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                @else
+                    {!! Form::hidden('gerar_matricula', 0) !!}
+                    {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
+                @endif
+                {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+            </div>
+        </div>
+    </div>
 </div>
 
 @section('javascript')
