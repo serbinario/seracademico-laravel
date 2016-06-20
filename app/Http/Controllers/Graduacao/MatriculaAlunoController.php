@@ -58,24 +58,23 @@ class MatriculaAlunoController extends Controller
         $alunos = \DB::table('fac_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->leftJoin('fac_alunos_semestres_disciplinas', 'fac_alunos_semestres_disciplinas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-            ->join(\DB::raw('(SELECT fac_alunos_situacoes.* FROM fac_alunos_situacoes ORDER BY fac_alunos_situacoes.id DESC LIMIT 1)fac_alunos_situacoes'), function ($join) {
-                $join->on('fac_alunos_situacoes.aluno_semestre_id', '=', 'fac_alunos_semestres.id');
-            })
-            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->where(function ($query) use ($semestres) {
-                $query->where('fac_situacao.id', 1)
-                    ->where('fac_semestres.id', $semestres[0]->id);
+                $query->where('fac_alunos_semestres_disciplinas.id', null)->where('fac_semestres.id', $semestres[0]->id);
+
             })
             ->orWhere(function ($query) use ($semestres) {
                 $query->where('fac_semestres.id', $semestres[1]->id);
             })
+            ->groupBy('fac_alunos.id')
             ->select([
                 'fac_alunos.id',
                 'pessoas.nome',
                 'pessoas.cpf',
                 'fac_alunos.matricula',
-                'pessoas.celular'
+                'pessoas.celular',
+                'fac_alunos_semestres.id as IDTESTE'
             ]);
 
         #Editando a grid
@@ -118,7 +117,7 @@ class MatriculaAlunoController extends Controller
                     'pessoas.nome as nomeAluno',
                     'fac_cursos.nome as nomeCurso'
             ]);
-       
+
         #Editando a grid
         return Datatables::of($rows)->make(true);
     }
