@@ -1300,6 +1300,42 @@
             allowedFileExtensions : ['pdf'],
         });
 
+        /*
+         * Regra para se o vestibulando já estiver sido transferido
+         * não poderá alterar nenhuma informação do vestibular
+        */
+        @if(isset($aluno->aluno->id))
+            $(document).on('ready', function () {
+                $("input[name=enem]").prop('disabled', true);
+                $("#primeira_opcao_curso_id").prop('disabled', true);
+                $("#segunda_opcao_curso_id").prop('disabled', true);
+                $("#terceira_opcao_curso_id").prop('disabled', true);
+                $("#primeira_opcao_turno_id").prop('disabled', true);
+                $("#segunda_opcao_turno_id").prop('disabled', true);
+                $("#terceira_opcao_turno_id").prop('disabled', true);
+                $("#path_comprovante_enem").prop('disabled', true);
+                $("#path_comprovante_endereco").prop('disabled', true);
+                $("#path_comprovante_ficha19").prop('disabled', true);
+                $("#ficha_nota_portugues").prop('readonly', true);
+                $("#ficha_nota_matematica").prop('readonly', true);
+                $("#ficha_nota_historia").prop('readonly', true);
+                $("#ficha_nota_geografia").prop('readonly', true);
+                $("#ficha_nota_sociologia").prop('readonly', true);
+                $("#ficha_nota_filosofia").prop('readonly', true);
+                $("#ficha_nota_biologia").prop('readonly', true);
+                $("#ficha_nota_lingua_estrangeira").prop('readonly', true);
+                $("#ficha_nota_quimica").prop('readonly', true);
+                $("#ficha_nota_fisica").prop('readonly', true);
+                $("#ano_enem").prop('disabled', true);
+                $("#inscricao_enem").prop('disabled', true);
+                $("#nota_humanas").prop('readonly', true);
+                $("#nota_matematica").prop('readonly', true);
+                $("#nota_natureza").prop('readonly', true);
+                $("#nota_linguagem").prop('readonly', true);
+                $("#nota_redacao").prop('readonly', true);
+            });
+        @endif
+
         {{--// Estado inicial enem--}}
         {{--@if(isset($aluno->enem) && $aluno->enem)--}}
             {{--$('#liEnem').show();--}}

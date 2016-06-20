@@ -129,8 +129,8 @@ class VestibulandoValidator extends LaravelValidator
 //            'fac_instituicoes_id' => 'integer',
 //            'fac_cursos_superiores_id' => 'integer',
 //            'ano_conclusao_superior' => 'integer',
-            'primeira_opcao_curso_id' => 'required|numeric',
-            'primeira_opcao_turno_id' => 'required|numeric',
+//            'primeira_opcao_curso_id' => 'required|numeric',
+//            'primeira_opcao_turno_id' => 'required|numeric',
         ],
     ];
 
