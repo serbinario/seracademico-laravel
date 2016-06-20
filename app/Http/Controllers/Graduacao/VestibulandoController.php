@@ -85,6 +85,7 @@ class VestibulandoController extends Controller
             ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_vestibulandos.primeira_opcao_turno_id')
             ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
             ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
+            ->leftJoin('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
             ->groupBy('fac_vestibulandos.id')
             ->select([
                 'fac_vestibulandos.id',
@@ -102,7 +103,8 @@ class VestibulandoController extends Controller
                 'turno3.nome as nomeTurno3',
                 'fac_vestibulares.nome as vestibular',
                 'tipos_taxas.id as idTipoTaxa',
-                'fac_vestibulandos_financeiros.pago'
+                'fac_vestibulandos_financeiros.pago',
+                \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia')
             ]);
 
         #Editando a grid

@@ -61,6 +61,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Vestibular</th>
+                                <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -72,6 +73,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Vestibular</th>
+                                <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -174,6 +176,7 @@
                 {data: 'celular', name: 'pessoas.celular'},
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'vestibular', name: 'fac_vestibulares.nome'},
+                {data: 'transferencia', name: 'fac_alunos.id'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
