@@ -32,7 +32,7 @@
         </div>
         <div class="ibox-content">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
                             {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
@@ -40,6 +40,10 @@
 
                         <div class="form-group">
                             {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Págos', 1 => 'Págos'] ), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('formaAvaliacaoSearch', (['' => 'Todas as Formas', 0 => 'FICHA 19', 1 => 'ENEM'] ), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
@@ -103,6 +107,11 @@
         // função para criação da linha de detalhe
         function format ( d ) {
             return  '<div class="row">' +
+                        '<div class="col-md-4">' +
+                            '<h3>Forma de avaliação : ' + d.formaAvaliacao + '</h3>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="row">' +
                         '<div class="col-md-12">' +
                             '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
                                 '<thead>' +
@@ -162,6 +171,7 @@
                 data: function (d) {
                     d.vestibular = $('select[name=vestibularSearch] option:selected').val();
                     d.pago = $('select[name=pagoSearch] option:selected').val();
+                    d.formaAvaliacao = $('select[name=formaAvaliacaoSearch] option:selected').val();
                 }
             },
             columns: [

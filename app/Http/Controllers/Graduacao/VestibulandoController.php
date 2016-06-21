@@ -104,7 +104,8 @@ class VestibulandoController extends Controller
                 'fac_vestibulares.nome as vestibular',
                 'tipos_taxas.id as idTipoTaxa',
                 'fac_vestibulandos_financeiros.pago',
-                \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia')
+                \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
+                \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
             ]);
 
         #Editando a grid
@@ -117,6 +118,10 @@ class VestibulandoController extends Controller
                 if ($request->has('pago')) {
                     $query->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
                     $query->where('tipos_taxas.id', '=', 1);
+                }
+
+                if ($request->has('formaAvaliacao')) {
+                    $query->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
                 }
             })
             ->addColumn('action', function ($row) {

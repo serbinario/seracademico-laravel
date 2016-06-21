@@ -40,7 +40,9 @@ class AlunoController extends Controller
         'SituacaoAluno',
         'Graduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
-        'FormaAdmissao'
+        'FormaAdmissao',
+        'Graduacao\\Semestre',
+        'SituacaoAluno'
     ];
 
     /**
@@ -57,35 +59,82 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        return view('graduacao.aluno.index');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+        $semestres  = $this->service->getParametrosMatricula();
+
+        # retorno
+        return view('graduacao.aluno.index', compact('loadFields', 'semestres'));
     }
 
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid(Request $request)
     {
+        # recuperando os semestres de congiruração
+        $semestres  = $this->service->getParametrosMatricula();
+
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->join('fac_alunos_cursos', function ($join) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = fac_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
+            ->join('fac_alunos_semestres', function ($join) {
+                $join->on(
+                    'fac_alunos_semestres.id', '=',
+                    \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual 
+                    where semestre_atual.aluno_id = fac_alunos.id ORDER BY semestre_atual.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->join('fac_alunos_situacoes', function ($join) {
+                $join->on(
+                    'fac_alunos_situacoes.id', '=',
+                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->select([
                 'fac_alunos.id',
                 'pessoas.nome',
                 'pessoas.cpf',
                 'fac_alunos.matricula',
                 'pessoas.celular',
+                'fac_semestres.nome as semestre',
+                'fac_alunos_semestres.periodo',
+                'fac_curriculos.codigo as codigoCurriculo'
             ]);
 
         #Editando a grid
-        return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                        <li><a class="btn-floating indigo" title="Histórico do aluno" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>                     
-                        <li><a class="btn-floating" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
-                    </ul>
-                    </div>';
+        return Datatables::of($alunos)
+            ->filter(function ($query) use ($request, $semestres) {
+                if ($request->has('semestre')) {
+                    $query->where('fac_semestres.id', '=', $request->get('semestre'));
+                } else if(count($semestres) == 2) {
+                    $query->where('fac_semestres.id', '=', $semestres[0]->id);
+                }
+
+                if ($request->has('situacao')) {
+                    $query->where('fac_situacao.id', '=', $request->get('situacao'));
+                }
+            })
+            ->addColumn('action', function ($aluno) {
+                return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a class="btn-floating" href="edit/'.$aluno->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating indigo" title="Histórico do aluno" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>                     
+                            <li><a class="btn-floating" href="contrato/'.$aluno->id.'" title="Contrato"><i class="material-icons">print</i></a></li>
+                        </ul>
+                        </div>';
         })->make(true);
     }
 

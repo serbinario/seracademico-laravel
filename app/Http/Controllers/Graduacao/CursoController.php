@@ -72,7 +72,7 @@ class CursoController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            $html       = '<div class="fixed-action-btn horizontal">
+            $html  = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
                             <li><a class="btn-floating indigo" title="Tabela de precos" id="tabela-precos"><i class="glyphicon glyphicon-list-alt"></i></a></li>
@@ -135,9 +135,6 @@ class CursoController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-
-            #Tratando as datas
-           // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
@@ -227,8 +224,8 @@ class CursoController extends Controller
                 ->join('fac_vestibular_curso_turno', 'fac_vestibular_curso_turno.turno_id', '=', 'fac_turnos.id')
                 ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_turno.vestibular_curso_id')
                 ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+                ->groupBy('fac_turnos.id')
                 ->where('fac_cursos.id', $request->get('idCurso'))->get();
-
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);

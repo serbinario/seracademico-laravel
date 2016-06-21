@@ -421,7 +421,7 @@ class AlunoService
     /**
      * @return mixed
      */
-    private function getParametrosMatricula()
+    public function getParametrosMatricula()
     {
         try {
             # Recuperando o item de parâmetro do semestre vigente

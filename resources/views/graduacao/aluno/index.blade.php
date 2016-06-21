@@ -27,6 +27,24 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
+                    <form id="search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('semestreSearch', (['' => 'Todos os Semestres'] + $loadFields['graduacao\\semestre']->toArray()), count($semestres) == 2 ? $semestres[0]->id : null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('situacaoSearch', (['' => 'Todos as Situações'] + $loadFields['situacaoaluno']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="table-responsive no-padding">
                         <table id="aluno-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -35,6 +53,9 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Semestre Atual</th>
+                                <th>Período</th>
+                                <th>Curso</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -44,6 +65,9 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Semestre Atual</th>
+                                <th>Período</th>
+                                <th>Curso</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -67,14 +91,29 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.graduacao.aluno.grid') !!}",
+            ajax: {
+                url: "{!! route('seracademico.graduacao.aluno.grid') !!}",
+                data: function (d) {
+                    d.semestre = $('select[name=semestreSearch] option:selected').val();
+                    d.situacao = $('select[name=situacaoSearch] option:selected').val();
+                }
+            },
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'matricula', name: 'fac_alunos.matricula'},
                 {data: 'celular', name: 'pessoas.celular'},
                 {data: 'cpf', name: 'pessoas.cpf'},
+                {data: 'semestre', name: 'fac_semestres.nome'},
+                {data: 'periodo', name: 'fac_alunos_semestres.periodo'},
+                {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Função do submit do search da grid principal
+        $('#search-form').on('submit', function(e) {
+            table.draw();
+            e.preventDefault();
         });
 
         // Id do aluno corrente

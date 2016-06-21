@@ -1221,13 +1221,9 @@
                     options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
                 }
 
-                // recuperando o id da option selecianda caso seja edit
-                //idOption = $(idHtml).find('option:selected').val();
-
                 // Gerando o html
                 $(idHtml).find('option').remove();
                 $(idHtml).append(options);
-                //$(idHtml).find('option[value=' + idOption + ']').prop('selected', true);
             });
         }
 
