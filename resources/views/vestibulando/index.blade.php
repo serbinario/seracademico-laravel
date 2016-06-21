@@ -27,7 +27,7 @@
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.vestibulando.create')}}" class="btn-sm btn-primary pull-right">Novo Vestibulando</a>
+                <a href="{{ route('seracademico.vestibulando.create')}}" id="btnAddVestibulando" class="btn-sm btn-primary pull-right">Novo Vestibulando</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -259,6 +259,46 @@
 
             // Executando a tabela de notas
             runFinanceiro(idVestibulando);
+        });
+
+        // evento quando houver click no botao de novo do vestibulando
+        $(document).on('click', '#btnAddVestibulando', function (event) {
+            // parando a execução
+            event.preventDefault();
+
+            // Fazendo a requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/vestibular/getByValidDate',
+                datatype: 'json'
+            }).done(function (retorno) {
+                // Verificando o retorno da requisição
+                if(retorno.success) {
+                    if(retorno.dados.length == 0) {
+                        @if((Auth::check() && Auth::user()->is('admin')))
+                            swal({
+                                title: "Período de inscrições encerrado, deseja continuar ?",
+                                text: "Não existe nenhum vestibular disponível!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Sim, desejo continuar!",
+                                closeOnConfirm: false
+                            }, function() {
+                                // redirecionamento
+                                location.href = $("#btnAddVestibulando").prop('href');
+                            });
+                        @else
+                            // usuário comum
+                            swal("Período de inscrições encerrado!");
+                        @endif
+                    }
+                } else {
+                    // Retorno caso não tenha currículo em uma turma ou algum erro
+                    swal(retorno.msg, "Click no botão abaixo!", "error");
+                    $('#modal-create-historico').modal('toggle');
+                }
+            });
         });
     </script>
 @stop

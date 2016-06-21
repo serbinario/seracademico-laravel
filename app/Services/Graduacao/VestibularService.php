@@ -392,4 +392,23 @@ class VestibularService
         # Retono
         return true;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getByValidDate()
+    {
+        # recuperando a data atual
+        $now  = new \DateTime('now');
+
+        # recuperando os vestibulares
+        $rows = \DB::table('fac_vestibulares')
+            ->select('id')
+            ->where('data_inicial', '>=', $now->format('Y-m-d'))
+            ->where('data_final', '<=', $now->format('Y-m-d'))
+            ->get();
+
+        # retorno
+        return $rows;
+    }
 }

@@ -397,6 +397,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibularController@update']);
             Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibularController@delete']);
+            Route::get('getByValidDate', ['as' => 'getValidDate', 'uses' => 'Graduacao\VestibularController@getByValidDate']);
 
             Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
                 Route::get('relatorio1', ['as' => 'relatorio1', 'uses' => 'Graduacao\VestibularController@relatorio1']);

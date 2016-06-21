@@ -249,4 +249,22 @@ class VestibularController extends Controller
     {
         return \PDF::loadView('reports.vestibulares.relatorio2')->stream();
     }
+
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function getByValidDate()
+    {
+        try {
+            #Executando a ação
+            $dados = $this->service->getByValidDate();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $dados]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }
