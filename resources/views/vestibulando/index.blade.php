@@ -292,6 +292,9 @@
                             // usuário comum
                             swal("Período de inscrições encerrado!");
                         @endif
+                    } else {
+                        // redirecionamento
+                        location.href = $("#btnAddVestibulando").prop('href');
                     }
                 } else {
                     // Retorno caso não tenha currículo em uma turma ou algum erro

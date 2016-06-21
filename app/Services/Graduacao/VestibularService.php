@@ -404,10 +404,10 @@ class VestibularService
         # recuperando os vestibulares
         $rows = \DB::table('fac_vestibulares')
             ->select('id')
-            ->where('data_inicial', '>=', $now->format('Y-m-d'))
-            ->where('data_final', '<=', $now->format('Y-m-d'))
+            ->whereDate('data_inicial', '<=', $now->format('Y-m-d'))
+            ->whereDate('data_final', '>=', $now->format('Y-m-d'))
             ->get();
-
+        
         # retorno
         return $rows;
     }
