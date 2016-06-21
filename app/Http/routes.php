@@ -180,6 +180,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::group(['prefix' => 'situacao', 'as' => 'situacao.'], function () {
                         Route::get('grid/{idAlunoSemestre}', ['as' => 'grid', 'uses' => 'Graduacao\HistoricoAlunoController@gridSituacao']);
                         Route::post('delete/{idAlunoSituacao}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@deleteSituacao']);
+                        Route::post('save/{idSemestre}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@saveSituacao']);
                     });
                 });
             });

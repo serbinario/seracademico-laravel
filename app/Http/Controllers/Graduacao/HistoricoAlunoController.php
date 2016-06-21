@@ -41,7 +41,13 @@ class HistoricoAlunoController extends Controller
         $alunos = \DB::table('fac_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-            ->leftJoin('fac_alunos_situacoes', 'fac_alunos_situacoes.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+            ->leftJoin('fac_alunos_situacoes', function ($join) {
+                $join->on(
+                    'fac_alunos_situacoes.id', '=',
+                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                );
+            })
             ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->join(\DB::raw('(SELECT fac_alunos_cursos.* FROM fac_alunos_cursos ORDER BY fac_alunos_cursos.id DESC LIMIT 1)fac_alunos_cursos'), function ($join) {
                 $join->on('fac_alunos_cursos.aluno_id', '=', 'fac_alunos.id');
@@ -55,6 +61,7 @@ class HistoricoAlunoController extends Controller
                 'pessoas.nome as nomeAluno',
                 'fac_alunos.matricula',
                 'fac_alunos_semestres.id as idAlunoSemestre',
+                'fac_semestres.id as idSemestre',
                 'fac_semestres.nome as nomeSemestre',
                 'fac_cursos.codigo as codigoCurso',
                 'fac_curriculos.codigo as codigoCurriculo',
@@ -107,7 +114,7 @@ class HistoricoAlunoController extends Controller
                 'cursoOrigem.codigo as codigoCursoOrigem',
                 'cursoDestino.codigo as codigoCursoDestino',
                 'fac_alunos_situacoes.observacao',
-                'fac_alunos_situacoes.data'
+                \DB::raw("DATE_FORMAT(fac_alunos_situacoes.data, '%d/%m/%Y') as data")
             ]);
 
         #Editando a grid
@@ -149,7 +156,7 @@ class HistoricoAlunoController extends Controller
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Histórico cadastrado com sucesso!']);
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
@@ -184,6 +191,27 @@ class HistoricoAlunoController extends Controller
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Histórico cadastrado com sucesso!']);
         } catch (\Throwable $e) {dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $idAlunoSemestre
+     * @return mixed
+     */
+    public function saveSituacao(Request $request, $idSemestre)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $mensagem = $this->alunoService->saveSituacao($data, $idSemestre);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Situação cadastrada com sucesso!']);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }

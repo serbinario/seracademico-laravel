@@ -80,6 +80,7 @@
 
     @include('graduacao.aluno.modal_historico')
     @include('graduacao.aluno.modal_create_historico')
+    @include('graduacao.aluno.modal_create_situacao')
 @stop
 
 @section('javascript')

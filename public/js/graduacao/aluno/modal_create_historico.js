@@ -113,6 +113,7 @@ $('#btnSaveHistorico').click(function() {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
+            table.ajax.reload();
             tableHistorico.ajax.reload();
             // tableHistorico.ajax.reload(function () {
             //     tablePrecosCurso.row(indexRowSelectedPrecoCurso).nodes().to$().find('td').addClass("row_selected");
@@ -136,6 +137,7 @@ $(document).on('click', '#btnDeleteHistorico', function () {
         url: '/index.php/seracademico/graduacao/aluno/historico/delete/' + idAlunoSemestre,
         datatype: 'json'
     }).done(function (retorno) {
+        table.ajax.reload();
         tableHistorico.ajax.reload();
         swal(retorno.msg, "Click no botão abaixo!", "success");
     });

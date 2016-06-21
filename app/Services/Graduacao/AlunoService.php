@@ -7,6 +7,7 @@ use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
+use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 use Seracademico\Validators\Graduacao\AlunoValidator;
 
 class AlunoService
@@ -27,6 +28,11 @@ class AlunoService
     private $pessoaRepository;
 
     /**
+     * @var SituacaoAlunoRepositoryEloquent
+     */
+    private $situacaoRepository;
+
+    /**
      * @var string
      */
     private $destinationPath = "images/";
@@ -36,15 +42,18 @@ class AlunoService
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param PessoaRepository $pessoaRepository
+     * @param SituacaoAlunoRepositoryEloquent $situacaoRepository
      */
     public function __construct(
         AlunoRepository $repository,
         EnderecoRepository $enderecoRepository,
-        PessoaRepository $pessoaRepository)
+        PessoaRepository $pessoaRepository,
+        SituacaoAlunoRepositoryEloquent $situacaoRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaRepository   = $pessoaRepository;
+        $this->situacaoRepository = $situacaoRepository;
     }
 
     /**
@@ -356,11 +365,17 @@ class AlunoService
     public function saveHistorico(array $dados, $idAluno)
     {
         # Recuperando o aluno
-        $aluno = $this->repository->find($idAluno);
+        $aluno    = $this->repository->find($idAluno);
+        $semestre = $aluno->semestres()->find($dados['semestre_id']);
 
         # Verificando o aluno foi encontrado
         if(!$aluno) {
             throw new \Exception('Aluno não encontrado.');
+        }
+
+        # Verificando se o aluno já está inscrito nesse semestre
+        if($semestre) {
+            throw new \Exception('O Aluno já está inscrito no semestre informado.');
         }
 
         # Verificando se curso foi passado
@@ -404,6 +419,33 @@ class AlunoService
     {
         \DB::table('fac_alunos_semestres')->where('id', $idAlunoSemestre)->delete();
 
+        return true;
+    }
+
+    /**
+     * @param array $dados
+     * @param $idSemestre
+     * @return bool
+     * @throws \Exception
+     */
+    public function saveSituacao(array $dados, $idSemestre)
+    {
+        # Recuperando a data atual
+        $now = new \DateTime('now');
+
+        # Recuperando a situacao e o aluno
+        $aluno    = $this->repository->find($dados['aluno_id']);
+        $situacao = $this->situacaoRepository->find($dados['situacao_id']);
+
+        # Validando os objetos
+        if(!$aluno || !$situacao) {
+            throw new \Exception('Dados inválidos.');
+        }
+        
+        #salvando a situacão
+        $aluno->semestres()->find($idSemestre)->pivot->situacoes()->attach($situacao->id, ['observacao' => $dados['observacao'], 'data' => $now->format('Y-m-d')]);
+
+        # retorno
         return true;
     }
 

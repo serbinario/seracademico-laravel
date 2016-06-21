@@ -73,8 +73,8 @@ function runHistorico(idAluno) {
     $("#modal-historico").modal({show:true});
 }
 
-// Id da tabela de preço selecionada
-var idAlunoSemestre;
+// Id da tabela do pivot de aluno e semestre e o id do semestre
+var idAlunoSemestre, idSemestre;
 
 // Evento para carregar grid de precos por disciplinas
 $(document).on('click', '#grid-historico tbody tr', function (event) {
@@ -88,6 +88,7 @@ $(document).on('click', '#grid-historico tbody tr', function (event) {
 
         //Recuperando o id da turma selecionada e o index da linha selecionada
         idAlunoSemestre = tableHistorico.row($(this).index()).data().idAlunoSemestre;
+        idSemestre      = tableHistorico.row($(this).index()).data().idSemestre;
         indexRowSelectedHistorico =  $(this).index();
 
         // carregando a grid de situacoes

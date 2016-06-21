@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="close" type="button" id="closeModalPrecoCurso" data-dismiss="modal">×</button>
+                <button class="close" type="button" id="closeModalHistorico" data-dismiss="modal">×</button>
                 <h4 class="modal-title">Histórico do Aluno</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
