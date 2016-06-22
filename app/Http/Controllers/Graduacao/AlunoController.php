@@ -116,14 +116,31 @@ class AlunoController extends Controller
         #Editando a grid
         return Datatables::of($alunos)
             ->filter(function ($query) use ($request, $semestres) {
+                # Filtrando por semestre
                 if ($request->has('semestre')) {
                     $query->where('fac_semestres.id', '=', $request->get('semestre'));
                 } else if(count($semestres) == 2) {
                     $query->where('fac_semestres.id', '=', $semestres[0]->id);
                 }
 
+                # Filtrando por situação
                 if ($request->has('situacao')) {
                     $query->where('fac_situacao.id', '=', $request->get('situacao'));
+                }
+
+                # Filtrando Global
+                if ($request->has('globalSearch')) {
+                    # recuperando o valor da requisição
+                    $search = $request->get('globalSearch');
+
+                    #condição
+                    $query->where(function ($where) use ($search) {
+                        $where->orWhere('pessoas.nome', 'like', "%$search%")
+                            ->orWhere('pessoas.cpf', 'like', "%$search%")
+                            ->orWhere('fac_alunos.matricula', 'like', "%$search%")
+                            ->orWhere('fac_curriculos.codigo', 'like', "%$search%")
+                            ->orWhere('fac_semestres.nome', 'like', "%$search%");
+                    });
                 }
             })
             ->addColumn('action', function ($aluno) {

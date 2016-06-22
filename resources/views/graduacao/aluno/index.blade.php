@@ -37,6 +37,10 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
+                        </div>
+
+                        <div class="form-group">
                             <button class="btn btn-primary" type="submit">Pesquisar</button>
                         </div>
                     </form>
@@ -92,11 +96,13 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
+            bFilter: false,
             ajax: {
                 url: "{!! route('seracademico.graduacao.aluno.grid') !!}",
                 data: function (d) {
                     d.semestre = $('select[name=semestreSearch] option:selected').val();
                     d.situacao = $('select[name=situacaoSearch] option:selected').val();
+                    d.globalSearch = $('input[name=globalSearch]').val();
                 }
             },
             columns: [

@@ -47,6 +47,10 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
+                        </div>
+
+                        <div class="form-group">
                             <button class="btn btn-primary" type="submit">Pesquisar</button>
                         </div>
                     </form>
@@ -166,12 +170,14 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
+            bFilter: false,
             ajax: {
                 url: "{!! route('seracademico.vestibulando.grid') !!}",
                 data: function (d) {
                     d.vestibular = $('select[name=vestibularSearch] option:selected').val();
                     d.pago = $('select[name=pagoSearch] option:selected').val();
                     d.formaAvaliacao = $('select[name=formaAvaliacaoSearch] option:selected').val();
+                    d.globalSearch = $('input[name=globalSearch]').val();
                 }
             },
             columns: [

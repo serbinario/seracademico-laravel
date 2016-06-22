@@ -111,17 +111,34 @@ class VestibulandoController extends Controller
         #Editando a grid
         return Datatables::of($vestibulandos)
             ->filter(function ($query) use ($request) {
+                // Filtranto por vestibular
                 if ($request->has('vestibular')) {
                     $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
                 }
 
+                // Filtrando por pagos
                 if ($request->has('pago')) {
                     $query->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
                     $query->where('tipos_taxas.id', '=', 1);
                 }
 
+                // Filtrando por forma de avaliação
                 if ($request->has('formaAvaliacao')) {
                     $query->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
+                }
+
+                // Filtrando Global
+                if ($request->has('globalSearch')) {
+                    # recuperando o valor da requisição
+                    $search = $request->get('globalSearch');
+                   
+                    #condição
+                    $query->where(function ($where) use ($search) {
+                        $where->orWhere('pessoas.nome', 'like', "%$search%")
+                            ->orWhere('pessoas.cpf', 'like', "%$search%")
+                            ->orWhere(\DB::raw('CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao)'), 'like', "%$search%");
+                    });
+
                 }
             })
             ->addColumn('action', function ($row) {
