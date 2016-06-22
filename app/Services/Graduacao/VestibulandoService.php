@@ -122,9 +122,8 @@ class VestibulandoService
      */
     public function store(array $data) : Vestibulando
     {
-        #tratamento de dados do aluno
+        # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoInscricao($data);
         $this->tratamentoImagem($data);
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
@@ -132,6 +131,19 @@ class VestibulandoService
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
         $endereco  = null;
+
+        # Query para verificação se a pessoa já está cadastrada para o vestibular
+        $row = \DB::table('fac_vestibulandos')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulandos.vestibular_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
+            ->where('fac_vestibulares.id', $data['vestibular_id'])
+            ->where('pessoas.cpf', $data['pessoa']['cpf'])
+            ->get();
+
+        # Veriicando se a pessoa já está cadastrada para o vestibular
+        if(count($row) > 0) {
+            throw new \Exception('Pessoa já cadastrada para esse vestibular.');
+        }
 
         # Verificando se a pesso já existe
         if(count($objPessoa) > 0) {
@@ -158,9 +170,10 @@ class VestibulandoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
-        #tratamento vestibular
+        # Regras de negócios
         $this->tratamentoVestibular($vestibulando);
         $this->tratamentoDebitoInscricao($vestibulando);
+        $this->tratamentoInscricao($data, $vestibulando->id);
 
         #Retorno
         return $vestibulando;
@@ -176,9 +189,8 @@ class VestibulandoService
         # Recuperando o vestibulando
         $vestibulando = $this->repository->find($id);
 
-        #tratamento de dados do aluno
+        # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoInscricao($data, $id);
         $this->tratamentoImagem($data, $vestibulando);
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
@@ -192,6 +204,9 @@ class VestibulandoService
         if(!$vestibulando || !$endereco || !$pessoa) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
+
+        # Regras de negócios
+        $this->tratamentoInscricao($data, $vestibulando->id);
 
         #Retorno
         return $vestibulando;
@@ -334,17 +349,41 @@ class VestibulandoService
 
         # Validando o parâmetro
         if(isset($data['gerar_inscricao']) && $data['gerar_inscricao'] == 1) {
+            # Verificando se o id foi passado
             if($id) {
+                # Recuperando o vestibulando e o id do vestibular
                 $vestibulando = $this->repository->find($id);
                 $idVestibular = $vestibulando->vestibular->id;
 
+                # Query para recuperar o débito de inscrição do vestibulando
+                $row = \DB::table('fac_vestibulandos')
+                    ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+                    ->join('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+                    ->join('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
+                    ->where('tipos_taxas.id', 1)
+                    ->where('fac_vestibulandos_financeiros.pago', 1)
+                    ->where('fac_vestibulandos.id', $vestibulando->id)
+                    ->get();
+
+                # Verificando se o débito de inscrição for pago
+                if(count($row) == 0) {
+                    # Zerando a geração de inscrição
+                    $vestibulando->gerar_inscricao = 0;
+                    $vestibulando->save();
+
+                    # Exception 
+                    throw new \Exception('Dados informados cadastrados, porem só poderá ser gerado a inscrição se o debito do vestibular for pago.');
+                }
+
+                # Veriicando se o vetibulando já tem inscrição gerada
                 if($vestibulando->gerar_inscricao == 1) {
                     unset($data['gerar_inscricao']);
                     return $data;
                 }
-            } else {
-                $idVestibular = $data['vestibular_id'];
             }
+//            else {
+//                $idVestibular = $data['vestibular_id'];
+//            }
 
             # Gerando a inscrição
             $data['inscricao'] = $this->gerarInscricao($idVestibular);
