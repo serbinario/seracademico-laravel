@@ -89,9 +89,9 @@ $(document).on('change', '#situacao_id', function () {
 // Evento para salvar tabela de preços
 $('#btnSaveSituacao').click(function() {
     //var curso_id  = $("#curso_id").val();
-    var situacao_id  = $("#situacao_id").val();
+    var situacao_id  = $("#situacao_id option:selected").val();
     var observacao   = $("#observacao").val();
-    var curso_destino_id = $("#curso_destino_id").val();
+    var curso_destino_id = $("#curso_destino_id:enabled option:selected").val();
 
     // Dados de envio
     var dados = {
