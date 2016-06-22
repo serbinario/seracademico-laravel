@@ -189,7 +189,7 @@ class HistoricoAlunoController extends Controller
             $this->alunoService->deleteSituacao($idAlunoSituacao);
 
             #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Histórico cadastrado com sucesso!']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Situação removida com sucesso!']);
         } catch (\Throwable $e) {dd($e);
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
