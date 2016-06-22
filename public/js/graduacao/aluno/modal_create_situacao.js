@@ -41,12 +41,13 @@ function loadFieldsSituacao()
 // Função a montar o html
 function builderHtmlFieldsSituacao (dados) {
     //Limpando os campos
-    //$('#curso_id option').attr('selected', false);
+    $('#curso_destino_id option').attr('selected', false).parent().prop('disabled', true);
     $('#situacao_id option').attr('selected', false);
     $('#observacao').val('');
 
     // Variáveis que armazenaram o html
     var htmlSituacao  = "";
+    var htmlCurso     = "";
 
     // Percorrendo o array de cursos
     for (var i = 0; i < dados['situacaoaluno'].length; i++) {
@@ -54,25 +55,50 @@ function builderHtmlFieldsSituacao (dados) {
 
     }
 
+    // Percorrendo o array de cursos
+    for (var i = 0; i < dados['graduacao\\curso'].length; i++) {
+        htmlCurso += "<option value='" + dados['graduacao\\curso'][i].id + "'>" + dados['graduacao\\curso'][i].nome + "</option>";
+
+    }
+
     // carregando o html
     $("#situacao_id option").remove();
     $("#situacao_id").append(htmlSituacao);
 
+    // carregando o html
+    $("#curso_destino_id option").remove();
+    $("#curso_destino_id").append(htmlCurso);
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-situacao").modal({show : true});
 }
+
+// Evento para mudança de curso
+$(document).on('change', '#situacao_id', function () {
+    // Recuperando o valor da
+    var valor = $(this).find('option:selected').val();
+
+    // Verificando se foi escolhido mudança de curso
+    if(valor == 3) {
+        $('#curso_destino_id').prop('disabled', false);
+    } else {
+        $('#curso_destino_id').prop('disabled', true);
+    }
+});
 
 // Evento para salvar tabela de preços
 $('#btnSaveSituacao').click(function() {
     //var curso_id  = $("#curso_id").val();
     var situacao_id  = $("#situacao_id").val();
     var observacao   = $("#observacao").val();
+    var curso_destino_id = $("#curso_destino_id").val();
 
     // Dados de envio
     var dados = {
         'situacao_id' : situacao_id,
         'aluno_id' : idAluno,
-        'observacao' : observacao
+        'observacao' : observacao,
+        'curso_destino_id' : curso_destino_id
     };
 
     jQuery.ajax({

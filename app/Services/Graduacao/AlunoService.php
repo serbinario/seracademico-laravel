@@ -405,7 +405,8 @@ class AlunoService
         $aluno->curriculos()->attach($curriculo[0]->id);
 
         # cadastrando a situação
-        $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data' => $now->format('YmdHis')]);
+        $aluno->semestres()->get()->last()->pivot->situacoes()
+            ->attach(1, ['data' => $now->format('YmdHis'), 'curriculo_destino_id' => $curriculo[0]->id]);
 
         #retorno
         return true;
@@ -441,9 +442,34 @@ class AlunoService
         if(!$aluno || !$situacao) {
             throw new \Exception('Dados inválidos.');
         }
-        
+
+        # Curriculo origem e destino
+        $curriculoOrigem  = $aluno->curriculos()->get()->last()->id;
+        $curriculoDestino = null;
+
+        # Verificando se o curso destino foi informado
+        if(isset($dados['curso_destino_id'])) {
+            # Recuperando o currículo
+            $curriculo = Curriculo::byCurso($dados['curso_destino_id']);
+           
+            # Vendo se o curriculo foi encontrado
+            $curriculoDestino = count($curriculo) == 1 ? $curriculo[0]->id : null;
+        }
+
+        # Verificando se o currículo destino foi passado
+        if($curriculoDestino) {
+            # Cadastrado o novo curso
+            $aluno->curriculos()->attach($curriculoDestino);
+        }
+
         #salvando a situacão
-        $aluno->semestres()->find($idSemestre)->pivot->situacoes()->attach($situacao->id, ['observacao' => $dados['observacao'], 'data' => $now->format('Y-m-d')]);
+        $aluno->semestres()->find($idSemestre)->pivot->situacoes()
+            ->attach($situacao->id, [
+                'observacao' => $dados['observacao'],
+                'data' => $now->format('Y-m-d'),
+                'curriculo_origem_id' => $curriculoOrigem,
+                'curriculo_destino_id' => $curriculoDestino
+            ]);
 
         # retorno
         return true;

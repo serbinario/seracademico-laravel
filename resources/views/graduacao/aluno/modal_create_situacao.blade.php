@@ -8,18 +8,18 @@
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
-                    {{--<div class="row">--}}
-                        {{--<div class="form-group col-md-12">--}}
-                            {{--<label for="curso_id">Curso</label>--}}
-                            {{--<select name="curso_id" class="form-control" id="curso_id">--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="situacao_id">Situação</label>
                             <select name="situacao_id" class="form-control" id="situacao_id">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="curso_destino_id">Curso Destino</label>
+                            <select disabled name="curso_destino_id" class="form-control" id="curso_destino_id">
                             </select>
                         </div>
                     </div>
