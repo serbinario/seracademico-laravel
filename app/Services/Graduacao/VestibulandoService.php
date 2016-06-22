@@ -173,7 +173,6 @@ class VestibulandoService
         # Regras de negócios
         $this->tratamentoVestibular($vestibulando);
         $this->tratamentoDebitoInscricao($vestibulando);
-        $this->tratamentoInscricao($data, $vestibulando->id);
 
         #Retorno
         return $vestibulando;
@@ -192,8 +191,10 @@ class VestibulandoService
         # Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoImagem($data, $vestibulando);
+        $this->tratamentoInscricao($data, $id);
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
+
 
         #Atualizando no banco de dados
         $vestibulando = $this->repository->update($data, $id);
@@ -204,9 +205,6 @@ class VestibulandoService
         if(!$vestibulando || !$endereco || !$pessoa) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
-
-        # Regras de negócios
-        $this->tratamentoInscricao($data, $vestibulando->id);
 
         #Retorno
         return $vestibulando;
@@ -366,12 +364,8 @@ class VestibulandoService
                     ->get();
 
                 # Verificando se o débito de inscrição for pago
-                if(count($row) == 0) {
-                    # Zerando a geração de inscrição
-                    $vestibulando->gerar_inscricao = 0;
-                    $vestibulando->save();
-
-                    # Exception 
+                if(count($row) == 0) {                    
+                    # Exception
                     throw new \Exception('Dados informados cadastrados, porem só poderá ser gerado a inscrição se o debito do vestibular for pago.');
                 }
 

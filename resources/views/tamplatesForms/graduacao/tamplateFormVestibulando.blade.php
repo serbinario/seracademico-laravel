@@ -732,6 +732,7 @@
                         </div>
                     </div>
 
+                    @if(isset($aluno))
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group col-md-4">
@@ -747,7 +748,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endif
                 </div>
             </div>
             {{-- Fim da aba vestibular --}}
