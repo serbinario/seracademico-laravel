@@ -138,7 +138,11 @@ class MatriculaAlunoController extends Controller
                 ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                 ->whereIn('fac_disciplinas.id', $request->get('dados'))
                 ->groupBy('fac_disciplinas.id')
-                ->select(['fac_disciplinas.id', 'fac_disciplinas.codigo as codigoDisciplina', 'fac_disciplinas.nome as nomeDisciplina'])->get();
+                ->select([
+                    'fac_disciplinas.id',
+                    'fac_disciplinas.codigo as codigoDisciplina',
+                    'fac_disciplinas.nome as nomeDisciplina'
+                ])->get();
 
             # Tratanto os dados de retorno
             $count = 0;
@@ -149,6 +153,7 @@ class MatriculaAlunoController extends Controller
                 # Carregando a disciplina
                 $dados[$count]['nomeDisciplina']   = $row->nomeDisciplina;
                 $dados[$count]['codigoDisciplina'] = $row->codigoDisciplina;
+                $dados[$count]['idDisciplina']     = $row->id;
 
                 // Recuperando as turmas
                 $rowsTurma = \DB::table('fac_turmas')
@@ -348,11 +353,12 @@ class MatriculaAlunoController extends Controller
             # Verificano se o horário já foi cadastrado
             $rowsVal = \DB::table("fac_horarios")
                 ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
+                ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
                 ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
                 ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
                 ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
+                ->where('fac_disciplinas.id', $dados['idDisciplina'])
                 ->where('fac_alunos.id', $dados['idAluno'])
                 ->select('fac_horarios.id')
                 ->lists('fac_horarios.id');

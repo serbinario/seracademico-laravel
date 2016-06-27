@@ -86,6 +86,7 @@ $(document).on('click', '#disciplina-grid tbody tr', function () {
                     turmas[index1] = {
                         id : value1.idTurmaDisciplina,
                         name : value1.codigoTurma + " - " + value1.nomeTurma,
+                        idDisciplina: value.idDisciplina,
                         open:true,
                         collapse:false,
                         icon:"/img/plugins/zTree/diy/6.png",

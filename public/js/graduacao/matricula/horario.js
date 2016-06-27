@@ -45,13 +45,14 @@ function onDblClick(event, treeId, treeNode) {
                 confirmButtonText: "Sim, desejo adicionar!",
                 closeOnConfirm: false
             },
-            function(){
+            function() {
                 // Array de envio ajax
                 var dados = {
                     'idAluno' : idAluno,
-                    'idTurmaDisciplina' : treeNode.id
+                    'idTurmaDisciplina' : treeNode.id,
+                    'idDisciplina' : treeNode.idDisciplina
                 };
-
+               
                 // Fazendo a requisição ajax
                 jQuery.ajax({
                     type: 'POST',
