@@ -455,8 +455,14 @@ class MatriculaAlunoController extends Controller
                 throw new \Exception('Aluno não tem horário.');
             }
 
+            #data atual
+            $now = new \DateTime('now');
+
+            # Recuperando o ultimo currículo do aluno
+            $curriculo = $aluno->curriculos()->get()->last();
+
             #cadastradando a situação
-            $semestre->pivot->situacoes()->attach([2]);
+            $semestre->pivot->situacoes()->attach(2, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
             $semestre->pivot->periodo = $dados['periodo'];
             $semestre->pivot->save();
 
