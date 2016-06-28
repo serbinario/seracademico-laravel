@@ -461,10 +461,30 @@ class MatriculaAlunoController extends Controller
             # Recuperando o ultimo currículo do aluno
             $curriculo = $aluno->curriculos()->get()->last();
 
+            # Recuperando os ids do pivot TurmaDisciplina correspondentes.
+            $rows = \DB::table('fac_turmas_disciplinas')
+                ->select(['fac_turmas_disciplinas.id'])
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->where('fac_alunos.id', $dados['idAluno'])
+                ->where('fac_semestres.id', $semestre->id)
+                ->groupBy('fac_turmas_disciplinas.id')->get();
+              
             #cadastradando a situação
             $semestre->pivot->situacoes()->attach(2, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
+
+            #Cadastrando o período
             $semestre->pivot->periodo = $dados['periodo'];
             $semestre->pivot->save();
+
+            # Cadastrando as notas do aluno
+            foreach ($rows as $row) {
+                $semestre->pivot->alunosNotas()->create(['turma_disciplina_id' => $row->id]);
+            }
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Matrícula realizada com sucesso!']);

@@ -168,7 +168,7 @@
                 closeOnConfirm: false,
                 animation: "slide-from-top",
                 inputPlaceholder: "Informe o Período"
-            }, function(inputValue){
+            }, function(inputValue) {
                 // verificando se o valor doi passado
                 if (inputValue === false) return false;
 

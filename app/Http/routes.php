@@ -283,6 +283,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioTurmaController@delete']);
                 });
 
+                Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaNotaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaNotaController@getLoadFields']);
+                });
+
             });
         });
 

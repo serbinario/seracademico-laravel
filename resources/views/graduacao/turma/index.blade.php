@@ -59,6 +59,7 @@
     @include('graduacao.turma.modal_disciplina')
     @include('graduacao.turma.modal_disciplina_store')
     @include('graduacao.turma.modal_horario_store')
+    @include('graduacao.turma.modal_notas')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -69,6 +70,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_notas.js')  }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>--}}
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
@@ -92,7 +94,7 @@
         //Id da turma corrente
         var idTurma;
 
-        /*Responsável em abrir modal*/
+        /*Responsável em abrir modal de horários*/
         $(document).on("click", '#modal-horario', function () {
             //Recuperando o id da turma selecionada
             idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
@@ -107,5 +109,13 @@
             $("#modal-disciplina-horario").modal({show: true, keyboard: true});
         });
 
+        /*Responsável em abrir modal de notas*/
+        $(document).on("click", '#modal-notas', function () {
+            //Recuperando o id da turma selecionada
+            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            //Executando as grids
+            runTableNotas(idTurma);
+        });
     </script>
 @stop
