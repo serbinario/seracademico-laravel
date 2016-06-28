@@ -57,11 +57,24 @@ class MatriculaAlunoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-            ->leftJoin('fac_alunos_semestres_disciplinas', 'fac_alunos_semestres_disciplinas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+            ->join('fac_alunos_semestres', function ($join) {
+                $join->on(
+                    'fac_alunos_semestres.id', '=',
+                    \DB::raw('(SELECT semestre_secundario.id FROM fac_alunos_semestres as semestre_secundario 
+                    where semestre_secundario.aluno_id = fac_alunos.id ORDER BY semestre_secundario.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_alunos_situacoes', function ($join) {
+                $join->on(
+                    'fac_alunos_situacoes.id', '=',
+                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->where(function ($query) use ($semestres) {
-                $query->where('fac_alunos_semestres_disciplinas.id', null)->where('fac_semestres.id', $semestres[0]->id);
+                $query->where('fac_situacao.id', 1)->where('fac_semestres.id', $semestres[0]->id);
 
             })
             ->orWhere(function ($query) use ($semestres) {
@@ -382,7 +395,7 @@ class MatriculaAlunoController extends Controller
             $semestres = $this->getParametrosMatricula();
 
             # Recuperando o semestre
-            $semestre = $aluno->semestres()->find($semestres[0]->id);
+            $semestre  = $aluno->semestres()->find($semestres[0]->id);
 
             # Verificando se o semestre já foi cadastrado
             if(!$semestre) {
@@ -444,6 +457,8 @@ class MatriculaAlunoController extends Controller
 
             #cadastradando a situação
             $semestre->pivot->situacoes()->attach([2]);
+            $semestre->pivot->periodo = $dados['periodo'];
+            $semestre->pivot->save();
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Matrícula realizada com sucesso!']);

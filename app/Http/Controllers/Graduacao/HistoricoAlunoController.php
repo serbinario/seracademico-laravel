@@ -49,8 +49,12 @@ class HistoricoAlunoController extends Controller
                 );
             })
             ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
-            ->join(\DB::raw('(SELECT fac_alunos_cursos.* FROM fac_alunos_cursos ORDER BY fac_alunos_cursos.id DESC LIMIT 1)fac_alunos_cursos'), function ($join) {
-                $join->on('fac_alunos_cursos.aluno_id', '=', 'fac_alunos.id');
+            ->join('fac_alunos_cursos', function ($join) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_secundario.id FROM fac_alunos_cursos as curso_secundario 
+                    where curso_secundario.aluno_id = fac_alunos.id ORDER BY curso_secundario.id DESC LIMIT 1)')
+                );
             })
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
