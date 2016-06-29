@@ -110,7 +110,8 @@ class AlunoController extends Controller
                 'pessoas.celular',
                 'fac_semestres.nome as semestre',
                 'fac_alunos_semestres.periodo',
-                'fac_curriculos.codigo as codigoCurriculo'
+                'fac_curriculos.codigo as codigoCurriculo',
+                'fac_situacao.nome as nomeSituacao'
             ]);
 
         #Editando a grid

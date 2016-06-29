@@ -26,9 +26,9 @@
                         <table id="turma-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
                                 <th>Codigo da turma</th>
+                                <th>Codigo do Curso</th>
+                                <th>Descrição</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -39,9 +39,9 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
                                 <th>Codigo da turma</th>
+                                <th>Codigo do Curso</th>
+                                <th>Descrição</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -86,9 +86,9 @@
 
             ajax: "{!! route('seracademico.graduacao.turma.grid') !!}",
             columns: [
+                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
-                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},

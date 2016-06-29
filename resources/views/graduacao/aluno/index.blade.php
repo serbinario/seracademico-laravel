@@ -60,6 +60,7 @@
                                 <th>Semestre Atual</th>
                                 <th>Período</th>
                                 <th>Curso</th>
+                                <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -72,6 +73,7 @@
                                 <th>Semestre Atual</th>
                                 <th>Período</th>
                                 <th>Curso</th>
+                                <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -113,6 +115,7 @@
                 {data: 'semestre', name: 'fac_semestres.nome'},
                 {data: 'periodo', name: 'fac_alunos_semestres.periodo'},
                 {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+                {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
