@@ -286,6 +286,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaNotaController@grid']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaNotaController@getLoadFields']);
+                    Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaNotaController@editNota']);
+                    Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Graduacao\TurmaNotaController@updateNota']);
+                });
+
+                Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaFrequenciaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaFrequenciaController@getLoadFields']);
+                    Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaFrequenciaController@editFrequencia']);
+                    Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'Graduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
 
             });

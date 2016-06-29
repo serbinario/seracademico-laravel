@@ -399,5 +399,15 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepository::class,
             \Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Graduacao\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Graduacao\AlunoFrequenciaRepositoryEloquent::class
+        );
 	}
 }

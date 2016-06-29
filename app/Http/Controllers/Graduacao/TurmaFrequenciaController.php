@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-//use Seracademico\Services\CalendarioDisciplinaTurmaService;
-use Seracademico\Services\Graduacao\AlunoNotaService;
+use Seracademico\Services\Graduacao\AlunoFrequenciaService;
 use Seracademico\Services\Graduacao\TurmaService;
 //use Seracademico\Validators\CalendarioDisciplinaTurmaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class TurmaNotaController extends Controller
+class TurmaFrequenciaController extends Controller
 {
     /**
      * @var TurmaService
@@ -21,19 +20,19 @@ class TurmaNotaController extends Controller
     private $turmaService;
 
     /**
-     * @var AlunoNotaService
+     * @var AlunoFrequenciaService
      */
-    private $alunoNotaService;
+    private $alunoFrequenciaService;
 
     /**
-     * TurmaNotaController constructor.
+     * TurmaFrequenciaController constructor.
      * @param TurmaService $turmaService
-     * @param AlunoNotaService $alunoNotaService
+     * @param AlunoFrequenciaService $alunoFrequenciaService
      */
-    public function __construct(TurmaService $turmaService, AlunoNotaService $alunoNotaService)
+    public function __construct(TurmaService $turmaService, AlunoFrequenciaService $alunoFrequenciaService)
     {
-        $this->turmaService     = $turmaService;
-        $this->alunoNotaService = $alunoNotaService;
+        $this->turmaService = $turmaService;
+        $this->alunoFrequenciaService = $alunoFrequenciaService;
     }
 
     /**
@@ -46,25 +45,22 @@ class TurmaNotaController extends Controller
             ->join('fac_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
             ->join('fac_alunos_notas', 'fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
-            ->leftJoin('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
-            ->leftJoin('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+            ->join('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
+            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->select([
-                'fac_turmas_disciplinas.id',
-                'fac_disciplinas.id as idDiciplina',
-                'fac_alunos_notas.id as idAlunoNota',
-                'fac_alunos_semestres.id as idAlunoSemestre',
-                'fac_alunos.id as idAluno',
-                'pessoas.nome as nomePessoa',
-                'fac_alunos_notas.nota_unidade_1',
-                'fac_alunos_notas.nota_unidade_2',
-                'fac_alunos_notas.nota_2_chamada',
-                'fac_alunos_notas.nota_final',
-                'fac_alunos_notas.nota_media',
+                'fac_alunos_frequencias.id',
+                'fac_alunos_frequencias.falta_mes_1',
+                'fac_alunos_frequencias.falta_mes_2',
+                'fac_alunos_frequencias.falta_mes_3',
+                'fac_alunos_frequencias.falta_mes_4',
+                'fac_alunos_frequencias.falta_mes_5',
+                'fac_alunos_frequencias.falta_mes_6',
+                'fac_alunos_frequencias.total_falta',
                 'fac_situacao_nota.nome as nomeSituacao',
-                'fac_alunos_frequencias.total_falta'
+                'pessoas.nome as nomePessoa'
             ])
             ->where('fac_turmas.id', '=', $idTurma);
 
@@ -80,7 +76,7 @@ class TurmaNotaController extends Controller
             })
             ->addColumn('action', function ($row) {
                 # html de retorno
-                $html = '<a title="Editar notas" id="btnEditarNotas"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
+                $html = '<a title="Editar notas" id="btnEditarFrequencias"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
 
                 # retorno
                 return $html;
@@ -107,23 +103,22 @@ class TurmaNotaController extends Controller
      * @param $id
      * @return mixed
      */
-    public function editNota($id)
+    public function editFrequencia($id)
     {
         try {
             #Recuperando o calendario e declarando variáveis
-            $row   = $this->alunoNotaService->search($id);
+            $row   = $this->alunoFrequenciaService->search($id);
             $data  = [];
             
             # Preparando o array de retorno
-            $data['nota_unidade_1'] = $row[0]->nota_unidade_1;
-            $data['nota_unidade_2'] = $row[0]->nota_unidade_2;
-            $data['nota_2_chamada'] = $row[0]->nota_2_chamada;
-            $data['nota_final']     = $row[0]->nota_final;
-            $data['nota_media']     = $row[0]->nota_media;
-            $data['total_falta']    = $row[0]->total_falta;
-            $data['situacao_id']    = $row[0]->idSituacao;
-            $data['nomeSituacao']   = $row[0]->nomeSituacao;
-            $data['nomePessoa']     = $row[0]->nomePessoa;
+            $data['falta_mes_1']  = $row[0]->falta_mes_1;
+            $data['falta_mes_2']  = $row[0]->falta_mes_2;
+            $data['falta_mes_3']  = $row[0]->falta_mes_3;
+            $data['falta_mes_4']  = $row[0]->falta_mes_4;
+            $data['falta_mes_5']  = $row[0]->falta_mes_5;
+            $data['falta_mes_6']  = $row[0]->falta_mes_6;
+            $data['total_falta']  = $row[0]->total_falta;
+            $data['nomePessoa']   = $row[0]->nomePessoa;
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $data]);
@@ -137,14 +132,14 @@ class TurmaNotaController extends Controller
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function updateNota(Request $request, $id)
+    public function updateFrequencia(Request $request, $id)
     {
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
 
             #Executando a ação
-            $this->alunoNotaService->update($data, $id);
+            $this->alunoFrequenciaService->update($data, $id);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);

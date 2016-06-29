@@ -473,6 +473,9 @@ class MatriculaAlunoController extends Controller
                 ->where('fac_alunos.id', $dados['idAluno'])
                 ->where('fac_semestres.id', $semestre->id)
                 ->groupBy('fac_turmas_disciplinas.id')->get();
+
+            # recuperando o curriculo
+            $curriculo = $aluno->curriculos()->get()->last();
               
             #cadastradando a situação
             $semestre->pivot->situacoes()->attach(2, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
@@ -483,7 +486,15 @@ class MatriculaAlunoController extends Controller
 
             # Cadastrando as notas do aluno
             foreach ($rows as $row) {
-                $semestre->pivot->alunosNotas()->create(['turma_disciplina_id' => $row->id]);
+                # Criando e recuperando a nota do aluno
+                $alunoNota = $semestre->pivot->alunosNotas()->create([
+                    'turma_disciplina_id' => $row->id,
+                    'situacao_id' => 10,
+                    'curriculo_id' => $curriculo->id
+                ]);
+
+                # Criando a frequência
+                $alunoNota->frequencia()->create([]);
             }
 
             #Retorno para a view

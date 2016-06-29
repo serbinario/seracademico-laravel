@@ -197,6 +197,7 @@ class TurmaService
                 } else {
                     #Recuperando o registro e armazenando no array
                     $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+
                 }
             } else {
                 if(count($expressao) > 1) {

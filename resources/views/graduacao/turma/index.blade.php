@@ -60,6 +60,9 @@
     @include('graduacao.turma.modal_disciplina_store')
     @include('graduacao.turma.modal_horario_store')
     @include('graduacao.turma.modal_notas')
+    @include('graduacao.turma.modal_editar_notas')
+    @include('graduacao.turma.modal_frequencias')
+    @include('graduacao.turma.modal_editar_frequencias')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -71,6 +74,9 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_frequencias.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_frequencias.js')  }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>--}}
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
@@ -116,6 +122,15 @@
 
             //Executando as grids
             runTableNotas(idTurma);
+        });
+
+        /*Responsável em abrir modal de frequencias*/
+        $(document).on("click", '#modal-frequencias', function () {
+            //Recuperando o id da turma selecionada
+            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            //Executando as grids
+            runTableFrequencias(idTurma);
         });
     </script>
 @stop

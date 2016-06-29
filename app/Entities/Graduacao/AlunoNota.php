@@ -20,7 +20,7 @@ class AlunoNota extends Model implements Transformable
         'nota_final',
         'nota_media',
         'situacao_id',
-        'aluno_curso_id',
+        'curriculo_id',
         'aluno_semestre_id',
         'turma_disciplina_id'
 	];
@@ -31,5 +31,13 @@ class AlunoNota extends Model implements Transformable
     public function situacao()
     {
         return $this->belongsTo(SituacaoNota::class, 'situacao_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function frequencia()
+    {
+        return $this->hasOne(AlunoFrequencia::class, 'aluno_nota_id');
     }
 }
