@@ -262,6 +262,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\TurmaController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\TurmaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\TurmaController@delete']);
 
                 Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaDisciplinaController@getLoadFields']);

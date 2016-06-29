@@ -11,15 +11,54 @@
 
 @section('content')
     <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <div class="col-sm-6 col-md-9">
-                    <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="{{ route('seracademico.graduacao.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
+        <div class="ibox-title">
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.graduacao.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
+            </div>
+        </div>
+
+        @if(Session::has('message'))
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <em> {!! session('message') !!}</em>
+            </div>
+        @endif
+
+        @if(Session::has('errors'))
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @foreach($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="turma-search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('semestreSearch', (['' => 'Todos os Semestres'] + $loadFields['graduacao\\semestre']->toArray()), count($semestres) == 2 ? $semestres[0]->id : null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('periodoSearch', (['' => 'Todos as Períodos'] + [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        <div class="ibox-content">
+            <br>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
@@ -83,8 +122,14 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-
-            ajax: "{!! route('seracademico.graduacao.turma.grid') !!}",
+            ajax: {
+                url: "{!! route('seracademico.graduacao.turma.grid') !!}",
+                data: function (d) {
+                    d.semestre = $('select[name=semestreSearch] option:selected').val();
+                    d.periodo = $('select[name=periodoSearch] option:selected').val();
+                    d.globalSearch = $('input[name=globalSearch]').val();
+                }
+            },
             columns: [
                 {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
@@ -97,6 +142,13 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
+        // Função do submit do search da grid principal
+        $('#turma-search-form').on('submit', function(e) {
+            table.draw();
+            e.preventDefault();
+        });
+
         //Id da turma corrente
         var idTurma;
 

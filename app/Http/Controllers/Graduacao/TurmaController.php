@@ -52,16 +52,20 @@ class TurmaController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $semestres  = $this->service->getParametrosMatricula();
 
         #retorno
-        return view('graduacao.turma.index', compact('loadFields'));
+        return view('graduacao.turma.index', compact('loadFields', 'semestres'));
     }
 
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid(Request $request)
     {
+        # recuperando os semestres de congiruração
+        $semestres  = $this->service->getParametrosMatricula();
+        
         #Criando a consulta
         $rows = \DB::table('fac_turmas')
             ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
@@ -82,19 +86,63 @@ class TurmaController extends Controller
             ]);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
+        return Datatables::of($rows)
+            ->filter(function ($query) use ($request, $semestres) {
+                # Filtrando por semestre
+                if ($request->has('semestre')) {
+                    $query->where('fac_semestres.id', '=', $request->get('semestre'));
+                } else if(count($semestres) == 2) {
+                    $query->where('fac_semestres.id', '=', $semestres[0]->id);
+                }
+               // dd($request->get('periodo'));
+                # Filtrando por situação
+                if ($request->has('periodo')) {
+                    $query->where('fac_turmas.periodo', '=', $request->get('periodo'));
+                }
 
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
-                        <li><a class="btn-floating green" id="modal-horario" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
-                        <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">date_range</i></a></li>
-                        <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">date_range</i></a></li>
-                    </ul>
-                    </div>';
+                # Filtrando Global
+                if ($request->has('globalSearch')) {
+                    # recuperando o valor da requisição
+                    $search = $request->get('globalSearch');
 
-        })->make(true);
+                    #condição
+                    $query->where(function ($where) use ($search) {
+                        $where->orWhere('fac_turmas.codigo', 'like', "%$search%")
+                            ->orWhere('fac_cursos.codigo', 'like', "%$search%")
+                            ->orWhere('fac_cursos.nome', 'like', "%$search%")
+                            ->orWhere('fac_turnos.codigo', 'like', "%$search%")
+                            ->orWhere('fac_semestres.nome', 'like', "%$search%")
+                            ->orWhere('fac_turmas.periodo', 'like', "%$search%")
+                        ;
+                    });
+                }
+            })
+            ->addColumn('action', function ($row) {
+                # Variável que armazenará o html de retorno
+                $html = '<div class="fixed-action-btn horizontal">
+                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                            <ul>                            
+                                <li><a class="btn-floating green" id="modal-horario" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
+                                <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">date_range</i></a></li>
+                                <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">date_range</i></a></li>
+                                <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>';
+    
+    
+                # Recuperando a turma da linha atual
+                $turma = $this->service->find($row->id);
+    
+                # Verificando a possibilidade de remorção
+                if(count($turma->disciplinas) == 0) {
+                    $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id. '" title="Editar da turma"><i class="material-icons">delete</i></a></li>';
+                }
+    
+                # Continuação da criação do html de retorno
+                $html .= '  </ul>
+                         </div>';
+    
+                # retorno
+                return $html;
+            })->make(true);
     }
 
     /**
@@ -176,6 +224,25 @@ class TurmaController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
