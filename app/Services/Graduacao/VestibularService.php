@@ -73,6 +73,9 @@ class VestibularService
      */
     public function store(array $data) : Vestibular
     {
+        # Regras de Negócios
+        $this->tratamentoVestibularAtivo($data);
+
         #Salvando o registro pincipal
         $vestibular =  $this->repository->create($data);
 
@@ -92,6 +95,9 @@ class VestibularService
      */
     public function update(array $data, int $id) : Vestibular
     {
+        # Regras de Negócios
+        $this->tratamentoVestibularAtivo($data);
+
         #Atualizando no banco de dados
         $vestibular = $this->repository->update($data, $id);
 
@@ -125,6 +131,30 @@ class VestibularService
 
         # retorno
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    private function tratamentoVestibularAtivo(array &$data): array
+    {
+        #Verificando se a condição é válida
+        if($data['ativo'] == 1) {
+            #Recuperando o(s) vestibular(es) ativo(s)
+            $rows = $this->repository->findWhere(['ativo' => 1]);
+
+            #Varrendo o array
+            foreach($rows as $row) {
+                $vestibular = $this->repository->find($row->id);
+
+                $vestibular->ativo = 0;
+                $vestibular->save();
+            }
+        }
+
+        #retorno
+        return $data;
     }
 
     /**

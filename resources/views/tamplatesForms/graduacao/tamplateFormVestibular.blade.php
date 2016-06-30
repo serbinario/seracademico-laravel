@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome *') !!}
                     {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
@@ -25,6 +25,14 @@
                 </div>
             </div>
 
+            <div class="form-group col-md-1">
+                {!! Form::label('ativar', 'Ativar') !!}
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('ativo', 0) !!}
+                    {!! Form::checkbox('ativo', 1, null, array('class' => 'form-control', 'id'=>'ativo')) !!}
+                    {!! Form::label('ativo', 'Ativar', false) !!}
+                </div>
+            </div>
 		</div>
 
         <hr class="hr-line-dashed"/>
@@ -216,3 +224,14 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+    <script type="text/javascript">
+        // Alerta para ativar o vestibular
+        $(document).on('click', '#ativo', function () {
+            if ($(this).is(':checked')) {
+                swal("Marcando esse Vestibular como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
+            }
+        });
+    </script>
+@stop
