@@ -35,7 +35,8 @@ class Arcevo extends Model implements Transformable
 		'volume',
 		'palavras_chaves',
 		'cdd',
-		'uso_global'
+		'uso_global',
+		'periodicidade'
 	];
 
 	public function tipoAcervo()

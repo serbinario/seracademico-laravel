@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais
+                    dados</a></li>
+            <li role="presentation"><a href="#infoAdd" aria-controls="infoAdd" role="tab" data-toggle="tab">Informações
+                    adicionais</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="dados">
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('titulo', 'Título') !!}
+                            {!! Form::text('titulo', Session::getOldInput('titulo') , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('cdd', 'CDD') !!}
+                            {!! Form::text('cdd', Session::getOldInput('cdd')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('tipos_acervos_id', 'Tipo do acervo') !!}
+                            {!! Form::select('tipos_acervos_id', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoacervo']->toArray()), Session::getOldInput('tipos_acervos_id'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('situacao_id', 'Situação') !!}
+                            {!! Form::select('situacao_id', $loadFields['biblioteca\situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('periodicidade', 'Periodicidade') !!}
+                            {!! Form::text('periodicidade', Session::getOldInput('periodicidade'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('exemplar_ref', 1) !!}
+                            {!! Form::hidden('tipo_periodico', 2) !!}
+                            {{--{!! Form::checkbox('exemplar_ref', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('exemplar_ref', 'Exemplar de referẽncia (Apenas consulta)', false) !!}--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="infoAdd">
+                <br/>
+                {{--<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('palavras_chaves', 'Palavras chave') !!}
+                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            {!! Form::label('sumario', 'Sumário') !!}
+                            {!! Form::textarea('sumario', Session::getOldInput('sumario')  ,['size' => '117x6'] , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                </div>--}}
+            </div>
+        </div>
+    </div>
+
+    {{--Buttons Submit e Voltar--}}
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                    <a href="{{ route('seracademico.biblioteca.indexAcervoP') }}" class="btn btn-primary btn-block"><i
+                                class="fa fa-long-arrow-left"></i> Voltar</a></div>
+                <div class="btn-group">
+                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -200,8 +200,20 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{ route('seracademico.biblioteca.indexResponsavel') }}"><i class="material-icons">perm_identity</i> Responsável</a></li>
                         <li><a href="{{ route('seracademico.biblioteca.indexEditora') }}"><i class="material-icons">card_travel</i> Editora</a></li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}"><i class="material-icons">find_in_page</i> Acervo</a></li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="material-icons">receipt</i> Exemplar</a></li>
+                        <li>
+                            <a href="#">Acervos <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}">Não periódico</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexAcervoP') }}">Periódico</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Exemplar <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}">Não periódico</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexExemplarP') }}">Periódico</a></li>
+                            </ul>
+                        </li>
                         <li><a href="{{ route('indexConsulta') }}" target="__blank"><i class="material-icons">receipt</i> Consulta</a></li>
                         <li>
                             <a href="#">Controle <span class="fa arrow"></span></a>

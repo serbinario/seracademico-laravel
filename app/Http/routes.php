@@ -469,6 +469,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('updateAcervo/{id}', ['as' => 'updateAcervo', 'uses' => 'Biblioteca\ArcevoController@update']);
             Route::get('deleteAcervo/{id}', ['as' => 'deleteAcervo', 'uses' => 'Biblioteca\ArcevoController@delete']);
 
+            Route::get('indexAcervoP', ['as' => 'indexAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@index']);
+            Route::get('createAcervoP', ['as' => 'createAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@create']);
+            Route::get('gridAcervoP', ['as' => 'gridAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@grid']);
+            Route::get('editAcervoP/{id}', ['as' => 'editAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@edit']);
+            Route::post('storeAcervoP', ['as' => 'storeAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@store']);
+            Route::post('updateAcervoP/{id}', ['as' => 'updateAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@update']);
+            Route::get('deleteAcervoP/{id}', ['as' => 'deleteAcervoP', 'uses' => 'Biblioteca\ArcevoPeriodicoController@delete']);
+
             Route::get('indexExemplar', ['as' => 'indexExemplar', 'uses' => 'Biblioteca\ExemplarController@index']);
             Route::get('createExemplar', ['as' => 'createExemplar', 'uses' => 'Biblioteca\ExemplarController@create']);
             Route::get('gridExemplar', ['as' => 'gridExemplar', 'uses' => 'Biblioteca\ExemplarController@grid']);
@@ -476,6 +484,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'Biblioteca\ExemplarController@store']);
             Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'Biblioteca\ExemplarController@update']);
             Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'Biblioteca\ExemplarController@delete']);
+
+            Route::get('indexExemplarP', ['as' => 'indexExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@index']);
+            Route::get('createExemplarP', ['as' => 'createExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@create']);
+            Route::get('gridExemplarP', ['as' => 'gridExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@grid']);
+            Route::get('editExemplarP/{id}', ['as' => 'editExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@edit']);
+            Route::post('storeExemplarP', ['as' => 'storeExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@store']);
+            Route::post('updateExemplarP/{id}', ['as' => 'updateExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@update']);
+            Route::get('deleteExemplarP/{id}', ['as' => 'deleteExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@delete']);
 
             Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
 
