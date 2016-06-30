@@ -22,7 +22,8 @@ class Semestre extends Model implements Transformable
      */
     public function alunos()
     {
-        return $this->belongsToMany(Aluno::class, 'fac_alunos_semestres', 'semestre_id', 'aluno_id');
+        return $this->belongsToMany(Aluno::class, 'fac_alunos_semestres', 'semestre_id', 'aluno_id')
+            ->withPivot(['id', 'periodo']);
     }
     
     /**

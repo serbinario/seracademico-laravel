@@ -19,7 +19,8 @@ class SituacaoNota extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'nome'
+        'nome',
+        'codigo'
     ];
 
 }

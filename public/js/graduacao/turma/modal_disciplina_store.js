@@ -75,6 +75,7 @@ $('#btnSalvarDisciplinaTurma').click(function() {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
+            table.ajax.reload();
             tableDisciplina.ajax.reload();
             $('#modal-disciplina-store').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");

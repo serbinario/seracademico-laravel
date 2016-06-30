@@ -262,6 +262,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\TurmaController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\TurmaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\TurmaController@delete']);
 
                 Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaDisciplinaController@getLoadFields']);
@@ -281,6 +282,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendarioTurmaController@edit']);
 //                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendarioTurmaController@update']);
 //                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioTurmaController@delete']);
+                });
+
+                Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaNotaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaNotaController@getLoadFields']);
+                    Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaNotaController@editNota']);
+                    Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Graduacao\TurmaNotaController@updateNota']);
+                });
+
+                Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaFrequenciaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaFrequenciaController@getLoadFields']);
+                    Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaFrequenciaController@editFrequencia']);
+                    Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'Graduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
 
             });

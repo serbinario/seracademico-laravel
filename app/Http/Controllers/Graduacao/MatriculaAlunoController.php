@@ -57,11 +57,24 @@ class MatriculaAlunoController extends Controller
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-            ->leftJoin('fac_alunos_semestres_disciplinas', 'fac_alunos_semestres_disciplinas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+            ->join('fac_alunos_semestres', function ($join) {
+                $join->on(
+                    'fac_alunos_semestres.id', '=',
+                    \DB::raw('(SELECT semestre_secundario.id FROM fac_alunos_semestres as semestre_secundario 
+                    where semestre_secundario.aluno_id = fac_alunos.id ORDER BY semestre_secundario.id DESC LIMIT 1)')
+                );
+            })
+//            ->join('fac_alunos_situacoes', function ($join) {
+//                $join->on(
+//                    'fac_alunos_situacoes.id', '=',
+//                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria
+//                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+//                );
+//            })
+//            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->where(function ($query) use ($semestres) {
-                $query->where('fac_alunos_semestres_disciplinas.id', null)->where('fac_semestres.id', $semestres[0]->id);
+                $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
 
             })
             ->orWhere(function ($query) use ($semestres) {
@@ -382,7 +395,7 @@ class MatriculaAlunoController extends Controller
             $semestres = $this->getParametrosMatricula();
 
             # Recuperando o semestre
-            $semestre = $aluno->semestres()->find($semestres[0]->id);
+            $semestre  = $aluno->semestres()->find($semestres[0]->id);
 
             # Verificando se o semestre já foi cadastrado
             if(!$semestre) {
@@ -442,8 +455,47 @@ class MatriculaAlunoController extends Controller
                 throw new \Exception('Aluno não tem horário.');
             }
 
+            #data atual
+            $now = new \DateTime('now');
+
+            # Recuperando o ultimo currículo do aluno
+            $curriculo = $aluno->curriculos()->get()->last();
+
+            # Recuperando os ids do pivot TurmaDisciplina correspondentes.
+            $rows = \DB::table('fac_turmas_disciplinas')
+                ->select(['fac_turmas_disciplinas.id'])
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->where('fac_alunos.id', $dados['idAluno'])
+                ->where('fac_semestres.id', $semestre->id)
+                ->groupBy('fac_turmas_disciplinas.id')->get();
+
+            # recuperando o curriculo
+            $curriculo = $aluno->curriculos()->get()->last();
+              
             #cadastradando a situação
-            $semestre->pivot->situacoes()->attach([2]);
+            $semestre->pivot->situacoes()->attach(2, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
+
+            #Cadastrando o período
+            $semestre->pivot->periodo = $dados['periodo'];
+            $semestre->pivot->save();
+
+            # Cadastrando as notas do aluno
+            foreach ($rows as $row) {
+                # Criando e recuperando a nota do aluno
+                $alunoNota = $semestre->pivot->alunosNotas()->create([
+                    'turma_disciplina_id' => $row->id,
+                    'situacao_id' => 10,
+                    'curriculo_id' => $curriculo->id
+                ]);
+
+                # Criando a frequência
+                $alunoNota->frequencia()->create([]);
+            }
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Matrícula realizada com sucesso!']);

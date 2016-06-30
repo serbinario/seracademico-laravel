@@ -638,7 +638,8 @@ class VestibulandoService
             $aluno->curriculos()->attach($curriculo[0]->id);
 
             # cadastrando a situação
-            $aluno->semestres()->find($semestre)->pivot->situacoes()->attach(1, ['data' => $now->format('YmdHis')]);
+            $aluno->semestres()->find($semestre)->pivot->situacoes()
+                ->attach(1, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo[0]->id]);
 
             # setando a mensagem
             $mensagem = "Transferência realizada com sucesso!";

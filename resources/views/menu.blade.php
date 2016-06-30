@@ -47,7 +47,7 @@
 </head>
 
 <body>
-
+<h3 style="color: white"><?php echo date('d/m/Y'); ?></h3>
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">

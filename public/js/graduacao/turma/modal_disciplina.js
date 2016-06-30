@@ -99,5 +99,6 @@ $(document).on('click', '#removerDisciplina', function () {
         swal(retorno.msg, "Click no botão abaixo!", "success");
        // $("#btnAddCalendario").attr("disabled", true);
         tableDisciplina.ajax.reload();
+        table.ajax.reload();
     });
 });

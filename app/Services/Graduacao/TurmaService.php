@@ -120,6 +120,28 @@ class TurmaService
     }
 
     /**
+     * @param $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete($id)
+    {
+        # Recuperando a turma
+        $turma = $this->repository->find($id);
+
+        # Verificando se a turma foi encontrada
+        if(!$turma) {
+            throw new \Exception('Turma não encontrada');
+        }
+
+        # Removendo a turma
+        $this->repository->delete($turma->id);
+
+        # Retorno
+        return true;
+    }
+
+    /**
      * @param $idTurma
      * @return array
      * @throws \Exception
@@ -197,6 +219,7 @@ class TurmaService
                 } else {
                     #Recuperando o registro e armazenando no array
                     $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+
                 }
             } else {
                 if(count($expressao) > 1) {
@@ -518,5 +541,45 @@ class TurmaService
 
         #Retorno
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParametrosMatricula()
+    {
+        try {
+            # Recuperando o item de parâmetro do semestre vigente
+            $queryParameter = \DB::table('fac_parametros')
+                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
+                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
+                ->where('fac_parametros_itens.id', 2)
+                ->orWhere('fac_parametros_itens.id', 3)
+                ->get();
+
+            # Validando o parametro
+            if(count($queryParameter) !== 2) {
+                throw new \Exception('Parâmetro do semestre vigente não configurado');
+            }
+
+            # Recuperando o semestre
+            $querySemestre = \DB::table('fac_semestres')
+                ->select(['fac_semestres.id', 'fac_semestres.nome'])
+                ->where('fac_semestres.nome', $queryParameter[0]->valor)
+                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
+                ->where('fac_semestres.ativo', 1)
+                ->get();
+
+            # Validando o parametro
+            if(count($querySemestre) !== 2) {
+                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
+            }
+
+            #Retorno
+            return $querySemestre;
+        } catch (\Throwable $e) {
+            #Retorno
+            return $e->getMessage();
+        }
     }
 }

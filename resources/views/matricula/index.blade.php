@@ -156,30 +156,55 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/horario.js') }}"></script>
     <script type="text/javascript">
+
         // Evento para finalizar matrícula
         $(document).on('click', '#btnFinalizarMatricula', function () {
-            // Fazendo a requisição ajax
-            jQuery.ajax({
-                type: 'POST',
-                data: {'idAluno' : idAluno},
-                url: '/index.php/seracademico/matricula/finalizarMatricula',
-                datatype: 'json'
-            }).done(function (retorno) {
-                if(retorno.success) {
-                    swal({
-                        title: retorno.msg,
-                        text: "Redirecionamento em 2 segundos",
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
+            // Mensagem para finalizar matrícula e inserção do período
+            swal({
+                title: "Informe o Período",
+                text: "A matrícula só poderá ser finalizada com a inserção do período",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "Informe o Período"
+            }, function(inputValue) {
+                // verificando se o valor doi passado
+                if (inputValue === false) return false;
 
-                    // Redirecionando
-                    window.location.reload();
-                    //swal(retorno.msg, "Horaŕios adiciondos com sucesso.", "success");
-                    //setTimeout(function(){ window.location.reload(); },1000);
-                } else {
-                    swal("Ops! Ocorreu um problema!", retorno.msg, "error");
+                // verificando se o valor é válido
+                if (inputValue === "" && typeof inputValue !== "number" ) {
+                    swal.showInputError("Valor para o período não é válido!");
+                    return false
                 }
+
+                // Fazendo a requisição ajax
+                jQuery.ajax({
+                    type: 'POST',
+                    data: {
+                        'idAluno' : idAluno,
+                        'periodo': inputValue
+                    },
+                    url: '/index.php/seracademico/matricula/finalizarMatricula',
+                    datatype: 'json'
+                }).done(function (retorno) {
+                    if(retorno.success) {
+                        swal({
+                            title: retorno.msg,
+                            text: "Redirecionamento em 2 segundos",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        // Redirecionando
+                        window.location.reload();
+                        //swal(retorno.msg, "Horaŕios adiciondos com sucesso.", "success");
+                        //setTimeout(function(){ window.location.reload(); },1000);
+                    } else {
+                        swal("Ops! Ocorreu um problema!", retorno.msg, "error");
+                    }
+                });
+                //swal("Nice!", "You wrote: " + inputValue, "success");
             });
         });
     </script>
