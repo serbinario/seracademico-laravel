@@ -54,7 +54,8 @@ class ArcevoService
             'corredor',
             'estante',
             'exemplares',
-            'primeiraEntrada.responsaveis'
+            'primeiraEntrada.responsaveis',
+            'segundaEntrada'
         ];
 
         #Recuperando o registro no banco de dados
@@ -75,6 +76,38 @@ class ArcevoService
 
         #retorno
         return $retorno;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find2($id) {
+
+        $relacionamentos = [
+            'tipoAcervo',
+            'colecao',
+            'genero',
+            'situacao',
+            'corredor',
+            'estante',
+            'exemplares',
+            'cursos',
+            'primeiraEntrada.responsaveis',
+            'segundaEntrada'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $arcevo = $this->repository->with($relacionamentos)->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$arcevo) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $arcevo;
     }
 
     /**
@@ -233,6 +266,14 @@ class ArcevoService
      */
     public function delete(int $id)
     {
+
+        $acervo = $this->find2($id);
+
+        #excluir dependências
+        $acervo->primeiraEntrada()->delete();
+        $acervo->segundaEntrada()->delete();
+        $acervo->cursos()->detach();
+
         #deletando o curso
         $result = $this->repository->delete($id);
 

@@ -35,7 +35,11 @@ class Exemplar extends Model implements Transformable
 		'codigo_barra',
 		'codigo',
 		'path_image',
-		'responsaveis_id'
+		'responsaveis_id',
+		'num_periodico',
+		'assunto',
+		'palavras_chaves',
+		'artigos',
 	];
 
 	public function acervo()
