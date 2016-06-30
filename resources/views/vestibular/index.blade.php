@@ -48,6 +48,7 @@
                                 <th>Data Prova</th>
                                 <th>Data Inic. Insc.</th>
                                 <th>Data Fim. Insc.</th>
+                                <th>Situação</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
@@ -59,6 +60,7 @@
                                 <th>Data Prova</th>
                                 <th>Data Prova</th>
                                 <th>Data Prova</th>
+                                <th>Situação</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -91,6 +93,7 @@
                 {data: 'data_prova', name: 'data_prova'},
                 {data: 'data_inicial', name: 'data_inicial'},
                 {data: 'data_final', name: 'data_final'},
+                {data: 'ativo', name: 'ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

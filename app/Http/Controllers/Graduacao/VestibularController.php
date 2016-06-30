@@ -65,7 +65,8 @@ class VestibularController extends Controller
                 'codigo',
                 'data_prova',
                 'data_inicial',
-                'data_final'
+                'data_final',
+                \DB::raw('IF(ativo, "Ativo", "Desativado") as ativo'),
             ]);
 
         #Editando a grid
