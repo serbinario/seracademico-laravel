@@ -64,18 +64,7 @@ class MatriculaAlunoController extends Controller
                     where semestre_secundario.aluno_id = fac_alunos.id ORDER BY semestre_secundario.id DESC LIMIT 1)')
                 );
             })
-//            ->join('fac_alunos_situacoes', function ($join) {
-//                $join->on(
-//                    'fac_alunos_situacoes.id', '=',
-//                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria
-//                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
-//                );
-//            })
-//            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-            //->orWhere(function ($query) use ($semestres) {
-            //    $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
-            //})
             ->where(function ($query) use ($semestres) {
                 $query->where('fac_semestres.id', $semestres[1]->id)
                     ->orWhere(function ($query) use ($semestres) {
@@ -532,6 +521,7 @@ class MatriculaAlunoController extends Controller
                 ->where('fac_semestres.nome', $queryParameter[0]->valor)
                 ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
                 ->where('fac_semestres.ativo', 1)
+                ->orderBy('fac_semestres.id')
                 ->get();
 
             # Validando o parametro
