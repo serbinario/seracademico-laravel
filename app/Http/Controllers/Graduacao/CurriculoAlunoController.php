@@ -79,7 +79,7 @@ class CurriculoAlunoController extends Controller
      */
     public function gridCursadas($idAluno)
     {
-#Criando a consulta
+        #Criando a consulta
         $rows = \DB::table('fac_disciplinas')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')

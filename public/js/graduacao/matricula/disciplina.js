@@ -51,7 +51,7 @@ $(document).on('click', '#disciplina-grid tbody tr', function () {
         data: {"dados" : arrayId},
         url: '/index.php/seracademico/matricula/getTurmas',
         datatype: 'json'
-    }).done(function (retorno) {// validado as disciplinas do currículo
+    }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno.success) {
             // Variável que armazenará o objeto tree e os nós
