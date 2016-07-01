@@ -183,6 +183,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                         Route::post('save/{idSemestre}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@saveSituacao']);
                     });
                 });
+
+                // Currículo do aluno
+                Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                    Route::get('gridACursar/{idAluno}', ['as' => 'gridACursar', 'uses' => 'Graduacao\CurriculoAlunoController@gridACursar']);
+                    Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursadas']);
+                });
             });
 
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
