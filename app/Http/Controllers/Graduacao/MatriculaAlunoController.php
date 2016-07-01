@@ -74,11 +74,8 @@ class MatriculaAlunoController extends Controller
 //            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->where(function ($query) use ($semestres) {
-                $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
-
-            })
-            ->orWhere(function ($query) use ($semestres) {
-                $query->where('fac_semestres.id', $semestres[1]->id);
+                $query->where('fac_semestres.id', $semestres[1]->id)
+                ->orWhere('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
             })
             ->groupBy('fac_alunos.id')
             ->select([
