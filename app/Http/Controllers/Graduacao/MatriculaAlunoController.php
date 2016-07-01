@@ -521,7 +521,7 @@ class MatriculaAlunoController extends Controller
                 ->where('fac_semestres.nome', $queryParameter[0]->valor)
                 ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
                 ->where('fac_semestres.ativo', 1)
-                ->orderBy('fac_semestres.id', 'DESC')
+                ->orderBy('fac_semestres.valor', 'DESC')
                 ->get();
 
             # Validando o parametro
