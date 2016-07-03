@@ -1,0 +1,103 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 03/07/2016 21:36
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-3d-buildings:before { content: "\f100"; }
+.flaticon-audience-in-presentation-of-business:before { content: "\f101"; }
+.flaticon-book:before { content: "\f102"; }
+.flaticon-book-1:before { content: "\f103"; }
+.flaticon-book-2:before { content: "\f104"; }
+.flaticon-book-3:before { content: "\f105"; }
+.flaticon-book-4:before { content: "\f106"; }
+.flaticon-book-with-magnifying-glass:before { content: "\f107"; }
+.flaticon-business:before { content: "\f108"; }
+.flaticon-calculator-and-dollar-sign:before { content: "\f109"; }
+.flaticon-commerce:before { content: "\f10a"; }
+.flaticon-copy:before { content: "\f10b"; }
+.flaticon-currency-rates:before { content: "\f10c"; }
+.flaticon-emploment-suitcase:before { content: "\f10d"; }
+.flaticon-employment-test:before { content: "\f10e"; }
+.flaticon-exam:before { content: "\f10f"; }
+.flaticon-exam-1:before { content: "\f110"; }
+.flaticon-exam-2:before { content: "\f111"; }
+.flaticon-folder:before { content: "\f112"; }
+.flaticon-interface:before { content: "\f113"; }
+.flaticon-interface-1:before { content: "\f114"; }
+.flaticon-library:before { content: "\f115"; }
+.flaticon-library-1:before { content: "\f116"; }
+.flaticon-male-university-graduate-silhouette-with-the-cap:before { content: "\f117"; }
+.flaticon-passed-exam:before { content: "\f118"; }
+.flaticon-portfolio-filled-open-folder:before { content: "\f119"; }
+.flaticon-read:before { content: "\f11a"; }
+.flaticon-settings:before { content: "\f11b"; }
+.flaticon-teacher-at-the-blackboard:before { content: "\f11c"; }
+.flaticon-test:before { content: "\f11d"; }
+.flaticon-tool:before { content: "\f11e"; }
+.flaticon-tools-cross-settings-symbol-for-interface:before { content: "\f11f"; }
+    
+    $font-Flaticon-3d-buildings: "\f100";
+    $font-Flaticon-audience-in-presentation-of-business: "\f101";
+    $font-Flaticon-book: "\f102";
+    $font-Flaticon-book-1: "\f103";
+    $font-Flaticon-book-2: "\f104";
+    $font-Flaticon-book-3: "\f105";
+    $font-Flaticon-book-4: "\f106";
+    $font-Flaticon-book-with-magnifying-glass: "\f107";
+    $font-Flaticon-business: "\f108";
+    $font-Flaticon-calculator-and-dollar-sign: "\f109";
+    $font-Flaticon-commerce: "\f10a";
+    $font-Flaticon-copy: "\f10b";
+    $font-Flaticon-currency-rates: "\f10c";
+    $font-Flaticon-emploment-suitcase: "\f10d";
+    $font-Flaticon-employment-test: "\f10e";
+    $font-Flaticon-exam: "\f10f";
+    $font-Flaticon-exam-1: "\f110";
+    $font-Flaticon-exam-2: "\f111";
+    $font-Flaticon-folder: "\f112";
+    $font-Flaticon-interface: "\f113";
+    $font-Flaticon-interface-1: "\f114";
+    $font-Flaticon-library: "\f115";
+    $font-Flaticon-library-1: "\f116";
+    $font-Flaticon-male-university-graduate-silhouette-with-the-cap: "\f117";
+    $font-Flaticon-passed-exam: "\f118";
+    $font-Flaticon-portfolio-filled-open-folder: "\f119";
+    $font-Flaticon-read: "\f11a";
+    $font-Flaticon-settings: "\f11b";
+    $font-Flaticon-teacher-at-the-blackboard: "\f11c";
+    $font-Flaticon-test: "\f11d";
+    $font-Flaticon-tool: "\f11e";
+    $font-Flaticon-tools-cross-settings-symbol-for-interface: "\f11f";
