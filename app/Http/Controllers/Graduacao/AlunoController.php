@@ -86,13 +86,14 @@ class AlunoController extends Controller
                 );
             })
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
-            ->join('fac_alunos_semestres', function ($join) {
-                $join->on(
-                    'fac_alunos_semestres.id', '=',
-                    \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual 
-                    where semestre_atual.aluno_id = fac_alunos.id ORDER BY semestre_atual.id DESC LIMIT 1)')
-                );
-            })
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+//            ->join('fac_alunos_semestres', function ($join) {
+//                $join->on(
+//                    'fac_alunos_semestres.id', '=',
+//                    \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual
+//                    where semestre_atual.aluno_id = fac_alunos.id ORDER BY semestre_atual.id DESC LIMIT 1)')
+//                );
+//            })
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->join('fac_alunos_situacoes', function ($join) {
                 $join->on(
