@@ -11,6 +11,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Validators\Graduacao\AlunoValidator;
 use Yajra\Datatables\Datatables;
+use Seracademico\Facades\ParametroMatriculaFacade;
 
 class MatriculaAlunoController extends Controller
 {
@@ -83,6 +84,7 @@ class MatriculaAlunoController extends Controller
             #Editando a grid
             return Datatables::of($alunos)->make(true);
         } catch (\Throwable $e) {
+            dd($e);
             abort(500);
         }
     }
