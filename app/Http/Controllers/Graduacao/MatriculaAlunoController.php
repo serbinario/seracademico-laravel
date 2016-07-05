@@ -46,43 +46,45 @@ class MatriculaAlunoController extends Controller
      */
     public function gridAluno()
     {
-        # recuperando as configurações
-        $semestres = $this->getParametrosMatricula();
+        try {
+            # recuperando as configurações
+            $semestres = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula()
+            ];
 
-        # verificando se os parâmetros foram carregados
-        if(!is_array($semestres) && count($semestres) !== 2) {
+            #Criando a consulta
+            $alunos = \DB::table('fac_alunos')
+                ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+                ->join('fac_alunos_semestres', function ($join) {
+                    $join->on(
+                        'fac_alunos_semestres.id', '=',
+                        \DB::raw('(SELECT semestre_secundario.id FROM fac_alunos_semestres as semestre_secundario 
+                    where semestre_secundario.aluno_id = fac_alunos.id ORDER BY semestre_secundario.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->where(function ($query) use ($semestres) {
+                    $query->where('fac_semestres.id', $semestres[1]->id)
+                        ->orWhere(function ($query) use ($semestres) {
+                            $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
+                        });
+                })
+                ->groupBy('fac_alunos.id')
+                ->select([
+                    'fac_alunos.id',
+                    'pessoas.nome',
+                    'pessoas.cpf',
+                    'fac_alunos.matricula',
+                    'pessoas.celular',
+                    'fac_alunos_semestres.id as IDTESTE'
+                ]);
+
+            #Editando a grid
+            return Datatables::of($alunos)->make(true);
+        } catch (\Throwable $e) {
             abort(500);
         }
-
-        #Criando a consulta
-        $alunos = \DB::table('fac_alunos')
-            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->join('fac_alunos_semestres', function ($join) {
-                $join->on(
-                    'fac_alunos_semestres.id', '=',
-                    \DB::raw('(SELECT semestre_secundario.id FROM fac_alunos_semestres as semestre_secundario 
-                    where semestre_secundario.aluno_id = fac_alunos.id ORDER BY semestre_secundario.id DESC LIMIT 1)')
-                );
-            })
-            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-            ->where(function ($query) use ($semestres) {
-                $query->where('fac_semestres.id', $semestres[1]->id)
-                    ->orWhere(function ($query) use ($semestres) {
-                        $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
-                    });
-            })
-            ->groupBy('fac_alunos.id')
-            ->select([
-                'fac_alunos.id',
-                'pessoas.nome',
-                'pessoas.cpf',
-                'fac_alunos.matricula',
-                'pessoas.celular',
-                'fac_alunos_semestres.id as IDTESTE'
-            ]);
-
-        #Editando a grid
-        return Datatables::of($alunos)->make(true);
     }
 
     /**
@@ -140,11 +142,16 @@ class MatriculaAlunoController extends Controller
             # Variável que armazenará o array de retorno
             $dados = [];
 
+            # Recuperando o semestre vigente
+            $semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
+
             # Fazendo a consulta pincipal e recuperando os registros
             $rows  = \DB::table('fac_disciplinas')
                 ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
                 ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_turmas.semestre_id')
                 ->whereIn('fac_disciplinas.id', $request->get('dados'))
+                ->where('fac_semestres.id', $semestreVigente->id)
                 ->groupBy('fac_disciplinas.id')
                 ->select([
                     'fac_disciplinas.id',
