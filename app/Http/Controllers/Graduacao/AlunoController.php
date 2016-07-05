@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Aluno;
+use Seracademico\Facades\ParametroMatriculaFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
@@ -61,7 +62,10 @@ class AlunoController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
-        $semestres  = $this->service->getParametrosMatricula();
+        $semestres  = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula()
+        ];
 
         # retorno
         return view('graduacao.aluno.index', compact('loadFields', 'semestres'));
@@ -73,7 +77,7 @@ class AlunoController extends Controller
     public function grid(Request $request)
     {
         # recuperando os semestres de congiruração
-        $semestres  = $this->service->getParametrosMatricula();
+        $semestreVigente  = ParametroMatriculaFacade::getSemestreVigente();
 
         #Criando a consulta
         $alunos = \DB::table('fac_alunos')
@@ -117,12 +121,12 @@ class AlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($alunos)
-            ->filter(function ($query) use ($request, $semestres) {
+            ->filter(function ($query) use ($request, $semestreVigente) {
                 # Filtrando por semestre
                 if ($request->has('semestre')) {
                     $query->where('fac_semestres.id', '=', $request->get('semestre'));
                 } else if(count($semestres) == 2) {
-                    $query->where('fac_semestres.id', '=', $semestres[0]->id);
+                    $query->where('fac_semestres.id', '=', $semestreVigente->id);
                 }
 
                 # Filtrando por situação
