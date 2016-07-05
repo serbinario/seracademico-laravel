@@ -484,8 +484,7 @@ class AlunoService
         \DB::table('fac_alunos_situacoes')->where('id', $idAlunoSituacao)->delete();
 
         return true;
-    }
-    
+    }    
 
     /**
      * @param $key
