@@ -2,6 +2,11 @@
 
 @section('css')
     <style type="text/css">
+        .select2-container {
+            width: 100% !important;
+            padding: 0;
+        }
+
         .select2-close-mask{
             z-index: 2099;
         }

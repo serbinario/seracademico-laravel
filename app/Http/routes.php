@@ -183,6 +183,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                         Route::post('save/{idSemestre}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@saveSituacao']);
                     });
                 });
+
+                // Currículo do aluno
+                Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                    Route::get('gridACursar/{idAluno}', ['as' => 'gridACursar', 'uses' => 'Graduacao\CurriculoAlunoController@gridACursar']);
+                    Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursadas']);
+                });
+
+                // Semestre do aluno
+                Route::group(['prefix' => 'semestre', 'as' => 'semestre.'], function () {
+                    Route::get('getTurmas/{idAluno}', ['as' => 'gridHorario', 'uses' => 'Graduacao\SemestreAlunoController@getTurmas']);
+                    Route::get('gridHorario/{idAluno}', ['as' => 'gridHorario', 'uses' => 'Graduacao\SemestreAlunoController@gridHorario']);
+                    Route::get('gridNotas/{idAluno}', ['as' => 'gridNotas', 'uses' => 'Graduacao\SemestreAlunoController@gridNotas']);
+                    Route::get('gridFaltas/{idAluno}', ['as' => 'gridFaltas', 'uses' => 'Graduacao\SemestreAlunoController@gridFaltas']);
+                });
             });
 
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
@@ -374,6 +388,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\MateriaController@store']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\MateriaController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\MateriaController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\MateriaController@delete']);
         });
 
         Route::group(['prefix' => 'banco', 'as' => 'banco.'], function () {

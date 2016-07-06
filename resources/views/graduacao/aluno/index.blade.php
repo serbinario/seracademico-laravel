@@ -87,12 +87,16 @@
     @include('graduacao.aluno.modal_historico')
     @include('graduacao.aluno.modal_create_historico')
     @include('graduacao.aluno.modal_create_situacao')
+    @include('graduacao.aluno.modal_curriculo')
+    @include('graduacao.aluno.modal_semestre')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_historico.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_historico.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_curriculo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_semestre.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -143,6 +147,40 @@
 
             // Executando o script de histórico
             runHistorico(idAluno);
+        });
+
+        // Evento para abrir o modal de histórico
+        $(document).on("click", "#modalCurriculo", function () {
+            // recuperando o id do aluno
+            idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            // Recuperando o nome e a matrícula
+            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+
+            // prenchendo o titulo do nome do aluno
+            $('#tlMatricula').text('Matrícula: ' + matricula);
+            $('#tlNomeAluno').text('Nome: ' + nomeAluno);
+
+            // Executando o script de curriculo
+            runCurriculo(idAluno);
+        });
+
+        // Evento para abrir o modal de semestre
+        $(document).on("click", "#modalSemestre", function () {
+            // recuperando o id do aluno
+            idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+            // Recuperando o nome e a matrícula
+            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+
+            // prenchendo o titulo do nome do aluno
+            $('#sTlMatricula').text('Matrícula: ' + matricula);
+            $('#sTlNomeAluno').text('Nome: ' + nomeAluno);
+
+            // Executando o script de curriculo
+            runSemestre(idAluno);
         });
     </script>
 @stop

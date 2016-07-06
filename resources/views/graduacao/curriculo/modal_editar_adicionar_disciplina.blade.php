@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="disciplina_id_editar">Disciplina</label>
-                            <select name="disciplina_id_editar" class="form-control" id="disciplina_id_editar">
+                            <select name="disciplina" class="form-control" id="disciplina_id_editar">
                             </select>
                         </div>
 
@@ -102,13 +102,13 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="">Pré-requisitos 1</label>
-                                            <select name="pre_disciplinas_editar" id="pre_disciplina_1_editar" class="form-control">
+                                            <select name="pre_requisito" id="pre_requisito_1_id_editar" class="form-control">
                                             </select>
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4 col-md-offset-1">
                                             <label for="">Pré-requisitos 2</label>
-                                            <select name="pre_disciplinas_editar" id="pre_disciplina_2_editar" class="form-control">
+                                            <select name="pre_requisito" id="pre_requisito_2_id_editar" class="form-control">
                                             </select>
                                         </div>
                                     </div>
@@ -116,13 +116,13 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="">Pré-requisitos 3</label>
-                                            <select name="pre_disciplinas_editar" id="pre_disciplina_3_editar" class="form-control">
+                                            <select name="pre_requisito" id="pre_requisito_3_id_editar" class="form-control">
                                             </select>
                                         </div>
 
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4 col-md-offset-1">
                                             <label for="">Pré-requisitos 4</label>
-                                            <select name="pre_disciplinas_editar" id="pre_disciplina_4_editar" class="form-control">
+                                            <select name="pre_requisito" id="pre_requisito_4_id_editar" class="form-control">
                                             </select>
                                         </div>
                                     </div>
@@ -130,14 +130,14 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="">Pré-requisitos 5</label>
-                                            <select name="pre_disciplinas_editar" id="pre_disciplina_5_editar" class="form-control">
+                                            <select name="pre_requisito" id="pre_requisito_5_id_editar" class="form-control">
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 {{--FIM Aba Autorização MEC--}}
 
-                                {{--Aba Pré - Reuisitos --}}
+                                {{--Aba Co - Reuisitos --}}
                                 <div role="tabpanel" class="tab-pane" id="corequisitosEditar">
                                     <br/>
 
@@ -145,7 +145,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="">Co-requisitos</label>
-                                            <select name="co_disciplinas_editar" id="co_disciplina_1_editar" class="form-control">
+                                            <select name="pre_requisito" id="co_requisito_1_id_editar" class="form-control">
                                             </select>
                                         </div>
                                     </div>

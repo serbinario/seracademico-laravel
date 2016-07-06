@@ -41,53 +41,9 @@ function builderHtmlFields (dados) {
     $("#carga_horaria_pratica").val("");
     $("#qtd_credito").val("");
     $("#qtd_faltas").val("");
-
-    // Variáveis que armazenaram o html
-    var htmlDisciplina     = "<option value=''>Selecione uma disciplina</option>";
-    var htmlPreDisciplina1 = "<option value=''>Selecione uma disciplina</option>";
-    var htmlPreDisciplina2 = "<option value=''>Selecione uma disciplina</option>";
-    var htmlPreDisciplina3 = "<option value=''>Selecione uma disciplina</option>";
-    var htmlPreDisciplina4 = "<option value=''>Selecione uma disciplina</option>";
-    var htmlPreDisciplina5 = "<option value=''>Selecione uma disciplina</option>";
-    var htmlCoDisciplina1  = "<option value=''>Selecione uma disciplina</option>";
-
-    // Percorrendo o array de disciplinacurriculo
-    for(var i = 0; i < dados['graduacao\\disciplina'].length; i++) {
-        // Criando as options
-        htmlDisciplina     += "<option value='" + dados['graduacao\\disciplina'][i].id + "'>"  + dados['graduacao\\disciplina'][i].codigo + " : " + dados['graduacao\\disciplina'][i].nome + "</option>";
-    }
-
-    // Percorrendo o array de disciplinadefault
-    for (var i = 0; i < dados['disciplinadefault'].length; i++) {
-        htmlPreDisciplina1 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina2 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina3 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina4 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
-        htmlPreDisciplina5 += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
-        htmlCoDisciplina1  += "<option value='" + dados['disciplinadefault'][i].id + "'>"  + dados['disciplinadefault'][i].codigo + " : " + dados['disciplinadefault'][i].nome + "</option>";
-    }
-
-    // Removendo e adicionando as options de período
-    $("#disciplina_id option").remove();
-    $("#disciplina_id").append(htmlDisciplina);
-
-    $("#pre_disciplina_1 option").remove();
-    $("#pre_disciplina_1").append(htmlPreDisciplina1);
-
-    $("#pre_disciplina_2 option").remove();
-    $("#pre_disciplina_2").append(htmlPreDisciplina2);
-
-    $("#pre_disciplina_3 option").remove();
-    $("#pre_disciplina_3").append(htmlPreDisciplina3);
-
-    $("#pre_disciplina_4 option").remove();
-    $("#pre_disciplina_4").append(htmlPreDisciplina4);
-
-    $("#pre_disciplina_5 option").remove();
-    $("#pre_disciplina_5").append(htmlPreDisciplina5);
-
-    $("#co_disciplina_1 option").remove();
-    $("#co_disciplina_1").append(htmlCoDisciplina1);
+        
+    // Carregando o script dos select2
+    $.getScript('/js/graduacao/curriculo/select2_requisitos.js', function() {});
 
     // Abrindo o modal de inserir disciplina
     $("#modal-inserir-adicionar-disciplina").modal({show : true});
@@ -104,21 +60,13 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
     var qtd_faltas            = $("#qtd_faltas").val();
     var dom_pre_discip        = $("select[name='pre_disciplinas'] option:selected").toArray();
     var dom_co_discip         = $("select[name='co_disciplinas'] option:selected").toArray();
-    var pre_disciplina        = [];
-    var co_disciplina         = [];
+    var pre_requisito_1_id    = $("#pre_requisito_1_id").val();
+    var pre_requisito_2_id    = $("#pre_requisito_2_id").val();
+    var pre_requisito_3_id    = $("#pre_requisito_3_id").val();
+    var pre_requisito_4_id    = $("#pre_requisito_4_id").val();
+    var pre_requisito_5_id    = $("#pre_requisito_5_id").val();
+    var co_requisito_1_id     = $("#co_requisito_1_id").val();
 
-    $(dom_pre_discip).each(function (index) {
-        if($(this).val() != "") {
-            pre_disciplina[index] = $(this).val();
-        }
-
-    });
-
-    $(dom_co_discip).each(function (index) {
-        if($(this).val() != "") {
-            co_disciplina[index] = $(this).val();
-        }
-    });
 
     var dados = {
         'curriculo_id' : idCurriculo,
@@ -129,8 +77,12 @@ $('#btnSalvarAdicionarDisciplina').click(function() {
         'carga_horaria_pratica' : carga_horaria_pratica,
         'qtd_credito': qtd_credito,
         'qtd_faltas' : qtd_faltas,
-        'pre_disciplina' : pre_disciplina,
-        'co_disciplina' : co_disciplina
+        'pre_requisito_1_id' : pre_requisito_1_id,
+        'pre_requisito_2_id' : pre_requisito_2_id,
+        'pre_requisito_3_id' : pre_requisito_3_id,
+        'pre_requisito_4_id' : pre_requisito_4_id,
+        'pre_requisito_5_id' : pre_requisito_5_id,
+        'co_requisito_1_id'  : co_requisito_1_id
     };
 
     jQuery.ajax({

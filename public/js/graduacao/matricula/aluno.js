@@ -41,7 +41,11 @@ $(document).on('click', '#aluno-grid tbody tr', function () {
         } else {
             // Recarregando a tableDisciplina
             tableDisciplina.ajax.url("/index.php/seracademico/matricula/gridDisciplina/" + idAluno).load(function ( data ) {
-                $('#nomeCurso').text(data.data[0].nomeAluno + ' - ' +data.data[0].nomeCurso);
+                if(data.data.length == 0) {
+                    $('#nomeCurso').text("Nenhuma disciplina foi encontrada para esse aluno.");
+                } else {
+                    $('#nomeCurso').text(data.data[0].nomeAluno + ' - ' +data.data[0].nomeCurso);
+                }
             });
         }
 

@@ -37,7 +37,8 @@ class Vestibular extends Model implements Transformable
 		'tipo_vencimento_id',
 		'qtd_dias',
 		'data_prova',
-        'semestre_id'
+        'semestre_id',
+        'ativo'
 	];
 
     /**
