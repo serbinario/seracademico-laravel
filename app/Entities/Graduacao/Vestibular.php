@@ -187,4 +187,13 @@ class Vestibular extends Model implements Transformable
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAtivo($query, $value)
+    {
+        return $query->where("ativo", $value);
+    }
 }
