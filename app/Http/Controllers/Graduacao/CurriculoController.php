@@ -298,9 +298,6 @@ class CurriculoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->disciplinaStore($data);
 
@@ -353,8 +350,18 @@ class CurriculoController extends Controller
             $pivot['carga_horaria_teorica']  = $model['model']->carga_horaria_teorica;
             $pivot['carga_horaria_pratica']  = $model['model']->carga_horaria_pratica;
             $pivot['periodo']                = $model['model']->periodo;
-            $pivot['preRequisitos']          = $model['model']->disciplinasPreRequisitos;
-            $pivot['cosRequisitos']          = $model['model']->disciplinasCoRequisitos;
+            $pivot['pre_1_id']               = $model['model']->preRequisito1->id ?? "";
+            $pivot['pre_1_nome']             = $model['model']->preRequisito1->nome  ?? "";
+            $pivot['pre_2_id']               = $model['model']->preRequisito2->id ?? "";
+            $pivot['pre_2_nome']             = $model['model']->preRequisito2->nome ?? "";
+            $pivot['pre_3_id']               = $model['model']->preRequisito3->id ?? "";
+            $pivot['pre_3_nome']             = $model['model']->preRequisito3->nome ?? "";
+            $pivot['pre_4_id']               = $model['model']->preRequisito4->id ?? "";
+            $pivot['pre_4_nome']             = $model['model']->preRequisito4->nome ?? "";
+            $pivot['pre_5_id']               = $model['model']->preRequisito5->id ?? "";
+            $pivot['pre_5_nome']             = $model['model']->preRequisito5->nome ?? "";
+            $pivot['co_1_id']                = $model['model']->coRequisito1->id ?? "";
+            $pivot['co_1_nome']              = $model['model']->coRequisito1->nome ?? "";
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $pivot]);

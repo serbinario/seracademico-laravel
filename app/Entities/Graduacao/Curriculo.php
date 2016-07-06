@@ -53,7 +53,13 @@ class Curriculo extends Model implements Transformable
                 'carga_horaria_teorica',
                 'carga_horaria_pratica',
                 'qtd_credito',
-                'qtd_faltas'
+                'qtd_faltas',
+                'pre_requisito_1_id',
+                'pre_requisito_2_id',
+                'pre_requisito_3_id',
+                'pre_requisito_4_id',
+                'pre_requisito_5_id',
+                'co_requisito_1_id'
             ]);
     }
 
