@@ -175,14 +175,15 @@ class ExemplarService
         //recupera o maior código ja registrado
         $codigo = \DB::table('bib_exemplares')->max('codigo');
         $dataObj  = new \DateTime('now');
-        $this->anoAtual = $dataObj->format('Y');
+        $this->anoAtual = date('Y');
         $codigoMax = $codigo != null ? $codigo : "0001{$this->anoAtual}";
         $codigoAtual = substr($codigoMax, 0, -4);
         $this->ultimoAno = substr($codigo, -4);
-        dd($codigoAtual . "         " . $this->ultimoAno);
+        //dd(date('Y'));
+        //dd($codigoAtual . "         " . $this->ultimoAno);
         //trata a quantidade de exemplar caso o valor informado seja 0
         $qtdExemplar = $data['registros'] == '0' ? $qtdExemplar = 1 : $qtdExemplar = $data['registros'];
-        //dd($codigoMax);
+       // dd($codigoMax);
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
                 if($i == 0){
