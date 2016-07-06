@@ -17,6 +17,12 @@ function loadTableAdicionarDisciplina (idCurriculo) {
             }
         },
         columns: [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
@@ -35,8 +41,68 @@ function loadTableAdicionarDisciplina (idCurriculo) {
         e.preventDefault();
     });
 
+    // array de detalhes da grid
+    var detailRows = [];
+
+    // evento para criação dos detalhes da grid
+    $('#add-disciplina-curriculo').on( 'click', 'tr td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = tableAdicionarDisciplina.row( tr );
+        var idx = $.inArray( tr.attr('id'), detailRows );
+
+        if ( row.child.isShown() ) {
+            tr.removeClass( 'details' );
+            row.child.hide();
+
+            // Remove from the 'open' array
+            detailRows.splice( idx, 1 );
+        }
+        else {
+            tr.addClass( 'details' );
+            row.child( format( row.data() ) ).show();
+
+            // Add to the 'open' array
+            if ( idx === -1 ) {
+                detailRows.push( tr.attr('id') );
+            }
+        }
+    } );
+
+    // On each draw, loop over the `detailRows` array and show any child rows
+    tableAdicionarDisciplina.on( 'draw', function () {
+        $.each( detailRows, function ( i, id ) {
+            $('#'+id+' td.details-control').trigger( 'click' );
+        } );
+    } );
+
     // Retorno
     return tableAdicionarDisciplina;
+}
+
+// função para criação da linha de detalhe
+function format ( d ) {
+    return  '<div class="row">' +
+                '<div class="row">' +
+                    '<div class="col-md-12">' +
+                        '<table id="detalhe-disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                            '<thead>' +
+                                '<tr>' +
+                                    '<th>Pré-Requisito 1</th>' +
+                                    '<th>Pré-Requisito 2</th>' +
+                                    '<th>Co-Requisito 1</th>' +
+                                '</tr>' +
+                            '</thead>' +
+                            '<tbody>' +
+                                '<tr>' +
+                                    '<td>' + d.pre1Codigo+ '</td>' +
+                                    '<td>' + d.pre2Codigo+ '</td>' +
+                                    '<td>' + d.co1Codigo+ '</td>' +
+                                '</tr>' +
+                            '</tbody>' +
+                        '</table>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
 }
 
 // Executando a grid
