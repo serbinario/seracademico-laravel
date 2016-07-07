@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Curriculo;
+use Seracademico\Facades\ParametroMatriculaFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
@@ -38,7 +39,7 @@ class VestibulandoController extends Controller
         'TipoSanguinio',
         'Estado',
         'CorRaca',
-        'Graduacao\\Vestibular',
+        'Graduacao\\Vestibular|ativo,1',
         'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
@@ -354,6 +355,9 @@ class VestibulandoController extends Controller
     public function editInclusao($idVestibulando)
     {
         try {
+            # Recuperando o semestre vigente
+            $semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
+
             # Recuperando o vestibulando
             $vestibulando = $this->service->find($idVestibulando);
             $dadosRetorno = [];
@@ -361,7 +365,7 @@ class VestibulandoController extends Controller
             # Populando o array de retorno
             $dadosRetorno['curso_id'] = isset($vestibulando->aluno->id) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
-            $dadosRetorno['semestre_id'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->id : null;
+            $dadosRetorno['semestre_id'] = $semestreVigente->id;
             //$dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
             $dadosRetorno['data_inclusao'] = isset($vestibulando->aluno->data_transferencia) ? $vestibulando->aluno->data_transferencia : null;
             $dadosRetorno['forma_admissao_id'] = isset($vestibulando->aluno->formaAdmissao->id) ? $vestibulando->aluno->formaAdmissao->id : null;

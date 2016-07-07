@@ -102,6 +102,34 @@ class CurriculoService
         return $curriculo;
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
+    }
 
     /**
      * @param array $models
@@ -211,6 +239,9 @@ class CurriculoService
      */
     public function disciplinaStore(array $data)
     {
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
         # Recuperando o currículo
         $curriculo     = $this->repository->find($data['curriculo_id']);
         $objDisciplina = $this->disciplinaRepository->find($data['disciplina_id']);
@@ -224,36 +255,18 @@ class CurriculoService
         $curriculo->disciplinas()->attach($objDisciplina,
             [
                 'periodo' => $data['periodo'],
-                'carga_horaria_total' => $data['carga_horaria_total'],
+                'carga_horaria_total'   => $data['carga_horaria_total'],
                 'carga_horaria_teorica' => $data['carga_horaria_teorica'],
                 'carga_horaria_pratica' => $data['carga_horaria_pratica'],
                 'qtd_credito' => $data['qtd_credito'],
-                'qtd_faltas'  => $data['qtd_faltas']
+                'qtd_faltas'  => $data['qtd_faltas'],
+                'pre_requisito_1_id' => $data['pre_requisito_1_id'],
+                'pre_requisito_2_id' => $data['pre_requisito_2_id'],
+                'pre_requisito_3_id' => $data['pre_requisito_3_id'],
+                'pre_requisito_4_id' => $data['pre_requisito_4_id'],
+                'co_requisito_1_id'  => $data['co_requisito_1_id'],
             ]
         );
-
-        # Contadores úteis
-        $countPre = 0;
-        $countCos = 0;
-
-        # Varrendo o array
-        foreach ($curriculo->disciplinas as $disciplina) {
-            if($disciplina->id == $objDisciplina->id) {
-                # Tratamento pre disciplina
-                if(isset($data['pre_disciplina']) && count($data['pre_disciplina']) > 0) {
-                    foreach ($data['pre_disciplina'] as $pre) {
-                        $disciplina->pivot->disciplinasPreRequisitos()->attach($pre, ['index' => ++$countPre]);
-                    }
-                }
-
-                # Tratamento co disciplina
-                if(isset($data['co_disciplina']) && count($data['co_disciplina']) > 0) {
-                    foreach ($data['co_disciplina'] as $cos) {
-                        $disciplina->pivot->disciplinasCoRequisitos()->attach($cos, ['index' => ++$countCos]);
-                    }
-                }
-            }
-        }
 
         # Retorno
         return true;
@@ -275,14 +288,6 @@ class CurriculoService
             throw new \Exception("Curriculo não encontrado!");
         }
 
-        #Deletando as dependências
-        foreach ($curriculo->disciplinas as $objDisciplina) {
-            if($disciplina->id === $objDisciplina->id) {
-                $objDisciplina->pivot->disciplinasPreRequisitos()->detach();
-                $objDisciplina->pivot->disciplinasCoRequisitos()->detach();
-            }
-        }
-
         #Disvinculando a disciplina do currículo
         $curriculo->disciplinas()->detach($disciplina->id);
 
@@ -297,8 +302,11 @@ class CurriculoService
      * @return bool
      * @throws \Exception
      */
-    public function disciplinaUpdate($idDisciplina, $idCurriculo, $data)
+    public function disciplinaUpdate($idDisciplina, $idCurriculo, $dados)
     {
+        # Regras de negócios
+        $this->tratamentoCampos($dados);
+
         # Recuperando a disciplina
         $curriculo       = $this->repository->find($idCurriculo);
         $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
@@ -308,36 +316,8 @@ class CurriculoService
             throw new \Exception("Disciplina não encontrada!");
         }
 
-        # Processo de atualização do pivot
-        $disciplina->pivot->periodo = $data['periodo'];
-        $disciplina->pivot->carga_horaria_total   = $data['carga_horaria_total'];
-        $disciplina->pivot->carga_horaria_teorica = $data['carga_horaria_teorica'];
-        $disciplina->pivot->carga_horaria_pratica = $data['carga_horaria_pratica'];
-        $disciplina->pivot->qtd_credito           = $data['qtd_credito'];
-        $disciplina->pivot->qtd_faltas            = $data['qtd_faltas'];
-        $disciplina->pivot->disciplinasPreRequisitos()->detach();
-        $disciplina->pivot->disciplinasCoRequisitos()->detach();
-
-        # Contadores úteis
-        $countPre = 0;
-        $countCos = 0;
-
-        # Cadastrando as disciplinas de prerequisitos
-        if(isset($data['pre_disciplina']) && count($data['pre_disciplina']) > 0) {
-            foreach ($data['pre_disciplina'] as $pre) {
-                $disciplina->pivot->disciplinasPreRequisitos()->attach($pre, ['index' => ++$countPre]);
-            }
-        }
-
-        # Cadastrando as disciplinas de costrquisitos
-        if(isset($data['co_disciplina']) && count($data['co_disciplina']) > 0) {
-            foreach ($data['co_disciplina'] as $cos) {
-                $disciplina->pivot->disciplinasCoRequisitos()->attach($cos, ['index' => ++$countCos]);
-            }
-        }
-
         #Salvando mudanças
-        $disciplina->pivot->save();
+        $disciplina->pivot->update($dados);
 
         #retorno
         return true;

@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 {!! Form::label('codigo', 'Tombo') !!}
                                 {!! Form::text('codigo', $codigo  , array('class' => 'form-control')) !!}
-                                <input type="hidden" name="ano" value="{{$ano}}">
+                                <input type="hidden" name="ano_tombo" value="{{$ano}}">
                             </div>
                         </div>
                     @endif

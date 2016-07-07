@@ -26,6 +26,7 @@
                             <table id="add-disciplina-curriculo" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
+                                    <th>Detalhe</th>
                                     <th style="width: 5%;">Código</th>
                                     <th>Nome</th>
                                     <th style="width: 5%;">Período</th>
@@ -41,6 +42,7 @@
 
                                 <tfoot>
                                 <tr>
+                                    <th>Detalhe</th>
                                     <th style="width: 5%;">Código</th>
                                     <th>Nome</th>
                                     <th style="width: 5%;">Período</th>

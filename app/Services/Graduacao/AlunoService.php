@@ -9,6 +9,7 @@ use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 use Seracademico\Validators\Graduacao\AlunoValidator;
+use Seracademico\Facades\ParametroMatriculaFacade;
 
 class AlunoService
 {
@@ -94,10 +95,15 @@ class AlunoService
     public function store(array $data) : Aluno
     {
         #regras de negócios
-        $this->tratamentoSemestre($data);
         $this->tratamentoImagem($data);
         $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+
+        # Recuperando os semestres de configurção de matrícula
+        $semestres = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula()
+        ];
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
@@ -129,9 +135,6 @@ class AlunoService
         }
 
         #Regra de negócio para cadastro do semestre
-        #Recuperando os semestres de configuração
-        $semestres = $this->getParametrosMatricula();
-
         #Vinculando o aluno ao semestre vigente
         $aluno->semestres()->attach($semestres[0]->id);
         $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data'=> new \DateTime('now')]);
@@ -171,23 +174,6 @@ class AlunoService
 
         #Retorno
         return $aluno;
-    }
-
-    /**
-     * @param array $data
-     */
-    public function tratamentoSemestre(array &$data)
-    {
-        # Recuperando os semestres
-        $semestres = $this->getParametrosMatricula();
-
-        # Verificando se os semestres de configuração estão válidos
-        if(count($semestres) == 2) {
-            new \Exception('Semestres não encontrados, por favor verifique na em "Configurações > Matrícula"');
-        }
-
-        #retorno
-        return true;
     }
 
     /**
@@ -484,47 +470,7 @@ class AlunoService
         \DB::table('fac_alunos_situacoes')->where('id', $idAlunoSituacao)->delete();
 
         return true;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParametrosMatricula()
-    {
-        try {
-            # Recuperando o item de parâmetro do semestre vigente
-            $queryParameter = \DB::table('fac_parametros')
-                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
-                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
-                ->where('fac_parametros_itens.id', 2)
-                ->orWhere('fac_parametros_itens.id', 3)
-                ->get();
-
-            # Validando o parametro
-            if(count($queryParameter) !== 2) {
-                throw new \Exception('Parâmetro do semestre vigente não configurado');
-            }
-
-            # Recuperando o semestre
-            $querySemestre = \DB::table('fac_semestres')
-                ->select(['fac_semestres.id', 'fac_semestres.nome'])
-                ->where('fac_semestres.nome', $queryParameter[0]->valor)
-                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
-                ->where('fac_semestres.ativo', 1)
-                ->get();
-
-            # Validando o parametro
-            if(count($querySemestre) !== 2) {
-                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
-            }
-
-            #Retorno
-            return $querySemestre;
-        } catch (\Throwable $e) {
-            #Retorno
-            return $e->getMessage();
-        }
-    }
+    }    
 
     /**
      * @param $key

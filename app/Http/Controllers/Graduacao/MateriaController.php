@@ -57,12 +57,28 @@ class MateriaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # recuperando as matérias
+            $materias = \DB::table('fac_vestibulares')
+                ->select(['fac_vestibulares.id'])
+                ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.vestibular_id', '=', 'fac_vestibulares.id')
+                ->join('fac_vestibular_curso_materia', 'fac_vestibular_curso_materia.vestibular_curso_id', '=', 'fac_vestibulares_cursos.id')
+                ->where('fac_vestibular_curso_materia.materia_id', $row->id)->get();
+
+            # html de retorno
             $html = '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
-                        </ul>
-                     </div>';
+                        ';
+
+            # Verificando se a disponibilidade para remoção
+            if (count($materias) == 0) {
+                $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
+            }
+
+            # html de retorno
+            $html .= ' </ul>
+                    </div>';
 
             # Retorno
             return $html;
@@ -155,4 +171,20 @@ class MateriaController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function delete($id)
+    {
+        try {
+            # Deletando a matéria
+            $this->service->delete($id);
+
+            #retorno para view
+            return redirect()->back()->with('message', 'Matéria removid com sucesso!');
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

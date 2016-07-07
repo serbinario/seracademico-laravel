@@ -11,6 +11,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\Graduacao\TurmaValidator;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Facades\ParametroMatriculaFacade;
 
 class TurmaController extends Controller
 {
@@ -50,12 +51,19 @@ class TurmaController extends Controller
      */
     public function index()
     {
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-        $semestres  = $this->service->getParametrosMatricula();
+        try {
+            #Carregando os dados para o cadastro
+            $loadFields = $this->service->load($this->loadFields);
+            $semestres  = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula()
+            ];
 
-        #retorno
-        return view('graduacao.turma.index', compact('loadFields', 'semestres'));
+            #retorno
+            return view('graduacao.turma.index', compact('loadFields', 'semestres'));
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
     }
 
     /**
@@ -64,7 +72,10 @@ class TurmaController extends Controller
     public function grid(Request $request)
     {
         # recuperando os semestres de congiruração
-        $semestres  = $this->service->getParametrosMatricula();
+        $semestres  = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula()
+        ];
         
         #Criando a consulta
         $rows = \DB::table('fac_turmas')

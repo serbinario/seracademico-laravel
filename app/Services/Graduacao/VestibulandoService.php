@@ -12,6 +12,7 @@ use Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
 use Seracademico\Repositories\Graduacao\VestibularRepository;
 use Seracademico\Repositories\PessoaRepository;
+use Seracademico\Facades\ParametroMatriculaFacade;
 
 class VestibulandoService
 {
@@ -581,12 +582,14 @@ class VestibulandoService
      */
     public function updateInclusao($dados, $idVestibulando)
     {
+        # Recuperando o semestre vigente
+        $semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
+
         # variável que armazenará a mensagem de retorno
         $mensagem = "";
 
         # Recuperando o vestibulando e o currículo
         $vestibulando = $this->repository->find($idVestibulando);
-
 
         # Verificando se o vestibulando existe
         if(!$vestibulando && count($curriculo) == 0) {
@@ -631,14 +634,13 @@ class VestibulandoService
             
             # matriculando o aluno
             # Regra de negócio para o semestre
-            $semestre = isset($dados['semestre_id']) ? $dados['semestre_id'] : $vestibulando->vestibular->semestre->id;
-            $aluno->semestres()->attach($semestre);
+            $aluno->semestres()->attach($semestreVigente->id);
 
             #Adicionando o currículo ao aluno
             $aluno->curriculos()->attach($curriculo[0]->id);
 
             # cadastrando a situação
-            $aluno->semestres()->find($semestre)->pivot->situacoes()
+            $aluno->semestres()->find($semestreVigente->id)->pivot->situacoes()
                 ->attach(1, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo[0]->id]);
 
             # setando a mensagem

@@ -183,7 +183,8 @@ return [
          */
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
-
+        # Provider dos parametros do sistema
+        \Seracademico\Providers\ParametroServiceProvider::class
     ],
 
     /*
@@ -249,8 +250,7 @@ return [
         'Datatables' => Yajra\Datatables\Datatables::class,
 
         //https://github.com/mcamara/laravel-localization
-        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class
-
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
 ];

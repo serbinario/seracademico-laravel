@@ -93,7 +93,10 @@ class CurriculoController extends Controller
         $rows = \DB::table('fac_curriculo_disciplina')
             ->join('fac_disciplinas', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->leftJoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->leftJoin('fac_disciplinas as pre1', 'pre1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+            ->leftJoin('fac_disciplinas as pre2', 'pre2.id', '=', 'fac_curriculo_disciplina.pre_requisito_2_id')
+            ->leftJoin('fac_disciplinas as co1', 'co1.id', '=', 'fac_curriculo_disciplina.co_requisito_1_id')
             ->leftJoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
             ->select([
                     'fac_curriculo_disciplina.id as idCurriculoDisciplina',
@@ -109,8 +112,11 @@ class CurriculoController extends Controller
                     'fac_curriculo_disciplina.carga_horaria_teorica',
                     'fac_curriculo_disciplina.qtd_credito',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
-                    'fac_tipo_avaliacoes.nome as tipo_avaliacao']
-            )
+                    'fac_tipo_avaliacoes.nome as tipo_avaliacao',
+                    \DB::raw('IF(pre1.codigo != "", pre1.codigo, "Não Informado") as pre1Codigo'),
+                    \DB::raw('IF(pre2.codigo != "", pre1.codigo, "Não Informado") as pre2Codigo'),
+                    \DB::raw('IF(co1.codigo  != "", pre1.codigo, "Não Informado") as co1Codigo')
+                ])
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
@@ -298,9 +304,6 @@ class CurriculoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->disciplinaStore($data);
 
@@ -353,8 +356,18 @@ class CurriculoController extends Controller
             $pivot['carga_horaria_teorica']  = $model['model']->carga_horaria_teorica;
             $pivot['carga_horaria_pratica']  = $model['model']->carga_horaria_pratica;
             $pivot['periodo']                = $model['model']->periodo;
-            $pivot['preRequisitos']          = $model['model']->disciplinasPreRequisitos;
-            $pivot['cosRequisitos']          = $model['model']->disciplinasCoRequisitos;
+            $pivot['pre_1_id']               = $model['model']->preRequisito1->id ?? "";
+            $pivot['pre_1_nome']             = $model['model']->preRequisito1->nome  ?? "";
+            $pivot['pre_2_id']               = $model['model']->preRequisito2->id ?? "";
+            $pivot['pre_2_nome']             = $model['model']->preRequisito2->nome ?? "";
+            $pivot['pre_3_id']               = $model['model']->preRequisito3->id ?? "";
+            $pivot['pre_3_nome']             = $model['model']->preRequisito3->nome ?? "";
+            $pivot['pre_4_id']               = $model['model']->preRequisito4->id ?? "";
+            $pivot['pre_4_nome']             = $model['model']->preRequisito4->nome ?? "";
+            $pivot['pre_5_id']               = $model['model']->preRequisito5->id ?? "";
+            $pivot['pre_5_nome']             = $model['model']->preRequisito5->nome ?? "";
+            $pivot['co_1_id']                = $model['model']->coRequisito1->id ?? "";
+            $pivot['co_1_nome']              = $model['model']->coRequisito1->nome ?? "";
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $pivot]);

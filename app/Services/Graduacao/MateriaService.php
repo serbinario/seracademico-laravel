@@ -78,6 +78,29 @@ class MateriaService
     }
 
     /**
+     * @param array $data
+     * @param int $id
+     * @return mixed
+     */
+    public function delete(int $id)
+    {
+        # Removendo o registro no banco de dados
+        $materia = $this->repository->find($id);
+
+
+        # Verifiando se a materia foi recuperada
+        if(!$materia) {
+            throw new \Exception('Matéria não encontrada!');
+        }
+
+        # Removendo o registro do banco de dados
+        $this->repository->delete($id);
+
+        #Retorno
+        return true;
+    }
+
+    /**
      * @param array $models
      * @return array
      */

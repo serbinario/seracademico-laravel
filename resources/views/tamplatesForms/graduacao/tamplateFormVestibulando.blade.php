@@ -426,9 +426,9 @@
                                 {!! Form::label('vestibular_id', 'Vestibular * ') !!}
                                
                                 @if(isset($aluno->vestibular->id))
-                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
+                                    {!! Form::select('vestibular_id', $loadFields['graduacao\\vestibular'], null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
                                 @else
-                                    {!! Form::select('vestibular_id', (['' => 'Selecione um vestibular'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('vestibular_id', $loadFields['graduacao\\vestibular'], null, array('class' => 'form-control')) !!}
                                 @endif
 
                             </div>
