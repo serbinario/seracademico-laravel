@@ -165,7 +165,7 @@ class ExemplarPeriodicoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+dd($data);
             #Validando a requisição
             //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
