@@ -76,16 +76,16 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Dados pessoais</a>
+                <a href="#dados" aria-controls="dados" data-toggle="tab"> Dados pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"> Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Superior</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"> Ensino Superior</a>
             </li>
             <li role="presentation">
-                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"> Documentos Obrigatórios</a>
             </li>
 
         </ul>
