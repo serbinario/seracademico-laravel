@@ -9,6 +9,7 @@ use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 use Seracademico\Validators\Graduacao\AlunoValidator;
+use Seracademico\Facades\ParametroMatriculaFacade;
 
 class AlunoService
 {
@@ -94,10 +95,15 @@ class AlunoService
     public function store(array $data) : Aluno
     {
         #regras de negócios
-        $this->tratamentoSemestre($data);
         $this->tratamentoImagem($data);
         $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+
+        # Recuperando os semestres de configurção de matrícula
+        $semestres = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula()
+        ];
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
@@ -129,9 +135,6 @@ class AlunoService
         }
 
         #Regra de negócio para cadastro do semestre
-        #Recuperando os semestres de configuração
-        $semestres = $this->getParametrosMatricula();
-
         #Vinculando o aluno ao semestre vigente
         $aluno->semestres()->attach($semestres[0]->id);
         $aluno->semestres()->get()->last()->pivot->situacoes()->attach(1, ['data'=> new \DateTime('now')]);
@@ -171,23 +174,6 @@ class AlunoService
 
         #Retorno
         return $aluno;
-    }
-
-    /**
-     * @param array $data
-     */
-    public function tratamentoSemestre(array &$data)
-    {
-        # Recuperando os semestres
-        $semestres = $this->getParametrosMatricula();
-
-        # Verificando se os semestres de configuração estão válidos
-        if(count($semestres) == 2) {
-            new \Exception('Semestres não encontrados, por favor verifique na em "Configurações > Matrícula"');
-        }
-
-        #retorno
-        return true;
     }
 
     /**

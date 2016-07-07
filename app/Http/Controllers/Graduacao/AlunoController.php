@@ -63,7 +63,7 @@ class AlunoController extends Controller
         try {
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
-            $semestres = [
+            $semestres  = [
                 ParametroMatriculaFacade::getSemestreVigente(),
                 ParametroMatriculaFacade::getSemestreSelMatricula()
             ];

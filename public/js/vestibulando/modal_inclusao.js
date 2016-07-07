@@ -91,8 +91,7 @@ function builderHtmlFieldsEditar (dados) {
 
             $("#semestre_id option").remove();
             $("#semestre_id").append(htmlSemestre);
-            
-            console.log();
+
             // Setando os valores do model no formulário
             $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
             $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
@@ -135,6 +134,7 @@ $('#btnUpdateInclusao').click(function() {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
+            table.ajax.reload();
             $('#modal-inclusao').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
