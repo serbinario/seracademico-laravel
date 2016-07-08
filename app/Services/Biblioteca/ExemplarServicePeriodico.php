@@ -258,7 +258,7 @@ class ExemplarServicePeriodico
         $data = $this->tratamentoCampos($data);
 
         $codigo = $data['codigo'];
-        $ano    = $data['ano'];
+        $ano    = $data['ano_tombo'];
 
         $data['codigo'] = $codigo.$ano;
 
