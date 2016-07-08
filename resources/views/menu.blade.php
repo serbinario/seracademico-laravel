@@ -310,7 +310,7 @@
 <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
-{{--<script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>--}}
+<script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>

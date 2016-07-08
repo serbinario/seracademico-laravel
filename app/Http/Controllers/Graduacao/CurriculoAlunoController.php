@@ -42,10 +42,14 @@ class CurriculoAlunoController extends Controller
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
-            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-            ->join(\DB::raw('(SELECT fac_alunos_cursos.* FROM fac_alunos_cursos ORDER BY fac_alunos_cursos.id DESC LIMIT 1)fac_alunos_cursos'), function ($join) {
-                $join->on('fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id');
+            ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                );
             })
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
@@ -85,8 +89,12 @@ class CurriculoAlunoController extends Controller
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-            ->join(\DB::raw('(SELECT fac_alunos_cursos.* FROM fac_alunos_cursos ORDER BY fac_alunos_cursos.id DESC LIMIT 1)fac_alunos_cursos'), function ($join) {
-                $join->on('fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id');
+            ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                );
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
