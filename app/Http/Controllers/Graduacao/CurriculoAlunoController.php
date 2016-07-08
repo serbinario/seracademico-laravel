@@ -105,7 +105,6 @@ class CurriculoAlunoController extends Controller
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
-            ->where('fac_alunos.id', $idAluno)
             ->orderBy('fac_curriculo_disciplina.periodo')
             ->select([
                 'fac_disciplinas.id',
