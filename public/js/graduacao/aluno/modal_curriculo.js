@@ -39,7 +39,10 @@ function loadTableCursadas (idAluno) {
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'}
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
+            {data: 'nota_media', name: 'fac_alunos_notas.nota_media'},
+            {data: 'codigoTurma', name: 'fac_turmas.codigo'},
+            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome'},
         ]
     });
 

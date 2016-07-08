@@ -64,6 +64,9 @@
                                             <th>Disciplina</th>
                                             <th>C. Horária</th>
                                             <th>Créditos</th>
+                                            <th>Média</th>
+                                            <th>Turma</th>
+                                            <th>Situação</th>
                                         </tr>
                                     </thead>
                                 </table>
