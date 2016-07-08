@@ -174,9 +174,11 @@ class MatriculaAlunoController extends Controller
 
                 // Recuperando as turmas
                 $rowsTurma = \DB::table('fac_turmas')
+                    ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_turmas.semestre_id')
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
                     ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
                     ->where('fac_disciplinas.id', $row->id)
+                    ->where('fac_semestres.id', $semestreVigente->id)
                     ->select([
                         'fac_turmas_disciplinas.id as idTurmaDisciplina',
                         'fac_turmas.codigo as codigoTurma',
