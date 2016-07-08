@@ -42,7 +42,6 @@ function loadTableACursar (idAluno) {
             detailRows.splice( idx, 1 );
         }
         else {
-            console.log(row.child());
             tr.addClass( 'details' );
             row.child( formatAcursar( row.data() ) ).show();
 
@@ -134,7 +133,6 @@ function loadTableCursadas (idAluno) {
             detailRows.splice( idx, 1 );
         }
         else {
-            console.log(row.child());
             tr.addClass( 'details' );
             row.child( formatCursadas( row.data() ) ).show();
 
