@@ -199,6 +199,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 });
             });
 
+            // Motivo
+            Route::group(['prefix' => 'motivo', 'as' => 'motivo.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MotivoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\MotivoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\MotivoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\MotivoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\MotivoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\MotivoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\MotivoController@delete']);
+            });
+
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\DisciplinaController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\DisciplinaController@grid']);

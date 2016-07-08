@@ -21,7 +21,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="material-icons">class</i>
+                    <i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>
                     Matricular Aluno
                 </h4>
             </div>
@@ -33,13 +33,13 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                         <li role="presentation" class="active" id="li-alunos">
-                            <a href="#alunos"  aria-controls="alunos" data-toggle="tab"><i class="fa fa-male"></i>Alunos</a>
+                            <a href="#alunos"  aria-controls="alunos" data-toggle="tab">Alunos</a>
                         </li>
                         <li role="presentation" id="li-disciplinas">
-                            <a href="#disciplinas"  aria-controls="disciplinas" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Disciplinas</a>
+                            <a href="#disciplinas"  aria-controls="disciplinas" role="tab" data-toggle="tab">Disciplinas</a>
                         </li>
                         <li role="presentation" id="li-turmas">
-                            <a href="#turmas" aria-controls="turmas"  role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Turmas</a>
+                            <a href="#turmas" aria-controls="turmas"  role="tab" data-toggle="tab">Turmas</a>
                         </li>
                     </ul>
                     <!-- End Nav tabs -->
