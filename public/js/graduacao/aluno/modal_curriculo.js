@@ -25,7 +25,7 @@ function loadTableACursar (idAluno) {
 // Função para carregar a grid
 var tableCursadas;
 function loadTableCursadas (idAluno) {
-    tableACursar = $('#grid-cursadas').DataTable({
+    tableCursadas = $('#grid-cursadas').DataTable({
         processing: true,
         serverSide: true,
         retrieve: true,
