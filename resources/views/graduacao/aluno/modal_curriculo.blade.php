@@ -16,8 +16,16 @@
                                 <h3 id="tlMatricula"></h3>
                             </div>
 
-                            <div class="col-md-6 col-xs-2">
+                            <div class="col-md-4">
                                 <h3 id="tlNomeAluno"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlCurso"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlPeriodo"></h3>
                             </div>
                         </div>
 

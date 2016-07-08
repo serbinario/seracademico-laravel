@@ -13,11 +13,19 @@
                         <!-- Linha de descrição -->
                         <div class="row">
                             <div class="col-md-4">
-                                <h3 id="sTlMatricula"></h3>
+                                <h3 id="tlSMatricula"></h3>
                             </div>
 
-                            <div class="col-md-6 col-xs-2">
-                                <h3 id="sTlNomeAluno"></h3>
+                            <div class="col-md-4">
+                                <h3 id="tlSNomeAluno"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlSCurso"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlSPeriodo"></h3>
                             </div>
                         </div>
 

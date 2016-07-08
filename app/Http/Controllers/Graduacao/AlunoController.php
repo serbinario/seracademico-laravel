@@ -96,6 +96,7 @@ class AlunoController extends Controller
                     );
                 })
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                 ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
                 ->join('fac_alunos_situacoes', function ($join) {
@@ -115,7 +116,8 @@ class AlunoController extends Controller
                     'fac_semestres.nome as semestre',
                     'fac_alunos_semestres.periodo',
                     'fac_curriculos.codigo as codigoCurriculo',
-                    'fac_situacao.nome as nomeSituacao'
+                    'fac_situacao.nome as nomeSituacao',
+                    'fac_cursos.codigo as codigoCurso'
                 ]);
 
             #Editando a grid
