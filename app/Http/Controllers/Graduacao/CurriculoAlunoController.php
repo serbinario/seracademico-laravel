@@ -85,6 +85,7 @@ class CurriculoAlunoController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('fac_disciplinas')
+
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
@@ -97,6 +98,14 @@ class CurriculoAlunoController extends Controller
                 );
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+            ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_alunos_notas', function ($join) {
+                $join->on('fac_alunos_notas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+                    ->on('fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id');
+            })
+            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereIn('fac_disciplinas.id', function ($query) use ($idAluno) {
                 $query->from('fac_alunos_semestres_disciplinas')
@@ -116,7 +125,10 @@ class CurriculoAlunoController extends Controller
                 'fac_curriculo_disciplina.periodo',
                 'fac_tipo_disciplinas.nome as tipo_disciplina',
                 'pessoas.nome as nomeAluno',
-                'fac_cursos.nome as nomeCurso'
+                'fac_cursos.nome as nomeCurso',
+                'fac_alunos_notas.nota_media',
+                'fac_turmas.codigo as codigoTurma',
+                'fac_situacao_nota.nome as nomeSituacao'
             ]);
 
         #Editando a grid
