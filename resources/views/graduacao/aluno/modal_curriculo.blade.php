@@ -41,6 +41,7 @@
                                 <table id="grid-acursar" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th>Detalhe</th>
                                             <th>Período</th>
                                             <th>Cod. Disciplina</th>
                                             <th>Disciplina</th>
@@ -59,6 +60,7 @@
                                 <table id="grid-cursadas" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th>Detalhe</th>
                                             <th>Período</th>
                                             <th>Cod. Disciplina</th>
                                             <th>Disciplina</th>

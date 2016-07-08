@@ -41,6 +41,9 @@ class CurriculoAlunoController extends Controller
         $rows = \DB::table('fac_disciplinas')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+            ->leftJoin('fac_disciplinas as pre1', 'pre1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+            ->leftJoin('fac_disciplinas as pre2', 'pre2.id', '=', 'fac_curriculo_disciplina.pre_requisito_2_id')
+            ->leftJoin('fac_disciplinas as co1', 'co1.id', '=', 'fac_curriculo_disciplina.co_requisito_1_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
             ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
                 $join->on(
@@ -71,7 +74,10 @@ class CurriculoAlunoController extends Controller
                 'fac_curriculo_disciplina.periodo',
                 'fac_tipo_disciplinas.nome as tipo_disciplina',
                 'pessoas.nome as nomeAluno',
-                'fac_cursos.nome as nomeCurso'
+                'fac_cursos.nome as nomeCurso',
+                \DB::raw('IF(pre1.codigo != "", pre1.codigo, "Não Informado") as pre1Codigo'),
+                \DB::raw('IF(pre2.codigo != "", pre1.codigo, "Não Informado") as pre2Codigo'),
+                \DB::raw('IF(co1.codigo  != "", pre1.codigo, "Não Informado") as co1Codigo')
             ]);
 
         #Editando a grid
@@ -126,9 +132,13 @@ class CurriculoAlunoController extends Controller
                 'fac_tipo_disciplinas.nome as tipo_disciplina',
                 'pessoas.nome as nomeAluno',
                 'fac_cursos.nome as nomeCurso',
-                'fac_alunos_notas.nota_media',
                 'fac_turmas.codigo as codigoTurma',
-                'fac_situacao_nota.nome as nomeSituacao'
+                'fac_situacao_nota.nome as nomeSituacao',
+                \DB::raw('IF(fac_alunos_notas.nota_unidade_1 != null, fac_alunos_notas.nota_unidade_1 != null, 0.0) as nota_unidade_1'),
+                \DB::raw('IF(fac_alunos_notas.nota_unidade_2 != null, fac_alunos_notas.nota_unidade_2 != null, 0.0) as nota_unidade_2'),
+                \DB::raw('IF(fac_alunos_notas.nota_2_chamada != null, fac_alunos_notas.nota_2_chamada != null, 0.0) as nota_2_chamada'),
+                \DB::raw('IF(fac_alunos_notas.nota_final != null, fac_alunos_notas.nota_final != null, 0.0) as nota_final'),
+                \DB::raw('IF(fac_alunos_notas.nota_media != null, fac_alunos_notas.nota_media != null, 0.0) as nota_media')
             ]);
 
         #Editando a grid
