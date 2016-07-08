@@ -188,6 +188,7 @@
                         <li><a href="{{ route('seracademico.banco.index') }}"><i class="material-icons">rate_review</i> Bancos</a></li>
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="material-icons">rate_review</i> Tipo de Vencimento</a></li>
                         <li><a href="{{ route('seracademico.taxa.index') }}"><i class="material-icons">rate_review</i> Taxas</a></li>
+                        <li><a href="{{ route('seracademico.graduacao.motivo.index') }}"><i class="material-icons">rate_review</i> Motivos</a></li>
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="material-icons">rate_review</i> Configurações</a></li>
                     </ul>
                 </li>

@@ -409,5 +409,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\AlunoFrequenciaRepository::class,
             \Seracademico\Repositories\Graduacao\AlunoFrequenciaRepositoryEloquent::class
         );
-	}
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\MotivoRepository::class,
+            \Seracademico\Repositories\Graduacao\MotivoRepositoryEloquent::class);
+
+    }
 }
