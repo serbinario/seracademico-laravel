@@ -7,7 +7,7 @@
             <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="material-icons">collections_bookmark</i>
-                    Listar disciplinas
+                    Listar disciplinas teste
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
