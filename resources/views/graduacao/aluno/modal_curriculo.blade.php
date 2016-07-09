@@ -16,8 +16,16 @@
                                 <h3 id="tlMatricula"></h3>
                             </div>
 
-                            <div class="col-md-6 col-xs-2">
+                            <div class="col-md-4">
                                 <h3 id="tlNomeAluno"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlCurso"></h3>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h3 id="tlPeriodo"></h3>
                             </div>
                         </div>
 
@@ -41,6 +49,7 @@
                                 <table id="grid-acursar" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th>Detalhe</th>
                                             <th>Período</th>
                                             <th>Cod. Disciplina</th>
                                             <th>Disciplina</th>
@@ -59,11 +68,15 @@
                                 <table id="grid-cursadas" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th>Detalhe</th>
                                             <th>Período</th>
                                             <th>Cod. Disciplina</th>
                                             <th>Disciplina</th>
                                             <th>C. Horária</th>
                                             <th>Créditos</th>
+                                            <th>Média</th>
+                                            <th>Turma</th>
+                                            <th>Situação</th>
                                         </tr>
                                     </thead>
                                 </table>

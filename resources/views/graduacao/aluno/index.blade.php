@@ -4,8 +4,13 @@
     <link rel="stylesheet" href="{{ asset('/js/graduacao/aluno/css/modal_historico.css') }}">
 
     <style type="text/css">
-        table.dataTable tbody th, table.dataTable tbody td {
-            padding: 2px 10px;
+        td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
         }
     </style>
 @stop
@@ -15,6 +20,23 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
+
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <em> {!! session('message') !!}</em>
+                    </div>
+                @endif
+
+                @if(Session::has('errors'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <h4>
                     <i class="fa fa-users"></i>
                     Listar Alunos
@@ -139,11 +161,16 @@
             idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             // Recuperando o nome e a matrícula
-            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
-            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            codigoCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurso;
+            periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
-            $('#nomeDoAluno').text('Nome: ' + nomeAluno);
+            $('#tlHMatricula').text('Matrícula: ' + matricula);
+            $('#tlHNomeAluno').text('Nome: ' + nomeAluno);
+            $('#tlHCurso').text('Curso: ' + codigoCurso);
+            $('#tlHPeriodo').text('Período: ' + periodo);
 
             // Executando o script de histórico
             runHistorico(idAluno);
@@ -155,12 +182,16 @@
             idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             // Recuperando o nome e a matrícula
-            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
-            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            codigoCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurso;
+            periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
             $('#tlMatricula').text('Matrícula: ' + matricula);
             $('#tlNomeAluno').text('Nome: ' + nomeAluno);
+            $('#tlCurso').text('Curso: ' + codigoCurso);
+            $('#tlPeriodo').text('Período: ' + periodo);
 
             // Executando o script de curriculo
             runCurriculo(idAluno);
@@ -172,12 +203,16 @@
             idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             // Recuperando o nome e a matrícula
-            nomeAluno = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
-            matricula = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            codigoCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurso;
+            periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
-            $('#sTlMatricula').text('Matrícula: ' + matricula);
-            $('#sTlNomeAluno').text('Nome: ' + nomeAluno);
+            $('#tlSMatricula').text('Matrícula: ' + matricula);
+            $('#tlSNomeAluno').text('Nome: ' + nomeAluno);
+            $('#tlSCurso').text('Curso: ' + codigoCurso);
+            $('#tlSPeriodo').text('Período: ' + periodo);
 
             // Executando o script de curriculo
             runSemestre(idAluno);
