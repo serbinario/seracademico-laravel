@@ -49,7 +49,7 @@ $(document).ready(function(){
     $('.ficha19').mask("0#.00", {reverse: true, maxlength: false});
 
 
-    $('.time').mask('00:00:00' , {reverse: true});
+    $('.time').mask('00:00:00');
 
     $('.datepicker').datetimepicker({
         timepicker: false,
