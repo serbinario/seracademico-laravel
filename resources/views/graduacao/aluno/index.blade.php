@@ -12,6 +12,9 @@
         tr.details td.details-control {
             background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
         }
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
     </style>
 @stop
 
