@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" id="closeModalHistorico" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Currículo do Aluno</h4>
+                <h4 class="modal-title"><i class="material-icons">assignment</i> Currículo do Aluno</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -32,10 +32,10 @@
                         <!-- Links para a navegação -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#acursar" aria-controls="acursar" data-toggle="tab"><i class="material-icons">collections_time</i> A Cursar</a>
+                                <a href="#acursar" aria-controls="acursar" data-toggle="tab">A Cursar</a>
                             </li>
                             <li role="presentation">
-                                <a href="#cursadas" aria-controls="cursadas" data-toggle="tab"><i class="material-icons">collections_time</i> Cursadas</a>
+                                <a href="#cursadas" aria-controls="cursadas" data-toggle="tab">Cursadas</a>
                             </li>
                         </ul>
 

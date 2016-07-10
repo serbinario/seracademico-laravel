@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                            <a class="btn-sm btn-primary" type="submit">Pesquisar</a>
                         </div>
                     </form>
                 </div>

@@ -247,7 +247,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-exchange" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="profile-img">
@@ -257,25 +257,6 @@
                         @endif
                     </span>
                 </div>
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <div class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="text-muted text-xs block">Idioma<b class="caret"></b></span></a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <li>
-                                        <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
-                                            {{{ $properties['native'] }}}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                    <li><h5 style="color: black"><?php echo date('d/m/Y'); ?></h5></li>
-                </ul>
 
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
@@ -304,7 +285,6 @@
 </div>
 
 <!-- Mainly scripts -->
-dsfsf
 <script src="{{ asset('/js/jquery-2.1.1.js')}}"></script>
 <script src="{{ asset('/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>

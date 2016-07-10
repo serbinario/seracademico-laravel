@@ -5,14 +5,12 @@
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="searchCpf">DIGITE O CPF SE POSSUIR CADASTRO</label>
-                    <input type="text" id="searchCpf" class="form-control">
-                </div>
-
-                <div class="col-md-4">
-                    <a style="margin-top: 6%;" id="btnSearchCpf" class="btn btn-primary">
-                        Buscar
-                        <span class="glyphicon glyphicon-search"></span>
-                    </a>
+                    <div class="input-group">
+                        <input type="text" id="searchCpf" class="form-control">
+                        <span class="input-group-btn">
+                             <a id="btnSearchCpf" class="btn-sm btn-primary">Buscar</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         @endif
@@ -36,21 +34,19 @@
                 {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
+
             {{--<div class="form-group col-md-4">--}}
                 {{--{!! Form::label('situacao_id', 'Situacao') !!}--}}
                 {{--{!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
 
         </div>
-    </div>
-</div>
-
-<hr class="hr-line-dashed"/>
-
-<div class="row">
-    <div class="col-md-4">
-        <label for="path_image">IMAGEM</label>
-        <input name="path_image" id="path_image" type="file">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="path_image">IMAGEM</label>
+                <input name="path_image" id="path_image" type="file">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -62,25 +58,26 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Dados pessoais</a>
+                <a href="#dados" aria-controls="dados" data-toggle="tab">Dados pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab">Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> 2º Grau</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab">2º Grau</a>
             </li>
             <li role="presentation">
-                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
             </li>
             <li role="presentation">
-                <a href="#admissao" aria-controls="admissao" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Admissão</a>
+                <a href="#admissao" aria-controls="admissao" role="tab" data-toggle="tab">Admissão</a>
             </li>
         </ul>
         <!-- End Nav tabs -->
 
         <!-- Tab panes -->
         <div class="tab-content">
+
             <div role="tabpanel" class="tab-pane active" id="dados">
                 <br/>
                 <div class="row">
@@ -370,6 +367,7 @@
                     </div>
                 </div>
             </div>
+
             <div role="tabpanel" class="tab-pane" id="ensMedio">
                 <br/>
                 <div class="row">
@@ -532,37 +530,35 @@
             </div>
             {{-- Fim aba admissão--}}
         </div>
-    </div>
-    <div class="col-md-10"></div>
 
-    {{--Buttons Submit e Voltar--}}
-    <div class="row">
-        <div class="col-md-8">
-        </div>
-        <div class="col-md-2">
-            {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
-        </div>
-        <div class="col-md-2">
-            <a href="{{ route('seracademico.graduacao.aluno.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
-        </div>
-    </div>
-    {{--Fim Buttons Submit e Voltar--}}
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group col-md-4">
-            <div class="checkbox checkbox-primary">
-                @if(isset($aluno) && !empty($aluno->matricula))
-                    {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                @else
-                    {!! Form::hidden('gerar_matricula', 0) !!}
-                    {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
-                @endif
-                {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+        {{--Buttons Submit e Voltar--}}
+        <div class="row">
+            <div class="col-md-9">
+                <div class="checkbox checkbox-primary">
+                    @if(isset($aluno) && !empty($aluno->matricula))
+                        {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                    @else
+                        {!! Form::hidden('gerar_matricula', 0) !!}
+                        {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
+                    @endif
+                    {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <a href="{{ route('seracademico.graduacao.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                    </div>
+                    <div class="btn-group">
+                        {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+    {{--Fim Buttons Submit e Voltar--}}
 </div>
 
 @section('javascript')

@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" id="closeModalHistorico" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Histórico do Aluno</h4>
+                <h4 class="modal-title"><i class="glyphicon glyphicon-list-alt"></i> Histórico do Aluno</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button href="#" id="btnAddHistorico" class="btn-sm btn-primary pull-right">Novo Histórico</button><br><br>
+                        <a href="#" id="btnAddHistorico" class="btn-sm btn-primary pull-right">Novo Histórico</a><br><br>
                         <table id="grid-historico" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -47,7 +47,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <button href="#" id="btnAddSituacao" class="btn-sm btn-primary pull-right">Nova Situação</button><br><br>
+                        <a href="#" id="btnAddSituacao" class="btn-sm btn-primary pull-right">Nova Situação</a><br><br>
                         <table id="grid-situacao" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -58,7 +58,7 @@
                                 <th>Curso Origem</th>
                                 <th>Curso Destino</th>
                                 <th>Observação</th>
-                                <th  style="width: 12%">Ação</th>
+                                <th >Ação</th>
                             </tr>
                             </thead>
                         </table>

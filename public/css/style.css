@@ -163,7 +163,8 @@ h5 {
 }
 .nav-header {
   padding: 10px 20px;
-  background: url("patterns/header.png") no-repeat;
+  background: url("/img/header.png");
+  /*background: #1f4173;*/
 }
 .pace-done .nav-header {
   transition: all 0.4s;
@@ -8318,4 +8319,10 @@ table.dataTable.no-footer {
 /*Ajustes file upload*/
 .file-preview {
   width: 70% !important;
+}
+
+.ztree li a {
+
+  display: initial !important;
+  white-space: normal !important;
 }

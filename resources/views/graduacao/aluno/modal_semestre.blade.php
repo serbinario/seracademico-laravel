@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" id="closeModalHistorico" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Currículo do Aluno</h4>
+                <h4 class="modal-title"><i class="material-icons">date_range</i> Semestre do Aluno</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -32,14 +32,14 @@
                         <!-- Links para a navegação -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#horario" aria-controls="acursar" data-toggle="tab"><i class="material-icons">collections_time</i> Horário</a>
+                                <a href="#horario" aria-controls="acursar" data-toggle="tab">Horário</a>
                             </li>
                             <li role="presentation">
-                                <a href="#notas" aria-controls="notas" data-toggle="tab"><i class="material-icons">collections_time</i> Notas</a>
+                                <a href="#notas" aria-controls="notas" data-toggle="tab">Notas</a>
                             </li>
 
                             <li role="presentation">
-                                <a href="#faltas" aria-controls="faltas" data-toggle="tab"><i class="material-icons">collections_time</i> Faltas</a>
+                                <a href="#faltas" aria-controls="faltas" data-toggle="tab">Faltas</a>
                             </li>
                         </ul>
 
