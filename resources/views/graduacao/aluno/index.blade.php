@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a class="btn-sm btn-primary" type="submit">Pesquisar</a>
+                            <a id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</a>
                         </div>
                     </form>
                 </div>
@@ -147,7 +147,7 @@
         });
 
         // Função do submit do search da grid principal
-        $('#search-form').on('submit', function(e) {
+        $('#pesquisar').click(function(e) {
             table.draw();
             e.preventDefault();
         });
