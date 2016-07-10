@@ -11,21 +11,21 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Linha de descrição -->
-                        <div class="row">
+                        <div class="col-md-12 infModal">
                             <div class="col-md-4">
-                                <h3 id="tlSMatricula"></h3>
+                                <span><strong>Matrícula: </strong><p id="tlSMatricula"></p></span>
                             </div>
 
                             <div class="col-md-4">
-                                <h3 id="tlSNomeAluno"></h3>
+                                <span><strong>Nome do Aluno: </strong><p id="tlSNomeAluno"></p></span>
                             </div>
 
                             <div class="col-md-2">
-                                <h3 id="tlSCurso"></h3>
+                                <span><strong>Curso: </strong><p id="tlSCurso"></p></span>
                             </div>
 
                             <div class="col-md-2">
-                                <h3 id="tlSPeriodo"></h3>
+                                <span><strong>Período: </strong><p id="tlSPeriodo"></p></span>
                             </div>
                         </div>
 

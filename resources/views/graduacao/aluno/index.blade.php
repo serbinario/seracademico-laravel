@@ -12,7 +12,11 @@
         tr.details td.details-control {
             background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
         }
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
     </style>
+
 @stop
 
 @section('content')
@@ -167,10 +171,10 @@
             periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
-            $('#tlHMatricula').text('Matrícula: ' + matricula);
-            $('#tlHNomeAluno').text('Nome: ' + nomeAluno);
-            $('#tlHCurso').text('Curso: ' + codigoCurso);
-            $('#tlHPeriodo').text('Período: ' + periodo);
+            $('#tlHMatricula').text(matricula);
+            $('#tlHNomeAluno').text(nomeAluno);
+            $('#tlHCurso').text(codigoCurso);
+            $('#tlHPeriodo').text(periodo);
 
             // Executando o script de histórico
             runHistorico(idAluno);
@@ -188,10 +192,10 @@
             periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
-            $('#tlMatricula').text('Matrícula: ' + matricula);
-            $('#tlNomeAluno').text('Nome: ' + nomeAluno);
-            $('#tlCurso').text('Curso: ' + codigoCurso);
-            $('#tlPeriodo').text('Período: ' + periodo);
+            $('#tlMatricula').text( matricula);
+            $('#tlNomeAluno').text(nomeAluno);
+            $('#tlCurso').text(codigoCurso);
+            $('#tlPeriodo').text(periodo);
 
             // Executando o script de curriculo
             runCurriculo(idAluno);
@@ -209,10 +213,10 @@
             periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
 
             // prenchendo o titulo do nome do aluno
-            $('#tlSMatricula').text('Matrícula: ' + matricula);
-            $('#tlSNomeAluno').text('Nome: ' + nomeAluno);
-            $('#tlSCurso').text('Curso: ' + codigoCurso);
-            $('#tlSPeriodo').text('Período: ' + periodo);
+            $('#tlSMatricula').text(matricula);
+            $('#tlSNomeAluno').text(nomeAluno);
+            $('#tlSCurso').text(codigoCurso);
+            $('#tlSPeriodo').text(periodo);
 
             // Executando o script de curriculo
             runSemestre(idAluno);

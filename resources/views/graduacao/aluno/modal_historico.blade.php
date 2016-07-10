@@ -9,22 +9,28 @@
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3 id="tlHMatricula"></h3>
+
+                    <div class="col-md-12">
+
+                    <div class="col-md-12 infModal">
+
+                        <div class="col-md-3">
+                            <span><strong>Matrícula: </strong><p id="tlHMatricula"></p></span>
                         </div>
 
-                        <div class="col-md-4">
-                            <h3 id="tlHNomeAluno"></h3>
+                        <div class="col-md-5">
+                            <span><strong>Nome do Aluno: </strong><p id="tlHNomeAluno"></p></span>
                         </div>
 
                         <div class="col-md-2">
-                            <h3 id="tlHCurso"></h3>
+                            <span><strong>Curso: </strong><p id="tlHCurso"></p></span>
                         </div>
 
                         <div class="col-md-2">
-                            <h3 id="tlHPeriodo"></h3>
+                            <span><strong>Período: </strong><p id="tlHPeriodo"></p></span>
                         </div>
+
+                    </div>
                     </div>
                     <div class="col-md-12">
                         <a href="#" id="btnAddHistorico" class="btn-sm btn-primary pull-right">Novo Histórico</a><br><br>

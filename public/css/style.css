@@ -1841,7 +1841,7 @@ div.dt-button-info {
   border-radius: 1px;
   color: inherit;
   display: block;
-  height: 26px !important;
+  height: 26px;
   padding: 3px 3px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
@@ -8323,6 +8323,23 @@ table.dataTable.no-footer {
 
 .ztree li a {
 
-  display: initial !important;
-  white-space: normal !important;
+    width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infModal {
+    background: #eee;
+    border-bottom: 2px solid #69aaa6;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.panel-body{
+    padding: 5px !important;
+}
+
+textarea {
+    resize: none;
 }

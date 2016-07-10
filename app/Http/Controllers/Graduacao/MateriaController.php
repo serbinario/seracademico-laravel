@@ -182,7 +182,7 @@ class MateriaController extends Controller
             $this->service->delete($id);
 
             #retorno para view
-            return redirect()->back()->with('message', 'Matéria removid com sucesso!');
+            return redirect()->back()->with('message', 'Matéria removida com sucesso!');
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

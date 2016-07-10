@@ -15,13 +15,13 @@
             </div>
 		</div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
+
+                <div class="form-group col-md-12">
 
                     {!! Form::label('anotacao', 'Anotações') !!}
-                    {!! Form::textarea('anotacao', Session::getOldInput('anotacao') , ['size' => '101x5'], array('class' => 'form-control')) !!}
+                    {!! Form::textarea('anotacao', Session::getOldInput('anotacao') , array('class' => 'form-control', 'rows'=>'3')) !!}
                 </div>
-            </div>
+
         </div>
 	</div>
 </div>
