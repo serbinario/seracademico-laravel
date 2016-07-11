@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.vestibular.update', $model->id], 'method' => "POST" ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.vestibular.update', $model->id], 'method' => "POST", "id" => "formVestibular"]) !!}
                 @include('tamplatesForms.graduacao.tamplateFormVestibular')
             {!! Form::close() !!}
         </div>

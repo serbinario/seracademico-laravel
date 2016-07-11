@@ -4,12 +4,16 @@ $(document).ready(function(){
     
     //Cpf
     $('.cpf').mask('000.000.000-00', {reverse: true});
+
     //RG
     $('.rg').mask('0.000.000', {reverse: true});
+
     //CEP
     $('.cep').mask('00000-000');
+
     //money
      $('.money').mask('000.000.000,00', {reverse: true});
+
     //CNPJ
     $('.cnpj').mask('00.000.000.0000-00');
 
@@ -27,8 +31,6 @@ $(document).ready(function(){
 
     //Numeros
     $('.numberFor').mask('0000');
-
-
 
     //Numeros
     $('.numberFive').mask('00000');

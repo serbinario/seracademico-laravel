@@ -92,28 +92,28 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('data_inicial', 'Data Inicial') !!}
-                                    {!! Form::text('data_inicial', null , array('class' => 'form-control datepicker date')) !!}
+                                    {!! Form::text('data_inicial', null , array('class' => 'form-control date', 'placeholder' => 'dd/mm/yyyy')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
                                     {!! Form::label('data_final', 'Data Final') !!}
-                                    {!! Form::text('data_final', null, array('class' => 'form-control datepicker date')) !!}
+                                    {!! Form::text('data_final', null, array('class' => 'form-control date', 'placeholder' => 'dd//mm/yyyy')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
                                     {!! Form::label('hora_inicial', 'Hora Inicial') !!}
-                                    {!! Form::text('hora_inicial', null , array('class' => 'form-control time')) !!}
+                                    {!! Form::text('hora_inicial', null , array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
                                     {!! Form::label('hora_final', 'Hora Final') !!}
-                                    {!! Form::text('hora_final',null , array('class' => 'form-control time')) !!}
+                                    {!! Form::text('hora_final',null , array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -226,6 +226,7 @@
 </div>
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('js/vestibular/validacao/form_validation.js')  }}"></script>
     <script type="text/javascript">
         // Alerta para ativar o vestibular
         $(document).on('click', '#ativo', function () {
