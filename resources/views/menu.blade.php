@@ -46,6 +46,10 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
     {{--<link rel="stylesheet" href="{{ asset('/css/plugins/zTree/demo.css')  }}">--}}
 
+
+            <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
     @yield('css')
 </head>
 
@@ -300,6 +304,10 @@
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
+
+<!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 
