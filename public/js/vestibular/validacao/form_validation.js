@@ -1,5 +1,11 @@
 // validação
 $('#formVestibular').bootstrapValidator({
+    framework: 'bootstrap',
+    icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
     fields: {
         data_inicial: {
             validators: {
@@ -7,8 +13,8 @@ $('#formVestibular').bootstrapValidator({
                     message: 'Campo Data Inicial é obrigatório'
                 },
                 date: {
-                    max: 'data_final',
-                    message: 'A data inicial deve ser menor ou igual a data final.'
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
@@ -18,8 +24,8 @@ $('#formVestibular').bootstrapValidator({
                     message: 'Campo Data Final é obrigatório'
                 },
                 date: {
-                    min: 'data_inicial',
-                    message: 'A data final deve ser maior ou igual a data inicial.'
+                    format: 'DD/MM/YYYY',
+                    message: 'Data inválida.'
                 }
             }
         },
@@ -46,14 +52,36 @@ $('#formVestibular').bootstrapValidator({
             }
         }
     }
-}).on('success.field.fv', function(e, data) {
-    // Revalidando a data final
-    if (data.field === 'data_inicial' && !data.fv.isValidField('data_final')) {
-        data.fv.revalidateField('data_final');
-    }
+});
 
-    // Revalidando a data inicial
-    if (data.field === 'data_final' && !data.fv.isValidField('data_inicial')) {
-        data.fv.revalidateField('data_inicial');
+// evento para validar o focus
+$('#data_inicial').focusin(function () {
+    $('#data_inicial').val('');
+});
+
+// evento para validar o focus
+$('#data_final').focusin(function () {
+    $('#data_final').val('');
+});
+
+// evento para validar a hora
+$('#data_final').focusout(function () {
+    // Recuperando as datas
+    var data_inicial = $('#data_inicial').val().split('/');
+    var data_final   = $('#data_final').val().split('/');
+
+    // Verificando se as datas foram preenchidas
+    if(data_inicial.length === 3 && data_final.length === 3) {
+        // Criando as datas
+        var objDataInicial = new Date(data_inicial[2], data_inicial[1], data_inicial[0]);
+        var objDataFinal   = new Date(data_final[2], data_final[1], data_final[0]);
+
+        // Validando
+        if(objDataInicial > objDataFinal) {
+            swal("Inválido", "A data inicial deve ser menor ou igual a data final!", "error");
+
+            // Regra de negócio
+            $('#data_inicial').val($('#data_final').val());
+        }
     }
 });

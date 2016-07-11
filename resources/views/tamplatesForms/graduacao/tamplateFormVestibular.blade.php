@@ -123,13 +123,6 @@
                                     {!! Form::text('qtd_vagas', Session::getOldInput('qtd_vagas')  , array('class' => 'form-control numberFor')) !!}
                                 </div>
                             </div>
-
-                            <div class="col-md-4 col-md-offset-2 demo">
-                                <h4>Your Date Range Picker</h4>
-                                <input type="text" id="config-demo" class="form-control">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                            </div>
-
                         </div>
 
                     </div>
@@ -240,17 +233,5 @@
                 swal("Marcando esse Vestibular como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
             }
         });
-
-
-        //http://www.daterangepicker.com/#examples
-        $('#config-demo').daterangepicker(options, function(start, end, label) {
-            console.log('New date range selected: '
-                    + start.format('YYYY-MM-DD')
-                    + ' to ' + end.format('YYYY-MM-DD')
-                    + ' (predefined range: ' + label + ')');
-        });
-
-
-
     </script>
 @stop
