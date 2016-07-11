@@ -70,7 +70,7 @@ function loadTreeList(idAluno)
 
 // Função para carregar a grid
 var tableNotas;
-function loadTableNotas (idAluno) {
+function loadTableNotas (idAluno, idSemestre) {
     tableNotas = $('#semestre-notas-grid').DataTable({
         processing: true,
         serverSide: true,
@@ -79,7 +79,7 @@ function loadTableNotas (idAluno) {
         bLengthChange: false,
         bFilter: false,
         bPaginate: false,
-        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridNotas/" + idAluno,
+        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridNotas/" + idAluno + "/" + idSemestre,
         columns: [
             {data: 'nome',  name: 'fac_disciplinas.nome'},
             {data: 'nota_unidade_1', name: 'fac_alunos_notas.nota_unidade_1'},
@@ -98,7 +98,7 @@ function loadTableNotas (idAluno) {
 
 // Função para carregar a grid
 var tableFaltas;
-function loadTableFaltas (idTurma) {
+function loadTableFaltas (idTurma, idSemestre) {
     tableFaltas = $('#semestre-faltas-grid').DataTable({
         processing: true,
         serverSide: true,
@@ -107,7 +107,7 @@ function loadTableFaltas (idTurma) {
         bLengthChange: false,
         bFilter: false,
         bPaginate: false,
-        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridFaltas/" + idAluno,
+        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridFaltas/" + idAluno + "/" + idSemestre,
         columns: [
             {data: 'nome',  name: 'fac_disciplinas.nome'},
             {data: 'falta_mes_1',  name: 'fac_alunos_frequencias.falta_mes_1'},
@@ -126,26 +126,26 @@ function loadTableFaltas (idTurma) {
 }
 
 // Função para executar a grid
-function runSemestre(idAluno) {
+function runSemestre(idAluno, idSemestre) {
     // Carregando a grid de Horários
     if(tableHorario) {
-        loadTableHorario(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno).load();
+        loadTableHorario(idAluno, idSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno).load();
     } else {
         loadTableHorario(idAluno);
     }
 
     // Carregando a grid de Notas
     if(tableNotas) {
-        loadTableNotas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridNotas/" + idAluno).load();
+        loadTableNotas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridNotas/" + idAluno + "/" + idSemestre).load();
     } else {
-        loadTableNotas(idAluno);
+        loadTableNotas(idAluno, idSemestre);
     }
 
     // Carregando a grid de Faltas
     if(tableFaltas) {
-        loadTableFaltas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridFaltas/" + idAluno).load();
+        loadTableFaltas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridFaltas/" + idAluno + "/" + idSemestre).load();
     } else {
-        loadTableFaltas(idAluno);
+        loadTableFaltas(idAluno, idSemestre);
     }
 
     // carregando a modal

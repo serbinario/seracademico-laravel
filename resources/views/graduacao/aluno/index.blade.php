@@ -206,6 +206,9 @@
             // recuperando o id do aluno
             idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
+            // recuperando o semestre de consulta
+            var idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
+
             // Recuperando o nome e a matrícula
             nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
@@ -219,7 +222,7 @@
             $('#tlSPeriodo').text(periodo);
 
             // Executando o script de curriculo
-            runSemestre(idAluno);
+            runSemestre(idAluno, idSemestre);
         });
     </script>
 @stop

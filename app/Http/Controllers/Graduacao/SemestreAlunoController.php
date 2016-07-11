@@ -229,7 +229,7 @@ class SemestreAlunoController extends Controller
      * @param $idAluno
      * @return mixed
      */
-    public function gridNotas($idAluno)
+    public function gridNotas($idAluno, $idSemestre)
     {
         #Criando a consulta
         $rows = \DB::table('fac_turmas_disciplinas')
@@ -238,13 +238,11 @@ class SemestreAlunoController extends Controller
             ->join('fac_alunos_notas', 'fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
             ->leftJoin('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
             ->leftJoin('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
-            ->join('fac_alunos_semestres', function ($join) use ($idAluno) {
-                $join->on(
-                    'fac_alunos_semestres.id', '=',
-                    \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual 
-                    where semestre_atual.aluno_id = ' .  $idAluno . ' ORDER BY semestre_atual.id DESC LIMIT 1)')
-                );
-            })
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->where('fac_semestres.id', $idSemestre)
             ->select([
                 'fac_turmas_disciplinas.id',
                 'fac_disciplinas.id as idDiciplina',
@@ -265,7 +263,7 @@ class SemestreAlunoController extends Controller
     /**
      * @return mixed
      */
-    public function gridFaltas(Request $request, $idAluno)
+    public function gridFaltas(Request $request, $idAluno, $idSemestre)
     {
         #Criando a consulta
         $rows = \DB::table('fac_turmas_disciplinas')
@@ -274,13 +272,11 @@ class SemestreAlunoController extends Controller
             ->join('fac_alunos_notas', 'fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
             ->join('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
-            ->join('fac_alunos_semestres', function ($join) use ($idAluno) {
-                $join->on(
-                    'fac_alunos_semestres.id', '=',
-                    \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual 
-                    where semestre_atual.aluno_id = ' .  $idAluno . ' ORDER BY semestre_atual.id DESC LIMIT 1)')
-                );
-            })
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->where('fac_semestres.id', $idSemestre)
             ->select([
                 'fac_alunos_frequencias.id',
                 'fac_alunos_frequencias.falta_mes_1',

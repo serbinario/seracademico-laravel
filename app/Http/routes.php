@@ -194,8 +194,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::group(['prefix' => 'semestre', 'as' => 'semestre.'], function () {
                     Route::get('getTurmas/{idAluno}', ['as' => 'gridHorario', 'uses' => 'Graduacao\SemestreAlunoController@getTurmas']);
                     Route::get('gridHorario/{idAluno}', ['as' => 'gridHorario', 'uses' => 'Graduacao\SemestreAlunoController@gridHorario']);
-                    Route::get('gridNotas/{idAluno}', ['as' => 'gridNotas', 'uses' => 'Graduacao\SemestreAlunoController@gridNotas']);
-                    Route::get('gridFaltas/{idAluno}', ['as' => 'gridFaltas', 'uses' => 'Graduacao\SemestreAlunoController@gridFaltas']);
+                    Route::get('gridNotas/{idAluno}/{idSemestre}', ['as' => 'gridNotas', 'uses' => 'Graduacao\SemestreAlunoController@gridNotas']);
+                    Route::get('gridFaltas/{idAluno}/{idSemestre}', ['as' => 'gridFaltas', 'uses' => 'Graduacao\SemestreAlunoController@gridFaltas']);
                 });
             });
 

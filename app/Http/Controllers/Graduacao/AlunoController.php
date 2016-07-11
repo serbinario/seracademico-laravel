@@ -113,6 +113,7 @@ class AlunoController extends Controller
                     'pessoas.cpf',
                     'fac_alunos.matricula',
                     'pessoas.celular',
+                    'fac_semestres.id as idSemestre',
                     'fac_semestres.nome as semestre',
                     'fac_alunos_semestres.periodo',
                     'fac_curriculos.codigo as codigoCurriculo',

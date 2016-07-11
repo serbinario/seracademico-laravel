@@ -1,4 +1,36 @@
-/*Datatable da grid adicionar disciplina*/
+// Evento para o fechamento do modal de adicionar disciplina
+$('#btnCloseAddDisciplina').click(function () { console.log('dsadsa');
+    $('#modal-adicionar-disciplina-curriculo').modal('toggle');
+    loadTableAdicionarDisciplina(idCurriculo).ajax.url("/index.php/seracademico/graduacao/curriculo/gridByCurriculo/" + 0).load();
+});
+
+// função para criação da linha de detalhe
+function format ( d ) {
+    return  '<div class="row">' +
+                '<div class="row">' +
+                '<div class="col-md-12">' +
+                    '<table id="detalhe-disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>Pré-Requisito 1</th>' +
+                                '<th>Pré-Requisito 2</th>' +
+                                '<th>Co-Requisito 1</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>' +
+                            '<tr>' +
+                                '<td>' + d.pre1Codigo+ '</td>' +
+                                '<td>' + d.pre2Codigo+ '</td>' +
+                                '<td>' + d.co1Codigo+ '</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>' +
+                '</div>' +
+                '</div>' +
+        '</div>';
+}
+
+// Carregando a table
 var tableAdicionarDisciplina;
 function loadTableAdicionarDisciplina (idCurriculo) {
     // Carregaando a grid
@@ -77,32 +109,6 @@ function loadTableAdicionarDisciplina (idCurriculo) {
 
     // Retorno
     return tableAdicionarDisciplina;
-}
-
-// função para criação da linha de detalhe
-function format ( d ) {
-    return  '<div class="row">' +
-                '<div class="row">' +
-                    '<div class="col-md-12">' +
-                        '<table id="detalhe-disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
-                            '<thead>' +
-                                '<tr>' +
-                                    '<th>Pré-Requisito 1</th>' +
-                                    '<th>Pré-Requisito 2</th>' +
-                                    '<th>Co-Requisito 1</th>' +
-                                '</tr>' +
-                            '</thead>' +
-                            '<tbody>' +
-                                '<tr>' +
-                                    '<td>' + d.pre1Codigo+ '</td>' +
-                                    '<td>' + d.pre2Codigo+ '</td>' +
-                                    '<td>' + d.co1Codigo+ '</td>' +
-                                '</tr>' +
-                            '</tbody>' +
-                        '</table>' +
-                    '</div>' +
-                '</div>' +
-            '</div>';
 }
 
 // Executando a grid

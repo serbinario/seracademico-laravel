@@ -119,11 +119,16 @@
 
         // Evento para abrir a modal de adicionar disciplinas ao currículo
         $(document).on("click", "#btnGraduacaoAddDisciplinaCurriculo", function () {
-            idCurriculo   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-            nomeCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            idCurriculo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            nomeCurriculo   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codigoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
 
             //Chmando a modal de adicionar disciplina
             runTableAdicionarDisciplina(idCurriculo);
+
+            // Setando a descrição do modal
+            $('#adNomeCurriculo').text(nomeCurriculo);
+            $('#adCodigoCurriculo').text(codigoCurriculo);
 
             //mostrando a modal
             $("#modal-adicionar-disciplina-curriculo").modal({show:true});

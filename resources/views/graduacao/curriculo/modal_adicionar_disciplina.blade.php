@@ -3,10 +3,21 @@
         <div class="modal-dialog" style="width: 98%; height: 90%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <button class="close" id="btnCloseAddDisciplina" type="button">×</button>
                     <h4 class="modal-title">Adicionar disciplinas ao currículo</h4>
                 </div>
                 <div class="modal-body" style="alignment-baseline: central">
+                    <!-- Linha de descrição -->
+                    <div class="col-md-12 infModal">
+                        <div class="col-md-4">
+                            <span><strong>Código: </strong><p id="adCodigoCurriculo"></p></span>
+                        </div>
+
+                        <div class="col-md-8">
+                            <span><strong>Corrículo: </strong><p id="adNomeCurriculo"></p></span>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-4">
                             <form id="search-form" class="form-inline" role="form" method="GET">
