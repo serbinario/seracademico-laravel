@@ -251,6 +251,9 @@ return [
 
         //https://github.com/mcamara/laravel-localization
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+
+        // Parametro de matricula
+        'ParametroMatricula' => \Seracademico\Facades\ParametroMatriculaFacade::class,
     ],
 
 ];

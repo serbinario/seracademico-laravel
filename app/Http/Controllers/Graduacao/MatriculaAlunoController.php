@@ -66,9 +66,11 @@ class MatriculaAlunoController extends Controller
                 })
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
                 ->where(function ($query) use ($semestres) {
-                    $query->where('fac_semestres.id', $semestres[1]->id)
+                    $query->where(function ($query) use ($semestres) {
+                            $query->where('fac_semestres.id', $semestres[1]->id)->whereNotNull('fac_alunos_semestres.periodo');
+                        })
                         ->orWhere(function ($query) use ($semestres) {
-                            $query->where('fac_alunos_semestres.periodo', null)->where('fac_semestres.id', $semestres[0]->id);
+                            $query->whereNull('fac_alunos_semestres.periodo')->where('fac_semestres.id', $semestres[0]->id);
                         });
                 })
                 ->groupBy('fac_alunos.id')
@@ -83,8 +85,7 @@ class MatriculaAlunoController extends Controller
 
             #Editando a grid
             return Datatables::of($alunos)->make(true);
-        } catch (\Throwable $e) {
-            dd($e);
+        } catch (\Throwable $e) {dd($e);
             abort(500);
         }
     }

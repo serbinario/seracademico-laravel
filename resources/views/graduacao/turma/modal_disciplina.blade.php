@@ -10,15 +10,15 @@
                 <!-- Linha de descrição -->
                 <div class="col-md-12 infModal">
                     <div class="col-md-4">
-                        <span><strong>Currículo: </strong><p id="tdCurriculo"></p></span>
+                        <span><strong>Currículo: </strong><p id="thCurriculo"></p></span>
                     </div>
 
                     <div class="col-md-6">
-                        <span><strong>Curso: </strong><p id="tcCurso"></p></span>
+                        <span><strong>Curso: </strong><p id="thCurso"></p></span>
                     </div>
 
                     <div class="col-md-2">
-                        <span><strong>Ano: </strong><p id="taAno"></p></span>
+                        <span><strong>Ano: </strong><p id="thAno"></p></span>
                     </div>
                 </div>
 

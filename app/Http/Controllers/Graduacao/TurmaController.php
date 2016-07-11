@@ -93,7 +93,9 @@ class TurmaController extends Controller
                 'fac_cursos.nome',
                 'fac_turnos.nome as turno',
                 'fac_turmas.periodo',
-                'fac_semestres.nome as semestre'
+                'fac_semestres.nome as semestre',
+                'fac_curriculos.codigo as codigoCurriculo',
+                'fac_curriculos.ano',
             ]);
 
         #Editando a grid

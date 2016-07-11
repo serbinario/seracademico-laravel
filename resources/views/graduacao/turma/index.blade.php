@@ -154,9 +154,20 @@
 
         /*Responsável em abrir modal de horários*/
         $(document).on("click", '#modal-horario', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, anoCurriculo;
+
             //Recuperando o id da turma selecionada
-            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-            periodo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+
+            // setando a descrição
+            $('#thCurriculo').text(codCurriculo);
+            $('#thCurso').text(nomeCurso);
+            $('#thAno').text(anoCurriculo);
 
             //Executando as grids
             runTableDisciplina(idTurma);

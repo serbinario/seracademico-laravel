@@ -264,7 +264,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="text-muted text-xs block">{{ Auth::user()->name }}<b class="caret"></b></span>
                             </a>
-                            <small style="text-align: left;">Semestre 2016.2</small>
+                            <small style="text-align: left;">Semestre {{ ParametroMatricula::getSemestreVigente()->nome ?? "" }}</small>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 {{-- <li><a href="profile.html">Perfil</a></li>
                                  <li><a href="contacts.html">Notificações</a></li>--}}
