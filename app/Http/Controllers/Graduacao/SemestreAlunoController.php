@@ -36,7 +36,7 @@ class SemestreAlunoController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function getTurmas(Request $request, $idAluno)
+    public function getTurmas(Request $request, $idAluno, $idSemestre)
     {
         try {
             # Variável que armazenará o array de retorno
@@ -48,13 +48,11 @@ class SemestreAlunoController extends Controller
                 ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                 ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
                 ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
-                ->join('fac_alunos_semestres', function ($join) use ($idAluno) {
-                    $join->on(
-                        'fac_alunos_semestres.id', '=',
-                        \DB::raw('(SELECT semestre_atual.id FROM fac_alunos_semestres as semestre_atual 
-                    where semestre_atual.aluno_id = '. $idAluno .' ORDER BY semestre_atual.id DESC LIMIT 1)')
-                    );
-                })
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->where('fac_semestres.id', $idSemestre)
                 ->groupBy('fac_disciplinas.id')
                 ->select([
                     'fac_disciplinas.id',
@@ -90,7 +88,7 @@ class SemestreAlunoController extends Controller
     /**
      * @return mixed
      */
-    public function gridHorario($idAluno)
+    public function gridHorario($idAluno, $idSemestre)
     {
         #Criando a consulta
         $rows = \DB::table('fac_horarios')
@@ -100,13 +98,15 @@ class SemestreAlunoController extends Controller
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
             ->where('fac_alunos.id', $idAluno)
+            ->where('fac_semestres.id', $idSemestre)
             ->groupBy('fac_horas.id')
             ->orderBy('fac_horas.id')
             ->select([
                 'fac_horarios.id',
                 'fac_horas.id as hora',
                 'fac_horas.nome as codigoHora',
-                'fac_alunos.id as idAluno'
+                'fac_alunos.id as idAluno',
+                'fac_semestres.id as idSemestre'
             ]);
 
         #Editando a grid
@@ -123,6 +123,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 1)->get();
 
                 return $result[0]->codigo ?? "";
@@ -139,6 +140,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 2)->get();
 
                 return $result[0]->codigo ?? "";
@@ -155,6 +157,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 3)->get();
 
                 return $result[0]->codigo ?? "";
@@ -171,6 +174,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 4)->get();
 
                 return $result[0]->codigo ?? "";
@@ -187,6 +191,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 5)->get();
 
                 return $result[0]->codigo ?? "";
@@ -203,6 +208,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 6)->get();
 
                 return $result[0]->codigo ?? "";
@@ -219,6 +225,7 @@ class SemestreAlunoController extends Controller
                     ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                     ->where('fac_horas.id', $row->hora)
                     ->where('fac_alunos.id', $row->idAluno)
+                    ->where('fac_semestres.id', $row->idSemestre)
                     ->where('fac_horarios.dia_id', 7)->get();
 
                 return $result[0]->codigo ?? "";

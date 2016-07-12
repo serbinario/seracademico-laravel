@@ -2,7 +2,7 @@
 var tableHorario;
 
 // Função para carregar a grid
-function loadTableHorario (idAluno) {
+function loadTableHorario (idAluno, idSemestre) {
     tableHorario = $('#horario-grid').DataTable({
         processing: true,
         serverSide: true,
@@ -11,7 +11,7 @@ function loadTableHorario (idAluno) {
         bLengthChange: false,
         bFilter: false,
         bPaginate: false,
-        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno,
+        ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridHorario/"  + idAluno + "/" + idSemestre,
         columns: [
             {data: 'codigoHora', name: 'fac_horas.nome', orderable: false, searchable: false},
             {data: 'domingo', name: 'domingo', orderable: false, searchable: false},
@@ -25,19 +25,19 @@ function loadTableHorario (idAluno) {
     });
 
     // Executando a arvore de disciplinas
-    loadTreeList(idAluno);
+    loadTreeList(idAluno, idSemestre);
 
     //Retorno
     return tableHorario;
 }
 
 // Função para carregar a lista da arvore
-function loadTreeList(idAluno)
+function loadTreeList(idAluno, idSemestre)
 {
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/graduacao/aluno/semestre/getTurmas/' + idAluno,
+        url: '/index.php/seracademico/graduacao/aluno/semestre/getTurmas/' + idAluno + "/" + idSemestre,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -129,9 +129,9 @@ function loadTableFaltas (idTurma, idSemestre) {
 function runSemestre(idAluno, idSemestre) {
     // Carregando a grid de Horários
     if(tableHorario) {
-        loadTableHorario(idAluno, idSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno).load();
+        loadTableHorario(idAluno, idSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno + "/" + idSemestre).load();
     } else {
-        loadTableHorario(idAluno);
+        loadTableHorario(idAluno, idSemestre);
     }
 
     // Carregando a grid de Notas
