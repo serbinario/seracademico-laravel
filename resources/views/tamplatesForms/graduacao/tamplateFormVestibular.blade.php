@@ -89,7 +89,7 @@
                         <br/>
                         <div class="row">
 
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('data_inicial', 'Data Inicial - Data Final') !!}
                                     {!! Form::text('data_inicial', null , array('class' => 'form-control ','id' => 'config-demo', 'placeholder' => 'dd/mm/yyyy')) !!}

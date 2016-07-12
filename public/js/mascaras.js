@@ -73,12 +73,13 @@ $(document).ready(function(){
     });
 
     var options = {};
-    options.timePicker = false;
+    options.timePicker24Hour = true;
+    options.timePicker = true;
     options.autoApply = true;
     options.drops = "up";
     options.locale = {
         direction: $('#rtl').is(':checked') ? 'rtl' : 'ltr',
-        format: 'DD/MM/YYYY HH:mm',
+        format: 'DD/MM/YYYY HH:mm:ss',
         separator: ' - ',
         applyLabel: 'Aplicar',
         cancelLabel: 'Cancelar',
