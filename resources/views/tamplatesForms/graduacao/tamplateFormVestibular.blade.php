@@ -111,7 +111,7 @@
                                 <div class="form-group">
                                     @if(isset($model->id) && empty($model->hora_inicial))
                                         {!! Form::label('hora_inicial', 'Hora Inicial') !!}
-                                        {!! Form::text('hora_inicial', '00:00:00', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                        {!! Form::text('hora_inicial', $model->hora_inicial ?? '00:00:00', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
                                     @else
                                         {!! Form::label('hora_inicial', 'Hora Inicial') !!}
                                         {!! Form::text('hora_inicial', '00:00:00', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
@@ -123,7 +123,7 @@
 
                                     @if(isset($model->id) && empty($model->hora_final))
                                         {!! Form::label('hora_final', 'Hora Final') !!}
-                                        {!! Form::text('hora_final', '23:59:59', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                        {!! Form::text('hora_final', $model->hora_final ?? '23:59:59', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
                                     @else
                                         {!! Form::label('hora_final', 'Hora Final') !!}
                                         {!! Form::text('hora_final', '23:59:59', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
