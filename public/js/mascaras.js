@@ -72,33 +72,7 @@ $(document).ready(function(){
         $('.phone').unmask();
     });
 
-    var options = {};
-    options.timePicker = false;
-    options.autoApply = true;
-    options.drops = "up";
-    options.locale = {
-        direction: $('#rtl').is(':checked') ? 'rtl' : 'ltr',
-        format: 'DD/MM/YYYY HH:mm',
-        separator: ' - ',
-        applyLabel: 'Aplicar',
-        cancelLabel: 'Cancelar',
-        fromLabel: 'De',
-        toLabel: 'Para',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex','Sab'],
-        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        firstDay: 1
-    };
-
-    $('#config-demo').daterangepicker(options, function(start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD')
-            + ' to ' + end.format('YYYY-MM-DD')
-            + ' (predefined range: ' + label + ')');
-    });
-
-
-
-     
+    
     //######## Mascaras para formulário empreendedor ##########
 
      
