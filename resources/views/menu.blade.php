@@ -97,33 +97,6 @@
                     <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
-                        <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level collapse">
-                                @permission('graduacao.aluno.select')
-                                <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
-                                <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.disciplina.select')
-                                <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
-                                @endpermission
-
-                                @permission('graduacao.curso.select')
-                                <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="flaticon-book-4"></i> Cursos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.curriculo.select')
-                                <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.turma.select')
-                                <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
-                                @endpermission
-                            </ul>
-                        </li>
-                        @endpermission
-
                         @permission('graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
                         <li>
                             <a href="#"><i class="flaticon-test"></i> Vestibular <span class="fa arrow"></span></a>
@@ -148,6 +121,33 @@
                                     </ul>
                                 </li>
 
+                            </ul>
+                        </li>
+                        @endpermission
+
+                        @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
+                        <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse">
+                                @permission('graduacao.aluno.select')
+                                <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                @endpermission
+
+                                @permission('graduacao.disciplina.select')
+                                <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
+                                @endpermission
+
+                                @permission('graduacao.curso.select')
+                                <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="flaticon-book-4"></i> Cursos</a></li>
+                                @endpermission
+
+                                @permission('graduacao.curriculo.select')
+                                <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
+                                @endpermission
+
+                                @permission('graduacao.turma.select')
+                                <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
+                                @endpermission
                             </ul>
                         </li>
                         @endpermission
