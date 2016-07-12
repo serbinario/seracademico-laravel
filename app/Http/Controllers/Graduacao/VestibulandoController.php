@@ -61,8 +61,12 @@ class VestibulandoController extends Controller
      */
     public function index()
     {
+        # Recuperando os loads
+        $arrayLoadFields = $this->loadFields;
+        $arrayLoadFields[10] = "Graduacao\\Vestibular";
+
         #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
+        $loadFields = $this->service->load($arrayLoadFields);
 
         return view('vestibulando.index', compact('loadFields'));
     }
