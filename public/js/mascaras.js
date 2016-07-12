@@ -71,11 +71,7 @@ $(document).ready(function(){
         $('.cpf').unmask();
         $('.phone').unmask();
     });
-
-    
-    //######## Mascaras para formulário empreendedor ##########
-
      
-     //Vaga disponível
-     $('#serbinario_sad_bundle_sadbundle_vagasdisponiveis_qtdVagas').mask('0000000000000000000', {reverse: true});
+    //Vaga disponível
+    $('#serbinario_sad_bundle_sadbundle_vagasdisponiveis_qtdVagas').mask('0000000000000000000', {reverse: true});
 });

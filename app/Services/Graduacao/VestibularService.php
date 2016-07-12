@@ -75,6 +75,7 @@ class VestibularService
     {
         # Regras de Negócios
         $this->tratamentoVestibularAtivo($data);
+        $this->tratamentoDataRanger($data);
 
         #Salvando o registro pincipal
         $vestibular =  $this->repository->create($data);
@@ -97,6 +98,7 @@ class VestibularService
     {
         # Regras de Negócios
         $this->tratamentoVestibularAtivo($data);
+        $this->tratamentoDataRanger($data);
 
         #Atualizando no banco de dados
         $vestibular = $this->repository->update($data, $id);
@@ -130,6 +132,32 @@ class VestibularService
         $this->repository->delete($vestibular->id);
 
         # retorno
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function tratamentoDataRanger(array &$data)
+    {
+        # Recuperando as datas e separado data_inicial e final
+        $arrayData = explode('-', $data['data_ranger']);
+
+        # Verificando as datas
+        if(count($arrayData) !== 2) {
+            throw new \Exception('Formato das datas inicial e final são inválidas.');
+        }
+
+        # Removendo o registro data_ranger
+        unset($data['data_ranger']);
+
+        # colocando as datas
+        $data['data_inicial'] = trim($arrayData[0]);
+        $data['data_final']   = trim($arrayData[1]);
+
+        # Retorno
         return true;
     }
 

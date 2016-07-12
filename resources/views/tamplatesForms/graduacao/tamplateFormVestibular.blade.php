@@ -89,31 +89,45 @@
                         <br/>
                         <div class="row">
 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @if(isset($model->id))
+                                        {!! Form::label('data_ranger', 'Data Inicial - Data Final') !!}
+                                        {!! Form::text('data_ranger', "{$model->data_inicial} - {$model->data_final}" , array('class' => 'form-control ','id' => 'data_ranger', 'placeholder' => 'dd/mm/yyyy')) !!}
+                                    @else
+                                        {!! Form::label('data_ranger', 'Data Inicial - Data Final') !!}
+                                        {!! Form::text('data_ranger', null , array('class' => 'form-control ','id' => 'data_ranger', 'placeholder' => 'dd/mm/yyyy')) !!}
+                                    @endif
+                                </div>
+                            </div>
+                            {{--<div class="col-md-2">--}}
+                                {{--<div class="form-group">--}}
+
+                                    {{--{!! Form::label('data_final', 'Data Final') !!}--}}
+                                    {{--{!! Form::text('data_final', null, array('class' => 'form-control date', 'placeholder' => 'dd/mm/yyyy')) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    {!! Form::label('data_inicial', 'Data Inicial - Data Final') !!}
-                                    {!! Form::text('data_inicial', null , array('class' => 'form-control ','id' => 'config-demo', 'placeholder' => 'dd/mm/yyyy')) !!}
+                                    @if(isset($model->id) && empty($model->hora_inicial))
+                                        {!! Form::label('hora_inicial', 'Hora Inicial') !!}
+                                        {!! Form::text('hora_inicial', '00:00:00', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                    @else
+                                        {!! Form::label('hora_inicial', 'Hora Inicial') !!}
+                                        {!! Form::text('hora_inicial', '00:00:00', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
-                                    {!! Form::label('data_final', 'Data Final') !!}
-                                    {!! Form::text('data_final', null, array('class' => 'form-control date', 'placeholder' => 'dd/mm/yyyy')) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-
-                                    {!! Form::label('hora_inicial', 'Hora Inicial') !!}
-                                    {!! Form::text('hora_inicial', null , array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-
-                                    {!! Form::label('hora_final', 'Hora Final') !!}
-                                    {!! Form::text('hora_final',null , array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                    @if(isset($model->id) && empty($model->hora_final))
+                                        {!! Form::label('hora_final', 'Hora Final') !!}
+                                        {!! Form::text('hora_final', '23:59:59', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                    @else
+                                        {!! Form::label('hora_final', 'Hora Final') !!}
+                                        {!! Form::text('hora_final', '23:59:59', array('class' => 'form-control', 'placeholder' => 'HH:mm:ss')) !!}
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-2">
