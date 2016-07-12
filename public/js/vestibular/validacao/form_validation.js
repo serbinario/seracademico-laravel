@@ -7,7 +7,7 @@ $('#formVestibular').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        data_inicial: {
+        data_inicial2: {
             validators: {
                 notEmpty: {
                     message: 'Campo Data Inicial é obrigatório'
@@ -18,7 +18,7 @@ $('#formVestibular').bootstrapValidator({
                 }
             }
         },
-        data_final: {
+        data_final2: {
             validators: {
                 notEmpty: {
                     message: 'Campo Data Final é obrigatório'
@@ -54,13 +54,15 @@ $('#formVestibular').bootstrapValidator({
     }
 });
 
+
+
 // evento para validar o focus
-$('#data_inicial').focusin(function () {
+$('#data_inicial2').focusin(function () {
     $('#data_inicial').val('');
 });
 
 // evento para validar o focus
-$('#data_final').focusin(function () {
+$('#data_final2').focusin(function () {
     $('#data_final').val('');
 });
 

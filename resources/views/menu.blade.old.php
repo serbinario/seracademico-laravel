@@ -117,16 +117,6 @@
 <script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
-<!--<script type="text/javascript">
-$(document).ready(function () {
-    $('.datepicker').datetimepicker({
-        timepicker: false,
-        format: 'd/m/Y',
-        mask: false,
-        lang: 'pt-BR'
-    });
-});
-</script>-->
 @yield('javascript')
 </body>
 

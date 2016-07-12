@@ -91,8 +91,8 @@
 
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    {!! Form::label('data_inicial', 'Data Inicial') !!}
-                                    {!! Form::text('data_inicial', null , array('class' => 'form-control date', 'placeholder' => 'dd/mm/yyyy')) !!}
+                                    {!! Form::label('data_inicial', 'Data Inicial - Data Final') !!}
+                                    {!! Form::text('data_inicial', null , array('class' => 'form-control ','id' => 'config-demo', 'placeholder' => 'dd/mm/yyyy')) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -123,6 +123,7 @@
                                     {!! Form::text('qtd_vagas', Session::getOldInput('qtd_vagas')  , array('class' => 'form-control numberFor')) !!}
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
