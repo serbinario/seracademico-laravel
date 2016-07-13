@@ -111,7 +111,7 @@ class MatriculaAlunoController extends Controller
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+           ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
                 $query->from('fac_alunos_semestres_disciplinas')
                     ->select('fac_alunos_semestres_disciplinas.disciplina_id')
                     ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
@@ -581,19 +581,6 @@ class MatriculaAlunoController extends Controller
             $idDisciplina = $request->get('idDisciplina');
 
             # Criando a query
-            $disciplinas = \DB::table('fac_disciplinas')
-                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-                ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
-                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
-                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
-                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                ->where('fac_alunos.id', $idAluno)
-                ->where('fac_semestres.id', $idSemestre)
-                ->groupBy('fac_disciplinas.id')
-                ->lists('fac_disciplinas.id');
-
-            # Criando a query
             $horarios = \DB::table('fac_horarios')
                 ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
                 ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
@@ -619,7 +606,7 @@ class MatriculaAlunoController extends Controller
 
             # removendo os horários
             $alunoSemestre->horarios()->detach($horarios);
-            $alunoSemestre->disciplinas()->detach($disciplinas);
+            $alunoSemestre->disciplinas()->detach($idDisciplina);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);
