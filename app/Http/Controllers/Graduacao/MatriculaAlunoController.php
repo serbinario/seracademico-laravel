@@ -402,31 +402,18 @@ class MatriculaAlunoController extends Controller
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
                 ->where('fac_alunos.id', $dados['idAluno'])
                 ->where('fac_semestres.id', $semestres[0]->id)
-                ->where(function ($query) use($dados) {
-                    $query->whereIn('fac_horas.id', function ($query) use($dados) {
-                        $query->from('fac_horarios')
-                            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
-                            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
-                            ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
-                            ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
-                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
-                            ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
-                            ->select([
-                                'fac_horas.id'
-                            ])->get();
-                    })->whereIn('fac_dias.id', function ($query) use($dados) {
-                        $query->from('fac_horarios')
-                            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
-                            ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
-                            ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
-                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
-                            ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
-                            ->select([
-                                'fac_dias.id'
-                            ])->get();
-                    });
+                ->whereExists(function ($query) use($dados) {
+                    $query->from('fac_horarios as horarios')
+                        ->join('fac_horas as horas', 'horas.id', '=', 'horarios.hora_id')
+                        ->join('fac_dias as dias', 'dias.id', '=', 'horarios.dia_id')
+                        ->join("fac_turmas_disciplinas as td", "td.id", "=", "horarios.turma_disciplina_id")
+                        ->join("fac_disciplinas as disciplina", "disciplina.id", "=", "td.disciplina_id")
+                        ->join('fac_turmas as t', 't.id', '=', 'td.turma_id')
+                        ->where('td.id', $dados['idTurmaDisciplina'])
+                        ->whereRaw('fac_horas.id = horas.id')
+                        ->whereRaw('fac_dias.id = dias.id');
                 })->lists('fac_horarios.id');
-
+            
             # Fazendo a validação
             if(count($horariosAluno) > 0) {
                 throw new \Exception("Esse horário já foi cadastrado");
