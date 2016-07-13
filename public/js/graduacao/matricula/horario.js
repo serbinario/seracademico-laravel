@@ -61,6 +61,7 @@ function onDblClick(event, treeId, treeNode) {
                     datatype: 'json'
                 }).done(function (retorno) {
                     if(retorno.success) {
+                        builderDisciplinasAlunoSemestre(idAluno, idSemestre);
                         tableHorario.ajax.reload();
                         swal("Adicionado!", "Horaŕios adiciondos com sucesso.", "success");
                     } else {
@@ -92,7 +93,9 @@ $(document).on('click', '#btnRemoverHorario', function (event) {
     }).done(function (retorno) {
         if(retorno.success) {
             tableHorario.ajax.reload();
-            builderDisciplinasAlunoSemestre(idAluno, idSemestre)
+            tableDisciplina.ajax.reload();
+            builderDisciplinasAlunoSemestre(idAluno, idSemestre);
+
             swal("Horário removido com sucesso", "", "success");
         } else {
             swal("Ops! Ocorreu um problema!", retorno.msg, "error");

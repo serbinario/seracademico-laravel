@@ -414,8 +414,11 @@ class MatriculaAlunoController extends Controller
             # Recuperando o aluno
             $aluno = $this->alunoService->find($dados['idAluno']);
 
-            # Recuperando o semestre vigete
-            $semestres = $this->getParametrosMatricula();
+            # recuperando as configurações
+            $semestres = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula()
+            ];
 
             # Recuperando o semestre
             $semestre  = $aluno->semestres()->find($semestres[0]->id);
@@ -467,8 +470,11 @@ class MatriculaAlunoController extends Controller
                 throw new \Exception('Aluno não encontrado');
             }
 
-            # Recuperando o semestre vigete
-            $semestres = $this->getParametrosMatricula();
+            # recuperando as configurações
+            $semestres = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula()
+            ];
 
             # Recuperando o semestre
             $semestre = $aluno->semestres()->find($semestres[0]->id);
@@ -575,7 +581,20 @@ class MatriculaAlunoController extends Controller
             $idDisciplina = $request->get('idDisciplina');
 
             # Criando a query
-            $query = \DB::table('fac_horarios')
+            $disciplinas = \DB::table('fac_disciplinas')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+                ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->where('fac_semestres.id', $idSemestre)
+                ->groupBy('fac_disciplinas.id')
+                ->lists('fac_disciplinas.id');
+
+            # Criando a query
+            $horarios = \DB::table('fac_horarios')
                 ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
                 ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
                 ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
@@ -587,9 +606,9 @@ class MatriculaAlunoController extends Controller
                 ->where('fac_disciplinas.id', $idDisciplina)
                 ->groupBy('fac_horarios.id')
                 ->lists('fac_horarios.id');
-            
+
             # Validando os horários
-            if (!count($query) > 0) {
+            if (!count($horarios) > 0) {
                 throw new \Exception('Horários não encontrados');
             }
 
@@ -599,7 +618,8 @@ class MatriculaAlunoController extends Controller
             $alunoSemestre = $semestre->pivot;
 
             # removendo os horários
-            $alunoSemestre->horarios()->detach($query);
+            $alunoSemestre->horarios()->detach($horarios);
+            $alunoSemestre->disciplinas()->detach($disciplinas);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);
