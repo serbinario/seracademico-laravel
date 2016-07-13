@@ -62,6 +62,7 @@ function onDblClick(event, treeId, treeNode) {
                 }).done(function (retorno) {
                     if(retorno.success) {
                         builderDisciplinasAlunoSemestre(idAluno, idSemestre);
+                        tableDisciplina.ajax.reload();
                         tableHorario.ajax.reload();
                         swal("Adicionado!", "Horaŕios adiciondos com sucesso.", "success");
                     } else {
