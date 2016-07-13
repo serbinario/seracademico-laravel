@@ -383,24 +383,52 @@ class MatriculaAlunoController extends Controller
     public function adicionarHorarioAluno(Request $request)
     {
         try {
-            # Recuperando os dados da requisição
-            $dados   = $request->all();
+            # recuperando as configurações
+            $semestres = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula()
+            ];
 
-            # Verificano se o horário já foi cadastrado
-            $rowsVal = \DB::table("fac_horarios")
-                ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
-                ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # recuperando as horas e os dias dos alunos
+            $horariosAluno = \DB::table("fac_horarios")
+                ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
                 ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
                 ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
                 ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                ->where('fac_disciplinas.id', $dados['idDisciplina'])
                 ->where('fac_alunos.id', $dados['idAluno'])
-                ->select('fac_horarios.id')
-                ->lists('fac_horarios.id');
+                ->where('fac_semestres.id', $semestres[0]->id)
+                ->where(function ($query) use($dados) {
+                    $query->whereIn('fac_horas.id', function ($query) use($dados) {
+                        $query->from('fac_horarios')
+                            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+                            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+                            ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
+                            ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
+                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+                            ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
+                            ->select([
+                                'fac_horas.id'
+                            ])->get();
+                    })->whereIn('fac_dias.id', function ($query) use($dados) {
+                        $query->from('fac_horarios')
+                            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+                            ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
+                            ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
+                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+                            ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
+                            ->select([
+                                'fac_dias.id'
+                            ])->get();
+                    });
+                })->lists('fac_horarios.id');
 
             # Fazendo a validação
-            if(count($rowsVal) > 0) {
+            if(count($horariosAluno) > 0) {
                 throw new \Exception("Esse horário já foi cadastrado");
             }
 
@@ -411,16 +439,8 @@ class MatriculaAlunoController extends Controller
                 ->select('fac_horarios.id', 'fac_turmas_disciplinas.disciplina_id')
                 ->get();
 
-            # Recuperando o aluno
-            $aluno = $this->alunoService->find($dados['idAluno']);
-
-            # recuperando as configurações
-            $semestres = [
-                ParametroMatriculaFacade::getSemestreVigente(),
-                ParametroMatriculaFacade::getSemestreSelMatricula()
-            ];
-
-            # Recuperando o semestre
+            # Recuperando o aluno e o semestre
+            $aluno     = $this->alunoService->find($dados['idAluno']);
             $semestre  = $aluno->semestres()->find($semestres[0]->id);
 
             # Verificando se o semestre já foi cadastrado
