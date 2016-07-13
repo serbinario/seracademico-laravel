@@ -72,4 +72,32 @@ function onDblClick(event, treeId, treeNode) {
     }
 }
 
+// evento para remover horários
+$(document).on('click', '#btnRemoverHorario', function (event) {
+    // Recuperando o id da disciplina
+    var disciplina = $('#selRemoverHorario').find('option:selected').val();
+
+    // Verificando a seleção da disciplina
+    if (!disciplina) {
+        swal("Você deve selecionar uma disciplina!", "", "error");
+        event.preventDefault();
+    }
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: {'idAluno' : idAluno, 'idSemestre' : idSemestre, 'idDisciplina' : disciplina},
+        url: '/index.php/seracademico/matricula/removerHorario',
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            tableHorario.ajax.reload();
+            builderDisciplinasAlunoSemestre(idAluno, idSemestre)
+            swal("Horário removido com sucesso", "", "success");
+        } else {
+            swal("Ops! Ocorreu um problema!", retorno.msg, "error");
+        }
+    });
+});
+
 

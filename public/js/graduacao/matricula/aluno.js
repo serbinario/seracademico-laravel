@@ -1,5 +1,5 @@
-// id do aluno clicado
-var idAluno;
+// id do aluno clicado e o semestre
+var idAluno, idSemestre;
 
 // desabilitando a configuração de erro padrão
 $.fn.dataTable.ext.errMode = 'none';
@@ -32,8 +32,9 @@ $(document).on('click', '#aluno-grid tbody tr', function () {
         $(this).parent().find("tr td").removeClass('row_selected');
         $(this).find("td").addClass("row_selected");
 
-        // Recuperando o id do aluno selecionado
-        idAluno = tableAluno.row($(this).index()).data().id;
+        // Recuperando o id do aluno selecionado e o semestre
+        idAluno    = tableAluno.row($(this).index()).data().id;
+        idSemestre = tableAluno.row($(this).index()).data().idSemestre;
 
         // Verificando se a tabela já foi carregada
         if(!tableDisciplina) {
@@ -56,6 +57,9 @@ $(document).on('click', '#aluno-grid tbody tr', function () {
             // Recarregando a tableHorario
             tableHorario.ajax.url("/index.php/seracademico/matricula/gridHorario/" + idAluno).load();
         }
+
+        // Carregando as opções de remoção de horários
+        builderDisciplinasAlunoSemestre(idAluno, idSemestre);
 
         // Tratamento das abas
         $("#nav-tab li").removeClass('active');

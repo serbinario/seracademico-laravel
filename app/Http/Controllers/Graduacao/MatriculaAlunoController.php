@@ -80,12 +80,13 @@ class MatriculaAlunoController extends Controller
                     'pessoas.cpf',
                     'fac_alunos.matricula',
                     'pessoas.celular',
-                    'fac_alunos_semestres.id as IDTESTE'
+                    'fac_alunos_semestres.id as IDTESTE',
+                    'fac_semestres.id as idSemestre'
                 ]);
 
             #Editando a grid
             return Datatables::of($alunos)->make(true);
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             abort(500);
         }
     }
@@ -228,8 +229,11 @@ class MatriculaAlunoController extends Controller
      */
     public function gridHorario($idAluno)
     {
-        # Recuperando os semestres dos parâmetros
-        $semestres = $this->getParametrosMatricula();
+        # recuperando as configurações
+        $semestres = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula()
+        ];
 
         #Criando a consulta
         $rows = \DB::table('fac_horarios')
@@ -525,43 +529,83 @@ class MatriculaAlunoController extends Controller
     }
 
     /**
+     * @param Request $request
+     */
+     public function getDisciplinas(Request $request)
+     {
+        try {
+            # Recuperando os dados da rquisição
+            $idAluno    = $request->get('idAluno');
+            $idSemestre = $request->get('idSemestre');
+
+            # Criando a query
+            $query = \DB::table('fac_disciplinas')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+                ->join('fac_horarios', 'fac_horarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->where('fac_semestres.id', $idSemestre)
+                ->groupBy('fac_disciplinas.id')
+                ->select([
+                    'fac_disciplinas.id',
+                    'fac_disciplinas.nome'
+                ])->get();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $query]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+     }
+
+    /**
+     * @param Request $request
      * @return mixed
      */
-    private function getParametrosMatricula()
+    public function removerHorario(Request $request)
     {
         try {
-            # Recuperando o item de parâmetro do semestre vigente
-            $queryParameter = \DB::table('fac_parametros')
-                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
-                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
-                ->where('fac_parametros_itens.id', 2)
-                ->orWhere('fac_parametros_itens.id', 3)
-                ->get();
+            # Recuperando os dados da rquisição
+            $idAluno      = $request->get('idAluno');
+            $idSemestre   = $request->get('idSemestre');
+            $idDisciplina = $request->get('idDisciplina');
 
-            # Validando o parametro
-            if(count($queryParameter) !== 2) {
-                throw new \Exception('Parâmetro do semestre vigente não configurado');
+            # Criando a query
+            $query = \DB::table('fac_horarios')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->where('fac_semestres.id', $idSemestre)
+                ->where('fac_disciplinas.id', $idDisciplina)
+                ->groupBy('fac_horarios.id')
+                ->lists('fac_horarios.id');
+            
+            # Validando os horários
+            if (!count($query) > 0) {
+                throw new \Exception('Horários não encontrados');
             }
 
-            # Recuperando o semestre
-            $querySemestre = \DB::table('fac_semestres')
-                ->select(['fac_semestres.id', 'fac_semestres.nome'])
-                ->where('fac_semestres.nome', $queryParameter[0]->valor)
-                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
-                ->where('fac_semestres.ativo', 1)
-                ->orderBy('fac_semestres.nome', 'DESC')
-                ->get();
+            # Recuperando o aluno
+            $aluno         = $this->alunoService->find($idAluno);
+            $semestre      = $aluno->semestres()->find($idSemestre);
+            $alunoSemestre = $semestre->pivot;
 
-            # Validando o parametro
-            if(count($querySemestre) !== 2) {
-                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
-            }
+            # removendo os horários
+            $alunoSemestre->horarios()->detach($query);
 
-            #Retorno
-            return $querySemestre;
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
         } catch (\Throwable $e) {
-            #Retorno
-            return $e->getMessage();
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

@@ -17,6 +17,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('getTurmas', ['as' => 'getTurmas', 'uses' => 'Graduacao\MatriculaAlunoController@getTurmas']);
             Route::post('adicionarHorarioAluno', ['as' => 'adicionarHorarioAluno', 'uses' => 'Graduacao\MatriculaAlunoController@adicionarHorarioAluno']);
             Route::post('finalizarMatricula', ['as' => 'finalizarMatricula', 'uses' => 'Graduacao\MatriculaAlunoController@finalizarMatricula']);
+            Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'Graduacao\MatriculaAlunoController@getDisciplinas']);
+            Route::post('removerHorario', ['as' => 'removerHorario', 'uses' => 'Graduacao\MatriculaAlunoController@removerHorario']);
         });
 
         Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {

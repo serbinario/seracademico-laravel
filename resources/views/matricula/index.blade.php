@@ -103,7 +103,6 @@
                         <!-- Aba Tumas -->
                         <div role="tabpanel" class="tab-pane" id="turmas">
                             <br>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="panel panel-default">
@@ -133,7 +132,19 @@
                                     </table>
 
                                     <div class="row">
-                                        <div class="col-md-4 col-md-offset-8">
+                                        <div class="col-md-6 form-group">
+                                            <label for="serachDisciplina"></label>
+                                            <div class="input-group">
+                                                <select class="form-control" id="selRemoverHorario">
+                                                    <option value="">Selecione um discilina</option>
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <a id="btnRemoverHorario" class="btn-sm btn-primary">Remover</a>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-md-offset-2">
                                             <button type="button" class="btn btn-primary" id="btnFinalizarMatricula">Finalizar Matrícula</button>
                                         </div>
                                     </div>
@@ -152,6 +163,7 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/funcoes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/aluno.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/matricula/horario.js') }}"></script>
