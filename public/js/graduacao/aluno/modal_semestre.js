@@ -148,6 +148,35 @@ function runSemestre(idAluno, idSemestre) {
         loadTableFaltas(idAluno, idSemestre);
     }
 
+    // Carregando as opções de gerenciar disciplinas
+    runGerenciarDisciplina(idAluno, idSemestre);
+
     // carregando a modal
     $("#modal-semestre").modal({show:true});
+}
+
+/**
+ * Função para carregar as dependências da aba de gerenciar disciplinas
+ * @param idAluno
+ * @param idSemestre
+ */
+function runGerenciarDisciplina(idAluno, idSemestre)
+{
+    // Carregando a grid de Horários
+    if(tableGerenciarDisciplinasHorario) {
+        loadtableGerenciarDisciplinasHorario(idAluno, idSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridHorario/" + idAluno + "/" + idSemestre).load();
+    } else {
+        loadtableGerenciarDisciplinasHorario(idAluno, idSemestre);
+    }
+
+    // Verificando se a tabela já foi carregada
+    if(!tableDisciplina) {
+        loadTableDisciplina(idAluno);
+    } else {
+        // Recarregando a tableDisciplina
+        tableDisciplina.ajax.url("/index.php/seracademico/graduacao/aluno/semestre/gridDisciplina/" + idAluno).load();
+    }
+
+    // Carregando as opções de remoção de horários
+    builderDisciplinasAlunoSemestre(idAluno, idSemestre);
 }

@@ -127,4 +127,35 @@ class AlunoNotaService
         #retorno
         return true;
     }
+
+    /**
+     * @param $idAlunoSemestre
+     * @param $idDisciplina
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteByAlunoAndDisciplina($idAluno, $idSemestre, $idDisciplina)
+    {
+        # Recuperando o id de alunos notas
+        $row = \DB::table('fac_alunos_notas')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->where('fac_disciplinas.id', $idDisciplina)
+            ->where('fac_alunos_semestres.aluno_id', $idAluno)
+            ->where('fac_alunos_semestres.semestre_id', $idSemestre)
+            ->lists('fac_alunos_notas.id');
+
+        # Validando o registro obtido
+        if(!(count($row) == 1)) {
+            throw new \Exception('Notas e Frequências inválidas!');
+        }
+
+        # Recuperando o model de alunoNota e deletando em cascata
+        $alunoNota = $this->repository->find($row[0]);
+        $alunoNota->delete();
+
+        #retorno
+        return true;
+    }
 }

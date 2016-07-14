@@ -41,6 +41,10 @@
                             <li role="presentation">
                                 <a href="#faltas" aria-controls="faltas" data-toggle="tab">Faltas</a>
                             </li>
+
+                            <li role="presentation">
+                                <a href="#gerenciardisciplinas" aria-controls="faltas" data-toggle="tab">Gerenciar Disciplinas</a>
+                            </li>
                         </ul>
 
                         <!-- Conteúdo de navegação de pastas -->
@@ -118,6 +122,107 @@
                                     </thead>
                                 </table>
                             </div>
+                            <!-- Fim Aba faltas -->
+
+                            <!-- Aba Gerenciar Disciplinas -->
+                            <div role="tabpanel" class="tab-pane" id="gerenciardisciplinas">
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#disciplinas"  aria-controls="disciplinas" role="tab" data-toggle="tab">Disciplinas</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#turmas" aria-controls="turmas"  role="tab" data-toggle="tab">Turmas</a>
+                                            </li>
+                                        </ul>
+                                        <!-- End Nav tabs -->
+
+                                        <!-- Conteúdo das abas -->
+                                        <div class="tab-content">
+
+                                            <!-- Aba Disciplinas -->
+                                            <div role="tabpanel" class="tab-pane active" id="disciplinas">
+                                                <br>
+                                                <div class="table-responsive no-padding">
+                                                    <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Disciplina</th>
+                                                            <th>Período</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Disciplina</th>
+                                                            <th>Período</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Fim Aba Disciplinas -->
+
+                                            <!-- Aba Tumas -->
+                                            <div role="tabpanel" class="tab-pane" id="turmas">
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-body">
+                                                                <h3>Disciplinas á adicionar</h3>
+                                                                <ul id="gerenciamento-disciplina-ztree" class="ztree">
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <h3>Horário do aluno</h3>
+                                                        <table id="gerenciardisciplinas-horario-grid" class="display table table-bordered" cellspacing="2" width="100%">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Hora</th>
+                                                                <th>Dom</th>
+                                                                <th>Seg</th>
+                                                                <th>Ter</th>
+                                                                <th>Qua</th>
+                                                                <th>Qui</th>
+                                                                <th>Sex</th>
+                                                                <th>Sab</th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+
+                                                        <div class="row">
+                                                            <div class="col-md-8 col-md-offset-4 form-group">
+                                                                <label for="serachDisciplina"></label>
+                                                                <div class="input-group">
+                                                                    <select class="form-control" id="selRemoverHorario">
+                                                                        <option value="">Selecione um discilina</option>
+                                                                    </select>
+                                                                    <span class="input-group-btn">
+                                                                        <a id="btnRemoverHorario" class="btn-sm btn-primary">Remover</a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fim Aba Disciplinas -->
+                                        </div>
+                                        <!-- Fim Conteúdo das abas -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fim Gerenciar Disciplinas -->
+
                         </div>
                     </div>
                 </div>

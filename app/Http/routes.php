@@ -198,6 +198,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gridHorario/{idAluno}/{idSemestre}', ['as' => 'gridHorario', 'uses' => 'Graduacao\SemestreAlunoController@gridHorario']);
                     Route::get('gridNotas/{idAluno}/{idSemestre}', ['as' => 'gridNotas', 'uses' => 'Graduacao\SemestreAlunoController@gridNotas']);
                     Route::get('gridFaltas/{idAluno}/{idSemestre}', ['as' => 'gridFaltas', 'uses' => 'Graduacao\SemestreAlunoController@gridFaltas']);
+                    Route::get('gridDisciplina/{idAluno}', ['as' => 'gridDisciplina', 'uses' => 'Graduacao\DisciplinaAlunoController@gridDisciplina']);
+                    Route::post('getTurmasHorarios/{idSemestre}', ['as' => 'getTurmasHorarios', 'uses' => 'Graduacao\DisciplinaAlunoController@getTurmas']);
+                    Route::post('adicionarHorarioAluno/{idSemestre}', ['as' => 'adicionarHorarioAluno', 'uses' => 'Graduacao\DisciplinaAlunoController@adicionarHorarioAluno']);
+                    Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'Graduacao\DisciplinaAlunoController@getDisciplinas']);
+                    Route::post('removerHorario', ['as' => 'removerHorario', 'uses' => 'Graduacao\DisciplinaAlunoController@removerHorario']);
                 });
             });
 

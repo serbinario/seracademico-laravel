@@ -123,6 +123,9 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_curriculo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_semestre.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/funcoes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/horario.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -156,8 +159,8 @@
             e.preventDefault();
         });
 
-        // Id do aluno corrente
-        var idAluno;
+        // Id do aluno corrente e o semestre
+        var idAluno, idSemestre;
 
         // Evento para abrir o modal de histórico
         $(document).on("click", "#modalHistorico", function () {
@@ -203,11 +206,9 @@
 
         // Evento para abrir o modal de semestre
         $(document).on("click", "#modalSemestre", function () {
-            // recuperando o id do aluno
-            idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-
-            // recuperando o semestre de consulta
-            var idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
+            // recuperando o id do aluno e o semestre
+            idAluno    = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
 
             // Recuperando o nome e a matrícula
             nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
