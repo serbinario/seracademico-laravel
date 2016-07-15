@@ -57,6 +57,7 @@ class MatriculaAlunoController extends Controller
             #Criando a consulta
             $alunos = \DB::table('fac_alunos')
                 ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+                ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_alunos.turno_id')
                 ->join('fac_alunos_semestres', function ($join) {
                     $join->on(
                         'fac_alunos_semestres.id', '=',
@@ -65,6 +66,23 @@ class MatriculaAlunoController extends Controller
                     );
                 })
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->join('fac_alunos_cursos', function ($join) {
+                    $join->on(
+                        'fac_alunos_cursos.id', '=',
+                        \DB::raw('(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = fac_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->join('fac_alunos_situacoes', function ($join) {
+                    $join->on(
+                        'fac_alunos_situacoes.id', '=',
+                        \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
                 ->where(function ($query) use ($semestres) {
                     $query->where(function ($query) use ($semestres) {
                             $query->where('fac_semestres.id', $semestres[1]->id)->whereNotNull('fac_alunos_semestres.periodo');
@@ -81,7 +99,12 @@ class MatriculaAlunoController extends Controller
                     'fac_alunos.matricula',
                     'pessoas.celular',
                     'fac_alunos_semestres.id as IDTESTE',
-                    'fac_semestres.id as idSemestre'
+                    'fac_semestres.id as idSemestre',
+                    'fac_situacao.nome as nomeSituacao',
+                    'fac_curriculos.codigo as codCurriculo',
+                    'fac_cursos.codigo as codCurso',
+                    'fac_turnos.nome as nomeTurno',
+                    'fac_alunos_semestres.periodo'
                 ]);
 
             #Editando a grid

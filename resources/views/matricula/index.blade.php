@@ -59,6 +59,11 @@
                                         <th>Matrícula</th>
                                         <th>Telefones</th>
                                         <th>CPF</th>
+                                        <th>Curso</th>
+                                        <th>Currículo</th>
+                                        <th>Período</th>
+                                        <th>Turno</th>
+                                        <th>situação</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -67,6 +72,11 @@
                                         <th>Matrícula</th>
                                         <th>Telefones</th>
                                         <th>CPF</th>
+                                        <th>Curso</th>
+                                        <th>Currículo</th>
+                                        <th>Período</th>
+                                        <th>Turno</th>
+                                        <th>situação</th>
                                     </tr>
                                     </tfoot>
                                 </table>
