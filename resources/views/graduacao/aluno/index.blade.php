@@ -114,6 +114,8 @@
     @include('graduacao.aluno.modal_create_historico')
     @include('graduacao.aluno.modal_create_situacao')
     @include('graduacao.aluno.modal_curriculo')
+    @include('graduacao.aluno.modal_inserir_dispensar_disciplina')
+    @include('graduacao.aluno.modal_editar_dispensar_disciplina')
     @include('graduacao.aluno.modal_semestre')
 @stop
 
@@ -122,6 +124,8 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_historico.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_curriculo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_semestre.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/funcoes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/disciplina.js') }}"></script>
@@ -185,8 +189,9 @@
 
         // Evento para abrir o modal de histórico
         $(document).on("click", "#modalCurriculo", function () {
-            // recuperando o id do aluno
-            idAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            // recuperando o id do aluno e do semestre
+            idAluno    = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
 
             // Recuperando o nome e a matrícula
             nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;

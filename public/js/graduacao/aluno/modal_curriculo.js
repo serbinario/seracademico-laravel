@@ -181,6 +181,34 @@ function formatCursadas ( d ) {
             '</div>' ;
 }
 
+
+// Função para carregar a grid
+var tableDispensadas;
+function loadTableDispensadas (idAluno) {
+    tableDispensadas = $('#grid-dispensadas').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridDispensadas/" + idAluno,
+        columns: [
+            {data: 'nomeSemestre', name: 'fac_semestres.nome'},
+            {data: 'codigo', name: 'fac_disciplinas.codigo'},
+            {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'nota_media', name: 'fac_alunos_semestres_disciplinas_dispensadas.media'},
+            {data: 'carga_horaria', name: 'fac_alunos_semestres_disciplinas_dispensadas.carga_horaria'},
+            {data: 'qtd_credito', name: 'fac_alunos_semestres_disciplinas_dispensadas.qtd_credito'},
+            {data: 'motivo', name: 'fac_motivos.nome'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableDispensadas;
+}
+
 // Função para executar a grid
 function runCurriculo(idAluno) {
     // Carregando a grid de ACursar
@@ -195,6 +223,13 @@ function runCurriculo(idAluno) {
         loadTableCursadas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursadas/" + idAluno).load();
     } else {
         loadTableCursadas(idAluno);
+    }
+
+    // Carregando a grid de dispensadas
+    if(tableDispensadas) {
+        loadTableDispensadas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridDispensadas/" + idAluno).load();
+    } else {
+        loadTableDispensadas(idAluno);
     }
 
     // carregando a modal

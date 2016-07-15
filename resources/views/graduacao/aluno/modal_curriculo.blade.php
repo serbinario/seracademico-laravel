@@ -34,8 +34,13 @@
                             <li role="presentation" class="active">
                                 <a href="#acursar" aria-controls="acursar" data-toggle="tab">A Cursar</a>
                             </li>
+
                             <li role="presentation">
                                 <a href="#cursadas" aria-controls="cursadas" data-toggle="tab">Cursadas</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#dispensadas" aria-controls="cursadas" data-toggle="tab">Dispensadas</a>
                             </li>
                         </ul>
 
@@ -78,6 +83,30 @@
                                             <th>Turma</th>
                                             <th>Situação</th>
                                         </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Dispensadas -->
+                            <div role="tabpanel" class="tab-pane" id="dispensadas">
+                                <br/>
+
+                                <!-- Adicinar disciplina dispensada-->
+                                <a id="btnNewDispensarDisciplina" class="btn-sm btn-primary pull-right">Dispensar Disciplina</a>
+
+                                <!-- Table Dispensadas -->
+                                <table id="grid-dispensadas" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Semestre</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Disciplina</th>
+                                        <th>Média</th>
+                                        <th>C.H.</th>
+                                        <th>Créditos</th>
+                                        <th>Motivo</th>
+                                        <th>Ação</th>
+                                    </tr>
                                     </thead>
                                 </table>
                             </div>

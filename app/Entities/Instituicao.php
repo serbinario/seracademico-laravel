@@ -22,4 +22,14 @@ class Instituicao extends Model implements Transformable
         return $this->hasMany(Aluno::class, 'fac_instituicoes_id');
     }
 
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeByNivel($query, $value)
+    {
+        return $query->where('nivel', $value);
+    }
+
 }

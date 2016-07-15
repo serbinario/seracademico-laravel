@@ -8,6 +8,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Aluno;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Services\Graduacao\AlunoDisciplinaDispensadaService;
 use Seracademico\Services\Graduacao\AlunoService;
 use Yajra\Datatables\Datatables;
 
@@ -19,16 +20,24 @@ class CurriculoAlunoController extends Controller
     private $alunoService;
 
     /**
+     * @var AlunoDisciplinaDispensadaService
+     */
+    private $alunoDisciplinaDispensadaService;
+
+    /**
      * @var array
      */
     private $loadFields = [
     ];
 
     /**
+     * CurriculoAlunoController constructor.
      * @param AlunoService $service
+     * @param AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService
      */
-    public function __construct(AlunoService $service)
+    public function __construct(AlunoService $service, AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService)
     {
+        $this->alunoDisciplinaDispensadaService = $alunoDisciplinaDispensadaService;
         $this->alunoService = $service;
     }
 
@@ -59,6 +68,13 @@ class CurriculoAlunoController extends Controller
                 $query->from('fac_alunos_semestres_disciplinas')
                     ->select('fac_alunos_semestres_disciplinas.disciplina_id')
                     ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_disciplinas_dispensadas')
+                    ->select('fac_alunos_semestres_disciplinas_dispensadas.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.aluno_semestre_id')
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
@@ -143,6 +159,122 @@ class CurriculoAlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->make(true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function gridDispensadas($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_alunos_semestres_disciplinas_dispensadas')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.aluno_semestre_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.disciplina_id')
+            ->join('fac_motivos', 'fac_motivos.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.motivo_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->select([
+                'fac_alunos_semestres_disciplinas_dispensadas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_alunos_semestres_disciplinas_dispensadas.carga_horaria',
+                'fac_alunos_semestres_disciplinas_dispensadas.qtd_credito',
+                'fac_semestres.nome as nomeSemestre',
+                'fac_motivos.nome as motivo',
+                \DB::raw('IF(fac_alunos_semestres_disciplinas_dispensadas.media, fac_alunos_semestres_disciplinas_dispensadas.media, 0.0) as nota_media')
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            return '<a class="btn-floating" id="btnEditDispensada" title="Editar Histórico"><i class="material-icons">edit</i></a>
+                    <a class="btn-floating" id="btnDeleteDispensada" title="Remover Hitórico"><i class="material-icons">delete</i></a>';
+        })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeDispensada(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # Persistindo os dados no banco de dados
+            $this->alunoDisciplinaDispensadaService->store($dados);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados cadastrados com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'success' => false,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteDispensada($id)
+    {
+        try {
+            # Removendo do banco de dados
+            $this->alunoDisciplinaDispensadaService->delete($id);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados removidos com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'success' => false,
+                'msg' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function editDispensada($id)
+    {
+        try {
+            #recuperando a dispensa
+            $dispensada = $this->alunoDisciplinaDispensadaService->find($id);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $dispensada]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateDispensada(Request $request, $id)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # Persistindo os dados no banco de dados
+            $this->alunoDisciplinaDispensadaService->update($dados, $id);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados atualizados com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'success' => false,
+                'msg' => $e->getMessage()
+            ]);
+        }
     }
 
     /**
