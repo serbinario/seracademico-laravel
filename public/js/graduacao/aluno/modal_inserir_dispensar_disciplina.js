@@ -111,7 +111,7 @@ $('#btnSalvarDispensarDisciplina').click(function() {
             tableDispensadas.ajax.reload();
             tableACursar.ajax.reload();
 
-            $('#modal-inserir-adicionar-disciplina').modal('toggle');
+            $('#modal-inserir-dispensar-disciplina').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
