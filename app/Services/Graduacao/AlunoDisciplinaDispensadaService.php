@@ -56,10 +56,13 @@ class AlunoDisciplinaDispensadaService
     {
         # Validando a entrada
         if(!isset($data['disciplina_id']) && !isset($data['aluno_id'])
-            && !isset($data['semestre_id'])) {
+            && !isset($data['semestre_id']) && !isset($data['motivo'])) {
             throw new \Exception('O campo disciplina é obrigatório!');
         }
 
+        # Tratamento
+        $this->tratamentoCampos($data);
+        
         # Recuperando o aluno
         $aluno = $this->alunoRepository->find($data['aluno_id']);
         $pivot = $aluno->semestres()->find($data['semestre_id'])->pivot;
@@ -90,10 +93,13 @@ class AlunoDisciplinaDispensadaService
     public function update(array $data, int $id) : AlunoDisciplinaDispensada
     {
         # Validando a entrada
-        if(!isset($data['disciplina_id'])) {
+        if(!isset($data['disciplina_id']) && !isset($data['motivo'])) {
             throw new \Exception('O campo disciplina é obrigatório!');
         }
-      
+
+        # Tratamento
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $alunoDisciplinaDispensada = $this->repository->update($data, $id);
 
@@ -166,5 +172,34 @@ class AlunoDisciplinaDispensadaService
 
          #retorno
          return $result;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
     }
 }

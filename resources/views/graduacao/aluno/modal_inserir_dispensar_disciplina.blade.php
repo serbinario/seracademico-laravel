@@ -11,14 +11,14 @@
                 <div class="row">
                     <div class="row">
                         <div class="form-group col-md-8">
-                            <label for="disciplina_id">Disciplina</label>
+                            <label for="disciplina_id">Disciplina *</label>
                             <select name="disciplina" class="form-control" id="disciplina_id">
                             </select>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="instituicao_id">Intituição</label>
-                            <select name="instituicao_id" class="form-control" id="instituicao_id">
+                            <label for="motivo_id">Motivo *</label>
+                            <select name="motivo_id" class="form-control" id="motivo_id">
                             </select>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="motivo_id">Motivo</label>
-                            <select name="motivo_id" class="form-control" id="motivo_id">
+                            <label for="instituicao_id">Intituição</label>
+                            <select name="instituicao_id" class="form-control" id="instituicao_id">
                             </select>
                         </div>
                     </div>
