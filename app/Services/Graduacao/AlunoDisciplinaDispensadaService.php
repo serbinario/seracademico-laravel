@@ -93,7 +93,7 @@ class AlunoDisciplinaDispensadaService
         if(!isset($data['disciplina_id'])) {
             throw new \Exception('O campo disciplina é obrigatório!');
         }
-       dd($data);
+      
         #Atualizando no banco de dados
         $alunoDisciplinaDispensada = $this->repository->update($data, $id);
 
