@@ -15,7 +15,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="material-icons">class</i>
+                    <i class="flaticon-passed-exam"></i>
                     Listar Matérias
                 </h4>
             </div>

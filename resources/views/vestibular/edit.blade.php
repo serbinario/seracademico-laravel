@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="material-icons">class</i>
+                <i class="flaticon-exam-1"></i>
                 Editar Vestibular
             </h4>
         </div>

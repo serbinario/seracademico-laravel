@@ -1,48 +1,46 @@
 @extends('menu')
 
+@section("css")
+
+    <style type="text/css">
+        td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
+        }
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+
+@stop
+
 @section('content')
     <div class="ibox float-e-margins">
+
         <div class="ibox-title">
-            <h5>Lista usuário</h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#">Config option 1</a>
-                    </li>
-                    <li><a href="#">Config option 2</a>
-                    </li>
-                </ul>
-                <a class="close-link">
-                    <i class="fa fa-times"></i>
-                </a>
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">account_circle</i> Listar Usuários</h4>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.user.create')}}" class="btn-sm btn-primary pull-right">Novo Usuário</a>
             </div>
         </div>
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('seracademico.user.create')}}" class="btn btn-primary btn-pressure btn-sm btn-sensitive">Novo Usuário</a><br /><br />
                     <div class="table-responsive no-padding">
                         <table id="user-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Email</th>
-                                <th >Acão</th>
+                                <th width="5%">Acão</th>
                             </tr>
                             </thead>
-
-                            <tfoot>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th style="width: 10%;">Acão</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

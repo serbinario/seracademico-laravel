@@ -162,14 +162,14 @@ class VestibulandoController extends Controller
                 foreach ($vestibulando->debitos as $debito) {
                     # Verificando se a matrícula foi pága
                     if($debito->pago && $debito->taxa->tipoTaxa->id == 2) {
-                        $html .= '<li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
                         break;
                     }
                 }
 //<li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
                 # Fim do html
                 $html .= '                                
-                                <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
+                                <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">attach_money</i></a></li>
                             </ul>
                         </div>';
 

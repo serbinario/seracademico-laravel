@@ -8343,3 +8343,12 @@ table.dataTable.no-footer {
 textarea {
     resize: none;
 }
+
+.btn-sm, .btn-group-sm>.btn {
+  border-style: none !important;
+}
+.sbtable{
+  position: relative;
+  float: right;
+  margin-right: 10px;
+}

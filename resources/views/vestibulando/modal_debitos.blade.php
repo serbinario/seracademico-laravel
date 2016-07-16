@@ -13,10 +13,10 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#debitosabertos" aria-controls="debitosabertos" data-toggle="tab"><i class="material-icons">collections_time</i> Débitos Abertos</a>
+                                <a href="#debitosabertos" aria-controls="debitosabertos" data-toggle="tab">Débitos Abertos</a>
                             </li>
                             <li role="presentation">
-                                <a href="#debitospagos" aria-controls="debitospagos" data-toggle="tab"><i class="material-icons">collections_time</i> Débitos Págos</a>
+                                <a href="#debitospagos" aria-controls="debitospagos" data-toggle="tab"> Débitos Pagos</a>
                             </li>
                         </ul>
 
@@ -43,11 +43,7 @@
 
                                 <div class="row">
                                     <div class="col-md-2 col-md-offset-10">
-                                        <div class="btn-group btn-group-justified">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos" style="margin-bottom: 3%;">Adicionar</button>
-                                            </div>
-                                        </div>
+                                        <button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>
                                     </div>
                                 </div>
                             </div>

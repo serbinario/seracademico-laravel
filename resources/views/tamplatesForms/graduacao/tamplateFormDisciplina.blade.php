@@ -17,26 +17,26 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('carga_horaria', 'Carga Horária') !!}
 				{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('qtd_credito', 'Qtd Crédito') !!}
 				{!! Form::text('qtd_credito', Session::getOldInput('qtd_credito')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('qtd_falta', 'Qtd. Faltas') !!}
 				{!! Form::text('qtd_falta', Session::getOldInput('qtd_falta')  , array('class' => 'form-control numberThree')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('tipo_disciplina_id', 'Tipo Disciplina') !!}
 				{!! Form::select('tipo_disciplina_id', $loadFields['tipodisciplina'], null, array('class' => 'form-control')) !!}
@@ -57,7 +57,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#cargahoraria" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Carga Horária</a>
+                        <a href="#cargahoraria" aria-controls="dados" data-toggle="tab">Carga Horária</a>
                     </li>
                 </ul>
                 <!-- End Nav tabs -->

@@ -68,19 +68,19 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#autMec" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Autorização MEC</a>
+                        <a href="#autMec" aria-controls="dados" data-toggle="tab">Autorização MEC</a>
                     </li>
                     <li role="presentation">
-                        <a href="#recMec" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i> Reconhecimento MEC</a>
+                        <a href="#recMec" aria-controls="contato" role="tab" data-toggle="tab">Reconhecimento MEC</a>
                     </li>
                     <li role="presentation">
-                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Vagas</a>
+                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"> Vagas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#datas" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Datas</a>
+                        <a href="#datas" aria-controls="documentosObrig" role="tab" data-toggle="tab">Datas</a>
                     </li>
                     <li role="presentation">
-                        <a href="#finan" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Financeiro</a>
+                        <a href="#finan" aria-controls="documentosObrig" role="tab" data-toggle="tab">Financeiro</a>
                     </li>
 
                 </ul>
@@ -227,10 +227,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('obs_vagas', 'Observação Vagas') !!}
-                                    {!! Form::textarea('obs_vagas', Session::getOldInput('obs_vagas')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
+                                    {!! Form::textarea('obs_vagas', Session::getOldInput('obs_vagas') , array('class' => 'form-control', 'rows'=>'3')) !!}
                                 </div>
                             </div>
                         </div>

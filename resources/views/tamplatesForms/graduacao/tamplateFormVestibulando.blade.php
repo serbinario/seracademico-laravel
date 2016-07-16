@@ -68,19 +68,19 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="fa fa-male"></i> Dados pessoais</a>
+                <a href="#dados" aria-controls="dados" data-toggle="tab"> Dados pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>Informações para contato</a>
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab">Informações para contato</a>
             </li>
             <li role="presentation">
-                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> Ensino Médio</a>
+                <a href="#ensMedio" aria-controls="ensMedio" role="tab" data-toggle="tab">Ensino Médio</a>
             </li>
             {{--<li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Documentos Obrigatórios</a>
             </li>--}}
             <li role="presentation">
-                <a href="#vestibular" aria-controls="vestibular" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i>Vestibular</a>
+                <a href="#vestibular" aria-controls="vestibular" role="tab" data-toggle="tab">Vestibular</a>
             </li>
         </ul>
         <!-- End Nav tabs -->
@@ -761,7 +761,7 @@
             <div class="col-md-3">
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
-                        <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right">Voltar</a>
+                        <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i> Voltar</a>
                     </div>
                     <div class="btn-group">
                         {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
