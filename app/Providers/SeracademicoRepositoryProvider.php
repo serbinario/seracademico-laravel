@@ -414,5 +414,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\MotivoRepository::class,
             \Seracademico\Repositories\Graduacao\MotivoRepositoryEloquent::class);
 
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\AlunoDisciplinaDispensadaRepository::class,
+            \Seracademico\Repositories\Graduacao\AlunoDisciplinaDispensadaRepositoryEloquent::class);
     }
 }

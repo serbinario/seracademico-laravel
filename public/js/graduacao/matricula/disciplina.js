@@ -20,7 +20,7 @@ function loadTableDisciplina(idAluno)
         columns: [
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'periodo', name: 'fac_curriculo_disciplina.nome'}
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'}
         ]
     });
 }

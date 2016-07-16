@@ -14,7 +14,12 @@ var tableAluno = $('#aluno-grid').DataTable({
         {data: 'nome', name: 'pessoas.nome'},
         {data: 'matricula', name: 'fac_alunos.matricula'},
         {data: 'celular', name: 'pessoas.celular'},
-        {data: 'cpf', name: 'pessoas.cpf'}
+        {data: 'cpf', name: 'pessoas.cpf'},
+        {data: 'codCurso', name: 'fac_cursos.codigo'},
+        {data: 'codCurriculo', name: 'fac_curriculos.codigo'},
+        {data: 'periodo', name: 'fac_alunos_semestres.periodo'},
+        {data: 'nomeTurno', name: 'fac_turnos.nome'},
+        {data: 'nomeSituacao', name: 'fac_situacao.nome'}
     ]
 });
 

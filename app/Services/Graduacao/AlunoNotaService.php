@@ -74,7 +74,8 @@ class AlunoNotaService
 
     /**
      * @param array $data
-     * @return array
+     * @return AlunoNota
+     * @throws \Exception
      */
     public function store(array $data) : AlunoNota
     {
@@ -93,7 +94,8 @@ class AlunoNotaService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return AlunoNota
+     * @throws \Exception
      */
     public function update(array $data, int $id) : AlunoNota
     {
@@ -129,7 +131,8 @@ class AlunoNotaService
     }
 
     /**
-     * @param $idAlunoSemestre
+     * @param $idAluno
+     * @param $idSemestre
      * @param $idDisciplina
      * @return bool
      * @throws \Exception

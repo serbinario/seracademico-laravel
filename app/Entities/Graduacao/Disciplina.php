@@ -61,7 +61,6 @@ class Disciplina extends Model implements Transformable
 	{
 		return $query
             ->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
-			->where('tipo_nivel_sistema_id', 1)
 			->whereNotIn('fac_disciplinas.id', function ($query) use ($value) {
                 $query->from('fac_curriculo_disciplina')
                     ->select('fac_curriculo_disciplina.disciplina_id')
@@ -107,7 +106,6 @@ class Disciplina extends Model implements Transformable
 			->where('fac_turmas.id', $value);
 	}
 
-
     /**
      * @param $query
      * @param $value
@@ -117,4 +115,24 @@ class Disciplina extends Model implements Transformable
     {
         return $query->select('id', 'nome', 'codigo')->where('tipo_nivel_sistema_id', $value);
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+	public function scopeCurriculoByAluno($query, $value)
+	{
+		return $query
+			->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
+			->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+			->join('fac_alunos_cursos', function ($join) use ($value) {
+				$join->on(
+					'fac_alunos_cursos.id', '=',
+					\DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = $value and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+				);
+			});
+	}
 }
