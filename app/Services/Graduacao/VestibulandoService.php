@@ -57,6 +57,11 @@ class VestibulandoService
     private $destinationPath = "images/";
 
     /**
+     * Método Construtor
+     *
+     * Método responsável por incializar o objeto
+     * com as referências necessárias para o seu funcionamento.
+     *
      * VestibulandoService constructor.
      * @param PessoaRepository $pessoaRepository
      * @param VestibulandoRepository $repository
@@ -85,6 +90,11 @@ class VestibulandoService
     }
 
     /**
+     * Método find
+     *
+     * Método responsável por recupear uma instância específica(id)
+     * do vestibulando com todas as suas dependências.
+     *
      * @param $id
      * @return mixed
      * @throws \Exception
@@ -115,11 +125,17 @@ class VestibulandoService
         #retorno
         return $vestibulando;
     }
-    
+
 
     /**
+     * Método store
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     *
      * @param array $data
-     * @return array
+     * @return Vestibulando
+     * @throws \Exception
      */
     public function store(array $data) : Vestibulando
     {
@@ -133,6 +149,7 @@ class VestibulandoService
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
         $endereco  = null;
 
+        # [RFV003-RN010] - Documento de Requisitos
         # Query para verificação se a pessoa já está cadastrada para o vestibular
         $row = \DB::table('fac_vestibulandos')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulandos.vestibular_id')
@@ -146,11 +163,12 @@ class VestibulandoService
             throw new \Exception('Pessoa já cadastrada para esse vestibular.');
         }
 
-        # Verificando se a pesso já existe
+        # [RFV003-RN012] - Documento de Requisitos
+        # Verificando se a pessoa já existe
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
-            $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
         } else {
             #Criando o endereco e pessoa
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
@@ -173,16 +191,22 @@ class VestibulandoService
 
         # Regras de negócios
         $this->tratamentoVestibular($vestibulando);
-        $this->tratamentoDebitoInscricao($vestibulando);
+        $this->tratamentoDebitoInscricao($vestibulando); // [RFV003-RN003]
 
         #Retorno
         return $vestibulando;
     }
 
     /**
+     * Método update
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     *
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Vestibulando
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Vestibulando
     {
@@ -192,7 +216,7 @@ class VestibulandoService
         # Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoImagem($data, $vestibulando);
-        $this->tratamentoInscricao($data, $id);
+        $this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -212,6 +236,12 @@ class VestibulandoService
     }
 
     /**
+     * Método load
+     *
+     * Método responsável por recuperar todos os models (com seus repectivos
+     * métodos personalizados para consulta, se for o caso) do array passado
+     * por parâmetro.
+     *
      * @param array $models || Melhorar esse código
      * @return array
      */
@@ -278,6 +308,14 @@ class VestibulandoService
     }
 
     /**
+     * Método tratamentoCampos
+     *
+     * Método responsável por tratar os campos de chave estrangeira
+     * do array passado por parâmentro, onde se não houver valor vinculado
+     * ao campo ele irá atribuir null ao mesmo. Isso é necessário, pois quando não
+     * escolhido um valor para um campo de chave estrangeira no formulário de cadastro
+     * ele vem com uma string vazia "" como valor, e isso ocasiona errors sql.
+     *
      * @param array $data
      * @return array
      */
@@ -307,6 +345,11 @@ class VestibulandoService
     }
 
     /**
+     * Método tratamentoImagem
+     *
+     * Método que faz o tratamento das imagens enviadas para o cadastro
+     * do vestibulando.
+     *
      * @param array $data
      * @return array
      */
@@ -338,8 +381,16 @@ class VestibulandoService
     }
 
     /**
+     * [RFV003-RN004] - Documento de Requisitos
+     *
+     * Método responsável por gerar o número de inscrição do vestibulando
+     * onde o mesmo só poderá ser gerado se a taxa de inscrição(Vestibular)
+     * estiver sido paga.
+     *
      * @param array $data
-     * @return mixed
+     * @param string $id
+     * @return array
+     * @throws \Exception
      */
     public function tratamentoInscricao(array &$data, $id = "") : array
     {
@@ -389,6 +440,12 @@ class VestibulandoService
     }
 
     /**
+     * [RFV003-RN004] - Documento de Requisitos
+     *
+     * Método responsável por verificar à ultima inscrição do
+     * vestibular em questão e gerar uma nova inscrição única
+     * para o vestibulando.
+     *
      * @return string
      */
     public function gerarInscricao($idVestibular)
@@ -412,7 +469,13 @@ class VestibulandoService
     }
 
     /**
-     * @param Aluno $aluno
+     * Método tratamentoVestibular
+     *
+     * Método responsável por gerar altomaticamente as notas do vestibular
+     * para cada matéria do mesmo.
+     *
+     * @param Vestibulando $vestibulando
+     * @return bool
      * @throws \Exception
      */
     public function tratamentoVestibular(Vestibulando $vestibulando)
@@ -452,6 +515,13 @@ class VestibulandoService
     }
 
     /**
+     * [RFV003-RN003] - Documento de Reuisitos
+     *
+     * Método responsável por recuperar a taxa do vestibular
+     * que o vestibulando está se matriculando e gerar automaticamente
+     * um débito da inscrição(Vestibular) para o mesmo, que só poderá
+     * fazer a prova com o débito págo.
+     *
      * @param Vestibulando $vestibulando
      * @return bool
      */
@@ -479,6 +549,11 @@ class VestibulandoService
     }
 
     /**
+     * Método tratamentoMediaEnem
+     *
+     * Método que trata os valores das notas do enem passadas por parâmetro
+     * e calcula a média segundo algorítmo de geração de média do enem.
+     *
      * @param array $dados
      */
     public function tratamentoMediaEnem(array &$dados)
@@ -498,6 +573,11 @@ class VestibulandoService
     }
 
     /**
+     * Método tratamentoMediaFicha
+     *
+     * Método que trata os valores das notas da ficha19 passadas por parâmetro
+     * e calcula a média segundo algorítmo de geração de média da ficha19.
+     *
      * @param array $dados
      */
     public function tratamentoMediaFicha(array &$dados)
@@ -530,6 +610,11 @@ class VestibulandoService
     }
 
     /**
+     * Método findNota
+     *
+     * Método responsável por recupear uma instância específica(id)
+     * da nota com todas as suas dependências.
+     *
      * @param array $data
      * @return mixed
      * @throws \Exception
@@ -555,9 +640,15 @@ class VestibulandoService
     }
 
     /**
+     * Método updateNota
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     *
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return VestibulandoNotaVestibular
+     * @throws \Exception
      */
     public function updateNota(array $data, int $id) : VestibulandoNotaVestibular
     {
@@ -575,6 +666,15 @@ class VestibulandoService
     }
 
     /**
+     * Método updateInclusao
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     * Para a primeira solicitação de cadastro, será criado um aluno
+     * com vinculo com o vestibulando em questão, onde é concretizada
+     * a transferência, a partir da segunda requisição, os dados de transferência
+     * serão atualizados.
+     *
      * @param $dados
      * @param $idVestibulando
      * @return bool
@@ -592,7 +692,7 @@ class VestibulandoService
         $vestibulando = $this->repository->find($idVestibulando);
 
         # Verificando se o vestibulando existe
-        if(!$vestibulando && count($curriculo) == 0) {
+        if(!$vestibulando) {
             throw new \Exception('Vestibulando não existe');
         }
 
@@ -652,6 +752,11 @@ class VestibulandoService
     }
 
     /**
+     * Método search
+     *
+     * Método responsável por recupear uma instância específica(id)
+     * da pessoa com todas as suas dependências.
+     *
      * @param $key
      * @param $value
      * @return mixed
@@ -678,6 +783,11 @@ class VestibulandoService
     }
 
     /**
+     * Método storeDebitosAbertos
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     *
      * @param array $dados
      * @return bool
      */
@@ -694,6 +804,11 @@ class VestibulandoService
     }
 
     /**
+     * Método updateDebitosAbertos
+     *
+     * Método responsável por tratar os dados recebidos pelo array
+     * passado por parâmetro, e persistir os dados no banco de dados.
+     *
      * @param array $dados
      * @return bool
      */
@@ -707,6 +822,11 @@ class VestibulandoService
     }
 
     /**
+     * Método findDebito
+     *
+     * Método responsável por recupear uma instância específica(id)
+     * do débito com todas as suas dependências.
+     *
      * @param int $id
      * @return mixed
      * @throws \Exception
@@ -731,8 +851,14 @@ class VestibulandoService
     }
 
     /**
+     * Método deleteDebitosAbertos
+     *
+     * Método responsável por deletar um débito específico(id)
+     * do banco de dados.
+     *
      * @param int $id
      * @return bool
+     * @throws \Exception
      */
     public function deleteDebitosAbertos(int $id)
     {

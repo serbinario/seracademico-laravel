@@ -92,7 +92,7 @@ class AlunoController extends Controller
                     $join->on(
                         'fac_alunos_cursos.id', '=',
                         \DB::raw('(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual 
-                    where curso_atual.aluno_id = fac_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                        where curso_atual.aluno_id = fac_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
                     );
                 })
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
@@ -103,7 +103,7 @@ class AlunoController extends Controller
                     $join->on(
                         'fac_alunos_situacoes.id', '=',
                         \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
-                    where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                         where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
                     );
                 })
                 ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
@@ -127,7 +127,7 @@ class AlunoController extends Controller
                     # Filtrando por semestre
                     if ($request->has('semestre')) {
                         $query->where('fac_semestres.id', '=', $request->get('semestre'));
-                    } else if (count($semestres) == 2) {
+                    } else if (count($semestreVigente) == 2) {
                         $query->where('fac_semestres.id', '=', $semestreVigente->id);
                     }
 

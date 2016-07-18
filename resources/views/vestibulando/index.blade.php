@@ -267,7 +267,14 @@
             runFinanceiro(idVestibulando);
         });
 
-        // evento quando houver click no botao de novo do vestibulando
+        /**
+         * [RFV003-RN002] - Documento de Requisitos
+         *
+         * Evento disparado quando houver o click no botão de novo vestibulando
+         * feito para validar se o período de inscriçõe do vestibular está válido
+         * caso não esteja e o usuário seja um administrador ele ainda poderá prosseguir
+         * com a requisição, caso contrário permanecerá na página.
+         */
         $(document).on('click', '#btnAddVestibulando', function (event) {
             // parando a execução
             event.preventDefault();
