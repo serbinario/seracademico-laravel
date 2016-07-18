@@ -598,6 +598,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
             Route::post('select2Obra', ['as' => 'select2Obra', 'uses' => 'UtilController@queryByselect2Obra']);
             Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
+            Route::post('queryByselect2Pessoa', ['as' => 'queryByselect2Pessoa', 'uses' => 'UtilController@queryByselect2Pessoa']);
         });
     });
 
