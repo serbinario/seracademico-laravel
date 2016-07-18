@@ -7,6 +7,21 @@
                 <h4 class="modal-title"><i class="material-icons">playlist_add_check</i> Gerenciamento de frequencias</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
+                <!-- Linha de descrição -->
+                <div class="col-md-12 infModal">
+                    <div class="col-md-4">
+                        <span><strong>Currículo: </strong><p id="tfCurriculo"></p></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span><strong>Curso: </strong><p id="tfCurso"></p></span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span><strong>Ano: </strong><p id="tfAno"></p></span>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <form id="frequencias-search-form" class="form-inline" role="form" method="GET">

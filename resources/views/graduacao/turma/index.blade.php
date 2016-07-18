@@ -180,8 +180,20 @@
 
         /*Responsável em abrir modal de notas*/
         $(document).on("click", '#modal-notas', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, anoCurriculo;
+
             //Recuperando o id da turma selecionada
-            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+
+            // setando a descrição
+            $('#tnCurriculo').text(codCurriculo);
+            $('#tnCurso').text(nomeCurso);
+            $('#tnAno').text(anoCurriculo);
 
             //Executando as grids
             runTableNotas(idTurma);
@@ -189,8 +201,20 @@
 
         /*Responsável em abrir modal de frequencias*/
         $(document).on("click", '#modal-frequencias', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, anoCurriculo;
+
             //Recuperando o id da turma selecionada
-            idTurma  = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+
+            // setando a descrição
+            $('#tfCurriculo').text(codCurriculo);
+            $('#tfCurso').text(nomeCurso);
+            $('#tfAno').text(anoCurriculo);
 
             //Executando as grids
             runTableFrequencias(idTurma);
