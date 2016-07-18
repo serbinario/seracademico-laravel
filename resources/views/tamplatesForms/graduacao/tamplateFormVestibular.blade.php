@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group col-md-1">
-                {!! Form::label('ativar', 'Ativar') !!}
+                {{--{!! Form::label('ativar', 'Ativar') !!}--}}
                 <div class="checkbox checkbox-primary">
                     {!! Form::hidden('ativo', 0) !!}
                     {!! Form::checkbox('ativo', 1, null, array('class' => 'form-control', 'id'=>'ativo')) !!}
@@ -43,21 +43,21 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#prova" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Prova</a>
+                        <a href="#prova" aria-controls="documentosObrig" role="tab" data-toggle="tab">Prova</a>
                     </li>
                     <li role="presentation" >
-                        <a href="#inscricoes" aria-controls="dados" data-toggle="tab"><i class="material-icons">playlist_add</i> Inscrições</a>
+                        <a href="#inscricoes" aria-controls="dados" data-toggle="tab">Inscrições</a>
                     </li>
                     <li role="presentation">
-                        <a href="#dadosBoleto" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Dados Boleto</a>
+                        <a href="#dadosBoleto" aria-controls="contato" role="tab" data-toggle="tab">Dados Boleto</a>
                     </li>
                     <li role="presentation">
-                        <a href="#dadosConfirInscricao" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Dados Inscrição</a>
+                        <a href="#dadosConfirInscricao" aria-controls="contato" role="tab" data-toggle="tab">Dados Inscrição</a>
                     </li>
 
 
                     <li role="presentation">
-                        <a href="#taxa" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Taxa</a>
+                        <a href="#taxa" aria-controls="ensMedio" role="tab" data-toggle="tab">Taxa</a>
                     </li>
 
 

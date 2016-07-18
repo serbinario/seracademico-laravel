@@ -15,7 +15,8 @@
 
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="fa fa-users"></i>Listar Cursos</h4>
+                <h4><i class="flaticon-book-4"></i>
+                    Listar Cursos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
                 <a href="{{ route('seracademico.graduacao.curso.create')}}" class="btn-sm btn-primary pull-right">Novo Curso</a>

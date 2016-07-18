@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" id="btnCloseModalNotas" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Gerenciamento de notas</h4>
+                <h4 class="modal-title"><i class="material-icons">spellcheck</i> Gerenciamento de notas</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -13,9 +13,8 @@
                             <div class="form-group">
                                 {!! Form::select('disciplinaSearch', [], null, array('class' => 'form-control', 'id' => 'disciplinaSearch')) !!}
                             </div>
-
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Pesquisar</button>
+                                <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
                             </div>
                         </form>
                     </div>

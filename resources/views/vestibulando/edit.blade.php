@@ -6,7 +6,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
+                <i class="flaticon-employment-test"></i>
                 Editar Vestibulando
             </h4>
         </div>

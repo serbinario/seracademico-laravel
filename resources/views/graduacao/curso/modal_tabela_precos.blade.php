@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" id="closeModalPrecoCurso" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Tabela de Preços</h4>
+                <h4 class="modal-title"><i class="glyphicon glyphicon-list-alt"></i> Tabela de Preços</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">

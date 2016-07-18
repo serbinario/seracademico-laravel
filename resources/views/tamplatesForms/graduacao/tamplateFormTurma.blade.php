@@ -67,7 +67,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#datas" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Datas</a>
+                        <a href="#datas" aria-controls="dados" data-toggle="tab">Datas</a>
                     </li>
                     {{--<li role="presentation">--}}
                         {{--<a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>--}}

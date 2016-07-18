@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="material-icons">class</i>
+                <i class="flaticon-passed-exam"></i>
                 Cadastrar Matéria
             </h4>
         </div>

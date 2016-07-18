@@ -181,14 +181,14 @@ class VestibulandoController extends Controller
                     # [RFV003-RN012] : Documento de Requisitos
                     # Verificando se a matrícula foi pága
                     if($debito->pago && $debito->taxa->tipoTaxa->id == 2) {
-                        $html .= '<li><a class="btn-floating" id="inclusao" title="Trasnferir para aluno"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
                         break;
                     }
                 }
 
                 # Fim do html
                 $html .= '                                
-                                <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">chrome_reader_mode</i></a></li>
+                                <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">attach_money</i></a></li>
                             </ul>
                         </div>';
 

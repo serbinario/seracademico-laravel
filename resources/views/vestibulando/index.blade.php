@@ -22,7 +22,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="fa fa-users"></i>
+                    <i class="flaticon-employment-test"></i>
                     Listar Vestibulandos
                 </h4>
             </div>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Pesquisar</button>
+                            <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
                         </div>
                     </form>
                 </div>

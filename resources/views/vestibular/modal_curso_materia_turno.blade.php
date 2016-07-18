@@ -4,13 +4,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Gerenciamento dos cursos do vestibular</h4>
+                <h4 class="modal-title"><i class="material-icons">add_to_photos</i> Gerenciamento dos cursos do vestibular</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="col-md-5">
                         <select name="select_curso" id="select_curso" multiple="multiple"></select>
-                        <button class="btn btn-primary pull-right" id="btnIncluirCursos" style="margin-bottom: 3%;">Incluir Cursos</button>
+                        <button class="btn-sm btn-primary pull-right" id="btnIncluirCursos" style="margin-bottom: 3%;">Incluir Cursos</button>
                         <table id="curso-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -26,10 +26,10 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#materia" aria-controls="materia" data-toggle="tab"><i class="material-icons">collections_time</i> Matérias</a>
+                                <a href="#materia" aria-controls="materia" data-toggle="tab">Matérias</a>
                             </li>
                             <li role="presentation">
-                                <a href="#turno" aria-controls="turno" data-toggle="tab"><i class="material-icons">collections_time</i> Turnos</a>
+                                <a href="#turno" aria-controls="turno" data-toggle="tab">Turnos</a>
                             </li>
                         </ul>
 

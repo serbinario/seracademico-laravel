@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Inserir preço por dsiciplinas</h4>
+                <h4 class="modal-title">Inserir preço por disciplinas</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
@@ -46,13 +46,13 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#configuracoes" aria-controls="configuracoes" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Configurações</a>
+                                    <a href="#configuracoes" aria-controls="configuracoes" data-toggle="tab">Configurações</a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="#prerequisitos" aria-controls="prerequisitos" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Pré-requisitos</a>
+                                    <a href="#prerequisitos" aria-controls="prerequisitos" data-toggle="tab">Pré-requisitos</a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="#corequisitos" aria-controls="corequisitos" data-toggle="tab"><i class="material-icons">collections_bookmark</i> Co-requisitos</a>
+                                    <a href="#corequisitos" aria-controls="corequisitos" data-toggle="tab">Co-requisitos</a>
                                 </li>
 
                             </ul>
@@ -99,6 +99,7 @@
 
                                 {{--FIM Inicio aba prerequisitos--}}
                                 <div role="tabpanel" class="tab-pane" id="prerequisitos">
+                                    <br/>
                                     <!-- Disciplias Pre-requisitos -->
                                     <div class="row">
                                         <div class="form-group col-md-4">
