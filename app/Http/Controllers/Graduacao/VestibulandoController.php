@@ -39,6 +39,8 @@ class VestibulandoController extends Controller
         'TipoSanguinio',
         'Estado',
         'CorRaca',
+        # [RFV003-RN005] - Documento de Requisitos
+        # Esse parâmetro retornará só o vestibular ativo.
         'Graduacao\\Vestibular|ativo,1',
         'Graduacao\\Curso|ativo,1',
         'Turno',
@@ -47,6 +49,11 @@ class VestibulandoController extends Controller
     ];
 
     /**
+     * Método Construtor
+     *
+     * Método responsável por iniciar o objeto com duas referências
+     * Service e Validator respectivamente.
+     *
      * @param VestibulandoService $service
      * @param VestibulandoValidator $validator
      */
@@ -57,6 +64,11 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método Index
+     *
+     * Método responsável por carregar a view correspondente
+     * e alguns dados necessários para seu carregamento
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -72,6 +84,12 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método Grid
+     *
+     * Método responsável por criar a query necessária para o
+     * carregamento da grid, junto com a criação de colunas e
+     * filtros personalizados.
+     *
      * @return mixed
      */
     public function grid(Request $request)
@@ -160,13 +178,14 @@ class VestibulandoController extends Controller
 
                 # Varrendo os débitos do vestibulando
                 foreach ($vestibulando->debitos as $debito) {
+                    # [RFV003-RN012] : Documento de Requisitos
                     # Verificando se a matrícula foi pága
                     if($debito->pago && $debito->taxa->tipoTaxa->id == 2) {
                         $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
                         break;
                     }
                 }
-//<li><a class="btn-floating" id="notas" title="Notas"><i class="material-icons">chrome_reader_mode</i></a></li>
+
                 # Fim do html
                 $html .= '                                
                                 <li><a class="btn-floating" id="financeiro" title="Financeiro"><i class="material-icons">attach_money</i></a></li>
@@ -179,6 +198,12 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método Grid (Notas)
+     *
+     * Método responsável por criar a query necessária para o
+     * carregamento da grid, junto com a criação de colunas e
+     * filtros personalizados.
+     *
      * @return mixed
      */
     public function gridNotas($idVestibulando)
@@ -203,6 +228,11 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método Create
+     *
+     * Método responsável por carregar a view correspondente e alguns
+     * dados necessários para seu carregamento.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -215,6 +245,13 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método store
+     *
+     * Método responsável de receber a requisição com os dados
+     * para cadastro, onde acontece a validação dos dados, o encaminhamento
+     * para o model responsável pela regra de negócio e o redirecionamento para
+     * a página solicitante.
+     *
      * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse
      */
@@ -240,6 +277,11 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método edit
+     *
+     * Método responsável por carregar a view correspondente e alguns
+     * dados necessários para seu carregamento.
+     *
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
@@ -260,6 +302,13 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método update
+     *
+     * Método responsável de receber a requisição com os dados
+     * para cadastro, onde acontece a validação dos dados, o encaminhamento
+     * para o model responsável pela regra de negócio e o redirecionamento para
+     * a página solicitante.
+     *
      * @param Request $request
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
@@ -289,6 +338,10 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método edit
+     *
+     * Método responsável por recupearar dados necessários para seu solicitante.
+     *
      * @param Request $request
      * @return mixed
      */
@@ -315,6 +368,13 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método updateNota
+     *
+     * Método responsável de receber a requisição com os dados
+     * para cadastro, onde acontece a validação dos dados, o encaminhamento
+     * para o model responsável pela regra de negócio e o retorno dos dados
+     * para página solicitante.
+     *
      * @param Request $request
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
@@ -337,6 +397,11 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método getLoadFields
+     *
+     * Método responsável por carregar os registros dos models
+     * vindos como parâmetros da requisição.
+     *
      * @param Request $request
      * @return mixed
      *
@@ -353,6 +418,10 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método editInclusao
+     *
+     * Método responsável por recupearar dados necessários para seu solicitante.
+     *
      * @param $idVestibulando
      * @return mixed
      */
@@ -382,6 +451,13 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método updateInclusao
+     *
+     * Método responsável de receber a requisição com os dados
+     * para cadastro, onde acontece a validação dos dados, o encaminhamento
+     * para o model responsável pela regra de negócio e o retorno dos dados
+     * para página solicitante.
+     *
      * @param Request $request
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse
@@ -403,6 +479,11 @@ class VestibulandoController extends Controller
     }
 
     /**
+     * Método search
+     *
+     * Método responsável por recuperar dados do model Pessoa
+     * e retorna para o solicitante.
+     *
      * @param Request $request
      * @return mixed
      */

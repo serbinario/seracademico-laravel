@@ -779,7 +779,12 @@
 
 @section('javascript')
     <script type="text/javascript">
-        //Carregando as cidades
+        /**
+         * Cidades
+         *
+         * Evento que que recuperar as cidades de acordo com o estado selecionado
+         * e preenche o select de cidades
+         */
         $(document).on('change', "#estado", function () {
             //Removendo as cidades
             $('#cidade option').remove();
@@ -819,7 +824,12 @@
             }
         });
 
-        //Carregando os bairros
+        /**
+         * Bairros
+         *
+         * Evento que que recuperar os bairros de acordo com a cidade selecionada
+         * e preenche o select de bairros
+         */
         $(document).on('change', "#cidade", function () {
             //Removendo as Bairros
             $('#bairro option').remove();
@@ -856,7 +866,12 @@
             }
         });
 
-        //consulta via select2
+        /**
+         * Instituição
+         *
+         * Código que executa a consulta via selec2
+         * para o preenchimento do select de instituição.
+         */
         $("#instituicao").select2({
             placeholder: 'Selecione uma instituição',
             minimumInputLength: 3,
@@ -898,7 +913,12 @@
             }
         });
 
-        //consulta via select2
+        /**
+         * Formação Acadêmica
+         *
+         * Código que executa a consulta via selec2
+         * para o preenchimento do select de formação acadêmica.
+         */
         $("#formacao").select2({
             placeholder: 'Selecione uma formação acadêmica',
             minimumInputLength: 3,
@@ -1024,20 +1044,32 @@
             // Recuperando o id do vestibular selecionado
             var vestibularId = $(this).find("option:selected").val();
 
+            // [RFV003-RN001] - Documentro de Requisitos
             // carregando os campos
             loadOpcoesCurso(vestibularId);
         });
 
-        // Regra para carregamento dos cursos a partir do vestibular escolhido
+        /**
+         * [RFV003-RN001] - Documento de Requisitos
+         *
+         * Evento para carregar as opções de cursos, só os cursos
+         * que estiverem vinculados com o vestibular
+         */
         $(document).on('ready', function () {
             // Recuperando o id do vestibular selecionado
             var vestibularId = $("#vestibular_id").find("option:selected").val();
 
+            // [RFV003-RN001] - Documentro de Requisitos
             // carregando os campos
             loadOpcoesCurso(vestibularId);
         });
 
-        // função para carregar as opções de curso
+        /**
+         * [RFV003-RN001] - Documento de Requisitos
+         *
+         * Função que recupera todos os cursos do vestibular ativo
+         * e preenche com eles todas as opções de curso.
+         */
         function loadOpcoesCurso(vestibularId) {
             // Verificando o id do vestibular
             if(vestibularId) {
@@ -1082,7 +1114,13 @@
             }
         }
 
-        // Evento para pesquisar o cpf do digito no search
+        /**
+         * [RFV003-RN001] - Documento de Requisitos
+         *
+         * Evento para para pesquisar o cpf digitado na busca
+         * que se for encontrado o registro carregará automaticamente
+         * os campos de dados pessoas do formulário de cadastro
+         */
         $(document).on('click', '#btnSearchCpf', function () {
             // Recuperndo o valor da consulta
             var serachValue = $("#searchCpf").val();
@@ -1161,56 +1199,78 @@
             });
         });
 
-        // Evento para selecionar os turnos da primeira opção de curso
+        /**
+         * [RFV003-RN008], [RFV003-RN011] - Documento de Requisitos
+         *
+         * Evento para recuperar as opções de turno da
+         * primeira opção de curso.
+         */
         $(document).on('change', '#primeira_opcao_curso_id', function () {
             // Recuperando o id do curso
             var idCurso = $(this).find('option:selected').val();
+            var idVestibular = $('#vestibular_id').find('option:selected').val();
 
             // verificando se o curso foi selecionado
             if(idCurso) {
                 // recuperando os options
-                getTurnosByCurso(idCurso, '#primeira_opcao_turno_id');
-            }
-        });
-
-        // Evento para selecionar os turnos da segunda opção de curso
-        $(document).on('change', '#segunda_opcao_curso_id', function () {
-            // Recuperando o id do curso
-            var idCurso = $(this).find('option:selected').val();
-
-            // verificando se o curso foi selecionado
-            if(idCurso) {
-                // recuperando os options
-                getTurnosByCurso(idCurso, '#segunda_opcao_turno_id');
-            }
-        });
-
-        // Evento para selecionar os turnos da segunda opção de curso
-        $(document).on('change', '#terceira_opcao_curso_id', function () {
-            // Recuperando o id do curso
-            var idCurso = $(this).find('option:selected').val();
-
-            // verificando se o curso foi selecionado
-            if(idCurso) {
-                // Gerando os options
-                getTurnosByCurso(idCurso, '#terceira_opcao_turno_id');
+                getTurnosByCurso(idVestibular, idCurso, '#primeira_opcao_turno_id');
             }
         });
 
         /**
+         * [RFV003-RN008], [RFV003-RN011] - Documento de Requisitos
+         *
+         * Evento para recuperar as opções de turno da
+         * segunda opção de curso
+         */
+        $(document).on('change', '#segunda_opcao_curso_id', function () {
+            // Recuperando o id do curso
+            var idCurso = $(this).find('option:selected').val();
+            var idVestibular = $('#vestibular_id').find('option:selected').val();
+
+            // verificando se o curso foi selecionado
+            if(idCurso) {
+                // recuperando os options
+                getTurnosByCurso(idVestibular, idCurso, '#segunda_opcao_turno_id');
+            }
+        });
+
+        /**
+         * [RFV003-RN008], [RFV003-RN011] - Documento de Requisitos
+         *
+         * Evento para recuperar as opções de turno da
+         * terceira opção de curso
+         */
+        $(document).on('change', '#terceira_opcao_curso_id', function () {
+            // Recuperando o id do curso
+            var idCurso = $(this).find('option:selected').val();
+            var idVestibular = $('#vestibular_id').find('option:selected').val();
+
+            // verificando se o curso foi selecionado
+            if(idCurso) {
+                // Gerando os options
+                getTurnosByCurso(idVestibular, idCurso, '#terceira_opcao_turno_id');
+            }
+        });
+
+        /**
+         * [RFV003-RN008], [RFV003-RN011] - Documento de Requisitos
+         *
+         * Método que recupera os turnos correspondentes (1º, 2º e 3º opção)
+         * e carrega os selects no formulário
          *
          * @param idCurso
          * @param idHtml
          */
-        function getTurnosByCurso (idCurso, idHtml) {
+        function getTurnosByCurso (idVestibular, idCurso, idHtml) {
             // Requisição ajax
             jQuery.ajax({
                 type: 'POST',
-                url: '{{ route('seracademico.graduacao.curso.getTurnosByCurso')  }}',
+                url: '{{ route('seracademico.vestibular.curso.turno.getTurnosByCurso')  }}',
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
-                data: {'idCurso' : idCurso},
+                data: {'idCurso' : idCurso, 'idVestibular' : idVestibular},
                 datatype: 'json'
             }).done(function (json) {
                 // Variável que armazenará o html
@@ -1228,11 +1288,14 @@
             });
         }
 
-        /*
+       /**
+        * Comprovante enem
+        *
+        * Código que é responsável pelo carregamento de
+        * arquivos no formulário
+        *
         * http://plugins.krajee.com/
         * https://github.com/kartik-v/bootstrap-fileinput
-        *
-        * comprovante enem
         */
         $("#path_comprovante_enem").fileinput({
             @if(isset($aluno->path_comprovante_enem))
@@ -1255,7 +1318,15 @@
             allowedFileExtensions : ['pdf'],
         });
 
-        // comprovante endereço
+        /**
+         * Comprovante Endereço
+         *
+         * Código que é responsável pelo carregamento de
+         * arquivos no formulário
+         *
+         * http://plugins.krajee.com/
+         * https://github.com/kartik-v/bootstrap-fileinput
+         */
         $("#path_comprovante_endereco").fileinput({
             @if(isset($aluno->path_comprovante_endereco))
                 initialPreviewFileType: 'object',
@@ -1276,7 +1347,15 @@
             allowedFileExtensions : ['pdf'],
         });
 
-        // comprovante ficha 19
+        /**
+         * Comprovante Ficha 19
+         *
+         * Código que é responsável pelo carregamento de
+         * arquivos no formulário
+         *
+         * http://plugins.krajee.com/
+         * https://github.com/kartik-v/bootstrap-fileinput
+         */
         $("#path_comprovante_ficha19").fileinput({
             @if(isset($aluno->path_comprovante_ficha19))
                 initialPreviewFileType: 'object',
@@ -1298,8 +1377,10 @@
         });
 
         /*
-         * Regra para se o vestibulando já estiver sido transferido
-         * não poderá alterar nenhuma informação do vestibular
+         * [RFV003-RN09] - Documento de Requisitos
+         *
+         * Código para bloquear toda a aba de vestibular
+         * caso o vestibulando já estive sido transferido para aluno.
         */
         @if(isset($aluno->aluno->id))
             $(document).on('ready', function () {
