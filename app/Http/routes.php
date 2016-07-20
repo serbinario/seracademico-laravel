@@ -177,6 +177,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\HistoricoAlunoController@getLoadFields']);
                     Route::post('save/{idAluno}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@saveHistorico']);
                     Route::post('delete/{idAlunoSemestre}', ['as' => 'save', 'uses' => 'Graduacao\HistoricoAlunoController@deleteHistorico']);
+                    Route::post('updatePeriodo', ['as' => 'updatePeriodo', 'uses' => 'Graduacao\HistoricoAlunoController@updatePeriodo']);
 
                     // Situações do histórico
                     Route::group(['prefix' => 'situacao', 'as' => 'situacao.'], function () {

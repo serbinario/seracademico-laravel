@@ -88,7 +88,7 @@ function builderHtmlFieldsHistorico (dados) {
     $("#modal-create-historico").modal({show : true});
 }
 
-// Evento para salvar tabela de preços
+// Evento para salvar histórico
 $('#btnSaveHistorico').click(function() {
     var curso_id  = $("#curso_id").val();
     var turno_id  = $("#turno_id").val();

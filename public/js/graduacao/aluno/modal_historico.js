@@ -95,3 +95,47 @@ $(document).on('click', '#grid-historico tbody tr', function (event) {
         loadTableSituacao(idAlunoSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/historico/situacao/grid/" + idAlunoSemestre).load();
     }
 });
+
+// Evento quando clicar no botão de editar período
+$(document).on('click', '#btnEditarPeriodo', function (e) {
+    // Recuperando o semestre
+    idSemestre = tableHistorico.row($(this).index()).data().idSemestre;
+
+    // Recuperando o período
+    var periodo = prompt("Digite o período");
+
+    // Validando a entrada
+    if(!periodo) {
+        return false;
+    }
+
+    // Verificando o tipo de entrada
+    if(!$.isNumeric(periodo)) {
+        swal('Você deve informar um valor numérico', 'error');
+        return false;
+    }
+
+    // Dados para a requisição
+    var dados = {
+        'idAluno' : idAluno,
+        'idSemestre' : idSemestre,
+        'periodo' : periodo
+    }
+
+    // Requisição ajax
+    $.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/graduacao/aluno/historico/updatePeriodo',
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            tableHistorico.ajax.reload();
+            loadTableSituacao(idAlunoSemestre).ajax.url("/index.php/seracademico/graduacao/aluno/historico/situacao/grid/" + 0).load();
+
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
