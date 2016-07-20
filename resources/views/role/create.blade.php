@@ -57,9 +57,30 @@
                                     <li>
                                         <input type="checkbox"> Todos
                                         <ul>
-                                            @if(isset($loadFields['permission']))
-                                                @foreach($loadFields['permission'] as $id => $permission)
-                                                    <li><input type="checkbox" name="permission[]" value="{{ $id  }}"> {{ $permission }} </li>
+                                            @if(isset($loadFields['tipopermissao']))
+                                                @foreach($loadFields['tipopermissao'] as $tipo)
+                                                    <!-- Inicio Accordion  -->
+                                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading" role="tab" id="headingTwo">
+                                                                <h4 class="panel-title">
+                                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#body-{{ $tipo->id }}" aria-expanded="false" aria-controls="body-{{ $tipo->id }}">
+                                                                        {{ $tipo->name }}
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="body-{{ $tipo->id  }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                                <div class="panel-body">
+                                                                    @if(count($tipo->permissoes) > 0)
+                                                                        @foreach($tipo->permissoes as $permission)
+                                                                            <li><input type="checkbox" name="permission[]" value="{{ $permission->id  }}"> {{ $permission->description }} </li>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim Accordion  -->
                                                 @endforeach
                                             @endif
                                         </ul>

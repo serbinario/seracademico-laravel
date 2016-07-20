@@ -14,7 +14,16 @@ class Permission extends Model implements Transformable
         'name',
         'slug',
         'description',
-        'model'
+        'model',
+        'tipo_permissao_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipo()
+    {
+        return $this->belongsTo(TipoPermissao::class, 'tipo_permissao_id');
+    }
 
 }

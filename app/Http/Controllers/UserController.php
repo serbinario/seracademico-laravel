@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Repositories\TipoPermissaoRepository;
 use Seracademico\Services\UserService;
 use Seracademico\Validators\UserValidator;
 use Yajra\Datatables\Datatables;
@@ -25,21 +26,28 @@ class UserController extends Controller
     private $validator;
 
     /**
+     * @var TipoPermissaoRepository
+     */
+    private $tipoPermissaoRepository;
+
+    /**
      * @var array
      */
     private $loadFields = [
-        'Role',
-        'Permission'
+        'Role'
     ];
 
     /**
+     * UserController constructor.
      * @param UserService $service
      * @param UserValidator $validator
+     * @param TipoPermissaoRepository $tipoPermissaoRepository
      */
-    public function __construct(UserService $service, UserValidator $validator)
+    public function __construct(UserService $service, UserValidator $validator, TipoPermissaoRepository $tipoPermissaoRepository)
     {
         $this->service   = $service;
         $this->validator = $validator;
+        $this->tipoPermissaoRepository = $tipoPermissaoRepository;
     }
 
     /**
@@ -69,10 +77,16 @@ class UserController extends Controller
         })->make(true);
     }
 
+    /**
+     * @return mixed
+     */
     public function create()
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+
+        # Recuperando todos os tipos de permissão
+        $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
 
         #Retorno para view
         return view('user.create', compact('loadFields'));
@@ -115,6 +129,9 @@ class UserController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+
+            # Recuperando todos os tipos de permissão
+            $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
 
             #retorno para view
             return view('user.edit', compact('user', 'loadFields'));
