@@ -415,6 +415,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\MateriaController@delete']);
         });
 
+        Route::group(['prefix' => 'hora', 'as' => 'hora.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'HoraController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'HoraController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'HoraController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'HoraController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'HoraController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'HoraController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'HoraController@delete']);
+        });
+
         Route::group(['prefix' => 'banco', 'as' => 'banco.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'BancoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'BancoController@grid']);

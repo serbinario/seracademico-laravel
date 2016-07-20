@@ -193,6 +193,7 @@
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="flaticon-tool"></i> Tipo de Vencimento</a></li>
                         <li><a href="{{ route('seracademico.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas</a></li>
                         <li><a href="{{ route('seracademico.graduacao.motivo.index') }}"><i class="material-icons">rate_review</i> Motivos</a></li>
+                        <li><a href="{{ route('seracademico.hora.index') }}"><i class="flaticon-currency-rates"></i> Horas</a></li>
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="flaticon-settings"></i> Configurações</a></li>
                     </ul>
                 </li>

@@ -1,9 +1,10 @@
 <?php
 
-namespace Seracademico\Repositories;
+namespace Seracademico\Validators;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
+use Seracademico\Validators\TraitReplaceRulesValidator;
 
 class HoraValidator extends LaravelValidator
 {
