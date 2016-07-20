@@ -422,5 +422,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Biblioteca\BibParametroRepository::class,
 			\Seracademico\Repositories\Biblioteca\BibParametroRepositoryEloquent::class
 		);
+
+        $this->app->bind(
+            \Seracademico\Repositories\TipoPermissaoRepository::class,
+            \Seracademico\Repositories\TipoPermissaoRepositoryEloquent::class);
+        
 	}
+    
 }

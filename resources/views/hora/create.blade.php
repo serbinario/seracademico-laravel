@@ -4,8 +4,8 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="material-icons">class</i>
-                Cadastrar Sala
+                <i class="flaticon-passed-exam"></i>
+                Cadastrar Hora
             </h4>
         </div>
 
@@ -26,8 +26,8 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.sala.store', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormSala')
+            {!! Form::open(['route'=>'seracademico.hora.store', 'method' => "POST", 'id' => 'formHora']) !!}
+                @include('tamplatesForms.tamplateFormHora')
             {!! Form::close() !!}
         </div>
     </div>

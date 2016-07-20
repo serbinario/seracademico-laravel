@@ -5,49 +5,39 @@ namespace Seracademico\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
-use Seracademico\Http\Controllers\Controller;
-use Seracademico\Repositories\TipoPermissaoRepository;
-use Seracademico\Services\UserService;
-use Seracademico\Validators\UserValidator;
+use Seracademico\Services\HoraService;
 use Yajra\Datatables\Datatables;
-use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Seracademico\Validators\HoraValidator;
 
-class UserController extends Controller
+class HoraController extends Controller
 {
     /**
-     * @var UserService
-     */
+    * @var HoraService
+    */
     private $service;
 
     /**
-     * @var UserValidator
-     */
+    * @var HoraValidator
+    */
     private $validator;
 
     /**
-     * @var TipoPermissaoRepository
-     */
-    private $tipoPermissaoRepository;
-
-    /**
-     * @var array
-     */
+    * @var array
+    */
     private $loadFields = [
-        'Role'
+        'Turno'
     ];
 
     /**
-     * UserController constructor.
-     * @param UserService $service
-     * @param UserValidator $validator
-     * @param TipoPermissaoRepository $tipoPermissaoRepository
-     */
-    public function __construct(UserService $service, UserValidator $validator, TipoPermissaoRepository $tipoPermissaoRepository)
+    * @param HoraService $service
+    * @param HoraValidator $validator
+    */
+    public function __construct(HoraService $service, HoraValidator $validator)
     {
-        $this->service   = $service;
-        $this->validator = $validator;
-        $this->tipoPermissaoRepository = $tipoPermissaoRepository;
+        $this->service   =  $service;
+        $this->validator =  $validator;
     }
 
     /**
@@ -55,7 +45,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        return view('hora.index');
     }
 
     /**
@@ -64,37 +54,57 @@ class UserController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $users = \DB::table('users')->select(['id', 'name', 'email']);
+        $rows = \DB::table('fac_horas')
+            ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_horas.turno_id')
+            ->select([
+                'fac_horas.id',
+                'fac_horas.nome',
+                'fac_horas.hora_inicial',
+                'fac_horas.hora_final',
+                'fac_turnos.nome as turno'
+            ]);
 
         #Editando a grid
-        return Datatables::of($users)->addColumn('action', function ($user) {
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$user->id.'" title="Editar Usuário"><i class="material-icons">edit</i></a></li>                        
-                    </ul>
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando a hora
+            $hora = $this->service->find($row->id);
+
+            # html de retorno
+            $html = '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
+                        ';
+
+            # Verificando se a disponibilidade para remoção
+            if (count($hora->horarios) == 0) {
+                $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
+            }
+
+            # html de retorno
+            $html .= ' </ul>
                     </div>';
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
 
-        # Recuperando todos os tipos de permissão
-        $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
-
         #Retorno para view
-        return view('user.create', compact('loadFields'));
+        return view('hora.create', compact('loadFields'));
     }
 
     /**
      * @param Request $request
-     * @return $this|\Illuminate\Http\RedirectResponse
+     * @return $this|array|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -110,7 +120,7 @@ class UserController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {print_r($e->getMessage()); exit;
+        } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
@@ -124,17 +134,14 @@ class UserController extends Controller
     public function edit($id)
     {
         try {
-            #Recuperando o aluno
-            $user = $this->service->find($id);
+            #Recuperando a empresa
+            $model = $this->service->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
-            # Recuperando todos os tipos de permissão
-            $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
-
             #retorno para view
-            return view('user.edit', compact('user', 'loadFields'));
+            return view('hora.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -151,6 +158,9 @@ class UserController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
@@ -162,6 +172,23 @@ class UserController extends Controller
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function delete($id)
+    {
+        try {
+            # Deletando a matéria
+            $this->service->delete($id);
+
+            #retorno para view
+            return redirect()->back()->with('message', 'Matéria removida com sucesso!');
+        } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -5,6 +5,7 @@ namespace Seracademico\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Hora extends Model implements Transformable
@@ -13,12 +14,8 @@ class Hora extends Model implements Transformable
 
     protected $table    = 'fac_horas';
 
-    protected $dates    = [
-        'hora_inicial',
-        'hora_final'
-    ];
-
     protected $fillable = [
+        'nome',
         'hora_inicial',
         'hora_final',
         'turno_id'
@@ -66,5 +63,13 @@ class Hora extends Model implements Transformable
     public function setHoraFinalAttribute($value)
     {
         $this->attributes['hora_final'] = SerbinarioDateFormat::toUsa($value, true);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function horarios()
+    {
+        return $this->hasMany(HorarioDisciplinaTurma::class, 'hora_id');
     }
 }

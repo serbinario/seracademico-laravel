@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Seracademico\Entities\TipoPermissao;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Repositories\TipoPermissaoRepository;
 use Seracademico\Services\RoleService;
 use Yajra\Datatables\Datatables;
 
@@ -19,25 +21,24 @@ class RoleController extends Controller
     private $service;
 
     /**
-     * @var UserValidator
+     * @var TipoPermissaoRepository
      */
-   // private $validator;
+    private $tipoPermissaoRepository;
 
     /**
      * @var array
      */
-    private $loadFields = [
-        'Permission'
-    ];
+    private $loadFields = [];
 
     /**
+     * RoleController constructor.
      * @param RoleService $service
-     * @param UserValidator $validator
+     * @param TipoPermissaoRepository $tipoPermissaoRepository
      */
-    public function __construct(RoleService $service)
+    public function __construct(RoleService $service, TipoPermissaoRepository $tipoPermissaoRepository)
     {
-        $this->service   = $service;
-        //$this->validator = $validator;
+        $this->service = $service;
+        $this->tipoPermissaoRepository = $tipoPermissaoRepository;
     }
 
     /**
@@ -62,10 +63,16 @@ class RoleController extends Controller
         })->make(true);
     }
 
+    /**
+     * @return mixed
+     */
     public function create()
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+
+        # Recuperando todos os tipos de permissão
+        $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
 
         #Retorno para view
         return view('role.create', compact('loadFields'));
@@ -108,6 +115,9 @@ class RoleController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+
+            # Recuperando todos os tipos de permissão
+            $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
 
             #retorno para view
             return view('role.edit', compact('role', 'loadFields'));

@@ -81,8 +81,7 @@ class CrudViewCommand extends Command
         $modelName = $this->option('model-name');
 
         $this->formFieldsHtml .=  "<div class=\"row\">\n";
-        $this->formFieldsHtml .=  "\t" . "<div class=\"col-md-10\">\n";
-        $this->formFieldsHtml .= "\t\t" . "<div class=\"row\">\n";
+        $this->formFieldsHtml .=  "\t" . "<div class=\"col-md-12\">\n";
 
 
 
@@ -91,7 +90,7 @@ class CrudViewCommand extends Command
         //Retorna todas as tabelas
         $tables = $schema->listTableColumns($tableName);
 
-        //Varre a procura de cada fields
+        //Varre a procura de cada fields em cada tabela
         foreach ($tables as $column) {
             echo ' - ' . $column->getName() . " - " . $column->getType()->getName() . "\n";
 
@@ -100,24 +99,27 @@ class CrudViewCommand extends Command
                 . $column->getName(). " do tipo " . $column->getType()->getName()
                 . " Escolha um tipo", ['text', 'password', 'select', 'radio', 'date', 'checkbox', 'Não Gerar'], false);
 
+
+
             $this->formFieldsHtml .= $this->createField($typeName, $column);
+
 
         }
 
-        $this->formFieldsHtml .= "\n\t\t" . "</div>\n";
-        $this->formFieldsHtml .=  "\t" . "</div>\n";
+
+        $this->formFieldsHtml .=  "\n\t" . "</div>\n";
         $this->formFieldsHtml .= "" . "</div>";
 
         Generic::setNameClasseSingular($this->getPathTemplate() . "tamplateForm" . $modelName . ".blade");
         Generic::write($this->formFieldsHtml, '');
-        dd($this->formFieldsHtml);
+        //dd($this->formFieldsHtml);
 
 
     }
 
     protected function createField($type, $column)
     {
-       // dd($column->getType()->getName());
+        // dd($column->getType()->getName());
         switch ($type) {
             case 'text':
                 return $this->createTextField($column);
@@ -147,9 +149,8 @@ class CrudViewCommand extends Command
     private function createTextField($column)
     {
         $this->buildImput = "";
-        $this->buildImput .= PHP_EOL;
-        $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "')  , array('class' => 'form-control')) !!}";
+        $this->buildImput .= "\t\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
+        $this->buildImput .= "\t\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "')  , array('class' => 'form-control')) !!}";
         return $this->wrapField($this->buildImput, '');
 
     }
@@ -158,8 +159,8 @@ class CrudViewCommand extends Command
     {
         $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
-        $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::password('" .$column->getName() . "', array('class' => 'form-control')) !!}";
+        $this->buildImput .= "\t\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
+        $this->buildImput .= "\t\t\t\t\t" . "{!! Form::password('" .$column->getName() . "', array('class' => 'form-control')) !!}";
         return $this->wrapField($this->buildImput, '');
 
     }
@@ -168,8 +169,8 @@ class CrudViewCommand extends Command
     {
         $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
-        $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::select('" .$column->getName() . "', array(), NULL, array('class' => 'form-control')) !!}";
+        $this->buildImput .= "\t\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
+        $this->buildImput .= "\t\t\t\t\t" . "{!! Form::select('" .$column->getName() . "', array(), NULL, array('class' => 'form-control')) !!}";
         return  $this->wrapField($this->buildImput, '');
 
     }
@@ -185,8 +186,8 @@ class CrudViewCommand extends Command
     {
         $this->buildImput = "";
         $this->buildImput .= PHP_EOL;
-        $this->buildImput .= "\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
-        $this->buildImput .= "\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "'), array('class' => 'form-control datepicker date')) !!}";
+        $this->buildImput .= "\t\t\t\t\t{!! Form::label('" .$column->getName() . "', '" .$column->getName() . "') !!}\n";
+        $this->buildImput .= "\t\t\t\t\t" . "{!! Form::text('" .$column->getName() . "', Session::getOldInput('" .$column->getName() . "'), array('class' => 'form-control datepicker date')) !!}";
 
         return  $this->wrapField($this->buildImput, '');
     }
@@ -202,11 +203,13 @@ class CrudViewCommand extends Command
     protected function wrapField($column, $field)
     {
         $buildImput = "
+        <div class=\"row\">
             <div class=\"col-md-4\">
                 <div class=\"form-group\">
                     $column
                 </div>
-            </div>";
+            </div>
+        </div>";
         return $buildImput;
 
     }
@@ -229,6 +232,28 @@ class CrudViewCommand extends Command
     protected function getPathTemplate()
     {
         return '/resources/views/tamplatesForms/';
+    }
+
+    protected function createIndex(){
+
+        //Seto o caminho e o nome do arquivo modelo
+        Generic::setFilePath($this->getStub());
+        Generic::setReplacements(['NAMESPACE' => app()->getNamespace()]);
+        //Generic::setReplacements(['TABLE' => $tableName]);
+        //Generic::setReplacements(['CLASS' => Generic::ucWords($modelName)]);
+        Generic::setReplacements(['VALIDATORS' => $this->tableFields]);
+        //Generic::setReplacements(['METODO' => $this->compileRelations]);
+
+        Generic::write(Generic::getContents(Generic::getReplacements()), $this->phathValidators, "Validator");
+
+    }
+
+    /*
+   * Retorna o arquivo de modelo
+   */
+    protected function getStub()
+    {
+        return __DIR__ . '/../../stubs/index.blade.stub';
     }
 
 
