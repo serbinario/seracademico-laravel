@@ -21,6 +21,7 @@ class Emprestar extends Model implements Transformable
 		'data_devolucao',
 		'data_devolucao_real',
 		'tipo_emprestimo',
+		'status'
 	];
 
 	public function pessoa()
@@ -30,7 +31,8 @@ class Emprestar extends Model implements Transformable
 
 	public function emprestimoExemplar()
 	{
-		return $this->belongsToMany(Exemplar::class, 'bib_emprestimos_exemplares', 'emprestimo_id', "exemplar_id");
+		return $this->belongsToMany(Exemplar::class, 'bib_emprestimos_exemplares', 'emprestimo_id', "exemplar_id")
+			->withPivot(['id', 'emprestimo_id', 'exemplar_id']);;
 	}
 
 }

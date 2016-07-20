@@ -36,8 +36,35 @@ class EmprestarService
      */
     public function find($id)
     {
+        $relacionamentos = [
+            'emprestimoExemplar.acervo'
+        ];
+
         #Recuperando o registro no banco de dados
-        $emprestar = $this->repository->find($id);
+        $emprestar = $this->repository->with($relacionamentos)->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$emprestar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $emprestar;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findWhere($dados)
+    {
+        $relacionamentos = [
+            'emprestimoExemplar.acervo',
+        ];
+
+        #Recuperando o registro no banco de dados
+        $emprestar = $this->repository->with($relacionamentos)->findWhere(['pessoas_id' => $dados['pessoas_id'], 'status' => '0']);
 
         #Verificando se o registro foi encontrado
         if(!$emprestar) {
@@ -59,25 +86,105 @@ class EmprestarService
         $dataObj   = new \DateTime('now');
         $dias      = "";
         $dia       = 0;
+        $parametros = \DB::table('bib_parametros')->select('bib_parametros.*')->where('bib_parametros.codigo', '=', '003')->get();
+        
+        $return = [
+            'data',
+            'msg',
+            'sucesso',
+            'emprestimos'
+        ];
 
-        if($dados['id_emp'] == '1') {
+        $validarEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->where('bib_emprestimos_exemplares.exemplar_id', '=', $dados['id'])
+            ->where('bib_emprestimos.status', '=', '0')
+            ->select('bib_emprestimos_exemplares.*')
+            ->get();
+
+        $validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
+            ->where('bib_emprestimos.status', '=', '0')
+            ->groupBy('bib_emprestimos_exemplares.emprestimo_id')
+            ->select([
+                \DB::raw('count(bib_emprestimos_exemplares.emprestimo_id) as qtd')
+            ])
+            ->get();
+
+        if(count($validarEmprestimo) > 0) {
+            $return[1] = 'Este exemplar já está sendo emprestado no momento';
+            $return[2] = false;
+            return $return;
+        } else if (isset($validarQtdEmprestimo[0]) && $validarQtdEmprestimo[0]->qtd >= $parametros[0]->valor) {
+            $return[1] = "Limite de até {$parametros[0]->valor} empréstimos foi atingido";
+            $return[2] = false;
+            return $return;
+        }
+
+
+        if($dados['tipo_emprestimo'] == '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
             $dia = $dias[0]->valor - 1;
-        } else if ($dados['id_emp'] == '2') {
+        } else if ($dados['tipo_emprestimo'] == '2') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
             $dia = $dias[0]->valor - 1;
         }
 
         $dataObj->add(new \DateInterval("P{$dia}D"));
         $data = $dataObj->format('d/m/Y');
+        $dados['data_devolucao'] = $data;
 
-        $dados = [
-            'data' => $data
-        ];
+        $result = $this->store($dados);
+        $empestimos = $this->findWhere($dados);
+        //dd($empestimos[0]->emprestimoExemplar);
+        $return[0] = $data;
+        $return[2] = true;
+        $return[3] = $empestimos[0]->emprestimoExemplar;
         
-        return $dados;
+        return $return;
 
     }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function store(array $data) : Emprestar
+    {
+
+        $data = $this->tratamentoCamposData($data);
+
+        $date = new \DateTime('now');
+        $dataFormat = $date->format('Y-m-d');
+        //$codigo = \DB::table('bib_emprestimos')->max('codigo');
+        $codigo = $date->format('YmdHis');
+        $data['data'] = $dataFormat;
+        $data['codigo'] = $codigo;
+        $data['status'] = '0';
+
+        $validarEmprestimo = $this->findWhere($data);
+       // dd($validarEmprestimo[0]->emprestimoExemplar());
+        #Salvando o registro pincipal
+        if(count($validarEmprestimo) <= 0) {
+            $emprestar =  $this->repository->create($data);
+            $emprestar->emprestimoExemplar()->attach([$data['id']]);
+        } else {
+            $emprestar = $validarEmprestimo[0];
+            $emprestar->emprestimoExemplar()->attach([$data['id']]);
+        }
+
+        $exemplar = $this->repoExemplar->find($data['id']);
+        $exemplar->situacao_id = '5';
+        $exemplar->save();
+
+        #Verificando se foi criado no banco de dados
+        if(!$emprestar) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $emprestar;
+    }
+    
 
     /**
      * @param $id
@@ -106,42 +213,6 @@ class EmprestarService
         return $emprestimo;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function store(array $data) : Emprestar
-    {
-        //dd($data);
-
-        $data = $this->tratamentoCamposData($data);
-
-        $date = new \DateTime('now');
-        $dataFormat = $date->format('Y-m-d');
-        //$codigo = \DB::table('bib_emprestimos')->max('codigo');
-        $codigo = $date->format('YmdHis');
-        $data['data'] = $dataFormat;
-        $data['codigo'] = $codigo;
-
-        #Salvando o registro pincipal
-        $emprestar =  $this->repository->create($data);
-
-        $emprestar->emprestimoExemplar()->attach($data['id']);
-
-        foreach ($data['id'] as $id) {
-            $exemplar =  $this->repoExemplar->find($id);
-            $exemplar->situacao_id = '5';
-            $exemplar->save();
-        }
-
-        #Verificando se foi criado no banco de dados
-        if(!$emprestar) {
-            throw new \Exception('Ocorreu um erro ao cadastrar!');
-        }
-
-        #Retorno
-       return $emprestar;
-    }
 
     /**
      * @param int $id
@@ -176,6 +247,44 @@ class EmprestarService
         if(!$emprestimo) {
             throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
         }
+
+        #retorno
+        return true;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteEmprestimo($id, $id2)
+    {
+
+        $idExemplar = \DB::table('bib_emprestimos_exemplares')
+            ->where('id', '=', $id2)
+            ->select('bib_emprestimos_exemplares.exemplar_id')
+        ->get();
+
+        $exemplar = $this->repoExemplar->find($idExemplar[0]->exemplar_id);
+        if($exemplar->emprestimo_id == '1') {
+            $exemplar->situacao_id = '1';
+            $exemplar->save();
+        } elseif ($exemplar->emprestimo_id == '2') {
+            $exemplar->situacao_id = '3';
+            $exemplar->save();
+        }
+
+        \DB::table('bib_emprestimos_exemplares')
+            ->where('id', '=', $id2)
+            ->where('emprestimo_id', '=', $id)
+            ->delete();
+        
+        #deletando o curso
+        $emprestimo = $this->find($id);
+
+       if(count($emprestimo->emprestimoExemplar) <= 1) {
+           \DB::delete('delete from bib_emprestimos where id = ?', [$id]);
+       }
 
         #retorno
         return true;

@@ -72,6 +72,7 @@ class ArcevoController extends Controller
             })
 //            ->join('primeira_entrada', 'primeira_entrada.arcevos_id', '=', 'bib_arcevos.id')
             ->leftJoin('responsaveis', 'responsaveis.id', '=', 'entrada.responsaveis_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
             ->select([
             'bib_arcevos.id',
             'bib_arcevos.titulo',

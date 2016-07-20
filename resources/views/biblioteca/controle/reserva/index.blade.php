@@ -182,7 +182,7 @@
                 width: 400,
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('seracademico.util.select2')  }}",
+                    url: "{{ route('seracademico.util.queryByselect2Pessoa')  }}",
                     dataType: 'json',
                     delay: 250,
                     crossDomain: true,

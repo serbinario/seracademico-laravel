@@ -148,11 +148,54 @@ class EmprestarController extends Controller
      */
     public function dataDevolucao(Request $request)
     {
-        $request = $request->request->all();
+        $req = $request->request->all();
         
-        $data = $this->service->dataDevolucao($request);
-        
+        $data = $this->service->dataDevolucao($req);
+
+        $request->session()->put('id_pessoa', $request['pessoas_id']);
+
         return $data;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function findWhereEmprestimo(Request $request)
+    {
+        $id = $request->session()->get('id_pessoa');
+
+        $data = $this->service->findWhere(['pessoas_id' => $id]);
+
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function confirmarEmprestimo(Request $request)
+    {
+        $id = $request->get('id_emp');
+
+        $data = $this->service->find($id);
+        $data->status = '1';
+        $data->save();
+
+        $result = $data;
+
+        return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function deleteEmprestimo($id, $id2)
+    {
+
+        $data = $this->service->deleteEmprestimo($id, $id2);
+
+        $result = $data;
+
+        return array();
     }
 
     /**

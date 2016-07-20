@@ -433,8 +433,7 @@ class UtilController extends Controller
 
             #executando a consulta e recuperando os dados
             $resultTotal = $qb->get();
-            dd($resultTotal);
-
+            
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
