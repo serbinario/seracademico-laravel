@@ -35,9 +35,12 @@ class DashboardController extends Controller
 
     public function dashboardBliblioteca()
     {
-        $acervo = $this->serviceAcervo->countAcervo();
-        $exemplar = $this->serviceExemplar->countExemplar();
+        $acervoNP = $this->serviceAcervo->countAcervoNPeriodico();
+        $acervoP = $this->serviceAcervo->countAcervoPeriodico();
         
-        return view('dashboards.biblioteca.dashboard', ['acervo' => $acervo, 'exemplar' => $exemplar]);
+        $exemplarNP = $this->serviceExemplar->countExemplarNPeriodico();
+        $exemplarP = $this->serviceExemplar->countExemplarPeriodico();
+
+        return view('dashboards.biblioteca.dashboard', compact('acervoNP', 'acervoP', 'exemplarNP', 'exemplarP'));
     }
 }

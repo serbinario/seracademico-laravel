@@ -101,12 +101,22 @@ class EmprestarService
             ->select('bib_emprestimos_exemplares.*')
             ->get();
 
-        $validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+        /*$validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
             ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
             ->where('bib_emprestimos.status', '=', '0')
             ->groupBy('bib_emprestimos_exemplares.emprestimo_id')
             ->select([
                 \DB::raw('count(bib_emprestimos_exemplares.emprestimo_id) as qtd')
+            ])
+            ->get();*/
+
+        $validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
+            ->where('bib_exemplares.situacao_id', '=', '5')
+            ->groupBy('bib_emprestimos.pessoas_id')
+            ->select([
+                \DB::raw('count(bib_emprestimos_exemplares.emprestimo_id) as qtd'),
             ])
             ->get();
 

@@ -6,21 +6,23 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
 
-class ReservaExemplarValidator extends LaravelValidator
+class BibParametroValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'reserva_id' =>  '' ,
-			'exemplar_id' =>  '' ,
+			'nome' =>  '' ,
+			'valor' =>  '' ,
+			'codigo' =>  '' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [
             
-			'reserva_id' =>  '' ,
-			'exemplar_id' =>  '' ,
+			'nome' =>  '' ,
+			'valor' =>  '' ,
+			'codigo' =>  '' ,
 
         ],
    ];

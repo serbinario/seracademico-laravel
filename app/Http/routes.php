@@ -533,6 +533,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('updateExemplarP/{id}', ['as' => 'updateExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@update']);
             Route::get('deleteExemplarP/{id}', ['as' => 'deleteExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@delete']);
 
+            Route::get('indexParametro', ['as' => 'indexParametro', 'uses' => 'Biblioteca\BibParametroController@index']);
+            Route::get('gridParametro', ['as' => 'gridParametro', 'uses' => 'Biblioteca\BibParametroController@grid']);
+            Route::get('editParametro/{id}', ['as' => 'editParametro', 'uses' => 'Biblioteca\BibParametroController@edit']);
+            Route::get('updateParametro', ['as' => 'updateParametro', 'uses' => 'Biblioteca\BibParametroController@update']);
+
             Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
 
             

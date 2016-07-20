@@ -417,5 +417,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         $this->app->bind(
             \Seracademico\Repositories\Graduacao\AlunoDisciplinaDispensadaRepository::class,
             \Seracademico\Repositories\Graduacao\AlunoDisciplinaDispensadaRepositoryEloquent::class);
-    }
+  
+		$this->app->bind(
+			\Seracademico\Repositories\Biblioteca\BibParametroRepository::class,
+			\Seracademico\Repositories\Biblioteca\BibParametroRepositoryEloquent::class
+		);
+	}
 }

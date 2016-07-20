@@ -75,11 +75,11 @@
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
+                        <input type="submit" disabled id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
-                            <table id="emprestimos" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="emprestimos"  class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Acervo - Título</th>
@@ -192,6 +192,8 @@
 
                     $('#emprestimos tbody').append(html);
                     $('#data').val(retorno[0]);
+
+                    validarQtdRawsTable();
                 });
             }
         });
@@ -204,6 +206,9 @@
                 tr.fadeOut(400, function () {
                     tr.remove();
                 });
+
+                validarQtdRawsTable();
+
                 return false;
             };
         })(jQuery);
@@ -295,8 +300,19 @@
                 url: "deleteEmprestimo/"+id+"/"+id2,
                 datatype: 'json'
             }).done(function (retorno) {
-
+                validarQtdRawsTable()
             });
         });
+
+        //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
+        function validarQtdRawsTable(){
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    $('#conf_emprestimo').prop('disabled', true);
+                } else {
+                    $('#conf_emprestimo').prop('disabled', false);
+                }
+            });
+        }
     </script>
 @stop

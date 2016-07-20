@@ -114,9 +114,13 @@ class ArcevoService
      * @return mixed
      * @throws \Exception
      */
-    public function countAcervo()
+    public function countAcervoNPeriodico()
     {
-        $arcevo = $this->repository->all();
+        $arcevo = \DB::table('bib_arcevos')
+            ->where('tipo_periodico', '=', '1')
+            ->select([
+                \DB::raw('COUNT(id) as qtd_acervos_np'),
+            ])->get();
 
         #Verificando se o registro foi encontrado
         if(!$arcevo) {
@@ -124,7 +128,28 @@ class ArcevoService
         }
 
         #retorno
-        return $arcevo;
+        return $arcevo[0];
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function countAcervoPeriodico()
+    {
+        $arcevo = \DB::table('bib_arcevos')
+            ->where('tipo_periodico', '=', '2')
+            ->select([
+                \DB::raw('COUNT(id) as qtd_acervos_p'),
+            ])->get();
+
+        #Verificando se o registro foi encontrado
+        if(!$arcevo) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $arcevo[0];
     }
 
 

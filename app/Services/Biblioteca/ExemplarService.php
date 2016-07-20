@@ -73,12 +73,17 @@ class ExemplarService
     }
 
     /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function countExemplar()
+ * @return mixed
+ * @throws \Exception
+ */
+    public function countExemplarNPeriodico()
     {
-        $exemplar = $this->repository->all();
+        $exemplar = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd_exemplar_np'),
+            ])->get();
 
         #Verificando se o registro foi encontrado
         if(!$exemplar) {
@@ -86,7 +91,29 @@ class ExemplarService
         }
 
         #retorno
-        return $exemplar;
+        return $exemplar[0];
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function countExemplarPeriodico()
+    {
+        $exemplar = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '2')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd_exemplar_p'),
+            ])->get();
+
+        #Verificando se o registro foi encontrado
+        if(!$exemplar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $exemplar[0];
     }
 
     /**
