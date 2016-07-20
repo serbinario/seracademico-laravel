@@ -75,9 +75,8 @@ class HistoricoAlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($alunos)->addColumn('action', function ($aluno) {
-            //<a class="btn-floating" id="btnEditHistorico" title="Editar Histórico"><i class="material-icons">edit</i></a>
             # Html de retorno
-            $html = '';
+            $html = '<a class="btn-floating" id="btnEditarPeriodo" title="Editar Histórico"><i class="material-icons">edit</i></a>';
 
             # recuperando o aluno
             $objAluno = $this->alunoService->find($aluno->id);
@@ -146,7 +145,7 @@ class HistoricoAlunoController extends Controller
 
     /**
      * @param Request $request
-     * @param $idAlunoSemestre
+     * @param $idAluno
      * @return mixed
      */
     public function saveHistorico(Request $request, $idAluno)
@@ -183,7 +182,7 @@ class HistoricoAlunoController extends Controller
     }
 
     /**
-     * @param $idAlunoSemestre
+     * @param $idAlunoSituacao
      * @return mixed
      */
     public function deleteSituacao($idAlunoSituacao)
@@ -194,14 +193,14 @@ class HistoricoAlunoController extends Controller
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Situação removida com sucesso!']);
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
     /**
      * @param Request $request
-     * @param $idAlunoSemestre
+     * @param $idSemestre
      * @return mixed
      */
     public function saveSituacao(Request $request, $idSemestre)
@@ -215,6 +214,26 @@ class HistoricoAlunoController extends Controller
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Situação cadastrada com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function updatePeriodo(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->alunoService->updatePeriodo($data);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Período alterado com sucesso!']);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }

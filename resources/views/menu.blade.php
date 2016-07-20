@@ -311,9 +311,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
-
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
-
 
 {{--<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>--}}
 

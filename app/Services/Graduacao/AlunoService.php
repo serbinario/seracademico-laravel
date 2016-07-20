@@ -462,7 +462,7 @@ class AlunoService
     }
 
     /**
-     * @param $idAlunoSemestre
+     * @param $idAlunoSituacao
      * @return bool
      */
     public function deleteSituacao($idAlunoSituacao)
@@ -496,5 +496,30 @@ class AlunoService
 
         # Retorno
         return $aluno;
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function updatePeriodo(array $data)
+    {
+        # Verificando os dados do parâmetro
+        if (!isset($data['idAluno']) && !isset($data['idSemestre']) && !isset($data['periodo'])) {
+            throw new \Exception('Dados Inválidos!');
+        }
+
+        # Recuperando o aluno, semestre e pivot
+        $aluno    = $this->repository->find($data['idAluno']);
+        $semestre = $aluno->semestres()->find($data['idSemestre']);
+        $pivot    = $semestre->pivot;
+
+        # Alterando o período
+        $pivot->periodo = $data['periodo'];
+        $pivot->save();
+
+        # retorno
+        return true;
     }
 }
