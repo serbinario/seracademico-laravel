@@ -13,42 +13,17 @@ class Professor extends Model implements Transformable
 
     protected $table    = 'fac_professores';
 
-    protected $fillable = [ 
-		'nome',
+    /**
+     * @var array
+     */
+    protected $dates    = [
+        'data_admissao'
+    ];
+
+    protected $fillable = [
 		'tratamento',
-		'nome_pai',
-		'nome_social',
-		'nome_mae',
-		'identidade',
-		'orgao_rg',
-		'data_expedicao',
-		'cpf',
-		'titulo_eleitoral',
-		'zona',
-		'secao',
-		'resevista',
-		'categoria_resevista',
-		'data_nascimento',
-		'nacionalidade',
-		'naturalidade',
-		'endereco_id',
-		'sexo_id',
 		'turno_id',
 		'titulacao_id',
-		'profissao_id',
-		'religiao_id',
-		'estado_civil_id',
-		'tipo_sanguinio_id',
-		'cor_raca_id',
-		'uf_nascimento_id',
-		'email',
-		'telefone_fixo',
-		'celular',
-		'celular2',
-		'deficiencia_auditiva',
-		'deficiencia_visual',
-		'deficiencia_fisica',
-		'deficiencia_outra',
 		'path_image',
 		'instituicao_graduacao_id',
 		'instituicao_pos_id',
@@ -58,20 +33,22 @@ class Professor extends Model implements Transformable
 		'especificacao_pos',
 		'especificacao_mestrado',
 		'especificacao_doutorado',
-		'grau_intrucao_id',
 		'ctps_numero',
 		'ctps_serie',
-		'data_admissao'
+		'data_admissao',
+        'pis',
+        'pessoa_id'
 	];
 
-	/**
-	 * @return string
-	 */
-	public function getDataNascimentoAttribute()
-	{
-		return SerbinarioDateFormat::toBrazil($this->attributes['data_nascimento']);
-	}
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pessoa()
+    {
+        return $this->belongsTo(Pessoa::class, 'pessoa_id');
+    }
+    
 	/**
 	 * @return string
 	 */
@@ -81,61 +58,17 @@ class Professor extends Model implements Transformable
 	}
 
     /**
-     * @return string
+     *
+     * @return \DateTime
      */
-    public function getDataExpedicaoAttribute()
+    public function setDataAdmissaoAttribute($value)
     {
-        return SerbinarioDateFormat::toBrazil($this->attributes['data_expedicao']);
-    }
-
-    public function endereco()
-    {
-        return $this->belongsTo(Endereco::class, 'endereco_id');
-    }
-
-    public function sexo()
-    {
-        return $this->belongsTo(Sexo::class, 'sexo_id');
+        $this->attributes['data_admissao'] = SerbinarioDateFormat::toUsa($value);
     }
 
     public function turno()
     {
         return $this->belongsTo(Turno::class, 'turno_id');
-    }
-
-    public function grauInstrucao()
-    {
-        return $this->belongsTo(GrauInstrucao::class, 'grau_instrucao_id');
-    }
-
-    public function profissao()
-    {
-        return $this->belongsTo(Profissao::class, 'profissao_id');
-    }
-
-    public function religiao()
-    {
-        return $this->belongsTo(Religiao::class, 'religiao_id');
-    }
-
-    public function estadoCivil()
-    {
-        return $this->belongsTo(EstadoCivil::class, 'estado_civil_id');
-    }
-
-    public function tipoSanguinio()
-    {
-        return $this->belongsTo(TipoSanguinio::class, 'tipo_sanguinio_id');
-    }
-
-    public function corRaca()
-    {
-        return $this->belongsTo(CorRaca::class, 'cor_raca_id');
-    }
-
-    public function ufNascimento()
-    {
-        return $this->belongsTo(Estado::class, 'uf_nascimento_id');
     }
 
     public function instituicaoGraduacao()

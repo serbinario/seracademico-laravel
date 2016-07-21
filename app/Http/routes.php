@@ -576,6 +576,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('reservados', ['as' => 'reservados', 'uses' => 'Biblioteca\ReservaController@reservados']);
             Route::get('gridReservados', ['as' => 'gridReservados', 'uses' => 'Biblioteca\ReservaController@gridReservados']);
             Route::post('saveEmprestimo', ['as' => 'saveEmprestimo', 'uses' => 'Biblioteca\ReservaController@saveEmprestimo']);
+            Route::post('findWhereReserva', ['as' => 'findWhereReserva', 'uses' => 'Biblioteca\ReservaController@findWhereReserva']);
+            Route::get('deleteReserva/{id}/{id2}', ['as' => 'deleteReserva', 'uses' => 'Biblioteca\ReservaController@deleteReserva']);
+            Route::post('confirmarReserva', ['as' => 'confirmarReserva', 'uses' => 'Biblioteca\ReservaController@confirmarReserva']);
             
         });
 

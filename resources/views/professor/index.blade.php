@@ -45,8 +45,8 @@
             serverSide: true,
             ajax: "{!! route('seracademico.posgraduacao.professor.grid') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'cpf', name: 'cpf'},
+                {data: 'nome', name: 'pessoas.nome'},
+                {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

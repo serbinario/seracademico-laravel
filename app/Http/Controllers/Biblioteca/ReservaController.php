@@ -92,12 +92,8 @@ class ReservaController extends Controller
             return $html;
         })->make(true);
     }
-
-    /**
-     * @param Request $request
-     * @return $this|array|\Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+    
+    /*public function store(Request $request)
     {
         try {
             #Recuperando os dados da requisição
@@ -119,6 +115,61 @@ class ReservaController extends Controller
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }*/
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $req = $request->request->all();
+
+        $data = $this->service->store($req);
+
+        $request->session()->put('id_pessoa_reserva', $request['pessoas_id']);
+
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function findWhereReserva(Request $request)
+    {
+        $id = $request->session()->get('id_pessoa_reserva');
+
+        $data = $this->service->findWhere(['pessoas_id' => $id]);
+
+        return $data;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function deleteReserva($id, $id2)
+    {
+        $data = $this->service->deleteReserva($id, $id2);
+
+        $result = $data;
+
+        return array();
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function confirmarReserva(Request $request)
+    {
+        $id = $request->get('id_emp');
+
+        $data = $this->service->find($id);
+        $data->status = '1';
+        $data->save();
+
+        //$result = $data;
+
+       return redirect()->back();
     }
     
 

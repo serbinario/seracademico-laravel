@@ -65,7 +65,9 @@ class ProfessorController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_professores')->select(['id', 'nome', 'cpf']);
+        $rows = \DB::table('fac_professores')
+            ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
+            ->select(['fac_professores.id as id', 'pessoas.nome as nome', 'pessoas.cpf as cpf']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -141,9 +143,12 @@ class ProfessorController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            #tratando as rules
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
+            
             #Executando a ação
             $this->service->update($data, $id);
 

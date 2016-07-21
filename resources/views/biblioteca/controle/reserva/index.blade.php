@@ -60,14 +60,14 @@
                         </table>
                     </div>
                 </div>
-                {!! Form::open(['route'=>'seracademico.biblioteca.storeReserva', 'method' => "POST", 'id' => 'form' ]) !!}
+                {!! Form::open(['route'=>'seracademico.biblioteca.confirmarReserva', 'method' => "POST", 'id' => 'form' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
                             {!! Form::select('pessoas_id', (["" => "Selecione uma pessoa"] + $loadFields['pessoa']->toArray()), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
                             <input type="hidden" name="edicao" id="edicao">
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
+                        <input type="submit" disabled id="conf_reserva" class="btn btn-success btn-sm" value="Confirmar reserva">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
@@ -145,21 +145,53 @@
                 if(data['id_emp'] == '2'){ id_emp2 = ""; $('#id_emprestimo').val(id_emp1)}
                 bootbox.alert("Vocẽ selecionou acervos tanto de consulta quanto para empréstimo, decida apenas entre um dos dois tipo!");
                 return false;
-            } else {
-                //console.log(data);
-                html += "<tr>";
-                html += "<td>" + data['titulo'] + "</td>";
-                html += "<td>" + data['cutter'] + "</td>";
-                html += "<td>" + data['subtitulo'] + "</td>";
-                html += "<td>" + data['edicao'] + "</td>";
-                html += "<td>" +
-                        "<button type='button' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                        "<input type='hidden' name='id[]' value='" + data['id_acervo'] + "'>" +
-                        "<input type='hidden' name='edicao[]' value='" + edicao + "'>";
-                html += "</tr>";
-
-                $('#emprestimos tbody').append(html);
             }
+
+            dadosAjax = {
+                'tipo_emprestimo': data['id_emp'],
+                'pessoas_id': $('#pessoa').val(),
+                'id_acervo': data['id_acervo'],
+                'edicao': edicao
+            };
+
+            if (!$('#pessoa').val()) {
+                bootbox.alert("Você deve selecionar um aluno!");
+                return false;
+            } else {
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "{!! route('seracademico.biblioteca.storeReserva') !!}",
+                    data: dadosAjax,
+                    datatype: 'json'
+                }).done(function (retorno) {
+
+                    /*if(retorno[2] == false) {
+                        bootbox.alert(retorno[1]);
+                        return false;
+                    }*/
+
+                    $('#emprestimos tbody tr').remove();
+                    for(var i = 0; i < retorno[2].length; i++){
+                        //console.log(data);
+                        html += "<tr>";
+                        html += "<td>" + retorno[2][i]['titulo'] + "</td>";
+                        html += "<td>" + retorno[2][i]['cutter'] + "</td>";
+                        html += "<td>" + retorno[2][i]['subtitulo'] + "</td>";
+                        html += "<td>" + retorno[2][i]['pivot']['edicao'] + "</td>";
+                        html += "<td>" +
+                                "<button type='button' data='"+retorno[2][i]['pivot']['reserva_id']+"' data2='"+retorno[2][i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                                "<input type='hidden' name='id_emp' value='"+retorno[2][i]['pivot']['reserva_id']+"'>" +
+                                "<input type='hidden' name='edicao' value='" + retorno[2][i]['titulo'] + "'>";
+                        html += "</tr>";
+                    }
+
+                    $('#emprestimos tbody').append(html);
+
+                    validarQtdRawsTable();
+                });
+            }
+
         });
 
         //Excluir tr da tabela
@@ -213,11 +245,68 @@
                         };
                     }
                 }
+
             });
+
+            @if(Session::has('id_pessoa_reserva'))
+                jQuery.ajax({
+                type: 'POST',
+                url: "{!! route('seracademico.biblioteca.findWhereReserva') !!}",
+                datatype: 'json'
+            }).done(function (retorno) {
+
+                var html= "";
+                if(retorno.length > 0 ) {
+                    var reservas = retorno[0]['reserva_exemplar'];
+                    $('#emprestimos tbody tr').remove();
+                    for (var i = 0; i < reservas.length; i++) {
+                        //console.log(data);
+                        html += "<tr>";
+                        html += "<td>" + reservas[i]['titulo'] + "</td>";
+                        html += "<td>" + reservas[i]['cutter'] + "</td>";
+                        html += "<td>" + reservas[i]['subtitulo'] + "</td>";
+                        html += "<td>" + reservas[i]['pivot']['edicao'] + "</td>";
+                        html += "<td>" +
+                                "<button type='button' data='"+reservas[i]['pivot']['reserva_id']+"' data2='"+reservas[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                                "<input type='hidden' name='id_emp' value='"+reservas[i]['pivot']['reserva_id']+"'>" +
+                                "<input type='hidden' name='edicao' value='" + reservas[i]['titulo'] + "'>";
+                        html += "</tr>";
+                    }
+
+                    $('#emprestimos tbody').append(html);
+                    $('#data').val("");
+                }
+
+            });
+            @endif
         });
 
         $(document).on('submit', '#form', function (event) {
-            location.reload();
+
         });
+
+        $(document).on('click', 'button.remove', function (event) {
+            event.preventDefault();
+            var id = $(this).attr('data');
+            var id2 = $(this).attr('data2');
+            jQuery.ajax({
+                type: 'get',
+                url: "deleteReserva/"+id+"/"+id2,
+                datatype: 'json'
+            }).done(function (retorno) {
+                validarQtdRawsTable()
+            });
+        });
+
+        //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
+        function validarQtdRawsTable(){
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    $('#conf_reserva').prop('disabled', true);
+                } else {
+                    $('#conf_reserva').prop('disabled', false);
+                }
+            });
+        }
     </script>
 @stop

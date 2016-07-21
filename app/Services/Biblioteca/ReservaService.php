@@ -74,10 +74,33 @@ class ReservaService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findWhere($dados)
+    {
+        $relacionamentos = [
+            'reservaExemplar',
+        ];
+
+        #Recuperando o registro no banco de dados
+        $emprestar = $this->repository->with($relacionamentos)->findWhere(['pessoas_id' => $dados['pessoas_id'], 'status' => '0']);
+
+        #Verificando se o registro foi encontrado
+        if(!$emprestar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $emprestar;
+    }
+
+    /**
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Reserva
+    public function store(array $data)
     {
         //dd($data);
 
@@ -88,26 +111,43 @@ class ReservaService
         $data['data'] = $dataFormat;
         $data['data_vencimento'] = $dataFormat;
         $data['codigo'] = $codigo;
+        $data['status'] = '0';
+        $return = [
+            'msg',
+            'sucesso',
+            'reserva'
+        ];
 
+        $validarReserva = $this->findWhere($data);
+        // dd($validarEmprestimo[0]->emprestimoExemplar());
         #Salvando o registro pincipal
-        $reserva =  $this->repository->create($data);
+        if(count($validarReserva) <= 0) {
+            $reserva =  $this->repository->create($data);
+            $reserva->reservaExemplar()->attach($data['id_acervo']);
+        } else {
+            $reserva = $validarReserva[0];
+            $reserva->reservaExemplar()->attach($data['id_acervo']);
+        }
 
-        $reserva->reservaExemplar()->attach($data['id']);
 
-        for ($i = 0; $i < count($data['edicao']); $i++) {
-            if($data['edicao'][$i] != 'null') {
-                $reservaExem =  $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id'][$i]]);
-                $reservaExem[0]->edicao = $data['edicao'][$i];
+        //for ($i = 0; $i < count($data['edicao']); $i++) {
+            if($data['edicao'] != 'null') {
+                $reservaExem =  $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
+                $reservaExem[0]->edicao = $data['edicao'];
                 $reservaExem[0]->status = 0;
                 $reservaExem[0]->save();
             }
-        }
+       // }
         
-        foreach ($data['id'] as $id) {
-            $acervo =  $this->repoAcervo->find($id);
+        //foreach ($data['id'] as $id) {
+            $acervo =  $this->repoAcervo->find($data['id_acervo']);
             $acervo->situacao_id = '3';
             $acervo->save();
-        }
+        //}
+
+        $reservas = $this->findWhere($data);
+        $return[1] = true;
+        $return[2] = $reservas[0]->reservaExemplar;
 
         #Verificando se foi criado no banco de dados
         if(!$reserva) {
@@ -115,7 +155,40 @@ class ReservaService
         }
 
         #Retorno
-        return $reserva;
+        return $return;
+    }
+
+    public function deleteReserva($id, $id2)
+    {
+
+        /*$idExemplar = \DB::table('bib_emprestimos_exemplares')
+            ->where('id', '=', $id2)
+            ->select('bib_emprestimos_exemplares.exemplar_id')
+            ->get();*/
+
+        /*$exemplar = $this->repoExemplar->find($idExemplar[0]->exemplar_id);
+        if($exemplar->emprestimo_id == '1') {
+            $exemplar->situacao_id = '1';
+            $exemplar->save();
+        } elseif ($exemplar->emprestimo_id == '2') {
+            $exemplar->situacao_id = '3';
+            $exemplar->save();
+        }*/
+
+        \DB::table('bib_reservas_exemplares')
+            ->where('id', '=', $id2)
+            ->where('reserva_id', '=', $id)
+            ->delete();
+
+        #deletando o curso
+        $reserva = $this->find($id);
+
+        if(count($reserva->reservaExemplar) <= 1) {
+            \DB::delete('delete from bib_reservas where id = ?', [$id]);
+        }
+
+        #retorno
+        return true;
     }
 
     /**
