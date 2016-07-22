@@ -67,7 +67,7 @@
                             <input type="hidden" name="edicao" id="edicao">
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" disabled id="conf_reserva" class="btn btn-success btn-sm" value="Confirmar reserva">
+                        <input type="submit" id="conf_reserva" class="btn btn-success btn-sm" value="Confirmar reserva">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
@@ -95,6 +95,7 @@
 
 @section('javascript')
     <script type="text/javascript">
+
         var id_emp1 = "";
         var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
@@ -166,14 +167,14 @@
                     datatype: 'json'
                 }).done(function (retorno) {
 
-                    /*if(retorno[2] == false) {
+                    if(retorno[2] == false) {
                         bootbox.alert(retorno[1]);
                         return false;
-                    }*/
+                    }
 
                     $('#emprestimos tbody tr').remove();
                     for(var i = 0; i < retorno[2].length; i++){
-                        //console.log(data);
+
                         html += "<tr>";
                         html += "<td>" + retorno[2][i]['titulo'] + "</td>";
                         html += "<td>" + retorno[2][i]['cutter'] + "</td>";
@@ -188,7 +189,6 @@
 
                     $('#emprestimos tbody').append(html);
 
-                    validarQtdRawsTable();
                 });
             }
 
@@ -282,6 +282,14 @@
         });
 
         $(document).on('submit', '#form', function (event) {
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    bootbox.alert('você deve selecionar pelo menos um livro');
+                    event.preventDefault();
+                } else {
+                    return;
+                }
+            });
 
         });
 
@@ -294,12 +302,12 @@
                 url: "deleteReserva/"+id+"/"+id2,
                 datatype: 'json'
             }).done(function (retorno) {
-                validarQtdRawsTable()
+
             });
         });
 
         //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
-        function validarQtdRawsTable(){
+        /*function validarQtdRawsTable(){
             $(document).ready(function(){
                 if($('#emprestimos tbody tr').length <= 0){
                     $('#conf_reserva').prop('disabled', true);
@@ -307,6 +315,6 @@
                     $('#conf_reserva').prop('disabled', false);
                 }
             });
-        }
+        }*/
     </script>
 @stop

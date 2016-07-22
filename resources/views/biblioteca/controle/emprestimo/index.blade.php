@@ -75,7 +75,7 @@
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" disabled id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
+                        <input type="submit" id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
@@ -192,8 +192,6 @@
 
                     $('#emprestimos tbody').append(html);
                     $('#data').val(retorno[0]);
-
-                    validarQtdRawsTable();
                 });
             }
         });
@@ -288,7 +286,15 @@
         });
 
         $(document).on('submit', '#form', function (event) {
-            location.reload();
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    bootbox.alert('você deve selecionar pelo menos um exemplar');
+                    event.preventDefault();
+                } else {
+                    return;
+                }
+            });
+
         });
 
         $(document).on('click', 'button.remove', function (event) {
@@ -300,12 +306,12 @@
                 url: "deleteEmprestimo/"+id+"/"+id2,
                 datatype: 'json'
             }).done(function (retorno) {
-                validarQtdRawsTable()
+
             });
         });
 
         //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
-        function validarQtdRawsTable(){
+        /*function validarQtdRawsTable(){
             $(document).ready(function(){
                 if($('#emprestimos tbody tr').length <= 0){
                     $('#conf_emprestimo').prop('disabled', true);
@@ -313,6 +319,6 @@
                     $('#conf_emprestimo').prop('disabled', false);
                 }
             });
-        }
+        }*/
     </script>
 @stop

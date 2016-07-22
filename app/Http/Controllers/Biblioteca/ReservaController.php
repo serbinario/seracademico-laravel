@@ -82,8 +82,6 @@ class ReservaController extends Controller
             ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
             ->having(\DB::raw('sum(bib_exemplares.situacao_id) = count(*) * 5'), '=', '1');
 
-        //dd($rows);
-
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
@@ -215,18 +213,16 @@ class ReservaController extends Controller
      */
     public function gridReservados(Request $request)
     {
-        //$dataObj = new \DateTime('now');
-        //$this->data    = $dataObj->format('d/m/Y');
 
         #Criando a consulta
         $rows = Reserva::join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
             ->with(['reservaExemplar.exemplares'])
-            ->select(
-                ['bib_reservas.codigo',
-                    'bib_reservas.*',
-                    'pessoas.nome',
-                    \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
-                    \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
+            ->select([
+                'bib_reservas.codigo',
+                'bib_reservas.*',
+                'pessoas.nome',
+                \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
+                \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
                 ]);
 
         #Editando a grid

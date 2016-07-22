@@ -102,7 +102,6 @@ class ReservaService
      */
     public function store(array $data)
     {
-        //dd($data);
 
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
@@ -112,14 +111,31 @@ class ReservaService
         $data['data_vencimento'] = $dataFormat;
         $data['codigo'] = $codigo;
         $data['status'] = '0';
+        $parametros = \DB::table('bib_parametros')->select('bib_parametros.*')->where('bib_parametros.codigo', '=', '003')->get();
         $return = [
             'msg',
             'sucesso',
             'reserva'
         ];
 
+        $validarQtdReserva = Reserva::join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->where('bib_reservas.pessoas_id', '=', $data['pessoas_id'])
+            ->where('bib_reservas_exemplares.status', '=', '0')
+            ->groupBy('bib_reservas.pessoas_id')
+            ->select([
+                \DB::raw('count(bib_reservas_exemplares.reserva_id) as qtd'),
+            ])
+            ->get();
+
+        if (isset($validarQtdReserva[0]) && $validarQtdReserva[0]->qtd >= $parametros[0]->valor) {
+            $return[1] = "Limite de até {$parametros[0]->valor} reservas foi atingido";
+            $return[2] = false;
+            return $return;
+        }
+
         $validarReserva = $this->findWhere($data);
-        // dd($validarEmprestimo[0]->emprestimoExemplar());
+
         #Salvando o registro pincipal
         if(count($validarReserva) <= 0) {
             $reserva =  $this->repository->create($data);
@@ -129,21 +145,16 @@ class ReservaService
             $reserva->reservaExemplar()->attach($data['id_acervo']);
         }
 
+        if ($data['edicao'] != 'null') {
+            $reservaExem = $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
+            $reservaExem[0]->edicao = $data['edicao'];
+            $reservaExem[0]->status = 0;
+            $reservaExem[0]->save();
+        }
 
-        //for ($i = 0; $i < count($data['edicao']); $i++) {
-            if($data['edicao'] != 'null') {
-                $reservaExem =  $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
-                $reservaExem[0]->edicao = $data['edicao'];
-                $reservaExem[0]->status = 0;
-                $reservaExem[0]->save();
-            }
-       // }
-        
-        //foreach ($data['id'] as $id) {
-            $acervo =  $this->repoAcervo->find($data['id_acervo']);
-            $acervo->situacao_id = '3';
-            $acervo->save();
-        //}
+        /*$acervo = $this->repoAcervo->find($data['id_acervo']);
+        $acervo->situacao_id = '3';
+        $acervo->save();*/
 
         $reservas = $this->findWhere($data);
         $return[1] = true;
@@ -214,7 +225,6 @@ class ReservaService
 
         for ($i = 0; $i < count($data['id']); $i++) {
             $exemplar = Exemplar::join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-                //->with(['reservaExemplar.exemplares'])
                 ->where('bib_arcevos.id', '=', $data['id'][$i])
                 ->where('bib_exemplares.situacao_id', '=', '1')
                 ->orWhere('bib_exemplares.situacao_id', '=', '3')
