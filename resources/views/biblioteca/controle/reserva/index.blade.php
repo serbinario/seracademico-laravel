@@ -117,6 +117,7 @@
             event.preventDefault();
             if ($(this).parent().parent().hasClass('selected')) {
                 $(this).parent().parent().removeClass('selected');
+                return false;
             }
             else {
                 table.$('tr.selected').removeClass('selected');
