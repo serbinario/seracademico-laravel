@@ -102,12 +102,11 @@ class Professor extends Model implements Transformable
     public function scopeGetValues($query)
     {
         $query
-            ->join('pessoas.id', '=', 'professores.pessoa_id')
+            ->join('pessoas.id', '=', 'fac_professores.pessoa_id')
             ->select([
-                'professores.id',
+                'fac_professores.id',
                 'pessoas.nome'
-            ])
-            ->get();
+            ]);
     }
 
 }
