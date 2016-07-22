@@ -61,7 +61,7 @@ class TurmaController extends Controller
 
             #retorno
             return view('graduacao.turma.index', compact('loadFields', 'semestres'));
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
