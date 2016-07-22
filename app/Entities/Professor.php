@@ -96,4 +96,18 @@ class Professor extends Model implements Transformable
         return $this->belongsTo(Titulacao::class, "titulacao_id");
     }
 
+    /**
+     * @param $query
+     */
+    public function scopeGetValues($query)
+    {
+        $query
+            ->join('pessoas.id', '=', 'professores.pessoa_id')
+            ->select([
+                'professores.id',
+                'pessoas.nome'
+            ])
+            ->get();
+    }
+
 }

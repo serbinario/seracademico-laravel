@@ -34,7 +34,7 @@ class ReportController extends Controller
     {
         # Recuperando os dados do relatório
         $report = $this->report->generate($idReport);
-        
+
         # Criando o relatório
         return \PDF::loadView('reports.report', ['dados' => $report])->stream();
     }
