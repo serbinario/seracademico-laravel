@@ -62,8 +62,9 @@ class EmprestarController extends Controller
     public function index()
     {
         $loadFields = $this->service->load($this->loadFields);
+        $emprestimosPendentes = $this->service->findWherePendencias();
         
-        return view('biblioteca.controle.emprestimo.index', compact('loadFields'));
+        return view('biblioteca.controle.emprestimo.index', compact('loadFields', 'emprestimosPendentes'));
     }
 
     /**
@@ -152,7 +153,7 @@ class EmprestarController extends Controller
         
         $data = $this->service->dataDevolucao($req);
 
-        $request->session()->put('id_pessoa', $request['pessoas_id']);
+        $request->session()->put('id_pessoa', ['id' => $request['pessoas_id'], 'nome' => $request['pessoas_nome']]);
 
         return $data;
     }
@@ -162,9 +163,9 @@ class EmprestarController extends Controller
      */
     public function findWhereEmprestimo(Request $request)
     {
-        $id = $request->session()->get('id_pessoa');
+        $pessoaId = $request->request->get('id_pessoa');
 
-        $data = $this->service->findWhere(['pessoas_id' => $id]);
+        $data = $this->service->findWhere(['pessoas_id' => $pessoaId]);
 
         return $data;
     }

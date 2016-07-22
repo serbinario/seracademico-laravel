@@ -118,6 +118,7 @@ class ReservaService
             'reserva'
         ];
 
+        //Busca quantidade de reserva do aluno
         $validarQtdReserva = Reserva::join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
             ->where('bib_reservas.pessoas_id', '=', $data['pessoas_id'])
@@ -128,15 +129,17 @@ class ReservaService
             ])
             ->get();
 
+        //Valida se a quantidade de reserva atinge o limite máximo
         if (isset($validarQtdReserva[0]) && $validarQtdReserva[0]->qtd >= $parametros[0]->valor) {
             $return[1] = "Limite de até {$parametros[0]->valor} reservas foi atingido";
             $return[2] = false;
             return $return;
         }
 
+        //busca o registro de reserva que está sendo usando no momento para reservas
         $validarReserva = $this->findWhere($data);
 
-        #Salvando o registro pincipal
+        #Salvando o registro pincipal (caso aja um registro já sendo usado, não será feito um novo registro)
         if(count($validarReserva) <= 0) {
             $reserva =  $this->repository->create($data);
             $reserva->reservaExemplar()->attach($data['id_acervo']);
@@ -145,6 +148,7 @@ class ReservaService
             $reserva->reservaExemplar()->attach($data['id_acervo']);
         }
 
+        //Atualizando as reservas para status em que ainda n foi feito emprestimos para as mesmas de acordo com a edição
         if ($data['edicao'] != 'null') {
             $reservaExem = $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
             $reservaExem[0]->edicao = $data['edicao'];
@@ -156,6 +160,7 @@ class ReservaService
         $acervo->situacao_id = '3';
         $acervo->save();*/
 
+        //Recuperando a reserva atual para ser listada novamente ao dar refresh na página
         $reservas = $this->findWhere($data);
         $return[1] = true;
         $return[2] = $reservas[0]->reservaExemplar;
@@ -172,20 +177,7 @@ class ReservaService
     public function deleteReserva($id, $id2)
     {
 
-        /*$idExemplar = \DB::table('bib_emprestimos_exemplares')
-            ->where('id', '=', $id2)
-            ->select('bib_emprestimos_exemplares.exemplar_id')
-            ->get();*/
-
-        /*$exemplar = $this->repoExemplar->find($idExemplar[0]->exemplar_id);
-        if($exemplar->emprestimo_id == '1') {
-            $exemplar->situacao_id = '1';
-            $exemplar->save();
-        } elseif ($exemplar->emprestimo_id == '2') {
-            $exemplar->situacao_id = '3';
-            $exemplar->save();
-        }*/
-
+        //Deletando reserva
         \DB::table('bib_reservas_exemplares')
             ->where('id', '=', $id2)
             ->where('reserva_id', '=', $id)
@@ -207,8 +199,6 @@ class ReservaService
      */
     public function saveEmprestimo(array $data)
     {
-        
-        //dd($data);
         
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
@@ -264,8 +254,6 @@ class ReservaService
                 $reservaExem[0]->status = 1;
                 $reservaExem[0]->save();
         }
-
-        //dd($emprestimo);
 
         #Retorno
         return $emprestar;
