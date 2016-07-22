@@ -4,10 +4,11 @@ namespace Seracademico\Validators\Biblioteca;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
+use Seracademico\Validators\TraitReplaceRulesValidator;
 
 class EmprestarValidator extends LaravelValidator
 {
-    //use TraitReplaceRulesValidator;
+    use TraitReplaceRulesValidator;
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [

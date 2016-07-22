@@ -74,12 +74,34 @@ class ReservaService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findWhere($dados)
+    {
+        $relacionamentos = [
+            'reservaExemplar',
+        ];
+
+        #Recuperando o registro no banco de dados
+        $emprestar = $this->repository->with($relacionamentos)->findWhere(['pessoas_id' => $dados['pessoas_id'], 'status' => '0']);
+
+        #Verificando se o registro foi encontrado
+        if(!$emprestar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $emprestar;
+    }
+
+    /**
      * @param array $data
      * @return array
      */
-    public function store(array $data) : Reserva
+    public function store(array $data)
     {
-        //dd($data);
 
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
@@ -88,26 +110,55 @@ class ReservaService
         $data['data'] = $dataFormat;
         $data['data_vencimento'] = $dataFormat;
         $data['codigo'] = $codigo;
+        $data['status'] = '0';
+        $parametros = \DB::table('bib_parametros')->select('bib_parametros.*')->where('bib_parametros.codigo', '=', '003')->get();
+        $return = [
+            'msg',
+            'sucesso',
+            'reserva'
+        ];
+
+        $validarQtdReserva = Reserva::join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->where('bib_reservas.pessoas_id', '=', $data['pessoas_id'])
+            ->where('bib_reservas_exemplares.status', '=', '0')
+            ->groupBy('bib_reservas.pessoas_id')
+            ->select([
+                \DB::raw('count(bib_reservas_exemplares.reserva_id) as qtd'),
+            ])
+            ->get();
+
+        if (isset($validarQtdReserva[0]) && $validarQtdReserva[0]->qtd >= $parametros[0]->valor) {
+            $return[1] = "Limite de até {$parametros[0]->valor} reservas foi atingido";
+            $return[2] = false;
+            return $return;
+        }
+
+        $validarReserva = $this->findWhere($data);
 
         #Salvando o registro pincipal
-        $reserva =  $this->repository->create($data);
-
-        $reserva->reservaExemplar()->attach($data['id']);
-
-        for ($i = 0; $i < count($data['edicao']); $i++) {
-            if($data['edicao'][$i] != 'null') {
-                $reservaExem =  $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id'][$i]]);
-                $reservaExem[0]->edicao = $data['edicao'][$i];
-                $reservaExem[0]->status = 0;
-                $reservaExem[0]->save();
-            }
+        if(count($validarReserva) <= 0) {
+            $reserva =  $this->repository->create($data);
+            $reserva->reservaExemplar()->attach($data['id_acervo']);
+        } else {
+            $reserva = $validarReserva[0];
+            $reserva->reservaExemplar()->attach($data['id_acervo']);
         }
-        
-        foreach ($data['id'] as $id) {
-            $acervo =  $this->repoAcervo->find($id);
-            $acervo->situacao_id = '3';
-            $acervo->save();
+
+        if ($data['edicao'] != 'null') {
+            $reservaExem = $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
+            $reservaExem[0]->edicao = $data['edicao'];
+            $reservaExem[0]->status = 0;
+            $reservaExem[0]->save();
         }
+
+        /*$acervo = $this->repoAcervo->find($data['id_acervo']);
+        $acervo->situacao_id = '3';
+        $acervo->save();*/
+
+        $reservas = $this->findWhere($data);
+        $return[1] = true;
+        $return[2] = $reservas[0]->reservaExemplar;
 
         #Verificando se foi criado no banco de dados
         if(!$reserva) {
@@ -115,7 +166,40 @@ class ReservaService
         }
 
         #Retorno
-        return $reserva;
+        return $return;
+    }
+
+    public function deleteReserva($id, $id2)
+    {
+
+        /*$idExemplar = \DB::table('bib_emprestimos_exemplares')
+            ->where('id', '=', $id2)
+            ->select('bib_emprestimos_exemplares.exemplar_id')
+            ->get();*/
+
+        /*$exemplar = $this->repoExemplar->find($idExemplar[0]->exemplar_id);
+        if($exemplar->emprestimo_id == '1') {
+            $exemplar->situacao_id = '1';
+            $exemplar->save();
+        } elseif ($exemplar->emprestimo_id == '2') {
+            $exemplar->situacao_id = '3';
+            $exemplar->save();
+        }*/
+
+        \DB::table('bib_reservas_exemplares')
+            ->where('id', '=', $id2)
+            ->where('reserva_id', '=', $id)
+            ->delete();
+
+        #deletando o curso
+        $reserva = $this->find($id);
+
+        if(count($reserva->reservaExemplar) <= 1) {
+            \DB::delete('delete from bib_reservas where id = ?', [$id]);
+        }
+
+        #retorno
+        return true;
     }
 
     /**
@@ -141,7 +225,6 @@ class ReservaService
 
         for ($i = 0; $i < count($data['id']); $i++) {
             $exemplar = Exemplar::join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-                //->with(['reservaExemplar.exemplares'])
                 ->where('bib_arcevos.id', '=', $data['id'][$i])
                 ->where('bib_exemplares.situacao_id', '=', '1')
                 ->orWhere('bib_exemplares.situacao_id', '=', '3')

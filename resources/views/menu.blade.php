@@ -231,6 +231,7 @@
                                 <li><a href="{{ route('seracademico.biblioteca.reservados') }}"><i class="flaticon-read"></i> Reservas</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexParametro') }}"><i class="material-icons">perm_identity</i> Parâmetros</a></li>
                     </ul>
                 </li>
                 <li>

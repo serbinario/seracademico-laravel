@@ -75,11 +75,11 @@
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" class="btn btn-success btn-sm" value="Confirmar emprestimo">
+                        <input type="submit" id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">
-                            <table id="emprestimos" class="display table table-bordered" cellspacing="0" width="100%">
+                            <table id="emprestimos"  class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th>Acervo - Título</th>
@@ -128,6 +128,7 @@
             event.preventDefault();
             if ($(this).parent().parent().hasClass('selected')) {
                 $(this).parent().parent().removeClass('selected');
+                return false;
             }
             else {
                 table.$('tr.selected').removeClass('selected');
@@ -204,6 +205,9 @@
                 tr.fadeOut(400, function () {
                     tr.remove();
                 });
+
+                validarQtdRawsTable();
+
                 return false;
             };
         })(jQuery);
@@ -283,7 +287,15 @@
         });
 
         $(document).on('submit', '#form', function (event) {
-            location.reload();
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    bootbox.alert('você deve selecionar pelo menos um exemplar');
+                    event.preventDefault();
+                } else {
+                    return;
+                }
+            });
+
         });
 
         $(document).on('click', 'button.remove', function (event) {
@@ -298,5 +310,16 @@
 
             });
         });
+
+        //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
+        /*function validarQtdRawsTable(){
+            $(document).ready(function(){
+                if($('#emprestimos tbody tr').length <= 0){
+                    $('#conf_emprestimo').prop('disabled', true);
+                } else {
+                    $('#conf_emprestimo').prop('disabled', false);
+                }
+            });
+        }*/
     </script>
 @stop
