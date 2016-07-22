@@ -35,7 +35,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ dd()  }}
             </div>
         </div>
     </div>
