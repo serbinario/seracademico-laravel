@@ -614,6 +614,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
             Route::post('queryByselect2Pessoa', ['as' => 'queryByselect2Pessoa', 'uses' => 'UtilController@queryByselect2Pessoa']);
         });
+
+        # Rota para relatórios
+        Route::get('report/{id}', ['as' => 'report', 'uses' => 'ReportController@report']);
     });
 
     Route::get('indexConsulta', ['as' => 'indexConsulta', 'uses' => 'Biblioteca\ConsultaController@index']);
