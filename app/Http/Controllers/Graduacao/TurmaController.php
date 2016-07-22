@@ -32,7 +32,7 @@ class TurmaController extends Controller
         'Graduacao\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
-        'Professor',
+        'Professor|getValues',
         'Graduacao\Semestre'
     ];
 
@@ -61,7 +61,7 @@ class TurmaController extends Controller
 
             #retorno
             return view('graduacao.turma.index', compact('loadFields', 'semestres'));
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -184,7 +184,7 @@ return [
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
         # Provider dos parametros do sistema
-        \Seracademico\Providers\ParametroServiceProvider::class
+        \Seracademico\Providers\ParametroServiceProvider::class,
     ],
 
     /*

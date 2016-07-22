@@ -3,6 +3,8 @@
 namespace Seracademico\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Seracademico\Contracts\Report;
+use Seracademico\Uteis\SimpleReport;
 
 class SeracademicoRepositoryProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(Report::class, SimpleReport::class);
+        
         $this->app->bind(
             \Seracademico\Repositories\Graduacao\VestibulandoRepository::class,
             \Seracademico\Repositories\Graduacao\VestibulandoRepositoryEloquent::class
