@@ -66,6 +66,7 @@ class VestibularController extends Controller
                 'data_prova',
                 'data_inicial',
                 'data_final',
+                'fac_vestibulares.created_at as data_criacao',
                 \DB::raw('IF(ativo, "Ativo", "Desativado") as ativo'),
             ]);
 
