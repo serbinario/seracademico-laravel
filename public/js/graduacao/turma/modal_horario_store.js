@@ -12,7 +12,7 @@ function loadFields()
             'Graduacao\\Disciplina|disciplinasOfTurma,' + idTurma,
             'Sala',
             'Dia|diasValidos,' + idTurma,
-            'Professor'
+            'Professor|getValues'
         ]
     };
 
