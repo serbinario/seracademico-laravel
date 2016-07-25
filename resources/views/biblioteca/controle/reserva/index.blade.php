@@ -60,6 +60,27 @@
                         </table>
                     </div>
                 </div>
+                @if(count($reservasPendentes) > 0)
+                    <div class="col-md-6">
+                        <div class="table-responsive no-padding">
+                            <table id="emprestimos-pendente"  class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">Reservas pendentes</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($reservasPendentes as $reserva)
+                                    <tr>
+                                        <td>{{$reserva->pessoa->nome}}</td>
+                                        <td style="width: 10%;"><a href="#" data="{{$reserva->pessoa->id}}" id="continuar">Continuar</a></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
                 {!! Form::open(['route'=>'seracademico.biblioteca.confirmarReserva', 'method' => "POST", 'id' => 'form' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
@@ -95,7 +116,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-
+        select2();
         var id_emp1 = "";
         var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
@@ -249,38 +270,97 @@
 
             });
 
-            @if(Session::has('id_pessoa_reserva'))
-                jQuery.ajax({
-                type: 'POST',
-                url: "{!! route('seracademico.biblioteca.findWhereReserva') !!}",
-                datatype: 'json'
-            }).done(function (retorno) {
+            $(document).ready(function(){
 
-                var html= "";
-                if(retorno.length > 0 ) {
-                    var reservas = retorno[0]['reserva_exemplar'];
-                    $('#emprestimos tbody tr').remove();
-                    for (var i = 0; i < reservas.length; i++) {
-                        //console.log(data);
-                        html += "<tr>";
-                        html += "<td>" + reservas[i]['titulo'] + "</td>";
-                        html += "<td>" + reservas[i]['cutter'] + "</td>";
-                        html += "<td>" + reservas[i]['subtitulo'] + "</td>";
-                        html += "<td>" + reservas[i]['pivot']['edicao'] + "</td>";
-                        html += "<td>" +
-                                "<button type='button' data='"+reservas[i]['pivot']['reserva_id']+"' data2='"+reservas[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                                "<input type='hidden' name='id_emp' value='"+reservas[i]['pivot']['reserva_id']+"'>" +
-                                "<input type='hidden' name='edicao' value='" + reservas[i]['titulo'] + "'>";
-                        html += "</tr>";
-                    }
+                $('#continuar').click(function(event){
+                    event.preventDefault();
 
-                    $('#emprestimos tbody').append(html);
-                    $('#data').val("");
-                }
+                    var idPessoa = $('#continuar').attr('data');
 
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: "{!! route('seracademico.biblioteca.findWhereReserva') !!}",
+                        datatype: 'json',
+                        data: {'id_pessoa' : idPessoa}
+                    }).done(function (retorno) {
+
+                        var html= "";
+                        if(retorno.length > 0 ) {
+                            var reservas = retorno[0]['reserva_exemplar'];
+                            var pessoaId = retorno[0]['pessoa']['id'];
+                            var pessoaNome = retorno[0]['pessoa']['nome'];
+
+                            $('#emprestimos tbody tr').remove();
+                            for (var i = 0; i < reservas.length; i++) {
+
+                                html += "<tr>";
+                                html += "<td>" + reservas[i]['titulo'] + "</td>";
+                                html += "<td>" + reservas[i]['cutter'] + "</td>";
+                                html += "<td>" + reservas[i]['subtitulo'] + "</td>";
+                                html += "<td>" + reservas[i]['pivot']['edicao'] + "</td>";
+                                html += "<td>" +
+                                        "<button type='button' data='"+reservas[i]['pivot']['reserva_id']+"' data2='"+reservas[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                                        "<input type='hidden' name='id_emp' value='"+reservas[i]['pivot']['reserva_id']+"'>" +
+                                        "<input type='hidden' name='edicao' value='" + reservas[i]['titulo'] + "'>";
+                                html += "</tr>";
+                            }
+
+                            var option = "<option selected value='"+pessoaId+"'>"+pessoaNome+"</option>";
+
+                            $('#pessoa option').remove();
+                            $('#pessoa').append(option);
+                            select2();
+
+                            $('#emprestimos tbody').append(html);
+                            $('#data').val("");
+                        }
+
+                    });
+                });
             });
-            @endif
         });
+
+        function select2(){
+            //consulta via select2 responsável
+            $("#pessoa").select2({
+                placeholder: 'Selecione uma pessoa',
+                minimumInputLength: 1,
+                width: 400,
+                ajax: {
+                    type: 'POST',
+                    url: "{{ route('seracademico.util.queryByselect2Pessoa')  }}",
+                    dataType: 'json',
+                    delay: 250,
+                    crossDomain: true,
+                    data: function (params) {
+                        return {
+                            'search':     params.term, // search term
+                            'tableName':  'pessoas',
+                            'fieldName':  'nome',
+                            'page':       params.page
+                        };
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    },
+                    processResults: function (data, params) {
+
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    }
+                }
+            });
+        }
 
         $(document).on('submit', '#form', function (event) {
             $(document).ready(function(){
@@ -288,9 +368,13 @@
                     bootbox.alert('você deve selecionar pelo menos um livro');
                     event.preventDefault();
                 } else {
-                    return;
+                    setTimeout(explode, 1000);
                 }
             });
+
+            function explode(){
+                location.reload();
+            }
 
         });
 
@@ -307,15 +391,6 @@
             });
         });
 
-        //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
-        /*function validarQtdRawsTable(){
-            $(document).ready(function(){
-                if($('#emprestimos tbody tr').length <= 0){
-                    $('#conf_reserva').prop('disabled', true);
-                } else {
-                    $('#conf_reserva').prop('disabled', false);
-                }
-            });
-        }*/
+
     </script>
 @stop

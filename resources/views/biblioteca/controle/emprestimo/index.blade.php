@@ -229,8 +229,6 @@
                     tr.remove();
                 });
 
-                validarQtdRawsTable();
-
                 return false;
             };
         })(jQuery);
@@ -332,11 +330,13 @@
                     bootbox.alert('você deve selecionar pelo menos um exemplar');
                     event.preventDefault();
                 } else {
-                    return;
-
+                    setTimeout(explode, 1000);
                 }
             });
 
+            function explode(){
+                location.reload();
+            }
         });
 
         $(document).on('click', 'button.remove', function (event) {
@@ -351,16 +351,5 @@
 
             });
         });
-
-        //validar quantidade de linha na tabela para desabilitar e habilitar o botão de confirmar emprestimo
-        /*function validarQtdRawsTable(){
-            $(document).ready(function(){
-                if($('#emprestimos tbody tr').length <= 0){
-                    $('#conf_emprestimo').prop('disabled', true);
-                } else {
-                    $('#conf_emprestimo').prop('disabled', false);
-                }
-            });
-        }*/
     </script>
 @stop
