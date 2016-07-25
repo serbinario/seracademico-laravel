@@ -125,6 +125,7 @@ class VestibulandoController extends Controller
                 'turno2.nome as nomeTurno2',
                 'turno3.nome as nomeTurno3',
                 'fac_vestibulares.nome as vestibular',
+                'fac_vestibulares.id as idVestibular',
                 'tipos_taxas.id as idTipoTaxa',
                 'fac_vestibulandos_financeiros.pago',
                 \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
@@ -438,6 +439,7 @@ class VestibulandoController extends Controller
             # Populando o array de retorno
             $dadosRetorno['curso_id'] = isset($vestibulando->aluno->id) ? $vestibulando->aluno->curriculos()->first()->curso->id : null;
             $dadosRetorno['turno_id'] = isset($vestibulando->aluno->turno->id) ? $vestibulando->aluno->turno->id : null;
+            $dadosRetorno['nomeTurno'] = isset($vestibulando->aluno->turno->nome) ? $vestibulando->aluno->turno->nome : null;
             $dadosRetorno['semestre_id'] = $semestreVigente->id;
             //$dadosRetorno['periodo'] = isset($vestibulando->aluno) ? $vestibulando->aluno->semestres()->first()->pivot->periodo : null;
             $dadosRetorno['data_inclusao'] = isset($vestibulando->aluno->data_transferencia) ? $vestibulando->aluno->data_transferencia : null;

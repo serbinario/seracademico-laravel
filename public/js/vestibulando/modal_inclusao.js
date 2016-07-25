@@ -11,7 +11,6 @@ function loadFieldsEditar()
     var dados =  {
         'models' : [
             'Graduacao\\Curso|byVestibulando,' + idVestibulando,
-            'Turno',
             'FormaAdmissao|byId,1',
             'Graduacao\\Semestre'
         ]
@@ -52,19 +51,12 @@ function builderHtmlFieldsEditar (dados) {
         if (retorno.success) {
             // Variáveis que armazenaram o html
             var htmlCurso     = "";
-            var htmlTurno     = "";
             var htmlFAdmissao = "";
             var htmlSemestre  = "";
 
             // Percorrendo o array de cursos
             for (var i = 0; i < dados['graduacao\\curso'].length; i++) {
                 htmlCurso += "<option value='" + dados['graduacao\\curso'][i].id + "'>" + dados['graduacao\\curso'][i].nome + "</option>";
-
-            }
-
-            // Percorrendo o array de turnos
-            for (var i = 0; i < dados['turno'].length; i++) {
-                htmlTurno += "<option value='" + dados['turno'][i].id + "'>" + dados['turno'][i].nome + "</option>";
 
             }
 
@@ -83,22 +75,34 @@ function builderHtmlFieldsEditar (dados) {
             $("#curso_id option").remove();
             $("#curso_id").append(htmlCurso);
 
-            $("#turno_id option").remove();
-            $("#turno_id").append(htmlTurno);
-
             $("#forma_admissao_id option").remove();
             $("#forma_admissao_id").append(htmlFAdmissao);
 
             $("#semestre_id option").remove();
             $("#semestre_id").append(htmlSemestre);
 
-            // Setando os valores do model no formulário
-            $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
-            $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
-            $('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);
-            $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
-            $('#data_inclusao').val(retorno.dados.data_inclusao);
-            //$('#periodo').val(retorno.dados.periodo);
+            // Verificando se a transferência já foi realizada
+            if (retorno.dados.curso_id) {
+                // Setando os valores do model no formulário
+                $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
+                $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
+                $('#turno_id').html('<option value="' + retorno.dados.turno_id + '">' + retorno.dados.nomeTurno + '</option>');
+                $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
+                $('#data_inclusao').val(retorno.dados.data_inclusao);
+
+                //$('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);
+                //$('#periodo').val(retorno.dados.periodo);
+            } else {
+                // Habilitando a o campo de curso
+                $('#curso_id').prop('disabled', false);
+
+                // Recuperando o id do curso selecionado
+                var cursoId = $("#curso_id").find("option:selected").val();
+
+                // carregando os campos
+                getTurnosByCurso(idVestibular ,cursoId, '#turno_id');
+            }
+
 
             // Abrindo o modal de inserir disciplina
             $("#modal-inclusao").modal({show : true});
@@ -142,3 +146,53 @@ $('#btnUpdateInclusao').click(function() {
         }
     });
 });
+
+/**
+ *
+ * Evento para recuperar as opções de turno do curso
+ */
+$(document).on('change', '#curso_id', function () {
+    // Recuperando o id do curso
+    var idCurso = $(this).find('option:selected').val();
+
+    // verificando se o curso foi selecionado
+    if(idCurso) {
+        // Gerando os options
+        getTurnosByCurso(idVestibular, idCurso, '#turno_id');
+    }
+});
+
+
+/**
+ *
+ * Método que recupera os turnos correspondentes
+ * e carrega os selects no formulário
+ *
+ * @param idCurso
+ * @param idHtml
+ */
+function getTurnosByCurso (idVestibular, idCurso, idHtml) {
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/vestibular/curso/turno/getTurnosByCurso',
+        headers: {
+        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+    },
+    data: {'idCurso' : idCurso, 'idVestibular' : idVestibular},
+    datatype: 'json'
+}).done(function (json) {
+        // Variável que armazenará o html
+        var options = '';
+
+        // Criando os options
+        options += '<option value="">Selecione um Turno</option>';
+        for (var i = 0; i < json.data.length; i++) {
+            options += '<option value="' + json.data[i]['id'] + '">' + json.data[i]['nome'] + '</option>';
+        }
+
+        // Gerando o html
+        $(idHtml).find('option').remove();
+        $(idHtml).append(options);
+    });
+}

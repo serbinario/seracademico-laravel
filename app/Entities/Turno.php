@@ -23,6 +23,7 @@ class Turno extends Model implements Transformable
      */
     public function scopeUniqueVestibularCurso($query, $value)
     {
+
         return $query
             ->select(['fac_turnos.id', 'fac_turnos.nome'])
             ->whereNotIn('fac_turnos.id', function ($query) use($value) {
@@ -34,4 +35,28 @@ class Turno extends Model implements Transformable
             });
     }
 
+    /**
+     * @param $query
+     * @param $vestibular
+     * @param $curso
+     * @return mixed
+     */
+    public function scopeUniqueVestibularAndCurso($query, $vestibular, $curso)
+    {
+        if(is_numeric($curso)) {
+            return $query
+                ->select(['fac_turnos.id', 'fac_turnos.nome'])
+                ->whereNotIn('fac_turnos.id', function ($query) use($vestibular, $curso) {
+                    return $query
+                        ->from('fac_vestibular_curso_turno')
+                        ->select(['fac_vestibular_curso_turno.turno_id'])
+                        ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.id', '=', 'fac_vestibular_curso_turno.vestibular_curso_id')
+                        ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulares_cursos.vestibular_id')
+                        ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+                        ->where('fac_cursos.id', $curso)
+                        ->where('fac_vestibulares.id', $vestibular)
+                        ->get();
+                });
+        }
+    }
 }

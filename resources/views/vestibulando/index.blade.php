@@ -237,8 +237,8 @@
             } );
         } );
 
-        // Id do vestibulando
-        var idVestibulando;
+        // Id do vestibulando e vestibular
+        var idVestibulando, idVestibular;
 
         // Evento para modal de notas
         $(document).on('click', '#notas', function () {
@@ -251,8 +251,9 @@
 
         // Evento para modal de transfência de vestibulando
         $(document).on('click', '#inclusao', function () {
-            // Recuperando o id do vestibulando
+            // Recuperando o id do vestibulando e vestibular
             idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
+            idVestibular   = table.row($(this).parent().parent().parent().parent().parent()).data().idVestibular;
 
             // Executando a tabela de notas
             runInclusao();
