@@ -57,10 +57,34 @@ class EmprestarService
      * @return mixed
      * @throws \Exception
      */
+    public function findWherePendencias()
+    {
+        $relacionamentos = [
+            'pessoa'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $emprestar = $this->repository->with($relacionamentos)->findWhere(['status' => '0']);
+
+        #Verificando se o registro foi encontrado
+        if(!$emprestar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $emprestar;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function findWhere($dados)
     {
         $relacionamentos = [
             'emprestimoExemplar.acervo',
+            'pessoa'
         ];
 
         #Recuperando o registro no banco de dados
@@ -95,21 +119,14 @@ class EmprestarService
             'emprestimos'
         ];
 
+        //Buscando o exemplar que esteja sendo emprestado
         $validarEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
             ->where('bib_emprestimos_exemplares.exemplar_id', '=', $dados['id'])
             ->where('bib_emprestimos.status', '=', '0')
             ->select('bib_emprestimos_exemplares.*')
             ->get();
 
-        /*$validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
-            ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
-            ->where('bib_emprestimos.status', '=', '0')
-            ->groupBy('bib_emprestimos_exemplares.emprestimo_id')
-            ->select([
-                \DB::raw('count(bib_emprestimos_exemplares.emprestimo_id) as qtd')
-            ])
-            ->get();*/
-
+        //Busca quantidade de emprestimos do aluno
         $validarQtdEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
             ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
             ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
@@ -120,6 +137,7 @@ class EmprestarService
             ])
             ->get();
 
+        //Verifica se o exemplar está sendo emprestado, e se o limite de emprestimos foi atingido
         if(count($validarEmprestimo) > 0) {
             $return[1] = 'Este exemplar já está sendo emprestado no momento';
             $return[2] = false;
@@ -131,6 +149,7 @@ class EmprestarService
         }
 
 
+        //Gerando a data de devolução conforme a situação de emprestimo do livro
         if($dados['tipo_emprestimo'] == '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
             $dia = $dias[0]->valor - 1;
@@ -143,9 +162,11 @@ class EmprestarService
         $data = $dataObj->format('d/m/Y');
         $dados['data_devolucao'] = $data;
 
+        //Salvando os emprestimos no banco
         $result = $this->store($dados);
+
+        //Recuperando o emprestimo atual para ser listada novamente ao dar refresh na página
         $empestimos = $this->findWhere($dados);
-        //dd($empestimos[0]->emprestimoExemplar);
         $return[0] = $data;
         $return[2] = true;
         $return[3] = $empestimos[0]->emprestimoExemplar;
@@ -171,9 +192,10 @@ class EmprestarService
         $data['codigo'] = $codigo;
         $data['status'] = '0';
 
+        //busca o registro do emprestimo que está sendo usando no momento
         $validarEmprestimo = $this->findWhere($data);
-       // dd($validarEmprestimo[0]->emprestimoExemplar());
-        #Salvando o registro pincipal
+
+        #Salvando o registro pincipal (caso aja um registro já sendo usado, não será feito um novo registro)
         if(count($validarEmprestimo) <= 0) {
             $emprestar =  $this->repository->create($data);
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
@@ -182,6 +204,7 @@ class EmprestarService
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         }
 
+        //Alterando a situação do emprestimo para emprestado
         $exemplar = $this->repoExemplar->find($data['id']);
         $exemplar->situacao_id = '5';
         $exemplar->save();

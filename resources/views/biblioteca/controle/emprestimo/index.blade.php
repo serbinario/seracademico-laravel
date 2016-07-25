@@ -66,6 +66,27 @@
                         </table>
                     </div>
                 </div>
+                @if(count($emprestimosPendentes) > 0)
+                <div class="col-md-6">
+                    <div class="table-responsive no-padding">
+                        <table id="emprestimos-pendente"  class="display table table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Empréstimos pendentes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($emprestimosPendentes as $emprestimo)
+                                <tr>
+                                    <td>{{$emprestimo->pessoa->nome}}</td>
+                                    <td style="width: 10%;"><a href="#" data="{{$emprestimo->pessoa->id}}" id="continuar">Continuar</a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @endif
                 {!! Form::open(['route'=>'seracademico.biblioteca.confirmarEmprestimo', 'method' => "POST", 'id' => 'form', 'target' => '__blank' ]) !!}
                     <div class="col-md-12">
                         <div class="form-group col-md-5">
@@ -104,6 +125,7 @@
 
 @section('javascript')
     <script type="text/javascript">
+        select2();
         var id_emp1 = "";
         var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
@@ -157,7 +179,8 @@
             dadosAjax = {
                 'tipo_emprestimo': data['id_emp'],
                 'id': data['id'],
-                'pessoas_id': $('#pessoa').val()
+                'pessoas_id': $('#pessoa').val(),
+                'pessoas_nome': $('select[name=pessoas_id] option:selected').text()
             };
 
             if (!$('#pessoa').val()) {
@@ -213,6 +236,55 @@
         })(jQuery);
 
         $(document).ready(function(){
+
+            $('#continuar').click(function(event){
+                event.preventDefault();
+
+                var idPessoa = $('#continuar').attr('data');
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "{!! route('seracademico.biblioteca.findWhereEmprestimo') !!}",
+                    datatype: 'json',
+                    data: {'id_pessoa' : idPessoa},
+                }).done(function (retorno) {
+
+                    var html= "";
+                    if(retorno.length > 0 ) {
+                        var emprestimos = retorno[0]['emprestimo_exemplar'];
+                        var pessoaId = retorno[0]['pessoa']['id'];
+                        var pessoaNome = retorno[0]['pessoa']['nome'];
+
+                        $('#emprestimos tbody tr').remove();
+                        for (var i = 0; i < emprestimos.length; i++) {
+                            html += "<tr>";
+                            html += "<td>" + emprestimos[i]['acervo']['titulo'] + "</td>";
+                            html += "<td>" + emprestimos[i]['acervo']['cutter'] + "</td>";
+                            html += "<td>" + emprestimos[i]['acervo']['subtitulo'] + "</td>";
+                            html += "<td>" + emprestimos[i]['edicao'] + "</td>";
+                            html += "<td>" + emprestimos[i]['codigo'] + "</td>";
+                            html += "<td>" +
+                                    "<button type='button' data='"+emprestimos[i]['pivot']['emprestimo_id']+"' data2='"+emprestimos[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                                    "<input type='hidden' name='id_emp' value='"+emprestimos[i]['pivot']['emprestimo_id']+"'>";
+                            html += "</tr>";
+                        }
+
+                        var option = "<option selected value='"+pessoaId+"'>"+pessoaNome+"</option>";
+
+                        $('#pessoa option').remove();
+                        $('#pessoa').append(option);
+                        select2();
+
+                        $('#emprestimos tbody').append(html);
+                        $('#data').val("");
+                    }
+
+                });
+            });
+
+        });
+
+        function select2(){
             //consulta via select2 responsável
             $("#pessoa").select2({
                 placeholder: 'Selecione uma pessoa',
@@ -252,39 +324,7 @@
                     }
                 }
             });
-
-            @if(Session::has('id_pessoa'))
-                jQuery.ajax({
-                    type: 'POST',
-                    url: "{!! route('seracademico.biblioteca.findWhereEmprestimo') !!}",
-                    datatype: 'json'
-                }).done(function (retorno) {
-
-                    var html= "";
-                if(retorno.length > 0 ) {
-                    var emprestimos = retorno[0]['emprestimo_exemplar'];
-                    $('#emprestimos tbody tr').remove();
-                    for (var i = 0; i < emprestimos.length; i++) {
-                        html += "<tr>";
-                        html += "<td>" + emprestimos[i]['acervo']['titulo'] + "</td>";
-                        html += "<td>" + emprestimos[i]['acervo']['cutter'] + "</td>";
-                        html += "<td>" + emprestimos[i]['acervo']['subtitulo'] + "</td>";
-                        html += "<td>" + emprestimos[i]['edicao'] + "</td>";
-                        html += "<td>" + emprestimos[i]['codigo'] + "</td>";
-                        html += "<td>" +
-                                "<button type='button' data='"+emprestimos[i]['pivot']['emprestimo_id']+"' data2='"+emprestimos[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                                "<input type='hidden' name='id_emp' value='"+emprestimos[i]['pivot']['emprestimo_id']+"'>";
-                        html += "</tr>";
-                    }
-
-                    $('#emprestimos tbody').append(html);
-                    $('#data').val("");
-                }
-
-                });
-            @endif
-
-        });
+        }
 
         $(document).on('submit', '#form', function (event) {
             $(document).ready(function(){
@@ -293,6 +333,7 @@
                     event.preventDefault();
                 } else {
                     return;
+
                 }
             });
 
