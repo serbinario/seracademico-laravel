@@ -7,6 +7,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Facades\ParametroMatriculaFacade;
+use Seracademico\Facades\ParametroVestibularFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
@@ -80,7 +81,11 @@ class VestibulandoController extends Controller
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($arrayLoadFields);
 
-        return view('vestibulando.index', compact('loadFields'));
+        # Recuperando o semestre ativo
+        $semestreAtivo = ParametroVestibularFacade::getAtivo();
+
+        # Retorno
+        return view('vestibulando.index', compact('loadFields', 'semestreAtivo'));
     }
 
     /**

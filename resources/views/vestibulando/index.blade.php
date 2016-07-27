@@ -35,7 +35,7 @@
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
-                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), isset($semestreAtivo[0]->id) ?? null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">

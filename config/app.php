@@ -254,6 +254,7 @@ return [
 
         // Parametro de matricula
         'ParametroMatricula' => \Seracademico\Facades\ParametroMatriculaFacade::class,
+        'ParametroVestibular' => \Seracademico\Facades\ParametroVestibularFacade::class,
     ],
 
 ];
