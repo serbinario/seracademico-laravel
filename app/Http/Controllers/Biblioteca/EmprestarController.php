@@ -176,9 +176,11 @@ class EmprestarController extends Controller
     public function confirmarEmprestimo(Request $request)
     {
         $id = $request->get('id_emp');
+        $user = \Auth::user();
 
         $data = $this->service->find($id);
         $data->status = '1';
+        $data->users_id = $user->id;
         $data->save();
 
         $result = $data;

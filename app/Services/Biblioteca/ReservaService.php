@@ -78,10 +78,34 @@ class ReservaService
      * @return mixed
      * @throws \Exception
      */
+    public function findWherePendencias()
+    {
+        $relacionamentos = [
+            'pessoa'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $reservar = $this->repository->with($relacionamentos)->findWhere(['status' => '0']);
+
+        #Verificando se o registro foi encontrado
+        if(!$reservar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $reservar;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function findWhere($dados)
     {
         $relacionamentos = [
             'reservaExemplar',
+            'pessoa'
         ];
 
         #Recuperando o registro no banco de dados

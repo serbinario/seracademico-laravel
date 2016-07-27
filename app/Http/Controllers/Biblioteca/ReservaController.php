@@ -55,8 +55,9 @@ class ReservaController extends Controller
     public function index()
     {
         $loadFields = $this->service->load($this->loadFields);
+        $reservasPendentes = $this->service->findWherePendencias();
 
-        return view('biblioteca.controle.reserva.index', compact('loadFields'));
+        return view('biblioteca.controle.reserva.index', compact('loadFields', 'reservasPendentes'));
     }
 
     /**
@@ -67,8 +68,6 @@ class ReservaController extends Controller
         #Criando a consulta
         $rows = \DB::table('bib_exemplares')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-            //->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
-            //->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
             ->where('bib_exemplares.exemp_principal', '=', '0')
             ->select(
                 'bib_arcevos.titulo',
@@ -90,30 +89,6 @@ class ReservaController extends Controller
             return $html;
         })->make(true);
     }
-    
-    /*public function store(Request $request)
-    {
-        try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
-            #Executando a ação
-            $this->service->store($data);
-
-            #Retorno para a view
-            return redirect()->back()->with("message", "Reserva realizado com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }*/
 
     /**
      * @param Request $request
@@ -135,9 +110,9 @@ class ReservaController extends Controller
      */
     public function findWhereReserva(Request $request)
     {
-        $id = $request->session()->get('id_pessoa_reserva');
+        $pessoaId = $request->request->get('id_pessoa');
 
-        $data = $this->service->findWhere(['pessoas_id' => $id]);
+        $data = $this->service->findWhere(['pessoas_id' => $pessoaId]);
 
         return $data;
     }
@@ -160,12 +135,12 @@ class ReservaController extends Controller
     public function confirmarReserva(Request $request)
     {
         $id = $request->get('id_emp');
+        $user = \Auth::user();
 
         $data = $this->service->find($id);
         $data->status = '1';
+        $data->users_id = $user->id;
         $data->save();
-
-        //$result = $data;
 
        return redirect()->back();
     }
