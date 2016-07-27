@@ -54,7 +54,6 @@
 </head>
 
 <body>
-
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -357,7 +356,6 @@
         }
     }, '.modal');
 </script>
-
 @yield('javascript')
 </body>
 
