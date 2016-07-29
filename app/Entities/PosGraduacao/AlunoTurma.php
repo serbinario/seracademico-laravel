@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\PosGraduacao;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Prettus\Repository\Contracts\Transformable;
