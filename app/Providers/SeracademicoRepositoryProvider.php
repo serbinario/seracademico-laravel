@@ -178,8 +178,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\CurriculoRepository::class,
-			\Seracademico\Repositories\CurriculoRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\CurriculoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\CurriculoRepositoryEloquent::class
 		);
 
 		$this->app->bind(
@@ -188,8 +188,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\TurmaRepository::class,
-			\Seracademico\Repositories\TurmaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\TurmaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\TurmaRepositoryEloquent::class
 		);
 
         $this->app->bind(
@@ -198,8 +198,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\CalendarioDisciplinaTurmaRepository::class,
-            \Seracademico\Repositories\CalendarioDisciplinaTurmaEloquent::class
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaEloquent::class
         );
 
         $this->app->bind(
