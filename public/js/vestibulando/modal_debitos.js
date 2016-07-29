@@ -14,10 +14,10 @@ function loadTableDebitosAbertos(idVestibulando) {
         retrieve: true,
         ajax: "/index.php/seracademico/vestibulando/financeiro/gridDebitosAbertos/" + idVestibulando,
         columns: [
-            {data: 'codigo', name: 'taxas.codigo'},
-            {data: 'nome', name: 'taxas.nome'},
+            {data: 'codigo', name: 'fin_taxas.codigo'},
+            {data: 'nome', name: 'fin_taxas.nome'},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento'},
-            {data: 'valor', name: 'taxas.valor'},
+            {data: 'valor', name: 'fin_taxas.valor'},
             {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia'},
             {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -37,10 +37,10 @@ function loadTableDebitosPagos(idVestibulando) {
         retrieve: true,
         ajax: "/index.php/seracademico/vestibulando/financeiro/gridDebitosPagos/" + idVestibulando,
         columns: [
-            {data: 'codigo', name: 'taxas.codigo'},
-            {data: 'nome', name: 'taxas.nome'},
+            {data: 'codigo', name: 'fin_taxas.codigo'},
+            {data: 'nome', name: 'fin_taxas.nome'},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento'},
-            {data: 'valor', name: 'taxas.valor'},
+            {data: 'valor', name: 'fin_taxas.valor'},
             {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia'},
             {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia'}
         ]
