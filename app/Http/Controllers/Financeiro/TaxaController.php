@@ -28,7 +28,12 @@ class TaxaController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Financeiro\TipoTaxa'
+        'Financeiro\Banco',
+        'Financeiro\TipoTaxa',
+        'Financeiro\TipoDebito',
+        'Financeiro\Exigencia',
+        'Financeiro\TipoMulta',
+        'Financeiro\TipoJuro'
     ];
 
     /**

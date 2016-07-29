@@ -45,7 +45,7 @@ class TaxaService
      * @return array
      */
     public function store(array $data) : Taxa
-    {
+    {   
         #Salvando o registro pincipal
         $taxa =  $this->repository->create($data);
 

@@ -463,5 +463,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\TipoDebitoRepository::class,
 			\Seracademico\Repositories\Financeiro\TipoDebitoRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoTaxaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoTaxaRepositoryEloquent::class
+		);
 	}
 }

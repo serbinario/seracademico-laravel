@@ -44,7 +44,15 @@ class Taxa extends Model implements Transformable
         'valido_fim',
         'banco_id',
         'tipo_debito_id',
-        'semestre_id'
+        'semestre_id',
+        'exigencia_financeiro_id',
+        'exigencia_biblioteca_id',
+        'exigencia_evento_id',
+        'exigencia_calendario_id',
+        'tipo_multa_id',
+        'tipo_juro_id',
+        'valor_multa',
+        'valor_juros'
 	];
 
     /**
@@ -61,5 +69,41 @@ class Taxa extends Model implements Transformable
     public function semestre()
     {
         return $this->belongsTo(Semestre::class, 'semestre_id');
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setValidoInicioAttribute($value)
+    {
+        $this->attributes['valido_inicio'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function getValidoInicioAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['valido_inicio']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setValidoFimAttribute($value)
+    {
+        $this->attributes['valido_fim'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function getValidoFimAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['valido_fim']);
     }
 }
