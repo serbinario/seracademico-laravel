@@ -452,13 +452,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\TipoJuroRepository::class,
 			\Seracademico\Repositories\Financeiro\TipoJuroRepositoryEloquent::class
 		);
-
-
-		$this->app->bind(
-			\Seracademico\Repositories\Financeiro\MultaJuroRepository::class,
-			\Seracademico\Repositories\Financeiro\MultaJuroRepositoryEloquent::class
-		);
-
+        
 		$this->app->bind(
 			\Seracademico\Repositories\Financeiro\TipoDebitoRepository::class,
 			\Seracademico\Repositories\Financeiro\TipoDebitoRepositoryEloquent::class
