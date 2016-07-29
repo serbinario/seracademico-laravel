@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Taxa;
+use \Seracademico\Entities\Financeiro\Taxa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class VestibulandoFinanceiro extends Model implements Transformable

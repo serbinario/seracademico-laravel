@@ -9,7 +9,7 @@ function loadFieldsDebitos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'TipoTaxa|withTaxas'
+            'Financeiro\\TipoTaxa|withTaxas'
         ]
     };
 
@@ -21,7 +21,7 @@ function loadFieldsDebitos()
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
-        if(retorno['tipotaxa'].length > 0) {
+        if(retorno['financeiro\\tipotaxa'].length > 0) {
             builderHtmlFieldsDebitos(retorno);
         } else {
             // Retorno caso não matéria disponível
@@ -43,9 +43,9 @@ function builderHtmlFieldsDebitos (dados) {
     var htmlTipoTaxa = "<option value=''>Selecione um tipo</option>";
 
     // Percorrendo o array de disciplinacurriculo
-    for(var i = 0; i < dados['tipotaxa'].length; i++) {
+    for(var i = 0; i < dados['financeiro\\tipotaxa'].length; i++) {
         // Criando as options
-        htmlTipoTaxa += "<option value='" + dados['tipotaxa'][i].id + "'>" + dados['tipotaxa'][i].nome + "</option>";
+        htmlTipoTaxa += "<option value='" + dados['financeiro\\tipotaxa'][i].id + "'>" + dados['financeiro\\tipotaxa'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de período
@@ -64,7 +64,7 @@ $(document).on('change', '#tipo_taxa_id', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/taxa/getTaxas',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxas',
         data: {'idTipoTaxa' : idTipoTaxa},
         datatype: 'json'
     }).done(function (retorno) {

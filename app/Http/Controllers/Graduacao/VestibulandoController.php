@@ -7,6 +7,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Facades\ParametroMatriculaFacade;
+use Seracademico\Facades\ParametroVestibularFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
@@ -80,7 +81,11 @@ class VestibulandoController extends Controller
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($arrayLoadFields);
 
-        return view('vestibulando.index', compact('loadFields'));
+        # Recuperando o semestre ativo
+        $semestreAtivo = ParametroVestibularFacade::getAtivo();
+
+        # Retorno
+        return view('vestibulando.index', compact('loadFields', 'semestreAtivo'));
     }
 
     /**
@@ -100,8 +105,8 @@ class VestibulandoController extends Controller
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
             ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-            ->leftJoin('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
-            ->leftJoin('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
+            ->leftJoin('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+            ->leftJoin('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
             ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
             ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
             ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
@@ -126,7 +131,7 @@ class VestibulandoController extends Controller
                 'turno3.nome as nomeTurno3',
                 'fac_vestibulares.nome as vestibular',
                 'fac_vestibulares.id as idVestibular',
-                'tipos_taxas.id as idTipoTaxa',
+                'fin_tipos_taxas.id as idTipoTaxa',
                 'fac_vestibulandos_financeiros.pago',
                 \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
                 \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
