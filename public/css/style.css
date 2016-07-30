@@ -8352,3 +8352,14 @@ textarea {
   float: right;
   margin-right: 10px;
 }
+
+td.details-control {
+  background-size: 20px !important;
+}
+tr.details td.details-control {
+  background-size: 20px !important;
+}
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+  height: 20px;
+}
