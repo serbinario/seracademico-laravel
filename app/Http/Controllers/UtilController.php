@@ -108,7 +108,7 @@ class UtilController extends Controller
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
-            $qb->take(5);
+            $qb->take(100);
 
             $resultItems = $qb->get();
 
@@ -217,7 +217,7 @@ class UtilController extends Controller
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
-            $qb->take(5);
+            $qb->take(100);
 
             $resultItems = $qb->get();
 
@@ -324,7 +324,7 @@ class UtilController extends Controller
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
-            $qb->take(5);
+            $qb->take(100);
 
             $resultItems = $qb->get();
 
@@ -437,7 +437,7 @@ class UtilController extends Controller
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
-            $qb->take(5);
+            $qb->take(100);
 
             $resultItems = $qb->get();
 
