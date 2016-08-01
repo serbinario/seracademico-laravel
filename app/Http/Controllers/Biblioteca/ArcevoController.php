@@ -36,7 +36,7 @@ class ArcevoController extends Controller
         'Biblioteca\Colecao',
         'Biblioteca\Genero',
         'Biblioteca\Situacao',
-        'Curso'
+        'Graduacao\Curso'
     ];
 
     /**
