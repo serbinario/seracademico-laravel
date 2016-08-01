@@ -14,6 +14,9 @@ $(document).ready(function(){
     //money
      $('.money').mask('000.000.000,00', {reverse: true});
 
+    //money2
+    $('.moneyReal').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+
     //CNPJ
     $('.cnpj').mask('00.000.000.0000-00');
 
@@ -58,6 +61,17 @@ $(document).ready(function(){
         format: 'd/m/Y',
         mask: false,
         lang: 'pt-BR'
+    });
+
+    //##### Submeter formulário
+    $('#formTaxa').submit(function() {
+
+        $('.moneyReal').each(function (index, value) {
+
+            $(value).val($('.moneyReal').maskMoney('unmasked')[index]);
+
+        });
+
     });
 
     //##### Submeter formulário

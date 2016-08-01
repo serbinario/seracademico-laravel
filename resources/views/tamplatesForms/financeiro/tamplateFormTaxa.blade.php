@@ -18,7 +18,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valor', 'Valor *') !!}
-                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control')) !!}
+                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal')) !!}
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
 
                             <div class="form-group col-md-3">
                                 {!! Form::label('valor_multa', 'Valor Multa * ') !!}
-                                {!! Form::text('valor_multa', Session::getOldInput('valor_multa'), array('class' => 'form-control')) !!}
+                                {!! Form::text('valor_multa', Session::getOldInput('valor_multa'), array('class' => 'form-control moneyReal')) !!}
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
 
                             <div class="form-group col-md-3">
                                 {!! Form::label('valor_juros', 'Valor Juros * ') !!}
-                                {!! Form::text('valor_juros', Session::getOldInput('valor_juros'), array('class' => 'form-control')) !!}
+                                {!! Form::text('valor_juros', Session::getOldInput('valor_juros'), array('class' => 'form-control moneyReal')) !!}
                             </div>
                         </div>
                     </div>
