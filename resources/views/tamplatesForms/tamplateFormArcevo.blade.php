@@ -48,13 +48,13 @@
                             {{--{{dd($model->cursos->lists('id')->all())}}--}}
                             @if(isset($model->id))
                                 <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
-                                    @foreach($loadFields['curso'] as $key => $value)
+                                    @foreach($loadFields['graduacao\curso'] as $key => $value)
                                         <option value="{{$key}}"
                                                 @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
                                     @endforeach
                                 </select>
                             @else
-                                {!! Form::select('cursos[]', $loadFields['curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
+                                {!! Form::select('cursos[]', $loadFields['graduacao\curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
                             @endif
                         </div>
                     </div>
