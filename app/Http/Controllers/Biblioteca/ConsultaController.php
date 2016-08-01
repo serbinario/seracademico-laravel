@@ -74,8 +74,6 @@ class ConsultaController extends Controller
 
         $resultado = $this->query($data);
 
-        //dd($resultado);
-
         return \View::make('portal.biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
     }
@@ -100,7 +98,6 @@ class ConsultaController extends Controller
 
     }
     
-
     /**
      * @param $dados
      * @return mixed
