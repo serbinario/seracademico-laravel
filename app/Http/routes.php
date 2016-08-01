@@ -629,6 +629,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\BancoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BancoController@update']);
             });
+
+            # Rotas para aluno
+            Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+                Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);
+                Route::get('gridDebitosAbertos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridDebitosAbertos']);
+                Route::post('storeDebitoAberto', ['as' => 'storeDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeDebitoAberto']);
+
+            });
         });
     });
 

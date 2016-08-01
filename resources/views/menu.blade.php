@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="seracademico">
 
 <head>
     <meta charset="utf-8">
@@ -328,6 +328,7 @@
 
 <!-- Angular -->
 <script type="text/javascript" src="{{ asset('/js/plugins/angular/angular.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
