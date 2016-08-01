@@ -29,6 +29,11 @@
         </div>
 
         <div class="row">
+            <div class="form-group col-md-3">
+                {!! Form::label('semestre_id', 'Semestre * ') !!}
+                {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], Session::getOldInput('semestre_id'), array('class' => 'form-control')) !!}
+            </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Inicio *') !!}
