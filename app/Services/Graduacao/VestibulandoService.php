@@ -112,6 +112,7 @@ class VestibulandoService
             'pessoa.profissao',
             'pessoa.corRaca',
             'pessoa.ufNascimento',
+            'vestibular.semestre',
             'aluno'
         ];
 

@@ -54,7 +54,6 @@
 </head>
 
 <body>
-
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -189,9 +188,9 @@
                         <li><a href="{{ route('seracademico.graduacao.semestre.index') }}"><i class="fa fa-calendar"></i> Semestres</a></li>
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="flaticon-portfolio-filled-open-folder"></i> Tipos de Cursos</a></li>
                         <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
-                        <li><a href="{{ route('seracademico.banco.index') }}"><i class="fa fa-university"></i> Bancos</a></li>
+                        <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos</a></li>
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="flaticon-tool"></i> Tipo de Vencimento</a></li>
-                        <li><a href="{{ route('seracademico.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas</a></li>
+                        <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas</a></li>
                         <li><a href="{{ route('seracademico.graduacao.motivo.index') }}"><i class="material-icons">rate_review</i> Motivos</a></li>
                         <li><a href="{{ route('seracademico.hora.index') }}"><i class="flaticon-currency-rates"></i> Horas</a></li>
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="flaticon-settings"></i> Configurações</a></li>
@@ -327,6 +326,9 @@
 <script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/sortable.min.js')}}"></script>
 
+<!-- Angular -->
+<script type="text/javascript" src="{{ asset('/js/plugins/angular/angular.min.js')}}"></script>
+
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
@@ -357,7 +359,6 @@
         }
     }, '.modal');
 </script>
-
 @yield('javascript')
 </body>
 

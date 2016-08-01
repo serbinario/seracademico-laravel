@@ -42,18 +42,18 @@ class VestibulandoFinanceiroController extends Controller
     {
         #Criando a consulta
         $debitos = \DB::table('fac_vestibulandos_financeiros')
-            ->join('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+            ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
             ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=', 'fac_vestibulandos_financeiros.vestibulando_id')
             ->where('fac_vestibulandos_financeiros.pago', '=', 0)
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
-                'taxas.valor',
+                'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
-                'taxas.codigo',
-                'taxas.nome'
+                'fin_taxas.codigo',
+                'fin_taxas.nome'
             ]);
 
         #Editando a grid
@@ -76,18 +76,18 @@ class VestibulandoFinanceiroController extends Controller
     {
         #Criando a consulta
         $debitos = \DB::table('fac_vestibulandos_financeiros')
-            ->join('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+            ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
             ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=', 'fac_vestibulandos_financeiros.vestibulando_id')
             ->where('fac_vestibulandos_financeiros.pago', '=', 1)
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
-                'taxas.valor',
+                'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
-                'taxas.codigo',
-                'taxas.nome'
+                'fin_taxas.codigo',
+                'fin_taxas.nome'
             ]);
 
         #Editando a grid

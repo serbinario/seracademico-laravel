@@ -89,14 +89,14 @@
                                 <table id="semestre-notas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th style="width: 100%">Disciplina</th>
-                                        <th>1º Unid.</th>
-                                        <th>2º Unid.</th>
-                                        <th>2º Chamada</th>
-                                        <th>Final</th>
-                                        <th>Média</th>
-                                        <th>Faltas</th>
-                                        <th>Situação</th>
+                                        <th>Disciplina</th>
+                                        <th width="8%">1º Unid.</th>
+                                        <th width="8%">2º Unid.</th>
+                                        <th width="8%">2º Chamada</th>
+                                        <th width="8%">Final</th>
+                                        <th width="8%">Média</th>
+                                        <th width="8%">Faltas</th>
+                                        <th width="8%">Situação</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -109,15 +109,15 @@
                                 <table id="semestre-faltas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th style="width: 100%">Disciplina</th>
-                                        <th>1º Mês.</th>
-                                        <th>2º Mês</th>
-                                        <th>3º Mês</th>
-                                        <th>4º Mês</th>
-                                        <th>5º Mês</th>
-                                        <th>6º Mês</th>
-                                        <th>Total Faltas</th>
-                                        <th>Situação</th>
+                                        <th>Disciplina</th>
+                                        <th width="8%">1º Mês.</th>
+                                        <th width="8%">2º Mês</th>
+                                        <th width="8%">3º Mês</th>
+                                        <th width="8%">4º Mês</th>
+                                        <th width="8%">5º Mês</th>
+                                        <th width="8%">6º Mês</th>
+                                        <th width="8%">Total Faltas</th>
+                                        <th width="8%">Situação</th>
                                     </tr>
                                     </thead>
                                 </table>

@@ -1,4 +1,3 @@
-
 // Evento para chamar o modal de inserir adicionar disciplina
 function runInclusao() {
     loadFieldsEditar();
@@ -81,13 +80,15 @@ function builderHtmlFieldsEditar (dados) {
             $("#semestre_id option").remove();
             $("#semestre_id").append(htmlSemestre);
 
+            // Selecionando o semestre, vigente ou escolhido.
+            $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
+
             // Verificando se a transferência já foi realizada
             if (retorno.dados.curso_id) {
                 // Setando os valores do model no formulário
                 $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
                 $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
                 $('#turno_id').html('<option value="' + retorno.dados.turno_id + '">' + retorno.dados.nomeTurno + '</option>');
-                $('#semestre_id option[value=' + retorno.dados.semestre_id + ']').attr('selected', true);
                 $('#data_inclusao').val(retorno.dados.data_inclusao);
 
                 //$('#turno_id option[value=' + retorno.dados.turno_id + ']').attr('selected', true);

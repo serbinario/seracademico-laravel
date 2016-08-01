@@ -5,6 +5,7 @@ namespace Seracademico\Providers;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Seracademico\Uteis\ParametroMatricula;
+use Seracademico\Uteis\ParametroVestibular;
 
 class ParametroServiceProvider extends ServiceProvider
 {
@@ -26,9 +27,11 @@ class ParametroServiceProvider extends ServiceProvider
     public function register()
     {
         # Retornando o objeto de Parametro de matrícula
-        App::bind('matricula', function()
-        {
+        App::bind('matricula', function() {
             return new ParametroMatricula();
         });
+
+        # Retornando o objeto de Parametro do vestibular
+        App::bind('vestibular', ParametroVestibular::class);
     }
 }

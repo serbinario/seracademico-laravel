@@ -178,8 +178,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\CurriculoRepository::class,
-			\Seracademico\Repositories\CurriculoRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\CurriculoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\CurriculoRepositoryEloquent::class
 		);
 
 		$this->app->bind(
@@ -188,8 +188,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\TurmaRepository::class,
-			\Seracademico\Repositories\TurmaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\TurmaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\TurmaRepositoryEloquent::class
 		);
 
         $this->app->bind(
@@ -198,8 +198,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\CalendarioDisciplinaTurmaRepository::class,
-            \Seracademico\Repositories\CalendarioDisciplinaTurmaEloquent::class
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaEloquent::class
         );
 
         $this->app->bind(
@@ -356,17 +356,18 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\BancoRepository::class,
-            \Seracademico\Repositories\BancoRepositoryEloquent::class
+            \Seracademico\Repositories\Financeiro\BancoRepository::class,
+            \Seracademico\Repositories\Financeiro\BancoRepositoryEloquent::class
         );
+
         $this->app->bind(
             \Seracademico\Repositories\TipoVencimentoRepository::class,
             \Seracademico\Repositories\TipoVencimentoRepositoryEloquent::class
         );
 
         $this->app->bind(
-            \Seracademico\Repositories\TaxaRepository::class,
-            \Seracademico\Repositories\TaxaRepositoryEloquent::class
+            \Seracademico\Repositories\Financeiro\TaxaRepository::class,
+            \Seracademico\Repositories\Financeiro\TaxaRepositoryEloquent::class
         );
 
         $this->app->bind(
@@ -430,7 +431,36 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         $this->app->bind(
             \Seracademico\Repositories\TipoPermissaoRepository::class,
             \Seracademico\Repositories\TipoPermissaoRepositoryEloquent::class);
+
+ 
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoExigenciaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoExigenciaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\ExigenciaRepository::class,
+			\Seracademico\Repositories\Financeiro\ExigenciaRepositoryEloquent::class
+		);        
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoMultaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoMultaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoJuroRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoJuroRepositoryEloquent::class
+		);
         
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoDebitoRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoDebitoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoTaxaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoTaxaRepositoryEloquent::class
+		);
 	}
-    
 }

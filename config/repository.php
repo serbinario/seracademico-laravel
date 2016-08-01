@@ -219,7 +219,7 @@ return [
     */
     'generator'  => [
         'basePath'      => app_path(),
-        'rootNamespace' => 'App\\',
+        'rootNamespace' => 'Seracademico\\',
         'paths'         => [
             'models'       => 'Entities',
             'repositories' => 'Repositories',

@@ -52,7 +52,7 @@ class TipoDisciplinaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_tipo_disciplinas')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('fac_tipo_disciplinas')->select(['id', 'nome']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
