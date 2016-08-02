@@ -618,6 +618,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\TaxaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TaxaController@update']);
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
+                Route::post('getTaxa/{id}', ['as' => 'getTaxa', 'uses' => 'Financeiro\TaxaController@getTaxa']);
             });
 
             # Rotas para banco

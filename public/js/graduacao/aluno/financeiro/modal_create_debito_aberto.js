@@ -54,6 +54,9 @@ function builderHtmlFieldsDebitosAbertos (dados) {
     $("#taxa_id option").remove();
     $("#taxa_id").append(htmlTaxa);
 
+    // Carregando os campos do formulário referentes a taxa
+    getInfoTaxa($('#taxa_id').find('option:selected').val());
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-debito-aberto").modal({show : true});
 }
@@ -95,6 +98,44 @@ $('#btnSaveDebitoAberto').click(function() {
         }
     });
 });
+
+/**
+ * Evento para ser disparado quando mudar de taxa
+ */
+$(document).on('change', '#taxa_id', function () {
+    getInfoTaxa($(this).find('option:selected').val());
+});
+
+/**
+ * Função responsável por recuperar a taxa e
+ * preencher os campos de cadastro.
+ *
+ * @param idTaxa
+ */
+function getInfoTaxa(idTaxa)
+{
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxa/' + idTaxa,
+        datatype: 'json'
+    }).done(function (retorno) {
+       if(retorno.success) {
+           // Data Atual
+           var now = new Date();
+
+           // Formatando os campos
+           $('#valor_desconto').val('0.00');
+           $('#valor_taxa').val(retorno.data.valor);
+           $('#valor_debito').val(retorno.data.valor);
+           $('#data_vencimento').val((retorno.data.dia_vencimento
+                   ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
+       } else {
+           swal(retorno.msg, "Click no botão abaixo!", "error");
+       }        
+    });
+}
+
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#btnDeleteHistorico', function () {

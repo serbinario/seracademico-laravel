@@ -106,7 +106,6 @@ $('#btnSaveFechamento').click(function() {
     var valor_tipo_descrecimo = $("#valor_tipo_descrecimo").val();
     var valor_total           = $("#valor_total").val();
 
-
     var dados = {
         'debito_id' : idDebitoAberto,
         'forma_pagamento_id' : forma_pagamento_id,
