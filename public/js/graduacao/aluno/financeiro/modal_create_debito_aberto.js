@@ -128,6 +128,8 @@ function getInfoTaxa(idTaxa)
            $('#valor_desconto').val('0.00');
            $('#valor_taxa').val(retorno.data.valor);
            $('#valor_debito').val(retorno.data.valor);
+           $('#mes_referencia').val(now.getMonth() + 1);
+           $('#ano_referencia').val(now.getFullYear());
            $('#data_vencimento').val((retorno.data.dia_vencimento
                    ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
        } else {
