@@ -1,21 +1,21 @@
 <div class="row">
 	<div class="col-md-12">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-7">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome *') !!}
                     {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
                     {!! Form::label('codigo', 'Código *') !!}
                     {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
                     {!! Form::label('valor', 'Valor *') !!}
                     {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal')) !!}
@@ -29,14 +29,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Inicio *') !!}
                     {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control datepicker')) !!}
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
                     {!! Form::label('valido_fim', 'Fim *') !!}
                     {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control datepicker')) !!}
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 {!! Form::label('tipo_debito_id', 'Tipo Debito * ') !!}
                 {!! Form::select('tipo_debito_id', $loadFields['financeiro\\tipodebito'], Session::getOldInput('tipo_debito_id'), array('class' => 'form-control')) !!}
             </div>
@@ -87,24 +87,24 @@
                     <div role="tabpanel" class="tab-pane" id="multasjuros">
                         <br>
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 {!! Form::label('tipo_multa_id', 'Tipo Multa *') !!}
                                 {!! Form::select('tipo_multa_id', $loadFields['financeiro\\tipomulta'], Session::getOldInput('tipo_multa_id'), array('class' => 'form-control')) !!}
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-1">
                                 {!! Form::label('valor_multa', 'Valor Multa * ') !!}
                                 {!! Form::text('valor_multa', Session::getOldInput('valor_multa'), array('class' => 'form-control moneyReal')) !!}
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 {!! Form::label('tipo_juro_id', 'Tipo Juros *') !!}
                                 {!! Form::select('tipo_juro_id', $loadFields['financeiro\\tipojuro'], Session::getOldInput('tipo_juro_id'), array('class' => 'form-control')) !!}
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-1">
                                 {!! Form::label('valor_juros', 'Valor Juros * ') !!}
                                 {!! Form::text('valor_juros', Session::getOldInput('valor_juros'), array('class' => 'form-control moneyReal')) !!}
                             </div>
