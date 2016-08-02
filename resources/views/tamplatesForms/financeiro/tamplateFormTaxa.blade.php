@@ -29,16 +29,16 @@
         </div>
 
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
-                    {!! Form::label('valido_inicio', 'Inicio ') !!}
+                    {!! Form::label('valido_inicio', 'Valido Inicio ') !!}
                     {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control datepicker')) !!}
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
-                    {!! Form::label('valido_fim', 'Fim ') !!}
+                    {!! Form::label('valido_fim', 'Ate Fim ') !!}
                     {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control datepicker')) !!}
                 </div>
             </div>
