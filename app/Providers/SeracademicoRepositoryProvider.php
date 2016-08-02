@@ -467,5 +467,21 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository::class,
 			\Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\FormaPagamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\FormaPagamentoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\LocalPagamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\LocalPagamentoRepositoryEloquent::class
+		);
+        
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\FechamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\FechamentoRepositoryEloquent::class
+		);
 	}
 }

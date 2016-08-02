@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\DebitoAbertoAlunoService;
+use Seracademico\Services\Financeiro\FechamentoService;
 use Seracademico\Services\Graduacao\AlunoService;
 
 use Yajra\Datatables\Datatables;
@@ -23,14 +24,23 @@ class AlunoFinanceiroController extends Controller
     private $debitoAbertoAlunoService;
 
     /**
+     * @var FechamentoService
+     */
+    private $fechamentoService;
+
+    /**
      * AlunoFinanceiroController constructor.
      * @param AlunoService $service
      * @param DebitoAbertoAlunoService $debitoAbertoAlunoService
+     * @param FechamentoService $fechamentoService
      */
-    public function __construct(AlunoService $service, DebitoAbertoAlunoService $debitoAbertoAlunoService)
+    public function __construct(AlunoService $service,
+                                DebitoAbertoAlunoService $debitoAbertoAlunoService,
+                                FechamentoService $fechamentoService)
     {
         $this->service = $service;
         $this->debitoAbertoAlunoService = $debitoAbertoAlunoService;
+        $this->fechamentoService = $fechamentoService;
     }
 
     /**
@@ -62,10 +72,10 @@ class AlunoFinanceiroController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>                        
-                            <li><a class="btn-floating indigo" title="Editar" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
-                            <li><a class="btn-floating indigo" title="Remover" id="modalCurriculo"><i class="material-icons">assignment</i></a></li>
-                            <li><a class="btn-floating indigo" title="Gerar Boleto"  id="modalSemestre"><i class="material-icons">date_range</i></a></li>                    
+                        <ul>                  
+                            <li><a class="btn-floating indigo" title="Editar" id="btnEditDebitoAberto"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating indigo" title="Fechamento" id="btnCreateFechamento"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
+                            <li><a class="btn-floating indigo" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
                         </ul>
                         </div>';
                 })->make(true);
@@ -77,9 +87,42 @@ class AlunoFinanceiroController extends Controller
     /**
      * @return mixed
      */
-    public function gridDebitosPagos($idAluno)
+    public function gridFechamentos($idAluno)
     {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('fin_debitos')
+                ->join('fin_fechamentos', 'fin_fechamentos.debito_id', '=', 'fin_debitos.id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_debitos.aluno_id')
+                ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_debitos.taxa_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->select([
+                    'fin_debitos.id',
+                    'fin_taxas.codigo',
+                    'fin_taxas.nome',
+                    'fin_taxas.valor',
+                    'fin_debitos.data_vencimento',
+                    'fin_taxas.valor_multa',
+                    'fin_taxas.valor_juros',
+                    'fin_debitos.valor_debito',
+                    'fin_debitos.mes_referencia',
+                    'fin_debitos.ano_referencia'
+                ]);
 
+            #Editando a grid
+            return Datatables::of($rows)
+                ->addColumn('action', function ($row) {
+                    return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>                        
+                            <li><a class="btn-floating indigo" title="Editar"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
+                            <li><a class="btn-floating indigo" title="Remover" id="modalCurriculo"><i class="material-icons">edit</i></a></li>                                          
+                        </ul>
+                        </div>';
+                })->make(true);
+        } catch (\Throwable $e) {
+            return abort(500, $e->getMessage());
+        }
     }
 
     /**
@@ -169,6 +212,27 @@ class AlunoFinanceiroController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Débito removido com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function storeFechamento(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->fechamentoService->store($data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso']);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);

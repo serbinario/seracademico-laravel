@@ -78,7 +78,7 @@ function loadTableDebitosFechados (idAluno) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridCursadas/" + idAluno,
+        ajax: "/index.php/seracademico/financeiro/aluno/gridFechamentos/" + idAluno,
         columns: [
             // {
             //     "className":      'details-control',
@@ -86,14 +86,16 @@ function loadTableDebitosFechados (idAluno) {
             //     "data":           null,
             //     "defaultContent": ''
             // },
-            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
-            {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
-            {data: 'nota_media', name: 'fac_alunos_notas.nota_media'},
-            {data: 'codigoTurma', name: 'fac_turmas.codigo'},
-            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome'},
+            {data: 'codigo', name: 'fin_taxas.codigo'},
+            {data: 'nome', name: 'fin_taxas.nome'},
+            {data: 'valor', name: 'fin_taxas.valor'},
+            {data: 'data_vencimento', name: 'fin_debitos.data_vencimento'},
+            {data: 'valor_multa', name: 'fin_taxas.valor_multa'},
+            {data: 'valor_juros', name: 'fin_taxas.valor_juros'},
+            {data: 'valor_debito', name: 'fin_debitos.valor_debito'},
+            {data: 'mes_referencia', name: 'fin_debitos.mes_referencia'},
+            {data: 'ano_referencia', name: 'fin_debitos.ano_referencia'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -144,12 +146,12 @@ function runFinanceiro(idAluno) {
         loadTableDebitosAbertos(idAluno);
     }
 
-    // Carregando a grid de cursadas
-    // if(tableCursadas) {
-    //     loadTableCursadas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursadas/" + idAluno).load();
-    // } else {
-    //     loadTableCursadas(idAluno);
-    // }
+    //Carregando a grid de cursadas
+    if(tableDebitosFechados) {
+        loadTableDebitosFechados(idAluno).ajax.url("/index.php/seracademico/financeiro/aluno/gridFechamentos/" + idAluno).load();
+    } else {
+        loadTableDebitosFechados(idAluno);
+    }
 
     // carregando a modal
     $("#modal-debitos").modal({show:true});

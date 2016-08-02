@@ -79,15 +79,16 @@
                                 <table id="grid-debitos-fechados" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Detalhe</th>
-                                        <th>Período</th>
-                                        <th>Cod. Disciplina</th>
-                                        <th>Disciplina</th>
-                                        <th>C. Horária</th>
-                                        <th>Créditos</th>
-                                        <th>Média</th>
-                                        <th>Turma</th>
-                                        <th>Situação</th>
+                                        <th>Cod. Taxa</th>
+                                        <th>Taxa</th>
+                                        <th>V. Taxa</th>
+                                        <th>Vencimento</th>
+                                        <th>V. Multa</th>
+                                        <th>V. Juros</th>
+                                        <th>Valor</th>
+                                        <th>Mês</th>
+                                        <th>Ano</th>
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                 </table>
