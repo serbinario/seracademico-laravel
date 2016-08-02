@@ -158,7 +158,8 @@ class AlunoController extends Controller
                             <li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>
                             <li><a class="btn-floating indigo" title="Histórico do aluno" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
                             <li><a class="btn-floating indigo" title="Currículo do aluno" id="modalCurriculo"><i class="material-icons">assignment</i></a></li>
-                            <li><a class="btn-floating indigo" title="Semestre do aluno" id="modalSemestre"><i class="material-icons">date_range</i></a></li>
+                            <li><a class="btn-floating indigo" title="Semestre do aluno"  id="modalSemestre"><i class="material-icons">date_range</i></a></li>
+                            <li><a class="btn-floating indigo" title="Financerito do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>
                             <li><a class="btn-floating" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
                         </ul>
                         </div>';

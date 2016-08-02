@@ -24,7 +24,6 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-
                 @if(Session::has('message'))
                     <div class="alert alert-success">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -117,6 +116,8 @@
     @include('graduacao.aluno.modal_inserir_dispensar_disciplina')
     @include('graduacao.aluno.modal_editar_dispensar_disciplina')
     @include('graduacao.aluno.modal_semestre')
+    @include('graduacao.aluno.financeiro.modal_debitos')
+    @include('graduacao.aluno.financeiro.modal_create_debito_aberto')
 @stop
 
 @section('javascript')
@@ -130,6 +131,8 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/funcoes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/horario.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -229,6 +232,28 @@
 
             // Executando o script de curriculo
             runSemestre(idAluno, idSemestre);
+        });
+
+        // Evento para abrir o modal de financeiro
+        $(document).on("click", "#modalFinanceiro", function () {
+            // recuperando o id do aluno e o semestre
+            idAluno    = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
+
+            // Recuperando o nome e a matrícula
+            nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            codigoCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurso;
+            periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+
+            // prenchendo o titulo do nome do aluno
+            $('#finMatricula').text(matricula);
+            $('#finNomeAluno').text(nomeAluno);
+            $('#finCurso').text(codigoCurso);
+            $('#finPeriodo').text(periodo);
+
+            // Carregando o modal
+            runFinanceiro(idAluno);
         });
     </script>
 @stop

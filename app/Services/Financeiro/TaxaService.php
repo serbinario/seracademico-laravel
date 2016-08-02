@@ -61,7 +61,8 @@ class TaxaService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Taxa
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Taxa
     {
