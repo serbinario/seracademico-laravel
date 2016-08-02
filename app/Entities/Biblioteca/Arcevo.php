@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Biblioteca;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Curso;
+use Seracademico\Entities\Graduacao\Curso;
 
 class Arcevo extends Model implements Transformable
 {

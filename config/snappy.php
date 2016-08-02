@@ -15,7 +15,9 @@ return array(
         'options' => array(),
     ),
 
-    /*'pdf' => array(
+
+
+   /* 'pdf' => array(
         'enabled' => true,
         'binary' => "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"",
         'timeout' => false,

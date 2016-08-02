@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.financeiro.taxa.store', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.financeiro.taxa.store', 'method' => "POST", 'id' => 'formTaxa' ]) !!}
                 @include('tamplatesForms.financeiro.tamplateFormTaxa')
             {!! Form::close() !!}
         </div>

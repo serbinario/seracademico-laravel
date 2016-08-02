@@ -330,6 +330,9 @@
 <script type="text/javascript" src="{{ asset('/js/plugins/angular/angular.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 
+<!-- Mascaras -->
+<script src="{{ asset('/js/jquery.maskMoney.min.js')}}"></script>
+
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>

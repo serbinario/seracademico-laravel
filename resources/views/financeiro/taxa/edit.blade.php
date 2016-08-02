@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.financeiro.taxa.update', $model->id], 'method' => "POST" ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.financeiro.taxa.update', $model->id], 'method' => "POST", 'id' => 'formTaxa' ]) !!}
                 @include('tamplatesForms.financeiro.tamplateFormTaxa')
             {!! Form::close() !!}
         </div>
