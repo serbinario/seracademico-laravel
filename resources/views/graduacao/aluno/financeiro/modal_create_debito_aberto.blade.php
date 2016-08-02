@@ -18,12 +18,12 @@
 
                         <div class="form-group col-md-2">
                             <label for="data_vencimento">Vencimento</label>
-                            <input type="text" readonly name="data_vencimento" id=data_vencimento" class="form-control datepicker">
+                            <input type="text" name="data_vencimento" id="data_vencimento" class="form-control datepicker">
                         </div>
 
                         <div class="form-group col-md-2">
                             <label for="valor_taxa">Valor Taxa</label>
-                            <input type="text" disabled name="valor_taxa" id="valor_taxa" class="form-control">
+                            <input type="text" disabled="disabled" name="valor_taxa" id="valor_taxa" class="form-control">
                         </div>
                     </div>
 

@@ -91,7 +91,7 @@ class AlunoFinanceiroController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+           
             #Executando a ação
             $this->debitoAbertoAlunoService->store($data);
 
