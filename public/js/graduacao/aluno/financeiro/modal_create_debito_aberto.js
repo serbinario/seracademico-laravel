@@ -66,7 +66,8 @@ $('#btnSaveDebitoAberto').click(function() {
     var valor_debito    = $("#valor_debito").val();
     var mes_referencia  = $("#mes_referencia").val();
     var ano_referencia  = $("#ano_referencia").val();
-    console.log(data_vencimento);
+    var valor_desconto  = $("#valor_desconto").val();
+
     var dados = {
         'aluno_id' : idAluno,
         'taxa_id' : taxa_id,
@@ -75,6 +76,7 @@ $('#btnSaveDebitoAberto').click(function() {
         'valor_debito': valor_debito,
         'mes_referencia' : mes_referencia,
         'ano_referencia' : ano_referencia,
+        'valor_desconto' : valor_desconto
     };
 
     jQuery.ajax({

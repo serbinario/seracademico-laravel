@@ -28,10 +28,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="desconto_id">Desconto</label>
-                            <select name="desconto_id" class="form-control" id="desconto_id">
-                            </select>
+                        <div class="form-group col-md-2">
+                            <label for="valor_desconto">Desconto</label>
+                            <input name="valor_desconto" id="valor_desconto" class="form-control">
                         </div>
 
                         <div class="form-group col-md-2">

@@ -33,6 +33,7 @@ class DebitoAbertoAluno extends Model implements Transformable
         'data_vencimento',
 		'mes_referencia',
 		'ano_referencia',
+		'valor_desconto',
 		'aluno_id'
 	];
 
