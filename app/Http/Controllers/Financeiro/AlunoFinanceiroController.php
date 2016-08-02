@@ -54,6 +54,11 @@ class AlunoFinanceiroController extends Controller
                 ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_debitos.aluno_id')
                 ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_debitos.taxa_id')
                 ->where('fac_alunos.id', $idAluno)
+                ->whereNotExists(function ($query) {
+                    $query->select('fin_fechamentos.id')
+                        ->from('fin_fechamentos')
+                        ->whereRaw('fin_fechamentos.debito_id = fin_debitos.id');
+                })
                 ->select([
                     'fin_debitos.id',
                     'fin_taxas.codigo',
