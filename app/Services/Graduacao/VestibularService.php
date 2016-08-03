@@ -69,7 +69,8 @@ class VestibularService
 
     /**
      * @param array $data
-     * @return array
+     * @return Vestibular
+     * @throws \Exception
      */
     public function store(array $data) : Vestibular
     {
@@ -92,7 +93,8 @@ class VestibularService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Vestibular
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Vestibular
     {
@@ -162,9 +164,9 @@ class VestibularService
     }
 
     /**
-     * @param array $data
-     * @return mixed
-     */
+ * @param array $data
+ * @return mixed
+ */
     private function tratamentoVestibularAtivo(array &$data): array
     {
         #Verificando se a condição é válida

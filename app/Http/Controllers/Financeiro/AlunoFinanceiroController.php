@@ -2,7 +2,9 @@
 
 namespace Seracademico\Http\Controllers\Financeiro;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Seracademico\Facades\ParametroBancoFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\DebitoAbertoAlunoService;
@@ -232,13 +234,17 @@ class AlunoFinanceiroController extends Controller
      */
     public function gerarBoleto($idDebitoAberto)
     {
+        #Recuperando o banco ativo
+        $banco   = ParametroBancoFacade::getAtivo();
+        $debito  = $this->debitoAbertoAlunoService->find($idDebitoAberto);
+
         $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
-        $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
+        $cedente = new Agente('Serbinario LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
         $boleto = new BancoDoBrasil(array(
             // Parâmetros obrigatórios
-            'dataVencimento' => new \DateTime('2013-01-24'),
-            'valor' => 23.00,
+            'dataVencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
+            'valor' => $debito->valor_debito,
             'sequencial' => 1234567, // Para gerar o nosso número
             'sacado' => $sacado,
             'cedente' => $cedente,

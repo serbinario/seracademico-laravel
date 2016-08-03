@@ -252,9 +252,10 @@ return [
         //https://github.com/mcamara/laravel-localization
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
 
-        // Parametro de matricula
+        // Parametros do Sistema
         'ParametroMatricula' => \Seracademico\Facades\ParametroMatriculaFacade::class,
         'ParametroVestibular' => \Seracademico\Facades\ParametroVestibularFacade::class,
+        'ParametroBanco' => \Seracademico\Facades\ParametroBancoFacade::class,
     ],
 
 ];

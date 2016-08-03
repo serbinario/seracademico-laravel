@@ -1,17 +1,15 @@
 <div class="row">
 	<div class="col-md-10">
 		<div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
-                    
-				{!! Form::label('nome', 'Nome *') !!}
-				{!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                    {!! Form::label('nome', 'Nome *') !!}
+                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-
 					{!! Form::label('codigo', 'Código *') !!}
 					{!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
 				</div>
@@ -19,11 +17,19 @@
 
 			<div class="col-md-3">
 				<div class="form-group">
-
 					{!! Form::label('numero_banco', 'Nº Banco *') !!}
 					{!! Form::text('numero_banco', Session::getOldInput('numero_banco')  , array('class' => 'form-control')) !!}
 				</div>
 			</div>
+
+            <div class="form-group col-md-1">
+                {{--{!! Form::label('ativar', 'Ativar') !!}--}}
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('status', 0) !!}
+                    {!! Form::checkbox('status', 1, null, array('class' => 'form-control', 'id'=>'ativo')) !!}
+                    {!! Form::label('status', 'Ativar', false) !!}
+                </div>
+            </div>
 		</div>
 
         <div class="row">
@@ -165,3 +171,15 @@
 		</div>
 	</div>
 </div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{ asset('js/vestibular/validacao/form_validation.js')  }}"></script>
+    <script type="text/javascript">
+        // Alerta para ativar o vestibular
+        $(document).on('click', '#ativo', function () {
+            if ($(this).is(':checked')) {
+                swal("Marcando esse Banco como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
+            }
+        });
+    </script>
+@stop

@@ -49,6 +49,7 @@ class BancoService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
+        $this->tratamentoBancoAtivo($data);
         
         #Salvando o registro pincipal
         $banco =  $this->repository->create($data);
@@ -72,6 +73,7 @@ class BancoService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
+        $this->tratamentoBancoAtivo($data);
 
         #Atualizando no banco de dados
         $banco = $this->repository->update($data, $id);
@@ -153,6 +155,30 @@ class BancoService
         }
 
         #Retorno
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    private function tratamentoBancoAtivo(array &$data): array
+    {
+        #Verificando se a condição é válida
+        if($data['status'] == 1) {
+            #Recuperando o(s) vestibular(es) ativo(s)
+            $rows = $this->repository->findWhere(['status' => 1]);
+
+            #Varrendo o array
+            foreach($rows as $row) {
+                $banco = $this->repository->find($row->id);
+
+                $banco->ativo = 0;
+                $banco->save();
+            }
+        }
+
+        #retorno
         return $data;
     }
 }

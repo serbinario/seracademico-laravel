@@ -35,7 +35,8 @@ class DebitoAbertoAlunoService
     {
         # Definindo os relacionamentos
         $relacionamentos = [
-            'taxa'
+            'taxa',
+            'aluno'
         ];
 
         # Recuperando o débito
