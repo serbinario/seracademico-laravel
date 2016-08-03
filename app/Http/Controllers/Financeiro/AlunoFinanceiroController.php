@@ -10,7 +10,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\DebitoAbertoAlunoService;
 use Seracademico\Services\Financeiro\FechamentoService;
 use Seracademico\Services\Graduacao\AlunoService;
-use OpenBoleto\Banco\BancoDoBrasil;
+use OpenBoleto\Banco\CaixaSICOB;
 use OpenBoleto\Agente;
 
 use Yajra\Datatables\Datatables;
@@ -241,7 +241,7 @@ class AlunoFinanceiroController extends Controller
         $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
         $cedente = new Agente('Serbinario LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
-        $boleto = new BancoDoBrasil(array(
+        $boleto = new CaixaSICOB(array(
             // Parâmetros obrigatórios
             'dataVencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
             'valor' => $debito->valor_debito,
@@ -249,8 +249,8 @@ class AlunoFinanceiroController extends Controller
             'sacado' => $sacado,
             'cedente' => $cedente,
             'agencia' => 1724, // Até 4 dígitos
-            'carteira' => 18,
-            'conta' => 10403005, // Até 8 dígitos
+            'carteira' => 'SR',
+            'conta' => 123456, // Até 8 dígitos
             'convenio' => 1234, // 4, 6 ou 7 dígitos
         ));
 
