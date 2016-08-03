@@ -12,9 +12,28 @@ class Banco extends Model implements Transformable
 
     protected $table    = 'fin_bancos';
 
-    protected $fillable = [
-        'codigo',
+    protected $fillable = [ 
+		'codigo',
 		'nome',
+		'numero_banco',
+		'status',
+		'numero_conta',
+		'numero_agencia',
+		'numero_convenio',
+		'carteira',
+		'carteira_var',
+		'mascara_nn',
+		'tipo_moeda_id',
+		'aceite',
+		'especie',
+		'local_pagamento',
 	];
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function tipoMoeda()
+	{
+		return $this->belongsTo(TipoMoeda::class, 'tipo_moeda_id');
+	}
 }

@@ -27,7 +27,9 @@ class BancoController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Financeiro\TipoMoeda'
+    ];
 
     /**
     * @param BancoService $service

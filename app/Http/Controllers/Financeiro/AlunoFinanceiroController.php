@@ -8,6 +8,8 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\DebitoAbertoAlunoService;
 use Seracademico\Services\Financeiro\FechamentoService;
 use Seracademico\Services\Graduacao\AlunoService;
+use OpenBoleto\Banco\BancoDoBrasil;
+use OpenBoleto\Agente;
 
 use Yajra\Datatables\Datatables;
 
@@ -81,7 +83,7 @@ class AlunoFinanceiroController extends Controller
                         <ul>                  
                             <li><a class="btn-floating indigo" title="Editar" id="btnEditDebitoAberto"><i class="material-icons">edit</i></a></li>
                             <li><a class="btn-floating indigo" title="Fechamento" id="btnCreateFechamento"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
-                            <li><a class="btn-floating indigo" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
+                            <li><a class="btn-floating indigo" target="_blank" href="/index.php/seracademico/financeiro/aluno/gerarBoleto/'. $row->id .'" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
                         </ul>
                         </div>';
                 })->make(true);
@@ -222,6 +224,31 @@ class AlunoFinanceiroController extends Controller
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param $idDebitoAberto
+     * @return string
+     */
+    public function gerarBoleto($idDebitoAberto)
+    {
+        $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
+        $cedente = new Agente('Empresa de cosméticos LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
+
+        $boleto = new BancoDoBrasil(array(
+            // Parâmetros obrigatórios
+            'dataVencimento' => new \DateTime('2013-01-24'),
+            'valor' => 23.00,
+            'sequencial' => 1234567, // Para gerar o nosso número
+            'sacado' => $sacado,
+            'cedente' => $cedente,
+            'agencia' => 1724, // Até 4 dígitos
+            'carteira' => 18,
+            'conta' => 10403005, // Até 8 dígitos
+            'convenio' => 1234, // 4, 6 ou 7 dígitos
+        ));
+
+        return $boleto->getOutput();
     }
 
     /**

@@ -639,6 +639,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('storeDebitoAberto', ['as' => 'storeDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeDebitoAberto']);
                 Route::post('storeFechamento', ['as' => 'storeFechamento', 'uses' => 'Financeiro\AlunoFinanceiroController@storeFechamento']);
                 Route::post('getDebitoAberto/{id}', ['as' => 'getDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@getDebitoAberto']);
+                Route::get('gerarBoleto/{idDebitoAberto}', ['as' => 'gerarBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@gerarBoleto']);
             });
         });
     });

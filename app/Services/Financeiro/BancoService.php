@@ -42,10 +42,14 @@ class BancoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Banco
+     * @throws \Exception
      */
     public function store(array $data) : Banco
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+        
         #Salvando o registro pincipal
         $banco =  $this->repository->create($data);
 
@@ -61,10 +65,14 @@ class BancoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Banco
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Banco
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $banco = $this->repository->update($data, $id);
 
@@ -118,17 +126,33 @@ class BancoService
          return $result;
     }
 
+
     /**
      * @param array $data
-     * @return mixed
+     * @return array
      */
-    public function tratamentoDatas(array &$data) : array
+    public function tratamentoCampos(array &$data)
     {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
 
-         #retorno
-         return $data;
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
     }
-
 }
