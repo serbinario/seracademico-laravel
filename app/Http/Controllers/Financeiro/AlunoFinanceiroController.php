@@ -61,6 +61,7 @@ class AlunoFinanceiroController extends Controller
                 })
                 ->select([
                     'fin_debitos.id',
+                    'fin_taxas.id as taxaId',
                     'fin_taxas.codigo',
                     'fin_taxas.nome',
                     'fin_taxas.valor',
@@ -261,20 +262,17 @@ class AlunoFinanceiroController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $id
      * @return mixed
      */
-    public function search(Request $request)
+    public function getDebitoAberto($id)
     {
         try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
             #Executando a ação
-            $dados = $this->service->search(key($data), $data[key($data)]);
+            $debito = $this->debitoAbertoAlunoService->find($id);
 
             #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $debito]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }

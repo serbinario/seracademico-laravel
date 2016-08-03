@@ -27,6 +27,30 @@ class DebitoAbertoAlunoService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find($id)
+    {
+        # Definindo os relacionamentos
+        $relacionamentos = [
+            'taxa'
+        ];
+
+        # Recuperando o débito
+        $debito = $this->repository->with($relacionamentos)->find($id);
+
+        #Verificando se foi criado no banco de dados
+        if(!$debito) {
+            throw new \Exception('Débito não encontrado!');
+        }
+
+        #Retorno
+        return $debito;
+    }
+
+    /**
      * @param array $data
      * @return mixed
      * @throws \Exception

@@ -85,6 +85,9 @@ function builderHtmlFechamento (dados) {
     $("#local_pagamento_id option").remove();
     $("#local_pagamento_id").append(htmlLocalPagamento);
 
+    // Carregando os valores padrões do formulário
+    getInfoDebitoAberto(idDebitoAberto);
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-fechamento").modal({show : true});
 }
@@ -141,6 +144,34 @@ $('#btnSaveFechamento').click(function() {
         }
     });
 });
+
+
+/**
+ * Função responsável por recuperar o débito e
+ * preencher os campos de cadastro.
+ *
+ * @param idTaxa
+ */
+function getInfoDebitoAberto(idDebitoAberto)
+{
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/financeiro/aluno/getDebitoAberto/' + idDebitoAberto,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            // Formatando os campos
+            $('#valor_parcela').val(retorno.data.taxa.valor);
+            $('#valor_debito_fechamento').val(retorno.data.valor_debito);
+            $('#data_vencimento_fechamento').val(retorno.data.data_vencimento);
+            $('#valor_tipo_juros').val(retorno.data.taxa.valor_juros);
+            $('#valor_tipo_multa').val(retorno.data.taxa.valor_multa);
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+}
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#btnDeleteHistorico', function () {
