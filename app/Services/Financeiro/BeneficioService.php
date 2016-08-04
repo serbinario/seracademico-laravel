@@ -49,10 +49,16 @@ class BeneficioService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
-        $this->tratamentoBeneficioAtivo($data);
-        
+
+        # Tratamento das taxas
+        $taxas = $data['taxas'];
+        unset($data['taxas']);
+
         #Salvando o registro pincipal
         $beneficio =  $this->repository->create($data);
+
+        # Salvando as taxas
+        $beneficio->taxas()->attach($taxas);
 
         #Verificando se foi criado no beneficio de dados
         if(!$beneficio) {
@@ -73,11 +79,16 @@ class BeneficioService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
-        $this->tratamentoBeneficioAtivo($data);
+
+        # Tratamento das taxas
+        $taxas = $data['taxas'];
+        unset($data['taxas']);
 
         #Atualizando no beneficio de dados
         $beneficio = $this->repository->update($data, $id);
 
+        # Salvando as taxas
+        $beneficio->taxas()->attach($taxas);
 
         #Verificando se foi atualizado no beneficio de dados
         if(!$beneficio) {
@@ -86,6 +97,31 @@ class BeneficioService
 
         #Retorno
         return $beneficio;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        #Recuperando o registro no beneficio de dados
+        $beneficio = $this->repository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$beneficio) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        # Removendo as dependências
+        $beneficio->taxas()->detach();
+        
+        # Removendo o benefício
+        $this->repository->delete($id);
+
+        # Retorno
+        return true;
     }
 
     /**

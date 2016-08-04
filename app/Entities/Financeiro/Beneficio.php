@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Graduacao\Aluno;
+use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Beneficio extends Model implements Transformable
 {
@@ -13,7 +14,13 @@ class Beneficio extends Model implements Transformable
 
     protected $table    = 'fin_beneficios';
 
-    protected $fillable = [ 
+    protected $dates    = [
+        'data_inicio',
+        'data_fim'
+    ];
+
+    protected $fillable = [
+        'codigo',
 		'data_inicio',
 		'data_fim',
 		'valor',
@@ -21,14 +28,20 @@ class Beneficio extends Model implements Transformable
 		'aluno_id',
 	];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
 	public function aluno()
     {
         return $this->belongsTo(Aluno::class, 'aluno_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tipoBeneficio()
     {
-        //return $this->belongsTo(TipoBeneficio::class, 'tipo_beneficio_id');
+        return $this->belongsTo(TipoBeneficio::class, 'tipo_beneficio_id');
     }
 
     /**
@@ -37,5 +50,40 @@ class Beneficio extends Model implements Transformable
     public function taxas()
     {
         return $this->belongsToMany(Taxa::class, 'fin_beneficios_taxas', 'beneficio_id', 'taxa_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataInicioAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_inicio']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataInicioAttribute($value)
+    {
+        $this->attributes['data_inicio'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function getDataFimAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_fim']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataFimAttribute($value)
+    {
+        $this->attributes['data_fim'] = SerbinarioDateFormat::toUsa($value);
     }
 }

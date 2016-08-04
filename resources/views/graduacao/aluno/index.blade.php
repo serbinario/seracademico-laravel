@@ -119,6 +119,8 @@
     @include('graduacao.aluno.financeiro.modal_debitos')
     @include('graduacao.aluno.financeiro.modal_create_debito_aberto')
     @include('graduacao.aluno.financeiro.modal_create_fechamento')
+    @include('graduacao.aluno.beneficio.modal_beneficios')
+    @include('graduacao.aluno.beneficio.modal_create_beneficio')
 @stop
 
 @section('javascript')
@@ -135,6 +137,8 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_fechamento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_beneficios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_create_beneficio.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -256,6 +260,29 @@
 
             // Carregando o modal
             runFinanceiro(idAluno);
+        });
+
+
+        // Evento para abrir o modal de financeiro
+        $(document).on("click", "#modalBeneficio", function () {
+            // recuperando o id do aluno e o semestre
+            idAluno    = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idSemestre = table.row($(this).parent().parent().parent().parent().parent().index()).data().idSemestre;
+
+            // Recuperando o nome e a matrícula
+            nomeAluno   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            matricula   = table.row($(this).parent().parent().parent().parent().parent().index()).data().matricula;
+            codigoCurso = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurso;
+            periodo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+
+            // prenchendo o titulo do nome do aluno
+            $('#benMatricula').text(matricula);
+            $('#benNomeAluno').text(nomeAluno);
+            $('#benCurso').text(codigoCurso);
+            $('#benPeriodo').text(periodo);
+
+            // Carregando o modal
+            runBeneficio(idAluno);
         });
     </script>
 @stop

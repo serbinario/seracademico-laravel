@@ -52,28 +52,28 @@ class BeneficioController extends Controller
     /**
      * @return mixed
      */
-    public function grid()
+    public function grid($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('fin_Beneficios')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('fin_Beneficios')
+            ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_Beneficios.tipo_beneficio_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_Beneficios.aluno_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->select([
+                'fin_Beneficios.id',
+                'fin_tipos_beneficios.nome',
+                'fin_Beneficios.valor',
+                'fin_Beneficios.data_inicio',
+                'fin_Beneficios.data_fim'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a href="edit/'.$row->id.'" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Editar</a>';
+            //<a class="btn-floating indigo" title="Editar" id="btnEditBeneficio"><i class="material-icons">edit</i></a>
+            return '<a class="btn-floating indigo" title="Excluir" id="btnDestroyBeneficio"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        #Carregando os dados para o cadastro
-        $loadFields = $this->service->load($this->loadFields);
-
-        #Retorno para view
-        return view('financeiro.beneficio.create', compact('loadFields'));
-    }
+    
 
     /**
      * @param Request $request
@@ -84,7 +84,7 @@ class BeneficioController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+           
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -92,33 +92,32 @@ class BeneficioController extends Controller
             $this->service->store($data);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        try {
-            #Recuperando a empresa
-            $model = $this->service->find($id);
-
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
-
-            #retorno para view
-            return view('financeiro.beneficio.edit', compact('model', 'loadFields'));
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso']);
         } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+//    /**
+//     * @param $id
+//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+//     */
+//    public function edit($id)
+//    {
+//        try {
+//            #Recuperando a empresa
+//            $model = $this->service->find($id);
+//
+//            #Carregando os dados para o cadastro
+//            $loadFields = $this->service->load($this->loadFields);
+//
+//            #retorno para view
+//            return view('financeiro.beneficio.edit', compact('model', 'loadFields'));
+//        } catch (\Throwable $e) {
+//            return redirect()->back()->with('message', $e->getMessage());
+//        }
+//    }
 
     /**
      * @param Request $request
@@ -141,12 +140,44 @@ class BeneficioController extends Controller
             $this->service->update($data, $id);
 
             #Retorno para a view
-            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->destroy($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Benefício removido com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }
