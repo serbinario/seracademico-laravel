@@ -469,6 +469,31 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\IncidenciaRepository::class,
+			\Seracademico\Repositories\Financeiro\IncidenciaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoValorRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoValorRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\DataVencimentoRepository::class,
+			\Seracademico\Repositories\Financeiro\DataVencimentoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoDiaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoDiaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoBeneficioRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoBeneficioRepositoryEloquent::class
+		);
+
+		$this->app->bind(
 			\Seracademico\Repositories\Financeiro\FormaPagamentoRepository::class,
 			\Seracademico\Repositories\Financeiro\FormaPagamentoRepositoryEloquent::class
 		);
@@ -477,7 +502,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\LocalPagamentoRepository::class,
 			\Seracademico\Repositories\Financeiro\LocalPagamentoRepositoryEloquent::class
 		);
-        
+
 
 		$this->app->bind(
 			\Seracademico\Repositories\Financeiro\FechamentoRepository::class,
@@ -487,6 +512,16 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		$this->app->bind(
 			\Seracademico\Repositories\Financeiro\TipoMoedaRepository::class,
 			\Seracademico\Repositories\Financeiro\TipoMoedaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BoletoRepository::class,
+			\Seracademico\Repositories\Financeiro\BoletoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BeneficioRepository::class,
+			\Seracademico\Repositories\Financeiro\BeneficioRepositoryEloquent::class
 		);
 	}
 }

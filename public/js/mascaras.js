@@ -14,7 +14,7 @@ $(document).ready(function(){
     //money
      $('.money').mask('000.000.000,00', {reverse: true});
 
-    //money2
+    //Transforma valores em Real (R$) para Dollar ($)
     $('.moneyReal').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 
     //CNPJ
@@ -61,6 +61,18 @@ $(document).ready(function(){
         format: 'd/m/Y',
         mask: false,
         lang: 'pt-BR'
+    });
+
+    //##### Tipos de beneficio
+    //##### Submeter formulário
+    $('#formTipoBeneficio').submit(function() {
+
+        $('.moneyReal').each(function (index, value) {
+
+            $(value).val($('.moneyReal').maskMoney('unmasked')[index]);
+
+        });
+
     });
 
     //##### Submeter formulário

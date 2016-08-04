@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: AndreyPriscila
- * Date: 01/08/2016
- * Time: 12:39
- */
-
 namespace Seracademico\Services\Financeiro;
 
 use Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository;
