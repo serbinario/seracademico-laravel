@@ -132,7 +132,7 @@ $(document).ready(function () {
                         message: "Este campo é obrigatório",
                     },
                 },
-            },*/
+            }, */
         }
     });
 });
