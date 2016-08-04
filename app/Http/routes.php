@@ -642,6 +642,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('getDebitoAberto/{id}', ['as' => 'getDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@getDebitoAberto']);
                 Route::get('gerarBoleto/{id}', ['as' => 'gerarBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@gerarBoleto']);
                 Route::post('storeBoleto', ['as' => 'storeBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeBoleto']);
+
+                Route::group(['prefix' => 'beneficio' , 'as' => 'beneficio.'], function () {
+                    Route::get('gridBeneficios/{idAluno}', ['as' => 'gridBeneficios', 'uses' => 'Financeiro\AlunoFinanceiroController@gridBeneficios']);
+                });
             });
         });
     });
