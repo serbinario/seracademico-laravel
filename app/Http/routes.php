@@ -636,10 +636,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);
                 Route::get('gridDebitosAbertos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridDebitosAbertos']);
                 Route::get('gridFechamentos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridFechamentos']);
+                Route::get('gridBoletos/{idAluno}', ['as' => 'gridBoletos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridBoletos']);
                 Route::post('storeDebitoAberto', ['as' => 'storeDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeDebitoAberto']);
                 Route::post('storeFechamento', ['as' => 'storeFechamento', 'uses' => 'Financeiro\AlunoFinanceiroController@storeFechamento']);
                 Route::post('getDebitoAberto/{id}', ['as' => 'getDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@getDebitoAberto']);
-                Route::get('gerarBoleto/{idDebitoAberto}', ['as' => 'gerarBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@gerarBoleto']);
+                Route::get('gerarBoleto/{id}', ['as' => 'gerarBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@gerarBoleto']);
+                Route::post('storeBoleto', ['as' => 'storeBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeBoleto']);
             });
         });
     });

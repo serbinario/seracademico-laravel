@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Facades\ParametroBancoFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Services\Financeiro\BoletoService;
 use Seracademico\Services\Financeiro\DebitoAbertoAlunoService;
 use Seracademico\Services\Financeiro\FechamentoService;
 use Seracademico\Services\Graduacao\AlunoService;
@@ -33,6 +34,11 @@ class AlunoFinanceiroController extends Controller
     private $fechamentoService;
 
     /**
+     * @var BoletoService
+     */
+    private $boletoService;
+
+    /**
      * AlunoFinanceiroController constructor.
      * @param AlunoService $service
      * @param DebitoAbertoAlunoService $debitoAbertoAlunoService
@@ -40,11 +46,13 @@ class AlunoFinanceiroController extends Controller
      */
     public function __construct(AlunoService $service,
                                 DebitoAbertoAlunoService $debitoAbertoAlunoService,
-                                FechamentoService $fechamentoService)
+                                FechamentoService $fechamentoService,
+                                BoletoService $boletoService)
     {
         $this->service = $service;
         $this->debitoAbertoAlunoService = $debitoAbertoAlunoService;
         $this->fechamentoService = $fechamentoService;
+        $this->boletoService = $boletoService;
     }
 
     /**
@@ -85,7 +93,7 @@ class AlunoFinanceiroController extends Controller
                         <ul>                  
                             <li><a class="btn-floating indigo" title="Editar" id="btnEditDebitoAberto"><i class="material-icons">edit</i></a></li>
                             <li><a class="btn-floating indigo" title="Fechamento" id="btnCreateFechamento"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
-                            <li><a class="btn-floating indigo" target="_blank" href="/index.php/seracademico/financeiro/aluno/gerarBoleto/'. $row->id .'" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
+                            <li><a class="btn-floating indigo" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
                         </ul>
                         </div>';
                 })->make(true);
@@ -127,6 +135,46 @@ class AlunoFinanceiroController extends Controller
                         <ul>                        
                             <li><a class="btn-floating indigo" title="Editar"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
                             <li><a class="btn-floating indigo" title="Remover" id="modalCurriculo"><i class="material-icons">edit</i></a></li>                                          
+                        </ul>
+                        </div>';
+                })->make(true);
+        } catch (\Throwable $e) {
+            return abort(500, $e->getMessage());
+        }
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function gridBoletos($idAluno)
+    {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('fin_boletos')
+                ->join('fin_debitos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
+                ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_boletos.aluno_id')
+                ->join('fin_bancos', 'fin_bancos.id', '=', 'fin_boletos.banco_id')
+                ->where('fac_alunos.id', $idAluno)
+                ->select([
+                    'fin_boletos.id',
+                    'fin_debitos.id as idDebito',
+                    'fin_bancos.id as idBanco',
+                    'fin_boletos.nosso_numero',
+                    'fin_boletos.vencimento',
+                    'fin_debitos.valor_debito',
+                    'fin_boletos.data',
+                    'fin_boletos.numero'
+                ]);
+
+            #Editando a grid
+            return Datatables::of($rows)
+                ->addColumn('action', function ($row) {
+                    return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>                        
+                            <li><a class="btn-floating indigo" title="Editar"><i class="material-icons">delete</i></a></li>  
+                            <li><a class="btn-floating indigo" title="Remover" ><i class="material-icons">edit</i></a></li>                                          
                         </ul>
                         </div>';
                 })->make(true);
@@ -229,19 +277,57 @@ class AlunoFinanceiroController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $idDebitoAberto
+     * @return mixed
+     */
+    public function storeBoleto(Request $request)
+    {
+        try {
+            #Recuperando o banco ativo
+            $banco   = ParametroBancoFacade::getAtivo();
+            $debito  = $this->debitoAbertoAlunoService->find($request->get('idDebito'));
+
+            # Data Atual
+            $now = new \DateTime('now');
+
+            # Array de boletos
+            $boleto = [
+                'debito_id' => $debito->id,
+                'banco_id' => $banco->id,
+                'aluno_id' => $debito->aluno->id,
+                'nosso_numero' => 123455678,
+                'vencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
+                'data' => $now,
+                'numero' => $now->format('YmdHis')
+            ];
+
+            # Creando o boleto
+            $objBoleto = $this->boletoService->store($boleto);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $objBoleto]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
      * @param $idDebitoAberto
      * @return string
      */
-    public function gerarBoleto($idDebitoAberto)
+    public function gerarBoleto($idBoleto)
     {
         #Recuperando o banco ativo
         $banco   = ParametroBancoFacade::getAtivo();
-        $debito  = $this->debitoAbertoAlunoService->find($idDebitoAberto);
+        $boleto  = $this->boletoService->find($idBoleto);
+        $debito  = $boleto->debito;
 
         $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
         $cedente = new Agente('Serbinario LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
-        $boleto = new CaixaSICOB(array(
+        $objBoleto = new CaixaSICOB(array(
             // Parâmetros obrigatórios
             'dataVencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
             'valor' => $debito->valor_debito,
@@ -254,7 +340,7 @@ class AlunoFinanceiroController extends Controller
             'convenio' => 1234, // 4, 6 ou 7 dígitos
         ));
 
-        return $boleto->getOutput();
+        return $objBoleto->getOutput();
     }
 
     /**
