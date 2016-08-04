@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-star-half-empty"></i>
-                Cadastrar Taxa
+                Editar Tipo de Beneficio
             </h4>
         </div>
 
