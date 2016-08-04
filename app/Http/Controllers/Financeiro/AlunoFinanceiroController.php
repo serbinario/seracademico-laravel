@@ -278,7 +278,6 @@ class AlunoFinanceiroController extends Controller
 
     /**
      * @param Request $request
-     * @param $idDebitoAberto
      * @return mixed
      */
     public function storeBoleto(Request $request)
@@ -314,8 +313,9 @@ class AlunoFinanceiroController extends Controller
     }
 
     /**
-     * @param $idDebitoAberto
+     * @param $idBoleto
      * @return string
+     * @throws \Exception
      */
     public function gerarBoleto($idBoleto)
     {
