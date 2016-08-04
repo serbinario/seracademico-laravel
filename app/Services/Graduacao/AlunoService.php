@@ -354,7 +354,7 @@ class AlunoService
                     $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->lists('nome', 'id');
                 }
             }
 
