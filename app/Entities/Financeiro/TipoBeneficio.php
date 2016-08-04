@@ -35,19 +35,35 @@ class TipoBeneficio extends Model implements Transformable
 		'tipo_dia_id',
 	];
 
-    public function incidencia(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function incidencia()
+    {
         return $this->belongsTo('Seracademico\Entities\Financeiro\Incidencia');
     }
 
-    public function tipoValor(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoValor()
+    {
         return $this->belongsTo('Seracademico\Entities\Financeiro\TipoValor');
     }
 
-    public function tipoDia(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoDia()
+    {
         return $this->belongsTo('Seracademico\Entities\Financeiro\TipoDia');
     }
 
-    public function dataNascimento(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dataNascimento()
+    {
         return $this->belongsTo('Seracademico\Entities\Financeiro\DataNascimento');
     }
 
@@ -89,8 +105,7 @@ class TipoBeneficio extends Model implements Transformable
 
 
     /**
-     *
-     * @return \DateTime
+     * @return string
      */
     public function getDataInicioAttribute()
     {

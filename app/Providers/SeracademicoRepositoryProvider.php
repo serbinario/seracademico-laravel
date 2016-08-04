@@ -518,5 +518,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\BoletoRepository::class,
 			\Seracademico\Repositories\Financeiro\BoletoRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BeneficioRepository::class,
+			\Seracademico\Repositories\Financeiro\BeneficioRepositoryEloquent::class
+		);
 	}
 }
