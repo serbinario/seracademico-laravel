@@ -492,5 +492,31 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\TipoBeneficioRepository::class,
 			\Seracademico\Repositories\Financeiro\TipoBeneficioRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\FormaPagamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\FormaPagamentoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\LocalPagamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\LocalPagamentoRepositoryEloquent::class
+		);
+
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\FechamentoRepository::class,
+			\Seracademico\Repositories\Financeiro\FechamentoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\TipoMoedaRepository::class,
+			\Seracademico\Repositories\Financeiro\TipoMoedaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BoletoRepository::class,
+			\Seracademico\Repositories\Financeiro\BoletoRepositoryEloquent::class
+		);
 	}
 }

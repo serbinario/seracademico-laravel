@@ -42,10 +42,15 @@ class BancoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Banco
+     * @throws \Exception
      */
     public function store(array $data) : Banco
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+        $this->tratamentoBancoAtivo($data);
+        
         #Salvando o registro pincipal
         $banco =  $this->repository->create($data);
 
@@ -61,10 +66,15 @@ class BancoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Banco
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Banco
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+        $this->tratamentoBancoAtivo($data);
+
         #Atualizando no banco de dados
         $banco = $this->repository->update($data, $id);
 
@@ -118,17 +128,57 @@ class BancoService
          return $result;
     }
 
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
+    }
+
     /**
      * @param array $data
      * @return mixed
      */
-    public function tratamentoDatas(array &$data) : array
+    private function tratamentoBancoAtivo(array &$data): array
     {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
+        #Verificando se a condição é válida
+        if($data['status'] == 1) {
+            #Recuperando o(s) vestibular(es) ativo(s)
+            $rows = $this->repository->findWhere(['status' => 1]);
 
-         #retorno
-         return $data;
+            #Varrendo o array
+            foreach($rows as $row) {
+                $banco = $this->repository->find($row->id);
+
+                $banco->ativo = 0;
+                $banco->save();
+            }
+        }
+
+        #retorno
+        return $data;
     }
-
 }

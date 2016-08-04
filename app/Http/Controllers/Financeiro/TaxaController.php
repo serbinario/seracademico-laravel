@@ -196,4 +196,21 @@ class TaxaController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getTaxa($id)
+    {
+        try {
+            #Executando a ação
+            $taxa = $this->service->find($id);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $taxa]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

@@ -1,6 +1,6 @@
 <!-- Modal principal de disciplinas -->
 <div id="modal-create-debito-aberto" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile"
-     aria-hidden="true" ng-app="aluno-financeiro">
+     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

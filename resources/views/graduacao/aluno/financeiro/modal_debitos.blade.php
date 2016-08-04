@@ -38,6 +38,10 @@
                             <li role="presentation">
                                 <a href="#debitos-fechados" aria-controls="debitos-fechados" data-toggle="tab">Débitos Fechados</a>
                             </li>
+
+                            <li role="presentation">
+                                <a href="#boletos" aria-controls="boletos" data-toggle="tab">Boletos</a>
+                            </li>
                         </ul>
 
                         <!-- Conteúdo de navegação de pastas -->
@@ -79,15 +83,35 @@
                                 <table id="grid-debitos-fechados" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Detalhe</th>
-                                        <th>Período</th>
-                                        <th>Cod. Disciplina</th>
-                                        <th>Disciplina</th>
-                                        <th>C. Horária</th>
-                                        <th>Créditos</th>
-                                        <th>Média</th>
-                                        <th>Turma</th>
-                                        <th>Situação</th>
+                                        <th>Cod. Taxa</th>
+                                        <th>Taxa</th>
+                                        <th>V. Taxa</th>
+                                        <th>Vencimento</th>
+                                        <th>V. Multa</th>
+                                        <th>V. Juros</th>
+                                        <th>Valor</th>
+                                        <th>Mês</th>
+                                        <th>Ano</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Boletos -->
+                            <div role="tabpanel" class="tab-pane" id="boletos">
+                                <br/>
+
+                                <!-- Table a cursadas -->
+                                <table id="grid-boletos" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nosso Número</th>
+                                        <th>Vencimento</th>
+                                        <th>Valor</th>
+                                        <th>Data Doc.</th>
+                                        <th>Nº Doc.</th>
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                 </table>

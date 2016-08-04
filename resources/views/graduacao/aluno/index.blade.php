@@ -118,6 +118,7 @@
     @include('graduacao.aluno.modal_semestre')
     @include('graduacao.aluno.financeiro.modal_debitos')
     @include('graduacao.aluno.financeiro.modal_create_debito_aberto')
+    @include('graduacao.aluno.financeiro.modal_create_fechamento')
 @stop
 
 @section('javascript')
@@ -133,6 +134,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/horario.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_fechamento.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
