@@ -620,6 +620,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
             });
 
+            # Rotas para a tipo de beneficios
+            Route::group(['prefix' => 'tipoBeneficio', 'as' => 'tipoBeneficio.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\TipoBeneficioController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Financeiro\TipoBeneficioController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Financeiro\TipoBeneficioController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\TipoBeneficioController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\TipoBeneficioController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TipoBeneficioController@update']);
+            });
+
             # Rotas para banco
             Route::group(['prefix' => 'banco', 'as' => 'banco.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\BancoController@index']);
