@@ -194,15 +194,15 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
+ 
             #Executando a ação
             $this->service->store($data);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {
+        } catch (ValidatorException $e) { dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {var_dump($e); exit;
+        } catch (\Throwable $e) { dd($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -222,7 +222,7 @@ class AlunoController extends Controller
 
             #retorno para view
             return view('graduacao.aluno.edit', compact('aluno', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -251,7 +251,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
