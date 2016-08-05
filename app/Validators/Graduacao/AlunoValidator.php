@@ -14,8 +14,8 @@ class AlunoValidator extends LaravelValidator
     ];
 
     protected $attributes = [
-        'nome' => 'Nome',
-        'cpf' => 'CPF',
+        'pessoa.nome' => 'Nome',
+        'pessoa.cpf' => 'CPF',
         'data_nasciemento' => 'Data Nascimento',
         'zona' => 'Zona',
     ];
