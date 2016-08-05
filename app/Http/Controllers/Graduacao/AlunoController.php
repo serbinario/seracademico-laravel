@@ -194,7 +194,11 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 82abdd9b4c6105be2130b44d86b6ba413d671ca4
             #Executando a ação
             $this->service->store($data);
 
