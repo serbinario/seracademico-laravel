@@ -5,8 +5,8 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Banco;
-use Seracademico\Entities\Taxa;
+use Seracademico\Entities\Financeiro\Banco;
+use Seracademico\Entities\Financeiro\Taxa;
 use Seracademico\Entities\TipoVencimento;
 use Seracademico\Uteis\SerbinarioDateFormat;
 

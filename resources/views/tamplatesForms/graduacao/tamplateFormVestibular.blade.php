@@ -17,8 +17,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     {!! Form::label('semestre_id', 'Semestre *') !!}
-                    @if(isset($model->banco))
-                        {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , $model->banco->id, array('class' => 'form-control')) !!}
+                    @if(isset($model->semestre))
+                        {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , $model->semestre->id, array('class' => 'form-control')) !!}
                     @else
                         {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'] , null, array('class' => 'form-control')) !!}
                     @endif
@@ -179,9 +179,9 @@
                             <div class="form-group">
                                 {!! Form::label('banco_id', 'Banco *') !!}
                                 @if(isset($model->banco))
-                                    {!! Form::select('banco_id', $loadFields['banco'] , $model->banco->id, array('class' => 'form-control')) !!}
+                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , $model->banco->id, array('class' => 'form-control')) !!}
                                 @else
-                                    {!! Form::select('banco_id', $loadFields['banco'] , null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , null, array('class' => 'form-control')) !!}
                                 @endif
                             </div>
                         </div>
@@ -189,9 +189,9 @@
                             <div class="form-group">
                                 {!! Form::label('taxa_id', 'Taxa *') !!}
                                 @if(isset($model->taxa))
-                                    {!! Form::select('taxa_id', $loadFields['taxa'] , $model->taxa->id, array('class' => 'form-control')) !!}
+                                    {!! Form::select('taxa_id', $loadFields['financeiro\\taxa'] , $model->taxa->id, array('class' => 'form-control')) !!}
                                 @else
-                                    {!! Form::select('taxa_id', $loadFields['taxa'] , null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('taxa_id', $loadFields['financeiro\\taxa'] , null, array('class' => 'form-control')) !!}
                                 @endif
                             </div>
                         </div>
