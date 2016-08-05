@@ -147,9 +147,9 @@
 
                 valido_inicio: {
                     validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Válido' })
-                        },
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Válido' })
+//                        },
                         stringLength: {
                             max: 10,
                             message: Lang.get('validation.max', { attribute: 'Válido' })
@@ -159,9 +159,9 @@
 
                 valido_fim: {
                     validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Até' })
-                        },
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Até' })
+//                        },
                         stringLength: {
                             max: 10,
                             message: Lang.get('validation.max', { attribute: 'Até' })
@@ -171,9 +171,9 @@
 
                 data_inicio: {
                     validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Início' })
-                        },
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Início' })
+//                        },
                         stringLength: {
                             max: 10,
                             message: Lang.get('validation.max', { attribute: 'Início' })
@@ -183,9 +183,9 @@
 
                 data_fim: {
                     validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Fim' })
-                        },
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Fim' })
+//                        },
                         stringLength: {
                             max: 10,
                             message: Lang.get('validation.max', { attribute: 'Fim' })
