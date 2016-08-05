@@ -39,7 +39,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     
-					{!! Form::label('data_inicio', 'Inicio') !!}
+					{!! Form::label('data_inicio', 'Início') !!}
 					{!! Form::text('data_inicio', Session::getOldInput('data_inicio'), array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
@@ -63,7 +63,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valor', 'Valor') !!}
-					{!! Form::text('valor', Session::getOldInput('valor'), array('class' => 'form-control')) !!}
+					{!! Form::text('valor', Session::getOldInput('valor'), array('class' => 'form-control moneyReal')) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -114,3 +114,98 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+
+    {{--Validaçao de campos--}}
+    <script type="text/javascript">
+        $('#formTipoBeneficio').bootstrapValidator({
+            fields: {
+                nome: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome' })
+                        },
+                        stringLength: {
+                            max: 200,
+                            message: Lang.get('validation.max', { attribute: 'Nome' })
+                        }
+                    }
+                },
+
+                codigo: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Código' })
+                        }
+                    },
+                    stringLength: {
+                        max: 20,
+                        message: Lang.get('validation.max', { attribute: 'Código' })
+                    }
+                },
+
+                valido_inicio: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Válido' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Válido' })
+                        }
+                    }
+                },
+
+                valido_fim: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Até' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Até' })
+                        }
+                    }
+                },
+
+                data_inicio: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Início' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Início' })
+                        }
+                    }
+                },
+
+                data_fim: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Fim' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Fim' })
+                        }
+                    }
+                },
+
+                valor: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Valor' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Valor' })
+                        }
+                    }
+                },
+            }
+        });
+    </script>
+
+@endsection
