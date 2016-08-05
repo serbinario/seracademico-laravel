@@ -145,65 +145,65 @@
                     }
                 },
 
-                valido_inicio: {
-                    validators: {
+//                valido_inicio: {
+//                    validators: {
 //                        notEmpty: {
 //                            message: Lang.get('validation.required', { attribute: 'Válido' })
 //                        },
-                        stringLength: {
-                            max: 10,
-                            message: Lang.get('validation.max', { attribute: 'Válido' })
-                        }
-                    }
-                },
-
-                valido_fim: {
-                    validators: {
+//                        stringLength: {
+//                            max: 10,
+//                            message: Lang.get('validation.max', { attribute: 'Válido' })
+//                        }
+//                    }
+//                },
+//
+//                valido_fim: {
+//                    validators: {
 //                        notEmpty: {
 //                            message: Lang.get('validation.required', { attribute: 'Até' })
 //                        },
-                        stringLength: {
-                            max: 10,
-                            message: Lang.get('validation.max', { attribute: 'Até' })
-                        }
-                    }
-                },
-
-                data_inicio: {
-                    validators: {
+//                        stringLength: {
+//                            max: 10,
+//                            message: Lang.get('validation.max', { attribute: 'Até' })
+//                        }
+//                    }
+//                },
+//
+//                data_inicio: {
+//                    validators: {
 //                        notEmpty: {
 //                            message: Lang.get('validation.required', { attribute: 'Início' })
 //                        },
-                        stringLength: {
-                            max: 10,
-                            message: Lang.get('validation.max', { attribute: 'Início' })
-                        }
-                    }
-                },
-
-                data_fim: {
-                    validators: {
+//                        stringLength: {
+//                            max: 10,
+//                            message: Lang.get('validation.max', { attribute: 'Início' })
+//                        }
+//                    }
+//                },
+//
+//                data_fim: {
+//                    validators: {
 //                        notEmpty: {
 //                            message: Lang.get('validation.required', { attribute: 'Fim' })
 //                        },
-                        stringLength: {
-                            max: 10,
-                            message: Lang.get('validation.max', { attribute: 'Fim' })
-                        }
-                    }
-                },
+//                        stringLength: {
+//                            max: 10,
+//                            message: Lang.get('validation.max', { attribute: 'Fim' })
+//                        }
+//                    }
+//                },
 
-                valor: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Valor' })
-                        },
-                        stringLength: {
-                            max: 10,
-                            message: Lang.get('validation.max', { attribute: 'Valor' })
-                        }
-                    }
-                },
+//                valor: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Valor' })
+//                        },
+//                        stringLength: {
+//                            max: 10,
+//                            message: Lang.get('validation.max', { attribute: 'Valor' })
+//                        }
+//                    }
+//                },
             }
         });
     </script>
