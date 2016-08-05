@@ -28,8 +28,8 @@ class VestibularController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Taxa',
-        'Banco',
+        'Financeiro\\Taxa',
+        'Financeiro\\Banco',
         'TipoVencimento',
         'Graduacao\\Semestre'
     ];

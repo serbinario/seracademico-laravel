@@ -81,11 +81,11 @@ class VestibulandoController extends Controller
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($arrayLoadFields);
 
-        # Recuperando o semestre ativo
-        $semestreAtivo = ParametroVestibularFacade::getAtivo();
+        # Recuperando o vestibular ativo
+        $vestibularAtivo = ParametroVestibularFacade::getAtivo();
 
         # Retorno
-        return view('vestibulando.index', compact('loadFields', 'semestreAtivo'));
+        return view('vestibulando.index', compact('loadFields', 'vestibularAtivo'));
     }
 
     /**
