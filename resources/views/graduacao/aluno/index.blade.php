@@ -85,6 +85,7 @@
                                 <th>Semestre Atual</th>
                                 <th>Período</th>
                                 <th>Curso</th>
+                                <th>Currículo</th>
                                 <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
@@ -98,6 +99,7 @@
                                 <th>Semestre Atual</th>
                                 <th>Período</th>
                                 <th>Curso</th>
+                                <th>Currículo</th>
                                 <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
@@ -160,6 +162,7 @@
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'semestre', name: 'fac_semestres.nome'},
                 {data: 'periodo', name: 'fac_alunos_semestres.periodo'},
+                {data: 'codigoCurso', name: 'fac_cursos.codigo'},
                 {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
