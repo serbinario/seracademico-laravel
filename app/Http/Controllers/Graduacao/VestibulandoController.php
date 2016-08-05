@@ -148,7 +148,7 @@ class VestibulandoController extends Controller
                 // Filtrando por pagos
                 if ($request->has('pago')) {
                     $query->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
-                    $query->where('tipos_taxas.id', '=', 1);
+                    $query->where('fin_tipos_taxas.id', '=', 1);
                 }
 
                 // Filtrando por forma de avaliação
