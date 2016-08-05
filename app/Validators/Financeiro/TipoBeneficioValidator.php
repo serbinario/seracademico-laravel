@@ -15,7 +15,7 @@ class TipoBeneficioValidator extends LaravelValidator
 
             'codigo' => 'integer|max:20', //'unique:fin_tipos_beneficios, codigo'
 			'nome' =>  'serbinario_alpha_space|max:100',
-			'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
+			'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:' ,
 			'valido_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
 			'data_inicio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
 			'data_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
