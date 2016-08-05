@@ -115,7 +115,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 {!! Form::label('pessoa[naturalidade]', 'Naturalidade ') !!}
-                                {!! Form::text('pessoa[naturalidade]', Session::getOldInput('pessoa[naturalidade]'), array('class' => 'form-control')) !!}
+                                {!! Form::text('pessoa[naturalidade]', Session::getOldInput('pessoas[naturalidade]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-archive"></i> Outros dados</legend>
@@ -179,7 +179,7 @@
                                             </div>
                                             <div class="form-group col-md-1">
                                                 {!! Form::label('pessoa[zona]', 'Zona') !!}
-                                                {!! Form::text('pessoa[zona]', Session::getOldInput('pessoa[zona]'), array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[zona]', Session::getOldInput('pessoas[zona]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
                                                 {!! Form::label('pessoa[secao]', 'Seção') !!}
@@ -271,7 +271,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-3">
-                                {!! Form::label('pessoa[endereco][bairros_id]', 'Bairro ') !!}
+                                {!! Form::label('pessoas[endereco][bairros_id]', 'Bairro ') !!}
                                 @if(isset($aluno->pessoa->endereco->bairro->id))
                                     {!! Form::select('pessoa[endereco][bairros_id]', array($aluno->pessoa->endereco->bairro->id => $aluno->pessoa->endereco->bairro->nome), $aluno->pessoa->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @else
@@ -297,7 +297,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-5">
                                                 {!! Form::label('pessoa[email]', 'E-mail') !!}
-                                                {!! Form::text('pessoa[email]', Session::getOldInput('pessoa[email]'), array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[email]', Session::getOldInput('pessoas[email]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
@@ -392,14 +392,14 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[ano_conclusao_medio]', 'Ano Conclusão') !!}
-                                {!! Form::text('pessoa[ano_conclusao_medio]', Session::getOldInput('pessoa[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {!! Form::label('pessoa[outra_escola]', 'Outra Instituição') !!}
-                                {!! Form::text('pessoa[outra_escola]', Session::getOldInput('pessoa[outra_escola]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoas[outra_escola]', 'Outra Instituição') !!}
+                                {!! Form::text('pessoas[outra_escola]', Session::getOldInput('pessoas[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                     </div>
