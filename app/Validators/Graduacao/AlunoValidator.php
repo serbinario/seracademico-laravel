@@ -81,7 +81,7 @@ class AlunoValidator extends LaravelValidator
             'nome_pai' => 'required|max:200|serbinario_alpha_space',
             'nome_social' => 'max:200|serbinario_alpha_space',
             'nome_mae' => 'required|max:200|serbinario_alpha_space',
-            //'identidade' => 'required|digits_between:0,11|numeric',
+            'identidade' => 'required|digits_between:0,11|numeric',
             'orgao_rg' => 'max:30',
             'data_expedicao' => 'digits_between:0,10|serbinario_date_format:"d/m/Y"',
             'cpf' => 'required|numeric|max:20|unique:pessoas,cpf,:id',
