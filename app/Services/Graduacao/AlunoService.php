@@ -94,7 +94,7 @@ class AlunoService
      * @throws \Exception
      */
     public function store(array $data) : Aluno
-    {
+    {      
         #regras de negócios
         $this->tratamentoImagem($data);
         $this->tratamentoMatricula($data);
