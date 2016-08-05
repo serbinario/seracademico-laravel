@@ -14,8 +14,8 @@ class AlunoValidator extends LaravelValidator
     ];
 
     protected $attributes = [
-        'nome' => 'Nome',
-        'cpf' => 'CPF',
+        'pessoa.nome' => 'Nome',
+        'pessoa.cpf' => 'CPF',
         'data_nasciemento' => 'Data Nascimento',
         'zona' => 'Zona',
     ];
@@ -29,7 +29,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.nome_pai' => 'required|max:200|serbinario_alpha_space',
             'nome_social' => 'max:200|serbinario_alpha_space',//
             'pessoa.nome_mae' => 'required|max:200|serbinario_alpha_space',
-            //'pessoa.identidade' => 'required|digits_between:4,11|numeric',
+            'pessoa.identidade' => 'required|digits_between:4,11|numeric',
             'orgao_rg' => 'max:30',
             'data_expedicao' => 'serbinario_date_format:"d/m/Y"',
             'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
