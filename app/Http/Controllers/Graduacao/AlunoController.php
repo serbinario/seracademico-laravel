@@ -166,7 +166,7 @@ class AlunoController extends Controller
                         </div>';
                 })->make(true);
         } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            abort(500, $e->getMessage());
         }
     }
 
@@ -194,7 +194,7 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-      
+
             #Executando a ação
             $this->service->store($data);
 
