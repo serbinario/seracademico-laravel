@@ -55,16 +55,16 @@ class BeneficioController extends Controller
     public function grid($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('fin_Beneficios')
-            ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_Beneficios.tipo_beneficio_id')
-            ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_Beneficios.aluno_id')
+        $rows = \DB::table('fin_beneficios')
+            ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_beneficios.tipo_beneficio_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_beneficios.aluno_id')
             ->where('fac_alunos.id', $idAluno)
             ->select([
-                'fin_Beneficios.id',
+                'fin_beneficios.id',
                 'fin_tipos_beneficios.nome',
-                'fin_Beneficios.valor',
-                'fin_Beneficios.data_inicio',
-                'fin_Beneficios.data_fim'
+                'fin_beneficios.valor',
+                'fin_beneficios.data_inicio',
+                'fin_beneficios.data_fim'
             ]);
 
         #Editando a grid
