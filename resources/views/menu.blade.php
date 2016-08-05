@@ -153,8 +153,9 @@
 
                         <li><a href="#"><i class="flaticon-folder"></i> Financeiro <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
-                                <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas</a></li>
-                                <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos</a></li>
+                                <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
+                                <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
+                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="fa fa-university"></i> Tipos de Beneficios </a></li>
                             </ul>
                         </li>
 
