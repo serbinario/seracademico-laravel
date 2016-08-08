@@ -16,7 +16,7 @@ class TipoBeneficioValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
-            'codigo' => 'integer|max:20', //'unique:fin_tipos_beneficios, codigo'
+            'codigo' => 'integer|unique:fin_tipos_beneficios,codigo,:id',
 			'nome' =>  'serbinario_alpha_space|max:100',
 			'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:' ,
 			'valido_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
@@ -32,7 +32,7 @@ class TipoBeneficioValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-            'codigo' => 'integer|max:20', //'unique:fin_tipos_beneficios, codigo'
+            'codigo' => 'integer|unique:fin_tipos_beneficios,codigo,:id',
             'nome' =>  'serbinario_alpha_space|max:100',
             'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
