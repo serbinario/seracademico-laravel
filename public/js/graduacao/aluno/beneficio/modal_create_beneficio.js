@@ -100,6 +100,11 @@ $('#btnSaveBeneficio').click(function() {
         if(retorno.success) {
             tableBeneficios.ajax.reload();
 
+            // Removendo as linhas da grid
+            if (TableTaxasOfBeneficio) {
+                TableTaxasOfBeneficio.rows().remove().draw();
+            }
+
             $('#modal-create-beneficio').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
