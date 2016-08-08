@@ -132,9 +132,9 @@ class AlunoFinanceiroController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>                        
-                            <li><a class="btn-floating indigo" title="Editar"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
-                            <li><a class="btn-floating indigo" title="Remover" id="modalCurriculo"><i class="material-icons">edit</i></a></li>                                          
+                        <ul>              
+                            <li><a class="btn-floating indigo" title="Editar"><i class="material-icons">edit</i></a></li>  
+                            <li><a class="btn-floating indigo" title="Remover"><i class="material-icons">delete</i></a></li>                                                                   
                         </ul>
                         </div>';
                 })->make(true);
@@ -172,9 +172,9 @@ class AlunoFinanceiroController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>                        
-                            <li><a class="btn-floating indigo" title="Editar"><i class="material-icons">delete</i></a></li>  
-                            <li><a class="btn-floating indigo" title="Remover" ><i class="material-icons">edit</i></a></li>                                          
+                        <ul>              
+                            <li><a class="btn-floating indigo" title="Editar"><i class="material-icons">edit</i></a></li>  
+                            <li><a class="btn-floating indigo" title="Remover"><i class="material-icons">delete</i></a></li>                                                                   
                         </ul>
                         </div>';
                 })->make(true);
