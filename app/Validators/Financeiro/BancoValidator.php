@@ -10,6 +10,11 @@ class BancoValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 
+    protected $messages   = [];
+
+    protected $attributes = [];
+
+
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
