@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">
-                        <table id="banco-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="tipos-beneficios-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
 
@@ -60,7 +60,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-        var table = $('#banco-grid').DataTable({
+        var table = $('#tipos-beneficios-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{!! route('seracademico.financeiro.tipoBeneficio.grid') !!}",
