@@ -10,7 +10,12 @@ class FechamentoValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 
-    protected $rules = [
+	protected $messages   = [];
+
+	protected $attributes = [];
+
+
+	protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
 			'debito_id' =>  '' ,

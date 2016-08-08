@@ -11,9 +11,11 @@ class BeneficioValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
 	protected $messages   = [];
+
 	protected $attributes = [];
-	
-    protected $rules = [
+
+
+	protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
 			'data_inicio' =>  '' ,
