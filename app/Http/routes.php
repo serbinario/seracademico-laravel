@@ -619,6 +619,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TaxaController@update']);
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
                 Route::post('getTaxa/{id}', ['as' => 'getTaxa', 'uses' => 'Financeiro\TaxaController@getTaxa']);
+                Route::get('getTaxasIn', ['as' => 'getTaxasIn', 'uses' => 'Financeiro\TaxaController@getTaxasIn']);
             });
 
             # Rotas para a tipo de beneficios
@@ -629,6 +630,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\TipoBeneficioController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\TipoBeneficioController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TipoBeneficioController@update']);
+                Route::post('getTipoBeneficio/{id}', ['as' => 'getTipoBeneficio', 'uses' => 'Financeiro\TipoBeneficioController@getTipoBeneficio']);
             });
 
             # Rotas para banco

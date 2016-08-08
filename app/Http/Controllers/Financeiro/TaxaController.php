@@ -213,4 +213,32 @@ class TaxaController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getTaxasIn(Request $request)
+    {
+        try {
+            // Recuperando os ids das taxas da requisição
+            $dados = $request->get('taxas');
+
+            #Criando a consulta
+            $rows = \DB::table('fin_taxas')
+                ->whereIn('id', $dados)
+                ->select(['id', 'nome', 'codigo']);
+
+            #Editando a grid
+            return Datatables::of($rows)->addColumn('action', function ($row) {
+                # Html de retorno
+                $html = '<a id="btnDeleteTaxa" class="btn-floating"><i class="material-icons">delete</i></a>';
+
+                # Retorno
+                return $html;
+            })->make(true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

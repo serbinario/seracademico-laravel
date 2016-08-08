@@ -189,4 +189,20 @@ class TipoBeneficioController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getTipoBeneficio($id)
+    {
+        try {
+            #Executando a ação
+            $tipoBeneficio = $this->service->find($id);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $tipoBeneficio]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

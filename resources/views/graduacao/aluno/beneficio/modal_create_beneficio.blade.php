@@ -1,5 +1,5 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-create-beneficio" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile"
+<div id="modal-create-beneficio" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -32,10 +32,33 @@
                         </div>
                     </div>
 
+                    <hr>
+
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-md-10">
+                            <select name="taxa_id_beneficios" class="form-control" id="taxa_id_beneficios">
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button id="btnAddTaxa" class="btn btn-primary">Adicionar</button>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="taxas_beneficio">Taxa</label>
-                            <select name="taxas_beneficio" multiple="multiple" class="form-control" id="taxas_beneficio"></select>
+                            <div class="table-responsive no-padding">
+                                <table id="beneficios-taxas-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th style="width: 5%;">Código</th>
+                                        <th>Nome</th>
+                                        <th style="width: 5%;">Acão</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

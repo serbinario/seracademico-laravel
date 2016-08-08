@@ -40,9 +40,30 @@ class TaxaService
         return $taxa;
     }
 
+
     /**
      * @param array $data
-     * @return array
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findIn(array $data)
+    {
+        #Recuperando os registros no banco de dados
+        $taxas = $this->repository->findWhereIn('id', $data);
+
+        #Verificando se o registro foi encontrado
+        if(!$taxas) {
+            throw new \Exception('Taxas não encontradas!');
+        }
+
+        #retorno
+        return $taxas;
+    }
+
+    /**
+     * @param array $data
+     * @return Taxa
+     * @throws \Exception
      */
     public function store(array $data) : Taxa
     {   

@@ -4,6 +4,14 @@
     <link rel="stylesheet" href="{{ asset('/js/graduacao/aluno/css/modal_historico.css') }}">
 
     <style type="text/css">
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            qz-index: 3051;
+        }
+
         td.details-control {
             background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
             cursor: pointer;
@@ -140,6 +148,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_fechamento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_beneficios.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/beneficios_select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_create_beneficio.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({

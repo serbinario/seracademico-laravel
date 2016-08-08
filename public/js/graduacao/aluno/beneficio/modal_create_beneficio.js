@@ -44,7 +44,7 @@ function builderHtmlFieldsBeneficio (dados) {
 
     // Variáveis que armazenaram o html
     var htmlTipoBeneficio = "";
-    var htmlTaxa = "";
+    var htmlTaxa = "<option>Selecione uma taxa</option>";
 
     // Percorrendo o array de taxaas
     for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
@@ -57,24 +57,30 @@ function builderHtmlFieldsBeneficio (dados) {
     }
 
     // Carregado os selects
-    $("#taxas_beneficio option").remove();
-    $("#taxas_beneficio").append(htmlTaxa);
+    $("#taxa_id_beneficios option").remove();
+    $("#taxa_id_beneficios").append(htmlTaxa);
     $("#tipo_beneficio_id option").remove();
     $("#tipo_beneficio_id").append(htmlTipoBeneficio);
-    console.log('dsadsa');
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-beneficio").modal({show : true});
 }
 
 // Evento para salvar histórico
 $('#btnSaveBeneficio').click(function() {
-    var taxas             = $("#taxas_beneficio").val();
+    // Recuperando os campos dos formulário
     var tipo_beneficio_id = $("#tipo_beneficio_id option:selected").val();
-    var valor             = $("#valor_beneficio").val();
-    var data_inicio       = $("#data_inicio_beneficio").val();
-    var data_fim          = $("#data_fim_beneficio").val();
+    var valor  = $("#valor_beneficio").val();
+    var data_inicio  = $("#data_inicio_beneficio").val();
+    var data_fim  = $("#data_fim_beneficio").val();
+    var taxas  = [];
 
+    // Carregando as taxas
+    $.each(TableTaxasOfBeneficio.rows().data(),function (index, val) {
+        taxas[index] = val[0];
+    });
 
+    // Dados para cadastro
     var dados = {
         'aluno_id' : idAluno,
         'taxas' : taxas,
@@ -84,12 +90,13 @@ $('#btnSaveBeneficio').click(function() {
         'data_fim' : data_fim
     };
 
+    // Requisição ajax
     jQuery.ajax({
         type: 'POST',
         url: '/index.php/seracademico/financeiro/aluno/beneficio/store',
         data: dados,
         datatype: 'json'
-    }).done(function (retorno) {
+    }).done(function (retorno) {console.log('dsadsa');
         if(retorno.success) {
             tableBeneficios.ajax.reload();
 
@@ -119,21 +126,21 @@ function getInfoTipoBeneficio(idTipoBeneficio)
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/financeiro/taxa/getTaxa/' + idTaxa,
+        url: '/index.php/seracademico/financeiro/tipoBeneficio/getTipoBeneficio/' + idTipoBeneficio,
         datatype: 'json'
     }).done(function (retorno) {
        if(retorno.success) {
            // Data Atual
-           var now = new Date();
+           // var now = new Date();
 
            // Formatando os campos
-           $('#valor_desconto').val('0.00');
-           $('#valor_taxa').val(retorno.data.valor);
-           $('#valor_debito').val(retorno.data.valor);
-           $('#mes_referencia').val(now.getMonth() + 1);
-           $('#ano_referencia').val(now.getFullYear());
-           $('#data_vencimento').val((retorno.data.dia_vencimento
-                   ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
+           //$('#valor_desconto').val('0.00');
+           $('#valor_beneficio').val(retorno.data.valor);
+           //$('#valor_debito').val(retorno.data.valor);
+           //$('#mes_referencia').val(now.getMonth() + 1);
+           //$('#ano_referencia').val(now.getFullYear());
+           //$('#data_vencimento').val((retorno.data.dia_vencimento
+           //        ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
        } else {
            swal(retorno.msg, "Click no botão abaixo!", "error");
        }        
@@ -157,3 +164,65 @@ $(document).on('click', '#btnDeleteHistorico', function () {
         swal(retorno.msg, "Click no botão abaixo!", "success");
     });
 });
+
+// Inicializando a grid de taxas do benefício
+var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
+    iDisplayLength: 5,
+    bLengthChange: false,
+    bFilter: false,
+    autoWidth: false,
+    columnDefs: [
+        {
+            "targets": [0],
+            "visible": false,
+            "searchable": false
+        }
+    ]
+});
+
+// Evento para adicionar linhas para grid de taxas
+$('#btnAddTaxa').on( 'click', function () {
+    // Recuperando o id da taxa
+    var taxaId = $('#taxa_id_beneficios').find('option:selected').val();
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn/',
+        data: {'taxas' : [taxaId]},
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Removendo a seleção do select
+        $('#taxa_id_beneficios option').attr('selected', false);
+
+        // Percorrendo o array de retorno
+        $.each(retorno.data, function (index, value) {
+            TableTaxasOfBeneficio.row.add(
+                [
+                    value.id,
+                    value.codigo,
+                    value.nome,
+                    value.action
+                ]
+            ).draw( false );
+
+            // escondendo o option
+            $('#taxa_id_beneficios option[value='+  value.id + ']').hide();
+        });
+    });
+} );
+
+// Removendo a linha da grid
+$(document).on( 'click', '#btnDeleteTaxa', function () {
+    // Recuperando o id od registro
+    var id = TableTaxasOfBeneficio.row($(this).parent().parent()).data()[0];
+
+    // Exibindo a option do select
+    $('#taxa_id_beneficios option[value='+  id + ']').show();
+
+    // Removendo a linha da grid
+    TableTaxasOfBeneficio
+        .row( $(this).parents('tr') )
+        .remove()
+        .draw();
+} );
