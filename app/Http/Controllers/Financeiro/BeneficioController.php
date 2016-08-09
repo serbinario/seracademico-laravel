@@ -71,9 +71,17 @@ class BeneficioController extends Controller
             ]);
 
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a class="btn-floating indigo" title="Editar" id="btnEditBeneficio"><i class="material-icons">edit</i></a>
-                    <a class="btn-floating indigo" title="Excluir" id="btnDestroyBeneficio"><i class="material-icons">delete</i></a>';
+        return Datatables::of($rows)
+            ->addColumn('taxas' , function ($row) {
+                # Recuperando o benefício
+                $beneficio = $this->service->find($row->id);
+
+                # Retornando as taxas
+                return $beneficio->taxas;
+            })
+            ->addColumn('action', function ($row) {
+                return '<a class="btn-floating indigo" title="Editar" id="btnEditBeneficio"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating indigo" title="Excluir" id="btnDestroyBeneficio"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
     

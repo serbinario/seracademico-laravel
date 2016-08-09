@@ -41,6 +41,7 @@
                         <table id="grid-beneficios" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Detalhe</th>
                                 <th>Benefício</th>
                                 <th>Valor</th>
                                 <th>Inicio</th>

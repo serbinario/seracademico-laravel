@@ -11,12 +11,12 @@ function loadTableBeneficios (idAluno) {
         autoWidth: false,
         ajax: "/index.php/seracademico/financeiro/aluno/beneficio/grid/" + idAluno,
         columns: [
-            // {
-            //     "className":      'details-control',
-            //     "orderable":      false,
-            //     "data":           null,
-            //     "defaultContent": ''
-            // },
+             {
+                 "className":      'details-control',
+                 "orderable":      false,
+                 "data":           null,
+                 "defaultContent": ''
+             },
             {data: 'nome', name: 'fin_tipos_beneficios.nome'},
             {data: 'valor', name: 'fin_Beneficios.valor'},
             {data: 'data_inicio', name: 'fin_Beneficios.data_inicio'},
@@ -31,7 +31,7 @@ function loadTableBeneficios (idAluno) {
     // evento para criação dos detalhes da grid
     $('#grid-beneficios').on( 'click', 'tr td.details-control', function () {
         var tr = $(this).closest('tr');
-        var row = tableCursadas.row( tr );
+        var row = tableBeneficios.row( tr );
         var idx = $.inArray( tr.attr('id'), detailRows );
 
         if ( row.child.isShown() ) {
@@ -43,7 +43,7 @@ function loadTableBeneficios (idAluno) {
         }
         else {
             tr.addClass( 'details' );
-            row.child( formatCursadas( row.data() ) ).show();
+            row.child( formatBeneficios( row.data() ) ).show();
 
             // Add to the 'open' array
             if ( idx === -1 ) {
@@ -60,6 +60,42 @@ function loadTableBeneficios (idAluno) {
     } );
 
     return tableBeneficios;
+}
+
+// Função para formatar a linha de detalhes de benefícios
+function formatBeneficios(dados) {
+    // Iniciando o html
+    var html ='<div class="row">' +
+                '<div class="col-md-12">' +
+                     '<table id="detalhe-disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                         '<thead>' +
+                            '<tr>' +
+                                '<th>Codigo</th>' +
+                                '<th>Nome</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>';
+
+    // Convertendo a string em json
+    var taxas =  JSON.parse(dados.taxas);
+
+    // Prenchendo o conteúdo da tabela
+   for(var i = 0; i < taxas.length; i++) {
+       html += "<tr>";
+       html += "<td>" + taxas[i].codigo + '</td>';
+       html += "<td>" + taxas[i].nome + '</td>';
+       html += "</tr>";
+   }
+
+    // Fechando o html
+    html +=            '</tbody>' +
+                    '</table>' +
+                '</div>' +
+            '</div>';
+
+
+    // Retorno
+    return html;
 }
 
 
