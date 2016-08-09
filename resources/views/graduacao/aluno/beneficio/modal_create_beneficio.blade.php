@@ -32,6 +32,20 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="tipo_id">Tipo</label>
+                            <select name="tipo_id" class="form-control" id="tipo_id">
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="incidencia_id">Incidência</label>
+                            <select name="incidencia_id" class="form-control" id="incidencia_id">
+                            </select>
+                        </div>
+                    </div>
+
                     <hr>
 
                     <div class="row" style="padding-bottom: 10px;">

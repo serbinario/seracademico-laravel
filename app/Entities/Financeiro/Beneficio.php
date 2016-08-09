@@ -26,7 +26,25 @@ class Beneficio extends Model implements Transformable
 		'valor',
 		'tipo_beneficio_id',
 		'aluno_id',
+        'tipo_id',
+        'incidencia_id'
 	];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function incidencia()
+    {
+        return $this->belongsTo(Incidencia::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoValor()
+    {
+        return $this->belongsTo(TipoValor::class, 'tipo_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -131,6 +131,7 @@
     @include('graduacao.aluno.financeiro.modal_create_fechamento')
     @include('graduacao.aluno.beneficio.modal_beneficios')
     @include('graduacao.aluno.beneficio.modal_create_beneficio')
+    @include('graduacao.aluno.beneficio.modal_edit_beneficio')
 @stop
 
 @section('javascript')
@@ -150,6 +151,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_beneficios.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/beneficios_select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_create_beneficio.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_edit_beneficio.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

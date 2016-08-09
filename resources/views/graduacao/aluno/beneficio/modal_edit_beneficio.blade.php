@@ -32,6 +32,20 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="tipo_id_editar">Tipo</label>
+                            <select name="tipo_id_editar" class="form-control" id="tipo_id_editar">
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="incidencia_id_editar">Incidência</label>
+                            <select name="incidencia_id_editar" class="form-control" id="incidencia_id_editar">
+                            </select>
+                        </div>
+                    </div>
+
                     <hr>
 
                     <div class="row" style="padding-bottom: 10px;">
@@ -51,7 +65,6 @@
                                 <table id="beneficios-taxas-grid-editar" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th style="width: 5%;">Código</th>
                                         <th>Nome</th>
                                         <th style="width: 5%;">Acão</th>

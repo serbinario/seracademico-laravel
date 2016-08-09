@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\Financeiro\BeneficioService;
+use Seracademico\Services\Financeiro\TaxaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -32,9 +33,11 @@ class BeneficioController extends Controller
     ];
 
     /**
-    * @param BeneficioService $service
-    * @param BeneficioValidator $validator
-    */
+     * BeneficioController constructor.
+     * @param BeneficioService $service
+     * @param BeneficioValidator $validator
+     * @param TaxaService $taxaService
+     */
     public function __construct(BeneficioService $service, BeneficioValidator $validator)
     {
         $this->service   =  $service;
@@ -99,25 +102,23 @@ class BeneficioController extends Controller
         }
     }
 
-//    /**
-//     * @param $id
-//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-//     */
-//    public function edit($id)
-//    {
-//        try {
-//            #Recuperando a empresa
-//            $model = $this->service->find($id);
-//
-//            #Carregando os dados para o cadastro
-//            $loadFields = $this->service->load($this->loadFields);
-//
-//            #retorno para view
-//            return view('financeiro.beneficio.edit', compact('model', 'loadFields'));
-//        } catch (\Throwable $e) {
-//            return redirect()->back()->with('message', $e->getMessage());
-//        }
-//    }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        try {
+            #Recuperando a empresa
+            $model = $this->service->find($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $model]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => $e->getMessage()]);
+        }
+    }
 
     /**
      * @param Request $request
@@ -131,16 +132,16 @@ class BeneficioController extends Controller
             $data = $request->all();
 
             #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
@@ -178,6 +179,78 @@ class BeneficioController extends Controller
             return \Illuminate\Support\Facades\Response::json([
                 'error' => $e->getMessage()
             ]);
+        }
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function gridTaxas($idBeneficio)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fin_taxas')
+            ->join('fin_beneficios_taxas', 'fin_beneficios_taxas.taxa_id', '=', 'fin_taxas.id')
+            ->join('fin_beneficios', 'fin_beneficios.id', '=', 'fin_beneficios_taxas.beneficio_id')
+            ->where('fin_beneficios.id', $idBeneficio)
+            ->select(['fin_taxas.id', 'fin_taxas.nome', 'fin_taxas.codigo']);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Html de retorno
+            $html = '<a id="btnDestroyBeneficioEditar" class="btn-floating"><i class="material-icons">delete</i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function attachTaxa(Request $request, $idBeneficio)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->get('taxas');
+
+            # Recuperando o benefício
+            $beneficio = $this->service->find($idBeneficio);
+
+            # Vinculando as taxas ao benefício
+            $beneficio->taxas()->attach($dados);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Taxa adicionada com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function detachTaxa(Request $request, $idBeneficio)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->get('taxas');
+
+            # Recuperando o benefício
+            $beneficio = $this->service->find($idBeneficio);
+
+            # Vinculando as taxas ao benefício
+            $beneficio->taxas()->detach($dados);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Taxa removida com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

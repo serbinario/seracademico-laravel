@@ -28,12 +28,19 @@ class BeneficioService
      */
     public function find($id)
     {
+        # Relacionamentos
+        $relacionamentos = [
+            'incidencia',
+            'tipoValor',
+            'tipoBeneficio'
+        ];
+
         #Recuperando o registro no beneficio de dados
-        $beneficio = $this->repository->find($id);
+        $beneficio = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$beneficio) {
-            throw new \Exception('Empresa não encontrada!');
+            throw new \Exception('Benefício não encontrado!');
         }
 
         #retorno
@@ -80,15 +87,8 @@ class BeneficioService
         # Regras de negócio
         $this->tratamentoCampos($data);
 
-        # Tratamento das taxas
-        $taxas = $data['taxas'];
-        unset($data['taxas']);
-
         #Atualizando no beneficio de dados
         $beneficio = $this->repository->update($data, $id);
-
-        # Salvando as taxas
-        $beneficio->taxas()->attach($taxas);
 
         #Verificando se foi atualizado no beneficio de dados
         if(!$beneficio) {

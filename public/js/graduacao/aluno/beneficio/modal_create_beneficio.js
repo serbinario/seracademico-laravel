@@ -17,7 +17,9 @@ function loadFieldsBeneficio()
     var dados =  {
         'models' : [
             'Financeiro\\TipoBeneficio',
-            'Financeiro\\Taxa'
+            'Financeiro\\Taxa',
+            'Financeiro\\Incidencia',
+            'Financeiro\\TipoValor'
         ]
     };
 
@@ -47,11 +49,15 @@ function builderHtmlFieldsBeneficio (dados) {
     $('#data_fim_beneficio').val('');
     $('#valor_beneficio').val('');
     $('#taxas_beneficio option').attr('selected', false);
+    $('#incidencia_id option').attr('selected', false);
+    $('#tipo_id option').attr('selected', false);
 
 
     // Variáveis que armazenaram o html
     var htmlTipoBeneficio = "";
     var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
+    var htmlIncidencia = "<option value=''>Selecione uma incidência</option>";
+    var htmlTipoValor = "<option value=''>Selecione uma tipo</option>";
 
     // Percorrendo o array de taxaas
     for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
@@ -63,11 +69,25 @@ function builderHtmlFieldsBeneficio (dados) {
         htmlTipoBeneficio += "<option value='" + dados['financeiro\\tipobeneficio'][i].id + "'>" + dados['financeiro\\tipobeneficio'][i].nome + "</option>";
     }
 
+    // Percorrendo o array de incidencias
+    for (var i = 0; i < dados['financeiro\\incidencia'].length; i++) {
+        htmlIncidencia += "<option value='" + dados['financeiro\\incidencia'][i].id + "'>" + dados['financeiro\\incidencia'][i].nome + "</option>";
+    }
+
+    // Percorrendo o array de tipos valores
+    for (var i = 0; i < dados['financeiro\\tipovalor'].length; i++) {
+        htmlTipoValor += "<option value='" + dados['financeiro\\tipovalor'][i].id + "'>" + dados['financeiro\\tipovalor'][i].nome + "</option>";
+    }
+
     // Carregado os selects
     $("#taxa_id_beneficios option").remove();
     $("#taxa_id_beneficios").append(htmlTaxa);
     $("#tipo_beneficio_id option").remove();
     $("#tipo_beneficio_id").append(htmlTipoBeneficio);
+    $("#incidencia_id option").remove();
+    $("#incidencia_id").append(htmlIncidencia);
+    $("#tipo_id option").remove();
+    $("#tipo_id").append(htmlTipoValor);
 
     // Abrindo o modal de inserir disciplina
     $("#modal-create-beneficio").modal({show : true});
@@ -80,6 +100,8 @@ $('#btnSaveBeneficio').click(function() {
     var valor  = $("#valor_beneficio").val();
     var data_inicio  = $("#data_inicio_beneficio").val();
     var data_fim  = $("#data_fim_beneficio").val();
+    var incidencia_id  =$("#incidencia_id option:selected").val();
+    var tipo_id  = $("#tipo_id option:selected").val();
     var taxas  = [];
 
     // Carregando as taxas
@@ -94,7 +116,9 @@ $('#btnSaveBeneficio').click(function() {
         'tipo_beneficio_id' : tipo_beneficio_id,
         'valor': valor,
         'data_inicio': data_inicio,
-        'data_fim' : data_fim
+        'data_fim' : data_fim,
+        'incidencia_id' : incidencia_id,
+        'tipo_id' : tipo_id
     };
 
     // Requisição ajax

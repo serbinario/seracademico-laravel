@@ -106,4 +106,20 @@ class Taxa extends Model implements Transformable
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['valido_fim']);
     }
+
+    /**
+     * @param $query
+     * @param $idBeneficio
+     * @return mixed
+     */
+    public function scopeNotBeneficio($query, $idBeneficio)
+    {
+        return $query
+            ->select(['fin_taxas.id', 'fin_taxas.nome', 'fin_taxas.codigo'])
+            ->whereNotIn('fin_taxas.id', function ($query) use ($idBeneficio) {
+                $query->from('fin_beneficios_taxas')
+                    ->select('fin_beneficios_taxas.taxa_id')
+                    ->where('fin_beneficios_taxas.beneficio_id', $idBeneficio)->get();
+            });
+    }
 }
