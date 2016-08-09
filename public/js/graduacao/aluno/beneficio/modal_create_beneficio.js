@@ -44,7 +44,7 @@ function builderHtmlFieldsBeneficio (dados) {
 
     // Variáveis que armazenaram o html
     var htmlTipoBeneficio = "";
-    var htmlTaxa = "<option>Selecione uma taxa</option>";
+    var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
 
     // Percorrendo o array de taxaas
     for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
@@ -189,6 +189,11 @@ var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
 $('#btnAddTaxa').on( 'click', function () {
     // Recuperando o id da taxa
     var taxaId = $('#taxa_id_beneficios').find('option:selected').val();
+   
+    if (!taxaId) {
+        swal('Você deve escolher uma taxa!', "Click no botão abaixo!", 'error');
+        return false;
+    }
 
     // Requisição ajax
     jQuery.ajax({
