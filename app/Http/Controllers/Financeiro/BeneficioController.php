@@ -69,8 +69,8 @@ class BeneficioController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            //<a class="btn-floating indigo" title="Editar" id="btnEditBeneficio"><i class="material-icons">edit</i></a>
-            return '<a class="btn-floating indigo" title="Excluir" id="btnDestroyBeneficio"><i class="material-icons">delete</i></a>';
+            return '<a class="btn-floating indigo" title="Editar" id="btnEditBeneficio"><i class="material-icons">edit</i></a>
+                    <a class="btn-floating indigo" title="Excluir" id="btnDestroyBeneficio"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
     

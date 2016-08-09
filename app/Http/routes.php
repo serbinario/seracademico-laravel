@@ -660,6 +660,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@grid']);
                     Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\BeneficioController@store']);
                     Route::delete('destroy/{id}', ['as' => 'destroy', 'uses' => 'Financeiro\BeneficioController@destroy']);
+                    Route::get('edit/{id}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@edit']);
                 });
             });
         });

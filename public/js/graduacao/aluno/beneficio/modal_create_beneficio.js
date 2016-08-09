@@ -1,3 +1,10 @@
+$('#modal-create-beneficio').on('hidden.bs.modal', function () {
+    // Removendo as linhas da grid
+    if (TableTaxasOfBeneficio) {
+        TableTaxasOfBeneficio.rows().remove().draw();
+    }
+});
+
 // Evento para chamar o modal de adicionar matéria ao curso
 $(document).on("click", "#btnCreateBeneficio", function () {
     loadFieldsBeneficio();
@@ -189,7 +196,7 @@ var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
 $('#btnAddTaxa').on( 'click', function () {
     // Recuperando o id da taxa
     var taxaId = $('#taxa_id_beneficios').find('option:selected').val();
-   
+
     if (!taxaId) {
         swal('Você deve escolher uma taxa!', "Click no botão abaixo!", 'error');
         return false;
