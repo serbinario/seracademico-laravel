@@ -117,6 +117,34 @@
         </div>
 	</div>
 </div>
+
+{{-- Grid conteudo programatico --}}
+<div class="ibox-content">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="table-responsive no-padding">
+                <table id="fac_plano_ensino" class="display table table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+
+                        <th style="width: 20%;">Nome</th>
+
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        {{-- Botão --}}
+        <div class="col-md-3">
+            <a class="btn-sm btn-primary pull-right">Adicionar Conteúdo</a>
+        </div>
+
+    </div>
+</div>
+</br>
+{{-- Grid conteudo programatico --}}
+
 {{--Buttons Submit e Voltar--}}
 <div class="row">
     <div class="col-md-9"></div>
@@ -131,3 +159,9 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+    <script type="text/javascript">
+        
+    </script>
+@stop
