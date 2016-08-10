@@ -3,8 +3,8 @@
 		<div class="row">
             <div class="col-md-9">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome * ') !!}
-                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'maxlength' => '5')) !!}
+                    {!! Form::label('nome', 'Nome *: max 60 caracteres ') !!}
+                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-3">
@@ -18,7 +18,7 @@
 
                 <div class="form-group col-md-12">
 
-                    {!! Form::label('anotacao', 'Anotações') !!}
+                    {!! Form::label('anotacao', 'Anotações: max 500 caracteres') !!}
                     {!! Form::textarea('anotacao', Session::getOldInput('anotacao') , array('class' => 'form-control', 'rows'=>'3')) !!}
                 </div>
 
