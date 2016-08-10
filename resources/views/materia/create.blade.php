@@ -26,7 +26,7 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.materia.store', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.materia.store', 'method' => "POST", 'id' => 'formMateria']) !!}
                 @include('tamplatesForms.tamplateFormMateria')
             {!! Form::close() !!}
         </div>
