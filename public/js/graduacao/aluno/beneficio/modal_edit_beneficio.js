@@ -77,6 +77,9 @@ function builderHtmlFieldsBeneficioEditar (dados) {
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
+            //Limpando os campos
+            $("#taxa_id_beneficios_editar").select2("val", "");
+
             // Variáveis que armazenaram o html
             var htmlTipoBeneficio = "";
             //var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
@@ -226,7 +229,9 @@ $('#btnAddTaxaEditar').on( 'click', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            //loadFeldsTaxas();
+            // Limpando a seleção
+            $("#taxa_id_beneficios_editar").select2("val", "");
+
             TableTaxasOfBeneficioEditar.ajax.reload();
             swal(retorno.msg, "Click no botão abaixo!", 'success');
         } else {
@@ -248,7 +253,9 @@ $(document).on( 'click', '#btnDestroyBeneficioEditar', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            //loadFeldsTaxas();
+            // Limpando a seleção
+            $("#taxa_id_beneficios_editar").select2("val", "");
+            
             TableTaxasOfBeneficioEditar.ajax.reload();
             swal(retorno.msg, "Click no botão abaixo!", 'success');
         } else {

@@ -51,6 +51,7 @@ function builderHtmlFieldsBeneficio (dados) {
     $('#taxas_beneficio option').attr('selected', false);
     $('#incidencia_id option').attr('selected', false);
     $('#tipo_id option').attr('selected', false);
+    $("#taxa_id_beneficios").select2("val", "");
 
 
     // Variáveis que armazenaram o html
@@ -130,7 +131,7 @@ $('#btnSaveBeneficio').click(function() {
         url: '/index.php/seracademico/financeiro/aluno/beneficio/store',
         data: dados,
         datatype: 'json'
-    }).done(function (retorno) {
+    }).done(function (retorno) {console.log('dsadsa');
         if(retorno.success) {
             tableBeneficios.ajax.reload();
 
@@ -146,7 +147,7 @@ $('#btnSaveBeneficio').click(function() {
             var msg = "";
 
             // Verificando o tipo de mensagem
-            if(retorno.validator) {
+            if(retorno.validator) {console.log(retorno.validator);
                 // se for mensagem de validação
                 $.each(retorno.msg, function (index, valor) {
                     msg += valor + "\n";
@@ -252,12 +253,13 @@ $('#btnAddTaxa').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn/',
         data: {'taxas' : [taxaId]},
         datatype: 'json'
     }).done(function (retorno) {
         // Removendo a seleção do select
         //$('#taxa_id_beneficios option').attr('selected', false);
+        $("#taxa_id_beneficios").select2("val", "");
 
         // Percorrendo o array de retorno
         $.each(retorno.data, function (index, value) {
@@ -282,7 +284,10 @@ $(document).on( 'click', '#btnDeleteTaxa', function () {
    //var id = TableTaxasOfBeneficio.row($(this).parent().parent()).data()[0];
 
     // Exibindo a option do select
-   // $('#taxa_id_beneficios option[value='+  id + ']').show();
+    // $('#taxa_id_beneficios option[value='+  id + ']').show();
+
+    //Removendo a seleção
+    $("#taxa_id_beneficios").select2("val", "");
 
     // Removendo a linha da grid
     TableTaxasOfBeneficio
