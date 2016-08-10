@@ -36,7 +36,6 @@ class BeneficioController extends Controller
      * BeneficioController constructor.
      * @param BeneficioService $service
      * @param BeneficioValidator $validator
-     * @param TaxaService $taxaService
      */
     public function __construct(BeneficioService $service, BeneficioValidator $validator)
     {
@@ -95,7 +94,7 @@ class BeneficioController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-           
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -104,7 +103,7 @@ class BeneficioController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Cadastro realizado com sucesso']);
-        } catch (ValidatorException $e) {
+        } catch (ValidatorException $e) { 
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessageBag(), 'validator' => true]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
@@ -139,19 +138,21 @@ class BeneficioController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+           
             #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
-        } catch (\Throwable $e) {
+        } catch (ValidatorException $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessageBag(), 'validator' => true]);
+        } catch (\Throwable $e) { dd($e->getMessage());
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }

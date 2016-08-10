@@ -335,15 +335,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaFrequenciaController@editFrequencia']);
                     Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'Graduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
+            });
 
-                Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
-                    Route::get('grid}', ['as' => 'grid', 'uses' => 'Graduacao\PlanoEnsinoController@grid']);
-                    Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\PlanoEnsinoController@index']);
-                    Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\PlanoEnsinoController@create']);
-                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoEnsinoController@store']);
-                    Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoEnsinoController@edit']);
-                    Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'Graduacao\PlanoEnsinoController@update']);
-                });
+            Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\PlanoEnsinoController@grid']);
+                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\PlanoEnsinoController@index']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\PlanoEnsinoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoEnsinoController@store']);
+                Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoEnsinoController@edit']);
+                Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'Graduacao\PlanoEnsinoController@update']);
             });
         });
 
@@ -675,9 +675,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::delete('destroy/{id}', ['as' => 'destroy', 'uses' => 'Financeiro\BeneficioController@destroy']);
                     Route::get('edit/{id}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@edit']);
                     Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BeneficioController@update']);
-                    Route::get('gridTaxas/{idBeneficio}', ['as' => 'gridTaxas', 'uses' => 'Financeiro\TipoBeneficioController@gridTaxas']);
-                    Route::post('attachTaxa/{idBeneficio}', ['as' => 'storeTaxa', 'uses' => 'Financeiro\TipoBeneficioController@attachTaxa']);
-                    Route::post('detachTaxa/{idBeneficio}', ['as' => 'detachTaxa', 'uses' => 'Financeiro\TipoBeneficioController@detachTaxa']);
+                    Route::get('gridTaxas/{idBeneficio}', ['as' => 'gridTaxas', 'uses' => 'Financeiro\BeneficioController@gridTaxas']);
+                    Route::post('attachTaxa/{idBeneficio}', ['as' => 'storeTaxa', 'uses' => 'Financeiro\BeneficioController@attachTaxa']);
+                    Route::post('detachTaxa/{idBeneficio}', ['as' => 'detachTaxa', 'uses' => 'Financeiro\BeneficioController@detachTaxa']);
                 });
             });
         });

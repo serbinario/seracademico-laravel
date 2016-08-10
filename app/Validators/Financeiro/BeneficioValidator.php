@@ -32,7 +32,6 @@ class BeneficioValidator extends LaravelValidator
 			'data_fim' =>  '' ,
 			'valor' =>  '' ,
 			'tipo_beneficio_id' =>  'required' ,
-			'taxas' => 'required',
 			'aluno_id' =>  '' ,
 
         ],

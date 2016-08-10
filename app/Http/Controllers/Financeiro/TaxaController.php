@@ -232,7 +232,12 @@ class TaxaController extends Controller
             #Editando a grid
             return Datatables::of($rows)->addColumn('action', function ($row) {
                 # Html de retorno
-                $html = '<a id="btnDeleteTaxa" class="btn-floating"><i class="material-icons">delete</i></a>';
+                $html = '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a id="btnDeleteTaxa" class="btn-floating"><i class="material-icons">delete</i></a></li>
+                        </ul>
+                     </div>';
 
                 # Retorno
                 return $html;
