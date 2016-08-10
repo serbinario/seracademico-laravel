@@ -147,6 +147,8 @@
                                 @permission('graduacao.turma.select')
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 @endpermission
+
+                                <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">library_books</i> Planos de Ensino</a></li>
                             </ul>
                         </li>
                         @endpermission
