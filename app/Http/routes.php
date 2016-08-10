@@ -336,17 +336,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'Graduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
 
+                Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                    Route::get('grid}', ['as' => 'grid', 'uses' => 'Graduacao\PlanoEnsinoController@grid']);
+                    Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\PlanoEnsinoController@index']);
+                    Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\PlanoEnsinoController@create']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoEnsinoController@store']);
+                    Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoEnsinoController@edit']);
+                    Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'Graduacao\PlanoEnsinoController@update']);
+                });
             });
-
-            Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
-                Route::get('grid}', ['as' => 'grid', 'uses' => 'Graduacao\PlanoEnsinoController@grid']);
-                Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\PlanoEnsinoController@index']);
-                Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\PlanoEnsinoController@create']);
-                Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoEnsinoController@store']);
-                Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoEnsinoController@edit']);
-                Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'Graduacao\PlanoEnsinoController@update']);
-            });
-
         });
 
 
@@ -605,7 +603,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'RoleController@update']);
         });
 
-
         //Rotas de utilitários
         Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
             # Refatorando os métodos do select2
@@ -617,6 +614,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('select2Obra', ['as' => 'select2Obra', 'uses' => 'UtilController@queryByselect2Obra']);
             Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
             Route::post('queryByselect2Pessoa', ['as' => 'queryByselect2Pessoa', 'uses' => 'UtilController@queryByselect2Pessoa']);
+
         });
 
         # Rota para relatórios
@@ -634,6 +632,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TaxaController@update']);
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
                 Route::post('getTaxa/{id}', ['as' => 'getTaxa', 'uses' => 'Financeiro\TaxaController@getTaxa']);
+                Route::get('getTaxasIn', ['as' => 'getTaxasIn', 'uses' => 'Financeiro\TaxaController@getTaxasIn']);
             });
 
             # Rotas para a tipo de beneficios
@@ -644,7 +643,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\TipoBeneficioController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\TipoBeneficioController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TipoBeneficioController@update']);
-                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Financeiro\TipoBeneficioController@delete']);
+                Route::post('getTipoBeneficio/{id}', ['as' => 'getTipoBeneficio', 'uses' => 'Financeiro\TipoBeneficioController@getTipoBeneficio']);
             });
 
             # Rotas para banco
@@ -674,6 +673,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@grid']);
                     Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\BeneficioController@store']);
                     Route::delete('destroy/{id}', ['as' => 'destroy', 'uses' => 'Financeiro\BeneficioController@destroy']);
+                    Route::get('edit/{id}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@edit']);
+                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BeneficioController@update']);
+                    Route::get('gridTaxas/{idBeneficio}', ['as' => 'gridTaxas', 'uses' => 'Financeiro\TipoBeneficioController@gridTaxas']);
+                    Route::post('attachTaxa/{idBeneficio}', ['as' => 'storeTaxa', 'uses' => 'Financeiro\TipoBeneficioController@attachTaxa']);
+                    Route::post('detachTaxa/{idBeneficio}', ['as' => 'detachTaxa', 'uses' => 'Financeiro\TipoBeneficioController@detachTaxa']);
                 });
             });
         });

@@ -242,8 +242,8 @@ var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
 // Evento para adicionar linhas para grid de taxas
 $('#btnAddTaxa').on( 'click', function () {
     // Recuperando o id da taxa
-    var taxaId = $('#taxa_id_beneficios').find('option:selected').val();
-
+    var taxaId = $('#taxa_id_beneficios').val();
+   
     if (!taxaId) {
         swal('Você deve escolher uma taxa!', "Click no botão abaixo!", 'error');
         return false;
@@ -252,7 +252,7 @@ $('#btnAddTaxa').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn/',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn',
         data: {'taxas' : [taxaId]},
         datatype: 'json'
     }).done(function (retorno) {
