@@ -130,7 +130,7 @@ $('#btnSaveBeneficio').click(function() {
         url: '/index.php/seracademico/financeiro/aluno/beneficio/store',
         data: dados,
         datatype: 'json'
-    }).done(function (retorno) {console.log('dsadsa');
+    }).done(function (retorno) {
         if(retorno.success) {
             tableBeneficios.ajax.reload();
 
@@ -146,7 +146,7 @@ $('#btnSaveBeneficio').click(function() {
             var msg = "";
 
             // Verificando o tipo de mensagem
-            if(retorno.validator) {console.log(retorno.validator);
+            if(retorno.validator) {
                 // se for mensagem de validação
                 $.each(retorno.msg, function (index, valor) {
                     msg += valor + "\n";
@@ -243,7 +243,7 @@ var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
 $('#btnAddTaxa').on( 'click', function () {
     // Recuperando o id da taxa
     var taxaId = $('#taxa_id_beneficios').val();
-   
+
     if (!taxaId) {
         swal('Você deve escolher uma taxa!', "Click no botão abaixo!", 'error');
         return false;
