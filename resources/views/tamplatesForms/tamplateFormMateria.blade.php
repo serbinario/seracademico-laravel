@@ -4,7 +4,7 @@
             <div class="col-md-9">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome * ') !!}
-                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'maxlength' => '5')) !!}
                 </div>
             </div>
             <div class="col-md-3">

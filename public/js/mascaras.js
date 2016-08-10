@@ -4,6 +4,8 @@ $(document).ready(function(){
     //Mascara códigos
     $('.codigo').mask('AAAAAAAA');
 
+    //Mascara códigos
+    $('.obs').mask('AAAAAAAA');
     //Cpf
     $('.cpf').mask('000.000.000-00', {reverse: true});
 
