@@ -44,7 +44,7 @@ function loadFieldsBeneficioEditar()
     var dados =  {
         'models' : [
             'Financeiro\\TipoBeneficio',
-            'Financeiro\\Taxa|notBeneficio,' + idBeneficio,
+            //'Financeiro\\Taxa|notBeneficio,' + idBeneficio,
             'Financeiro\\Incidencia',
             'Financeiro\\TipoValor'
         ]
@@ -79,14 +79,14 @@ function builderHtmlFieldsBeneficioEditar (dados) {
         if (retorno.success) {
             // Variáveis que armazenaram o html
             var htmlTipoBeneficio = "";
-            var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
+            //var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
             var htmlIncidencia = "<option value=''>Selecione uma incidência</option>";
             var htmlTipoValor = "<option value=''>Selecione uma tipo</option>";
 
             // Percorrendo o array de taxaas
-            for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
-                htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>" + dados['financeiro\\taxa'][i].nome + "</option>";
-            }
+            // for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
+            //     htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>" + dados['financeiro\\taxa'][i].nome + "</option>";
+            // }
 
             // Percorrendo o array de taxaas
             for (var i = 0; i < dados['financeiro\\tipobeneficio'].length; i++) {
@@ -104,8 +104,8 @@ function builderHtmlFieldsBeneficioEditar (dados) {
             }
 
             // Carregado os selects
-            $("#taxa_id_beneficios_editar option").remove();
-            $("#taxa_id_beneficios_editar").append(htmlTaxa);
+            //$("#taxa_id_beneficios_editar option").remove();
+            // $("#taxa_id_beneficios_editar").append(htmlTaxa);
             $("#tipo_beneficio_id_editar option").remove();
             $("#tipo_beneficio_id_editar").append(htmlTipoBeneficio);
             $("#incidencia_id_editar option").remove();
@@ -226,7 +226,7 @@ $('#btnAddTaxaEditar').on( 'click', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            loadFeldsTaxas();
+            //loadFeldsTaxas();
             TableTaxasOfBeneficioEditar.ajax.reload();
             swal(retorno.msg, "Click no botão abaixo!", 'success');
         } else {
@@ -248,7 +248,7 @@ $(document).on( 'click', '#btnDestroyBeneficioEditar', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            loadFeldsTaxas();
+            //loadFeldsTaxas();
             TableTaxasOfBeneficioEditar.ajax.reload();
             swal(retorno.msg, "Click no botão abaixo!", 'success');
         } else {

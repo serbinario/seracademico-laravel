@@ -9,7 +9,7 @@
         }
 
         .select2-dropdown{
-            qz-index: 3051;
+            z-index: 3051;
         }
 
         td.details-control {

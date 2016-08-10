@@ -55,14 +55,14 @@ function builderHtmlFieldsBeneficio (dados) {
 
     // Variáveis que armazenaram o html
     var htmlTipoBeneficio = "<option value=''>Selecione um Tipo de Benefício</option>";
-    var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
+    //var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
     var htmlIncidencia = "<option value=''>Selecione uma incidência</option>";
     var htmlTipoValor = "<option value=''>Selecione uma tipo</option>";
 
     // Percorrendo o array de taxaas
-    for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
-        htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>" + dados['financeiro\\taxa'][i].nome + "</option>";
-    }
+    //for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
+    //    htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>" + dados['financeiro\\taxa'][i].nome + "</option>";
+    //}
 
     // Percorrendo o array de taxaas
     for (var i = 0; i < dados['financeiro\\tipobeneficio'].length; i++) {
@@ -80,8 +80,8 @@ function builderHtmlFieldsBeneficio (dados) {
     }
 
     // Carregado os selects
-    $("#taxa_id_beneficios option").remove();
-    $("#taxa_id_beneficios").append(htmlTaxa);
+    //$("#taxa_id_beneficios option").remove();
+    //$("#taxa_id_beneficios").append(htmlTaxa);
     $("#tipo_beneficio_id option").remove();
     $("#tipo_beneficio_id").append(htmlTipoBeneficio);
     $("#incidencia_id option").remove();
@@ -257,7 +257,7 @@ $('#btnAddTaxa').on( 'click', function () {
         datatype: 'json'
     }).done(function (retorno) {
         // Removendo a seleção do select
-        $('#taxa_id_beneficios option').attr('selected', false);
+        //$('#taxa_id_beneficios option').attr('selected', false);
 
         // Percorrendo o array de retorno
         $.each(retorno.data, function (index, value) {
@@ -271,7 +271,7 @@ $('#btnAddTaxa').on( 'click', function () {
             ).draw( false );
 
             // escondendo o option
-            $('#taxa_id_beneficios option[value='+  value.id + ']').hide();
+            //$('#taxa_id_beneficios option[value='+  value.id + ']').hide();
         });
     });
 } );
@@ -279,10 +279,10 @@ $('#btnAddTaxa').on( 'click', function () {
 // Removendo a linha da grid
 $(document).on( 'click', '#btnDeleteTaxa', function () {
     // Recuperando o id od registro
-    var id = TableTaxasOfBeneficio.row($(this).parent().parent()).data()[0];
+   //var id = TableTaxasOfBeneficio.row($(this).parent().parent()).data()[0];
 
     // Exibindo a option do select
-    $('#taxa_id_beneficios option[value='+  id + ']').show();
+   // $('#taxa_id_beneficios option[value='+  id + ']').show();
 
     // Removendo a linha da grid
     TableTaxasOfBeneficio

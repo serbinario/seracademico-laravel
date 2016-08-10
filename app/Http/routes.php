@@ -605,8 +605,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'RoleController@update']);
         });
 
+
         //Rotas de utilitários
         Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
+            # Refatorando os métodos do select2
+            Route::post('simpleQuery', ['as' => 'simpleQuery', 'uses' => 'Select2Controller@simpleQuery']);
+
+            # Métodos antigos. OBS : DESCONTINUAR AOS POUCOS
             Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);
             Route::post('select2', ['as' => 'select2', 'uses' => 'UtilController@queryByselect2']);
             Route::post('select2Obra', ['as' => 'select2Obra', 'uses' => 'UtilController@queryByselect2Obra']);
