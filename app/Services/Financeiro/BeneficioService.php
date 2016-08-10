@@ -58,9 +58,9 @@ class BeneficioService
         $this->tratamentoCampos($data);
 
         # Validando a taxa
-       // if(!isset($data['taxas'])) {
-         //   throw new \Exception('Você deve informa uma taxa!');
-        //}
+        if(!isset($data['taxas'])) {
+            throw new \Exception('Você deve informa uma taxa!');
+        }
 
         # Tratamento das taxas
         $taxas = $data['taxas'];

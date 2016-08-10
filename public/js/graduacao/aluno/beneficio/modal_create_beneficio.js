@@ -51,6 +51,7 @@ function builderHtmlFieldsBeneficio (dados) {
     $('#taxas_beneficio option').attr('selected', false);
     $('#incidencia_id option').attr('selected', false);
     $('#tipo_id option').attr('selected', false);
+    $("#taxa_id_beneficios").select2("val", "");
 
 
     // Variáveis que armazenaram o html
@@ -243,7 +244,7 @@ var TableTaxasOfBeneficio = $('#beneficios-taxas-grid').DataTable({
 $('#btnAddTaxa').on( 'click', function () {
     // Recuperando o id da taxa
     var taxaId = $('#taxa_id_beneficios').val();
-   
+
     if (!taxaId) {
         swal('Você deve escolher uma taxa!', "Click no botão abaixo!", 'error');
         return false;
@@ -252,12 +253,13 @@ $('#btnAddTaxa').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn',
+        url: '/index.php/seracademico/financeiro/taxa/getTaxasIn/',
         data: {'taxas' : [taxaId]},
         datatype: 'json'
     }).done(function (retorno) {
         // Removendo a seleção do select
         //$('#taxa_id_beneficios option').attr('selected', false);
+        $("#taxa_id_beneficios").select2("val", "");
 
         // Percorrendo o array de retorno
         $.each(retorno.data, function (index, value) {
@@ -282,7 +284,10 @@ $(document).on( 'click', '#btnDeleteTaxa', function () {
    //var id = TableTaxasOfBeneficio.row($(this).parent().parent()).data()[0];
 
     // Exibindo a option do select
-   // $('#taxa_id_beneficios option[value='+  id + ']').show();
+    // $('#taxa_id_beneficios option[value='+  id + ']').show();
+
+    //Removendo a seleção
+    $("#taxa_id_beneficios").select2("val", "");
 
     // Removendo a linha da grid
     TableTaxasOfBeneficio
