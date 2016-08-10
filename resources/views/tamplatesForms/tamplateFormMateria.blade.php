@@ -3,14 +3,14 @@
 		<div class="row">
             <div class="col-md-9">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome *') !!}
+                    {!! Form::label('nome', 'Nome * ') !!}
                     {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    {!! Form::label('codigo', 'Codigo *') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
+                    {!! Form::label('codigo', 'Codigo * max 8 caracteres') !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control codigo')) !!}
                 </div>
             </div>
 		</div>
@@ -39,3 +39,30 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+    <script type="text/javascript">
+
+        $('#formMateria').bootstrapValidator({
+            fields: {
+                'nome': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Nome' })
+                        }
+                    }
+                },
+                'codigo': {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'código' })
+                        }
+                    }
+                }
+            },
+        });
+
+
+
+    </script>
+@stop

@@ -1,7 +1,9 @@
 $(document).ready(function(){
     
     //######## Mascaras para formulário candidato ##########
-    
+    //Mascara códigos
+    $('.codigo').mask('AAAAAAAA');
+
     //Cpf
     $('.cpf').mask('000.000.000-00', {reverse: true});
 
@@ -42,7 +44,7 @@ $(document).ready(function(){
     $('.notasComuns').mask('00,00');
     
     //código
-    $('.codigo').mask('###');
+   // $('.codigo').mask('###');
 
     //Data
     $('.date').mask('00/00/0000');
