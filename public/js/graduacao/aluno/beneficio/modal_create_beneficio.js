@@ -89,6 +89,9 @@ function builderHtmlFieldsBeneficio (dados) {
     $("#tipo_id option").remove();
     $("#tipo_id").append(htmlTipoValor);
 
+    // Carregando os valores padrão do formulário
+    getInfoTipoBeneficio($('#tipo_beneficio_id').find('option:selected').val());
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-beneficio").modal({show : true});
 }
@@ -172,7 +175,10 @@ function getInfoTipoBeneficio(idTipoBeneficio)
            // Formatando os campos
            //$('#valor_desconto').val('0.00');
            $('#valor_beneficio').val(retorno.data.valor);
-           //$('#valor_debito').val(retorno.data.valor);
+           $('#incidencia_id option[value='+ retorno.data.incidencia_id +']').attr('selected', true);
+           $('#tipo_id option[value='+ retorno.data.tipo_id +']').attr('selected', true);
+           $('#data_inicio_beneficio').val(retorno.data.data_inicio);
+           $('#data_fim_beneficio').val(retorno.data.data_fim);
            //$('#mes_referencia').val(now.getMonth() + 1);
            //$('#ano_referencia').val(now.getFullYear());
            //$('#data_vencimento').val((retorno.data.dia_vencimento
