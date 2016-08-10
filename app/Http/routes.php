@@ -615,6 +615,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('select2personalizado', ['as' => 'select2personalizado', 'uses' => 'UtilController@queryByselect2Personalizado']);
             Route::post('queryByselect2Pessoa', ['as' => 'queryByselect2Pessoa', 'uses' => 'UtilController@queryByselect2Pessoa']);
 
+            # Util de benefício
+            Route::group(['prefix' => 'beneficio', 'as' => 'beneficio.'], function () {
+                Route::post('createQuery', ['as' => 'createQuery', 'uses' => 'Util\Select2BeneficioController@createQuery']);
+                Route::post('editQuery', ['as' => 'editQuery', 'uses' => 'Util\Select2BeneficioController@editQuery']);
+            });
         });
 
         # Rota para relatórios

@@ -11,25 +11,26 @@ class MateriaValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
     protected $messages   = [
+        'anotacao' => 'Anotações'
     ];
 
     protected $attributes = [
-        
+        'anotacao' => 'Anotações'
     ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
-            'nome' =>  'required|max:200|unique:fac_materias,nome',
+            'nome' =>  'required|max:60|unique:fac_materias,nome',
             'codigo' =>  'required|max:8|unique:fac_materias,codigo',
-			'anotacao' =>  '' ,
+			'anotacao' =>  'max:500|serbinario_alpha_space' ,
 
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-            'nome' =>  'required|max:200|unique:fac_materias,nome,:id',
+            'nome' =>  'required|max:60|string|unique:fac_materias,nome,:id',
             'codigo' =>  'required|max:8|unique:fac_materias,codigo,:id',
-			'anotacao' =>  '' ,
+			'anotacao' =>  'max:500|serbinario_alpha_space' ,
 
         ],
    ];

@@ -124,7 +124,7 @@ function builderHtmlFieldsBeneficioEditar (dados) {
             $('#data_fim_beneficio_editar').val(retorno.data.data_fim);
             $('#tipo_id_editar option[value=' + retorno.data.tipo_id +']').attr('selected', true);
             $('#incidencia_id_editar option[value=' + retorno.data.incidencia_id +']').attr('selected', true);
-
+            
             // Abrindo o modal de inserir disciplina
             $("#modal-edit-beneficio").modal({show : true});
         } else {

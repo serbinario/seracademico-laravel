@@ -92,7 +92,7 @@ function builderHtmlFieldsBeneficio (dados) {
 
     // Carregando os valores padrão do formulário
     getInfoTipoBeneficio($('#tipo_beneficio_id').find('option:selected').val());
-
+    
     // Abrindo o modal de inserir disciplina
     $("#modal-create-beneficio").modal({show : true});
 }
@@ -131,7 +131,7 @@ $('#btnSaveBeneficio').click(function() {
         url: '/index.php/seracademico/financeiro/aluno/beneficio/store',
         data: dados,
         datatype: 'json'
-    }).done(function (retorno) {console.log('dsadsa');
+    }).done(function (retorno) {
         if(retorno.success) {
             tableBeneficios.ajax.reload();
 
