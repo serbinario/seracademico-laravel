@@ -103,9 +103,10 @@ class BeneficioController extends Controller
             $this->service->store($data);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Cadastro realizado com sucesso']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Cadastro realizado com sucesso']);
+        } catch (ValidatorException $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessageBag(), 'validator' => true]);
         } catch (\Throwable $e) {
-            #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }

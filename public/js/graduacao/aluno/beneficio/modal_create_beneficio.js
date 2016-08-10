@@ -54,7 +54,7 @@ function builderHtmlFieldsBeneficio (dados) {
 
 
     // Variáveis que armazenaram o html
-    var htmlTipoBeneficio = "";
+    var htmlTipoBeneficio = "<option value=''>Selecione um Tipo de Benefício</option>";
     var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
     var htmlIncidencia = "<option value=''>Selecione uma incidência</option>";
     var htmlTipoValor = "<option value=''>Selecione uma tipo</option>";
@@ -142,7 +142,21 @@ $('#btnSaveBeneficio').click(function() {
             $('#modal-create-beneficio').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
-            swal(retorno.msg, "Click no botão abaixo!", "error");
+            // Mensagem de erro
+            var msg = "";
+
+            // Verificando o tipo de mensagem
+            if(retorno.validator) {console.log(retorno.validator);
+                // se for mensagem de validação
+                $.each(retorno.msg, function (index, valor) {
+                    msg += valor + "\n";
+                });
+            } else {
+                msg = retorno.msg;
+            }
+
+            // Exibe a mensagem
+            swal(msg, "Click no botão abaixo!", "error");
         }
     });
 });
@@ -162,6 +176,9 @@ $(document).on('change', '#tipo_beneficio_id', function () {
  */
 function getInfoTipoBeneficio(idTipoBeneficio)
 {
+    if(!idTipoBeneficio) {
+        return false;
+    }
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
