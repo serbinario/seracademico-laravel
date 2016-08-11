@@ -76,20 +76,20 @@
             <!-- Tab panes -->
             <div class="tab-content">
 
-                {{--Aba Autorização MEC--}}
+                {{--Aba Recurso Audivisual--}}
                 <div role="tabpanel" class="tab-pane active" id="recrusoAudiovisual">
                     <br/>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}
+                                {{--{!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}--}}
                                 {!! Form::textarea('recurso_audivisual', Session::getOldInput('recurso_audivisual') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
                     </div>
                 </div>
-                {{--FIM Aba Autorização MEC--}}
+                {{--FIM Aba Recurso Audivisual--}}
 
                 {{--Aba Ementa--}}
                 <div role="tabpanel" class="tab-pane" id="metodologia">
@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('ementa', 'Ementa') !!}
+                                {{--{!! Form::label('ementa', 'Ementa') !!}--}}
                                 {!! Form::textarea('ementa', Session::getOldInput('ementa') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}
+                                {{--{!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}--}}
                                 {!! Form::textarea('bibliografia_basica', Session::getOldInput('bibliografia_basica') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('competencia', 'Competência') !!}
+                                {{--{!! Form::label('competencia', 'Competência') !!}--}}
                                 {!! Form::textarea('competencia', Session::getOldInput('competencia') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('aula_pratica', 'Aulas Práticas') !!}
+                                {{--{!! Form::label('aula_pratica', 'Aulas Práticas') !!}--}}
                                 {!! Form::textarea('aula_pratica', Session::getOldInput('aula_pratica') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -214,9 +214,4 @@
         </div>
     </div>
 </div>
-
-@section('javascript')
-    <script type="text/javascript">
-        
-    </script>
-@stop
+</div>

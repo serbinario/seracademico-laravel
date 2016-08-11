@@ -33,14 +33,3 @@
         </div>
     </div>
 @stop
-
-{{--@section('javascript')--}}
-    {{--<script type="text/javascript">--}}
-        {{--$('#btnCreateConteudo').on("click", function () {--}}
-            {{--var row = document.getElementById('#ConteudoProgramatico');--}}
-
-
-
-        {{--});--}}
-    {{--</script>--}}
-{{--@stop--}}
