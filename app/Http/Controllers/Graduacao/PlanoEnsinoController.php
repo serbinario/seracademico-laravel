@@ -29,7 +29,7 @@ class PlanoEnsinoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Graduacao\\Disciplina'
+        'Graduacao\\Disciplina|tipoNivelSistema,1'
     ];
 
     /**

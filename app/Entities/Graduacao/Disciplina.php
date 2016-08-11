@@ -72,7 +72,8 @@ class Disciplina extends Model implements Transformable
 
 	/**
 	 * @param $query
-	 * @param $value
+	 * @param $idTurma
+	 * @param $periodo
 	 * @return mixed
 	 */
 	public function scopeUniqueDisciplinaTurma($query, $idTurma, $periodo)

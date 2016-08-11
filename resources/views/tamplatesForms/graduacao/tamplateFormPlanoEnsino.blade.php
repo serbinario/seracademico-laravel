@@ -19,7 +19,7 @@
             <div class="col-md-4">
                 <div class="form-group">
 					{!! Form::label('disciplina_id', 'Disciplina') !!}
-					{!! Form::select('disciplina_id', array(), NULL, array('class' => 'form-control')) !!}
+					{!! Form::select('disciplina_id', (['' => 'Selecione uma disciplina'] + $loadFields['graduacao\\disciplina']->toArray()), NULL, array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -153,39 +153,40 @@
                     <br/>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-9">
                             <div class="form-group">
-                                {!! Form::label('conteudo_porgramatico_id', 'Conteudo Programatico') !!}
-                                {!! Form::text('conteudo_porgramatico_id', Session::getOldInput('conteudo_porgramatico_id')  , array('class' => 'form-control', 'id'=>'ConteudoProgramatico')) !!}
+                                {!! Form::text('conteudo_programatico', Session::getOldInput('conteudo_programatico')  , array('class' => 'form-control', 'id'=>'conteudo_programatico')) !!}
                             </div>
                         </div>
 
                         {{-- Botão --}}
                         <div class="col-md-3">
-                            <a class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</a>
+                            @if(isset($model))
+                                <button type="button" class="btn-sm btn-primary" id="btnCreateConteudoEditar">Adicionar Conteúdo</button>
+                            @else
+                                <button type="button" class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</button>
+                            @endif
                         </div>
                         {{-- Fim Botão --}}
 
                     </div>
 
                     {{-- Grid conteudo programatico --}}
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive no-padding">
-                                    <table id="grid-conteudo-programatico" class="display table table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                        <tr>
-
-                                            <th style="width: 20%;">Nome</th>
-
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive no-padding">
+                                <table id="grid-conteudo-programatico" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Conteúdo</th>
+                                        <th style="width: 5%;">Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
+
                     </br>
                     {{-- Grid conteudo programatico --}}
 
