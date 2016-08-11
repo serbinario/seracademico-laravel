@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('serbinario_alpha_space_especial', function($attribute, $value, $formats, $validator) {
             #expressão regular
-            $pattern = "^[\d\pL\s\-\.\[\]]+$/u";
+            $pattern = "/^[\d\pL\s\-\.\[\]]+$/u";
 
             #Validando pela expressão regular
             if (\preg_match($pattern, $value)) {
