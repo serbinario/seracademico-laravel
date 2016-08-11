@@ -19,7 +19,7 @@
             <div class="col-md-4">
                 <div class="form-group">
 					{!! Form::label('disciplina_id', 'Disciplina') !!}
-					{!! Form::select('disciplina_id', array(), NULL, array('class' => 'form-control')) !!}
+					{!! Form::select('disciplina_id', (['' => "Selecione uma disciplina"] + $loadFields['graduacao\\disciplina']->toArray()), NULL, array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -155,7 +155,7 @@
                         <div class="row">
                             <div class="col-md-9 form-group">
                                 {{--{!! Form::label('conteudo_porgramatico_id', 'Conteudo Programatico') !!}--}}
-                                {!! Form::textarea('conteudo_programatico', Session::getOldInput('conteudo_programatico') , array('class' => 'form-control', 'rows'=>'3', 'id' => 'conteudo_programatico')) !!}
+                                {!! Form::text('conteudo_programatico', Session::getOldInput('conteudo_programatico') , array('class' => 'form-control', 'id' => 'conteudo_programatico')) !!}
                             </div>
 
                             {{-- Botão --}}
@@ -232,7 +232,7 @@
             loadCreateTableConteudoProgramatico();
         } else {
             // Recuperando o id do conteúdo programático
-            idPlanoEnsino = Number("{{ isset($model) ?? 0  }}");
+            idPlanoEnsino = Number("{{ isset($model->id) ? $model->id : 0  }}");
 
             // Carregando a grid edit de conteúdo programático
             loadEditTableConteudoProgramatico(idPlanoEnsino);

@@ -57,6 +57,9 @@ class PlanoEnsinoService
      */
     public function store(array $data) : PlanoEnsino
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $planoEnsino =  $this->repository->create($data);
 
@@ -80,6 +83,9 @@ class PlanoEnsinoService
      */
     public function update(array $data, int $id) : PlanoEnsino
     {
+        # Regras de negócio
+        $this->tratamentoCampos($data);
+        
         #Atualizando no banco de dados
         $planoEnsino = $this->repository->update($data, $id);
 
@@ -130,6 +136,35 @@ class PlanoEnsinoService
 
          #retorno
          return $result;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
     }
 
     /**

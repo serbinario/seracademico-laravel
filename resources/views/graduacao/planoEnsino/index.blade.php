@@ -48,7 +48,7 @@
             ajax: "{!! route('seracademico.graduacao.planoEnsino.grid') !!}",
             columns: [
                 {data: 'nome', name: 'nome'},
-                {data: 'disciplina_id', name: 'disciplina_id'},
+                {data: 'nomeDisciplina', name: 'fac_disciplinas.nome'},
                 {data: 'carga_horaria', name: 'carga_horaria'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

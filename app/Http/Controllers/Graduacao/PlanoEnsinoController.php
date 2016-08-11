@@ -28,7 +28,9 @@ class PlanoEnsinoController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Graduacao\\Disciplina'
+    ];
 
     /**
     * @param PlanoEnsinoService $service
@@ -54,23 +56,24 @@ class PlanoEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_plano_ensino')->select([
-            'id',
-            'vigencia',
-            'nome',
-            'disciplina_id',
-            'carga_horaria',
-            'conteudo_porgramatico_id',
-            'ementa',
-            'obj_gerais',
-            'obj_especifico',
-            'metodologia',
-            'recurso_audivisual',
-            'avaliacao',
-            'bibliografia_basica',
-            'competencia',
-            'aula_pratica',
-        ]);
+        $rows = \DB::table('fac_plano_ensino')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_plano_ensino.disciplina_id')
+            ->select([
+                'fac_plano_ensino.id',
+                'fac_plano_ensino.vigencia',
+                'fac_plano_ensino.nome',
+                'fac_plano_ensino.carga_horaria',
+                'fac_plano_ensino.ementa',
+                'fac_plano_ensino.obj_gerais',
+                'fac_plano_ensino.obj_especifico',
+                'fac_plano_ensino.metodologia',
+                'fac_plano_ensino.recurso_audivisual',
+                'fac_plano_ensino.avaliacao',
+                'fac_plano_ensino.bibliografia_basica',
+                'fac_plano_ensino.competencia',
+                'fac_plano_ensino.aula_pratica',
+                'fac_disciplinas.nome as nomeDisciplina'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
