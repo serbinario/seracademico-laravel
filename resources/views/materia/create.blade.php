@@ -1,5 +1,18 @@
 @extends('menu')
 
+@section("css")
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+        .Campo_Legenda {
+            color: #666;
+            font-size: 11px;
+            margin: 0 0 4px;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">

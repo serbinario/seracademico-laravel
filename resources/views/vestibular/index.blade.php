@@ -62,7 +62,7 @@
                             <tr>
                                 <th style="width: 20%;">Código</th>
                                 <th>Nome</th>
-                                <th>Data Prova</th>
+                                <th>Data Resultado</th>
                                 <th>Data Inic. Insc.</th>
                                 <th>Data Fim. Insc.</th>
                                 <th>Data Criação</th>
@@ -75,9 +75,9 @@
                             <tr>
                                 <th style="width: 20%;">Código</th>
                                 <th>Nome</th>
-                                <th>Data Prova</th>
-                                <th>Data Prova</th>
-                                <th>Data Prova</th>
+                                <th>Data Resultado</th>
+                                <th>Data Inic. Insc.</th>
+                                <th>Data Fim. Insc.</th>
                                 <th>Data Criação</th>
                                 <th>Situação</th>
                                 <th style="width: 5%;">Acão</th>

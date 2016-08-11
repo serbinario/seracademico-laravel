@@ -237,7 +237,7 @@ class AlunoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+           
             #tratando as rules
             $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
