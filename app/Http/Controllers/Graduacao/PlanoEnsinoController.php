@@ -78,6 +78,8 @@ class PlanoEnsinoController extends Controller
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
+                        </ul>
+                     </div>        
                         ';
 
             # Retorno
@@ -106,9 +108,6 @@ class PlanoEnsinoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -174,4 +173,61 @@ class PlanoEnsinoController extends Controller
         }
     }
 
+    /**
+     * @return mixed
+     */
+    public function gridConteudoProgramatico($idPlanoEnsino)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_conteudos_programaticos')
+            ->join('fac_plano_ensino', 'fac_plano_ensino.id', '=', 'fac_conteudos_programaticos.plano_ensino_id')
+            ->where('fac_plano_ensino.id', $idPlanoEnsino)
+            ->select(['fac_conteudos_programaticos.id','fac_conteudos_programaticos.nome']);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = '<a id="btnRemoverConteudoEditar" class="btn-floating"><i class="material-icons">delete</i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function storeConteudoProgramatico(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->storeConteudoProgramatico($data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Cadastro realizado com sucesso']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteConteudoProgramatico($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->deleteConteudoProgramatico($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Conteúdo removido com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

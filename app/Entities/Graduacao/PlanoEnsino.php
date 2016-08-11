@@ -5,7 +5,6 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Graduacao\Entities\ConteudoProgramatico;
 
 class PlanoEnsino extends Model implements Transformable
 {
@@ -33,7 +32,5 @@ class PlanoEnsino extends Model implements Transformable
     public function conteudoProgramatico()
     {
         return $this->hasMany(ConteudoProgramatico::class);
-    }
-
-
+    }	
 }

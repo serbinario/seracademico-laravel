@@ -47,157 +47,159 @@
         </div>
 
         {{--Linha da da Abas--}}
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#recrusoAudiovisual" aria-controls="dados" data-toggle="tab"><i class="material-icons">playlist_add</i> Recurcos Audiovisuais</a>
-                </li>
-                <li role="presentation">
-                    <a href="#metodologia" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Ementa</a>
-                </li>
-                <li role="presentation">
-                    <a href="#avaliacao" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Bibliografia Básica</a>
-                </li>
-                <li role="presentation">
-                    <a href="#competencia" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Competência</a>
-                </li>
-                <li role="presentation">
-                    <a href="#aulaPratica" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Aulas Práticas</a>
-                </li>
-                <li role="presentation">
-                    <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programatico</a>
-                </li>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#recrusoAudiovisual" aria-controls="dados" data-toggle="tab"><i class="material-icons">playlist_add</i> Recurcos Audiovisuais</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#metodologia" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Ementa</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#avaliacao" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Bibliografia Básica</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#competencia" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Competência</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#aulaPratica" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Aulas Práticas</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programatico</a>
+                    </li>
 
-            </ul>
-            <!-- End Nav tabs -->
+                </ul>
+                <!-- End Nav tabs -->
 
-            <!-- Tab panes -->
-            <div class="tab-content">
+                <!-- Tab panes -->
+                <div class="tab-content">
 
-                {{--Aba Autorização MEC--}}
-                <div role="tabpanel" class="tab-pane active" id="recrusoAudiovisual">
-                    <br/>
+                    {{--Aba Autorização MEC--}}
+                    <div role="tabpanel" class="tab-pane active" id="recrusoAudiovisual">
+                        <br/>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}
-                                {!! Form::textarea('recurso_audivisual', Session::getOldInput('recurso_audivisual') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}
+                                    {!! Form::textarea('recurso_audivisual', Session::getOldInput('recurso_audivisual') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{--FIM Aba Autorização MEC--}}
+                    {{--FIM Aba Autorização MEC--}}
 
-                {{--Aba Ementa--}}
-                <div role="tabpanel" class="tab-pane" id="metodologia">
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!! Form::label('ementa', 'Ementa') !!}
-                                {!! Form::textarea('ementa', Session::getOldInput('ementa') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                    {{--Aba Ementa--}}
+                    <div role="tabpanel" class="tab-pane" id="metodologia">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('ementa', 'Ementa') !!}
+                                    {!! Form::textarea('ementa', Session::getOldInput('ementa') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{--Aba Ementa--}}
+                    {{--Aba Ementa--}}
 
-                {{--Aba Bibliografia Básica--}}
-                <div role="tabpanel" class="tab-pane" id="avaliacao">
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}
-                                {!! Form::textarea('bibliografia_basica', Session::getOldInput('bibliografia_basica') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                    {{--Aba Bibliografia Básica--}}
+                    <div role="tabpanel" class="tab-pane" id="avaliacao">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}
+                                    {!! Form::textarea('bibliografia_basica', Session::getOldInput('bibliografia_basica') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{--FIM Aba Bibliografia Básica --}}
+                    {{--FIM Aba Bibliografia Básica --}}
 
-                {{--Aba Competência--}}
-                <div role="tabpanel" class="tab-pane" id="competencia">
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!! Form::label('competencia', 'Competência') !!}
-                                {!! Form::textarea('competencia', Session::getOldInput('competencia') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                    {{--Aba Competência--}}
+                    <div role="tabpanel" class="tab-pane" id="competencia">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('competencia', 'Competência') !!}
+                                    {!! Form::textarea('competencia', Session::getOldInput('competencia') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{--FIM Aba Competência --}}
+                    {{--FIM Aba Competência --}}
 
-                {{--Aba Vagas--}}
-                <div role="tabpanel" class="tab-pane" id="aulaPratica">
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {!! Form::label('aula_pratica', 'Aulas Práticas') !!}
-                                {!! Form::textarea('aula_pratica', Session::getOldInput('aula_pratica') , array('class' => 'form-control', 'rows'=>'3')) !!}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {{--FIM Aba Financeiro --}}
-
-                {{--Aba Conteudo Programatico--}}
-                <div role="tabpanel" class="tab-pane" id="conteudoProgramatico">
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('conteudo_porgramatico_id', 'Conteudo Programatico') !!}
-                                {!! Form::text('conteudo_porgramatico_id', Session::getOldInput('conteudo_porgramatico_id')  , array('class' => 'form-control', 'id'=>'ConteudoProgramatico')) !!}
+                    {{--Aba Vagas--}}
+                    <div role="tabpanel" class="tab-pane" id="aulaPratica">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('aula_pratica', 'Aulas Práticas') !!}
+                                    {!! Form::textarea('aula_pratica', Session::getOldInput('aula_pratica') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                </div>
                             </div>
                         </div>
 
-                        {{-- Botão --}}
-                        <div class="col-md-3">
-                            <a class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</a>
-                        </div>
-                        {{-- Fim Botão --}}
-
                     </div>
+                    {{--FIM Aba Financeiro --}}
 
-                    {{-- Grid conteudo programatico --}}
-                    <div class="ibox-content">
+                    {{--Aba Conteudo Programatico--}}
+                    <div role="tabpanel" class="tab-pane" id="conteudoProgramatico">
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-md-9 form-group">
+                                {{--{!! Form::label('conteudo_porgramatico_id', 'Conteudo Programatico') !!}--}}
+                                {!! Form::textarea('conteudo_programatico', Session::getOldInput('conteudo_programatico') , array('class' => 'form-control', 'rows'=>'3', 'id' => 'conteudo_programatico')) !!}
+                            </div>
+
+                            {{-- Botão --}}
+                            <div class="col-md-3">
+                                @if(isset($model))
+                                    <button type="button" class="btn-sm btn-primary" id="btnCreateConteudoEditar">Adicionar Conteúdo</button>
+                                @else
+                                    <button type="button" class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</button>
+                                @endif
+                            </div>
+                            {{-- Fim Botão --}}
+
+                        </div>
+
+                        {{-- Grid conteudo programatico --}}
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive no-padding">
                                     <table id="grid-conteudo-programatico" class="display table table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-
-                                            <th style="width: 20%;">Nome</th>
-
+                                            <th>Conteúdo</th>
+                                            <th style="width: 5%;">Ação</th>
                                         </tr>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        </br>
+                        {{-- Grid conteudo programatico --}}
+
                     </div>
-                    </br>
-                    {{-- Grid conteudo programatico --}}
+                    {{--FIM Aba Conteudo Programatico --}}
 
                 </div>
-                {{--FIM Aba Conteudo Programatico --}}
-
+                <!-- FIM Tab panes -->
             </div>
-            <!-- FIM Tab panes -->
         </div>
-    </div>
-    {{--FIM Linha da da Abas--}}
+        {{--FIM Linha da da Abas--}}
 
+    </div>
 </div>
 
 {{--Buttons Submit e Voltar--}}
@@ -216,7 +218,25 @@
 </div>
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/grid_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/create_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/edit_conteudo_programatico.js')  }}"></script>
+
     <script type="text/javascript">
-        
+        // Variável que armazenará o objeto datatable
+        var tableConteudoProgramatico, idPlanoEnsino;
+
+        // Verificando se é cadastro ou edição
+        if(Boolean("{{ !isset($model) }}")) {
+            // Carregando a grid create de conteúdo programático
+            loadCreateTableConteudoProgramatico();
+        } else {
+            // Recuperando o id do conteúdo programático
+            idPlanoEnsino = Number("{{ $model->id  }}");
+
+            // Carregando a grid edit de conteúdo programático
+            loadEditTableConteudoProgramatico(idPlanoEnsino);
+        }
+
     </script>
-@stop
+@endsection

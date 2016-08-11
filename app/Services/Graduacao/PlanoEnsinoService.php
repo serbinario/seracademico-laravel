@@ -2,6 +2,8 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Seracademico\Entities\Graduacao\ConteudoProgramatico;
+use Seracademico\Repositories\Graduacao\ConteudoProgramaticoRepository;
 use Seracademico\Repositories\Graduacao\PlanoEnsinoRepository;
 use Seracademico\Entities\Graduacao\PlanoEnsino;
 //use Carbon\Carbon;
@@ -14,11 +16,19 @@ class PlanoEnsinoService
     private $repository;
 
     /**
-     * @param PlanoEnsinoRepository $repository
+     * @var ConteudoProgramaticoRepository
      */
-    public function __construct(PlanoEnsinoRepository $repository)
+    private $conteudoProgramaticoRepository;
+
+    /**
+     * PlanoEnsinoService constructor.
+     * @param PlanoEnsinoRepository $repository
+     * @param ConteudoProgramaticoRepository $conteudoProgramaticoRepository
+     */
+    public function __construct(PlanoEnsinoRepository $repository, ConteudoProgramaticoRepository $conteudoProgramaticoRepository)
     {
         $this->repository = $repository;
+        $this->conteudoProgramaticoRepository = $conteudoProgramaticoRepository;
     }
 
     /**
@@ -42,12 +52,16 @@ class PlanoEnsinoService
 
     /**
      * @param array $data
-     * @return array
+     * @return PlanoEnsino
+     * @throws \Exception
      */
     public function store(array $data) : PlanoEnsino
     {
         #Salvando o registro pincipal
         $planoEnsino =  $this->repository->create($data);
+
+        # salvando os conteúdos programáticos
+        $planoEnsino->conteudoProgramatico()->saveMany($this->tratamentoConteudosProgramaticos($data));
 
         #Verificando se foi criado no banco de dados
         if(!$planoEnsino) {
@@ -61,13 +75,13 @@ class PlanoEnsinoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return PlanoEnsino
+     * @throws \Exception
      */
     public function update(array $data, int $id) : PlanoEnsino
     {
         #Atualizando no banco de dados
         $planoEnsino = $this->repository->update($data, $id);
-
 
         #Verificando se foi atualizado no banco de dados
         if(!$planoEnsino) {
@@ -120,15 +134,65 @@ class PlanoEnsinoService
 
     /**
      * @param array $data
-     * @return mixed
+     * @return array
      */
-    public function tratamentoDatas(array &$data) : array
+    public function tratamentoConteudosProgramaticos(array $data)
     {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
+        # Array de retorno
+        $arrayResult = [];
 
-         #retorno
-         return $data;
+        # Recuperado e removendo do array o conteúdo programático
+        $conteudos = explode(',', $data['conteudo_programatico']);
+        unset($data['conteudo_programatico']);
+
+        # Criando o array de retorno
+        foreach ($conteudos as $conteudo) {
+            $arrayResult[] = new ConteudoProgramatico(['nome' => $conteudo]);
+        }
+ 
+        # Retorno
+        return $arrayResult;
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     * @throws \Exception
+     */
+    public function storeConteudoProgramatico(array $data)
+    {
+        #Salvando o registro pincipal
+        $conteudo =  $this->conteudoProgramaticoRepository->create($data);
+
+        #Verificando se foi criado no banco de dados
+        if(!$conteudo) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        #Retorno
+        return $conteudo;
+    }
+
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteConteudoProgramatico(int $id)
+    {
+        # Recuperando o registor on banco de dados
+        $conteudo = $this->conteudoProgramaticoRepository->find($id);
+
+        #Verificando se foi atualizado no banco de dados
+        if(!$conteudo) {
+            throw new \Exception('Conteúdo não encontrado!');
+        }
+
+        # Removendo do banco
+        $this->conteudoProgramaticoRepository->delete($id);
+
+        #Retorno
+        return true;
+    }
 }
