@@ -232,7 +232,7 @@
             loadCreateTableConteudoProgramatico();
         } else {
             // Recuperando o id do conteúdo programático
-            idPlanoEnsino = Number("{{ $model->id  }}");
+            idPlanoEnsino = Number("{{ isset($model) ?? 0  }}");
 
             // Carregando a grid edit de conteúdo programático
             loadEditTableConteudoProgramatico(idPlanoEnsino);
