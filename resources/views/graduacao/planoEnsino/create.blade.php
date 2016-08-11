@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.graduacao.planoEnsino.store', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.graduacao.planoEnsino.store', 'method' => "POST", "id" => "formPlanoEnsino" ]) !!}
                 @include('tamplatesForms.graduacao.tamplateFormPlanoEnsino')
             {!! Form::close() !!}
         </div>

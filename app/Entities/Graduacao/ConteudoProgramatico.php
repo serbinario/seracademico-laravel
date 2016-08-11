@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Graduacao\Entities;
+namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;

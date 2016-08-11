@@ -31,6 +31,7 @@ class PlanoEnsinoValidator extends LaravelValidator
 			'bibliografia_basica' =>  '' ,
 			'competencia' =>  '' ,
 			'aula_pratica' =>  '' ,
+			'conteudo_programatico' => 'required'
 
         ],
         ValidatorInterface::RULE_UPDATE => [

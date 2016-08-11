@@ -214,4 +214,27 @@
         </div>
     </div>
 </div>
-</div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/grid_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/create_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/edit_conteudo_programatico.js')  }}"></script>
+
+    <script type="text/javascript">
+        // Variável que armazenará o objeto datatable
+        var tableConteudoProgramatico, idPlanoEnsino;
+
+        // Verificando se é cadastro ou edição
+        if(Boolean("{{ !isset($model) }}")) {
+            // Carregando a grid create de conteúdo programático
+            loadCreateTableConteudoProgramatico();
+        } else {
+            // Recuperando o id do conteúdo programático
+            idPlanoEnsino = Number("{{ isset($model->id) ? $model->id : 0  }}");
+
+            // Carregando a grid edit de conteúdo programático
+            loadEditTableConteudoProgramatico(idPlanoEnsino);
+        }
+
+    </script>
+@endsection
