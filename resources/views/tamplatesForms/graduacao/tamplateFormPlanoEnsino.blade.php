@@ -29,22 +29,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    {!! Form::label('obj_gerais', 'Obj. Gerais') !!}
-                    {!! Form::textarea('obj_gerais', Session::getOldInput('obj_gerais') , array('class' => 'form-control', 'rows'=>'3')) !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    {!! Form::label('obj_especifico', 'Obj. Especificos') !!}
-                    {!! Form::textarea('obj_especifico', Session::getOldInput('obj_especifico') , array('class' => 'form-control', 'rows'=>'3')) !!}
-                </div>
-            </div>
-        </div>
 
         {{--Linha da da Abas--}}
     <div class="row">
@@ -67,8 +51,12 @@
                     <a href="#aulaPratica" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Aulas Práticas</a>
                 </li>
                 <li role="presentation">
-                    <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programatico</a>
+                    <a href="#objEspecificos" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Obj. Gerais/Específico</a>
                 </li>
+                <li role="presentation">
+                    <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programático</a>
+                </li>
+
 
             </ul>
             <!-- End Nav tabs -->
@@ -147,6 +135,29 @@
 
                 </div>
                 {{--FIM Aba Financeiro --}}
+
+                {{--Aba objetos especificos--}}
+                <div role="tabpanel" class="tab-pane" id="objEspecificos">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::label('obj_especifico', 'Objetivos Especificos') !!}
+                                {!! Form::textarea('obj_especifico', Session::getOldInput('obj_especifico') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::label('obj_gerais', 'Objetivos Gerais') !!}
+                                {!! Form::textarea('obj_gerais', Session::getOldInput('obj_gerais') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {{--FIM Aba objetos especificos --}}
 
                 {{--Aba Conteudo Programatico--}}
                 <div role="tabpanel" class="tab-pane" id="conteudoProgramatico">
