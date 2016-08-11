@@ -10,11 +10,20 @@ class VestibularValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 
+	protected $messages   = [
+		'qtd_vagas' =>  'QTD Vagas' ,
+	];
+
+	protected $attributes = [
+		'qtd_vagas' =>  'QTD Vagas' ,
+
+	];
+
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
-			'nome' =>  'required|max:200|unique:fac_vestibulares,nome',
-			'codigo' =>  'required|max:15|unique:fac_vestibulares,codigo',
+			'nome' =>  'required|max:60|unique:fac_vestibulares,nome',
+			'codigo' =>  'required|max:8|unique:fac_vestibulares,codigo',
 			'semestre_id' => 'required|integer',
 			'hora_inicial' =>  '' ,
 			'hora_final' =>  '' ,
@@ -30,11 +39,12 @@ class VestibularValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-			'nome' =>  'required|max:200|unique:fac_vestibulares,nome,:id',
-			'codigo' =>  'required|max:15|unique:fac_vestibulares,codigo,:id',
+			'nome' =>  'required|max:60|unique:fac_vestibulares,nome,:id',
+			'codigo' =>  'required|max:8|unique:fac_vestibulares,codigo,:id',
 			'semestre_id' => 'required|integer',
+			'hora_final' =>  'max:8' ,
 			'hora_final' =>  '' ,
-			'qtd_vagas' =>  '' ,
+			'qtd_vagas' =>  'max:4' ,
 			'instrucoes_boleto' =>  '' ,
 			'confirmacao_inscricao' =>  '' ,
 			'banco_id' =>  'integer' ,
