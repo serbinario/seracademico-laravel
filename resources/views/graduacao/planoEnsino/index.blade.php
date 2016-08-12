@@ -38,9 +38,19 @@
             </div>
         </div>
     </div>
+
+    @include('graduacao.planoEnsino.planoAula.modal_planos_aulas')
+    @include('graduacao.planoEnsino.planoAula.modal_create_planos_aulas')
+    @include('graduacao.planoEnsino.planoAula.modal_edit_planos_aulas')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/modal_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/modal_create_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/modal_edit_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/create_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/edit_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/planoAula/grid_conteudo_programatico_plano_aula.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#fac_plano_ensino').DataTable({
             processing: true,
@@ -52,6 +62,28 @@
                 {data: 'carga_horaria', name: 'carga_horaria'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // variável que armazenará o id do plano de enisno
+        var idPlanoEnsino;
+
+        // Evento disparado no click do link #modalPlanoAula
+        $(document).on('click', '#modalPlanoAula', function () {
+            // Recuperando o id
+            idPlanoEnsino = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando os dados de descrição
+            var nomePlanoEnsino = table.row($(this).parents('tr')).data().nome;
+            var nomeDiscplina = table.row($(this).parents('tr')).data().nomeDisciplina;
+            var cargaHoraria = table.row($(this).parents('tr')).data().carga_horaria;
+
+            // Setando a descrição
+            $('#paPlanoEnsino').text(nomePlanoEnsino);
+            $('#paDisciplina').text(nomeDiscplina);
+            $('#paCargaHoraria').text(cargaHoraria);
+
+            // Executando o modal de plano de aula
+            runPlanoAula(idPlanoEnsino);
         });
     </script>
 @stop

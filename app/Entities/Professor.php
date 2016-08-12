@@ -66,31 +66,49 @@ class Professor extends Model implements Transformable
         $this->attributes['data_admissao'] = SerbinarioDateFormat::toUsa($value);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function turno()
     {
         return $this->belongsTo(Turno::class, 'turno_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function instituicaoGraduacao()
     {
         return $this->belongsTo(Instituicao::class, "instituicao_graduacao_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function instituicaoPos()
     {
         return $this->belongsTo(Instituicao::class, "instituicao_pos_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function instituicaoMestrado()
     {
         return $this->belongsTo(Instituicao::class, "instituicao_mestrado_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function instituicaoDoutorado()
     {
         return $this->belongsTo(Instituicao::class, "instituicao_doutorado_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function titulacao()
     {
         return $this->belongsTo(Titulacao::class, "titulacao_id");

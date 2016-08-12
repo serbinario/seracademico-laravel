@@ -80,6 +80,7 @@ class PlanoEnsinoController extends Controller
             $html = '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
+                            <li><a class="btn-floating indigo" title="Planos de aula" id="modalPlanoAula"><i class="material-icons">assignment</i></a></li>
                             <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
                         </ul>
                      </div>        

@@ -349,6 +349,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('gridConteudoProgramatico/{idPlanoEnsino}', ['as' => 'gridConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@gridConteudoProgramatico']);
                 Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@storeConteudoProgramatico']);
                 Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@deleteConteudoProgramatico']);
+
+                # Planos de aula
+                Route::group(['prefix' => 'planoAula', 'as' => 'planoAula.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\PlanoAulaController@getLoadFields']);
+                    Route::get('grid/{idPlanoEnsino}', ['as' => 'grid', 'uses' => 'Graduacao\PlanoAulaController@grid']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoAulaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@edit']);
+                    Route::post('update/{id}', ['update' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@update']);
+                    Route::delete('delete/{id}', ['delete' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@delete']);
+                    Route::get('getConteudosIn', ['as' => 'getConteudosIn', 'uses' => 'Graduacao\PlanoAulaController@getConteudosIn']);
+                    Route::get('gridConteudos/{idPlanoAula}', ['as' => 'gridConteudos', 'uses' => 'Graduacao\PlanoAulaController@gridConteudos']);
+                    Route::post('attachConteudo/{idPlanoAula}', ['as' => 'attachConteudo', 'uses' => 'Graduacao\PlanoAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idPlanoAula}', ['as' => 'detachConteudo', 'uses' => 'Graduacao\PlanoAulaController@detachConteudo']);
+
+                });
             });
         });
 
