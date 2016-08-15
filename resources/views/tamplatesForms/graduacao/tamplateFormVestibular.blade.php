@@ -175,16 +175,16 @@
                     <div role="tabpanel" class="tab-pane" id="taxa">
                         <br/>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('banco_id', 'Banco *') !!}
-                                @if(isset($model->banco))
-                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , $model->banco->id, array('class' => 'form-control')) !!}
-                                @else
-                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , null, array('class' => 'form-control')) !!}
-                                @endif
-                            </div>
-                        </div>
+                        {{--<div class="col-md-4">--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('banco_id', 'Banco *') !!}--}}
+                                {{--@if(isset($model->banco))--}}
+                                    {{--{!! Form::select('banco_id', $loadFields['financeiro\\banco'] , $model->banco->id, array('class' => 'form-control')) !!}--}}
+                                {{--@else--}}
+                                    {{--{!! Form::select('banco_id', $loadFields['financeiro\\banco'] , null, array('class' => 'form-control')) !!}--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 {!! Form::label('taxa_id', 'Taxa *') !!}
@@ -205,12 +205,12 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {!! Form::label('qtd_dias', 'Qtd. Dias') !!}
-                                {!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control numberTwo')) !!}
-                            </div>
-                        </div>
+                        {{--<div class="col-md-2">--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('qtd_dias', 'Qtd. Dias') !!}--}}
+                                {{--{!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control numberTwo')) !!}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                     </div>
                     {{--FIM Aba Taxa --}}
