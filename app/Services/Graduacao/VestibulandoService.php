@@ -167,9 +167,11 @@ class VestibulandoService
         # [RFV003-RN012] - Documento de Requisitos
         # Verificando se a pessoa já existe
         if(count($objPessoa) > 0) {
+
             #aAlterando a pessoa e o endereço
-            $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
-            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+            $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
+            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $objPessoa[0]->endereco->id);
+            $pessoa = $objPessoa[0];
         } else {
             #Criando o endereco e pessoa
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
