@@ -26,7 +26,7 @@ class TaxaValidator extends LaravelValidator
             'valido_inicio' =>  'serbinario_date_format:"d/m/Y"',
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"',
             'dia_vencimento' =>  'required|integer',
-            'tipo_debito_id' =>  'required|integer',
+            //'tipo_debito_id' =>  'required|integer',
             'banco_id' =>  'integer',
             'tipo_multa_id' =>  'integer',
             'valor_multa' =>  'regex:/^\d{0,6}(\.\d{2})?$/' , //$
@@ -48,7 +48,7 @@ class TaxaValidator extends LaravelValidator
             'valido_inicio' =>  'serbinario_date_format:"d/m/Y"',
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"',
             'dia_vencimento' =>  'required|integer',
-            'tipo_debito_id' =>  'required|integer',
+            //'tipo_debito_id' =>  'required|integer',
             'banco_id' =>  'integer',
             'tipo_multa_id' =>  'integer',
             'valor_multa' =>  'regex:/^\d{0,6}(\.\d{2})?$/' , //$

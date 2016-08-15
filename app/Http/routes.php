@@ -658,6 +658,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
                 Route::post('getTaxa/{id}', ['as' => 'getTaxa', 'uses' => 'Financeiro\TaxaController@getTaxa']);
                 Route::get('getTaxasIn', ['as' => 'getTaxasIn', 'uses' => 'Financeiro\TaxaController@getTaxasIn']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Financeiro\TaxaController@delete']);
             });
 
             # Rotas para a tipo de beneficios

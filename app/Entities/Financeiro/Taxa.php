@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Graduacao\Semestre;
+use Seracademico\Entities\Graduacao\VestibulandoFinanceiro;
+use Seracademico\Entities\Graduacao\Vestibular;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Taxa extends Model implements Transformable
@@ -69,6 +71,38 @@ class Taxa extends Model implements Transformable
     public function semestre()
     {
         return $this->belongsTo(Semestre::class, 'semestre_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function beneficios()
+    {
+        return $this->belongsToMany(Beneficio::class, 'fin_beneficios_taxas', 'taxa_id', 'beneficio_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function debitosAlunos()
+    {
+        return $this->hasMany(DebitoAbertoAluno::class, 'taxa_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function debitosVestibulandos()
+    {
+        return $this->hasMany(VestibulandoFinanceiro::class, 'taxa_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vestibulares()
+    {
+        return $this->hasMany(Vestibular::class, 'taxa_id');
     }
 
     /**

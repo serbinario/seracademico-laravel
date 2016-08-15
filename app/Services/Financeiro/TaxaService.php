@@ -101,6 +101,28 @@ class TaxaService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #Atualizando no banco de dados
+        $taxa = $this->repository->find($id);
+
+        #Verificando se foi atualizado no banco de dados
+        if(!$taxa) {
+            throw new \Exception('Taxa não encontrada!');
+        }
+
+        # Removendo a taxa
+        $this->repository->delete($taxa->id);
+
+        #Retorno
+        return true;
+    }
+
+    /**
      * @param array $models
      * @return array
      */

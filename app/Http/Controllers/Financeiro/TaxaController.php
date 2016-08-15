@@ -65,13 +65,25 @@ class TaxaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o objeto da taxa
+            $objTaxa = $this->service->find($row->id);
+
             # Html de retorno
             $html = '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
-                        </ul>
-                     </div>';
+                            <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>';
+
+            # Verificação de possibilidade de remoção
+            if(count($objTaxa->beneficios) == 0 && count($objTaxa->debitosAlunos) == 0 &&
+                count($objTaxa->debitosVestibulandos && count($objTaxa->vestibulares))) {
+                # Html de retorno
+                $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
+            }
+
+            # Html de retorno
+            $html .=   '</ul>
+                    </div>';
 
             # Retorno
             return $html;
@@ -159,6 +171,23 @@ class TaxaController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Taxa removida com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
