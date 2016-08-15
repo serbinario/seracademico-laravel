@@ -10,6 +10,7 @@ class SegundaEntradaValidator extends LaravelValidator
     protected $messages   = [];
 
     protected $attributes = [];
+    
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [

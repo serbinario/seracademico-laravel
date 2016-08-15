@@ -28,7 +28,7 @@ class ArcevoController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Biblioteca\TipoAcervo',
+        'Biblioteca\\TipoAcervo|tipoAcervoNP,1',
         'Biblioteca\Responsavel',
         'Biblioteca\TipoAutor',
         'Biblioteca\Corredor',

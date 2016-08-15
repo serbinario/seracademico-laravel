@@ -166,6 +166,27 @@
                             {!! Form::text('edicao', Session::getOldInput('edicao')  , array('class' => 'form-control numberFive')) !!}
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 16px;">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('ampliada', 0) !!}
+                            {!! Form::checkbox('ampliada', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('ampliada', 'Ampliada', false) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 16px;">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('revisada', 0) !!}
+                            {!! Form::checkbox('revisada', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('revisada', 'Revisada', false) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 16px;">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('atualizada', 0) !!}
+                            {!! Form::checkbox('atualizada', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('atualizada', 'Atualizada', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">

@@ -16,4 +16,27 @@ class TipoAcervo extends Model implements Transformable
 		'nome',
 	];
 
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeTipoAcervoNP($query, $value)
+    {
+        return $query
+            ->select(['id', 'nome'])
+            ->where('tipo', 1);
+    }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeTipoAcervoP($query, $value)
+    {
+        return $query
+            ->select(['id', 'nome'])
+            ->where('tipo', 2);
+    }
 }

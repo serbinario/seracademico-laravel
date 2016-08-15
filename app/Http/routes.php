@@ -588,6 +588,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('findWhereReserva', ['as' => 'findWhereReserva', 'uses' => 'Biblioteca\ReservaController@findWhereReserva']);
             Route::get('deleteReserva/{id}/{id2}', ['as' => 'deleteReserva', 'uses' => 'Biblioteca\ReservaController@deleteReserva']);
             Route::post('confirmarReserva', ['as' => 'confirmarReserva', 'uses' => 'Biblioteca\ReservaController@confirmarReserva']);
+
+
+            Route::get('indexColecao', ['as' => 'indexColecao', 'uses' => 'Biblioteca\ColecaoController@index']);
+            Route::get('createColecao', ['as' => 'createColecao', 'uses' => 'Biblioteca\ColecaoController@create']);
+            Route::get('gridColecao', ['as' => 'gridColecao', 'uses' => 'Biblioteca\ColecaoController@grid']);
+            Route::get('editColecao/{id}', ['as' => 'editColecao', 'uses' => 'Biblioteca\ColecaoController@edit']);
+            Route::post('storeColecao', ['as' => 'storeColecao', 'uses' => 'Biblioteca\ColecaoController@store']);
+            Route::post('updateColecao/{id}', ['as' => 'updateColecao', 'uses' => 'Biblioteca\ColecaoController@update']);
+            Route::get('deleteColecao/{id}', ['as' => 'deleteColecao', 'uses' => 'Biblioteca\ColecaoController@delete']);
+
+
+            Route::get('indexGenero', ['as' => 'indexGenero', 'uses' => 'Biblioteca\GeneroController@index']);
+            Route::get('createGenero', ['as' => 'createGenero', 'uses' => 'Biblioteca\GeneroController@create']);
+            Route::get('gridGenero', ['as' => 'gridGenero', 'uses' => 'Biblioteca\GeneroController@grid']);
+            Route::get('editGenero/{id}', ['as' => 'editGenero', 'uses' => 'Biblioteca\GeneroController@edit']);
+            Route::post('storeGenero', ['as' => 'storeGenero', 'uses' => 'Biblioteca\GeneroController@store']);
+            Route::post('updateGenero/{id}', ['as' => 'updateGenero', 'uses' => 'Biblioteca\GeneroController@update']);
+            Route::get('deleteGenero/{id}', ['as' => 'deleteGenero', 'uses' => 'Biblioteca\GeneroController@delete']);
             
         });
 

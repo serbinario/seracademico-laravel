@@ -22,7 +22,9 @@ class ArcevoValidator extends LaravelValidator
 			'nome' =>  '' ,
 
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+            'nome' =>  '' ,
+        ],
    ];
 
 }
