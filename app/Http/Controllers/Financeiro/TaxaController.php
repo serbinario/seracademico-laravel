@@ -61,7 +61,7 @@ class TaxaController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fin_taxas')->select(['id', 'nome', 'codigo']);
+        $rows = \DB::table('fin_taxas')->select(['id', 'nome', 'codigo', 'valor', 'dia_vencimento']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {

@@ -14,10 +14,14 @@ class PlanoEnsinoValidator extends LaravelValidator
 
     protected $attributes = [];
 
+	
+
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  '' ,
+			'nome' =>  'unique:fac_plano_ensino1,nome,:id,id,carga_horaria,:ch' ,
+			//'nome' =>  'unique:fac_plano_ensino,carga_horaria,10,id,nome,"teste1"' ,
+			//unique:users,username,10,id,company_id,31
 			'vigencia' =>  '' ,
 			'disciplina_id' =>  '' ,
 			'carga_horaria' =>  '' ,
@@ -31,7 +35,7 @@ class PlanoEnsinoValidator extends LaravelValidator
 			'bibliografia_basica' =>  '' ,
 			'competencia' =>  '' ,
 			'aula_pratica' =>  '' ,
-			'conteudo_programatico' => 'required'
+			'conteudo_programatico' => ''
 
         ],
         ValidatorInterface::RULE_UPDATE => [

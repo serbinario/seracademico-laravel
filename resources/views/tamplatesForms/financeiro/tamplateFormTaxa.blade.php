@@ -1,28 +1,28 @@
 <div class="row">
 	<div class="col-md-12">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome *') !!}
+                    {!! Form::label('nome', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                     {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
-                    {!! Form::label('codigo', 'Código *') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
+                    {!! Form::label('codigo', 'Código * max 6') !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control numberFive')) !!}
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valor', 'Valor *') !!}
                     {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal')) !!}
                 </div>
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 {!! Form::label('tipo_taxa_id', 'Tipo da Taxa * ') !!}
                 {!! Form::select('tipo_taxa_id', $loadFields['financeiro\\tipotaxa'], Session::getOldInput('tipo_taxa_id'), array('class' => 'form-control')) !!}
             </div>
@@ -32,21 +32,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Valido Inicio ') !!}
-                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control datepicker')) !!}
+                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_fim', 'Ate Fim ') !!}
-                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control datepicker')) !!}
+                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control date datepicker')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('dia_vencimento', 'Dia Vencimento *') !!}
-                    {!! Form::text('dia_vencimento', Session::getOldInput('dia_vencimento')  , array('class' => 'form-control')) !!}
+                    {!! Form::text('dia_vencimento', Session::getOldInput('dia_vencimento')  , array('class' => 'form-control numberTwo')) !!}
                 </div>
             </div>
 

@@ -23,7 +23,7 @@ class VestibularValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
 
 			'nome' =>  'required|max:60|unique:fac_vestibulares,nome',
-			'codigo' =>  'required|max:8|unique:fac_vestibulares,codigo',
+			'codigo' =>  'required|max:8|serbinario_alpha_space_especial|unique:fac_vestibulares,codigo',
 			'semestre_id' => 'required|integer',
 			'hora_inicial' =>  '' ,
 			'hora_final' =>  '' ,
@@ -40,7 +40,7 @@ class VestibularValidator extends LaravelValidator
         ValidatorInterface::RULE_UPDATE => [
 
 			'nome' =>  'required|max:60|unique:fac_vestibulares,nome,:id',
-			'codigo' =>  'required|max:8|unique:fac_vestibulares,codigo,:id',
+			'codigo' =>  'required|max:8|serbinario_alpha_space_especial|unique:fac_vestibulares,codigo,:id',
 			'semestre_id' => 'required|integer',
 			'hora_final' =>  'max:8' ,
 			'hora_final' =>  '' ,

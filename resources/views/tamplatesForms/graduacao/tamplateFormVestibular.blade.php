@@ -3,14 +3,14 @@
 		<div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome  *:  max 60 caracteres')!!}
+                    {!! Form::label('nome', 'Nome  *:  max 60 caracteres (0-9 A-Z .-[ ])')!!}
                     {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control', 'placeholder'=>'Nome do Vestibular')) !!}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('codigo', 'Codigo *: max 8 carac.') !!}
-				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control codigo', 'placeholder'=>'Código')) !!}
+				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control', 'placeholder'=>'Código')) !!}
                 </div>
             </div>
 
