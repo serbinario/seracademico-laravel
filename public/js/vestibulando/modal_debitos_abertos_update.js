@@ -48,6 +48,7 @@ function builderHtmlFieldsDebitosEditar (dados) {
             $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>'); 
             $('#vencimento_editar').val(retorno.data.vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
+            $('#valor_desconto_editar').val(retorno.data.valor_desconto);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
@@ -71,6 +72,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
     // Recuperando os valores
     var taxa_id        = $("#taxa_id_editar").val();
     var valor_debito   = $("#valor_debito_editar").val();
+    var valor_desconto = $("#valor_desconto_editar").val();
     var vencimento     = $('#vencimento_editar').val();
     var mes_referencia = $('#mes_referencia_editar').val();
     var ano_referencia = $('#ano_referencia_editar').val();
@@ -82,6 +84,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
         'vestibulando_id' : idVestibulando,
         'taxa_id' : taxa_id,
         'valor_debito' : valor_debito,
+        'valor_desconto' : valor_desconto,
         'vencimento' : vencimento,
         'mes_referencia': mes_referencia,
         'ano_referencia': ano_referencia,

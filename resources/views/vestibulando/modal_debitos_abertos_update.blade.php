@@ -8,13 +8,13 @@
                 </div>
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-12">
                             <label for="tipo_taxa_id">Tipo da taxa</label>
                             <select readonly="readonly" name="tipo_taxa_id_editar" class="form-control" id="tipo_taxa_id_editar">
                             </select>
                         </div>
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-12">
                             <label for="taxa_id_editar">Taxa</label>
                             <select readonly="readonly" name="taxa_id_editar" class="form-control" id="taxa_id_editar">
                             </select>
@@ -28,8 +28,13 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="valor_debito">Valor débito</label>
+                            <label for="valor_debito_editar">Valor débito</label>
                             <input type="text" class="form-control" name="valor_debito_editar" id="valor_debito_editar">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="valor_desconto_editar">Valor Desconto</label>
+                            <input type="text" class="form-control" name="valor_desconto_editar" id="valor_desconto_editar">
                         </div>
                     </div>
 

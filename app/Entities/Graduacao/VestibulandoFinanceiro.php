@@ -21,6 +21,7 @@ class VestibulandoFinanceiro extends Model implements Transformable
     protected $fillable = [ 
 		'taxa_id',
 		'valor_debito',
+        'valor_desconto',
         'vencimento',
         'mes_referencia',
         'ano_referencia',

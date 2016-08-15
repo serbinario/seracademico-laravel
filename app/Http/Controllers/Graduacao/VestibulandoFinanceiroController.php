@@ -129,6 +129,7 @@ class VestibulandoFinanceiroController extends Controller
             $dados  = [
                 'tipoTaxaId' => $debito->taxa->tipoTaxa->id,
                 'tipoTaxaNome' => $debito->taxa->tipoTaxa->nome,
+                'valor_desconto' => $debito->valor_desconto,
                 'taxaId' => $debito->taxa->id,
                 'taxaNome' => $debito->taxa->nome,
                 'vencimento' => $debito->vencimento,
