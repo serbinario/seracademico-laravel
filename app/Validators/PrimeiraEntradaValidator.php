@@ -10,10 +10,6 @@ class PrimeiraEntradaValidator extends LaravelValidator
     protected $messages   = [];
 
     protected $attributes = [];
-
-    protected $messages   = [];
-
-    protected $attributes = [];
     
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
