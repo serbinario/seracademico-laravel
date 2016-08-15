@@ -19,7 +19,7 @@ $(document).ready(function(){
      $('.money').mask('000.000.000,00', {reverse: true});
 
     //Transforma valores em Real (R$) para Dollar ($)
-    $('.moneyReal').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    $('.moneyReal').maskMoney({prefix:'R$ ', allowZero: true, allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 
     //CNPJ
     $('.cnpj').mask('00.000.000.0000-00');
