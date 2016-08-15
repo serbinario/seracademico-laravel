@@ -175,23 +175,22 @@ class VestibulandoController extends Controller
                 $html = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                                <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                                <li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>
+                                <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>                           
                          ';
 
                 # regra de negócio para transferir o vestibulando
                 # recuperando o vestibulando
-                //$vestibulando = $this->service->find($row->id);
+                $vestibulando = $this->service->find($row->id);
 
                 # Varrendo os débitos do vestibulando
-                //foreach ($vestibulando->debitos as $debito) {
+                foreach ($vestibulando->debitos as $debito) {
                     # [RFV003-RN012] : Documento de Requisitos
                     # Verificando se a matrícula foi pága
-                //    if($debito->pago && $debito->taxa->tipoTaxa->id == 2) {
-                //        $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
-                //        break;
-                //    }
-                //}
+                    if($debito->pago && $debito->taxa->tipoTaxa->id == 1 && $vestibulando->gerar_inscricao == 1) {
+                        $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
+                        break;
+                    }
+                }
 
                 # Fim do html
                 $html .= '                                

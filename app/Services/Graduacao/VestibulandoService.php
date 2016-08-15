@@ -411,9 +411,9 @@ class VestibulandoService
                 # Query para recuperar o débito de inscrição do vestibulando
                 $row = \DB::table('fac_vestibulandos')
                     ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-                    ->join('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
-                    ->join('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
-                    ->where('tipos_taxas.id', 1)
+                    ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+                    ->join('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
+                    ->where('fin_tipos_taxas.id', 1)
                     ->where('fac_vestibulandos_financeiros.pago', 1)
                     ->where('fac_vestibulandos.id', $vestibulando->id)
                     ->get();

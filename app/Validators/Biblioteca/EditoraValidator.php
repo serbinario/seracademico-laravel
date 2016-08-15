@@ -18,17 +18,26 @@ class EditoraValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  '' ,
-			'email' =>  '' ,
-			'site' =>  '' ,
-			'cnpj' =>  '' ,
-			'razao_social' =>  '' ,
-			'agencia' =>  '' ,
-			'conta' =>  '' ,
-			'enderecos_id' =>  '' ,
+			'nome' =>  'unique:bib_editoras,nome',
+			'email' =>  '',
+			'site' =>  '',
+			'cnpj' =>  '',
+			'razao_social' =>  '',
+			'agencia' =>  '',
+			'conta' =>  '',
+			'enderecos_id' =>  '',
 
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+			'nome' =>  'unique:bib_editoras,nome',
+			'email' =>  '',
+			'site' =>  '',
+			'cnpj' =>  '',
+			'razao_social' =>  '',
+			'agencia' =>  '',
+			'conta' =>  '',
+			'enderecos_id' =>  '',
+		],
    ];
 
 }

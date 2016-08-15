@@ -221,12 +221,64 @@
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                             <?php $count++ ?>
-                                            <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                            <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ). @else;@endif
+                                        @endforeach
+                                    @endif
+                                @elseif(count($exemplar['acervo']['segundaEntrada']) > 0)
+                                    @if($exemplar['acervo']['etial_outros'] == '1')
+                                        <span style="text-transform: uppercase">{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}</span>,
+                                        <?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al.
+                                    @else
+                                        @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
+                                            <?php $count++ ?>
+                                            <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>, <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ). @else;@endif
                                         @endforeach
                                     @endif
                                 @endif
-                                <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
-                                @if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @if(count($exemplar['acervo']['primeiraEntrada']) <= 0 && count($exemplar['acervo']['segundaEntrada']) <= 0)
+                                    <b><?php
+                                            $array = explode(' ', $exemplar['acervo']['titulo']);
+                                            $aux = 0;
+                                            $paravra = "";
+                                        if (strlen($array[0]) <= 1) {
+                                            $paravra .= strtoupper($array[0] . " " . $array[1])." ";
+                                            for ($i = 2; $i < count($array); $i++) {
+                                                $paravra .= mb_strtolower($array[$i]);
+                                                $aux = $i + 1;
+                                                if($aux < count($array)) {
+                                                    $paravra .= " ";
+                                                }
+                                            };
+                                        } else {
+                                            $paravra .= strtoupper($array[0])." ";
+                                            for ($i = 1; $i < count($array); $i++) {
+                                                $paravra .= mb_strtolower($array[$i]);
+                                                if($i + 1 <= count($array)) {
+                                                    $paravra .= " ";
+                                                }
+                                            };
+                                        }
+                                        echo $paravra;
+                                        ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                @else
+                                    <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                @endif
+                                @if($exemplar['edicao'])
+                                    {{$exemplar['edicao']}}. ed.
+                                    @if($exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada']) ampl.
+                                    @elseif($exemplar['revisada'] && !$exemplar['ampliada'] && !$exemplar['atualizada']) rev.
+                                    @elseif($exemplar['atualizada'] && !$exemplar['ampliada'] && !$exemplar['revisada']) atual.
+                                    @elseif($exemplar['ampliada'] && $exemplar['revisada']) ampl. e rev.
+                                    @elseif($exemplar['ampliada'] && $exemplar['atualizada']) ampl. e atual.
+                                    @elseif($exemplar['revisada'] && $exemplar['atualizada']) rev. e atual.
+                                    @elseif($exemplar['revisada'] && $exemplar['atualizada'] && $exemplar['ampliada']) ampl. e rev. e atual.
+                                    @endif
+                                @endif
+                                @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
+                                @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif
+                                @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif
+                                @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif
+                                @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
                         </div>
                     </section>

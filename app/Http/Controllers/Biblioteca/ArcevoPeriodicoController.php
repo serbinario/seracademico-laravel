@@ -28,7 +28,7 @@ class ArcevoPeriodicoController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Biblioteca\TipoAcervo',
+        'Biblioteca\\TipoAcervo|tipoAcervoP,2',
         'Biblioteca\Responsavel',
         'Biblioteca\TipoAutor',
         'Biblioteca\Corredor',
@@ -69,10 +69,11 @@ class ArcevoPeriodicoController extends Controller
             })
             ->where('tipo_periodico', '=', '2')
             ->select([
-            'bib_arcevos.id',
-            'bib_arcevos.titulo',
-            'bib_arcevos.cdd',
-            'exemplares.qtd_exemplares',
+                'bib_arcevos.id',
+                'bib_arcevos.titulo',
+                'bib_arcevos.cdd',
+                'bib_arcevos.link',
+                'exemplares.qtd_exemplares',
             ]);
 
         #Editando a grid
@@ -91,7 +92,11 @@ class ArcevoPeriodicoController extends Controller
 
             # Retorno
             return $html;
-        })->make(true);
+        })
+            ->addColumn('link', function ($row) {
+                return '<a href="'.$row->link.'" title="Link de acesso" target="_blank">Link de acesso</a>';
+            })
+            ->make(true);
     }
 
     /**
