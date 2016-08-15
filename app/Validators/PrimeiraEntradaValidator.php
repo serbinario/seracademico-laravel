@@ -8,6 +8,10 @@ use \Prettus\Validator\LaravelValidator;
 class PrimeiraEntradaValidator extends LaravelValidator
 {
 
+    protected $messages   = [];
+
+    protected $attributes = [];
+    
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             

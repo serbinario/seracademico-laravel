@@ -109,36 +109,42 @@ class ConsultaController extends Controller
 
         if($this->data['busca_por'] == '2') {
             $campoLike = 'bib_arcevos.titulo';
-        } else if ($this->data['busca_por'] == '3') {
+        } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '1') {
             $campoLike = 'bib_arcevos.assunto';
         } else if ($this->data['busca_por'] == '4') {
             $campoLike = 'responsaveis.nome';
+        } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '2') {
+            $campoLike = 'bib_exemplares.assunto';
         }
 
         if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' || $this->data['busca_por'] == '4') {
+
             $my_query = \DB::table('bib_exemplares')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', '1')
+                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
                 ->where($campoLike, 'like', "%{$this->data['busca']}%")
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
+
+            //dd($my_query);
         } else {
             $my_query = \DB::table('bib_exemplares')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo','bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', '1')
+                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
                 ->Where(function ($query) {
                     $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
-                        ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%");
+                        ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_exemplares.assunto', 'like', "%{$this->data['busca']}%");
                 })
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
                 ->orderBy('bib_arcevos.titulo','DESC')

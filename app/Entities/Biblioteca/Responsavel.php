@@ -12,9 +12,10 @@ class Responsavel extends Model implements Transformable
 
     protected $table    = 'responsaveis';
 
-    protected $fillable = [ 
+    protected $fillable = [
 		'nome',
 		'sobrenome',
+        'tipo_reponsavel_id'
 	];
 
     /**
@@ -29,6 +30,14 @@ class Responsavel extends Model implements Transformable
      */
     public function outros(){
         return $this->hasMany(SegundaEntrada::class, 'responsaveis_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipo()
+    {
+        return $this->belongsTo(TipoResponsavel::class, 'tipo_reponsavel_id');
     }
 
 }

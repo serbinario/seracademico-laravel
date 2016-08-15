@@ -1,8 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
 				{!! Form::label('nome', 'Nome') !!}
 				{!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'onkeyup' => 'maiuscula("nome")', 'id' => 'nome')) !!}
@@ -12,6 +11,12 @@
                 <div class="form-group">
 				{!! Form::label('sobrenome', 'Último Sobrenome') !!}
 				{!! Form::text('sobrenome', Session::getOldInput('sobrenome')  , array('class' => 'form-control', 'id' => 'sobrenome')) !!}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    {!! Form::label('tipo_reponsavel_id', 'Tipo do responsável') !!}
+                    {!! Form::select('tipo_reponsavel_id', (["" => "Selecione um tipo"] + $loadFields['biblioteca\tiporesponsavel']->toArray()), Session::getOldInput('tipo_reponsavel_id'), array('class' => 'form-control')) !!}
                 </div>
             </div>
 		</div>

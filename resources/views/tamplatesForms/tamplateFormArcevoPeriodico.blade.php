@@ -4,8 +4,6 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais
                     dados</a></li>
-            <li role="presentation"><a href="#infoAdd" aria-controls="infoAdd" role="tab" data-toggle="tab">Informações
-                    adicionais</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -22,10 +20,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('cdd', 'CDD') !!}
                             {!! Form::text('cdd', Session::getOldInput('cdd')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('outro_cdd', 'Outra opção de CDD') !!}
+                            {!! Form::text('outro_cdd', Session::getOldInput('outro_cdd')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -47,6 +51,12 @@
                             {!! Form::text('periodicidade', Session::getOldInput('periodicidade'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('link', 'Link de acesso') !!}
+                            {!! Form::text('link', Session::getOldInput('link'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('exemplar_ref', 1) !!}
@@ -56,25 +66,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="infoAdd">
-                <br/>
-                {{--<div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('palavras_chaves', 'Palavras chave') !!}
-                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            {!! Form::label('sumario', 'Sumário') !!}
-                            {!! Form::textarea('sumario', Session::getOldInput('sumario')  ,['size' => '117x6'] , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                </div>--}}
             </div>
         </div>
     </div>

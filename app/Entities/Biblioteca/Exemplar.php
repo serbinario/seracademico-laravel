@@ -40,6 +40,9 @@ class Exemplar extends Model implements Transformable
 		'assunto',
 		'palavras_chaves',
 		'artigos',
+		'ampliada',
+		'revisada',
+		'atualizada'
 	];
 
 	public function acervo()

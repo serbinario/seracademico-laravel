@@ -8,3 +8,4 @@ Homestead.json
 /public/images/*
 /public/images/
 .gitignore
+snappy.php

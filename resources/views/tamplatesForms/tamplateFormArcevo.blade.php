@@ -72,10 +72,16 @@
                             {!! Form::text('cutter', Session::getOldInput('cutter') , array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('cdd', 'CDD') !!}
                             {!! Form::text('cdd', Session::getOldInput('cdd')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('outro_cdd', 'Outra opção de CDD') !!}
+                            {!! Form::text('outro_cdd', Session::getOldInput('outro_cdd')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -352,7 +358,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 {!! Form::label('nome', 'Nome') !!}
-                                {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'onkeyup' => 'maiuscula("nome")', 'id' => 'nome')) !!}
+                                {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'id' => 'nome')) !!}
                             </div>
                         </div>
                         <div class="col-md-4">

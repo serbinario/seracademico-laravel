@@ -239,6 +239,8 @@
                             </ul>
                         </li>
                         <li><a href="{{ route('seracademico.biblioteca.indexParametro') }}"><i class="material-icons">perm_identity</i> Parâmetros</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexColecao') }}"><i class="material-icons">card_travel</i> Coleções</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexGenero') }}"><i class="material-icons">card_travel</i> Gêneros</a></li>
                     </ul>
                 </li>
                 <li>
