@@ -14,10 +14,15 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-8">
                             <label for="taxa_id_editar">Taxa</label>
                             <select readonly="readonly" name="taxa_id_editar" class="form-control" id="taxa_id_editar">
                             </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="valor_taxa_vestibulando_editar">Valor Taxa</label>
+                            <input type="text" disabled="disabled" class="form-control" name="valor_taxa_vestibulando_editar" id="valor_taxa_vestibulando_editar">
                         </div>
                     </div>
 

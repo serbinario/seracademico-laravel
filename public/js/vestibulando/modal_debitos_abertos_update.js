@@ -45,7 +45,8 @@ function builderHtmlFieldsDebitosEditar (dados) {
         if (retorno.success) {
             // Setando os valores do model no formulário
             $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
-            $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>'); 
+            $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
+            $('#valor_taxa_vestibulando_editar').val(retorno.data.taxaValor);
             $('#vencimento_editar').val(retorno.data.vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
             $('#valor_desconto_editar').val(retorno.data.valor_desconto);
@@ -129,4 +130,45 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
+});
+
+// Evento para mudança de valor
+$('#valor_desconto_editar').on('focusout', function() {
+    // variáveis de uso
+    var valorDebito, valorDeconto, valorFinal, valorProvFinal, valorTaxa;
+
+    // Recebendo e tratando as entradas
+    valorDeconto = Number($(this).val());
+    valorDebito  = Number($('#valor_debito_editar').val());
+    valorTaxa    = Number($('#valor_taxa_vestibulando_editar').val());
+  
+    // Verificando se é um número
+    if(!valorDebito || !valorTaxa) {
+        return false;
+    }
+
+    // Regra para o valor do desconto, caso seja 0 ou vazio
+    if(!valorDeconto) { console.log(1);
+        $('#valor_debito_editar').val(valorTaxa);
+        return false;
+    }
+
+    // Validação dos valores
+    if(valorDeconto > valorDebito) {
+        swal('Valor de desconto tem que ser menor ou igual ao valor do débito');
+        return false;
+    }
+
+    // Calculando o valor provisório final
+    valorProvFinal = valorDebito - valorDeconto;
+
+    // Regra de cálculo
+    if((valorProvFinal + valorDeconto) != valorTaxa) {
+        valorFinal = valorProvFinal + (valorTaxa - (valorProvFinal + valorDeconto));
+    } else {
+        valorFinal = valorProvFinal;
+    }
+
+    // Calculando o valor final
+    $('#valor_debito_editar').val(valorFinal); // get the current value of the input field.
 });
