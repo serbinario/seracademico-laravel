@@ -33,6 +33,7 @@
                                         <th style="width: 10%">Cód Taxa</th>
                                         <th>Taxa</th>
                                         <th style="width: 10%">Vencimento</th>
+                                        <th style="width: 15%">Valor Desconto</th>
                                         <th style="width: 15%">Valor Débito</th>
                                         <th style="width: 15%">Valor</th>
                                         <th style="width: 15%">Mês</th>
@@ -60,6 +61,7 @@
                                         <th style="width: 10%">Cód Taxa</th>
                                         <th>Taxa</th>
                                         <th style="width: 10%">Vencimento</th>
+                                        <th style="width: 15%">Valor Desconto</th>
                                         <th style="width: 15%">Valor Débito</th>
                                         <th style="width: 15%">Valor</th>
                                         <th style="width: 15%">Mês</th>
