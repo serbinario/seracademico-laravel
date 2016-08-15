@@ -141,20 +141,20 @@ $('#valor_desconto_editar').on('focusout', function() {
     valorDeconto = Number($(this).val());
     valorDebito  = Number($('#valor_debito_editar').val());
     valorTaxa    = Number($('#valor_taxa_vestibulando_editar').val());
-  
+
     // Verificando se é um número
     if(!valorDebito || !valorTaxa) {
         return false;
     }
 
     // Regra para o valor do desconto, caso seja 0 ou vazio
-    if(!valorDeconto) { console.log(1);
+    if(!valorDeconto) {
         $('#valor_debito_editar').val(valorTaxa);
         return false;
     }
 
     // Validação dos valores
-    if(valorDeconto > valorDebito) {
+    if(valorDeconto > valorTaxa) {
         swal('Valor de desconto tem que ser menor ou igual ao valor do débito');
         return false;
     }
