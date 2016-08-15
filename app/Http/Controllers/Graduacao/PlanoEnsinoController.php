@@ -28,7 +28,9 @@ class PlanoEnsinoController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Graduacao\\Disciplina|tipoNivelSistema,1'
+    ];
 
     /**
     * @param PlanoEnsinoService $service
@@ -54,30 +56,34 @@ class PlanoEnsinoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('fac_plano_ensino')->select([
-            'id',
-            'vigencia',
-            'nome',
-            'disciplina_id',
-            'carga_horaria',
-            'conteudo_porgramatico_id',
-            'ementa',
-            'obj_gerais',
-            'obj_especifico',
-            'metodologia',
-            'recurso_audivisual',
-            'avaliacao',
-            'bibliografia_basica',
-            'competencia',
-            'aula_pratica',
-        ]);
+        $rows = \DB::table('fac_plano_ensino')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_plano_ensino.disciplina_id')
+            ->select([
+                'fac_plano_ensino.id',
+                'fac_plano_ensino.vigencia',
+                'fac_plano_ensino.nome',
+                'fac_plano_ensino.carga_horaria',
+                'fac_plano_ensino.ementa',
+                'fac_plano_ensino.obj_gerais',
+                'fac_plano_ensino.obj_especifico',
+                'fac_plano_ensino.metodologia',
+                'fac_plano_ensino.recurso_audivisual',
+                'fac_plano_ensino.avaliacao',
+                'fac_plano_ensino.bibliografia_basica',
+                'fac_plano_ensino.competencia',
+                'fac_plano_ensino.aula_pratica',
+                'fac_disciplinas.nome as nomeDisciplina'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
+                            <li><a class="btn-floating indigo" title="Planos de aula" id="modalPlanoAula"><i class="material-icons">assignment</i></a></li>
                             <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
+                        </ul>
+                     </div>        
                         ';
 
             # Retorno
@@ -106,9 +112,6 @@ class PlanoEnsinoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -174,4 +177,61 @@ class PlanoEnsinoController extends Controller
         }
     }
 
+    /**
+     * @return mixed
+     */
+    public function gridConteudoProgramatico($idPlanoEnsino)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_conteudos_programaticos')
+            ->join('fac_plano_ensino', 'fac_plano_ensino.id', '=', 'fac_conteudos_programaticos.plano_ensino_id')
+            ->where('fac_plano_ensino.id', $idPlanoEnsino)
+            ->select(['fac_conteudos_programaticos.id','fac_conteudos_programaticos.nome']);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            $html = '<a id="btnRemoverConteudoEditar" class="btn-floating"><i class="material-icons">delete</i></a>';
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function storeConteudoProgramatico(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->storeConteudoProgramatico($data);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Cadastro realizado com sucesso']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteConteudoProgramatico($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->deleteConteudoProgramatico($id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Conteúdo removido com sucesso!']);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

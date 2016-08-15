@@ -3,14 +3,14 @@
 		<div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome *') !!}
-                    {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control')) !!}
+                    {!! Form::label('nome', 'Nome  *:  max 60 caracteres (0-9 A-Z .-[ ])')!!}
+                    {!! Form::text('nome', Session::getOldInput('nome'), array('class' => 'form-control', 'placeholder'=>'Nome do Vestibular')) !!}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-				{!! Form::label('codigo', 'Codigo *') !!}
-				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control')) !!}
+				{!! Form::label('codigo', 'Codigo *: max 8 carac.') !!}
+				{!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control', 'placeholder'=>'Código')) !!}
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#prova" aria-controls="documentosObrig" role="tab" data-toggle="tab">Prova</a>
+                        <a href="#resultado" aria-controls="documentosObrig" role="tab" data-toggle="tab">Resultado</a>
                     </li>
                     <li role="presentation" >
                         <a href="#inscricoes" aria-controls="dados" data-toggle="tab">Inscrições</a>
@@ -68,13 +68,13 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
 
-                    {{--Aba Prova--}}
-                    <div role="tabpanel" class="tab-pane active" id="prova">
+                    {{--Aba Resultado--}}
+                    <div role="tabpanel" class="tab-pane active" id="resultado">
                         <br/>
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                {!! Form::label('data_prova', 'Data da prova') !!}
+                                {!! Form::label('data_prova', 'Data do Resultado') !!}
                                 {!! Form::text('data_prova', null, array('class' => 'form-control datepicker date')) !!}
                             </div>
                         </div>
@@ -175,16 +175,16 @@
                     <div role="tabpanel" class="tab-pane" id="taxa">
                         <br/>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('banco_id', 'Banco *') !!}
-                                @if(isset($model->banco))
-                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , $model->banco->id, array('class' => 'form-control')) !!}
-                                @else
-                                    {!! Form::select('banco_id', $loadFields['financeiro\\banco'] , null, array('class' => 'form-control')) !!}
-                                @endif
-                            </div>
-                        </div>
+                        {{--<div class="col-md-4">--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('banco_id', 'Banco *') !!}--}}
+                                {{--@if(isset($model->banco))--}}
+                                    {{--{!! Form::select('banco_id', $loadFields['financeiro\\banco'] , $model->banco->id, array('class' => 'form-control')) !!}--}}
+                                {{--@else--}}
+                                    {{--{!! Form::select('banco_id', $loadFields['financeiro\\banco'] , null, array('class' => 'form-control')) !!}--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 {!! Form::label('taxa_id', 'Taxa *') !!}
@@ -205,12 +205,12 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {!! Form::label('qtd_dias', 'Qtd. Dias') !!}
-                                {!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control numberTwo')) !!}
-                            </div>
-                        </div>
+                        {{--<div class="col-md-2">--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('qtd_dias', 'Qtd. Dias') !!}--}}
+                                {{--{!! Form::text('qtd_dias', Session::getOldInput('qtd_dias')  , array('class' => 'form-control numberTwo')) !!}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                     </div>
                     {{--FIM Aba Taxa --}}

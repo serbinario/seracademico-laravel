@@ -17,6 +17,8 @@ function loadTableDebitosAbertos(idVestibulando) {
             {data: 'codigo', name: 'fin_taxas.codigo'},
             {data: 'nome', name: 'fin_taxas.nome'},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento'},
+            {data: 'valor_desconto', name: 'fac_vestibulandos_finaceiros.valor_desconto'},
+            {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito'},
             {data: 'valor', name: 'fin_taxas.valor'},
             {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia'},
             {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia'},
@@ -40,6 +42,8 @@ function loadTableDebitosPagos(idVestibulando) {
             {data: 'codigo', name: 'fin_taxas.codigo'},
             {data: 'nome', name: 'fin_taxas.nome'},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento'},
+            {data: 'valor_desconto', name: 'fac_vestibulandos_finaceiros.valor_desconto'},
+            {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito'},
             {data: 'valor', name: 'fin_taxas.valor'},
             {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia'},
             {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia'}

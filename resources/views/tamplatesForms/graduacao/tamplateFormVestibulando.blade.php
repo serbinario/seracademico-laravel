@@ -262,8 +262,8 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[endereco][numero]', 'Número') !!}
-                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
+                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control numberFive')) !!}
                             </div>
                         </div>
                         <div class="row">

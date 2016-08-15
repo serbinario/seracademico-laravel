@@ -27,20 +27,9 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.graduacao.planoEnsino.store', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.graduacao.planoEnsino.store', 'method' => "POST", "id" => "formPlanoEnsino" ]) !!}
                 @include('tamplatesForms.graduacao.tamplateFormPlanoEnsino')
             {!! Form::close() !!}
         </div>
     </div>
 @stop
-
-{{--@section('javascript')--}}
-    {{--<script type="text/javascript">--}}
-        {{--$('#btnCreateConteudo').on("click", function () {--}}
-            {{--var row = document.getElementById('#ConteudoProgramatico');--}}
-
-
-
-        {{--});--}}
-    {{--</script>--}}
-{{--@stop--}}

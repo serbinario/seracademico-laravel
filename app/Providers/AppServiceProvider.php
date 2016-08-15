@@ -46,6 +46,20 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
+        // Permitido alguns caracteres especiais . - []
+        Validator::extend('serbinario_alpha_space_especial', function($attribute, $value, $formats, $validator) {
+            #expressão regular
+            $pattern = "/^[\d\pL\s\-\.\[\]]+$/u";
+
+            #Validando pela expressão regular
+            if (\preg_match($pattern, $value)) {
+                return true;
+            }
+
+            #retorno
+            return false;
+        });
+
         // Validator para arquivo pdf
         Validator::extend('pdf', function($attribute, $value, $formats, $validator) {
             if(!is_string($value)) {

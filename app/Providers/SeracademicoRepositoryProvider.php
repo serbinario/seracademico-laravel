@@ -528,5 +528,17 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Graduacao\PlanoEnsinoRepository::class,
 			\Seracademico\Repositories\Graduacao\PlanoEnsinoRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Graduacao\ConteudoProgramaticoRepository::class,
+			\Seracademico\Repositories\Graduacao\ConteudoProgramaticoRepositoryEloquent::class
+		);
+		
+
+		$this->app->bind(
+			\Seracademico\Repositories\Graduacao\PlanoAulaRepository::class,
+			\Seracademico\Repositories\Graduacao\PlanoAulaRepositoryEloquent::class
+		);
+		
 	}
 }

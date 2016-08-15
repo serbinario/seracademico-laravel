@@ -7,6 +7,9 @@ use \Prettus\Validator\LaravelValidator;
 
 class SegundaEntradaValidator extends LaravelValidator
 {
+    protected $messages   = [];
+
+    protected $attributes = [];
 
     protected $messages   = [];
 

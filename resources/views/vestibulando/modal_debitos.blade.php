@@ -33,6 +33,8 @@
                                         <th style="width: 10%">Cód Taxa</th>
                                         <th>Taxa</th>
                                         <th style="width: 10%">Vencimento</th>
+                                        <th style="width: 15%">Valor Desconto</th>
+                                        <th style="width: 15%">Valor Débito</th>
                                         <th style="width: 15%">Valor</th>
                                         <th style="width: 15%">Mês</th>
                                         <th style="width: 15%">Ano</th>
@@ -41,11 +43,11 @@
                                     </thead>
                                 </table>
 
-                                <div class="row">
-                                    <div class="col-md-2 col-md-offset-10">
-                                        <button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>
-                                    </div>
-                                </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-2 col-md-offset-10">--}}
+                                        {{--<button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                             {{--FIM Débitos Abertos--}}
 
@@ -59,6 +61,8 @@
                                         <th style="width: 10%">Cód Taxa</th>
                                         <th>Taxa</th>
                                         <th style="width: 10%">Vencimento</th>
+                                        <th style="width: 15%">Valor Desconto</th>
+                                        <th style="width: 15%">Valor Débito</th>
                                         <th style="width: 15%">Valor</th>
                                         <th style="width: 15%">Mês</th>
                                         <th style="width: 15%">Ano</th>

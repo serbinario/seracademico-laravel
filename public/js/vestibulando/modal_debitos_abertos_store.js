@@ -35,6 +35,7 @@ function builderHtmlFieldsDebitos (dados) {
     // limpando os campos
     $('#vencimento').val("");
     $('#valor_debito').val("");
+    $('#valor_desconto').val("");
     $('#mes_referencia').val("");
     $('#ano_referencia').val("");
     $('#observacao').val("");
@@ -95,6 +96,7 @@ $('#btnDebitosAbertosSalvar').click(function() {
     // Recuperando os valores
     var taxa_id        = $("#taxa_id").val();
     var valor_debito   = $("#valor_debito").val();
+    var valor_desconto = $("#valor_desconto").val();
     var vencimento     = $('#vencimento').val();
     var mes_referencia = $('#mes_referencia').val();
     var ano_referencia = $('#ano_referencia').val();
@@ -105,6 +107,7 @@ $('#btnDebitosAbertosSalvar').click(function() {
         'vestibulando_id' : idVestibulando,
         'taxa_id' : taxa_id,
         'valor_debito' : valor_debito,
+        'valor_desconto' : valor_desconto,
         'vencimento' : vencimento,
         'mes_referencia': mes_referencia,
         'ano_referencia': ano_referencia,

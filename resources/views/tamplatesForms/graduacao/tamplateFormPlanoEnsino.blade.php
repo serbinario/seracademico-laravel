@@ -19,29 +19,13 @@
             <div class="col-md-4">
                 <div class="form-group">
 					{!! Form::label('disciplina_id', 'Disciplina') !!}
-					{!! Form::select('disciplina_id', array(), NULL, array('class' => 'form-control')) !!}
+					{!! Form::select('disciplina_id', (['' => 'Selecione uma disciplina'] + $loadFields['graduacao\\disciplina']->toArray()), NULL, array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('carga_horaria', 'CH') !!}
 					{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control')) !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    {!! Form::label('obj_gerais', 'Obj. Gerais') !!}
-                    {!! Form::textarea('obj_gerais', Session::getOldInput('obj_gerais') , array('class' => 'form-control', 'rows'=>'3')) !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    {!! Form::label('obj_especifico', 'Obj. Especificos') !!}
-                    {!! Form::textarea('obj_especifico', Session::getOldInput('obj_especifico') , array('class' => 'form-control', 'rows'=>'3')) !!}
                 </div>
             </div>
         </div>
@@ -67,8 +51,12 @@
                     <a href="#aulaPratica" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Aulas Práticas</a>
                 </li>
                 <li role="presentation">
-                    <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programatico</a>
+                    <a href="#objEspecificos" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Obj. Gerais/Específico</a>
                 </li>
+                <li role="presentation">
+                    <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programático</a>
+                </li>
+
 
             </ul>
             <!-- End Nav tabs -->
@@ -76,20 +64,20 @@
             <!-- Tab panes -->
             <div class="tab-content">
 
-                {{--Aba Autorização MEC--}}
+                {{--Aba Recurso Audivisual--}}
                 <div role="tabpanel" class="tab-pane active" id="recrusoAudiovisual">
                     <br/>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}
+                                {{--{!! Form::label('recurso_audivisual', 'Recursos Audivisuais') !!}--}}
                                 {!! Form::textarea('recurso_audivisual', Session::getOldInput('recurso_audivisual') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
                     </div>
                 </div>
-                {{--FIM Aba Autorização MEC--}}
+                {{--FIM Aba Recurso Audivisual--}}
 
                 {{--Aba Ementa--}}
                 <div role="tabpanel" class="tab-pane" id="metodologia">
@@ -97,7 +85,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('ementa', 'Ementa') !!}
+                                {{--{!! Form::label('ementa', 'Ementa') !!}--}}
                                 {!! Form::textarea('ementa', Session::getOldInput('ementa') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -111,7 +99,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}
+                                {{--{!! Form::label('bibliografia_basica', 'Bibliografia Básica') !!}--}}
                                 {!! Form::textarea('bibliografia_basica', Session::getOldInput('bibliografia_basica') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -125,7 +113,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('competencia', 'Competência') !!}
+                                {{--{!! Form::label('competencia', 'Competência') !!}--}}
                                 {!! Form::textarea('competencia', Session::getOldInput('competencia') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -139,7 +127,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::label('aula_pratica', 'Aulas Práticas') !!}
+                                {{--{!! Form::label('aula_pratica', 'Aulas Práticas') !!}--}}
                                 {!! Form::textarea('aula_pratica', Session::getOldInput('aula_pratica') , array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                         </div>
@@ -148,44 +136,68 @@
                 </div>
                 {{--FIM Aba Financeiro --}}
 
+                {{--Aba objetos especificos--}}
+                <div role="tabpanel" class="tab-pane" id="objEspecificos">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::label('obj_especifico', 'Objetivos Especificos') !!}
+                                {!! Form::textarea('obj_especifico', Session::getOldInput('obj_especifico') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::label('obj_gerais', 'Objetivos Gerais') !!}
+                                {!! Form::textarea('obj_gerais', Session::getOldInput('obj_gerais') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {{--FIM Aba objetos especificos --}}
+
                 {{--Aba Conteudo Programatico--}}
                 <div role="tabpanel" class="tab-pane" id="conteudoProgramatico">
                     <br/>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-9">
                             <div class="form-group">
-                                {!! Form::label('conteudo_porgramatico_id', 'Conteudo Programatico') !!}
-                                {!! Form::text('conteudo_porgramatico_id', Session::getOldInput('conteudo_porgramatico_id')  , array('class' => 'form-control', 'id'=>'ConteudoProgramatico')) !!}
+                                {!! Form::text('conteudo_programatico', Session::getOldInput('conteudo_programatico')  , array('class' => 'form-control', 'id'=>'conteudo_programatico')) !!}
                             </div>
                         </div>
 
                         {{-- Botão --}}
                         <div class="col-md-3">
-                            <a class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</a>
+                            @if(isset($model))
+                                <button type="button" class="btn-sm btn-primary" id="btnCreateConteudoEditar">Adicionar Conteúdo</button>
+                            @else
+                                <button type="button" class="btn-sm btn-primary" id="btnCreateConteudo">Adicionar Conteúdo</button>
+                            @endif
                         </div>
                         {{-- Fim Botão --}}
 
                     </div>
 
                     {{-- Grid conteudo programatico --}}
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive no-padding">
-                                    <table id="grid-conteudo-programatico" class="display table table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                        <tr>
-
-                                            <th style="width: 20%;">Nome</th>
-
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive no-padding">
+                                <table id="grid-conteudo-programatico" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Conteúdo</th>
+                                        <th style="width: 5%;">Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
+
                     </br>
                     {{-- Grid conteudo programatico --}}
 
@@ -216,7 +228,25 @@
 </div>
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/grid_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/create_conteudo_programatico.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/edit_conteudo_programatico.js')  }}"></script>
+
     <script type="text/javascript">
-        
+        // Variável que armazenará o objeto datatable
+        var tableConteudoProgramatico, idPlanoEnsino;
+
+        // Verificando se é cadastro ou edição
+        if(Boolean("{{ !isset($model) }}")) {
+            // Carregando a grid create de conteúdo programático
+            loadCreateTableConteudoProgramatico();
+        } else {
+            // Recuperando o id do conteúdo programático
+            idPlanoEnsino = Number("{{ isset($model->id) ? $model->id : 0  }}");
+
+            // Carregando a grid edit de conteúdo programático
+            loadEditTableConteudoProgramatico(idPlanoEnsino);
+        }
+
     </script>
-@stop
+@endsection

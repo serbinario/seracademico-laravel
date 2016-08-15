@@ -45,9 +45,11 @@ function builderHtmlFieldsDebitosEditar (dados) {
         if (retorno.success) {
             // Setando os valores do model no formulário
             $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
-            $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>'); 
+            $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
+            $('#valor_taxa_vestibulando_editar').val(retorno.data.taxaValor);
             $('#vencimento_editar').val(retorno.data.vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
+            $('#valor_desconto_editar').val(retorno.data.valor_desconto);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
@@ -71,6 +73,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
     // Recuperando os valores
     var taxa_id        = $("#taxa_id_editar").val();
     var valor_debito   = $("#valor_debito_editar").val();
+    var valor_desconto = $("#valor_desconto_editar").val();
     var vencimento     = $('#vencimento_editar').val();
     var mes_referencia = $('#mes_referencia_editar').val();
     var ano_referencia = $('#ano_referencia_editar').val();
@@ -82,6 +85,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
         'vestibulando_id' : idVestibulando,
         'taxa_id' : taxa_id,
         'valor_debito' : valor_debito,
+        'valor_desconto' : valor_desconto,
         'vencimento' : vencimento,
         'mes_referencia': mes_referencia,
         'ano_referencia': ano_referencia,
@@ -126,4 +130,50 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
+});
+
+// Evento para mudança de valor
+$('#valor_desconto_editar').on('focusout', function() {
+    // variáveis de uso
+    var valorDebito, valorDeconto, valorFinal, valorProvFinal, valorTaxa;
+
+    // Recebendo e tratando as entradas
+    valorDeconto = Number($(this).val());
+    valorDebito  = Number($('#valor_debito_editar').val());
+    valorTaxa    = Number($('#valor_taxa_vestibulando_editar').val());
+
+    // Regra de verificação
+    if(valorDebito == 0) {
+        valorDebito = valorTaxa;
+    }
+
+    // Verificando se é um número
+    if(valorDebito == "" || !valorTaxa) {
+        return false;
+    }
+
+    // Regra para o valor do desconto, caso seja 0 ou vazio
+    if(!valorDeconto) {
+        $('#valor_debito_editar').val(valorTaxa);
+        return false;
+    }
+
+    // Validação dos valores
+    if(valorDeconto > valorTaxa) {
+        swal('Valor de desconto tem que ser menor ou igual ao valor do débito');
+        return false;
+    }
+
+    // Calculando o valor provisório final
+    valorProvFinal = valorDebito - valorDeconto;
+
+    // Regra de cálculo
+    if((valorProvFinal + valorDeconto) != valorTaxa) {
+        valorFinal = valorProvFinal + (valorTaxa - (valorProvFinal + valorDeconto));
+    } else {
+        valorFinal = valorProvFinal;
+    }
+
+    // Calculando o valor final
+    $('#valor_debito_editar').val(valorFinal); // get the current value of the input field.
 });

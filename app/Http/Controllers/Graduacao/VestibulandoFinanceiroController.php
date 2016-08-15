@@ -49,6 +49,8 @@ class VestibulandoFinanceiroController extends Controller
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
+                'fac_vestibulandos_financeiros.valor_debito',
+                'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
@@ -59,11 +61,11 @@ class VestibulandoFinanceiroController extends Controller
         #Editando a grid
         return Datatables::of($debitos)
             ->addColumn('action', function ($debito) {
+                // <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
                 return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>                         
                         </ul>
                         </div>';
             })->make(true);
@@ -83,6 +85,8 @@ class VestibulandoFinanceiroController extends Controller
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
+                'fac_vestibulandos_financeiros.valor_debito',
+                'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
@@ -116,7 +120,7 @@ class VestibulandoFinanceiroController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $id
      * @return mixed
      */
     public function editDebitosAbertos($id)
@@ -129,10 +133,12 @@ class VestibulandoFinanceiroController extends Controller
             $dados  = [
                 'tipoTaxaId' => $debito->taxa->tipoTaxa->id,
                 'tipoTaxaNome' => $debito->taxa->tipoTaxa->nome,
+                'valor_desconto' => $debito->valor_desconto,
                 'taxaId' => $debito->taxa->id,
                 'taxaNome' => $debito->taxa->nome,
+                'taxaValor' => $debito->taxa->valor,
                 'vencimento' => $debito->vencimento,
-                'valor_debito' => $debito->valor_debito,
+                'valor_debito' => $debito->valor_debito ?? $debito->taxa->valor,
                 'mes_referencia' => $debito->mes_referencia,
                 'ano_referencia' => $debito->ano_referencia,
                 'observacao' => $debito->observacao,

@@ -15,6 +15,23 @@
         </div>
 
         <div class="ibox-content">
+
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <em> {!! session('message') !!}</em>
+                </div>
+            @endif
+
+            @if(Session::has('errors'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-12">
 
@@ -24,6 +41,8 @@
                             <tr>
                                 <th style="width: 5%;">Código</th>
                                 <th>Nome</th>
+                                <th>Valor</th>
+                                <th>Dia Vencimento</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -32,6 +51,8 @@
                             <tr>
                                 <th style="width: 5%;">Código</th>
                                 <th>Nome</th>
+                                <th style="width: 5%;">Valor</th>
+                                <th style="width: 5%;">Dia Vencimento</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -49,10 +70,13 @@
         var table = $('#sala-grid').DataTable({
             processing: true,
             serverSide: true,
+            autoWidth: false,
             ajax: "{!! route('seracademico.financeiro.taxa.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'codigo'},
                 {data: 'nome', name: 'nome'},
+                {data: 'valor', name: 'valor'},
+                {data: 'dia_vencimento', name: 'dia_vencimento'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -3,25 +3,23 @@
 		<div class="row">
             <div class="col-md-9">
                 <div class="form-group">
-                    {!! Form::label('nome', 'Nome *: max 60 caracteres ') !!}
+                    {!! Form::label('nome', 'Nome *: max 60 caracteres (0-9 A-Z .-[ ]) ') !!}
                     {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    {!! Form::label('codigo', 'Codigo * max 8 caracteres') !!}
+                    {!! Form::label('codigo', 'Codigo *: max 8 caracteres ') !!}
                     {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control codigo')) !!}
                 </div>
             </div>
 		</div>
         <div class="row">
-
                 <div class="form-group col-md-12">
-
                     {!! Form::label('anotacao', 'Anotações: max 500 caracteres') !!}
+
                     {!! Form::textarea('anotacao', Session::getOldInput('anotacao') , array('class' => 'form-control', 'rows'=>'3')) !!}
                 </div>
-
         </div>
 	</div>
 </div>

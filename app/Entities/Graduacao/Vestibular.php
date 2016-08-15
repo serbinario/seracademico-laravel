@@ -32,10 +32,10 @@ class Vestibular extends Model implements Transformable
 		'qtd_vagas',
 		'instrucoes_boleto',
 		'confirmacao_inscricao',
-		'banco_id',
+		//'banco_id',
 		'taxa_id',
 		'tipo_vencimento_id',
-		'qtd_dias',
+		//'qtd_dias',
 		'data_prova',
         'semestre_id',
         'ativo'

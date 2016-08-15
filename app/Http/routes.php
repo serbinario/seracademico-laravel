@@ -344,6 +344,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoEnsinoController@store']);
                 Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoEnsinoController@edit']);
                 Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'Graduacao\PlanoEnsinoController@update']);
+
+                # Conteúdo programático
+                Route::get('gridConteudoProgramatico/{idPlanoEnsino}', ['as' => 'gridConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@gridConteudoProgramatico']);
+                Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@storeConteudoProgramatico']);
+                Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Graduacao\PlanoEnsinoController@deleteConteudoProgramatico']);
+
+                # Planos de aula
+                Route::group(['prefix' => 'planoAula', 'as' => 'planoAula.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\PlanoAulaController@getLoadFields']);
+                    Route::get('grid/{idPlanoEnsino}', ['as' => 'grid', 'uses' => 'Graduacao\PlanoAulaController@grid']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\PlanoAulaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@edit']);
+                    Route::post('update/{id}', ['update' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@update']);
+                    Route::delete('delete/{id}', ['delete' => 'edit', 'uses' => 'Graduacao\PlanoAulaController@delete']);
+                    Route::get('getConteudosIn', ['as' => 'getConteudosIn', 'uses' => 'Graduacao\PlanoAulaController@getConteudosIn']);
+                    Route::get('gridConteudos/{idPlanoAula}', ['as' => 'gridConteudos', 'uses' => 'Graduacao\PlanoAulaController@gridConteudos']);
+                    Route::post('attachConteudo/{idPlanoAula}', ['as' => 'attachConteudo', 'uses' => 'Graduacao\PlanoAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idPlanoAula}', ['as' => 'detachConteudo', 'uses' => 'Graduacao\PlanoAulaController@detachConteudo']);
+
+                });
             });
         });
 
@@ -656,6 +676,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('getTaxas', ['as' => 'getTaxas', 'uses' => 'Financeiro\TaxaController@getTaxas']);
                 Route::post('getTaxa/{id}', ['as' => 'getTaxa', 'uses' => 'Financeiro\TaxaController@getTaxa']);
                 Route::get('getTaxasIn', ['as' => 'getTaxasIn', 'uses' => 'Financeiro\TaxaController@getTaxasIn']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Financeiro\TaxaController@delete']);
             });
 
             # Rotas para a tipo de beneficios

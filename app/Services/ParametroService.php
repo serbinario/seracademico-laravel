@@ -51,7 +51,8 @@ class ParametroService
 
     /**
      * @param array $data
-     * @return array
+     * @return Parametro
+     * @throws \Exception
      */
     public function store(array $data) : Parametro
     {
@@ -70,7 +71,8 @@ class ParametroService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Parametro
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Parametro
     {
