@@ -59,11 +59,11 @@ class VestibulandoFinanceiroController extends Controller
         #Editando a grid
         return Datatables::of($debitos)
             ->addColumn('action', function ($debito) {
+                // <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
                 return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>                         
                         </ul>
                         </div>';
             })->make(true);
@@ -116,7 +116,7 @@ class VestibulandoFinanceiroController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param $id
      * @return mixed
      */
     public function editDebitosAbertos($id)
