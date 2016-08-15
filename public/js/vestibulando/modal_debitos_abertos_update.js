@@ -142,8 +142,13 @@ $('#valor_desconto_editar').on('focusout', function() {
     valorDebito  = Number($('#valor_debito_editar').val());
     valorTaxa    = Number($('#valor_taxa_vestibulando_editar').val());
 
+    // Regra de verificação
+    if(valorDebito == 0) {
+        valorDebito = valorTaxa;
+    }
+
     // Verificando se é um número
-    if(!valorDebito || !valorTaxa) {
+    if(valorDebito == "" || !valorTaxa) {
         return false;
     }
 

@@ -49,6 +49,7 @@ class VestibulandoFinanceiroController extends Controller
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
+                'fac_vestibulandos_financeiros.valor_debito',
                 'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
@@ -83,6 +84,7 @@ class VestibulandoFinanceiroController extends Controller
             ->select([
                 'fac_vestibulandos_financeiros.id',
                 'fac_vestibulandos_financeiros.vencimento',
+                'fac_vestibulandos_financeiros.valor_debito',
                 'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
                 'fac_vestibulandos_financeiros.ano_referencia',
