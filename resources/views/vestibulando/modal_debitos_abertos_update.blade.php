@@ -62,16 +62,16 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label>Págo</label>
-                                    <input name="pago"  id="pago" type="checkbox" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-8">--}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-8">--}}
+                                    {{--<label>Págo</label>--}}
+                                    {{--<input name="pago"  id="pago" type="checkbox" value="1">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="btnDebitosAbertosUpdate">Salvar</button>
