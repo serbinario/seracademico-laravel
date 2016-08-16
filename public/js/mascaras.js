@@ -64,7 +64,8 @@ $(document).ready(function(){
         timepicker: false,
         format: 'd/m/Y',
         mask: false,
-        lang: 'pt-BR'
+        lang: 'pt-BR',
+        allowBlank: false,
     });
 
     //##### Tipos de beneficio

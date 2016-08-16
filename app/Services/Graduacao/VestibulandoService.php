@@ -879,4 +879,22 @@ class VestibulandoService
         # retorno
         return true;
     }
+
+    /**
+     * @param $vestibulando
+     * @param $comprovante
+     * @return bool
+     */
+    public function deleteFile($vestibulando, $comprovante)
+    {
+        # Removendo o arquivo do diretório
+        unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $vestibulando->$comprovante);
+
+        # Removendo o arquivo do banco de dados
+        $vestibulando->$comprovante = null;
+        $vestibulando->save();
+        
+        # Retorno
+        return true;
+    }
 }

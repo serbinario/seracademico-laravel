@@ -46,6 +46,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@edit']);
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@update']);
             Route::post('search', ['as' => 'search', 'uses' => 'Graduacao\VestibulandoController@search']);
+            Route::delete('deleteComprovante/{id}', ['as' => 'deleteComprovante', 'uses' => 'Graduacao\VestibulandoController@deleteComprovante']);
 
             Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
                 Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'Graduacao\VestibulandoController@gridNotas']);

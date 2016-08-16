@@ -1414,6 +1414,25 @@
             });
         @endif
 
+        // Evento para remover o comprovante
+        $(document).on('click', 'button.fileinput-remove-button', function () {
+            // Recuperando o comprovante
+            var comprovante = $(this).parent().find('input[type=file]').attr('id');
+
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'DELETE',
+                data: {'comprovante' : comprovante},
+                url: '{{ route('seracademico.vestibulando.deleteComprovante', ['id' => $aluno->id ])  }}',
+                datatype: 'json'
+            }).done(function (json) {
+              // Verificando se remoção foi bem sucedida
+                if(!json.success) {
+                    swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
+                }
+            });
+        });
+
         {{--// Estado inicial enem--}}
         {{--@if(isset($aluno->enem) && $aluno->enem)--}}
             {{--$('#liEnem').show();--}}
