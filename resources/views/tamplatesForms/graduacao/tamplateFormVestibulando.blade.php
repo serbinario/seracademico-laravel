@@ -1414,6 +1414,7 @@
             });
         @endif
 
+        @if(isset($aluno))
         // Evento para remover o comprovante
         $(document).on('click', 'button.fileinput-remove-button', function () {
             // Recuperando o comprovante
@@ -1428,11 +1429,11 @@
             }).done(function (json) {
               // Verificando se remoção foi bem sucedida
                 if(!json.success) {
-                    swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
+                    //swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
                 }
             });
         });
-
+        @endif
         {{--// Estado inicial enem--}}
         {{--@if(isset($aluno->enem) && $aluno->enem)--}}
             {{--$('#liEnem').show();--}}
