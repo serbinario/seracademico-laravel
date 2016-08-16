@@ -127,6 +127,8 @@
                         @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
                         <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
+                                <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
+                                
                                 @permission('graduacao.aluno.select')
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
@@ -197,7 +199,6 @@
                         <li><a href="{{ route('seracademico.tipoDisciplina.index') }}"><i class="fa fa-tags"></i> Tipos de Disciplinas</a></li>
                         <li><a href="{{ route('seracademico.graduacao.semestre.index') }}"><i class="fa fa-calendar"></i> Semestres</a></li>
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="flaticon-portfolio-filled-open-folder"></i> Tipos de Cursos</a></li>
-                        <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="flaticon-tool"></i> Tipo de Vencimento</a></li>
                         <li><a href="{{ route('seracademico.graduacao.motivo.index') }}"><i class="material-icons">rate_review</i> Motivos</a></li>
                         <li><a href="{{ route('seracademico.hora.index') }}"><i class="flaticon-currency-rates"></i> Horas</a></li>
