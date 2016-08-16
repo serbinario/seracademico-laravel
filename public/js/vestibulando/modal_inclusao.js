@@ -85,8 +85,14 @@ function builderHtmlFieldsEditar (dados) {
 
             // Verificando se a transferência já foi realizada
             if (retorno.dados.curso_id) {
+                // Desabilitando o formulário
+                $('#curso_id').prop('disabled', true);
+                $('#forma_admissao_id').prop('disabled', true);
+                $('#turno_id').prop('disabled', true);
+                $('#semestre_id').prop('disabled', true);
+
                 // Setando os valores do model no formulário
-                $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent().prop('disabled', true);
+                $('#curso_id option[value=' + retorno.dados.curso_id + ']').attr('selected', true).parent();
                 $('#forma_admissao_id option[value=' + retorno.dados.forma_admissao_id + ']').attr('selected', true);
                 $('#turno_id').html('<option value="' + retorno.dados.turno_id + '">' + retorno.dados.nomeTurno + '</option>');
                 $('#data_inclusao').val(retorno.dados.data_inclusao);
