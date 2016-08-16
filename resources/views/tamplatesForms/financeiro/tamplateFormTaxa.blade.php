@@ -156,3 +156,74 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+
+    {{--Validaçao de campos--}}
+    <script type="text/javascript">
+        $('#formTaxa').bootstrapValidator({
+            fields: {
+                nome: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Nome'})
+                        },
+                        stringLength: {
+                            max: 60,
+                            message: Lang.get('validation.max', {attribute: 'Nome'})
+                        }
+                    }
+                },
+
+                codigo: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Código'})
+                        }
+                    },
+                    stringLength: {
+                        max: 6,
+                        message: Lang.get('validation.max', {attribute: 'Código'})
+                    }
+                },
+
+//                valor: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', {attribute: 'Valor'})
+//                        },
+//                        stringLength: {
+//                            max: 4,
+//                            message: Lang.get('validation.max', {attribute: 'Valor'})
+//                        }
+//                    }
+//                },
+
+                tipo_taxa_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})
+                        },
+                    }
+                },
+
+                dia_vencimento: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})
+                        },
+                    }
+                },
+
+                tipo_debito_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Tipo Debito'})
+                        },
+                    }
+                },
+            }
+        });
+    </script>
+
+@endsection

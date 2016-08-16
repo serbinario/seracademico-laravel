@@ -19,7 +19,7 @@ class TaxaValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-            'codigo' =>  'required|serbinario_alpha_space_especial|unique:fin_taxas,codigo,:id|max:8', //unique
+            'codigo' =>  'required|serbinario_alpha_space_especial|unique:fin_taxas,codigo,:id|max:6', //unique
 			'nome' =>  'required|serbinario_alpha_space_especial|max:60',
             'valor' =>  'required|regex:/^\d{0,6}(\.\d{2})?$/', //$
             'tipo_taxa_id' =>  'required|integer',
@@ -41,7 +41,7 @@ class TaxaValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-            'codigo' =>  'required|serbinario_alpha_space_especial|unique:fin_taxas,codigo,:id|max:8', //unique
+            'codigo' =>  'required|serbinario_alpha_space_especial|unique:fin_taxas,codigo,:id|max:6', //unique
             'nome' =>  'required|serbinario_alpha_space_especial|max:60',
             'valor' =>  'required|regex:/^\d{0,6}(\.\d{2})?$/', //$
             'tipo_taxa_id' =>  'required|integer',
