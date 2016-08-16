@@ -32,14 +32,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Valido Inicio ') !!}
-                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control date datepicker')) !!}
+                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control date datepicker', 'id'=>'validoInicio')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_fim', 'Ate Fim ') !!}
-                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control date datepicker')) !!}
+                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control date datepicker', 'id'=>'validoFim')) !!}
                 </div>
             </div>
 
@@ -158,6 +158,26 @@
 </div>
 
 @section('javascript')
+
+    <script type="text/javascript">
+
+        var dataInicio, dataFim;
+
+        $( "#validoInicio" ).change(function() {
+            dataInicio = $('#validoInicio').val();
+        });
+
+        $( "#validoFim" ).change(function() {
+            dataFim = $('#validoFim').val();
+
+            if (dataFim < dataInicio){
+                swal("Você precisa inserir uma data superior a data de início", "Click no botão ok para voltar a página", "error");
+                $('#validoFim').val("");
+            }
+
+        });
+
+    </script>
 
     {{--Validaçao de campos--}}
     <script type="text/javascript">
