@@ -63,10 +63,10 @@ class VestibularController extends Controller
                 'id',
                 'nome',
                 'codigo',
-                'data_prova',
-                'data_inicial',
-                'data_final',
-                'fac_vestibulares.created_at as data_criacao',
+                \DB::raw('DATE_FORMAT(data_prova, "%d/%m/%Y") as data_prova'),
+                \DB::raw('DATE_FORMAT(data_inicial, "%d/%m/%Y") as data_inicial'),
+                \DB::raw('DATE_FORMAT(data_final, "%d/%m/%Y") as data_final'),
+                \DB::raw('DATE_FORMAT(created_at, "%d/%m/%Y") as data_criacao'),
                 \DB::raw('IF(ativo, "Ativo", "Desativado") as ativo'),
             ]);
 
