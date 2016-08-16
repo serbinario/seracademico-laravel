@@ -44,6 +44,9 @@ $(document).ready(function(){
 
     //notasComuns
     $('.notasComuns').mask('00,00');
+
+    //notasComuns
+    $('.decimal').mask('0000000##0.00', {reverse: true});
     
     //código
    // $('.codigo').mask('###');

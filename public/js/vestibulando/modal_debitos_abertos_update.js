@@ -175,5 +175,5 @@ $('#valor_desconto_editar').on('focusout', function() {
     }
 
     // Calculando o valor final
-    $('#valor_debito_editar').val(valorFinal); // get the current value of the input field.
+    $('#valor_debito_editar').val(valorFinal.toFixed(2)); // get the current value of the input field.
 });
