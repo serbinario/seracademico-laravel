@@ -22,31 +22,14 @@
                             <thead>
                             <tr>
 
-                                <th style="width: 16%;">Código</th>
-
-                                <th style="width: 16%;">Descrição</th>
-
-                                <th style="width: 16%;">Válido</th>
-
-                                <th style="width: 16%;">Até</th>
-
-                                <th style="width: 16%;">Inicio</th>
-
-                                <th style="width: 16%;">Final</th>
-
-                                <th style="width: 16%;">Valor</th>
-
-                                <th style="width: 16%;">Tipo</th>
-
-                                <th style="width: 16%;">Incidência</th>
-
-                                <th style="width: 16%;">Dia Inicial</th>
-
-                                <th style="width: 16%;">Dia Final</th>
-
-                                <th style="width: 16%;">Tipo Dia</th>
-
-                                <th style="width: 16%;">Acao</th>
+                                <th style="width: 10%;">Código</th>
+                                <th style="width: 50%;">Descrição</th>
+                                <th>Valor</th>
+                                <th>Válido</th>
+                                <th>Até</th>
+                                <th>Inicio</th>
+                                <th>Final</th>
+                                <th style="width: 5%;">Acao</th>
 
                             </tr>
                             </thead>
@@ -67,16 +50,12 @@
             columns: [
                 {data: 'codigo',        name: 'fin_tipos_beneficios.codigo'},        //codigo
                 {data: 'nome',          name: 'fin_tipos_beneficios.nome'},          //nome
+                {data: 'valor',         name: 'fin_tipos_beneficios.valor'},         //endereco
                 {data: 'validoInicio',  name: 'fin_tipos_beneficios.valido_inicio'}, //rg
                 {data: 'validoFim',     name: 'fin_tipos_beneficios.valido_fim'},    //data nasc
                 {data: 'dataInicio',    name: 'fin_tipos_beneficios.data_inicio'},   //cpf
                 {data: 'dataFim',       name: 'fin_tipos_beneficios.data_fim'},      //endereco
-                {data: 'valor',         name: 'fin_tipos_beneficios.valor'},         //endereco
-                {data: 'tipoId',        name: 'fin_tipos_valores.nome'},               //endereco
-                {data: 'incidenciaId',  name: 'fin_incidencia.nome'},                  //endereco
-                {data: 'diaInicialId',  name: 'data_nascimento_inicial.nome'},             //endereco
-                {data: 'diaFinalId',    name: 'data_nascimento_final.nome'},             //endereco
-                {data: 'tipoDiaId',     name: 'fin_tipo_dia.nome'},                    //endereco
+
                 {data: 'action',        name: 'action', orderable: false, searchable: false}
             ]
         });
