@@ -21,8 +21,8 @@ class VestibulandoValidator extends LaravelValidator
         'pessoa.cpf' => 'CPF',
         'pessoa.data_nasciemento' => 'Data de Nascimento',
         'pessoa.email' => 'E-mail',
-        'pessoa.primeira_opcao_curso_id' => '1ª Opção ',
-        'pessoa.primeira_opcao_turno_id' => '1ª Opção Turno',
+        'primeira_opcao_curso_id' => '1ª Opção ',
+        'primeira_opcao_turno_id' => '1ª Opção Turno',
         'pessoa.sexos_id' => 'integer',
         'pessoa.deficiencia_auditiva' => 'integer',
         'pessoa.deficiencia_visual' => 'integer',
@@ -114,12 +114,12 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => 'integer',
 
             //Opções de Curso
-            'pessoa.primeira_opcao_curso_id' => 'required|integer',
-            'pessoa.primeira_opcao_turno_id' => 'required|integer',
-            'pessoa.segunda_opcao_curso_id' => 'integer',
-            'pessoa.segunda_opcao_turno_id' => 'integer',
-            'pessoa.terceira_opcao_curso_id' => 'integer',
-            'pessoa.terceira_opcao_turno_id' => 'integer',
+            'primeira_opcao_curso_id' => 'required|integer',
+            'primeira_opcao_turno_id' => 'required|integer',
+            'segunda_opcao_curso_id' => 'integer',
+            'segunda_opcao_turno_id' => 'integer',
+            'terceira_opcao_curso_id' => 'integer',
+            'terceira_opcao_turno_id' => 'integer',
 
             //Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
