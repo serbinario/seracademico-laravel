@@ -2,23 +2,38 @@
 	<div class="col-md-12">
     {{--Linha 1--}}
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-9">
                 <div class="form-group">
-
-                    {!! Form::label('codigo', 'Código') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo') , array('class' => 'form-control')) !!}
+                    {!! Form::label('nome', 'Nome *: max 60 caracteres (0-9 A-Z .-[ ]) ') !!}
+                    {!! Form::text('nome', Session::getOldInput('nome') , array('class' => 'form-control', 'placeholder' => 'Nome do benefício')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
 
-                    {!! Form::label('nome', 'Descrição') !!}
-                    {!! Form::text('nome', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('codigo', 'Codigo *: max 8 caracteres') !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo') , array('class' => 'form-control', 'placeholder' => 'Código do benefício')) !!}
                 </div>
             </div>
+
         </div>
     {{--Linha 2--}}
         <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {!! Form::label('valor', 'Valor') !!}
+                    {!! Form::text('valor', Session::getOldInput('valor'), array('class' => 'form-control moneyReal', 'placeholder' => 'R$')) !!}
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+
+                    {!! Form::label('tipo_id', 'Tipo') !!}
+                    {!! Form::select('tipo_id', $loadFields['financeiro\\tipovalor'], NULL, array('class' => 'form-control')) !!}
+                </div>
+            </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     
@@ -33,14 +48,11 @@
                     {!! Form::text('valido_fim', Session::getOldInput('valido_fim'), array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
-        </div>
 
-        <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
-                    
-					{!! Form::label('data_inicio', 'Início') !!}
-					{!! Form::text('data_inicio', Session::getOldInput('data_inicio'), array('class' => 'form-control datepicker date')) !!}
+                    {!! Form::label('data_inicio', 'Início') !!}
+                    {!! Form::text('data_inicio', Session::getOldInput('data_inicio'), array('class' => 'form-control datepicker date', 'placeholder' => 'Data início do benefício')) !!}
                 </div>
             </div>
             <div class="col-md-2">
@@ -50,22 +62,15 @@
                     {!! Form::text('data_fim', Session::getOldInput('data_fim'), array('class' => 'form-control datepicker date')) !!}
                 </div>
             </div>
+
         </div>
 
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
 
-                    {!! Form::label('tipo_id', 'Tipo') !!}
-                    {!! Form::select('tipo_id', $loadFields['financeiro\\tipovalor'], NULL, array('class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    {!! Form::label('valor', 'Valor') !!}
-					{!! Form::text('valor', Session::getOldInput('valor'), array('class' => 'form-control moneyReal')) !!}
-                </div>
-            </div>
+
+
+
+        <div class="row">
+
             <div class="col-md-4">
                 <div class="form-group">
 

@@ -46,7 +46,7 @@ $(document).ready(function(){
     $('.notasComuns').mask('00,00');
 
     //notasComuns
-    $('.decimal').mask('0000000##0.00', {reverse: true});
+    $('.decimal').mask('0##0.00',  {placeholder: "R$", reverse: true});
     
     //código
    // $('.codigo').mask('###');
@@ -68,7 +68,7 @@ $(document).ready(function(){
         format: 'd/m/Y',
         mask: false,
         lang: 'pt-BR',
-        allowBlank: false,
+        allowBlank: true,
     });
 
     //##### Tipos de beneficio
