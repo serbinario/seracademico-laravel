@@ -499,7 +499,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="form-group col-md-8">
-                                        {!! Form::label('primeira_opcao_curso_id', '1º Opção * ') !!}
+                                        {!! Form::label('primeira_opcao_curso_id', '1ª Opção * ') !!}
                                         @if(isset($aluno->primeira_opcao_curso_id))
                                             {!! Form::select('primeira_opcao_curso_id', [$aluno->primeiraOpcaoCurso->id => $aluno->primeiraOpcaoCurso->nome ], $aluno->primeira_opcao_curso_id, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
                                         @else
@@ -507,7 +507,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('primeira_opcao_turno_id', 'Opção Turno *') !!}
+                                        {!! Form::label('primeira_opcao_turno_id', '1ª Opção Turno *') !!}
                                         @if(isset($aluno->primeira_opcao_turno_id))
                                             {!! Form::select('primeira_opcao_turno_id', [$aluno->primeiraOpcaoTurno->id => $aluno->primeiraOpcaoTurno->nome ], $aluno->primeira_opcao_turno_id, array('class' => 'form-control', 'id' => 'primeira_opcao_turno_id')) !!}
                                         @else
@@ -518,7 +518,7 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
-                                        {!! Form::label('segunda_opcao_curso_id', '2º Opção ') !!}
+                                        {!! Form::label('segunda_opcao_curso_id', '2ª Opção ') !!}
                                         @if(isset($aluno->segunda_opcao_curso_id))
                                             {!! Form::select('segunda_opcao_curso_id', [$aluno->segundaOpcaoCurso->id => $aluno->segundaOpcaoCurso->nome ], $aluno->segunda_opcao_curso_id, array('class' => 'form-control', 'id' => 'segunda_opcao_curso_id')) !!}
                                         @else
@@ -526,7 +526,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('segunda_opcao_turno_id', 'Opção Turno') !!}
+                                        {!! Form::label('segunda_opcao_turno_id', '2ª Opção Turno') !!}
                                         @if(isset($aluno->segunda_opcao_turno_id))
                                             {!! Form::select('segunda_opcao_turno_id', [$aluno->segundaOpcaoTurno->id => $aluno->segundaOpcaoTurno->nome ], $aluno->segunda_opcao_turno_id, array('class' => 'form-control', 'id' => 'segunda_opcao_turno_id')) !!}
                                         @else
@@ -537,7 +537,7 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-8">
-                                        {!! Form::label('terceira_opcao_curso_id', '3º Opção ') !!}
+                                        {!! Form::label('terceira_opcao_curso_id', '3ª Opção ') !!}
                                         @if(isset($aluno->terceira_opcao_curso_id))
                                             {!! Form::select('terceira_opcao_curso_id', [$aluno->terceiraOpcaoCurso->id => $aluno->terceiraOpcaoCurso->nome ], $aluno->terceira_opcao_curso_id, array('class' => 'form-control', 'id' => 'terceira_opcao_curso_id')) !!}
                                         @else
@@ -545,7 +545,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-md-4">
-                                        {!! Form::label('terceira_opcao_turno_id', 'Opção Turno') !!}
+                                        {!! Form::label('terceira_opcao_turno_id', '3ª Opção Turno') !!}
                                         @if(isset($aluno->terceira_opcao_turno_id))
                                             {!! Form::select('terceira_opcao_turno_id', [$aluno->terceiraOpcaoTurno->id => $aluno->terceiraOpcaoTurno->nome ], $aluno->terceira_opcao_turno_id, array('class' => 'form-control', 'id' => 'terceira_opcao_turno_id')) !!}
                                         @else
