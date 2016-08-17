@@ -17,7 +17,7 @@
         @endif
         <div class="row">
             <div class="form-group col-md-7">
-                {!! Form::label('pessoa[nome]', 'Nome *') !!}
+                {!! Form::label('pessoa[nome]', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                 {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
@@ -139,11 +139,11 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai *') !!}
+                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                                                 {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe *') !!}
+                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                                                 {!! Form::text('pessoa[nome_mae]',Session::getOldInput('pessoa[nome_mae]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
@@ -959,85 +959,85 @@
         });
 
         // Validações javascript
-        $('#formVestibulando').bootstrapValidator({
-            fields: {
-                'pessoa[nome]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome' })
-                        },
-                        stringLength: {
-                            max: 50,
-                            message: Lang.get('validation.max', { attribute: 'Nome' })
-                        }
-                    }
-                },
-                'pessoa[data_nasciemento]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-                        }
-                    }
-                },
-                'pessoa[cpf]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'CPF' })
-                        }
-                    }
-                },
-                'pessoa[nome_pai]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-                        }
-                    }
-                },
-                'pessoa[nome_mae]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-                        }
-                    }
-                },
-                'pessoa[identidade]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-                        }
-                    }
-                },
-                'vestibular_id': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
-                        }
-                    }
-                },
-                'data_insricao_vestibular': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
-                        }
-                    }
-                },
-                'primeira_opcao_curso_id': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
-                        }
-                    }
-                },
-                'primeira_opcao_turno_id': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
-                        }
-                    }
-                }
-
-            },
-        });
+//        $('#formVestibulando').bootstrapValidator({
+//            fields: {
+//                'pessoa[nome]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome' })
+//                        },
+//                        stringLength: {
+//                            max: 50,
+//                            message: Lang.get('validation.max', { attribute: 'Nome' })
+//                        }
+//                    }
+//                },
+//                'pessoa[data_nasciemento]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+//                        }
+//                    }
+//                },
+//                'pessoa[cpf]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'CPF' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_pai]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_mae]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+//                        }
+//                    }
+//                },
+//                'pessoa[identidade]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+//                        }
+//                    }
+//                },
+//                'vestibular_id': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
+//                        }
+//                    }
+//                },
+//                'data_insricao_vestibular': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
+//                        }
+//                    }
+//                },
+//                'primeira_opcao_curso_id': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
+//                        }
+//                    }
+//                },
+//                'primeira_opcao_turno_id': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
+//                        }
+//                    }
+//                }
+//
+//            },
+//        });
 
         // Regra para carregamento dos cursos a partir do vestibular escolhido
         $(document).on('change', '#vestibular_id', function () {
