@@ -76,7 +76,7 @@ class TaxaController extends Controller
 
             # Verificação de possibilidade de remoção
             if(count($objTaxa->beneficios) == 0 && count($objTaxa->debitosAlunos) == 0 &&
-                count($objTaxa->debitosVestibulandos && count($objTaxa->vestibulares))) {
+                count($objTaxa->debitosVestibulandos) == 0 && count($objTaxa->vestibulares) == 0) {
                 # Html de retorno
                 $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
             }

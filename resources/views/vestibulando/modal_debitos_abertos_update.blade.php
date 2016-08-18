@@ -34,12 +34,12 @@
 
                         <div class="form-group col-md-4">
                             <label for="valor_debito_editar">Valor débito</label>
-                            <input type="text" readonly="readonly" class="form-control" name="valor_debito_editar" id="valor_debito_editar">
+                            <input type="text" readonly="readonly" class="form-control decimal" name="valor_debito_editar" id="valor_debito_editar">
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="valor_desconto_editar">Valor Desconto</label>
-                            <input type="text" class="form-control" name="valor_desconto_editar" id="valor_desconto_editar">
+                            <input type="text" class="form-control decimal" name="valor_desconto_editar" id="valor_desconto_editar">
                         </div>
                     </div>
 
@@ -62,16 +62,16 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label>Págo</label>
-                                    <input name="pago"  id="pago" type="checkbox" value="1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-8">--}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-8">--}}
+                                    {{--<label>Págo</label>--}}
+                                    {{--<input name="pago"  id="pago" type="checkbox" value="1">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="btnDebitosAbertosUpdate">Salvar</button>

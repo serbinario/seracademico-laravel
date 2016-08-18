@@ -65,7 +65,8 @@ class VestibulandoFinanceiroController extends Controller
                 return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>                         
+                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating" id="btnCloseDebitoAberto" title="Fechar Débito"><i class="material-icons">edit</i></a></li>
                         </ul>
                         </div>';
             })->make(true);
@@ -147,6 +148,28 @@ class VestibulandoFinanceiroController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $dados]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function closeDebitoAberto($id)
+    {
+        try {
+            #Recuperando o aluno
+            $debito = $this->service->findDebito($id);
+
+            # Fechando o débito
+            $debito->pago = 1;
+            $debito->save();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Fechamento realizado com sucesso!']);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);

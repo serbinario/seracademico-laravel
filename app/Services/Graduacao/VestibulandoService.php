@@ -167,9 +167,11 @@ class VestibulandoService
         # [RFV003-RN012] - Documento de Requisitos
         # Verificando se a pessoa já existe
         if(count($objPessoa) > 0) {
+
             #aAlterando a pessoa e o endereço
-            $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
-            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+            $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
+            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $objPessoa[0]->endereco->id);
+            $pessoa = $objPessoa[0];
         } else {
             #Criando o endereco e pessoa
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
@@ -409,9 +411,9 @@ class VestibulandoService
                 # Query para recuperar o débito de inscrição do vestibulando
                 $row = \DB::table('fac_vestibulandos')
                     ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-                    ->join('taxas', 'taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
-                    ->join('tipos_taxas', 'tipos_taxas.id', '=', 'taxas.tipo_taxa_id')
-                    ->where('tipos_taxas.id', 1)
+                    ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+                    ->join('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
+                    ->where('fin_tipos_taxas.id', 1)
                     ->where('fac_vestibulandos_financeiros.pago', 1)
                     ->where('fac_vestibulandos.id', $vestibulando->id)
                     ->get();
@@ -875,6 +877,24 @@ class VestibulandoService
         $this->financeiroRepository->delete($id);
 
         # retorno
+        return true;
+    }
+
+    /**
+     * @param $vestibulando
+     * @param $comprovante
+     * @return bool
+     */
+    public function deleteFile($vestibulando, $comprovante)
+    {
+        # Removendo o arquivo do diretório
+        unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $vestibulando->$comprovante);
+
+        # Removendo o arquivo do banco de dados
+        $vestibulando->$comprovante = null;
+        $vestibulando->save();
+        
+        # Retorno
         return true;
     }
 }

@@ -4,21 +4,21 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {!! Form::label('nome', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
-                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control')) !!}
+                    {!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'placeholder'=>'Nome do Taxa')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('codigo', 'Código * max 6') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control numberFive')) !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control numberFive' , 'placeholder'=>'Código da Taxa')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valor', 'Valor *') !!}
-                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal')) !!}
+                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal' , 'placeholder'=>'R$')) !!}
                 </div>
             </div>
 
@@ -32,14 +32,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Valido Inicio ') !!}
-                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control date datepicker')) !!}
+                    {!! Form::text('valido_inicio', Session::getOldInput('valido_inicio')  , array('class' => 'form-control date datepicker', 'id'=>'validoInicio')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_fim', 'Ate Fim ') !!}
-                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control date datepicker')) !!}
+                    {!! Form::text('valido_fim', Session::getOldInput('valido_fim')  , array('class' => 'form-control date datepicker', 'id'=>'validoFim')) !!}
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
 
                             <div class="form-group col-md-2">
                                 {!! Form::label('valor_multa', 'Valor Multa ') !!}
-                                {!! Form::text('valor_multa', Session::getOldInput('valor_multa'), array('class' => 'form-control moneyReal')) !!}
+                                {!! Form::text('valor_multa', Session::getOldInput('valor_multa'), array('class' => 'form-control moneyReal', 'placeholder'=>'R$')) !!}
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
 
                             <div class="form-group col-md-2">
                                 {!! Form::label('valor_juros', 'Valor Juros ') !!}
-                                {!! Form::text('valor_juros', Session::getOldInput('valor_juros'), array('class' => 'form-control moneyReal')) !!}
+                                {!! Form::text('valor_juros', Session::getOldInput('valor_juros'), array('class' => 'form-control moneyReal', 'placeholder'=>'R$')) !!}
                             </div>
                         </div>
                     </div>
@@ -156,3 +156,98 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+
+    <script type="text/javascript">
+
+        var dataInicio, dataFim;
+
+        $( "#validoInicio" ).change(function() {
+            dataInicio = $('#validoInicio').val();
+        });
+
+        $( "#validoFim" ).change(function() {
+            dataFim = $('#validoFim').val();
+
+            if (dataFim < dataInicio){
+                swal("Você precisa inserir uma data superior a data de início", "Click no botão ok para voltar a página", "error");
+                $('#validoFim').val("");
+            }
+
+        });
+
+    </script>
+
+    {{--Validaçao de campos--}}
+    {{--<script type="text/javascript">--}}
+        {{--$('#formTaxa').bootstrapValidator({--}}
+            {{--fields: {--}}
+                {{--nome: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Nome'})--}}
+                        {{--},--}}
+                        {{--stringLength: {--}}
+                            {{--max: 60,--}}
+                            {{--message: Lang.get('validation.max', {attribute: 'Nome'})--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--valido_inicio: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Valido Inicio'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--valido_fim: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Valido Fim'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--codigo: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Código'})--}}
+                        {{--}--}}
+                    {{--},--}}
+                    {{--stringLength: {--}}
+                        {{--max: 6,--}}
+                        {{--message: Lang.get('validation.max', {attribute: 'Código'})--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--dia_vencimento: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--tipo_taxa_id: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--tipo_debito_id: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Tipo Debito'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+            {{--}--}}
+        {{--});--}}
+    {{--</script>--}}
+
+@endsection

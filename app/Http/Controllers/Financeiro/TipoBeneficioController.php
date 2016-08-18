@@ -66,6 +66,11 @@ class TipoBeneficioController extends Controller
             ->join('fin_data_vencimento as data_nascimento_final', 'data_nascimento_final.id', '=', 'fin_tipos_beneficios.dia_final_id')
             ->join('fin_tipo_dia', 'fin_tipo_dia.id', '=', 'fin_tipos_beneficios.tipo_dia_id')
 
+//            $rows = \DB::table('pessoas')
+//                ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=' 'pessoas.vestibulando_id')
+//
+//                ->select(['pessoas.id', 'pessoas.cpf', ]);
+
             ->select([
                 'fin_tipos_beneficios.id',
                 'fin_tipos_beneficios.codigo',

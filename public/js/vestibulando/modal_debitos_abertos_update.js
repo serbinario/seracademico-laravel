@@ -175,5 +175,28 @@ $('#valor_desconto_editar').on('focusout', function() {
     }
 
     // Calculando o valor final
-    $('#valor_debito_editar').val(valorFinal); // get the current value of the input field.
+    $('#valor_debito_editar').val(valorFinal.toFixed(2)); // get the current value of the input field.
+});
+
+// Método para dar baixa no débito em aberto
+$(document).on('click', '#btnCloseDebitoAberto', function () {
+    // Recuperando o id do débito
+    idDebito = tableDebitosAbertos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'PUT',
+        url: '/index.php/seracademico/vestibulando/financeiro/closeDebitoAberto/' + idDebito,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            tableDebitosAbertos.ajax.reload();
+            tableDebitosPagos.ajax.reload();
+            table.ajax.reload();
+
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
 });
