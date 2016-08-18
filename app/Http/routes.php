@@ -606,6 +606,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeGenero', ['as' => 'storeGenero', 'uses' => 'Biblioteca\GeneroController@store']);
             Route::post('updateGenero/{id}', ['as' => 'updateGenero', 'uses' => 'Biblioteca\GeneroController@update']);
             Route::get('deleteGenero/{id}', ['as' => 'deleteGenero', 'uses' => 'Biblioteca\GeneroController@delete']);
+
+            Route::post('getCutter', ['as' => 'getCutter', 'uses' => 'Biblioteca\ArcevoController@getCutter']);
             
         });
 

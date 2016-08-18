@@ -7,6 +7,7 @@ use Seracademico\Entities\Biblioteca\SegundaEntrada;
 use Seracademico\Repositories\Biblioteca\ArcevoRepository;
 use Seracademico\Entities\Biblioteca\Arcevo;
 use Seracademico\Repositories\Biblioteca\PrimeiraEntradaRepository;
+use Seracademico\Repositories\Biblioteca\ResponsavelRepository;
 use Seracademico\Repositories\Biblioteca\SegundaEntradaRepository;
 
 //use Carbon\Carbon;
@@ -29,14 +30,20 @@ class ArcevoService
     private $primeiraRepository;
 
     /**
+     * @var ResponsavelRepository
+     */
+    private $responsavelRepository;
+
+    /**
      * @param ArcevoRepository $repository
      */
     public function __construct(ArcevoRepository $repository, SegundaEntradaRepository $segundaRepository,
-                                PrimeiraEntradaRepository $primeiraRepository)
+                                PrimeiraEntradaRepository $primeiraRepository, ResponsavelRepository $responsavelRepository)
     {
         $this->repository = $repository;
         $this->segundaRepository = $segundaRepository;
         $this->primeiraRepository = $primeiraRepository;
+        $this->responsavelRepository = $responsavelRepository;
     }
 
     /**
@@ -309,6 +316,71 @@ class ArcevoService
 
         #retorno
         return true;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function getCutter(array $data)
+    {
+
+        //Pegando o título da obra
+        $titulo = $data['titulo'];
+
+        //Recuperando um responsável pelo id
+        $respo = $this->responsavelRepository->find($data['autor']);
+
+        //Cortando os sobrenome q possuem vírgulas
+        $exp = explode(',', $respo->sobrenome);
+
+        //Validação do sobrenome pois se caso houver , o mesmo deve ser pego inteiramento, caso contrário cortar o sobrenome sepando-os por espaço
+        if(count($exp) > 1) {
+            $nome = $respo->sobrenome;
+        } else {
+            $exp2 = explode(' ', $respo->sobrenome);
+            $nome = $exp2[0];
+        }
+
+        //Pegando apenas as duas primerias letras do sobrenome
+        $rest = substr($nome, 0, 2);
+
+        //Fazendo uma consulta no banco de dados buscando todos os cdd que começão com as duas primeiras letras do sobrenome
+        $cdds = \DB::table('bib_cdd')->where('cdd', 'like', "{$rest}%")->select(['cdd', 'codigo'])->get();
+        $codigo = "";
+        $abrev   = "";
+
+        //Varre todos os cdds encontrado comparando se o cdd encontrado está contido no sobrenome, caso sim, recupera-se o cdd e o código
+        foreach ($cdds as $cdd) {
+            $pos = stripos($nome, $cdd->cdd);
+            if($pos !== false) {
+                $codigo = $cdd->codigo;
+                $abrev   = $cdd->cdd;
+            }
+        }
+
+        //Pega a primeira letra do cdd encontrado
+        $prim = substr($abrev, 0, 1);
+        
+        //Separa o título por espaço
+        $expTitulo = explode(' ', $titulo);
+        $primTitulo = "";
+
+        //Valida se o título começa com artigo ou n, pois o artigo n é usado no cutter, e sim a primeira letra da primeira palavra do título
+        if(count($expTitulo) > 0) {
+            if(strlen($expTitulo[0]) <= 1) {
+                $primTitulo = strtolower(substr($expTitulo[1], 0, 1));
+            } else {
+                $primTitulo = strtolower(substr($expTitulo[0], 0, 1));
+            }
+        }
+
+        //Montando o cutter;
+        $cutter = $prim.$codigo.$primTitulo;
+
+        #retorno
+        return $cutter;
     }
 
     /**

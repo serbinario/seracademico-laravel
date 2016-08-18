@@ -31,8 +31,8 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="form-group">
-                            {!! Form::label('assunto', 'Assunto') !!}
-                            {!! Form::text('assunto', Session::getOldInput('assunto')  , array('class' => 'form-control')) !!}
+                            {!! Form::label('assunto_p', 'Assunto') !!}
+                            {!! Form::text('assunto_p', Session::getOldInput('assunto_p')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                 </div>

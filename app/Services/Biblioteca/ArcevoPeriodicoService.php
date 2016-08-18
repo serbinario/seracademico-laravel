@@ -103,6 +103,7 @@ class ArcevoPeriodicoService
     {
 
         $this->tratamentoCampos($data);
+        $this->tratamentoDatas($data);
 
         $data['numero_chamada'] = $data['cdd'];
 
@@ -126,6 +127,7 @@ class ArcevoPeriodicoService
     public function update(array $data, int $id) : Arcevo
     {
         $this->tratamentoCampos($data);
+        $data = $this->tratamentoDatas($data);
 
         $data['numero_chamada'] = $data['cdd'];
 
@@ -235,13 +237,51 @@ class ArcevoPeriodicoService
      * @param array $data
      * @return mixed
      */
-    public function tratamentoDatas(array &$data) : array
+    public function tratamentoDatas($data) : array
     {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
+        #tratando as datas
+        $data['data_vencimento'] = $data['data_vencimento'] ? $this->convertDate($data['data_vencimento'], 'en') : "";
 
-         #retorno
-         return $data;
+        #retorno
+        return $data;
+    }
+
+
+    /**
+     * @param $date
+     * @return bool|string
+     */
+    public function convertDate($date, $format)
+    {
+        #declarando variável de retorno
+        $result = "";
+
+        #convertendo a data
+        if (!empty($date) && !empty($format)) {
+            #Fazendo o tratamento por idioma
+            switch ($format) {
+                case 'pt-BR' : $result = date_create_from_format('Y-m-d', $date); break;
+                case 'en'    : $result = date_create_from_format('d/m/Y', $date); break;
+            }
+        }
+
+        #retorno
+        return $result;
+    }
+
+    /**
+     * @param Aluno $aluno
+     */
+    public function getDateFormatPtBr($entity)
+    {
+        #validando as datas
+        $entity->data_vencimento   = $entity->data_vencimento == '0000-00-00' ? "" : $entity->data_vencimento;
+
+        #tratando as datas
+        $entity->data_vencimento   = date('d/m/Y', strtotime($entity->data_vencimento));
+
+        #return
+        return $entity;
     }
 
     /**

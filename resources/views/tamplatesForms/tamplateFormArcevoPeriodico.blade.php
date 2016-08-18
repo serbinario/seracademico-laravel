@@ -51,6 +51,12 @@
                             {!! Form::text('periodicidade', Session::getOldInput('periodicidade'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('data_vencimento', 'Data de vencimento') !!}
+                            {!! Form::text('data_vencimento', Session::getOldInput('data_vencimento'), array('class' => 'form-control datepicker date data2')) !!}
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('link', 'Link de acesso') !!}

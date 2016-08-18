@@ -148,10 +148,10 @@ class ArcevoPeriodicoController extends Controller
             $model = $retorno['acervo'];
             $segundaEntrada = $retorno['segundaEntrada'];
             $primeiraEntrada = $retorno['primeiraEntrada'];
-            //dd($segundaEntrada);
+
 
             #Tratando as datas
-           // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
+            $model = $this->service->getDateFormatPtBr($model);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
