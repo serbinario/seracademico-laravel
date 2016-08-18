@@ -19,7 +19,7 @@ class PlanoEnsinoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  'unique:fac_plano_ensino1,nome,:id,id,carga_horaria,:ch' ,
+			'nome' =>  'unique:fac_plano_ensino,nome,:id,id,carga_horaria,:ch' ,
 			//'nome' =>  'unique:fac_plano_ensino,carga_horaria,10,id,nome,"teste1"' ,
 			//unique:users,username,10,id,company_id,31
 			'vigencia' =>  '' ,

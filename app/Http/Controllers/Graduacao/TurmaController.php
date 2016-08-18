@@ -61,7 +61,7 @@ class TurmaController extends Controller
 
             #retorno
             return view('graduacao.turma.index', compact('loadFields', 'semestres'));
-        } catch (\Throwable $e) { dd($e->getMessage());
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -107,7 +107,7 @@ class TurmaController extends Controller
                 } else if(count($semestres) == 2) {
                     $query->where('fac_semestres.id', '=', $semestres[0]->id);
                 }
-               // dd($request->get('periodo'));
+
                 # Filtrando por situação
                 if ($request->has('periodo')) {
                     $query->where('fac_turmas.periodo', '=', $request->get('periodo'));
@@ -135,6 +135,7 @@ class TurmaController extends Controller
                 $html = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>                            
+                                <li><a class="btn-floating green" id="btnModalDiarioAula"  title="Diários de Aulas"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                                 <li><a class="btn-floating green" id="modal-horario" href="#" title="Calendário da turma"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                                 <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">spellcheck</i></a></li>
                                 <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">playlist_add_check</i></a></li>
@@ -190,7 +191,7 @@ class TurmaController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -210,7 +211,7 @@ class TurmaController extends Controller
 
             #retorno para view
             return view('graduacao.turma.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

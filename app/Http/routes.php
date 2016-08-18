@@ -337,6 +337,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaFrequenciaController@editFrequencia']);
                     Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'Graduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
+
+                # Rotaas de diários de aulas
+                Route::group(['prefix' => 'diarioAula', 'as' => 'diarioAula.'], function () {
+                    Route::get('grid/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'Graduacao\DiarioAulaController@grid']);
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'Graduacao\DiarioAulaController@gridDisciplinas']);
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\DiarioAulaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\DiarioAulaController@store']);
+                    Route::get('getConteudosProgramaticos', ['as' => 'getConteudosProgramaticos', 'uses' => 'Graduacao\DiarioAulaController@getConteudosProgramaticos']);
+                    Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'Graduacao\DiarioAulaController@delete']);
+                    Route::get('edit/{idDiarioAula}', ['as' => 'edit', 'uses' => 'Graduacao\DiarioAulaController@edit']);
+                    Route::post('update/{idDiarioAula}', ['as' => 'update', 'uses' => 'Graduacao\DiarioAulaController@update']);
+                    Route::get('gridConteudoProgramatico/{idDiarioAula}', ['as' => 'grid', 'uses' => 'Graduacao\DiarioAulaController@gridConteudoProgramatico']);
+                    Route::post('attachConteudo/{idDiarioAula}', ['as' => 'attachConteudo', 'uses' => 'Graduacao\DiarioAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idDiarioAula}', ['as' => 'detachConteudo', 'uses' => 'Graduacao\DiarioAulaController@detachConteudo']);
+                });
             });
 
             Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
@@ -659,6 +674,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::group(['prefix' => 'beneficio', 'as' => 'beneficio.'], function () {
                 Route::post('createQuery', ['as' => 'createQuery', 'uses' => 'Util\Select2BeneficioController@createQuery']);
                 Route::post('editQuery', ['as' => 'editQuery', 'uses' => 'Util\Select2BeneficioController@editQuery']);
+            });
+
+            # Util de diario aula
+            Route::group(['prefix' => 'diarioAula', 'as' => 'diarioAula.'], function () {
+                Route::post('createQuery', ['as' => 'createQuery', 'uses' => 'Util\Select2DiarioAulaController@createQuery']);
+                Route::post('editQuery', ['as' => 'editQuery', 'uses' => 'Util\Select2DiarioAulaController@editQuery']);
             });
         });
 

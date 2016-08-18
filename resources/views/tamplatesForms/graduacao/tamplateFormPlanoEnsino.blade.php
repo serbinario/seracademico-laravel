@@ -28,6 +28,14 @@
 					{!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
+
+            <div class="form-group col-md-1">
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('ativo', 0) !!}
+                    {!! Form::checkbox('ativo', 1, null, array('class' => 'form-control', 'id'=>'ativo')) !!}
+                    {!! Form::label('ativo', 'Ativar', false) !!}
+                </div>
+            </div>
         </div>
 
         {{--Linha da da Abas--}}
@@ -233,6 +241,13 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/planoEnsino/conteudoProgramatico/edit_conteudo_programatico.js')  }}"></script>
 
     <script type="text/javascript">
+        // Evento para alertar o usuário do plano de ensino ativo.
+        $(document).on('click', '#ativo', function () {
+            if($(this).is(':checked')) {
+                swal("Marcando esse plano como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
+            }
+        });
+
         // Variável que armazenará o objeto datatable
         var tableConteudoProgramatico, idPlanoEnsino;
 

@@ -55,7 +55,8 @@ class CurriculoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Curriculo
+     * @throws \Exception
      */
     public function store(array $data) : Curriculo
     {
@@ -80,7 +81,8 @@ class CurriculoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Curriculo
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Curriculo
     {
@@ -209,7 +211,10 @@ class CurriculoService
     }
 
     /**
-     * @param $idCurriculoDisciplina
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @return array
+     * @throws \Exception
      */
     public function disciplinaFind($idDisciplina, $idCurriculo)
     {
@@ -235,6 +240,7 @@ class CurriculoService
 
     /**
      * @param array $data
+     * @return bool
      * @throws \Exception
      */
     public function disciplinaStore(array $data)
@@ -273,8 +279,8 @@ class CurriculoService
     }
 
     /**
-     * @param $idCurriculo
-     * @param $idDisciplina
+     * @param $data
+     * @return bool
      * @throws \Exception
      */
     public function disciplinaDelete($data)
@@ -298,7 +304,7 @@ class CurriculoService
     /**
      * @param $idDisciplina
      * @param $idCurriculo
-     * @param $data
+     * @param $dados
      * @return bool
      * @throws \Exception
      */

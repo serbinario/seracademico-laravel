@@ -41,16 +41,16 @@ class PlanoAulaController extends Controller
             #Criando a consulta
             $rows = \DB::table('fac_planos_aulas')
                 ->join('fac_plano_ensino', 'fac_plano_ensino.id', '=', 'fac_planos_aulas.plano_ensino_id')
-                ->join('fac_professores as prof1', 'prof1.id', '=', 'fac_planos_aulas.professor_1_id')
-                ->join('pessoas as pes1', 'pes1.id', '=', 'prof1.pessoa_id')
-                ->join('fac_professores as prof2', 'prof2.id', '=', 'fac_planos_aulas.professor_2_id')
-                ->join('pessoas as pes2', 'pes2.id', '=', 'prof2.pessoa_id')
-                ->join('fac_professores as prof3', 'prof3.id', '=', 'fac_planos_aulas.professor_3_id')
-                ->join('pessoas as pes3', 'pes3.id', '=', 'prof3.pessoa_id')
-                ->join('fac_professores as prof4', 'prof4.id', '=', 'fac_planos_aulas.professor_4_id')
-                ->join('pessoas as pes4', 'pes4.id', '=', 'prof4.pessoa_id')
-                ->join('fac_professores as prof5', 'prof5.id', '=', 'fac_planos_aulas.professor_5_id')
-                ->join('pessoas as pes5', 'pes5.id', '=', 'prof5.pessoa_id')
+                ->leftJoin('fac_professores as prof1', 'prof1.id', '=', 'fac_planos_aulas.professor_1_id')
+                ->leftJoin('pessoas as pes1', 'pes1.id', '=', 'prof1.pessoa_id')
+                ->leftJoin('fac_professores as prof2', 'prof2.id', '=', 'fac_planos_aulas.professor_2_id')
+                ->leftJoin('pessoas as pes2', 'pes2.id', '=', 'prof2.pessoa_id')
+                ->leftJoin('fac_professores as prof3', 'prof3.id', '=', 'fac_planos_aulas.professor_3_id')
+                ->leftJoin('pessoas as pes3', 'pes3.id', '=', 'prof3.pessoa_id')
+                ->leftJoin('fac_professores as prof4', 'prof4.id', '=', 'fac_planos_aulas.professor_4_id')
+                ->leftJoin('pessoas as pes4', 'pes4.id', '=', 'prof4.pessoa_id')
+                ->leftJoin('fac_professores as prof5', 'prof5.id', '=', 'fac_planos_aulas.professor_5_id')
+                ->leftJoin('pessoas as pes5', 'pes5.id', '=', 'prof5.pessoa_id')
                 ->where('fac_plano_ensino.id', $idPlanoEnsino)
                 ->select([
                     'fac_planos_aulas.id',
@@ -58,11 +58,11 @@ class PlanoAulaController extends Controller
                     'fac_planos_aulas.hora_inicial',
                     'fac_planos_aulas.hora_final',
                     'fac_planos_aulas.numero_aula',
-                    'pes1.nome as nomeProf1',
-                    'pes2.nome as nomeProf2',
-                    'pes3.nome as nomeProf3',
-                    'pes4.nome as nomeProf4',
-                    'pes5.nome as nomeProf5'
+                    \DB::raw('IF(pes1.nome != "", pes1.nome, "") as nomeProf1'),
+                    \DB::raw('IF(pes2.nome != "", pes2.nome, "") as nomeProf2'),
+                    \DB::raw('IF(pes3.nome != "", pes3.nome, "") as nomeProf3'),
+                    \DB::raw('IF(pes4.nome != "", pes4.nome, "") as nomeProf4'),
+                    \DB::raw('IF(pes5.nome != "", pes5.nome, "") as nomeProf5')
                 ]);
 
             #Editando a grid
