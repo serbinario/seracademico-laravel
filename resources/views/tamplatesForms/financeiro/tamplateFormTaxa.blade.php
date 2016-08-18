@@ -180,70 +180,74 @@
     </script>
 
     {{--Validaçao de campos--}}
-    <script type="text/javascript">
-        $('#formTaxa').bootstrapValidator({
-            fields: {
-                nome: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', {attribute: 'Nome'})
-                        },
-                        stringLength: {
-                            max: 60,
-                            message: Lang.get('validation.max', {attribute: 'Nome'})
-                        }
-                    }
-                },
+    {{--<script type="text/javascript">--}}
+        {{--$('#formTaxa').bootstrapValidator({--}}
+            {{--fields: {--}}
+                {{--nome: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Nome'})--}}
+                        {{--},--}}
+                        {{--stringLength: {--}}
+                            {{--max: 60,--}}
+                            {{--message: Lang.get('validation.max', {attribute: 'Nome'})--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--},--}}
 
-                codigo: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', {attribute: 'Código'})
-                        }
-                    },
-                    stringLength: {
-                        max: 6,
-                        message: Lang.get('validation.max', {attribute: 'Código'})
-                    }
-                },
+                {{--valido_inicio: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Valido Inicio'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
 
-//                valor: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', {attribute: 'Valor'})
-//                        },
-//                        stringLength: {
-//                            max: 4,
-//                            message: Lang.get('validation.max', {attribute: 'Valor'})
-//                        }
-//                    }
-//                },
+                {{--valido_fim: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Valido Fim'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
 
-                tipo_taxa_id: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})
-                        },
-                    }
-                },
+                {{--codigo: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Código'})--}}
+                        {{--}--}}
+                    {{--},--}}
+                    {{--stringLength: {--}}
+                        {{--max: 6,--}}
+                        {{--message: Lang.get('validation.max', {attribute: 'Código'})--}}
+                    {{--}--}}
+                {{--},--}}
 
-                dia_vencimento: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})
-                        },
-                    }
-                },
+                {{--dia_vencimento: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
 
-                tipo_debito_id: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', {attribute: 'Tipo Debito'})
-                        },
-                    }
-                },
-            }
-        });
-    </script>
+                {{--tipo_taxa_id: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+
+                {{--tipo_debito_id: {--}}
+                    {{--validators: {--}}
+                        {{--notEmpty: {--}}
+                            {{--message: Lang.get('validation.required', {attribute: 'Tipo Debito'})--}}
+                        {{--},--}}
+                    {{--}--}}
+                {{--},--}}
+            {{--}--}}
+        {{--});--}}
+    {{--</script>--}}
 
 @endsection

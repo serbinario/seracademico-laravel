@@ -186,14 +186,6 @@
                     }
                 },
 
-                valor: {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Valor' })
-                        }
-                    }
-                },
-
                 dia_inicial_id: {
                     validators: {
                         notEmpty: {
