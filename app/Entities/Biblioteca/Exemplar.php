@@ -37,7 +37,7 @@ class Exemplar extends Model implements Transformable
 		'path_image',
 		'responsaveis_id',
 		'num_periodico',
-		'assunto',
+		'assunto_p',
 		'palavras_chaves',
 		'artigos',
 		'ampliada',

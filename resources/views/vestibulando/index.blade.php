@@ -13,6 +13,15 @@
         tr.details td.details-control {
             background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
         }
+
+        .finance-container-label {
+            border-top: 1px solid #c9d3dd;
+            float: left;
+            margin-bottom: 7px;
+            margin-top: 0px;
+            padding-top: 6px;
+            width: 100%;
+        }
     </style>
 @stop
 

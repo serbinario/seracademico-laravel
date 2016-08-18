@@ -210,4 +210,26 @@ class ArcevoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return $this|array|\Illuminate\Http\RedirectResponse
+     */
+    public function getCutter(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $result = $this->service->getCutter($data['dados']);
+
+            #Retorno para a view
+            return array('result' => $result);
+        } catch (ValidatorException $e) {
+            return $this->validator->errors();
+        } catch (\Throwable $e) { dd($e);
+            return $e->getMessage();
+        }
+    }
+
 }

@@ -18,7 +18,7 @@ $(document).ready(function(){
     //money
      $('.money').mask('000.000.000,00', {reverse: true});
 
-    //Transforma valores em Real (R$) para Dollar ($)
+    //Valor monetario em reais (R$)
     $('.moneyReal').maskMoney({prefix:'R$ ', allowZero: true, allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 
     //CNPJ
@@ -46,7 +46,7 @@ $(document).ready(function(){
     $('.notasComuns').mask('00,00');
 
     //notasComuns
-    $('.decimal').mask('0000000##0.00', {reverse: true});
+    $('.decimal').mask('0##0.00',  {placeholder: "R$", reverse: true});
     
     //código
    // $('.codigo').mask('###');
@@ -68,7 +68,7 @@ $(document).ready(function(){
         format: 'd/m/Y',
         mask: false,
         lang: 'pt-BR',
-        allowBlank: false,
+        allowBlank: true,
     });
 
     //##### Tipos de beneficio

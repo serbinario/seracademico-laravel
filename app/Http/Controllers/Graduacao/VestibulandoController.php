@@ -266,7 +266,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+            //dd($data);
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -324,6 +324,20 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
+
+            $vestibulando = $this->service->find($id);
+
+            #retornando Id de pessoa
+            $pessoaId = $vestibulando->pessoa_id;
+
+            #retornando email de pessoa
+            $pessoaEmail = $vestibulando->email;
+
+            #validando se existe um cpf
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":cpf", $pessoaId);
+
+            #validando se existe um email
+            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":email", $pessoaEmail);
 
             #tratando as rules
             $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);

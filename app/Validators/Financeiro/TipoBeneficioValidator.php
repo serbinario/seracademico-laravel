@@ -11,13 +11,21 @@ class TipoBeneficioValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
 	protected $messages   = [];
-	protected $attributes = [];
+	protected $attributes = [
+        'codigo' => 'Código',
+        'nome' =>  'Nome',
+        'valido_incio' =>  'Válido Incio' ,
+        'valido_fim' =>  'Válido Fim' ,
+        'data_inicio' =>  'Data Inicio' ,
+        'data_fim' =>  'Data Fim' ,
+        'valor' =>  'Valor' ,
+    ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
-            'codigo' => 'integer|unique:fin_tipos_beneficios,codigo,:id',
-			'nome' =>  'serbinario_alpha_space|max:100',
+            'codigo' => 'required|max:8|serbinario_alpha_space_especial|unique:fin_tipos_beneficios,codigo,:id',
+			'nome' =>  'required|serbinario_alpha_space_especial|max:60',
 			'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:' ,
 			'valido_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
 			'data_inicio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
@@ -32,8 +40,8 @@ class TipoBeneficioValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-            'codigo' => 'integer|unique:fin_tipos_beneficios,codigo,:id',
-            'nome' =>  'serbinario_alpha_space|max:100',
+            'codigo' => 'required|max:8|serbinario_alpha_space_especial|unique:fin_tipos_beneficios,codigo,:id',
+			'nome' =>  'required|serbinario_alpha_space_especial|max:60',
             'valido_incio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"|max:10' ,
             'data_inicio' =>  'serbinario_date_format:"d/m/Y"|max:10' ,

@@ -114,7 +114,7 @@ class ConsultaController extends Controller
         } else if ($this->data['busca_por'] == '4') {
             $campoLike = 'responsaveis.nome';
         } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '2') {
-            $campoLike = 'bib_exemplares.assunto';
+            $campoLike = 'bib_exemplares.assunto_p';
         }
 
         if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' || $this->data['busca_por'] == '4') {
@@ -131,7 +131,6 @@ class ConsultaController extends Controller
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
 
-            //dd($my_query);
         } else {
             $my_query = \DB::table('bib_exemplares')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
@@ -144,7 +143,7 @@ class ConsultaController extends Controller
                         ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%")
-                        ->orWhere('bib_exemplares.assunto', 'like', "%{$this->data['busca']}%");
+                        ->orWhere('bib_exemplares.assunto_p', 'like', "%{$this->data['busca']}%");
                 })
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
                 ->orderBy('bib_arcevos.titulo','DESC')
@@ -169,12 +168,14 @@ class ConsultaController extends Controller
         $data = $this->serviceExem->detalheAcervo($exemplar);
         $exemplar = $data['exemplar'];
         $exemplares = $data['exemplares'];
-       //dd($exemplares);
 
         return view('portal.biblioteca.consulta.detalhe', compact('loadFields', 'exemplar', 'exemplares'));
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function meusEmprestimos()
     {
         return view('portal.biblioteca.consulta.emprestimos');
