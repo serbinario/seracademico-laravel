@@ -38,7 +38,8 @@ class Arcevo extends Model implements Transformable
 		'uso_global',
 		'periodicidade',
 		'link',
-		'outro_cdd'
+		'outro_cdd',
+		'data_vencimento'
 	];
 
 	public function tipoAcervo()

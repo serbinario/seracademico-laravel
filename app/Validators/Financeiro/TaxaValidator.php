@@ -13,7 +13,16 @@ class TaxaValidator extends LaravelValidator
     protected $messages   = [
     ];
 
-    protected $attributes = [];
+    protected $attributes = [
+        'codigo' => 'Código',
+        'nome' => 'Nome',
+        'dia_vencimento' => 'Dia de Vencimento',
+        'valor' =>  'Valor',
+        'valido_incio' =>  'Válido Incio' ,
+        'valido_fim' =>  'Válido Fim' ,
+        'valor_multa' =>  'Valor Multa' ,
+        'valor_juros' =>  'Valor Juros' ,
+    ];
 
 
     protected $rules = [
@@ -26,7 +35,7 @@ class TaxaValidator extends LaravelValidator
             'valido_inicio' =>  'serbinario_date_format:"d/m/Y"',
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"',
             'dia_vencimento' =>  'required|integer',
-            //'tipo_debito_id' =>  'required|integer',
+            //'tipo_debito_id' =>  'required|integer', //campo nao encontrado no formulario
             'banco_id' =>  'integer',
             'tipo_multa_id' =>  'integer',
             'valor_multa' =>  'regex:/^\d{0,6}(\.\d{2})?$/' , //$
@@ -36,7 +45,7 @@ class TaxaValidator extends LaravelValidator
             'exigencia_biblioteca_id' =>  'integer',
             'exigencia_evento_id' =>  'integer',
             'exigencia_calendario_id' =>  'integer',
-            'semestre_id' => 'integer', //campo nao encontrado no formulario
+            //'semestre_id' => 'integer', //campo nao encontrado no formulario
 
         ],
         ValidatorInterface::RULE_UPDATE => [
@@ -58,7 +67,7 @@ class TaxaValidator extends LaravelValidator
             'exigencia_biblioteca_id' =>  'integer',
             'exigencia_evento_id' =>  'integer',
             'exigencia_calendario_id' =>  'integer',
-            'semestre_id' => 'integer', //campo nao encontrado no formulario
+            //'semestre_id' => 'integer', //campo nao encontrado no formulario
 
         ],
    ];

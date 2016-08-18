@@ -46,7 +46,8 @@
                         <div class="col s5 m2" style="margin-top: 3px;">
                             {{--{!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}--}}
                             <select name="tipo_obra" class="form-control">
-                                <option value="1" selected>Livro</option>
+                                <option value="1">Livro</option>
+                                <option value="2">Revista</option>
                             </select>
                         </div>
                     </div>
@@ -80,57 +81,107 @@
                                             <div class="col s8">{{$exemplar['acervo']['tipoAcervo']['nome']}} - {{$exemplar['idioma']['nome']}}</div>
                                         </div>
                                     </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>ISBN</b></div>
-                                            <div class="col s8">{{$exemplar['isbn']}}</div>
-                                        </div>
-                                    </a>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>ISBN</b></div>
+                                                <div class="col s8">{{$exemplar['isbn']}}</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>ISSN</b></div>
+                                                <div class="col s8">{{$exemplar['issn']}}</div>
+                                            </div>
+                                        </a>
+                                    @endif
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Classificação Dewey</b></div>
                                             <div class="col s8">{{$exemplar['acervo']['cdd']}}</div>
                                         </div>
                                     </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Cutter</b></div>
-                                            <div class="col s8">{{$exemplar['acervo']['cutter']}}</div>
-                                        </div>
-                                    </a>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Cutter</b></div>
+                                                <div class="col s8">{{$exemplar['acervo']['cutter']}}</div>
+                                            </div>
+                                        </a>
+                                    @endif
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Número de chamada</b></div>
                                             <div class="col s8">{{$exemplar['acervo']['numero_chamada']}}</div>
                                         </div>
                                     </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Edição</b></div>
-                                            <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
-                                        </div>
-                                    </a>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Edição</b></div>
+                                                <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Velume</b></div>
+                                                <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. v. @endif</div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                        <?php
+                                        $data = \DateTime::createFromFormat('Y-m-d', $exemplar['acervo']['data_vencimento']);
+                                        $dataFromat = $data->format('d/m/Y');
+                                        ?>
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Periodicidade</b></div>
+                                                <div class="col s8">{{$exemplar['acervo']['periodicidade']}} - Vencimento ({{$dataFromat}})</div>
+                                            </div>
+                                        </a>
+                                    @endif
                                     <a class="collection-item active">
                                         <div class="row">
                                             <div class="col s4"><b>Título</b></div>
                                             <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}}</b></div>
                                         </div>
                                     </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Ent. princ.</b></div>
-                                            <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
-                                                    @if($exemplar['acervo']['etial_autor'] == '1')
-                                                        {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
-                                                        <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
-                                                    @else
-                                                        @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
-                                                        @endforeach
-                                                    @endif
-                                                @endif</div>
-                                        </div>
-                                    </a>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Ent. princ.</b></div>
+                                                <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
+                                                        @if($exemplar['acervo']['etial_autor'] == '1')
+                                                            {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
+                                                            <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
+                                                        @else
+                                                            @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
+                                                                <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            @endforeach
+                                                        @endif
+                                                    @endif</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Artigos</b></div>
+                                                <div class="col s8">
+                                                    <?php
+                                                        $array = explode(';', $exemplar['artigos']);
+                                                        $count = 0;
+                                                    ?>
+                                                    @foreach($array as $artigo)
+                                                            <?php $count++ ?>
+                                                        {{$artigo}} @if($count >= count($array)) @else <br /> @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endif
                                     <a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Imprenta</b></div>
@@ -143,32 +194,52 @@
                                             <div class="col s8">{{$exemplar['numero_pag']}}p. @if($exemplar['ilustracoes_id'] == '1') : il.@endif</div>
                                         </div>
                                     </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Notas</b></div>
-                                            <div class="col s8">{{$exemplar['acervo']['resumo']}}</div>
-                                        </div>
-                                    </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Assunto</b></div>
-                                            <div class="col s8">{{$exemplar['acervo']['assunto']}}</div>
-                                        </div>
-                                    </a>
-                                    <a class="collection-item">
-                                        <div class="row">
-                                            <div class="col s4"><b>Ent. sec.</b></div>
-                                            <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
-                                                    @if($exemplar['acervo']['etial_outros'] == '1')
-                                                        <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al
-                                                    @else
-                                                        @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
-                                                            <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
-                                                        @endforeach
-                                                    @endif
-                                                @endif</div>
-                                        </div>
-                                    </a>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Notas</b></div>
+                                                <div class="col s8">{{$exemplar['acervo']['resumo']}}</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Link</b></div>
+                                                <div class="col s8">{{$exemplar['acervo']['link']}}</div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Assunto</b></div>
+                                                <div class="col s8">{{$exemplar['acervo']['assunto']}}</div>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Assunto</b></div>
+                                                <div class="col s8">{{$exemplar['assunto_p']}}</div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Ent. sec.</b></div>
+                                                <div class="col s8">@if(count($exemplar['acervo']['segundaEntrada']) > 0)
+                                                        @if($exemplar['acervo']['etial_outros'] == '1')
+                                                            <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al
+                                                        @else
+                                                            @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
+                                                                <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}}, <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                            @endforeach
+                                                        @endif
+                                                    @endif</div>
+                                            </div>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             <div id="test2" class="col s12">
@@ -178,11 +249,19 @@
                                         <thead>
                                         <tr>
                                             <th>Tombo</th>
-                                            <th>Edição</th>
+                                            @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                <th>Edição</th>
+                                            @else
+                                                <th>Volume</th>
+                                            @endif
                                             <th>Ano</th>
-                                            <th>Volume</th>
+                                            @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                <th>Volume</th>
+                                            @endif
                                             <th>CDD</th>
-                                            <th>Cutter</th>
+                                            @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                <th>Cutter</th>
+                                            @endif
                                             <th>Nº de chamada</th>
                                             <th>Situação</th>
                                         </tr>
@@ -198,11 +277,21 @@
                                                     ?>
                                                     {{$tombo}}
                                                 </td>
-                                                <td>@if($e->edicao){{$e->edicao}}. ed. @endif</td>
+                                                <td>
+                                                    @if($e->tipo_periodico == '1' && $e->edicao)
+                                                        {{$e->edicao}}. ed.
+                                                    @elseif($e->tipo_periodico == '2' && $e->edicao)
+                                                        {{$e->edicao}}. v.
+                                                    @endif
+                                                </td>
                                                 <td>@if($e->ano){{$e->ano}} @endif</td>
-                                                <td>{{$e->volume}}</td>
+                                                @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                    <td>{{$e->volume}}</td>
+                                                @endif
                                                 <td>{{$e->cdd}}</td>
-                                                <td>{{$e->cutter}}</td>
+                                                @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                    <td>{{$e->cutter}}</td>
+                                                @endif
                                                 <td>{{$e->numero_chamada}}</td>
                                                 <td>{{$e->nome}}</td>
                                             </tr>
@@ -238,14 +327,15 @@
                                 @if(count($exemplar['acervo']['primeiraEntrada']) <= 0 && count($exemplar['acervo']['segundaEntrada']) <= 0)
                                     <b><?php
                                             $array = explode(' ', $exemplar['acervo']['titulo']);
-                                            $aux = 0;
                                             $paravra = "";
+
                                         if (strlen($array[0]) <= 1) {
-                                            $paravra .= strtoupper($array[0] . " " . $array[1])." ";
+                                            $paravra .= strtoupper($array[0] ." ". $array[1])." ";
                                             for ($i = 2; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
-                                                $aux = $i + 1;
-                                                if($aux < count($array)) {
+                                                if($i >= count($array)) {
+                                                    $paravra .= "";
+                                                } else {
                                                     $paravra .= " ";
                                                 }
                                             };
@@ -253,7 +343,9 @@
                                             $paravra .= strtoupper($array[0])." ";
                                             for ($i = 1; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
-                                                if($i + 1 <= count($array)) {
+                                                if($i >= count($array)) {
+                                                    $paravra .= "";
+                                                } else {
                                                     $paravra .= " ";
                                                 }
                                             };
@@ -264,7 +356,7 @@
                                     <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
                                 @endif
                                 @if($exemplar['edicao'])
-                                    {{$exemplar['edicao']}}. ed.
+                                    {{$exemplar['edicao']}}. @if($exemplar['acervo']['tipo_periodico'] == '1') ed.@else v.@endif
                                     @if($exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada']) ampl.
                                     @elseif($exemplar['revisada'] && !$exemplar['ampliada'] && !$exemplar['atualizada']) rev.
                                     @elseif($exemplar['atualizada'] && !$exemplar['ampliada'] && !$exemplar['revisada']) atual.

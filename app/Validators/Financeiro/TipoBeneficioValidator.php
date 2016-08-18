@@ -11,7 +11,15 @@ class TipoBeneficioValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
 	protected $messages   = [];
-	protected $attributes = [];
+	protected $attributes = [
+        'codigo' => 'Código',
+        'nome' =>  'Nome',
+        'valido_incio' =>  'Válido Incio' ,
+        'valido_fim' =>  'Válido Fim' ,
+        'data_inicio' =>  'Data Inicio' ,
+        'data_fim' =>  'Data Fim' ,
+        'valor' =>  'Valor' ,
+    ];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
