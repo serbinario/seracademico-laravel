@@ -132,7 +132,7 @@
                             message: Lang.get('validation.required', { attribute: 'Nome' })
                         },
                         stringLength: {
-                            max: 200,
+                            max: 60,
                             message: Lang.get('validation.max', { attribute: 'Nome' })
                         }
                     }
@@ -145,70 +145,79 @@
                         }
                     },
                     stringLength: {
-                        max: 20,
+                        max: 8,
                         message: Lang.get('validation.max', { attribute: 'Código' })
                     }
                 },
 
-//                valido_inicio: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Válido' })
-//                        },
-//                        stringLength: {
-//                            max: 10,
-//                            message: Lang.get('validation.max', { attribute: 'Válido' })
-//                        }
-//                    }
-//                },
-//
-//                valido_fim: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Até' })
-//                        },
-//                        stringLength: {
-//                            max: 10,
-//                            message: Lang.get('validation.max', { attribute: 'Até' })
-//                        }
-//                    }
-//                },
-//
-//                data_inicio: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Início' })
-//                        },
-//                        stringLength: {
-//                            max: 10,
-//                            message: Lang.get('validation.max', { attribute: 'Início' })
-//                        }
-//                    }
-//                },
-//
-//                data_fim: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Fim' })
-//                        },
-//                        stringLength: {
-//                            max: 10,
-//                            message: Lang.get('validation.max', { attribute: 'Fim' })
-//                        }
-//                    }
-//                },
+                valido_inicio: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Válido' })
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: Lang.get('validation.max', { attribute: 'Válido' })
+                        }
+                    }
+                },
 
-//                valor: {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Valor' })
-//                        },
-//                        stringLength: {
-//                            max: 10,
-//                            message: Lang.get('validation.max', { attribute: 'Valor' })
-//                        }
-//                    }
-//                },
+                incidência_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Até' })
+                        }
+                    }
+                },
+
+                data_inicio: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Início' })
+                        }
+                    }
+                },
+
+                tipo_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Fim' })
+                        }
+                    }
+                },
+
+                valor: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Valor' })
+                        }
+                    }
+                },
+
+                dia_inicial_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Valor' })
+                        }
+                    }
+                },
+
+                dia_final_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Valor' })
+                        }
+                    }
+                },
+
+                tipo_dia_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', { attribute: 'Valor' })
+                        }
+                    }
+                },
+
             }
         });
     </script>
