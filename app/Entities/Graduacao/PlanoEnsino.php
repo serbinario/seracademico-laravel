@@ -32,6 +32,7 @@ class PlanoEnsino extends Model implements Transformable
 		'bibliografia_basica',
 		'competencia',
 		'aula_pratica',
+		'ativo'
 	];
 
     public function conteudoProgramatico()

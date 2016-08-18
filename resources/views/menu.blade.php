@@ -128,7 +128,7 @@
                         <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
-                                
+
                                 @permission('graduacao.aluno.select')
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>

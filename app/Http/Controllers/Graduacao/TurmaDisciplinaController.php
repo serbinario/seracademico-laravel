@@ -113,7 +113,7 @@ class TurmaDisciplinaController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
      * @return mixed
      */
     public function delete(Request $request)

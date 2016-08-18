@@ -2,20 +2,20 @@
 
 namespace Seracademico\Services\Graduacao;
 
-use Seracademico\Repositories\Graduacao\CursoRepository;
-use Seracademico\Entities\Graduacao\Curso;
+use Seracademico\Repositories\Graduacao\DiarioAulaRepository;
+use Seracademico\Entities\Graduacao\DiarioAula;
 
-class CursoService
+class DiarioAulaService
 {
     /**
-     * @var CursoRepository
+     * @var DiarioAulaRepository
      */
     private $repository;
 
     /**
-     * @param CursoRepository $repository
+     * @param DiarioAulaRepository $repository
      */
-    public function __construct(CursoRepository $repository)
+    public function __construct(DiarioAulaRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -28,80 +28,94 @@ class CursoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $curso = $this->repository->find($id);
+        $diarioAula = $this->repository->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$curso) {
-            throw new \Exception('Curso não encontrado!');
+        if(!$diarioAula) {
+            throw new \Exception('Empresa não encontrada!');
         }
 
         #retorno
-        return $curso;
+        return $diarioAula;
     }
 
     /**
      * @param array $data
-     * @return Curso
+     * @return DiarioAula
      * @throws \Exception
      */
-    public function store(array $data) : Curso
+    public function store(array $data) : DiarioAula
     {
-        # setando o nível do sistema
-        $data['tipo_nivel_sistema_id'] = 1;
+        # aplicação das regras de negócio
+        $this->tratamentoCampos($data);
 
         #Salvando o registro pincipal
-        $curso =  $this->repository->create($data);
+        $diarioAula =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$curso) {
+        if(!$diarioAula) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
+        # Verificando se a conteúdo a ser cadastrado
+        if(isset($data['conteudos']) && count($data['conteudos']) > 0) {
+            # Vinculando os conteúdos
+            $diarioAula->conteudos()->attach($data['conteudos']);
+        }
+
         #Retorno
-        return $curso;
+        return $diarioAula;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return Curso
+     * @return DiarioAula
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Curso
+    public function update(array $data, int $id) : DiarioAula
     {
-        # setando o nível do sistema
-        $data['tipo_nivel_sistema_id'] = 1;
+        # aplicação das regras de negócio
+        $this->tratamentoCampos($data);
 
         #Atualizando no banco de dados
-        $curso = $this->repository->update($data, $id);
+        $diarioAula = $this->repository->update($data, $id);
+
 
         #Verificando se foi atualizado no banco de dados
-        if(!$curso) {
+        if(!$diarioAula) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $curso;
+        return $diarioAula;
     }
 
     /**
      * @param int $id
-     * @return bool
+     * @return mixed
      * @throws \Exception
      */
     public function delete(int $id)
     {
-        #deletando o curso
-        $result = $this->repository->delete($id);
+        # Recuperando o registro no banco de dados
+        $diarioAula = $this->repository->find($id);
 
-        # Verificando se a execução foi bem sucessida
-        if(!$result) {
-            throw new \Exception('Ocorreu um erro ao tentar remover o curso!');
+        #Verificando se foi atualizado no banco de dados
+        if(!$diarioAula) {
+            throw new \Exception('Diário de aula não encontrado!');
         }
 
-        #retorno
-        return true;
+        # Removendo todos as pendências
+        $diarioAula->conteudos()->detach();
+
+        # Remvendo o registro do banco
+        $this->repository->delete($diarioAula->id);
+
+        #Retorno
+        return $diarioAula;
     }
+
 
     /**
      * Método load
@@ -158,12 +172,24 @@ class CursoService
                     $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
                 }
             } else {
-                if(count($expressao) > 1) {
-                    #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                    }
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->lists('nome', 'id');
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
                 }
             }
 
@@ -173,5 +199,34 @@ class CursoService
 
         #retorno
         return $result;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $key2 => $value2) {
+                    $explodeKey2 = explode("_", $key2);
+
+                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
+                        $data[$key][$key2] = null;
+                    }
+                }
+            }
+
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                $data[$key] = null;
+            }
+        }
+
+        #Retorno
+        return $data;
     }
 }

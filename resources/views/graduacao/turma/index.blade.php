@@ -3,8 +3,25 @@
 @section("css")
     <link rel="stylesheet" href="{{ asset('/js/graduacao/turma/css/modal_horario.css') }}">
     <style type="text/css">
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
+
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
+        }
+
+        td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
         }
     </style>
 @stop
@@ -102,6 +119,9 @@
     @include('graduacao.turma.modal_editar_notas')
     @include('graduacao.turma.modal_frequencias')
     @include('graduacao.turma.modal_editar_frequencias')
+    @include('graduacao.turma.diarioAula.modal_diario_aula')
+    @include('graduacao.turma.diarioAula.modal_create_diario_aula')
+    @include('graduacao.turma.diarioAula.modal_edit_diario_aula')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -116,7 +136,13 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_notas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_frequencias.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_frequencias.js')  }}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/modal_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/diario_aula_select2.js')  }}"></script>
+
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -218,6 +244,28 @@
 
             //Executando as grids
             runTableFrequencias(idTurma);
+        });
+
+
+        /*Responsável em abrir modal de frequencias*/
+        $(document).on("click", '#btnModalDiarioAula', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, anoCurriculo;
+
+            //Recuperando o id da turma selecionada
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+
+            // setando a descrição
+            $('#daCurriculo').text(codCurriculo);
+            $('#daCurso').text(nomeCurso);
+            $('#daAno').text(anoCurriculo);
+
+            //Executando as grids
+            runTableDiariosAulas(idTurma);
         });
     </script>
 @stop

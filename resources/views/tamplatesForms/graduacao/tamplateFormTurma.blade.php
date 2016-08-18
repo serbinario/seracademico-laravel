@@ -140,6 +140,7 @@
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
 </div>
+</div>
 
 @section('javascript')
     <script type="text/javascript">
@@ -173,4 +174,4 @@
 
         });
     </script>
-@stop
+@endsection
