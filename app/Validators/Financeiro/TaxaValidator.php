@@ -34,7 +34,7 @@ class TaxaValidator extends LaravelValidator
             'tipo_taxa_id' =>  'required|integer',
             'valido_inicio' =>  'serbinario_date_format:"d/m/Y"',
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"',
-            'dia_vencimento' =>  'required|integer',
+            'dia_vencimento' =>  'required|integer|max:31',
             //'tipo_debito_id' =>  'required|integer', //campo nao encontrado no formulario
             'banco_id' =>  'integer',
             'tipo_multa_id' =>  'integer',
@@ -56,7 +56,7 @@ class TaxaValidator extends LaravelValidator
             'tipo_taxa_id' =>  'required|integer',
             'valido_inicio' =>  'serbinario_date_format:"d/m/Y"',
             'valido_fim' =>  'serbinario_date_format:"d/m/Y"',
-            'dia_vencimento' =>  'required|integer',
+            'dia_vencimento' =>  'required|integer|max:31',
             //'tipo_debito_id' =>  'required|integer',
             'banco_id' =>  'integer',
             'tipo_multa_id' =>  'integer',
