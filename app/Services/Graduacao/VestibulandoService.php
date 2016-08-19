@@ -830,7 +830,7 @@ class VestibulandoService
     public function storeDebitosAbertos(array $dados)
     {
         # Regras de negócios
-        $this->tratamentoCampos($data);
+        $this->tratamentoCampos($dados);
 
         # Regra de negócio para págo
         $dados['pago'] = 0;
@@ -854,7 +854,7 @@ class VestibulandoService
     public function updateDebitosAbertos(array $dados, int $id)
     {
         # Regras de negócios
-        $this->tratamentoCampos($data);
+        $this->tratamentoCampos($dados);
 
         # Atualizando
         $this->financeiroRepository->update($dados, $id);
