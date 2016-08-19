@@ -45,6 +45,14 @@ function builderHtmlFieldsDebitosEditar (dados) {
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
+            // Limpando os campos
+            $('#pago').prop('checked', false);
+            $('#vencimento_editar').val("");
+            $('#valor_debito_editar').val("");
+            $('#valor_desconto_editar').val("");
+            $('#observacao_editar').val("");
+            $("#valor_pago_edit").val("");
+
             // Variáveis que armazenaram o html
             var htmlLocalPagamento = "<option value=''>Selecione um Local</option>";
             var htmlFormaPagamento = "<option value=''>Selecione uma Forma</option>";
@@ -72,29 +80,37 @@ function builderHtmlFieldsDebitosEditar (dados) {
             // Setando os valores do model no formulário
             $('#forma_pagamento_id_edit option[value=' +  retorno.data.debito.forma_pagamento_id + ']').prop('selected', true);
             $('#local_pagamento_id_edit option[value=' +  retorno.data.debito.local_pagamento_id + ']').prop('selected', true);
-            $("#valor_total_edit").val(retorno.data.debito.valor_total);
             $("#valor_multa_edit").val(retorno.data.debito.valor_multa);
             $("#valor_juros_edit").val(retorno.data.debito.valor_juros);
 
+            // Verificando se já existe uma data cadastrada
             if(retorno.data.debito.data_pagamento) {
                 $("#data_pagamento_edit").val(retorno.data.debito.data_pagamento);
             }
 
+            // Veificando se existe valor pago
+            if(retorno.data.debito.valor_pago) {
+                $("#valor_pago_edit").val(retorno.data.debito.valor_pago);
+            } else {
+                $("#valor_pago_edit").val(retorno.data.taxaValor);
+            }
+
+            // Setando os valores do model no formulário
             $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
             $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
             $('#valor_taxa_vestibulando_editar').val(retorno.data.taxaValor);
             $('#vencimento_editar').val(retorno.data.vencimento);
-            $('#valor_debito_editar').val(retorno.data.valor_debito);
+            $('#valor_debito_editar').val(retorno.data.taxaValor);
             $('#valor_desconto_editar').val(retorno.data.valor_desconto);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
-            
+
             // Tratando a baixa
             if(retorno.data.pago == 1) {
                 $('#pago').attr('checked', true).attr('disabled', true);
             }
-            
+
             // Abrindo o modal de inserir disciplina
             $("#modal-debitos-abertos-update").modal({show : true});
         } else {
