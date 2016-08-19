@@ -5,6 +5,8 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Financeiro\FormaPagamento;
+use Seracademico\Entities\Financeiro\LocalPagamento;
 use \Seracademico\Entities\Financeiro\Taxa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
@@ -15,7 +17,8 @@ class VestibulandoFinanceiro extends Model implements Transformable
     protected $table    = 'fac_vestibulandos_financeiros';
 
     protected $dates    = [
-        'vencimento'
+        'vencimento',
+        'data_pagamento'
     ];
 
     protected $fillable = [ 
@@ -27,7 +30,13 @@ class VestibulandoFinanceiro extends Model implements Transformable
         'ano_referencia',
         'observacao',
         'vestibulando_id',
-        'pago'
+        'pago',
+        'data_pagamento',
+        'forma_pagamento_id',
+        'local_pagamento_id',
+        'valor_multa',
+        'valor_juros',
+        'valor_pago'
 	];
 
     /**
@@ -38,6 +47,22 @@ class VestibulandoFinanceiro extends Model implements Transformable
         return $this->belongsTo(Taxa::class, 'taxa_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function localPagamento()
+    {
+        return $this->belongsTo(LocalPagamento::class, 'local_pagamento_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function formaPagamento()
+    {
+        return $this->belongsTo(FormaPagamento::class, 'forma_pagamento_id');
+    }
+    
     /**
      *
      * @return \DateTime
@@ -53,5 +78,22 @@ class VestibulandoFinanceiro extends Model implements Transformable
     public function getVencimentoAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['vencimento']);
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function setDataPagamentoAttribute($value)
+    {
+        $this->attributes['data_pagamento'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataPagamentoAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_pagamento']);
     }
 }

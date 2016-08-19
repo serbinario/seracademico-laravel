@@ -38,9 +38,9 @@ function loadTableDebitosPagos(idVestibulando) {
         columns: [
             {data: 'codigo', name: 'fin_taxas.codigo', orderable: false},
             {data: 'nome', name: 'fin_taxas.nome', orderable: false},
-            {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento', orderable: false},
+            {data: 'data_pagamento', name: 'fac_vestibulandos_finaceiros.vencimento', orderable: false},
             {data: 'valor_desconto', name: 'fac_vestibulandos_finaceiros.valor_desconto', orderable: false},
-            {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito', orderable: false},
+            {data: 'valor_pago', name: 'fac_vestibulandos_finaceiros.valor_pago', orderable: false},
            // {data: 'valor', name: 'fin_taxas.valor', orderable: false}
            // {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia', orderable: false},
            // {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia', orderable: false}

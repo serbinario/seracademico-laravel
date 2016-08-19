@@ -21,10 +21,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-3">
-                            <label for="valor_taxa_vestibulando_editar">Valor Taxa</label>
-                            <input type="text" disabled="disabled" class="form-control" name="valor_taxa_vestibulando_editar" id="valor_taxa_vestibulando_editar">
-                        </div>
+                        {{--<div class="form-group col-md-3">--}}
+                            {{--<label for="valor_taxa_vestibulando_editar">Valor Taxa</label>--}}
+                            {{--<input type="text" disabled="disabled" class="form-control" name="valor_taxa_vestibulando_editar" id="valor_taxa_vestibulando_editar">--}}
+                        {{--</div>--}}
 
                         <div class="form-group col-md-3">
                             <label for="vencimento_editar">Vencimento</label>
@@ -59,25 +59,25 @@
                         <div class="col-md-12">
 
                             <div class="form-group col-md-3">
-                                <label for="data_pagamento">Data Pagamento</label>
-                                <input type="text"  class="form-control datepicker" name="data_pagamento" id="data_pagamento">
+                                <label for="data_pagamento_edit">Data Pagamento</label>
+                                <input type="text" value="{{ date('d/m/Y')  }}" readonly="readonly"  class="form-control" name="data_pagamento_edit" id="data_pagamento_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="tipo_taxa_id">Forma de Pag.</label>
-                                <select name="forma_pagamento" class="form-control" id="forma_pagamento">
+                                <label for="forma_pagamento_id_edit">Forma de Pag.</label>
+                                <select name="forma_pagamento_id_edit" class="form-control" id="forma_pagamento_id_edit">
                                 </select>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="tipo_taxa_id">Local de Pag.</label>
-                                <select name="forma_pagamento" class="form-control" id="forma_pagamento">
+                                <label for="local_pagamento_id_edit">Local de Pag.</label>
+                                <select name="local_pagamento_id_edit" class="form-control" id="local_pagamento_id_edit">
                                 </select>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="data_pagamento">Multa</label>
-                                <input type="text"  class="form-control" name="multa" id="multa">
+                                <label for="valor_multa_edit">Multa</label>
+                                <input type="text"  class="form-control decimal" name="valor_multa_edit" id="valor_multa_edit">
                             </div>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                         <div class="col-md-12">
 
                             <div class="form-group col-md-3">
-                                <label for="data_pagamento">Juros</label>
-                                <input type="text"  class="form-control" name="juros" id="juros">
+                                <label for="valor_juros_edit">Juros</label>
+                                <input type="text"  class="form-control decimal" name="valor_juros_edit" id="valor_juros_edit">
                             </div>
 
                             <div class="form-group col-md-3">
@@ -96,8 +96,8 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="valor_pago">Valor Pago</label>
-                                <input type="text" disabled="disabled" class="form-control" name="valor_pago" id="valor_pago">
+                                <label for="valor_pago_edit">Valor Pago</label>
+                                <input type="text" disabled="disabled" class="form-control decimal" name="valor_pago_edit" id="valor_pago_edit">
                             </div>
 
                         </div>
