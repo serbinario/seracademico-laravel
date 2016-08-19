@@ -503,7 +503,7 @@
                                         @if(isset($aluno->primeira_opcao_curso_id))
                                             {!! Form::select('primeira_opcao_curso_id', [$aluno->primeiraOpcaoCurso->id => $aluno->primeiraOpcaoCurso->nome ], $aluno->primeira_opcao_curso_id, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
                                         @else
-                                            {!! Form::select('primeira_opcao_curso_id', [], null, array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
+                                            {!! Form::select('primeira_opcao_curso_id', [], Session::getOldInput('primeira_opcao_curso_id'), array('class' => 'form-control', 'id' => 'primeira_opcao_curso_id')) !!}
                                         @endif
                                     </div>
                                     <div class="form-group col-md-4">

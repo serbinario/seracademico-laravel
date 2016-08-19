@@ -104,7 +104,7 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.nota_exame_nacional_um' => '',
             'pessoa.data_exame_nacional_dois' => 'serbinario_date_format:"d/m/Y"',
             'pessoa.nota_exame_nacional_dois' => '',
-            'pessoa.email' => 'email|max:50|unique:pessoas,email',
+            //'pessoa.email' => 'email|max:50|unique:pessoas,email',
             'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
             'pessoa.celular' => 'digits_between:9,11|numeric',
             'pessoa.celular2' => 'digits_between:9,11|numeric',
@@ -124,7 +124,7 @@ class VestibulandoValidator extends LaravelValidator
             //Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
-            'pessoa.endereco.complemento' => 'serbinario_alpha_space|max:100',
+            'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.cep' => 'numeric|max:99999999',
             'pessoa.endereco.bairros_id' => 'integer',
 
@@ -188,7 +188,7 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.exames1_id' => 'integer',
             'pessoa.exames2_id' => 'integer',
             'pessoa.uf_nascimento_id' => 'integer',
-            'pessoa.email' => 'email|max:50|unique:pessoas,email,:email',
+           // 'pessoa.email' => 'email|max:50|unique:pessoas,email,:email',
             'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
             'pessoa.celular' => 'digits_between:9,11|numeric',
             'pessoa.celular2' => 'digits_between:9,11|numeric',
@@ -208,7 +208,7 @@ class VestibulandoValidator extends LaravelValidator
             //Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
-            'pessoa.endereco.complemento' => 'serbinario_alpha_space|max:100',
+            'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.cep' => 'numeric|max:99999999',
             'pessoa.endereco.bairros_id' => 'integer',
 
