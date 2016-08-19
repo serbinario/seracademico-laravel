@@ -570,36 +570,36 @@ class VestibulandoService
         $notaLinguagem  = !isset($dados['nota_linguagem']) || $dados['nota_linguagem'] == "" ? 0.0 :  $dados['nota_linguagem'];
         $notaRedacao    = !isset($dados['nota_redacao']) || $dados['nota_redacao'] == "" ? 0.0 :  $dados['nota_redacao'];
 
-        # Declaracao de array
+        # Inicializacao de variaveis
         $notas = array();
         $mediaEnem = 0;
 
-            # Testando se existem registros com valor 0 (zero)
-            if ($notaHumanas > 0){
-                 $notas[] = $notaHumanas;
-            }
+        # Testando se foram inseridos registros com valor 0 (zero)
+        if ($notaHumanas > 0){
+            $notas[] = $notaHumanas;
+        }
 
-            if ($notaNatureza > 0){
-                $notas[] = $notaNatureza;
-            }
+        if ($notaNatureza > 0){
+            $notas[] = $notaNatureza;
+        }
 
-            if ($notaMatematica > 0){
-                $notas[] = $notaMatematica;
-            }
+        if ($notaMatematica > 0){
+            $notas[] = $notaMatematica;
+        }
 
-            if ($notaLinguagem > 0){
-                $notas[] = $notaLinguagem;
-            }
+        if ($notaLinguagem > 0){
+            $notas[] = $notaLinguagem;
+        }
 
-            # Contangem de registros
-            $divisor = count($notas);
+        # Contangem de registros diferentes de 0 (zero)
+        $divisor = count($notas);
 
         # Obtendo a media
+        # Testando se os campos foram preenchidos
         # array_sum() soma os elementos de um array
         if($divisor){
             $mediaEnem = (((array_sum($notas))/$divisor) + $notaRedacao) / 2;
         }
-
 
         # Calculando a média - Andrey
         //$mediaEnem      =  ((($notaHumanas + $notaNatureza + $notaMatematica + $notaLinguagem)/4) + $notaRedacao) / 2;

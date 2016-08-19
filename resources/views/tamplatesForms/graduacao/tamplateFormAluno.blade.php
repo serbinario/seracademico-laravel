@@ -17,7 +17,7 @@
 
         <div class="row">
             <div class="form-group col-md-6">
-                {!! Form::label('pessoa[nome]', 'Nome *') !!}
+                {!! Form::label('pessoa[nome]', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                 {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
             </div>
             <div class="form-group col-md-2">
@@ -135,7 +135,7 @@
                                                 {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe *') !!}
+                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe * max 60 caracteres (0-9 A-Z .-[ ])') !!}
                                                 {!! Form::text('pessoa[nome_mae]',Session::getOldInput('pessoa[nome_mae]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
@@ -249,8 +249,8 @@
                                 {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[endereco][numero]', 'Número') !!}
-                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
+                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control numberFive')) !!}
                             </div>
                         </div>
                         <div class="row">
