@@ -273,6 +273,16 @@
             // Recuperando o id do vestibulando
             idVestibulando = table.row($(this).parent().parent().parent().parent().parent()).data().id;
 
+            // Recuperando a descrição
+            nomeVestibulando = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            nomeVestibular   = table.row($(this).parent().parent().parent().parent().parent().index()).data().vestibular;
+            nomeSemestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().nomeSemestre;
+
+            // prenchendo a descrição do vestibulando
+            $('#veVestibulando').text(nomeVestibulando);
+            $('#veVestibular').text(nomeVestibular);
+            $('#veSemestre').text(nomeSemestre);
+
             // Executando a tabela de notas
             runFinanceiro(idVestibulando);
         });
