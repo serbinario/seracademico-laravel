@@ -41,8 +41,14 @@ class VestibulandoValidator extends LaravelValidator
         'pessoa.nacionalidade' => 'Nacionalidade',
         'pessoa.naturalidade' => 'Naturalidade',
         'pessoa.ano_conclusao_2_grau' => 'Ano de Conclusao 2 Grau',
+        'pessoa.endereco.logradouro' => 'Logradouro',
+        'pessoa.endereco.numero' => 'Número',
+        'pessoa.endereco.complemento' => 'Complemento',
+        'pessoa.endereco.cep' => 'CEP',
+        'pessoa.outra_escola' => 'Outra Instituição',
+        'pessoa.uf_nascimento_id' => 'UF(Documentos)',
+        'pessoa.uf_exp' => 'UF(Documentos)'
 
-//        'pessoa.outra_escola' => 'Outra Instituição',
 //        'pessoa.data_exame_nacional_um' => 'serbinario_date_format:"d/m/Y"',
 //        'pessoa.nota_exame_nacional_um' => '',
 //        'pessoa.data_exame_nacional_dois' => 'serbinario_date_format:"d/m/Y"',
@@ -188,6 +194,7 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.exames1_id' => 'integer',
             'pessoa.exames2_id' => 'integer',
             'pessoa.uf_nascimento_id' => 'integer',
+            'pessoa.uf_exp' => '',
            // 'pessoa.email' => 'email|max:50|unique:pessoas,email,:email',
             'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
             'pessoa.celular' => 'digits_between:9,11|numeric',
