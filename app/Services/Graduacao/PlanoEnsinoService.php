@@ -149,7 +149,8 @@ class PlanoEnsinoService
         #Verificando se a condição é válida
         if($data['ativo'] == 1) {
             #Recuperando o(s) plano(s) ativo(s)
-            $rows = $this->repository->findWhere(['ativo' => 1, 'disciplina_id' => $data['disciplina_id']]);
+            $rows = $this->repository->findWhere(['ativo' => 1, 'disciplina_id' => $data['disciplina_id'],
+                'carga_horaria' => $data['carga_horaria']]);
 
             #Varrendo o array
             foreach($rows as $row) {

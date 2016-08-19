@@ -1099,17 +1099,36 @@
                     // carregando a primeira opção de curso
                     $('#primeira_opcao_curso_id option').remove();
                     $('#primeira_opcao_curso_id').append(option);
-                    $('#primeira_opcao_curso_id option[value=' + idOpcao1 + ']').prop('selected', true);
 
                     // carregando a segunda opção de curso
                     $('#segunda_opcao_curso_id option').remove();
                     $('#segunda_opcao_curso_id').append(option);
-                    $('#segunda_opcao_curso_id option[value=' + idOpcao2 + ']').prop('selected', true);
 
                     // carregando a terceira opção de curso
                     $('#terceira_opcao_curso_id option').remove();
                     $('#terceira_opcao_curso_id').append(option);
-                    $('#terceira_opcao_curso_id option[value=' + idOpcao3 + ']').prop('selected', true);
+
+                    @if(isset($aluno))
+                       $('#primeira_opcao_curso_id option[value=' + idOpcao1 + ']').prop('selected', true);
+                        $('#segunda_opcao_curso_id option[value=' + idOpcao2 + ']').prop('selected', true);
+                        $('#terceira_opcao_curso_id option[value=' + idOpcao3 + ']').prop('selected', true);
+                    @else
+                        @if( Session::getOldInput('primeira_opcao_curso_id'))
+                            $('#primeira_opcao_curso_id option[value=' + "{{ Session::getOldInput('primeira_opcao_curso_id')  }}" + ']').prop('selected', true);
+                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('primeira_opcao_curso_id')  }}", '#primeira_opcao_turno_id');
+                        @endif
+
+                        @if( Session::getOldInput('segunda_opcao_curso_id'))
+                            $('#segunda_opcao_curso_id option[value=' + "{{ Session::getOldInput('segunda_opcao_curso_id')  }}" + ']').prop('selected', true);
+                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('segunda_opcao_curso_id')  }}",  '#segunda_opcao_turno_id');
+                        @endif
+
+                        @if( Session::getOldInput('terceira_opcao_curso_id'))
+                            $('#terceira_opcao_curso_id option[value=' + "{{ Session::getOldInput('terceira_opcao_curso_id')  }}" + ']').prop('selected', true);
+                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('terceira_opcao_curso_id')  }}", '#terceira_opcao_turno_id');
+                        @endif
+
+                    @endif
                 });
             }
         }
@@ -1285,6 +1304,26 @@
                 // Gerando o html
                 $(idHtml).find('option').remove();
                 $(idHtml).append(options);
+
+                // Recuperando os oldIdOpcao de turno
+                var oldInputPrimeiraOpcaoTurno = "{{ Session::getOldInput('primeira_opcao_turno_id')  }}";
+                var oldInputSegundaOpcaoTurno  = "{{ Session::getOldInput('segunda_opcao_turno_id')  }}";
+                var oldInputTerceiraOpcaoTurno = "{{ Session::getOldInput('terceira_opcao_turno_id')  }}";
+
+                // Verificando se foi primeira opção de turno
+                if(idHtml == '#primeira_opcao_turno_id') {
+                    $('#primeira_opcao_turno_id option[value=' + oldInputPrimeiraOpcaoTurno  + ']').prop('selected', true);
+                }
+
+                // Verificando se foi a segunda opção de turno
+                if(idHtml == '#segunda_opcao_turno_id') {
+                    $('#segunda_opcao_turno_id option[value=' + oldInputSegundaOpcaoTurno  + ']').prop('selected', true);
+                }
+
+                // Verificando se foi a terceira opção de turno
+                if(idHtml == '#terceira_opcao_turno_id') {
+                    $('#terceira_opcao_turno_id option[value=' + oldInputTerceiraOpcaoTurno  + ']').prop('selected', true);
+                }
             });
         }
 

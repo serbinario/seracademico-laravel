@@ -368,13 +368,16 @@ class TurmaService
 
                 # Verificando se a disciplina é do período da turma
                 if($disciplina->pivot->periodo == $turma->periodo) {
+                    # Recuperando o pivot
+                    $pivotDisciplina = $disciplina->pivot;
+
                     # Recuperando o plano de ensino ativo
-                    $planoEnsino = $disciplina->planosEnsinos->filter(function ($plano) {
-                        return $plano->ativo;
+                    $planoEnsino = $disciplina->planosEnsinos->filter(function ($plano) use ($pivotDisciplina) {
+                        return $plano->ativo && $plano->carga_horaria == $pivotDisciplina->carga_horaria_total;
                     });
 
                     # Validando o plano de ensino
-                    $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino[0]->id : null;
+                    $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
 
                     # Vinculando as disciplinas
                     $turma->disciplinas()->attach($disciplina, ['plano_ensino_id' => $planoEnsino]);
@@ -438,8 +441,33 @@ class TurmaService
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
 
+        # Recuperando a disciplina do vinculo com o currículo
+        $curriculoDisciplina = $objTurma->curriculo->disciplinas->filter(function ($disciplina) use ($objDisciplina) {
+            return $disciplina->id == $objDisciplina->id;
+        });
+
+        # Valor inicial para o plano de ensino
+        $planoEnsino = null;
+
+        # Verificando se foi filtrado alguma disciplina do currículo
+        if(count($curriculoDisciplina) > 0) {
+            # Transformando recuperando o objeto do array
+            $curriculoDisciplina = $curriculoDisciplina->first();
+
+            # Recuperando o pivot curriculo_disciplina
+            $pivotCurriculoDisciplina = $curriculoDisciplina->pivot;
+
+            # Recuperando o plano de ensino ativo para a disciplina em questão com a carga horária do currículo
+            $planoEnsino = $curriculoDisciplina->planosEnsinos->filter(function ($plano) use ($pivotCurriculoDisciplina) {
+                return $plano->ativo && $plano->carga_horaria == $pivotCurriculoDisciplina->carga_horaria_total;
+            });
+
+            # Validando o plano de ensino
+            $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
+        }
+
         #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->attach($objDisciplina->id);
+        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino]);
         $objTurma->save();
 
         #Retorno
