@@ -23,4 +23,11 @@ class TurmaDisciplina extends Pivot implements Transformable
         return $this->hasMany(HorarioDisciplinaTurma::class, 'turma_disciplina_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function diarios()
+    {
+        return $this->hasMany(DiarioAula::class, 'turma_disciplina_id');
+    }
 }
