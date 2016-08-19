@@ -179,75 +179,83 @@
 
     </script>
 
-    {{--Validaçao de campos--}}
-    {{--<script type="text/javascript">--}}
-        {{--$('#formTaxa').bootstrapValidator({--}}
-            {{--fields: {--}}
-                {{--nome: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Nome'})--}}
-                        {{--},--}}
-                        {{--stringLength: {--}}
-                            {{--max: 60,--}}
-                            {{--message: Lang.get('validation.max', {attribute: 'Nome'})--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--},--}}
+    Validaçao de campos
+    <script type="text/javascript">
+        $('#formTaxa').bootstrapValidator({
+            fields: {
+                nome: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Nome'})
+                        },
+                        stringLength: {
+                            max: 60,
+                            message: Lang.get('validation.max', {attribute: 'Nome'})
+                        }
+                    }
+                },
 
-                {{--valido_inicio: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Valido Inicio'})--}}
-                        {{--},--}}
-                    {{--}--}}
-                {{--},--}}
+//                valido_inicio: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', {attribute: 'Valido Inicio'})
+//                        },
+//                    }
+//                },
+//
+//                valido_fim: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', {attribute: 'Valido Fim'})
+//                        },
+//                    }
+//                },
 
-                {{--valido_fim: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Valido Fim'})--}}
-                        {{--},--}}
-                    {{--}--}}
-                {{--},--}}
+                valor: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Valor'})
+                        }
+                    }
+                },
 
-                {{--codigo: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Código'})--}}
-                        {{--}--}}
-                    {{--},--}}
-                    {{--stringLength: {--}}
-                        {{--max: 6,--}}
-                        {{--message: Lang.get('validation.max', {attribute: 'Código'})--}}
-                    {{--}--}}
-                {{--},--}}
+                codigo: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Código'})
+                        }
+                    },
+                    stringLength: {
+                        max: 6,
+                        message: Lang.get('validation.max', {attribute: 'Código'})
+                    }
+                },
 
-                {{--dia_vencimento: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})--}}
-                        {{--},--}}
-                    {{--}--}}
-                {{--},--}}
+                dia_vencimento: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Dia de Vencimento'})
+                        },
+                    }
+                },
 
-                {{--tipo_taxa_id: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})--}}
-                        {{--},--}}
-                    {{--}--}}
-                {{--},--}}
+                tipo_taxa_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Tipo de Taxa'})
+                        },
+                    }
+                },
 
-                {{--tipo_debito_id: {--}}
-                    {{--validators: {--}}
-                        {{--notEmpty: {--}}
-                            {{--message: Lang.get('validation.required', {attribute: 'Tipo Debito'})--}}
-                        {{--},--}}
-                    {{--}--}}
-                {{--},--}}
-            {{--}--}}
-        {{--});--}}
-    {{--</script>--}}
+                tipo_debito_id: {
+                    validators: {
+                        notEmpty: {
+                            message: Lang.get('validation.required', {attribute: 'Tipo Debito'})
+                        },
+                    }
+                },
+            }
+        });
+    </script>
 
 @endsection

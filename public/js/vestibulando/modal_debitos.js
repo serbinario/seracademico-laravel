@@ -2,7 +2,7 @@
 var tableDebitosAbertos;
 var tableDebitosPagos;
 
-// Função para carregamento da tabela de notas
+// Função para carregamento da tabela de debitos pagos
 function loadTableDebitosAbertos(idVestibulando) {
     tableDebitosAbertos = $('#debitos-abertos-grid').DataTable({
         processing: true,
@@ -17,17 +17,14 @@ function loadTableDebitosAbertos(idVestibulando) {
             {data: 'codigo', name: 'fin_taxas.codigo', orderable: false},
             {data: 'nome', name: 'fin_taxas.nome', orderable: false},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento', orderable: false},
-            {data: 'valor_desconto', name: 'fac_vestibulandos_finaceiros.valor_desconto', orderable: false},
             {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito', orderable: false},
-            {data: 'valor', name: 'fin_taxas.valor', orderable: false},
-            {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia', orderable: false},
-            {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia', orderable: false},
+           // {data: 'valor', name: 'fin_taxas.valor', orderable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 }
 
-// Função para carregamento da tabela de debitos abertos
+// Função para carregamento da tabela de debitos pagos
 function loadTableDebitosPagos(idVestibulando) {
     tableDebitosPagos = $('#debitos-pagos-grid').DataTable({
         processing: true,
@@ -44,9 +41,9 @@ function loadTableDebitosPagos(idVestibulando) {
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento', orderable: false},
             {data: 'valor_desconto', name: 'fac_vestibulandos_finaceiros.valor_desconto', orderable: false},
             {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito', orderable: false},
-            {data: 'valor', name: 'fin_taxas.valor', orderable: false},
-            {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia', orderable: false},
-            {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia', orderable: false}
+           // {data: 'valor', name: 'fin_taxas.valor', orderable: false}
+           // {data: 'mes_referencia', name: 'fac_vestibulandos_finaceiros.mes_referencia', orderable: false},
+           // {data: 'ano_referencia', name: 'fac_vestibulandos_finaceiros.ano_referencia', orderable: false}
         ]
     });
 }

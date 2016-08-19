@@ -72,7 +72,8 @@ class PlanoEnsinoController extends Controller
                 'fac_plano_ensino.bibliografia_basica',
                 'fac_plano_ensino.competencia',
                 'fac_plano_ensino.aula_pratica',
-                'fac_disciplinas.nome as nomeDisciplina'
+                'fac_disciplinas.nome as nomeDisciplina',
+                \DB::raw('IF(fac_plano_ensino.ativo = 1,"SIM","NÃO") as ativo'),
             ]);
 
         #Editando a grid

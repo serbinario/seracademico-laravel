@@ -106,14 +106,14 @@ class TurmaDisciplinaController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e);
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
     /**
-     * @param $id
+     * @param Request $request
      * @return mixed
      */
     public function delete(Request $request)

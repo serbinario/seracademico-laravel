@@ -59,6 +59,7 @@ class PlanoEnsinoService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
+        $this->tratamentoPlanoAtivo($data);
 
         #Salvando o registro pincipal
         $planoEnsino =  $this->repository->create($data);
@@ -85,6 +86,7 @@ class PlanoEnsinoService
     {
         # Regras de negócio
         $this->tratamentoCampos($data);
+        $this->tratamentoPlanoAtivo($data);
         
         #Atualizando no banco de dados
         $planoEnsino = $this->repository->update($data, $id);
@@ -124,10 +126,10 @@ class PlanoEnsinoService
 
             if(count($expressao) > 1) {
                 #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome')->lists('nome', 'id');
             } else {
                 #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                $result[strtolower($model)] = $nameModel::orderBy('nome')->lists('nome', 'id');
             }
 
             # Limpando a expressão
@@ -136,6 +138,31 @@ class PlanoEnsinoService
 
          #retorno
          return $result;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    private function tratamentoPlanoAtivo(array &$data): array
+    {
+        #Verificando se a condição é válida
+        if($data['ativo'] == 1) {
+            #Recuperando o(s) plano(s) ativo(s)
+            $rows = $this->repository->findWhere(['ativo' => 1, 'disciplina_id' => $data['disciplina_id'],
+                'carga_horaria' => $data['carga_horaria']]);
+
+            #Varrendo o array
+            foreach($rows as $row) {
+                $plano = $this->repository->find($row->id);
+
+                $plano->ativo = 0;
+                $plano->save();
+            }
+        }
+
+        #retorno
+        return $data;
     }
 
     /**

@@ -61,7 +61,8 @@ class TurmaService
 
     /**
      * @param array $data
-     * @return array
+     * @return Turma
+     * @throws \Exception
      */
     public function store(array $data) : Turma
     {
@@ -236,15 +237,15 @@ class TurmaService
                     switch (count($expressao)) {
                         case 1 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id']);
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
                             break;
                         case 2 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id']);
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
                             break;
                         case 3 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id']);
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
                             break;
                     }
                 } else {
@@ -262,6 +263,10 @@ class TurmaService
     }
 
     /**
+     * Método usado para validar se o curso escolhido tem um currículo ativo
+     * e se o for escolhido o mesmo curso (edição) permanece o currículo anterior
+     * mesmo se o mesmo não estiver mais ativo.
+     *
      * @param $data
      * @return mixed
      * @throws \Exception
@@ -309,6 +314,9 @@ class TurmaService
     }
 
     /**
+     * Método responsável de verificar a possibilidade de
+     * mudança de currículo na turma.
+     *
      * @param $id
      * @param $data
      * @return bool
@@ -339,7 +347,11 @@ class TurmaService
     }
 
     /**
+     * Método responsável por vincular as disciplinas
+     * do currículo do período em questão na turma.
+     *
      * @param Turma $turma
+     * @return bool
      * @throws \Exception
      */
     private function tratamentoDisciplinas(Turma $turma)
@@ -353,8 +365,28 @@ class TurmaService
 
             #percorrendo as disciplinas
             foreach ($turma->curriculo->disciplinas as $disciplina) {
+
+                # Verificando se a disciplina é do período da turma
                 if($disciplina->pivot->periodo == $turma->periodo) {
-                    $turma->disciplinas()->attach($disciplina);
+                    # Recuperando o pivot
+                    $pivotDisciplina = $disciplina->pivot;
+
+                    # Recuperando o plano de ensino ativo
+                    $planoEnsino = $disciplina->planosEnsinos->filter(function ($plano) use ($pivotDisciplina) {
+                        return $plano->ativo && $plano->carga_horaria == $pivotDisciplina->carga_horaria_total;
+                    });
+
+                    //dd($planoEnsino);
+
+                    # Validando o plano de ensino
+                    $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
+
+                    //dd($planoEnsino);
+
+                    # Vinculando as disciplinas
+                    $turma->disciplinas()->attach($disciplina, ['plano_ensino_id' => $planoEnsino]);
+
+                    //dd($turma);
                 }
             }
 
@@ -368,7 +400,9 @@ class TurmaService
         }
     }
 
-    /**
+    /** Método responsável por atualizar as disciplinas
+     *  da turma.
+     *
      * @param Turma $turma
      * @return bool
      * @throws \Exception
@@ -383,6 +417,9 @@ class TurmaService
     }
 
     /**
+     * Método responsável por incluir disciplinas (Manualmente)
+     * na turma.
+     *
      * @param array $data
      * @return bool
      * @throws \Exception
@@ -410,8 +447,33 @@ class TurmaService
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
 
+        # Recuperando a disciplina do vinculo com o currículo
+        $curriculoDisciplina = $objTurma->curriculo->disciplinas->filter(function ($disciplina) use ($objDisciplina) {
+            return $disciplina->id == $objDisciplina->id;
+        });
+
+        # Valor inicial para o plano de ensino
+        $planoEnsino = null;
+
+        # Verificando se foi filtrado alguma disciplina do currículo
+        if(count($curriculoDisciplina) > 0) {
+            # Transformando recuperando o objeto do array
+            $curriculoDisciplina = $curriculoDisciplina->first();
+
+            # Recuperando o pivot curriculo_disciplina
+            $pivotCurriculoDisciplina = $curriculoDisciplina->pivot;
+
+            # Recuperando o plano de ensino ativo para a disciplina em questão com a carga horária do currículo
+            $planoEnsino = $curriculoDisciplina->planosEnsinos->filter(function ($plano) use ($pivotCurriculoDisciplina) {
+                return $plano->ativo && $plano->carga_horaria == $pivotCurriculoDisciplina->carga_horaria_total;
+            });
+
+            # Validando o plano de ensino
+            $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
+        }
+
         #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->attach($objDisciplina->id);
+        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino]);
         $objTurma->save();
 
         #Retorno
@@ -419,6 +481,9 @@ class TurmaService
     }
 
     /**
+     * Método responsável por remover disciplina (manualmente)
+     * na turma.
+     *
      * @param array $data
      * @return bool
      * @throws \Exception
@@ -453,6 +518,8 @@ class TurmaService
     }
 
     /**
+     * Método responsável por incluir horário a turma.
+     *
      * @param array $data
      * @return bool
      * @throws \Exception
@@ -565,43 +632,43 @@ class TurmaService
         return $data;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getParametrosMatricula()
-    {
-        try {
-            # Recuperando o item de parâmetro do semestre vigente
-            $queryParameter = \DB::table('fac_parametros')
-                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
-                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
-                ->where('fac_parametros_itens.id', 2)
-                ->orWhere('fac_parametros_itens.id', 3)
-                ->get();
-
-            # Validando o parametro
-            if(count($queryParameter) !== 2) {
-                throw new \Exception('Parâmetro do semestre vigente não configurado');
-            }
-
-            # Recuperando o semestre
-            $querySemestre = \DB::table('fac_semestres')
-                ->select(['fac_semestres.id', 'fac_semestres.nome'])
-                ->where('fac_semestres.nome', $queryParameter[0]->valor)
-                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
-                ->where('fac_semestres.ativo', 1)
-                ->get();
-
-            # Validando o parametro
-            if(count($querySemestre) !== 2) {
-                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
-            }
-
-            #Retorno
-            return $querySemestre;
-        } catch (\Throwable $e) {
-            #Retorno
-            return $e->getMessage();
-        }
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getParametrosMatricula()
+//    {
+//        try {
+//            # Recuperando o item de parâmetro do semestre vigente
+//            $queryParameter = \DB::table('fac_parametros')
+//                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
+//                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
+//                ->where('fac_parametros_itens.id', 2)
+//                ->orWhere('fac_parametros_itens.id', 3)
+//                ->get();
+//
+//            # Validando o parametro
+//            if(count($queryParameter) !== 2) {
+//                throw new \Exception('Parâmetro do semestre vigente não configurado');
+//            }
+//
+//            # Recuperando o semestre
+//            $querySemestre = \DB::table('fac_semestres')
+//                ->select(['fac_semestres.id', 'fac_semestres.nome'])
+//                ->where('fac_semestres.nome', $queryParameter[0]->valor)
+//                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
+//                ->where('fac_semestres.ativo', 1)
+//                ->get();
+//
+//            # Validando o parametro
+//            if(count($querySemestre) !== 2) {
+//                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
+//            }
+//
+//            #Retorno
+//            return $querySemestre;
+//        } catch (\Throwable $e) {
+//            #Retorno
+//            return $e->getMessage();
+//        }
+//    }
 }

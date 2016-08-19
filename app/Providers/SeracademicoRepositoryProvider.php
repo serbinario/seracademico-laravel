@@ -540,5 +540,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Graduacao\PlanoAulaRepositoryEloquent::class
 		);
 		
+
+		$this->app->bind(
+			\Seracademico\Repositories\Graduacao\DiarioAulaRepository::class,
+			\Seracademico\Repositories\Graduacao\DiarioAulaRepositoryEloquent::class
+		);
 	}
 }
