@@ -17,7 +17,7 @@ function loadTableDebitosAbertos(idVestibulando) {
             {data: 'codigo', name: 'fin_taxas.codigo', orderable: false},
             {data: 'nome', name: 'fin_taxas.nome', orderable: false},
             {data: 'vencimento', name: 'fac_vestibulandos_finaceiros.vencimento', orderable: false},
-            {data: 'valor_debito', name: 'fac_vestibulandos_finaceiros.valor_debito', orderable: false},
+            {data: 'valor', name: 'fin_taxas.valor', orderable: false},
            // {data: 'valor', name: 'fin_taxas.valor', orderable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
