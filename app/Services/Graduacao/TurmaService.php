@@ -376,11 +376,17 @@ class TurmaService
                         return $plano->ativo && $plano->carga_horaria == $pivotDisciplina->carga_horaria_total;
                     });
 
+                    //dd($planoEnsino);
+
                     # Validando o plano de ensino
                     $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
 
+                    //dd($planoEnsino);
+
                     # Vinculando as disciplinas
                     $turma->disciplinas()->attach($disciplina, ['plano_ensino_id' => $planoEnsino]);
+
+                    //dd($turma);
                 }
             }
 
