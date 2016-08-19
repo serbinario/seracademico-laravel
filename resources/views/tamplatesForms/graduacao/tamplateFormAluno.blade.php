@@ -131,7 +131,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai *') !!}
+                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai max 60 caracteres (0-9 A-Z .-[ ])') !!}
                                                 {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
@@ -723,56 +723,56 @@
             }
         });
 
-        $('#formAluno').bootstrapValidator({
-            fields: {
-                'pessoa[nome]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome' })
-                        },
-                        stringLength: {
-                            max: 50,
-                            message: Lang.get('validation.max', { attribute: 'Nome' })
-                        }
-                    }
-                },
-                'pessoa[data_nasciemento]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-                        }
-                    }
-                },
-                'pessoa[cpf]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'CPF' })
-                        }
-                    }
-                },
-                'pessoa[nome_pai]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-                        }
-                    }
-                },
-                'pessoa[nome_mae]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-                        }
-                    }
-                },
-                'pessoa[identidade]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-                        }
-                    }
-                }
-            },
-        });
+//        $('#formAluno').bootstrapValidator({
+//            fields: {
+//                'pessoa[nome]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome' })
+//                        },
+//                        stringLength: {
+//                            max: 50,
+//                            message: Lang.get('validation.max', { attribute: 'Nome' })
+//                        }
+//                    }
+//                },
+//                'pessoa[data_nasciemento]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+//                        }
+//                    }
+//                },
+//                'pessoa[cpf]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'CPF' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_pai]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_mae]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+//                        }
+//                    }
+//                },
+//                'pessoa[identidade]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+//                        }
+//                    }
+//                }
+//            },
+//        });
 
         // Path imagem do aluno
         $("#path_image").fileinput({
