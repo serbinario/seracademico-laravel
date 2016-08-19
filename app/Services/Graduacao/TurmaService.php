@@ -373,11 +373,17 @@ class TurmaService
                         return $plano->ativo;
                     });
 
+                    //dd($planoEnsino);
+
                     # Validando o plano de ensino
                     $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino[0]->id : null;
 
+                    //dd($planoEnsino);
+
                     # Vinculando as disciplinas
                     $turma->disciplinas()->attach($disciplina, ['plano_ensino_id' => $planoEnsino]);
+
+                    //dd($turma);
                 }
             }
 

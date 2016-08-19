@@ -572,6 +572,7 @@ class VestibulandoService
 
         # Declaracao de array
         $notas = array();
+        $mediaEnem = 0;
 
             # Testando se existem registros com valor 0 (zero)
             if ($notaHumanas > 0){
@@ -595,7 +596,10 @@ class VestibulandoService
 
         # Obtendo a media
         # array_sum() soma os elementos de um array
-        $mediaEnem = (((array_sum($notas))/$divisor) + $notaRedacao) / 2;
+        if($divisor){
+            $mediaEnem = (((array_sum($notas))/$divisor) + $notaRedacao) / 2;
+        }
+
 
         # Calculando a média - Andrey
         //$mediaEnem      =  ((($notaHumanas + $notaNatureza + $notaMatematica + $notaLinguagem)/4) + $notaRedacao) / 2;
