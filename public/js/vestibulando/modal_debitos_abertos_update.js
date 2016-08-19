@@ -13,6 +13,8 @@ function loadFieldsDebitosEditar()
     // Definindo os models
     var dados =  {
         'models' : [
+            'Financeiro\\FormaPagamento',
+            'Financeiro\\LocalPagamento',
         ]
     };
 
@@ -43,22 +45,72 @@ function builderHtmlFieldsDebitosEditar (dados) {
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
+            // Limpando os campos
+            $('#pago').prop('checked', false);
+            $('#vencimento_editar').val("");
+            $('#valor_debito_editar').val("");
+            $('#valor_desconto_editar').val("");
+            $('#observacao_editar').val("");
+            $("#valor_pago_edit").val("");
+
+            // Variáveis que armazenaram o html
+            var htmlLocalPagamento = "<option value=''>Selecione um Local</option>";
+            var htmlFormaPagamento = "<option value=''>Selecione uma Forma</option>";
+
+            // Percorrendo o array de localpagamento
+            for(var i = 0; i < dados['financeiro\\localpagamento'].length; i++) {
+                // Criando as options
+                htmlLocalPagamento += "<option value='" + dados['financeiro\\localpagamento'][i].id + "'>"  + dados['financeiro\\localpagamento'][i].nome + "</option>";
+            }
+
+            // Percorrendo o array de formapagamento
+            for(var i = 0; i < dados['financeiro\\formapagamento'].length; i++) {
+                // Criando as options
+                htmlFormaPagamento += "<option value='" + dados['financeiro\\formapagamento'][i].id + "'>"  + dados['financeiro\\formapagamento'][i].nome + "</option>";
+            }
+
+            // Removendo e adicionando as options de localpagamento
+            $("#local_pagamento_id_edit option").remove();
+            $("#local_pagamento_id_edit").append(htmlLocalPagamento);
+
+            // Removendo e adicionando as options de formapagamento
+            $("#forma_pagamento_id_edit option").remove();
+            $("#forma_pagamento_id_edit").append(htmlFormaPagamento);
+
+            // Setando os valores do model no formulário
+            $('#forma_pagamento_id_edit option[value=' +  retorno.data.debito.forma_pagamento_id + ']').prop('selected', true);
+            $('#local_pagamento_id_edit option[value=' +  retorno.data.debito.local_pagamento_id + ']').prop('selected', true);
+            $("#valor_multa_edit").val(retorno.data.debito.valor_multa);
+            $("#valor_juros_edit").val(retorno.data.debito.valor_juros);
+
+            // Verificando se já existe uma data cadastrada
+            if(retorno.data.debito.data_pagamento) {
+                $("#data_pagamento_edit").val(retorno.data.debito.data_pagamento);
+            }
+
+            // Veificando se existe valor pago
+            if(retorno.data.debito.valor_pago) {
+                $("#valor_pago_edit").val(retorno.data.debito.valor_pago);
+            } else {
+                $("#valor_pago_edit").val(retorno.data.taxaValor);
+            }
+
             // Setando os valores do model no formulário
             $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
             $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
             $('#valor_taxa_vestibulando_editar').val(retorno.data.taxaValor);
             $('#vencimento_editar').val(retorno.data.vencimento);
-            $('#valor_debito_editar').val(retorno.data.valor_debito);
+            $('#valor_debito_editar').val(retorno.data.taxaValor);
             $('#valor_desconto_editar').val(retorno.data.valor_desconto);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
-            
+
             // Tratando a baixa
             if(retorno.data.pago == 1) {
                 $('#pago').attr('checked', true).attr('disabled', true);
             }
-            
+
             // Abrindo o modal de inserir disciplina
             $("#modal-debitos-abertos-update").modal({show : true});
         } else {
@@ -70,18 +122,35 @@ function builderHtmlFieldsDebitosEditar (dados) {
 
 // Evento para salvar tabela de preços
 $('#btnDebitosAbertosUpdate').click(function() {
+    // Calcular o valor totla
+    calculoValorTotal();
+
     // Recuperando os valores
-    var taxa_id        = $("#taxa_id_editar").val();
-    var valor_debito   = $("#valor_debito_editar").val();
-    var valor_desconto = $("#valor_desconto_editar").val();
-    var vencimento     = $('#vencimento_editar').val();
-    var mes_referencia = $('#mes_referencia_editar').val();
-    var ano_referencia = $('#ano_referencia_editar').val();
-    var observacao     = $('#observacao_editar').val();
-    var pago           = $('#pago:checked').val();
+    var forma_pagamento_id = $("#forma_pagamento_id_edit").val();
+    var local_pagamento_id = $("#local_pagamento_id_edit").val();
+    var observacao         = $("#observacao_editar").val();
+    var valor_pago         = $("#valor_pago_edit").val();
+    var valor_multa        = $("#valor_multa_edit").val();
+    var valor_juros        = $("#valor_juros_edit").val();
+    var data_pagamento     = $("#data_pagamento_edit").val();
+    var taxa_id            = $("#taxa_id_editar").val();
+    var valor_debito       = $("#valor_debito_editar").val();
+    var valor_desconto     = $("#valor_desconto_editar").val();
+    var vencimento         = $('#vencimento_editar').val();
+    var mes_referencia     = $('#mes_referencia_editar').val();
+    var ano_referencia     = $('#ano_referencia_editar').val();
+    var observacao         = $('#observacao_editar').val();
+    var pago               = $('#pago:checked').val();
 
     // Dados ajax
     var dados = {
+        'data_pagamento': data_pagamento,
+        'observacao': observacao,
+        'valor_multa' : valor_multa,
+        'valor_juros' : valor_juros,
+        'forma_pagamento_id': forma_pagamento_id,
+        'local_pagamento_id': local_pagamento_id,
+        'valor_pago': valor_pago,
         'vestibulando_id' : idVestibulando,
         'taxa_id' : taxa_id,
         'valor_debito' : valor_debito,
@@ -134,48 +203,8 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
 
 // Evento para mudança de valor
 $('#valor_desconto_editar').on('focusout', function() {
-    // variáveis de uso
-    var valorDebito, valorDeconto, valorFinal, valorProvFinal, valorTaxa;
-
-    // Recebendo e tratando as entradas
-    valorDeconto = Number($(this).val());
-    valorDebito  = Number($('#valor_debito_editar').val());
-    valorTaxa    = Number($('#valor_taxa_vestibulando_editar').val());
-
-    // Regra de verificação
-    if(valorDebito == 0) {
-        valorDebito = valorTaxa;
-    }
-
-    // Verificando se é um número
-    if(valorDebito == "" || !valorTaxa) {
-        return false;
-    }
-
-    // Regra para o valor do desconto, caso seja 0 ou vazio
-    if(!valorDeconto) {
-        $('#valor_debito_editar').val(valorTaxa);
-        return false;
-    }
-
-    // Validação dos valores
-    if(valorDeconto > valorTaxa) {
-        swal('Valor de desconto tem que ser menor ou igual ao valor do débito');
-        return false;
-    }
-
-    // Calculando o valor provisório final
-    valorProvFinal = valorDebito - valorDeconto;
-
-    // Regra de cálculo
-    if((valorProvFinal + valorDeconto) != valorTaxa) {
-        valorFinal = valorProvFinal + (valorTaxa - (valorProvFinal + valorDeconto));
-    } else {
-        valorFinal = valorProvFinal;
-    }
-
-    // Calculando o valor final
-    $('#valor_debito_editar').val(valorFinal.toFixed(2)); // get the current value of the input field.
+    //Calcular o valor total
+    calculoValorTotal();
 });
 
 // Método para dar baixa no débito em aberto
@@ -200,3 +229,39 @@ $(document).on('click', '#btnCloseDebitoAberto', function () {
         }
     });
 });
+
+// Função para calcular o valor total
+function calculoValorTotal()
+{
+    // variáveis de uso
+    var valorDebito, valorDeconto, valorTotal, valorFinal, valorProvFinal;
+
+    // Recebendo e tratando as entradas
+    valorDeconto = Number($('#valor_desconto_editar').val());
+    valorDebito  = Number($('#valor_debito_editar').val());
+    valorTotal   = Number($("#valor_pago_edit").val());
+
+    // Regra de verificação
+    if(valorTotal == 0 || !valorTotal) {
+        valorTotal = valorDebito;
+    }
+
+    // Validação dos valores
+    if(valorDeconto > valorDebito) {
+        swal('Valor de desconto tem que ser menor ou igual ao valor do débito');
+        return false;
+    }
+
+    // Calculando o valor provisório final
+    valorProvFinal = valorDebito - valorDeconto;
+
+    // Regra de cálculo
+    if((valorProvFinal + valorDeconto) != valorDebito) {
+        valorFinal = valorProvFinal + (valorDebito - (valorProvFinal + valorDeconto));
+    } else {
+        valorFinal = valorProvFinal;
+    }
+
+    // Calculando o valor final
+    $('#valor_pago_edit').val(valorFinal.toFixed(2)); // get the current value of the input field.
+}

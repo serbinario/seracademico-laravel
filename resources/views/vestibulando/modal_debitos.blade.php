@@ -9,6 +9,20 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="col-md-12">
+                        <!-- Linha de descrição -->
+                        <div class="col-md-12 infModal">
+                            <div class="col-md-4">
+                                <span><strong>Vestibulando: </strong><p id="veVestibulando"></p></span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <span><strong>Vestibular: </strong><p id="veVestibular"></p></span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <span><strong>Semestre: </strong><p id="veSemestre"></p></span>
+                            </div>
+                        </div>
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">

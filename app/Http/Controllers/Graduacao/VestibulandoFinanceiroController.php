@@ -85,8 +85,8 @@ class VestibulandoFinanceiroController extends Controller
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
-                'fac_vestibulandos_financeiros.vencimento',
-                'fac_vestibulandos_financeiros.valor_debito',
+                'fac_vestibulandos_financeiros.data_pagamento',
+                'fac_vestibulandos_financeiros.valor_pago',
                 'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
                 'fac_vestibulandos_financeiros.mes_referencia',
@@ -143,7 +143,8 @@ class VestibulandoFinanceiroController extends Controller
                 'mes_referencia' => $debito->mes_referencia,
                 'ano_referencia' => $debito->ano_referencia,
                 'observacao' => $debito->observacao,
-                'pago' => $debito->pago
+                'pago' => $debito->pago,
+                'debito' => $debito
             ];
 
             #Retorno para a view

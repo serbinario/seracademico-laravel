@@ -133,6 +133,7 @@ class VestibulandoController extends Controller
                 'fac_vestibulares.id as idVestibular',
                 'fin_tipos_taxas.id as idTipoTaxa',
                 'fac_vestibulandos_financeiros.pago',
+                'fac_semestres.nome as nomeSemestre',
                 \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
                 \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
             ]);
