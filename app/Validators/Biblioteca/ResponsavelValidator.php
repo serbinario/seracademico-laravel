@@ -20,10 +20,10 @@ class ResponsavelValidator extends LaravelValidator
             
 			'nome' =>  'unique:responsaveis,nome' ,
 			'sobrenome' =>  '',
-
         ],
+        
         ValidatorInterface::RULE_UPDATE => [
-            'nome' =>  'unique:responsaveis,nome',
+            'nome' =>  'required|unique:responsaveis,nome,:id',
             'sobrenome' =>  '',
         ],
    ];

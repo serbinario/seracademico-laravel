@@ -27,6 +27,7 @@
                                 <th style="width: 32%;">Disciplina</th>
 
                                 <th style="width: 3%;">CH</th>
+                                <th style="width: 3%;">Vigência</th>
 
                                 <th style="width: 3%;">Ativo</th>
 
@@ -62,6 +63,7 @@
                 {data: 'nome', name: 'nome'},
                 {data: 'nomeDisciplina', name: 'fac_disciplinas.nome'},
                 {data: 'carga_horaria', name: 'carga_horaria'},
+                {data: 'vigencia', name: 'vigencia'},
                 {data: 'ativo', name: 'fac_plano_ensino.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

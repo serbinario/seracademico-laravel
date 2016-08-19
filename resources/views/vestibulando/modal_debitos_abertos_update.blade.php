@@ -38,8 +38,6 @@
 
                     </div>
 
-
-
                     {{--<div class="row">
                         <div class="form-group col-md-4">
                             <label for="mes_referencia_editar">Mês</label>
@@ -52,18 +50,6 @@
                         </div>
                     </div>--}}
 
-
-
-                    {{--<div class="row">--}}
-                        {{--<div class="col-md-8">--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-md-8">--}}
-                                    {{--<label>Págo</label>--}}
-                                    {{--<input name="pago"  id="pago" type="checkbox" value="1">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                     <div>
                         <label for="observacao_editar">Pago</label>
                     </div>
@@ -121,6 +107,17 @@
                         <div class="col-md-12">
                             <label for="observacao_editar">Observação</label>
                             <textarea class="form-control" rows="3" name="observacao_editar" id="observacao_editar"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>Págo</label>
+                                    <input name="pago"  id="pago" type="checkbox" value="1">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
