@@ -70,7 +70,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.fac_instituicoes_id' => 'integer',
             'pessoa.fac_cursos_superiores_id' => 'integer',
 
-            //Endereço
+            //Tabela Endereço
             'endereco.logradouro' => '',
             'endereco.cep' => '',
             'endereco.numero' => '',

@@ -121,7 +121,7 @@ class VestibulandoValidator extends LaravelValidator
             'terceira_opcao_curso_id' => 'integer',
             'terceira_opcao_turno_id' => 'integer',
 
-            //Endereço
+            //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'serbinario_alpha_space|max:100',
