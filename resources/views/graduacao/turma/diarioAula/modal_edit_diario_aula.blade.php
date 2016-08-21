@@ -46,12 +46,12 @@
 
                     </div>
 
-                    <div class="row">
+                    {{--<div class="row">
                         <div class="col-md-12 form-group">
                             <label for="assunto_ministrado_edit">Assunto Ministrado</label>
                             <textarea class="form-control" rows="5" name="assunto_ministrado_edit" id="assunto_ministrado_edit"></textarea>
                         </div>
-                    </div>
+                    </div>--}}
 
                     <hr>
 
