@@ -54,4 +54,14 @@ class DiarioAula extends Model implements Transformable
     {
         $this->attributes['data'] = SerbinarioDateFormat::toUsa($value);
     }
+
+    // this is a recommended way to declare event handlers
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($diario) {
+            $diario->conteudos()->detach();
+            // do the rest of the cleanup...
+        });
+    }
 }

@@ -29,7 +29,7 @@ class EditoraValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-			'nome' =>  'unique:bib_editoras,nome',
+			'nome' =>  'unique:bib_editoras,nome,:id',
 			'email' =>  '',
 			'site' =>  '',
 			'cnpj' =>  '',
