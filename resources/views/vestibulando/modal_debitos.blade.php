@@ -73,7 +73,7 @@
                                         <th style="width: 10%">Data Pagamento</th>
                                         <th style="width: 10%">Valor Desconto</th>
                                         <th style="width: 10%">Valor Pago</th>
-
+                                        <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>
                                 </table>

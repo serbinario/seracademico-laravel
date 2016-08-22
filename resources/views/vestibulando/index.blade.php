@@ -107,6 +107,7 @@
     @include('vestibulando.modal_debitos')
     @include('vestibulando.modal_debitos_abertos_store')
     @include('vestibulando.modal_debitos_abertos_update')
+    @include('vestibulando.modal_debitos_pagos_update')
 @stop
 
 @section('javascript')
@@ -116,6 +117,7 @@
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_store.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_update.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_pagos_update.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format ( d ) {
