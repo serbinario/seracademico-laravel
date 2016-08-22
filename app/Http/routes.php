@@ -68,6 +68,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('updateDebitosAbertos/{id}', ['as' => 'updateDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@updateDebitosAbertos']);
                 Route::get('deleteDebitosAbertos/{id}', ['as' => 'deleteDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@deleteDebitosAbertos']);
                 Route::put('closeDebitoAberto/{id}', ['as' => 'closeDebitoAberto', 'uses' => 'Graduacao\VestibulandoFinanceiroController@closeDebitoAberto']);
+                Route::get('gerarBoleto', ['as' => 'gerarBoleto', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gerarBoleto']);
             });
         });
 

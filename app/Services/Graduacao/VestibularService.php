@@ -7,6 +7,7 @@ use Seracademico\Repositories\Graduacao\MateriaRepository;
 use Seracademico\Repositories\TurnoRepository;
 use Seracademico\Repositories\Graduacao\VestibularRepository;
 use Seracademico\Entities\Graduacao\Vestibular;
+use Seracademico\Facades\ParametroVestibularFacade;
 
 class VestibularService
 {
@@ -455,9 +456,15 @@ class VestibularService
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getByValidDate()
     {
+        # Verificando se existe um vestibular ativo
+        if(count(ParametroVestibularFacade::getAtivo()) == 0) {
+            throw new \Exception('Não existe um vestibular ativo!');
+        }
+
         # recuperando a data atual
         $now  = new \DateTime('now');
 
