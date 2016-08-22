@@ -346,7 +346,7 @@ class TurmaService
         return true;
     }
 
-    /**
+    /**[RF017-RN004]
      * Método responsável por vincular as disciplinas
      * do currículo do período em questão na turma.
      *

@@ -88,7 +88,7 @@
                     <div role="tabpanel" class="tab-pane active" id="datas">
                         <br/>
                         <div class="row">
-                            <div class="col-md-2">
+                            {{--<div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('matricula_inicio', 'Matrícula (Início)') !!}
                                     {!! Form::text('matricula_inicio', Session::getOldInput('matricula_inicio'), array('class' => 'form-control datepicker date')) !!}
@@ -99,7 +99,7 @@
                                     {!! Form::label('matricula_fim', 'Matrícula (Fim)') !!}
                                     {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('aula_inicio', 'Aula (Início)') !!}
