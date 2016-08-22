@@ -53,11 +53,11 @@
                                     </thead>
                                 </table>
 
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-md-2 col-md-offset-10">--}}
-                                        {{--<button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-10">
+                                        <button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>
+                                    </div>
+                                </div>
                             </div>
                             {{--FIM Débitos Abertos--}}
 
