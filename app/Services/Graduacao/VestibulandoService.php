@@ -833,7 +833,7 @@ class VestibulandoService
         $this->tratamentoCampos($dados);
 
         # Regra de negócio para págo
-        $dados['pago'] = 0;
+        //$dados['pago'] = 0;
 
         # Cadastrando
         $this->financeiroRepository->create($dados);

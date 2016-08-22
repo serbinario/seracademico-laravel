@@ -53,11 +53,11 @@
                                     </thead>
                                 </table>
 
-                                {{--<div class="row">--}}
-                                    {{--<div class="col-md-2 col-md-offset-10">--}}
-                                        {{--<button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-10">
+                                        <button class="btn btn-primary pull-right" id="btnAdicionarDebitosAbertos">Adicionar</button>
+                                    </div>
+                                </div>
                             </div>
                             {{--FIM Débitos Abertos--}}
 
@@ -73,7 +73,7 @@
                                         <th style="width: 10%">Data Pagamento</th>
                                         <th style="width: 10%">Valor Desconto</th>
                                         <th style="width: 10%">Valor Pago</th>
-
+                                        <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>
                                 </table>

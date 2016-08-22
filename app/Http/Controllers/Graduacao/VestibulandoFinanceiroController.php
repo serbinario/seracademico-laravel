@@ -11,6 +11,8 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Yajra\Datatables\Datatables;
+use OpenBoleto\Banco\CaixaSICOB;
+use OpenBoleto\Agente;
 
 class VestibulandoFinanceiroController extends Controller
 {
@@ -66,7 +68,9 @@ class VestibulandoFinanceiroController extends Controller
                 return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>                            
+                            <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>   
+                            <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating" target="_blank" href="financeiro/gerarBoleto" id="btnGerarBoleto" title="Fechar Débito"><i class="material-icons">edit</i></a></li>
                         </ul>
                         </div>';
             })->make(true);
@@ -96,7 +100,18 @@ class VestibulandoFinanceiroController extends Controller
             ]);
 
         #Editando a grid
-        return Datatables::of($debitos)->make(true);
+        return Datatables::of($debitos)
+            ->addColumn('action', function ($debito) {
+                // <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                //<li><a class="btn-floating" id="btnCloseDebitoAberto" title="Fechar Débito"><i class="material-icons">edit</i></a></li>
+                return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a class="btn-floating" id="btnEditDebitosPagos" title="Editar débito"><i class="material-icons">edit</i></a></li>   
+                            <li><a class="btn-floating" id="btnRemoveDebitosPagos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                        </ul>
+                        </div>';
+            })->make(true);
     }
 
     /**
@@ -252,4 +267,34 @@ class VestibulandoFinanceiroController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @return string
+     */
+    public function gerarBoleto()
+    {
+        #Recuperando o banco ativo
+        //$banco   = ParametroBancoFacade::getAtivo();
+        //$boleto  = $this->boletoService->find($idBoleto);
+        //$debito  = $boleto->debito;
+
+        $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
+        $cedente = new Agente('Serbinario LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
+
+        $objBoleto = new CaixaSICOB(array(
+            // Parâmetros obrigatórios
+            'dataVencimento' => new \DateTime('now'),
+            'valor' => 500.00,
+            'sequencial' => 1234567, // Para gerar o nosso número
+            'sacado' => $sacado,
+            'cedente' => $cedente,
+            'agencia' => 1724, // Até 4 dígitos
+            'carteira' => 'SR',
+            'conta' => 123456, // Até 8 dígitos
+            'convenio' => 1234, // 4, 6 ou 7 dígitos
+        ));
+
+        return $objBoleto->getOutput();
+    }
+
 }
