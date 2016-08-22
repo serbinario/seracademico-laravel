@@ -30,6 +30,7 @@ class PlanoEnsino extends Model implements Transformable
 		'recurso_audivisual',
 		'avaliacao',
 		'bibliografia_basica',
+        'bibliografia_complementar',
 		'competencia',
 		'aula_pratica',
 		'ativo'
