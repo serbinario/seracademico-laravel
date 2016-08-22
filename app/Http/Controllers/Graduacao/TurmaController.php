@@ -145,9 +145,9 @@ class TurmaController extends Controller
                 # Recuperando a turma da linha atual
                 $turma = $this->service->find($row->id);
     
-                # Verificando a possibilidade de remorção
+                # [RF017-RN003] Verificando a possibilidade de remorção
                 if(count($turma->disciplinas) == 0) {
-                    $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id. '" title="Editar da turma"><i class="material-icons">delete</i></a></li>';
+                    $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id. '" title="Deletar turma"><i class="material-icons">delete</i></a></li>';
                 }
     
                 # Continuação da criação do html de retorno
