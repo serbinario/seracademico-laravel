@@ -207,6 +207,33 @@ $('#valor_desconto_editar').on('focusout', function() {
     calculoValorTotal();
 });
 
+// Evento para mudança de valor
+// $('#valor_juros_edit').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorJurosEdit();
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa_edit').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorMultaEdit();
+// });
+//
+// // Variáveis que armazenarão valores antigos de multa e juros
+// var valorMultaEditOld = 0, valorJurosEditOld = 0;
+//
+// // Evento para mudança de valor
+// $('#valor_juros_edit').on('focus', function() {
+//     //Calcular o valor total
+//     valorJurosEditOld = Number($('#valor_pago_edit').val()) - Number($(this).val());
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa_edit').on('focus', function() {
+//     //Calcular o valor total
+//     valorMultaOld = Number($('#valor_pago').val()) - Number($(this).val());
+// });
+
 // Método para dar baixa no débito em aberto
 $(document).on('click', '#btnCloseDebitoAberto', function () {
     // Recuperando o id do débito
@@ -264,4 +291,40 @@ function calculoValorTotal()
 
     // Calculando o valor final
     $('#valor_pago_edit').val(valorFinal.toFixed(2)); // get the current value of the input field.
+}
+
+// Função para calcular o valor do juros
+function calcularValorJurosEdit()
+{
+    // Variáveis úteis
+    var valorJuros, valorFinal;
+
+    // Recalculando o valor Total
+    calculoValorTotal();
+    calcularValorMultaEdit();
+
+    // Recebendo e tratando as entradas
+    valorJuros = Number($('#valor_juros_edit').val());
+    valorFinal = Number($('#valor_pago_edit').val());
+
+    // Setando com o novo valor
+    $('#valor_pago_edit').val((valorFinal + valorJuros));
+}
+
+// Função para calcular o valor da multa
+function calcularValorMultaEdit()
+{
+    // Variáveis úteis
+    var valorMulta, valorFinal;
+
+    // Recalculando o valor Total
+    calculoValorTotal();
+    calcularValorJurosEdit();
+
+    // Recebendo e tratando as entradas
+    valorMulta = Number($('#valor_multa_edit').val());
+    valorFinal = Number($('#valor_pago_edit').val());
+
+    // Setando com o novo valor
+    $('#valor_pago_edit').val((valorFinal + valorMulta));
 }

@@ -135,7 +135,9 @@ $(document).on('click', '#taxa_id', function () {
     }).done(function (retorno) {
         if(retorno.success) {
             $('#valor_debito').val(retorno.data.valor);
-            $('#valor_pago').val(retorno.data.valor);
+            $('#valor_pago').val(Number(retorno.data.valor));
+            //$('#valor_multa').val(retorno.data.valor_multa);
+            //$('#valor_juros').val(retorno.data.valor_juros);
         } else {
             // Fechando a modal
             $('#modal-debitos-abertos-store').modal('toggle');
@@ -150,6 +152,8 @@ $(document).on('click', '#taxa_id', function () {
 $('#btnDebitosAbertosSalvar').click(function() {
     // Calculando o valor total
     calculoValorTotalCreate();
+//    calcularValorJuros();
+//    calcularValorMulta();
 
     // Recuperando os valores
     var forma_pagamento_id = $("#forma_pagamento_id").val();
@@ -215,6 +219,34 @@ $('#valor_desconto').on('focusout', function() {
     //Calcular o valor total
     calculoValorTotalCreate();
 });
+//
+// // Evento para mudança de valor
+// $('#valor_juros').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorJuros();
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorMulta();
+// });
+//
+// // Variáveis que armazenarão valores antigos de multa e juros
+// var valorMultaOld = 0, valorJurosOld = 0;
+//
+// // Evento para mudança de valor
+// $('#valor_juros').on('focus', function() {
+//     //Calcular o valor total
+//     valorJurosOld = Number($('#valor_pago').val()) - Number($(this).val());
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa').on('focus', function() {
+//     //Calcular o valor total
+//     valorMultaOld = Number($('#valor_pago').val()) - Number($(this).val());
+// });
+
 
 // Função para calcular o valor total
 function calculoValorTotalCreate()
@@ -250,4 +282,32 @@ function calculoValorTotalCreate()
 
     // Calculando o valor final
     $('#valor_pago').val(valorFinal.toFixed(2)); // get the current value of the input field.
+}
+
+// Função para calcular o valor do juros
+function calcularValorJuros()
+{
+    // Variáveis úteis
+    var valorJuros, valorFinal;
+
+    // Recebendo e tratando as entradas
+    valorJuros = Number($('#valor_juros').val());
+    valorFinal = Number($('#valor_pago').val());
+
+    // Setando com o novo valor
+    $('#valor_pago').val(((valorFinal - valorJurosOld) + valorJuros));
+}
+
+// Função para calcular o valor da multa
+function calcularValorMulta()
+{
+    // Variáveis úteis
+    var valorMulta, valorFinal;
+
+    // Recebendo e tratando as entradas
+    valorMulta = Number($('#valor_multa').val());
+    valorFinal = Number($('#valor_pago').val());
+
+    // Setando com o novo valor
+    $('#valor_pago').val(((valorFinal - valorMultaOld) + valorMulta));
 }

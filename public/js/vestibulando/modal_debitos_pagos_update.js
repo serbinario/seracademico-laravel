@@ -204,6 +204,33 @@ $('#valor_desconto_pago').on('focusout', function() {
     calculoValorTotalPago();
 });
 
+// // Evento para mudança de valor
+// $('#valor_juros_pago').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorJurosPago();
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa_pago').on('focusout', function() {
+//     //Calcular o valor total
+//     calcularValorMultaPago();
+// });
+//
+// // Variáveis que armazenarão valores antigos de multa e juros
+// var valorMultaPagoOld = 0, valorJurosPagoOld = 0;
+//
+// // Evento para mudança de valor
+// $('#valor_juros_pago').on('focus', function() {
+//     //Calcular o valor total
+//     valorJurosPagoOld = Number($('#valor_pago_pago').val()) - Number($(this).val());
+// });
+//
+// // Evento para mudança de valor
+// $('#valor_multa_pago').on('focus', function() {
+//     //Calcular o valor total
+//     valorMultaPagoOld = Number($('#valor_pago_pago').val()) - Number($(this).val());
+// });
+
 // Função para calcular o valor total
 function calculoValorTotalPago()
 {
@@ -238,4 +265,32 @@ function calculoValorTotalPago()
 
     // Calculando o valor final
     $('#valor_pago_pago').val(valorFinal.toFixed(2)); // get the current value of the input field.
+}
+
+// Função para calcular o valor do juros
+function calcularValorJurosEdit()
+{
+    // Variáveis úteis
+    var valorJuros, valorFinal;
+
+    // Recebendo e tratando as entradas
+    valorJuros = Number($('#valor_juros_pago').val());
+    valorFinal = Number($('#valor_pago_pago').val());
+
+    // Setando com o novo valor
+    $('#valor_pago_pago').val(((valorFinal - valorJurosPagoOld) + valorJuros));
+}
+
+// Função para calcular o valor da multa
+function calcularValorMultaPago()
+{
+    // Variáveis úteis
+    var valorMulta, valorFinal;
+
+    // Recebendo e tratando as entradas
+    valorMulta = Number($('#valor_multa_pago').val());
+    valorFinal = Number($('#valor_pago_pago').val());
+
+    // Setando com o novo valor
+    $('#valor_pago_pago').val(((valorFinal - valorMultaPagoOld) + valorMulta));
 }
