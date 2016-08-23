@@ -57,6 +57,11 @@ class VestibulandoService
     private $destinationPath = "images/";
 
     /**
+     * @var AlunoService
+     */
+    private $alunoService;
+
+    /**
      * Método Construtor
      *
      * Método responsável por incializar o objeto
@@ -70,6 +75,7 @@ class VestibulandoService
      * @param VestibulandoNotaVestibularRepository $notaRepository
      * @param AlunoRepository $alunoRepository
      * @param VestibulandoFinanceiroRepository $financeiroRepository
+     * @param AlunoService $alunoService
      */
     public function __construct(
         PessoaRepository $pessoaRepository,
@@ -78,7 +84,8 @@ class VestibulandoService
         VestibularRepository $vestibularRepository,
         VestibulandoNotaVestibularRepository $notaRepository,
         AlunoRepository $alunoRepository,
-        VestibulandoFinanceiroRepository $financeiroRepository)
+        VestibulandoFinanceiroRepository $financeiroRepository,
+        AlunoService $alunoService)
     {
         $this->repository           = $repository;
         $this->pessoaRepository     = $pessoaRepository;
@@ -87,6 +94,7 @@ class VestibulandoService
         $this->notaRepository       = $notaRepository;
         $this->alunoRepository      = $alunoRepository;
         $this->financeiroRepository = $financeiroRepository;
+        $this->alunoService = $alunoService;
     }
 
     /**
@@ -762,7 +770,7 @@ class VestibulandoService
             $now = new \DateTime('now');
 
             # Geração da matrícula e vinculo com o vestibulando
-            $dados['matricula']       = $now->format('YmdHis');
+            $dados['matricula']       = $this->alunoService->gerarMatricula();
             $dados['vestibulando_id'] = $vestibulando->id;
 
             # Transferindo para aluno
