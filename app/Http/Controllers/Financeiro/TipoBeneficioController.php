@@ -91,13 +91,23 @@ class TipoBeneficioController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando o tipo de benefício
+            $tipoBeneficio = $this->service->find($row->id);
+
             # Html de retorno
             $html = '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
-                            <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>
-                        </ul>
-                     </div>';
+                            <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>';
+
+            # Verificando a possibilidade de remoção
+            if(count($tipoBeneficio->beneficios) == 0) {
+                $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
+            }
+
+            # Html de retorno
+            $html .=   '</ul>
+                    </div>';
 
             # Retorno
             return $html;
@@ -190,6 +200,25 @@ class TipoBeneficioController extends Controller
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
