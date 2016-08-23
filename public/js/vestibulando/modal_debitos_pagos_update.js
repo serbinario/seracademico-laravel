@@ -99,8 +99,9 @@ function builderHtmlFieldsDebitosPagos (dados) {
             $('#taxa_id_pago').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
             $('#valor_taxa_vestibulando_pago').val(retorno.data.taxaValor);
             $('#vencimento_pago').val(retorno.data.vencimento);
-            $('#valor_debito_pago').val(retorno.data.taxaValor);
+            $('#valor_debito_pago').val(retorno.data.debito.valor_debito);
             $('#valor_desconto_pago').val(retorno.data.valor_desconto);
+            $('#valor_pago_pago').val(retorno.data.debito.valor_pago);
             $('#mes_referencia_pago').val(retorno.data.mes_referencia);
             $('#ano_referencia_pago').val(retorno.data.ano_referencia);
             $('#observacao_pago').val(retorno.data.observacao);
