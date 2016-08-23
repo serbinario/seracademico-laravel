@@ -53,6 +53,9 @@
                     <a href="#avaliacao" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Bibliografia Básica</a>
                 </li>
                 <li role="presentation">
+                    <a href="#bibliComplementar" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Bibliografia Complementar</a>
+                </li>
+                <li role="presentation">
                     <a href="#competencia" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">event</i> Competência</a>
                 </li>
                 <li role="presentation">
@@ -114,6 +117,20 @@
                     </div>
                 </div>
                 {{--FIM Aba Bibliografia Básica --}}
+
+                {{--Aba Bibliografia Complementar--}}
+                <div role="tabpanel" class="tab-pane" id="bibliComplementar">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{--{!! Form::label('bibliografia_complementar', 'Bibliografia complementar') !!}--}}
+                                {!! Form::textarea('bibliografia_complementar', Session::getOldInput('bibliografia_complementar') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--FIM Aba Bibliografia Complementar --}}
 
                 {{--Aba Competência--}}
                 <div role="tabpanel" class="tab-pane" id="competencia">

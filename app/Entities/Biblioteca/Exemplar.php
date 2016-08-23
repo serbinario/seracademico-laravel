@@ -42,7 +42,8 @@ class Exemplar extends Model implements Transformable
 		'artigos',
 		'ampliada',
 		'revisada',
-		'atualizada'
+		'atualizada',
+		'vol_periodico'
 	];
 
 	public function acervo()
