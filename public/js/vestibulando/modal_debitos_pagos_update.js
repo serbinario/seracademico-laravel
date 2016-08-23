@@ -2,13 +2,13 @@
 var idDebito;
 
 // Evento para chamar o modal de inserir adicionar disciplina
-$(document).on("click", "#btnEditDebitosAbertos", function () {
-    idDebito = tableDebitosAbertos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-    loadFieldsDebitosEditar();
+$(document).on("click", "#btnEditDebitosPagos", function () {
+    idDebito = tableDebitosPagos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+    loadFieldsDebitosPagos();
 });
 
 // carregando todos os campos preenchidos
-function loadFieldsDebitosEditar()
+function loadFieldsDebitosPagos()
 {
     // Definindo os models
     var dados =  {
@@ -27,17 +27,17 @@ function loadFieldsDebitosEditar()
     }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
         if(retorno) {
-            builderHtmlFieldsDebitosEditar(retorno);
+            builderHtmlFieldsDebitosPagos(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
-            $('#modal-debitos-abertos-update').modal('toggle');
+            $('#modal-debitos-pagos-update').modal('toggle');
         }
     });
 };
 
 // Função a montar o html
-function builderHtmlFieldsDebitosEditar (dados) {
+function builderHtmlFieldsDebitosPagos (dados) {
     // Fazendo a requisição para recuperar os dados do curriculoDisciplina
     jQuery.ajax({
         type: 'GET',
@@ -46,12 +46,11 @@ function builderHtmlFieldsDebitosEditar (dados) {
     }).done(function (retorno) {
         if (retorno.success) {
             // Limpando os campos
-            $('#pago').prop('checked', false);
-            $('#vencimento_editar').val("");
-            $('#valor_debito_editar').val("");
-            $('#valor_desconto_editar').val("");
-            $('#observacao_editar').val("");
-            $("#valor_pago_edit").val("");
+            $('#vencimento_pago').val("");
+            $('#valor_debito_pago').val("");
+            $('#valor_desconto_pago').val("");
+            $('#observacao_pago').val("");
+            $("#valor_pago_pago").val("");
 
             // Variáveis que armazenaram o html
             var htmlLocalPagamento = "<option value=''>Selecione um Local</option>";
@@ -70,18 +69,18 @@ function builderHtmlFieldsDebitosEditar (dados) {
             }
 
             // Removendo e adicionando as options de localpagamento
-            $("#local_pagamento_id_edit option").remove();
-            $("#local_pagamento_id_edit").append(htmlLocalPagamento);
+            $("#local_pagamento_id_pago option").remove();
+            $("#local_pagamento_id_pago").append(htmlLocalPagamento);
 
             // Removendo e adicionando as options de formapagamento
-            $("#forma_pagamento_id_edit option").remove();
-            $("#forma_pagamento_id_edit").append(htmlFormaPagamento);
+            $("#forma_pagamento_id_pago option").remove();
+            $("#forma_pagamento_id_pago").append(htmlFormaPagamento);
 
             // Setando os valores do model no formulário
-            $('#forma_pagamento_id_edit option[value=' +  retorno.data.debito.forma_pagamento_id + ']').prop('selected', true);
-            $('#local_pagamento_id_edit option[value=' +  retorno.data.debito.local_pagamento_id + ']').prop('selected', true);
-            $("#valor_multa_edit").val(retorno.data.debito.valor_multa);
-            $("#valor_juros_edit").val(retorno.data.debito.valor_juros);
+            $('#forma_pagamento_id_pago option[value=' +  retorno.data.debito.forma_pagamento_id + ']').prop('selected', true);
+            $('#local_pagamento_id_pago option[value=' +  retorno.data.debito.local_pagamento_id + ']').prop('selected', true);
+            $("#valor_multa_pago").val(retorno.data.debito.valor_multa);
+            $("#valor_juros_pago").val(retorno.data.debito.valor_juros);
 
             // Verificando se já existe uma data cadastrada
             if(retorno.data.debito.data_pagamento) {
@@ -96,15 +95,15 @@ function builderHtmlFieldsDebitosEditar (dados) {
             }
 
             // Setando os valores do model no formulário
-            $('#tipo_taxa_id_editar').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
-            $('#taxa_id_editar').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
-            $('#valor_taxa_vestibulando_editar').val(retorno.data.taxaValor);
-            $('#vencimento_editar').val(retorno.data.vencimento);
-            $('#valor_debito_editar').val(retorno.data.taxaValor);
-            $('#valor_desconto_editar').val(retorno.data.valor_desconto);
-            $('#mes_referencia_editar').val(retorno.data.mes_referencia);
-            $('#ano_referencia_editar').val(retorno.data.ano_referencia);
-            $('#observacao_editar').val(retorno.data.observacao);
+            $('#tipo_taxa_id_pago').html('<option value="' + retorno.data.tipoTaxaId + '">'  + retorno.data.tipoTaxaNome + '</option>');
+            $('#taxa_id_pago').html('<option value="' + retorno.data.taxaId + '">'  + retorno.data.taxaNome + '</option>');
+            $('#valor_taxa_vestibulando_pago').val(retorno.data.taxaValor);
+            $('#vencimento_pago').val(retorno.data.vencimento);
+            $('#valor_debito_pago').val(retorno.data.taxaValor);
+            $('#valor_desconto_pago').val(retorno.data.valor_desconto);
+            $('#mes_referencia_pago').val(retorno.data.mes_referencia);
+            $('#ano_referencia_pago').val(retorno.data.ano_referencia);
+            $('#observacao_pago').val(retorno.data.observacao);
 
             // Tratando a baixa
             if(retorno.data.pago == 1) {
@@ -112,7 +111,7 @@ function builderHtmlFieldsDebitosEditar (dados) {
             }
 
             // Abrindo o modal de inserir disciplina
-            $("#modal-debitos-abertos-update").modal({show : true});
+            $("#modal-debitos-pagos-update").modal({show : true});
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -121,26 +120,25 @@ function builderHtmlFieldsDebitosEditar (dados) {
 }
 
 // Evento para salvar tabela de preços
-$('#btnDebitosAbertosUpdate').click(function() {
+$('#btnDebitosPagosUpdate').click(function() {
     // Calcular o valor totla
     calculoValorTotal();
 
     // Recuperando os valores
-    var forma_pagamento_id = $("#forma_pagamento_id_edit").val();
-    var local_pagamento_id = $("#local_pagamento_id_edit").val();
-    var observacao         = $("#observacao_editar").val();
-    var valor_pago         = $("#valor_pago_edit").val();
-    var valor_multa        = $("#valor_multa_edit").val();
-    var valor_juros        = $("#valor_juros_edit").val();
-    var data_pagamento     = $("#data_pagamento_edit").val();
-    var taxa_id            = $("#taxa_id_editar").val();
-    var valor_debito       = $("#valor_debito_editar").val();
-    var valor_desconto     = $("#valor_desconto_editar").val();
-    var vencimento         = $('#vencimento_editar').val();
-    var mes_referencia     = $('#mes_referencia_editar').val();
-    var ano_referencia     = $('#ano_referencia_editar').val();
-    var observacao         = $('#observacao_editar').val();
-    var pago               = $('#pago:checked').val();
+    var forma_pagamento_id = $("#forma_pagamento_id_pago").val();
+    var local_pagamento_id = $("#local_pagamento_id_pago").val();
+    var observacao         = $("#observacao_pago").val();
+    var valor_pago         = $("#valor_pago_pago").val();
+    var valor_multa        = $("#valor_multa_pago").val();
+    var valor_juros        = $("#valor_juros_pago").val();
+    var data_pagamento     = $("#data_pagamento_pago").val();
+    var taxa_id            = $("#taxa_id_pago").val();
+    var valor_debito       = $("#valor_debito_pago").val();
+    var valor_desconto     = $("#valor_desconto_pago").val();
+    var vencimento         = $('#vencimento_pago').val();
+    var mes_referencia     = $('#mes_referencia_pago').val();
+    var ano_referencia     = $('#ano_referencia_pago').val();
+    var observacao         = $('#observacao_pago').val();
 
     // Dados ajax
     var dados = {
@@ -158,8 +156,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
         'vencimento' : vencimento,
         'mes_referencia': mes_referencia,
         'ano_referencia': ano_referencia,
-        'observacao': observacao,
-        'pago': pago
+        'observacao': observacao
     };
     
     jQuery.ajax({
@@ -173,7 +170,7 @@ $('#btnDebitosAbertosUpdate').click(function() {
             tableDebitosPagos.ajax.reload();
             table.ajax.reload();
 
-            $('#modal-debitos-abertos-update').modal('toggle');
+            $('#modal-debitos-pagos-update').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -182,8 +179,8 @@ $('#btnDebitosAbertosUpdate').click(function() {
 });
 
 // Evento para remover débito
-$(document).on("click", "#btnRemoveDebitosAbertos", function () {
-    idDebito = tableDebitosAbertos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+$(document).on("click", "#btnRemoveDebitosPagos", function () {
+    idDebito = tableDebitosPagos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
     jQuery.ajax({
         type: 'GET',
@@ -191,7 +188,7 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            tableDebitosAbertos.ajax.reload();
+            tableDebitosPagos.ajax.reload();
             table.ajax.reload();
             
             swal(retorno.msg, "Click no botão abaixo!", "success");
@@ -202,71 +199,48 @@ $(document).on("click", "#btnRemoveDebitosAbertos", function () {
 });
 
 // Evento para mudança de valor
-$('#valor_desconto_editar').on('focusout', function() {
+$('#valor_desconto_pago').on('focusout', function() {
     //Calcular o valor total
-    calculoValorTotal();
+    calculoValorTotalPago();
 });
 
-// Evento para mudança de valor
-// $('#valor_juros_edit').on('focusout', function() {
+// // Evento para mudança de valor
+// $('#valor_juros_pago').on('focusout', function() {
 //     //Calcular o valor total
-//     calcularValorJurosEdit();
+//     calcularValorJurosPago();
 // });
 //
 // // Evento para mudança de valor
-// $('#valor_multa_edit').on('focusout', function() {
+// $('#valor_multa_pago').on('focusout', function() {
 //     //Calcular o valor total
-//     calcularValorMultaEdit();
+//     calcularValorMultaPago();
 // });
 //
 // // Variáveis que armazenarão valores antigos de multa e juros
-// var valorMultaEditOld = 0, valorJurosEditOld = 0;
+// var valorMultaPagoOld = 0, valorJurosPagoOld = 0;
 //
 // // Evento para mudança de valor
-// $('#valor_juros_edit').on('focus', function() {
+// $('#valor_juros_pago').on('focus', function() {
 //     //Calcular o valor total
-//     valorJurosEditOld = Number($('#valor_pago_edit').val()) - Number($(this).val());
+//     valorJurosPagoOld = Number($('#valor_pago_pago').val()) - Number($(this).val());
 // });
 //
 // // Evento para mudança de valor
-// $('#valor_multa_edit').on('focus', function() {
+// $('#valor_multa_pago').on('focus', function() {
 //     //Calcular o valor total
-//     valorMultaOld = Number($('#valor_pago').val()) - Number($(this).val());
+//     valorMultaPagoOld = Number($('#valor_pago_pago').val()) - Number($(this).val());
 // });
-
-// Método para dar baixa no débito em aberto
-$(document).on('click', '#btnCloseDebitoAberto', function () {
-    // Recuperando o id do débito
-    idDebito = tableDebitosAbertos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-
-    // Requisição ajax
-    jQuery.ajax({
-        type: 'PUT',
-        url: '/index.php/seracademico/vestibulando/financeiro/closeDebitoAberto/' + idDebito,
-        datatype: 'json'
-    }).done(function (retorno) {
-        if(retorno.success) {
-            tableDebitosAbertos.ajax.reload();
-            tableDebitosPagos.ajax.reload();
-            table.ajax.reload();
-
-            swal(retorno.msg, "Click no botão abaixo!", "success");
-        } else {
-            swal(retorno.msg, "Click no botão abaixo!", "error");
-        }
-    });
-});
 
 // Função para calcular o valor total
-function calculoValorTotal()
+function calculoValorTotalPago()
 {
     // variáveis de uso
     var valorDebito, valorDeconto, valorTotal, valorFinal, valorProvFinal;
 
     // Recebendo e tratando as entradas
-    valorDeconto = Number($('#valor_desconto_editar').val());
-    valorDebito  = Number($('#valor_debito_editar').val());
-    valorTotal   = Number($("#valor_pago_edit").val());
+    valorDeconto = Number($('#valor_desconto_pago').val());
+    valorDebito  = Number($('#valor_debito_pago').val());
+    valorTotal   = Number($("#valor_pago_pago").val());
 
     // Regra de verificação
     if(valorTotal == 0 || !valorTotal) {
@@ -290,7 +264,7 @@ function calculoValorTotal()
     }
 
     // Calculando o valor final
-    $('#valor_pago_edit').val(valorFinal.toFixed(2)); // get the current value of the input field.
+    $('#valor_pago_pago').val(valorFinal.toFixed(2)); // get the current value of the input field.
 }
 
 // Função para calcular o valor do juros
@@ -299,32 +273,24 @@ function calcularValorJurosEdit()
     // Variáveis úteis
     var valorJuros, valorFinal;
 
-    // Recalculando o valor Total
-    calculoValorTotal();
-    calcularValorMultaEdit();
-
     // Recebendo e tratando as entradas
-    valorJuros = Number($('#valor_juros_edit').val());
-    valorFinal = Number($('#valor_pago_edit').val());
+    valorJuros = Number($('#valor_juros_pago').val());
+    valorFinal = Number($('#valor_pago_pago').val());
 
     // Setando com o novo valor
-    $('#valor_pago_edit').val((valorFinal + valorJuros));
+    $('#valor_pago_pago').val(((valorFinal - valorJurosPagoOld) + valorJuros));
 }
 
 // Função para calcular o valor da multa
-function calcularValorMultaEdit()
+function calcularValorMultaPago()
 {
     // Variáveis úteis
     var valorMulta, valorFinal;
 
-    // Recalculando o valor Total
-    calculoValorTotal();
-    calcularValorJurosEdit();
-
     // Recebendo e tratando as entradas
-    valorMulta = Number($('#valor_multa_edit').val());
-    valorFinal = Number($('#valor_pago_edit').val());
+    valorMulta = Number($('#valor_multa_pago').val());
+    valorFinal = Number($('#valor_pago_pago').val());
 
     // Setando com o novo valor
-    $('#valor_pago_edit').val((valorFinal + valorMulta));
+    $('#valor_pago_pago').val(((valorFinal - valorMultaPagoOld) + valorMulta));
 }

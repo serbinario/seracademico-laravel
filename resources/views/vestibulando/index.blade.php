@@ -26,7 +26,6 @@
 @stop
 
 @section('content')
-
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
@@ -44,7 +43,7 @@
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
-                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), $vestibularAtivo[0]->id ?? '', array('class' => 'form-control')) !!}
+                            {!! Form::select('vestibularSearch', (['' => 'Todos os vestibulares'] + $loadFields['graduacao\\vestibular']->toArray()), isset($vestibularAtivo[0]) ? $vestibularAtivo[0]->id : '', array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
@@ -107,6 +106,7 @@
     @include('vestibulando.modal_debitos')
     @include('vestibulando.modal_debitos_abertos_store')
     @include('vestibulando.modal_debitos_abertos_update')
+    @include('vestibulando.modal_debitos_pagos_update')
 @stop
 
 @section('javascript')
@@ -116,6 +116,7 @@
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_store.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_update.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_pagos_update.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format ( d ) {
@@ -311,7 +312,7 @@
                         @if((Auth::check() && Auth::user()->is('admin')))
                             swal({
                                 title: "Período de inscrições encerrado, deseja continuar ?",
-                                text: "Não existe nenhum vestibular disponível!",
+                                text: "",
                                 type: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "#DD6B55",

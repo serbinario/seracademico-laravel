@@ -254,8 +254,7 @@ class VestibularController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return $this|array|\Illuminate\Http\RedirectResponse
+     * @return mixed
      */
     public function getByValidDate()
     {

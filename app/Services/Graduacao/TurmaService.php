@@ -346,7 +346,7 @@ class TurmaService
         return true;
     }
 
-    /**
+    /**[RF017-RN004]
      * Método responsável por vincular as disciplinas
      * do currículo do período em questão na turma.
      *
@@ -508,6 +508,23 @@ class TurmaService
         if(!$objTurma && !$objDisciplina) {
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
+
+        # Recuperando a turma da disciplina
+        $turmDisciplina = $objTurma->disciplinas->filter(function ($disciplina) use($objDisciplina) {
+            return $disciplina->id == $objDisciplina->id;
+        });
+
+        # Recuperando o pivot
+        $turmaDisciplinaPivot = $turmDisciplina->first()->pivot;
+
+        # Removendo os diários
+        $turmaDisciplinaPivot->diarios->each(function ($item, $key) {
+            # Removendo os diários
+            $item->delete();
+
+            # Não terá retorno
+            return false;
+        });
 
         #Incluindo e salvando a disciplina
         $objTurma->disciplinas()->detach($objDisciplina->id);
