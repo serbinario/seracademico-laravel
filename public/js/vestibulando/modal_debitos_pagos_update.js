@@ -108,7 +108,7 @@ function builderHtmlFieldsDebitosPagos (dados) {
 
             // Tratando a baixa
             if(retorno.data.pago == 1) {
-                $('#pago').attr('checked', true).attr('disabled', true);
+                $('#pago').prop('checked', true).attr('disabled', true);
             }
 
             // Abrindo o modal de inserir disciplina
