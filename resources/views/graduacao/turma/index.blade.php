@@ -181,7 +181,7 @@
         /*Responsável em abrir modal de horários*/
         $(document).on("click", '#modal-horario', function () {
             // declaração de variáveis locais
-            var nomeCurso, codCurriculo, anoCurriculo;
+            var nomeCurso, codCurriculo, semestre;
 
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
@@ -189,14 +189,14 @@
             periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
-            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
 
             // setando a descrição
             $('#thTurma').text(codigo);
             $('#thPeriodo').text(periodo);
             $('#thCurriculo').text(codCurriculo);
             $('#thCurso').text(nomeCurso);
-            $('#thAno').text(anoCurriculo);
+            $('#thSemestre').text(semestre);
 
             //Executando as grids
             runTableDisciplina(idTurma);
@@ -210,7 +210,7 @@
         /*Responsável em abrir modal de notas*/
         $(document).on("click", '#modal-notas', function () {
             // declaração de variáveis locais
-            var nomeCurso, codCurriculo, anoCurriculo;
+            var nomeCurso, codCurriculo, semestre;
 
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
@@ -218,14 +218,14 @@
             codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
-            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
 
             // setando a descrição
             $('#tnTurma').text(codigo);
             $('#tnPeriodo').text(periodo);
             $('#tnCurriculo').text(codCurriculo);
             $('#tnCurso').text(nomeCurso);
-            $('#tnAno').text(anoCurriculo);
+            $('#tnSemestre').text(semestre);
 
             //Executando as grids
             runTableNotas(idTurma);
@@ -234,7 +234,7 @@
         /*Responsável em abrir modal de frequencias*/
         $(document).on("click", '#modal-frequencias', function () {
             // declaração de variáveis locais
-            var nomeCurso, codCurriculo, anoCurriculo;
+            var nomeCurso, codCurriculo, semestre;
 
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
@@ -242,14 +242,14 @@
             codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
-            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
 
             // setando a descrição
             $('#tfTurma').text(codigo);
             $('#tfPeriodo').text(periodo);
             $('#tfCurriculo').text(codCurriculo);
             $('#tfCurso').text(nomeCurso);
-            $('#tfAno').text(anoCurriculo);
+            $('#tfSemestre').text(semestre);
 
             //Executando as grids
             runTableFrequencias(idTurma);
@@ -259,7 +259,7 @@
         /*Responsável em abrir modal de frequencias*/
         $(document).on("click", '#btnModalDiarioAula', function () {
             // declaração de variáveis locais
-            var nomeCurso, codCurriculo, anoCurriculo;
+            var nomeCurso, codCurriculo, semestre;
 
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
@@ -267,14 +267,14 @@
             codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
-            anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
 
             // setando a descrição
             $('#daTurma').text(codigo);
             $('#daPeriodo').text(periodo);
             $('#daCurriculo').text(codCurriculo);
             $('#daCurso').text(nomeCurso);
-            $('#daAno').text(anoCurriculo);
+            $('#daSemestre').text(semestre);
 
             //Executando as grids
             runTableDiariosAulas(idTurma);

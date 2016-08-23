@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span><strong>Ano: </strong><p id="thAno"></p></span>
+                        <span><strong>Semestre: </strong><p id="thSemestre"></p></span>
                     </div>
                 </div>
 

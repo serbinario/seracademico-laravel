@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span><strong>Ano: </strong><p id="tfAno"></p></span>
+                        <span><strong>Semestre: </strong><p id="tfSemestre"></p></span>
                     </div>
                 </div>
 
