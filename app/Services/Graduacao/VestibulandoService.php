@@ -727,10 +727,10 @@ class VestibulandoService
     public function updateInclusao($dados, $idVestibulando)
     {
         # Recuperando o semestre vigente
-        $semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
+        //$semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
 
         # variável que armazenará a mensagem de retorno
-        $mensagem = "";
+        //$mensagem = "";
 
         # Recuperando o vestibulando e o currículo
         $vestibulando = $this->repository->find($idVestibulando);
@@ -778,13 +778,13 @@ class VestibulandoService
             
             # matriculando o aluno
             # Regra de negócio para o semestre
-            $aluno->semestres()->attach($semestreVigente->id);
+            $aluno->semestres()->attach($dados['semestre_id']);
 
             #Adicionando o currículo ao aluno
             $aluno->curriculos()->attach($curriculo[0]->id);
 
             # cadastrando a situação
-            $aluno->semestres()->find($semestreVigente->id)->pivot->situacoes()
+            $aluno->semestres()->find($dados['semestre_id'])->pivot->situacoes()
                 ->attach(1, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo[0]->id]);
 
             # setando a mensagem

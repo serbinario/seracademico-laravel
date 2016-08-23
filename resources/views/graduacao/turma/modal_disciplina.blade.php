@@ -9,11 +9,19 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <!-- Linha de descrição -->
                 <div class="col-md-12 infModal">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <span><strong>Turma: </strong><p id="thTurma"></p></span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span><strong>Período: </strong><p id="thPeriodo"></p></span>
+                    </div>
+
+                    <div class="col-md-2">
                         <span><strong>Currículo: </strong><p id="thCurriculo"></p></span>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <span><strong>Curso: </strong><p id="thCurso"></p></span>
                     </div>
 

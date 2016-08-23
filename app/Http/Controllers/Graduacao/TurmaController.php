@@ -104,9 +104,10 @@ class TurmaController extends Controller
                 # Filtrando por semestre
                 if ($request->has('semestre')) {
                     $query->where('fac_semestres.id', '=', $request->get('semestre'));
-                } else if(count($semestres) == 2) {
-                    $query->where('fac_semestres.id', '=', $semestres[0]->id);
                 }
+                //else if(count($semestres) == 2) {
+                //    $query->where('fac_semestres.id', '=', $semestres[0]->id);
+                //}
 
                 # Filtrando por situação
                 if ($request->has('periodo')) {

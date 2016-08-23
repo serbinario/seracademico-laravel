@@ -312,12 +312,12 @@ class AlunoService
 
         # Verificando se o vestibular possui vestibulando
         if(!$lastIncricao) {
-            return $semestreAtual->nom . '0001';
+            return $semestreAtual->nome . '0001';
         }
 
         # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
         # para nova inscrição
-        $lastIncricao = (int) $lastIncricao;
+        $lastIncricao = (int) (substr($lastIncricao, -4));
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
 
         # retorno

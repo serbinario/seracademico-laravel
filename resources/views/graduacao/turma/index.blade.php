@@ -185,12 +185,15 @@
 
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
             anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
 
             // setando a descrição
+            $('#thTurma').text(codigo);
+            $('#thPeriodo').text(periodo);
             $('#thCurriculo').text(codCurriculo);
             $('#thCurso').text(nomeCurso);
             $('#thAno').text(anoCurriculo);
@@ -212,11 +215,14 @@
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
             periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
             anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
 
             // setando a descrição
+            $('#tnTurma').text(codigo);
+            $('#tnPeriodo').text(periodo);
             $('#tnCurriculo').text(codCurriculo);
             $('#tnCurso').text(nomeCurso);
             $('#tnAno').text(anoCurriculo);
@@ -233,11 +239,14 @@
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
             periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
             anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
 
             // setando a descrição
+            $('#tfTurma').text(codigo);
+            $('#tfPeriodo').text(periodo);
             $('#tfCurriculo').text(codCurriculo);
             $('#tfCurso').text(nomeCurso);
             $('#tfAno').text(anoCurriculo);
@@ -255,11 +264,14 @@
             //Recuperando o id da turma selecionada
             idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
             periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
             nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
             codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
             anoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().ano;
 
             // setando a descrição
+            $('#daTurma').text(codigo);
+            $('#daPeriodo').text(periodo);
             $('#daCurriculo').text(codCurriculo);
             $('#daCurso').text(nomeCurso);
             $('#daAno').text(anoCurriculo);
