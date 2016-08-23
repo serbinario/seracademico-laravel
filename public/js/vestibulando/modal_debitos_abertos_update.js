@@ -105,12 +105,7 @@ function builderHtmlFieldsDebitosEditar (dados) {
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
-
-            // Tratando a baixa
-            if(retorno.data.pago == 1) {
-                $('#pago').attr('checked', true).attr('disabled', true);
-            }
-
+            
             // Abrindo o modal de inserir disciplina
             $("#modal-debitos-abertos-update").modal({show : true});
         } else {
