@@ -126,8 +126,12 @@
                                     @else
                                         <a class="collection-item">
                                             <div class="row">
-                                                <div class="col s4"><b>Velume</b></div>
-                                                <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. v. @endif</div>
+                                                <div class="col s4"><b>Edição</b></div>
+                                                <div class="col s8">
+                                                    @if($exemplar['vol_periodico'])v. {{$exemplar['vol_periodico']}}. @endif
+                                                    @if($exemplar['edicao'])n. {{$exemplar['edicao']}}. @endif
+                                                        @if($exemplar['ano']){{$exemplar['ano']}}. @endif
+                                                </div>
                                             </div>
                                         </a>
                                     @endif
@@ -274,6 +278,7 @@
                                                 <th>Edição</th>
                                             @else
                                                 <th>Volume</th>
+                                                <th>Número</th>
                                             @endif
                                             <th>Ano</th>
                                             @if($exemplar['acervo']['tipo_periodico'] == '1')
@@ -302,9 +307,12 @@
                                                     @if($e->tipo_periodico == '1' && $e->edicao)
                                                         {{$e->edicao}}. ed.
                                                     @elseif($e->tipo_periodico == '2' && $e->edicao)
-                                                        {{$e->edicao}}. v.
+                                                        v. {{$e->edicao}}
                                                     @endif
                                                 </td>
+                                                @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                                    <td>n. {{$e->edicao}}</td>
+                                                @endif
                                                 <td>@if($e->ano){{$e->ano}} @endif</td>
                                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                                     <td>{{$e->volume}}</td>
@@ -364,38 +372,46 @@
                                     @endif
                                 @endif
                                 @if(count($exemplar['acervo']['primeiraEntrada']) <= 0 && count($exemplar['acervo']['segundaEntrada']) <= 0)
-                                    <b><?php
-                                            $array = explode(' ', $exemplar['acervo']['titulo']);
-                                            $paravra = "";
+
+                                        <?php
+                                        $array = explode(' ', $exemplar['acervo']['titulo']);
+                                        $paravra = "";
 
                                         if (strlen($array[0]) <= 1) {
-                                            $paravra .= strtoupper($array[0] ." ". $array[1])." ";
+                                            $paravra .= strtoupper($array[0] . " " . $array[1]) . " ";
                                             for ($i = 2; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
-                                                if($i >= count($array)) {
+                                                if ($i >= count($array)) {
                                                     $paravra .= "";
                                                 } else {
                                                     $paravra .= " ";
                                                 }
                                             };
                                         } else {
-                                            $paravra .= strtoupper($array[0])." ";
+                                            $paravra .= strtoupper($array[0]) . " ";
                                             for ($i = 1; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
-                                                if($i >= count($array)) {
+                                                if ($i >= count($array)) {
                                                     $paravra .= "";
                                                 } else {
                                                     $paravra .= " ";
                                                 }
                                             };
                                         }
-                                        echo $paravra;
-                                        ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                        //echo $paravra;
+                                        ?>
+
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                          <b> {{$paravra}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif  </b>
+                                    @elseif($exemplar['acervo']['tipo_periodico'] == '2')
+                                          {{mb_strtoupper($paravra)}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtoupper($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                    @endif
+
                                 @else
                                     <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
                                 @endif
-                                @if($exemplar['edicao'])
-                                    {{$exemplar['edicao']}}. @if($exemplar['acervo']['tipo_periodico'] == '1') ed.@else v.@endif
+                                @if($exemplar['edicao'] && $exemplar['acervo']['tipo_periodico'] == '1')
+                                    {{$exemplar['edicao']}}. ed.
                                     @if($exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada']) ampl.
                                     @elseif($exemplar['revisada'] && !$exemplar['ampliada'] && !$exemplar['atualizada']) rev.
                                     @elseif($exemplar['atualizada'] && !$exemplar['ampliada'] && !$exemplar['revisada']) atual.
@@ -404,6 +420,9 @@
                                     @elseif($exemplar['revisada'] && $exemplar['atualizada']) rev. e atual.
                                     @elseif($exemplar['revisada'] && $exemplar['atualizada'] && $exemplar['ampliada']) ampl. e rev. e atual.
                                     @endif
+                                @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                    v. {{$exemplar['vol_periodico']}}, n. {{$exemplar['edicao']}},
                                 @endif
                                 @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
                                 @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif

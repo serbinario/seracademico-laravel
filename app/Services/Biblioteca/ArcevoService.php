@@ -329,18 +329,34 @@ class ArcevoService
         //Pegando o título da obra
         $titulo = $data['titulo'];
 
-        //Recuperando um responsável pelo id
-        $respo = $this->responsavelRepository->find($data['autor']);
+        //Artigos definidos para validação do título
+        $artigosDefinidos = array("A", "O", "AS", "OS", "a", "o", "as", "os", "As", "Os");
 
-        //Cortando os sobrenome q possuem vírgulas
-        $exp = explode(',', $respo->sobrenome);
+        //Valida se irá fazer a consulta do cdd pelo nome do outro ou pelo título
+        if(isset($data['autor']) && $data['autor'] != "") {
+            //Recuperando um responsável pelo id
+            $respo = $this->responsavelRepository->find($data['autor']);
 
-        //Validação do sobrenome pois se caso houver , o mesmo deve ser pego inteiramento, caso contrário cortar o sobrenome sepando-os por espaço
-        if(count($exp) > 1) {
-            $nome = $respo->sobrenome;
+            //Cortando os sobrenome q possuem vírgulas
+            $exp = explode(',', $respo->sobrenome);
+
+            //Validação do sobrenome pois se caso houver , o mesmo deve ser pego inteiramento, caso contrário cortar o sobrenome sepando-os por espaço
+            if(count($exp) > 1) {
+                $nome = $respo->sobrenome;
+            } else {
+                $exp2 = explode(' ', $respo->sobrenome);
+                $nome = $exp2[0];
+            }
         } else {
-            $exp2 = explode(' ', $respo->sobrenome);
-            $nome = $exp2[0];
+            //Cortando os sobrenome que possuem vírgulas
+            $exp = explode(' ', $titulo);
+
+            //Validação do sobrenome pois se caso houver , o mesmo deve ser pego inteiramento, caso contrário cortar o sobrenome sepando-os por espaço
+            if(count($exp) > 1 && in_array($exp[0], $artigosDefinidos)) {
+                $nome = $exp[1];
+            } else {
+                $nome = $exp[0];
+            }
         }
 
         //Pegando apenas as duas primerias letras do sobrenome
@@ -369,7 +385,7 @@ class ArcevoService
 
         //Valida se o título começa com artigo ou n, pois o artigo n é usado no cutter, e sim a primeira letra da primeira palavra do título
         if(count($expTitulo) > 0) {
-            if(strlen($expTitulo[0]) <= 1) {
+            if(strlen($expTitulo[0]) <= 2 && in_array($expTitulo[0], $artigosDefinidos)) {
                 $primTitulo = strtolower(substr($expTitulo[1], 0, 1));
             } else {
                 $primTitulo = strtolower(substr($expTitulo[0], 0, 1));
@@ -377,7 +393,12 @@ class ArcevoService
         }
 
         //Montando o cutter;
-        $cutter = $prim.$codigo.$primTitulo;
+        if(isset($data['autor']) && $data['autor'] != "") {
+            $cutter = $prim.$codigo.$primTitulo;
+        } else {
+            $cutter = strtoupper($primTitulo).$codigo;
+        }
+        
 
         #retorno
         return $cutter;
