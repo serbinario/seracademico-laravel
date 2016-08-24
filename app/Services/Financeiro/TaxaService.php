@@ -28,8 +28,13 @@ class TaxaService
      */
     public function find($id)
     {
+        # Relacionamentos
+        $relacionamentos = [
+            'beneficios'
+        ];
+
         #Recuperando o registro no banco de dados
-        $taxa = $this->repository->find($id);
+        $taxa = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$taxa) {

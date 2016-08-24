@@ -58,6 +58,14 @@ class VestibulandoFinanceiro extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function vestibulando()
+    {
+        return $this->belongsTo(Vestibulando::class, 'vestibulando_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function formaPagamento()
     {
         return $this->belongsTo(FormaPagamento::class, 'forma_pagamento_id');

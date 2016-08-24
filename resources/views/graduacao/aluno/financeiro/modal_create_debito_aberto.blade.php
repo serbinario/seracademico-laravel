@@ -48,6 +48,33 @@
                             <input type="text" name="ano_referencia" id="ano_referencia" class="form-control">
                         </div>
                     </div>
+
+                    <hr>
+
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-md-10">
+                            <select name="beneficio_id_debito" class="form-control" id="beneficio_id_debito">
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button id="btnAddBeneficio" class="btn btn-primary">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="grid-debitos-beneficios" class="display table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Benefício</th>
+                                    <th style="width:10%;">Valor</th>
+                                    <th style="width: 5%;">Ação</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

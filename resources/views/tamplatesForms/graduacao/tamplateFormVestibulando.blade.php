@@ -732,23 +732,23 @@
                         </div>
                     </div>
 
-                    @if(isset($aluno))
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group col-md-4">
-                                <div class="checkbox checkbox-primary">
-                                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
-                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                                    @else
-                                        {!! Form::hidden('gerar_inscricao', 0) !!}
-                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
-                                    @endif
-                                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
+                    {{--@if(isset($aluno))--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div class="form-group col-md-4">--}}
+                                {{--<div class="checkbox checkbox-primary">--}}
+                                    {{--@if(isset($aluno) && $aluno->gerar_inscricao == 1)--}}
+                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                                    {{--@else--}}
+                                        {{--{!! Form::hidden('gerar_inscricao', 0) !!}--}}
+                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}--}}
+                                    {{--@endif--}}
+                                    {{--{!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--@endif--}}
                 </div>
             </div>
             {{-- Fim da aba vestibular --}}

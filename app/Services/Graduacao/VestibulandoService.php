@@ -4,6 +4,7 @@ namespace Seracademico\Services\Graduacao;
 
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Entities\Graduacao\Vestibulando;
+use Seracademico\Entities\Graduacao\VestibulandoFinanceiro;
 use Seracademico\Entities\Graduacao\VestibulandoNotaVestibular;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
@@ -227,7 +228,7 @@ class VestibulandoService
         # Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoImagem($data, $vestibulando);
-        $this->tratamentoInscricao($data, $id); // [RFV003-RN004]
+        //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -403,51 +404,83 @@ class VestibulandoService
      * @return array
      * @throws \Exception
      */
-    public function tratamentoInscricao(array &$data, $id = "") : array
-    {
-        # Variáveis
-        $idVestibular = 0;
-
-        # Validando o parâmetro
-        if(isset($data['gerar_inscricao']) && $data['gerar_inscricao'] == 1) {
-            # Verificando se o id foi passado
-            if($id) {
-                # Recuperando o vestibulando e o id do vestibular
-                $vestibulando = $this->repository->find($id);
-                $idVestibular = $vestibulando->vestibular->id;
-
-                # Query para recuperar o débito de inscrição do vestibulando
-                $row = \DB::table('fac_vestibulandos')
-                    ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-                    ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
-                    ->join('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
-                    ->where('fin_tipos_taxas.id', 1)
-                    ->where('fac_vestibulandos_financeiros.pago', 1)
-                    ->where('fac_vestibulandos.id', $vestibulando->id)
-                    ->get();
-
-                # Verificando se o débito de inscrição for pago
-                if(count($row) == 0) {                    
-                    # Exception
-                    throw new \Exception('Dados informados cadastrados, porem só poderá ser gerado a inscrição se o debito do vestibular for pago.');
-                }
-
-                # Veriicando se o vetibulando já tem inscrição gerada
-                if($vestibulando->gerar_inscricao == 1) {
-                    unset($data['gerar_inscricao']);
-                    return $data;
-                }
-            }
-//            else {
-//                $idVestibular = $data['vestibular_id'];
+//    public function tratamentoInscricao(array &$data, $id = "") : array
+//    {
+//        # Variáveis
+//        $idVestibular = 0;
+//
+//        # Validando o parâmetro
+//        if(isset($data['gerar_inscricao']) && $data['gerar_inscricao'] == 1) {
+//            # Verificando se o id foi passado
+//            if($id) {
+//                # Recuperando o vestibulando e o id do vestibular
+//                $vestibulando = $this->repository->find($id);
+//                $idVestibular = $vestibulando->vestibular->id;
+//
+//                # Query para recuperar o débito de inscrição do vestibulando
+//                $row = \DB::table('fac_vestibulandos')
+//                    ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+//                    ->join('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+//                    ->join('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
+//                    ->where('fin_tipos_taxas.id', 1)
+//                    ->where('fac_vestibulandos_financeiros.pago', 1)
+//                    ->where('fac_vestibulandos.id', $vestibulando->id)
+//                    ->get();
+//
+//                # Verificando se o débito de inscrição for pago
+//                if(count($row) == 0) {
+//                    # Exception
+//                    throw new \Exception('Dados informados cadastrados, porem só poderá ser gerado a inscrição se o debito do vestibular for pago.');
+//                }
+//
+//                # Veriicando se o vetibulando já tem inscrição gerada
+//                if($vestibulando->gerar_inscricao == 1) {
+//                    unset($data['gerar_inscricao']);
+//                    return $data;
+//                }
 //            }
+////            else {
+////                $idVestibular = $data['vestibular_id'];
+////            }
+//
+//            # Gerando a inscrição
+//            $data['inscricao'] = $this->gerarInscricao($idVestibular);
+//        }
+//
+//        # retorno
+//        return $data;
+//    }
 
-            # Gerando a inscrição
-            $data['inscricao'] = $this->gerarInscricao($idVestibular);
+    /**
+     * Método Responsável por gerar o número de inscrição
+     * se por acaso o débito do vestibular for págo
+     *
+     * @param VestibulandoFinanceiro $vestibulandoFinanceiro
+     * @param Vestibulando $vestibulando
+     * @return bool
+     */
+    public function tratamentoInscricao(VestibulandoFinanceiro $vestibulandoFinanceiro, Vestibulando $vestibulando)
+    {
+        # Verificando se a taxa foi informada, e se o débito foi págo
+        if(isset($vestibulandoFinanceiro->taxa->id) && $vestibulandoFinanceiro->pago && !$vestibulando->inscricao) {
+            $query = \DB::table('fin_taxas')
+                ->join('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
+                ->where('fin_taxas.id', $vestibulandoFinanceiro->taxa->id)
+                ->where('fin_tipos_taxas.id', 1)
+                ->get();
+
+            # Verificanado se houve retorno
+            if(count($query) > 0) {
+                $vestibulando->inscricao = $this->gerarInscricao($vestibulando->vestibular->id);
+                $vestibulando->save();
+            }
+
+            # Retorno
+            return true;
         }
 
-        # retorno
-        return $data;
+        # Retorno
+        return false;
     }
 
     /**
@@ -840,11 +873,11 @@ class VestibulandoService
         # Regras de negócios
         $this->tratamentoCampos($dados);
 
-        # Regra de negócio para págo
-        //$dados['pago'] = 0;
-
         # Cadastrando
-        $this->financeiroRepository->create($dados);
+        $vestibulandoFinanceiro = $this->financeiroRepository->create($dados);
+
+        # Regras de negócios
+        $this->tratamentoInscricao($vestibulandoFinanceiro, $vestibulandoFinanceiro->vestibulando);
 
         # Retorno
         return true;
@@ -865,7 +898,10 @@ class VestibulandoService
         $this->tratamentoCampos($dados);
 
         # Atualizando
-        $this->financeiroRepository->update($dados, $id);
+        $vestibulandoFinanceiro = $this->financeiroRepository->update($dados, $id);
+
+        # Regras de negócios
+        $this->tratamentoInscricao($vestibulandoFinanceiro, $vestibulandoFinanceiro->vestibulando);
 
         # Retorno
         return true;

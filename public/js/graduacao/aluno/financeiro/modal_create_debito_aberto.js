@@ -132,12 +132,48 @@ function getInfoTaxa(idTaxa)
            $('#ano_referencia').val(now.getFullYear());
            $('#data_vencimento').val((retorno.data.dia_vencimento
                    ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
+
+           // Carregando o select de benefícios
+           loadFieldBeneficios(retorno.data.id);
        } else {
            swal(retorno.msg, "Click no botão abaixo!", "error");
        }        
     });
 }
 
+// Função para carregar os benefícios a partir da taxa
+function loadFieldBeneficios(idTaxa)
+{
+    // Definindo os models
+    var dados =  {
+        'models' : [
+            'Financeiro\\Beneficio|byTaxa,' + idTaxa
+        ]
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        data: dados,
+        url: '/index.php/seracademico/financeiro/aluno/getLoadFields',
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Verificando o retorno da requisição
+        if(retorno) {
+            // Variáveis que armazenaram o html
+            var htmlBeneficio     = ",<option value=''>Selecione um benefício</option>";
+
+            // Percorrendo o array de taxaas
+            for (var i = 0; i < retorno['financeiro\\beneficio'].length; i++) {
+                htmlBeneficio += "<option value='" + retorno['financeiro\\beneficio'][i].id + "'>" + retorno['financeiro\\beneficio'][i].nome + "</option>";
+            }
+
+            // Carregado os selects
+            $("#beneficio_id_debito option").remove();
+            $("#beneficio_id_debito").append(htmlBeneficio);
+        }
+    });
+}
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#btnDeleteHistorico', function () {
