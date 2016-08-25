@@ -252,6 +252,17 @@ class VestibularController extends Controller
         return \PDF::loadView('reports.vestibulares.relatorio2')->stream();
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function quantidadesGerais(Request $request)
+    {
+        //return \PDF::loadView('reports.vestibulares.quantidadesGerais')->stream();
+        return view('reports.vestibulares.quantidadesGerais');
+    }
+
 
     /**
      * @return mixed

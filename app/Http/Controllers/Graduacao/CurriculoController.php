@@ -401,8 +401,8 @@ class CurriculoController extends Controller
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @param $idDisciplina
+     * @return mixed
      */
     public function getDisciplina($idDisciplina)
     {
@@ -422,8 +422,53 @@ class CurriculoController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $result]);
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) { 
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function reportView()
+    {
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #Retorno para view
+        return view('graduacao.curriculo.report', compact('loadFields'));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function reportById($id)
+    {
+        try {
+            # Fazendo a consulta no banco de dados
+            $query = \DB::table('fac_disciplinas')
+                ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->join('fac_disciplinas as preReq1', 'preReq1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+                ->where('fac_curriculos.id', $id)
+                ->select([
+                    'fac_curriculos.codigo as codigoCurriculo',
+                    'fac_cursos.nome as nomeCurso',
+                    'fac_curriculo_disciplina.periodo',
+                    'fac_disciplinas.codigo',
+                    'fac_disciplinas.nome',
+                    'fac_curriculo_disciplina.carga_horaria_total as carga_horaria',
+                    'fac_curriculo_disciplina.qtd_credito',
+                    'preReq1.codigo as codPreReq1'
+                ])->get();
+
+            # retorno
+            return \PDF::loadView('reports.curriculos.curriculo', ['rows' =>  $query])->stream();
+            //return view('reports.curriculos.curriculo', ['rows' =>  $query]);
+        } catch(\Throwable $e) { dd($e->getMessage());
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 }
