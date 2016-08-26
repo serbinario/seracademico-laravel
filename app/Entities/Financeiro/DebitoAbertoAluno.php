@@ -53,6 +53,14 @@ class DebitoAbertoAluno extends Model implements Transformable
 		return $this->belongsTo(Aluno::class, 'aluno_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function boleto()
+	{
+		return $this->hasOne(Boleto::class, 'debito_id');
+	}
+
     /**
      *
      * @return \DateTime

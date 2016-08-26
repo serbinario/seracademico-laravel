@@ -173,19 +173,19 @@ function getInfoDebitoAberto(idDebitoAberto)
     });
 }
 
-// Evento para o click no botão de remover disciplina
-$(document).on('click', '#btnDeleteHistorico', function () {
-    // recuperando o id do aluno_semestre
-    var idAlunoSemestre = tableHistorico.row($(this).parent().parent().index()).data().idAlunoSemestre;
-
-    // Requisição ajax
-    jQuery.ajax({
-        type: 'POST',
-        url: '/index.php/seracademico/graduacao/aluno/historico/delete/' + idAlunoSemestre,
-        datatype: 'json'
-    }).done(function (retorno) {
-        table.ajax.reload();
-        tableHistorico.ajax.reload();
-        swal(retorno.msg, "Click no botão abaixo!", "success");
-    });
-});
+//// Evento para o click no botão de remover disciplina
+//$(document).on('click', '#btnDeleteHistorico', function () {
+//    // recuperando o id do aluno_semestre
+//    var idAlunoSemestre = tableHistorico.row($(this).parent().parent().index()).data().idAlunoSemestre;
+//
+//    // Requisição ajax
+//    jQuery.ajax({
+//        type: 'POST',
+//        url: '/index.php/seracademico/graduacao/aluno/historico/delete/' + idAlunoSemestre,
+//        datatype: 'json'
+//    }).done(function (retorno) {
+//        table.ajax.reload();
+//        tableHistorico.ajax.reload();
+//        swal(retorno.msg, "Click no botão abaixo!", "success");
+//    });
+//});
