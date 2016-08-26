@@ -496,7 +496,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
                 Route::get('relatorio1', ['as' => 'relatorio1', 'uses' => 'Graduacao\VestibularController@relatorio1']);
                 Route::get('relatorio2', ['as' => 'relatorio2', 'uses' => 'Graduacao\VestibularController@relatorio2']);
-                Route::get('quantidadesGerais', ['as' => 'quantidadesGerais', 'uses' => 'Graduacao\VestibularController@quantidadesGerais']);
+                //Route::get('printQuantidadesGerais', ['as' => 'printQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@printQuantidadesGerais']);
+                Route::get('viewReportQuantidadesGerais', ['as' => 'viewReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@viewReportQuantidadesGerais']);
+                Route::get('getReportQuantidadesGerais/{id}', ['as' => 'getReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@getReportQuantidadesGerais']);
             });
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {

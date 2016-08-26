@@ -11,6 +11,23 @@
             </div>
         </div>
         <div class="ibox-content">
+
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <em> {!! session('message') !!}</em>
+                </div>
+            @endif
+
+            @if(Session::has('errors'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-12">
                     {!! Form::open(['route'=>'seracademico.graduacao.curriculo.reportById', 'method' => "POST", 'id' => 'reportCurriculo', 'class' => 'form-line']) !!}

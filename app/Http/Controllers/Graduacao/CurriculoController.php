@@ -451,7 +451,7 @@ class CurriculoController extends Controller
                 ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
                 ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-                ->join('fac_disciplinas as preReq1', 'preReq1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+                ->leftJoin('fac_disciplinas as preReq1', 'preReq1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
                 ->where('fac_curriculos.id', $id)
                 ->select([
                     'fac_curriculos.codigo as codigoCurriculo',
@@ -464,10 +464,15 @@ class CurriculoController extends Controller
                     'preReq1.codigo as codPreReq1'
                 ])->get();
 
+            # Verificando a consulta
+            if(count($query) == 0) {
+                throw new \Exception('Nenhum dado foi encontrado!');
+            }
+
             # retorno
             return \PDF::loadView('reports.curriculos.curriculo', ['rows' =>  $query])->stream();
             //return view('reports.curriculos.curriculo', ['rows' =>  $query]);
-        } catch(\Throwable $e) { dd($e->getMessage());
+        } catch(\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

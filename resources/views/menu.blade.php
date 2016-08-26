@@ -47,7 +47,7 @@
     {{--<link rel="stylesheet" href="{{ asset('/css/plugins/zTree/demo.css')  }}">--}}
 
 
-            <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
+    <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     @yield('css')
@@ -116,7 +116,7 @@
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
                                         <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="flaticon-employment-test"></i> Vestibulandos</a></li>
-                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.quantidadesGerais') }}"><i class="flaticon-employment-test"></i> Vestibular Geral Quantitativo</a></li>
+                                        <li><a href="{{ route('seracademico.vestibular.relatorios.viewReportQuantidadesGerais') }}"><i class="flaticon-employment-test"></i> Vestibular Geral Quantitativo</a></li>
                                         {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                                     </ul>
                                 </li>
@@ -147,19 +147,19 @@
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
                                 @endpermission
 
-                                <li>
-                                    <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level collapse">
-                                        <li><a target="_blank" href="{{ route('seracademico.graduacao.curriculo.reportView') }}"><i class="flaticon-employment-test"></i> Currúculos</a></li>
-                                        {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
-                                    </ul>
-                                </li>
-
                                 @permission('graduacao.turma.select')
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 @endpermission
 
                                 <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">library_books</i> Planos de Ensino</a></li>
+
+                                <li>
+                                    <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="{{ route('seracademico.graduacao.curriculo.reportView') }}"><i class="flaticon-employment-test"></i> Currúculos</a></li>
+                                        {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         @endpermission
@@ -355,7 +355,8 @@
 
 <!-- Flot -->
 <script src="{{ asset('js/plugins/flot/jquery.flot.js') }}"></script>
-<script src="{{ asset('js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+<script src="{{ asset('js/plugins/flot/jquery.flot.categories.js') }}"></script>
+{{--<script src="{{ asset('js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>--}}
 <script src="{{ asset('js/plugins/flot/jquery.flot.resize.js') }}"></script>
 <script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }} "></script>
 <script src="{{ asset('js/plugins/flot/jquery.flot.time.js') }}"></script>
