@@ -156,7 +156,7 @@
                                 <li>
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <li><a href="{{ route('seracademico.graduacao.curriculo.reportView') }}"><i class="flaticon-employment-test"></i> Currúculos</a></li>
+                                        <li><a href="{{ route('seracademico.graduacao.curriculo.reportView') }}"><i class="flaticon-employment-test"></i> Currículos</a></li>
                                         {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                                     </ul>
                                 </li>
