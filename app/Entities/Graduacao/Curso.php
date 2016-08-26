@@ -55,7 +55,8 @@ class Curso extends Model implements Transformable
         'cordenador_id',
         'tipo_nivel_sistema_id',
         'carga_horaria',
-        'ativo'
+        'ativo',
+        'coordenador_id'
     ];
 
 //    /*
@@ -140,7 +141,7 @@ class Curso extends Model implements Transformable
      */
     public function setDataDouRecAttribute($value)
     {
-        $this->attributes['data_dou_rec'] = SerbinarioDateFormat::toUsa($value);;
+        $this->attributes['data_dou_rec'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**

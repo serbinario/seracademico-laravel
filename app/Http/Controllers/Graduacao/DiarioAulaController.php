@@ -31,7 +31,7 @@ class DiarioAulaController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Professor',
+        'Professor|getValues',
         'Sala'
     ];
 
