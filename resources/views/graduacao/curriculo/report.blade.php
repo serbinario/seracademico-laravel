@@ -30,7 +30,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::open(['route'=>'seracademico.graduacao.curriculo.reportById', 'method' => "POST", 'id' => 'reportCurriculo', 'class' => 'form-line']) !!}
+                    {!! Form::open(['route'=>'seracademico.graduacao.curriculo.reportById', 'method' => "POST", 'id' => 'reportCurriculo', 'class' => 'form-inline']) !!}
                     <div class="form-group">
                             {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['graduacao\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         </div>
