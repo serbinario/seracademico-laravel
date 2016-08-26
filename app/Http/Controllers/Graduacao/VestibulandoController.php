@@ -187,7 +187,7 @@ class VestibulandoController extends Controller
                 foreach ($vestibulando->debitos as $debito) {
                     # [RFV003-RN012] : Documento de Requisitos
                     # Verificando se a matrícula foi pága
-                    if($debito->pago && $debito->taxa->tipoTaxa->id == 1 && $vestibulando->gerar_inscricao == 1) {
+                    if($debito->pago && $debito->taxa->tipoTaxa->id == 1) {
                         $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
                         break;
                     }
