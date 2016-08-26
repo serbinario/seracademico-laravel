@@ -78,7 +78,8 @@ class ProfessorService
 
     /**
      * @param array $data
-     * @return array
+     * @return Professor
+     * @throws \Exception
      */
     public function store(array $data) : Professor
     {
@@ -98,7 +99,7 @@ class ProfessorService
         }
 
         # Recuperando a pessoa pelo cpf
-        $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+        $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
         $endereco  = null;
 
         # Verificando se a pesso já existe
