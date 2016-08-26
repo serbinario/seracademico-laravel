@@ -162,7 +162,7 @@ function getInfoDebitoAberto(idDebitoAberto)
     }).done(function (retorno) {
         if(retorno.success) {
             // Formatando os campos
-            $('#valor_parcela').val(retorno.data.taxa.valor);
+            $('#valor_total').val(retorno.data.valor_debito);
             $('#valor_debito_fechamento').val(retorno.data.valor_debito);
             $('#data_vencimento_fechamento').val(retorno.data.data_vencimento);
             $('#valor_tipo_juros').val(retorno.data.taxa.valor_juros);
