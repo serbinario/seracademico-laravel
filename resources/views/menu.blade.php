@@ -126,7 +126,7 @@
                         @endpermission
 
                         @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
-                        <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
+                        <li><a href="#"><i class="material-icons">markunread_mailbox</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
 
@@ -151,7 +151,7 @@
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 @endpermission
 
-                                <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">library_books</i> Planos de Ensino</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">line_weight</i> Planos de Ensino</a></li>
 
                                 <li>
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
@@ -164,11 +164,11 @@
                         </li>
                         @endpermission
 
-                        <li><a href="#"><i class="flaticon-folder"></i> Financeiro <span class="fa arrow"></span></a>
+                        <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
                                 <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
-                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="fa fa-university"></i> Tipos de Beneficios </a></li>
+                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
                             </ul>
                         </li>
 
@@ -364,7 +364,7 @@
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
-{{--<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>--}}
+<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

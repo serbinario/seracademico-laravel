@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-10">
         <!-- Busca por cpf, caso exista em pessoa -->
         @if(!isset($aluno))
             <div class="row">
@@ -34,17 +34,24 @@
                 {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
-
-            {{--<div class="form-group col-md-4">--}}
-                {{--{!! Form::label('situacao_id', 'Situacao') !!}--}}
-                {{--{!! Form::select('situacao_id', $loadFields['situacaoaluno'] , Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}--}}
-            {{--</div>--}}
-
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="path_image">IMAGEM</label>
-                <input name="path_image" id="path_image" type="file">
+
+    </div>
+    <div class="col-md-2">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                @if (isset($aluno) && $aluno->path_image != null)
+                    <div id="midias">
+                        <img id="logo" src="/images/{{$aluno->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                    </div>
+                @endif
+            </div>
+            <div>
+               <span class="btn btn-primary btn-xs btn-block btn-file">
+                   <span class="fileinput-new">Selecionar</span>
+                   <input type="file" name="img">
+               </span>
+                {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
     </div>
