@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="flaticon-employment-test"></i>
+                    <i class="material-icons">insert_chart</i>
                     Relatório Geral Quantitativo
                 </h4>
             </div>

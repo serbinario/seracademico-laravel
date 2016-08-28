@@ -115,8 +115,8 @@
                                 <li>
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="flaticon-employment-test"></i> Vestibulandos</a></li>
-                                        <li><a href="{{ route('seracademico.vestibular.relatorios.viewReportQuantidadesGerais') }}"><i class="flaticon-employment-test"></i> Vestibular Geral Quantitativo</a></li>
+                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="material-icons">contacts</i> Vestibulandos</a></li>
+                                        <li><a href="{{ route('seracademico.vestibular.relatorios.viewReportQuantidadesGerais') }}"><i class="material-icons">insert_chart</i> Vestibular Geral Quantitativo</a></li>
                                         {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                                     </ul>
                                 </li>
@@ -289,8 +289,8 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="text-muted text-xs block">{{ Auth::user()->name }}<b class="caret"></b></span>
                             </a>
-                            <small style="text-align: left;">Semestre {{ ParametroMatricula::getSemestreVigente()->nome ?? "" }}</small><br>
-                            <small style="text-align: left;">Escopo {{ getenv('APP_ENV') }}</small>
+                            {{--<small style="text-align: left;">Semestre {{ ParametroMatricula::getSemestreVigente()->nome ?? "" }}</small><br>--}}
+                            {{--<small style="text-align: left;">Escopo {{ getenv('APP_ENV') }}</small>--}}
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 {{-- <li><a href="profile.html">Perfil</a></li>
                                  <li><a href="contacts.html">Notificações</a></li>--}}
