@@ -94,8 +94,8 @@ function loadTableDebitosFechados (idAluno) {
             {data: 'valor_juros', name: 'fin_taxas.valor_juros'},
             {data: 'valor_debito', name: 'fin_debitos.valor_debito'},
             {data: 'mes_referencia', name: 'fin_debitos.mes_referencia'},
-            {data: 'ano_referencia', name: 'fin_debitos.ano_referencia'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'ano_referencia', name: 'fin_debitos.ano_referencia'}
+            //{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -160,8 +160,8 @@ function loadTableBoletos (idAluno) {
             {data: 'vencimento', name: 'fin_boletos.vencimento'},
             {data: 'valor_debito', name: 'fin_debitos.valor_debito'},
             {data: 'data', name: 'fin_boletos.data'},
-            {data: 'numero', name: 'fin_boletos.numero'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'numero', name: 'fin_boletos.numero'}
+            //{data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
