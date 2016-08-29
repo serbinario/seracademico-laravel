@@ -38,6 +38,7 @@
                                 <th>Número do Periódico</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
+                                <th>Link de acesso</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -48,6 +49,7 @@
                                 <th>Número do Periódico</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
+                                <th>Link de acesso</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -70,6 +72,7 @@
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
+                {data: 'link', name: 'link', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -38,7 +38,6 @@
                                 <th>Título</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
-                                <th>Link de acesso</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -48,7 +47,6 @@
                                 <th>Título</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
-                                <th>Link de acesso</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -72,7 +70,6 @@
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
                 {data: 'cdd', name: 'bib_arcevos.cdd'},
                 {data: 'qtd_exemplares', name: 'exemplares.qtd_exemplares'},
-                {data: 'link', name: 'link', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

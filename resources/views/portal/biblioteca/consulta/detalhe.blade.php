@@ -70,6 +70,7 @@
                                     <li class="tab col s3"><a class="active" href="#test1">Detalhes</a></li>
                                     <li class="tab col s3"><a href="#test2">Exemplares</a></li>
                                     <li class="tab col s3"><a href="#test4">Referência</a></li>
+                                    <li class="tab col s3"><a href="#test5">Sumário/Palavras chaves</a></li>
                                 </ul>
                             </div>
                             <div id="test1" class="col s12">
@@ -430,6 +431,42 @@
                                 @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif
                                 @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                             </div>
+
+                            <div id="test5" class="col s12">
+                                <div class="collection">
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Sumário</b></div>
+                                            <div class="col s8">
+                                                <?php
+                                                $array = explode(';', $exemplar['acervo']['sumario']);
+                                                $count = 0;
+                                                ?>
+                                                @foreach($array as $sumario)
+                                                    <?php $count++ ?>
+                                                     {{$sumario}} @if($count >= count($array)) @else <br /> @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Número de chamada</b></div>
+                                            <div class="col s8">
+                                                <?php
+                                                $array = explode(';', $exemplar['acervo']['palavras_chaves']);
+                                                $count = 0;
+                                                ?>
+                                                @foreach($array as $palavra)
+                                                    <?php $count++ ?>
+                                                    {{$palavra}} @if($count >= count($array)) @else <br /> @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
                 </div>
