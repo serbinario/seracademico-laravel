@@ -70,7 +70,8 @@ class ExemplarPeriodicoController extends Controller
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
                 'bib_exemplares.edicao',
-                 'bib_situacao.nome as nome_sit',
+                'bib_situacao.nome as nome_sit',
+                'bib_exemplares.link as link',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
                 );
 
@@ -90,6 +91,14 @@ class ExemplarPeriodicoController extends Controller
 
             # Retorno
             return $html;
+        })->addColumn('link', function ($row) {
+            
+            if($row->link != "") {
+                return '<a href="'.$row->link.'" title="Link de acesso" target="_blank">Link de acesso</a>';
+            } else {
+                return "";
+            }
+            
         })->make(true);
     }
 

@@ -29,10 +29,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('assunto_p', 'Assunto') !!}
                             {!! Form::text('assunto_p', Session::getOldInput('assunto_p')  , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('link', 'Link de acesso') !!}
+                            {!! Form::text('link', Session::getOldInput('link'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                 </div>
