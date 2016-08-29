@@ -37,7 +37,6 @@ class Arcevo extends Model implements Transformable
 		'cdd',
 		'uso_global',
 		'periodicidade',
-		'link',
 		'outro_cdd',
 		'data_vencimento'
 	];

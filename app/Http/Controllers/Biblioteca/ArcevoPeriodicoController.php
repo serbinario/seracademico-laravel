@@ -72,7 +72,6 @@ class ArcevoPeriodicoController extends Controller
                 'bib_arcevos.id',
                 'bib_arcevos.titulo',
                 'bib_arcevos.cdd',
-                'bib_arcevos.link',
                 'exemplares.qtd_exemplares',
             ]);
 
@@ -92,11 +91,7 @@ class ArcevoPeriodicoController extends Controller
 
             # Retorno
             return $html;
-        })
-            ->addColumn('link', function ($row) {
-                return '<a href="'.$row->link.'" title="Link de acesso" target="_blank">Link de acesso</a>';
-            })
-            ->make(true);
+        })->make(true);
     }
 
     /**

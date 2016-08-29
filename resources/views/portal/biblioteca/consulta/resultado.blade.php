@@ -77,7 +77,8 @@
                                     Livro
                                 @elseif($f->tipos_acervos_id == '2')
                                     Revista
-                                @endif</span>
+                                @endif
+                            </span>
                         </div>
                     </div>
 
@@ -92,7 +93,8 @@
                                         @endforeach
                                     @else
                                         {{$data[0]}} {{$data[1]}} {{$data[2]}}...
-                                    @endif</p></a>
+                                    @endif
+                                </p></a>
                             <p style="font-size: 11px;color: #0c0c0c;">{{$f->sobrenome}}, {{$f->nome}}</p>
                             <div class="col s6"><p class="labels-cc"><b>CDD</b><br/>{{ $f->cdd }}</p></div>
                             <div class="col s6"><p class="labels-cc"><b>CUTTER</b><br/>{{ $f->cutter }}</p></div>

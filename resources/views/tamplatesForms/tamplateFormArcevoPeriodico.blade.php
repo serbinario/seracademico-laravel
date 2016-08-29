@@ -57,12 +57,6 @@
                             {!! Form::text('data_vencimento', Session::getOldInput('data_vencimento'), array('class' => 'form-control datepicker date data2')) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('link', 'Link de acesso') !!}
-                            {!! Form::text('link', Session::getOldInput('link'), array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
                     <div class="col-md-4">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('exemplar_ref', 1) !!}
