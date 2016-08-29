@@ -1,5 +1,15 @@
 @extends('menu')
 
+@section("css")
+
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+
+@stop
+
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-title">

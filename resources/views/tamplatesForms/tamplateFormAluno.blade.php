@@ -59,10 +59,9 @@
             <div>
                <span class="btn btn-primary btn-xs btn-block btn-file">
                    <span class="fileinput-new">Selecionar</span>
-                   <span class="fileinput-exists">Mudar</span>
                    <input type="file" name="img">
                </span>
-                <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
+                {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
     </div>

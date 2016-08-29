@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
+                <i class="material-icons">account_box</i>
                 Cadastrar Perfil
             </h4>
         </div>
@@ -35,7 +35,6 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="role">
                             <br/>
-
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('name', 'Nome') !!}
@@ -51,7 +50,6 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="permission">
                             <br/>
-
                             <div id="tree-permission">
                                 <ul>
                                     <li>
@@ -89,18 +87,23 @@
                             </div>
                         </div>
                     </div>
+                    {{--Buttons Submit e Voltar--}}
+                    <div class="row">
+                        <div class="col-md-9"></div>
+                        <div class="col-md-3">
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group">
+                                    <a href="{{ route('seracademico.role.index') }}" class="btn btn-primary btn-block"><i class="fa fa-long-arrow-left"></i>  Voltar</a></div>
+                                <div class="btn-group">
+                                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--Fim Buttons Submit e Voltar--}}
                 </div>
-                <di class="col-md-12">
-                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary')) !!}
-                </di>
             </div>
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
         </div>
     </div>
 @stop

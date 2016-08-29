@@ -1,12 +1,22 @@
 @extends('menu')
 
+@section("css")
+
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+
+@stop
+
 @section('content')
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="material-icons">class</i>
+                    <i class="material-icons">line_weight</i>
                     Listar Planos de Ensino
                 </h4>
             </div>

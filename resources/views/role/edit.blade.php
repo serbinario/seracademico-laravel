@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
+                <i class="material-icons">account_box</i>
                 Editar Perfil
             </h4>
         </div>
@@ -51,8 +51,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="permission">
                             <br/>
-
-                            <div id="tree-permission">
+                            <div id="tree-permission" style="padding: 15px;">
                                 <ul>
                                     <li>
                                         @if(count($role->permissions->lists('name')->all()) > 0)
@@ -60,18 +59,19 @@
                                         @else
                                             <input type="checkbox"> Todos
                                         @endif
-                                        <ul>
-                                            @if(isset($loadFields['tipopermissao']))
-                                                @foreach($loadFields['tipopermissao'] as $tipo)
-                                                    <!-- Inicio Accordion  -->
-                                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <br/>
+                                        <ul >
+                                            <!-- Inicio Accordion  -->
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                @if(isset($loadFields['tipopermissao']))
+                                                    @foreach($loadFields['tipopermissao'] as $tipo)
                                                         <div class="panel panel-default">
                                                             <div class="panel-heading" role="tab" id="headingTwo">
-                                                                <h4 class="panel-title">
+                                                                <p class="panel-title">
                                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#body-{{ $tipo->id }}" aria-expanded="false" aria-controls="body-{{ $tipo->id }}">
                                                                         {{ $tipo->name }}
                                                                     </a>
-                                                                </h4>
+                                                                </p>
                                                             </div>
                                                             <div id="body-{{ $tipo->id  }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                                 <div class="panel-body">
@@ -87,28 +87,34 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <!-- Fim Accordion  -->
-                                                @endforeach
-                                            @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <!-- Fim Accordion  -->
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    {{--Buttons Submit e Voltar--}}
+                    <div class="row">
+                        <div class="col-md-9"></div>
+                        <div class="col-md-3">
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group">
+                                    <a href="{{ route('seracademico.role.index') }}" class="btn btn-primary btn-block"><i class="fa fa-long-arrow-left"></i>  Voltar</a></div>
+                                <div class="btn-group">
+                                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--Fim Buttons Submit e Voltar--}}
                 </div>
-                <di class="col-md-12">
-                    {!! Form::submit('Salvar', array('class' => 'btn btn-primary')) !!}
-                </di>
+
             </div>
             {!! Form::close() !!}
-        </div>
-        <div class="ibox-footer">
-            <span class="pull-right">
-                footer a direita
-            </span>
-            footer esquerda
         </div>
     </div>
 @stop
