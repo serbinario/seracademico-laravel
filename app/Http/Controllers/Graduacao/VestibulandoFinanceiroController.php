@@ -70,7 +70,6 @@ class VestibulandoFinanceiroController extends Controller
                         <ul>
                             <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>   
                             <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
-                            <li><a class="btn-floating" target="_blank" href="financeiro/gerarBoleto" id="btnGerarBoleto" title="Fechar Débito"><i class="material-icons">edit</i></a></li>
                         </ul>
                         </div>';
             })->make(true);

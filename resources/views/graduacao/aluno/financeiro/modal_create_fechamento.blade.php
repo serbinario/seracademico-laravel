@@ -11,31 +11,12 @@
                 <div class="row">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="valor_parcela">Valor Parcela</label>
-                            <input type="text" disabled="disabled" name="valor_parcela" id="valor_parcela" class="form-control">
-                        </div>
-                   </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="valor_pago">Valor Pago</label>
-                            <input type="text" disabled="disabled" name="valor_pago" id="valor_pago" class="form-control">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="valor_debito_fechamento">Valor Débito</label>
-                            <input type="text" disabled="disabled" name="valor_debito_fechamento" id="valor_debito_fechamento" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="data_vencimento_fechamento">Vencimento</label>
+                            <label for="data_vencimento_fechamento">Data Vencimento</label>
                             <input type="text" disabled="disabled" name="data_vencimento_fechamento" id="data_vencimento_fechamento" class="form-control datepicker">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="data_fechamento">Data</label>
+                            <label for="data_fechamento">Data Pagamento</label>
                             <input type="text" readonly="readonly" name="data_vencimento_fechamento" value="{{ date('d/m/Y')  }}" id="data_vencimento_fechamento" class="form-control">
                         </div>
                     </div>
@@ -114,9 +95,18 @@
                     </div>
 
                     <div class="row">
+                        {{--<div class="form-group col-md-6">--}}
+                        {{--<label for="valor_pago">Valor Pago</label>--}}
+                        {{--<input type="text" name="valor_pago" id="valor_pago" class="form-control">--}}
+                        {{--</div>--}}
                         <div class="col-md-6">
-                            <label for="valor_total">Valor Total</label>
+                            <label for="valor_total">Valor Pago</label>
                             <input type="text" readonly="readonly" name="valor_total" id="valor_total" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="valor_debito_fechamento">Valor Débito</label>
+                            <input type="text" disabled="disabled" name="valor_debito_fechamento" id="valor_debito_fechamento" class="form-control">
                         </div>
                     </div>
                 </div>

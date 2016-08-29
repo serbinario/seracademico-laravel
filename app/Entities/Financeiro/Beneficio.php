@@ -104,4 +104,22 @@ class Beneficio extends Model implements Transformable
     {
         $this->attributes['data_fim'] = SerbinarioDateFormat::toUsa($value);
     }
+
+    /**
+     * @param $query
+     * @param $idTaxa
+     * @return mixed
+     */
+    public function scopeByTaxa($query, $idTaxa)
+    {
+        return $query
+            ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_beneficios.tipo_beneficio_id')
+            ->join('fin_beneficios_taxas', 'fin_beneficios_taxas.beneficio_id', '=', 'fin_beneficios.id')
+            ->where('fin_beneficios_taxas.taxa_id', $idTaxa)
+            ->select([
+                'fin_beneficios.id',
+                'fin_beneficios.codigo',
+                'fin_tipos_beneficios.nome'
+            ]);
+    }
 }

@@ -92,7 +92,7 @@
                                         <th>Valor</th>
                                         <th>Mês</th>
                                         <th>Ano</th>
-                                        <th>Ação</th>
+                                        {{--<th>Ação</th>--}}
                                     </tr>
                                     </thead>
                                 </table>
@@ -111,7 +111,7 @@
                                         <th>Valor</th>
                                         <th>Data Doc.</th>
                                         <th>Nº Doc.</th>
-                                        <th>Ação</th>
+                                        {{--<th>Ação</th>--}}
                                     </tr>
                                     </thead>
                                 </table>

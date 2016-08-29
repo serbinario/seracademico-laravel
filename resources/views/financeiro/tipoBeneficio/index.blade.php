@@ -1,20 +1,47 @@
 @extends('menu')
 
+@section("css")
+
+    <style type="text/css">
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+
+@stop
+
 @section('content')
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
                 <h4>
-                    <i class="material-icons">class</i>
+                    <i class="material-icons">account_balance_wallet</i>
                     Listar Tipos de Beneficios
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.financeiro.tipoBeneficio.create')}}" class="btn-sm btn-primary pull-right">Nova Tipo de Beneficio</a>
+                <a href="{{ route('seracademico.financeiro.tipoBeneficio.create')}}" class="btn-sm btn-primary pull-right">Novo Tipo de Beneficio</a>
             </div>
         </div>
         <div class="ibox-content">
+
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <em> {!! session('message') !!}</em>
+                </div>
+            @endif
+
+            @if(Session::has('errors'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">

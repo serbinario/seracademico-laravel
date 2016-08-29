@@ -36,6 +36,14 @@ class TipoBeneficio extends Model implements Transformable
 	];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function beneficios()
+    {
+        return $this->hasMany(Beneficio::class, 'tipo_beneficio_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function incidencia()

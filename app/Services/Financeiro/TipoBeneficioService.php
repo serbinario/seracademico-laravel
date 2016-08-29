@@ -61,7 +61,8 @@ class TipoBeneficioService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return TipoBeneficio
+     * @throws \Exception
      */
     public function update(array $data, int $id) : TipoBeneficio
     {
@@ -77,6 +78,29 @@ class TipoBeneficioService
         #Retorno
         return $tipoBeneficio;
     }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        # Recuperando o registro no banco de dados
+        $tipoBeneficio = $this->repository->find($id);
+
+        #Verificando se foi recuperado no banco de dados
+        if(!$tipoBeneficio) {
+            throw new \Exception('Tipo de benefício não encontrado!');
+        }
+
+        # Removendo no banco de dados
+        $this->repository->delete($tipoBeneficio->id);
+
+        #Retorno
+        return $tipoBeneficio;
+    }
+
 
     /**
      * @param array $models
@@ -117,18 +141,4 @@ class TipoBeneficioService
          #retorno
          return $result;
     }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array &$data) : array
-    {
-         #tratando as datas
-         //$data[''] = $data[''] ? Carbon::createFromFormat("d/m/Y", $data['']) : "";
-
-         #retorno
-         return $data;
-    }
-
 }

@@ -47,7 +47,7 @@
     {{--<link rel="stylesheet" href="{{ asset('/css/plugins/zTree/demo.css')  }}">--}}
 
 
-            <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
+    <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     @yield('css')
@@ -115,7 +115,8 @@
                                 <li>
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level collapse">
-                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="flaticon-employment-test"></i> Vestibulandos</a></li>
+                                        <li><a target="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio1') }}"><i class="material-icons">contacts</i> Vestibulandos</a></li>
+                                        <li><a href="{{ route('seracademico.vestibular.relatorios.viewReportQuantidadesGerais') }}"><i class="material-icons">insert_chart</i> Vestibular Geral Quantitativo</a></li>
                                         {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                                     </ul>
                                 </li>
@@ -125,7 +126,7 @@
                         @endpermission
 
                         @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
-                        <li><a href="#"><i class="flaticon-folder"></i> Secretaria <span class="fa arrow"></span></a>
+                        <li><a href="#"><i class="material-icons">markunread_mailbox</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
 
@@ -150,16 +151,24 @@
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 @endpermission
 
-                                <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">library_books</i> Planos de Ensino</a></li>
+                                <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">line_weight</i> Planos de Ensino</a></li>
+
+                                <li>
+                                    <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="{{ route('seracademico.graduacao.curriculo.reportView') }}"><i class="flaticon-employment-test"></i> Currículos</a></li>
+                                        {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         @endpermission
 
-                        <li><a href="#"><i class="flaticon-folder"></i> Financeiro <span class="fa arrow"></span></a>
+                        <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
                                 <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
-                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="fa fa-university"></i> Tipos de Beneficios </a></li>
+                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
                             </ul>
                         </li>
 
@@ -278,10 +287,9 @@
                     <li>
                         <div class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="text-muted text-xs block">{{ Auth::user()->name }}<b class="caret"></b></span>
+                                <span class="text-muted text-xs block" style="text-align: right;"><b style="color: #2F5286;">{{ Auth::user()->name }}</b> <b class="caret"></b></span>
                             </a>
-                            <small style="text-align: left;">Semestre {{ ParametroMatricula::getSemestreVigente()->nome ?? "" }}</small><br>
-                            <small style="text-align: left;">Escopo {{ getenv('APP_ENV') }}</small>
+                            <small style="text-align: left;">Semestre: {{ ParametroMatricula::getSemestreVigente()->nome ?? "" }} - Escopo {{ getenv('APP_ENV') }}</small>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 {{-- <li><a href="profile.html">Perfil</a></li>
                                  <li><a href="contacts.html">Notificações</a></li>--}}
@@ -344,10 +352,18 @@
 <!-- Mascaras -->
 <script src="{{ asset('/js/jquery.maskMoney.min.js')}}"></script>
 
+<!-- Flot -->
+<script src="{{ asset('js/plugins/flot/jquery.flot.js') }}"></script>
+<script src="{{ asset('js/plugins/flot/jquery.flot.categories.js') }}"></script>
+{{--<script src="{{ asset('js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>--}}
+<script src="{{ asset('js/plugins/flot/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }} "></script>
+<script src="{{ asset('js/plugins/flot/jquery.flot.time.js') }}"></script>
+
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
-{{--<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>--}}
+<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

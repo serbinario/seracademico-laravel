@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="material-icons">class</i>
+                <i class="material-icons">line_weight</i>
                 Cadastrar Plano de Ensino
             </h4>
         </div>

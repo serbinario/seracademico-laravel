@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-star-half-empty"></i>
+                <i class="material-icons">account_balance_wallet</i>
                 Editar Tipo de Beneficio
             </h4>
         </div>

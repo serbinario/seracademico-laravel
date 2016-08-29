@@ -43,11 +43,10 @@
             <div>
                <span class="btn btn-primary btn-xs btn-block btn-file">
                    <span class="fileinput-new">Selecionar</span>
-                   <span class="fileinput-exists">Mudar</span>
                    <input type="file" name="img">
                </span>
-                <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6"
-                   data-dismiss="fileinput">Remover</a>
+                {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6"--}}
+                   {{--data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
     </div>
@@ -58,15 +57,15 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#dados" aria-controls="dados" data-toggle="tab"><i class="material-icons">contacts</i> Dados
+                <a href="#dados" aria-controls="dados" data-toggle="tab">Dados
                     pessoais</a>
             </li>
             <li role="presentation">
-                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">contact_phone</i>Informações
+                <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab">Informações
                     para contato</a>
             </li>
             <li role="presentation">
-                <a href="#academico" aria-controls="academico" role="tab" data-toggle="tab"><i class="material-icons">school</i>
+                <a href="#academico" aria-controls="academico" role="tab" data-toggle="tab">
                     Dados Acadêmicos</a>
             </li>
         </ul>
@@ -112,7 +111,7 @@
                                 {!! Form::text('pessoa[naturalidade]', Session::getOldInput('naturalidade')  , array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        <legend><i class="fa fa-archive"></i> Outros dados</legend>
+                        <legend>Outros dados</legend>
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">

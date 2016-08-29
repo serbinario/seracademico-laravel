@@ -49,7 +49,7 @@
             <div class="col-md-4">
                 <div class="form-group">                    
 				{!! Form::label('cordenador_id', 'Cordenador') !!}
-				{!! Form::select('cordenador_id', array(), null, array('class' => 'form-control')) !!}
+				{!! Form::select('cordenador_id', (['' => 'Selecione um Coordenador'] + $loadFields['professor']->toArray()), null, array('class' => 'form-control')) !!}
                 </div>
             </div>
             

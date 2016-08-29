@@ -99,7 +99,7 @@ class AlunoService
         $this->tratamentoImagem($data);
         $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
-
+    
         # Recuperando os semestres de configurção de matrícula
         $semestres = [
             ParametroMatriculaFacade::getSemestreVigente(),
@@ -283,15 +283,45 @@ class AlunoService
     }
 
     /**
+     * @param $idSemestre
+     * @return mixed
+     * @throws \Exception
+     */
+    private function getLastAlunoBySemestre($idSemestre)
+    {
+        # Fazendo a consulta no banco de dados
+        $query = \DB::table('fac_alunos')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->where('fac_semestres.id', $idSemestre)
+            ->get();
+
+        # Retorno
+        return $query;
+    }
+
+    /**
      * @return string
      */
     public function gerarMatricula()
     {
-        # recuperando a data atual
-        $now = new \DateTime('now');
+        # Recuperando o vestibular
+        $semestreAtual = ParametroMatriculaFacade::getSemestreVigente();
+        $arrayAlunos   = collect($this->getLastAlunoBySemestre($semestreAtual->id));
+        $lastIncricao  = $arrayAlunos->max('matricula');
 
-        #retorno
-        return $now->format('YmdHis');
+        # Verificando se o vestibular possui vestibulando
+        if(!$lastIncricao) {
+            return $semestreAtual->nome . '0001';
+        }
+
+        # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
+        # para nova inscrição
+        $lastIncricao = (int) (substr($lastIncricao, -4));
+        $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
+
+        # retorno
+        return $semestreAtual->nome . $newInscricao;
     }
 
     /**

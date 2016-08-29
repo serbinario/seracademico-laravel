@@ -91,7 +91,7 @@ class AlunoFinanceiroController extends Controller
                     return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>                  
-                            <li><a class="btn-floating indigo" title="Editar" id="btnEditDebitoAberto"><i class="material-icons">edit</i></a></li>
+                            <!--<li><a class="btn-floating indigo" title="Editar" id="btnEditDebitoAberto"><i class="material-icons">edit</i></a></li>-->
                             <li><a class="btn-floating indigo" title="Fechamento" id="btnCreateFechamento"><i class="glyphicon glyphicon-list-alt"></i></a></li>  
                             <li><a class="btn-floating indigo" title="Gerar Boleto"  id="btnGerarBoleto"><i class="material-icons">date_range</i></a></li>                    
                         </ul>
@@ -137,7 +137,8 @@ class AlunoFinanceiroController extends Controller
                             <li><a class="btn-floating indigo" title="Remover"><i class="material-icons">delete</i></a></li>                                                                   
                         </ul>
                         </div>';
-                })->make(true);
+                })
+                ->make(true);
         } catch (\Throwable $e) {
             return abort(500, $e->getMessage());
         }
@@ -284,26 +285,31 @@ class AlunoFinanceiroController extends Controller
     {
         try {
             #Recuperando o banco ativo
-            $banco   = ParametroBancoFacade::getAtivo();
-            $debito  = $this->debitoAbertoAlunoService->find($request->get('idDebito'));
+            $banco     = ParametroBancoFacade::getAtivo();
+            $debito    = $this->debitoAbertoAlunoService->find($request->get('idDebito'));
+            $objBoleto = null;
 
-            # Data Atual
-            $now = new \DateTime('now');
+            # Verificando se o débito já possui boleto
+            if($debito->boleto) {
+                $objBoleto = $debito->boleto;
+            } else {
+                # Data Atual
+                $now = new \DateTime('now');
 
-            # Array de boletos
-            $boleto = [
-                'debito_id' => $debito->id,
-                'banco_id' => $banco->id,
-                'aluno_id' => $debito->aluno->id,
-                'nosso_numero' => 123455678,
-                'vencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
-                'data' => $now,
-                'numero' => $now->format('YmdHis')
-            ];
+                # Array de boletos
+                $boleto = [
+                    'debito_id' => $debito->id,
+                    'banco_id' => $banco->id,
+                    'aluno_id' => $debito->aluno->id,
+                    'nosso_numero' => 123455678,
+                    'vencimento' => Carbon::createFromFormat('d/m/Y', $debito->data_vencimento),
+                    'data' => $now,
+                    'numero' => $now->format('YmdHis')
+                ];
 
-            # Creando o boleto
-            $objBoleto = $this->boletoService->store($boleto);
-
+                # Creando o boleto
+                $objBoleto = $this->boletoService->store($boleto);
+            }
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $objBoleto]);
         } catch (\Throwable $e) {

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-10">
         @if(!isset($aluno))
         <div class="row">
             <div class="col-md-4 form-group">
@@ -39,25 +39,24 @@
 
         </div>
     </div>
-    {{--<div class="col-md-2">--}}
-        {{--<div class="fileinput fileinput-new" data-provides="fileinput">--}}
-            {{--<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">--}}
-                {{--@if (isset($aluno) && $aluno->path_image != null)--}}
-                    {{--<div id="midias">--}}
-                        {{--<img id="logo" src="/images/{{$aluno->path_image}}"  alt="Foto" height="120" width="100"/><br/>--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-            {{--</div>--}}
-            {{--<div>--}}
-               {{--<span class="btn btn-primary btn-xs btn-block btn-file">--}}
-                   {{--<span class="fileinput-new">Selecionar</span>--}}
-                   {{--<span class="fileinput-exists">Mudar</span>--}}
-                   {{--<input type="file" name="img">--}}
-               {{--</span>--}}
+    <div class="col-md-2">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+                @if (isset($aluno) && $aluno->path_image != null)
+                    <div id="midias">
+                        <img id="logo" src="/images/{{$aluno->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                    </div>
+                @endif
+            </div>
+            <div>
+               <span class="btn btn-primary btn-xs btn-block btn-file">
+                   <span class="fileinput-new">Selecionar</span>
+                   <input type="file" name="img">
+               </span>
                 {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+            </div>
+        </div>
+    </div>
 </div>
 <hr class="hr-line-dashed"/>
 
@@ -732,23 +731,23 @@
                         </div>
                     </div>
 
-                    @if(isset($aluno))
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group col-md-4">
-                                <div class="checkbox checkbox-primary">
-                                    @if(isset($aluno) && $aluno->gerar_inscricao == 1)
-                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                                    @else
-                                        {!! Form::hidden('gerar_inscricao', 0) !!}
-                                        {!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}
-                                    @endif
-                                    {!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
+                    {{--@if(isset($aluno))--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div class="form-group col-md-4">--}}
+                                {{--<div class="checkbox checkbox-primary">--}}
+                                    {{--@if(isset($aluno) && $aluno->gerar_inscricao == 1)--}}
+                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                                    {{--@else--}}
+                                        {{--{!! Form::hidden('gerar_inscricao', 0) !!}--}}
+                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}--}}
+                                    {{--@endif--}}
+                                    {{--{!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--@endif--}}
                 </div>
             </div>
             {{-- Fim da aba vestibular --}}

@@ -89,7 +89,8 @@ class UserService
         }
 
         #Salvando o registro pincipal
-        $user =  $this->repository->create($data);
+        //$user =  $this->repository->create($data);
+        $user = User::create($data);
 
         #Verificando se foi criado no banco de dados
         if(!$user) {
@@ -144,11 +145,18 @@ class UserService
         if(empty($data['password'])) {
             unset($data['password']);
         } else {
-            $data['password'] = \bcrypt($data['password']);
+            $newPassword = \bcrypt($data['password']);
         }
 
         #Salvando o registro pincipal
         $user =  $this->repository->update($data, $id);
+
+        # Alterando a senha do usuário
+        if(isset($newPassword)) {
+            $user->fill([
+                'password' => $newPassword
+            ])->save();
+        }
 
         #tratando a imagem
         if(isset($data['img'])) {

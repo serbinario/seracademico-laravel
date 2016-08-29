@@ -8363,3 +8363,9 @@ tr.details td.details-control {
 table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
   height: 20px;
 }
+.fileinput .thumbnail>img{
+  max-height: 100%;
+}
+.thumbnail{
+  margin-bottom: 5px !important;
+}

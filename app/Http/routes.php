@@ -294,6 +294,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('update/{idDisciplina}/{idCurriculo}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@disciplinaUpdate']);
                 });
 
+                # Rotas de relatórios
+                Route::get('reportView', ['as' => 'reportView', 'uses' => 'Graduacao\CurriculoController@reportView']);
+                Route::get('reportById/{id}', ['as' => 'reportById', 'uses' => 'Graduacao\CurriculoController@reportById']);
             });
 
             Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
@@ -493,6 +496,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
                 Route::get('relatorio1', ['as' => 'relatorio1', 'uses' => 'Graduacao\VestibularController@relatorio1']);
                 Route::get('relatorio2', ['as' => 'relatorio2', 'uses' => 'Graduacao\VestibularController@relatorio2']);
+                //Route::get('printQuantidadesGerais', ['as' => 'printQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@printQuantidadesGerais']);
+                Route::get('viewReportQuantidadesGerais', ['as' => 'viewReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@viewReportQuantidadesGerais']);
+                Route::get('getReportQuantidadesGerais/{id}', ['as' => 'getReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@getReportQuantidadesGerais']);
             });
 
             Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
@@ -714,6 +720,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\TipoBeneficioController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\TipoBeneficioController@update']);
                 Route::post('getTipoBeneficio/{id}', ['as' => 'getTipoBeneficio', 'uses' => 'Financeiro\TipoBeneficioController@getTipoBeneficio']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Financeiro\TipoBeneficioController@delete']);
             });
 
             # Rotas para banco
