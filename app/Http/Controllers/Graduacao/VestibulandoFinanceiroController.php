@@ -22,12 +22,6 @@ class VestibulandoFinanceiroController extends Controller
     private $service;
 
     /**
-     * @var array
-     */
-    private $loadFields = [
-    ];
-
-    /**
      * VestibulandoFinanceiroController constructor.
      * @param VestibulandoService $service
      */
@@ -297,4 +291,18 @@ class VestibulandoFinanceiroController extends Controller
         return $objBoleto->getOutput();
     }
 
+    /**
+     * @param id $
+     * @return mixed
+     */
+    public function gerarComprovanteInscricao($id)
+    {
+        try {
+            $vestibulando = $this->service->find($id);
+
+            return \PDF::loadView('reports.vestibulandos.comprovanteInscricao', ['vestibulando' =>  $vestibulando])->stream();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

@@ -189,7 +189,7 @@ class VestibulandoController extends Controller
                     # Verificando se a matrícula foi pága
                     if($debito->pago && $debito->taxa->tipoTaxa->id == 1 && !$vestibulando->aluno) {
                         $html .= '<li><a class="btn-floating" id="inclusao" title="Transferir para aluno"><i class="material-icons">portrait</i></a></li>';
-                        $html .= '<li><a target="_blank" href="gerarComprovanteInscricao/'.$row->id.'" class="btn-floating" id="comprovante" title="Gerar Comprovante de Inscriçao"><i class="material-icons">portrait</i></a></li>';
+                        $html .= '<li><a target="_blank" href="financeiro/gerarComprovanteInscricao/'.$row->id.'" class="btn-floating" id="comprovante" title="Gerar Comprovante de Inscriçao"><i class="material-icons">portrait</i></a></li>';
                         break;
                     }
                 }
@@ -559,16 +559,14 @@ class VestibulandoController extends Controller
      * @param id $
      * @return mixed
      */
-//    public function gerarComprovanteInscricao(id)
-//    {
-//        try {
-//
-//            $vestibulando = $this->service->find($id);
-//
-//            return \PDF::loadView('gerarComprovanteInscricao', ['aluno' =>  $aluno])->stream();
-//        } catch (\Throwable $e) {
-//
-//        }
-//    }
+    public function gerarComprovanteInscricao($id)
+    {
+        try {
+            $vestibulando = $this->service->find($id);
 
+            return \PDF::loadView('gerarComprovanteInscricao', ['vestibulando' =>  $vestibulando])->stream();
+        } catch (\Throwable $e) {
+
+        }
+    }
 }

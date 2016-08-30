@@ -55,6 +55,10 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::select('cursoSearch', (['' => 'Todas os Cursos'] + $loadFields['graduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
                         </div>
 

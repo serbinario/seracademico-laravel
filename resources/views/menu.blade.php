@@ -91,26 +91,26 @@
                 {{--</li>--}}
                 @endrole
 
-                @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select|graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
+                {{--@permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select|graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')--}}
                 <li>
                     <a href="index.html"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        @permission('graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
+                        {{--@permission('graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')--}}
                         <li>
                             <a href="#"><i class="flaticon-test"></i> Vestibular <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
-                                @permission('graduacao.materia.select')
+                                {{--@permission('graduacao.materia.select')--}}
                                 <li><a href="{{ route('seracademico.materia.index') }}"><i class="flaticon-passed-exam"></i> Matérias</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.vestibular.select')
+                                {{--@permission('graduacao.vestibular.select')--}}
                                 <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="flaticon-exam-1"></i> Vestibulares</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.vestibulando.select')
+                                {{--@permission('graduacao.vestibulando.select')--}}
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="flaticon-employment-test"></i> Vestibulando</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
                                 <li>
                                     <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
@@ -123,33 +123,33 @@
 
                             </ul>
                         </li>
-                        @endpermission
+                        {{--@endpermission--}}
 
-                        @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
+                        {{--@permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')--}}
                         <li><a href="#"><i class="material-icons">markunread_mailbox</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
 
-                                @permission('graduacao.aluno.select')
+                                {{--@permission('graduacao.aluno.select')--}}
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.disciplina.select')
+                                {{--@permission('graduacao.disciplina.select')--}}
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.curso.select')
+                                {{--@permission('graduacao.curso.select')--}}
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="flaticon-book-4"></i> Cursos</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.curriculo.select')
+                                {{--@permission('graduacao.curriculo.select')--}}
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
-                                @permission('graduacao.turma.select')
+                                {{--@permission('graduacao.turma.select')--}}
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
-                                @endpermission
+                                {{--@endpermission--}}
 
                                 <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">line_weight</i> Planos de Ensino</a></li>
 
@@ -162,7 +162,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @endpermission
+                        {{--@endpermission--}}
 
                         <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
@@ -184,7 +184,7 @@
                         </li>--}}
                     </ul>
                 </li>
-                @endpermission
+                {{--@endpermission--}}
 
                 @role('admin')
                 <li><a href="index.html"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
