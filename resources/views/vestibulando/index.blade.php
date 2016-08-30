@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Págos', 1 => 'Págos'] ), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Pagos', 1 => 'Pagos'] ), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
