@@ -161,13 +161,13 @@ class VestibulandoController extends Controller
                 if ($request->has('cursoSearch')) {
                     # recuperando o valor da requisição
                     $cursoSearch = $request->get('cursoSearch');
-                    $opcaoSearch = !empty($request->get('opcaoCurso')) ? $request->get('opcaoCurso')  : 3;
+                    $opcaoSearch = !empty($request->get('opcaoCurso')) ? $request->get('opcaoCurso')  : 4;
 
                     # Escolha das opções de curso para filtro
                     switch($opcaoSearch) {
-                        case 0  : $query->where('curso1.id', '=', $cursoSearch); break;
-                        case 1  : $query->where('curso2.id', '=', $cursoSearch); break;
-                        case 2  : $query->where('curso3.id', '=', $cursoSearch); break;
+                        case 1  : $query->where('curso1.id', '=', $cursoSearch); break;
+                        case 2  : $query->where('curso2.id', '=', $cursoSearch); break;
+                        case 3  : $query->where('curso3.id', '=', $cursoSearch); break;
                         default : $query->where(function ($where) use ($cursoSearch) {
                                     $where->orWhere('curso1.id', '=', $cursoSearch)
                                         ->orWhere('curso2.id', '=', $cursoSearch)
