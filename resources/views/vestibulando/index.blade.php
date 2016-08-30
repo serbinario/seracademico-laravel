@@ -59,6 +59,10 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::select('opcaoSearch', (['' => 'Todas as Opções de Curso', 0 => '1º Opção', 1 => '2º Opção', 2 => '3º Opção']), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
                         </div>
 
@@ -192,6 +196,8 @@
                     d.pago = $('select[name=pagoSearch] option:selected').val();
                     d.formaAvaliacao = $('select[name=formaAvaliacaoSearch] option:selected').val();
                     d.globalSearch = $('input[name=globalSearch]').val();
+                    d.cursoSearch = $('select[name=cursoSearch] option:selected').val();
+                    d.opcaoCurso = $('select[name=opcaoSearch] option:selected').val();
                 }
             },
             columns: [

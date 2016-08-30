@@ -157,7 +157,27 @@ class VestibulandoController extends Controller
                     $query->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
                 }
 
-                // Filtrando Global
+                // Filtrando Por Curso
+                if ($request->has('cursoSearch')) {
+                    # recuperando o valor da requisição
+                    $cursoSearch = $request->get('cursoSearch');
+                    $opcaoSearch = $request->get('opcaoCurso');
+
+                    # Escolha das opções de curso para filtro
+                    switch($opcaoSearch) {
+                        case 0  : $query->where('curso1.id', '=', $cursoSearch); break;
+                        case 1  : $query->where('curso2.id', '=', $cursoSearch); break;
+                        case 2  : $query->where('curso3.id', '=', $cursoSearch); break;
+                        default : $query->where(function ($where) use ($cursoSearch) {
+                                    $where->orWhere('curso1.id', '=', $cursoSearch)
+                                        ->orWhere('curso2.id', '=', $cursoSearch)
+                                        ->orWhere('curso3.id', '=', $cursoSearch);
+                                    });
+                    }
+                }
+
+
+                    // Filtrando Global
                 if ($request->has('globalSearch')) {
                     # recuperando o valor da requisição
                     $search = $request->get('globalSearch');
