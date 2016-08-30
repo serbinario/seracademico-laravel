@@ -161,7 +161,7 @@ class VestibulandoController extends Controller
                 if ($request->has('cursoSearch')) {
                     # recuperando o valor da requisição
                     $cursoSearch = $request->get('cursoSearch');
-                    $opcaoSearch = $request->get('opcaoCurso');
+                    $opcaoSearch = !empty($request->get('opcaoCurso')) ? $request->get('opcaoCurso')  : 3;
 
                     # Escolha das opções de curso para filtro
                     switch($opcaoSearch) {
