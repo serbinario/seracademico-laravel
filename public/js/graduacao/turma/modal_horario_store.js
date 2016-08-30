@@ -63,6 +63,9 @@ function builderHtmlFields (dados) {
         htmlsala += "<option value='" + dados['sala'][i].id + "'>" + dados['sala'][i].nome + "</option>";
     }
 
+    // Reordenando os dias
+    dados['dia'] = dados['dia'].sort(function (d1, d2) { return d1.id - d2.id });
+
     // Percorrendo o array de dias
     for(var i = 0; i < dados['dia'].length; i++) {
         // Criando as options
