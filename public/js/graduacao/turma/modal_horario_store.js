@@ -119,6 +119,9 @@ $(document).on('change', '#dia_id', function () {
             // variável de retorno
             var html = '';
 
+            // Reordenando a hora
+            retorno.data = retorno.data.sort(function (h1, h2) { return h1.id - h2.nome; });
+
             // Percorrento o array
             for(var i = 0; i < retorno.data.length; i++) {
                 html += '<option value="' + retorno.data[i].id + '">' + retorno.data[i].nome + '</option>'

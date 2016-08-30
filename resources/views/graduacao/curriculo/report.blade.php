@@ -79,7 +79,7 @@
 
                     option += '<option value="">Selecione um currículo</option>';
                     for (var i = 0; i < json.length; i++) {
-                        option += '<option value="' + json[i]['id'] + '">' + json[i]['nome'] + '</option>';
+                        option += '<option value="' + json[i]['id'] + '">'+ json[i]['codigo'] + ' : ' + json[i]['nome'] + '</option>';
                     }
 
                     $('#curriculo_id option').remove();
