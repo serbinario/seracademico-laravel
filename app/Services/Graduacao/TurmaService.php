@@ -615,6 +615,16 @@ class TurmaService
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
 
+        # Recuperando os alunos cadastrados para esse horário
+        $alunos  = \DB::table('fac_alunos_semestres_horarios')
+            ->join('fac_horarios', 'fac_horarios.id', '=', 'fac_alunos_semestres_horarios.horario_id')
+            ->whereIn('fac_alunos_semestres_horarios.horario_id', [$resultId[0]->id])->get();
+
+        # Verificando se tem alunos cadastrados para esse horário
+        if(count($alunos) > 0) {
+            throw new \Exception("Existem alunos nesse horário.");
+        }
+        
         #Recuperando o pivot e remocvendo o horário
         $disciplina  = $objTurma->disciplinas()->find($resultId[0]->disciplina_id);
         $pivot       = $disciplina->pivot;
