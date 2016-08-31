@@ -115,6 +115,7 @@
     @include('graduacao.turma.modal_disciplina')
     @include('graduacao.turma.modal_disciplina_store')
     @include('graduacao.turma.modal_horario_store')
+    @include('graduacao.turma.modal_horario_update')
     @include('graduacao.turma.modal_notas')
     @include('graduacao.turma.modal_editar_notas')
     @include('graduacao.turma.modal_frequencias')
@@ -132,6 +133,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_update.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_notas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_notas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_frequencias.js')  }}"></script>

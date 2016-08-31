@@ -550,5 +550,9 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Financeiro\BoletoVestibulandoRepositoryEloquent::class
 		);
 
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepositoryEloquent::class
+        );
 	}
 }

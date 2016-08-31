@@ -1,6 +1,6 @@
 // Evento para remoção de um horário
 $(document).on('click', '#btnRemoverHorario', function (event) {
-    if(!idHora || !idDia) {
+    if(typeof idHora == "undefined" || typeof idDia == "undefined") {
         swal('Você deve selecionar um horário!', "Click no botão abaixo!", "warning");
         return false;
     }

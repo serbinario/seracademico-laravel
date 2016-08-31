@@ -2,8 +2,10 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
 use Seracademico\Repositories\Graduacao\CurriculoRepository;
 use Seracademico\Repositories\Graduacao\DisciplinaRepository;
+use Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepository;
 use Seracademico\Repositories\Graduacao\TurmaRepository;
 use Seracademico\Entities\Graduacao\Turma;
 use Carbon\Carbon;
@@ -26,6 +28,11 @@ class TurmaService
     private $disciplinaRepository;
 
     /**
+     * @var HorarioDisciplinaTurmaRepository
+     */
+    private $horarioDisciplinaTurmaRepository;
+
+    /**
      * @param TurmaRepository $repository
      * @param CurriculoRepository $curriculoRepository
      * @param DisciplinaRepository $disciplinaRepository
@@ -33,11 +40,13 @@ class TurmaService
     public function __construct(
         TurmaRepository $repository,
         CurriculoRepository $curriculoRepository,
-        DisciplinaRepository $disciplinaRepository)
+        DisciplinaRepository $disciplinaRepository,
+        HorarioDisciplinaTurmaRepository $horarioDisciplinaTurmaRepository)
     {
         $this->repository           = $repository;
         $this->curriculoRepository  = $curriculoRepository;
         $this->disciplinaRepository = $disciplinaRepository;
+        $this->horarioDisciplinaTurmaRepository = $horarioDisciplinaTurmaRepository;
     }
 
     /**
@@ -639,6 +648,66 @@ class TurmaService
         #Retorno
         return true;
     }
+
+    /**
+     * @param $idTurma
+     * @param $idHora
+     * @param $idDia
+     * @return mixed
+     * @throws \Exception
+     */
+    public function editHorario($idTurma, $idHora, $idDia)
+    {
+        # Recuperando os horários
+        $horarios   = \DB::table('fac_horarios')
+            ->select(['fac_horarios.id'])
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->where('fac_turmas.id', $idTurma)
+            ->where('fac_horarios.dia_id', $idDia)
+            ->where('fac_horarios.hora_id', $idHora)
+            ->get();
+
+        # Verificando se foi retornado os horários
+        if(!count($horarios) > 0) {
+            throw new \Exception('Nenhum horário foi encontrado');
+        }
+
+        # Recuperando o objeto de horário
+        $horario = $this->horarioDisciplinaTurmaRepository->find($horarios[0]->id);
+
+        # Verificando se foi retornado o horário
+        if(!$horario) {
+            throw new \Exception('Horário não encontrado');
+        }
+
+        # Retorno
+        return $horario;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return Turma
+     * @throws \Exception
+     */
+    public function updateHorario(array $data, int $id) : HorarioDisciplinaTurma
+    {
+        # Aplicação das regras de negócios
+        $this->tratamentoCampos($data);
+
+        # Atualizando no banco de dados
+        $horario = $this->horarioDisciplinaTurmaRepository->update($data, $id);
+
+        #Verificando se foi atualizado no banco de dados
+        if (!$horario) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        # Retorno
+        return $horario;
+    }
+
 
     /**
      * @param array $data
