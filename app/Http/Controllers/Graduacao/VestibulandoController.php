@@ -265,6 +265,21 @@ class VestibulandoController extends Controller
      */
     public function create()
     {
+        # recuperando a data atual
+        $now  = new \DateTime('now');
+
+        # recuperando os vestibulares
+        $rows = \DB::table('fac_vestibulares')
+            ->select('id')
+            ->whereDate('data_inicial', '<=', $now->format('Y-m-d'))
+            ->whereDate('data_final', '>=', $now->format('Y-m-d'))
+            ->get();
+
+        # Verificando se foi retornado linhas
+        if(count($rows) == 0) {
+            abort(403);
+        }
+
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
 
