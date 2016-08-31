@@ -256,6 +256,4 @@ $(document).on('click', '#btnGerarBoleto', function () {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
-
-
 });

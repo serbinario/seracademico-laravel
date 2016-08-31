@@ -539,11 +539,16 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Graduacao\PlanoAulaRepository::class,
 			\Seracademico\Repositories\Graduacao\PlanoAulaRepositoryEloquent::class
 		);
-		
 
 		$this->app->bind(
 			\Seracademico\Repositories\Graduacao\DiarioAulaRepository::class,
 			\Seracademico\Repositories\Graduacao\DiarioAulaRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BoletoVestibulandoRepository::class,
+			\Seracademico\Repositories\Financeiro\BoletoVestibulandoRepositoryEloquent::class
+		);
+
 	}
 }
