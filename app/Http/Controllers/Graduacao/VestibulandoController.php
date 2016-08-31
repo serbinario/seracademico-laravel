@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\Graduacao;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Curriculo;
@@ -277,7 +278,9 @@ class VestibulandoController extends Controller
 
         # Verificando se foi retornado linhas
         if(count($rows) == 0) {
-            abort(403);
+            if(!Auth::user()->is('admin')) {
+                abort(403);
+            }
         }
 
         #Carregando os dados para o cadastro
