@@ -50,6 +50,7 @@
 
                         <span class="sbtable">
                             <button class="btn-floating" id="btnAdicionarHorario" title="Adicionar Horário"><i class="material-icons">alarm_add</i></button>
+                            <button class="btn-floating" id="btnEditarHorario" title="Adicionar Horário"><i class="material-icons">edit</i></button>
                             <button class="btn-floating" id="btnRemoverHorario" title="Remover Horário"><i class="material-icons">delete</i></button>
                         </span>
                         <h3>Horário</h3>

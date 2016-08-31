@@ -624,7 +624,7 @@ class TurmaService
         if(count($alunos) > 0) {
             throw new \Exception("Existem alunos nesse horário.");
         }
-        
+
         #Recuperando o pivot e remocvendo o horário
         $disciplina  = $objTurma->disciplinas()->find($resultId[0]->disciplina_id);
         $pivot       = $disciplina->pivot;
