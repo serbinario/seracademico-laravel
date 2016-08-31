@@ -63,7 +63,7 @@ class VestibulandoFinanceiroController extends Controller
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
-                'fac_vestibulandos_financeiros.vencimento',
+                \DB::raw('DATE_FORMAT(fac_vestibulandos_financeiros.vencimento, "%d/%m/%Y") as vencimento'),
                 'fac_vestibulandos_financeiros.valor_debito',
                 'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
@@ -102,7 +102,7 @@ class VestibulandoFinanceiroController extends Controller
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
-                'fac_vestibulandos_financeiros.data_pagamento',
+                \DB::raw('DATE_FORMAT(fac_vestibulandos_financeiros.data_pagamento, "%d/%m/%Y") as data_pagamento'),
                 'fac_vestibulandos_financeiros.valor_pago',
                 'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
@@ -298,9 +298,9 @@ class VestibulandoFinanceiroController extends Controller
                     'fac_vestibulandos_financeiros.id as idDebito',
                     'fin_bancos.id as idBanco',
                     'fin_boletos_vestibulandos.nosso_numero',
-                    'fin_boletos_vestibulandos.vencimento',
+                    \DB::raw('DATE_FORMAT(fin_boletos_vestibulandos.vencimento, "%d/%m/%Y") as vencimento'),
                     'fac_vestibulandos_financeiros.valor_debito',
-                    'fin_boletos_vestibulandos.data',
+                    \DB::raw('DATE_FORMAT(fin_boletos_vestibulandos.data, "%d/%m/%Y") as data'),
                     'fin_boletos_vestibulandos.numero'
                 ]);
 
