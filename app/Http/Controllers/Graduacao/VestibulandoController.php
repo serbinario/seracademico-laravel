@@ -607,4 +607,117 @@ class VestibulandoController extends Controller
 
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function reportFilter(Request $request)
+    {
+        try {
+            # Query de vestibulandos
+            $vestibulandos = \DB::table('fac_vestibulandos')
+                ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
+                ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_vestibulares.semestre_id')
+                ->leftJoin('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+                ->leftJoin('fin_taxas', 'fin_taxas.id', '=', 'fac_vestibulandos_financeiros.taxa_id')
+                ->leftJoin('fin_tipos_taxas', 'fin_tipos_taxas.id', '=', 'fin_taxas.tipo_taxa_id')
+                ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
+                ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'fac_vestibulandos.segunda_opcao_curso_id')
+                ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'fac_vestibulandos.terceira_opcao_curso_id')
+                ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'fac_vestibulandos.primeira_opcao_turno_id')
+                ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
+                ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
+                ->leftJoin('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
+                ->groupBy('fac_vestibulandos.id')
+                ->select([
+                    'fac_vestibulandos.id',
+                    \DB::raw('FORMAT(fac_vestibulandos.media_enem, 2) as media_enem'),
+                    \DB::raw('FORMAT(fac_vestibulandos.media_ficha, 2) as media_ficha'),
+                    'pessoas.nome',
+                    'pessoas.cpf',
+                    'pessoas.celular',
+                    \DB::raw('IF(fac_vestibulandos.inscricao,CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao), "Pendente") as inscricao'),
+                    'curso1.nome as nomeCurso1',
+                    'curso2.nome as nomeCurso2',
+                    'curso3.nome as nomeCurso3',
+                    'turno1.nome as nomeTurno1',
+                    'turno2.nome as nomeTurno2',
+                    'turno3.nome as nomeTurno3',
+                    'fac_vestibulares.nome as vestibular',
+                    'fac_vestibulares.id as idVestibular',
+                    'fin_tipos_taxas.id as idTipoTaxa',
+                    \DB::raw('IF(fac_vestibulandos_financeiros.pago, "Pago", "Não Pago") as financeiro'),
+                    'fac_semestres.nome as nomeSemestre',
+                    \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
+                    \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
+                ]);
+
+            // Filtranto por vestibular
+            if ($request->has('vestibular')) {
+                $vestibulandos->where('fac_vestibulares.id', '=', $request->get('vestibular'));
+            }
+
+            // Filtrando por pagos
+            if ($request->has('pago')) {
+                $vestibulandos->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
+                $vestibulandos->where('fin_tipos_taxas.id', '=', 1);
+            }
+
+            // Filtrando por forma de avaliação
+            if ($request->has('formaAvaliacao')) {
+                $vestibulandos->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
+            }
+
+            // Filtrando Por Curso
+            if ($request->has('cursoSearch')) {
+                # recuperando o valor da requisição
+                $cursoSearch = $request->get('cursoSearch');
+                $opcaoSearch = !empty($request->get('opcaoCurso')) ? $request->get('opcaoCurso')  : 4;
+
+                # Escolha das opções de curso para filtro
+                switch($opcaoSearch) {
+                    case 1  : $vestibulandos->where('curso1.id', '=', $cursoSearch); break;
+                    case 2  : $vestibulandos->where('curso2.id', '=', $cursoSearch); break;
+                    case 3  : $vestibulandos->where('curso3.id', '=', $cursoSearch); break;
+                    default : $vestibulandos->where(function ($where) use ($cursoSearch) {
+                        $where->orWhere('curso1.id', '=', $cursoSearch)
+                            ->orWhere('curso2.id', '=', $cursoSearch)
+                            ->orWhere('curso3.id', '=', $cursoSearch);
+                    });
+                }
+            }
+
+            // Filtrando Global
+            if ($request->has('globalSearch')) {
+                # recuperando o valor da requisição
+                $search = $request->get('globalSearch');
+
+                #condição
+                $vestibulandos->where(function ($where) use ($search) {
+                    $where->orWhere('pessoas.nome', 'like', "%$search%")
+                        ->orWhere('pessoas.cpf', 'like', "%$search%")
+                        ->orWhere(\DB::raw('CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao)'), 'like', "%$search%");
+                });
+            }
+
+            # Recuperando os dados
+            $rows = $vestibulandos->get();
+
+            # Verificando se houve registro
+            if(count($rows) == 0) {
+               throw new \Exception('Nenhum Vestibulando foi encontrado');
+            }
+
+            # Retorno
+            return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $rows])->stream();
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $vestibulandos])->stream();
+     */
 }
