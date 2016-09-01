@@ -372,7 +372,7 @@ class AlunoController extends Controller
             # Retorno
             return \PDF::loadView('reports.alunos.relatorioFilter', ['rows' => $rows])->stream();
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 }
