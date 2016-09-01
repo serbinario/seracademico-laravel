@@ -713,7 +713,7 @@ class VestibulandoController extends Controller
             # Retorno
             return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $rows])->stream();
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
