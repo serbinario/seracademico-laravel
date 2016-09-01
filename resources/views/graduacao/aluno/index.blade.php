@@ -75,6 +75,7 @@
 
                         <div class="form-group">
                             <a id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</a>
+                            <button id="reportAluno" class="btn-sm btn-primary">Relatório</button>
                         </div>
                     </form>
                 </div>
@@ -297,6 +298,23 @@
 
             // Carregando o modal
             runBeneficio(idAluno);
+        });
+
+        /**
+         * Evento responsável por gerar um gráfico a partir
+         * do filtro escolhido na busca.
+         */
+        $(document).on('click', '#reportAluno', function () {
+            // Reuperando os valores do filtro
+            var semestre = $('select[name=semestreSearch] option:selected').val();
+            var situacao = $('select[name=situacaoSearch] option:selected').val();
+            var globalSearch = $('input[name=globalSearch]').val();
+
+            // Dados para requisição
+            var dados =  'semestre=' + semestre + '&situacao=' + situacao + '&globalSearch=' + globalSearch;
+
+            // Redirecionando para a página de relatório
+            window.open('/index.php/seracademico/graduacao/aluno/reportFilter?' + dados ,'_blank');
         });
     </script>
 @stop

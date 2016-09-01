@@ -287,4 +287,92 @@ class AlunoController extends Controller
 
         return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno])->stream();
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function reportFilter(Request $request)
+    {
+        try {
+            # recuperando os semestres de congiruração
+            $semestreVigente = ParametroMatriculaFacade::getSemestreVigente();
+
+            #Criando a consulta
+            $alunos = \DB::table('fac_alunos')
+                ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+                ->join('fac_alunos_cursos', function ($join) {
+                    $join->on(
+                        'fac_alunos_cursos.id', '=',
+                        \DB::raw('(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = fac_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->join('fac_alunos_situacoes', function ($join) {
+                    $join->on(
+                        'fac_alunos_situacoes.id', '=',
+                        \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria
+                         where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
+                ->select([
+                    'fac_alunos.id',
+                    'pessoas.nome',
+                    'pessoas.cpf',
+                    'fac_alunos.matricula',
+                    'pessoas.celular',
+                    'fac_semestres.id as idSemestre',
+                    'fac_semestres.nome as semestre',
+                    'fac_alunos_semestres.periodo',
+                    'fac_curriculos.codigo as codigoCurriculo',
+                    'fac_situacao.nome as nomeSituacao',
+                    'fac_cursos.codigo as codigoCurso'
+                ]);
+
+            # Filtrando por semestre
+            if ($request->has('semestre')) {
+                $alunos->where('fac_semestres.id', '=', $request->get('semestre'));
+            } else if (count($semestreVigente) == 2) {
+                $alunos->where('fac_semestres.id', '=', $semestreVigente->id);
+            }
+
+            # Filtrando por situação
+            if ($request->has('situacao')) {
+                $alunos->where('fac_situacao.id', '=', $request->get('situacao'));
+            }
+
+            # Filtrando Global
+            if ($request->has('globalSearch')) {
+                # recuperando o valor da requisição
+                $search = $request->get('globalSearch');
+
+                #condição
+                $alunos->where(function ($where) use ($search) {
+                    $where->orWhere('pessoas.nome', 'like', "%$search%")
+                        ->orWhere('pessoas.cpf', 'like', "%$search%")
+                        ->orWhere('fac_alunos.matricula', 'like', "%$search%")
+                        ->orWhere('fac_curriculos.codigo', 'like', "%$search%")
+                        ->orWhere('fac_semestres.nome', 'like', "%$search%");
+                });
+            }
+
+            # Recuperando os alunos
+            $rows = $alunos->get();
+
+            # Verificando se foi retornado registros
+            if(count($rows) == 0) {
+                throw new \Exception('Nunhum aluno foi encontrado');
+            }
+
+            # Retorno
+            return \PDF::loadView('reports.alunos.relatorioFilter', ['rows' => $rows])->stream();
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

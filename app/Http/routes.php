@@ -177,6 +177,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'Graduacao\AlunoController@contrato']);
+                Route::get('reportFilter', ['as' => 'reportFilter', 'uses' => 'Graduacao\AlunoController@reportFilter']);
 
                 // Histórico do aluno
                 Route::group(['prefix' => 'historico', 'as' => 'historico.'], function () {
