@@ -282,7 +282,7 @@ class PlanoEnsinoService
 
                 # Validando a atualização
                 if (!empty($planoEnsino) && $planoEnsino->{$key} != null) {
-                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $fileName);
+                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $planoEnsino->{$key});
                 }
 
                 #Movendo a imagem
