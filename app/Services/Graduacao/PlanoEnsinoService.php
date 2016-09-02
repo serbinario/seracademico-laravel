@@ -6,7 +6,6 @@ use Seracademico\Entities\Graduacao\ConteudoProgramatico;
 use Seracademico\Repositories\Graduacao\ConteudoProgramaticoRepository;
 use Seracademico\Repositories\Graduacao\PlanoEnsinoRepository;
 use Seracademico\Entities\Graduacao\PlanoEnsino;
-//use Carbon\Carbon;
 
 class PlanoEnsinoService
 {
@@ -19,6 +18,11 @@ class PlanoEnsinoService
      * @var ConteudoProgramaticoRepository
      */
     private $conteudoProgramaticoRepository;
+
+    /**
+     * @var string
+     */
+    private $destinationPath = "images/";
 
     /**
      * PlanoEnsinoService constructor.
@@ -60,6 +64,7 @@ class PlanoEnsinoService
         # Regras de negócio
         $this->tratamentoCampos($data);
         $this->tratamentoPlanoAtivo($data);
+        $this->tratamentoImagem($data);
 
         #Salvando o registro pincipal
         $planoEnsino =  $this->repository->create($data);
@@ -87,9 +92,12 @@ class PlanoEnsinoService
         # Regras de negócio
         $this->tratamentoCampos($data);
         $this->tratamentoPlanoAtivo($data);
-        
+
         #Atualizando no banco de dados
         $planoEnsino = $this->repository->update($data, $id);
+
+        #Regras de negócios
+        $this->tratamentoImagem($data, $planoEnsino);
 
         #Verificando se foi atualizado no banco de dados
         if(!$planoEnsino) {
@@ -256,5 +264,36 @@ class PlanoEnsinoService
 
         #Retorno
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoImagem(array &$data, $planoEnsino = "")
+    {
+        #tratando a imagem
+        foreach ($data as $key => $value) {
+            $explode = explode("_", $key);
+
+            if (count($explode) > 0 && $explode[0] == "path") {
+                $file = $data[$key];
+                $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+                # Validando a atualização
+                if (!empty($planoEnsino) && $planoEnsino->{$key} != null) {
+                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $fileName);
+                }
+
+                #Movendo a imagem
+                $file->move($this->destinationPath, $fileName);
+
+                #renomeando
+                $data[$key] = $fileName;
+            }
+        }
+
+        # retorno
+        return $data;
     }
 }

@@ -363,7 +363,7 @@
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
-<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
+{{--<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>--}}
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

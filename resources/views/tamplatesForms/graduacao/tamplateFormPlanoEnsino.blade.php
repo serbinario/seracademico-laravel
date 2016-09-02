@@ -67,8 +67,9 @@
                 <li role="presentation">
                     <a href="#conteudoProgramatico" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Conteúdo Programático</a>
                 </li>
-
-
+                <li role="presentation">
+                    <a href="#anexos" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Anexos</a>
+                </li>
             </ul>
             <!-- End Nav tabs -->
 
@@ -230,6 +231,17 @@
                 </div>
                 {{--FIM Aba Conteudo Programatico --}}
 
+                {{-- Aba de anexos--}}
+                <div role="tabpanel" class="tab-pane" id="anexos">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="path_plano_ensino">Anexo</label>
+                            <input name="path_plano_ensino" id="path_plano_ensino" type="file">
+                        </div>
+                    </div>
+                </div>
+                {{-- Fim aba anexos --}}
+
             </div>
             <!-- FIM Tab panes -->
         </div>
@@ -251,6 +263,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @section('javascript')
@@ -280,6 +293,35 @@
             // Carregando a grid edit de conteúdo programático
             loadEditTableConteudoProgramatico(idPlanoEnsino);
         }
+
+        /**
+         * Anexo plano de ensino
+         *
+         * Código que é responsável pelo carregamento de
+         * arquivos no formulário
+         *
+         * http://plugins.krajee.com/
+         * https://github.com/kartik-v/bootstrap-fileinput
+         */
+        $("#path_plano_ensino").fileinput({
+            @if(isset($model->path_plano_ensino))
+            initialPreviewFileType: 'object',
+            initialPreview:[
+                '/images/{{$model->path_plano_ensino}}'
+            ],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [{
+                caption: 'anexo-plano-ensino.pdf',
+                filetype: 'application/pdf',
+                url: false,
+                width: '100%'
+            }],
+            @endif
+            language: 'pt-BR',
+            showUpload: false,
+            showCaption: false,
+            allowedFileExtensions : ['pdf']
+        });
 
     </script>
 @endsection

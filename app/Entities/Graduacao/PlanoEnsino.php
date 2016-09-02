@@ -33,6 +33,7 @@ class PlanoEnsino extends Model implements Transformable
         'bibliografia_complementar',
 		'competencia',
 		'aula_pratica',
+		'path_plano_ensino',
 		'ativo'
 	];
 
