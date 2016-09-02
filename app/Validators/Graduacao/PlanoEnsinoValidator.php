@@ -23,8 +23,8 @@ class PlanoEnsinoValidator extends LaravelValidator
 			//'nome' =>  'unique:fac_plano_ensino,carga_horaria,10,id,nome,"teste1"' ,
 			//unique:users,username,10,id,company_id,31
 			'vigencia' =>  '' ,
-			'disciplina_id' =>  '' ,
-			'carga_horaria' =>  '' ,
+			'disciplina_id' =>  'required' ,
+			'carga_horaria' =>  'required' ,
 			'conteudo_porgramatico_id' =>  '' ,
 			'ementa' =>  '' ,
 			'obj_gerais' =>  '' ,
@@ -42,8 +42,8 @@ class PlanoEnsinoValidator extends LaravelValidator
             
 			'nome' =>  '' ,
 			'vigencia' =>  '' ,
-			'disciplina_id' =>  '' ,
-			'carga_horaria' =>  '' ,
+			'disciplina_id' =>  'required' ,
+			'carga_horaria' =>  'required' ,
 			'conteudo_porgramatico_id' =>  '' ,
 			'ementa' =>  '' ,
 			'obj_gerais' =>  '' ,

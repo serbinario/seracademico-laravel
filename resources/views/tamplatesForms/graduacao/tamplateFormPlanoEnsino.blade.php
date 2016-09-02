@@ -323,5 +323,26 @@
             allowedFileExtensions : ['pdf']
         });
 
+        @if(isset($model->path_plano_ensino))
+        // Evento para remover o comprovante
+        $(document).on('click', 'button.fileinput-remove-button', function () {
+            // Recuperando o anexo
+            var anexo = $(this).parent().find('input[type=file]').attr('id');
+
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'DELETE',
+                data: {'anexo' : anexo},
+                url: '{{ route('seracademico.graduacao.planoEnsino.deleteAnexo', ['id' => $model->id ])  }}',
+                datatype: 'json'
+            }).done(function (json) {
+                // Verificando se remoção foi bem sucedida
+                if(!json.success) {
+                    //swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
+                }
+            });
+        });
+        @endif
+
     </script>
 @endsection

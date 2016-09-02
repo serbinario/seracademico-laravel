@@ -299,4 +299,22 @@ class PlanoEnsinoService
         # retorno
         return $data;
     }
+
+    /**
+     * @param $planoEnsino
+     * @param $anexo
+     * @return bool
+     */
+    public function deleteFile($planoEnsino, $anexo)
+    {
+        # Removendo o arquivo do diretório
+        unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $planoEnsino->$anexo);
+
+        # Removendo o arquivo do banco de dados
+        $planoEnsino->$anexo = null;
+        $planoEnsino->save();
+
+        # Retorno
+        return true;
+    }
 }
