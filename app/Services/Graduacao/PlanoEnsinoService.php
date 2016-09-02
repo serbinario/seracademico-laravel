@@ -93,11 +93,14 @@ class PlanoEnsinoService
         $this->tratamentoCampos($data);
         $this->tratamentoPlanoAtivo($data);
 
-        #Atualizando no banco de dados
-        $planoEnsino = $this->repository->update($data, $id);
+        # Recuperando o vestibulando
+        $planoEnsino = $this->repository->find($id);
 
         #Regras de negócios
         $this->tratamentoImagem($data, $planoEnsino);
+
+        #Atualizando no banco de dados
+        $planoEnsino = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$planoEnsino) {
