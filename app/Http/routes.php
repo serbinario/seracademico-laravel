@@ -363,6 +363,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('attachConteudo/{idDiarioAula}', ['as' => 'attachConteudo', 'uses' => 'Graduacao\DiarioAulaController@attachConteudo']);
                     Route::post('detachConteudo/{idDiarioAula}', ['as' => 'detachConteudo', 'uses' => 'Graduacao\DiarioAulaController@detachConteudo']);
                 });
+
+                # Rotaas de planos de ensino
+                Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'Graduacao\TurmaPlanoEnsinoController@gridDisciplinas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaPlanoEnsinoController@getLoadFields']);
+                    Route::post('attachPlanoEnsino', ['as' => 'attachPlanoEnsino', 'uses' => 'Graduacao\TurmaPlanoEnsinoController@attachPlanoEnsino']);
+
+                });
             });
 
             Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {

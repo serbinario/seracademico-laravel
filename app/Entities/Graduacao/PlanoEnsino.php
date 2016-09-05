@@ -59,4 +59,15 @@ class PlanoEnsino extends Model implements Transformable
     {
         $this->attributes['vigencia'] = SerbinarioDateFormat::toUsa($value);
     }
+
+    /**
+     * @param $query
+     * @param $disciplinaId
+     * @param $cargaHoraria
+     * @return mixed
+     */
+    public function scopeByDisciplinaAndCargaHoraria($query, $disciplinaId, $cargaHoraria)
+    {
+        return $query->where('disciplina_id', $disciplinaId)->where('carga_horaria', $cargaHoraria);
+    }
 }
