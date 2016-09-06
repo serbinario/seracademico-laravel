@@ -4,9 +4,9 @@ namespace Seracademico\Repositories\PosGraduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\CursoValidator;
-use Seracademico\Repositories\CursoRepository;
-use Seracademico\Entities\Curso;
+use Seracademico\Validators\PosGraduacao\CursoValidator;
+use Seracademico\Repositories\PosGraduacao\CursoRepository;
+use Seracademico\Entities\PosGraduacao\Curso;
 
 /**
  * Class CursoRepositoryEloquent

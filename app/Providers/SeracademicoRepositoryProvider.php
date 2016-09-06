@@ -168,8 +168,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\CursoRepository::class,
-			\Seracademico\Repositories\CursoRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\CursoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\CursoRepositoryEloquent::class
 		);
 
 		$this->app->bind(

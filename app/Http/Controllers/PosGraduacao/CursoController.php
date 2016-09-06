@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\CursoService;
+use Seracademico\Services\PosGraduacao\CursoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\CursoValidator;
+use Seracademico\Validators\PosGraduacao\CursoValidator;
 
 class CursoController extends Controller
 {
@@ -46,7 +47,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-        return view('curso.index');
+        return view('posGraduacao.curso.index');
     }
 
     /**
@@ -96,7 +97,7 @@ class CursoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('curso.create', compact('loadFields'));
+        return view('posGraduacao.curso.create', compact('loadFields'));
     }
 
     /**
@@ -141,7 +142,7 @@ class CursoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('curso.edit', compact('model', 'loadFields'));
+            return view('posGraduacao.curso.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
