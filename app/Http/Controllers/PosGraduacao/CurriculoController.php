@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\CurriculoService;
+use Seracademico\Services\PosGraduacao\CurriculoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\CurriculoValidator;
+use Seracademico\Validators\PosGraduacao\CurriculoValidator;
 
 class CurriculoController extends Controller
 {
@@ -27,7 +28,7 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Curso|ativo,1'
+        'PosGraduacao\\Curso|ativo,1'
     ];
 
     /**
@@ -45,7 +46,7 @@ class CurriculoController extends Controller
      */
     public function index()
     {
-        return view('curriculo.index');
+        return view('posGraduacao.curriculo.index');
     }
 
     /**
@@ -56,6 +57,7 @@ class CurriculoController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_curriculos')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 2)
             ->select([
                 'fac_curriculos.id',
                 'fac_curriculos.nome',
@@ -100,6 +102,7 @@ class CurriculoController extends Controller
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
             )
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 2)
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
@@ -111,12 +114,12 @@ class CurriculoController extends Controller
             $boolReturn = true;
 
             # percorre as turmas
-            foreach ($tumas as $turma) {
-                if(count($turma->disciplinas) > 0) {
-                    $boolReturn = false;
-                    break;
-                }
-            }
+            //foreach ($tumas as $turma) {
+            //    if(count($turma->disciplinas) > 0) {
+            //        $boolReturn = false;
+            //        break;
+            //    }
+            //}
 
             # Verifica a se a condição é válida
             if($boolReturn) {
@@ -137,7 +140,7 @@ class CurriculoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('curriculo.create', compact('loadFields'));
+        return view('posGraduacao.curriculo.create', compact('loadFields'));
     }
 
     /**
@@ -182,7 +185,7 @@ class CurriculoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('curriculo.edit', compact('model', 'loadFields'));
+            return view('posGraduacao.curriculo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

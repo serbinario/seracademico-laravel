@@ -131,15 +131,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
-                Route::get('index', ['as' => 'index', 'uses' => 'CurriculoController@index']);
-                Route::get('grid', ['as' => 'grid', 'uses' => 'CurriculoController@grid']);
-                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'CurriculoController@gridByCurriculo']);
-                Route::get('create', ['as' => 'create', 'uses' => 'CurriculoController@create']);
-                Route::post('store', ['as' => 'store', 'uses' => 'CurriculoController@store']);
-                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CurriculoController@edit']);
-                Route::post('update/{id}', ['as' => 'update', 'uses' => 'CurriculoController@update']);
-                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'CurriculoController@adicionarDisciplinas']);
-                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'CurriculoController@removerDisciplina']);
+                Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\CurriculoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\CurriculoController@grid']);
+                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'PosGraduacao\CurriculoController@gridByCurriculo']);
+                Route::get('create', ['as' => 'create', 'uses' => 'PosGraduacao\CurriculoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\CurriculoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\CurriculoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\CurriculoController@update']);
+                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'PosGraduacao\CurriculoController@adicionarDisciplinas']);
+                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'PosGraduacao\CurriculoController@removerDisciplina']);
             });
 
             Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {

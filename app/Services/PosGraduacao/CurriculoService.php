@@ -2,10 +2,10 @@
 
 namespace Seracademico\Services\PosGraduacao;
 
-use Seracademico\Repositories\CurriculoRepository;
-use Seracademico\Entities\Curriculo;
-use Seracademico\Repositories\CursoRepository;
-use Seracademico\Repositories\DisciplinaRepository;
+use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
+use Seracademico\Entities\PosGraduacao\Curriculo;
+use Seracademico\Repositories\PosGraduacao\CursoRepository;
+use Seracademico\Repositories\PosGraduacao\DisciplinaRepository;
 
 class CurriculoService
 {
