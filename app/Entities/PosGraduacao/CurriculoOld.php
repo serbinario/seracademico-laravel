@@ -5,7 +5,6 @@ namespace Seracademico\Entities\PosGraduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Graduacao\PivotCurriculoDisciplina;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Curriculo extends Model implements Transformable
@@ -38,29 +37,20 @@ class Curriculo extends Model implements Transformable
         return $this->belongsTo(Curso::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function turmas()
+    {
+        return $this->hasMany(Turma::class, 'curriculo_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function disciplinas()
     {
-        return $this->belongsToMany(Disciplina::class, 'fac_curriculo_disciplina', 'curriculo_id', 'disciplina_id')
-            ->withPivot([
-                'id',
-                'periodo',
-                'disciplina_id',
-                'carga_horaria_total',
-                'carga_horaria_teorica',
-                'carga_horaria_pratica',
-                'qtd_credito',
-                'qtd_faltas',
-                'pre_requisito_1_id',
-                'pre_requisito_2_id',
-                'pre_requisito_3_id',
-                'pre_requisito_4_id',
-                'pre_requisito_5_id',
-                'co_requisito_1_id'
-            ]);
+        return $this->belongsToMany(Disciplina::class, 'fac_curriculo_disciplina', 'curriculo_id', 'disciplina_id');
     }
 
     /**
@@ -93,31 +83,5 @@ class Curriculo extends Model implements Transformable
     public function setValidoFimAttribute($value)
     {
         $this->attributes['valido_fim'] = SerbinarioDateFormat::toUsa($value);
-    }
-
-    /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-     */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
-    {
-        if ($parent instanceof Disciplina) {
-            return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
-        }
-
-        return parent::newPivot($parent, $attributes, $table, $exists);
-    }
-
-    /**
-     * @param $query
-     * @param $value
-     * @return mixed
-     */
-    public function scopeByCurso($query, $value)
-    {
-        return $query->where('curso_id', $value)->where('ativo', 1)->get();
     }
 }

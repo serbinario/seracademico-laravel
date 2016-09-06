@@ -5,8 +5,6 @@ namespace Seracademico\Entities\PosGraduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\TipoCurso;
-use Seracademico\Repositories\Graduacao\PrecoCursoRepository;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Curso extends Model implements Transformable
@@ -53,17 +51,16 @@ class Curso extends Model implements Transformable
         'cordenador_id',
         'tipo_nivel_sistema_id',
         'carga_horaria',
-        'ativo',
-        'coordenador_id'
+        'ativo'
     ];
 
-//    /*
-//     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-//     */
-//    public function curriculos()
-//    {
-//        return $this->hasMany(Curriculo::class);
-//    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function curriculos()
+    {
+        return $this->hasMany(Curriculo::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -71,14 +68,6 @@ class Curso extends Model implements Transformable
     public function tipoCurso()
     {
         return $this->belongsTo(TipoCurso::class, "tipo_curso_id");
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function precosCursos()
-    {
-        return $this->hasMany(PrecoCurso::class, "curso_id", "id");
     }
 
     /**
@@ -112,7 +101,7 @@ class Curso extends Model implements Transformable
      */
     public function setDataDouRecAttribute($value)
     {
-        $this->attributes['data_dou_rec'] = SerbinarioDateFormat::toUsa($value);
+        $this->attributes['data_dou_rec'] = SerbinarioDateFormat::toUsa($value);;
     }
 
     /**
@@ -236,8 +225,6 @@ class Curso extends Model implements Transformable
     {
         return $query->select('fac_cursos.nome', 'fac_cursos.id')
             ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_cursos.tipo_nivel_sistema_id', 2)
-            ->where("fac_cursos.ativo", $value)
             ->where('fac_curriculos.ativo', $value);
     }
 
@@ -247,6 +234,14 @@ class Curso extends Model implements Transformable
      */
     public function scopeAtivo($query, $value)
     {
-        return $query->where('tipo_nivel_sistema_id', 2)->where("ativo", $value);
+        return $query->where("ativo", $value)->where('tipo_nivel_sistema_id', 1);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function acervos()
+    {
+        return $this->belongsToMany(Arcevo::class, 'bib_arcevos_cursos', 'cursos_id', "arcevos_id");
     }
 }

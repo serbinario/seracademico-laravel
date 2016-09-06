@@ -1,9 +1,9 @@
 <?php
 
-namespace Seracademico\Services;
+namespace Seracademico\Services\PosGraduacao;
 
-use Seracademico\Repositories\DisciplinaRepository;
-use Seracademico\Entities\Disciplina;
+use Seracademico\Repositories\PosGraduacao\DisciplinaRepository;
+use Seracademico\Entities\PosGraduacao\Disciplina;
 
 class DisciplinaService
 {
@@ -41,7 +41,8 @@ class DisciplinaService
 
     /**
      * @param array $data
-     * @return array
+     * @return Disciplina
+     * @throws \Exception
      */
     public function store(array $data) : Disciplina
     {
@@ -63,7 +64,8 @@ class DisciplinaService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Disciplina
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Disciplina
     {

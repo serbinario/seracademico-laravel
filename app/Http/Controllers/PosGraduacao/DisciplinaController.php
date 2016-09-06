@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\DisciplinaService;
+use Seracademico\Services\PosGraduacao\DisciplinaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\DisciplinaValidator;
+use Seracademico\Validators\PosGraduacao\DisciplinaValidator;
 
 class DisciplinaController extends Controller
 {
@@ -46,7 +47,7 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        return view('disciplina.index');
+        return view('posGraduacao.disciplina.index');
     }
 
     /**
@@ -71,12 +72,15 @@ class DisciplinaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Recuperando a disciplina
+            $disciplina = $this->service->find($row->id);
+
             # Variáveis de uso
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
                             <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
-            $disciplina = $this->service->find($row->id);
+
             # Verificando se existe vinculo com o currículo
             if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
                 $html .= '<li><a class="btn-floating" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
@@ -98,7 +102,7 @@ class DisciplinaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('disciplina.create', compact('loadFields'));
+        return view('posGraduacao.disciplina.create', compact('loadFields'));
     }
 
     /**
@@ -143,7 +147,7 @@ class DisciplinaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('disciplina.edit', compact('model', 'loadFields'));
+            return view('posGraduacao.disciplina.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -179,8 +183,8 @@ class DisciplinaController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id)
     {

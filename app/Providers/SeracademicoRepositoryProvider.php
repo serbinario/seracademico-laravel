@@ -163,13 +163,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\DisciplinaRepository::class,
-			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
-		);
-
-		$this->app->bind(
-			\Seracademico\Repositories\DisciplinaRepository::class,
-			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\DisciplinaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\DisciplinaRepositoryEloquent::class
 		);
 
 		$this->app->bind(
@@ -554,5 +549,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepository::class,
             \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepositoryEloquent::class
         );
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoRepositoryEloquent::class
+		);
 	}
 }

@@ -63,20 +63,20 @@
                 </li>
 
                 @role('posgraduacao')
-                {{--<li>--}}
-                    {{--<a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span--}}
-                                {{--class="fa arrow"></span></a>--}}
-                    {{--<ul class="nav nav-second-level collapse">--}}
-                        {{--<li>--}}
-                            {{--<a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>--}}
-                            {{--<ul class="nav nav-third-level">--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>--}}
-                            {{--</ul>--}}
-                        {{--</li>--}}
+                <li>
+                    <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
+                            </ul>
+                        </li>
                         {{--<li>--}}
                             {{--<a href="#">Tesouraria <span class="fa arrow"></span></a>--}}
                             {{--<ul class="nav nav-third-level">--}}
@@ -87,8 +87,8 @@
                                 {{--<li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
                             {{--</ul>--}}
                         {{--</li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
+                    </ul>
+                </li>
                 @endrole
 
                 @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select|graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')

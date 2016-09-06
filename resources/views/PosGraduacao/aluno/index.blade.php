@@ -29,6 +29,9 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Curso</th>
+                                <th>Currículo</th>
+                                <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -38,6 +41,9 @@
                                 <th>Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
+                                <th>Curso</th>
+                                <th>Currículo</th>
+                                <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
                             </tfoot>
@@ -48,13 +54,13 @@
         </div>
     </div>
 
-    @include('aluno.turma.modal_aluno_turma')
-    @include('aluno.turma.modal_nova_turma')
+    {{--@include('aluno.turma.modal_aluno_turma')
+    @include('aluno.turma.modal_nova_turma')--}}
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
+   {{-- <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>--}}
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -62,10 +68,13 @@
             autoWidth: false,
             ajax: "{!! route('seracademico.posgraduacao.aluno.grid') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'matricula', name: 'matricula'},
-                {data: 'celular', name: 'celular'},
-                {data: 'cpf', name: 'cpf'},
+                {data: 'nome', name: 'pessoas.nome'},
+                {data: 'matricula', name: 'pos_alunos.matricula'},
+                {data: 'celular', name: 'pessoas.celular'},
+                {data: 'cpf', name: 'pessoas.cpf'},
+                {data: 'codigoCurso', name: 'fac_cursos.codigo'},
+                {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+                {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

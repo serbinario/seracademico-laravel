@@ -128,7 +128,7 @@ $(document).on('click', '#addPlanoEnsino', function () {
         url: '/index.php/seracademico/graduacao/turma/planoEnsino/attachPlanoEnsino',
         datatype: 'json'
     }).done(function (retorno) {
-        swal(retorno['msg'], retorno['success'] ? 'success' : 'error')
+        swal(retorno['msg'], 'Click no Ok para sair!', retorno['success'] ? 'success' : 'error')
         tableDisciplinasPlanoEnsino.ajax.reload();
         cleanSelectPlanoEnsino();
     });
