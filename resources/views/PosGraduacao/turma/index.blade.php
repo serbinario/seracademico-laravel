@@ -51,10 +51,10 @@
             </div>
         </div>
     </div>
-    @include('turma.modal_calendario')
-    @include('turma.modal_novo_calendario')
-    @include('turma.modal_editar_calendario')
-    @include('turma.modal_incluir_disciplinas')
+    @include('posGraduacao.turma.modal_calendario')
+    @include('posGraduacao.turma.modal_novo_calendario')
+    @include('posGraduacao.turma.modal_editar_calendario')
+    @include('posGraduacao.turma.modal_incluir_disciplinas')
 @stop
 
 @section('javascript')

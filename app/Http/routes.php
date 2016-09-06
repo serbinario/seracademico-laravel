@@ -143,23 +143,23 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
-                Route::get('index', ['as' => 'index', 'uses' => 'TurmaController@index']);
-                Route::get('grid', ['as' => 'grid', 'uses' => 'TurmaController@grid']);
-                Route::get('create', ['as' => 'create', 'uses' => 'TurmaController@create']);
-                Route::post('store', ['as' => 'store', 'uses' => 'TurmaController@store']);
-                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'TurmaController@edit']);
-                Route::post('update/{id}', ['as' => 'update', 'uses' => 'TurmaController@update']);
+                Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\TurmaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\TurmaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'PosGraduacao\TurmaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\TurmaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaController@update']);
 
                 Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
-                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@grid']);
-                    Route::get('gridCalendario/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@gridCalendario']);
-                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'CalendarioTurmaController@disciplinasOfCurriculo']);
-                    Route::post('store', ['as' => 'store', 'uses' => 'CalendarioTurmaController@store']);
-                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendarioTurmaController@edit']);
-                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendarioTurmaController@update']);
-                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioTurmaController@delete']);
-                    Route::post('incluir', ['as' => 'incluir', 'uses' => 'CalendarioTurmaController@incluirDisciplina']);
-                    Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'CalendarioTurmaController@removerDisciplina']);
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\CalendarioTurmaController@grid']);
+                    Route::get('gridCalendario/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'PosGraduacao\CalendarioTurmaController@gridCalendario']);
+                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\CalendarioTurmaController@disciplinasOfCurriculo']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\CalendarioTurmaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\CalendarioTurmaController@edit']);
+                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\CalendarioTurmaController@update']);
+                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'PosGraduacao\CalendarioTurmaController@delete']);
+                    Route::post('incluir', ['as' => 'incluir', 'uses' => 'PosGraduacao\CalendarioTurmaController@incluirDisciplina']);
+                    Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'PosGraduacao\CalendarioTurmaController@removerDisciplina']);
                 });
 
             });

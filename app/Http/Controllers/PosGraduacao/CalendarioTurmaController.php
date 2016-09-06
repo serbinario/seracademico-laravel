@@ -1,14 +1,14 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\CalendarioDisciplinaTurmaService;
-use Seracademico\Services\TurmaService;
-use Seracademico\Validators\CalendarioDisciplinaTurmaValidator;
+use Seracademico\Services\PosGraduacao\CalendarioDisciplinaTurmaService;
+use Seracademico\Services\PosGraduacao\TurmaService;
+use Seracademico\Validators\PosGraduacao\CalendarioDisciplinaTurmaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
@@ -33,7 +33,7 @@ class CalendarioTurmaController extends Controller
      * @var array
      */
     private $loadFields = [
-        'Professor',
+        'Professor|getValues',
         'Sala'
     ];
 
@@ -83,6 +83,7 @@ class CalendarioTurmaController extends Controller
         $rows = \DB::table('fac_calendarios')
             ->join('fac_turmas_disciplinas', 'fac_calendarios.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
             ->leftJoin('fac_professores', 'fac_calendarios.professor_id', '=', 'fac_professores.id')
+            ->leftJoin('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
             ->leftJoin('fac_salas', 'fac_calendarios.sala_id', '=', 'fac_salas.id')
             ->select([
                 'fac_calendarios.id',
@@ -90,7 +91,7 @@ class CalendarioTurmaController extends Controller
                 'fac_calendarios.data_final',
                 'fac_calendarios.hora_inicial',
                 'fac_calendarios.hora_final',
-                'fac_professores.nome as professor',
+                'pessoas.nome as professor',
                 'fac_salas.nome as sala'
             ])
             ->where('fac_turmas_disciplinas.id', '=', $idTurmaDisciplina);

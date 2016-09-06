@@ -1,15 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Routing\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\TurmaService;
+use Seracademico\Services\PosGraduacao\TurmaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\TurmaValidator;
+use Seracademico\Validators\PosGraduacao\TurmaValidator;
 
 class TurmaController extends Controller
 {
@@ -27,10 +28,10 @@ class TurmaController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Curso|byCurriculoAtivo,1',
+        'PosGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
-        'Professor'
+        'Professor|getValues'
     ];
 
     /**
@@ -52,7 +53,7 @@ class TurmaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #retorno
-        return view('turma.index', compact('loadFields'));
+        return view('posGraduacao.turma.index', compact('loadFields'));
     }
 
     /**
@@ -65,6 +66,7 @@ class TurmaController extends Controller
             ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
             ->leftJoin('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->leftJoin('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
+            ->where('fac_turmas.tipo_nivel_sistema_id', 2)
             ->select([
                 'fac_turmas.id',
                 'fac_turmas.codigo as codigo_turma',
@@ -100,7 +102,7 @@ class TurmaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('turma.create', compact('loadFields'));
+        return view('posGraduacao.turma.create', compact('loadFields'));
     }
 
     /**
@@ -142,7 +144,7 @@ class TurmaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('turma.edit', compact('model', 'loadFields'));
+            return view('posGraduacao.turma.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

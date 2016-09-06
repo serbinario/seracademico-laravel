@@ -112,14 +112,14 @@ class CurriculoController extends Controller
             $curriculo  = $this->service->find($row->idCurriculo);
             $tumas      = $curriculo->turmas;
             $boolReturn = true;
-
+            
             # percorre as turmas
-            //foreach ($tumas as $turma) {
-            //    if(count($turma->disciplinas) > 0) {
-            //        $boolReturn = false;
-            //        break;
-            //    }
-            //}
+            foreach ($tumas as $turma) {
+                if(count($turma->disciplinas) > 0) {
+                    $boolReturn = false;
+                    break;
+                }
+            }
 
             # Verifica a se a condição é válida
             if($boolReturn) {

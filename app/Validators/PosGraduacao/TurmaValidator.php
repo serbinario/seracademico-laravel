@@ -1,9 +1,10 @@
 <?php
 
-namespace Seracademico\Validators;
+namespace Seracademico\Validators\PosGraduacao;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
+use Seracademico\Validators\TraitReplaceRulesValidator;
 
 class TurmaValidator extends LaravelValidator
 {

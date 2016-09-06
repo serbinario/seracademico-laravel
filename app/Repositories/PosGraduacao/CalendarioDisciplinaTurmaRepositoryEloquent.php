@@ -9,11 +9,11 @@
 namespace Seracademico\Repositories\PosGraduacao;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\CalendarioDisciplinaTurmaRepository;
-use Seracademico\Entities\CalendarioDisciplinaTurma;
-use Seracademico\Validators\CalendarioDisciplinaTurmaValidator;
+use Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository;
+use Seracademico\Entities\PosGraduacao\CalendarioDisciplinaTurma;
+use Seracademico\Validators\PosGraduacao\CalendarioDisciplinaTurmaValidator;
 
-class CalendarioDisciplinaTurmaEloquent extends BaseRepository implements CalendarioDisciplinaTurmaRepository
+class CalendarioDisciplinaTurmaRepositoryEloquent extends BaseRepository implements CalendarioDisciplinaTurmaRepository
 {
     /**
      * Specify Model class name

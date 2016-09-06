@@ -194,7 +194,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 
         $this->app->bind(
             \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository::class,
-            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaEloquent::class
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepositoryEloquent::class
         );
 
         $this->app->bind(

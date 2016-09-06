@@ -63,6 +63,15 @@ class Curriculo extends Model implements Transformable
             ]);
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function turmas()
+    {
+        return $this->hasMany(Turma::class, 'curriculo_id');
+    }
+
     /**
      * @return string
      */
