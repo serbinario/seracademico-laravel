@@ -29,7 +29,7 @@
                 @endif
 
             {!! Form::model($model, ['route'=> ['seracademico.posgraduacao.curriculo.update', $model->id], 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormCurriculo')
+                    @include('tamplatesForms.posGraduacao.tamplateFormCurriculo')
             {!! Form::close() !!}
         </div>        
     </div>
