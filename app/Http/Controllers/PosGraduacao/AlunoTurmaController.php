@@ -1,13 +1,13 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
-use Seracademico\Entities\AlunoTurma;
+use Seracademico\Entities\PosGraduacao\AlunoTurma;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\AlunoTurmaService;
+use Seracademico\Services\PosGraduacao\AlunoTurmaService;
 use Yajra\Datatables\Datatables;
 
 class AlunoTurmaController extends Controller
@@ -43,22 +43,22 @@ class AlunoTurmaController extends Controller
     public function grid($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('fac_alunos_turmas')
-            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_turmas.aluno_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_turmas.turma_id')
+        $rows = \DB::table('pos_alunos_turmas')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'pos_alunos_turmas.aluno_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->join('fac_curriculos', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->join('fac_situacao_aluno', 'fac_alunos_turmas.situacao_id', '=', 'fac_situacao_aluno.id')
+            ->join('fac_situacao', 'pos_alunos_turmas.situacao_id', '=', 'fac_situacao.id')
             ->where('fac_alunos.id', $idAluno)
             ->select([
-                'fac_alunos_turmas.id',
+                'pos_alunos_turmas.id',
                 'fac_alunos.id as idAluno',
                 'fac_turmas.codigo as codigo_turma',
                 'fac_curriculos.codigo as codigo_curriculo',
                 'fac_curriculos.nome as nome_curriculo',
                 'fac_cursos.codigo as codigo_curso',
                 'fac_cursos.nome as nome_curso',
-                'fac_situacao_aluno.nome as situacao_aluno',
+                'fac_situacao.nome as situacao_aluno',
                 \DB::raw('DATE_FORMAT(fac_turmas.aula_inicio, "%d/%m/%Y") as aula_inicio'),
             ]);
 
@@ -80,8 +80,8 @@ class AlunoTurmaController extends Controller
         $rows = \DB::table('fac_notas')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_notas.situacao_nota_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_notas.disciplina_id')
-            ->join('fac_alunos_turmas', 'fac_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_turmas.turma_id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->where('fac_notas.aluno_tuma_id', $idAlunoTurma)
             ->select([
                 'fac_notas.media',
@@ -105,8 +105,8 @@ class AlunoTurmaController extends Controller
         $rows = \DB::table('fac_notas')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_notas.situacao_nota_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_notas.disciplina_id')
-            ->join('fac_alunos_turmas', 'fac_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_turmas.turma_id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->where('fac_notas.aluno_tuma_id', $idAlunoTurma)
             ->where('fac_situacao_nota.id', 'in', [1,2])
             ->select([
@@ -131,8 +131,8 @@ class AlunoTurmaController extends Controller
         $rows = \DB::table('fac_notas')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_notas.situacao_nota_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_notas.disciplina_id')
-            ->join('fac_alunos_turmas', 'fac_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_turmas.turma_id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->where('fac_notas.aluno_tuma_id', $idAlunoTurma)
             ->where('fac_situacao_nota.id', '=', 4)
             ->select([

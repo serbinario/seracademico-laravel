@@ -131,6 +131,9 @@ class AlunoService
         #Vinculando o currículo ao aluno
         $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
 
+        # Vinculando o aluno a uma turma
+        $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
+
         #Retorno
         return $aluno;
     }

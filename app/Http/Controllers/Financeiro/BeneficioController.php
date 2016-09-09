@@ -263,4 +263,33 @@ class BeneficioController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getIn(Request $request)
+    {
+        try {
+            // Recuperando os ids das taxas da requisição
+            $dados = $request->get('beneficios');
+
+            #Criando a consulta
+            $rows = \DB::table('fin_beneficios')
+                ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_beneficios.tipo_beneficio_id')
+                ->whereIn('fin_beneficios.id', $dados)
+                ->select(['fin_beneficios.id', 'fin_tipos_beneficios.nome', 'fin_beneficios.valor', 'fin_beneficios.codigo']);
+
+            #Editando a grid
+            return Datatables::of($rows)->addColumn('action', function ($row) {
+                # Html de retorno
+                $html = '<a id="btnDeleteBeneficio" class="btn-floating"><i class="material-icons">delete</i></a>';
+
+                # Retorno
+                return $html;
+            })->make(true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

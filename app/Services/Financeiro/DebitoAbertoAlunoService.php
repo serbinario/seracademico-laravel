@@ -54,10 +54,22 @@ class DebitoAbertoAlunoService
         #Salvando o registro pincipal
         $debito =  $this->repository->create($data);
 
+        # Validando a taxa
+        if(!isset($data['beneficios'])) {
+            throw new \Exception('Você deve informa um Benefício!');
+        }
+
+        # Tratamento das taxas
+        $beneficios = $data['beneficios'];
+        unset($data['beneficios']);
+
         #Verificando se foi criado no banco de dados
         if(!$debito) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
+
+        # Vinculando os beneficios
+        $debito->beneficios()->attach($beneficios);
 
         #Retorno
         return $debito;

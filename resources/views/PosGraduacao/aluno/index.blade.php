@@ -54,13 +54,13 @@
         </div>
     </div>
 
-    {{--@include('aluno.turma.modal_aluno_turma')
-    @include('aluno.turma.modal_nova_turma')--}}
+    @include('posGraduacao.aluno.turma.modal_aluno_turma')
+    @include('posGraduacao.aluno.turma.modal_nova_turma')
 @stop
 
 @section('javascript')
-   {{-- <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

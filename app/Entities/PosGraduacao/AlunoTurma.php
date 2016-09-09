@@ -14,7 +14,7 @@ class AlunoTurma extends Pivot implements Transformable
     /**
      * @var string
      */
-    protected $table = 'fac_alunos_turmas';
+    protected $table = 'pos_alunos_turmas';
 
     /**
      * @var array
