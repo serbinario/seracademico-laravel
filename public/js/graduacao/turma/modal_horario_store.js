@@ -149,20 +149,48 @@ $('#btnStoreHorario').click(function() {
         'professor_id': professor_id,
     };
 
+    // Requisição de confirmação caso for junção de turmas
     jQuery.ajax({
-        type: 'POST',
-        url: '/index.php/seracademico/graduacao/turma/horario/store',
+        type: 'GET',
+        url: '/index.php/seracademico/graduacao/turma/horario/eJuncao',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            tableDisciplina.ajax.reload();
-            tableHorario.ajax.reload();
+            // Mensagem para o alert
+            var msg = "Foi verificado a existência de um horário com a mesma disciplina, carga horária e professor." +
+                      " Esses casos são recomendados para junção de turmas, se esse não for o caso aconselhamos a não prosseguir" +
+                      " com a operação.";
 
-            $('#modal-horario-store').modal('hide');
-            swal(retorno.msg, "Click no botão abaixo!", "success");
-        } else {
-            swal(retorno.msg, "Click no botão abaixo!", "error");
+            // Alerta para caso de junção de turma
+            swal({
+                    title: "Deseja realmente continuar ?",
+                    text: msg,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, desejo continuar!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    // Requisição de cadastro
+                    jQuery.ajax({
+                        type: 'POST',
+                        url: '/index.php/seracademico/graduacao/turma/horario/store',
+                        data: dados,
+                        datatype: 'json'
+                    }).done(function (retorno) {
+                        if(retorno.success) {
+                            tableDisciplina.ajax.reload();
+                            tableHorario.ajax.reload();
+
+                            $('#modal-horario-store').modal('hide');
+                            swal(retorno.msg, "Click no botão abaixo!", "success");
+                        } else {
+                            swal(retorno.msg, "Click no botão abaixo!", "error");
+                        }
+                    });
+                });
         }
     });
 });

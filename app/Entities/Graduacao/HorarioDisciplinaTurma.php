@@ -3,6 +3,7 @@
 namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
+use Seracademico\Entities\Graduacao\TurmaDisciplina;
 use Seracademico\Entities\Professor;
 use Seracademico\Entities\Sala;
 use Seracademico\Entities\Dia;
@@ -62,5 +63,13 @@ class HorarioDisciplinaTurma extends Model implements Transformable
     public function professor()
     {
         return $this->belongsTo(Professor::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function turmaDisciplina()
+    {
+        return $this->belongsTo(TurmaDisciplina::class, 'turma_disciplina_id');
     }
 }

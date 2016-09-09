@@ -355,6 +355,20 @@ class HorarioTurmaController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    public function eJuncao(Request $request)
+    {
+        try {
+            #incluindo disciplina as Disciplinas
+            $this->turmaService->eJuncao($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 //
 //    /**
 //     * @param $idTurma
