@@ -157,10 +157,10 @@ $('#btnStoreHorario').click(function() {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            // Mensagem para o alert
-            var msg = "Foi verificado a existência de um horário com a mesma disciplina, carga horária e professor." +
-                      " Esses casos são recomendados para junção de turmas, se esse não for o caso aconselhamos a não prosseguir" +
-                      " com a operação.";
+            var msg = "Foi verificado a existência de um horário com o mesmo professor." +
+                " Esses casos são recomendados para junção de turmas (mesma disciplina e carga horária)," +
+                " se esse não for o caso aconselhamos a não prosseguir" +
+                " com a operação.";
 
             // Alerta para caso de junção de turma
             swal({
@@ -174,23 +174,32 @@ $('#btnStoreHorario').click(function() {
                 },
                 function() {
                     // Requisição de cadastro
-                    jQuery.ajax({
-                        type: 'POST',
-                        url: '/index.php/seracademico/graduacao/turma/horario/store',
-                        data: dados,
-                        datatype: 'json'
-                    }).done(function (retorno) {
-                        if(retorno.success) {
-                            tableDisciplina.ajax.reload();
-                            tableHorario.ajax.reload();
-
-                            $('#modal-horario-store').modal('hide');
-                            swal(retorno.msg, "Click no botão abaixo!", "success");
-                        } else {
-                            swal(retorno.msg, "Click no botão abaixo!", "error");
-                        }
-                    });
+                    storeHorario(dados)
                 });
+        } else {
+            // Requisição de cadastro
+            storeHorario(dados)
         }
     });
 });
+
+// Função para cadastro de horário
+function storeHorario(dados) {
+    // Requisição de cadastro
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/graduacao/turma/horario/store',
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            tableDisciplina.ajax.reload();
+            tableHorario.ajax.reload();
+
+            $('#modal-horario-store').modal('hide');
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+}

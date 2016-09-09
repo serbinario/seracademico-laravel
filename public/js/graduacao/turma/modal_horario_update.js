@@ -162,8 +162,9 @@ $('#btnUpdateHorario').click(function() {
     }).done(function (retorno) {
         if(retorno.success) {
             // Mensagem para o alert
-            var msg = "Foi verificado a existência de um horário com a mesma disciplina, carga horária e professor." +
-                " Esses casos são recomendados para junção de turmas, se esse não for o caso aconselhamos a não prosseguir" +
+            var msg = "Foi verificado a existência de um horário com o mesmo professor." +
+                " Esses casos são recomendados para junção de turmas (mesma disciplina e carga horária)," +
+                " se esse não for o caso aconselhamos a não prosseguir" +
                 " com a operação.";
 
             // Alerta para caso de junção de turma
@@ -177,21 +178,31 @@ $('#btnUpdateHorario').click(function() {
                     closeOnConfirm: false
                 },
                 function() {
-                    // Requisição ajax
-                    jQuery.ajax({
-                        type: 'POST',
-                        url: '/index.php/seracademico/graduacao/turma/horario/update/' + idHorarioEditar,
-                        data: dados,
-                        datatype: 'json'
-                    }).done(function (retorno) {
-                        if(retorno.success) {
-                            $('#modal-horario-update').modal('toggle');
-                            swal(retorno.msg, "Click no botão abaixo!", "success");
-                        } else {
-                            swal(retorno.msg, "Click no botão abaixo!", "error");
-                        }
-                    });
+                    // Requisição de atualização
+                    updateHorario(dados);
                 });
+        } else {
+            // Requisição de atualização
+            updateHorario(dados);
         }
     });
 });
+
+// Função para atualização de horário
+function updateHorario(dados) {
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: '/index.php/seracademico/graduacao/turma/horario/update/' + idHorarioEditar,
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            $('#modal-horario-update').modal('toggle');
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+}
+

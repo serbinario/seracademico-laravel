@@ -64,12 +64,4 @@ class HorarioDisciplinaTurma extends Model implements Transformable
     {
         return $this->belongsTo(Professor::class);
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function turmaDisciplina()
-    {
-        return $this->belongsTo(TurmaDisciplina::class, 'turma_disciplina_id');
-    }
 }

@@ -919,11 +919,20 @@ class TurmaService
         # Verificando algumas regras de validação
         if(count($rowsHorarios) > 0) {
             foreach ($rowsHorarios as $row) {
+                # Velidação  se as disciplinas forem diferentes
+                if($row->disciplina_id != $objDisciplina->id) {
+                    throw new \Exception();
+                }
+
                 # Validação se as disciplinas tiverem cargas horárias diferentes
                 if($row->disciplina_id == $objDisciplina->id && $row->carga_horaria_total != $cargaHoraria) {
-                    return false;
+                    throw new \Exception();
                 }
+
+
             }
+        } else {
+            throw new \Exception();
         }
 
         # retorno caso seja satisfeita a condição de junção
