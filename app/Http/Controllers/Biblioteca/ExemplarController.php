@@ -66,6 +66,7 @@ class ExemplarController extends Controller
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
                 'bib_arcevos.cutter',
@@ -81,13 +82,14 @@ class ExemplarController extends Controller
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
                             <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
-            //$obra = $this->service->find($row->id);
+
+            $emprestimo = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
-           // if(count($obra['acervo']->exemplares) == 0) {
+           if(count($emprestimo->emprestimos) == 0) {
                 $html .= '<li><a class="btn-floating excluir" href="deleteExemplar/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
                             </ul>
                            </div>';
-           // }
+           }
 
             # Retorno
             return $html;
@@ -141,7 +143,7 @@ class ExemplarController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-
+            
             #Tratando as datas
             $model = $this->service->getDateFormatPtBr($model);
 
@@ -154,6 +156,18 @@ class ExemplarController extends Controller
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImg($id)
+    {
+        #Recuperando a empresa
+        $model = $this->service->find($id);
+
+        return response($model->path_image) ->header('Content-Type', 'image/jpeg');
     }
 
     /**
