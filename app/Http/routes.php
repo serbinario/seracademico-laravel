@@ -201,6 +201,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\CurriculoAlunoController@getLoadFields']);
                     Route::get('gridACursar/{idAluno}', ['as' => 'gridACursar', 'uses' => 'Graduacao\CurriculoAlunoController@gridACursar']);
+                    Route::get('gridCursando/{idAluno}', ['as' => 'gridCursando', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursando']);
                     Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursadas']);
                     Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridDispensadas']);
                     Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@storeDispensada']);
