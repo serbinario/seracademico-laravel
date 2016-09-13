@@ -222,12 +222,6 @@ function loadTableCursando (idAluno) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno,
         columns: [
-            {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
             {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
             {data: 'nome', name: 'fac_disciplinas.nome'},
@@ -239,39 +233,6 @@ function loadTableCursando (idAluno) {
         ]
     });
 
-    // array de detalhes da grid
-    var detailRows = [];
-
-    // evento para criação dos detalhes da grid
-    $('#grid-cursando').on( 'click', 'tr td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = tableCursando.row( tr );
-        var idx = $.inArray( tr.attr('id'), detailRows );
-
-        if ( row.child.isShown() ) {
-            tr.removeClass( 'details' );
-            row.child.hide();
-
-            // Remove from the 'open' array
-            detailRows.splice( idx, 1 );
-        }
-        else {
-            tr.addClass( 'details' );
-            row.child( formatCursando( row.data() ) ).show();
-
-            // Add to the 'open' array
-            if ( idx === -1 ) {
-                detailRows.push( tr.attr('id') );
-            }
-        }
-    } );
-
-    // On each draw, loop over the `detailRows` array and show any child rows
-    tableCursando.on( 'draw', function () {
-        $.each( detailRows, function ( i, id ) {
-            $('#'+id+' td.details-control').trigger( 'click' );
-        } );
-    } );
 
     return tableCursando;
 }
