@@ -48,7 +48,7 @@
                             </li>
 
                             <li role="presentation">
-                                <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Currículares</a>
+                                <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Curriculares</a>
                             </li>
                         </ul>
 
@@ -148,14 +148,11 @@
                                 <table id="grid-extras" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Detalhe</th>
                                         <th>Período</th>
                                         <th>Cod. Disciplina</th>
                                         <th>Disciplina</th>
                                         <th>C. Horária</th>
                                         <th>Créditos</th>
-                                        <th>Média</th>
-                                        <th>Turma</th>
                                         <th>Currículo</th>
                                     </tr>
                                     </thead>

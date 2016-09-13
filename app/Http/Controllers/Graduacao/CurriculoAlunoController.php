@@ -241,7 +241,7 @@ class CurriculoAlunoController extends Controller
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.disciplina_id')
-            ->join('fac_motivos', 'fac_motivos.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.motivo_id')
+            ->leftJoin('fac_motivos', 'fac_motivos.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.motivo_id')
             ->where('fac_alunos.id', $idAluno)
             ->select([
                 'fac_alunos_semestres_disciplinas_dispensadas.id',
@@ -260,6 +260,49 @@ class CurriculoAlunoController extends Controller
                     <a class="btn-floating" id="btnDeleteDispensada" title="Remover Hitórico"><i class="material-icons">delete</i></a>';
         })->make(true);
     }
+
+    /**
+     * @return mixed
+     */
+    public function gridExtraCurricular(Request $request, $idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_alunos_semestres_disciplinas_extras')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_disciplinas_extras.disciplina_id')
+            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_semestres_disciplinas_extras.curriculo_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id');
+            })
+            ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                    where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                );
+            })
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->orderBy('fac_curriculo_disciplina.periodo')
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_disciplinas.qtd_falta',
+                'fac_disciplinas.qtd_credito',
+                'fac_curriculo_disciplina.periodo',
+                'fac_tipo_disciplinas.nome as tipo_disciplina',
+                'pessoas.nome as nomeAluno',
+                'fac_curriculos.codigo as codigoCurriculo'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->make(true);
+    }
+
 
     /**
      * @param Request $request

@@ -204,6 +204,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gridCursando/{idAluno}', ['as' => 'gridCursando', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursando']);
                     Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridCursadas']);
                     Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridDispensadas']);
+                    Route::get('gridExtraCurricular/{idAluno}', ['as' => 'gridExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@gridExtraCurricular']);
                     Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@storeDispensada']);
                     Route::get('deleteDispensada/{id}', ['as' => 'deleteDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDispensada']);
                     Route::get('editDispensada/{id}', ['as' => 'editDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@editDispensada']);
