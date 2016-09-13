@@ -587,6 +587,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeExemplar', ['as' => 'storeExemplar', 'uses' => 'Biblioteca\ExemplarController@store']);
             Route::post('updateExemplar/{id}', ['as' => 'updateExemplar', 'uses' => 'Biblioteca\ExemplarController@update']);
             Route::get('deleteExemplar/{id}', ['as' => 'deleteExemplar', 'uses' => 'Biblioteca\ExemplarController@delete']);
+            Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'Biblioteca\ExemplarController@getImg']);
 
             Route::get('indexExemplarP', ['as' => 'indexExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@index']);
             Route::get('createExemplarP', ['as' => 'createExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@create']);

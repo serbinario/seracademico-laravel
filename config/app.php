@@ -185,6 +185,8 @@ return [
 
         # Provider dos parametros do sistema
         \Seracademico\Providers\ParametroServiceProvider::class,
+
+        //Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*

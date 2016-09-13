@@ -58,6 +58,7 @@ class ExemplarService
     {
         $relacionamentos = [
             'acervo',
+            'emprestimos'
         ];
         
         #Recuperando o registro no banco de dados
@@ -206,11 +207,10 @@ class ExemplarService
         $codigoMax = $codigo != null ? $codigo : "0001{$this->anoAtual}";
         $codigoAtual = substr($codigoMax, 0, -4);
         $this->ultimoAno = substr($codigo, -4);
-        //dd(date('Y'));
-        //dd($codigoAtual . "         " . $this->ultimoAno);
+        
         //trata a quantidade de exemplar caso o valor informado seja 0
         $qtdExemplar = $data['registros'] == '0' ? $qtdExemplar = 1 : $qtdExemplar = $data['registros'];
-       // dd($codigoMax);
+       
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
                 if($i == 0){
@@ -219,8 +219,11 @@ class ExemplarService
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
-                    #Salvando o registro pincipal
+                    $data = $this->insertImg($data);
+
+                    #Salvando o registro principal
                     $exemplar =  $this->repository->create($data);
+                    $this->insertImg($exemplar->id);
                     $ultCodigo = substr($exemplar->codigo, 0, -4);
                     $codNovo = $ultCodigo + 1;
                     $this->tombo = $codNovo.$this->anoAtual;
@@ -228,10 +231,11 @@ class ExemplarService
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
-                    // dd($this->tombo);
                     $data['codigo'] = $this->tombo;
-                    #Salvando o registro pincipal
+
+                    #Salvando o registro principal
                     $exemplar =  $this->repository->create($data);
+                    $this->insertImg($exemplar->id);
                     $ultCodigo = substr($exemplar->codigo, 0, -4);
                     $codNovo = $ultCodigo + 1;
                     $this->tombo = $codNovo.$this->anoAtual;
@@ -245,8 +249,10 @@ class ExemplarService
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
-                    #Salvando o registro pincipal
+
+                    #Salvando o registro principal
                     $exemplar =  $this->repository->create($data);
+                    $this->insertImg($exemplar->id);
                     $ultCodigo = substr($exemplar->codigo, 0, -4);
                     $codNovo = $ultCodigo + 1;
                     $this->tombo = $codNovo.$this->anoAtual;
@@ -254,10 +260,11 @@ class ExemplarService
                     $data['exemp_principal'] = '0';
                     $data['emprestimo_id'] = '1';
                     $data['situacao_id'] = '1';
-                   // dd($this->tombo);
                     $data['codigo'] = $this->tombo;
-                    #Salvando o registro pincipal
+                    
+                    #Salvando o registro principal
                     $exemplar =  $this->repository->create($data);
+                    $this->insertImg($exemplar->id);
                     $ultCodigo = substr($exemplar->codigo, 0, -4);
                     $codNovo = $ultCodigo + 1;
                     $this->tombo = $codNovo.$this->anoAtual;
@@ -272,6 +279,34 @@ class ExemplarService
 
         #Retorno
         return $exemplar;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE bib_exemplares SET path_image = '{$add}' where id =  $id ";
+
+            $pdo->query($query);
+            
+        }
+
     }
 
     /**
@@ -292,28 +327,7 @@ class ExemplarService
 
         #Atualizando no banco de dados
         $exemplar = $this->repository->update($data, $id);
-
-        #tratando a imagem
-        /*if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-
-            #removendo a imagem antiga
-            if ($exemplar->path_image != null) {
-                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $exemplar->path_image);
-            }
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $exemplar->path_image = $fileName;
-            $exemplar->save();
-
-            #destruindo o img do array
-            unset($data['img']);
-        }*/
+        $this->insertImg($exemplar->id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$exemplar) {
@@ -447,30 +461,6 @@ class ExemplarService
         $newCod2 = str_pad($newCod2,8,"0",STR_PAD_LEFT);
 
         return $newCod2;
-    }
-
-    /**
-     * @param $data
-     */
-    public function insertImg($data, $img)
-    {
-        #tratando a imagem
-        if(isset($img) && $img != null) {
-            $file     = $img;
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $data['path_image'] = $fileName;
-
-            #destruindo o img do array
-            unset($data['img']);
-
-        }
-
-        return $data;
     }
 
     /**
