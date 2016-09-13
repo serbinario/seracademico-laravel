@@ -77,7 +77,7 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $data['tipo_nivel_sistema_id'] = 1;
-        $this->tratamentoDoCurso($data);
+        //$this->tratamentoDoCurso($data);
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -104,7 +104,7 @@ class TurmaService
     {
         # Aplicação das regras de negócios
         $data['tipo_nivel_sistema_id'] = 1;
-        $this->tratamentoDoCurso($data, $id);
+        //$this->tratamentoDoCurso($data, $id);
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
         # Se não poder ser alterado lançará uma exception.
@@ -374,7 +374,6 @@ class TurmaService
 
             #percorrendo as disciplinas
             foreach ($turma->curriculo->disciplinas as $disciplina) {
-
                 # Verificando se a disciplina é do período da turma
                 if($disciplina->pivot->periodo == $turma->periodo) {
                     # Recuperando o pivot
@@ -385,17 +384,11 @@ class TurmaService
                         return $plano->ativo && $plano->carga_horaria == $pivotDisciplina->carga_horaria_total;
                     });
 
-                    //dd($planoEnsino);
-
                     # Validando o plano de ensino
                     $planoEnsino = count($planoEnsino) > 0 ? $planoEnsino->first()->id : null;
 
-                    //dd($planoEnsino);
-
                     # Vinculando as disciplinas
                     $turma->disciplinas()->attach($disciplina, ['plano_ensino_id' => $planoEnsino]);
-
-                    //dd($turma);
                 }
             }
 
@@ -430,7 +423,7 @@ class TurmaService
      * na turma.
      *
      * @param array $data
-     * @return bool
+     * @return bool|bool
      * @throws \Exception
      */
     public function incluirDisciplina(array $data) : bool

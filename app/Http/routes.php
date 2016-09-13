@@ -291,6 +291,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CurriculoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@update']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Graduacao\CurriculoController@getByCurso']);
 
                 Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                     Route::get('get/{idDisciplina}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@getDisciplina']);

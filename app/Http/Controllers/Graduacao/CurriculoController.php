@@ -334,8 +334,9 @@ class CurriculoController extends Controller
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @return mixed
      */
     public function disciplinaEdit($idDisciplina, $idCurriculo)
     {
@@ -474,6 +475,34 @@ class CurriculoController extends Controller
             //return view('reports.curriculos.curriculo', ['rows' =>  $query]);
         } catch(\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param $idCurso
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getByCurso($idCurso)
+    {
+        try {
+            # Fazendo a consulta no banco de dados
+            $rows = \DB::table('fac_curriculos')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->where('fac_cursos.id', $idCurso)
+                ->select([
+                    'fac_curriculos.id',
+                    'fac_curriculos.nome',
+                ])->get();
+
+            # Verificando a consulta
+            if(count($rows) == 0) {
+                throw new \Exception('Nenhum dado foi encontrado!');
+            }
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }
