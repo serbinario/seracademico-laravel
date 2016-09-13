@@ -287,16 +287,16 @@ function runCurriculo(idAluno) {
 
     // Carregando a grid de Cursando
     if(tableCursando) {
-        loadTableExtraCurricular(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno).load();
+        loadTableCursando(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno).load();
     } else {
-        loadTableExtraCurricular(idAluno);
+        loadTableCursando(idAluno);
     }
 
     // Carregando a grid de extras
     if(tableExtraCurricular) {
-        loadTableCursando(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridExtraCurricular/" + idAluno).load();
+        loadTableExtraCurricular(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridExtraCurricular/" + idAluno).load();
     } else {
-        loadTableCursando(idAluno);
+        loadTableExtraCurricular(idAluno);
     }
 
     // carregando a modal
