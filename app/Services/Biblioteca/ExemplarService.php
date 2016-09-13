@@ -282,8 +282,7 @@ class ExemplarService
     }
 
     /**
-     * @param $data
-     * @return mixed
+     * @param $id
      */
     public function insertImg($id)
     {
