@@ -110,7 +110,7 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <label>Págo</label>
+                                    <label>Pago</label>
                                     <input name="pago_create"  id="pago_create" type="checkbox" value="1">
                                 </div>
                             </div>

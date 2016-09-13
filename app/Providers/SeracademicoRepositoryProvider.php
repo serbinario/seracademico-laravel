@@ -163,18 +163,13 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\DisciplinaRepository::class,
-			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\DisciplinaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\DisciplinaRepositoryEloquent::class
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\DisciplinaRepository::class,
-			\Seracademico\Repositories\DisciplinaRepositoryEloquent::class
-		);
-
-		$this->app->bind(
-			\Seracademico\Repositories\CursoRepository::class,
-			\Seracademico\Repositories\CursoRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\CursoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\CursoRepositoryEloquent::class
 		);
 
 		$this->app->bind(
@@ -199,7 +194,7 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 
         $this->app->bind(
             \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository::class,
-            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaEloquent::class
+            \Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepositoryEloquent::class
         );
 
         $this->app->bind(
@@ -539,11 +534,25 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Graduacao\PlanoAulaRepository::class,
 			\Seracademico\Repositories\Graduacao\PlanoAulaRepositoryEloquent::class
 		);
-		
 
 		$this->app->bind(
 			\Seracademico\Repositories\Graduacao\DiarioAulaRepository::class,
 			\Seracademico\Repositories\Graduacao\DiarioAulaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Financeiro\BoletoVestibulandoRepository::class,
+			\Seracademico\Repositories\Financeiro\BoletoVestibulandoRepositoryEloquent::class
+		);
+
+        $this->app->bind(
+            \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoRepositoryEloquent::class
 		);
 	}
 }

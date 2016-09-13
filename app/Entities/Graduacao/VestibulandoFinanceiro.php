@@ -5,6 +5,7 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Financeiro\BoletoVestibulando;
 use Seracademico\Entities\Financeiro\FormaPagamento;
 use Seracademico\Entities\Financeiro\LocalPagamento;
 use \Seracademico\Entities\Financeiro\Taxa;
@@ -69,6 +70,14 @@ class VestibulandoFinanceiro extends Model implements Transformable
     public function formaPagamento()
     {
         return $this->belongsTo(FormaPagamento::class, 'forma_pagamento_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function boleto()
+    {
+        return $this->hasOne(BoletoVestibulando::class, 'vestibulando_financeiro_id');
     }
     
     /**

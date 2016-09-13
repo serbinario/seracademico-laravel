@@ -67,7 +67,8 @@
                             <table id="grid-debitos-beneficios" class="display table table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Benefício</th>
+                                    <th>Id</th>
+                                    <th style="width:10%;">Benefício</th>
                                     <th style="width:10%;">Valor</th>
                                     <th style="width: 5%;">Ação</th>
                                 </tr>

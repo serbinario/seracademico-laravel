@@ -32,6 +32,9 @@
                             <li role="presentation">
                                 <a href="#debitospagos" aria-controls="debitospagos" data-toggle="tab"> Débitos Pagos</a>
                             </li>
+                            <li role="presentation">
+                                <a href="#boletos" aria-controls="boletos" data-toggle="tab"> Boletos</a>
+                            </li>
                         </ul>
 
                         <!-- Tab panes -->
@@ -79,6 +82,25 @@
                                 </table>
                             </div>
                             {{--FIM Débitos Págos--}}
+
+                                    <!-- Aba Boletos -->
+                            <div role="tabpanel" class="tab-pane" id="boletos">
+                                <br/>
+
+                                <!-- Table a cursadas -->
+                                <table id="grid-boletos" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nosso Número</th>
+                                        <th>Vencimento</th>
+                                        <th>Valor</th>
+                                        <th>Data Doc.</th>
+                                        <th>Nº Doc.</th>
+                                        {{--<th>Ação</th>--}}
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
 
                         </div>
                         <!-- FIM Tab panes -->

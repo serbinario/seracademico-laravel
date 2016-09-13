@@ -53,5 +53,7 @@ $(document).on('click', '#horario-grid tbody tr td', function () {
         idDia  = $(this).index();
     } else {
         idDisciplinaHorario = 0;
+        idHora = undefined;
+        idDia  = undefined;
     }
 });

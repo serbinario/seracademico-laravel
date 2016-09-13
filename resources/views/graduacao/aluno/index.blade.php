@@ -13,12 +13,12 @@
         }
 
         td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            background: url("{{asset("imagemgrid/icone-produto-plus.png")}}") no-repeat center center;
             cursor: pointer;
         }
 
         tr.details td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
+            background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
         }
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
@@ -75,6 +75,7 @@
 
                         <div class="form-group">
                             <a id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</a>
+                            <button id="reportAluno" class="btn-sm btn-primary">Relatório</button>
                         </div>
                     </form>
                 </div>
@@ -148,6 +149,8 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_fechamento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/create_beneficio_financeiro_aluno.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/grid_beneficio_financeiro_aluno.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_beneficios.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/beneficios_select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_create_beneficio.js') }}"></script>
@@ -297,6 +300,23 @@
 
             // Carregando o modal
             runBeneficio(idAluno);
+        });
+
+        /**
+         * Evento responsável por gerar um gráfico a partir
+         * do filtro escolhido na busca.
+         */
+        $(document).on('click', '#reportAluno', function () {
+            // Reuperando os valores do filtro
+            var semestre = $('select[name=semestreSearch] option:selected').val();
+            var situacao = $('select[name=situacaoSearch] option:selected').val();
+            var globalSearch = $('input[name=globalSearch]').val();
+
+            // Dados para requisição
+            var dados =  'semestre=' + semestre + '&situacao=' + situacao + '&globalSearch=' + globalSearch;
+
+            // Redirecionando para a página de relatório
+            window.open('/index.php/seracademico/graduacao/aluno/reportFilter?' + dados ,'_blank');
         });
     </script>
 @stop

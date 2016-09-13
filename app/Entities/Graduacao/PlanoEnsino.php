@@ -33,6 +33,7 @@ class PlanoEnsino extends Model implements Transformable
         'bibliografia_complementar',
 		'competencia',
 		'aula_pratica',
+		'path_plano_ensino',
 		'ativo'
 	];
 
@@ -57,5 +58,16 @@ class PlanoEnsino extends Model implements Transformable
     public function setVigenciaAttribute($value)
     {
         $this->attributes['vigencia'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @param $query
+     * @param $disciplinaId
+     * @param $cargaHoraria
+     * @return mixed
+     */
+    public function scopeByDisciplinaAndCargaHoraria($query, $disciplinaId, $cargaHoraria)
+    {
+        return $query->where('disciplina_id', $disciplinaId)->where('carga_horaria', $cargaHoraria);
     }
 }

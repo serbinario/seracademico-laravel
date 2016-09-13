@@ -4,9 +4,9 @@ namespace Seracademico\Repositories\PosGraduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\TurmaValidator;
-use Seracademico\Repositories\TurmaRepository;
-use Seracademico\Entities\Turma;
+use Seracademico\Validators\PosGraduacao\TurmaValidator;
+use Seracademico\Repositories\PosGraduacao\TurmaRepository;
+use Seracademico\Entities\PosGraduacao\Turma;
 
 /**
  * Class TurmaRepositoryEloquent

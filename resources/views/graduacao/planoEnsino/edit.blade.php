@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.graduacao.planoEnsino.update', $model->id], 'method' => "POST", "id" => "formPlanoEnsino"]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.graduacao.planoEnsino.update', $model->id], 'method' => "POST", "id" => "formPlanoEnsino", 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.graduacao.tamplateFormPlanoEnsino')
             {!! Form::close() !!}
         </div>

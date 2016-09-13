@@ -61,6 +61,14 @@ class DebitoAbertoAluno extends Model implements Transformable
 		return $this->hasOne(Boleto::class, 'debito_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function beneficios()
+	{
+		return $this->belongsToMany(Beneficio::class, 'fin_debitos_beneficios', 'debito_id', 'beneficio_id');
+	}
+
     /**
      *
      * @return \DateTime
@@ -78,5 +86,4 @@ class DebitoAbertoAluno extends Model implements Transformable
     {
         $this->attributes['data_vencimento'] = SerbinarioDateFormat::toUsa($value);
     }
-
 }

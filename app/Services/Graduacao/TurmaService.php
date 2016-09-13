@@ -2,8 +2,10 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
 use Seracademico\Repositories\Graduacao\CurriculoRepository;
 use Seracademico\Repositories\Graduacao\DisciplinaRepository;
+use Seracademico\Repositories\Graduacao\HorarioDisciplinaTurmaRepository;
 use Seracademico\Repositories\Graduacao\TurmaRepository;
 use Seracademico\Entities\Graduacao\Turma;
 use Carbon\Carbon;
@@ -26,6 +28,11 @@ class TurmaService
     private $disciplinaRepository;
 
     /**
+     * @var HorarioDisciplinaTurmaRepository
+     */
+    private $horarioDisciplinaTurmaRepository;
+
+    /**
      * @param TurmaRepository $repository
      * @param CurriculoRepository $curriculoRepository
      * @param DisciplinaRepository $disciplinaRepository
@@ -33,11 +40,13 @@ class TurmaService
     public function __construct(
         TurmaRepository $repository,
         CurriculoRepository $curriculoRepository,
-        DisciplinaRepository $disciplinaRepository)
+        DisciplinaRepository $disciplinaRepository,
+        HorarioDisciplinaTurmaRepository $horarioDisciplinaTurmaRepository)
     {
         $this->repository           = $repository;
         $this->curriculoRepository  = $curriculoRepository;
         $this->disciplinaRepository = $disciplinaRepository;
+        $this->horarioDisciplinaTurmaRepository = $horarioDisciplinaTurmaRepository;
     }
 
     /**
@@ -543,14 +552,15 @@ class TurmaService
      */
     public function incluirHorario(array $data) : bool
     {
-        # Validando a requisição
-        if(!(isset($data['disciplina_id']) && is_numeric($data['disciplina_id'])) &&
-            !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
-            throw new \Exception("Parametros inválidos");
-        }
-
-        #Tratamento dos campos
+        # Aplicando as regras de negócios
         $this->tratamentoCampos($data);
+
+        # Validando a requisição
+        if( !(isset($data['disciplina_id']) && is_numeric($data['disciplina_id'])) ||
+            !(isset($data['idTurma']) && is_numeric($data['idTurma'])) ||
+            !(isset($data['professor_id']) && is_numeric($data['professor_id']))) {
+            throw new \Exception("Disciplina e Professor são campos obrigatórios!");
+        }
 
         # Recuperando os parametros da requisição
         $idTurma      = $data['idTurma'];
@@ -568,9 +578,61 @@ class TurmaService
             throw new \Exception("Turma ou disciplina informada não encontrada");
         }
 
+        # Recuperando o currículoe a carga horária da disciplina em questão
+        $curriculo    = $objTurma->curriculo;
+        $cargaHoraria = $curriculo->disciplinas()->find($objDisciplina->id)->pivot->carga_horaria_total;
+
         #Incluindo e salvando a disciplina
         $disciplina = $objTurma->disciplinas()->find($objDisciplina->id);
         $pivot      = $disciplina->pivot;
+
+        # Query para busca de choque de horários
+        $rowsHorarios = \DB::table('fac_horarios')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_turmas_disciplinas.disciplina_id');
+            })
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+            ->join('fac_professores', 'fac_professores.id', '=', 'fac_horarios.professor_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
+            ->where('fac_dias.id', $data['dia_id'])
+            ->where('fac_horas.id', $data['hora_id'])
+            ->where('fac_professores.id', $data['professor_id'])
+            ->select([
+                'fac_horarios.id',
+                'fac_horas.nome as hora',
+                'fac_dias.nome as dia',
+                'pessoas.nome',
+                'fac_disciplinas.nome as nomeDisciplina',
+                'fac_curriculo_disciplina.carga_horaria_total',
+                'fac_turmas.codigo as codigoTurma',
+                'fac_turmas_disciplinas.disciplina_id'
+            ])->get();
+
+        # Verificando algumas regras de validação
+        if(count($rowsHorarios) > 0) {
+            # Quebra de linha
+            $quebraLinha = utf8_encode("\n");
+
+            foreach ($rowsHorarios as $row) {
+                # Velidação  se as disciplinas forem diferentes
+                if($row->disciplina_id != $disciplina->id) {
+                    $msg = "Professor: {$row->nome} {$quebraLinha} Turma: {$row->codigoTurma} {$quebraLinha} Disciplina: {$row->nomeDisciplina} {$quebraLinha} CH: {$row->carga_horaria_total}";
+                    throw new \Exception("Foi detectado um choque de horário: \n {$msg}");
+                }
+
+                # Validação se as disciplinas forem iguais
+                if($row->disciplina_id == $disciplina->id && $row->carga_horaria_total != $cargaHoraria) {
+                    $msg = "Professor: {$row->nome} {$quebraLinha} Turma: {$row->codigoTurma} {$quebraLinha} Disciplina: {$row->nomeDisciplina} {$quebraLinha} CH: {$row->carga_horaria_total}";
+                    throw new \Exception("Foi detectado um choque de horário: \n {$msg}");
+                }
+            }
+        }
 
         # Salvando o horário
         $pivot->horarios()->create($data);
@@ -587,8 +649,8 @@ class TurmaService
     public function removerHorario(array $data)
     {
         # Validando a requisição
-        if(!(isset($data['idDia']) && is_numeric($data['idDia'])) &&
-            !(isset($data['idHora']) && is_numeric($data['idHora'])) &&
+        if(!(isset($data['idDia']) && is_numeric($data['idDia'])) ||
+            !(isset($data['idHora']) && is_numeric($data['idHora'])) ||
             !(isset($data['idTurma']) && is_numeric($data['idTurma']))) {
             throw new \Exception("Parametros inválidos");
         }
@@ -601,18 +663,28 @@ class TurmaService
         # Recuperando a turma e a disciplina
         $objTurma   = $this->repository->find($idTurma);
         $resultId   = \DB::table('fac_horarios')
-                            ->select(['fac_turmas_disciplinas.disciplina_id', 'fac_horarios.id'])
-                            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
-                            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
-                            ->where('fac_turmas.id', $idTurma)
-                            ->where('fac_horarios.dia_id', $idDia)
-                            ->where('fac_horarios.hora_id', $idHora)
-                            ->get();
+            ->select(['fac_turmas_disciplinas.disciplina_id', 'fac_horarios.id'])
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->where('fac_turmas.id', $idTurma)
+            ->where('fac_horarios.dia_id', $idDia)
+            ->where('fac_horarios.hora_id', $idHora)
+            ->get();
 
 
         # Verificando se foi encontrada uma turma e disciplina
         if(!$objTurma && count($resultId) == 0) {
             throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        # Recuperando os alunos cadastrados para esse horário
+        $alunos  = \DB::table('fac_alunos_semestres_horarios')
+            ->join('fac_horarios', 'fac_horarios.id', '=', 'fac_alunos_semestres_horarios.horario_id')
+            ->whereIn('fac_alunos_semestres_horarios.horario_id', [$resultId[0]->id])->get();
+
+        # Verificando se tem alunos cadastrados para esse horário
+        if(count($alunos) > 0) {
+            throw new \Exception("Existem alunos nesse horário.");
         }
 
         #Recuperando o pivot e remocvendo o horário
@@ -629,6 +701,138 @@ class TurmaService
         #Retorno
         return true;
     }
+
+    /**
+     * @param $idTurma
+     * @param $idHora
+     * @param $idDia
+     * @return mixed
+     * @throws \Exception
+     */
+    public function editHorario($idTurma, $idHora, $idDia)
+    {
+        # Recuperando os horários
+        $horarios   = \DB::table('fac_horarios')
+            ->select(['fac_horarios.id'])
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->where('fac_turmas.id', $idTurma)
+            ->where('fac_horarios.dia_id', $idDia)
+            ->where('fac_horarios.hora_id', $idHora)
+            ->get();
+
+        # Verificando se foi retornado os horários
+        if(!count($horarios) > 0) {
+            throw new \Exception('Nenhum horário foi encontrado');
+        }
+
+        # Recuperando o objeto de horário
+        $horario = $this->horarioDisciplinaTurmaRepository->find($horarios[0]->id);
+
+        # Verificando se foi retornado o horário
+        if(!$horario) {
+            throw new \Exception('Horário não encontrado');
+        }
+
+        # Retorno
+        return $horario;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return HorarioDisciplinaTurma
+     * @throws \Exception
+     */
+    public function updateHorario(array $data, int $id) : HorarioDisciplinaTurma
+    {
+        # Aplicação das regras de negócios
+        $this->tratamentoCampos($data);
+
+        # Validando a requisição
+        if(!(isset($data['professor_id']) && is_numeric($data['professor_id']))) {
+            throw new \Exception("Professor é um campo obrigatório!!");
+        }
+
+        # Recuperando o objeto de horário
+        $horario = $this->horarioDisciplinaTurmaRepository->find($id);
+
+        # Recuperando o id da turma
+        $queryTurma = \DB::table('fac_turmas_disciplinas')
+            ->where('id', $horario->turma_disciplina_id)
+            ->select(['turma_id as id', 'disciplina_id'])
+            ->get()[0];
+
+        # Recuperando a turma, disciplina
+        $turma = $this->repository->find($queryTurma->id);
+        $disciplina = $turma->disciplinas()->find($queryTurma->disciplina_id);
+
+        # Recuperando o currículoe a carga horária da disciplina em questão
+        $curriculo    = $turma->curriculo;
+        $cargaHoraria = $curriculo->disciplinas()->find($disciplina->id)->pivot->carga_horaria_total;
+
+        # Query para busca de choque de horários
+        $rowsHorarios = \DB::table('fac_horarios')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_turmas_disciplinas.disciplina_id');
+            })
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+            ->join('fac_professores', 'fac_professores.id', '=', 'fac_horarios.professor_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
+            ->where('fac_dias.id', $horario->dia->id)
+            ->where('fac_horas.id', $horario->hora->id)
+            ->where('fac_professores.id', $horario->professor->id)
+            ->where('fac_turmas.id', '!=', $turma->id)
+            ->select([
+                'fac_horarios.id',
+                'fac_horas.nome as hora',
+                'fac_dias.nome as dia',
+                'pessoas.nome',
+                'fac_disciplinas.nome as nomeDisciplina',
+                'fac_curriculo_disciplina.carga_horaria_total',
+                'fac_turmas.codigo as codigoTurma',
+                'fac_turmas_disciplinas.disciplina_id'
+            ])->get();
+
+        # Verificando algumas regras de validação
+        if(count($rowsHorarios) > 0) {
+            # Quebra de linha
+            $quebraLinha = utf8_encode("\n");
+
+            foreach ($rowsHorarios as $row) {
+                # Velidação  se as disciplinas forem diferentes
+                if($row->disciplina_id != $disciplina->id) {
+                    $msg = "Professor: {$row->nome} {$quebraLinha} Turma: {$row->codigoTurma} {$quebraLinha} Disciplina: {$row->nomeDisciplina} {$quebraLinha} CH: {$row->carga_horaria_total}";
+                    throw new \Exception("Foi detectado um choque de horário: \n {$msg}");
+                }
+
+                # Validação se as disciplinas forem iguais
+                if($row->disciplina_id == $disciplina->id && $row->carga_horaria_total != $cargaHoraria) {
+                    $msg = "Professor: {$row->nome} {$quebraLinha} Turma: {$row->codigoTurma} {$quebraLinha} Disciplina: {$row->nomeDisciplina} {$quebraLinha} CH: {$row->carga_horaria_total}";
+                    throw new \Exception("Foi detectado um choque de horário: \n {$msg}");
+                }
+            }
+        }
+
+
+        # Atualizando no banco de dados
+        $horario = $this->horarioDisciplinaTurmaRepository->update($data, $id);
+
+        #Verificando se foi atualizado no banco de dados
+        if (!$horario) {
+            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        # Retorno
+        return $horario;
+    }
+
 
     /**
      * @param array $data
@@ -649,43 +853,89 @@ class TurmaService
         return $data;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getParametrosMatricula()
-//    {
-//        try {
-//            # Recuperando o item de parâmetro do semestre vigente
-//            $queryParameter = \DB::table('fac_parametros')
-//                ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
-//                ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
-//                ->where('fac_parametros_itens.id', 2)
-//                ->orWhere('fac_parametros_itens.id', 3)
-//                ->get();
-//
-//            # Validando o parametro
-//            if(count($queryParameter) !== 2) {
-//                throw new \Exception('Parâmetro do semestre vigente não configurado');
-//            }
-//
-//            # Recuperando o semestre
-//            $querySemestre = \DB::table('fac_semestres')
-//                ->select(['fac_semestres.id', 'fac_semestres.nome'])
-//                ->where('fac_semestres.nome', $queryParameter[0]->valor)
-//                ->orWhere('fac_semestres.nome', $queryParameter[1]->valor)
-//                ->where('fac_semestres.ativo', 1)
-//                ->get();
-//
-//            # Validando o parametro
-//            if(count($querySemestre) !== 2) {
-//                throw new \Exception('Semestre não encontrado, verifique o item "Semestre vigente" no parâmetro "Matrícula" em configurações.');
-//            }
-//
-//            #Retorno
-//            return $querySemestre;
-//        } catch (\Throwable $e) {
-//            #Retorno
-//            return $e->getMessage();
-//        }
-//    }
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function eJuncao(array $data)
+    {
+        # Validando a requisição
+        if( !(isset($data['disciplina_id']) && is_numeric($data['disciplina_id'])) ||
+            !(isset($data['idTurma']) && is_numeric($data['idTurma'])) ||
+            !(isset($data['professor_id']) && is_numeric($data['professor_id']))) {
+            throw new \Exception("Disciplina e Professor são campos obrigatórios!");
+        }
+
+        # Recuperando a turma e a disciplina
+        $objTurma      = $this->repository->find($data['idTurma']);
+        $objDisciplina = $this->disciplinaRepository->find($data['disciplina_id']);
+
+        # Verificando se foi encontrada uma turma e disciplina
+        if(!$objTurma && !$objDisciplina) {
+            throw new \Exception("Turma ou disciplina informada não encontrada");
+        }
+
+        # Recuperando o currículoe a carga horária da disciplina em questão
+        $curriculo    = $objTurma->curriculo;
+        $cargaHoraria = $curriculo->disciplinas()->find($objDisciplina->id)->pivot->carga_horaria_total;
+
+        # Query para busca de choque de horários
+        $query = \DB::table('fac_horarios')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_turmas_disciplinas.disciplina_id');
+            })
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+            ->join('fac_professores', 'fac_professores.id', '=', 'fac_horarios.professor_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
+            ->where('fac_dias.id', $data['dia_id'])
+            ->where('fac_horas.id', $data['hora_id'])
+            ->where('fac_professores.id', $data['professor_id'])
+            ->select([
+                'fac_horarios.id',
+                'fac_horas.nome as hora',
+                'fac_dias.nome as dia',
+                'pessoas.nome',
+                'fac_disciplinas.nome as nomeDisciplina',
+                'fac_curriculo_disciplina.carga_horaria_total',
+                'fac_turmas.codigo as codigoTurma',
+                'fac_turmas_disciplinas.disciplina_id'
+            ]);
+
+        # Se for uma requisição de update
+        if(isset($data['edit']) && $data['edit']) {
+            $query->where('fac_turmas.id', '!=', $objTurma->id);
+        }
+
+        # Recuperando os registros
+        $rowsHorarios = $query->get();
+
+        # Verificando algumas regras de validação
+        if(count($rowsHorarios) > 0) {
+            foreach ($rowsHorarios as $row) {
+                # Velidação  se as disciplinas forem diferentes
+                if($row->disciplina_id != $objDisciplina->id) {
+                    throw new \Exception();
+                }
+
+                # Validação se as disciplinas tiverem cargas horárias diferentes
+                if($row->disciplina_id == $objDisciplina->id && $row->carga_horaria_total != $cargaHoraria) {
+                    throw new \Exception();
+                }
+
+
+            }
+        } else {
+            throw new \Exception();
+        }
+
+        # retorno caso seja satisfeita a condição de junção
+        return true;
+    }
 }

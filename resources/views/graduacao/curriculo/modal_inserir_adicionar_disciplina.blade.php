@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Inserir preço por disciplinas</h4>
+                <h4 class="modal-title">Adicionar disciplina</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">

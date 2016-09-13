@@ -7,11 +7,11 @@
             padding: 2px 10px;
         }
         td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            background: url( "{{asset("imagemgrid/icone-produto-plus.png")}} ") no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
+            background: url( "{{asset("imagemgrid/icone-produto-minus.png")}}" ) no-repeat center center;
         }
 
         .finance-container-label {
@@ -47,11 +47,19 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Págos', 1 => 'Págos'] ), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('pagoSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Pagos', 1 => 'Pagos'] ), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::select('formaAvaliacaoSearch', (['' => 'Todas as Formas', 0 => 'FICHA 19', 1 => 'ENEM'] ), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('cursoSearch', (['' => 'Todas os Cursos'] + $loadFields['graduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('opcaoSearch', (['' => 'Todas as Opções de Curso', 1 => '1º Opção', 2 => '2º Opção', 3 => '3º Opção']), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
@@ -60,6 +68,7 @@
 
                         <div class="form-group">
                             <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
+                            <button class="btn-sm btn-primary" type="button" id="reportVestibulando">Relatório</button>
                         </div>
                     </form>
                 </div>
@@ -188,6 +197,8 @@
                     d.pago = $('select[name=pagoSearch] option:selected').val();
                     d.formaAvaliacao = $('select[name=formaAvaliacaoSearch] option:selected').val();
                     d.globalSearch = $('input[name=globalSearch]').val();
+                    d.cursoSearch = $('select[name=cursoSearch] option:selected').val();
+                    d.opcaoCurso = $('select[name=opcaoSearch] option:selected').val();
                 }
             },
             columns: [
@@ -336,6 +347,27 @@
                     $('#modal-create-historico').modal('toggle');
                 }
             });
+        });
+
+        /**
+         * Evento responsável por gerar um gráfico a partir
+         * do filtro escolhido na busca.
+         */
+        $(document).on('click', '#reportVestibulando', function () {
+            // Reuperando os valores do filtro
+            var vestibular = $('select[name=vestibularSearch] option:selected').val();
+            var pago = $('select[name=pagoSearch] option:selected').val();
+            var formaAvaliacao = $('select[name=formaAvaliacaoSearch] option:selected').val();
+            var globalSearch = $('input[name=globalSearch]').val();
+            var cursoSearch = $('select[name=cursoSearch] option:selected').val();
+            var opcaoCurso = $('select[name=opcaoSearch] option:selected').val();
+
+            // Dados para requisição
+            var dados =  'vestibular=' + vestibular + '&pago=' + pago + '&formaAvaliacao=' + formaAvaliacao
+                    + '&globalSearch=' + globalSearch + '&cursoSearch=' + cursoSearch + '&opcaoCurso=' + opcaoCurso;
+
+            // Redirecionando para a página de relatório
+            window.open('/index.php/seracademico/vestibulando/reportFilter?' + dados ,'_blank');
         });
     </script>
 @stop

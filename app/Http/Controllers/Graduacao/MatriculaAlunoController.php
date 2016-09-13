@@ -544,7 +544,7 @@ class MatriculaAlunoController extends Controller
             $curriculo = $aluno->curriculos()->get()->last();
               
             #cadastradando a situação
-            $semestre->pivot->situacoes()->attach(2, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
+            $semestre->pivot->situacoes()->attach(13, ['data' => $now->format('YmdHis'), 'curriculo_origem_id' => $curriculo->id]);
 
             #Cadastrando o período
             $semestre->pivot->periodo = $dados['periodo'];

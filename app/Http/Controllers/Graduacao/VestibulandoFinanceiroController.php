@@ -2,12 +2,16 @@
 
 namespace Seracademico\Http\Controllers\Graduacao;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Curriculo;
+use Seracademico\Facades\ParametroBancoFacade;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Repositories\Graduacao\VestibulandoFinanceiroRepository;
+use Seracademico\Services\Financeiro\BoletoVestibulandoService;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Yajra\Datatables\Datatables;
@@ -22,18 +26,27 @@ class VestibulandoFinanceiroController extends Controller
     private $service;
 
     /**
-     * @var array
+     * @var BoletoVestibulandoService
      */
-    private $loadFields = [
-    ];
+    private $boletoVestibulandoService;
+
+    /**
+     * @var VestibulandoFinanceiroRepository
+     */
+    private $vestibulandoFinanceiroRepository;
 
     /**
      * VestibulandoFinanceiroController constructor.
      * @param VestibulandoService $service
+     * @param BoletoVestibulandoService $boletoVestibulandoService
      */
-    public function __construct(VestibulandoService $service)
+    public function __construct(VestibulandoService $service,
+                                BoletoVestibulandoService $boletoVestibulandoService,
+                                VestibulandoFinanceiroRepository $vestibulandoFinanceiroRepository)
     {
-        $this->service    = $service;
+        $this->service = $service;
+        $this->boletoVestibulandoService = $boletoVestibulandoService;
+        $this->vestibulandoFinanceiroRepository = $vestibulandoFinanceiroRepository;
     }
 
 
@@ -50,7 +63,7 @@ class VestibulandoFinanceiroController extends Controller
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
-                'fac_vestibulandos_financeiros.vencimento',
+                \DB::raw('DATE_FORMAT(fac_vestibulandos_financeiros.vencimento, "%d/%m/%Y") as vencimento'),
                 'fac_vestibulandos_financeiros.valor_debito',
                 'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
@@ -70,6 +83,7 @@ class VestibulandoFinanceiroController extends Controller
                         <ul>
                             <li><a class="btn-floating" id="btnEditDebitosAbertos" title="Editar débito"><i class="material-icons">edit</i></a></li>   
                             <li><a class="btn-floating" id="btnRemoveDebitosAbertos" title="Remover débito"><i class="material-icons">delete</i></a></li>
+                            <li><a class="btn-floating" id="btnGerarBoleto" title="Gerar Boleto"><i class="material-icons">date_range</i></a></li>
                         </ul>
                         </div>';
             })->make(true);
@@ -88,7 +102,7 @@ class VestibulandoFinanceiroController extends Controller
             ->where('fac_vestibulandos.id', '=', $idVestibulando)
             ->select([
                 'fac_vestibulandos_financeiros.id',
-                'fac_vestibulandos_financeiros.data_pagamento',
+                \DB::raw('DATE_FORMAT(fac_vestibulandos_financeiros.data_pagamento, "%d/%m/%Y") as data_pagamento'),
                 'fac_vestibulandos_financeiros.valor_pago',
                 'fac_vestibulandos_financeiros.valor_desconto',
                 'fin_taxas.valor',
@@ -268,22 +282,104 @@ class VestibulandoFinanceiroController extends Controller
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function gerarBoleto()
+    public function gridBoletos($idVestibulando)
+    {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('fin_boletos_vestibulandos')
+                ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.id', '=', 'fin_boletos_vestibulandos.vestibulando_financeiro_id')
+                ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=', 'fin_boletos_vestibulandos.vestibulando_id')
+                ->join('fin_bancos', 'fin_bancos.id', '=', 'fin_boletos_vestibulandos.banco_id')
+                ->where('fac_vestibulandos.id', $idVestibulando)
+                ->select([
+                    'fin_boletos_vestibulandos.id',
+                    'fac_vestibulandos_financeiros.id as idDebito',
+                    'fin_bancos.id as idBanco',
+                    'fin_boletos_vestibulandos.nosso_numero',
+                    \DB::raw('DATE_FORMAT(fin_boletos_vestibulandos.vencimento, "%d/%m/%Y") as vencimento'),
+                    'fac_vestibulandos_financeiros.valor_debito',
+                    \DB::raw('DATE_FORMAT(fin_boletos_vestibulandos.data, "%d/%m/%Y") as data'),
+                    'fin_boletos_vestibulandos.numero'
+                ]);
+
+            #Editando a grid
+            return Datatables::of($rows)
+                ->addColumn('action', function ($row) {
+                    return '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                        <ul>
+                            <li><a class="btn-floating indigo" title="Editar"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating indigo" title="Remover"><i class="material-icons">delete</i></a></li>
+                        </ul>
+                        </div>';
+                })->make(true);
+        } catch (\Throwable $e) {
+            return abort(500, $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeBoleto(Request $request)
+    {
+        try {
+            #Recuperando o banco ativo
+            $banco     = ParametroBancoFacade::getAtivo();
+            $debito    = $this->vestibulandoFinanceiroRepository->find($request->get('idDebito'));
+            $objBoleto = null;
+
+            # Verificando se o débito já possui boleto
+            if($debito->boleto) {
+                $objBoleto = $debito->boleto;
+            } else {
+                # Data Atual
+                $now = new \DateTime('now');
+
+                # Array de boletos
+                $boleto = [
+                    'vestibulando_financeiro_id' => $debito->id,
+                    'banco_id' => $banco->id,
+                    'vestibulando_id' => $debito->vestibulando->id,
+                    'nosso_numero' => 123455678,
+                    'vencimento' => $now,
+                    'data' => $now,
+                    'numero' => $now->format('YmdHis')
+                ];
+
+                # Creando o boleto
+                $objBoleto = $this->boletoVestibulandoService->store($boleto);
+            }
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $objBoleto]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idBoleto
+     * @return string
+     * @throws \Exception
+     */
+    public function gerarBoleto($idBoleto)
     {
         #Recuperando o banco ativo
-        //$banco   = ParametroBancoFacade::getAtivo();
-        //$boleto  = $this->boletoService->find($idBoleto);
-        //$debito  = $boleto->debito;
+        $banco   = ParametroBancoFacade::getAtivo();
+        $boleto  = $this->boletoVestibulandoService->find($idBoleto);
+        $debito  = $boleto->debito;
 
         $sacado  = new Agente('Fernando Maia', '023.434.234-34', 'ABC 302 Bloco N', '72000-000', 'Brasília', 'DF');
         $cedente = new Agente('Serbinario LTDA', '02.123.123/0001-11', 'CLS 403 Lj 23', '71000-000', 'Brasília', 'DF');
 
         $objBoleto = new CaixaSICOB(array(
             // Parâmetros obrigatórios
-            'dataVencimento' => new \DateTime('now'),
-            'valor' => 500.00,
+            'dataVencimento' => Carbon::createFromFormat('d/m/Y', $debito->vencimento),
+            'valor' => $debito->valor_debito,
             'sequencial' => 1234567, // Para gerar o nosso número
             'sacado' => $sacado,
             'cedente' => $cedente,
@@ -296,4 +392,18 @@ class VestibulandoFinanceiroController extends Controller
         return $objBoleto->getOutput();
     }
 
+    /**
+     * @param id $
+     * @return mixed
+     */
+    public function gerarComprovanteInscricao($id)
+    {
+        try {
+            $vestibulando = $this->service->find($id);
+
+            return \PDF::loadView('reports.vestibulandos.comprovanteInscricao', ['vestibulando' =>  $vestibulando])->stream();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

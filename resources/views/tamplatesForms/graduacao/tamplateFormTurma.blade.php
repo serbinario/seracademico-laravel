@@ -26,7 +26,12 @@
             <div class="col-md-2">
                 <div class="form-group">
 				{!! Form::label('turno_id', 'Turno *') !!}
-				{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                    @if(isset($model->turno->id))
+                        {!! Form::select('turno_id', [$model->turno->id => $model->turno->nome], $model->turno->id, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                        {{--{!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                    @else
+                        {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                    @endif
                 </div>
             </div>
         </div>
@@ -41,8 +46,10 @@
 
             <div class="col-md-2">
                 {!! Form::label('semestre_id', 'Semestre *') !!}
+
                 @if(isset($model->semestre->id))
-                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], $model->semestre->id, array('class' => 'form-control')) !!}
+                    {!! Form::select('semestre_id', [$model->semestre->id => $model->semestre->nome], $model->semestre->id, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                    {{--{!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
                 @else
                     {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], null, array('class' => 'form-control')) !!}
                 @endif

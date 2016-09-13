@@ -235,4 +235,33 @@ class PlanoEnsinoController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function deleteAnexo(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $anexo = $request->get('anexo');
+
+            #Executando a ação
+            $planoEnsino = $this->service->find($id);
+
+            # Verificando se existe comprovante para ser removido
+            if(!$planoEnsino->$anexo) {
+                throw new \Exception('Anexo não exite');
+            }
+
+            # Removendo o comprovante
+            $this->service->deleteFile($planoEnsino, $anexo);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

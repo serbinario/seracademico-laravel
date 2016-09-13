@@ -115,6 +115,7 @@
     @include('graduacao.turma.modal_disciplina')
     @include('graduacao.turma.modal_disciplina_store')
     @include('graduacao.turma.modal_horario_store')
+    @include('graduacao.turma.modal_horario_update')
     @include('graduacao.turma.modal_notas')
     @include('graduacao.turma.modal_editar_notas')
     @include('graduacao.turma.modal_frequencias')
@@ -122,6 +123,7 @@
     @include('graduacao.turma.diarioAula.modal_diario_aula')
     @include('graduacao.turma.diarioAula.modal_create_diario_aula')
     @include('graduacao.turma.diarioAula.modal_edit_diario_aula')
+    @include('graduacao.turma.planoEnsino.modal_plano_ensino')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -132,6 +134,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_update.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_notas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_editar_notas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_frequencias.js')  }}"></script>
@@ -142,6 +145,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/diarioAula/diario_aula_select2.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
 
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
@@ -278,6 +282,30 @@
 
             //Executando as grids
             runTableDiariosAulas(idTurma);
+        });
+
+        /*Responsável em abrir modal de frequencias*/
+        $(document).on("click", '#btnModalPlanoEnsino', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, semestre;
+
+            //Recuperando o id da turma selecionada
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
+
+            // setando a descrição
+            $('#peTurma').text(codigo);
+            $('#pePeriodo').text(periodo);
+            $('#peCurriculo').text(codCurriculo);
+            $('#peCurso').text(nomeCurso);
+            $('#peSemestre').text(semestre);
+
+            //Executando as grids
+            runTablePlanoEnsino(idTurma);
         });
     </script>
 @stop

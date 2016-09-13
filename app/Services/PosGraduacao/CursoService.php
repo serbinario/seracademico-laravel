@@ -3,8 +3,8 @@
 namespace Seracademico\Services\PosGraduacao;
 
 use Carbon\Carbon;
-use Seracademico\Repositories\CursoRepository;
-use Seracademico\Entities\Curso;
+use Seracademico\Repositories\PosGraduacao\CursoRepository;
+use Seracademico\Entities\PosGraduacao\Curso;
 
 class CursoService
 {
@@ -42,10 +42,14 @@ class CursoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Curso
+     * @throws \Exception
      */
     public function store(array $data) : Curso
     {
+        # Regra de negócio
+        $data['tipo_nivel_sistema_id'] = 2;
+
         #Salvando o registro pincipal
         $curso =  $this->repository->create($data);
 
@@ -61,10 +65,14 @@ class CursoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Curso
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Curso
     {
+        # Regra de negócio
+        $data['tipo_nivel_sistema_id'] = 2;
+
         #Atualizando no banco de dados
         $curso = $this->repository->update($data, $id);
 

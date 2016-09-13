@@ -209,71 +209,57 @@ class HorarioTurmaController extends Controller
 //            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
 //        }
 //    }
-//
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function edit($id)
-//    {
-//        try {
-//            #Recuperando o calendario e declarando variáveis
-//            $model      = $this->service->find($id);
-//            $calendario = [];
-//
-//            #Carregando os dados para o cadastro
-//            $loadFields = $this->service->load($this->loadFields);
-//
-//            # Preparando o array de retorno
-//            $calendario['data']                = $model->data;
-//            $calendario['data_final']          = $model->data_final;
-//            $calendario['hora_inicial']        = $model->hora_inicial;
-//            $calendario['hora_final']          = $model->hora_final;
-//            $calendario['professor_id']        = $model->professor_id;
-//            $calendario['id_calendario']       = $model->id;
-//            $calendario['sala_id']             = $model->sala_id;
-//
-//            # Dados de retorno
-//            $dados      = compact('calendario', 'loadFields');
-//
-//            #retorno para view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
-//        } catch (\Throwable $e) {dd($e);
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
-//
-//    /**
-//     * @param Request $request
-//     * @param $id
-//     * @return $this|\Illuminate\Http\RedirectResponse
-//     */
-//    public function update(Request $request, $id)
-//    {
-//        try {
-//            #Recuperando os dados da requisição
-//            $data = $request->all();
-//
-//            #tratando as rules
-//            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-//
-//            #Validando a requisição
-//            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-//
-//            #Executando a ação
-//            $this->service->update($data, $id);
-//
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
-//        } catch (ValidatorException $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        } catch (\Throwable $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
-//
+
+    /**
+     * @param $idTurma
+     * @param $idHora
+     * @param $idDia
+     * @return mixed
+     */
+    public function edit($idTurma, $idHora, $idDia)
+    {
+        try {
+            #Recuperando o calendario e declarando variáveis
+            $model = $this->turmaService->editHorario($idTurma, $idHora, $idDia);
+
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $model]);
+        } catch (\Throwable $e) {dd($e);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #tratando as rules
+            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+
+            #Validando a requisição
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            #Executando a ação
+            $this->turmaService->updateHorario($data, $id);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
+        } catch (ValidatorException $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
 
     /**
      * @param Request $request
@@ -364,6 +350,20 @@ class HorarioTurmaController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'data' => $rows]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    public function eJuncao(Request $request)
+    {
+        try {
+            #incluindo disciplina as Disciplinas
+            $this->turmaService->eJuncao($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);

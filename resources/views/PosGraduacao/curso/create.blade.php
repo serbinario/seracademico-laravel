@@ -29,7 +29,7 @@
                 @endif
 
             {!! Form::open(['route'=>'seracademico.posgraduacao.curso.store','id' => 'formCurso',  'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormCurso')
+                    @include('tamplatesForms.posGraduacao.tamplateFormCurso')
             {!! Form::close() !!}
         </div>        
     </div>

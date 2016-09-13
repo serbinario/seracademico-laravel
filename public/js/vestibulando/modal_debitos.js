@@ -1,6 +1,7 @@
 // variáveis de tabela de débitos
 var tableDebitosAbertos;
 var tableDebitosPagos;
+var tableBoletos;
 
 // Função para carregamento da tabela de debitos pagos
 function loadTableDebitosAbertos(idVestibulando) {
@@ -49,16 +50,71 @@ function loadTableDebitosPagos(idVestibulando) {
     });
 }
 
+// Função para carregar a grid
+function loadTableBoletos (idVestibulando) {
+    tableBoletos = $('#grid-boletos').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/vestibulando/financeiro/gridBoletos/" + idVestibulando,
+        columns: [
+            {data: 'nosso_numero', name: 'fin_boletos_vestibulandos.nosso_numero'},
+            {data: 'vencimento', name: 'fin_boletos_vestibulandos.vencimento'},
+            {data: 'valor_debito', name: 'fac_vestibulandos_financeiros.valor_debito'},
+            {data: 'data', name: 'fin_boletos_vestibulandos.data'},
+            {data: 'numero', name: 'fin_boletos_vestibulandos.numero'}
+            //{data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableBoletos;
+}
+
 // Função para executar a tabela de notas
 function runFinanceiro(idVestibulando) {
-    if(tableDebitosAbertos && tableDebitosPagos) {
+    if(tableDebitosAbertos && tableDebitosPagos && tableBoletos) {
         tableDebitosAbertos.ajax.url("/index.php/seracademico/vestibulando/financeiro/gridDebitosAbertos/" + idVestibulando).load();
         tableDebitosPagos.ajax.url("/index.php/seracademico/vestibulando/financeiro/gridDebitosPagos/" + idVestibulando).load();
+        tableBoletos.ajax.url("/index.php/seracademico/vestibulando/financeiro/gridBoletos/" + idVestibulando).load();
     } else {
         loadTableDebitosAbertos(idVestibulando);
         loadTableDebitosPagos(idVestibulando);
+        loadTableBoletos(idVestibulando);
     }
 
     // Abrindo o modal
     $('#modal-debitos').modal({ show:true });
 }
+
+
+// Evento para gerar boleto
+$(document).on('click', '#btnGerarBoleto', function () {
+    // Recuperando o débito
+    var idDebito = tableDebitosAbertos.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+
+    // Dados para requisição
+    var dados = {
+        'idDebito' : idDebito
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: dados,
+        url: '/index.php/seracademico/vestibulando/financeiro/storeBoleto',
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Verificando o retorno da requisição
+        if(retorno.success) {
+            tableBoletos.ajax.reload();
+            window.open('/index.php/seracademico/vestibulando/financeiro/gerarBoleto/' + retorno.data.id,  '_blank');
+        } else {
+            // Retorno caso não tenha currículo em uma turma ou algum erro
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});

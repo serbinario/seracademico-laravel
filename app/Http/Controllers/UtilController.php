@@ -29,7 +29,7 @@ class UtilController extends Controller
             }
 
             #executando a consulta e retornando os dados
-            return DB::table($table)->select('id', 'nome')->orderBy('nome', 'asc')->where($filed, $value)->get();
+            return DB::table($table)->select('*')->orderBy('nome', 'asc')->where($filed, $value)->get();
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json([
                 'error' => $e->getMessage()

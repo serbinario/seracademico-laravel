@@ -118,6 +118,14 @@ class Turma extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class, 'semestre_id');
+    }
+
+    /**
      * @return mixed
      */
     public function disciplinas()

@@ -30,12 +30,12 @@
             @endif
 
             {!! Form::open(['route'=>'seracademico.posgraduacao.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.tamplateFormAluno')
+                @include('tamplatesForms.posGraduacao.tamplateFormAluno')
             {!! Form::close() !!}
         </div>
     </div>
 
-    @section('javascript')
+   {{-- @section('javascript')
         <script type="text/javascript">
             //Carregando as cidades
             $(document).on('change', "#estado", function () {
@@ -248,5 +248,5 @@
                 },
             });
         </script>
-    @stop
+    @stop--}}
 @stop

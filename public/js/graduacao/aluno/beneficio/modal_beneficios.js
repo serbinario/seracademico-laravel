@@ -1,3 +1,8 @@
+// Evento quando o modal fechar
+$('#modal-beneficios').on('hidden.bs.modal', function () {
+    loadTableBeneficios(0).ajax.url("/index.php/seracademico/financeiro/aluno/beneficio/grid/" + 0).load();
+})
+
 // Função para carregar a grid
 var tableBeneficios;
 function loadTableBeneficios (idAluno) {

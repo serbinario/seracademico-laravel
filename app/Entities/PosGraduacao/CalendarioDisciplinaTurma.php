@@ -3,6 +3,8 @@
 namespace Seracademico\Entities\PosGraduacao;
 
 use Illuminate\Database\Eloquent\Model;
+use Seracademico\Entities\Professor;
+use Seracademico\Entities\Sala;
 use Seracademico\Uteis\SerbinarioDateFormat;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
