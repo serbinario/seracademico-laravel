@@ -40,6 +40,8 @@ class ParametroMatricula
 
     /**
      * @param $idItemParametro
+     * @return mixed
+     * @throws \Exception
      */
     private static function getParamPreRequisito($idItemParametro)
     {
