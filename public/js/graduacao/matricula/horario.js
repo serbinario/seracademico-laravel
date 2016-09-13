@@ -52,26 +52,67 @@ function onDblClick(event, treeId, treeNode) {
                     'idTurmaDisciplina' : treeNode.id,
                     'idDisciplina' : treeNode.idDisciplina
                 };
-               
-                // Fazendo a requisição ajax
+
+                // Requisição de confirmação caso for junção de turmas
                 jQuery.ajax({
-                    type: 'POST',
+                    type: 'GET',
+                    url: '/index.php/seracademico/matricula/validarPreRequisito',
                     data: dados,
-                    url: '/index.php/seracademico/matricula/adicionarHorarioAluno',
                     datatype: 'json'
                 }).done(function (retorno) {
                     if(retorno.success) {
-                        builderDisciplinasAlunoSemestre(idAluno, idSemestre);
-                        tableDisciplina.ajax.reload();
-                        tableHorario.ajax.reload();
-                        swal("Adicionado!", "Horaŕios adiciondos com sucesso.", "success");
+                        // Mensagem do alerta
+                        var msg = "Essa disciplina possui pré-requisitos que o aluno não concluio!";
+
+                        // Alerta para caso de junção de turma
+                        swal({
+                                title: "Deseja realmente continuar ?",
+                                text: msg,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Sim, desejo continuar!",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                // Requisição de cadastro
+                                adicionarHorarioAluno(dados);
+                            });
                     } else {
-                        swal("Ops! Ocorreu um problema!", retorno.msg, "error");
+                        // Requisição de cadastro
+                        adicionarHorarioAluno(dados)
                     }
                 });
+
+
             }
         );
     }
+}
+
+/**
+ * Função responsável pela requisição
+ * de adicionar horários
+ *
+ * @param daods
+ */
+function adicionarHorarioAluno(dados) {
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: dados,
+        url: '/index.php/seracademico/matricula/adicionarHorarioAluno',
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            builderDisciplinasAlunoSemestre(idAluno, idSemestre);
+            tableDisciplina.ajax.reload();
+            tableHorario.ajax.reload();
+            swal("Adicionado!", "Horaŕios adiciondos com sucesso.", "success");
+        } else {
+            swal("Ops! Ocorreu um problema!", retorno.msg, "error");
+        }
+    });
 }
 
 // evento para remover horários
