@@ -113,7 +113,6 @@ class CurriculoAlunoController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('fac_disciplinas')
-
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
@@ -135,13 +134,15 @@ class CurriculoAlunoController extends Controller
             })
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->whereIn('fac_disciplinas.id', function ($query) use ($idAluno) {
-                $query->from('fac_alunos_semestres_disciplinas')
-                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
-                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-                    ->where('fac_alunos.id', $idAluno);
-            })
+            ->whereIn('fac_situacao_nota.id', [1,2,6,7]) // Situação de cumprimento da disciplina
+//            ->whereIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+//                $query->from('fac_alunos_semestres_disciplinas')
+//                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
+//                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+//                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+//                    ->where('fac_alunos.id', $idAluno);
+//            })
+
             ->orderBy('fac_curriculo_disciplina.periodo')
             ->select([
                 'fac_disciplinas.id',
