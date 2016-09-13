@@ -150,7 +150,7 @@ class MatriculaAlunoController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
                     ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
                     ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
-                    ->whereIn('fac_situacao_nota.id', [1,6,7]) // Situação de cumprimento da disciplina
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
                     ->where('fac_alunos.id', $idAluno);
             })
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
