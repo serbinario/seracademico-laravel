@@ -17,7 +17,7 @@ class TurmaValidator extends LaravelValidator
     protected $rules      = [
         ValidatorInterface::RULE_CREATE => [
 
-			'curriculo_id' => 'integer',
+			'curriculo_id' => 'required|integer',
 			'codigo' => 'required|max:15',
 			'turno_id' => 'integer',
 			'sigla' => '',
@@ -31,7 +31,7 @@ class TurmaValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-			'curriculo_id' => 'integer',
+			'curriculo_id' => 'required|integer',
 			'codigo' => 'required|max:15',
 			'turno_id' => 'integer',
 			'sigla' => '',
