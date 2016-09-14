@@ -144,6 +144,9 @@
                             <div role="tabpanel" class="tab-pane" id="extra">
                                 <br/>
 
+                                <!-- Adicinar disciplina extra curricular-->
+                                <a id="btnAddDisciplinaExtraCurricular" class="btn-sm btn-primary pull-right">Adicionar Disciplina</a>
+
                                 <!-- Table a Cursando -->
                                 <table id="grid-extras" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
