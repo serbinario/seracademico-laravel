@@ -17,11 +17,11 @@ function loadTableACursar (idAluno) {
                 "data":           null,
                 "defaultContent": ''
             },
-            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
-            {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'}
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo', orderable: false},
+            {data: 'codigo', name: 'fac_disciplinas.codigo',orderable: false},
+            {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria', orderable: false},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito', orderable: false}
         ]
     });
 
@@ -209,6 +209,60 @@ function loadTableDispensadas (idAluno) {
     return tableDispensadas;
 }
 
+// Função para carregar a grid
+var tableCursando;
+function loadTableCursando (idAluno) {
+    tableCursando = $('#grid-cursando').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno,
+        columns: [
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo', orderable: false},
+            {data: 'codigo', name: 'fac_disciplinas.codigo', orderable: false},
+            {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria', orderable: false},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito', orderable: false},
+            {data: 'nota_media', name: 'fac_alunos_notas.nota_media', orderable: false},
+            {data: 'codigoTurma', name: 'fac_turmas.codigo', orderable: false},
+            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome', orderable: false},
+        ]
+    });
+
+
+    return tableCursando;
+}
+
+// Função para carregar a grid
+var tableExtraCurricular;
+function loadTableExtraCurricular (idAluno) {
+    tableExtraCurricular = $('#grid-extras').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridExtraCurricular/" + idAluno,
+        columns: [
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
+            {data: 'codigo', name: 'fac_disciplinas.codigo'},
+            {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
+            {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableExtraCurricular;
+}
+
 // Função para executar a grid
 function runCurriculo(idAluno) {
     // Carregando a grid de ACursar
@@ -230,6 +284,20 @@ function runCurriculo(idAluno) {
         loadTableDispensadas(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridDispensadas/" + idAluno).load();
     } else {
         loadTableDispensadas(idAluno);
+    }
+
+    // Carregando a grid de Cursando
+    if(tableCursando) {
+        loadTableCursando(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno).load();
+    } else {
+        loadTableCursando(idAluno);
+    }
+
+    // Carregando a grid de extras
+    if(tableExtraCurricular) {
+        loadTableExtraCurricular(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridExtraCurricular/" + idAluno).load();
+    } else {
+        loadTableExtraCurricular(idAluno);
     }
 
     // carregando a modal

@@ -149,6 +149,43 @@ $('#btnStoreHorario').click(function() {
         'professor_id': professor_id,
     };
 
+    // Requisição de confirmação caso for junção de turmas
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/graduacao/turma/horario/eJuncao',
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            var msg = "Foi verificado a existência de um horário com o mesmo professor." +
+                " Esses casos são recomendados para junção de turmas (mesma disciplina e carga horária)," +
+                " se esse não for o caso aconselhamos a não prosseguir" +
+                " com a operação.";
+
+            // Alerta para caso de junção de turma
+            swal({
+                    title: "Deseja realmente continuar ?",
+                    text: msg,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, desejo continuar!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    // Requisição de cadastro
+                    storeHorario(dados)
+                });
+        } else {
+            // Requisição de cadastro
+            storeHorario(dados)
+        }
+    });
+});
+
+// Função para cadastro de horário
+function storeHorario(dados) {
+    // Requisição de cadastro
     jQuery.ajax({
         type: 'POST',
         url: '/index.php/seracademico/graduacao/turma/horario/store',
@@ -165,4 +202,4 @@ $('#btnStoreHorario').click(function() {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
-});
+}

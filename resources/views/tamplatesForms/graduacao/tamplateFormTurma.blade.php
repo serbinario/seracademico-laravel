@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('curso_id', 'Curso *') !!}
                 @if(isset($model->curriculo->curso->id))
@@ -13,6 +13,21 @@
                 @else
                     {!! Form::select('curso_id', (['' => 'Selecione um curso'] + $loadFields['graduacao\\curso']->toArray()), null, array('id' => 'curso', 'class' => 'form-control')) !!}
                 @endif
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    {!! Form::label('curriculo_id', 'Currículo *') !!}
+                    @if(isset($model->curriculo->id))
+                        @if(count($model->disciplinas) > 0)
+                            {!! Form::select('curriculo_id',[$model->curriculo->id => $model->curriculo->nome], $model->curriculo->id, array('id' => 'curriculo', 'class' => 'form-control', 'readonly' => 'readonly')) !!}
+                        @else
+                            {!! Form::select('curriculo_id', [$model->curriculo->id => $model->curriculo->nome], $model->curriculo->id, array('id' => 'curriculo', 'class' => 'form-control')) !!}
+                        @endif
+                    @else
+                        {!! Form::select('curriculo_id', [], null, array('id' => 'curriculo', 'class' => 'form-control')) !!}
+                    @endif
                 </div>
             </div>
 
@@ -156,7 +171,30 @@
 
             // Evento para preenchimento automático da descrição
             $(document).on('change', '#curso', function () {
+                // Recuperando o texto do option selecionado e preenchendo a descrição
                 $('#descricao').val($(this).find('option:selected').text());
+
+                // Recuperando o id do curso selecionado
+                var cursoId = $('#curso').val();
+
+                // Requisição ajax
+                jQuery.ajax({
+                    type: 'GET',
+                    url: '/index.php/seracademico/graduacao/curriculo/getByCurso/' + cursoId,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                    },
+                    datatype: 'json'
+                }).done(function (json) {
+                    var option = '<option value="">Selecione um Currículo</option>';
+
+                    for (var i = 0; i < json.dados.length; i++) {
+                        option += '<option value="' + json.dados[i].id + '">' + json.dados[i].nome + '</option>';
+                    }
+
+                    $('#curriculo option').remove();
+                    $('#curriculo').append(option);
+                });
             });
 
             $('#formTurma').bootstrapValidator({

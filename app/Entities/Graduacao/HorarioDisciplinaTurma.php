@@ -3,6 +3,7 @@
 namespace Seracademico\Entities\Graduacao;
 
 use Illuminate\Database\Eloquent\Model;
+use Seracademico\Entities\Graduacao\TurmaDisciplina;
 use Seracademico\Entities\Professor;
 use Seracademico\Entities\Sala;
 use Seracademico\Entities\Dia;

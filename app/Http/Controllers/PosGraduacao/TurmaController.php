@@ -179,4 +179,27 @@ class TurmaController extends Controller
         }
     }
 
+    /**
+     * @param $idCurso
+     * @return mixed
+     */
+    public function getAllByCurso($idCurso)
+    {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('fac_turmas')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+                ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
+                ->where('fac_cursos.id', $idCurso)
+                ->select([
+                    'fac_turmas.id',
+                    'fac_turmas.descricao'
+                ])->get();
+
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
 }

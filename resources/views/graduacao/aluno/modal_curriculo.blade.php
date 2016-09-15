@@ -36,11 +36,19 @@
                             </li>
 
                             <li role="presentation">
+                                <a href="#cursando" aria-controls="cursando" data-toggle="tab">Cursando</a>
+                            </li>
+
+                            <li role="presentation">
                                 <a href="#cursadas" aria-controls="cursadas" data-toggle="tab">Cursadas</a>
                             </li>
 
                             <li role="presentation">
                                 <a href="#dispensadas" aria-controls="cursadas" data-toggle="tab">Dispensadas</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Curriculares</a>
                             </li>
                         </ul>
 
@@ -61,6 +69,27 @@
                                             <th>C. Horária</th>
                                             <th>Créditos</th>
                                         </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Cursando -->
+                            <div role="tabpanel" class="tab-pane" id="cursando">
+                                <br/>
+
+                                <!-- Table a Cursando -->
+                                <table id="grid-cursando" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Disciplina</th>
+                                        <th>C. Horária</th>
+                                        <th>Créditos</th>
+                                        <th>Média</th>
+                                        <th>Turma</th>
+                                        <th>Situação</th>
+                                    </tr>
                                     </thead>
                                 </table>
                             </div>
@@ -105,6 +134,29 @@
                                         <th>C.H.</th>
                                         <th>Créditos</th>
                                         <th>Motivo</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Extra -->
+                            <div role="tabpanel" class="tab-pane" id="extra">
+                                <br/>
+
+                                <!-- Adicinar disciplina extra curricular-->
+                                <a id="btnAddDisciplinaExtraCurricular" class="btn-sm btn-primary pull-right">Adicionar Disciplina</a>
+
+                                <!-- Table a Cursando -->
+                                <table id="grid-extras" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Disciplina</th>
+                                        <th>C. Horária</th>
+                                        <th>Créditos</th>
+                                        <th>Currículo</th>
                                         <th>Ação</th>
                                     </tr>
                                     </thead>

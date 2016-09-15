@@ -93,12 +93,12 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="col-md-2">
+                    <div class="col-md-2">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                 @if (isset($model) && $model->path_image != null)
                                     <div id="midias">
-                                        <img id="logo" src="/images/{{$model->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                                        <img id="logo" src="{{route('seracademico.biblioteca.getImg', ['id' => $model->id])}}"  alt="Foto" height="120" width="100"/><br/>
                                     </div>
                                 @endif
                             </div>
@@ -111,7 +111,7 @@
                                 <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
                             </div>
                         </div>
-                    </div>--}}
+                    </div>
                 </div>
             </div>
 

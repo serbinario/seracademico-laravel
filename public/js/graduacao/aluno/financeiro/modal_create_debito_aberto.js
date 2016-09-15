@@ -57,6 +57,9 @@ function builderHtmlFieldsDebitosAbertos (dados) {
     // Carregando os campos do formulário referentes a taxa
     getInfoTaxa($('#taxa_id').find('option:selected').val());
 
+    // Carrega a grid de beneficios
+    loadCreateTableBeneficio();
+
     // Abrindo o modal de inserir disciplina
     $("#modal-create-debito-aberto").modal({show : true});
 }
@@ -70,6 +73,12 @@ $('#btnSaveDebitoAberto').click(function() {
     var mes_referencia  = $("#mes_referencia").val();
     var ano_referencia  = $("#ano_referencia").val();
     var valor_desconto  = $("#valor_desconto").val();
+    var beneficios      = [];
+
+    // Carregando as taxas
+    $.each(tableBeneficioDebitoAluno.rows().data(),function (index, val) {
+        beneficios[index] = val[0];
+    });
 
     var dados = {
         'aluno_id' : idAluno,
@@ -79,7 +88,8 @@ $('#btnSaveDebitoAberto').click(function() {
         'valor_debito': valor_debito,
         'mes_referencia' : mes_referencia,
         'ano_referencia' : ano_referencia,
-        'valor_desconto' : valor_desconto
+        'valor_desconto' : valor_desconto,
+        'beneficios' : beneficios
     };
 
     jQuery.ajax({

@@ -59,6 +59,12 @@ class DebitoAbertoAlunoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
+        # Validando o Benefício
+        if(isset($data['beneficios'])) {
+            # Vinculando os beneficios
+            $debito->beneficios()->attach($data['beneficios']);
+        }
+
         #Retorno
         return $debito;
     }

@@ -32,6 +32,38 @@ class ParametroMatricula
     /**
      * @return mixed
      * @throws \Exception
+     */
+    public function getPreRequisitoSelMatricula()
+    {
+        return $this->getParamPreRequisito(4);
+    }
+
+    /**
+     * @param $idItemParametro
+     * @return mixed
+     * @throws \Exception
+     */
+    private static function getParamPreRequisito($idItemParametro)
+    {
+        # Recuperando o item de parâmetro do semestre vigente
+        $queryParameter = \DB::table('fac_parametros')
+            ->join('fac_parametros_itens', 'fac_parametros_itens.parametro_id', '=', 'fac_parametros.id')
+            ->select(['fac_parametros_itens.valor', 'fac_parametros_itens.nome'])
+            ->where('fac_parametros_itens.id', $idItemParametro)
+            ->get();
+
+        # Verificando se foi retorna o registro
+        if(count($queryParameter) !== 1) {
+            throw new \Exception('Parâmetro do bloqueio por pré-matrícula não configurado!');
+        }
+
+        # Retorno
+        return $queryParameter[0]->valor;
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
      *
      * Esse método retorna o semestre correspondente ao parametro selecionado
      */

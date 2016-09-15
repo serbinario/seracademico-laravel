@@ -79,11 +79,17 @@ class Exemplar extends Model implements Transformable
 
 	public function emprestimo()
 	{
-		return $this->belongsTo(Editora::class, 'emprestimo_id');
+		return $this->belongsTo(Emprestimo::class, 'emprestimo_id');
 	}
 
 	public function editor()
 	{
 		return $this->belongsTo(Responsavel::class, 'responsaveis_id');
+	}
+
+	public function emprestimos()
+	{
+		return $this->belongsToMany(Exemplar::class, 'bib_emprestimos_exemplares', 'exemplar_id', "emprestimo_id")
+			->withPivot(['id', 'emprestimo_id', 'exemplar_id']);
 	}
 }

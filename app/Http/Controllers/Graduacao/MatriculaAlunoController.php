@@ -134,11 +134,23 @@ class MatriculaAlunoController extends Controller
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-           ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
-                $query->from('fac_alunos_semestres_disciplinas')
-                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+//           ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+//                $query->from('fac_alunos_semestres_disciplinas')
+//                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
+//                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+//                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+//                    ->where('fac_alunos.id', $idAluno);
+//            })
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
                     ->where('fac_alunos.id', $idAluno);
             })
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
@@ -413,75 +425,138 @@ class MatriculaAlunoController extends Controller
     public function adicionarHorarioAluno(Request $request)
     {
         try {
-            # recuperando as configurações
-            $semestres = [
-                ParametroMatriculaFacade::getSemestreVigente(),
-                ParametroMatriculaFacade::getSemestreSelMatricula()
-            ];
+        # recuperando as configurações
+        $semestres = [
+            ParametroMatriculaFacade::getSemestreVigente(),
+            ParametroMatriculaFacade::getSemestreSelMatricula(),
+            ParametroMatriculaFacade::getPreRequisitoSelMatricula()
+        ];
 
-            # Recuperando os dados da requisição
-            $dados = $request->all();
+        # Recuperando os dados da requisição
+        $dados = $request->all();
 
-            # recuperando as horas e os dias dos alunos
-            $horariosAluno = \DB::table("fac_horarios")
-                ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
-                ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
-                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
-                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
-                ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                ->where('fac_alunos.id', $dados['idAluno'])
-                ->where('fac_semestres.id', $semestres[0]->id)
-                ->whereExists(function ($query) use($dados) {
-                    $query->from('fac_horarios as horarios')
-                        ->join('fac_horas as horas', 'horas.id', '=', 'horarios.hora_id')
-                        ->join('fac_dias as dias', 'dias.id', '=', 'horarios.dia_id')
-                        ->join("fac_turmas_disciplinas as td", "td.id", "=", "horarios.turma_disciplina_id")
-                        ->join("fac_disciplinas as disciplina", "disciplina.id", "=", "td.disciplina_id")
-                        ->join('fac_turmas as t', 't.id', '=', 'td.turma_id')
-                        ->where('td.id', $dados['idTurmaDisciplina'])
-                        ->whereRaw('fac_horas.id = horas.id')
-                        ->whereRaw('fac_dias.id = dias.id');
-                })->lists('fac_horarios.id');
-            
-            # Fazendo a validação
-            if(count($horariosAluno) > 0) {
-                throw new \Exception("Esse horário já foi cadastrado");
-            }
+        # recuperando as horas e os dias dos alunos
+        $horariosAluno = \DB::table("fac_horarios")
+            ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
+            ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
+            ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.horario_id', '=', 'fac_horarios.id')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_horarios.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->where('fac_alunos.id', $dados['idAluno'])
+            ->where('fac_semestres.id', $semestres[0]->id)
+            ->whereExists(function ($query) use($dados) {
+                $query->from('fac_horarios as horarios')
+                    ->join('fac_horas as horas', 'horas.id', '=', 'horarios.hora_id')
+                    ->join('fac_dias as dias', 'dias.id', '=', 'horarios.dia_id')
+                    ->join("fac_turmas_disciplinas as td", "td.id", "=", "horarios.turma_disciplina_id")
+                    ->join("fac_disciplinas as disciplina", "disciplina.id", "=", "td.disciplina_id")
+                    ->join('fac_turmas as t', 't.id', '=', 'td.turma_id')
+                    ->where('td.id', $dados['idTurmaDisciplina'])
+                    ->whereRaw('fac_horas.id = horas.id')
+                    ->whereRaw('fac_dias.id = dias.id');
+            })->lists('fac_horarios.id');
 
-            # Recuperando os ids dos horários
-            $rows = \DB::table("fac_horarios")
-                ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
-                ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
-                ->select('fac_horarios.id', 'fac_turmas_disciplinas.disciplina_id')
-                ->get();
-
-            # Recuperando o aluno e o semestre
-            $aluno     = $this->alunoService->find($dados['idAluno']);
-            $semestre  = $aluno->semestres()->find($semestres[0]->id);
-
-            # Verificando se o semestre já foi cadastrado
-            if(!$semestre) {
-                # Cadastrando o aluno no semestre vigente
-                $aluno->semestres()->attach([$semestres[0]->id]);
-
-                # Recuperando o semestre cadastrado
-                $semestre = $aluno->semestres()->find($semestres[0]->id);
-
-                # Setando a situação
-                $semestre->pivot->situacoes()->attach([1]);
-            }
-           
-            # cadastrando os horários e disciplinas
-            $semestre->pivot->horarios()->attach(array_unique(array_column($rows, 'id')));
-            $semestre->pivot->disciplinas()->attach(array_unique(array_column($rows, 'disciplina_id')));
-
-            #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true]);
-        } catch (\Throwable $e) {
-            #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        # Fazendo a validação
+        if(count($horariosAluno) > 0) {
+            throw new \Exception("Esse horário já foi cadastrado");
         }
+
+        # Recuperando os ids dos horários
+        $rows = \DB::table("fac_horarios")
+            ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
+            ->join("fac_turmas", "fac_turmas.id", "=", "fac_turmas_disciplinas.turma_id")
+            ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
+            ->select('fac_horarios.id', 'fac_turmas_disciplinas.disciplina_id', 'fac_turmas.id as turma_id')
+            ->get();
+
+        # Recuperando o aluno e o semestre
+        $aluno     = $this->alunoService->find($dados['idAluno']);
+        $semestre  = $aluno->semestres()->find($semestres[0]->id);
+
+        # Verificando se o semestre já foi cadastrado
+        if(!$semestre) {
+            # Cadastrando o aluno no semestre vigente
+            $aluno->semestres()->attach([$semestres[0]->id]);
+
+            # Recuperando o semestre cadastrado
+            $semestre = $aluno->semestres()->find($semestres[0]->id);
+
+            # Setando a situação
+            $semestre->pivot->situacoes()->attach([1]);
+        }
+
+        # Verificando no parãmetro do sistema se
+        # é para bloquear por pré-requisitos
+        if($semestres[2] === "Sim") {
+            # Fazendo as validações de pré-requisito
+            foreach ($rows as $row) {
+                # Fazendo a consulta no banco de dados
+                $query = \DB::table('fac_curriculos')
+                    ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
+                    ->where('fac_curriculo_disciplina.disciplina_id', $row->disciplina_id)
+                    ->where('fac_turmas.id', $row->turma_id)
+                    ->select([
+                        'fac_curriculo_disciplina.pre_requisito_1_id',
+                        'fac_curriculo_disciplina.pre_requisito_2_id',
+                        'fac_curriculo_disciplina.pre_requisito_3_id',
+                        'fac_curriculo_disciplina.pre_requisito_4_id',
+                        'fac_curriculo_disciplina.pre_requisito_5_id'
+                    ])->get();
+
+                # Verificando se foi retornado o registro
+                if(count($query) == 1) {
+                    # Recuperando o objeto do currículo
+                    $objCurriculo = $query[0];
+
+                    # Array de pré-requisitos
+                    $arrayPreReq = array(
+                        $objCurriculo->pre_requisito_1_id,
+                        $objCurriculo->pre_requisito_2_id,
+                        $objCurriculo->pre_requisito_3_id,
+                        $objCurriculo->pre_requisito_4_id,
+                        $objCurriculo->pre_requisito_5_id
+                    );
+
+                    # Filtrando o array de pré-reuisitos
+                    $arrayPreReq = \array_filter($arrayPreReq, function ($value) {
+                        return $value =! null && $value != '';
+                    });
+
+                    # Query de validação
+                    $queryPreReq = \DB::table('fac_alunos_notas')
+                        ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                        ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                        ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+                        ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                        ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                        ->where('fac_alunos.id', $aluno->id)
+                        ->whereIn('fac_situacao_nota.id', [1,6,7])
+                        ->whereIn('fac_disciplinas.id', $arrayPreReq)
+                        ->select(['fac_alunos_notas.id'])->get();
+
+                    # Verificando se existe pré-requisitos
+                    if(count($arrayPreReq) > 0 ) {
+                        # Verificanso se o aluno pagou todos
+                        if(count($arrayPreReq) !== count($queryPreReq)) {
+                            throw new \Exception('Está disciplina possui pré-requisitos que o aluno não concluio!');
+                        }
+                    }
+                }
+            }
+        }
+
+        # cadastrando os horários e disciplinas
+        $semestre->pivot->horarios()->attach(array_unique(array_column($rows, 'id')));
+        $semestre->pivot->disciplinas()->attach(array_unique(array_column($rows, 'disciplina_id')));
+
+        #Retorno para a view
+        return \Illuminate\Support\Facades\Response::json(['success' => true]);
+    } catch (\Throwable $e) {
+        #Retorno para a view
+        return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+    }
     }
 
     /**
@@ -644,6 +719,106 @@ class MatriculaAlunoController extends Controller
             # removendo os horários
             $alunoSemestre->horarios()->detach($horarios);
             $alunoSemestre->disciplinas()->detach($idDisciplina);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function validarPreRequisito(Request $request)
+    {
+        try {
+            # recuperando as configurações
+            $semestres = [
+                ParametroMatriculaFacade::getSemestreVigente(),
+                ParametroMatriculaFacade::getSemestreSelMatricula(),
+                ParametroMatriculaFacade::getPreRequisitoSelMatricula()
+            ];
+
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # Recuperando os ids dos horários
+            $rows = \DB::table("fac_horarios")
+                ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.id", "=", "fac_horarios.turma_disciplina_id")
+                ->join("fac_turmas", "fac_turmas.id", "=", "fac_turmas_disciplinas.turma_id")
+                ->where('fac_turmas_disciplinas.id', $dados['idTurmaDisciplina'])
+                ->select('fac_horarios.id', 'fac_turmas_disciplinas.disciplina_id', 'fac_turmas.id as turma_id')
+                ->get();
+
+            # Recuperando o aluno e o semestre
+            $aluno = $this->alunoService->find($dados['idAluno']);
+
+
+            # Verificando no parãmetro do sistema se
+            # é para bloquear por pré-requisitos
+            if($semestres[2] === "Não") {
+                # Fazendo as validações de pré-requisito
+                foreach ($rows as $row) {
+                    # Fazendo a consulta no banco de dados
+                    $query = \DB::table('fac_curriculos')
+                        ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                        ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
+                        ->where('fac_curriculo_disciplina.disciplina_id', $row->disciplina_id)
+                        ->where('fac_turmas.id', $row->turma_id)
+                        ->select([
+                            'fac_curriculo_disciplina.pre_requisito_1_id',
+                            'fac_curriculo_disciplina.pre_requisito_2_id',
+                            'fac_curriculo_disciplina.pre_requisito_3_id',
+                            'fac_curriculo_disciplina.pre_requisito_4_id',
+                            'fac_curriculo_disciplina.pre_requisito_5_id'
+                        ])->get();
+
+                    # Verificando se foi retornado o registro
+                    if(count($query) == 1) {
+                        # Recuperando o objeto do currículo
+                        $objCurriculo = $query[0];
+
+                        # Array de pré-requisitos
+                        $arrayPreReq = array(
+                            $objCurriculo->pre_requisito_1_id,
+                            $objCurriculo->pre_requisito_2_id,
+                            $objCurriculo->pre_requisito_3_id,
+                            $objCurriculo->pre_requisito_4_id,
+                            $objCurriculo->pre_requisito_5_id
+                        );
+
+                        # Filtrando o array de pré-reuisitos
+                        $arrayPreReq = \array_filter($arrayPreReq, function ($value) {
+                            return $value =! null && $value != '';
+                        });
+
+                        # Query de validação
+                        $queryPreReq = \DB::table('fac_alunos_notas')
+                            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+                            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                            ->where('fac_alunos.id', $aluno->id)
+                            ->whereIn('fac_situacao_nota.id', [1,6,7]) // Situações de cumprimento da disciplina
+                            ->whereIn('fac_disciplinas.id', $arrayPreReq)
+                            ->select(['fac_alunos_notas.id'])->get();
+
+                        # Verificando se existe pré-requisitos
+                        if(count($arrayPreReq) > 0 ) {
+                            # Verificanso se o aluno pagou todos
+                            if(count($arrayPreReq) !== count($queryPreReq)) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else {
+                throw new \Exception("Bloqueio Ativado!");
+            }
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);

@@ -507,13 +507,23 @@
             <div role="tabpanel" class="tab-pane" id="abaMatricula">
                 <br>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         {!! Form::label('curso_id', 'Curso') !!}
                         @if(isset($aluno->id) && count($aluno->curriculos) > 0)
-                            {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                            {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled', 'id' => 'curso_id')) !!}
                         @else
-                            {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], null, array('class' => 'form-control')) !!}
+                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @endif
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        {!! Form::label('turma_id', 'Turma') !!}
+                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
+                        {{--@if(isset($aluno->id) && count($aluno->curriculos) > 0)--}}
+                            {{--{!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                        {{--@else--}}
+                            {{--{!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], null, array('class' => 'form-control')) !!}--}}
+                        {{--@endif--}}
                     </div>
 
                     <div class="form-group col-md-2">
@@ -525,14 +535,15 @@
                         @endif
                     </div>
 
-                    <div class="form-group col-md-4">
-                        {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
-                        @if(isset($aluno->id))
-                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                        @else
-                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
-                        @endif
-                    </div>
+
+                    {{--<div class="form-group col-md-4">--}}
+                        {{--{!! Form::label('forma_admissao_id', 'Forma de admissão') !!}--}}
+                        {{--@if(isset($aluno->id))--}}
+                            {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                        {{--@else--}}
+                            {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}--}}
+                        {{--@endif--}}
+                    {{--</div>--}}
                 </div>
             </div>
             {{-- Fim aba admissão--}}
@@ -875,6 +886,39 @@
                 } else {
                     swal(json.msg, "Click no botão ok para voltar a página", "error");
                     return false;
+                }
+            });
+        });
+
+        // Evento para mudanção de curso carregar automaticamente as turmas
+        $(document).on('change', '#curso_id', function () {
+            // Recuperando o id do curso
+            var cursoId = $(this).val();
+
+            // Validando o curso
+            if(!cursoId) {
+                return false;
+            }
+
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/turma/getAllByCurso/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+            }).done(function (json) {
+                if(json.success) {
+                    var option = "";
+
+                    option += '<option value="">Selecione uma turma</option>';
+                    for (var i = 0; i < json.dados.length; i++) {
+                        option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['descricao'] + '</option>';
+                    }
+
+                    $('#turma_id option').remove();
+                    $('#turma_id').append(option);
                 }
             });
         });

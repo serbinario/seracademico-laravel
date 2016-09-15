@@ -83,6 +83,7 @@
                             <thead>
                             <tr>
                                 <th>Codigo da turma</th>
+                                <th>Código do Currículo</th>
                                 <th>Codigo do Curso</th>
                                 <th>Descrição</th>
                                 <th>Turno</th>
@@ -162,6 +163,7 @@
             },
             columns: [
                 {data: 'codigo_turma', name: 'fac_turmas.codigo'},
+                {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
                 {data: 'turno', name: 'fac_turnos.nome'},

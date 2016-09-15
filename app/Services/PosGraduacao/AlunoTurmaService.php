@@ -3,14 +3,12 @@
 namespace Seracademico\Services\PosGraduacao;
 
 use Illuminate\Support\Facades\DB;
-use Seracademico\Entities\Aluno;
-use Seracademico\Repositories\AlunoRepository;
-use Seracademico\Repositories\CurriculoRepository;
-use Seracademico\Repositories\CursoRepository;
-use Seracademico\Repositories\DepartamentoRepository;
-use Seracademico\Entities\Departamento;
+use Seracademico\Entities\PosGraduacao\Aluno;
+use Seracademico\Repositories\PosGraduacao\AlunoRepository;
+use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
+use Seracademico\Repositories\PosGraduacaoCursoRepository;
 use Seracademico\Repositories\NotaRepository;
-use Seracademico\Repositories\TurmaRepository;
+use Seracademico\Repositories\PosGraduacao\TurmaRepository;
 use Carbon\Carbon;
 
 class AlunoTurmaService
@@ -55,6 +53,7 @@ class AlunoTurmaService
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getCursos()
     {
@@ -79,6 +78,7 @@ class AlunoTurmaService
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getTurmas()
     {
@@ -100,6 +100,7 @@ class AlunoTurmaService
 
     /**
      * @param array $data
+     * @return bool
      * @throws \Exception
      */
     public function store(array $data)
@@ -197,7 +198,7 @@ class AlunoTurmaService
     public function tratamentoDisciplinas(int $idAluno, int $idTurma)
     {
         # Select para recuperar o id da tabela pivot
-        $arrayResult = DB::table("fac_alunos_turmas")->select(["id"])->where("turma_id", $idTurma)->where("aluno_id", $idAluno)->get();
+        $arrayResult = DB::table("pos_alunos_turmas")->select(["id"])->where("turma_id", $idTurma)->where("aluno_id", $idAluno)->get();
 
         # Verificando se um único registro foi recuperado
         if(count($arrayResult) == 1) {

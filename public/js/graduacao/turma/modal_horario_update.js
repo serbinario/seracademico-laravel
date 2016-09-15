@@ -149,9 +149,47 @@ $('#btnUpdateHorario').click(function() {
         'dia_id': dia_id,
         'hora_id': hora_id,
         'professor_id': professor_id,
-        'sala_id' : sala_id
+        'sala_id' : sala_id,
+        'edit' : true,
     };
 
+    // Requisição de confirmação caso for junção de turmas
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/graduacao/turma/horario/eJuncao',
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            // Mensagem para o alert
+            var msg = "Foi verificado a existência de um horário com o mesmo professor." +
+                " Esses casos são recomendados para junção de turmas (mesma disciplina e carga horária)," +
+                " se esse não for o caso aconselhamos a não prosseguir" +
+                " com a operação.";
+
+            // Alerta para caso de junção de turma
+            swal({
+                    title: "Deseja realmente continuar ?",
+                    text: msg,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, desejo continuar!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    // Requisição de atualização
+                    updateHorario(dados);
+                });
+        } else {
+            // Requisição de atualização
+            updateHorario(dados);
+        }
+    });
+});
+
+// Função para atualização de horário
+function updateHorario(dados) {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
@@ -166,4 +204,5 @@ $('#btnUpdateHorario').click(function() {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
     });
-});
+}
+
