@@ -6,6 +6,7 @@ function loadCreateTableBeneficio()
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
+        retrieve: true,
         columnDefs: [
             {
                 "targets": [0],
