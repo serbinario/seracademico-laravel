@@ -1,3 +1,9 @@
+// Evento quando o modal fechar
+$('#modal-curriculo').on('hidden.bs.modal', function () {
+    loadTableACursar(0).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridACursar/" + 0).load();
+    loadTableCursadas(0).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridCursadas/" + 0).load();
+})
+
 // Função para carregar a grid
 var tableACursar;
 function loadTableACursar (idAluno) {
@@ -180,7 +186,6 @@ function formatCursadas ( d ) {
                 '</div>' +
             '</div>' ;
 }
-
 
 // Função para carregar a grid
 var tableDispensadas;
