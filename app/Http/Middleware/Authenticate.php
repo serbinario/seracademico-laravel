@@ -28,6 +28,10 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
+     *   //return true;
+         //return response('Unauthorized.', 401);
+        } else {
+
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
@@ -35,10 +39,7 @@ class Authenticate
     public function handle($request, Closure $next)
     {
         if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return true;
-                //return response('Unauthorized.', 401);
-            } else {
+            if (!$request->ajax()) {
                 return redirect()->guest('auth/login');
             }
         }
