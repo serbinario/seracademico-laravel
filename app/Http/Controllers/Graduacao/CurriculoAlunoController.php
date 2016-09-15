@@ -394,6 +394,8 @@ class CurriculoAlunoController extends Controller
             ->orderBy('fac_curriculo_disciplina.periodo')
             ->select([
                 'fac_alunos_semestres_disciplinas_extras.id',
+                'fac_alunos_semestres.id as aluno_semestre_id',
+                'fac_disciplinas.id as disciplina_id',
                 'fac_disciplinas.nome',
                 'fac_disciplinas.codigo',
                 'fac_disciplinas.carga_horaria',
@@ -406,7 +408,23 @@ class CurriculoAlunoController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a class="btn-floating" id="btnDeleteDisciplinaExtraCurricular" title="Remover disciplina"><i class="material-icons">delete</i></a>';
+            # Variável que armazenará o html
+            $html = "";
+
+            # Recuperando os registros da validação
+            $rowsNotas = \DB::table('fac_alunos_notas')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                ->where('fac_alunos_notas.aluno_semestre_id', $row->aluno_semestre_id)
+                ->where('fac_turmas_disciplinas.disciplina_id', $row->disciplina_id)
+                ->select(['fac_alunos_notas.id'])->get();
+
+            # Validando se veio registro
+            if(count($rowsNotas) == 0) {
+                $html .= '<a class="btn-floating" id="btnDeleteDisciplinaExtraCurricular" title="Remover disciplina"><i class="material-icons">delete</i></a>';
+            }
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
