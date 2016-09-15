@@ -120,4 +120,13 @@ class Curriculo extends Model implements Transformable
     {
         return $query->where('curso_id', $value)->where('ativo', 1)->get();
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeByGraduacao($query)
+    {
+        return $query->where('tipo_nivel_sistema_id', 1);
+    }
 }

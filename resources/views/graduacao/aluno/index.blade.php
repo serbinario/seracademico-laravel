@@ -133,6 +133,7 @@
     @include('graduacao.aluno.beneficio.modal_beneficios')
     @include('graduacao.aluno.beneficio.modal_create_beneficio')
     @include('graduacao.aluno.beneficio.modal_edit_beneficio')
+    @include('graduacao.aluno.curriculo.modal_create_disciplina_extra_curricular')
 @stop
 
 @section('javascript')
@@ -155,6 +156,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/beneficios_select2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_create_beneficio.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_edit_beneficio.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

@@ -17,11 +17,11 @@ function loadTableACursar (idAluno) {
                 "data":           null,
                 "defaultContent": ''
             },
-            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
-            {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'}
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo', orderable: false},
+            {data: 'codigo', name: 'fac_disciplinas.codigo',orderable: false},
+            {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria', orderable: false},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito', orderable: false}
         ]
     });
 
@@ -222,14 +222,14 @@ function loadTableCursando (idAluno) {
         autoWidth: false,
         ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridCursando/" + idAluno,
         columns: [
-            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
-            {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
-            {data: 'nota_media', name: 'fac_alunos_notas.nota_media'},
-            {data: 'codigoTurma', name: 'fac_turmas.codigo'},
-            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome'},
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo', orderable: false},
+            {data: 'codigo', name: 'fac_disciplinas.codigo', orderable: false},
+            {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria', orderable: false},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito', orderable: false},
+            {data: 'nota_media', name: 'fac_alunos_notas.nota_media', orderable: false},
+            {data: 'codigoTurma', name: 'fac_turmas.codigo', orderable: false},
+            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome', orderable: false},
         ]
     });
 
@@ -255,7 +255,8 @@ function loadTableExtraCurricular (idAluno) {
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
             {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
-            {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'}
+            {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 

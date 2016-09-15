@@ -148,7 +148,7 @@ class AlunoNotaService
             ->where('fac_alunos_semestres.aluno_id', $idAluno)
             ->where('fac_alunos_semestres.semestre_id', $idSemestre)
             ->lists('fac_alunos_notas.id');
-
+      
         # Validando o registro obtido
         if(!(count($row) == 1)) {
             throw new \Exception('Notas e Frequências inválidas!');

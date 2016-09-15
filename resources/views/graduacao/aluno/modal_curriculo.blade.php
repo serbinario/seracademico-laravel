@@ -157,6 +157,7 @@
                                         <th>C. Horária</th>
                                         <th>Créditos</th>
                                         <th>Currículo</th>
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                 </table>

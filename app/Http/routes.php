@@ -209,6 +209,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('deleteDispensada/{id}', ['as' => 'deleteDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDispensada']);
                     Route::get('editDispensada/{id}', ['as' => 'editDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@editDispensada']);
                     Route::post('updateDispensada/{id}', ['as' => 'updateDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@updateDispensada']);
+                    Route::post('storeDisciplinaExtraCurricular', ['as' => 'storeDisciplinaExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@storeDisciplinaExtraCurricular']);
+                    Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'Graduacao\CurriculoAlunoController@getDisciplinasByCurriculo']);
+                    Route::get('deleteDisciplinaExtraCurricular/{id}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDisciplinaExtraCurricular']);
                 });
 
                 // Semestre do aluno
