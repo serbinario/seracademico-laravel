@@ -29,7 +29,7 @@ class Disciplina extends Model implements Transformable
     public function turmas()
     {
         return $this->belongsToMany(Turma::class, "fac_turmas_disciplinas", "disciplina_id", "turma_id")
-            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva_id', 'plano_ensino_id']);
+            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva', 'plano_ensino_id']);
     }
 
 	public function planosEnsinos()
@@ -141,4 +141,15 @@ class Disciplina extends Model implements Transformable
 				);
 			});
 	}
+
+	/**
+	 * @param $query
+	 * @param $id
+	 * @return mixed
+	 */
+	public function scopeGetId($query, $id)
+	{
+		return $query->where('id', $id);
+	}
+
 }
