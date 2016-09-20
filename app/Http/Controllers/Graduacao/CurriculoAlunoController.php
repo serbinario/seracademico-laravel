@@ -84,8 +84,7 @@ class CurriculoAlunoController extends Controller
                     ->select('fac_disciplinas.id')
                     ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-                    ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
-                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
                     ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
                     ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
                     ->where('fac_alunos.id', $idAluno);
@@ -149,16 +148,16 @@ class CurriculoAlunoController extends Controller
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
             ->join('fac_alunos_notas', function ($join) {
                 $join->on('fac_alunos_notas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
-                    ->on('fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id');
+                    ->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id');
             })
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_notas.turma_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereIn('fac_situacao_nota.id', [10]) // Situação de cumprimento da disciplina
             ->union(BuildersExtraCurricular::getExtraCurricularCursando($idAluno))
+            ->union(BuildersExtraCurricular::getEletivasCursando($idAluno))
             ->orderBy('periodo')
             ->select([
                 'fac_disciplinas.id',
@@ -204,12 +203,11 @@ class CurriculoAlunoController extends Controller
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
             ->join('fac_alunos_notas', function ($join) {
                 $join->on('fac_alunos_notas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
-                    ->on('fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id');
+                    ->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id');
             })
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_notas.turma_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereIn('fac_situacao_nota.id', [1,2,6,7]) // Situação de cumprimento da disciplina
@@ -308,9 +306,9 @@ class CurriculoAlunoController extends Controller
 
             # Recuperando os registros da validação
             $rowsNotas = \DB::table('fac_alunos_notas')
-                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
                 ->where('fac_alunos_notas.aluno_semestre_id', $row->aluno_semestre_id)
-                ->where('fac_turmas_disciplinas.disciplina_id', $row->disciplina_id)
+                ->where('fac_disciplinas.id', $row->disciplina_id)
                 ->select(['fac_alunos_notas.id'])->get();
 
             # Validando se veio registro
@@ -345,14 +343,14 @@ class CurriculoAlunoController extends Controller
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
             ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
             ->leftJoin('fac_alunos_semestres_eletivas', 'fac_alunos_semestres_eletivas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->leftJoin('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
-            ->leftJoin('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_turmas_disciplinas.disciplina_id')
-            ->leftJoin('fac_curriculo_disciplina as curriculoDisciplinaEletiva', 'curriculoDisciplinaEletiva.disciplina_id', '=', 'eletiva.id')
-            ->leftJoin('fac_curriculos as curriculoEletiva', 'curriculoEletiva.id', '=', 'curriculoDisciplinaEletiva.curriculo_id')
+            ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
+            ->leftJoin('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
+            ->leftJoin('fac_curriculos as curriculoEletiva', 'curriculoEletiva.id', '=', 'fac_turmas.curriculo_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->where('fac_tipo_disciplinas.id', 2)
             ->orderBy('fac_curriculo_disciplina.periodo')
             ->select([
+                'fac_alunos_semestres_eletivas.id as idEletiva',
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
                 'fac_disciplinas.codigo',
@@ -361,8 +359,8 @@ class CurriculoAlunoController extends Controller
                 'fac_curriculo_disciplina.periodo',
                 'fac_curriculos.codigo as codigoCurriculo',
                 'eletiva.codigo as codigoEletiva',
+                'eletiva.id as disciplinaEletivaId',
                 'curriculoEletiva.codigo as codigoCurriculoEletiva',
-                'fac_turmas_disciplinas.id as turma_disciplina_id',
                 'fac_alunos_semestres.id as aluno_semestre_id'
             ]);
 
@@ -373,13 +371,13 @@ class CurriculoAlunoController extends Controller
 
             # Recuperando os registros da validação
             $rowsNotas = \DB::table('fac_alunos_notas')
-                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
                 ->where('fac_alunos_notas.aluno_semestre_id', $row->aluno_semestre_id)
-                ->where('fac_turmas_disciplinas.id', $row->turma_disciplina_id)
-                ->select(['fac_alunos_notas.id'])->get();
+                ->where('fac_disciplinas.id', $row->disciplinaEletivaId)
+                ->select(['fac_disciplinas.id'])->get();
 
             # Validando se veio registro
-            if($row->turma_disciplina_id && count($rowsNotas) == 0) {
+            if($row->id && count($rowsNotas) == 0) {
                 $html .= '<a class="btn-floating" id="btnDetachEletiva" title="Remover disciplina adicionada"><i class="material-icons">cancel</i></a>';
             }
 

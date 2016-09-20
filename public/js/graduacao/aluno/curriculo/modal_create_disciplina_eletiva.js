@@ -102,12 +102,12 @@ $('#btnSaveDisciplinaEletiva').click(function() {
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#btnDetachEletiva', function () {
-    var idDicilinaEletiva = tableEletiva.row($(this).parent().parent().index()).data().turma_disciplina_id;
+    var id = tableEletiva.row($(this).parent().parent().index()).data().idEletiva;
 
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/graduacao/aluno/curriculo/deleteDisciplinaEletiva/' + idDicilinaEletiva,
+        url: '/index.php/seracademico/graduacao/aluno/curriculo/deleteDisciplinaEletiva/' + id,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

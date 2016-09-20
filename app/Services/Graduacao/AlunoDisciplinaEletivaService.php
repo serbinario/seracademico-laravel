@@ -37,6 +37,7 @@ class AlunoDisciplinaEletivaService
     {
         # Aplicação de regras de negócios
         $this->tratamentoAluno($data);
+        $this->tratamentoTurmaDisciplina($data);
 
         #Salvando o registro pincipal
         $alunoDisciplinaEletiva =  $this->repository->create($data);
@@ -74,6 +75,43 @@ class AlunoDisciplinaEletivaService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    private function getTurmaDisciplina($id)
+    {
+        # Recuperando o registro do pivot
+        $row = \DB::table('fac_turmas_disciplinas')
+            ->where('id', $id)
+            ->select('disciplina_id', 'turma_id')->get();
+
+        # Validando o retorno da query
+        if(count($row) !== 1) {
+            throw new \Exception('Dados inválidos!');
+        }
+
+        # Retorno
+        return $row;
+    }
+
+    /**
+     * @param array $data
+     * @throws \Exception
+     */
+    public function tratamentoTurmaDisciplina(array &$data)
+    {
+        # Recuperando o pivot
+        $turmaDisciplina = $this->getTurmaDisciplina($data['turma_disciplina_id']);
+
+        # Recuperando o id do pivot e adicionando o array da reuisição
+        $data['turma_id'] = $turmaDisciplina->turma_id;
+        $data['disciplina_eletiva_id'] = $turmaDisciplina->disciplina_id;
+
+        # Removendo os indices
+        unset($data['turma_disciplina_id']);
+    }
+
+    /**
      * @param int $id
      * @return bool
      * @throws \Exception
@@ -81,15 +119,15 @@ class AlunoDisciplinaEletivaService
     public function delete(int $id)
     {
         # Removendo o registro no banco de dados
-        $alunoDisciplinaEletiva = $this->repository->findWhere(['turma_disciplina_id' => $id]);
+        $alunoDisciplinaEletiva = $this->repository->find($id);
 
         # Verifiando se a AlunoDisciplinaDispensada foi recuperada
-        if(count($alunoDisciplinaEletiva) == 0) {
+        if(!$alunoDisciplinaEletiva) {
             throw new \Exception('Dados não encontrados não encontrada!');
         }
 
         # Removendo o registro do banco de dados
-        $this->repository->delete($alunoDisciplinaEletiva[0]->id);
+        $this->repository->delete($alunoDisciplinaEletiva->id);
 
         #Retorno
         return true;

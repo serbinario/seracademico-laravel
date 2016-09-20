@@ -15,7 +15,8 @@ class AlunoDisciplinaEletiva extends Model implements Transformable
     protected $fillable = [ 
 		'disciplina_id',
 		'aluno_semestre_id',
-		'turma_disciplina_id'
+		'turma_id',
+		'disciplina_eletiva_id'
 	];
 
 }

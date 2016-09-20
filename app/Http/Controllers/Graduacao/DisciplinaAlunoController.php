@@ -66,14 +66,8 @@ class DisciplinaAlunoController extends Controller
                 );
             })
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-           ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
-                $query->from('fac_alunos_semestres_disciplinas')
-                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
-                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-                    ->where('fac_alunos.id', $idAluno);
-            })
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
                 $query->from('fac_alunos_semestres_eletivas')
                     ->select('fac_alunos_semestres_eletivas.disciplina_id')
@@ -81,8 +75,27 @@ class DisciplinaAlunoController extends Controller
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
+                    ->where('fac_alunos.id', $idAluno);
+            })
+            // Alterar depois de regularizar a situação das dispensadas em alunos_notas
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_disciplinas_dispensadas')
+                    ->select('fac_alunos_semestres_disciplinas_dispensadas.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas_dispensadas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
-            ->union(BuildersExtraCurricular::getExtraCurricularCursandoMatricular($idAluno))
+            ->union(BuildersExtraCurricular::getExtraCurricularMatricular($idAluno))
             ->union(BuildersExtraCurricular::getEletivasMatricula($idAluno))
             ->orderBy('periodo')
             ->select([
@@ -247,11 +260,11 @@ class DisciplinaAlunoController extends Controller
            
             # cadastrando os horários e disciplinas
             $semestre->pivot->horarios()->attach(array_unique(array_column($rows, 'id')));
-            $semestre->pivot->disciplinas()->attach(array_unique(array_column($rows, 'disciplina_id')));
+            //$semestre->pivot->disciplinas()->attach(array_unique(array_column($rows, 'disciplina_id')));
 
             # Recuperando os ids do pivot TurmaDisciplina correspondentes.
             $turmasDisciplinas = \DB::table('fac_turmas_disciplinas')
-                ->select(['fac_turmas_disciplinas.id', 'fac_curriculos.id as curriculo_id'])
+                ->select(['fac_turmas_disciplinas.turma_id', 'fac_turmas_disciplinas.disciplina_id', 'fac_curriculos.id as curriculo_id'])
                 ->join("fac_turmas", 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
                 ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
@@ -269,7 +282,8 @@ class DisciplinaAlunoController extends Controller
             foreach ($turmasDisciplinas as $row) {
                 # Criando e recuperando a nota do aluno
                 $alunoNota = $semestre->pivot->alunosNotas()->create([
-                    'turma_disciplina_id' => $row->id,
+                    'turma_id' => $row->turma_id,
+                    'disciplina_id' => $row->disciplina_id,
                     'situacao_id' => 10,
                     'curriculo_id' => $row->curriculo_id
                 ]);

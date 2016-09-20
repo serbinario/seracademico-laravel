@@ -44,10 +44,14 @@ class BuildersExtraCurricular
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
-                $query->from('fac_alunos_semestres_disciplinas')
-                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
                     ->where('fac_alunos.id', $idAluno);
             })
             ->where('fac_alunos.id', $idAluno)
@@ -76,6 +80,7 @@ class BuildersExtraCurricular
      * @return mixed
      */
     public static function getExtraCurricularCursando($idAluno) {
+        # Retorno
         return \DB::table('fac_alunos_semestres_disciplinas_extras')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_disciplinas_extras.disciplina_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
@@ -97,12 +102,11 @@ class BuildersExtraCurricular
                 );
             })
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
             ->join('fac_alunos_notas', function ($join) {
                 $join->on('fac_alunos_notas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
-                    ->on('fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id');
+                    ->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id');
             })
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_notas.turma_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereIn('fac_situacao_nota.id', [10]) // Situação de cumprimento da disciplina
@@ -135,7 +139,7 @@ class BuildersExtraCurricular
      * @param $idAluno
      * @return mixed
      */
-    public static function getExtraCurricularCursandoMatricular($idAluno) {
+    public static function getExtraCurricularMatricular($idAluno) {
         # Retorno
         return \DB::table('fac_alunos_semestres_disciplinas_extras')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_disciplinas_extras.disciplina_id')
@@ -157,10 +161,14 @@ class BuildersExtraCurricular
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
-                $query->from('fac_alunos_semestres_disciplinas')
-                    ->select('fac_alunos_semestres_disciplinas.disciplina_id')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_disciplinas.aluno_semestre_id')
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
                     ->where('fac_alunos.id', $idAluno);
             })
             ->where('fac_alunos.id', $idAluno)
@@ -185,10 +193,9 @@ class BuildersExtraCurricular
     {
         #Criando a consulta
         $rows = \DB::table('fac_alunos_semestres_eletivas')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('fac_curriculo_disciplina', function ($join) {
@@ -201,6 +208,17 @@ class BuildersExtraCurricular
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->select([
                 'fac_disciplinas.id',
@@ -225,14 +243,63 @@ class BuildersExtraCurricular
      * @param $idAluno
      * @return mixed
      */
+    public static function getEletivasCursando($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_alunos_semestres_eletivas')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
+            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id');
+            })
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('fac_alunos_notas', function ($join) {
+                $join->on('fac_alunos_notas.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+                    ->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id');
+            })
+            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->whereIn('fac_situacao_nota.id', [10]) // Situação de cumprimento da disciplina
+            ->where('fac_alunos.id', $idAluno)
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_disciplinas.qtd_falta',
+                'fac_disciplinas.qtd_credito',
+                'fac_curriculo_disciplina.periodo',
+                'fac_tipo_disciplinas.nome as tipo_disciplina',
+                'pessoas.nome as nomeAluno',
+                'fac_cursos.nome as nomeCurso',
+                'fac_turmas.codigo as codigoTurma',
+                'fac_situacao_nota.nome as nomeSituacao',
+                \DB::raw('IF(fac_alunos_notas.nota_unidade_1 != "", fac_alunos_notas.nota_unidade_1 != "", 0.0) as nota_unidade_1'),
+                \DB::raw('IF(fac_alunos_notas.nota_unidade_2 != "", fac_alunos_notas.nota_unidade_2 != "", 0.0) as nota_unidade_2'),
+                \DB::raw('IF(fac_alunos_notas.nota_2_chamada != "", fac_alunos_notas.nota_2_chamada != "", 0.0) as nota_2_chamada'),
+                \DB::raw('IF(fac_alunos_notas.nota_final != "", fac_alunos_notas.nota_final != "", 0.0) as nota_final'),
+                \DB::raw('IF(fac_alunos_notas.nota_media != "", fac_alunos_notas.nota_media != "", 0.0) as nota_media')
+            ]);
+
+        return $rows;
+    }
+
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
     public static function getEletivasMatricula($idAluno)
     {
         #Criando a consulta
         $rows = \DB::table('fac_alunos_semestres_eletivas')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('fac_curriculo_disciplina', function ($join) {
@@ -245,6 +312,17 @@ class BuildersExtraCurricular
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_notas')
+                    ->distinct()
+                    ->select('fac_disciplinas.id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                    ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+                    ->whereIn('fac_situacao_nota.id', [1,6,7,10]) // Situação de cumprimento da disciplina
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->select([
                 'fac_disciplinas.id',
