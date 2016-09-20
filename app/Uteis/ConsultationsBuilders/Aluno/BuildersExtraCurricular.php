@@ -177,4 +177,88 @@ class BuildersExtraCurricular
             ]);
     }
 
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
+    public static function getEletivasACursar($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_alunos_semestres_eletivas')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id');
+            })
+            ->leftJoin('fac_disciplinas as pre1', 'pre1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+            ->leftJoin('fac_disciplinas as pre2', 'pre2.id', '=', 'fac_curriculo_disciplina.pre_requisito_2_id')
+            ->leftJoin('fac_disciplinas as co1', 'co1.id', '=', 'fac_curriculo_disciplina.co_requisito_1_id')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_disciplinas.qtd_falta',
+                'fac_disciplinas.qtd_credito',
+                'fac_curriculo_disciplina.periodo',
+                'fac_tipo_disciplinas.nome as tipo_disciplina',
+                'pessoas.nome as nomeAluno',
+                'fac_cursos.nome as nomeCurso',
+                \DB::raw('IF(pre1.codigo != "", pre1.codigo, "Não Informado") as pre1Codigo'),
+                \DB::raw('IF(pre2.codigo != "", pre1.codigo, "Não Informado") as pre2Codigo'),
+                \DB::raw('IF(co1.codigo  != "", pre1.codigo, "Não Informado") as co1Codigo')
+            ]);
+
+        return $rows;
+    }
+
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
+    public static function getEletivasMatricula($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_alunos_semestres_eletivas')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('fac_curriculo_disciplina', function ($join) {
+                $join->on('fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->on('fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id');
+            })
+            ->leftJoin('fac_disciplinas as pre1', 'pre1.id', '=', 'fac_curriculo_disciplina.pre_requisito_1_id')
+            ->leftJoin('fac_disciplinas as pre2', 'pre2.id', '=', 'fac_curriculo_disciplina.pre_requisito_2_id')
+            ->leftJoin('fac_disciplinas as co1', 'co1.id', '=', 'fac_curriculo_disciplina.co_requisito_1_id')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->where('fac_alunos.id', $idAluno)
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_disciplinas.qtd_falta',
+                'fac_curriculo_disciplina.periodo',
+                'fac_tipo_disciplinas.nome as tipo_disciplina',
+                'pessoas.nome as nomeAluno',
+                'fac_cursos.nome as nomeCurso'
+            ]);
+
+        return $rows;
+    }
+
 }

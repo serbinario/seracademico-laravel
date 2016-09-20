@@ -8,6 +8,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\Graduacao\Aluno;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Services\Graduacao\AlunoDisciplinaEletivaService;
 use Seracademico\Services\Graduacao\AlunoDisciplinaExtraCurricularService;
 use Seracademico\Services\Graduacao\AlunoDisciplinaDispensadaService;
 use Seracademico\Services\Graduacao\AlunoService;
@@ -32,17 +33,26 @@ class CurriculoAlunoController extends Controller
     private $alunoDisciplinaExtraCurricularService;
 
     /**
+     * @var AlunoDisciplinaEletivaService
+     */
+    private $alunoDisciplinaEletivaService;
+
+    /**
      * CurriculoAlunoController constructor.
      * @param AlunoService $service
      * @param AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService
+     * @param AlunoDisciplinaExtraCurricularService $alunoDisciplinaExtraCurricularService
+     * @param AlunoDisciplinaEletivaService $alunoDisciplinaEletivaService
      */
     public function __construct(AlunoService $service,
         AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService,
-        AlunoDisciplinaExtraCurricularService $alunoDisciplinaExtraCurricularService)
+        AlunoDisciplinaExtraCurricularService $alunoDisciplinaExtraCurricularService,
+        AlunoDisciplinaEletivaService $alunoDisciplinaEletivaService)
     {
-        $this->alunoDisciplinaDispensadaService = $alunoDisciplinaDispensadaService;
         $this->alunoService = $service;
+        $this->alunoDisciplinaDispensadaService = $alunoDisciplinaDispensadaService;
         $this->alunoDisciplinaExtraCurricularService = $alunoDisciplinaExtraCurricularService;
+        $this->alunoDisciplinaEletivaService = $alunoDisciplinaEletivaService;
     }
 
     /**
@@ -88,8 +98,16 @@ class CurriculoAlunoController extends Controller
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_eletivas')
+                    ->select('fac_alunos_semestres_eletivas.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->union(BuildersExtraCurricular::getExtraCurricularACursar($idAluno))
+            ->union(BuildersExtraCurricular::getEletivasACursar($idAluno))
             ->orderBy('periodo')
             ->select([
                 'fac_disciplinas.id',
@@ -305,6 +323,70 @@ class CurriculoAlunoController extends Controller
         })->make(true);
     }
 
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
+    public function gridEletiva($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_disciplinas')
+            ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                    where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                );
+            })
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+            ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->leftJoin('fac_alunos_semestres_eletivas', 'fac_alunos_semestres_eletivas.disciplina_id', '=', 'fac_disciplinas.id')
+            ->leftJoin('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.turma_disciplina_id')
+            ->leftJoin('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->leftJoin('fac_curriculo_disciplina as curriculoDisciplinaEletiva', 'curriculoDisciplinaEletiva.disciplina_id', '=', 'eletiva.id')
+            ->leftJoin('fac_curriculos as curriculoEletiva', 'curriculoEletiva.id', '=', 'curriculoDisciplinaEletiva.curriculo_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->where('fac_tipo_disciplinas.id', 2)
+            ->orderBy('fac_curriculo_disciplina.periodo')
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_curriculo_disciplina.qtd_credito',
+                'fac_curriculo_disciplina.periodo',
+                'fac_curriculos.codigo as codigoCurriculo',
+                'eletiva.codigo as codigoEletiva',
+                'curriculoEletiva.codigo as codigoCurriculoEletiva',
+                'fac_turmas_disciplinas.id as turma_disciplina_id',
+                'fac_alunos_semestres.id as aluno_semestre_id'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variável que armazenará o html
+            $html = '<a class="btn-floating" id="btnAttachEletiva" title="Adicionar disciplina eletiva"><i class="material-icons">add-to-photos</i></a>';
+
+            # Recuperando os registros da validação
+            $rowsNotas = \DB::table('fac_alunos_notas')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
+                ->where('fac_alunos_notas.aluno_semestre_id', $row->aluno_semestre_id)
+                ->where('fac_turmas_disciplinas.id', $row->turma_disciplina_id)
+                ->select(['fac_alunos_notas.id'])->get();
+
+            # Validando se veio registro
+            if($row->turma_disciplina_id && count($rowsNotas) == 0) {
+                $html .= '<a class="btn-floating" id="btnDetachEletiva" title="Remover disciplina adicionada"><i class="material-icons">cancel</i></a>';
+            }
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
 
     /**
      * @param Request $request
@@ -407,10 +489,7 @@ class CurriculoAlunoController extends Controller
             #Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados cadastrados com sucesso!']);
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json([
-                'success' => false,
-                'msg' => $e->getMessage()
-            ]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
 
@@ -427,12 +506,47 @@ class CurriculoAlunoController extends Controller
             #Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados removidos com sucesso!']);
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json([
-                'success' => false,
-                'msg' => $e->getMessage()
-            ]);
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeDisciplinaEletiva(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # Persistindo os dados no banco de dados
+            $this->alunoDisciplinaEletivaService->store($dados);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados cadastrados com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteDisciplinaEletiva($id)
+    {
+        try {
+            # Removendo do banco de dados
+            $this->alunoDisciplinaEletivaService->delete($id);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados removidos com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
 
     /**
      * @param Request $request

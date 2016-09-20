@@ -50,6 +50,10 @@
                             <li role="presentation">
                                 <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Curriculares</a>
                             </li>
+
+                            <li role="presentation">
+                                <a href="#eletiva" aria-controls="eletiva" data-toggle="tab">Eletivas</a>
+                            </li>
                         </ul>
 
                         <!-- Conteúdo de navegação de pastas -->
@@ -157,6 +161,28 @@
                                         <th>C. Horária</th>
                                         <th>Créditos</th>
                                         <th>Currículo</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Eletiva -->
+                            <div role="tabpanel" class="tab-pane" id="eletiva">
+                                <br/>
+
+                                <!-- Table Eletivas -->
+                                <table id="grid-eletivas" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Disciplina</th>
+                                        <th>C. Horária</th>
+                                        <th>Créditos</th>
+                                        <th>Currículo</th>
+                                        <th>Cod. Eletiva</th>
+                                        <th>Curriculo Eletiva</th>
                                         <th>Ação</th>
                                     </tr>
                                     </thead>

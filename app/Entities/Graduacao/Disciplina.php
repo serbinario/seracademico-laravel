@@ -152,4 +152,31 @@ class Disciplina extends Model implements Transformable
 		return $query->where('id', $id);
 	}
 
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeEletiva($query, $idAluno)
+	{
+		return $query
+			->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+			->where('fac_turmas_disciplinas.eletiva', 1)
+            ->whereNotIn('fac_disciplinas.id', function ($where) use ($idAluno) {
+                $where->from('fac_curriculo_disciplina')
+                    ->select('fac_curriculo_disciplina.disciplina_id')
+                    ->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                        $join->on(
+                            'fac_alunos_cursos.id', '=',
+                            \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                            where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                        );
+                    });
+            })
+			->select([
+				'fac_turmas_disciplinas.id',
+				'fac_disciplinas.nome',
+				'fac_disciplinas.codigo'
+			]);
+	}
 }

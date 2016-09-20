@@ -63,8 +63,6 @@ function builderHtmlFieldsDisciplinaEditar (dados, idDisciplina) {
                 $('#eletiva_editar').find('option:eq(0)').prop('selected', true);
             }
 
-
-
             // Abrindo o modal de inserir disciplina
             $("#modal-disciplina-edit").modal({show : true});
         } else {

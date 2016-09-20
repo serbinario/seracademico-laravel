@@ -74,8 +74,16 @@ class DisciplinaAlunoController extends Controller
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
+            ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_eletivas')
+                    ->select('fac_alunos_semestres_eletivas.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->union(BuildersExtraCurricular::getExtraCurricularCursandoMatricular($idAluno))
+            ->union(BuildersExtraCurricular::getEletivasMatricula($idAluno))
             ->orderBy('periodo')
             ->select([
                     'fac_disciplinas.id',

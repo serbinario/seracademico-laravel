@@ -559,5 +559,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\Graduacao\AlunoDisciplinaExtraCurricularRepository::class,
 			\Seracademico\Repositories\Graduacao\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\Graduacao\AlunoDisciplinaEletivaRepository::class,
+			\Seracademico\Repositories\Graduacao\AlunoDisciplinaEletivaRepositoryEloquent::class
+		);
 	}
 }
