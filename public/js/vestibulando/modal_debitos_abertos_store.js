@@ -141,8 +141,12 @@ $(document).on('click', '#taxa_id', function () {
             $('#valor_pago').val(Number(retorno.data.valor));
             $('#vencimento').val((retorno.data.dia_vencimento
                     ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
-            //$('#valor_multa').val(retorno.data.valor_multa);
-            //$('#valor_juros').val(retorno.data.valor_juros);
+
+            if(!retorno.data.alterar_data_vencimento) {
+                $('#vencimento').attr('readonly', true);
+            } else {
+                $('#vencimento').attr('readonly', false);
+            }
         } else {
             // Fechando a modal
             $('#modal-debitos-abertos-store').modal('toggle');

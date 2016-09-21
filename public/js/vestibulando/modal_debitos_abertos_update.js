@@ -105,6 +105,13 @@ function builderHtmlFieldsDebitosEditar (dados) {
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
             $('#observacao_editar').val(retorno.data.observacao);
+
+            // tratamento readonly data de vencimento
+            if(!retorno.data.debito.taxa.alterar_data_vencimento) {
+                $('#vencimento_editar').attr('disabled', true);
+            } else {
+                $('#vencimento_editar').attr('disabled', false);
+            }
             
             // Abrindo o modal de inserir disciplina
             $("#modal-debitos-abertos-update").modal({show : true});

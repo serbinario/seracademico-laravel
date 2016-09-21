@@ -54,6 +54,14 @@
                 {!! Form::label('tipo_debito_id', 'Tipo Debito * ') !!}
                 {!! Form::select('tipo_debito_id', $loadFields['financeiro\\tipodebito'], Session::getOldInput('tipo_debito_id'), array('class' => 'form-control')) !!}
             </div>
+
+            <div class="col-md-4">
+                <div class="checkbox checkbox-primary">
+                    {!! Form::hidden('alterar_data_vencimento', 0) !!}
+                    {!! Form::checkbox('alterar_data_vencimento', 1, null, array('class' => 'form-control')) !!}
+                    {!! Form::label('alterar_data_vencimento', 'Permitir alterar data de vencimento ? ', false) !!}
+                </div>
+            </div>
         </div>
 
         <div class="row">
