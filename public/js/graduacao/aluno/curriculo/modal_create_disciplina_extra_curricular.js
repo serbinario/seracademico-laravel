@@ -9,7 +9,7 @@ function loadFieldsAddDisciplinaExtraCurricular()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Curriculo|byGraduacao'
+            'Graduacao\\Curriculo|lessOfAluno,' + idAluno
         ]
     };
 
@@ -42,7 +42,8 @@ function builderHtmlFieldsAddDisciplinaExtraCurricular (dados) {
 
     // Percorrendo o array de cursos
     for (var i = 0; i < dados['graduacao\\curriculo'].length; i++) {
-        htmlCurriculo += "<option value='" + dados['graduacao\\curriculo'][i].id + "'>" + dados['graduacao\\curriculo'][i].nome + "</option>";
+        htmlCurriculo += "<option value='" + dados['graduacao\\curriculo'][i].id + "'>"
+            + dados['graduacao\\curriculo'][i].codigo +  ' : ' + dados['graduacao\\curriculo'][i].nome + "</option>";
     }
 
     // carregando o html
@@ -75,7 +76,7 @@ $(document).on('change', '#curriculo_extra_curricular_id', function () {
 
             // Percorrendo o array de disciplinas
             for (var i = 0; i < retorno.dados.length; i++) {
-                htmlDisciplina += "<option value='" + retorno.dados[i].id + "'>" + retorno.dados[i].nome + "</option>";
+                htmlDisciplina += "<option value='" + retorno.dados[i].id + "'>" + retorno.dados[i].codigo  + ' : ' + retorno.dados[i].nome + "</option>";
             }
 
             // Atualizando o dom

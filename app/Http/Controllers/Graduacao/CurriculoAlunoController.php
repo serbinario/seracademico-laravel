@@ -574,7 +574,7 @@ class CurriculoAlunoController extends Controller
                 ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
                 ->where('fac_curriculos.id', $idCurriculo)
-                ->select(['fac_disciplinas.id', 'fac_disciplinas.nome'])->get();
+                ->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])->get();
 
             # Verificando se os registros foram encontrados
             if(count($rows) === 0) {
