@@ -37,7 +37,9 @@ function builderHtmlFieldsDebitos (dados) {
     // limpando os campos
     $("#forma_pagamento_id option").attr('selected', false);
     $("#local_pagamento_id option").attr('selected', false);
+    $("#taxa_id option").remove();
     $('#vencimento').val("");
+    $('#vencimento').attr("selected", false);
     $('#valor_debito').val("");
     $('#valor_desconto').val("");
     $('#valor_pago').val("");
@@ -144,8 +146,16 @@ $(document).on('click', '#taxa_id', function () {
 
             if(!retorno.data.alterar_data_vencimento) {
                 $('#vencimento').attr('readonly', true);
+                $('#vencimento').datetimepicker('destroy');
             } else {
                 $('#vencimento').attr('readonly', false);
+                $('#vencimento').datetimepicker({
+                    timepicker: false,
+                    format: 'd/m/Y',
+                    mask: false,
+                    lang: 'pt-BR',
+                    allowBlank: true,
+                });
             }
         } else {
             // Fechando a modal
