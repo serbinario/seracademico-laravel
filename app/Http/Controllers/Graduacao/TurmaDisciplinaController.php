@@ -64,14 +64,14 @@ class TurmaDisciplinaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html  = '';
+            $html  = '<a title="Editar Disciplina" id="btnEditarDisciplina"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
 
             $turma           = $this->turmaService->find($row->idTurma);
             $disciplina      = $turma->disciplinas()->find($row->idDisciplina);
             $turmaDisciplina = $disciplina->pivot;
 
             if(count($turmaDisciplina->horarios) == 0) {
-                $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
+                $html .= '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
             }
 
             return $html;
@@ -103,6 +103,42 @@ class TurmaDisciplinaController extends Controller
         try {
             #incluindo disciplina as Disciplinas
             $this->turmaService->incluirDisciplina($request->all());
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);
+        } catch (\Throwable $e) { dd($e);
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idTurma
+     * @param $idDisciplina
+     * @return mixed
+     */
+    public function edit($idTurma, $idDisciplina)
+    {
+        try {
+            # Recuperando os dados para edição
+            $turmaDisciplina =  $this->turmaService->editarDisciplina($idTurma, $idDisciplina);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $turmaDisciplina]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function update(Request $request, $idTurma, $idDisciplina)
+    {
+        try {
+            #Editando as disciplinas da turma
+            $this->turmaService->updateDisciplina($request->all(), $idTurma, $idDisciplina);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Inclusão realizada com sucesso!']);

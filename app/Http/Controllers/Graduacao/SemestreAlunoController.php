@@ -239,12 +239,15 @@ class SemestreAlunoController extends Controller
     public function gridNotas($idAluno, $idSemestre)
     {
         #Criando a consulta
-        $rows = \DB::table('fac_turmas_disciplinas')
-            ->join('fac_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
-            ->join('fac_alunos_notas', 'fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
+        $rows = \DB::table('fac_alunos_notas')
             ->leftJoin('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
             ->leftJoin('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+            ->join('fac_disciplinas', 'fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_turmas', 'fac_alunos_notas.turma_id', '=', 'fac_turmas.id')
+            ->join('fac_turmas_disciplinas', function ($join) {
+                $join->on('fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
+                    ->on('fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id');
+            })
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
@@ -273,12 +276,11 @@ class SemestreAlunoController extends Controller
     public function gridFaltas(Request $request, $idAluno, $idSemestre)
     {
         #Criando a consulta
-        $rows = \DB::table('fac_turmas_disciplinas')
-            ->join('fac_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
-            ->join('fac_alunos_notas', 'fac_alunos_notas.turma_disciplina_id', '=', 'fac_turmas_disciplinas.id')
-            ->join('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
+        $rows = \DB::table('fac_alunos_notas')
+            ->join('fac_disciplinas', 'fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_turmas', 'fac_alunos_notas.turma_id', '=', 'fac_turmas.id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+            ->join('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')

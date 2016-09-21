@@ -60,12 +60,12 @@ function builderHtmlFieldsDisciplina (dados) {
 // Evento para salvar tabela de preços
 $('#btnSalvarDisciplinaTurma').click(function() {
     var disciplina_id = $("#disciplina_id").val();
-    var eletiva_id    = $("#eletiva_id").val();
+    var eletiva    = $("#eletiva").val();
 
     var dados = {
         'idTurma' : idTurma,
         'disciplina_id': disciplina_id,
-        'eletiva_id': eletiva_id,
+        'eletiva': eletiva,
     };
 
     jQuery.ajax({

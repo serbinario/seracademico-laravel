@@ -268,6 +268,34 @@ function loadTableExtraCurricular (idAluno) {
     return tableExtraCurricular;
 }
 
+// Função para carregar a grid
+var tableEletiva;
+function loadTableEletiva (idAluno) {
+    tableEletiva = $('#grid-eletivas').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/graduacao/aluno/curriculo/gridEletiva/" + idAluno,
+        columns: [
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
+            {data: 'codigo', name: 'fac_disciplinas.codigo'},
+            {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
+            {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+            {data: 'codigoEletiva', name: 'eletiva.codigo'},
+            {data: 'codigoCurriculoEletiva', name: 'curriculoEletiva.codigo'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableEletiva;
+}
+
 // Função para executar a grid
 function runCurriculo(idAluno) {
     // Carregando a grid de ACursar
@@ -303,6 +331,13 @@ function runCurriculo(idAluno) {
         loadTableExtraCurricular(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridExtraCurricular/" + idAluno).load();
     } else {
         loadTableExtraCurricular(idAluno);
+    }
+
+    // Carregando a grid de eletivas
+    if(tableEletiva) {
+        loadTableEletiva(idAluno).ajax.url("/index.php/seracademico/graduacao/aluno/curriculo/gridEletiva/" + idAluno).load();
+    } else {
+        loadTableEletiva(idAluno);
     }
 
     // carregando a modal

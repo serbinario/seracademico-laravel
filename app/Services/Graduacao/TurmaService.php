@@ -437,12 +437,11 @@ class TurmaService
         # Recuperando os parametros da requisição
         $idTurma      = $data['idTurma'];
         $idDisciplina = $data['disciplina_id'];
-       // $idEletiva    = (isset($data['eletiva_id']) &&  is_numeric($data['eletiva_id'])) ? $data['eletiva_id'] : null;
+        $eletiva      = (isset($data['eletiva'])) ? $data['eletiva'] : 0;
 
         # Recuperando a turma e a disciplina
         $objTurma      = $this->repository->find($idTurma);
         $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
-        //$objEletiva    = $this->disciplinaRepository->find($idEletiva);
 
         # Verificando se foi encontrada uma turma e disciplina
         if(!$objTurma && !$objDisciplina) {
@@ -475,10 +474,71 @@ class TurmaService
         }
 
         #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino]);
+        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino, 'eletiva' => $eletiva]);
         $objTurma->save();
 
         #Retorno
+        return true;
+    }
+
+    /**
+     * @param int $idTurma
+     * @param int $idDisciplina
+     * @return mixed
+     * @throws \Exception
+     */
+    public function editarDisciplina(int $idTurma, int $idDisciplina)
+    {
+        # Recuperando o objeto turma e pivot
+        $turma = $this->repository->find($idTurma);
+
+        # Validando a turma
+        if(!$turma) {
+            throw new \Exception('Turma não encontrada!');
+        }
+
+        # Recuperando o objeto do pivot
+        $turmaDisciplina = $turma->disciplinas()->find($idDisciplina)->pivot;
+
+        # Validando o pivot
+        if(!$turmaDisciplina) {
+            throw new \Exception('Disciplina não encontrada nessa turma!');
+        }
+
+        # Retorno
+        return $turmaDisciplina;
+    }
+
+    /**
+     * @param array $data
+     * @param int $idTurma
+     * @param int $idDisciplina
+     * @return bool
+     * @throws \Exception
+     */
+    public function updateDisciplina(array $data, int $idTurma, int $idDisciplina)
+    {
+        # Recuperando o objeto turma e pivot
+        $turma = $this->repository->find($idTurma);
+
+        # Validando a turma
+        if(!$turma) {
+            throw new \Exception('Turma não encontrada!');
+        }
+
+        # Recuperando o objeto do pivot
+        $turmaDisciplina = $turma->disciplinas()->find($idDisciplina)->pivot;
+
+        # Validando o pivot
+        if(!$turmaDisciplina) {
+            throw new \Exception('Disciplina não encontrada nessa turma!');
+        }
+
+        # Atualizando a disciplina da turma
+        $turmaDisciplina->eletiva = $data['eletiva'];
+        $turmaDisciplina->save();
+
+        # Retorno
         return true;
     }
 
