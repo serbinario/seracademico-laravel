@@ -4,6 +4,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 //consulta via select2
 $("#taxa_id_beneficios_editar").select2({
     placeholder: 'Selecione uma Taxa',
+    allowClear: true,
     //minimumInputLength: 3,
     width: 718,
     ajax: {
@@ -65,6 +66,7 @@ function getTaxasId()
 $("#taxa_id_beneficios").select2({
     placeholder: 'Selecione uma Taxa',
     //minimumInputLength: 3,
+    allowClear: true,
     width: 718,
     ajax: {
         type: 'POST',

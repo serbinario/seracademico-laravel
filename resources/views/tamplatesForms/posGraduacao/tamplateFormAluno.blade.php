@@ -663,6 +663,7 @@
             placeholder: 'Selecione uma instituição',
             minimumInputLength: 3,
             width: 750,
+            allowClear: true,
             ajax: {
                 type: 'POST',
                 url: "{{ route('seracademico.util.select2')  }}",
@@ -711,6 +712,7 @@
                 dataType: 'json',
                 delay: 250,
                 crossDomain: true,
+                allowClear: true,
                 data: function (params) {
                     return {
                         'search':     params.term, // search term
@@ -914,7 +916,7 @@
 
                     option += '<option value="">Selecione uma turma</option>';
                     for (var i = 0; i < json.dados.length; i++) {
-                        option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['descricao'] + '</option>';
+                        option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                     }
 
                     $('#turma_id option').remove();

@@ -60,6 +60,7 @@ function runTableCurso(idVestibular) {
 $('#select_curso').select2({
     placeholder: 'Selecione',
     width: 300,
+    allowClear: true,
     ajax: {
         type: 'POST',
         url: "/index.php/seracademico/util/select2",
