@@ -134,8 +134,13 @@ $(document).on('click', '#taxa_id', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
+            // Data Atual
+            var now = new Date();
+
             $('#valor_debito').val(retorno.data.valor);
             $('#valor_pago').val(Number(retorno.data.valor));
+            $('#vencimento').val((retorno.data.dia_vencimento
+                    ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
             //$('#valor_multa').val(retorno.data.valor_multa);
             //$('#valor_juros').val(retorno.data.valor_juros);
         } else {
