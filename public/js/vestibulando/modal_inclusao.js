@@ -9,7 +9,7 @@ function loadFieldsEditar()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Curso|byVestibulando,' + idVestibulando,
+            'Graduacao\\Curso|byVestibularOfVestibulando,' + idVestibulando,
             'FormaAdmissao|byId,1',
             'Graduacao\\Semestre'
         ]

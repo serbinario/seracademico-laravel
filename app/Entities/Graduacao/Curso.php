@@ -272,34 +272,20 @@ class Curso extends Model implements Transformable
 
     /**
      * @param $query
-     * @param $value
+     * @param $idVestibulando
      * @return mixed
      */
-    public function scopeByVestibulando($query, $value)
+    public function scopeByVestibularOfVestibulando($query, $idVestibulando)
     {
         return $query->select('fac_cursos.nome', 'fac_cursos.id')
             ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_cursos.tipo_nivel_sistema_id', 1)
+            ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.curso_id', '=', 'fac_cursos.id')
+            ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulares_cursos.vestibular_id')
+            ->join('fac_vestibulandos', 'fac_vestibulandos.vestibular_id', '=', 'fac_vestibulares.id')
+            ->where('fac_vestibulandos.id', $idVestibulando)
             ->where("fac_cursos.ativo", 1)
-            ->where('fac_curriculos.ativo', 1)
-            ->whereIn('fac_cursos.id', function ($query) use ($value) {
-                # recuperando o vestibulando
-                $vestibulando = \DB::table('fac_vestibulandos')
-                    ->select([
-                        'fac_vestibulandos.primeira_opcao_curso_id as pOpacao',
-                        'fac_vestibulandos.segunda_opcao_curso_id as sOpcao',
-                        'fac_vestibulandos.terceira_opcao_curso_id as tOpcao'
-                    ])
-                    ->where('fac_vestibulandos.id', $value)->get();
+            ->where('fac_curriculos.ativo', 1);
 
-
-                # query principal
-                $query->from('fac_cursos')
-                    ->whereIn('fac_cursos.id', [$vestibulando[0]->pOpacao, $vestibulando[0]->sOpcao, $vestibulando[0]->tOpcao])
-                    ->select([
-                        'fac_cursos.id'
-                    ]);
-            });
     }
 
     /**
