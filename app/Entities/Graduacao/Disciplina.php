@@ -26,12 +26,18 @@ class Disciplina extends Model implements Transformable
 		'tipo_nivel_sistema_id'
 	];
 
+	/**
+	 * @return $this
+	 */
     public function turmas()
     {
         return $this->belongsToMany(Turma::class, "fac_turmas_disciplinas", "disciplina_id", "turma_id")
-            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva', 'plano_ensino_id']);
+            ->withPivot(['id', 'turma_id', 'disciplina_id', 'plano_ensino_id']);
     }
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function planosEnsinos()
 	{
 		return $this->hasMany(PlanoEnsino::class, 'disciplina_id');

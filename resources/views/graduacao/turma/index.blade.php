@@ -115,7 +115,6 @@
     </div>
     @include('graduacao.turma.modal_disciplina')
     @include('graduacao.turma.modal_disciplina_store')
-    @include('graduacao.turma.modal_disciplina_edit')
     @include('graduacao.turma.modal_horario_store')
     @include('graduacao.turma.modal_horario_update')
     @include('graduacao.turma.modal_notas')
@@ -133,7 +132,6 @@
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina_store.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_disciplina_edit.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_delete.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/modal_horario_store.js')  }}"></script>

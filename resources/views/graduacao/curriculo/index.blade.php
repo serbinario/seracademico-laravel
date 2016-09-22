@@ -1,6 +1,7 @@
 @extends('menu')
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('/js/graduacao/curriculo/css/modal_eletivas.css') }}">
     <style type="text/css">
         .select2-close-mask{
             z-index: 2099;
@@ -19,12 +20,12 @@
         }
 
         td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-plus.png")}}) no-repeat center center;
+            background: url('{{asset("imagemgrid/icone-produto-plus.png")}}') no-repeat center center;
             cursor: pointer;
         }
 
         tr.details td.details-control {
-            background: url({{asset("imagemgrid/icone-produto-minus.png")}}) no-repeat center center;
+            background: url('{{asset("imagemgrid/icone-produto-minus.png")}}') no-repeat center center;
         }
     </style>
 @stop
@@ -87,12 +88,14 @@
     @include('graduacao.curriculo.modal_adicionar_disciplina')
     @include('graduacao.curriculo.modal_inserir_adicionar_disciplina')
     @include('graduacao.curriculo.modal_editar_adicionar_disciplina')
+    @include('graduacao.curriculo.modal_curriculos_eletivas')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_inserir_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_editar_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_curriculos_eletivas.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
@@ -132,6 +135,26 @@
 
             //mostrando a modal
             $("#modal-adicionar-disciplina-curriculo").modal({show:true});
+        });
+
+        // Evento para abrir a modal de adicionar disciplinas ao currículo
+        $(document).on("click", "#btnGraduacaoEletivaOfCurriculo", function () {
+            idCurriculo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            nomeCurriculo   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codigoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+
+            //Chmando a modal de adicionar disciplina
+            runTableDisciplinaEletiva(idCurriculo);
+
+            // Setando a descrição do modal
+            $('#ceNomeCurriculo').text(nomeCurriculo);
+            $('#ceCodigoCurriculo').text(codigoCurriculo);
+
+            //Ativando o botão de adicionar disciplina
+            $("#btnAdicionarOpcaoEletiva").prop("disabled", true);
+
+            //mostrando a modal
+            $("#modal-curriculo-eletiva").modal({show:true});
         });
     </script>
 @stop
