@@ -26,8 +26,9 @@
                         <table id="disciplina-eletiva-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
+                                <th style="width: 5%;">Código</th>
                                 <th>Disciplina</th>
+                                <th style="width: 5%;">Período</th>
                             </tr>
                             </thead>
                         </table>

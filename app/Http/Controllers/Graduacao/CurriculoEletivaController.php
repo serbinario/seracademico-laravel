@@ -44,7 +44,8 @@ class CurriculoEletivaController extends Controller
             ->select([
                 'fac_curriculo_disciplina.id',
                 'fac_disciplinas.nome',
-                'fac_disciplinas.codigo'
+                'fac_disciplinas.codigo',
+                'fac_curriculo_disciplina.periodo'
             ]);
 
         #Editando a grid

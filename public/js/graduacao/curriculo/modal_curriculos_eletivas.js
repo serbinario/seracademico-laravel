@@ -11,7 +11,8 @@ function loadTableDisciplinaEletiva (idCurriculo) {
         ajax: "/index.php/seracademico/graduacao/curriculo/eletiva/grid/" + idCurriculo,
         columns: [
             {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'}
+            {data: 'nome', name: 'fac_disciplinas.nome'},
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'},
         ]
     });
 
@@ -31,7 +32,7 @@ function runTableOpcoesEletivas (idCurriculoDisciplinaEletiva) {
         ajax: "/index.php/seracademico/graduacao/curriculo/eletiva/gridOpcoesEletivas/" + idCurriculoDisciplinaEletiva,
         columns: [
             {data: 'semestre', name: 'fac_semestres.nome'},
-            {data: 'disciplina', name: 'fac_calendarios.nome'},
+            {data: 'disciplina', name: 'fac_disciplina.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
