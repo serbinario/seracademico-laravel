@@ -368,7 +368,7 @@ class CurriculoAlunoController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Variável que armazenará o html
-            $html = '<a class="btn-floating" id="btnAttachEletiva" title="Adicionar disciplina eletiva"><i class="material-icons">add-to-photos</i></a>';
+            $html = '';
 
             # Recuperando os registros da validação
             $rowsNotas = \DB::table('fac_alunos_notas')
@@ -379,6 +379,7 @@ class CurriculoAlunoController extends Controller
 
             # Validando se veio registro
             if($row->id && count($rowsNotas) == 0) {
+                $html .= '<a class="btn-floating" id="btnAttachEletiva" title="Adicionar disciplina eletiva"><i class="material-icons">add-to-photos</i></a>';
                 $html .= '<a class="btn-floating" id="btnDetachEletiva" title="Remover disciplina adicionada"><i class="material-icons">cancel</i></a>';
             }
 
