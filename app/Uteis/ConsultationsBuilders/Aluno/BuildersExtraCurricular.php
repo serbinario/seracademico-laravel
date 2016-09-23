@@ -194,6 +194,7 @@ class BuildersExtraCurricular
         #Criando a consulta
         $rows = \DB::table('fac_alunos_semestres_eletivas')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
+            ->join('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_alunos_semestres_eletivas.disciplina_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
@@ -223,7 +224,7 @@ class BuildersExtraCurricular
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
-                'fac_disciplinas.codigo',
+                'eletiva.codigo',
                 'fac_disciplinas.carga_horaria',
                 'fac_disciplinas.qtd_falta',
                 'fac_disciplinas.qtd_credito',
@@ -248,6 +249,7 @@ class BuildersExtraCurricular
         #Criando a consulta
         $rows = \DB::table('fac_alunos_semestres_eletivas')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
+            ->join('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_alunos_semestres_eletivas.disciplina_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
@@ -269,7 +271,7 @@ class BuildersExtraCurricular
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
-                'fac_disciplinas.codigo',
+                'eletiva.codigo',
                 'fac_disciplinas.carga_horaria',
                 'fac_disciplinas.qtd_falta',
                 'fac_disciplinas.qtd_credito',
@@ -298,6 +300,7 @@ class BuildersExtraCurricular
         #Criando a consulta
         $rows = \DB::table('fac_alunos_semestres_eletivas')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_semestres_eletivas.disciplina_eletiva_id')
+            ->join('fac_disciplinas as eletiva', 'eletiva.id', '=', 'fac_alunos_semestres_eletivas.disciplina_id')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
@@ -327,7 +330,7 @@ class BuildersExtraCurricular
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
-                'fac_disciplinas.codigo',
+                'eletiva.codigo',
                 'fac_disciplinas.carga_horaria',
                 'fac_disciplinas.qtd_falta',
                 'fac_curriculo_disciplina.periodo',
