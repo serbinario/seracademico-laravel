@@ -186,6 +186,8 @@ class BuildersExtraCurricular
     }
 
     /**
+     * Método que cria a query de eletivas a cursar
+     *
      * @param $idAluno
      * @return mixed
      */
