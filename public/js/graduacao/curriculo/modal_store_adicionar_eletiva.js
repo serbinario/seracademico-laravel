@@ -24,7 +24,7 @@ function loadFieldsOpcaoEletiva()
     }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
         if(retorno['graduacao\\curriculo'].length > 0 && retorno['graduacao\\semestre'].length > 0) {
-            builderHtmlFields(retorno);
+            builderHtmlFieldsOpcaoEletiva(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal("Desculpe não existe semestres ou disciplinas disponíveis", "Click no botão abaixo!", "error");
@@ -34,7 +34,7 @@ function loadFieldsOpcaoEletiva()
 };
 
 // Função a montar o html
-function builderHtmlFields (dados) {
+function builderHtmlFieldsOpcaoEletiva (dados) {
     // limpando os campos
     $("#semestre_eletiva_id").find("option").prop("selected", true);
     $("#disciplina_opcao_eletiva_id").find("option").remove();
