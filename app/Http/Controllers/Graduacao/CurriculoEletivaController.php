@@ -65,10 +65,10 @@ class CurriculoEletivaController extends Controller
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_eletivas_disciplinas.disciplina_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_eletivas_semestres.semestre_id')
             ->select([
-                    'fac_eletivas_semestres.id',
+                    'fac_eletivas_disciplinas.id',
                     'fac_semestres.nome as semestre',
                     'fac_disciplinas.nome as disciplina',
-                    'fac_disciplinas.nome as idDisciplina',
+                    'fac_disciplinas.id as idDisciplina',
                     'fac_curriculos.id as idCurriculo'
                 ])
             ->where('fac_curriculo_disciplina.id', $idCurriculoDisciplinaEletiva);
@@ -80,8 +80,15 @@ class CurriculoEletivaController extends Controller
 
             # Recuperando as eletivas que tem alunos matriculados
             $rowsEletivasEmUso = \DB::table('fac_alunos_semestres_eletivas')
-                ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
-                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_eletivas.aluno_semestre_id')
+                ->join('fac_alunos_cursos', function ($join) {
+                    $join->on(
+                        'fac_alunos_cursos.id', '=',
+                        \DB::raw('(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = fac_alunos_semestres.aluno_id ORDER BY curso_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_alunos_cursos.curriculo_id')
                 ->select(['fac_alunos_semestres_eletivas.disciplina_eletiva_id'])
                 ->where('fac_curriculos.id', $row->idCurriculo)
                 ->where('fac_alunos_semestres_eletivas.disciplina_eletiva_id', $row->idDisciplina)

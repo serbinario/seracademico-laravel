@@ -32,12 +32,32 @@
                             </thead>
                         </table>
                     </div>
+
                     <div class="col-md-7">
                         <span class="sbtable">
                             <button class="btn-floating" id="btnAdicionarOpcaoEletiva" title="Adicionar opções de eletiva"><i class="material-icons">alarm_add</i></button>
                         </span>
 
                         <h4>Opções da Eletiva</h4>
+
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<form id="search-form" class="form-inline" role="form" method="GET">--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--{!! Form::select('semestreEletivaSearch', [], null, array('class' => 'form-control')) !!}--}}
+                                    {{--</div>--}}
+
+                                   {{-- <div class="form-group">--}}
+                                        {{--{!! Form::select('disciplinaEletivaSearch', (['' => 'Todos os Vestibulandos', 0 => 'Não Pagos', 1 => 'Pagos'] ), null, array('class' => 'form-control')) !!}--}}
+                                    {{--</div>--}}
+
+
+                                    {{--<div class="form-group">--}}
+                                        {{--<button class="btn-sm btn-primary" type="submit">Pesquisar</button>--}}
+                                    {{--</div>--}}
+                                {{--</form>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <hr class="hr-dashline">
                         <table id="opcoes-eletivas-grid" class="display table table-bordered" cellspacing="0" width="100%">
