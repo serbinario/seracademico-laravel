@@ -200,15 +200,18 @@ class Disciplina extends Model implements Transformable
 	 * @param $idAluno
 	 * @return mixed
 	 */
-	public function scopeLessCurriculo($query, $idCurriculo)
+	public function scopeDisciplinasEletivasByCurriculo($query, $idCurriculo, $idCurriculoEletiva)
 	{
 		return $query
-			->whereNotIn('fac_disciplinas.id', function ($where) use ($idCurriculo) {
+			->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+			->whereNotIn('fac_disciplinas.id', function ($where) use ($idCurriculoEletiva) {
 				$where->from('fac_curriculo_disciplina')
 					->select('fac_curriculo_disciplina.disciplina_id')
 					->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
-                    ->where('fac_curriculos.id', $idCurriculo);
+                    ->where('fac_curriculos.id', $idCurriculoEletiva);
 			})
+			->where('fac_curriculos.id', $idCurriculo)
 			->select([
 				'fac_disciplinas.id',
 				'fac_disciplinas.nome',

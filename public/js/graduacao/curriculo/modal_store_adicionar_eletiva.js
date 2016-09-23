@@ -10,7 +10,8 @@ function loadFieldsOpcaoEletiva()
     var dados =  {
         'models' : [
             'Graduacao\\Semestre',
-            'Graduacao\\Disciplina|lessCurriculo,' + idCurriculo
+            'Graduacao\\Curriculo|notById,' + idCurriculo
+           // 'Graduacao\\Disciplina|lessCurriculo,' + idCurriculo
         ]
     };
 
@@ -22,11 +23,11 @@ function loadFieldsOpcaoEletiva()
         datatype: 'json'
     }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
-        if(retorno['graduacao\\disciplina'].length > 0) {
+        if(retorno['graduacao\\curriculo'].length > 0 && retorno['graduacao\\semestre'].length > 0) {
             builderHtmlFields(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
-            swal("Desculpe não existe disciplinas disponíveis", "Click no botão abaixo!", "error");
+            swal("Desculpe não existe semestres ou disciplinas disponíveis", "Click no botão abaixo!", "error");
             $('#modal-store-adicinar-eletiva').modal('toggle');
         }
     });
@@ -36,25 +37,25 @@ function loadFieldsOpcaoEletiva()
 function builderHtmlFields (dados) {
     // limpando os campos
     $("#semestre_eletiva_id").find("option").prop("selected", true);
-    $("#disciplina_opcao_eletiva_id").find("option").prop("selected", true);
+    $("#disciplina_opcao_eletiva_id").find("option").remove();
 
     // Variáveis que armazenaram o html
     var htmlSemestre    = "<option value=''>Selecione um semestre</option>";
-    var htmlDisciplina  = "<option value=''>Selecione uma eletiva</option>";
+    var htmlCurriculo   = "<option value=''>Selecione um Currículo</option>";
 
     // Percorrendo o array de disciplina
-    for (var i = 0; i < dados['graduacao\\disciplina'].length; i++) {
-        htmlDisciplina += "<option value='" + dados['graduacao\\disciplina'][i].id + "'>" + dados['graduacao\\disciplina'][i].nome + "</option>";
-    }
-
-    // Percorrendo o array de semestres
     for (var i = 0; i < dados['graduacao\\semestre'].length; i++) {
         htmlSemestre += "<option value='" + dados['graduacao\\semestre'][i].id + "'>" + dados['graduacao\\semestre'][i].nome + "</option>";
     }
 
+    // Percorrendo o array de semestres
+    for (var i = 0; i < dados['graduacao\\curriculo'].length; i++) {
+        htmlCurriculo += "<option value='" + dados['graduacao\\curriculo'][i].id + "'>" + dados['graduacao\\curriculo'][i].nome + "</option>";
+    }
+
     // carregando o html
-    $("#disciplina_opcao_eletiva_id option").remove();
-    $("#disciplina_opcao_eletiva_id").append(htmlDisciplina);
+    $("#curriculo_eletiva_id option").remove();
+    $("#curriculo_eletiva_id").append(htmlCurriculo);
     $("#semestre_eletiva_id option").remove();
     $("#semestre_eletiva_id").append(htmlSemestre);
 
@@ -105,5 +106,44 @@ $(document).on('click', '#btnRemoveOpcaoEletiva', function () {
     }).done(function (retorno) {
         tableOpcoesEletivas.ajax.reload();
         swal(retorno.msg, "Click no botão abaixo!", "success");
+    });
+});
+
+// Evento para quando mudar a option do curriculo
+$(document).on('change', '#curriculo_eletiva_id', function () {
+    var curriculoId = $(this).val();
+
+    // Definindo os models
+    var dados =  {
+        'models' : [
+            'Graduacao\\Disciplina|disciplinasEletivasByCurriculo,' + curriculoId + ',' + idCurriculo
+        ]
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: dados,
+        url: '/index.php/seracademico/graduacao/curriculo/getLoadFields',
+        datatype: 'json'
+    }).done(function (retorno) {// validado as disciplinas do currículo
+        // Verificando o retorno da requisição
+        if(retorno['graduacao\\disciplina'].length > 0) {
+            // Variável que armazenará o html
+            var htmlDisciplina = '';
+
+            // Percorrendo o array de disciplina
+            for (var i = 0; i < retorno['graduacao\\disciplina'].length; i++) {
+                htmlDisciplina += "<option value='" + retorno['graduacao\\disciplina'][i].id + "'>" + retorno['graduacao\\disciplina'][i].nome + "</option>";
+            }
+
+            // Carregando o html
+            $("#disciplina_opcao_eletiva_id option").remove();
+            $("#disciplina_opcao_eletiva_id").append(htmlDisciplina);
+        } else {
+            // Retorno caso não tenha currículo em uma turma ou algum erro
+            swal("Desculpe não existe disciplinas disponíveis", "Click no botão abaixo!", "error");
+            //$('#modal-store-adicinar-eletiva').modal('toggle');
+        }
     });
 });

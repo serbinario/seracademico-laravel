@@ -134,7 +134,13 @@ class CurriculoService
     }
 
     /**
-     * @param array $models
+     * Método load
+     *
+     * Método responsável por recuperar todos os models (com seus repectivos
+     * métodos personalizados para consulta, se for o caso) do array passado
+     * por parâmetro.
+     *
+     * @param array $models || Melhorar esse código
      * @return array
      */
     public function load(array $models, $ajax = false) : array
@@ -158,20 +164,45 @@ class CurriculoService
             $nameModel = "\\Seracademico\\Entities\\$model";
 
             #Verificando se existe sobrescrita do nome do model
-            $model     = isset($expressao[2]) ? $expressao[2] : $model;
+            //$model     = isset($expressao[2]) ? $expressao[2] : $model;
 
             if ($ajax) {
-                if(count($expressao) > 1) {
-                    #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                    }
+
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
                 }
             } else {
-                if(count($expressao) > 1) {
-                    #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                    }
                 } else {
                     #Recuperando o registro e armazenando no array
                     $result[strtolower($model)] = $nameModel::lists('nome', 'id');
@@ -356,7 +387,8 @@ class CurriculoService
     public function storeOpcaoEletiva(array $data)
     {
         # Validando os parâmetros de entrada
-        if(!isset($data['semestre_eletiva_id']) && !isset($data['disciplina_eletiva_id'])) {
+        if((!isset($data['semestre_eletiva_id']) || empty($data['semestre_eletiva_id']))
+            || (!isset($data['disciplina_eletiva_id']) || empty($data['disciplina_eletiva_id']))) {
             throw new \Exception('Você deve informa o semestre e a disciplina');
         }
 

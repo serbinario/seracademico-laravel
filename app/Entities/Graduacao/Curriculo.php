@@ -146,4 +146,13 @@ class Curriculo extends Model implements Transformable
             })
             ->where('tipo_nivel_sistema_id', 1);
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeNotById($query, $idCurriculo)
+    {
+        return $query->whereNotIn('id', [$idCurriculo])->where('tipo_nivel_sistema_id', 1);
+    }
 }

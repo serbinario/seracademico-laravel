@@ -176,13 +176,13 @@
                                     <thead>
                                     <tr>
                                         <th>Período</th>
-                                        <th>Cod. Disciplina</th>
-                                        <th>Disciplina</th>
+                                        <th>Cod. Eletiva</th>
+                                        <th>Eletiva</th>
                                         <th>C. Horária</th>
                                         <th>Créditos</th>
                                         <th>Currículo</th>
-                                        <th>Cod. Eletiva</th>
-                                        <th>Curriculo Eletiva</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Curriculo Disciplina</th>
                                         <th>Ação</th>
                                     </tr>
                                     </thead>

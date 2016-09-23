@@ -18,6 +18,14 @@
 
                       <div class="row">
                           <div class="form-group col-md-12">
+                              <label for="curriculo_eletiva_id">Currículo</label>
+                              <select name="curriculo_eletiva_id" class="form-control" id="curriculo_eletiva_id">
+                              </select>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="form-group col-md-12">
                               <label for="disciplina_opcao_eletiva_id">Disciplina</label>
                               <select name="disciplina_opcao_eletiva_id" class="form-control" id="disciplina_opcao_eletiva_id">
                               </select>
