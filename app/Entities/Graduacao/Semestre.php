@@ -25,6 +25,14 @@ class Semestre extends Model implements Transformable
         return $this->belongsToMany(Aluno::class, 'fac_alunos_semestres', 'semestre_id', 'aluno_id')
             ->withPivot(['id', 'periodo']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function eletivasOfCurriculo()
+    {
+        return $this->belongsToMany(PivotCurriculoDisciplina::class, 'fac_eletivas_semestres', 'semestre_id', 'curriculo_disciplina_id');
+    }
     
     /**
      * @param Model $parent
@@ -37,6 +45,10 @@ class Semestre extends Model implements Transformable
     {
         if ($parent instanceof Aluno) {
             return new PivotAlunoSemestre($parent, $attributes, $table, $exists);
+        }
+
+        if($parent instanceof PivotCurriculoDisciplina) {
+            return new EletivaSemestre($parent, $attributes, $table, $exists);
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);

@@ -358,6 +358,7 @@ class CurriculoAlunoController extends Controller
                 'fac_curriculo_disciplina.qtd_credito',
                 'fac_curriculo_disciplina.periodo',
                 'fac_curriculos.codigo as codigoCurriculo',
+                'fac_curriculo_disciplina.id as idCurriculoDisciplinaEletiva',
                 'eletiva.codigo as codigoEletiva',
                 'eletiva.id as disciplinaEletivaId',
                 'curriculoEletiva.codigo as codigoCurriculoEletiva',

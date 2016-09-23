@@ -30,12 +30,4 @@ class TurmaDisciplina extends Pivot implements Transformable
     {
         return $this->hasMany(DiarioAula::class, 'turma_disciplina_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function semestresEletivas()
-    {
-        return $this->belongsToMany(Semestre::class, 'fac_eletivas_semestres', 'turma_disciplina_id', 'semestre_id');
-    }
 }

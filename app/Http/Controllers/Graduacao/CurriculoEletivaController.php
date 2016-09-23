@@ -59,21 +59,41 @@ class CurriculoEletivaController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('fac_curriculo_disciplina')
-            ->join('fac_eletivas_semestres', 'fac_eletivas_semestres.turma_disciplina_id', '=', 'fac_curriculo_disciplina.id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+            ->join('fac_eletivas_semestres', 'fac_eletivas_semestres.curriculo_disciplina_id', '=', 'fac_curriculo_disciplina.id')
             ->join('fac_eletivas_disciplinas', 'fac_eletivas_disciplinas.eletiva_semestre_id', '=', 'fac_eletivas_semestres.id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_eletivas_disciplinas.disciplina_id')
             ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_eletivas_semestres.semestre_id')
             ->select([
                     'fac_eletivas_semestres.id',
                     'fac_semestres.nome as semestre',
-                    'fac_disciplinas.nome as disciplina'
+                    'fac_disciplinas.nome as disciplina',
+                    'fac_disciplinas.nome as idDisciplina',
+                    'fac_curriculos.id as idCurriculo'
                 ])
             ->where('fac_curriculo_disciplina.id', $idCurriculoDisciplinaEletiva);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Html de retono
+            $html = '';
+
+            # Recuperando as eletivas que tem alunos matriculados
+            $rowsEletivasEmUso = \DB::table('fac_alunos_semestres_eletivas')
+                ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_alunos_semestres_eletivas.turma_id')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->select(['fac_alunos_semestres_eletivas.disciplina_eletiva_id'])
+                ->where('fac_curriculos.id', $row->idCurriculo)
+                ->where('fac_alunos_semestres_eletivas.disciplina_eletiva_id', $row->idDisciplina)
+            ->get();
+
+            # Verificando se algum registro foi encontrado
+            if(count($rowsEletivasEmUso) == 0) {
+                $html .= '<a class="btn-floating indigo" id="btnRemoveOpcaoEletiva" title="Editar Currículo"><i class="material-icons">delete</i></a>';
+            }
+
             # Retorno
-            return '<a class="btn-floating indigo" href="deleteOpcaoEletiva/'.$row->id.'" title="Editar Currículo"><i class="material-icons">delete</i></a>';
+            return $html;
         })->make(true);
     }
 
@@ -91,9 +111,9 @@ class CurriculoEletivaController extends Controller
             $this->service->storeOpcaoEletiva($data);
 
             #retorno sucesso
-            return response()->json(['sucess' => true, 'msg' => "Opção cadastrada com sucesso!"]);
+            return response()->json(['success' => true, 'msg' => "Opção cadastrada com sucesso!"]);
         } catch (\Throwable $e) {
-            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
 

@@ -77,6 +77,7 @@ class AlunoDisciplinaEletivaService
     /**
      * @param $id
      * @return mixed
+     * @throws \Exception
      */
     private function getTurmaDisciplina($id)
     {
@@ -91,7 +92,7 @@ class AlunoDisciplinaEletivaService
         }
 
         # Retorno
-        return $row;
+        return $row[0];
     }
 
     /**

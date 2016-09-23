@@ -44,7 +44,6 @@
                             <thead>
                             <tr>
                                 <th>Semestre</th>
-                                <th>Curso</th>
                                 <th>Disciplina</th>
                                 <th>Ação</th>
                             </tr>

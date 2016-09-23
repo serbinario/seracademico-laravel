@@ -162,11 +162,20 @@ class Disciplina extends Model implements Transformable
 	 * @param $query
 	 * @return mixed
 	 */
-	public function scopeEletiva($query, $idAluno)
+	public function scopeEletiva($query, $idAluno, $idCurriculoDisciplinEletiva)
 	{
 		return $query
 			->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-			->where('fac_turmas_disciplinas.eletiva', 1)
+			->whereIn('fac_disciplinas.id', function ($where) use ($idCurriculoDisciplinEletiva) {
+                $where->from('fac_curriculo_disciplina')
+                    ->join('fac_eletivas_semestres', 'fac_eletivas_semestres.curriculo_disciplina_id', '=', 'fac_curriculo_disciplina.id')
+                    ->join('fac_eletivas_disciplinas', 'fac_eletivas_disciplinas.eletiva_semestre_id', '=', 'fac_eletivas_semestres.id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_eletivas_disciplinas.disciplina_id')
+                    ->where('fac_curriculo_disciplina.id', $idCurriculoDisciplinEletiva)
+                    ->select([
+                        'fac_disciplinas.id'
+                    ]);
+            })
             ->whereNotIn('fac_disciplinas.id', function ($where) use ($idAluno) {
                 $where->from('fac_curriculo_disciplina')
                     ->select('fac_curriculo_disciplina.disciplina_id')
@@ -183,6 +192,26 @@ class Disciplina extends Model implements Transformable
 				'fac_turmas_disciplinas.id',
 				'fac_disciplinas.nome',
 				'fac_disciplinas.codigo'
+			]);
+	}
+
+	/**
+	 * @param $query
+	 * @param $idAluno
+	 * @return mixed
+	 */
+	public function scopeLessCurriculo($query, $idCurriculo)
+	{
+		return $query
+			->whereNotIn('fac_disciplinas.id', function ($where) use ($idCurriculo) {
+				$where->from('fac_curriculo_disciplina')
+					->select('fac_curriculo_disciplina.disciplina_id')
+					->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->where('fac_curriculos.id', $idCurriculo);
+			})
+			->select([
+				'fac_disciplinas.id',
+				'fac_disciplinas.nome',
 			]);
 	}
 }

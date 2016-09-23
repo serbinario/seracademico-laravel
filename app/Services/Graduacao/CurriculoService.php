@@ -347,4 +347,66 @@ class CurriculoService
         #retorno
         return $disciplina;
     }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function storeOpcaoEletiva(array $data)
+    {
+        # Validando os parâmetros de entrada
+        if(!isset($data['semestre_eletiva_id']) && !isset($data['disciplina_eletiva_id'])) {
+            throw new \Exception('Você deve informa o semestre e a disciplina');
+        }
+
+        # Validando os parâmetros de entrada interno
+        if(!isset($data['curriculo_disciplina_id'])) {
+            throw new \Exception('Parêmetros inválidos');
+        }
+
+        # Recuperando o id do curriculo e disciplina
+        $rowCurriculoDisciplina = \DB::table('fac_curriculo_disciplina')
+            ->select(['curriculo_id', 'disciplina_id'])
+            ->where('id', $data['curriculo_disciplina_id'])->get();
+
+        # Validando resultado da pesquisa
+        if(count($rowCurriculoDisciplina) !== 1) {
+            throw new \Exception('Disciplina eletiva não encontrada');
+        }
+
+        # Recuperando o curriculo
+        $curriculo = $this->repository->find($rowCurriculoDisciplina[0]->curriculo_id);
+
+        # Recuperando o semestre
+        $semestre  = $curriculo->disciplinas()->find($rowCurriculoDisciplina[0]->disciplina_id)->pivot->semestres()->find($data['semestre_eletiva_id']);
+
+        # Verificando se o semestre foi retornado
+        if(!$semestre) {
+            # Salvando o semestre da eletiva
+            $curriculo->disciplinas()->find($rowCurriculoDisciplina[0]->disciplina_id)->pivot->semestres()->attach($data['semestre_eletiva_id']);
+            $semestre  = $curriculo->disciplinas()->find($rowCurriculoDisciplina[0]->disciplina_id)->pivot->semestres()->find($data['semestre_eletiva_id']);
+        }
+
+        # Salvando a disciplina eletiva no semestre
+        $semestre->pivot->disciplinasEletivas()->attach($data['disciplina_eletiva_id']);
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteOpcaoEletiva(int $id)
+    {
+        # Recuperando o id do curriculo e disciplina
+       \DB::table('fac_eletivas_disciplinas')
+            ->select(['id'])
+            ->where('id', $id)->delete();
+
+        # Retorno
+        return true;
+    }
 }

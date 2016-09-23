@@ -57,7 +57,11 @@ $(document).on('click', '#disciplina-eletiva-grid tbody tr', function () {
         indexRowSelectedDisciplinaEletiva =  $(this).index();
 
         // Executando a grid de opcoes de eletivas
-        runTableOpcoesEletivas(idCurriculoDisciplinaEletiva).ajax.url( "/index.php/seracademico/graduacao/curriculo/eletiva/gridOpcoesEletivas/" + idCurriculoDisciplinaEletiva).load();
+        if(!tableOpcoesEletivas) {
+            runTableOpcoesEletivas(idCurriculoDisciplinaEletiva);
+        } else {
+            runTableOpcoesEletivas(idCurriculoDisciplinaEletiva).ajax.url( "/index.php/seracademico/graduacao/curriculo/eletiva/gridOpcoesEletivas/" + idCurriculoDisciplinaEletiva).load();
+        }
     }
 });
 

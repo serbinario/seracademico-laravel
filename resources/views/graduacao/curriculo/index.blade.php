@@ -89,6 +89,7 @@
     @include('graduacao.curriculo.modal_inserir_adicionar_disciplina')
     @include('graduacao.curriculo.modal_editar_adicionar_disciplina')
     @include('graduacao.curriculo.modal_curriculos_eletivas')
+    @include('graduacao.curriculo.modal_store_adicionar_eletiva')
 @stop
 
 @section('javascript')
@@ -96,6 +97,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_inserir_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_editar_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_curriculos_eletivas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/curriculo/modal_store_adicionar_eletiva.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
