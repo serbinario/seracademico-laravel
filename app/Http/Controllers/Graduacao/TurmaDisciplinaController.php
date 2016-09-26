@@ -62,7 +62,7 @@ class TurmaDisciplinaController extends Controller
             ])
             ->where('fac_turmas.id', '=', $idTurma);
 
-        #Editando a grid
+        #Editando a grid <a title="Editar Disciplina" id="btnEditarDisciplina"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html  = '';
 
@@ -71,7 +71,7 @@ class TurmaDisciplinaController extends Controller
             $turmaDisciplina = $disciplina->pivot;
 
             if(count($turmaDisciplina->horarios) == 0) {
-                $html = '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
+                $html .= '<a title="Remover Disciplina" id="removerDisciplina"  href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
             }
 
             return $html;

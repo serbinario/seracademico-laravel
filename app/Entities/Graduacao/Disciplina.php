@@ -26,12 +26,18 @@ class Disciplina extends Model implements Transformable
 		'tipo_nivel_sistema_id'
 	];
 
+	/**
+	 * @return $this
+	 */
     public function turmas()
     {
         return $this->belongsToMany(Turma::class, "fac_turmas_disciplinas", "disciplina_id", "turma_id")
-            ->withPivot(['id', 'turma_id', 'disciplina_id', 'eletiva_id', 'plano_ensino_id']);
+            ->withPivot(['id', 'turma_id', 'disciplina_id', 'plano_ensino_id']);
     }
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function planosEnsinos()
 	{
 		return $this->hasMany(PlanoEnsino::class, 'disciplina_id');
@@ -140,5 +146,75 @@ class Disciplina extends Model implements Transformable
                     where curso_atual.aluno_id = $value and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
 				);
 			});
+	}
+
+	/**
+	 * @param $query
+	 * @param $id
+	 * @return mixed
+	 */
+	public function scopeGetId($query, $id)
+	{
+		return $query->where('id', $id);
+	}
+
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeEletiva($query, $idAluno, $idCurriculoDisciplinEletiva)
+	{
+		return $query
+			->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+			->whereIn('fac_disciplinas.id', function ($where) use ($idCurriculoDisciplinEletiva) {
+                $where->from('fac_curriculo_disciplina')
+                    ->join('fac_eletivas_semestres', 'fac_eletivas_semestres.curriculo_disciplina_id', '=', 'fac_curriculo_disciplina.id')
+                    ->join('fac_eletivas_disciplinas', 'fac_eletivas_disciplinas.eletiva_semestre_id', '=', 'fac_eletivas_semestres.id')
+                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_eletivas_disciplinas.disciplina_id')
+                    ->where('fac_curriculo_disciplina.id', $idCurriculoDisciplinEletiva)
+                    ->select([
+                        'fac_disciplinas.id'
+                    ]);
+            })
+            ->whereNotIn('fac_disciplinas.id', function ($where) use ($idAluno) {
+                $where->from('fac_curriculo_disciplina')
+                    ->select('fac_curriculo_disciplina.disciplina_id')
+                    ->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                        $join->on(
+                            'fac_alunos_cursos.id', '=',
+                            \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                            where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                        );
+                    });
+            })
+			->select([
+				'fac_turmas_disciplinas.id',
+				'fac_disciplinas.nome',
+				'fac_disciplinas.codigo'
+			]);
+	}
+
+	/**
+	 * @param $query
+	 * @param $idAluno
+	 * @return mixed
+	 */
+	public function scopeDisciplinasEletivasByCurriculo($query, $idCurriculo, $idCurriculoEletiva)
+	{
+		return $query
+			->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+			->whereNotIn('fac_disciplinas.id', function ($where) use ($idCurriculoEletiva) {
+				$where->from('fac_curriculo_disciplina')
+					->select('fac_curriculo_disciplina.disciplina_id')
+					->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+                    ->where('fac_curriculos.id', $idCurriculoEletiva);
+			})
+			->where('fac_curriculos.id', $idCurriculo)
+			->select([
+				'fac_disciplinas.id',
+				'fac_disciplinas.nome',
+			]);
 	}
 }

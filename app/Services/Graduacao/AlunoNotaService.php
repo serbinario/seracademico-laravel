@@ -142,8 +142,7 @@ class AlunoNotaService
         # Recuperando o id de alunos notas
         $row = \DB::table('fac_alunos_notas')
             ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_alunos_notas.turma_disciplina_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
             ->where('fac_disciplinas.id', $idDisciplina)
             ->where('fac_alunos_semestres.aluno_id', $idAluno)
             ->where('fac_alunos_semestres.semestre_id', $idSemestre)

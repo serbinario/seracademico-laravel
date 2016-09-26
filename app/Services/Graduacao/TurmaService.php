@@ -437,12 +437,11 @@ class TurmaService
         # Recuperando os parametros da requisição
         $idTurma      = $data['idTurma'];
         $idDisciplina = $data['disciplina_id'];
-       // $idEletiva    = (isset($data['eletiva_id']) &&  is_numeric($data['eletiva_id'])) ? $data['eletiva_id'] : null;
+        $eletiva      = (isset($data['eletiva'])) ? $data['eletiva'] : 0;
 
         # Recuperando a turma e a disciplina
         $objTurma      = $this->repository->find($idTurma);
         $objDisciplina = $this->disciplinaRepository->find($idDisciplina);
-        //$objEletiva    = $this->disciplinaRepository->find($idEletiva);
 
         # Verificando se foi encontrada uma turma e disciplina
         if(!$objTurma && !$objDisciplina) {
@@ -475,7 +474,7 @@ class TurmaService
         }
 
         #Incluindo e salvando a disciplina
-        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino]);
+        $objTurma->disciplinas()->attach($objDisciplina->id, ['plano_ensino_id' => $planoEnsino, 'eletiva' => $eletiva]);
         $objTurma->save();
 
         #Retorno

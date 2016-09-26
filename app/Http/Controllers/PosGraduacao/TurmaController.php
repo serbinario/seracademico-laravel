@@ -194,7 +194,7 @@ class TurmaController extends Controller
                 ->where('fac_cursos.id', $idCurso)
                 ->select([
                     'fac_turmas.id',
-                    'fac_turmas.descricao'
+                    'fac_turmas.codigo'
                 ])->get();
 
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);

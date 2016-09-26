@@ -16,13 +16,15 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="eletiva_id">Eletiva</label>
-                                <select name="eletiva_id" class="form-control" id="eletiva_id">
-                                </select>
-                            </div>
-                        </div>
+                        {{--<div class="row">--}}
+                            {{--<div class="form-group col-md-12">--}}
+                                {{--<label for="eletiva">Eletiva</label>--}}
+                                {{--<select name="eletiva" class="form-control" id="eletiva">--}}
+                                    {{--<option value="0">Não</option>--}}
+                                    {{--<option value="1">Sim</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                 </div>
             </div>
             <div class="modal-footer">

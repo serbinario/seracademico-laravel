@@ -18,9 +18,9 @@ function loadTableDisciplina(idAluno)
         retrieve: true,
         ajax: "/index.php/seracademico/matricula/gridDisciplina/" + idAluno,
         columns: [
-            {data: 'codigo', name: 'fac_disciplinas.codigo'},
-            {data: 'nome', name: 'fac_disciplinas.nome'},
-            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo'}
+            {data: 'codigo', name: 'fac_disciplinas.codigo' , orderable: false},
+            {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
+            {data: 'periodo', name: 'fac_curriculo_disciplina.periodo', orderable: false}
         ]
     });
 }

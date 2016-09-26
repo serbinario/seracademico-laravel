@@ -78,7 +78,8 @@ class CurriculoController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
-                        <li><a class="grid-curricular btn-floating green" href="#" id="btnGraduacaoAddDisciplinaCurriculo" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
+                        <li><a class="btn-floating green" href="#" id="btnGraduacaoAddDisciplinaCurriculo" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
+                        <li><a class="btn-floating green" href="#" id="btnGraduacaoEletivaOfCurriculo" title="Gernciamento de Eletivas"><i class="material-icons">add_to_photos</i></a></li>
                     </ul>
                     </div>';
         })->make(true);

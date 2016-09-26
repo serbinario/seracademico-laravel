@@ -8,13 +8,13 @@
                 </div>
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label for="tipo_taxa_id">Tipo da taxa</label>
                             <select name="tipo_taxa_id" class="form-control" id="tipo_taxa_id">
                             </select>
                         </div>
 
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label for="taxa_id">Taxa</label>
                             <select name="taxa_id" class="form-control" id="taxa_id">
                             </select>
