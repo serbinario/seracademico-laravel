@@ -11,6 +11,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoDisciplinaEletivaService;
 use Seracademico\Services\Graduacao\AlunoDisciplinaExtraCurricularService;
 use Seracademico\Services\Graduacao\AlunoDisciplinaDispensadaService;
+use Seracademico\Services\Graduacao\AlunoEquivalenciaService;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Uteis\ConsultationsBuilders\Aluno\BuildersExtraCurricular;
 use Yajra\Datatables\Datatables;
@@ -37,22 +38,30 @@ class CurriculoAlunoController extends Controller
      */
     private $alunoDisciplinaEletivaService;
 
+     /**
+     * @var AlunoEquivalenciaService
+     */
+    private $alunoEquivalenciaService;
+
     /**
      * CurriculoAlunoController constructor.
      * @param AlunoService $service
      * @param AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService
      * @param AlunoDisciplinaExtraCurricularService $alunoDisciplinaExtraCurricularService
      * @param AlunoDisciplinaEletivaService $alunoDisciplinaEletivaService
+     * @param AlunoEquivalenciaService $alunoEquivalenciaService
      */
     public function __construct(AlunoService $service,
         AlunoDisciplinaDispensadaService $alunoDisciplinaDispensadaService,
         AlunoDisciplinaExtraCurricularService $alunoDisciplinaExtraCurricularService,
-        AlunoDisciplinaEletivaService $alunoDisciplinaEletivaService)
+        AlunoDisciplinaEletivaService $alunoDisciplinaEletivaService,
+        AlunoEquivalenciaService $alunoEquivalenciaService)
     {
         $this->alunoService = $service;
         $this->alunoDisciplinaDispensadaService = $alunoDisciplinaDispensadaService;
         $this->alunoDisciplinaExtraCurricularService = $alunoDisciplinaExtraCurricularService;
         $this->alunoDisciplinaEletivaService = $alunoDisciplinaEletivaService;
+        $this->alunoEquivalenciaService = $alunoEquivalenciaService;
     }
 
     /**
@@ -104,9 +113,17 @@ class CurriculoAlunoController extends Controller
                     ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
                     ->where('fac_alunos.id', $idAluno);
             })
+             ->whereNotIn('fac_disciplinas.id', function ($query) use ($idAluno) {
+                $query->from('fac_alunos_semestres_equivalencias')
+                    ->select('fac_alunos_semestres_equivalencias.disciplina_id')
+                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_semestres_equivalencias.aluno_semestre_id')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+                    ->where('fac_alunos.id', $idAluno);
+            })
             ->where('fac_alunos.id', $idAluno)
             ->union(BuildersExtraCurricular::getExtraCurricularACursar($idAluno))
             ->union(BuildersExtraCurricular::getEletivasACursar($idAluno))
+            ->union(BuildersExtraCurricular::getEquivalenciasACursar($idAluno))
             ->orderBy('periodo')
             ->select([
                 'fac_disciplinas.id',
@@ -158,6 +175,7 @@ class CurriculoAlunoController extends Controller
             ->whereIn('fac_situacao_nota.id', [10]) // Situação de cumprimento da disciplina
             ->union(BuildersExtraCurricular::getExtraCurricularCursando($idAluno))
             ->union(BuildersExtraCurricular::getEletivasCursando($idAluno))
+            ->union(BuildersExtraCurricular::getEquivalenciaCursando($idAluno))
             ->orderBy('periodo')
             ->select([
                 'fac_disciplinas.id',
@@ -388,6 +406,69 @@ class CurriculoAlunoController extends Controller
         })->make(true);
     }
 
+
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
+    public function gridEquivalencia($idAluno)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_disciplinas')
+            ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('fac_alunos_cursos', function ($join) use ($idAluno) {
+                $join->on(
+                    'fac_alunos_cursos.id', '=',
+                    \DB::raw("(SELECT curso_atual.id FROM fac_alunos_cursos as curso_atual
+                    where curso_atual.aluno_id = $idAluno and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+                );
+            })
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+            ->join('fac_alunos_semestres',  'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_alunos_semestres_equivalencias', 'fac_alunos_semestres_equivalencias.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_disciplinas as equivalente', 'equivalente.id', '=', 'fac_alunos_semestres_equivalencias.disciplina_equivalente_id')
+            ->join('fac_curriculos as curriculoEquivalencia', 'curriculoEquivalencia.id', '=', 'fac_alunos_semestres_equivalencias.curriculo_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->orderBy('fac_curriculo_disciplina.periodo')
+            ->select([    
+                'fac_alunos_semestres_equivalencias.id',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.codigo',
+                'fac_disciplinas.carga_horaria',
+                'fac_curriculo_disciplina.qtd_credito',
+                'fac_curriculo_disciplina.periodo',
+                'fac_curriculos.codigo as codigoCurriculo',
+                'equivalente.codigo as codigoEquivalencia',
+                'equivalente.id as disciplinaEquivalenteId',
+                'curriculoEquivalencia.codigo as codigoCurriculoEquivalencia',
+                'fac_alunos_semestres.id as aluno_semestre_id'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Variável que armazenará o html
+            $html = '';
+
+            # Recuperando os registros da validação
+            $rowsNotas = \DB::table('fac_alunos_notas')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_alunos_notas.disciplina_id')
+                ->where('fac_alunos_notas.aluno_semestre_id', $row->aluno_semestre_id)
+                ->where('fac_disciplinas.id', $row->disciplinaEquivalenteId)
+                ->select(['fac_disciplinas.id'])->get();
+
+            # Validando se veio registro
+            if($row->id && count($rowsNotas) == 0) {
+                $html .= '<a class="btn-floating" id="btnDeleteEquivalencia" title="Remover disciplina adicionada"><i class="material-icons">delete</i></a>';
+            }
+
+            # Retorno
+            return $html;
+        })->make(true);
+    }
+
     /**
      * @param Request $request
      * @return mixed
@@ -585,6 +666,44 @@ class CurriculoAlunoController extends Controller
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeEquivalencia(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+
+            # Persistindo os dados no banco de dados
+            $this->alunoEquivalenciaService->store($dados);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Dados cadastrados com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteEquivalencia($id)
+    {
+        try {
+            # Removendo do banco de dados
+            $this->alunoEquivalenciaService->delete($id);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Dados removidos com sucesso!']);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
         }

@@ -206,6 +206,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridDispensadas']);
                     Route::get('gridExtraCurricular/{idAluno}', ['as' => 'gridExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@gridExtraCurricular']);
                     Route::get('gridEletiva/{idAluno}', ['as' => 'gridEletiva', 'uses' => 'Graduacao\CurriculoAlunoController@gridEletiva']);
+                    Route::get('gridEquivalencia/{idAluno}', ['as' => 'gridEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@gridEquivalencia']);
                     Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@storeDispensada']);
                     Route::get('deleteDispensada/{id}', ['as' => 'deleteDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDispensada']);
                     Route::get('editDispensada/{id}', ['as' => 'editDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@editDispensada']);
@@ -215,6 +216,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'Graduacao\CurriculoAlunoController@getDisciplinasByCurriculo']);
                     Route::get('deleteDisciplinaExtraCurricular/{id}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDisciplinaExtraCurricular']);
                     Route::get('deleteDisciplinaEletiva/{id}', ['as' => 'deleteDisciplinaEletiva', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDisciplinaEletiva']);
+                    Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@storeEquivalencia']);
+                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@deleteEquivalencia']);
                 });
 
                 // Semestre do aluno
