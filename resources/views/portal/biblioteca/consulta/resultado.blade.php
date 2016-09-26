@@ -68,7 +68,11 @@
                             <div class="col s12">
                                 <div class="book-search">
                                     <a href="{{url("seachDetalhe/exemplar/$f->id")}}">
-                                        <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @if($f->path_image != null)
+                                            <img src="{{route('seracademico.biblioteca.getImg', ['id' => $f->id])}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @else
+                                            <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @endif
                                     </a>
                                 </div>
                             </div>
