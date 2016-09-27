@@ -31,7 +31,7 @@
 
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
-                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
         </div>
