@@ -50,9 +50,6 @@ function builderHtmlFieldsDisciplina (dados) {
     $("#disciplina_id option").remove();
     $("#disciplina_id").append(htmlDisciplina);
 
-    //$("#eletiva_id option").remove();
-    //$("#eletiva_id").append(htmlDisciplina);
-
     // Abrindo o modal de inserir disciplina
     $("#modal-disciplina-store").modal({show : true});
 };
@@ -60,12 +57,10 @@ function builderHtmlFieldsDisciplina (dados) {
 // Evento para salvar tabela de preços
 $('#btnSalvarDisciplinaTurma').click(function() {
     var disciplina_id = $("#disciplina_id").val();
-    var eletiva    = $("#eletiva").val();
 
     var dados = {
         'idTurma' : idTurma,
-        'disciplina_id': disciplina_id,
-        'eletiva': eletiva,
+        'disciplina_id': disciplina_id
     };
 
     jQuery.ajax({

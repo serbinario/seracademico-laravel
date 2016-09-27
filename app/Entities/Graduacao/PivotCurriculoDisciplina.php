@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Uteis\SerbinarioDateFormat;
+use Illuminate\Database\Eloquent\Model;
 
 class PivotCurriculoDisciplina extends Pivot implements Transformable
 {
@@ -82,5 +82,30 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
     public function coRequisito1()
     {
         return $this->belongsTo(Disciplina::class, 'co_requisito_1_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function semestres()
+    {
+        return $this->belongsToMany(Semestre::class, 'fac_eletivas_semestres', 'curriculo_disciplina_id', 'semestre_id')
+            ->withPivot(['id', 'curriculo_disciplina_id', 'semestre_id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return Pivot|EletivaSemestre
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Semestre) {
+            return new EletivaSemestre($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 }

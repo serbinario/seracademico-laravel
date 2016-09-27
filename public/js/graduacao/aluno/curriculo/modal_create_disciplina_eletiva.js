@@ -1,10 +1,11 @@
 // id da disciplina eletiva do currículo principal
-var idDisciplinaEletiva, idTurmaDisciplinaEletiva;
+var idDisciplinaEletiva, idTurmaDisciplinaEletiva, idCurriculoDisciplinaEletiva;
 
 // Evento para chamar o modal de adicionar matéria ao curso
 $(document).on("click", "#btnAttachEletiva", function () {
     // recuperando o id da disciplina e turma
     idDisciplinaEletiva = tableEletiva.row($(this).parents('tr')).data().id;
+    idCurriculoDisciplinaEletiva  = tableEletiva.row($(this).parents('tr')).data().idCurriculoDisciplinaEletiva;
 
     // carregando o formulário
     loadFieldsAttachEletiva();
@@ -16,7 +17,7 @@ function loadFieldsAttachEletiva()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Disciplina|eletiva,' + idAluno
+            'Graduacao\\Disciplina|eletiva,' + idAluno + ',' + idCurriculoDisciplinaEletiva
         ]
     };
 

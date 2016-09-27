@@ -54,6 +54,10 @@
                             <li role="presentation">
                                 <a href="#eletiva" aria-controls="eletiva" data-toggle="tab">Eletivas</a>
                             </li>
+
+                            <li role="presentation">
+                                <a href="#equivalencia" aria-controls="equivalencia" data-toggle="tab">Equivalências</a>
+                            </li>
                         </ul>
 
                         <!-- Conteúdo de navegação de pastas -->
@@ -176,13 +180,38 @@
                                     <thead>
                                     <tr>
                                         <th>Período</th>
-                                        <th>Cod. Disciplina</th>
-                                        <th>Disciplina</th>
+                                        <th>Cod. Eletiva</th>
+                                        <th>Eletiva</th>
                                         <th>C. Horária</th>
                                         <th>Créditos</th>
                                         <th>Currículo</th>
-                                        <th>Cod. Eletiva</th>
-                                        <th>Curriculo Eletiva</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Curriculo Disciplina</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <!-- Aba Eletiva -->
+                            <div role="tabpanel" class="tab-pane" id="equivalencia">
+                                <br/>
+
+                                <!-- Adicinar equivalância-->
+                                <a id="btnAddEquivalencia" class="btn-sm btn-primary pull-right">Adicionar Equivalencia</a>
+
+                                <!-- Table Eletivas -->
+                                <table id="grid-equivalencias" class="display table table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Cod. Disciplina</th>
+                                        <th>Disciplina</th>
+                                        <th>Currículo</th>
+                                        <th>C. Horária</th>
+                                        <th>Créditos</th>                                        
+                                        <th>Cod. Equivalente</th>
+                                        <th>Curriculo da Equivalente</th>
                                         <th>Ação</th>
                                     </tr>
                                     </thead>

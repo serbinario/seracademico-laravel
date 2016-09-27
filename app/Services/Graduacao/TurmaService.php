@@ -482,67 +482,6 @@ class TurmaService
     }
 
     /**
-     * @param int $idTurma
-     * @param int $idDisciplina
-     * @return mixed
-     * @throws \Exception
-     */
-    public function editarDisciplina(int $idTurma, int $idDisciplina)
-    {
-        # Recuperando o objeto turma e pivot
-        $turma = $this->repository->find($idTurma);
-
-        # Validando a turma
-        if(!$turma) {
-            throw new \Exception('Turma não encontrada!');
-        }
-
-        # Recuperando o objeto do pivot
-        $turmaDisciplina = $turma->disciplinas()->find($idDisciplina)->pivot;
-
-        # Validando o pivot
-        if(!$turmaDisciplina) {
-            throw new \Exception('Disciplina não encontrada nessa turma!');
-        }
-
-        # Retorno
-        return $turmaDisciplina;
-    }
-
-    /**
-     * @param array $data
-     * @param int $idTurma
-     * @param int $idDisciplina
-     * @return bool
-     * @throws \Exception
-     */
-    public function updateDisciplina(array $data, int $idTurma, int $idDisciplina)
-    {
-        # Recuperando o objeto turma e pivot
-        $turma = $this->repository->find($idTurma);
-
-        # Validando a turma
-        if(!$turma) {
-            throw new \Exception('Turma não encontrada!');
-        }
-
-        # Recuperando o objeto do pivot
-        $turmaDisciplina = $turma->disciplinas()->find($idDisciplina)->pivot;
-
-        # Validando o pivot
-        if(!$turmaDisciplina) {
-            throw new \Exception('Disciplina não encontrada nessa turma!');
-        }
-
-        # Atualizando a disciplina da turma
-        $turmaDisciplina->eletiva = $data['eletiva'];
-        $turmaDisciplina->save();
-
-        # Retorno
-        return true;
-    }
-
-    /**
      * Método responsável por remover disciplina (manualmente)
      * na turma.
      *

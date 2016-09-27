@@ -23,7 +23,9 @@ class TipoTaxa extends Model implements Transformable
      */
     public function scopeWithTaxas($query)
     {
-        return $query->select(['fin_tipos_taxas.id', 'fin_tipos_taxas.nome'])
+        return $query
+            ->distinct()
+            ->select(['fin_tipos_taxas.id', 'fin_tipos_taxas.nome'])
             ->join('fin_taxas', 'fin_taxas.tipo_taxa_id', '=', 'fin_tipos_taxas.id');
     }
 }

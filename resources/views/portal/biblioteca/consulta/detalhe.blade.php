@@ -476,7 +476,11 @@
                             <div class="card" style="margin-top: 0px;">
                                 <div class="card-image waves-effect waves-block waves-light" >
                                     <div class="book-search">
-                                        <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @if($exemplar['path_image'] != null)
+                                            <img src="{{route('seracademico.biblioteca.getImg', ['id' => $exemplar['id']])}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @else
+                                            <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                        @endif
                                     </div>
                                     {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
                                 </div>

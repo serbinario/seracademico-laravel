@@ -2,14 +2,14 @@
 
 namespace Seracademico\Services\Graduacao;
 
-use Seracademico\Repositories\Graduacao\AlunoDisciplinaEletivaRepository;
-use Seracademico\Entities\Graduacao\AlunoDisciplinaEletiva;
+use Seracademico\Repositories\Graduacao\AlunoEquivalenciaRepository;
+use Seracademico\Entities\Graduacao\AlunoEquivalencia;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
 
-class AlunoDisciplinaEletivaService
+class AlunoEquivalenciaService
 {
     /**
-     * @var AlunoDisciplinaEletivaRepository
+     * @var AlunoEquivalenciaRepository
      */
     private $repository;
 
@@ -19,9 +19,10 @@ class AlunoDisciplinaEletivaService
     private $alunoRepository;
 
     /**
-     * @param AlunoDisciplinaEletivaRepository $repository
+     * @param AlunoEquivalenciaRepository $repository
+     * @param AlunoRepository $alunoRepository
      */
-    public function __construct(AlunoDisciplinaEletivaRepository $repository, AlunoRepository $alunoRepository)
+    public function __construct(AlunoEquivalenciaRepository $repository, AlunoRepository $alunoRepository)
     {
         $this->repository = $repository;
         $this->alunoRepository = $alunoRepository;
@@ -30,25 +31,24 @@ class AlunoDisciplinaEletivaService
 
     /**
      * @param array $data
-     * @return AlunoDisciplinaEletiva
+     * @return AlunoEquivalencia
      * @throws \Exception
      */
-    public function store(array $data) : AlunoDisciplinaEletiva
+    public function store(array $data) : AlunoEquivalencia
     {
         # Aplicação de regras de negócios
         $this->tratamentoAluno($data);
-        $this->tratamentoTurmaDisciplina($data);
 
         #Salvando o registro pincipal
-        $alunoDisciplinaEletiva =  $this->repository->create($data);
+        $alunoEquivalencia =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$alunoDisciplinaEletiva) {
+        if(!$alunoEquivalencia) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $alunoDisciplinaEletiva;
+        return $alunoEquivalencia;
     }
 
     /**
@@ -74,43 +74,6 @@ class AlunoDisciplinaEletivaService
         unset($data['semestre_id']);
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     * @throws \Exception
-     */
-    private function getTurmaDisciplina($id)
-    {
-        # Recuperando o registro do pivot
-        $row = \DB::table('fac_turmas_disciplinas')
-            ->where('id', $id)
-            ->select('disciplina_id', 'turma_id')->get();
-
-        # Validando o retorno da query
-        if(count($row) !== 1) {
-            throw new \Exception('Dados inválidos!');
-        }
-
-        # Retorno
-        return $row[0];
-    }
-
-    /**
-     * @param array $data
-     * @throws \Exception
-     */
-    public function tratamentoTurmaDisciplina(array &$data)
-    {
-        # Recuperando o pivot
-        $turmaDisciplina = $this->getTurmaDisciplina($data['turma_disciplina_id']);
-
-        # Recuperando o id do pivot e adicionando o array da reuisição
-        $data['turma_id'] = $turmaDisciplina->turma_id;
-        $data['disciplina_eletiva_id'] = $turmaDisciplina->disciplina_id;
-
-        # Removendo os indices
-        unset($data['turma_disciplina_id']);
-    }
 
     /**
      * @param int $id
@@ -120,15 +83,15 @@ class AlunoDisciplinaEletivaService
     public function delete(int $id)
     {
         # Removendo o registro no banco de dados
-        $alunoDisciplinaEletiva = $this->repository->find($id);
-
+        $alunoEquivalencia = $this->repository->find($id);
+        
         # Verifiando se a AlunoDisciplinaDispensada foi recuperada
-        if(!$alunoDisciplinaEletiva) {
+        if(!$alunoEquivalencia) {
             throw new \Exception('Dados não encontrados não encontrada!');
         }
 
         # Removendo o registro do banco de dados
-        $this->repository->delete($alunoDisciplinaEletiva->id);
+        $this->repository->delete($alunoEquivalencia->id);
 
         #Retorno
         return true;

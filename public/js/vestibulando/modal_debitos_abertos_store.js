@@ -37,7 +37,9 @@ function builderHtmlFieldsDebitos (dados) {
     // limpando os campos
     $("#forma_pagamento_id option").attr('selected', false);
     $("#local_pagamento_id option").attr('selected', false);
+    $("#taxa_id option").remove();
     $('#vencimento').val("");
+    $('#vencimento').attr("selected", false);
     $('#valor_debito').val("");
     $('#valor_desconto').val("");
     $('#valor_pago').val("");
@@ -134,10 +136,27 @@ $(document).on('click', '#taxa_id', function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
+            // Data Atual
+            var now = new Date();
+
             $('#valor_debito').val(retorno.data.valor);
             $('#valor_pago').val(Number(retorno.data.valor));
-            //$('#valor_multa').val(retorno.data.valor_multa);
-            //$('#valor_juros').val(retorno.data.valor_juros);
+            $('#vencimento').val((retorno.data.dia_vencimento
+                    ? retorno.data.dia_vencimento : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear());
+
+            if(!retorno.data.alterar_data_vencimento) {
+                $('#vencimento').attr('readonly', true);
+                $('#vencimento').datetimepicker('destroy');
+            } else {
+                $('#vencimento').attr('readonly', false);
+                $('#vencimento').datetimepicker({
+                    timepicker: false,
+                    format: 'd/m/Y',
+                    mask: false,
+                    lang: 'pt-BR',
+                    allowBlank: true,
+                });
+            }
         } else {
             // Fechando a modal
             $('#modal-debitos-abertos-store').modal('toggle');

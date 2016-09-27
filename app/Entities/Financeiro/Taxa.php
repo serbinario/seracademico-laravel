@@ -54,7 +54,8 @@ class Taxa extends Model implements Transformable
         'tipo_multa_id',
         'tipo_juro_id',
         'valor_multa',
-        'valor_juros'
+        'valor_juros',
+        'alterar_data_vencimento'
 	];
 
     /**

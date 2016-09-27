@@ -206,6 +206,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Graduacao\CurriculoAlunoController@gridDispensadas']);
                     Route::get('gridExtraCurricular/{idAluno}', ['as' => 'gridExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@gridExtraCurricular']);
                     Route::get('gridEletiva/{idAluno}', ['as' => 'gridEletiva', 'uses' => 'Graduacao\CurriculoAlunoController@gridEletiva']);
+                    Route::get('gridEquivalencia/{idAluno}', ['as' => 'gridEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@gridEquivalencia']);
                     Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@storeDispensada']);
                     Route::get('deleteDispensada/{id}', ['as' => 'deleteDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDispensada']);
                     Route::get('editDispensada/{id}', ['as' => 'editDispensada', 'uses' => 'Graduacao\CurriculoAlunoController@editDispensada']);
@@ -215,6 +216,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'Graduacao\CurriculoAlunoController@getDisciplinasByCurriculo']);
                     Route::get('deleteDisciplinaExtraCurricular/{id}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDisciplinaExtraCurricular']);
                     Route::get('deleteDisciplinaEletiva/{id}', ['as' => 'deleteDisciplinaEletiva', 'uses' => 'Graduacao\CurriculoAlunoController@deleteDisciplinaEletiva']);
+                    Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@storeEquivalencia']);
+                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Graduacao\CurriculoAlunoController@deleteEquivalencia']);
                 });
 
                 // Semestre do aluno
@@ -302,12 +305,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@update']);
                 Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Graduacao\CurriculoController@getByCurso']);
 
+                # Disciplinas
                 Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                     Route::get('get/{idDisciplina}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@getDisciplina']);
                     Route::post('store', ['as' => 'store', 'uses' => 'Graduacao\CurriculoController@disciplinaStore']);
                     Route::post('delete', ['as' => 'delete', 'uses' => 'Graduacao\CurriculoController@disciplinaDelete']);
                     Route::get('edit/{idDisciplina}/{idCurriculo}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoController@disciplinaEdit']);
                     Route::post('update/{idDisciplina}/{idCurriculo}', ['as' => 'update', 'uses' => 'Graduacao\CurriculoController@disciplinaUpdate']);
+                });
+
+                # Disciplinas Eletivas
+                Route::group(['prefix' => 'eletiva', 'as' => 'eletiva.'], function () {
+                    Route::get('grid/{idCurriculo}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoEletivaController@grid']);
+                    Route::get('gridOpcoesEletivas/{idCurriculoDisciplinaEletiva}', ['as' => 'edit', 'uses' => 'Graduacao\CurriculoEletivaController@gridOpcoesEletivas']);
+                    Route::post('storeOpcaoEletiva', ['as' => 'storeOpcaoEletiva', 'uses' => 'Graduacao\CurriculoEletivaController@storeOpcaoEletiva']);
+                    Route::get('deleteOpcaoEletiva/{id}', ['as' => 'deleteOpcaoEletiva', 'uses' => 'Graduacao\CurriculoEletivaController@deleteOpcaoEletiva']);
                 });
 
                 # Rotas de relatórios
@@ -329,8 +341,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Graduacao\TurmaDisciplinaController@grid']);
                     Route::post('store', ['as' => 'incluir', 'uses' => 'Graduacao\TurmaDisciplinaController@store']);
                     Route::post('delete', ['as' => 'removerDisciplina', 'uses' => 'Graduacao\TurmaDisciplinaController@delete']);
-                    Route::get('edit/{idTurma}/{idDisciplina}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaDisciplinaController@edit']);
-                    Route::post('update/{idTurma}/{idDisciplina}', ['as' => 'update', 'uses' => 'Graduacao\TurmaDisciplinaController@update']);
                 });
 
                 Route::group(['prefix' => 'horario', 'as' => 'horario.'], function () {

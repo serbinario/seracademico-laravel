@@ -125,8 +125,34 @@ class Curriculo extends Model implements Transformable
      * @param $query
      * @return mixed
      */
-    public function scopeByGraduacao($query)
+    public function scopeLessOfAluno($query, $idAluno)
     {
-        return $query->where('tipo_nivel_sistema_id', 1);
+        return $query
+            ->whereNotIn('id', function ($query) use ($idAluno) {
+                # Recuperando os cursos
+                $cursos = $query->from('fac_alunos_cursos')
+                    ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_cursos.aluno_id')
+                    ->where('fac_alunos.id', $idAluno)
+                    ->orderBy('fac_alunos_cursos.id', 'DESC')
+                    ->select(['fac_alunos_cursos.curriculo_id as id'])->get();
+
+                # Verificando se algum registro foi retornado
+                if(count($cursos) > 0) {
+                   return $cursos[0];
+                }
+
+                # Retorno
+                return $cursos;
+            })
+            ->where('tipo_nivel_sistema_id', 1);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeNotById($query, $idCurriculo)
+    {
+        return $query->whereNotIn('id', [$idCurriculo])->where('tipo_nivel_sistema_id', 1);
     }
 }
