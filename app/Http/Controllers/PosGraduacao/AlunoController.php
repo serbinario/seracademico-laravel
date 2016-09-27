@@ -81,16 +81,16 @@ class AlunoController extends Controller
             #Criando a consulta
             $alunos = \DB::table('pos_alunos')
                 ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
-                ->join('pos_alunos_cursos', function ($join) {
+                ->leftJoin('pos_alunos_cursos', function ($join) {
                     $join->on(
                         'pos_alunos_cursos.id', '=',
                         \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
                         where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
                     );
                 })
-                ->join('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_cursos.situacao_id')
-                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
-                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_cursos.situacao_id')
+                ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+                ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome',
@@ -98,7 +98,7 @@ class AlunoController extends Controller
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',
-                    'fac_situacao.nome as nomeSituacao',
+                    \DB::raw('IF(pos_alunos.matricula = "", "PENDENTE",fac_situacao.nome) as nomeSituacao'),
                     'fac_cursos.codigo as codigoCurso'
                 ]);
 

@@ -93,8 +93,9 @@ class AlunoService
      * @throws \Exception
      */
     public function store(array $data) : Aluno
-    {      
+    {    
         #regras de negócios
+        $this->tratamentoCampos($data);
         $this->tratamentoImagem($data);
         //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
@@ -105,6 +106,7 @@ class AlunoService
 
         # Verificando se a pesso já existe
         if(count($objPessoa) > 0) {
+
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
             $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
@@ -128,12 +130,15 @@ class AlunoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
-        #Vinculando o currículo ao aluno
-        $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
+        # Tratamento do currículo do aluno
+        if(isset($data['curriculo_id'])) {
+            #Vinculando o currículo ao aluno
+            $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
 
-        # Vinculando o aluno a uma turma
-        $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
-
+            # Vinculando o aluno a uma turma
+            $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
+        }
+        
         #Retorno
         return $aluno;
     }
@@ -146,14 +151,14 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
-        # Regras de negócio
-        //$this->tratamentoMatricula($data);
-
         # Recuperando o vestibulando
-        $aluno = $this->repository->find($id);
+        $aluno = $this->repository->find($id);     
 
         #Regras de negócios
+        $this->tratamentoCampos($data);
         $this->tratamentoImagem($data, $aluno);
+        $this->tratamentoCurso($data);
+        //$this->tratamentoMatricula($data);
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
@@ -163,6 +168,15 @@ class AlunoService
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
+        }
+
+        # Tratamento do currículo do aluno
+        if(isset($data['curriculo_id'])) {
+            #Vinculando o currículo ao aluno
+            $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
+
+            # Vinculando o aluno a uma turma
+            $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
         }
 
         #Retorno
@@ -178,9 +192,10 @@ class AlunoService
     {
         # Verificando se o curso foi informado
         if(!isset($data['curso_id'])) {
-            throw new \Exception('Curso não informado');
+            //throw new \Exception('Curso não informado');
+            return true;
         }
-
+        
         # recuperando o currículo
         $curriculo = Curriculo::byCurso($data['curso_id']);
 

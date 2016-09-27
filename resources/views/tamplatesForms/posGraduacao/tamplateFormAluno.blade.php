@@ -529,7 +529,7 @@
                     <div class="form-group col-md-2">
                         {!! Form::label('turno_id', 'Turno') !!}
                         @if(isset($aluno->id))
-                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                         @else
                             {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                         @endif
