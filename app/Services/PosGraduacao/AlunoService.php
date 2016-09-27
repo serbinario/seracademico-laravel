@@ -96,7 +96,7 @@ class AlunoService
     {      
         #regras de negócios
         $this->tratamentoImagem($data);
-        $this->tratamentoMatricula($data);
+        //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         # Recuperando a pessoa pelo cpf
