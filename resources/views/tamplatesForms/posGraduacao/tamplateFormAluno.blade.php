@@ -79,6 +79,9 @@
             <li role="presentation">
                 <a href="#abaMatricula" aria-controls="abaMatricula" role="tab" data-toggle="tab">Matrícula</a>
             </li>
+            <li role="presentation">
+                <a href="#cursosPretendidos" aria-controls="cursosPretendidos" role="tab" data-toggle="tab">Cursos Pretendidos</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
 
@@ -546,7 +549,29 @@
                     {{--</div>--}}
                 </div>
             </div>
-            {{-- Fim aba admissão--}}
+            {{-- Fim aba Mtrícula--}}
+
+             {{-- Aba Cursos pretendidos --}}
+            <div role="tabpanel" class="tab-pane" id="cursosPretendidos">
+                <br>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        {!! Form::label('curso_pretendido_1_id', '1º Opção de Curso') !!}                    
+                        {!! Form::select('curso_pretendido_1_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}                        
+                    </div>
+
+                     <div class="form-group col-md-4">
+                        {!! Form::label('curso_pretendido_2_id', '2º Opção de Curso') !!}                    
+                        {!! Form::select('curso_pretendido_2_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}                        
+                    </div>
+
+                     <div class="form-group col-md-4">
+                        {!! Form::label('curso_pretendido_3_id', '3º Opção de Curso') !!}                    
+                        {!! Form::select('curso_pretendido_3_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}                        
+                    </div>                   
+                </div>
+            </div>
+            {{-- Fim Cursos pretendidos--}}
         </div>
 
         {{--Buttons Submit e Voltar--}}

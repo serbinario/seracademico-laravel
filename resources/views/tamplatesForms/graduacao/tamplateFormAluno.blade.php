@@ -37,7 +37,8 @@
         </div>
 
     </div>
-    <div class="col-md-2">
+
+    <div class="col-md-2" style="height: 50px;">
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                 @if (isset($aluno) && $aluno->path_image != null)
@@ -51,9 +52,9 @@
                    <span class="fileinput-new">Selecionar</span>
                    <input type="file" name="img">
                </span>
-                {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
+                <!--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>-->
             </div>
-        </div>
+        </div>        
     </div>
 </div>
 

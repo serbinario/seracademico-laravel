@@ -24,7 +24,10 @@ class Aluno extends Model implements Transformable
         'data_inscricao',
         'pessoa_id',
         'turno_id',
-        'path_image'
+        'path_image',
+        'curso_pretendido_1_id',
+        'curso_pretendido_2_id',
+        'curso_pretendido_3_id'
     ];
 
     /**
