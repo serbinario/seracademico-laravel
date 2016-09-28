@@ -94,7 +94,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="form-group col-md-4">
+                        <label for="img">Foto</label>
+                        <input class="file-preview-other" name="img" id="img" type="file">
+                    </div>
+                    {{--<div class="col-md-2">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
                                 @if (isset($model) && $model->path_image != null)
@@ -112,7 +116,7 @@
                                 <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
 
