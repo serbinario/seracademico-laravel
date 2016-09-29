@@ -398,7 +398,10 @@ class CurriculoAlunoController extends Controller
             # Validando se veio registro
             if($row->id && count($rowsNotas) == 0) {
                 $html .= '<a class="btn-floating" id="btnAttachEletiva" title="Adicionar disciplina eletiva"><i class="material-icons">add-to-photos</i></a>';
-                $html .= '<a class="btn-floating" id="btnDetachEletiva" title="Remover disciplina adicionada"><i class="material-icons">cancel</i></a>';
+
+                if($row->disciplinaEletivaId) {
+                    $html .= '<a class="btn-floating" id="btnDetachEletiva" title="Remover disciplina adicionada"><i class="material-icons">cancel</i></a>';
+                }
             }
 
             # Retorno

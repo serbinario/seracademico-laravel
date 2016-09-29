@@ -7,17 +7,32 @@
     <style type="text/css">
         table tbody th, table tbody td {
             padding: 2px 2px;
-            font-size: 12px;
+            font-size: 15px;
         }
     </style>
 </head>
 
 <body>
     <div class="row">
+        <table width="100%">
+            <tr>
+                <td width="20%">
+                    <img alt="image" width="100%" src="{{ asset('/img/logo-alpha.png')}}"/>
+                </td>
+                <td width="55%"><br>
+                    <h1 style="text-align: center;color: #082652; ">{{ $dados['reportName'] }}</h1>
+                </td>
+                <td width="15%">
+                    <img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div class="row">
         <div class="col-md-12">
-            <h3>{{ $dados['reportName'] }}</h3>
             <div>
-                <table id="report" border="1" cellspacing="0" width="100%">
+                <table id="report"  width="100%" border="1" cellspacing="0" style="border: 1px solid lightgray;">
                     <thead>
                     <tr>
                         @foreach($dados['headers'] as $value)
