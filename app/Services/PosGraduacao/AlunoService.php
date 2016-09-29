@@ -369,12 +369,24 @@ class AlunoService
                     $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
                 }
             } else {
-                if(count($expressao) > 1) {
-                    #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                    }
                 } else {
                     #Recuperando o registro e armazenando no array
-                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->lists('nome', 'id');
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
                 }
             }
 
