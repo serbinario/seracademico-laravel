@@ -137,13 +137,13 @@ class CurriculoController extends Controller
             # percorre as turmas
             if($tumas) {
                 foreach ($tumas as $turma) {
-                    if(count($turma->disciplinas) > 0) {
-                        $boolReturn = false;
-                        break;
+                    foreach ($turma->disciplinas as $disciplina) {
+                        if($disciplina->id == $row->id) {
+                            $boolReturn = false;
+                        }
                     }
                 }
             }
-
 
             # Verifica a se a condição é válida
             if($boolReturn) {

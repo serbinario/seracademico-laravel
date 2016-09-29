@@ -38,6 +38,13 @@ class Curriculo extends Model implements Transformable
         return $this->belongsTo(Curso::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function turmas()
+    {
+        return $this->hasMany(Turma::class, 'curriculo_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

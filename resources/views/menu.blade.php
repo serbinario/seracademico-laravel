@@ -77,6 +77,14 @@
                                 <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                             </ul>
                         </li>
+
+                        <li>
+                            <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.reportViewGeralAlunoCandidato') }}"><i class="flaticon-employment-test"></i> Geral de Alunos e Candidatos</a></li>
+                                {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
+                            </ul>
+                        </li>
                         {{--<li>--}}
                             {{--<a href="#">Tesouraria <span class="fa arrow"></span></a>--}}
                             {{--<ul class="nav nav-third-level">--}}
