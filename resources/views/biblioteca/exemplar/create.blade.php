@@ -37,6 +37,37 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
+
+            /**
+             * Comprovante enem
+             *
+             * Código que é responsável pelo carregamento de
+             * arquivos no formulário
+             *
+             * http://plugins.krajee.com/
+             * https://github.com/kartik-v/bootstrap-fileinput
+             */
+            $("#img").fileinput({
+                @if (isset($model) && $model->path_image != null)
+                initialPreviewFileType: 'object',
+                initialPreview:[
+                    '{{route('seracademico.biblioteca.getImg', ['id' => $model->id])}}'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{
+                    caption: 'comprovante-enem.pdf',
+                    //filetype: 'application/pdf',
+                    url: false,
+                    width: '100%'
+                }],
+                @endif
+
+                language: 'pt-BR',
+                showUpload: false,
+                showCaption: false,
+                //allowedFileExtensions : ['pdf'],
+            });
+
             <?php
                 $data = new \DateTime('now');
                 $data = $data->format('d/m/Y');
