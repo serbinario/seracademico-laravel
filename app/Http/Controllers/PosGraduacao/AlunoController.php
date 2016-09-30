@@ -353,4 +353,16 @@ class AlunoController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImgAluno($id)
+    {
+        #Recuperando a empresa
+        $model = $this->service->find($id);
+
+        return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+    }
 }

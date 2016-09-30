@@ -96,7 +96,7 @@ class AlunoService
     {    
         #regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data);
+       // $this->tratamentoImagem($data);
         //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
@@ -121,6 +121,21 @@ class AlunoService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
+
+        #tratando a imagem
+        if(isset($data['img'])) {
+            $file     = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $data['path_image'] = $fileName;
+
+            #destruindo o img do array
+            unset($data['img']);
+        }
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -151,12 +166,18 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
+
+        //dd(base64_decode( $data['cod_img'] ));
+
+        //$img = base64_decode( $data['cod_img'] );
+
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);     
 
         #Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data, $aluno);
+        //$this->tratamentoImagem($data, $aluno);
+       // dd($this->tratamentoImagem($data, $aluno));
         $this->tratamentoCurso($data);
         //$this->tratamentoMatricula($data);
 
@@ -165,6 +186,39 @@ class AlunoService
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
+        $this->insertImg($aluno->id);
+
+       //dd($img);
+
+        /*$pdo = \DB::connection()->getPdo();
+
+        $query = "UPDATE pos_alunos SET path_image = ? where id = ? ";
+
+        $pdo->query($query);*/
+
+        //dd($pdo);
+
+        #tratando a imagem
+        /*if(isset($data['img'])) {
+            $file     = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #removendo a imagem antiga
+            if($aluno->path_image != null) {
+                unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $aluno->path_image);
+            }
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $aluno->path_image = $fileName;
+            $aluno->save();
+
+            #destruindo o img do array
+            unset($data['img']);
+        }*/
+        
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -181,6 +235,34 @@ class AlunoService
 
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE pos_alunos SET path_image = '{$add}' where id =  $id ";
+
+            $pdo->query($query);
+
+        }
+
     }
 
     /**
@@ -265,6 +347,7 @@ class AlunoService
 
                 #renomeando
                 $data[$key] = $fileName;
+
             }
         }
 

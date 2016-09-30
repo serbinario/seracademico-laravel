@@ -88,6 +88,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\AlunoController@contrato']);
+                Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoTurmaController@grid']);
