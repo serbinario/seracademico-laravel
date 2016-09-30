@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Report\Simple;
 
 use Illuminate\Http\Request;
 
@@ -30,10 +30,13 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function report($idReport)
+    public function report(Request $request, $idReport)
     {
+        # Recuperando os dados de filtros
+        $dados = $request->all();
+
         # Recuperando os dados do relatório
-        $report = $this->report->generate($idReport);
+        $report = $this->report->generate($idReport, $dados);
 
         # Criando o relatório
         return \PDF::loadView('reports.report', ['dados' => $report])->stream();

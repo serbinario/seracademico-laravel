@@ -574,6 +574,27 @@
                         {!! Form::select('curso_pretendido_3_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}                        
                     </div>                   
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        {!! Form::label('canal_captacao_id', 'Canal de Captação') !!}
+                        {!! Form::select('canal_captacao_id', (['' => 'Selecione um canal de captação'] + $loadFields['posgraduacao\\canalcaptacao']->toArray()), null, array('class' => 'form-control')) !!}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        {!! Form::label('tipo_pretensao_id', 'Tipo de Pretensão') !!}
+                        {!! Form::select('tipo_pretensao_id', (['' => 'Selecione um tipo de pretensão'] + $loadFields['posgraduacao\\tipopretensao']->toArray()), null, array('class' => 'form-control')) !!}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('obs_cursos_pretendidos', 'Observação') !!}
+                            {!! Form::textarea('obs_cursos_pretendidos', Session::getOldInput('obs_cursos_pretendidos') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                        </div>
+                    </div>
+                </div>
             </div>
             {{-- Fim Cursos pretendidos--}}
         </div>

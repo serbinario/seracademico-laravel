@@ -43,7 +43,12 @@ class AlunoController extends Controller
         'Turno',
         'FormaAdmissao',
         'Graduacao\\Semestre',
-        'SituacaoAluno'
+        'SituacaoAluno',
+        'SimpleReport',
+        'PosGraduacao\\Turma|posGraduacao',
+        'PosGraduacao\\Curso|ativo,1',
+        'PosGraduacao\\CanalCaptacao',
+        'PosGraduacao\\TipoPretensao'
     ];
 
     /**
@@ -172,7 +177,7 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
+       
             #Executando a ação
             $this->service->store($data);
 

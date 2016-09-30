@@ -4,9 +4,11 @@ namespace Seracademico\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use Seracademico\Contracts\ReportAluno;
 use Seracademico\Uteis\ParametroBanco;
 use Seracademico\Uteis\ParametroMatricula;
 use Seracademico\Uteis\ParametroVestibular;
+use Seracademico\Uteis\ReportBuilderQuery\AlunoPosBuilderQueryForReport;
 
 class ParametroServiceProvider extends ServiceProvider
 {
@@ -37,5 +39,8 @@ class ParametroServiceProvider extends ServiceProvider
 
         # Retornando o objeto de Parametro do banco
         App::bind('banco', ParametroBanco::class);
+
+        # Retorna um objeto AlunoPosBuilderQueryForReport pela interface ReportAluno
+        App::bind(ReportAluno::class, AlunoPosBuilderQueryForReport::class);
     }
 }

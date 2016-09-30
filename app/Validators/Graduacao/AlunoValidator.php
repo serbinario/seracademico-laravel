@@ -30,7 +30,6 @@ class AlunoValidator extends LaravelValidator
         'pessoa.deficiencia_outra' => 'integer',
         'pessoa.exames1_id' => 'integer',
         'pessoa.exames2_id' => 'integer',
-        'vestibular_id' => 'Vestibular',
         'pessoa.orgao_rg' => 'Orgão RG',
         'pessoa.data_expedicao' => 'Data de Expedição',
         'pessoa.titulo_eleitoral' => 'Título Eleitoral',
@@ -73,7 +72,7 @@ class AlunoValidator extends LaravelValidator
 
             'matricula' => 'unique:fac_alunos,matricula|digits_between:4,20|numeric',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
-            //'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
+            'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required|serbinario_date_format:"d/m/Y"',
@@ -126,7 +125,7 @@ class AlunoValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
-            'matricula' => 'unique:fac_alunos,matricula|digits_between:4,20|numeric',
+            'matricula' => 'unique:fac_alunos,matricula,:id|digits_between:4,20|numeric',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             //'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
@@ -147,7 +146,6 @@ class AlunoValidator extends LaravelValidator
             'pessoa.exames2_id' => 'integer',
             'pessoa.uf_nascimento_id' => 'integer',
             //'pessoa.nome_social' => 'max:200|serbinario_alpha_space',
-            'vestibular_id' => 'required|numeric',
             'pessoa.orgao_rg' => 'max:30',
             'pessoa.data_expedicao' => 'serbinario_date_format:"d/m/Y"',
             'pessoa.titulo_eleitoral' => 'digits_between:4,11|numeric',

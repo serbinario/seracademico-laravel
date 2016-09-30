@@ -15,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('serbinario_date_format', function($attribute, $value, $formats, $validator) {
-
             #Verificando se o valor já é uma data
             if($value instanceof \DateTime) {
                 return true;
