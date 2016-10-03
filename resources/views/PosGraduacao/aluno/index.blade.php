@@ -11,7 +11,7 @@
             <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-users"></i>
-                    Listar Alunos
+                    Listar Alunos - Pós-graduação
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
