@@ -123,6 +123,26 @@ class AppServiceProvider extends ServiceProvider
             return true;
         });
 
+        // Validator para unique em pessoa
+        Validator::extend('unique_in_pessoa', function($attribute, $value, $formats, $validator) {
+
+            # Vaidando a entrada de parámetros
+            if(count($formats) == 1 && $value != "") {
+                # Fazendo a query
+                $rows = \DB::table('pessoas')
+                    ->where("pessoas.{$formats[0]}", $value)
+                    ->select(['pessoas.id'])->get();
+
+                # Verificando a quantidade de retorno
+                if(count($rows) > 0) {
+                    return false;
+                }
+            }
+
+            #retorno
+            return true;
+        });
+
         # Unique validator
         Validator::extend('serbinario_unique', '\\Seracademico\\Providers\\Validators\\UniqueValidator@validate');
     }
