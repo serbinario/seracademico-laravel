@@ -38,11 +38,7 @@ function loadFields()
 // Função a montar o html
 function builderHtmlFields (dados) {
     // limpando os campos
-    $("#disciplina_horario_id").find("option").eq(0).prop("selected", true);
-    $("#sala_id").find("option").eq(0).prop("selected", true);
-    $("#dia_id").find("option").eq(0).prop("selected", true);
-    $("#hora_id").find("option").remove();
-    $("#professor_id").find("option").eq(0).prop("selected", true);
+    clearFields();
 
     // Variáveis que armazenaram o html
     var htmlDisciplina = "";
@@ -97,6 +93,20 @@ function builderHtmlFields (dados) {
     // Abrindo o modal de inserir disciplina
     $("#modal-horario-store").modal({show : true});
 };
+
+/**
+ * Função responsável por limpar os campos do formulário
+ */
+function clearFields()
+{
+    // limpando os campos
+    $("#disciplina_horario_id").find("option").eq(0).prop("selected", true);
+    $("#sala_id").find("option").eq(0).prop("selected", true);
+    $("#dia_id").find("option").eq(0).prop("selected", true);
+    $("#hora_id").find("option").remove();
+    $("#professor_id").find("option").eq(0).prop("selected", true);
+
+}
 
 // evento para mudança no select de dia
 $(document).on('change', '#dia_id', function () {
@@ -196,7 +206,9 @@ function storeHorario(dados) {
             tableDisciplina.ajax.reload();
             tableHorario.ajax.reload();
 
-            $('#modal-horario-store').modal('hide');
+            // limpando os campos
+            clearFields();
+            //$('#modal-horario-store').modal('hide');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
