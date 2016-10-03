@@ -91,6 +91,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('reportViewGeralAlunoCandidato', ['as' => 'reportViewGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@reportViewGeralAlunoCandidato']);
                 Route::get('gridReportGeralAlunoCandidatorid/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
                 Route::get('graphicBuilderGeral', ['as' => 'graphicBuilderGeral', 'uses' => 'Report\ReportAlunoController@graphicBuilderGeral']);
+                Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoTurmaController@grid']);
@@ -738,7 +739,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         # Rota para relatórios
-        Route::get('report/{id}', ['as' => 'report', 'uses' => 'ReportBuilderQuery\Simple\ReportController@report']);
+        Route::get('report/{id}', ['as' => 'report', 'uses' => 'ReportController@report']);
 
         # Rotas para o financeiro
         Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {

@@ -151,7 +151,7 @@ class VestibulandoService
     {
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data);
+        //$this->tratamentoImagem($data);
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -193,6 +193,21 @@ class VestibulandoService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
 
+        #tratando a imagem
+        /*if (isset($data['img'])) {
+            $file = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $data['path_image'] = $fileName;
+
+            #destruindo o img do array
+            unset($data['img']);
+        }*/
+
         #Salvando o registro pincipal
         $vestibulando =  $this->repository->create($data);
 
@@ -227,7 +242,7 @@ class VestibulandoService
 
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data, $vestibulando);
+       // $this->tratamentoImagem($data, $vestibulando);
         //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
@@ -237,6 +252,28 @@ class VestibulandoService
         $vestibulando = $this->repository->update($data, $id);
         $pessoa       = $this->pessoaRepository->update($data['pessoa'], $vestibulando->pessoa->id);
         $endereco     = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+
+
+        #tratando a imagem
+        /*if (isset($data['img'])) {
+            $file = $data['img'];
+            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+            #removendo a imagem antiga
+            if ($vestibulando->path_image != null) {
+                unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $aluno->path_image);
+            }
+
+            #Movendo a imagem
+            $file->move($this->destinationPath, $fileName);
+
+            #setando o nome da imagem no model
+            $vestibulando->path_image = $fileName;
+            $vestibulando->save();
+
+            #destruindo o img do array
+            unset($data['img']);
+        }*/
 
         #Verificando se foi atualizado no banco de dados
         if(!$vestibulando || !$endereco || !$pessoa) {

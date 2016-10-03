@@ -39,18 +39,22 @@
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura" style="width: 135px; height: 115px;">
                 @if (isset($aluno) && $aluno->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="/images/{{$aluno->path_image}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo" src="{{route('seracademico.posgraduacao.aluno.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
+                        {{--<img id="logo" src="{{asset("/images/$aluno->path_image")}}"  alt="Foto" height="120" width="100"/><br/>--}}
                     </div>
                 @endif
             </div>
             <div>
                <span class="btn btn-primary btn-xs btn-block btn-file">
+
                    <span class="fileinput-new">Selecionar</span>
-                   <input type="file" name="img">
+                   <input type="file" id="img" name="img">
+                   <input type="hidden" id="cod_img" name="cod_img">
                </span>
+                <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal">
                 {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
@@ -597,6 +601,27 @@
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
+
+            <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Foto</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="margin-left: -11px;" id="my_camera"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                            <button type="button" onClick="take_snapshot()" class="btn btn-primary">Tirar foto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
            {{-- <div class="col-md-9">
                 <div class="checkbox checkbox-primary">
                     @if(isset($aluno) && !empty($aluno->matricula))
@@ -627,6 +652,36 @@
 
 @section('javascript')
     <script type="text/javascript">
+
+
+        Webcam.set({
+            width: 260,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+
+        $(document).on('click', '#foto', function(){
+            Webcam.attach( '#my_camera' );
+        });
+
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap( function(data_uri) {
+
+                // display results in page
+                document.getElementById('captura').innerHTML = '<img src="'+data_uri+'"/>';
+                var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+                document.getElementById('cod_img').value = raw_image_data;
+
+                $(".my-profile").modal('hide');
+                Webcam.reset();
+               // $(".modal-dialog").modal('toggle');
+
+            } );
+        }
+
         //Carregando as cidades
         $(document).on('change', "#estado", function () {
             //Removendo as cidades
