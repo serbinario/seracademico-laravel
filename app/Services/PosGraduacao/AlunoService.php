@@ -93,10 +93,13 @@ class AlunoService
      * @throws \Exception
      */
     public function store(array $data) : Aluno
-    {    
+    {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         #regras de negócios
         $this->tratamentoCampos($data);
-       // $this->tratamentoImagem($data);
         //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
@@ -122,23 +125,31 @@ class AlunoService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
 
-        #tratando a imagem
-        if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $data['path_image'] = $fileName;
-
-            #destruindo o img do array
-            unset($data['img']);
-        }
-
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
+
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
+
+            $pdo->query($query);
+
+        }
 
         #Verificando se foi criado no banco de dados
         if(!$aluno) {
@@ -167,59 +178,45 @@ class AlunoService
     public function update(array $data, int $id) : Aluno
     {
 
-       // dd(base64_decode( $data['cod_img'] ));
-        //dd($data['cod_img'] );
-
-        $img = $data['cod_img'] ;
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
 
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);     
 
         #Regras de negócios
         $this->tratamentoCampos($data);
-        //$this->tratamentoImagem($data, $aluno);
-       // dd($this->tratamentoImagem($data, $aluno));
         $this->tratamentoCurso($data);
         //$this->tratamentoMatricula($data);
+
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        }
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
-        //$this->insertImg($aluno->id);
-
-       //dd($img);
-
-        $pdo = \DB::connection()->getPdo();
-
-        $query = "UPDATE pos_alunos SET path_image = '{$img}' where id = {$id} ";
-
-        $pdo->query($query);
-
-        //dd($pdo);
-
-        #tratando a imagem
-        /*if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-            #removendo a imagem antiga
-            if($aluno->path_image != null) {
-                unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $aluno->path_image);
-            }
-
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $aluno->path_image = $fileName;
-            $aluno->save();
-
-            #destruindo o img do array
-            unset($data['img']);
-        }*/
-        
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -241,7 +238,7 @@ class AlunoService
     /**
      * @param $id
      */
-    public function insertImg($id)
+    public function insertImg($id, $tipo)
     {
         #tratando a imagem
         if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
@@ -258,7 +255,7 @@ class AlunoService
 
             $pdo = \DB::connection()->getPdo();
 
-            $query = "UPDATE pos_alunos SET path_image = '{$add}' where id =  $id ";
+            $query = "UPDATE pos_alunos SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
 
             $pdo->query($query);
 

@@ -49,6 +49,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('search', ['as' => 'search', 'uses' => 'Graduacao\VestibulandoController@search']);
             Route::delete('deleteComprovante/{id}', ['as' => 'deleteComprovante', 'uses' => 'Graduacao\VestibulandoController@deleteComprovante']);
             Route::get('reportFilter', ['as' => 'reportFilter', 'uses' => 'Graduacao\VestibulandoController@reportFilter']);
+            Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'Graduacao\VestibulandoController@getImgAluno']);
 
             Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
                 Route::get('grid/{idVestibulando}', ['as' => 'grid', 'uses' => 'Graduacao\VestibulandoController@gridNotas']);
@@ -184,6 +185,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Graduacao\AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'Graduacao\AlunoController@contrato']);
                 Route::get('reportFilter', ['as' => 'reportFilter', 'uses' => 'Graduacao\AlunoController@reportFilter']);
+                Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'Graduacao\AlunoController@getImgAluno']);
 
                 // Histórico do aluno
                 Route::group(['prefix' => 'historico', 'as' => 'historico.'], function () {

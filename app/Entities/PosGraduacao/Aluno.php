@@ -30,7 +30,8 @@ class Aluno extends Model implements Transformable
         'curso_pretendido_3_id',
         'obs_cursos_pretendidos',
         'canal_captacao_id',
-        'tipo_pretensao_id'
+        'tipo_pretensao_id',
+        'tipo_img'
     ];
 
     /**
