@@ -167,9 +167,10 @@ class AlunoService
     public function update(array $data, int $id) : Aluno
     {
 
-        //dd(base64_decode( $data['cod_img'] ));
+       // dd(base64_decode( $data['cod_img'] ));
+        //dd($data['cod_img'] );
 
-        //$img = base64_decode( $data['cod_img'] );
+        $img = $data['cod_img'] ;
 
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);     
@@ -186,15 +187,15 @@ class AlunoService
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
-        $this->insertImg($aluno->id);
+        //$this->insertImg($aluno->id);
 
        //dd($img);
 
-        /*$pdo = \DB::connection()->getPdo();
+        $pdo = \DB::connection()->getPdo();
 
-        $query = "UPDATE pos_alunos SET path_image = ? where id = ? ";
+        $query = "UPDATE pos_alunos SET path_image = '{$img}' where id = {$id} ";
 
-        $pdo->query($query);*/
+        $pdo->query($query);
 
         //dd($pdo);
 
