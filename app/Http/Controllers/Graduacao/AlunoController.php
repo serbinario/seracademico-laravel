@@ -375,4 +375,22 @@ class AlunoController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImgAluno($id)
+    {
+        #Recuperando a empresa
+        $model = $this->service->find($id);
+
+        if($model->tipo_img == 1) {
+            return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+        } else {
+            return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+
+
+    }
 }

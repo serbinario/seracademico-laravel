@@ -368,6 +368,12 @@ class AlunoController extends Controller
         #Recuperando a empresa
         $model = $this->service->find($id);
 
-        return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+        if($model->tipo_img == 1) {
+            return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+        } else {
+            return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+
+
     }
 }
