@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="btnUpdateHorario">Salvar</button>
-                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
