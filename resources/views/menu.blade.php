@@ -24,7 +24,7 @@
     <link href="{{ asset('/fonts/pkt4/font/flaticon.css')}}" rel="stylesheet">
 
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
-    {{--<link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">--}}
+    <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
 
     <!-- Krajee -->
-    <link rel="stylesheet" href="{{ asset('/css/plugins/Krajee/fileinput.min.css')  }}">
+    {{--<link rel="stylesheet" href="{{ asset('/css/plugins/Krajee/fileinput.min.css')  }}">--}}
 
     <!-- zTree-->
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
@@ -75,6 +75,14 @@
                                 <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse">
+                                <li><a href="{{ route('seracademico.posgraduacao.aluno.reportViewGeralAlunoCandidato') }}"><i class="flaticon-employment-test"></i> Geral de Alunos e Candidatos</a></li>
+                                {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                             </ul>
                         </li>
                         {{--<li>--}}
@@ -325,6 +333,7 @@
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('/js/webcam.js')  }}"></script>
 
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -339,7 +348,7 @@
 <script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
 
 <!-- Krajee -->
-<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>
+{{--<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>--}}
 <script src="{{ asset('/js/plugins/Krajee/locale/pt-BR.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/canvas-to-blob.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
@@ -363,7 +372,7 @@
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
-{{--<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>--}}
+<script src="{{ asset('/js/jasny-bootstrap.js')}}"></script>
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>

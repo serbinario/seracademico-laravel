@@ -14,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        # Validator para formatos de datas
         Validator::extend('serbinario_date_format', function($attribute, $value, $formats, $validator) {
-
             #Verificando se o valor já é uma data
             if($value instanceof \DateTime) {
                 return true;
@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
+        # Validator para espaços em branco
         Validator::extend('serbinario_alpha_space', function($attribute, $value, $formats, $validator) {
             #expressão regular
             $pattern = "/^[\pL\s\-]+$/u";
@@ -80,6 +81,49 @@ class AppServiceProvider extends ServiceProvider
             return true;
         });
 
+        // Validator para unique em pessoa pelo aluno
+        Validator::extend('graduacao_aluno_unique_in_pessoa', function($attribute, $value, $formats, $validator) {
+            # Vaidando a entrada de parámetros
+            if(count($formats) == 2 && $value != "" && $formats[1] != ":id") {
+                # Fazendo a query
+                $rows = \DB::table('pessoas')
+                    ->join('fac_alunos', 'fac_alunos.pessoa_id', '=', 'pessoas.id')
+                    ->where("pessoas.{$formats[0]}", $value)
+                    ->where("fac_alunos.id", "!=", $formats[1])
+                    ->select(['pessoas.id'])->get();
+
+                # Verificando a quantidade de retorno
+                if(count($rows) > 0) {
+                    return false;
+                }
+            }
+
+            #retorno
+            return true;
+        });
+
+        // Validator para unique em pessoa pelo aluno de pos
+        Validator::extend('pos_aluno_unique_in_pessoa', function($attribute, $value, $formats, $validator) {
+            # Vaidando a entrada de parámetros
+            if(count($formats) == 2 && $value != "" && $formats[1] != ":id") {
+                # Fazendo a query
+                $rows = \DB::table('pessoas')
+                    ->join('pos_alunos', 'pos_alunos.pessoa_id', '=', 'pessoas.id')
+                    ->where("pessoas.{$formats[0]}", $value)
+                    ->where("pos_alunos.id", "!=", $formats[1])
+                    ->select(['pessoas.id'])->get();
+
+                # Verificando a quantidade de retorno
+                if(count($rows) > 0) {
+                    return false;
+                }
+            }
+
+            #retorno
+            return true;
+        });
+
+        # Unique validator
         Validator::extend('serbinario_unique', '\\Seracademico\\Providers\\Validators\\UniqueValidator@validate');
     }
 

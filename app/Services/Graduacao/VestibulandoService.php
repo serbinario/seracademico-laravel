@@ -149,9 +149,12 @@ class VestibulandoService
      */
     public function store(array $data) : Vestibulando
     {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data);
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -196,6 +199,29 @@ class VestibulandoService
         #Salvando o registro pincipal
         $vestibulando =  $this->repository->create($data);
 
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$vestibulando->id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($vestibulando->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$vestibulando->id} ";
+
+            $pdo->query($query);
+
+        }
+
         #Verificando se foi criado no banco de dados
         if(!$vestibulando) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -222,12 +248,38 @@ class VestibulandoService
      */
     public function update(array $data, int $id) : Vestibulando
     {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         # Recuperando o vestibulando
         $vestibulando = $this->repository->find($id);
 
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($vestibulando->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        }
+
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoImagem($data, $vestibulando);
         //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
@@ -245,6 +297,34 @@ class VestibulandoService
 
         #Retorno
         return $vestibulando;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id, $tipo)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_vestibulandos SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
+
+            $pdo->query($query);
+
+        }
+
     }
 
     /**

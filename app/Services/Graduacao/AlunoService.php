@@ -94,9 +94,13 @@ class AlunoService
      * @throws \Exception
      */
     public function store(array $data) : Aluno
-    {      
+    {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         #regras de negócios
-        $this->tratamentoImagem($data);
+        //$this->tratamentoImagem($data);
         $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
     
@@ -130,6 +134,29 @@ class AlunoService
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
 
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
+
+            $pdo->query($query);
+
+        }
+
         #Verificando se foi criado no banco de dados
         if(!$aluno) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -155,14 +182,38 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
+
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         # Regras de negócio
         $this->tratamentoMatricula($data);
 
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);
 
-        #Regras de negócios
-        $this->tratamentoImagem($data, $aluno);
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($aluno->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
+        }
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
@@ -176,6 +227,34 @@ class AlunoService
 
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id, $tipo)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_alunos SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
+
+            $pdo->query($query);
+
+        }
+
     }
 
     /**
@@ -232,37 +311,6 @@ class AlunoService
         }
 
         #Retorno
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function tratamentoImagem(array &$data, $aluno = "")
-    {
-        #tratando a imagem
-        foreach ($data as $key => $value) {
-            $explode = explode("_", $key);
-
-            if (count($explode) > 0 && $explode[0] == "path") {
-                $file = $data[$key];
-                $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
-
-                # Validando a atualização
-                if (!empty($aluno) && $aluno->{$key} != null) {
-                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $aluno->{$key});
-                }
-
-                #Movendo a imagem
-                $file->move($this->destinationPath, $fileName);
-
-                #renomeando
-                $data[$key] = $fileName;
-            }
-        }
-
-        # retorno
         return $data;
     }
 

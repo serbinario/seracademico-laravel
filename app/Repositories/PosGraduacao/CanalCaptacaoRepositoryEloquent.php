@@ -4,13 +4,14 @@ namespace Seracademico\Repositories\PosGraduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Entities\PosGraduacao\Aluno;
+use Seracademico\Repositories\PosGraduacao\CanalCaptacaoRepository;
+use Seracademico\Entities\PosGraduacao\CanalCaptacao;
 
 /**
- * Class AlunoRepositoryEloquent
+ * Class CanalCaptacaoRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
+class CanalCaptacaoRepositoryEloquent extends BaseRepository implements CanalCaptacaoRepository
 {
     /**
      * Specify Model class name
@@ -19,7 +20,7 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
      */
     public function model()
     {
-        return Aluno::class;
+        return CanalCaptacao::class;
     }
 
     /**

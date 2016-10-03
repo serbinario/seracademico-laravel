@@ -356,6 +356,10 @@ class HorarioTurmaController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function eJuncao(Request $request)
     {
         try {

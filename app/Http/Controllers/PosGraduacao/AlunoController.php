@@ -46,7 +46,9 @@ class AlunoController extends Controller
         'SituacaoAluno',
         'SimpleReport',
         'PosGraduacao\\Turma|posGraduacao',
-        'PosGraduacao\\Curso|ativo,1'
+        'PosGraduacao\\Curso|ativo,1',
+        'PosGraduacao\\CanalCaptacao',
+        'PosGraduacao\\TipoPretensao'
     ];
 
     /**
@@ -175,7 +177,7 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
+       
             #Executando a ação
             $this->service->store($data);
 
@@ -355,5 +357,23 @@ class AlunoController extends Controller
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImgAluno($id)
+    {
+        #Recuperando a empresa
+        $model = $this->service->find($id);
+
+        if($model->tipo_img == 1) {
+            return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+        } else {
+            return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+
+
     }
 }

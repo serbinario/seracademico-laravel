@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\Report\Simple;
 
 use Illuminate\Http\Request;
 
