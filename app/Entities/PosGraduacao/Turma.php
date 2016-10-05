@@ -39,7 +39,8 @@ class Turma extends Model implements Transformable
         'minimo_vagas',
         'observacao_vagas',
         'vencimento_inicial',
-        'tipo_nivel_sistema_id'
+        'tipo_nivel_sistema_id',
+        'duracao_meses'
 	];
 
     /**

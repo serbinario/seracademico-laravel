@@ -23,7 +23,6 @@ class CursoValidator extends LaravelValidator
 
 			'nome' =>  'required|max:200|unique:fac_cursos,nome',
 			'codigo' =>  'required|max:15|unique:fac_cursos,codigo',
-			'duracao_meses' =>  'digits_between:1,3|numeric',
 			'portaria_mec_rec' =>  'max:50',
 			'numero_decreto_rec' =>  '' ,
 			'data_decreto_rec' =>  'serbinario_date_format:"d/m/Y"',

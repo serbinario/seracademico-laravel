@@ -268,7 +268,28 @@ class AlunoController extends Controller
     {
         $aluno = $this->service->find($id);
 
-        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno])->stream();
+        $data = new \DateTime('now');
+        $curso = "";
+        $turma = "";
+
+        if(!$aluno->data_contrato) {
+            $aluno->data_contrato = $data->format('Y-m-d');
+            $aluno->save();
+        }
+
+        foreach ($aluno->curriculos as $curriculo) {
+            if($curriculo->pivot->situacao_id == 2) {
+                $curso = $curriculo->nome;
+            }
+        }
+
+        foreach ($aluno->turmas as $t) {
+            if($t->pivot->situacao_id == 2) {
+                $turma = $t;
+            }
+        }
+
+        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma])->stream();
     }
 
     /**

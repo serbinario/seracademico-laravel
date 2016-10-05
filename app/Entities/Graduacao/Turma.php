@@ -34,7 +34,8 @@ class Turma extends Model implements Transformable
         'aula_final',
         'maximo_vagas',
         'minimo_vagas',
-        'tipo_nivel_sistema_id'
+        'tipo_nivel_sistema_id',
+        'duracao_meses'
 	];
 
     /**
