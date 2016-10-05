@@ -73,7 +73,7 @@
                     <li role="presentation">
                         <a href="#recMec" aria-controls="contato" role="tab" data-toggle="tab"><i class="material-icons">playlist_add_check</i> Reconhecimento MEC</a>
                     </li>
-                    <li role="presentation">
+                   {{-- <li role="presentation">
                         <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
                     </li>
                     <li role="presentation">
@@ -81,7 +81,7 @@
                     </li>
                     <li role="presentation">
                         <a href="#finan" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">account_balance_wallet</i> Financeiro</a>
-                    </li>
+                    </li>--}}
 
                 </ul>
                 <!-- End Nav tabs -->
@@ -170,7 +170,7 @@
                     </div>
                     {{--Aba Reconhecimento MEC--}}
 
-                    {{--Aba Datas--}}
+                    {{--Aba Datas--}}{{--
                     <div role="tabpanel" class="tab-pane" id="datas">
                         <br/>
                         <div class="row">
@@ -205,9 +205,9 @@
                         </div>
 
                     </div>
-                    {{--FIM Aba Datas --}}
+                    --}}{{--FIM Aba Datas --}}{{--
 
-                    {{--Aba Vagas--}}
+                    --}}{{--Aba Vagas--}}{{--
                     <div role="tabpanel" class="tab-pane" id="vagas">
                         <br/>
                         <div class="row">
@@ -236,9 +236,9 @@
                         </div>
 
                     </div>
-                    {{--FIM Aba Financeiro --}}
+                    --}}{{--FIM Aba Financeiro --}}{{--
 
-                    {{--Aba Vagas--}}
+                    --}}{{--Aba Vagas--}}{{--
                     <div role="tabpanel" class="tab-pane" id="finan">
                         <br/>
                         <div class="row">
@@ -265,7 +265,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--FIM Aba Financeiro --}}
+                    --}}{{--FIM Aba Financeiro --}}
                 </div>
                 <!-- FIM Tab panes -->
             </div>
