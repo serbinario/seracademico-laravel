@@ -83,20 +83,9 @@ class ProfessorService
      */
     public function store(array $data) : Professor
     {
-        #tratando a imagem
-        if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
 
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
-
-            #setando o nome da imagem no model
-            $data['path_image'] = $fileName;
-
-            #destruindo o img do array
-            unset($data['img']);
-        }
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
@@ -123,6 +112,29 @@ class ProfessorService
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));
 
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_professores SET path_image = '{$imgCam}', tipo_img = 2 where id = {$professor->id} ";
+
+            $pdo->query($query);
+
+        } else if ($img && !$imgCam) {
+
+            $this->insertImg($professor->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_professores SET path_image = '{$imgCam}', tipo_img = 2 where id = {$professor->id} ";
+
+            $pdo->query($query);
+
+        }
+
         #Verificando se foi criado no banco de dados
         if(!$professor) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -140,32 +152,36 @@ class ProfessorService
     public function update(array $data, int $id) : Professor
     {
 
+        $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
+        $img    = isset($data['img']) ? $data['img'] : "";
+
         $this->tratamentoCampos($data);
         $this->tratamentoDatas($data);
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
 
-        #tratando a imagem
-        if(isset($data['img'])) {
-            $file     = $data['img'];
-            $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+        //Validando se a imagem vem da webcam ou não, e salvando no banco
+        if($imgCam && !$img) {
 
+            $pdo = \DB::connection()->getPdo();
 
-            #removendo a imagem antiga
-            if ($professor->path_image != null) {
-                unlink(__DIR__ . "/../../public/" . $this->destinationPath . $professor->path_image);
-            }
+            $query = "UPDATE fac_professores SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
 
-            #Movendo a imagem
-            $file->move($this->destinationPath, $fileName);
+            $pdo->query($query);
 
-            #setando o nome da imagem no model
-            $professor->path_image = $fileName;
-            $professor->save();
+        } else if ($img && !$imgCam) {
 
-            #destruindo o img do array
-            unset($data['img']);
+            $this->insertImg($professor->id, 1);
+
+        } else if ($imgCam && $img) {
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_professores SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
+
+            $pdo->query($query);
+
         }
 
         #Atualizando no banco de dados
@@ -181,6 +197,34 @@ class ProfessorService
 
         #Retorno
         return $professor;
+    }
+
+    /**
+     * @param $id
+     */
+    public function insertImg($id, $tipo)
+    {
+        #tratando a imagem
+        if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
+
+            $tmpName = $_FILES['img']['tmp_name'];
+
+            $fp = fopen($tmpName, 'r');
+
+            $add = fread($fp, filesize($tmpName));
+
+            $add = addslashes($add);
+
+            fclose($fp);
+
+            $pdo = \DB::connection()->getPdo();
+
+            $query = "UPDATE fac_professores SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
+
+            $pdo->query($query);
+
+        }
+
     }
 
     /**

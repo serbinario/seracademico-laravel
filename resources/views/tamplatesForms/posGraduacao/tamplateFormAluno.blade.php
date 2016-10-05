@@ -583,7 +583,7 @@
 
                     <div class="form-group col-md-4">
                         {!! Form::label('tipo_pretensao_id', 'Tipo de Pretenção') !!}
-                        {!! Form::select('tipo_pretensao_id', (['' => 'Selecione um tipo de pretensão'] + $loadFields['posgraduacao\\canalcaptacao']->toArray()), null, array('class' => 'form-control')) !!}
+                        {!! Form::select('tipo_pretensao_id', (['' => 'Selecione um tipo de pretensão'] + $loadFields['posgraduacao\\tipopretensao']->toArray()), null, array('class' => 'form-control')) !!}
                     </div>
                 </div>
 

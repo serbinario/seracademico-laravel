@@ -169,4 +169,22 @@ class ProfessorPosController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function getImg($id)
+    {
+        #Recuperando a empresa
+        $model = $this->service->find($id);
+
+        if($model->tipo_img == 1) {
+            return response($model->path_image) ->header('Content-Type', 'image/jpeg');
+        } else {
+            return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+
+
+    }
+
 }
