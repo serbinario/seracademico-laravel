@@ -74,4 +74,12 @@ class Aluno extends Model implements Transformable
         return $this->belongsToMany(Turma::class, "pos_alunos_turmas", "aluno_id", "turma_id")
             ->withPivot(['id', 'aluno_id', 'turma_id']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipoPretensao()
+    {
+        return $this->belongsTo(TipoPretensao::class, 'tipo_pretensao_id');
+    }
 }
