@@ -1,11 +1,11 @@
 // carregando todos os campos preenchidos
-function runSimpleReportGraAlunoSituacao()
+function runSimpleReportGraAlunoTrancado()
 {
-    builderReportGraAlunoSituacao();
+    builderReportGraAlunoTrancado();
 }
 
 // Função a montar o html
-function builderReportGraAlunoSituacao () {
+function builderReportGraAlunoTrancado () {
     // Recuperando o id do relatório selecionado
     var reportId   = $('#report_id').val();
 
