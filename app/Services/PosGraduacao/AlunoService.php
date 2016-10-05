@@ -74,6 +74,8 @@ class AlunoService
             'pessoa.profissao',
             'pessoa.corRaca',
             'pessoa.ufNascimento',
+            'turmas',
+            'curriculos'
         ];
 
         $aluno = $this->repository->with($relacionamentos)->find($id);

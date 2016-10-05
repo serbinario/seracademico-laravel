@@ -32,7 +32,6 @@ class Curso extends Model implements Transformable
     protected $fillable = [
         'nome',
         'codigo',
-        'duracao_meses',
         'portaria_mec_rec',
         'numero_decreto_rec',
         'data_decreto_rec',

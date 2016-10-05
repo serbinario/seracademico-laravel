@@ -24,6 +24,8 @@
                                 <th>Endereço</th>
                                 <th>Telefone</th>
                                 <th>Email</th>
+                                <th>Pretensão</th>
+                                <th>Ação</th>
                             </tr>
                             </thead>
                         </table>
@@ -40,10 +42,12 @@
             </div>
         </div>
     </div>
+
+    @include('posGraduacao.aluno.report.modal_editar_pretensao')
 @stop
 
 @section('javascript')
-
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/report/modal_editar_pretensao.js') }}"></script>
     <script type="text/javascript">
         var tableReport = $('#report-grid').DataTable({
             processing: true,
@@ -53,28 +57,41 @@
             iDisplayLength: 10,
             bLengthChange: false,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 2]) !!}",
+            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 4]) !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'endereco', name: 'endereco', orderable: false, searchable: false},
                 {data: 'celular', name: 'pessoas.celular'},
-                {data: 'email', name: 'pessoas.email'}
+                {data: 'email', name: 'pessoas.email'},
+                {data: 'pretensao', name: 'pos_tipos_pretensoes.nome'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
-        // Requisição ajax
-        jQuery.ajax({
-            type: 'GET',
-            url: '/index.php/seracademico/posgraduacao/aluno/graphicBuilderGeralPretensao',
-            datatype: 'json'
-        }).done(function (json) {
-            reportBar(json);
-        });
+        // executando o gráfico
+        loadGrafics();
+
+        // Função para executar o ajax do gráfico
+        function loadGrafics() {
+            // Requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/aluno/graphicBuilderGeralPretensao',
+                datatype: 'json'
+            }).done(function (json) {
+                reportBar(json);
+            });
+        }
 
         // Função para carregar o gráfico de barras
         function reportBar(dados) {
-            var data = [ ["Captação Futura", dados.capFutura], ["Não tem interesse", dados.naoInteresse], ["Total", dados.total] ];
+            var data = [
+                ["Captação Futura", dados.capFutura],
+                ["Não tem interesse", dados.naoInteresse],
+                ["Aguardando abertura de Turma", dados.abTurma],
+                ["Email Enviado", dados.eEnviado],
+                ["Total", dados.total] ];
 
             $.plot("#flot-bar-chart", [ data ], {
                 colors: ["#1ab394"],
@@ -108,11 +125,10 @@
                 },
             });
         };
-//            window.open("/index.php/seracademico/report/"
-//                    + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_turnos,id="+turnoId, '_blank');
+
+        // Evento no click no gráfico
         $("#flot-bar-chart").bind("plotclick", function (event, pos, item) {
             tableReport.ajax.url("/index.php/seracademico/posgraduacao/aluno/gridReportPretensao/" + item.dataIndex).load();
         });
-
     </script>
 @stop
