@@ -1,44 +1,50 @@
 <?php
 // leitura das datas automaticamente
-$dia = date('d');
-$mes = date('m');
-$ano = date('Y');
-$semana = date('w');
+
+        function data($dia, $mes, $ano, $semana) {
+
+            /*$dia = date('d');
+            $mes = date('m');
+            $ano = date('Y');
+            $semana = date('w');*/
 //$cidade = "Digite aqui sua cidade";
 
 // configuração mes
 
-switch ($mes){
+            switch ($mes){
 
-    case 1: $mes = "Janeiro"; break;
-    case 2: $mes = "Fevereiro"; break;
-    case 3: $mes = "Março"; break;
-    case 4: $mes = "Abril"; break;
-    case 5: $mes = "Maio"; break;
-    case 6: $mes = "Junho"; break;
-    case 7: $mes = "Julho"; break;
-    case 8: $mes = "Agosto"; break;
-    case 9: $mes = "Setembro"; break;
-    case 10: $mes = "Outubro"; break;
-    case 11: $mes = "Novembro"; break;
-    case 12: $mes = "Dezembro"; break;
+                case 1: $mes = "Janeiro"; break;
+                case 2: $mes = "Fevereiro"; break;
+                case 3: $mes = "Março"; break;
+                case 4: $mes = "Abril"; break;
+                case 5: $mes = "Maio"; break;
+                case 6: $mes = "Junho"; break;
+                case 7: $mes = "Julho"; break;
+                case 8: $mes = "Agosto"; break;
+                case 9: $mes = "Setembro"; break;
+                case 10: $mes = "Outubro"; break;
+                case 11: $mes = "Novembro"; break;
+                case 12: $mes = "Dezembro"; break;
 
-}
+            }
 
 
 // configuração semana
 
-switch ($semana) {
+            switch ($semana) {
 
-    case 0: $semana = "Domingo"; break;
-    case 1: $semana = "Segunda Feira"; break;
-    case 2: $semana = "Terça Feira"; break;
-    case 3: $semana = "Quarta Feira"; break;
-    case 4: $semana = "Quinta Feira"; break;
-    case 5: $semana = "Sexta Feira"; break;
-    case 6: $semana = "Sábado"; break;
+                case 0: $semana = "Domingo"; break;
+                case 1: $semana = "Segunda Feira"; break;
+                case 2: $semana = "Terça Feira"; break;
+                case 3: $semana = "Quarta Feira"; break;
+                case 4: $semana = "Quinta Feira"; break;
+                case 5: $semana = "Sexta Feira"; break;
+                case 6: $semana = "Sábado"; break;
 
-}
+            }
+
+            echo ("$semana, $dia de $mes de $ano");
+        }
 //Agora basta imprimir na tela...
 //echo ("$cidade, $semana, $dia de $mes de $ano");
 ?>
@@ -89,28 +95,30 @@ switch ($semana) {
 
 <table width="100%">
     <tr>
-        <td style="width: 20px"><b>Aluno</b></td>
-        <td>{!! isset($aluno['nome']) ? $aluno['nome'] : "" !!}</td>
+        <td style="width: 20px"><b>Aluno </b></td>
+        <td>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</td>
     </tr>
 </table>
 <br />
 
-<span><b>Filiação: </b></span><span>{!! isset($aluno['nome_pai']) ? $aluno['nome_pai'] : "" !!} </span>e<span> {!! isset($aluno['nome_mae']) ? $aluno['nome_mae'] : "" !!}</span><br />
-<span><b>Nacionalidade: </b></span><span>{!! isset($aluno['nacionalidade']) ? $aluno['nacionalidade'] : "" !!} </span><span><b>Naturalidade: </b></span><span>{!! isset($aluno['naturalidade']) ? $aluno['naturalidade'] : "" !!} </span><span><b>Estado Civil: </b></span><span>{!! isset($aluno['estadoCivil']['nome']) ? $aluno['estadoCivil']['nome'] : "" !!} </span><br />
-<span><b>dentidade RG nº: </b></span><span>{!! isset($aluno['identidade']) ? $aluno['identidade'] : "" !!} </span><span><b>Org. Expedidor: </b></span><span>{!! isset($aluno['orgao_rg']) ? $aluno['orgao_rg'] : "" !!} </span><span><b>UF: </b></span><span>{!! isset($aluno['estado']['nome']) ? $aluno['estado']['nome'] : "" !!} </span><span><b>CPF nº: </b></span><span>{!! isset($aluno['cpf']) ? $aluno['cpf'] : "" !!} </span><br />
+<span><b>Filiação: </b></span><span>{!! isset($aluno['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" !!} </span>e<span> {!! isset($aluno['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" !!}</span><br />
+<span><b>Nacionalidade: </b></span><span>{!! isset($aluno['nacionalidade']) ? $aluno['pessoa']['nacionalidade'] : "" !!} </span><span><b>Naturalidade: </b></span><span>{!! isset($aluno['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" !!} </span><span><b>Estado Civil: </b></span><span>{!! isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" !!} </span><br />
+<span><b>dentidade RG nº: </b></span><span>{!! isset($aluno['identidade']) ? $aluno['pessoa']['identidade'] : "" !!} </span><span><b>Org. Expedidor: </b></span><span>{!! isset($aluno['orgao_rg']) ? $aluno['pessoa']['orgao_rg'] : "" !!} </span><span><b>UF: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['estado']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['nome'] : "" !!} </span><span><b>CPF nº: </b></span><span>{!! isset($aluno['cpf']) ? $aluno['pessoa']['cpf'] : "" !!} </span><br />
 <?php
-if(isset($aluno['data_nasciemento'])) {
-    $date = explode('T', $aluno['data_nasciemento']);
-    $data = \DateTime::createFromFormat('Y-m-d', $date[0]);
+/*if(isset($aluno['pessoa']['data_nasciemento'])) {
+    dd($aluno['pessoa']['data_nasciemento']);
+    //$date = explode('T', $aluno['pessoa']['data_nasciemento']);
+    $data = \DateTime::createFromFormat('Y-m-d', $aluno['pessoa']['data_nasciemento']);
+
     $dataFromat = $data->format('d/m/Y');
 } else {
     $dataFromat = "";
 }
-?>
-<span><b>Data de nascimento: </b></span><span>{{$dataFromat}} </span><span><b>Sexo: </b></span><span>{!! isset($aluno['sexo']['nome']) ? $aluno['sexo']['nome'] : "" !!} </span><span><b>Residência: </b></span><span>{!! isset($aluno['endereco']['logradouro']) ? $aluno['endereco']['logradouro'] : "" !!} </span><br />
-<span><b>Bairro: </b></span><span>{!! isset($aluno['endereco']['bairro']['nome']) ? $aluno['endereco']['bairro']['nome'] : "" !!} </span><span><b>Cidade: </b></span><span>{!! isset($aluno['endereco']['bairro']['cidade']['nome']) ? $aluno['endereco']['bairro']['cidade']['nome'] : "" !!} </span><span><b>CEP: </b></span><span>{!! isset($aluno['endereco']['cep']) ? $aluno['endereco']['cep'] : "" !!} </span><br />
-<span><b>Telefones: {!! isset($aluno['telefone_fixo']) ? $aluno['telefone_fixo'] : "" !!} </b></span><span></span><br />
-<span><b>Profissão: </b>{!! isset($aluno['profissao']['nome']) ? $aluno['profissao']['nome'] : "" !!} </span><br /><br />
+*/?>
+<span><b>Data de nascimento: </b></span><span>{{$aluno['pessoa']['data_nasciemento']}} </span><span><b>Sexo: </b></span><span>{!! isset($aluno['pessoa']['sexo']) ? $aluno['pessoa']['sexo']['nome'] : "" !!} </span><span><b>Residência: </b></span><span>{!! isset($aluno['pessoa']['endereco']['logradouro']) ? $aluno['pessoa']['endereco']['logradouro'] : "" !!} </span><br />
+<span><b>Bairro: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['nome']) ? $aluno['pessoa']['endereco']['bairro']['nome'] : "" !!} </span><span><b>Cidade: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['nome']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] : "" !!} </span><span><b>CEP: </b></span><span>{!! isset($aluno['endereco']['cep']) ? $aluno['pessoa']['endereco']['cep'] : "" !!} </span><br />
+<span><b>Telefones: {!! isset($aluno['pessoa']['telefone_fixo']) ? $aluno['pessoa']['telefone_fixo'] : "" !!} </b></span><span></span><br />
+<span><b>Profissão: </b>{!! isset($aluno['pessoa']['profissao']['nome']) ? $aluno['pessoa']['profissao']['nome'] : "" !!} </span><br /><br />
 
 <span>DOS FUNDAMENTOS LEGAIS</span><br />
 <center><span><b>CLAUSULA I</b></span></center><br />
@@ -125,14 +133,14 @@ if(isset($aluno['data_nasciemento'])) {
 
 <h4>CLAUSULA II</h4>
 <span>O beneficiário do presente Contrato será:</span><br />
-<span><b>Nome: </b></span><span>{!! isset($aluno['nome']) ? $aluno['nome'] : "" !!} </span><span><b>Curso: </b></span><span> </span><br />
+<span><b>Nome: </b></span><span>{!! isset($aluno['pessoa']['nome']) ? $aluno['pessoa']['nome'] : "" !!} </span><span><b>Curso: {!! isset($curso) ? $curso : "" !!} </b></span><span> </span><br />
 <span><b>Dia: </b></span><span></span><span><b>Polo: </b></span><span> </span><br /><br />
 <span>DO OBJETO</span><br /><br />
 
 <h4>CLAUSULA III</h4>
 <span>
     Constitui objeto do presente Contrato, a prestação de Serviços Educacionais para o <b>Curso Pós Graduação “Lato Senso”</b>
-    em ___________________________________________________________, ofertado pela ALPHA EDUCAÇÃO E
+    em <b>{!! isset($curso) ? $curso : "" !!}</b>, ofertado pela ALPHA EDUCAÇÃO E
     TREINAMENTOS, de acordo com o prescrito na legislação acima citada, Estatuto e no Regimento Interno da ALPHA, as quais se
     obrigam a prestá-los ao beneficiário indicado neste Contrato, garantindo os padrões de qualidade estabelecidos pelo Ministério
     da Educação e a regularidade da oferta de ensino superior de qualidade
@@ -141,8 +149,17 @@ if(isset($aluno['data_nasciemento'])) {
 
 <h4>CLAUSULA IV</h4>
 <span>
-    O presente Contrato terá a duração de 15 meses, com início em _______de ____________ de ______ e termino em
-    _______ de ____________ de ________
+    <?php
+
+        if(isset($turma['aula_inicio']) && isset($turma['aula_final'])) {
+            $aulaIni = \DateTime::createFromFormat('d/m/Y', $turma['aula_inicio']);
+            $aulaFim = \DateTime::createFromFormat('d/m/Y', $turma['aula_final']);
+        } else {
+            $dataFromat = "";
+        }
+    ?>
+    O presente Contrato terá a duração de {!! isset($turma['duracao_meses']) ? $turma['duracao_meses'] : "" !!} meses, com início <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> e termino em
+        <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>
 </span><br /><br />
 <span>DA MATRÍCULA</span><br /><br />
 
@@ -162,8 +179,16 @@ if(isset($aluno['data_nasciemento'])) {
 
 <h4>CLAUSULA VII</h4>
 <span>
+    <?php
+
+        use Seracademico\Uteis\Monetary;
+
+        $valorCurso = number_format($turma['valor_turma'] * ($turma['qtd_parcelas'] + 1), 2, ',', '.');
+        $valorCurso2 = number_format($turma['valor_turma'] * ($turma['qtd_parcelas'] + 1), 2, '.', '');
+        $numeroTxt = Monetary::numberToExt($valorCurso2);
+    ?>
     Como contraprestação dos serviços educacionais, acima referidos, será cobrado do CONTRATANTE <br>um investimento de
-    R$ 2.400,00 (dois mil e quatrocentos reais), dividido em 1+ 15 (quinze) parcelas iguais mensais de R$ 150,00</b>, com vencimento no
+    R$ {{$valorCurso}} ({{$numeroTxt}}), dividido em 1+ {{$turma['qtd_parcelas']}} (quinze) parcelas iguais mensais de R$ {{$turma['valor_turma']}}</b>, com vencimento no
     dia do módulo presencial. As parcelas podem variar de acordo com cada curso. A matricula só será devolvida caso não forme turma.
     § 1° O aluno que efetivar as mensalidades até o dia da aula terá um desconto de acordo com a promoção estipulada pela ALPHA
     sobre o valor da parcela, caso contrário o valor será integral. A Alpha tem um prazo de 4 meses para fechamento de turmas. O aluno
@@ -223,7 +248,19 @@ if(isset($aluno['data_nasciemento'])) {
     que se produzam todos os efeitos legais.
 </span><br /><br />
 
-<center><span>Recife, <?php echo ("$semana, $dia de $mes de $ano"); ?></span></center><br /><br />
+<center>
+    <span>
+        <?php
+            if(isset($aluno['data_contrato'])) {
+                $dataContrato = $aluno['data_contrato'];
+            } else {
+                $dataContrato = "";
+            }
+        ?>
+        Recife, <?php data($dataContrato->format('d'), $dataContrato->format('m'), $dataContrato->format('Y'), $dataContrato->format('w')); ?>
+    </span>
+</center>
+<br /><br />
 <center><span>____________________________________<br />
                             CONTRATANTE
     </span></center><br /><br />

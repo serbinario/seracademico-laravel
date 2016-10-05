@@ -43,7 +43,8 @@ class Aluno extends Model implements Transformable
         'forma_admissao_id',
         'vestibulando_id',
         'path_image',
-        'tipo_img'
+        'tipo_img',
+        'data_contrato'
     ];
 
     /**

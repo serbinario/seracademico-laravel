@@ -32,13 +32,6 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
-                <div class="form-group">
-				{!! Form::label('duracao_meses', 'Duração (meses) ') !!}
-				{!! Form::text('duracao_meses', Session::getOldInput('duracao_meses')  , array('class' => 'form-control number')) !!}
-                </div>
-            </div>
-
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('tipo_curso_id', 'Tipo Curso *') !!}

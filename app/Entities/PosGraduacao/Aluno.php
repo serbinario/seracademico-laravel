@@ -16,7 +16,8 @@ class Aluno extends Model implements Transformable
     protected $table = "pos_alunos";
 
     protected $dates = [
-        "data_inscricao"
+        "data_inscricao",
+        'data_contrato'
     ];
 
     protected $fillable = [
@@ -31,7 +32,8 @@ class Aluno extends Model implements Transformable
         'obs_cursos_pretendidos',
         'canal_captacao_id',
         'tipo_pretensao_id',
-        'tipo_img'
+        'tipo_img',
+        'data_contrato'
     ];
 
     /**
@@ -72,7 +74,7 @@ class Aluno extends Model implements Transformable
     public function turmas()
     {
         return $this->belongsToMany(Turma::class, "pos_alunos_turmas", "aluno_id", "turma_id")
-            ->withPivot(['id', 'aluno_id', 'turma_id']);
+            ->withPivot(['id', 'aluno_id', 'turma_id', 'situacao_id']);
     }
 
     /**
