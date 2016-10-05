@@ -1,25 +1,26 @@
 <?php
 
-namespace Seracademico\Http\Controllers;
+namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\ProfessorService;
+use Seracademico\Services\PosGraduacao\ProfessorPosService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\ProfessorValidator;
+use Seracademico\Validators\PosGraduacao\ProfessorPosValidator;
 
-class ProfessorController extends Controller
+class ProfessorPosController extends Controller
 {
     /**
-    * @var ProfessorService
+    * @var ProfessorPosService
     */
     private $service;
 
     /**
-    * @var ProfessorValidator
+    * @var ProfessorPosValidator
     */
     private $validator;
 
@@ -42,10 +43,10 @@ class ProfessorController extends Controller
     ];
 
     /**
-    * @param ProfessorService $service
-    * @param ProfessorValidator $validator
+    * @param ProfessorPosService $service
+    * @param ProfessorPosValidator $validator
     */
-    public function __construct(ProfessorService $service, ProfessorValidator $validator)
+    public function __construct(ProfessorPosService $service, ProfessorPosValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -56,7 +57,7 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        return view('professor.index');
+        return view('professorPos.index');
     }
 
     /**
@@ -68,7 +69,7 @@ class ProfessorController extends Controller
         $rows = \DB::table('fac_professores')
             ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
             ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
-            ->where('tipo_nivel_sistema.id', '=' , 1)
+            ->where('tipo_nivel_sistema.id', '=' , 2)
             ->orWhere('fac_professores.pos_e_graduacao', '=' , 1)
             ->select(['fac_professores.id as id', 'pessoas.nome as nome', 'pessoas.cpf as cpf']);
 
@@ -91,7 +92,7 @@ class ProfessorController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('professor.create', compact('loadFields'));
+        return view('professorPos.create', compact('loadFields'));
     }
 
     /**
@@ -133,7 +134,7 @@ class ProfessorController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('professor.edit', compact('model', 'loadFields'));
+            return view('professorPos.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

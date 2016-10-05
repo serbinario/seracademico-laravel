@@ -1,13 +1,17 @@
 <?php
 
-namespace Seracademico\Entities;
+namespace Seracademico\Entities\PosGraduacao;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Instituicao;
+use Seracademico\Entities\Pessoa;
+use Seracademico\Entities\Titulacao;
+use Seracademico\Entities\Turno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
-class Professor extends Model implements Transformable
+class ProfessorPos extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -38,8 +42,8 @@ class Professor extends Model implements Transformable
 		'data_admissao',
         'pis',
         'pessoa_id',
-        'pos_e_graduacao',
-        'tipo_nivel_sistema_id'
+        'tipo_nivel_sistema_id',
+        'pos_e_graduacao'
 	];
 
 

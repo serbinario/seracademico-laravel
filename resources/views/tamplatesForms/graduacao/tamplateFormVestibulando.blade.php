@@ -1,19 +1,19 @@
 <div class="row">
     <div class="col-md-10">
         @if(!isset($aluno))
-        <div class="row">
-            <div class="col-md-4 form-group">
-                <label for="searchCpf">DIGITE O CPF SE POSSUIR CADASTRO</label>
-                <input type="text" id="searchCpf" class="form-control">
-            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="searchCpf">DIGITE O CPF SE POSSUIR CADASTRO</label>
+                    <input type="text" id="searchCpf" class="form-control">
+                </div>
 
-            <div class="col-md-4">
-                <a style="margin-top: 6%;" id="btnSearchCpf" class="btn btn-primary">
-                    Buscar
-                    <span class="glyphicon glyphicon-search"></span>
-                </a>
+                <div class="col-md-4">
+                    <a style="margin-top: 6%;" id="btnSearchCpf" class="btn btn-primary">
+                        Buscar
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </div>
             </div>
-        </div>
         @endif
         <div class="row">
             <div class="form-group col-md-7">
@@ -29,22 +29,24 @@
                 {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control')) !!}
             </div>
             {{--<div class="form-group col-md-1">--}}
-                {{--{!! Form::label('ativar', 'Ativar') !!}--}}
-                {{--<div class="checkbox checkbox-primary">--}}
-                    {{--{!! Form::hidden('pessoa[ativo]', 0) !!}--}}
-                    {{--{!! Form::checkbox('pessoa[ativo]', 1, null, array('class' => 'form-control')) !!}--}}
-                    {{--{!! Form::label('pessoa[ativo]', 'Ativar', false) !!}--}}
-                {{--</div>--}}
+            {{--{!! Form::label('ativar', 'Ativar') !!}--}}
+            {{--<div class="checkbox checkbox-primary">--}}
+            {{--{!! Form::hidden('pessoa[ativo]', 0) !!}--}}
+            {{--{!! Form::checkbox('pessoa[ativo]', 1, null, array('class' => 'form-control')) !!}--}}
+            {{--{!! Form::label('pessoa[ativo]', 'Ativar', false) !!}--}}
+            {{--</div>--}}
             {{--</div>--}}
 
         </div>
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura" style="width: 135px; height: 115px;">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura"
+                 style="width: 135px; height: 115px;">
                 @if (isset($aluno) && $aluno->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="{{route('seracademico.vestibulando.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo" src="{{route('seracademico.vestibulando.getImgAluno', ['id' => $aluno->id])}}"
+                             alt="Foto" height="120" width="100"/><br/>
                     </div>
                 @endif
             </div>
@@ -54,7 +56,8 @@
                    <input type="file" id="img" name="img">
                    <input type="hidden" id="cod_img" name="cod_img">
                </span>
-                <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal">
+                <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
+                       data-target="#myModal">
                 {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
@@ -98,8 +101,8 @@
                                 {!! Form::select('pessoa[estados_civis_id]', (['' => 'Selecione uma opção'] + $loadFields['estadocivil']->toArray()), null, array('class' => 'form-control')) !!}
                             </div>
                             {{--<div class="form-group col-md-2">--}}
-                                {{--{!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}--}}
-                                {{--{!! Form::select('grau_instrucoes_id', $loadFields['grauinstrucao'], Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('grau_instrucoes_id', 'Grau de instrução') !!}--}}
+                            {{--{!! Form::select('grau_instrucoes_id', $loadFields['grauinstrucao'], Session::getOldInput('grau_instrucoes_id'),array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
                             {{--<div class="form-group col-md-4">
                                 {!! Form::label('profissoes_id', 'Profissão ') !!}
@@ -133,7 +136,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i class="fa fa-plus-circle"></i> Filiação</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#filiacao"> <i
+                                                    class="fa fa-plus-circle"></i> Filiação</a>
                                     </h4>
                                 </div>
                                 <div id="filiacao" class="panel-collapse collapse">
@@ -387,18 +391,19 @@
                     <div class="col-md-12">
                         <div class="row">
                             {{--<div class="form-group col-md-5">--}}
-                                {{--<label for="fac_cursos_superiores_id">Formação Acadêmica</label>--}}
-                                {{--<select id="formacao" name="fac_cursos_superiores_id" class="form-control">--}}
-                                    {{--@if(isset($aluno->id) && $aluno->cursoSuperior != null)--}}
-                                        {{--<option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>--}}
-                                    {{--@endif--}}
-                                {{--</select>--}}
+                            {{--<label for="fac_cursos_superiores_id">Formação Acadêmica</label>--}}
+                            {{--<select id="formacao" name="fac_cursos_superiores_id" class="form-control">--}}
+                            {{--@if(isset($aluno->id) && $aluno->cursoSuperior != null)--}}
+                            {{--<option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>--}}
+                            {{--@endif--}}
+                            {{--</select>--}}
                             {{--</div>--}}
                             <div class="form-group col-md-10">
                                 <label for="instituicao">Instituição</label><br>
                                 <select id="instituicao" class="form-control" name="pessoa[instituicao_escolar_id]">
                                     @if(isset($aluno->id) && $aluno->pessoa->instituicaoEscolar != null)
-                                        <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
+                                        <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}"
+                                                selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
                                     @endif
                                 </select>
                             </div>
@@ -425,7 +430,7 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 {!! Form::label('vestibular_id', 'Vestibular * ') !!}
-                               
+
                                 @if(isset($aluno->vestibular->id))
                                     {!! Form::select('vestibular_id', $loadFields['graduacao\\vestibular'], null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
                                 @else
@@ -434,8 +439,8 @@
 
                             </div>
                             {{--<div class="form-group col-md-4">--}}
-                                {{--{!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira ') !!}--}}
-                                {{--{!! Form::select('linguagem_estrangeira_id', $loadFields['linguaextrangeira'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('linguagem_estrangeira_id', 'Linguagem Estrangeira ') !!}--}}
+                            {{--{!! Form::select('linguagem_estrangeira_id', $loadFields['linguaextrangeira'], Session::getOldInput('vestibular_id'), array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
                             <div class="form-group col-md-2">
                                 {!! Form::label('inscricao', 'Inscricao * ') !!}
@@ -452,14 +457,14 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                <?php $now =  new \DateTime('now'); ?>
+                                <?php $now = new \DateTime('now'); ?>
                                 {!! Form::label('data_insricao_vestibular', 'Data Inscricao * ') !!}
                                 {!! Form::text('data_insricao_vestibular', $now->format('d/m/Y'), array('class' => 'form-control', 'readonly' => 'readonly')) !!}
                             </div>
 
                             {{--<div class="form-group col-md-2">--}}
-                                {{--{!! Form::label('sala_vestibular_id', 'Sala ') !!}--}}
-                                {{--{!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('sala_vestibular_id', 'Sala ') !!}--}}
+                            {{--{!! Form::select('sala_vestibular_id', (['' => 'Selecione uma sala'] + $loadFields['sala']->toArray()), Session::getOldInput('sala_vestibular_id'), array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
 
                             <div class="form-group col-md-1">
@@ -486,10 +491,11 @@
                                 <a href="#comprovantes" aria-controls="comprovantes" role="tab" data-toggle="tab">Comprovantes</a>
                             </li>
                             <li role="presentation" id="liFicha19">
-                                <a href="#ficha19" id="aFicha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha 19</a>
+                                <a href="#ficha19" id="aFicha19" aria-controls="ficha19" role="tab" data-toggle="tab">Ficha
+                                    19</a>
                             </li>
                             <li role="presentation" id="liEnem">
-                                <a href="#enem"id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
+                                <a href="#enem" id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
                             </li>
                         </ul>
                         <!-- End Nav tabs -->
@@ -709,8 +715,8 @@
                                         </div>
                                     </div>--}}
                                 </div>
-                                </div>
                             </div>
+
 
                             <div role="tabpanel" class="tab-pane" id="ficha19">
                                 <br>
@@ -775,19 +781,19 @@
 
                     {{--@if(isset($aluno))--}}
                     {{--<div class="row">--}}
-                        {{--<div class="col-md-12">--}}
-                            {{--<div class="form-group col-md-4">--}}
-                                {{--<div class="checkbox checkbox-primary">--}}
-                                    {{--@if(isset($aluno) && $aluno->gerar_inscricao == 1)--}}
-                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
-                                    {{--@else--}}
-                                        {{--{!! Form::hidden('gerar_inscricao', 0) !!}--}}
-                                        {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}--}}
-                                    {{--@endif--}}
-                                    {{--{!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                    {{--<div class="col-md-12">--}}
+                    {{--<div class="form-group col-md-4">--}}
+                    {{--<div class="checkbox checkbox-primary">--}}
+                    {{--@if(isset($aluno) && $aluno->gerar_inscricao == 1)--}}
+                    {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                    {{--@else--}}
+                    {{--{!! Form::hidden('gerar_inscricao', 0) !!}--}}
+                    {{--{!! Form::checkbox('gerar_inscricao', 1, null, array('class' => 'form-control')) !!}--}}
+                    {{--@endif--}}
+                    {{--{!! Form::label('gerar_inscricao', 'Gerar número de inscrição', false) !!}--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--@endif--}}
                 </div>
@@ -799,7 +805,8 @@
         {{--Buttons Submit e Voltar--}}
         <div class="row">
 
-            <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -812,7 +819,7 @@
                             <div style="margin-left: -11px;" id="my_camera"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                             <button type="button" onClick="take_snapshot()" class="btn btn-primary">Tirar foto</button>
                         </div>
                     </div>
@@ -823,7 +830,8 @@
             <div class="col-md-3">
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
-                        <a href="{{ route('seracademico.vestibulando.index') }}" class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i> Voltar</a>
+                        <a href="{{ route('seracademico.vestibulando.index') }}"
+                           class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i> Voltar</a>
                     </div>
                     <div class="btn-group">
                         {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
@@ -834,7 +842,6 @@
         </div>
         {{--Fim Buttons Submit e Voltar--}}
     </div>
-
 
 
 </div>
@@ -849,17 +856,17 @@
             jpeg_quality: 90
         });
 
-        $(document).on('click', '#foto', function(){
-            Webcam.attach( '#my_camera' );
+        $(document).on('click', '#foto', function () {
+            Webcam.attach('#my_camera');
         });
 
         function take_snapshot() {
 
             // take snapshot and get image data
-            Webcam.snap( function(data_uri) {
+            Webcam.snap(function (data_uri) {
 
                 // display results in page
-                document.getElementById('captura').innerHTML = '<img src="'+data_uri+'"/>';
+                document.getElementById('captura').innerHTML = '<img src="' + data_uri + '"/>';
                 var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
                 document.getElementById('cod_img').value = raw_image_data;
 
@@ -867,7 +874,7 @@
                 Webcam.reset();
                 // $(".modal-dialog").modal('toggle');
 
-            } );
+            });
         }
 
 
@@ -889,8 +896,8 @@
 
             if (estado !== "") {
                 var dados = {
-                    'table' : 'cidades',
-                    'field_search' : 'estados_id',
+                    'table': 'cidades',
+                    'field_search': 'estados_id',
                     'value_search': estado,
                 };
 
@@ -900,7 +907,7 @@
                     data: dados,
                     datatype: 'json',
                     headers: {
-                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
                     },
                 }).done(function (json) {
                     var option = "";
@@ -931,8 +938,8 @@
 
             if (cidade !== "") {
                 var dados = {
-                    'table' : 'bairros',
-                    'field_search' : 'cidades_id',
+                    'table': 'bairros',
+                    'field_search': 'cidades_id',
                     'value_search': cidade,
                 };
 
@@ -976,16 +983,16 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_instituicoes',
-                        'fieldName':  'nome',
-                        'fieldWhere':  'nivel',
-                        'valueWhere':  '2',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_instituicoes',
+                        'fieldName': 'nome',
+                        'fieldWhere': 'nivel',
+                        'valueWhere': '2',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -1023,14 +1030,14 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_cursos_superiores',
-                        'fieldName':  'nome',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_cursos_superiores',
+                        'fieldName': 'nome',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -1051,85 +1058,85 @@
         });
 
         // Validações javascript
-//        $('#formVestibulando').bootstrapValidator({
-//            fields: {
-//                'pessoa[nome]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome' })
-//                        },
-//                        stringLength: {
-//                            max: 50,
-//                            message: Lang.get('validation.max', { attribute: 'Nome' })
-//                        }
-//                    }
-//                },
-//                'pessoa[data_nasciemento]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-//                        }
-//                    }
-//                },
-//                'pessoa[cpf]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'CPF' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_pai]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_mae]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-//                        }
-//                    }
-//                },
-//                'pessoa[identidade]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-//                        }
-//                    }
-//                },
-//                'vestibular_id': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
-//                        }
-//                    }
-//                },
-//                'data_insricao_vestibular': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
-//                        }
-//                    }
-//                },
-//                'primeira_opcao_curso_id': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
-//                        }
-//                    }
-//                },
-//                'primeira_opcao_turno_id': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
-//                        }
-//                    }
-//                }
-//
-//            },
-//        });
+        //        $('#formVestibulando').bootstrapValidator({
+        //            fields: {
+        //                'pessoa[nome]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome' })
+        //                        },
+        //                        stringLength: {
+        //                            max: 50,
+        //                            message: Lang.get('validation.max', { attribute: 'Nome' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[data_nasciemento]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[cpf]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'CPF' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[nome_pai]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[nome_mae]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[identidade]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+        //                        }
+        //                    }
+        //                },
+        //                'vestibular_id': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
+        //                        }
+        //                    }
+        //                },
+        //                'data_insricao_vestibular': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
+        //                        }
+        //                    }
+        //                },
+        //                'primeira_opcao_curso_id': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
+        //                        }
+        //                    }
+        //                },
+        //                'primeira_opcao_turno_id': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
+        //                        }
+        //                    }
+        //                }
+        //
+        //            },
+        //        });
 
         // Regra para carregamento dos cursos a partir do vestibular escolhido
         $(document).on('change', '#vestibular_id', function () {
@@ -1164,14 +1171,14 @@
          */
         function loadOpcoesCurso(vestibularId) {
             // Verificando o id do vestibular
-            if(vestibularId) {
+            if (vestibularId) {
                 jQuery.ajax({
                     type: 'POST',
                     url: '{{ route('seracademico.graduacao.curso.getByVestibular')  }}',
                     headers: {
                         'X-CSRF-TOKEN': '{{  csrf_token() }}'
                     },
-                    data: {'vestibularId' : vestibularId},
+                    data: {'vestibularId': vestibularId},
                     datatype: 'json'
                 }).done(function (json) {
                     // Variável que armazenará os options do select
@@ -1202,23 +1209,23 @@
 
                     @if(isset($aluno))
                        $('#primeira_opcao_curso_id option[value=' + idOpcao1 + ']').prop('selected', true);
-                        $('#segunda_opcao_curso_id option[value=' + idOpcao2 + ']').prop('selected', true);
-                        $('#terceira_opcao_curso_id option[value=' + idOpcao3 + ']').prop('selected', true);
+                    $('#segunda_opcao_curso_id option[value=' + idOpcao2 + ']').prop('selected', true);
+                    $('#terceira_opcao_curso_id option[value=' + idOpcao3 + ']').prop('selected', true);
                     @else
                         @if( Session::getOldInput('primeira_opcao_curso_id'))
                             $('#primeira_opcao_curso_id option[value=' + "{{ Session::getOldInput('primeira_opcao_curso_id')  }}" + ']').prop('selected', true);
-                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('primeira_opcao_curso_id')  }}", '#primeira_opcao_turno_id');
-                        @endif
+                    getTurnosByCurso(vestibularId, "{{ Session::getOldInput('primeira_opcao_curso_id')  }}", '#primeira_opcao_turno_id');
+                    @endif
 
-                        @if( Session::getOldInput('segunda_opcao_curso_id'))
-                            $('#segunda_opcao_curso_id option[value=' + "{{ Session::getOldInput('segunda_opcao_curso_id')  }}" + ']').prop('selected', true);
-                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('segunda_opcao_curso_id')  }}",  '#segunda_opcao_turno_id');
-                        @endif
+                    @if( Session::getOldInput('segunda_opcao_curso_id'))
+                        $('#segunda_opcao_curso_id option[value=' + "{{ Session::getOldInput('segunda_opcao_curso_id')  }}" + ']').prop('selected', true);
+                    getTurnosByCurso(vestibularId, "{{ Session::getOldInput('segunda_opcao_curso_id')  }}", '#segunda_opcao_turno_id');
+                    @endif
 
-                        @if( Session::getOldInput('terceira_opcao_curso_id'))
-                            $('#terceira_opcao_curso_id option[value=' + "{{ Session::getOldInput('terceira_opcao_curso_id')  }}" + ']').prop('selected', true);
-                            getTurnosByCurso(vestibularId, "{{ Session::getOldInput('terceira_opcao_curso_id')  }}", '#terceira_opcao_turno_id');
-                        @endif
+                    @if( Session::getOldInput('terceira_opcao_curso_id'))
+                        $('#terceira_opcao_curso_id option[value=' + "{{ Session::getOldInput('terceira_opcao_curso_id')  }}" + ']').prop('selected', true);
+                    getTurnosByCurso(vestibularId, "{{ Session::getOldInput('terceira_opcao_curso_id')  }}", '#terceira_opcao_turno_id');
+                    @endif
 
                     @endif
                 });
@@ -1322,7 +1329,7 @@
             var idVestibular = $('#vestibular_id').find('option:selected').val();
 
             // verificando se o curso foi selecionado
-            if(idCurso) {
+            if (idCurso) {
                 // recuperando os options
                 getTurnosByCurso(idVestibular, idCurso, '#primeira_opcao_turno_id');
             }
@@ -1340,7 +1347,7 @@
             var idVestibular = $('#vestibular_id').find('option:selected').val();
 
             // verificando se o curso foi selecionado
-            if(idCurso) {
+            if (idCurso) {
                 // recuperando os options
                 getTurnosByCurso(idVestibular, idCurso, '#segunda_opcao_turno_id');
             }
@@ -1358,7 +1365,7 @@
             var idVestibular = $('#vestibular_id').find('option:selected').val();
 
             // verificando se o curso foi selecionado
-            if(idCurso) {
+            if (idCurso) {
                 // Gerando os options
                 getTurnosByCurso(idVestibular, idCurso, '#terceira_opcao_turno_id');
             }
@@ -1373,7 +1380,7 @@
          * @param idCurso
          * @param idHtml
          */
-        function getTurnosByCurso (idVestibular, idCurso, idHtml) {
+        function getTurnosByCurso(idVestibular, idCurso, idHtml) {
             // Requisição ajax
             jQuery.ajax({
                 type: 'POST',
@@ -1381,7 +1388,7 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
-                data: {'idCurso' : idCurso, 'idVestibular' : idVestibular},
+                data: {'idCurso': idCurso, 'idVestibular': idVestibular},
                 datatype: 'json'
             }).done(function (json) {
                 // Variável que armazenará o html
@@ -1399,54 +1406,54 @@
 
                 // Recuperando os oldIdOpcao de turno
                 var oldInputPrimeiraOpcaoTurno = "{{ Session::getOldInput('primeira_opcao_turno_id')  }}";
-                var oldInputSegundaOpcaoTurno  = "{{ Session::getOldInput('segunda_opcao_turno_id')  }}";
+                var oldInputSegundaOpcaoTurno = "{{ Session::getOldInput('segunda_opcao_turno_id')  }}";
                 var oldInputTerceiraOpcaoTurno = "{{ Session::getOldInput('terceira_opcao_turno_id')  }}";
 
                 // Verificando se foi primeira opção de turno
-                if(idHtml == '#primeira_opcao_turno_id') {
-                    $('#primeira_opcao_turno_id option[value=' + oldInputPrimeiraOpcaoTurno  + ']').prop('selected', true);
+                if (idHtml == '#primeira_opcao_turno_id') {
+                    $('#primeira_opcao_turno_id option[value=' + oldInputPrimeiraOpcaoTurno + ']').prop('selected', true);
                 }
 
                 // Verificando se foi a segunda opção de turno
-                if(idHtml == '#segunda_opcao_turno_id') {
-                    $('#segunda_opcao_turno_id option[value=' + oldInputSegundaOpcaoTurno  + ']').prop('selected', true);
+                if (idHtml == '#segunda_opcao_turno_id') {
+                    $('#segunda_opcao_turno_id option[value=' + oldInputSegundaOpcaoTurno + ']').prop('selected', true);
                 }
 
                 // Verificando se foi a terceira opção de turno
-                if(idHtml == '#terceira_opcao_turno_id') {
-                    $('#terceira_opcao_turno_id option[value=' + oldInputTerceiraOpcaoTurno  + ']').prop('selected', true);
+                if (idHtml == '#terceira_opcao_turno_id') {
+                    $('#terceira_opcao_turno_id option[value=' + oldInputTerceiraOpcaoTurno + ']').prop('selected', true);
                 }
             });
         }
 
-       /**
-        * Comprovante enem
-        *
-        * Código que é responsável pelo carregamento de
-        * arquivos no formulário
-        *
-        * http://plugins.krajee.com/
-        * https://github.com/kartik-v/bootstrap-fileinput
-        */
+        /**
+         * Comprovante enem
+         *
+         * Código que é responsável pelo carregamento de
+         * arquivos no formulário
+         *
+         * http://plugins.krajee.com/
+         * https://github.com/kartik-v/bootstrap-fileinput
+         */
         $("#path_comprovante_enem").fileinput({
             @if(isset($aluno->path_comprovante_enem))
-                initialPreviewFileType: 'object',
-                initialPreview:[
-                    '/images/{{$aluno->path_comprovante_enem}}'
-                ],
-                initialPreviewAsData: true,
-                initialPreviewConfig: [{
-                    caption: 'comprovante-enem.pdf',
-                    filetype: 'application/pdf',
-                    url: false,
-                    width: '100%'
-                }],
+            initialPreviewFileType: 'object',
+            initialPreview: [
+                '/images/{{$aluno->path_comprovante_enem}}'
+            ],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [{
+                caption: 'comprovante-enem.pdf',
+                filetype: 'application/pdf',
+                url: false,
+                width: '100%'
+            }],
             @endif
 
             language: 'pt-BR',
             showUpload: false,
             showCaption: false,
-            allowedFileExtensions : ['pdf'],
+            allowedFileExtensions: ['pdf'],
         });
 
         /**
@@ -1460,22 +1467,22 @@
          */
         $("#path_comprovante_endereco").fileinput({
             @if(isset($aluno->path_comprovante_endereco))
-                initialPreviewFileType: 'object',
-                initialPreview:[
-                    '/images/{{$aluno->path_comprovante_endereco}}'
-                ],
-                initialPreviewAsData: true,
-                initialPreviewConfig: [{
-                    caption: 'comprovante-endereco.pdf',
-                    filetype: 'application/pdf',
-                    url: false,
-                    width: '100%'
-                }],
+            initialPreviewFileType: 'object',
+            initialPreview: [
+                '/images/{{$aluno->path_comprovante_endereco}}'
+            ],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [{
+                caption: 'comprovante-endereco.pdf',
+                filetype: 'application/pdf',
+                url: false,
+                width: '100%'
+            }],
             @endif
             language: 'pt-BR',
             showUpload: false,
             showCaption: false,
-            allowedFileExtensions : ['pdf'],
+            allowedFileExtensions: ['pdf'],
         });
 
         /**
@@ -1489,22 +1496,22 @@
          */
         $("#path_comprovante_ficha19").fileinput({
             @if(isset($aluno->path_comprovante_ficha19))
-                initialPreviewFileType: 'object',
-                initialPreview:[
-                    '/images/{{$aluno->path_comprovante_ficha19}}'
-                ],
-                initialPreviewAsData: true,
-                initialPreviewConfig: [{
-                    caption: 'comprovante-ficha19.pdf',
-                    filetype: 'application/pdf',
-                    url: false,
-                    width: '100%'
-                }],
+            initialPreviewFileType: 'object',
+            initialPreview: [
+                '/images/{{$aluno->path_comprovante_ficha19}}'
+            ],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [{
+                caption: 'comprovante-ficha19.pdf',
+                filetype: 'application/pdf',
+                url: false,
+                width: '100%'
+            }],
             @endif
             language: 'pt-BR',
             showUpload: false,
             showCaption: false,
-            allowedFileExtensions : ['pdf'],
+            allowedFileExtensions: ['pdf'],
         });
 
         /*
@@ -1512,37 +1519,37 @@
          *
          * Código para bloquear toda a aba de vestibular
          * caso o vestibulando já estive sido transferido para aluno.
-        */
+         */
         @if(isset($aluno->aluno->id))
             $(document).on('ready', function () {
-                $("input[name=enem]").prop('disabled', true);
-                $("#primeira_opcao_curso_id").prop('disabled', true);
-                $("#segunda_opcao_curso_id").prop('disabled', true);
-                $("#terceira_opcao_curso_id").prop('disabled', true);
-                $("#primeira_opcao_turno_id").prop('disabled', true);
-                $("#segunda_opcao_turno_id").prop('disabled', true);
-                $("#terceira_opcao_turno_id").prop('disabled', true);
-                $("#path_comprovante_enem").prop('disabled', true);
-                $("#path_comprovante_endereco").prop('disabled', true);
-                $("#path_comprovante_ficha19").prop('disabled', true);
-                $("#ficha_nota_portugues").prop('readonly', true);
-                $("#ficha_nota_matematica").prop('readonly', true);
-                $("#ficha_nota_historia").prop('readonly', true);
-                $("#ficha_nota_geografia").prop('readonly', true);
-                $("#ficha_nota_sociologia").prop('readonly', true);
-                $("#ficha_nota_filosofia").prop('readonly', true);
-                $("#ficha_nota_biologia").prop('readonly', true);
-                $("#ficha_nota_lingua_estrangeira").prop('readonly', true);
-                $("#ficha_nota_quimica").prop('readonly', true);
-                $("#ficha_nota_fisica").prop('readonly', true);
-                $("#ano_enem").prop('disabled', true);
-                $("#inscricao_enem").prop('disabled', true);
-                $("#nota_humanas").prop('readonly', true);
-                $("#nota_matematica").prop('readonly', true);
-                $("#nota_natureza").prop('readonly', true);
-                $("#nota_linguagem").prop('readonly', true);
-                $("#nota_redacao").prop('readonly', true);
-            });
+            $("input[name=enem]").prop('disabled', true);
+            $("#primeira_opcao_curso_id").prop('disabled', true);
+            $("#segunda_opcao_curso_id").prop('disabled', true);
+            $("#terceira_opcao_curso_id").prop('disabled', true);
+            $("#primeira_opcao_turno_id").prop('disabled', true);
+            $("#segunda_opcao_turno_id").prop('disabled', true);
+            $("#terceira_opcao_turno_id").prop('disabled', true);
+            $("#path_comprovante_enem").prop('disabled', true);
+            $("#path_comprovante_endereco").prop('disabled', true);
+            $("#path_comprovante_ficha19").prop('disabled', true);
+            $("#ficha_nota_portugues").prop('readonly', true);
+            $("#ficha_nota_matematica").prop('readonly', true);
+            $("#ficha_nota_historia").prop('readonly', true);
+            $("#ficha_nota_geografia").prop('readonly', true);
+            $("#ficha_nota_sociologia").prop('readonly', true);
+            $("#ficha_nota_filosofia").prop('readonly', true);
+            $("#ficha_nota_biologia").prop('readonly', true);
+            $("#ficha_nota_lingua_estrangeira").prop('readonly', true);
+            $("#ficha_nota_quimica").prop('readonly', true);
+            $("#ficha_nota_fisica").prop('readonly', true);
+            $("#ano_enem").prop('disabled', true);
+            $("#inscricao_enem").prop('disabled', true);
+            $("#nota_humanas").prop('readonly', true);
+            $("#nota_matematica").prop('readonly', true);
+            $("#nota_natureza").prop('readonly', true);
+            $("#nota_linguagem").prop('readonly', true);
+            $("#nota_redacao").prop('readonly', true);
+        });
         @endif
 
         @if(isset($aluno))
@@ -1554,12 +1561,12 @@
             // Requisição ajax
             jQuery.ajax({
                 type: 'DELETE',
-                data: {'comprovante' : comprovante},
+                data: {'comprovante': comprovante},
                 url: '{{ route('seracademico.vestibulando.deleteComprovante', ['id' => $aluno->id ])  }}',
                 datatype: 'json'
             }).done(function (json) {
-              // Verificando se remoção foi bem sucedida
-                if(!json.success) {
+                // Verificando se remoção foi bem sucedida
+                if (!json.success) {
                     //swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
                 }
             });
@@ -1567,24 +1574,24 @@
         @endif
         {{--// Estado inicial enem--}}
         {{--@if(isset($aluno->enem) && $aluno->enem)--}}
-            {{--$('#liEnem').show();--}}
-            {{--$('#liFicha19').hide();--}}
+        {{--$('#liEnem').show();--}}
+        {{--$('#liFicha19').hide();--}}
         {{--@else--}}
-            {{--$('#liEnem').hide();--}}
-            {{--$('#liFicha19').show();--}}
+        {{--$('#liEnem').hide();--}}
+        {{--$('#liFicha19').show();--}}
         {{--@endif--}}
 
         {{--// Regra de negócio aba enem e ficha19--}}
         {{--$(document).on('change', '#ingresso_enem', function () {--}}
-           {{--if(this.checked) {--}}
-               {{--$('#liEnem').show();--}}
-               {{--$('#aEnem').trigger('click');--}}
-               {{--$('#liFicha19').hide();--}}
-           {{--} else {--}}
-               {{--$('#liEnem').hide();--}}
-               {{--$('#liFicha19').show();--}}
-               {{--$('#aFicha19').trigger('click');--}}
-           {{--}--}}
+        {{--if(this.checked) {--}}
+        {{--$('#liEnem').show();--}}
+        {{--$('#aEnem').trigger('click');--}}
+        {{--$('#liFicha19').hide();--}}
+        {{--} else {--}}
+        {{--$('#liEnem').hide();--}}
+        {{--$('#liFicha19').show();--}}
+        {{--$('#aFicha19').trigger('click');--}}
+        {{--}--}}
         {{--});--}}
     </script>
 
