@@ -52,6 +52,12 @@ $('#btnBuilderReportGraAlunoPorVestibular').click(function() {
     var reportId   = $('#report_id').val();
     var semestreId = $('#semestre_gra_aluno_por_vestibular_id').val();
 
+    // Validando as entradas
+    if(!semestreId) {
+        swal('Todos os campos do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
+        return false;
+    }
+
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
         + reportId + "?fac_semestres,id=" + semestreId, '_blank');

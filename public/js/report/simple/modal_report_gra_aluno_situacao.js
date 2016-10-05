@@ -2,7 +2,7 @@
 function runSimpleReportGraAlunoSituacao()
 {
     builderReportGraAlunoSituacao();
-};
+}
 
 // Função a montar o html
 function builderReportGraAlunoSituacao () {
