@@ -7,7 +7,7 @@
             <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-users"></i>
-                    Relatório Geral de Alunos e Pretendentes
+                    Relatório Geral Candidatos por Pretensão
                 </h4>
             </div>
 
@@ -45,7 +45,6 @@
 @section('javascript')
 
     <script type="text/javascript">
-        console.log("{!! route('seracademico.posgraduacao.aluno.gridReportGeralAlunoCandidato', ['tipo' => 2]) !!}");
         var tableReport = $('#report-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -54,7 +53,7 @@
             iDisplayLength: 10,
             bLengthChange: false,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportGeralAlunoCandidato', ['tipo' => 2]) !!}",
+            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 2]) !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'cpf', name: 'pessoas.cpf'},
@@ -67,7 +66,7 @@
         // Requisição ajax
         jQuery.ajax({
             type: 'GET',
-            url: '/index.php/seracademico/posgraduacao/aluno/graphicBuilderGeral',
+            url: '/index.php/seracademico/posgraduacao/aluno/graphicBuilderGeralPretensao',
             datatype: 'json'
         }).done(function (json) {
             reportBar(json);
@@ -75,7 +74,7 @@
 
         // Função para carregar o gráfico de barras
         function reportBar(dados) {
-            var data = [ ["Alunos", dados.alunos], ["Pretendentes", dados.pretendentes], ["Total", dados.total] ];
+            var data = [ ["Captação Futura", dados.capFutura], ["Não tem interesse", dados.naoInteresse], ["Total", dados.total] ];
 
             $.plot("#flot-bar-chart", [ data ], {
                 colors: ["#1ab394"],
@@ -112,7 +111,7 @@
 //            window.open("/index.php/seracademico/report/"
 //                    + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_turnos,id="+turnoId, '_blank');
         $("#flot-bar-chart").bind("plotclick", function (event, pos, item) {
-            tableReport.ajax.url("/index.php/seracademico/posgraduacao/aluno/gridReportGeralAlunoCandidato/" + item.dataIndex).load();
+            tableReport.ajax.url("/index.php/seracademico/posgraduacao/aluno/gridReportPretensao/" + item.dataIndex).load();
         });
 
     </script>
