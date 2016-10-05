@@ -53,7 +53,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
@@ -65,31 +65,12 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                    <form id="report-form" class="form-inline" role="form">
-                                        <div class="form-group">
-                                            {!! Form::select('relatorios', ( ['' => 'Selecione um relatório'] + $loadFields['simplereport']->toArray()),
-                                             Session::getOldInput('relatorios'), array('class' => 'form-control', 'id' => 'report_id')) !!}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {!! Form::select('cursos', ( ['' => 'Selecione um curso'] + $loadFields['posgraduacao\\curso']->toArray()),
-                                             Session::getOldInput('cursos'), array('class' => 'form-control', 'id' => 'curso_id')) !!}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {!! Form::select('turmas', ( ['' => 'Selecione uma turma'] + $loadFields['posgraduacao\\turma']->toArray()),
-                                             Session::getOldInput('turmas'), array('class' => 'form-control', 'id' => 'turma_id')) !!}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {!! Form::select('turnos', ( ['' => 'Selecione um turno'] + $loadFields['turno']->toArray()),
-                                             Session::getOldInput('turnos'), array('class' => 'form-control', 'id' => 'turno_id')) !!}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <button class="btn-sm btn-primary" type="submit" id="reportVestibulando">Relatório</button>
-                                        </div>
-                                    </form>
+                                   <div class="row">
+                                       <div class="form-group col-md-12">
+                                           {!! Form::select('relatorios', ( ['' => 'Selecione um relatório'] + $loadFields['simplereport']->toArray()),
+                                            Session::getOldInput('relatorios'), array('class' => 'form-control', 'id' => 'report_id')) !!}
+                                       </div>
+                                   </div>
                                 </div>
                             </div>
                         </div>
@@ -101,11 +82,13 @@
 
     @include('posGraduacao.aluno.turma.modal_aluno_turma')
     @include('posGraduacao.aluno.turma.modal_nova_turma')
+    @include('reports.simple.modals.modal_report_pos_aluno_geral')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -135,24 +118,35 @@
             loadTableCursoTurma(idAluno);
         });
 
-        $('#report-form').submit(function (event) {
-            event.preventDefault();
-
-            // Recuperando o id do relatório selecionado
+        // Geriamento dos relatórios avançadas
+        $(document).on('change', '#report_id', function () {
+            // Recuperando o id do relatório
             var reportId = $('#report_id').val();
-            var cursoId  = $('#curso_id').val();
-            var turmaId  = $('#turma_id').val();
-            var turnoId  = $('#turno_id').val();
 
-            // Validando o relatório escolhido
+            // Validando o id do relatório
             if(!reportId) {
-                swal('Você deve escolher um relatório', '', 'error');
-                return false;
+               return false;
             }
 
-            window.open("/index.php/seracademico/report/"
-                    + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_turnos,id="+turnoId, '_blank');
+            // Fazendo a requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/report/getFunction/' + reportId,
+                datatype: 'json'
+            }).done(function (retorno) {
+                // Verificando o retorno da requisição
+                if(retorno.success) {
+                    execute(new Function(retorno.dados.function));
+                } else {
+                    // Retorno tenha dado erro
+                    swal(retorno.msg, "Click no botão abaixo!", "error");
+                }
+            });
         });
 
+        // Função utilizada para executar o callback
+        function execute(callback) {
+            callback();
+        }
     </script>
 @stop

@@ -18,4 +18,14 @@ class SimpleReport extends Model implements Transformable
 		'crud_id',
 	];
 
+	/**
+	 * @param $query
+	 * @param $idCrud
+	 * @return mixed
+	 */
+	public function scopeByCrud($query, $idCrud)
+	{
+		return $query->where('crud_id', $idCrud);
+	}
+
 }

@@ -33,7 +33,8 @@ class TurmaController extends Controller
         'Turno',
         'Sala|situacao,1',
         'Professor|getValues',
-        'Graduacao\Semestre'
+        'Graduacao\Semestre',
+        'SimpleReport|byCrud,3'
     ];
 
     /**
