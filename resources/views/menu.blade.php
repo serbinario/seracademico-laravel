@@ -71,6 +71,7 @@
                             <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.posgraduacao.professorpos.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>

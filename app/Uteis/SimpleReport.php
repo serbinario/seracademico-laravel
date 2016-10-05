@@ -55,14 +55,17 @@ class SimpleReport implements Report
         # Recuperando a configuração do html
         $width  = array_column($this->fields, 'largura');
         $head   = array_column($this->fields, 'name');
-       
+        $fHead  = array_column($this->filters, 'name');
+        
         # Array de retorno
         $report = [
             'reportName' => $this->nameReport[0]->nome,
             'body'    => $this->body($filters),
             //'footer'  => $this->footer(),
             'headers' => $head,
-            'widths'  => $width
+            'widths'  => $width,
+            'filtersHeaders' => $fHead,
+            'filtersBody' => array_values((array) $this->filterBody($filters)[0])
         ];
         
         # retorno
@@ -76,6 +79,12 @@ class SimpleReport implements Report
      */
     private function body($filters)
     {
+        # Recuperando os campos e larguras da pesquisa principal
+        $fields = implode(',', array_column($this->fields, 'field'));
+
+        # Finalizando o sql principal
+        $sql = str_replace('FIELDS', $fields, $this->sql[0]);
+
         # Variável que armazenará a condição where
         $where = "";
 
@@ -89,9 +98,39 @@ class SimpleReport implements Report
                 }
             }
         }
-   
+
         # Executando o sql principal
-        return \DB::select($this->sql[0] . $where);
+        return \DB::select($sql . $where);
+    }
+
+    /**
+     * @param $filters
+     * @return mixed
+     */
+    private function filterBody($filters)
+    {
+        # Campos que vão ser utilizados na consulta
+        $fields = implode(',', array_column($this->filters, 'field_body'));
+
+        # Finalizando o sql principal
+        $sql = str_replace('FIELDS', $fields, $this->sql[0]);
+
+        # Variável que armazenará a condição where
+        $where = "";
+
+        # Percorrendo os filtros
+        foreach($this->filters as $filter) {
+            foreach ($filters as $chave => $value) {
+                $chave = str_replace(',', '.', $chave);
+
+                if (strcmp($filter->field, $chave) == 0 && !empty($value)) {
+                    $where .= empty($where) ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
+                }
+            }
+        }
+  
+        # Executando o sql principal
+        return \DB::select($sql . $where);
     }
 
 //    /**
@@ -175,7 +214,9 @@ class SimpleReport implements Report
             ->join('reports', 'reports.id', '=', 'filters_report.report_id')
             ->where('reports.id', $id)
             ->select([
-                'filters_report.field_name as field'
+                'filters_report.field_name as field',
+                'filters_report.name',
+                'filters_report.field_body'
             ])
             ->get();
     }

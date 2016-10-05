@@ -74,6 +74,12 @@ $('#btnBuilderReportPosAlunoGeral').click(function() {
     var turmaId  = $('#turma_pos_aluno_geral_id').val();
     var turnoId  = $('#turno_pos_aluno_geral_id').val();
 
+    // Validando as entradas
+    if(!cursoId || !turmaId || !turnoId) {
+        swal('Todos os campos do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
+        return false;
+    }
+
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
         + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_turnos,id="+turnoId, '_blank');

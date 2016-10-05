@@ -116,6 +116,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'ProfessorController@contrato']);
             });
 
+            Route::group(['prefix' => 'professorpos', 'as' => 'professorpos.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\ProfessorPosController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\ProfessorPosController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'PosGraduacao\ProfessorPosController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\ProfessorPosController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\ProfessorPosController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\ProfessorPosController@update']);
+                Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\ProfessorPosController@contrato']);
+            });
+
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\DisciplinaController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\DisciplinaController@grid']);

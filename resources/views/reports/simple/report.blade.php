@@ -21,6 +21,13 @@
                 </td>
                 <td width="55%"><br>
                     <h1 style="text-align: center;color: #082652; ">{{ $dados['reportName'] }}</h1>
+                    <h3 style="text-align: center;color: #082652; ">
+                        @if(count($dados['filtersHeaders']) === count($dados['filtersBody']))
+                            @for ($i = 0; $i < count($dados['filtersHeaders']); $i++)
+                                {{ $dados['filtersHeaders'][$i]  }} : {{ $dados['filtersBody'][$i] }} <br>
+                            @endfor
+                        @endif
+                    </h3>
                 </td>
                 <td width="15%">
                     <img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>

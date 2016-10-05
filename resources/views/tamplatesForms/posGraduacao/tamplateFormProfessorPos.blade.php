@@ -30,7 +30,7 @@
             <div class="checkbox checkbox-primary checkbox-inline" style="margin-top: 27px">
                 {!! Form::hidden('pos_e_graduacao', 0) !!}
                 {!! Form::checkbox('pos_e_graduacao', 1, null, array('class' => 'form-control')) !!}
-                {!! Form::label('pos_e_graduacao', 'Professor de pós-graduação', false) !!}
+                {!! Form::label('pos_e_graduacao', 'Professor de graduação', false) !!}
             </div>
         </div>
     </div>
@@ -411,7 +411,7 @@
     <div class="col-md-3">
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
-                <a href="{{ route('seracademico.posgraduacao.professor.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                <a href="{{ route('seracademico.posgraduacao.professorpos.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>  Voltar</a>
             </div>
             <div class="btn-group">
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary', 'id' => 'submitForm')) !!}
