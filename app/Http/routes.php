@@ -90,8 +90,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\AlunoController@contrato']);
                 Route::get('reportViewGeralAlunoCandidato', ['as' => 'reportViewGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@reportViewGeralAlunoCandidato']);
-                Route::get('gridReportGeralAlunoCandidatorid/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
+                Route::get('gridReportGeralAlunoCandidato/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
                 Route::get('graphicBuilderGeral', ['as' => 'graphicBuilderGeral', 'uses' => 'Report\ReportAlunoController@graphicBuilderGeral']);
+                Route::get('reportViewPretensao', ['as' => 'reportViewPretensao', 'uses' => 'Report\ReportPretensaoController@reportViewPretensao']);
+                Route::get('gridReportPretensao/{tipo}', ['as' => 'gridReportPretensao', 'uses' => 'Report\ReportPretensaoController@gridReportPretensao']);
+                Route::get('graphicBuilderGeralPretensao', ['as' => 'graphicBuilderGeralPretensao', 'uses' => 'Report\ReportPretensaoController@graphicBuilderGeral']);
+
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
