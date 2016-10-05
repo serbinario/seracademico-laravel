@@ -39,6 +39,35 @@
 
     @section('javascript')
         <script type="text/javascript">
+
+            Webcam.set({
+                width: 260,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+
+            $(document).on('click', '#foto', function () {
+                Webcam.attach('#my_camera');
+            });
+
+            function take_snapshot() {
+
+                // take snapshot and get image data
+                Webcam.snap(function (data_uri) {
+
+                    // display results in page
+                    document.getElementById('captura').innerHTML = '<img src="' + data_uri + '"/>';
+                    var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
+                    document.getElementById('cod_img').value = raw_image_data;
+
+                    $(".my-profile").modal('hide');
+                    Webcam.reset();
+                    // $(".modal-dialog").modal('toggle');
+
+                });
+            }
+
             //Carregando as cidades
             $(document).on('change', "#estado", function () {
                 //Removendo as cidades
