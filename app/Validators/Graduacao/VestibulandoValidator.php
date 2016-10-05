@@ -205,8 +205,8 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => '',
 
             //Opções de Curso
-            'primeira_opcao_curso_id' => 'required|integer',
-            'primeira_opcao_turno_id' => 'required|integer',
+            'primeira_opcao_curso_id' => 'integer',
+            'primeira_opcao_turno_id' => 'integer',
             'segunda_opcao_curso_id' => 'integer',
             'segunda_opcao_turno_id' => 'integer',
             'terceira_opcao_curso_id' => 'integer',

@@ -1,9 +1,12 @@
 <?php
 namespace Seracademico\Uteis;
 
-
 use Seracademico\Contracts\Report;
 
+/**
+ * Class SimpleReport
+ * @package Seracademico\Uteis
+ */
 class SimpleReport implements Report
 {
     /**
@@ -52,7 +55,7 @@ class SimpleReport implements Report
         # Recuperando a configuração do html
         $width  = array_column($this->fields, 'largura');
         $head   = array_column($this->fields, 'name');
-
+       
         # Array de retorno
         $report = [
             'reportName' => $this->nameReport[0]->nome,
@@ -66,11 +69,6 @@ class SimpleReport implements Report
         return $report;
     }
 
-    public function prepareFilters($filters)
-    {
-
-    }
-
     /**
      * Método responsável por retornar os dados do corpo
      *
@@ -78,13 +76,7 @@ class SimpleReport implements Report
      */
     private function body($filters)
     {
-        # Recuperando os campos e larguras da pesquisa principal
-       // $fields = implode(',', array_column($this->fields, 'field'));
-
-        # Finalizando o sql principal
-        //$sql    = str_replace('FIELDS', $fields, $this->sql[0]);
-
-        # Variável que armazenará o filtro
+        # Variável que armazenará a condição where
         $where = "";
 
         # Percorrendo os filtros
@@ -160,6 +152,7 @@ class SimpleReport implements Report
                 'fields_report.descricao as name',
                 'fields_report.largura'
             ])
+            ->orderBy('fields_report.id', 'ASC')
             ->get();
 
         # Carregando os campos de rodapé
@@ -174,6 +167,7 @@ class SimpleReport implements Report
                 'operation_report.nome as operation',
                 'fields_report.descricao as name',
             ])
+            ->orderBy('fields_report.id', 'ASC')
             ->get();
 
         # Carregando os campos de filtros

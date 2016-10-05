@@ -166,4 +166,13 @@ class Turma extends Model implements Transformable
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeGraduacao($query)
+    {
+        return $query->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])->where('tipo_nivel_sistema_id', 1);
+    }
 }

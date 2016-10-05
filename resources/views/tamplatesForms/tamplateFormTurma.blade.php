@@ -136,10 +136,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('observacao_vagas', 'Observação Vagas') !!}
-                                    {!! Form::textarea('observacao_vagas', Session::getOldInput('observacao_vagas')  ,['size' => '50x5'] , array('class' => 'form-control')) !!}
+                                    {!! Form::label('observacao_vagas', 'Observação') !!}
+                                    {!! Form::textarea('observacao_vagas', Session::getOldInput('observacao_vagas'), array('class' => 'form-control',  'rows'=>'3')) !!}
                                 </div>
                             </div>
                         </div>
@@ -160,11 +160,12 @@
                             </div>
                         </div>
 
+
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('obs_sala', 'Observação Sala') !!}
-                                    {!! Form::textarea('obs_sala', Session::getOldInput('obs_sala') , ['size' => '50x5'] , array('class' => 'form-control')) !!}
+                                    {!! Form::label('obs_sala', 'Observação:') !!}
+                                    {!! Form::textarea('obs_sala', Session::getOldInput('obs_sala') , array('class' => 'form-control',  'rows'=>'3')) !!}
                                 </div>
                             </div>
                         </div>

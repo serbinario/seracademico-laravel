@@ -751,7 +751,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         # Rota para relatórios
-        Route::get('report/{id}', ['as' => 'report', 'uses' => 'ReportController@report']);
+        Route::get('report/{id}', ['as' => 'report', 'uses' => 'Report\Simple\ReportController@report']);
+        Route::post('report/getLoadFields', ['as' => 'report.getLoadFields', 'uses' => 'Report\Simple\ReportController@getLoadFields']);
+        Route::get('report/getFunction/{id}', ['as' => 'report.getFunction', 'uses' => 'Report\Simple\ReportController@getFunction']);
 
         # Rotas para o financeiro
         Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
