@@ -18,7 +18,7 @@ function runSimpleReportGraAlunoPorPeriodo()
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno) {
-            builderFilterGraAlunoPorVestibular(retorno);
+            builderFilterGraAlunoPorPeriodo(retorno);
         } else {
             // Retorno tenha dado erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -27,7 +27,7 @@ function runSimpleReportGraAlunoPorPeriodo()
 };
 
 // Função a montar o html
-function builderFilterGraAlunoPorVestibular (dados) {
+function builderFilterGraAlunoPorPeriodo (dados) {
     //Limpando os campos
     $('#semestre_gra_aluno_por_periodo_id option').find('option').prop('selected', false);
     $('#periodo_gra_aluno_por_periodo_id option').find('option').prop('selected', false);
@@ -64,6 +64,12 @@ $('#btnBuilderReportGraAlunoPorPeriodo').click(function() {
     var semestreId = $('#semestre_gra_aluno_por_periodo_id').val();
     var periodo    = $('#periodo_gra_aluno_por_periodo_id').val();
     var cursoId    = $('#curso_gra_aluno_por_periodo_id').val();
+
+    // Validando as entradas
+    if(!semestreId || !periodo || !cursoId) {
+        swal('Todos os campos do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
+        return false;
+    }
 
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
