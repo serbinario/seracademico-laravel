@@ -17,7 +17,7 @@
             padding: 2px 10px;
         }
     </style>
-    
+
 @stop
 
 @section('content')
