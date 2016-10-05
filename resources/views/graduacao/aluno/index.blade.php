@@ -191,7 +191,9 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_por_vestibular.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_por_periodo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_situacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_trancado.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_graduado.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_ativo.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

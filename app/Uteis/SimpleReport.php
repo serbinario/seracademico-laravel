@@ -115,6 +115,11 @@ class SimpleReport implements Report
         # Campos que vão ser utilizados na consulta
         $fields = implode(',', array_column($this->filters, 'field_body'));
 
+        # Verificando se tem algum filtro
+        if(empty($fields)) {
+            return [];
+        }
+
         # Finalizando o sql principal
         $sql = str_replace('FIELDS', $fields, $this->sql[0]);
 
