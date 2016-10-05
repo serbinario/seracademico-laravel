@@ -1,17 +1,17 @@
 <?php
 
-namespace Seracademico\Services;
+namespace Seracademico\Services\PosGraduacao;
 
-use Seracademico\Entities\Professor;
+use Seracademico\Repositories\PosGraduacao\ProfessorPosRepository;
+use Seracademico\Entities\PosGraduacao\ProfessorPos;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Carbon\Carbon;
-use Seracademico\Repositories\ProfessorRepository;
 
-class ProfessorService
+class ProfessorPosService
 {
     /**
-     * @var ProfessorRepository
+     * @var ProfessorPosRepository
      */
     private $repository;
 
@@ -32,11 +32,11 @@ class ProfessorService
 
     /**
      * ProfessorService constructor.
-     * @param ProfessorRepository $repository
+     * @param ProfessorPosRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param PessoaRepository $pessoaRepository
      */
-    public function __construct(ProfessorRepository $repository,
+    public function __construct(ProfessorPosRepository $repository,
                                 EnderecoRepository $enderecoRepository,
                                 PessoaRepository $pessoaRepository)
     {
@@ -81,7 +81,7 @@ class ProfessorService
      * @return Professor
      * @throws \Exception
      */
-    public function store(array $data) : Professor
+    public function store(array $data) : ProfessorPos
     {
         #tratando a imagem
         if(isset($data['img'])) {
@@ -118,7 +118,7 @@ class ProfessorService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
-        $data['tipo_nivel_sistema_id'] = 1;
+        $data['tipo_nivel_sistema_id'] = 2;
 
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));
@@ -137,7 +137,7 @@ class ProfessorService
      * @param int $id
      * @return mixed
      */
-    public function update(array $data, int $id) : Professor
+    public function update(array $data, int $id) : ProfessorPos
     {
 
         $this->tratamentoCampos($data);
