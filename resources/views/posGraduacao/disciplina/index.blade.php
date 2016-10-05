@@ -1,5 +1,22 @@
 @extends('menu')
 
+@section('css')
+    <style type="text/css">
+
+        td.details-control {
+            background: url("{{asset("imagemgrid/icone-produto-plus.png")}}") no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
+        }
+        table.dataTable tbody th, table.dataTable tbody td {
+            padding: 2px 10px;
+        }
+    </style>
+@stop
+
 @section('content')
 
     <div class="ibox float-e-margins">
