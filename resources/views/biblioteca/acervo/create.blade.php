@@ -404,7 +404,7 @@
                     }
                 });
             } else {
-                swal("Você deve informar um título", "warning");
+                //swal("Você deve informar um título", "warning");
             }
         });
 
