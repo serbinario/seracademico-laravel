@@ -652,8 +652,6 @@
 
 @section('javascript')
     <script type="text/javascript">
-
-
         Webcam.set({
             width: 260,
             height: 240,
@@ -844,56 +842,56 @@
             }
         });
 
-        $('#formAluno').bootstrapValidator({
-            fields: {
-                'pessoa[nome]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome' })
-                        },
-                        stringLength: {
-                            max: 50,
-                            message: Lang.get('validation.max', { attribute: 'Nome' })
-                        }
-                    }
-                },
-                'pessoa[data_nasciemento]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-                        }
-                    }
-                },
-                'pessoa[cpf]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'CPF' })
-                        }
-                    }
-                },
-                'pessoa[nome_pai]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-                        }
-                    }
-                },
-                'pessoa[nome_mae]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-                        }
-                    }
-                },
-                'pessoa[identidade]': {
-                    validators: {
-                        notEmpty: {
-                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-                        }
-                    }
-                }
-            },
-        });
+//        $('#formAluno').bootstrapValidator({
+//            fields: {
+//                'pessoa[nome]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome' })
+//                        },
+//                        stringLength: {
+//                            max: 50,
+//                            message: Lang.get('validation.max', { attribute: 'Nome' })
+//                        }
+//                    }
+//                },
+//                'pessoa[data_nasciemento]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+//                        }
+//                    }
+//                },
+//                'pessoa[cpf]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'CPF' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_pai]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+//                        }
+//                    }
+//                },
+//                'pessoa[nome_mae]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+//                        }
+//                    }
+//                },
+//                'pessoa[identidade]': {
+//                    validators: {
+//                        notEmpty: {
+//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+//                        }
+//                    }
+//                }
+//            },
+//        });
 
         // Path imagem do aluno
         $("#path_image").fileinput({
