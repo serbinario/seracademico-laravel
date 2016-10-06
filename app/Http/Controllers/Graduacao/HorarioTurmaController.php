@@ -337,7 +337,8 @@ class HorarioTurmaController extends Controller
 
             # Fazendo a consulta
             $rows = \DB::table("fac_horas")
-                        ->select('fac_horas.id', 'fac_horas.nome')
+                        ->orderBy('fac_horas.hora_inicial')
+                        ->select('fac_horas.id', 'fac_horas.hora_inicial')
                         ->whereNotIn('fac_horas.id', function ($query) use ($idTurma, $idDia) {
                             $query->from('fac_horarios')
                                 ->select('fac_horarios.hora_id')
