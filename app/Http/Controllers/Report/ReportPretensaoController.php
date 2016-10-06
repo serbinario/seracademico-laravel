@@ -70,12 +70,13 @@ class ReportPretensaoController extends Controller
             ]);
 
         # Verificando o tipo do gráfico
-        if($tipo != 4) {
+        if($tipo != 5) {
             switch ($tipo) {
                 case 0 : $query->where('pos_tipos_pretensoes.codigo', 'CF'); break;
                 case 1 : $query->where('pos_tipos_pretensoes.codigo', 'NI'); break;
                 case 2 : $query->where('pos_tipos_pretensoes.codigo', 'AAT'); break;
                 case 3 : $query->where('pos_tipos_pretensoes.codigo', 'EE'); break;
+                case 4 : $query->where('pos_tipos_pretensoes.codigo', 'EA'); break;
             }
         }
 
@@ -118,12 +119,18 @@ class ReportPretensaoController extends Controller
             return $row->codigo == "EE";
         });
 
+        # Filtrando as de email enviado
+        $emAndamento = array_filter($rows, function ($row) {
+            return $row->codigo == "EA";
+        });
+
         # array de retorno
         $arrayResult = [
             'abTurma' => count($abTurma),
             'eEnviado' => count($eEnviado),
             'capFutura' => count($capFutura),
             'naoInteresse' => count($naoInteresse),
+            'emAndamento' => count($emAndamento),
             'total' => count($rows)
         ];
 
