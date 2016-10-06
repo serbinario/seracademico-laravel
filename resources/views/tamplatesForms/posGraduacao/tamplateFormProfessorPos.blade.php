@@ -36,10 +36,13 @@
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura" style="width: 135px; height: 115px;">
+            <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura"
+                 style="width: 135px; height: 115px;">
                 @if (isset($model) && $model->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="{{route('seracademico.posgraduacao.professorpos.getImg', ['id' => $model->id])}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo"
+                             src="{{route('seracademico.posgraduacao.professorpos.getImg', ['id' => $model->id])}}"
+                             alt="Foto" height="120" width="100"/><br/>
                         {{--<img id="logo" src="{{asset("/images/$aluno->path_image")}}"  alt="Foto" height="120" width="100"/><br/>--}}
                     </div>
                 @endif
@@ -51,13 +54,14 @@
                    <input type="file" id="img" name="img">
                    <input type="hidden" id="cod_img" name="cod_img">
                </span>
-                <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal">
+                <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
+                       data-target="#myModal">
                 {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
             </div>
         </div>
     </div>
-    </div>
 </div>
+
 <hr class="hr-line-dashed"/>
 <div class="row">
     <div class="col-md-12">
@@ -436,7 +440,8 @@
     <div class="col-md-3">
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
-                <a href="{{ route('seracademico.posgraduacao.professorpos.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                <a href="{{ route('seracademico.posgraduacao.professorpos.index') }}" class="btn btn-primary"><i
+                            class="fa fa-long-arrow-left"></i> Voltar</a>
             </div>
             <div class="btn-group">
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary', 'id' => 'submitForm')) !!}

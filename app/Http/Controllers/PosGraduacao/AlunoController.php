@@ -277,16 +277,26 @@ class AlunoController extends Controller
             $aluno->save();
         }
 
-        foreach ($aluno->curriculos as $curriculo) {
-            if($curriculo->pivot->situacao_id == 2) {
-                $curso = $curriculo->nome;
-            }
-        }
+        $curso = \DB::table('pos_alunos_cursos')
+            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
+            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->limit(1)
+            ->select([
+                'fac_curriculos.*'
+            ])->first();
 
-        foreach ($aluno->turmas as $t) {
-            if($t->pivot->situacao_id == 2) {
-                $turma = $t;
-            }
+        $turma = \DB::table('pos_alunos_turmas')
+            ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+            ->where('pos_alunos_turmas.aluno_id', '=', $aluno->id)
+            ->orderBy('pos_alunos_turmas.id', 'DESC')
+            ->limit(1)
+            ->select([
+                'fac_turmas.*'
+            ])->first();
+        
+        if(!$curso && !$turma) {
+            return redirect()->back()->with("message", "Este aluno não foi vinculado a uma curso e turma!");
         }
 
         return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma])->stream();
