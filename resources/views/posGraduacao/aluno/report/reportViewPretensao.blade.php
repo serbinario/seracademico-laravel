@@ -15,6 +15,21 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
+                    <form id="search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
+                            {{--<button class="btn-sm btn-primary" type="button" id="filterReport">Relatório</button>--}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="table-responsive no-padding">
                         <table id="report-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -57,7 +72,13 @@
             iDisplayLength: 10,
             bLengthChange: false,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 5]) !!}",
+            bFilter: false,
+            ajax: {
+                url: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 5]) !!}",
+                data: function (d) {
+                    d.curso = $('select[name=cursoSearch] option:selected').val();
+                }
+            },
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'cpf', name: 'pessoas.cpf'},
@@ -67,6 +88,12 @@
                 {data: 'pretensao', name: 'pos_tipos_pretensoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Função do submit do search da grid principal
+        $('#search-form').on('submit', function(e) {
+            tableReport.draw();
+            e.preventDefault();
         });
 
         // executando o gráfico
