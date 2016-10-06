@@ -102,8 +102,15 @@
 
         /*Responsável em abrir modal*/
         $(document).on("click", '.modal-calendario', function () {
+            // declaração de variáveis locais
+            var codigo;
+
             //Recuperando o id da turma selecionada
             idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+
+            // setando a descrição
+            $('#caTurma').text(codigo);
 
             //Executando a grid
             runTableDisciplina(idTurma);
