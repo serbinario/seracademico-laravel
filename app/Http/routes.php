@@ -95,7 +95,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('reportViewPretensao', ['as' => 'reportViewPretensao', 'uses' => 'Report\ReportPretensaoController@reportViewPretensao']);
                 Route::get('gridReportPretensao/{tipo}', ['as' => 'gridReportPretensao', 'uses' => 'Report\ReportPretensaoController@gridReportPretensao']);
                 Route::get('graphicBuilderGeralPretensao', ['as' => 'graphicBuilderGeralPretensao', 'uses' => 'Report\ReportPretensaoController@graphicBuilderGeral']);
-
+                Route::get('editPretensao/{id}', ['as' => 'editPretensao', 'uses' => 'Report\ReportPretensaoController@editPretensao']);
+                Route::post('updatePretensao/{id}', ['as' => 'updatePretensao', 'uses' => 'Report\ReportPretensaoController@updatePretensao']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
