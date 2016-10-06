@@ -133,14 +133,14 @@
 
 <h4>CLAUSULA II</h4>
 <span>O beneficiário do presente Contrato será:</span><br />
-<span><b>Nome: </b></span><span>{!! isset($aluno['pessoa']['nome']) ? $aluno['pessoa']['nome'] : "" !!} </span><span><b>Curso: {!! isset($curso) ? $curso : "" !!} </b></span><span> </span><br />
+<span><b>Nome: </b></span><span>{!! isset($aluno['pessoa']['nome']) ? $aluno['pessoa']['nome'] : "" !!} </span><span><b>Curso: {!! isset($curso->nome) ? $curso->nome : "" !!} </b></span><span> </span><br />
 <span><b>Dia: </b></span><span></span><span><b>Polo: </b></span><span> </span><br /><br />
 <span>DO OBJETO</span><br /><br />
 
 <h4>CLAUSULA III</h4>
 <span>
     Constitui objeto do presente Contrato, a prestação de Serviços Educacionais para o <b>Curso Pós Graduação “Lato Senso”</b>
-    em <b>{!! isset($curso) ? $curso : "" !!}</b>, ofertado pela ALPHA EDUCAÇÃO E
+    em <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, ofertado pela ALPHA EDUCAÇÃO E
     TREINAMENTOS, de acordo com o prescrito na legislação acima citada, Estatuto e no Regimento Interno da ALPHA, as quais se
     obrigam a prestá-los ao beneficiário indicado neste Contrato, garantindo os padrões de qualidade estabelecidos pelo Ministério
     da Educação e a regularidade da oferta de ensino superior de qualidade
@@ -151,14 +151,14 @@
 <span>
     <?php
 
-        if(isset($turma['aula_inicio']) && isset($turma['aula_final'])) {
-            $aulaIni = \DateTime::createFromFormat('d/m/Y', $turma['aula_inicio']);
-            $aulaFim = \DateTime::createFromFormat('d/m/Y', $turma['aula_final']);
+        if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
+            $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+            $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
         } else {
             $dataFromat = "";
         }
     ?>
-    O presente Contrato terá a duração de {!! isset($turma['duracao_meses']) ? $turma['duracao_meses'] : "" !!} meses, com início <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> e termino em
+    O presente Contrato terá a duração de {!! isset($turma->duracao_meses) ? $turma->duracao_meses : "" !!} meses, com início <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> e termino em
         <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>
 </span><br /><br />
 <span>DA MATRÍCULA</span><br /><br />
@@ -183,12 +183,12 @@
 
         use Seracademico\Uteis\Monetary;
 
-        $valorCurso = number_format($turma['valor_turma'] * ($turma['qtd_parcelas'] + 1), 2, ',', '.');
-        $valorCurso2 = number_format($turma['valor_turma'] * ($turma['qtd_parcelas'] + 1), 2, '.', '');
+        $valorCurso = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, ',', '.');
+        $valorCurso2 = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, '.', '');
         $numeroTxt = Monetary::numberToExt($valorCurso2);
     ?>
     Como contraprestação dos serviços educacionais, acima referidos, será cobrado do CONTRATANTE <br>um investimento de
-    R$ {{$valorCurso}} ({{$numeroTxt}}), dividido em 1+ {{$turma['qtd_parcelas']}} (quinze) parcelas iguais mensais de R$ {{$turma['valor_turma']}}</b>, com vencimento no
+    R$ {{$valorCurso}} ({{$numeroTxt}}), dividido em 1+ {{$turma->qtd_parcelas}} (quinze) parcelas iguais mensais de R$ {{$turma->valor_turma}}</b>, com vencimento no
     dia do módulo presencial. As parcelas podem variar de acordo com cada curso. A matricula só será devolvida caso não forme turma.
     § 1° O aluno que efetivar as mensalidades até o dia da aula terá um desconto de acordo com a promoção estipulada pela ALPHA
     sobre o valor da parcela, caso contrário o valor será integral. A Alpha tem um prazo de 4 meses para fechamento de turmas. O aluno
