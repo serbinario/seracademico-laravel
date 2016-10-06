@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <div class="form-group">
 				{!! Form::label('nome', 'Nome') !!}
-				{!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'onkeyup' => 'maiuscula("nome")', 'id' => 'nome')) !!}
+				{!! Form::text('nome', Session::getOldInput('nome')  , array('class' => 'form-control', 'id' => 'nome')) !!}
                 </div>
             </div>
             <div class="col-md-4">

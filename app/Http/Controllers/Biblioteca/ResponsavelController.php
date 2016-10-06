@@ -147,6 +147,8 @@ class ResponsavelController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            //dd($data);
+
             #tratando as rules
             $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
