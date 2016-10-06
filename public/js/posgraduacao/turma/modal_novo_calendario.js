@@ -30,15 +30,15 @@ $('#btnSalvarCalendario').click(function() {
     }).done(function (retorno) {
         $('#modal-novo-calendario').modal('toggle');
         tableCargaHoraria.load();
-        tableDisciplina.load();
+        tableDisciplina.ajax.reload(function () {
+            $("#calendario-disciplina-grid tbody tr").eq(indexRowSelectedDisciplina).find("td").addClass("row_selected");
+        });
 
         if(retorno.success) {
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
-
-        $("#calendario-disciplina-grid tbody tr").eq(indexRowSelectedDisciplina).find("td").addClass("row_selected");
     });
 });
 
