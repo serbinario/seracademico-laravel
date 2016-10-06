@@ -106,12 +106,16 @@ class AlunoService
         $this->tratamentoCurso($data);
 
         # Recuperando a pessoa pelo cpf
-        $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+        $objPessoa = [];
         $endereco  = null;
+
+        # Validando o cpf
+        if($data['pessoa']['cpf']) {
+            $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+        }
 
         # Verificando se a pesso já existe
         if(count($objPessoa) > 0) {
-
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
             $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
@@ -121,7 +125,7 @@ class AlunoService
 
             # setando a chave estrangeira e criando a pessoa
             $data['pessoa']['enderecos_id'] = $endereco->id;
-            $pessoa   = $this->pessoaRepository->create($data['pessoa']);
+            $pessoa  = $this->pessoaRepository->create($data['pessoa']);
         }
 
         #setando as chaves estrageiras
