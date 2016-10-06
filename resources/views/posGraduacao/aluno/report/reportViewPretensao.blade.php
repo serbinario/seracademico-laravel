@@ -57,7 +57,7 @@
             iDisplayLength: 10,
             bLengthChange: false,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 4]) !!}",
+            ajax: "{!! route('seracademico.posgraduacao.aluno.gridReportPretensao', ['tipo' => 5]) !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'cpf', name: 'pessoas.cpf'},
@@ -91,6 +91,7 @@
                 ["Não tem interesse", dados.naoInteresse],
                 ["Aguardando abertura de Turma", dados.abTurma],
                 ["Email Enviado", dados.eEnviado],
+                ["Em Andamento", dados.emAndamento],
                 ["Total", dados.total] ];
 
             $.plot("#flot-bar-chart", [ data ], {
