@@ -124,7 +124,7 @@ class AlunoValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'matricula' => 'pos_aluno_unique_in_pessoa:matricula,:id',
+            'matricula' => 'unique:pos_alunos,matricula,:id',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             'pessoa.cpf' => 'required|max:20|pos_aluno_unique_in_pessoa:cpf,:id',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
