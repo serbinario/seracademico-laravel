@@ -45,8 +45,16 @@ class ReportPretensaoController extends Controller
      * @return mixed
      */
     public function reportViewPretensao()
-    { 
-        return view('posGraduacao.aluno.report.reportViewPretensao');
+    {
+        $cursos = \Seracademico\Entities\PosGraduacao\Curso::ativo(1)
+            ->orderBy('nome', 'asc')
+            ->lists('nome', 'id');
+
+        $loadFields = [
+            'posgraduacao\\curso' => $cursos
+        ];
+
+        return view('posGraduacao.aluno.report.reportViewPretensao', compact('loadFields'));
     }
 
     /**
@@ -54,7 +62,7 @@ class ReportPretensaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function gridReportPretensao($tipo)
+    public function gridReportPretensao(Request $request, $tipo)
     {
         # Query principal da grid
         $query = $this->report->getBuilderGeral()
@@ -81,8 +89,20 @@ class ReportPretensaoController extends Controller
         }
 
         # Retorno
-        return Datatables::of($query) ->addColumn('action', function () {
-            return '<a class="btn-floating" id="btnEditPretensao" title="Editar pretensão"><i class="material-icons">edit</i></a>';
+        return Datatables::of($query)
+            ->filter(function ($query) use ($request) {
+
+                // Filtranto por Curso
+                if ($request->has('curso')) {
+                    $query->where(function ($query) use ($request) {
+                        $query->orWhere('pretensao1.id', '=', $request->get('curso'));
+                        $query->orWhere('pretensao2.id', '=', $request->get('curso'));
+                        $query->orWhere('pretensao3.id', '=', $request->get('curso'));
+                    });
+                }
+            })
+            ->addColumn('action', function () {
+                return '<a class="btn-floating" id="btnEditPretensao" title="Editar pretensão"><i class="material-icons">edit</i></a>';
         })->make(true);
     }
 
