@@ -46,6 +46,9 @@ class ResponsavelService
      */
     public function store(array $data) : Responsavel
     {
+
+        $this->tratamentoCampos($data);
+
         #Salvando o registro pincipal
         $responsavel =  $this->repository->create($data);
 
@@ -65,6 +68,9 @@ class ResponsavelService
      */
     public function update(array $data, int $id) : Responsavel
     {
+
+        $this->tratamentoCampos($data);
+
         #Atualizando no banco de dados
         $responsavel = $this->repository->update($data, $id);
 
@@ -130,6 +136,24 @@ class ResponsavelService
 
          #retorno
          return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoCampos(array &$data)
+    {
+        # Tratamento de campos de chaves estrangeira
+        foreach ($data as $key => $value) {
+            $explodeKey = explode("_", $key);
+
+            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
+                unset($data[$key]);
+            }
+        }
+        #Retorno
+        return $data;
     }
 
 }
