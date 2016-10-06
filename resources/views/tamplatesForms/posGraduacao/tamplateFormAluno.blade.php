@@ -525,12 +525,12 @@
 
                     <div class="form-group col-md-4">
                         {!! Form::label('turma_id', 'Turma') !!}
-                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
-                        {{--@if(isset($aluno->id) && count($aluno->curriculos) > 0)--}}
-                            {{--{!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
-                        {{--@else--}}
-                            {{--{!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], null, array('class' => 'form-control')) !!}--}}
-                        {{--@endif--}}
+
+                        @if(isset($aluno->id) && count($aluno->turmas) > 0)
+                            {!! Form::select('turma_id', [$aluno->turmas->last()->id => $aluno->turmas->last()->codigo], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
+                        @endif
                     </div>
 
                     <div class="form-group col-md-2">
