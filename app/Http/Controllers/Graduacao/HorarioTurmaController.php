@@ -48,11 +48,11 @@ class HorarioTurmaController extends Controller
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
             ->where('fac_turmas.id', $idTurma)
             ->groupBy('fac_horas.id')
-            ->orderBy('fac_horas.id')
+            ->orderBy('fac_horas.hora_inicial')
             ->select([
                 'fac_horarios.id',
                 'fac_horas.id as hora',
-                'fac_horas.nome as codigoHora',
+                \DB::raw('DATE_FORMAT(fac_horas.hora_inicial, "%k:%i") as codigoHora'),
                 'fac_turmas.id as idTurma',
                 'fac_disciplinas.id as idDisciplinaHorario'
             ]);
@@ -337,7 +337,8 @@ class HorarioTurmaController extends Controller
 
             # Fazendo a consulta
             $rows = \DB::table("fac_horas")
-                        ->select('fac_horas.id', 'fac_horas.nome')
+                        ->orderBy('fac_horas.hora_inicial')
+                        ->select('fac_horas.id', 'fac_horas.hora_inicial')
                         ->whereNotIn('fac_horas.id', function ($query) use ($idTurma, $idDia) {
                             $query->from('fac_horarios')
                                 ->select('fac_horarios.hora_id')
