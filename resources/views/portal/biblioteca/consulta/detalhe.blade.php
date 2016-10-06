@@ -164,7 +164,7 @@
                                                                 <b>1</b>. {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
                                                                 <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @else
-                                                                <?php echo strtoupper($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']) ?> et al
+                                                                <?php echo ucfirst(mb_strtoupper($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
@@ -173,7 +173,7 @@
                                                                     <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
-                                                                    <?php echo strtoupper($autor['responsaveis']['nome']) ?><br />
+                                                                    <?php echo  ucfirst(mb_strtoupper($autor['responsaveis']['nome']) ) ?><br />
                                                                 @endif
                                                             @endforeach
                                                         @endif
@@ -249,7 +249,7 @@
                                                                 <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}},
                                                                 <?php echo ucfirst(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @else
-                                                                <?php echo strtoupper($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome']) ?> et al
+                                                                <?php echo ucfirst(mb_strtoupper($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
@@ -258,7 +258,7 @@
                                                                     <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
-                                                                    <?php echo strtoupper($autor['responsaveis']['nome']) ?><br />
+                                                                    <?php echo ucfirst(mb_strtoupper($autor['responsaveis']['nome'])) ?><br />
                                                                 @endif
                                                             @endforeach
                                                         @endif
@@ -339,7 +339,7 @@
                                             <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
                                             <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al.
                                         @else
-                                            <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome']}}</span>.
+                                            <span style="text-transform: uppercase"><?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?></span>.
                                         @endif
                                     @else
                                         @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
@@ -348,7 +348,7 @@
                                                     <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                     <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                                 @else
-                                                    <?php echo strtoupper($autor['responsaveis']['nome']); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
+                                                    <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['primeiraEntrada']) == $count ). @else;@endif
                                                 @endif
                                         @endforeach
                                     @endif
@@ -358,7 +358,7 @@
                                             <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
                                             <?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?> et al.
                                         @else
-                                            <span style="text-transform: uppercase">{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome']}}</span>.
+                                            <span style="text-transform: uppercase"><?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?></span>.
                                         @endif
                                     @else
                                         @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
@@ -367,7 +367,7 @@
                                                     <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                     <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ). @else;@endif
                                                 @else
-                                                    <?php echo strtoupper($autor['responsaveis']['nome']); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ). @else;@endif
+                                                    <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ). @else;@endif
                                                 @endif
                                         @endforeach
                                     @endif
