@@ -48,6 +48,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    
                         @foreach($dados['body'] as $bordy)
                             <tr>
                                 @foreach($bordy as $key => $value)
