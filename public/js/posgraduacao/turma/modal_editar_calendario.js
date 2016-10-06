@@ -83,7 +83,7 @@ $(document).on('click', '#btnUpdateCalendario', function () {
         datatype: 'json'
     }).done(function (retorno) {
         $('#modal-editar-calendario').modal('toggle');
-        tableCargaHoraria.load();
+        tableCargaHoraria.ajax.reload();
 
         if(retorno.success) {
             swal(retorno.msg, "Click no botão abaixo!", "success");
