@@ -8,6 +8,13 @@
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
+                    <!-- Linha de descrição -->
+                    <div class="col-md-12 infModal">
+                        <div class="col-md-2">
+                            <span><strong>Turma: </strong><p id="caTurma"></p></span>
+                        </div>
+                    </div>
+
                     <div class="col-md-5">
                         <button class="btn btn-primary pull-right" id="btnIncluirDisciplinas" style="margin-bottom: 3%;">Incluir disciplinas</button>
 

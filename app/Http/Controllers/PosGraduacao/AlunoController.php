@@ -139,14 +139,21 @@ class AlunoController extends Controller
                     <li><a class="btn-floating indigo" title="Financeiro do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>
                     <li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
                      */
-                    return '<div class="fixed-action-btn horizontal">
-                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                        <ul>
-                            <li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>
-                            <li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
-                        </ul>
-                        </div>';
+
+                    $html = "";
+
+                    $html .= '<div class="fixed-action-btn horizontal">';
+                    $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
+                    $html .=    '<ul>';
+                    $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
+                    $html .=        '<li><a class="btn-floating" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        if($aluno->matricula) {
+                            $html .= '<li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>';
+                        }
+                    $html .=    '</ul>';
+                    $html .=   '</div>';
+
+                    return $html;
                 })->make(true);
         } catch (\Throwable $e) {
             abort(500, $e->getMessage());
@@ -296,7 +303,7 @@ class AlunoController extends Controller
             ])->first();
         
         if(!$curso && !$turma) {
-            return redirect()->back()->with("message", "Este aluno não foi vinculado a uma curso e turma!");
+            return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
         }
 
         return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma])->stream();
