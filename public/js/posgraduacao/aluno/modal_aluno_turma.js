@@ -21,6 +21,8 @@ function loadTableCursoTurma(idAluno) {
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
+
+    return tableCursoTurma;
 }
 
 // carregamento da grid de disciplinas a cursar
@@ -99,13 +101,12 @@ function loadTableDisciplinasDispensadas(idAlunoTurma) {
 }
 
 // evento para abrir todas as grids de disciplinas
-$(document).on("click", "#curso-turma-grid tbody tr", function () {
-    if (tableCursoTurma.rows().data().length > 0) {
+$(document).on("click", "#curso-turma-grid tbody tr", function (event) {
+    if (tableCursoTurma.rows().data().length > 0  && $(event.target).is("td")) {
         $(this).parent().find("tr td").removeClass('row_selected');
         $(this).find("td").addClass("row_selected");
 
         //Recuperando o id da turma selecionada e o index da linha selecionada
-        console.log("ddddddddd");
         idAlunoTurma = tableCursoTurma.row($(this).index()).data().id;
         //indexRowSelectedDisciplina =  $(this).index();
 

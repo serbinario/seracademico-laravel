@@ -249,6 +249,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" id="btnSalvarTurmaAluno">Salvar</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>

@@ -150,10 +150,15 @@
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
-            idAluno = table.row($(this).parent().parent().parent().index()).data().id;
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            if(tableCursoTurma) {
+                loadTableCursoTurma(idAluno).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/grid/" + idAluno).load();
+            } else {
+                loadTableCursoTurma(idAluno);
+            }
 
             $("#modal-turma-aluno").modal({show:true});
-            loadTableCursoTurma(idAluno);
         });
 
         // Geriamento dos relatórios avançadas
