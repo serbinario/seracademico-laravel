@@ -451,7 +451,7 @@
                                     </a>
                                     <a class="collection-item">
                                         <div class="row">
-                                            <div class="col s4"><b>Número de chamada</b></div>
+                                            <div class="col s4"><b>Palavras chave</b></div>
                                             <div class="col s8">
                                                 <?php
                                                 $array = explode(';', $exemplar['acervo']['palavras_chaves']);

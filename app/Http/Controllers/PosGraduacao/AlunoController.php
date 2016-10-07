@@ -154,9 +154,9 @@ class AlunoController extends Controller
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
-                        if($aluno->matricula) {
+                        //if($aluno->matricula) {
                             $html .= '<li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>';
-                        }
+                       // }
                     $html .=    '</ul>';
                     $html .=   '</div>';
 
@@ -286,11 +286,6 @@ class AlunoController extends Controller
         $curso = "";
         $turma = "";
 
-        if(!$aluno->data_contrato) {
-            $aluno->data_contrato = $data->format('Y-m-d');
-            $aluno->save();
-        }
-
         $curso = \DB::table('pos_alunos_cursos')
             ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
             ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
@@ -311,6 +306,16 @@ class AlunoController extends Controller
         
         if(!$curso && !$turma) {
             return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
+        }
+
+        if(!$turma->aula_inicio || !$turma->aula_final || !$turma->qtd_parcelas || !$turma->duracao_meses || !$turma->valor_turma) {
+            return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
+            aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+        }
+
+        if(!$aluno->data_contrato) {
+            $aluno->data_contrato = $data->format('Y-m-d');
+            $aluno->save();
         }
 
         return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma])->stream();
