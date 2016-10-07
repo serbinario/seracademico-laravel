@@ -24,15 +24,9 @@
             padding: 2px 10px;
         }
     </style>
-
 @stop
 
-
-
-
-
 @section('content')
-
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">

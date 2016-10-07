@@ -73,6 +73,15 @@ class Curriculo extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function alunos()
+    {
+        return $this->belongsToMany(Aluno::class, 'pos_alunos_cursos', 'curriculo_id', 'aluno_id')
+            ->withPivot(['id']);
+    } 
+
+    /**
      * @return string
      */
     public function getValidoInicioAttribute()
@@ -115,6 +124,10 @@ class Curriculo extends Model implements Transformable
     {
         if ($parent instanceof Disciplina) {
             return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
+        }
+
+        if ($parent instanceof Aluno) {
+            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);
