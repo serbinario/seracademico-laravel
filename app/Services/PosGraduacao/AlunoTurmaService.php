@@ -58,17 +58,18 @@ class AlunoTurmaService
     public function getCursos()
     {
         $query = DB::table('fac_curriculos')
-            ->distinct()
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
+            ->where('fac_turmas.tipo_nivel_sistema_id', 2)
+            ->groupBy('fac_cursos.nome')
             ->select([
                'fac_curriculos.id as curriculo_id',
                'fac_cursos.nome as nome_curso'
             ]);
 
         $retorno = $query->get();
-
+   
         if (count($retorno) == 0) {
             throw new \Exception("Não existe currículo vinculado a uma turma!");
         }
@@ -80,10 +81,12 @@ class AlunoTurmaService
      * @return mixed
      * @throws \Exception
      */
-    public function getTurmas()
+    public function getTurmas($idCurriculo)
     {
         $query = DB::table('fac_turmas')
             ->join('fac_curriculos', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
+            ->where('fac_curriculos.id', $idCurriculo)
+            ->groupBy('fac_turmas.codigo')
             ->select([
                 'fac_turmas.id',
                 'fac_turmas.codigo'
@@ -121,8 +124,18 @@ class AlunoTurmaService
         unset($data['aluno_id']);
         unset($data['turma_id']);
 
-        #Salvando
-        $aluno->turmas()->attach($turma->id, $data);
+        #Salvando o currúculo
+        $aluno->curriculos()->attach($data['curriculo_id']);
+        unset($data['curriculo_id']);
+
+        #Salvando a situação
+        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id']);
+        unset($data['situacao_id']);
+
+        # Salvando a turma
+        $aluno->curriculos->last()->pivot->turmas()->attach($turma->id, $data);
+
+        # Persistindo os dados
         $aluno->save();
 
         #Criando o esquema de disciplinas e notas do aluno pela turma
@@ -198,7 +211,12 @@ class AlunoTurmaService
     public function tratamentoDisciplinas(int $idAluno, int $idTurma)
     {
         # Select para recuperar o id da tabela pivot
-        $arrayResult = DB::table("pos_alunos_turmas")->select(["id"])->where("turma_id", $idTurma)->where("aluno_id", $idAluno)->get();
+        $arrayResult = DB::table("pos_alunos_turmas")
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+            ->where("pos_alunos_cursos.aluno_id", $idAluno)
+            ->where("turma_id", $idTurma)
+            ->select(["pos_alunos_turmas.id"])
+            ->get();
 
         # Verificando se um único registro foi recuperado
         if(count($arrayResult) == 1) {

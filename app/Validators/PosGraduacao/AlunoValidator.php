@@ -161,7 +161,7 @@ class AlunoValidator extends LaravelValidator
 //            'pessoa.nota_exame_nacional_um' => '',
 //            'pessoa.data_exame_nacional_dois' => 'serbinario_date_format:"d/m/Y"',
 //            'pessoa.nota_exame_nacional_dois' => '',
-            'pessoa.email' => 'email|max:50|pos_aluno_unique_in_pessoa:email,:id',
+            //'pessoa.email' => 'email|max:50|pos_aluno_unique_in_pessoa:email,:id',
             'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
             'pessoa.celular' => 'digits_between:9,11|numeric',
             'pessoa.celular2' => 'digits_between:9,11|numeric',

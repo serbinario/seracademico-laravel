@@ -24,15 +24,9 @@
             padding: 2px 10px;
         }
     </style>
-
 @stop
 
-
-
-
-
 @section('content')
-
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
@@ -156,10 +150,15 @@
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
-            idAluno = table.row($(this).parent().parent().parent().index()).data().id;
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            if(tableCursoTurma) {
+                loadTableCursoTurma(idAluno).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/grid/" + idAluno).load();
+            } else {
+                loadTableCursoTurma(idAluno);
+            }
 
             $("#modal-turma-aluno").modal({show:true});
-            loadTableCursoTurma(idAluno);
         });
 
         // Geriamento dos relatórios avançadas
