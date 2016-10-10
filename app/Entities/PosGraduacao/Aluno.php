@@ -65,16 +65,7 @@ class Aluno extends Model implements Transformable
      */
     public function curriculos()
     {
-        return $this->belongsToMany(Curriculo::class, 'pos_alunos_cursos', 'aluno_id', 'curriculo_id')->withPivot(['situacao_id']);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function turmas()
-    {
-        return $this->belongsToMany(Turma::class, "pos_alunos_turmas", "aluno_id", "turma_id")
-            ->withPivot(['id', 'aluno_id', 'turma_id', 'situacao_id']);
+        return $this->belongsToMany(Curriculo::class, 'pos_alunos_cursos', 'aluno_id', 'curriculo_id')->withPivot(['id']);
     }
 
     /**
@@ -83,5 +74,21 @@ class Aluno extends Model implements Transformable
     public function tipoPretensao()
     {
         return $this->belongsTo(TipoPretensao::class, 'tipo_pretensao_id');
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Curriculo) {
+            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 }

@@ -75,7 +75,7 @@ function loadCursosAluno()
             // Percorrendo o array
             for(var i = 0; i < retorno.length; i++) {
                 // Criando as options
-                html += "<option value='" + retorno[0].curriculo_id + "'>"  + retorno[0].nome_curso + "</option>";
+                html += "<option value='" + retorno[i].curriculo_id + "'>"  + retorno[i].nome_curso + "</option>";
             }
 
             // Removendo e adicionando as options
@@ -106,7 +106,7 @@ function loadTurmasAluno(idCurriculo)
             // Percorrendo o array
             for(var i = 0; i < retorno.length; i++) {
                 // Criando as options
-                html += "<option value='" + retorno[0].id + "'>"  + retorno[0].codigo + "</option>";
+                html += "<option value='" + retorno[i].id + "'>"  + retorno[i].codigo + "</option>";
             }
 
             // Removendo e adicionando as options
@@ -177,6 +177,7 @@ function clearValueFields()
 function getValueFields()
 {
     // Iniciais
+    var curriculo_id            = $("#curso").val();
     var turma_id                = $("#turma_id").val();
     var situacao_id             = $("#situacao_id").val();
 
@@ -205,6 +206,7 @@ function getValueFields()
 
     // Preparando os dados
     var dados = {
+        'curriculo_id'            : curriculo_id,
         'aluno_id'                : idAluno,
         'turma_id'                : turma_id == "" ? null : turma_id,
         'situacao_id'             : situacao_id == "" ? null : situacao_id,
@@ -235,7 +237,7 @@ function getValueFields()
 $(document).on("click", "#btnSalvarTurmaAluno", function () {
     // Recuperando os valores dos formulários
     var dados = getValueFields();
-
+    console.log(dados);
     // Transação com banco de dados
     jQuery.ajax({
         type: 'POST',
@@ -244,8 +246,17 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
-            loadTableCursoTurma(idAluno);
+            // Recarregando as grids
+            tableCursoTurma.ajax.reload();
+            table.ajax.reload();
+
+            // Limpando os campos
             clearValueFields();
+
+            // Fechando o modal
+            $("#modal-nova-turma-aluno").modal('toggle');
+
+            // Mensagem de retorno
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");

@@ -93,7 +93,14 @@ class AlunoController extends Controller
                         where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
                     );
                 })
-                ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_cursos.situacao_id')
+                ->leftJoin('pos_alunos_situacoes', function ($join) {
+                    $join->on(
+                        'pos_alunos_situacoes.id', '=',
+                        \DB::raw('(SELECT situacao_atual.id FROM pos_alunos_situacoes as situacao_atual
+                        where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                 ->select([
