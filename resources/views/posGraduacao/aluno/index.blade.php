@@ -120,12 +120,14 @@
 
     @include('posGraduacao.aluno.turma.modal_aluno_turma')
     @include('posGraduacao.aluno.turma.modal_nova_turma')
+    @include('posGraduacao.aluno.turma.modal_edit_nova_turma')
     @include('reports.simple.modals.modal_report_pos_aluno_geral')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({

@@ -145,21 +145,128 @@ class AlunoTurmaService
         return true;
     }
 
-    /*
-    public function update(array $data, int $id) : Departamento
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function edit($id)
     {
-        #Atualizando no banco de dados
-        $departamento = $this->repository->update($data, $id);
+        # Recuperando o id do aluno
+        $result = \DB::table('pos_alunos_turmas')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->where('pos_alunos_turmas.id', $id)
+            ->select([
+                'pos_alunos.id',
+                'pos_alunos_cursos.curriculo_id as idCurriculo',
+                'pos_alunos_turmas.turma_id as idTurma'
+            ])->get();
 
 
-        #Verificando se foi atualizado no banco de dados
-        if(!$departamento) {
-            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        # Validando o retorno
+        if(count($result) !== 1) {
+            throw new \Exception("Nenhum aluno foi encontrado");
         }
 
+        # Recuperando o objeto de aluno
+        $objAluno      = $this->alunoRepository->find($result[0]->id);
+        $objCurrriculo = $this->curriculoRepository->find($result[0]->idCurriculo);
+        $objTurma      = $this->turmaRepository->find($result[0]->idTurma);
+
+        # Array de retorno
+        $arrayResult = [
+            'aluno' => $objAluno,
+            'turma' => $objTurma,
+            'curso' => $objCurrriculo,
+            'alunoTurma' => $objAluno->curriculos->find($objCurrriculo->id)->turmas->find($objTurma->id)->pivot,
+            'situacao' => $objAluno->curriculos->find($objCurrriculo->id)->pivot->situacoes->last()
+        ];
+
+        # Retorno
+        return $arrayResult;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function update(array $data, int $id)
+    {
+        # Aplicação de regras de negócio
+        $this->tratamentoCampos($data);
+
+        #Recuperando o aluno e a turma
+        $aluno = $this->alunoRepository->find($data['aluno_id']);
+        $turma = $this->turmaRepository->find($data['turma_id']);
+
+        # Verificando se o aluno foi encontrado
+        if(!$aluno && !$turma) {
+            throw new \Exception("Aluno ou turma não existe!");
+        }
+
+        # Deletando os valores da array
+        unset($data['aluno_id']);
+        unset($data['turma_id']);
+
+        #Recuperando o id do currículo
+        $curriculoId = $data['curriculo_id'];
+        unset($data['curriculo_id']);
+
+        # Aplicação de regras de negócios
+        $this->tratamentoSituacao($aluno, $curriculoId, $data);
+        $this->tratamentoTurma($aluno, $turma, $curriculoId, $data);
+        $this->tratamentoDisciplinas($aluno->id, $turma->id);
+
         #Retorno
-        return $departamento;
-    }*/
+        return true;
+    }
+
+    /**
+     * @param $aluno
+     * @param $turma
+     * @param $curriculoId
+     * @param $data
+     * @return bool
+     */
+    public function tratamentoTurma($aluno, $turma, $curriculoId, &$data)
+    {
+        # Recuperando a ultima turma
+        $lastTurma = $aluno->curriculos->last()->pivot->turmas->last();
+
+        # Verificando se a turma é a mesma turma
+        if(isset($lastTurma) && $lastTurma->id == $turma->id) {
+            # Recuperando o Pivot
+            $alunoTurma = $lastTurma->pivot;
+            $alunoTurma->update($data);
+
+            # Retorno
+            return true;
+        }
+
+        # Salvando a turma
+        $aluno->curriculos->find($curriculoId)->pivot->turmas()->attach($turma->id, $data);
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param $aluno
+     * @param $curriculoId
+     * @return bool
+     */
+    public function tratamentoSituacao($aluno, $curriculoId, &$data)
+    {
+        #Salvando a situação
+        $aluno->curriculos->find($curriculoId)->pivot->situacoes()->attach($data['situacao_id']);
+        unset($data['situacao_id']);
+
+        # Retorno
+        return true;
+    }
 
     /**
      * @param array $models

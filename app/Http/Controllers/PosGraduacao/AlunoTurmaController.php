@@ -18,18 +18,6 @@ class AlunoTurmaController extends Controller
     private $service;
 
     /**
-     * @var
-     */
-    private $validator;
-
-    /**
-     * @var array
-     */
-    private $loadFields = [
-
-    ];
-
-    /**
      * @param AlunoTurmaService $service
      */
     public function __construct(AlunoTurmaService $service)
@@ -74,7 +62,7 @@ class AlunoTurmaController extends Controller
         #Editando a grid <a href="edit/'.$row->id.'" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
         #<a href="#" class="btn btn-xs btn-danger" title="Remover Curso/Turma"><i class="glyphicon glyphicon-remove"></i></a>
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '';
+            return '<a id="btnEditAlunoCurso" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>';
         })->make(true);
     }
 
@@ -219,48 +207,41 @@ class AlunoTurmaController extends Controller
         }
     }
 
-
-   /* public function edit($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function edit($id)
     {
         try {
             #Recuperando o aluno
-            $aluno = $this->service->find($id);
-
-            #Tratando as datas
-            $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
-
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
+            $dados = $this->service->edit($id);
 
             #retorno para view
-            return view('aluno.edit', compact('aluno', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
-    }*/
+    }
 
-
-    /*public function update(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function update(Request $request, $id)
     {
         try {
             #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
+            $dados = $request->all();
+            
             #Executando a ação
-            $this->service->update($data, $id);
+            $this->service->update($dados, $id);
 
-            #Retorno para a view
-            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+            #retorno para view
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Dados atualizados com sucesso!']);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
-    }*/
+    }
 }

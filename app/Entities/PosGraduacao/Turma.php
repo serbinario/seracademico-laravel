@@ -159,10 +159,31 @@ class Turma extends Model implements Transformable
     /**
      * @return $this
      */
-    public function alunos()
+    public function alunosCursos()
     {
-        return $this->belongsToMany(Aluno::class, "fac_alunos_turmas", "turma_id", "aluno_id")
-            ->withPivot(['id', 'aluno_id', 'disciplina_id']);
+        return $this->belongsToMany(PivotAlunoCurso::class, "pos_alunos_turmas", "turma_id", "pos_aluno_curso_id")
+            ->withPivot([
+                'id',
+                'pos_aluno_curso_id',
+                'turma_id',
+                'titulo',
+                'nota_final',
+                'defesa',
+                'madia',
+                'media_conceito',
+                'defendeu',
+                'professor_orientador_id',
+                'professor_banca_1_id',
+                'professor_banca_2_id',
+                'professor_banca_3_id',
+                'professor_banca_4_id',
+                'inst_ensino_banca_1_id',
+                'inst_ensino_banca_2_id',
+                'inst_ensino_banca_3_id',
+                'inst_ensino_banca_4_id',
+                'data_conclusao',
+                'data_colacao'
+            ]);
     }
 
     /**
@@ -177,11 +198,6 @@ class Turma extends Model implements Transformable
         # Pivot para disciplina
         if ($parent instanceof Disciplina) {
             return new TurmaDisciplina($parent, $attributes, $table, $exists);
-        }
-
-        # Pivot para Aluno
-        if($parent instanceof Aluno) {
-            return new AlunoTurma($parent, $attributes, $table, $exists);
         }
 
         # Retorno do novo pivot
