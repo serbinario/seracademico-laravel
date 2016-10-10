@@ -16,7 +16,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('tipo_reponsavel_id', 'Tipo do responsável') !!}
-                    {!! Form::select('tipo_reponsavel_id', (["" => "Selecione um tipo"] + $loadFields['biblioteca\tiporesponsavel']->toArray()), Session::getOldInput('tipo_reponsavel_id'), array('class' => 'form-control')) !!}
+                    {!! Form::select('tipo_reponsavel_id', $loadFields['biblioteca\tiporesponsavel'], Session::getOldInput('tipo_reponsavel_id'), array('class' => 'form-control')) !!}
                 </div>
             </div>
 		</div>
