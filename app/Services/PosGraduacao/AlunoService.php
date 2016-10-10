@@ -74,7 +74,6 @@ class AlunoService
             'pessoa.profissao',
             'pessoa.corRaca',
             'pessoa.ufNascimento',
-            'turmas',
             'curriculos'
         ];
 
@@ -96,7 +95,7 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
-
+        # Recuperando dados da imagem
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
@@ -136,25 +135,26 @@ class AlunoService
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
-
+            # Recuperando a conexão
             $pdo = \DB::connection()->getPdo();
 
+            # Query de atualização
             $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
 
+            # Persistindo as alterações
             $pdo->query($query);
-
         } else if ($img && !$imgCam) {
-
+            # Inserindo a imagem
             $this->insertImg($aluno->id, 1);
-
         } else if ($imgCam && $img) {
-
+            # Recuperando a conexão
             $pdo = \DB::connection()->getPdo();
 
+            # Query de atualização
             $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$aluno->id} ";
 
+            # Persistindo as alterações
             $pdo->query($query);
-
         }
 
         #Verificando se foi criado no banco de dados
@@ -164,11 +164,10 @@ class AlunoService
 
         # Tratamento do currículo do aluno
         if(isset($data['curriculo_id'])) {
-            #Vinculando o currículo ao aluno
-            $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
-
-            # Vinculando o aluno a uma turma
-            $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
+            #Vinculando o currículo, situação e turma ao aluno
+            $aluno->curriculos()->attach($data['curriculo_id']);
+            $aluno->curriculos()->find($data['curriculo_id'])->pivot->situacoes()->attach(1);
+            $aluno->curriculos()->find($data['curriculo_id'])->pivot->turmas()->attach($data['turma_id']);
         }
         
         #Retorno
@@ -183,7 +182,7 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
-
+        # Recuperando dados da imagem
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
@@ -197,25 +196,26 @@ class AlunoService
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
-
+            # Recuperando a conexão
             $pdo = \DB::connection()->getPdo();
 
+            # Alterando o registro
             $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
 
+            # Persistindo as alterações
             $pdo->query($query);
-
         } else if ($img && !$imgCam) {
-
+            # Inserindo a imagem
             $this->insertImg($aluno->id, 1);
-
         } else if ($imgCam && $img) {
-
+            # Recuperando a conexão
             $pdo = \DB::connection()->getPdo();
 
+            # Alterando o registro
             $query = "UPDATE pos_alunos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
 
+            # Persistindo as alterações
             $pdo->query($query);
-
         }
 
         #Atualizando no banco de dados
@@ -230,11 +230,10 @@ class AlunoService
 
         # Tratamento do currículo do aluno
         if(isset($data['curriculo_id'])) {
-            #Vinculando o currículo ao aluno
-            $aluno->curriculos()->attach($data['curriculo_id'], ['situacao_id' => 1]);
-
-            # Vinculando o aluno a uma turma
-            $aluno->turmas()->attach($data['turma_id'], ['situacao_id' => 1]);
+            #Vinculando o currículo, situação e turma ao aluno
+            $aluno->curriculos()->attach($data['curriculo_id']);
+            $aluno->curriculos()->find($data['curriculo_id'])->situacoes()->attach(1);
+            $aluno->curriculos()->find($data['curriculo_id'])->turmas()->attach($data['turma_id']);
         }
 
         #Retorno
@@ -248,23 +247,21 @@ class AlunoService
     {
         #tratando a imagem
         if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
-
+            # Tratando a imagem
             $tmpName = $_FILES['img']['tmp_name'];
-
             $fp = fopen($tmpName, 'r');
-
             $add = fread($fp, filesize($tmpName));
 
+            # Escapando os caractéres
             $add = addslashes($add);
 
+            # Fechando o arquivo
             fclose($fp);
 
+            # Persistindo no banco
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE pos_alunos SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
-
             $pdo->query($query);
-
         }
 
     }

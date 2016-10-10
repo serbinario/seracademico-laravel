@@ -526,8 +526,8 @@
                     <div class="form-group col-md-4">
                         {!! Form::label('turma_id', 'Turma') !!}
 
-                        @if(isset($aluno->id) && count($aluno->turmas) > 0)
-                            {!! Form::select('turma_id', [$aluno->turmas->last()->id => $aluno->turmas->last()->codigo], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @if(isset($aluno->id) && count($aluno->curriculos->last()->turmas) > 0)
+                            {!! Form::select('turma_id', [$aluno->curriculos->last()->turmas->last()->id => $aluno->curriculos->last()->turmas->last()->codigo], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
                         @else
                             {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
                         @endif
