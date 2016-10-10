@@ -55,7 +55,13 @@ class ResponsavelController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('responsaveis')->select(['id', 'nome', 'sobrenome']);
+        $rows = \DB::table('responsaveis')
+            ->join('bib_tipo_reponsavel', 'bib_tipo_reponsavel.id', '=', 'responsaveis.tipo_reponsavel_id')
+            ->select(['responsaveis.id',
+                'responsaveis.nome',
+                'responsaveis.sobrenome',
+                'bib_tipo_reponsavel.nome as tipo'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
