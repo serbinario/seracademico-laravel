@@ -39,6 +39,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Sobrenome</th>
+                                <th>Tipo do responsável</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -47,6 +48,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Sobrenome</th>
+                                <th>Tipo do responsável</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -67,6 +69,7 @@
             columns: [
                 {data: 'nome', name: 'nome'},
                 {data: 'sobrenome', name: 'sobrenome'},
+                {data: 'tipo', name: 'tipo_reponsavel.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

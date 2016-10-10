@@ -92,8 +92,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('colecao_id', 'Coleção') !!}
-                            {!! Form::select('colecao_id', (["" => "Selecione a coleção"] + $loadFields['biblioteca\colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
+                            {!! Form::label('colecao_id', 'Coleção/Série') !!}
+                            {!! Form::select('colecao_id', (["" => "Selecione a coleção/série"] + $loadFields['biblioteca\colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -365,6 +365,12 @@
                             <div class="form-group">
                                 {!! Form::label('sobrenome', 'Último Sobrenome') !!}
                                 {!! Form::text('sobrenome', Session::getOldInput('sobrenome')  , array('class' => 'form-control', 'id' => 'sobrenome')) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('tipo_reponsavel_id', 'Tipo do responsável') !!}
+                                {!! Form::select('tipo_reponsavel_id', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tiporesponsavel']->toArray()), Session::getOldInput('corredor_id'), array('class' => 'form-control', 'id' => 'tipo_reponsavel_id')) !!}
                             </div>
                         </div>
                     </div>
