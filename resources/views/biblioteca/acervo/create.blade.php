@@ -340,6 +340,7 @@
                 var dados = {
                     'nome': $('#nome').val(),
                     'sobrenome': $('#sobrenome').val(),
+                    'tipo_reponsavel_id': $('#tipo_reponsavel_id').val(),
                 };
 
                 if($('#nome').val() != "" && $('#sobrenome').val() != "") {

@@ -367,6 +367,12 @@
                                 {!! Form::text('sobrenome', Session::getOldInput('sobrenome')  , array('class' => 'form-control', 'id' => 'sobrenome')) !!}
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('tipo_reponsavel_id', 'Tipo do responsável') !!}
+                                {!! Form::select('tipo_reponsavel_id', $loadFields['biblioteca\tiporesponsavel'], Session::getOldInput('corredor_id'), array('class' => 'form-control', 'id' => 'tipo_reponsavel_id')) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
