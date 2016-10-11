@@ -535,7 +535,7 @@
                             {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
                         @endif
                     </div>
-                    {{dd('Teste')}}
+
                     <div class="form-group col-md-2">
                         {!! Form::label('turno_id', 'Turno') !!}
                         @if(isset($aluno->id))
