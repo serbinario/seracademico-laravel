@@ -213,7 +213,7 @@ class AlunoController extends Controller
         try {
             #Recuperando o aluno
             $aluno = $this->service->find($id);
-           
+
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
