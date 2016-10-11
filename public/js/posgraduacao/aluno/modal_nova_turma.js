@@ -15,7 +15,6 @@ function loadFields()
     var dados =  {
         'models' : [
             'SituacaoAluno',
-            'Professor',
             'Instituicao'
         ]
     };
@@ -42,9 +41,6 @@ function loadFields()
 function builderHtmlFields (dados) {
     // Variáveis que armazenaram o html
     var htmlSituacao    = "<option value=''>Selecione uma situação</option>";
-    var htmlProfessor   = "<option value=''>Selecione um professor</option>";
-    var htmlInstituicao = "<option value=''>Selecione uma instituição</option>";
-
 
     // Percorrendo o array de situacaoaluno
     for(var i = 0; i < dados['situacaoaluno'].length; i++) {
@@ -52,20 +48,9 @@ function builderHtmlFields (dados) {
         htmlSituacao += "<option value='" + dados['situacaoaluno'][i].id + "'>"  + dados['situacaoaluno'][i].nome + "</option>";
     }
 
-    // Percorrendo o array de professor
-    for(var i = 0; i < dados['professor'].length; i++) {
-        // Criando as options
-        htmlProfessor += "<option value='" + dados['professor'][i].id + "'>"  + dados['professor'][i].nome + "</option>";
-    }
-
     // Removendo e adicionando as options de situacao aluno
     $("#situacao_id option").remove();
     $("#situacao_id").append(htmlSituacao);
-
-    // Removendo e adicionando as options de Professor orientador
-    $("#professor_orientador_id option").remove();
-    $("#professor_orientador_id").append(htmlProfessor);
-
 }
 
 // carregando os cursos para nova turma do aluno
@@ -196,8 +181,11 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
         if(retorno.success) {
             // Recarregando as grids
             tableCursoTurma.ajax.reload();
-            table.ajax.reload();
+            loadTableSituacoes(0).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/gridSituacoes/" + 0).load();
 
+            // desabilitando o butão
+            $('#btnAdicionarSituacao').attr('disabled', true);
+            
             // Limpando os campos
             clearValueFields();
 

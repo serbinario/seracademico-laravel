@@ -129,7 +129,7 @@ class AlunoTurmaService
         unset($data['curriculo_id']);
 
         #Salvando a situação
-        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id']);
+        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id'], ['turma_origem_id' => $turma->id]);
         unset($data['situacao_id']);
 
         # Salvando a turma
