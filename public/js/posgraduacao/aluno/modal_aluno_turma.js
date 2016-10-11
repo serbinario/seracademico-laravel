@@ -168,6 +168,10 @@ function runCursoTurma(idAluno) {
         loadTableCursoTurma(idAluno);
     }
 
+    // Carregamento inicial
+    loadTableSituacoes(0).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/gridSituacoes/" + 0).load();
+
+
     // Exibindi o modal
     $("#modal-turma-aluno").modal({show:true});
 }
