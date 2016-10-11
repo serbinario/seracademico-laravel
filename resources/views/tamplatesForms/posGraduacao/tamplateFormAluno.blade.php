@@ -712,11 +712,11 @@
                         <div classe="row">
                             <div class="form-group col-md-2">
                                 {!! Form::label('data_conclusao', 'Data Conclusão') !!}
-                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('data_colacao', 'Data Colação') !!}
-                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control')) !!}
+                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
                             </div>
                         </div>
                     </div>

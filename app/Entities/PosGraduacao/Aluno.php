@@ -19,7 +19,8 @@ class Aluno extends Model implements Transformable
         'data_inscricao',
         'data_contrato',
         'data_inscricao',
-        'data_colacao'
+        'data_colacao',
+        'data_conclusao'
     ];
 
     protected $fillable = [
