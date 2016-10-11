@@ -101,16 +101,23 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoTurmaController@grid']);
-                    Route::get('gridACursar/{idAlunoTurma}', ['as' => 'gridACursar', 'uses' => 'PosGraduacao\AlunoTurmaController@gridACursar']);
-                    Route::get('gridCursadas/{idAlunoTurma}', ['as' => 'gridCursadas', 'uses' => 'PosGraduacao\AlunoTurmaController@gridCursadas']);
-                    Route::get('gridDispensadas/{idAlunoTurma}', ['as' => 'gridDispensadas', 'uses' => 'PosGraduacao\AlunoTurmaController@gridDispensadas']);
+                    Route::get('gridSituacoes/{idAlunoCurso}', ['as' => 'gridSituacoes', 'uses' => 'PosGraduacao\AlunoTurmaController@gridSituacoes']);
                     Route::get('getCursos', ['as' => 'getCursos', 'uses' => 'PosGraduacao\AlunoTurmaController@getCursos']);
                     Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmas']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\AlunoTurmaController@getLoadFields']);
                     Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoTurmaController@store']);
-                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
-                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
+                    Route::get('getTurmaOrigem/{idAlunoCurso}', ['as' => 'getTurmaOrigem', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmaOrigem']);
+                    Route::delete('destroySituacao/{idSituacao}', ['as' => 'destroySituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@destroySituacao']);
+                    Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
+//                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
+//                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
 
+                });
+
+                Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                    Route::get('gridACursar/{idAlunoTurma}', ['as' => 'gridACursar', 'uses' => 'PosGraduacao\AlunoCurriculoController@gridACursar']);
+                    Route::get('gridCursadas/{idAlunoTurma}', ['as' => 'gridCursadas', 'uses' => 'PosGraduacao\AlunoCurriculoController@gridCursadas']);
+                    Route::get('gridDispensadas/{idAlunoTurma}', ['as' => 'gridDispensadas', 'uses' => 'PosGraduacao\AlunoCurriculoController@gridDispensadas']);
                 });
             });
 

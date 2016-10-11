@@ -212,4 +212,32 @@ class Turma extends Model implements Transformable
     {
         return $query->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])->where('tipo_nivel_sistema_id', 2);
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePosGraduacaoByAlunoCurso($query, $idAlunoCurso)
+    {
+        # Query personalizada
+        return $query
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])
+            ->whereNotIn('fac_turmas.id', function ($query) use ($idAlunoCurso){
+                $query->from('pos_alunos_cursos')
+                ->join('pos_alunos_turmas', function ($join) {
+                    $join->on(
+                        'pos_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->select([
+                    'pos_alunos_turmas.turma_id'
+                ]);
+            })
+            ->where('pos_alunos_cursos.id', $idAlunoCurso)
+            ->where('fac_turmas.tipo_nivel_sistema_id', 2);
+    }
 }

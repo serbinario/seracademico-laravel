@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Entities\PosGraduacao\AlunoTurma;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Repositories\PosGraduacao\AlunoRepository;
 use Seracademico\Services\PosGraduacao\AlunoTurmaService;
 use Yajra\Datatables\Datatables;
 
@@ -18,11 +19,17 @@ class AlunoTurmaController extends Controller
     private $service;
 
     /**
+     * @var AlunoRepository
+     */
+    private $alunoRepository;
+
+    /**
      * @param AlunoTurmaService $service
      */
-    public function __construct(AlunoTurmaService $service)
+    public function __construct(AlunoTurmaService $service, AlunoRepository $alunoRepository)
     {
         $this->service = $service;
+        $this->alunoRepository = $alunoRepository;
     }
 
       /**
@@ -31,25 +38,33 @@ class AlunoTurmaController extends Controller
     public function grid($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('pos_alunos_turmas')
-            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+        $rows = \DB::table('pos_alunos_cursos')
+            ->leftJoin('pos_alunos_turmas', function ($join) {
+                $join->on(
+                    'pos_alunos_turmas.id', '=',
+                    \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                );
+            })
             ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->join('fac_curriculos', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->join('pos_alunos_situacoes', function ($join) {
+            ->leftJoin('pos_alunos_situacoes', function ($join) {
                 $join->on(
                     'pos_alunos_situacoes.id', '=',
                     \DB::raw('(SELECT situacao_atual.id FROM pos_alunos_situacoes as situacao_atual
                         where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
                 );
             })
-            ->join('fac_situacao', 'pos_alunos_situacoes.situacao_id', '=', 'fac_situacao.id')
-            ->orderBy('pos_alunos_turmas.id')
+            ->leftJoin('fac_situacao', 'pos_alunos_situacoes.situacao_id', '=', 'fac_situacao.id')
             ->where('pos_alunos.id', $idAluno)
+            ->orderBy('pos_alunos_turmas.id')
+            ->groupBy('pos_alunos_turmas.id')
             ->select([
                 'pos_alunos_turmas.id',
                 'pos_alunos.id as idAluno',
+                'pos_alunos_cursos.id as idAlunoCurso',
                 'fac_turmas.codigo as codigo_turma',
                 'fac_curriculos.codigo as codigo_curriculo',
                 'fac_curriculos.nome as nome_curriculo',
@@ -59,89 +74,42 @@ class AlunoTurmaController extends Controller
                 \DB::raw('DATE_FORMAT(fac_turmas.aula_inicio, "%d/%m/%Y") as aula_inicio'),
             ]);
 
-        #Editando a grid <a href="edit/'.$row->id.'" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+        #Editando a grid <a id="btnEditAlunoCurso" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
         #<a href="#" class="btn btn-xs btn-danger" title="Remover Curso/Turma"><i class="glyphicon glyphicon-remove"></i></a>
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '<a id="btnEditAlunoCurso" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>';
+            return '';
         })->make(true);
     }
 
-
     /**
-     * @param $idAlunoTurma
+     * @param int $idAlunoCurso
      * @return mixed
      */
-    public function gridACursar($idAlunoTurma)
+    public function gridSituacoes(int $idAlunoCurso)
     {
         #Criando a consulta
-        $rows = \DB::table('fac_disciplinas')
-            ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
-            ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('pos_alunos_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-            ->where('pos_alunos_turmas.id', $idAlunoTurma)
+        $rows = \DB::table('pos_alunos_situacoes')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_situacoes.pos_aluno_curso_id')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->leftJoin('fac_turmas as origem', 'origem.id', '=', 'pos_alunos_situacoes.turma_origem_id')
+            ->leftJoin('fac_turmas as destino', 'destino.id', '=', 'pos_alunos_situacoes.turma_destino_id')
+            ->join('fac_situacao', 'pos_alunos_situacoes.situacao_id', '=', 'fac_situacao.id')
+            ->where('pos_alunos_cursos.id', $idAlunoCurso)
             ->select([
-                'pos_alunos_turmas.madia as media',
-                'fac_disciplinas.codigo as disciplina_codigo',
-                'fac_disciplinas.nome as disciplina_nome',
-                'fac_turmas.codigo as turma_codigo',
-                'fac_disciplinas.nome as situacao_nota_nome'
+                'pos_alunos_situacoes.id',
+                'fac_curriculos.codigo as codigoCurriculo',
+                'fac_cursos.codigo as codigoCurso',
+                'origem.codigo as codigoOrigem',
+                'destino.codigo as codigoDestino',
+                'fac_situacao.nome as nomeSituacao'
             ]);
 
         #Editando a grid
-        return Datatables::of($rows)->make(true);
-    }
-
-    /**
-     * @param $idAlunoTurma
-     * @return mixed
-     */
-    public function gridCursadas($idAlunoTurma)
-    {
-        #Criando a consulta
-        $rows = \DB::table('fac_notas')
-            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_notas.situacao_nota_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_notas.disciplina_id')
-            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-            ->where('fac_notas.aluno_tuma_id', $idAlunoTurma)
-            ->where('fac_situacao_nota.id', 'in', [1,2])
-            ->select([
-                'fac_notas.media',
-                'fac_disciplinas.codigo as disciplina_codigo',
-                'fac_disciplinas.nome as disciplina_nome',
-                'fac_turmas.codigo as turma_codigo',
-                'fac_situacao_nota.nome as situacao_nota_nome'
-            ]);
-
-        #Editando a grid
-        return Datatables::of($rows)->make(true);
-    }
-
-    /**
-     * @param $idAlunoTurma
-     * @return mixed
-     */
-    public function gridDispensadas($idAlunoTurma)
-    {
-        #Criando a consulta
-        $rows = \DB::table('fac_notas')
-            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_notas.situacao_nota_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_notas.disciplina_id')
-            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'fac_notas.aluno_tuma_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-            ->where('fac_notas.aluno_tuma_id', $idAlunoTurma)
-            ->where('fac_situacao_nota.id', '=', 4)
-            ->select([
-                'fac_notas.media',
-                'fac_disciplinas.codigo as disciplina_codigo',
-                'fac_disciplinas.nome as disciplina_nome',
-                'fac_turmas.codigo as turma_codigo',
-                'fac_situacao_nota.nome as situacao_nota_nome'
-            ]);
-
-        #Editando a grid
-        return Datatables::of($rows)->make(true);
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+            return '<a id="btnRemoverSituacao" class="btn btn-xs btn-danger" title="Remover Situação"><i class="glyphicon glyphicon-remove"></i></a>';
+        })->make(true);
     }
 
     /**
@@ -173,6 +141,34 @@ class AlunoTurmaController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function getTurmaOrigem($idAlunoCurso)
+    {
+        try {
+            # Fazendo a consulta da turma
+            $row = \DB::table('pos_alunos_turmas')
+                    ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
+                    ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+                    ->where('pos_alunos_cursos.id', $idAlunoCurso)
+                    ->orderBy('pos_alunos_turmas.id', 'DESC')
+                    ->take(1)
+                    ->select([
+                        'fac_turmas.id',
+                        'fac_turmas.codigo as nome'
+                    ])
+                    ->get();
+
+            # Retorno
+            return $row;
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
      * @param Request $request
      * @return mixed
      *
@@ -180,7 +176,7 @@ class AlunoTurmaController extends Controller
     public function getLoadFields(Request $request)
     {
         try {
-            return $this->service->load($request->get("models"));
+            return $this->service->load($request->get("models"), true);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json([
                 'error' => $e->getMessage()
@@ -202,46 +198,86 @@ class AlunoTurmaController extends Controller
             $this->service->store($data);
 
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
-        }  catch (\Throwable $e) {var_dump($e->getMessage());exit;
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-        }
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function edit($id)
-    {
-        try {
-            #Recuperando o aluno
-            $dados = $this->service->edit($id);
-
-            #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
-        } catch (\Throwable $e) {
+        }  catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
     /**
      * @param Request $request
-     * @param $id
-     * @return mixed
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function storeSituacao(Request $request)
     {
         try {
             #Recuperando os dados da requisição
-            $dados = $request->all();
-            
-            #Executando a ação
-            $this->service->update($dados, $id);
+            $data = $request->all();
 
-            #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Dados atualizados com sucesso!']);
-        } catch (\Throwable $e) {
+            #Executando a ação
+            $this->service->storeSituacao($data);
+
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
+        }  catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+
+
+    /**
+     * @param $idSituacao
+     * @return mixed
+     */
+    public function destroySituacao($idSituacao)
+    {
+        try {
+            # Recuperado o curso do aluno
+           \DB::table('pos_alunos_situacoes')
+                ->where('pos_alunos_situacoes.id', $idSituacao)
+                ->delete();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Situação removida com sucesso!"]);
+        }  catch (\Throwable $e) {var_dump($e->getMessage());
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+
+    }
+
+//    /**
+//     * @param $id
+//     * @return mixed
+//     */
+//    public function edit($id)
+//    {
+//        try {
+//            #Recuperando o aluno
+//            $dados = $this->service->edit($id);
+//
+//            #retorno para view
+//            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+//        } catch (\Throwable $e) {
+//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+//        }
+//    }
+//
+//    /**
+//     * @param Request $request
+//     * @param $id
+//     * @return mixed
+//     */
+//    public function update(Request $request, $id)
+//    {
+//        try {
+//            #Recuperando os dados da requisição
+//            $dados = $request->all();
+//
+//            #Executando a ação
+//            $this->service->update($dados, $id);
+//
+//            #retorno para view
+//            return \Illuminate\Support\Facades\Response::json(['success' => true, 'msg' => 'Dados atualizados com sucesso!']);
+//        } catch (\Throwable $e) {
+//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+//        }
+//    }
 }
