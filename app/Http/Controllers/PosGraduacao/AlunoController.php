@@ -39,16 +39,16 @@ class AlunoController extends Controller
         'Estado',
         'CorRaca',
         'SituacaoAluno',
-        'PosGraduacao\\Curso|byCurriculoAtivo,1',
+        'posGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'FormaAdmissao',
         'Graduacao\\Semestre',
         'SituacaoAluno',
         'SimpleReport|byCrud,1',
-        'PosGraduacao\\Turma|posGraduacao',
-        'PosGraduacao\\Curso|ativo,1',
-        'PosGraduacao\\CanalCaptacao',
-        'PosGraduacao\\TipoPretensao'
+        'posGraduacao\\Turma|posGraduacao',
+        'posGraduacao\\Curso|ativo,1',
+        'posGraduacao\\CanalCaptacao',
+        'posGraduacao\\TipoPretensao'
     ];
 
     /**
@@ -155,7 +155,7 @@ class AlunoController extends Controller
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Curso / Turma" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                         //if($aluno->matricula) {
-                            $html .= '<li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>';
+                            $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Contrato"><i class="material-icons">print</i></a></li>';
                        // }
                     $html .=    '</ul>';
                     $html .=   '</div>';
@@ -292,17 +292,23 @@ class AlunoController extends Controller
             ->orderBy('pos_alunos_cursos.id', 'DESC')
             ->limit(1)
             ->select([
-                'fac_curriculos.*'
+                'fac_curriculos.*',
+                'pos_alunos_cursos.id as idCurso'
             ])->first();
 
-        $turma = \DB::table('pos_alunos_turmas')
-            ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-            ->where('pos_alunos_turmas.aluno_id', '=', $aluno->id)
-            ->orderBy('pos_alunos_turmas.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_turmas.*'
-            ])->first();
+        if ($curso) {
+
+            $turma = \DB::table('pos_alunos_turmas')
+                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
+                ->orderBy('pos_alunos_turmas.id', 'DESC')
+                ->limit(1)
+                ->select([
+                    'fac_turmas.*'
+                ])->first();
+
+        }
+
         
         if(!$curso && !$turma) {
             return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");

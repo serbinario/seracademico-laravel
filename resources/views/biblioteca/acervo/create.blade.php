@@ -365,88 +365,50 @@
                     swal("Os campos nome, sobrenome e tipo responsável são obrigatórios", "Click no botão abaixo!", "warning");
                 }
             });
-        });
 
-        //Gerar o cutter ao selecionar um autor
-        $(document).change('.gerar-cutter', function(event){
-            //event.preventDefault();
+            //Gerar o cutter ao selecionar um autor
+            $("#auto-cutter").click(function (event) {
+                //event.preventDefault();
 
-            var autor  = $('select[id=autor-1] option:selected').val();
-            var outro  = $('select[id=responsavel-1] option:selected').val();
-            var titulo = $('input[name=titulo]').val();
-            var nome = "";
+                var autor  = $('select[id=autor-1] option:selected').val();
+                var outro  = $('select[id=responsavel-1] option:selected').val();
+                var titulo = $('input[name=titulo]').val();
+                var nome = "";
 
-            if(autor && !outro) {
-                nome = autor;
-            } else if (!autor && outro) {
-                nome = outro;
-            } else if (autor && outro) {
-                nome = autor;
-            }
+                if(autor && !outro) {
+                    nome = autor;
+                } else if (!autor && outro) {
+                    nome = outro;
+                } else if (autor && outro) {
+                    nome = autor;
+                }
 
-            if(titulo) {
+                if(titulo) {
 
-                var dados = {
-                    'autor' : nome,
-                    'titulo' : titulo
-                };
+                    var dados = {
+                        'autor' : nome,
+                        'titulo' : titulo
+                    };
 
-                $.ajax({
-                    url: "{{ route('seracademico.biblioteca.getCutter')  }}",
-                    data: {
-                        dados: dados
-                    },
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
-                        if(data['result']) {
-                            $('#cutter').val(data['result']);
+                    $.ajax({
+                        url: "{{ route('seracademico.biblioteca.getCutter')  }}",
+                        data: {
+                            dados: dados
+                        },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            if(data['result']) {
+                                $('#cutter').val(data['result']);
+                            }
                         }
-                    }
-                });
-            } else {
-                //swal("Você deve informar um título", "warning");
-            }
+                    });
+                } else {
+                    swal("Você deve informar ao menos o título", "Click no botão abaixo!", "warning");
+                }
+            });
+
         });
 
-        //Gerar o cutter ao selecionar ao digitar o título
-        $(document).change('#titulo', function(event){
-            //event.preventDefault();
-
-            var autor  = $('select[id=autor-1] option:selected').val();
-            var outro  = $('select[id=responsavel-1] option:selected').val();
-            var titulo = $('input[name=titulo]').val();
-            var nome = "";
-
-            if(autor && !outro) {
-                nome = autor;
-            } else if (!autor && outro) {
-                nome = outro;
-            } else if (autor && outro) {
-                nome = autor;
-            }
-
-            if(titulo && !nome) {
-
-                var dados = {
-                    'autor' : nome,
-                    'titulo' : titulo
-                };
-
-                $.ajax({
-                    url: "{{ route('seracademico.biblioteca.getCutter')  }}",
-                    data: {
-                        dados: dados
-                    },
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
-                        if(data['result']) {
-                            $('#cutter').val(data['result']);
-                        }
-                    }
-                });
-            }
-        });
     </script>
 @stop

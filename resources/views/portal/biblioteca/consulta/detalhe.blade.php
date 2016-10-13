@@ -70,7 +70,9 @@
                                     <li class="tab col s3"><a class="active" href="#test1">Detalhes</a></li>
                                     <li class="tab col s3"><a href="#test2">Exemplares</a></li>
                                     <li class="tab col s3"><a href="#test4">Referência</a></li>
-                                    <li class="tab col s3"><a href="#test5">Sumário/Palavras chaves</a></li>
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                        <li class="tab col s3"><a href="#test5">Sumário/Palavras chaves</a></li>
+                                    @endif
                                 </ul>
                             </div>
                             <div id="test1" class="col s12">
@@ -130,7 +132,8 @@
                                                 <div class="col s4"><b>Edição</b></div>
                                                 <div class="col s8">
                                                     @if($exemplar['vol_periodico'])v. {{$exemplar['vol_periodico']}}. @endif
-                                                    @if($exemplar['edicao'])n. {{$exemplar['edicao']}}. @endif
+                                                    @if($exemplar['num_periodico'])n. {{$exemplar['num_periodico']}}. @endif
+
                                                         @if($exemplar['ano']){{$exemplar['ano']}}. @endif
                                                 </div>
                                             </div>
@@ -162,18 +165,18 @@
                                                         @if($exemplar['acervo']['etial_autor'] == '1')
                                                             @if($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1')
                                                                 <b>1</b>. {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
-                                                                <?php echo ucfirst(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
+                                                                <?php echo ucwords(mb_strtolower($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @else
-                                                                <?php echo ucfirst(mb_strtoupper($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
+                                                                <?php echo ucwords(mb_strtoupper($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['nome'])) ?> et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['primeiraEntrada'] as $chave => $autor)
                                                                 @if($autor['responsaveis']['tipo_reponsavel_id'] == '1')
                                                                     <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}},
-                                                                    <?php echo ucfirst(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
+                                                                    <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])) ?><br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
-                                                                    <?php echo  ucfirst(mb_strtoupper($autor['responsaveis']['nome']) ) ?><br />
+                                                                    <?php echo  ucwords(mb_strtoupper($autor['responsaveis']['nome']) ) ?><br />
                                                                 @endif
                                                             @endforeach
                                                         @endif
@@ -220,7 +223,7 @@
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Link</b></div>
-                                                <div class="col s8">{{$exemplar['acervo']['link']}}</div>
+                                                <div class="col s8">{{$exemplar['link']}}</div>
                                             </div>
                                         </a>
                                     @endif
@@ -423,15 +426,22 @@
                                     @endif
                                 @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')
-                                    v. {{$exemplar['vol_periodico']}}, n. {{$exemplar['edicao']}},
+                                    v. {{$exemplar['vol_periodico']}}, n. {{$exemplar['num_periodico']}},
                                 @endif
                                 @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
                                 @if($exemplar['editora']['nome'])<?php echo ucfirst(mb_strtolower($exemplar['editora']['nome'])) ?>, @endif
                                 @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif
-                                @if($exemplar['ilustracoes_id'] && $exemplar['ilustracoes_id'] == '1')il., @endif
-                                @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['ilustracoes_id'] == '1')il., @endif
+                                @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @else
+                                    @if($exemplar['issn'])ISSN {{$exemplar['issn']}}. @endif
+                                @endif
                             </div>
 
+                            @if($exemplar['acervo']['tipo_periodico'] == '1')
                             <div id="test5" class="col s12">
                                 <div class="collection">
                                     <a class="collection-item">
@@ -466,6 +476,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
 
                         </div>
                     </section>

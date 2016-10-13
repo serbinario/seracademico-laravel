@@ -121,12 +121,14 @@
     @include('posGraduacao.aluno.turma.modal_aluno_turma')
     @include('posGraduacao.aluno.turma.modal_nova_turma')
     @include('reports.simple.modals.modal_report_pos_aluno_geral')
+    @include('posGraduacao.aluno.modal_aluno_documento')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -159,6 +161,15 @@
             }
 
             $("#modal-turma-aluno").modal({show:true});
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#aluno_documentos", function () {
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            loadFieldsDocumentos();
+
+            $("#modal-aluno-documento").modal({show:true});
         });
 
         // Geriamento dos relatórios avançadas
