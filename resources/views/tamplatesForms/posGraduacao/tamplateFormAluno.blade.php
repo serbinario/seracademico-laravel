@@ -86,6 +86,9 @@
             <li role="presentation">
                 <a href="#cursosPretendidos" aria-controls="cursosPretendidos" role="tab" data-toggle="tab">Cursos Pretendidos</a>
             </li>
+            <li role="presentation">
+                <a href="#monografia" aria-controls="monografia" role="tab" data-toggle="tab">Monografia</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
 
@@ -597,7 +600,130 @@
                 </div>
             </div>
             {{-- Fim Cursos pretendidos--}}
-        </div>
+
+            {{-- Aba Monografia --}}
+            <div role="tabpanel" class="tab-pane" id="monografia">
+                </br>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#monografiaGerais" aria-controls="monografiaGerais" role="tab" data-toggle="tab">Monografia / Gerais</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#monografiaBanca" aria-controls="monografiaBanca" role="tab" data-toggle="tab">Monografia Banca Examinadora</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#formatura" aria-controls="formatura" role="tab" data-toggle="tab">Formatura</a>
+                    </li>
+                </ul>
+
+                {{-- Inicio Monografia/gerais --}}
+                </br>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="monografiaGerais">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('titulo', 'Título') !!}
+                                {!! Form::text('titulo', Session::getOldInput('titulo'), array('class' => 'form-control', 'placeholder' => 'Informe um título')) !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('nota_final', 'Nota Final') !!}
+                                {!! Form::text('nota_final', Session::getOldInput('nota_final'), array('class' => 'form-control')) !!}
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                {!! Form::label('media', 'Média') !!}
+                                {!! Form::text('media', Session::getOldInput('media'), array('class' => 'form-control')) !!}
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                {!! Form::label('media_conceito', 'Média Conceito') !!}
+                                {!! Form::select('media_conceito', ['' => 'Selecione', '1' => 'CUMPRIO', '2' => 'NÃO CUMPRIO'], null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('defendeu', 'Defendeu') !!}
+                                {!! Form::select('defendeu', ['' => 'Selecione', '1' => 'Sim', '2' => 'Não'], null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('professor_orientador_id', 'Professor Orientador') !!}
+                                {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('defesa', 'Defesa') !!}
+                                {!! Form::text('defesa', Session::getOldInput(''), array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Fim Monografia/gerais --}}
+
+                    {{-- Inicio Monografia/gerais --}}
+                    </br>
+                    <div role="tabpanel" class="tab-pane" id="monografiaBanca">
+                        <div classe="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('professor_banca_1_id', 'Professor 01') !!}
+                                {!! Form::select('professor_banca_1_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('inst_ensino_banca_1_id', 'Instituição 01') !!}
+                                {!! Form::select('inst_ensino_banca_1_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                        <div classe="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('professor_banca_2_id', 'Professor 02') !!}
+                                {!! Form::select('professor_banca_2_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('inst_ensino_banca_2_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_2_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                        <div classe="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('professor_banca_3_id', 'Professor 03') !!}
+                                {!! Form::select('professor_banca_3_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('inst_ensino_banca_3_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_3_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                        <div classe="row">
+                            <div class="form-group col-md-4">
+                                {!! Form::label('professor_banca_4_id', 'Professor 04') !!}
+                                {!! Form::select('professor_banca_4_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('inst_ensino_banca_4_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_4_id', array(), null, array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Fim Monografia/gerais --}}
+
+                    {{-- Fim Monografia/gerais --}}
+                    <div role="tabpanel" class="tab-pane" id="formatura">
+                        <div classe="row">
+                            <div class="form-group col-md-2">
+                                {!! Form::label('data_conclusao', 'Data Conclusão') !!}
+                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {!! Form::label('data_colacao', 'Data Colação') !!}
+                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Fim Monografia/gerais --}}
+                </div>
+            </div>
+            {{-- Fim Monografia--}}
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">

@@ -7,8 +7,7 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\PosGraduacao\Turma;
 use Seracademico\Entities\SituacaoAluno;
-use Seracademico\Entities\Turno;
-use Seracademico\Uteis\SerbinarioDateFormat;
+use Illuminate\Database\Eloquent\Model;
 
 class PivotAlunoCurso extends Pivot implements Transformable
 {

@@ -16,8 +16,11 @@ class Aluno extends Model implements Transformable
     protected $table = "pos_alunos";
 
     protected $dates = [
-        "data_inscricao",
-        'data_contrato'
+        'data_inscricao',
+        'data_contrato',
+        'data_inscricao',
+        'data_colacao',
+        'data_conclusao'
     ];
 
     protected $fillable = [
@@ -33,7 +36,26 @@ class Aluno extends Model implements Transformable
         'canal_captacao_id',
         'tipo_pretensao_id',
         'tipo_img',
-        'data_contrato'
+        'data_contrato',
+        //
+        'titulo',
+        'nota_final',
+        'defesa',
+        'media',
+        'media_conceito',
+        'defendeu',
+        'professor_orientador_id',
+        'professor_banca_1_id',
+        'professor_banca_2_id',
+        'professor_banca_3_id',
+        'professor_banca_4_id',
+        'inst_ensino_banca_1_id',
+        'inst_ensino_banca_2_id',
+        'inst_ensino_banca_3_id',
+        'inst_ensino_banca_4_id',
+        'data_conclusao',
+        'data_colacao',
+        'pos_aluno_curso_id'
     ];
 
     /**
@@ -58,6 +80,54 @@ class Aluno extends Model implements Transformable
     public function setDataInscricaoAttribute($value)
     {
         $this->attributes['data_inscricao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataConclusaoAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_conclusao']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDataConclusaoAttribute($value)
+    {
+        $this->attributes['data_conclusao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataColacaoAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_colacao']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDataColacaoAttribute($value)
+    {
+        $this->attributes['data_colacao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDefesaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['defesa']);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function setDefesaAttribute($value)
+    {
+        $this->attributes['defesa'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**

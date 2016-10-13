@@ -1,3 +1,13 @@
+// evento para abrir modal de adicionar curso ao aluno
+$(document).on("click", "#adicionar-curso", function () {
+    // Carregando os campos
+    loadFields();
+    loadCursosAluno();
+
+    // Exibindo o modal
+    $("#modal-nova-turma-aluno").modal({show:true});
+});
+
 // carregando todos os campos preenchidos
 function loadFields()
 {
@@ -5,7 +15,6 @@ function loadFields()
     var dados =  {
         'models' : [
             'SituacaoAluno',
-            'Professor',
             'Instituicao'
         ]
     };
@@ -32,9 +41,6 @@ function loadFields()
 function builderHtmlFields (dados) {
     // Variáveis que armazenaram o html
     var htmlSituacao    = "<option value=''>Selecione uma situação</option>";
-    var htmlProfessor   = "<option value=''>Selecione um professor</option>";
-    var htmlInstituicao = "<option value=''>Selecione uma instituição</option>";
-
 
     // Percorrendo o array de situacaoaluno
     for(var i = 0; i < dados['situacaoaluno'].length; i++) {
@@ -42,20 +48,9 @@ function builderHtmlFields (dados) {
         htmlSituacao += "<option value='" + dados['situacaoaluno'][i].id + "'>"  + dados['situacaoaluno'][i].nome + "</option>";
     }
 
-    // Percorrendo o array de professor
-    for(var i = 0; i < dados['professor'].length; i++) {
-        // Criando as options
-        htmlProfessor += "<option value='" + dados['professor'][i].id + "'>"  + dados['professor'][i].nome + "</option>";
-    }
-
     // Removendo e adicionando as options de situacao aluno
     $("#situacao_id option").remove();
     $("#situacao_id").append(htmlSituacao);
-
-    // Removendo e adicionando as options de Professor orientador
-    $("#professor_orientador_id option").remove();
-    $("#professor_orientador_id").append(htmlProfessor);
-
 }
 
 // carregando os cursos para nova turma do aluno
@@ -148,29 +143,6 @@ function clearValueFields()
     $("#curso").find("option:selected").removeAttr("selected");
     $("#turma_id option").remove();
     $("#situacao_id").find("option:selected").removeAttr("selected");
-
-    // Monografia / Gerais
-    $("#titulo").val("");
-    $("#nota_final").val("");
-    $("#madia").val("");
-    $("#media_conceito").val("");
-    $("#defendeu").val("");
-    $("#professor_orientador_id").find("option:selected").removeAttr("selected");
-    $("#defesa").val("");
-
-    // Monografia / Banca examinadora
-    $("#professor_banca_1_id").find("option:selected").removeAttr("selected");
-    $("#professor_banca_2_id").find("option:selected").removeAttr("selected");
-    $("#professor_banca_3_id").find("option:selected").removeAttr("selected");
-    $("#professor_banca_4_id").find("option:selected").removeAttr("selected");
-    $("#inst_ensino_banca_1_id").find("option:selected").removeAttr("selected");
-    $("#inst_ensino_banca_2_id").find("option:selected").removeAttr("selected");
-    $("#inst_ensino_banca_3_id").find("option:selected").removeAttr("selected");
-    $("#inst_ensino_banca_4_id").find("option:selected").removeAttr("selected");
-
-    // Formatura
-    $("#data_conclusao").val("");
-    $("#data_colacao").val("");
 }
 
 // Recuperando os valores dos campos
@@ -181,52 +153,13 @@ function getValueFields()
     var turma_id                = $("#turma_id").val();
     var situacao_id             = $("#situacao_id").val();
 
-    // Monografia / Gerais
-    var titulo                  = $("#titulo").val();
-    var nota_final              = $("#nota_final").val();
-    var madia                   = $("#madia").val();
-    var media_conceito          = $("#media_conceito").val();
-    var defendeu                = $("#defendeu").val();
-    var professor_orientador_id = $("#professor_orientador_id").val();
-    var defesa                  = $("#defesa").val();
-
-    // Monografia / Banca examinadora
-    var professor_banca_1_id    = $("#professor_banca_1_id").val();
-    var professor_banca_2_id    = $("#professor_banca_2_id").val();
-    var professor_banca_3_id    = $("#professor_banca_3_id").val();
-    var professor_banca_4_id    = $("#professor_banca_4_id").val();
-    var inst_ensino_banca_1_id  = $("#inst_ensino_banca_1_id").val();
-    var inst_ensino_banca_2_id  = $("#inst_ensino_banca_2_id").val();
-    var inst_ensino_banca_3_id  = $("#inst_ensino_banca_3_id").val();
-    var inst_ensino_banca_4_id  = $("#inst_ensino_banca_4_id").val();
-
-    // Formatura
-    var data_conclusao          = $("#data_conclusao").val();
-    var data_colacao            = $("#data_colacao").val();
 
     // Preparando os dados
     var dados = {
         'curriculo_id'            : curriculo_id,
         'aluno_id'                : idAluno,
         'turma_id'                : turma_id == "" ? null : turma_id,
-        'situacao_id'             : situacao_id == "" ? null : situacao_id,
-        'titulo'                  : titulo,
-        'nota_final'              : nota_final,
-        'madia'                   : madia,
-        'media_conceito'          : media_conceito,
-        'defendeu'                : defendeu,
-        'professor_orientador_id' : professor_orientador_id == "" ? null : professor_orientador_id,
-        'defesa'                  : defesa,
-        'professor_banca_1_id'    : professor_banca_1_id == "" ? null : professor_banca_1_id,
-        'professor_banca_2_id'    : professor_banca_2_id == "" ? null : professor_banca_2_id,
-        'professor_banca_3_id'    : professor_banca_3_id == "" ? null : professor_banca_3_id,
-        'professor_banca_4_id'    : professor_banca_4_id == "" ? null : professor_banca_4_id,
-        'inst_ensino_banca_1_id'  : inst_ensino_banca_1_id == "" ? null : inst_ensino_banca_1_id,
-        'inst_ensino_banca_2_id'  : inst_ensino_banca_2_id == "" ? null : inst_ensino_banca_2_id,
-        'inst_ensino_banca_3_id'  : inst_ensino_banca_3_id == "" ? null : inst_ensino_banca_3_id,
-        'inst_ensino_banca_4_id'  : inst_ensino_banca_4_id == "" ? null : inst_ensino_banca_4_id,
-        'data_conclusao'          : data_conclusao,
-        'data_colacao'            : data_colacao
+        'situacao_id'             : situacao_id == "" ? null : situacao_id
     };
 
     // Retorno
@@ -237,7 +170,7 @@ function getValueFields()
 $(document).on("click", "#btnSalvarTurmaAluno", function () {
     // Recuperando os valores dos formulários
     var dados = getValueFields();
-    console.log(dados);
+  
     // Transação com banco de dados
     jQuery.ajax({
         type: 'POST',
@@ -248,8 +181,11 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
         if(retorno.success) {
             // Recarregando as grids
             tableCursoTurma.ajax.reload();
-            table.ajax.reload();
+            loadTableSituacoes(0).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/gridSituacoes/" + 0).load();
 
+            // desabilitando o butão
+            $('#btnAdicionarSituacao').attr('disabled', true);
+            
             // Limpando os campos
             clearValueFields();
 

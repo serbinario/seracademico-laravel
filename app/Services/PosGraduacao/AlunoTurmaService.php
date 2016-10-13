@@ -129,7 +129,7 @@ class AlunoTurmaService
         unset($data['curriculo_id']);
 
         #Salvando a situação
-        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id']);
+        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id'], ['turma_origem_id' => $turma->id]);
         unset($data['situacao_id']);
 
         # Salvando a turma
@@ -145,38 +145,207 @@ class AlunoTurmaService
         return true;
     }
 
-    /*
-    public function update(array $data, int $id) : Departamento
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function edit($id)
     {
-        #Atualizando no banco de dados
-        $departamento = $this->repository->update($data, $id);
+        # Recuperando o id do aluno
+        $result = \DB::table('pos_alunos_turmas')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->where('pos_alunos_turmas.id', $id)
+            ->select([
+                'pos_alunos.id',
+                'pos_alunos_cursos.curriculo_id as idCurriculo',
+                'pos_alunos_turmas.turma_id as idTurma'
+            ])->get();
 
 
-        #Verificando se foi atualizado no banco de dados
-        if(!$departamento) {
-            throw new \Exception('Ocorreu um erro ao cadastrar!');
+        # Validando o retorno
+        if(count($result) !== 1) {
+            throw new \Exception("Nenhum aluno foi encontrado");
         }
 
-        #Retorno
-        return $departamento;
-    }*/
+        # Recuperando o objeto de aluno
+        $objAluno      = $this->alunoRepository->find($result[0]->id);
+        $objCurrriculo = $this->curriculoRepository->find($result[0]->idCurriculo);
+        $objTurma      = $this->turmaRepository->find($result[0]->idTurma);
+
+        # Array de retorno
+        $arrayResult = [
+            'aluno' => $objAluno,
+            'turma' => $objTurma,
+            'curso' => $objCurrriculo,
+            'alunoTurma' => $objAluno->curriculos->find($objCurrriculo->id)->turmas->find($objTurma->id)->pivot,
+            'situacao' => $objAluno->curriculos->find($objCurrriculo->id)->pivot->situacoes->last()
+        ];
+
+        # Retorno
+        return $arrayResult;
+    }
 
     /**
-     * @param array $models
-     * @return mixed
+     * @param array $data
+     * @param int $id
+     * @return bool
+     * @throws \Exception
      */
-    public function load(array $models) : array
+    public function update(array $data, int $id)
+    {
+        # Aplicação de regras de negócio
+        $this->tratamentoCampos($data);
+
+        #Recuperando o aluno e a turma
+        $aluno = $this->alunoRepository->find($data['aluno_id']);
+        $turma = $this->turmaRepository->find($data['turma_id']);
+
+        # Verificando se o aluno foi encontrado
+        if(!$aluno && !$turma) {
+            throw new \Exception("Aluno ou turma não existe!");
+        }
+
+        # Deletando os valores da array
+        unset($data['aluno_id']);
+        unset($data['turma_id']);
+
+        #Recuperando o id do currículo
+        $curriculoId = $data['curriculo_id'];
+        unset($data['curriculo_id']);
+
+        # Aplicação de regras de negócios
+        $this->tratamentoSituacao($aluno, $curriculoId, $data);
+        $this->tratamentoTurma($aluno, $turma, $curriculoId, $data);
+        $this->tratamentoDisciplinas($aluno->id, $turma->id);
+
+        #Retorno
+        return true;
+    }
+
+    /**
+     * @param $aluno
+     * @param $turma
+     * @param $curriculoId
+     * @param $data
+     * @return bool
+     */
+    public function tratamentoTurma($aluno, $turma, $curriculoId, &$data)
+    {
+        # Recuperando a ultima turma
+        $lastTurma = $aluno->curriculos->last()->pivot->turmas->last();
+
+        # Verificando se a turma é a mesma turma
+        if(isset($lastTurma) && $lastTurma->id == $turma->id) {
+            # Recuperando o Pivot
+            $alunoTurma = $lastTurma->pivot;
+            $alunoTurma->update($data);
+
+            # Retorno
+            return true;
+        }
+
+        # Salvando a turma
+        $aluno->curriculos->find($curriculoId)->pivot->turmas()->attach($turma->id, $data);
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param $aluno
+     * @param $curriculoId
+     * @return bool
+     */
+    public function tratamentoSituacao($aluno, $curriculoId, &$data)
+    {
+        #Salvando a situação
+        $aluno->curriculos->find($curriculoId)->pivot->situacoes()->attach($data['situacao_id']);
+        unset($data['situacao_id']);
+
+        # Retorno
+        return true;
+    }
+
+    /**
+     * Método load
+     *
+     * Método responsável por recuperar todos os models (com seus repectivos
+     * métodos personalizados para consulta, se for o caso) do array passado
+     * por parâmetro.
+     *
+     * @param array $models || Melhorar esse código
+     * @return array
+     */
+    public function load(array $models, $ajax = false) : array
     {
         #Declarando variáveis de uso
-        $result = [];
+        $result    = [];
+        $expressao = [];
 
         #Criando e executando as consultas
         foreach ($models as $model) {
-            #qualificando o namespace
-            $nameModel = "Seracademico\\Entities\\$model";
+            # separando as strings
+            $explode   = explode("|", $model);
 
-            #Recuperando o registro e armazenando no array
-            $result[strtolower($model)] = $nameModel::get();
+            # verificando a condição
+            if(count($explode) > 1) {
+                $model     = $explode[0];
+                $expressao = explode(",", $explode[1]);
+            }
+
+            #qualificando o namespace
+            $nameModel = "\\Seracademico\\Entities\\$model";
+
+            #Verificando se existe sobrescrita do nome do model
+            //$model     = isset($expressao[2]) ? $expressao[2] : $model;
+
+            if ($ajax) {
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                            break;
+                    }
+
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::orderBy('nome', 'asc')->get(['nome', 'id']);
+                }
+            } else {
+                if(count($expressao) > 0) {
+                    switch (count($expressao)) {
+                        case 1 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 2 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                        case 3 :
+                            #Recuperando o registro e armazenando no array
+                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
+                            break;
+                    }
+                } else {
+                    #Recuperando o registro e armazenando no array
+                    $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+                }
+            }
+
+            # Limpando a expressão
+            $expressao = [];
         }
 
         #retorno
@@ -248,4 +417,31 @@ class AlunoTurmaService
         # Retono exception
         throw new \Exception("Esta turma não está vinculada a esse aluno.");
     }
+
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function storeSituacao(array $data)
+    {
+        # Aplicação de regras de negócio
+        $this->tratamentoCampos($data);
+
+        # Cadastrando a situação
+        DB::table('pos_alunos_situacoes')->insert($data);
+
+        # Verificando se é mudança de turma
+        if($data['situacao_id'] == 14) {
+            # Cadastrando a nova turma
+            DB::table('pos_alunos_turmas')->insert([
+                'pos_aluno_curso_id' => $data['pos_aluno_curso_id'],
+                'turma_id' => $data['turma_destino_id']
+            ]);
+        }
+
+        # Retorno
+        return true;
+    }
+
 }

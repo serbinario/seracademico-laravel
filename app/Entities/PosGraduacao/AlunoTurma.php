@@ -93,12 +93,4 @@ class AlunoTurma extends Pivot implements Transformable
     {
         return $this->hasMany(Nota::class, 'aluno_tuma_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function situacao()
-    {
-        return $this->belongsTo(SituacaoAluno::class, 'situacao_id');
-    }
 }
