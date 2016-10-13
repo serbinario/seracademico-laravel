@@ -278,8 +278,70 @@ class AlunoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function contrato(Request $request, $id)
+    public function documentos(Request $request)
     {
+        $tipoDocumento = $request->request->get('documentacao_id');
+        $id = $request->request->get('id_aluno');
+
+        if($tipoDocumento === "1") {
+
+            $result  = $this->contrato($id);
+
+            if(!$result['curso'] && !$result['turma']) {
+                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
+            }
+
+            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final || !$result['turma']->qtd_parcelas || !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
+                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
+            aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+            }
+
+            return \PDF::loadView('reports.contrato', $result)->stream();
+
+        } else if ($tipoDocumento === "2") {
+
+            $result = $this->declaracaoVinculo($id);
+
+            //dd($result);
+
+            if(!$result['curso'] && !$result['turma']) {
+                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
+            }
+
+            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final ) {
+                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
+            aula inicial e aula final");
+            }
+
+            return \PDF::loadView('reports.declaracaoVinculo', $result)->stream();
+
+        } else if ($tipoDocumento === "3") {
+
+            $result = $this->certificadoConclusao($id);
+
+            //dd($result);
+
+            if(!$result['curso'] && !$result['turma']) {
+                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
+            }
+
+            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final ) {
+                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
+            aula inicial e aula final");
+            }
+
+            return \PDF::loadView('reports.certificadoConclusao', $result)->stream();
+            
+        }
+
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function contrato($id) {
+
         $aluno = $this->service->find($id);
 
         $data = new \DateTime('now');
@@ -309,14 +371,50 @@ class AlunoController extends Controller
 
         }
 
-        
-        if(!$curso && !$turma) {
-            return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
+        if(!$aluno->data_contrato) {
+            $aluno->data_contrato = $data->format('Y-m-d');
+            $aluno->save();
         }
 
-        if(!$turma->aula_inicio || !$turma->aula_final || !$turma->qtd_parcelas || !$turma->duracao_meses || !$turma->valor_turma) {
-            return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
-            aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
+
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function declaracaoVinculo($id) {
+
+        $aluno = $this->service->find($id);
+
+        $data = new \DateTime('now');
+        $curso = "";
+        $turma = "";
+
+        $curso = \DB::table('pos_alunos_cursos')
+            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
+            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->limit(1)
+            ->select([
+                'fac_curriculos.*',
+                'fac_cursos.*',
+                'pos_alunos_cursos.id as idCurso'
+            ])->first();
+
+        if ($curso) {
+
+            $turma = \DB::table('pos_alunos_turmas')
+                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
+                ->orderBy('pos_alunos_turmas.id', 'DESC')
+                ->limit(1)
+                ->select([
+                    'fac_turmas.*'
+                ])->first();
+
         }
 
         if(!$aluno->data_contrato) {
@@ -324,7 +422,54 @@ class AlunoController extends Controller
             $aluno->save();
         }
 
-        return \PDF::loadView('reports.contrato', ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma])->stream();
+        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
+
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function certificadoConclusao($id) {
+
+        $aluno = $this->service->find($id);
+
+        $data = new \DateTime('now');
+        $curso = "";
+        $turma = "";
+
+        $curso = \DB::table('pos_alunos_cursos')
+            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
+            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->limit(1)
+            ->select([
+                'fac_curriculos.*',
+                'fac_cursos.*',
+                'pos_alunos_cursos.id as idCurso'
+            ])->first();
+
+        if ($curso) {
+
+            $turma = \DB::table('pos_alunos_turmas')
+                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
+                ->orderBy('pos_alunos_turmas.id', 'DESC')
+                ->limit(1)
+                ->select([
+                    'fac_turmas.*'
+                ])->first();
+
+        }
+
+        if(!$aluno->data_contrato) {
+            $aluno->data_contrato = $data->format('Y-m-d');
+            $aluno->save();
+        }
+
+        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
+
     }
 
     /**

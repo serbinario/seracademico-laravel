@@ -74,37 +74,41 @@
 <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
 <center>
-    <span>DECLARAÇÃO DE VÍNCULO</span>
+    <span>CERTIDÃO DE CONCLUSÃO DE CURSO</span>
 </center>
 
 <br />
 
 <p>
-    Declaramos, para os devidos fins de direito, que {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!},
-    matrícula nº {!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!} está regulamente matriculado (a)
-    nesta Instituição de Ensino Superior, FASUP – Faculdade de Saúde de
-    Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
-    {!! isset($curso->nome) ? $curso->nome : "" !!}, realizado e certificado pela Faculdade FASUP (
-    Faculdade de Saúde de Paulista ), de acordo com a portaria de
-    credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
-    <?php $data_rec = \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec);  ?>{{$data_rec->format('d/m/Y')}}.
+    Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
+    RG nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!} – {!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE,
+    CPF nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!} Filha de {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!} e
+    {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}, concluiu o curso de Pós-
+    graduação “Lato Sensu” EM <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade de
+    Saúde de Paulista - FASUP , de acordo com a portaria de credenciamento
+    do MEC de nº {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de <?php $data_rec = \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec);  ?>{{$data_rec->format('d/m/Y')}}. O referido aluno (a) concluiu o
+    curso com média 9,2 (NOVE VÍRGULA DOIS)e freqüência maior que 75%
+    (setenta e cinco por cento) tendo entregue e apresentado o artigo ao final do
+    curso.
 </p>
 
 <p>
     <?php
 
-    if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
+    if (isset($turma->aula_inicio) && isset($turma->aula_final)) {
         $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
         $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
     } else {
         $dataFromat = "";
     }
     ?>
-    O curso de Pós-Graduação atendeu ao disposto na Resolução CES/CNE-
-    MEC Nº 01 de 2007, com carga horária total de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!}horas/aula, iniciado no dia
-        <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> com previsão de término no dia
-        <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>.
-    Aulas aos sábados, das 08:00 às 17:00 horas.
+    O curso de Pós-Graduação atendeu ao disposto na Resolução
+    CNE/CES Nº 1 de junho de 2007, com carga horária total
+    de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!} horas/aula,
+    iniciado
+    em <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?>
+    om término
+    em <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>.
 </p>
 
 <p>

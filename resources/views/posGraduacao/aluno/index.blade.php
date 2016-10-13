@@ -175,6 +175,7 @@
         $(document).on("click", "#aluno_documentos", function () {
             idAluno = table.row($(this).parents('tr')).data().id;
 
+            $('#id_aluno').val(idAluno);
             loadFieldsDocumentos();
 
             $("#modal-aluno-documento").modal({show:true});
