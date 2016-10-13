@@ -159,10 +159,31 @@ class Turma extends Model implements Transformable
     /**
      * @return $this
      */
-    public function alunos()
+    public function alunosCursos()
     {
-        return $this->belongsToMany(Aluno::class, "fac_alunos_turmas", "turma_id", "aluno_id")
-            ->withPivot(['id', 'aluno_id', 'disciplina_id']);
+        return $this->belongsToMany(PivotAlunoCurso::class, "pos_alunos_turmas", "turma_id", "pos_aluno_curso_id")
+            ->withPivot([
+                'id',
+                'pos_aluno_curso_id',
+                'turma_id',
+                'titulo',
+                'nota_final',
+                'defesa',
+                'madia',
+                'media_conceito',
+                'defendeu',
+                'professor_orientador_id',
+                'professor_banca_1_id',
+                'professor_banca_2_id',
+                'professor_banca_3_id',
+                'professor_banca_4_id',
+                'inst_ensino_banca_1_id',
+                'inst_ensino_banca_2_id',
+                'inst_ensino_banca_3_id',
+                'inst_ensino_banca_4_id',
+                'data_conclusao',
+                'data_colacao'
+            ]);
     }
 
     /**
@@ -179,11 +200,6 @@ class Turma extends Model implements Transformable
             return new TurmaDisciplina($parent, $attributes, $table, $exists);
         }
 
-        # Pivot para Aluno
-        if($parent instanceof Aluno) {
-            return new AlunoTurma($parent, $attributes, $table, $exists);
-        }
-
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
@@ -195,5 +211,33 @@ class Turma extends Model implements Transformable
     public function scopePosGraduacao($query)
     {
         return $query->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])->where('tipo_nivel_sistema_id', 2);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePosGraduacaoByAlunoCurso($query, $idAlunoCurso)
+    {
+        # Query personalizada
+        return $query
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])
+            ->whereNotIn('fac_turmas.id', function ($query) use ($idAlunoCurso){
+                $query->from('pos_alunos_cursos')
+                ->join('pos_alunos_turmas', function ($join) {
+                    $join->on(
+                        'pos_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->select([
+                    'pos_alunos_turmas.turma_id'
+                ]);
+            })
+            ->where('pos_alunos_cursos.id', $idAlunoCurso)
+            ->where('fac_turmas.tipo_nivel_sistema_id', 2);
     }
 }

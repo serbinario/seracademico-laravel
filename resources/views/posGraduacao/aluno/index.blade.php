@@ -120,12 +120,16 @@
 
     @include('posGraduacao.aluno.turma.modal_aluno_turma')
     @include('posGraduacao.aluno.turma.modal_nova_turma')
+    @include('posGraduacao.aluno.turma.modal_create_situacao')
+    {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
     @include('reports.simple.modals.modal_report_pos_aluno_geral')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_create_situacao.js') }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
@@ -150,15 +154,19 @@
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
+            // Recuperando o id do aluno selecionado
             idAluno = table.row($(this).parents('tr')).data().id;
 
-            if(tableCursoTurma) {
-                loadTableCursoTurma(idAluno).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/grid/" + idAluno).load();
-            } else {
-                loadTableCursoTurma(idAluno);
-            }
+            // Recuperando o nome e a matrícula
+            var nomeAluno   = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
 
-            $("#modal-turma-aluno").modal({show:true});
+            // prenchendo o titulo do nome do aluno
+            $('#ctMatricula').text(matricula);
+            $('#ctNomeAluno').text(nomeAluno);
+
+            // Executando o modal
+            runCursoTurma(idAluno);
         });
 
         // Geriamento dos relatórios avançadas
