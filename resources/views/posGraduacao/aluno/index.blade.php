@@ -133,6 +133,9 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_create_situacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_curriculo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript">
@@ -154,7 +157,7 @@
         });
 
         // Id do aluno corrente
-        var idAluno;
+        var idAluno, idAlunoTurma, idAlunoCurso;
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
