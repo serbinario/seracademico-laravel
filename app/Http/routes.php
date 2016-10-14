@@ -88,7 +88,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoController@update']);
-                Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\AlunoController@contrato']);
+                Route::get('documentos', ['as' => 'documentos', 'uses' => 'PosGraduacao\AlunoController@documentos']);
                 Route::get('reportViewGeralAlunoCandidato', ['as' => 'reportViewGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@reportViewGeralAlunoCandidato']);
                 Route::get('gridReportGeralAlunoCandidato/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
                 Route::get('graphicBuilderGeral', ['as' => 'graphicBuilderGeral', 'uses' => 'Report\ReportAlunoController@graphicBuilderGeral']);
@@ -111,7 +111,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
 //                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
 //                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
-
                 });
 
                 Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {

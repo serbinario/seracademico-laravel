@@ -57,7 +57,7 @@ class ProfessorPosController extends Controller
      */
     public function index()
     {
-        return view('professorPos.index');
+        return view('posGraduacao.professor.index');
     }
 
     /**
@@ -92,7 +92,7 @@ class ProfessorPosController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('professorPos.create', compact('loadFields'));
+        return view('posGraduacao.professor.create', compact('loadFields'));
     }
 
     /**
@@ -134,7 +134,7 @@ class ProfessorPosController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('professorPos.edit', compact('model', 'loadFields'));
+            return view('posGraduacao.professor.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

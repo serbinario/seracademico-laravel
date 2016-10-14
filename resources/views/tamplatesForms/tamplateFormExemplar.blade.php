@@ -3,7 +3,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dado" aria-controls="dado" role="tab" data-toggle="tab">Dados Principais</a></li>
-            <li role="presentation"><a href="#publicacao" aria-controls="outros" role="tab" data-toggle="tab">Publicação</a></li>
+            <li role="presentation"><a href="#publicacao" aria-controls="publicacao" role="tab" data-toggle="tab">Publicação</a></li>
             <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Informação adicional</a></li>
             <li role="presentation"><a href="#aquisicao" aria-controls="aquisicao" role="tab" data-toggle="tab">Aquisição</a>
             </li>

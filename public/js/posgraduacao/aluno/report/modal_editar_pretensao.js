@@ -13,7 +13,7 @@ function loadFields()
     // Definindo os models
     var dados =  {
         'models' : [
-            'PosGraduacao\\TipoPretensao'
+            'posGraduacao\\TipoPretensao'
         ]
     };
 

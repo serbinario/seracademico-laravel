@@ -4,8 +4,8 @@ function runSimpleReportPosAlunoGeral()
     // Definindo os models
     var dados =  {
         'models' : [
-            'PosGraduacao\\Curso',
-            'PosGraduacao\\Turma|posGraduacao',
+            'posGraduacao\\Curso',
+            'posGraduacao\\Turma|posGraduacao',
             'Turno'
         ]
     };
