@@ -39,17 +39,17 @@ class AlunoTurmaController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('pos_alunos_cursos')
-            ->leftJoin('pos_alunos_turmas', function ($join) {
+            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->join('pos_alunos_turmas', function ($join) {
                 $join->on(
                     'pos_alunos_turmas.id', '=',
                     \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
                         where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                 );
             })
+            ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-            ->join('fac_curriculos', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->leftJoin('pos_alunos_situacoes', function ($join) {
                 $join->on(
                     'pos_alunos_situacoes.id', '=',
