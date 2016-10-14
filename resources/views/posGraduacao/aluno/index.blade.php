@@ -126,15 +126,13 @@
     @include('posGraduacao.aluno.curriculo.modal_curriculo')
     @include('posGraduacao.aluno.curriculo.modal_inserir_dispensar_disciplina')
     @include('posGraduacao.aluno.curriculo.modal_editar_dispensar_disciplina')
+    @include('posGraduacao.aluno.modal_aluno_documento')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_create_situacao.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_curriculo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript">
@@ -156,14 +154,12 @@
         });
 
         // Id do aluno corrente
-        var idAluno, idAlunoTurma, idAlunoCurso;
+        var idAluno;
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
             // Recuperando o id do aluno selecionado
             idAluno = table.row($(this).parents('tr')).data().id;
-            idAlunoTurma = table.row($(this).parents('tr')).data().idAlunoTurma;
-            idAlunoCurso = table.row($(this).parents('tr')).data().idAlunoCurso;
 
             // Recuperando o nome e a matrícula
             var nomeAluno   = table.row($(this).parents('tr')).data().nome;
@@ -196,6 +192,16 @@
 
             // Executando o modal
             runCurriculo(idAluno);
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#aluno_documentos", function () {
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            $('#id_aluno').val(idAluno);
+            loadFieldsDocumentos();
+
+            $("#modal-aluno-documento").modal({show:true});
         });
 
         // Geriamento dos relatórios avançadas

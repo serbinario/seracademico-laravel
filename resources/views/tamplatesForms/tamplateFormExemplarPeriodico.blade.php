@@ -3,7 +3,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dado" aria-controls="dado" role="tab" data-toggle="tab">Dados Principais</a></li>
-            <li role="presentation"><a href="#publicacao" aria-controls="outros" role="tab" data-toggle="tab">Publicação</a></li>
+            <li role="presentation"><a href="#publicacao" aria-controls="publicacao" role="tab" data-toggle="tab">Publicação</a></li>
             <li role="presentation"><a href="#outros" aria-controls="outros" role="tab" data-toggle="tab">Informação adicional</a></li>
             <li role="presentation"><a href="#aquisicao" aria-controls="aquisicao" role="tab" data-toggle="tab">Aquisição</a>
             </li>
@@ -165,20 +165,20 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('ano', 'Ano') !!}
-                            {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control numberFor')) !!}
+                            {!! Form::label('edicao', 'Edição') !!}
+                            {!! Form::text('edicao', Session::getOldInput('edicao'), array('class' => 'form-control numberFor')) !!}
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('vol_periodico', 'Volume') !!}
+                            {!! Form::label('vol_periodico', 'Volume/Ano') !!}
                             {!! Form::text('vol_periodico', Session::getOldInput('vol_periodico')  , array('class' => 'form-control numberFive')) !!}
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('edicao', 'Número do Periódico') !!}
-                            {!! Form::text('edicao', Session::getOldInput('edicao')  , array('class' => 'form-control numberFive')) !!}
+                            {!! Form::label('num_periodico', 'Número do Periódico') !!}
+                            {!! Form::text('num_periodico', Session::getOldInput('num_periodico')  , array('class' => 'form-control numberFive')) !!}
                         </div>
                     </div>
                 </div>
