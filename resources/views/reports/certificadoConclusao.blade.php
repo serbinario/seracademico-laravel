@@ -45,10 +45,14 @@
 
             echo ("$semana, $dia de $mes de $ano");
         }
+
 //Agora basta imprimir na tela...
 //echo ("$cidade, $semana, $dia de $mes de $ano");
+
 ?>
+
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -79,13 +83,15 @@
 
 <br />
 
+
+
 <p style="font-size: 20px">
     Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
     RG nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!} – {!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE,
     CPF nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!} Filha de {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!} e
     {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}, concluiu o curso de Pós-
     graduação “Lato Sensu” EM <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela ALPHA EDUCAÇÃO E TREINAMENTOS - ALPHA , de acordo com a portaria de credenciamento
-    do MEC de nº {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de <?php $data_rec = \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec);  ?>{{$data_rec->format('d/m/Y')}}. O referido aluno (a) concluiu o
+    do MEC de nº {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>{{ !empty($data_rec) ? $data_rec->format('d/m/Y'): "" }}. O referido aluno (a) concluiu o
     curso com média 9,2 (NOVE VÍRGULA DOIS)e freqüência maior que 75%
     (setenta e cinco por cento) tendo entregue e apresentado o artigo ao final do
     curso.
@@ -100,6 +106,7 @@
     } else {
         $dataFromat = "";
     }
+
     ?>
     O curso de Pós-Graduação atendeu ao disposto na Resolução
     CNE/CES Nº 1 de junho de 2007, com carga horária total

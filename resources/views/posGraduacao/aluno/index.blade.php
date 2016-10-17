@@ -138,6 +138,10 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
+
+    {{--Fabio--}}
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
+
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
