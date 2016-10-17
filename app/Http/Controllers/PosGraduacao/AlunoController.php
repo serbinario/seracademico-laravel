@@ -93,6 +93,13 @@ class AlunoController extends Controller
                         where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
                     );
                 })
+                ->leftJoin('pos_alunos_turmas', function ($join) {
+                    $join->on(
+                        'pos_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    );
+                })
                 ->leftJoin('pos_alunos_situacoes', function ($join) {
                     $join->on(
                         'pos_alunos_situacoes.id', '=',
@@ -105,37 +112,40 @@ class AlunoController extends Controller
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                 ->select([
                     'pos_alunos.id',
+                    'pos_alunos_turmas.id as idAlunoTurma',
+                    'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
                     'pessoas.cpf',
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',
                     \DB::raw('IF(pos_alunos.matricula = "", "PENDENTE",fac_situacao.nome) as nomeSituacao'),
-                    'fac_cursos.codigo as codigoCurso'
+                    'fac_cursos.codigo as codigoCurso',
+                    'fac_cursos.nome as nomeCurso'
                 ]);
 
             #Editando a grid
             return Datatables::of($alunos)
-                ->filter(function ($query) use ($request) {
-                    # Filtrando por situação
-                    if ($request->has('situacao')) {
-                        $query->where('fac_situacao.id', '=', $request->get('situacao'));
-                    }
-
-                    # Filtrando Global
-                    if ($request->has('globalSearch')) {
-                        # recuperando o valor da requisição
-                        $search = $request->get('globalSearch');
-
-                        #condição
-                        $query->where(function ($where) use ($search) {
-                            $where->orWhere('pessoas.nome', 'like', "%$search%")
-                                ->orWhere('pessoas.cpf', 'like', "%$search%")
-                                ->orWhere('fac_alunos.matricula', 'like', "%$search%")
-                                ->orWhere('fac_curriculos.codigo', 'like', "%$search%");
-                        });
-                    }
-                })
+//                ->filter(function ($query) use ($request) {
+//                    # Filtrando por situação
+//                    if ($request->has('situacao')) {
+//                        $query->where('fac_situacao.id', '=', $request->get('situacao'));
+//                    }
+//
+//                    # Filtrando Global
+//                    if ($request->has('globalSearch')) {
+//                        # recuperando o valor da requisição
+//                        $search = $request->get('globalSearch');
+//
+//                        #condição
+//                        $query->where(function ($where) use ($search) {
+//                            $where->orWhere('pessoas.nome', 'like', "%$search%")
+//                                ->orWhere('pessoas.cpf', 'like', "%$search%")
+//                                ->orWhere('fac_alunos.matricula', 'like', "%$search%")
+//                                ->orWhere('fac_curriculos.codigo', 'like', "%$search%");
+//                        });
+//                    }
+//                })
                 ->addColumn('action', function ($aluno) {
                     /**
                      *   <li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>
@@ -154,8 +164,9 @@ class AlunoController extends Controller
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                    $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
                         //if($aluno->matricula) {
-                            $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Contrato"><i class="material-icons">print</i></a></li>';
+                            $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
                        // }
                     $html .=    '</ul>';
                     $html .=   '</div>';

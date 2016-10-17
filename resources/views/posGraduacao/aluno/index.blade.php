@@ -123,6 +123,9 @@
     @include('posGraduacao.aluno.turma.modal_create_situacao')
     {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
     @include('reports.simple.modals.modal_report_pos_aluno_geral')
+    @include('posGraduacao.aluno.curriculo.modal_curriculo')
+    @include('posGraduacao.aluno.curriculo.modal_inserir_dispensar_disciplina')
+    @include('posGraduacao.aluno.curriculo.modal_editar_dispensar_disciplina')
     @include('posGraduacao.aluno.modal_aluno_documento')
 @stop
 
@@ -130,9 +133,15 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_create_situacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_curriculo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
+
+    {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
+
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -152,7 +161,7 @@
         });
 
         // Id do aluno corrente
-        var idAluno;
+        var idAluno, idAlunoTurma, idAlunoCurso;
 
         // Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#link_modal_curso_turma", function () {
@@ -169,6 +178,27 @@
 
             // Executando o modal
             runCursoTurma(idAluno);
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#btnModalCurriculo", function () {
+            // Recuperando o id do aluno selecionado
+            idAluno = table.row($(this).parents('tr')).data().id;
+            idAlunoTurma = table.row($(this).parents('tr')).data().idAlunoTurma;
+            idAlunoCurso = table.row($(this).parents('tr')).data().idAlunoCurso;
+
+            // Recuperando o nome e a matrícula
+            var nomeAluno   = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+            var codigoCurso = table.row($(this).parents('tr')).data().codigoCurso;
+
+            // prenchendo o titulo do nome do aluno
+            $('#caMatricula').text(matricula);
+            $('#caNomeAluno').text(nomeAluno);
+            $('#caNomeCurso').text(codigoCurso);
+
+            // Executando o modal
+            runCurriculo(idAluno);
         });
 
         // Evento para abrir o modal de cursos/turmas

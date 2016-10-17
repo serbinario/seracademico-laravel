@@ -54,4 +54,23 @@ class Disciplina extends Model implements Transformable
 		return parent::newPivot($parent, $attributes, $table, $exists);
 	}
 
+	/**
+	 * @param $query
+	 * @param $value
+	 * @return mixed
+	 */
+	public function scopeCurriculoByAluno($query, $value)
+	{
+		return $query
+			->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
+			->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+			->join('pos_alunos_cursos', function ($join) use ($value) {
+				$join->on(
+					'pos_alunos_cursos.id', '=',
+					\DB::raw("(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual 
+                    where curso_atual.aluno_id = $value and curso_atual.curriculo_id = fac_curriculos.id  ORDER BY curso_atual.id DESC LIMIT 1)")
+				);
+			});
+	}
 }
