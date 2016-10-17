@@ -86,7 +86,8 @@
     {!! isset($curso->nome) ? $curso->nome : "" !!}, realizado e certificado pela Faculdade ALPHA (
     ALPHA EDUCAÇÃO E TREINAMENTOS ), de acordo com a portaria de
     credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
-    <?php $data_rec = \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec);  ?>{{$data_rec->format('d/m/Y')}}.
+    <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>{{ !empty($data_rec) ? $data_rec->format('d/m/Y'): ''}}.
+
 </p>
 
 <p style="font-size: 20px">

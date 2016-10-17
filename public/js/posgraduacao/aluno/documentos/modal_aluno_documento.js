@@ -4,7 +4,7 @@ function loadFieldsDocumentos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'posGraduacao\\TipoDocumento'
+            'PosGraduacao\\TipoDocumento'
         ]
     };
 
@@ -12,7 +12,7 @@ function loadFieldsDocumentos()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/SerAcademmico/public/index.php/seracademico/posgraduacao/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/posgraduacao/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -31,7 +31,7 @@ function builderHtmlFieldsDocumento (dados) {
     //Limpando os campos
     $('#documentacao_id option').attr('selected', false);
 
-
+console.log(dados);
     // Variáveis que armazenaram o html
     var htmlDocumento     = "";
 

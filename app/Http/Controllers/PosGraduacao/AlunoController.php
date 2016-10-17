@@ -166,7 +166,7 @@ class AlunoController extends Controller
                     $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
                         //if($aluno->matricula) {
-                            $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Contrato"><i class="material-icons">print</i></a></li>';
+                            $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
                        // }
                     $html .=    '</ul>';
                     $html .=   '</div>';
