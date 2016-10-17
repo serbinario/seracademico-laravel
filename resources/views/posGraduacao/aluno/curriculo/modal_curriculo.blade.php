@@ -151,7 +151,6 @@
                                 <table id="grid-extras" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Período</th>
                                         <th>Cod. Disciplina</th>
                                         <th>Disciplina</th>
                                         <th>C. Horária</th>

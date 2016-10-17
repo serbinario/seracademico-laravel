@@ -83,6 +83,31 @@ function loadTableDisciplinasDispensadas(idAlunoTurma) {
     return tableDisciplinasDispensadas;
 }
 
+// Função para carregar a grid
+var tableDisciplinasExtraCurricular;
+function loadTableDisciplinasExtraCurricular (idAluno) {
+    tableDisciplinasExtraCurricular = $('#grid-extras').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/posgraduacao/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno,
+        columns: [
+            {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo'},
+            {data: 'disciplina_nome', name: 'fac_disciplinas.nome'},
+            {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
+            {data: 'qtd_credito', name: 'fac_disciplinas.qtd_credito'},
+            {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableDisciplinasExtraCurricular;
+}
+
 // Função para executar a grid
 function runCurriculo(idAluno) {
     // Carregando a grid de ACursar
@@ -104,6 +129,13 @@ function runCurriculo(idAluno) {
         loadTableDisciplinasDispensadas(idAluno).ajax.url("/index.php/seracademico/posgraduacao/aluno/curriculo/gridDispensadas/" + idAluno).load();
     } else {
         loadTableDisciplinasDispensadas(idAluno);
+    }
+
+    // Carregando a grid de extras curriculares
+    if(tableDisciplinasExtraCurricular) {
+        loadTableDisciplinasExtraCurricular(idAluno).ajax.url("/index.php/seracademico/posgraduacao/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno).load();
+    } else {
+        loadTableDisciplinasExtraCurricular(idAluno);
     }
 
     // carregando a modal
