@@ -60,16 +60,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::label('volume', 'Volume') !!}
-                            {!! Form::text('volume', Session::getOldInput('volume') , array('class' => 'form-control')) !!}
+                            {!! Form::label('cutter', 'Cutter') !!}
+                            {!! Form::text('cutter', Session::getOldInput('cutter') , array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <button class="btn-sm btn-primary" id="auto-cutter" style="margin-top: 23px; margin-left: -29px;" type="button">Gerar Cutter
+                            </button>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('cutter', 'Cutter') !!}
-                            {!! Form::text('cutter', Session::getOldInput('cutter') , array('class' => 'form-control')) !!}
+                            {!! Form::label('volume', 'Volume') !!}
+                            {!! Form::text('volume', Session::getOldInput('volume') , array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -84,6 +90,8 @@
                             {!! Form::text('outro_cdd', Session::getOldInput('outro_cdd')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('tipos_acervos_id', 'Tipo do acervo') !!}
@@ -98,8 +106,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('genero_id', 'Genero') !!}
-                            {!! Form::select('genero_id', (["" => "Selecione o genero"] + $loadFields['biblioteca\genero']->toArray()), Session::getOldInput('genero_id'), array('class' => 'form-control')) !!}
+                            {!! Form::label('genero_id', 'Área de conhecimento') !!}
+                            {!! Form::select('genero_id', (["" => "Selecione a área"] + $loadFields['biblioteca\genero']->toArray()), Session::getOldInput('genero_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -187,10 +195,10 @@
                         <div class="form-group">
                             {!! Form::label('primeira[responsaveis_id]', 'Autor 1') !!}
                             @if(isset($primeiraEntrada[0]))
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $primeiraEntrada[0]->responsaveis_id, array('class' => 'form-control gerar-cutter', "id" => 'autor-1')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $primeiraEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'autor-1')) !!}
                                 <input type="hidden" name="primeira[id][]" value="{{$primeiraEntrada[0]->id}}">
                             @else
-                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), array(" " => 'teste'), array('class' => 'form-control', "id" => 'autor-1')) !!}
+                                {!! Form::select('primeira[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), null, array('class' => 'form-control', "id" => 'autor-1')) !!}
                             @endif
                         </div>
                     </div>
@@ -246,7 +254,7 @@
                         <div class="form-group">
                             {!! Form::label('segunda[responsaveis_id]', 'Responsável 1') !!}
                             @if(isset($segundaEntrada[0]))
-                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $segundaEntrada[0]->responsaveis_id, array('class' => 'form-control gerar-cutter', "id" => 'responsavel-1')) !!}
+                                {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), $segundaEntrada[0]->responsaveis_id, array('class' => 'form-control', "id" => 'responsavel-1')) !!}
                                 <input type="hidden" name="segunda[id][]" value="{{$segundaEntrada[0]->id}}">
                             @else
                                 {!! Form::select('segunda[responsaveis_id][]', (["" => "Selecione o responsável"] + $loadFields['biblioteca\responsavel']->toArray()), NULL, array('class' => 'form-control', "id" => 'responsavel-1')) !!}

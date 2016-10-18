@@ -584,5 +584,26 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\PosGraduacao\ProfessorPosRepository::class,
 			\Seracademico\Repositories\PosGraduacao\ProfessorPosRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoNotaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoNotaRepositoryEloquent::class
+		);
+		
+
+		$this->app->bind(
+			\Seracademico\Repositories\AlunoFrequenciaRepository::class,
+			\Seracademico\Repositories\AlunoFrequenciaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaDispensadaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaDispensadaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaExtraCurricularRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+		);
 	}
 }

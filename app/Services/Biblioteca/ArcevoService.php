@@ -348,11 +348,11 @@ class ArcevoService
                 $nome = $exp2[0];
             }
         } else {
-            //Cortando os sobrenome que possuem vírgulas
+            //Cortando o título
             $exp = explode(' ', $titulo);
 
             //Validação do sobrenome pois se caso houver , o mesmo deve ser pego inteiramento, caso contrário cortar o sobrenome sepando-os por espaço
-            if(count($exp) > 1 && in_array($exp[0], $artigosDefinidos)) {
+            if(count($exp) > 1 && (in_array($exp[0], $artigosDefinidos) || is_numeric($exp[0]))) {
                 $nome = $exp[1];
             } else {
                 $nome = $exp[0];
@@ -370,7 +370,7 @@ class ArcevoService
         //Varre todos os cdds encontrado comparando se o cdd encontrado está contido no sobrenome, caso sim, recupera-se o cdd e o código
         foreach ($cdds as $cdd) {
             $pos = stripos($nome, $cdd->cdd);
-            if($pos !== false) {
+            if($pos !== false && $pos == 0) {
                 $codigo = $cdd->codigo;
                 $abrev   = $cdd->cdd;
             }
@@ -381,16 +381,14 @@ class ArcevoService
         
         //Separa o título por espaço
         $expTitulo = explode(' ', $titulo);
-        $primTitulo = "";
 
         //Valida se o título começa com artigo ou n, pois o artigo n é usado no cutter, e sim a primeira letra da primeira palavra do título
-        if(count($expTitulo) > 0) {
-            if(strlen($expTitulo[0]) <= 2 && in_array($expTitulo[0], $artigosDefinidos)) {
-                $primTitulo = strtolower(substr($expTitulo[1], 0, 1));
-            } else {
-                $primTitulo = strtolower(substr($expTitulo[0], 0, 1));
-            }
+        if (count($expTitulo) > 1 && (in_array($expTitulo[0], $artigosDefinidos) || is_numeric($expTitulo[0]))) {
+            $primTitulo = strtolower(substr($expTitulo[1], 0, 1));
+        } else {
+            $primTitulo = strtolower(substr($expTitulo[0], 0, 1));
         }
+
 
         //Montando o cutter;
         if(isset($data['autor']) && $data['autor'] != "") {

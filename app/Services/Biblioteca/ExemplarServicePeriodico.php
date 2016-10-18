@@ -191,6 +191,7 @@ class ExemplarServicePeriodico
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
+                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -203,6 +204,7 @@ class ExemplarServicePeriodico
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
                     $data['codigo'] = $this->tombo;
+                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -220,6 +222,7 @@ class ExemplarServicePeriodico
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
+                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -232,6 +235,7 @@ class ExemplarServicePeriodico
                     $data['emprestimo_id'] = '1';
                     $data['situacao_id'] = '1';
                     $data['codigo'] = $this->tombo;
+                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
