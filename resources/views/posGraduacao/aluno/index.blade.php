@@ -127,6 +127,8 @@
     @include('posGraduacao.aluno.curriculo.modal_inserir_dispensar_disciplina')
     @include('posGraduacao.aluno.curriculo.modal_editar_dispensar_disciplina')
     @include('posGraduacao.aluno.modal_aluno_documento')
+    @include('posGraduacao.aluno.curriculo.modal_create_disciplina_extra_curricular')
+    @include('posGraduacao.aluno.curriculo.modal_create_equivalencia')
 @stop
 
 @section('javascript')
@@ -136,6 +138,8 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_curriculo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
 

@@ -142,4 +142,30 @@ class Curriculo extends Model implements Transformable
     {
         return $query->where('curso_id', $value)->where('ativo', 1)->get();
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLessOfAluno($query, $idAluno)
+    {
+        return $query
+            ->whereNotIn('id', function ($query) use ($idAluno) {
+                # Recuperando os cursos
+                $cursos = $query->from('pos_alunos_cursos')
+                    ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+                    ->where('pos_alunos.id', $idAluno)
+                    ->orderBy('pos_alunos_cursos.id', 'DESC')
+                    ->select(['pos_alunos_cursos.curriculo_id as id'])->get();
+
+                # Verificando se algum registro foi retornado
+                if(count($cursos) > 0) {
+                    return $cursos[0];
+                }
+
+                # Retorno
+                return $cursos;
+            })
+            ->where('tipo_nivel_sistema_id', 2);
+    }
 }

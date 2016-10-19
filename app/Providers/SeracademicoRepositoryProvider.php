@@ -600,5 +600,15 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaDispensadaRepository::class,
 			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaDispensadaRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaExtraCurricularRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaEquivalenteRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+		);
 	}
 }
