@@ -63,4 +63,20 @@ class PivotAlunoCurso extends Pivot implements Transformable
     {
         return $this->belongsToMany(SituacaoAluno::class, "pos_alunos_situacoes", "pos_aluno_curso_id", "situacao_id");
     }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Turma) {
+            return new AlunoTurma($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
 }

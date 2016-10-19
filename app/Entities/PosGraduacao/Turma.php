@@ -200,6 +200,12 @@ class Turma extends Model implements Transformable
             return new TurmaDisciplina($parent, $attributes, $table, $exists);
         }
 
+        # Pivot para curso do aluno de pós
+        if ($parent instanceof PivotAlunoCurso) {
+            return new AlunoTurma($parent, $attributes, $table, $exists);
+        }
+
+
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }

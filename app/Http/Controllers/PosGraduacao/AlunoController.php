@@ -210,7 +210,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {
+        } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -585,7 +585,5 @@ class AlunoController extends Controller
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
         }
-
-
     }
 }

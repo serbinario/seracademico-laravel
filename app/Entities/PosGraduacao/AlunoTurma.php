@@ -91,6 +91,6 @@ class AlunoTurma extends Pivot implements Transformable
      */
     public function notas()
     {
-        return $this->hasMany(Nota::class, 'aluno_tuma_id');
+        return $this->hasMany(AlunoNota::class, 'pos_aluno_turma_id');
     }
 }

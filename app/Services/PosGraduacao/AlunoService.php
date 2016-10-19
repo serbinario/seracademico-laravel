@@ -3,10 +3,13 @@
 namespace Seracademico\Services\PosGraduacao;
 
 use Seracademico\Entities\PosGraduacao\Aluno;
+use Seracademico\Entities\PosGraduacao\AlunoFrequencia;
+use Seracademico\Entities\PosGraduacao\AlunoNota;
 use Seracademico\Entities\PosGraduacao\Curriculo;
 use Seracademico\Repositories\PosGraduacao\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
+use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 use Seracademico\Facades\ParametroMatriculaFacade;
 
@@ -38,22 +41,30 @@ class AlunoService
     private $destinationPath = "images/";
 
     /**
+     * @var CurriculoRepository
+     */
+    private $curriculoRepository;
+
+    /**
      * AlunoService constructor.
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param PessoaRepository $pessoaRepository
      * @param SituacaoAlunoRepositoryEloquent $situacaoRepository
+     * @param CurriculoRepository $curriculoRepository
      */
     public function __construct(
         AlunoRepository $repository,
         EnderecoRepository $enderecoRepository,
         PessoaRepository $pessoaRepository,
-        SituacaoAlunoRepositoryEloquent $situacaoRepository)
+        SituacaoAlunoRepositoryEloquent $situacaoRepository,
+        CurriculoRepository $curriculoRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaRepository   = $pessoaRepository;
         $this->situacaoRepository = $situacaoRepository;
+        $this->curriculoRepository = $curriculoRepository;
     }
 
     /**
@@ -168,10 +179,51 @@ class AlunoService
             $aluno->curriculos()->attach($data['curriculo_id']);
             $aluno->curriculos()->find($data['curriculo_id'])->pivot->situacoes()->attach(1);
             $aluno->curriculos()->find($data['curriculo_id'])->pivot->turmas()->attach($data['turma_id']);
+
+            # Regras de negócios
+            $this->tratamentoNotas($aluno, $data['curriculo_id']);
         }
         
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param Aluno $aluno
+     * @param $idCurriculo
+     * @return bool
+     */
+    public function tratamentoNotas(Aluno $aluno, $idCurriculo)
+    {
+        # Recuperando a entidade de currículo
+        $curriculo = $this->curriculoRepository->find($idCurriculo);
+
+        # Percorendo e persistindo as notas
+        foreach($curriculo->disciplinas as $disciplina) {
+            $aluno->curriculos()->find($idCurriculo)->pivot->turmas->last()->pivot->notas()
+                ->save(new AlunoNota([
+                    'disciplina_id'  => $disciplina->id,
+                    'situacao_nota_id' => 10
+                ]));
+        }
+
+        # Turma ativa e todas as notas
+        $turma = $aluno->curriculos()->find($idCurriculo)->pivot->turmas->last();
+        $notas = $aluno->curriculos()->find($idCurriculo)->pivot->turmas->last()->pivot->notas;
+
+        # Criando as frequências para cada disciplinas
+        foreach($notas as $nota) {
+            # Recuperando os calendários
+            $calendarios = $nota->disciplina->turmas()->find($turma->id)->pivot->calendarios;
+
+            # Percorrendo os calendários e persistindo as frequências
+            foreach ($calendarios as $calendario) {
+                $nota->frequencias()->save(new AlunoFrequencia(['calendario_id' => $calendario->id]));
+            }
+        }
+
+        # Retorno
+        return true;
     }
 
     /**
