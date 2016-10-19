@@ -17,7 +17,8 @@ class ProfessorPosValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-			
+
+			'img' => 'image|max:800',
 			'tratamento' =>  '' ,
 			'path_image' =>  '' ,
 			'instituicao_graduacao_id' =>  '' ,
@@ -31,6 +32,7 @@ class ProfessorPosValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
+			'img' => 'image|max:800',
 			'tratamento' =>  '' ,
 			'path_image' =>  '' ,
 			'instituicao_graduacao_id' =>  '' ,

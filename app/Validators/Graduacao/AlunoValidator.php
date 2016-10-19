@@ -43,7 +43,8 @@ class AlunoValidator extends LaravelValidator
         'pessoa.endereco.logradouro' => 'Logradouro',
         'pessoa.endereco.numero' => 'Número',
         'pessoa.endereco.complemento' => 'Complemento',
-        'pessoa.uf_exp' => 'UF(Documentos)'
+        'pessoa.uf_exp' => 'UF(Documentos)',
+        'img' => 'Foto',
 
 
 //        'pessoa.outra_escola' => 'Outra Instituição',
@@ -70,6 +71,7 @@ class AlunoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
+            'img' => 'image|max:800',
             'matricula' => 'unique:fac_alunos,matricula|digits_between:4,20|numeric',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
@@ -125,6 +127,7 @@ class AlunoValidator extends LaravelValidator
         ],
         ValidatorInterface::RULE_UPDATE => [
 
+            'img' => 'image|max:800',
             'matricula' => 'unique:fac_alunos,matricula,:id|digits_between:4,20|numeric',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             'pessoa.cpf' => 'required|max:20|graduacao_aluno_unique_in_pessoa:cpf,:id',

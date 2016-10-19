@@ -1057,6 +1057,22 @@
             }
         });
 
+
+
+         //Validações javascript
+        $('#formVestibulando').bootstrapValidator({
+            fields: {
+                'img': {
+                    validators: {
+                        file: {
+                            maxSize: 819200,   // 2048 * 1024
+                            message: "Tamanho de imagem permitido é de até 800kb"
+                        }
+                    }
+                },
+            },
+        });
+
         // Validações javascript
         //        $('#formVestibulando').bootstrapValidator({
         //            fields: {
