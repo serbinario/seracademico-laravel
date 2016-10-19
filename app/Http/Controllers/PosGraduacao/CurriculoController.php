@@ -28,7 +28,7 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'posGraduacao\\Curso|ativo,1'
+        'PosGraduacao\\Curso|ativo,1'
     ];
 
     /**
