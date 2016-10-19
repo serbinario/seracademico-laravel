@@ -37,7 +37,7 @@
                         <table id="turma-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Cód. Turma</th>
+                                <th>Código</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
                                 <th>Turno</th>
@@ -49,7 +49,7 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Cód. Turma</th>
+                                <th>Código</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
                                 <th>Turno</th>
