@@ -37,27 +37,25 @@
                         <table id="turma-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
                                 <th>Codigo da turma</th>
+                                <th>Cód. Curso</th>
+                                <th>Curso</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Valor Integral</th>
-                                <th>Valor Isolado</th>
+                                <th>Val. Turma</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
                                 <th>Codigo da turma</th>
+                                <th>Cód. Curso</th>
+                                <th>Curso</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Valor Integral</th>
-                                <th>Valor Isolado</th>
+                                <th>Val. Turma</th>
                                 <th >Acão</th>
                             </tr>
                             </tfoot>
@@ -89,14 +87,13 @@
 
             ajax: "{!! route('seracademico.posgraduacao.turma.grid') !!}",
             columns: [
+                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
-                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},
                 {data: 'valor_turma', name: 'fac_turmas.valor_turma'},
-                {data: 'valor_disciplina', name: 'fac_turmas.valor_disciplina'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
