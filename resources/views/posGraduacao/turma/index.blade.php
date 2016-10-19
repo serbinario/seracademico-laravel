@@ -71,6 +71,8 @@
     @include('posGraduacao.turma.modal_novo_calendario')
     @include('posGraduacao.turma.modal_editar_calendario')
     @include('posGraduacao.turma.modal_incluir_disciplinas')
+    @include('posGraduacao.turma.modal_notas')
+    @include('posGraduacao.turma.modal_frequencias')
 @stop
 
 @section('javascript')
@@ -78,6 +80,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_novo_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -107,7 +110,7 @@
 
             //Recuperando o id da turma selecionada
             idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
 
             // setando a descrição
             $('#caTurma').text(codigo);
@@ -120,5 +123,36 @@
             $("#modal-disciplina-calendario").modal({show: true, keyboard: true});
         });
 
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-notas', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#naCodigo').text(codigo);
+
+            //Executando a grid
+            runTableNotas(idTurma);
+        });
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-frequencias', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#faCodigo').text(codigo);
+
+            //Executando a grid
+            runTableFrequencias(idTurma);
+        });
     </script>
 @stop

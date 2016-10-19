@@ -73,4 +73,18 @@ class Disciplina extends Model implements Transformable
 				);
 			});
 	}
+
+	/**
+	 * @param $query
+	 * @param $value
+	 * @return mixed
+	 */
+	public function scopeDisciplinasOfTurma($query, $value)
+	{
+		return $query
+			->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])
+			->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+			->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+			->where('fac_turmas.id', $value);
+	}
 }
