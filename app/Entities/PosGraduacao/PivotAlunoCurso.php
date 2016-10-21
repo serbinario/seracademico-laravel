@@ -35,24 +35,7 @@ class PivotAlunoCurso extends Pivot implements Transformable
             ->withPivot([
                 'id',
                 'pos_aluno_curso_id',
-                'turma_id',
-                'titulo',
-                'nota_final',
-                'defesa',
-                'madia',
-                'media_conceito',
-                'defendeu',
-                'professor_orientador_id',
-                'professor_banca_1_id',
-                'professor_banca_2_id',
-                'professor_banca_3_id',
-                'professor_banca_4_id',
-                'inst_ensino_banca_1_id',
-                'inst_ensino_banca_2_id',
-                'inst_ensino_banca_3_id',
-                'inst_ensino_banca_4_id',
-                'data_conclusao',
-                'data_colacao'
+                'turma_id'
             ]);
     }
 
@@ -61,7 +44,12 @@ class PivotAlunoCurso extends Pivot implements Transformable
      */
     public function situacoes()
     {
-        return $this->belongsToMany(SituacaoAluno::class, "pos_alunos_situacoes", "pos_aluno_curso_id", "situacao_id");
+        return $this->belongsToMany(SituacaoAluno::class, "pos_alunos_situacoes", "pos_aluno_curso_id", "situacao_id")
+            ->withPivot([
+                'id',
+                'turma_origem_id',
+                'turma_destino_id'
+            ]);
     }
 
     /**

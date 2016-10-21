@@ -72,6 +72,7 @@
     @include('posGraduacao.turma.modal_editar_calendario')
     @include('posGraduacao.turma.modal_incluir_disciplinas')
     @include('posGraduacao.turma.modal_notas')
+    @include('posGraduacao.turma.modal_editar_notas')
     @include('posGraduacao.turma.modal_frequencias')
 @stop
 
@@ -80,7 +81,8 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_novo_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_notas.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,

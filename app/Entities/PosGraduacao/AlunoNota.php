@@ -18,6 +18,7 @@ class AlunoNota extends Model implements Transformable
 		'disciplina_id',
 		'nota_final',
 		'situacao_nota_id',
+        'turma_id'
 	];
 
     /**

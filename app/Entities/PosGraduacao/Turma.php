@@ -166,23 +166,6 @@ class Turma extends Model implements Transformable
                 'id',
                 'pos_aluno_curso_id',
                 'turma_id',
-                'titulo',
-                'nota_final',
-                'defesa',
-                'madia',
-                'media_conceito',
-                'defendeu',
-                'professor_orientador_id',
-                'professor_banca_1_id',
-                'professor_banca_2_id',
-                'professor_banca_3_id',
-                'professor_banca_4_id',
-                'inst_ensino_banca_1_id',
-                'inst_ensino_banca_2_id',
-                'inst_ensino_banca_3_id',
-                'inst_ensino_banca_4_id',
-                'data_conclusao',
-                'data_colacao'
             ]);
     }
 

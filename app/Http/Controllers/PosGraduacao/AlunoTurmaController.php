@@ -41,7 +41,7 @@ class AlunoTurmaController extends Controller
         $rows = \DB::table('pos_alunos_cursos')
             ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->join('pos_alunos_turmas', function ($join) {
+            ->leftJoin('pos_alunos_turmas', function ($join) {
                 $join->on(
                     'pos_alunos_turmas.id', '=',
                     \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
