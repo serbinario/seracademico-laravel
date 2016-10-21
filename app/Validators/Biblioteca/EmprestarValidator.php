@@ -20,7 +20,7 @@ class EmprestarValidator extends LaravelValidator
 			'pessoas_id' =>  'required' ,
 			'codigo' =>  '' ,
 			'data' =>  '' ,
-			'data_devolucao' =>  'required' ,
+			'data_devolucao' =>  '' ,
 			'data_devolucao_real' =>  '' ,
 
         ],

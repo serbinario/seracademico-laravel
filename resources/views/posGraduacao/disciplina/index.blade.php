@@ -56,7 +56,7 @@
                             <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Nome</th>
+                                <th>Disciplina</th>
                                 <th>Tipo da disciplina</th>
                                 <th>Carga Horaria</th>
                                 {{--<th>Tipo de avaliação</th>--}}
@@ -66,7 +66,7 @@
                             <tfoot>
                             <tr>
                                 <th>Código</th>
-                                <th>Nome</th>
+                                <th>Disciplina</th>
                                 <th>Tipo da disciplina</th>
                                 <th>Carga Horaria</th>
                                 {{--<th>Tipo de avaliação</th>--}}

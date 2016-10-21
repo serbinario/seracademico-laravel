@@ -54,7 +54,7 @@
                             <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Nome</th>
+                                <th>Curso</th>
                                 <th>Tipo do Curso</th>
                                 <th>Ativo</th>
                                 <th >Acão</th>
@@ -64,7 +64,7 @@
                             <tfoot>
                             <tr>
                                 <th>Código</th>
-                                <th>Nome</th>
+                                <th>Curso</th>
                                 <th>Tipo do Curso</th>
                                 <th>Ativo</th>
                                 <th style="width: 5%;">Acão</th>
