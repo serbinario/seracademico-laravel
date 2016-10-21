@@ -35,4 +35,12 @@ class AlunoNota extends Model implements Transformable
     {
         return $this->belongsTo(SituacaoNota::class, 'situacao_nota_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function frequencias()
+    {
+        return $this->hasMany(AlunoFrequencia::class, 'pos_aluno_nota_id');
+    }
 }

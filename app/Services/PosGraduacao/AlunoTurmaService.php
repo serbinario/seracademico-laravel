@@ -4,6 +4,8 @@ namespace Seracademico\Services\PosGraduacao;
 
 use Illuminate\Support\Facades\DB;
 use Seracademico\Entities\PosGraduacao\Aluno;
+use Seracademico\Entities\PosGraduacao\AlunoFrequencia;
+use Seracademico\Entities\PosGraduacao\AlunoNota;
 use Seracademico\Repositories\PosGraduacao\AlunoRepository;
 use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Repositories\PosGraduacaoCursoRepository;
@@ -139,7 +141,9 @@ class AlunoTurmaService
         $aluno->save();
 
         #Criando o esquema de disciplinas e notas do aluno pela turma
-        $this->tratamentoDisciplinas($aluno->id, $turma->id);
+        # e tratando as notas e frequências
+        $this->tratamentoDisciplinas($aluno->curriculos->last()->pivot->id, $turma->id);
+        $this->tratamentoNotas($aluno);
 
         #Retorno
         return true;
@@ -218,7 +222,7 @@ class AlunoTurmaService
         # Aplicação de regras de negócios
         $this->tratamentoSituacao($aluno, $curriculoId, $data);
         $this->tratamentoTurma($aluno, $turma, $curriculoId, $data);
-        $this->tratamentoDisciplinas($aluno->id, $turma->id);
+        $this->tratamentoDisciplinas($aluno->curriculos->last()->pivot->id, $turma->id);
 
         #Retorno
         return true;
@@ -266,6 +270,53 @@ class AlunoTurmaService
 
         # Retorno
         return true;
+    }
+
+    /**
+     * @param int $idAlunoCurso
+     * @param int $idTurma
+     * @return bool
+     * @throws \Exception
+     */
+    public function tratamentoDisciplinas(int $idAlunoCurso, int $idTurma)
+    {
+        # Select para recuperar o id da tabela pivot
+        $arrayResult = DB::table("pos_alunos_turmas")
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+            ->where("pos_alunos_cursos.id", $idAlunoCurso)
+            ->where("turma_id", $idTurma)
+            ->select(["pos_alunos_turmas.id"])
+            ->get();
+
+        # Verificando se um único registro foi recuperado
+        if(count($arrayResult) == 1) {
+            # Recuperando o id de da tabela pivot
+            $idAlunoTurma = $arrayResult[0]->id;
+
+            # Recuperando a turma e as disciplinas
+            $objTurma     = $this->turmaRepository->find($idTurma);
+            $disciplinas  = $objTurma->disciplinas;
+
+            # Percorrendo as disciplinas e criando o esquemas de notas
+            foreach ($disciplinas as $disciplina) {
+                # Declarando o array para armazenamento do schema de nota
+                $arrayNota = [];
+
+                # Populando o array da nota
+                $arrayNota['aluno_tuma_id']    = $idAlunoTurma;
+                $arrayNota['disciplina_id']    = $disciplina->id;
+                $arrayNota['situacao_nota_id'] = 3;
+
+                # Salvando a nota no banco de dados
+                $this->notaRepository->create($arrayNota);
+            }
+
+            # Retorno
+            return true;
+        }
+
+        # Retono exception
+        throw new \Exception("Turma inválida.");
     }
 
     /**
@@ -372,53 +423,6 @@ class AlunoTurmaService
     }
 
     /**
-     * @param int $idAluno
-     * @param int $idTurma
-     * @return bool
-     * @throws \Exception
-     */
-    public function tratamentoDisciplinas(int $idAluno, int $idTurma)
-    {
-        # Select para recuperar o id da tabela pivot
-        $arrayResult = DB::table("pos_alunos_turmas")
-            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
-            ->where("pos_alunos_cursos.aluno_id", $idAluno)
-            ->where("turma_id", $idTurma)
-            ->select(["pos_alunos_turmas.id"])
-            ->get();
-
-        # Verificando se um único registro foi recuperado
-        if(count($arrayResult) == 1) {
-            # Recuperando o id de da tabela pivot
-            $idAlunoTurma = $arrayResult[0]->id;
-
-            # Recuperando a turma e as disciplinas
-            $objTurma     = $this->turmaRepository->find($idTurma);
-            $disciplinas  = $objTurma->disciplinas;
-
-            # Percorrendo as disciplinas e criando o esquemas de notas
-            foreach ($disciplinas as $disciplina) {
-                # Declarando o array para armazenamento do schema de nota
-                $arrayNota = [];
-
-                # Populando o array da nota
-                $arrayNota['aluno_tuma_id']    = $idAlunoTurma;
-                $arrayNota['disciplina_id']    = $disciplina->id;
-                $arrayNota['situacao_nota_id'] = 3;
-
-                # Salvando a nota no banco de dados
-                $this->notaRepository->create($arrayNota);
-            }
-
-            # Retorno
-            return true;
-        }
-
-        # Retono exception
-        throw new \Exception("Esta turma não está vinculada a esse aluno.");
-    }
-
-    /**
      * @param array $data
      * @return bool
      * @throws \Exception
@@ -444,4 +448,37 @@ class AlunoTurmaService
         return true;
     }
 
+    /**
+     * @param Aluno $aluno
+     * @return bool
+     */
+    public function tratamentoNotas(Aluno $aluno)
+    {
+        # Percorendo e persistindo as notas
+        foreach($aluno->curriculos->last()->disciplinas as $disciplina) {
+            $aluno->curriculos->last()->pivot->turmas->last()->pivot->notas()
+                ->save(new AlunoNota([
+                    'disciplina_id'  => $disciplina->id,
+                    'situacao_nota_id' => 10
+                ]));
+        }
+
+        # Turma ativa e todas as notas
+        $turma = $aluno->curriculos->last()->pivot->turmas->last();
+        $notas = $aluno->curriculos->last()->pivot->turmas->last()->pivot->notas;
+
+        # Criando as frequências para cada disciplinas
+        foreach($notas as $nota) {
+            # Recuperando os calendários
+            $calendarios = $nota->disciplina->turmas()->find($turma->id)->pivot->calendarios;
+
+            # Percorrendo os calendários e persistindo as frequências
+            foreach ($calendarios as $calendario) {
+                $nota->frequencias()->save(new AlunoFrequencia(['calendario_id' => $calendario->id]));
+            }
+        }
+
+        # Retorno
+        return true;
+    }
 }

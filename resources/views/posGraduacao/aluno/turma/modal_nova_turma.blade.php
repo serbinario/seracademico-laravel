@@ -8,6 +8,11 @@
                 <h4 class="modal-title">Adicionar curso ao aluno</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
+                <div class="row" id="load">
+                    <div class="col-md-6 col-md-offset-4">
+                        <img src="{{ asset('img/load.gif') }}" alt="Carregando ...">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">

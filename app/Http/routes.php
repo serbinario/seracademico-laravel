@@ -206,6 +206,20 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'PosGraduacao\CalendarioTurmaController@removerDisciplina']);
                 });
 
+                Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\TurmaNotaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaNotaController@getLoadFields']);
+                    Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaNotaController@editNota']);
+                    Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaNotaController@updateNota']);
+                });
+
+                Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\TurmaFrequenciaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaFrequenciaController@getLoadFields']);
+                    Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaFrequenciaController@editFrequencia']);
+                    Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaFrequenciaController@updateFrequencia']);
+                });
+
             });
 
         });

@@ -200,6 +200,10 @@ class AlunoCurriculoController extends Controller
         })->make(true);
     }
 
+    /**
+     * @param $idAluno
+     * @return mixed
+     */
     public function gridDisciplinasExtraCurricular($idAluno)
     {
         #Criando a consulta

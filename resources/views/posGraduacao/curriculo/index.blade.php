@@ -52,9 +52,9 @@
                         <table id="curriculo-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código Currículo</th>
-                                <th>Descrição</th>
-                                <th>Código Curso</th>
+                                <th>Código</th>
+                                <th>Currículo</th>
+                                <th>Cód. Curso</th>
                                 <th>Curso</th>
                                 <th>Ano</th>
                                 {{--<th>Validade (Início)</th>--}}
@@ -68,9 +68,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Código Currículo</th>
-                                <th>Descrição</th>
-                                <th>Código Curso</th>
+                                <th>Código</th>
+                                <th>Currículo</th>
+                                <th>Cód. Curso</th>
                                 <th>Curso</th>
                                 <th>Ano</th>
                                 {{--<th>Validade (Início)</th>--}}
