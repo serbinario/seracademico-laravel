@@ -72,6 +72,8 @@
     @include('posGraduacao.turma.modal_notas')
     @include('posGraduacao.turma.modal_editar_notas')
     @include('posGraduacao.turma.modal_frequencias')
+    @include('posGraduacao.turma.alunos.modal_turmas_alunos')
+    @include('posGraduacao.turma.alunos.modal_add_aluno')
 @stop
 
 @section('javascript')
@@ -81,6 +83,8 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_turmas_alunos.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_add_aluno.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -152,6 +156,25 @@
 
             //Executando a grid
             runTableFrequencias(idTurma);
+        });
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-alunos', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#gaTurma').text(codigo);
+
+            //Executando a grid
+            runTableAlunos(idTurma);
+
+            // Abrindo o modal
+            $("#modal-turmas-alunos").modal('show');
         });
     </script>
 @stop
