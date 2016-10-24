@@ -125,14 +125,14 @@ class AlunoTurmaService
         $aluno->curriculos()->attach($data['curriculo_id']);
 
         #Salvando a situação
-        $aluno->curriculos->last()->pivot->situacoes()->attach($data['situacao_id'], [
+        $aluno->curriculos()->get()->last()->pivot->situacoes()->attach($data['situacao_id'], [
             'turma_origem_id' => $data['turma_id'] ?? null
         ]);
 
         # Verificando se a turma foi informada
         if(isset($data['turma_id']) && $data['turma_id']) {
             # Salvando a turma
-            $aluno->curriculos->last()->pivot->turmas()->attach($data['turma_id']);
+            $aluno->curriculos()->get()->last()->pivot->turmas()->attach($data['turma_id']);
 
             # e tratando as notas e frequências
             $this->tratamentoNotas($aluno);
@@ -382,14 +382,14 @@ class AlunoTurmaService
         # Cadastrando a situação
         DB::table('pos_alunos_situacoes')->insert($data);
 
-        # Verificando se é mudança de turma
-        if($data['situacao_id'] == 14) {
-            # Cadastrando a nova turma
-            DB::table('pos_alunos_turmas')->insert([
-                'pos_aluno_curso_id' => $data['pos_aluno_curso_id'],
-                'turma_id' => $data['turma_destino_id']
-            ]);
-        }
+//        # Verificando se é mudança de turma
+//        if($data['situacao_id'] == 14) {
+//            # Cadastrando a nova turma
+//            DB::table('pos_alunos_turmas')->insert([
+//                'pos_aluno_curso_id' => $data['pos_aluno_curso_id'],
+//                'turma_id' => $data['turma_destino_id']
+//            ]);
+//        }
 
         # Retorno
         return true;
@@ -401,28 +401,17 @@ class AlunoTurmaService
      */
     public function tratamentoNotas(Aluno $aluno)
     {
-        # Recuperando o currículo
-        $curriculo  = $aluno->curriculos()->last();
+        # Recuperando a entidade de currículo
+        $curriculo =  $aluno->curriculos()->get()->last();
 
         # Recuperando a turma ativa, data atual e as notas do aluno
-        $turma = $aluno->curriculos->last()->pivot->turmas->last();
+        $turma    = $curriculo->pivot->turmas()->get()->last();
         $dataHoje = new \DateTime('now');
-//        $todasNotas = $turma->pivot->notas;
 
         # Percorendo e persistindo as notas
         foreach($curriculo->disciplinas as $disciplina) {
             # Recuperando o ultimo calendário da disicplina
             $calendario = $turma->disciplinas()->find($disciplina->id)->pivot->calendarios->last();
-
-//            # Filtrando as notas para a disciplina em questão
-//            $todasNotas = $todasNotas->filter(function ($nota) use ($disciplina) {
-//                return $nota->disciplina_id == $disciplina->id;
-//            });
-//
-//            # Verificando se a disciplina já tem nota
-//            if(count($todasNotas) > 0) {
-//                continue;
-//            }
 
             # Verificando se o calendário é
             if(isset($calendario) && \DateTime::createFromFormat('d/m/Y' , $calendario->data_final) < $dataHoje) {
@@ -430,7 +419,7 @@ class AlunoTurmaService
             }
 
             # Salvando as notas
-            $aluno->curriculos()->find($idCurriculo)->pivot->turmas->last()->pivot->notas()
+            $turma->pivot->notas()
                 ->save(new AlunoNota([
                     'disciplina_id'  => $disciplina->id,
                     'situacao_nota_id' => 10,
@@ -439,7 +428,7 @@ class AlunoTurmaService
         }
 
         # Recuperando todas as notas
-        $notas = $aluno->curriculos()->find($idCurriculo)->pivot->turmas->last()->pivot->notas;
+        $notas = $turma->pivot->notas()->get();
 
         # Criando as frequências para cada disciplinas
         foreach($notas as $nota) {

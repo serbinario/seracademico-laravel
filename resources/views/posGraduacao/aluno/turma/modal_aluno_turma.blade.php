@@ -35,7 +35,7 @@
                                         <th>Situação</th>
                                         <th>Data de início</th>
                                         <th>Cód. Turma</th>
-                                        {{--<th>Ação</th>--}}
+                                        <th>Ação</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -56,7 +56,7 @@
                                 <th>Currículo</th>
                                 <th>Situação</th>
                                 <th>Turma</th>
-                                <th>Turma Destino</th>
+                                {{--<th>Turma Destino</th>--}}
                                 <th>Ação</th>
                             </tr>
                             </thead>

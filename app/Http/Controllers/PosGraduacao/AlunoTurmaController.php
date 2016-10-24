@@ -59,7 +59,7 @@ class AlunoTurmaController extends Controller
             })
             ->leftJoin('fac_situacao', 'pos_alunos_situacoes.situacao_id', '=', 'fac_situacao.id')
             ->where('pos_alunos.id', $idAluno)
-            ->orderBy('pos_alunos_turmas.id')
+            ->orderBy('pos_alunos_cursos.id')
             ->groupBy('pos_alunos_turmas.id')
             ->select([
                 'pos_alunos_turmas.id',
@@ -77,7 +77,19 @@ class AlunoTurmaController extends Controller
         #Editando a grid <a id="btnEditAlunoCurso" title="Editar" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
         #<a href="#" class="btn btn-xs btn-danger" title="Remover Curso/Turma"><i class="glyphicon glyphicon-remove"></i></a>
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            return '';
+            # Variável que armazenará o html
+            $html = '';
+
+            # Recuperando o objeto aluno
+            $objAluno = $this->alunoRepository->find($row->idAluno);
+
+            # Verificando se o curso possui situação
+            if(count($objAluno->curriculos()->where('pos_alunos_cursos.id', $row->idAlunoCurso)->first()->pivot->situacoes()->get()) == 0) {
+                $html = '<a id="btnRemoverCurso" class="btn btn-xs btn-danger" title="Remover Curso/Turma"><i class="glyphicon glyphicon-remove"></i></a>';
+            }
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
@@ -201,6 +213,42 @@ class AlunoTurmaController extends Controller
         }  catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param $idAluno
+     * @param $idAlunoCurso
+     * @return mixed
+     */
+    public function destroy($idAluno, $idAlunoCurso)
+    {
+        try {
+            # Recuperando o registro
+            $curriculo = $this->alunoRepository->find($idAluno)->curriculos()
+                ->where('pos_alunos_cursos.id', $idAlunoCurso)->first();
+
+            # Removendo as dependências
+            $curriculo->pivot->situacoes()->detach();
+
+            # Iterando quanda turma para remover as notas
+            foreach($curriculo->pivot->turmas()->get() as $turma) {
+                $turma->pivot->notas()->delete();
+            }
+            
+            # Removendoas dependências
+            $curriculo->pivot->turmas()->detach();
+
+            # removendo o curso
+            \DB::table('pos_alunos_cursos')
+                ->where('pos_alunos_cursos.id', $idAlunoCurso)
+                ->delete();
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Curso removido com sucesso!"]);
+        }  catch (\Throwable $e) {dd($e->getMessage());
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+
     }
 
     /**

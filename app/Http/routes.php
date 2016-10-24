@@ -106,6 +106,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmas']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\AlunoTurmaController@getLoadFields']);
                     Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoTurmaController@store']);
+                    Route::delete('destroy/{idAluno}/{idAlunoCurso}', ['as' => 'destroy', 'uses' => 'PosGraduacao\AlunoTurmaController@destroy']);
                     Route::get('getTurmaOrigem/{idAlunoCurso}', ['as' => 'getTurmaOrigem', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmaOrigem']);
                     Route::delete('destroySituacao/{idSituacao}', ['as' => 'destroySituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@destroySituacao']);
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);

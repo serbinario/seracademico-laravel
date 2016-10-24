@@ -177,13 +177,15 @@ class AlunoService
         if(isset($data['curriculo_id'])) {
             #Vinculando o currículo, situação e turma ao aluno
             $aluno->curriculos()->attach($data['curriculo_id']);
+
+            # Recuperando o ultimo registro e vinculando a situação
             $aluno->curriculos()->get()->last()->pivot->situacoes()->attach(1, [
                 'turma_origem_id' => $data['turma_id'] ?? null
             ]);
 
             # Verificando se a turma foi informada
             if($data['turma_id']) {
-                # Vinculando a turma ao curso
+                # Recuperando o ultimo registro e vinculando a turma ao curso
                 $aluno->curriculos()->get()->last()->pivot->turmas()->attach($data['turma_id']);
 
                 # Regras de negócios para cadastro automático de
@@ -293,16 +295,16 @@ class AlunoService
     public function tratamentoTurmaUpdate($aluno, $idTurma)
     {
         # Recuperando o currículo do aluno
-        $curriculo = $aluno->curriculos->last();
+        $curriculo = $aluno->curriculos()->get()->last();
 
         # Verificando se existe turma cadastada
-        if(count($curriculo->pivot->turmas) > 0) {
+        if(count($curriculo->pivot->turmas()->get()) > 0) {
             # Recuperando o pivot da turma
-            $alunoTurma  = $curriculo->pivot->turmas->last()->pivot;
+            $alunoTurma  = $curriculo->pivot->turmas()->get()->last()->pivot;
             $lastTurmaId = $alunoTurma->turma_id;
 
             # Filtrando as situações
-            $situacoes = $aluno->curriculos->last()->pivot->situacoes->filter(function ($situacao) use ($lastTurmaId) {
+            $situacoes = $curriculo->pivot->situacoes()->get()->filter(function ($situacao) use ($lastTurmaId) {
                 return $situacao->turma_origem_id == $lastTurmaId;
             });
 
@@ -325,10 +327,10 @@ class AlunoService
         }
 
         # Vinculando a turma
-        $aluno->curriculos->last()->pivot->turmas()->attach($idTurma);
+        $curriculo->pivot->turmas()->attach($idTurma);
 
         # Alterando a turma de origem das situações
-        $aluno->curriculos->last()->pivot->situacoes->each(function ($situacao) use ($idTurma) {
+        $curriculo->pivot->situacoes()->get()->each(function ($situacao) use ($idTurma) {
             # Alterando o id da turma de origem
             $situacao->pivot->turma_origem_id = $idTurma;
             $situacao->pivot->save();
@@ -351,27 +353,16 @@ class AlunoService
     public function tratamentoNotas(Aluno $aluno)
     {
         # Recuperando a entidade de currículo
-        $curriculo =  $aluno->curriculos->last();
+        $curriculo =  $aluno->curriculos()->get()->last();
 
         # Recuperando a turma ativa, data atual e as notas do aluno
-        $turma = $curriculo->pivot->turmas()->get()->last();
+        $turma    = $curriculo->pivot->turmas()->get()->last();
         $dataHoje = new \DateTime('now');
-//        $todasNotas = $turma->pivot->notas;
 
         # Percorendo e persistindo as notas
         foreach($curriculo->disciplinas as $disciplina) {
             # Recuperando o ultimo calendário da disicplina
             $calendario = $turma->disciplinas()->find($disciplina->id)->pivot->calendarios->last();
-
-//            # Filtrando as notas para a disciplina em questão
-//            $todasNotas = $todasNotas->filter(function ($nota) use ($disciplina) {
-//                return $nota->disciplina_id == $disciplina->id;
-//            });
-//
-//            # Verificando se a disciplina já tem nota
-//            if(count($todasNotas) > 0) {
-//                continue;
-//            }
 
             # Verificando se o calendário é
             if(isset($calendario) && \DateTime::createFromFormat('d/m/Y' , $calendario->data_final) < $dataHoje) {
