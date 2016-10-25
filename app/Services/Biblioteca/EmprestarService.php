@@ -272,6 +272,28 @@ class EmprestarService
         $dataObj = new \DateTime("now");
         $data = $dataObj->format('Y-m-d');
 
+        $parametros = \DB::table('bib_parametros')->select('bib_parametros.*')
+            ->where('bib_parametros.codigo', '=', '006')
+            ->where('bib_parametros.codigo', '=', '007')
+            ->get();
+
+        $valorNormal     = $parametros[0]->valor;
+        $valorConsulta   = $parametros[1]->valor;
+
+        if(strtotime($emprestimo->data_devolucao) < strtotime($data)) {
+            $time_inicial = strtotime($emprestimo->data_devolucao);
+            $time_final = strtotime($data);
+
+            // Calcula a diferença de segundos entre as duas datas:
+            $diferenca = $time_final - $time_inicial; // 19522800 segundos
+
+            // Calcula a diferença de dias
+            $dias = (int) floor( $diferenca / (60 * 60 * 24)); // 225 dias
+
+            //pegando a quantidade de exemplares emprestados
+            $qtdExemplar = count($emprestimo->emprestimoExemplar);
+        }
+
         $emprestimo->data_devolucao_real = $data;
         $emprestimo->save();
         

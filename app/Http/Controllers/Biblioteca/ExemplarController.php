@@ -81,7 +81,9 @@ class ExemplarController extends Controller
             $html       = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                            <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
+                            <li><a class="btn-floating" href="editExemplar/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>
+                            <li><a class="btn-floating" target="_blank" href="fixaFrente/'.$row->id.'" title="Fixa frente"><i class="material-icons">undo</i></a></li>
+                            <li><a class="btn-floating" target="_blank" href="fixaVerso/'.$row->id.'" title="Fixa verso"><i class="material-icons">redo</i></a></li>';
 
             $emprestimo = $this->service->find($row->id);
             # Verificando se existe vinculo com o currículo
@@ -211,6 +213,41 @@ class ExemplarController extends Controller
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function fixaFrente($id)
+    {
+        #Recuperando a empresa
+        $result = $this->service->findFixa($id);
+
+        return \PDF::loadView('biblioteca.fixas.frente', ['result' => $result])->stream();
+    }
+
+    /**
+     * @param $id
+     * @throws \Exception
+     */
+    public function fixaVerso($id)
+    {
+        #Recuperando a empresa
+        $result = $this->service->findFixa($id);
+
+        $query = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_exemplares.edicao', '=', $result->edicao)
+            ->where('bib_exemplares.ano', '=', $result->ano)
+            ->where('bib_arcevos.id', '=', $result->arcevos_id)
+            ->select([
+                \DB::raw("COUNT(bib_exemplares.id) as qtd_exemplar")
+            ])->first();
+
+        //dd($result);
+
+        return \PDF::loadView('biblioteca.fixas.verso', ['result' => $result, 'qtdExemplar' => $query->qtd_exemplar])->stream();
     }
 
 }
