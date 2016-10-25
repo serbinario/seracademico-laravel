@@ -108,6 +108,11 @@ class TurmaAlunoController extends Controller
     public function getAlunosByCurso($idCurso, $idTurma, $idDisciplina)
     {
         try {
+            /*
+             * Faltando verificar se a disciplina em qustão já foi cursada pelo aluno (Reposição de aula)
+             * Ver tbm o impacto na alteração de turma no aluno.
+             */
+
             # Recuperando os alunos
             $alunos = \DB::table('pos_alunos')
                 ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
@@ -127,7 +132,6 @@ class TurmaAlunoController extends Controller
                         where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                     );
                 })
-                //->join('pos_alunos_notas','pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
                 ->groupBy('pos_alunos.id')
                 ->where('fac_cursos.id', $idCurso)
                 ->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
@@ -196,7 +200,7 @@ class TurmaAlunoController extends Controller
                     ]));
 
                 # Recuperando a nota cadastrada
-                $objNota = $aluno->curriculos()->get()->last()->pivot->turmas()->get()->last()->pivot->notas->last();
+                $objNota = $aluno->curriculos()->get()->last()->pivot->turmas()->get()->last()->pivot->notas()->get()->last();
             }
 
             # Recuperando os calendários

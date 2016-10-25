@@ -83,6 +83,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_frequencias.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_turmas_alunos.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_add_aluno.js')  }}"></script>
     <script type="text/javascript">

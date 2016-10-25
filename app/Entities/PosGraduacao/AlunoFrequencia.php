@@ -26,4 +26,12 @@ class AlunoFrequencia extends Model implements Transformable
         return $this->belongsTo(AlunoNota::class, 'pos_aluno_nota_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function calendario()
+    {
+        return $this->belongsTo(CalendarioDisciplinaTurma::class, 'calendario_id');
+    }
+
 }

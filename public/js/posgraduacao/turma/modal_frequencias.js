@@ -6,7 +6,7 @@ $(document).on('click', '#btnCloseModalFrequencias', function () {
 // Função para carregar a grid
 var tableFrequencias;
 function loadTableFrequencias (idTurma) {
-    tableFrequencias = $('#alunos-frequencias-grid').DataTable({
+    tableFrequencias = $('#frequencias-grid').DataTable({
         processing: true,
         serverSide: true,
         retrieve: true,
@@ -15,22 +15,15 @@ function loadTableFrequencias (idTurma) {
         bFilter: false,
         bPaginate: false,
         ajax: {
-            url: "/index.php/seracademico/graduacao/turma/frequencias/grid/" + idTurma,
+            url: "/index.php/seracademico/posgraduacao/turma/frequencias/grid/" + idTurma,
             data: function (d) {
                 d.disciplina = $('select[name=disciplinaFrequenciasSearch] option:selected').val();
             }
         },
         columns: [
             {data: 'nomePessoa', name: 'pessoas.nome'},
-            {data: 'falta_mes_1', name: 'fac_alunos_frequencias.falta_mes_1'},
-            {data: 'falta_mes_2', name: 'fac_alunos_frequencias.falta_mes_2'},
-            {data: 'falta_mes_3', name: 'fac_alunos_frequencias.falta_mes_3'},
-            {data: 'falta_mes_4', name: 'fac_alunos_frequencias.falta_mes_4'},
-            {data: 'falta_mes_5', name: 'fac_alunos_frequencias.falta_mes_5'},
-            {data: 'falta_mes_6', name: 'fac_alunos_frequencias.falta_mes_6'},
-            {data: 'total_falta', name: 'fac_alunos_frequencias.total_falta'},
-            {data: 'nomeSituacao', name: 'fac_situacao_nota.nome'},
-            {data: 'action', name: 'action'}
+            {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
+            {data: 'frequencia', name: 'frequencia', orderable: false, filterable: false}
         ]
     });
 
@@ -47,7 +40,7 @@ function loadTableFrequencias (idTurma) {
 // Função para executar a grid
 function runTableFrequencias(idTurma) {
     if (tableFrequencias) {
-        tableFrequencias.ajax.url( "/index.php/seracademico/graduacao/turma/frequencias/grid/" + idTurma).load();
+        tableFrequencias.ajax.url( "/index.php/seracademico/posgraduacao/turma/frequencias/grid/" + idTurma).load();
     } else {
         // Carregamento da grids
         loadTableFrequencias(idTurma);
@@ -58,8 +51,6 @@ function runTableFrequencias(idTurma) {
 
         
     // Configurações do modal
-    $("#modal-frequencias-alunos").find('.modal-dialog').css("width", "97%");
-    $("#modal-frequencias-alunos").find('.modal-dialog').css("max-height", "97%");
     $("#modal-frequencias-alunos").modal({show: true, keyboard: true});
 }
 
@@ -69,7 +60,7 @@ function loadFieldsFrequencias()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Graduacao\\Disciplina|disciplinasOfTurma,' + idTurma
+            'PosGraduacao\\Disciplina|disciplinasOfTurma,' + idTurma
         ]
     };
 
@@ -77,7 +68,7 @@ function loadFieldsFrequencias()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/graduacao/turma/frequencias/getLoadFields',
+        url: '/index.php/seracademico/posgraduacao/turma/frequencias/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -86,9 +77,9 @@ function loadFieldsFrequencias()
             var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
 
             // Percorrendo o array de disciplina
-            for(var i = 0; i < retorno['graduacao\\disciplina'].length; i++) {
+            for(var i = 0; i < retorno['posgraduacao\\disciplina'].length; i++) {
                 // Criando as options
-                htmlDisciplina += "<option value='" + retorno['graduacao\\disciplina'][i].id + "'>"  + retorno['graduacao\\disciplina'][i].nome + "</option>";
+                htmlDisciplina += "<option value='" + retorno['posgraduacao\\disciplina'][i].id + "'>"  + retorno['posgraduacao\\disciplina'][i].nome + "</option>";
             }
 
             // Preenchendo o select
@@ -101,3 +92,23 @@ function loadFieldsFrequencias()
         }
     });
 };
+
+// Evento para cadastro de falta
+$(document).on('click', '.frequencia', function () {
+    var frequencia = $(this).prop('checked');
+    var idFrequencia = $(this).val();
+  
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'PUT',
+        url: '/index.php/seracademico/posgraduacao/turma/frequencias/changeFrequencia/' + idFrequencia,
+        data: {'frequencia' : frequencia},
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            swal(retorno.msg, 'Click no botão abaixo!', 'success');
+        } else {
+            swal(retorno.msg, 'Click no botão abaixo!', 'error');
+        }
+    });
+});
