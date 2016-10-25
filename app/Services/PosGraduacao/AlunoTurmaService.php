@@ -411,10 +411,16 @@ class AlunoTurmaService
         # Percorendo e persistindo as notas
         foreach($curriculo->disciplinas as $disciplina) {
             # Recuperando o ultimo calendário da disicplina
-            $calendario = $turma->disciplinas()->find($disciplina->id)->pivot->calendarios->last();
+            $disciplinaTurma = $turma->disciplinas()->find($disciplina->id);
+            $calendario = $disciplinaTurma ? $disciplinaTurma->pivot->calendarios->last() : null;
 
-            # Verificando se o calendário é
-            if(isset($calendario) && \DateTime::createFromFormat('d/m/Y' , $calendario->data_final) < $dataHoje) {
+            # Verificando se existe calendário
+            if(!isset($calendario)) {
+                continue;
+            }
+
+            # Verificando se o calendário é válido
+            if(\DateTime::createFromFormat('d/m/Y' , $calendario->data_final) < $dataHoje) {
                 continue;
             }
 

@@ -15,7 +15,6 @@ class TurmaDisciplina extends Pivot implements Transformable
      */
     protected $table = 'fac_turmas_disciplinas';
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -4,6 +4,8 @@ namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Entities\PosGraduacao\AlunoFrequencia;
+use Seracademico\Entities\PosGraduacao\AlunoNota;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\PosGraduacao\AlunoRepository;
@@ -125,7 +127,7 @@ class TurmaAlunoController extends Controller
                         where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                     );
                 })
-                ->join('pos_alunos_notas','pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
+                //->join('pos_alunos_notas','pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
                 ->groupBy('pos_alunos.id')
                 ->where('fac_cursos.id', $idCurso)
                 ->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
@@ -141,6 +143,10 @@ class TurmaAlunoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function attachAluno(Request $request)
     {
         try {
@@ -158,12 +164,47 @@ class TurmaAlunoController extends Controller
                 ->turmas()->get()->last()->pivot
                 ->notas()->get();
 
-            # Percorrendo todas as notas
-            foreach ($notas as $nota) {
-                if($nota->disciplina_id == $request->get('disciplina_id')) {
-                    $nota->turma_id = $request->get('turma_id');
-                    $nota->save();
-                }
+            # Recuperand os dados da requisição
+            $idDisciplina = $dados['disciplina_id'];
+            $idTurma = $dados['turma_id'];
+
+            # Recuperado objDisciplina da turma
+            $objDisciplina = $this->turmaRepository->find($idTurma)->disciplinas()->find($idDisciplina);
+
+            # Filtrando a nota da disiplina
+            $notaFilter = $notas->filter(function ($nota) use ($objDisciplina) {
+                return $nota->turma_id == $objDisciplina->id ;
+            });
+
+            # Referêcia para a nota
+            $objNota = null;
+
+            if(count($notaFilter) == 1) {
+                # Recuperando a nota
+                $objNota = $notaFilter->last();
+
+                # Atualizando a nota
+                $objNota->turma_id = $idTurma;
+                $objNota->save();
+            } else {
+                # Salvando as notas
+                $aluno->curriculos()->get()->last()->pivot->turmas()->get()->last()->pivot->notas()
+                    ->save(new AlunoNota([
+                        'disciplina_id'  => $objDisciplina->id,
+                        'situacao_nota_id' => 10,
+                        'turma_id' => $idTurma
+                    ]));
+
+                # Recuperando a nota cadastrada
+                $objNota = $aluno->curriculos()->get()->last()->pivot->turmas()->get()->last()->pivot->notas->last();
+            }
+
+            # Recuperando os calendários
+            $calendarios = $objDisciplina->turmas()->find($idTurma)->pivot->calendarios;
+
+            # Percorrendo os calendários e persistindo as frequências
+            foreach ($calendarios as $calendario) {
+                $objNota->frequencias()->save(new AlunoFrequencia(['calendario_id' => $calendario->id]));
             }
 
             # Retorno

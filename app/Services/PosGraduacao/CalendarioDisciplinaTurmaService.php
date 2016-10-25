@@ -2,9 +2,12 @@
 
 namespace Seracademico\Services\PosGraduacao;
 
+use Seracademico\Entities\PosGraduacao\AlunoFrequencia;
+use Seracademico\Entities\PosGraduacao\AlunoNota;
+use Seracademico\Entities\PosGraduacao\TurmaDisciplina;
+use Seracademico\Repositories\PosGraduacao\AlunoRepository;
 use Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository;
 use Seracademico\Entities\PosGraduacao\CalendarioDisciplinaTurma;
-use Carbon\Carbon;
 
 class CalendarioDisciplinaTurmaService
 {
@@ -14,11 +17,17 @@ class CalendarioDisciplinaTurmaService
     private $repository;
 
     /**
+     * @var AlunoRepository
+     */
+    private $alunoRepository;
+
+    /**
      * @param CalendarioDisciplinaTurmaRepository $repository
      */
-    public function __construct(CalendarioDisciplinaTurmaRepository $repository)
+    public function __construct(CalendarioDisciplinaTurmaRepository $repository, AlunoRepository $alunoRepository)
     {
         $this->repository = $repository;
+        $this->alunoRepository = $alunoRepository;
     }
 
     /**
@@ -61,7 +70,54 @@ class CalendarioDisciplinaTurmaService
         $this->tratamentoCampos($data);
 
         #Salvando o registro pincipal
-        $calendarioTurma =  $this->repository->create($data);
+        $calendarioTurma = $this->repository->create($data);
+        $turmaDisciplina = \DB::table('fac_turmas_disciplinas')
+            ->select('turma_id', 'disciplina_id')
+            ->where('id', $calendarioTurma->turma_disciplina_id)->get();
+
+        # Recuperando todos os alunos
+        $alunos = $this->alunoRepository->all();
+
+        # Percorrendo todos os alunos
+        foreach ($alunos as $aluno) {
+
+            # Recuperando o ultimo currículo
+            $curriculo = $aluno->curriculos()->get()->last();
+
+            # Verificando se o currículo existe
+            if($curriculo) {
+                # Recuperando a ultima turma
+                $turma = $curriculo->pivot->turmas()->get()->last();
+
+                # Verificando se a turma existe
+                if($turma && $turma->id == $turmaDisciplina[0]->turma_id) {
+                    # Filtrando se o aluno possui nota cadastrada
+                    $nota = $turma->pivot->notas()->get()->filter(function ($nota) use ($turmaDisciplina) {
+                        return $nota->disciplina_id == $turmaDisciplina[0]->disciplina_id;
+                    });
+
+                    # Verificando e salvando nota
+                    if(count($nota) == 0) {
+                        # Salvando a nota
+                        $turma->pivot->notas()
+                            ->save(new AlunoNota([
+                                'disciplina_id'  => $turmaDisciplina[0]->disciplina_id,
+                                'situacao_nota_id' => 10,
+                                'turma_id' => $turma->id
+                            ]));
+
+                        # Recuperando a nota
+                        $nota = $turma->pivot->notas()->get()->last();
+                    } else {
+                        # Recuperando a ultima nota
+                        $nota = $nota->last();
+                    }
+
+                    # Salvando a frequÊncia
+                    $nota->frequencias()->save(new AlunoFrequencia(['calendario_id' => $calendarioTurma->id]));
+                }
+            }
+        }
 
         #Verificando se foi criado no banco de dados
         if(!$calendarioTurma) {
@@ -75,7 +131,8 @@ class CalendarioDisciplinaTurmaService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return CalendarioDisciplinaTurma
+     * @throws \Exception
      */
     public function update(array $data, int $id) : CalendarioDisciplinaTurma
     {
