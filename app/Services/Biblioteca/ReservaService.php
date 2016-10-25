@@ -142,6 +142,14 @@ class ReservaService
             'reserva'
         ];
 
+        //validando se a pessoa possui empréstimo em atraso
+        $emprestimoAtraso = \DB::table('bib_emprestimos')->
+        where('bib_emprestimos.pessoas_id', '=', $data['pessoas_id'])
+            ->whereDate('bib_emprestimos.data_devolucao', '<', $dataFormat)
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
+            ->select('bib_emprestimos.*')
+            ->first();
+
         //Busca quantidade de reserva do aluno
         $validarQtdReserva = Reserva::join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
@@ -153,8 +161,12 @@ class ReservaService
             ])
             ->get();
 
-        //Valida se a quantidade de reserva atinge o limite máximo
-        if (isset($validarQtdReserva[0]) && $validarQtdReserva[0]->qtd >= $parametros[0]->valor) {
+        //Valida se a quantidade de reserva atinge o limite máximo, ou se a pessoa possui empréstimo em atraso
+        if ($emprestimoAtraso) {
+            $return[1] = "Esta pessoa possui um empréstimo em atraso";
+            $return[2] = false;
+            return $return;
+        } else if (isset($validarQtdReserva[0]) && $validarQtdReserva[0]->qtd >= $parametros[0]->valor) {
             $return[1] = "Limite de até {$parametros[0]->valor} reservas foi atingido";
             $return[2] = false;
             return $return;

@@ -87,6 +87,9 @@ class TurmaController extends Controller
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
                         <li><a class="modal-calendario btn-floating green" data-id="'.$row->id.'" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
+                        <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">spellcheck</i></a></li>
+                        <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">playlist_add_check</i></a></li>
+                        <li><a class="btn-floating green" id="modal-alunos" href="#" title="Gerenciamento de Alunos"><i class="material-icons">supervisor_account</i></a></li>
                     </ul>
                     </div>';
 
@@ -198,6 +201,26 @@ class TurmaController extends Controller
                 ])->get();
 
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idTurma
+     * @param $idDisciplina
+     * @return mixed
+     */
+    public function getCalendariosByDisciplina($idTurma, $idDisciplina)
+    {
+        try {
+            #Recuperando a turma
+            $turma = $this->service->find($idTurma);
+
+            # Recuperando os calendários
+            $calendarios = $turma->disciplinas()->find($idDisciplina)->pivot->calendarios()->get();
+
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $calendarios]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
         }

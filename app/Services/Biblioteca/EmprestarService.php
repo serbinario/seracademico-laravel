@@ -119,6 +119,14 @@ class EmprestarService
             'emprestimos'
         ];
 
+        //validando se a pessoa possui empréstimo em atraso
+        $emprestimoAtraso = Emprestar::
+            where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
+            ->whereDate('bib_emprestimos.data_devolucao', '<', $dataObj->format('Y-m-d'))
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
+            ->select('bib_emprestimos.*')
+            ->first();
+
         //Buscando o exemplar que esteja sendo emprestado
         $validarEmprestimo = Emprestar::join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
             ->where('bib_emprestimos_exemplares.exemplar_id', '=', $dados['id'])
@@ -138,7 +146,11 @@ class EmprestarService
             ->get();
 
         //Verifica se o exemplar está sendo emprestado, e se o limite de emprestimos foi atingido
-        if(count($validarEmprestimo) > 0) {
+        if ($emprestimoAtraso) {
+            $return[1] = "Esta pessoa possui um empréstimo em atraso";
+            $return[2] = false;
+            return $return;
+        } else if (count($validarEmprestimo) > 0) {
             $return[1] = 'Este exemplar já está sendo emprestado no momento';
             $return[2] = false;
             return $return;
@@ -152,7 +164,7 @@ class EmprestarService
         //Gerando a data de devolução conforme a situação de emprestimo do livro
         if($dados['tipo_emprestimo'] == '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
-            $dia = $dias[0]->valor - 1;
+            $dia = $dias[0]->valor;
         } else if ($dados['tipo_emprestimo'] == '2') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
             $dia = $dias[0]->valor - 1;
@@ -160,7 +172,6 @@ class EmprestarService
 
         $dataObj->add(new \DateInterval("P{$dia}D"));
         $data = $dataObj->format('d/m/Y');
-        $dados['data_devolucao'] = $data;
 
         //Salvando os emprestimos no banco
         $result = $this->store($dados);
@@ -191,16 +202,17 @@ class EmprestarService
         $data['data'] = $dataFormat;
         $data['codigo'] = $codigo;
         $data['status'] = '0';
+        $data['status_devolucao'] = '0';
 
         //busca o registro do emprestimo que está sendo usando no momento
-        $validarEmprestimo = $this->findWhere($data);
+        $emprestimo = $this->findWhere($data);
 
         #Salvando o registro pincipal (caso aja um registro já sendo usado, não será feito um novo registro)
-        if(count($validarEmprestimo) <= 0) {
+        if(count($emprestimo) <= 0) {
             $emprestar =  $this->repository->create($data);
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         } else {
-            $emprestar = $validarEmprestimo[0];
+            $emprestar = $emprestimo[0];
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         }
 
@@ -228,10 +240,10 @@ class EmprestarService
         $emprestimo = $this->repository->find($id);
         $dataObj   = \DateTime::createFromFormat('Y-m-d H:i:s', $emprestimo->data_devolucao);
         $dia       = 0;
-        //dd($dataObj);
+
         if($emprestimo->tipo_emprestimo == '1') {
             $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
-            $dia = $query[0]->valor - 1;
+            $dia = $query[0]->valor;
         } else if ($emprestimo->tipo_emprestimo == '2') {
             $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
             $dia = $query[0]->valor - 1;
@@ -262,15 +274,13 @@ class EmprestarService
 
         $emprestimo->data_devolucao_real = $data;
         $emprestimo->save();
-
-        //dd($emprestimo->emprestimoExemplar);
         
         foreach ($emprestimo->emprestimoExemplar as $e) {
             $exemplar =  $this->repoExemplar->find($e->id);
             if($exemplar->emprestimo_id == '1') {
                 $exemplar->situacao_id = '1';
                 $exemplar->save();
-            } elseif ($exemplar->emprestimo_id == '2') {
+            } else if ($exemplar->emprestimo_id == '2') {
                 $exemplar->situacao_id = '3';
                 $exemplar->save();
             }
@@ -370,8 +380,8 @@ class EmprestarService
     private function tratamentoCamposData($data)
     {
         #tratamento de datas do aluno
-        $data['data_devolucao'] = $data['data_devolucao'] ? $this->convertDate($data['data_devolucao'], 'en') : "";
-        $data['data_devolucao'] = $data['data_devolucao']->format('Y-m-d');
+        //$data['data_devolucao'] = $data['data_devolucao'] ? $this->convertDate($data['data_devolucao'], 'en') : "";
+        //$data['data_devolucao'] = $data['data_devolucao']->format('Y-m-d');
 
         # Tratamento de campos de chaves estrangeira
         foreach ($data as $key => $value) {

@@ -5,7 +5,6 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\PosGraduacao\Aluno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 

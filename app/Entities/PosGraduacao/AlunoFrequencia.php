@@ -15,6 +15,7 @@ class AlunoFrequencia extends Model implements Transformable
     protected $fillable = [ 
 		'pos_aluno_nota_id',
 		'frequencia',
+        'calendario_id'
 	];
 
     /**

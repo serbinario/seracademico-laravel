@@ -47,7 +47,8 @@ class VestibulandoValidator extends LaravelValidator
         'pessoa.endereco.cep' => 'CEP',
         'pessoa.outra_escola' => 'Outra Instituição',
         'pessoa.uf_nascimento_id' => 'UF(Documentos)',
-        'pessoa.uf_exp' => 'UF(Documentos)'
+        'pessoa.uf_exp' => 'UF(Documentos)',
+        'img' => 'Foto'
 
 //        'pessoa.data_exame_nacional_um' => 'serbinario_date_format:"d/m/Y"',
 //        'pessoa.nota_exame_nacional_um' => '',
@@ -74,6 +75,7 @@ class VestibulandoValidator extends LaravelValidator
             'path_comprovante_enem' => 'pdf',
             'path_comprovante_endereco' => 'pdf',
             'path_comprovante_ficha19' => 'pdf',
+            'img' => 'image|max:800',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             //'pessoa.cpf' => 'required|max:20|unique:pessoas,cpf',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
@@ -158,6 +160,7 @@ class VestibulandoValidator extends LaravelValidator
             'path_comprovante_enem' => 'pdf',
             'path_comprovante_endereco' => 'pdf',
             'path_comprovante_ficha19' => 'pdf',
+            'img' => 'image|max:800',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             //'pessoa.cpf' => 'max:20|unique:pessoas,cpf,:cpf',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',

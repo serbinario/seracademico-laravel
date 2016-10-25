@@ -3,7 +3,10 @@ $(document).on("click", "#adicionar-curso", function () {
     // Carregando os campos
     loadFields();
     loadCursosAluno();
-
+    
+    // Escondendo o img de load
+    $('#load').hide();
+    
     // Exibindo o modal
     $("#modal-nova-turma-aluno").modal({show:true});
 });
@@ -176,7 +179,13 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
         type: 'POST',
         url: '/index.php/seracademico/posgraduacao/aluno/turma/store',
         data: dados,
-        datatype: 'json'
+        datatype: 'json',
+        beforeSend: function() {
+            $('#load').show();
+        },
+        complete: function(){
+            $('#load').hide();
+        },
     }).done(function (retorno) {
         if(retorno.success) {
             // Recarregando as grids

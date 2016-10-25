@@ -38,26 +38,24 @@
                             <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Descrição</th>
-                                <th>Codigo da turma</th>
+                                <th>Cód. Curso</th>
+                                <th>Curso</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Valor Integral</th>
-                                <th>Valor Isolado</th>
+                                <th>Val. Turma</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Código</th>
-                                <th>Descrição</th>
-                                <th>Codigo da turma</th>
+                                <th>Cód. Curso</th>
+                                <th>Curso</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Valor Integral</th>
-                                <th>Valor Isolado</th>
+                                <th>Val. Turma</th>
                                 <th >Acão</th>
                             </tr>
                             </tfoot>
@@ -71,6 +69,11 @@
     @include('posGraduacao.turma.modal_novo_calendario')
     @include('posGraduacao.turma.modal_editar_calendario')
     @include('posGraduacao.turma.modal_incluir_disciplinas')
+    @include('posGraduacao.turma.modal_notas')
+    @include('posGraduacao.turma.modal_editar_notas')
+    @include('posGraduacao.turma.modal_frequencias')
+    @include('posGraduacao.turma.alunos.modal_turmas_alunos')
+    @include('posGraduacao.turma.alunos.modal_add_aluno')
 @stop
 
 @section('javascript')
@@ -78,6 +81,10 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_novo_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_turmas_alunos.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_add_aluno.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -86,14 +93,13 @@
 
             ajax: "{!! route('seracademico.posgraduacao.turma.grid') !!}",
             columns: [
+                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
-                {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},
                 {data: 'valor_turma', name: 'fac_turmas.valor_turma'},
-                {data: 'valor_disciplina', name: 'fac_turmas.valor_disciplina'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -107,7 +113,7 @@
 
             //Recuperando o id da turma selecionada
             idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
 
             // setando a descrição
             $('#caTurma').text(codigo);
@@ -120,5 +126,55 @@
             $("#modal-disciplina-calendario").modal({show: true, keyboard: true});
         });
 
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-notas', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#naCodigo').text(codigo);
+
+            //Executando a grid
+            runTableNotas(idTurma);
+        });
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-frequencias', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#faCodigo').text(codigo);
+
+            //Executando a grid
+            runTableFrequencias(idTurma);
+        });
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '#modal-alunos', function () {
+            // declaração de variáveis locais
+            var codigo;
+
+            //Recuperando o id da turma selecionada
+            idTurma = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            codigo  = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo_turma;
+
+            // setando a descrição
+            $('#gaTurma').text(codigo);
+
+            //Executando a grid
+            runTableAlunos(idTurma);
+
+            // Abrindo o modal
+            $("#modal-turmas-alunos").modal('show');
+        });
     </script>
 @stop

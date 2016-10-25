@@ -177,13 +177,29 @@ class EmprestarController extends Controller
     {
         $id = $request->get('id_emp');
         $user = \Auth::user();
+        $dataObj   = new \DateTime('now');
+        $dia = "";
 
-        $data = $this->service->find($id);
-        $data->status = '1';
-        $data->users_id = $user->id;
-        $data->save();
+        $emprestimo = $this->service->find($id);
 
-        $result = $data;
+        //Gerando a data de devolução conforme a situação de emprestimo do livro
+        if($emprestimo->tipo_emprestimo == '1') {
+            $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->first();
+            $dia = $dias->valor;
+        } else if ($emprestimo->tipo_emprestimo == '2') {
+            $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->first();
+            $dia = $dias->valor - 1;
+        }
+
+        $dataObj->add(new \DateInterval("P{$dia}D"));
+        $data = $dataObj->format('Y-m-d');
+        $emprestimo->data_devolucao = $data;
+
+        $emprestimo->status = '1';
+        $emprestimo->users_id = $user->id;
+        $emprestimo->save();
+
+        $result = $emprestimo;
 
         return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
     }

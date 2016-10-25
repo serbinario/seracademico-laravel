@@ -10,9 +10,6 @@
                     Listar Parâmetros
                 </h4>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.biblioteca.createResponsavel')}}" class="btn-sm btn-primary pull-right">Novo Responsável</a>
-            </div>
         </div>
         <div class="ibox-content">
             @if(Session::has('message'))

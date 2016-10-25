@@ -31,10 +31,6 @@
                                 <a href="#acursar" aria-controls="acursar" data-toggle="tab">A Cursar</a>
                             </li>
 
-                            {{--<li role="presentation">--}}
-                                {{--<a href="#cursando" aria-controls="cursando" data-toggle="tab">Cursando</a>--}}
-                            {{--</li>--}}
-
                             <li role="presentation">
                                 <a href="#cursadas" aria-controls="cursadas" data-toggle="tab">Cursadas</a>
                             </li>
@@ -45,10 +41,6 @@
 
                             <li role="presentation">
                                 <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Curriculares</a>
-                            </li>
-
-                            <li role="presentation">
-                                <a href="#eletiva" aria-controls="eletiva" data-toggle="tab">Eletivas</a>
                             </li>
 
                             <li role="presentation">
@@ -75,27 +67,6 @@
                                     </thead>
                                 </table>
                             </div>
-
-                            <!-- Aba Cursando -->
-                            {{--<div role="tabpanel" class="tab-pane" id="cursando">--}}
-                                {{--<br/>--}}
-
-                                {{--<!-- Table a Cursando -->--}}
-                                {{--<table id="grid-cursando" class="display table table-bordered" cellspacing="0" width="100%">--}}
-                                    {{--<thead>--}}
-                                    {{--<tr>--}}
-                                        {{--<th>Período</th>--}}
-                                        {{--<th>Cod. Disciplina</th>--}}
-                                        {{--<th>Disciplina</th>--}}
-                                        {{--<th>C. Horária</th>--}}
-                                        {{--<th>Créditos</th>--}}
-                                        {{--<th>Média</th>--}}
-                                        {{--<th>Turma</th>--}}
-                                        {{--<th>Situação</th>--}}
-                                    {{--</tr>--}}
-                                    {{--</thead>--}}
-                                {{--</table>--}}
-                            {{--</div>--}}
 
                             <!-- Aba Cursadas -->
                             <div role="tabpanel" class="tab-pane" id="cursadas">
@@ -163,28 +134,6 @@
                             </div>
 
                             <!-- Aba Eletiva -->
-                            <div role="tabpanel" class="tab-pane" id="eletiva">
-                                <br/>
-
-                                <!-- Table Eletivas -->
-                                <table id="grid-eletivas" class="display table table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Período</th>
-                                        <th>Cod. Eletiva</th>
-                                        <th>Eletiva</th>
-                                        <th>C. Horária</th>
-                                        <th>Créditos</th>
-                                        <th>Currículo</th>
-                                        <th>Cod. Disciplina</th>
-                                        <th>Curriculo Disciplina</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-
-                            <!-- Aba Eletiva -->
                             <div role="tabpanel" class="tab-pane" id="equivalencia">
                                 <br/>
 
@@ -195,10 +144,7 @@
                                 <table id="grid-equivalencias" class="display table table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Período</th>
                                         <th>Cod. Disciplina</th>
-                                        <th>Disciplina</th>
-                                        <th>Currículo</th>
                                         <th>C. Horária</th>
                                         <th>Créditos</th>                                        
                                         <th>Cod. Equivalente</th>

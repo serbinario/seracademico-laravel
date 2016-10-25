@@ -519,8 +519,9 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         {!! Form::label('curso_id', 'Curso') !!}
+
                         @if(isset($aluno->id) && count($aluno->curriculos) > 0)
-                            {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], [$aluno->curriculos->first()->id => $aluno->curriculos->first()->nome], array('class' => 'form-control', 'disabled' => 'disabled', 'id' => 'curso_id')) !!}
+                            {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @else
                             {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @endif
@@ -528,12 +529,7 @@
 
                     <div class="form-group col-md-4">
                         {!! Form::label('turma_id', 'Turma') !!}
-
-                        @if(isset($aluno->id) && count($aluno->curriculos->last()->turmas) > 0)
-                            {!! Form::select('turma_id', [$aluno->curriculos->last()->turmas->last()->id => $aluno->curriculos->last()->turmas->last()->codigo], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                        @else
-                            {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
-                        @endif
+                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
                     </div>
 
                     <div class="form-group col-md-2">
@@ -774,7 +770,9 @@
 
 
     {{--Fim Buttons Submit e Voltar--}}
+    </div>
 </div>
+
 
 @section('javascript')
     <script type="text/javascript">
@@ -968,6 +966,20 @@
             }
         });
 
+        //Validações javascript
+        $('#formAluno').bootstrapValidator({
+            fields: {
+                'img': {
+                    validators: {
+                        file: {
+                            maxSize: 819200,   // 2048 * 1024
+                            message: "Tamanho de imagem permitido é de até 800kb"
+                        }
+                    }
+                },
+            },
+        });
+
 //        $('#formAluno').bootstrapValidator({
 //            fields: {
 //                'pessoa[nome]': {
@@ -1127,6 +1139,34 @@
                 return false;
             }
 
+            // Recuperando as turmas e carregando o select
+            getTurmasByCurso(cursoId);
+        });
+
+        // Evento para carregar as turmas a partir do
+        // curso selecionado
+        $(document).ready(function () {
+            // Recuperando o id do curso
+            var cursoId = $('#curso_id').val();
+
+            // Validando o curso
+            if(!cursoId) {
+                return false;
+            }
+
+            // Recuperando as turmas e carregando o select
+            getTurmasByCurso(cursoId);
+        });
+
+
+        /**
+         * Função para retornar as turmas referentes ao curso informado (cursoId)
+         * e prencher o select de turmas.
+         *
+         * @param cursoId
+         */
+        function getTurmasByCurso(cursoId)
+        {
             // Requisição
             jQuery.ajax({
                 type: 'GET',
@@ -1138,16 +1178,24 @@
             }).done(function (json) {
                 if(json.success) {
                     var option = "";
-
                     option += '<option value="">Selecione uma turma</option>';
+
                     for (var i = 0; i < json.dados.length; i++) {
-                        option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                        @if(isset($aluno) && count($aluno->curriculos->last()->turmas) > 0)
+                            if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            } else {
+                                option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            }
+                        @else
+                            option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                        @endif
                     }
 
                     $('#turma_id option').remove();
                     $('#turma_id').append(option);
                 }
             });
-        });
+        }
     </script>
 @stop

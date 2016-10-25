@@ -18,7 +18,7 @@ function loadTableCursoTurma(idAluno) {
             {data: 'situacao_aluno', name: 'fac_situacao_aluno.nome'},
             {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
             {data: 'codigo_turma', name: 'fac_turmas.codigo'},
-            // {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -42,7 +42,7 @@ function loadTableSituacoes(idAlunoCurso) {
             {data: 'codigoCurso', name: 'fac_cursos.codigo'},
             {data: 'nomeSituacao', name: 'fac_situacao.nome'},
             {data: 'codigoOrigem', name: 'origem.codigo'},
-            {data: 'codigoDestino', name: 'destino.codigo'},
+//            {data: 'codigoDestino', name: 'destino.codigo'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -100,3 +100,31 @@ function runCursoTurma(idAluno) {
     // Exibindi o modal
     $("#modal-turma-aluno").modal({show:true});
 }
+
+// Evento para remover a situação
+$(document).on('click', '#btnRemoverCurso', function () {
+    // Recuperando o id da situação do aluno
+    var id = tableCursoTurma.row($(this).parents('tr')).data().idAlunoCurso;
+    var idAluno = tableCursoTurma.row($(this).parents('tr')).data().idAluno;
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'DELETE',
+        url: '/index.php/seracademico/posgraduacao/aluno/turma/destroy/' + idAluno + '/' + id,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            // Recarregando as grids
+            tableCursoTurma.ajax.reload();
+            loadTableSituacoes(0).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/gridSituacoes/" + 0).load();
+
+            // desabilitando o butão
+            $('#btnAdicionarSituacao').attr('disabled', true);
+
+            // Mensagem de retorno
+            swal(retorno.msg, "Click no botão abaixo!", "success");
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
