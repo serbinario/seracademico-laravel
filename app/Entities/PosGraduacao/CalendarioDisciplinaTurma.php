@@ -40,7 +40,6 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
         'turma_disciplina_id'
     ];
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -89,7 +88,7 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
         $this->attributes['data_final'] = SerbinarioDateFormat::toUsa($value);
     }
 
-    /**
+    /*
      * @return \DateTime
      */
     public function getHoraInicialAttribute()
