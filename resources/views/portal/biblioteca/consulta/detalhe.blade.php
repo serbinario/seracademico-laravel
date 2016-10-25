@@ -161,7 +161,8 @@
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Ent. princ.</b></div>
-                                                <div class="col s8">@if(count($exemplar['acervo']['primeiraEntrada']) > 0)
+                                                <div class="col s8">
+                                                    @if(count($exemplar['acervo']['primeiraEntrada']) > 0)
                                                         @if($exemplar['acervo']['etial_autor'] == '1')
                                                             @if($exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1')
                                                                 <b>1</b>. {{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}},
@@ -180,7 +181,8 @@
                                                                 @endif
                                                             @endforeach
                                                         @endif
-                                                    @endif</div>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </a>
                                     @else

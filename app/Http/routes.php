@@ -739,6 +739,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('deleteGenero/{id}', ['as' => 'deleteGenero', 'uses' => 'Biblioteca\GeneroController@delete']);
 
             Route::post('getCutter', ['as' => 'getCutter', 'uses' => 'Biblioteca\ArcevoController@getCutter']);
+
+            Route::get('fixaFrente/{id}', ['as' => 'fixaFrente', 'uses' => 'Biblioteca\ExemplarController@fixaFrente']);
+            Route::get('fixaVerso/{id}', ['as' => 'fixaVerso', 'uses' => 'Biblioteca\ExemplarController@fixaVerso']);
             
         });
 

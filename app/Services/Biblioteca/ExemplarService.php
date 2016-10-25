@@ -54,6 +54,43 @@ class ExemplarService
      * @return mixed
      * @throws \Exception
      */
+    public function findFixa($id)
+    {
+        $relacionamentos = [
+            'acervo.exemplares',
+            'acervo.tipoAcervo',
+            'acervo.colecao',
+            'acervo.genero',
+            'acervo.situacao',
+            'acervo.corredor',
+            'acervo.estante',
+            'acervo.segundaEntrada.responsaveis',
+            'acervo.primeiraEntrada.responsaveis',
+            'idioma',
+            'editora',
+            'ilustracoes',
+            'aquisicao',
+            'emprestimo',
+            'emprestimos'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $exemplar = $this->repository->with($relacionamentos)->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$exemplar) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $exemplar;
+    }
+    
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
     public function find($id)
     {
         $relacionamentos = [
