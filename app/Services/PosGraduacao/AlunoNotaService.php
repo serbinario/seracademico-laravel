@@ -48,21 +48,16 @@ class AlunoNotaService
     public function search($id)
     {
         # Fazendo a consulta
-        $row = \DB::table('fac_alunos_notas')            
-            ->leftJoin('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
-            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
-            ->leftJoin('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
-            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
-            ->where('fac_alunos_notas.id', $id)
+        $row = \DB::table('pos_alunos_notas')
+            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
+            ->where('pos_alunos_notas.id', $id)
             ->select([
-                'fac_alunos_notas.id',
-                'fac_alunos_notas.nota_unidade_1',
-                'fac_alunos_notas.nota_unidade_2',
-                'fac_alunos_notas.nota_2_chamada',
-                'fac_alunos_notas.nota_final',
-                'fac_alunos_notas.nota_media',
-                'fac_alunos_frequencias.total_falta',
+                'pos_alunos_notas.id',
+                'pos_alunos_notas.nota_final',
                 'fac_situacao_nota.id as idSituacao',
                 'fac_situacao_nota.nome as nomeSituacao',
                 'pessoas.nome as nomePessoa'

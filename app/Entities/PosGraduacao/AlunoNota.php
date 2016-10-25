@@ -18,6 +18,7 @@ class AlunoNota extends Model implements Transformable
 		'disciplina_id',
 		'nota_final',
 		'situacao_nota_id',
+        'turma_id'
 	];
 
     /**
@@ -42,5 +43,17 @@ class AlunoNota extends Model implements Transformable
     public function frequencias()
     {
         return $this->hasMany(AlunoFrequencia::class, 'pos_aluno_nota_id');
+    }
+
+    /**
+     *  Observer para deletar as frequências
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($alunoNota) {
+            $alunoNota->frequencias()->delete();
+        });
     }
 }

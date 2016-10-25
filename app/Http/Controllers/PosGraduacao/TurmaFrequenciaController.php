@@ -39,28 +39,14 @@ class TurmaFrequenciaController extends Controller
     public function grid(Request $request, $idTurma)
     {
         #Criando a consulta
-        $rows = \DB::table('fac_disciplinas')
-            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
-            ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
-            ->join('fac_alunos_notas', function ($join) {
-                $join->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id')
-                    ->on('fac_alunos_notas.turma_id', '=', 'fac_turmas.id');
-            })
-            ->join('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
-            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
-            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
-            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
-            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+        $rows = \DB::table('pos_alunos_frequencias')
+            ->join('pos_alunos_notas', 'pos_alunos_notas.id', '=', 'pos_alunos_frequencias.pos_aluno_nota_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
             ->select([
-                'fac_alunos_frequencias.id',
-                'fac_alunos_frequencias.falta_mes_1',
-                'fac_alunos_frequencias.falta_mes_2',
-                'fac_alunos_frequencias.falta_mes_3',
-                'fac_alunos_frequencias.falta_mes_4',
-                'fac_alunos_frequencias.falta_mes_5',
-                'fac_alunos_frequencias.falta_mes_6',
-                'fac_alunos_frequencias.total_falta',
-                'fac_situacao_nota.nome as nomeSituacao',
+                'pos_alunos_frequencias.id',
                 'pessoas.nome as nomePessoa'
             ])
             ->where('fac_turmas.id', '=', $idTurma);
@@ -75,7 +61,7 @@ class TurmaFrequenciaController extends Controller
                     $query->where('fac_disciplinas.id', '=', 0);
                 }
             })
-            ->addColumn('action', function ($row) {
+            ->addColumn('frequencia', function ($row) {
                 # html de retorno
                 $html = '<a title="Editar notas" id="btnEditarFrequencias"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
 
@@ -84,49 +70,21 @@ class TurmaFrequenciaController extends Controller
         })->make(true);
     }
 
-    /**
-     * @param Request $request
-     * @return mixed
-     *
-     */
-    public function getLoadFields(Request $request)
-    {
-        try {
-            return $this->turmaService->load($request->get("models"), true);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json([
-                'error' => $e->getMessage()
-            ]);
-        }
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function editFrequencia($id)
-    {
-        try {
-            #Recuperando o calendario e declarando variáveis
-            $row   = $this->alunoFrequenciaService->search($id);
-            $data  = [];
-            
-            # Preparando o array de retorno
-            $data['falta_mes_1']  = $row[0]->falta_mes_1;
-            $data['falta_mes_2']  = $row[0]->falta_mes_2;
-            $data['falta_mes_3']  = $row[0]->falta_mes_3;
-            $data['falta_mes_4']  = $row[0]->falta_mes_4;
-            $data['falta_mes_5']  = $row[0]->falta_mes_5;
-            $data['falta_mes_6']  = $row[0]->falta_mes_6;
-            $data['total_falta']  = $row[0]->total_falta;
-            $data['nomePessoa']   = $row[0]->nomePessoa;
-
-            #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $data]);
-        } catch (\Throwable $e) {dd($e);
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-        }
-    }
+//    /**
+//     * @param Request $request
+//     * @return mixed
+//     *
+//     */
+//    public function getLoadFields(Request $request)
+//    {
+//        try {
+//            return $this->turmaService->load($request->get("models"), true);
+//        } catch (\Throwable $e) {
+//            return \Illuminate\Support\Facades\Response::json([
+//                'error' => $e->getMessage()
+//            ]);
+//        }
+//    }
 
     /**
      * @param Request $request
@@ -152,26 +110,4 @@ class TurmaFrequenciaController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
-//
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function delete($id)
-//    {
-//        try {
-//            #Executando a ação
-//            $this->service->delete($id);
-//
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Calendário removido com sucesso!']);
-//        } catch (ValidatorException $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        } catch (\Throwable $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
-
 }

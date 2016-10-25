@@ -50,7 +50,6 @@ function runTableNotas(idTurma) {
 
     // Carregamento os campos necessários
     loadFieldsNotas();
-
         
     // Configurações do modal
     $("#modal-notas-alunos").find('.modal-dialog').css("width", "97%");

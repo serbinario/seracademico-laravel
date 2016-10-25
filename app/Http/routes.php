@@ -106,6 +106,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmas']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\AlunoTurmaController@getLoadFields']);
                     Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoTurmaController@store']);
+                    Route::delete('destroy/{idAluno}/{idAlunoCurso}', ['as' => 'destroy', 'uses' => 'PosGraduacao\AlunoTurmaController@destroy']);
                     Route::get('getTurmaOrigem/{idAlunoCurso}', ['as' => 'getTurmaOrigem', 'uses' => 'PosGraduacao\AlunoTurmaController@getTurmaOrigem']);
                     Route::delete('destroySituacao/{idSituacao}', ['as' => 'destroySituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@destroySituacao']);
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
@@ -193,6 +194,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaController@update']);
                 Route::get('getAllByCurso/{idCurso}', ['as' => 'getAllByCurso', 'uses' => 'PosGraduacao\TurmaController@getAllByCurso']);
+                Route::get('getCalendariosByDisciplina/{idTurma}/{idDisciplina}', ['as' => 'getCalendariosByDisciplina', 'uses' => 'PosGraduacao\TurmaController@getCalendariosByDisciplina']);
 
                 Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\CalendarioTurmaController@grid']);
@@ -220,6 +222,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaFrequenciaController@updateFrequencia']);
                 });
 
+                Route::group(['prefix' => 'alunos', 'as' => 'alunos.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\TurmaAlunoController@grid']);
+                    Route::get('getAlunosByCurso/{idCurso}/{idTurma}/{idDisciplina}', ['as' => 'getAlunosByCurso', 'uses' => 'PosGraduacao\TurmaAlunoController@getAlunosByCurso']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaAlunoController@getLoadFields']);
+                    Route::post('attachAluno', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaAlunoController@attachAluno']);
+                    Route::post('detachAluno', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaAlunoController@detachAluno']);
+                });
             });
 
         });

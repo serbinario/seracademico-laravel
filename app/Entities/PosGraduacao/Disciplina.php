@@ -87,4 +87,13 @@ class Disciplina extends Model implements Transformable
 			->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
 			->where('fac_turmas.id', $value);
 	}
+
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopePosGraduacao($query)
+	{
+		return $query->where('tipo_nivel_sistema_id', 2);
+	}
 }

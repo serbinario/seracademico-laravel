@@ -105,19 +105,14 @@ class TurmaNotaController extends Controller
             $data  = [];
             
             # Preparando o array de retorno
-            $data['nota_unidade_1'] = $row[0]->nota_unidade_1;
-            $data['nota_unidade_2'] = $row[0]->nota_unidade_2;
-            $data['nota_2_chamada'] = $row[0]->nota_2_chamada;
-            $data['nota_final']     = $row[0]->nota_final;
-            $data['nota_media']     = $row[0]->nota_media;
-            $data['total_falta']    = $row[0]->total_falta;
-            $data['situacao_id']    = $row[0]->idSituacao;
-            $data['nomeSituacao']   = $row[0]->nomeSituacao;
-            $data['nomePessoa']     = $row[0]->nomePessoa;
+            $data['nota_final']   = $row[0]->nota_final;
+            $data['situacao_id']  = $row[0]->idSituacao;
+            $data['nomeSituacao'] = $row[0]->nomeSituacao;
+            $data['nomePessoa']   = $row[0]->nomePessoa;
 
             #retorno para view
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'data' => $data]);
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
