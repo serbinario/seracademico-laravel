@@ -80,7 +80,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="5">
+        <td colspan="4">
             <sup><b>Autores</b></sup> <br />
             @if(count($result->acervo->primeiraEntrada) > 0)
                 @if($result->acervo->etial_autor == '1')
@@ -104,7 +104,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="5">
+        <td colspan="4">
             <sup><b>Outros responsáveis</b></sup> <br />
             @if(count($result->acervo->segundaEntrada) > 0)
                 @if($result->acervo->etial_outros == '1')
@@ -128,7 +128,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan="2">
             <sup><b>ISBN</b></sup> <br /> {{$result->isbn}}
         </td>
         <td>
@@ -137,15 +137,9 @@
         <td>
             <sup><b>Empréstimo</b></sup> <br /> {{$result->emprestimo->nome}}
         </td>
-        <td>
-            <sup><b>Ano</b></sup> <br /> {{$result->ano}}
-        </td>
-        <td>
-            <sup><b>Nº ED.</b></sup> <br /> {{$result->edicao}}
-        </td>
     </tr>
     <tr>
-        <td colspan="3">
+        <td colspan="2">
             <sup><b>Editora</b></sup> <br /> {{$result->editora->nome}}
         </td>
         <td>
@@ -156,11 +150,11 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td>
             <sup><b>Idioma</b></sup> <br /> {{$result->idioma->nome}}
         </td>
         <td>
-            <sup><b>Nº de pág.</b></sup> <br /> {{$result->numero_pag}}
+            <sup><b>Nº de pág.</b></sup> <br /> {{count($result->acervo->exemplares)}}
         </td>
         <td>
             <sup><b>Aquisição</b></sup> <br /> {{$result->aquisicao->nome}}
@@ -174,8 +168,17 @@
         </td>
     </tr>
     <tr>
-        <td colspan="5">
-            <sup><b>Registros/Exemplares</b></sup>
+        <td colspan="4">
+            <sup><b>Registros/Exemplares</b></sup> <br />
+            @foreach($result->acervo->exemplares as $exemplar)
+                <?php
+                    $codigo = str_pad(substr($exemplar->codigo, 0, -4),4,"0",STR_PAD_LEFT);
+                    $ano    = substr($exemplar->codigo, -4);
+                    $tombo  = $codigo.'/'.$ano;
+                ?>
+                {{$tombo}}
+                    @if($exemplar->ano || $exemplar->edicao) ({{$exemplar->ano}}/{{$exemplar->edicao}}) @endif /
+            @endforeach
         </td>
     </tr>
 </table>
