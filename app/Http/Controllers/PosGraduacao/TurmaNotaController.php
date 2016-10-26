@@ -64,8 +64,6 @@ class TurmaNotaController extends Controller
                 # Filtranto por disciplina
                 if ($request->has('disciplina')) {
                     $query->where('fac_disciplinas.id', '=', $request->get('disciplina'));
-                } else {
-                    $query->where('fac_disciplinas.id', '=', 0);
                 }
             })
             ->addColumn('action', function ($row) {

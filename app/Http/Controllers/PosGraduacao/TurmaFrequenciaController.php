@@ -48,13 +48,25 @@ class TurmaFrequenciaController extends Controller
      */
     public function grid(Request $request, $idTurma)
     {
-        $rows = \DB::table('pos_alunos_notas')
-            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
-            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+        $rows = \DB::table('pos_alunos')
+            ->join('pos_alunos_cursos', function ($join) {
+                $join->on(
+                    'pos_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                );
+            })
+            ->join('pos_alunos_turmas', function ($join) {
+                $join->on(
+                    'pos_alunos_turmas.id', '=',
+                    \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                );
+            })
+            ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
-            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
             ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
             ->select([
                 'fac_disciplinas.id',
@@ -64,6 +76,23 @@ class TurmaFrequenciaController extends Controller
                 'pessoas.nome as nomePessoa'
             ])
             ->where('fac_turmas.id', '=', $idTurma);
+        
+//        $rows = \DB::table('pos_alunos_notas')
+//            ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
+//            ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
+//            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
+//            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
+//            ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
+//            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+//            ->join('pessoas', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
+//            ->select([
+//                'fac_disciplinas.id',
+//                'fac_disciplinas.nome as nome_disciplina',
+//                'pos_alunos_notas.id as idAlunoNota',
+//                'pos_alunos.id as idAluno',
+//                'pessoas.nome as nomePessoa'
+//            ])
+//            ->where('fac_turmas.id', '=', $idTurma);
 
 
         #Editando a grid

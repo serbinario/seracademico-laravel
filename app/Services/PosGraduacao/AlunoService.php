@@ -291,18 +291,45 @@ class AlunoService
      * @param $aluno
      * @param $idTurma
      * @return bool
+     * @throws \Exception
      */
     public function tratamentoTurmaUpdate($aluno, $idTurma)
     {
         # Recuperando o currículo do aluno
         $curriculo = $aluno->curriculos()->get()->last();
+        $turmas    = $curriculo->pivot->turmas()->get();
 
         # Verificando se existe turma cadastada
-        if(count($curriculo->pivot->turmas()->get()) > 0) {
+        if(count($turmas) > 0) {
             # Recuperando o pivot da turma
-            $alunoTurma  = $curriculo->pivot->turmas()->get()->last()->pivot;
+            $alunoTurma  = $turmas->last()->pivot;
             $lastTurmaId = $alunoTurma->turma_id;
 
+            # Filtrando se a turma está em andamento
+            $emAndamento = $turmas->last()->pivot->notas()->get()->filter(function ($nota) {
+                return in_array($nota->situacao_nota_id, [1,2,6,7]) && is_numeric($nota->nota_final);
+            });
+
+            # Verificando se a turma já está em andamento
+            if(count($emAndamento) > 0) {
+                throw new \Exception('Turma não pode ser alterada, pois já está em andamento!');
+            }
+
+            # remover as frequências
+            $turmas->last()->pivot->notas()->get()->each(function ($nota) {
+                # removendo as frequências
+                $nota->frequencias()->delete();
+
+                # retorno
+                return false;
+            });
+
+            # Removendo as notas
+            $turmas->last()->pivot->notas()->delete();
+
+            # Atualizando a turma no pivot
+            $curriculo->pivot->turmas()->updateExistingPivot($alunoTurma->turma_id, ['turma_id' => $idTurma]);
+            
             # Filtrando as situações
             $situacoes = $curriculo->pivot->situacoes()->get()->filter(function ($situacao) use ($lastTurmaId) {
                 return $situacao->turma_origem_id == $lastTurmaId;
@@ -317,27 +344,20 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
+        } else {
+            # Vinculando a turma
+            $curriculo->pivot->turmas()->attach($idTurma);
 
-            # Atualizando a turma no pivot
-            $alunoTurma->turma_id = $idTurma;
-            $alunoTurma->save();
+            # Alterando a turma de origem das situações
+            $curriculo->pivot->situacoes()->get()->each(function ($situacao) use ($idTurma) {
+                # Alterando o id da turma de origem
+                $situacao->pivot->turma_origem_id = $idTurma;
+                $situacao->pivot->save();
 
-            # Retorno
-            return true;
+                # Retorno ficticio
+                return false;
+            });
         }
-
-        # Vinculando a turma
-        $curriculo->pivot->turmas()->attach($idTurma);
-
-        # Alterando a turma de origem das situações
-        $curriculo->pivot->situacoes()->get()->each(function ($situacao) use ($idTurma) {
-            # Alterando o id da turma de origem
-            $situacao->pivot->turma_origem_id = $idTurma;
-            $situacao->pivot->save();
-
-            # Retorno ficticio
-            return false;
-        });
 
         # Tratamento das notas do aluno
         $this->tratamentoNotas($aluno);

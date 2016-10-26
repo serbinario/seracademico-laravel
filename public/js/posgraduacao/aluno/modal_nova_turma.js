@@ -189,6 +189,7 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
     }).done(function (retorno) {
         if(retorno.success) {
             // Recarregando as grids
+            table.ajax.reload();
             tableCursoTurma.ajax.reload();
             loadTableSituacoes(0).ajax.url("/index.php/seracademico/posgraduacao/aluno/turma/gridSituacoes/" + 0).load();
 
