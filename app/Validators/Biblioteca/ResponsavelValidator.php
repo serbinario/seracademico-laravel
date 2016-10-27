@@ -18,12 +18,12 @@ class ResponsavelValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  'unique:responsaveis,nome' ,
+			'nome' =>  'required' ,
 			'sobrenome' =>  '',
         ],
         
         ValidatorInterface::RULE_UPDATE => [
-            'nome' =>  'required|unique:responsaveis,nome,:id',
+            'nome' =>  'required',
             'sobrenome' =>  '',
         ],
    ];
