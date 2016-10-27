@@ -202,7 +202,7 @@ class AlunoController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-       
+
             #Executando a ação
             $this->service->store($data);
 
@@ -210,7 +210,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) { 
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

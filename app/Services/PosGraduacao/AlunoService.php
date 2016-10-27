@@ -460,13 +460,13 @@ class AlunoService
             //throw new \Exception('Curso não informado');
             return true;
         }
-        
+
         # recuperando o currículo
         $curriculo = Curriculo::byCurso($data['curso_id']);
 
         # Verificando se o currículo foi encontrado
-        if(!$curriculo && !count($curriculo) == 1) {
-            throw new \Exception('Currículo não encontrado');
+        if(!$curriculo || count($curriculo) == 0) {
+            throw new \Exception('Curso informado não possui currículo ativo!');
         }
 
         # tratando o array
