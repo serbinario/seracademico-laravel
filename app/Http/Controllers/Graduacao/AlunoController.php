@@ -111,7 +111,8 @@ class AlunoController extends Controller
                 ->select([
                     'fac_alunos.id',
                     'pessoas.nome',
-                    \DB::raw('CONCAT(SUBSTR(pessoas.cpf,1,3), ".", SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)) AS cpf'),
+                    \DB::raw('if(pessoas.cpf != null AND pessoas.cpf != "", CONCAT(SUBSTR(pessoas.cpf,1,3), ".",
+                         SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)), pessoas.cpf) AS cpf'),
                     'fac_alunos.matricula',
                     'pessoas.celular',
                     'fac_semestres.id as idSemestre',
@@ -126,9 +127,9 @@ class AlunoController extends Controller
             return Datatables::of($alunos)
                 ->filter(function ($query) use ($request, $semestreVigente) {
                     # Filtrando por semestre
-                    if ($request->has('semestre')) {
                         $query->where('fac_semestres.id', '=', $request->get('semestre'));
-                    } else if (count($semestreVigente) == 2) {
+                        if ($request->has('semestre')) {
+                        } else if (count($semestreVigente) == 2) {
                         $query->where('fac_semestres.id', '=', $semestreVigente->id);
                     }
 
