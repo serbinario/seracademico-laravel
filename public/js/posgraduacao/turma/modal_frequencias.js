@@ -23,6 +23,7 @@ function loadTableFrequencias (idTurma) {
         columns: [
             {data: 'nomePessoa', name: 'pessoas.nome'},
             {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
+            {data: 'status', name: 'status', orderable: false, filterable: false},
             {data: 'frequencia', name: 'frequencia', orderable: false, filterable: false}
         ]
     });

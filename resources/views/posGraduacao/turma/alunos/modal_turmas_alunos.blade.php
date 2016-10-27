@@ -34,7 +34,7 @@
                             <thead>
                             <tr>
                                 <th style="width: 40%">Nome</th>
-                                {{--<th>Média</th>--}}
+                                <th>Status</th>
                                 {{--<th>Disciplina</th>--}}
                                 {{--<th>Situação</th>--}}
                                 {{--<th>Ação</th>--}}

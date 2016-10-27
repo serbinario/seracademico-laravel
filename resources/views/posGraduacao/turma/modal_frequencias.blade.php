@@ -37,6 +37,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Disciplina</th>
+                                <th>Status</th>
                                 <th>Frequências</th>
                             </tr>
                             </thead>

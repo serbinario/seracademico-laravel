@@ -107,6 +107,7 @@ class AlunoController extends Controller
                         where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
                     );
                 })
+                ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
@@ -121,7 +122,8 @@ class AlunoController extends Controller
                     'fac_curriculos.codigo as codigoCurriculo',
                     \DB::raw('IF(pos_alunos.matricula = "", "PENDENTE",fac_situacao.nome) as nomeSituacao'),
                     'fac_cursos.codigo as codigoCurso',
-                    'fac_cursos.nome as nomeCurso'
+                    'fac_cursos.nome as nomeCurso',
+                    'fac_turmas.codigo as codigoTurma'
                 ]);
 
             #Editando a grid
@@ -210,7 +212,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { 
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

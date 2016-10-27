@@ -65,7 +65,8 @@ class TurmaAlunoController extends Controller
             ->groupBy('pos_alunos.id')
             ->where('fac_turmas.id', '=', $idTurma)
             ->select([
-                'pessoas.nome'
+                'pessoas.nome',
+                \DB::raw('IF(pos_alunos_turmas.turma_id = pos_alunos_notas.turma_id, "Corrente", "Reposição de Aula") as status')
             ]);
 
         #Editando a grid
@@ -74,12 +75,17 @@ class TurmaAlunoController extends Controller
                 # Filtranto por disciplina
                 if ($request->has('disciplina')) {
                     $query->where('fac_disciplinas.id', '=', $request->get('disciplina'));
+                } else {
+                    $query->where('fac_disciplinas.id', '=', 0);
                 }
 
                 # Filtranto por calendario
                 if ($request->has('calendario')) {
                     $query->where('fac_calendarios.id', '=', $request->get('calendario'));
+                }else {
+                    $query->where('fac_calendarios.id', '=', 0);
                 }
+
             })->make(true);
     }
 

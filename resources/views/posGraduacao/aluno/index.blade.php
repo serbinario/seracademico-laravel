@@ -68,7 +68,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Turma</th>
                                 <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
@@ -80,7 +80,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Turma</th>
                                 <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
@@ -158,7 +158,7 @@
                 {data: 'celular', name: 'pessoas.celular'},
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'codigoCurso', name: 'fac_cursos.codigo'},
-                {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+                {data: 'codigoTurma', name: 'fac_turmas.codigo'},
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

@@ -42,7 +42,7 @@ class TurmaNotaController extends Controller
         $rows = \DB::table('pos_alunos_notas')
             ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
             ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
-            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
+            ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
             ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
@@ -54,7 +54,8 @@ class TurmaNotaController extends Controller
                 'pos_alunos.id as idAluno',
                 'pessoas.nome as nomePessoa',
                 'pos_alunos_notas.nota_final',
-                'fac_situacao_nota.nome as situacao'
+                'fac_situacao_nota.nome as situacao',
+                \DB::raw('IF(pos_alunos_turmas.turma_id = pos_alunos_notas.turma_id, "Corrente", "Reposição de Aula") as status')
             ])
             ->where('fac_turmas.id', '=', $idTurma);
 
@@ -64,6 +65,8 @@ class TurmaNotaController extends Controller
                 # Filtranto por disciplina
                 if ($request->has('disciplina')) {
                     $query->where('fac_disciplinas.id', '=', $request->get('disciplina'));
+                } else {
+                    $query->where('fac_disciplinas.id', '=', 0);
                 }
             })
             ->addColumn('action', function ($row) {

@@ -73,7 +73,8 @@ class TurmaFrequenciaController extends Controller
                 'fac_disciplinas.nome as nome_disciplina',
                 'pos_alunos_notas.id as idAlunoNota',
                 'pos_alunos.id as idAluno',
-                'pessoas.nome as nomePessoa'
+                'pessoas.nome as nomePessoa',
+                \DB::raw('IF(pos_alunos_turmas.turma_id = pos_alunos_notas.turma_id, "Corrente", "Reposição de Aula") as status')
             ])
             ->where('fac_turmas.id', '=', $idTurma);
         
@@ -101,6 +102,8 @@ class TurmaFrequenciaController extends Controller
                 # Filtranto por disciplina
                 if ($request->has('disciplina')) {
                     $query->where('fac_disciplinas.id', '=', $request->get('disciplina'));
+                } else {
+                    $query->where('fac_disciplinas.id', '=', 0);
                 }
             })
             ->addColumn('frequencia', function ($row) {
