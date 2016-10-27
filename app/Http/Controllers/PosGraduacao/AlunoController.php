@@ -115,7 +115,7 @@ class AlunoController extends Controller
                     'pos_alunos_turmas.id as idAlunoTurma',
                     'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
-                    'pessoas.cpf',
+                    \DB::raw('CONCAT(SUBSTR(pessoas.cpf,1,3), ".", SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)) AS cpf'),
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',

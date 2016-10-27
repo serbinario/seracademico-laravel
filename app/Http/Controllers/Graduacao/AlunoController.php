@@ -111,7 +111,7 @@ class AlunoController extends Controller
                 ->select([
                     'fac_alunos.id',
                     'pessoas.nome',
-                    'pessoas.cpf',
+                    \DB::raw('CONCAT(SUBSTR(pessoas.cpf,1,3), ".", SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)) AS cpf'),
                     'fac_alunos.matricula',
                     'pessoas.celular',
                     'fac_semestres.id as idSemestre',
