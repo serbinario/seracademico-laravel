@@ -218,8 +218,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'PosGraduacao\TurmaFrequenciaController@grid']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaFrequenciaController@getLoadFields']);
-                    Route::get('edit/{idAlunoFrequencia}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaFrequenciaController@editFrequencia']);
-                    Route::post('update/{idAlunoFrequencia}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaFrequenciaController@updateFrequencia']);
+                    Route::put('changeFrequencia/{id}', ['as' => 'changeFrequencia', 'uses' => 'PosGraduacao\TurmaFrequenciaController@changeFrequencia']);
                 });
 
                 Route::group(['prefix' => 'alunos', 'as' => 'alunos.'], function () {

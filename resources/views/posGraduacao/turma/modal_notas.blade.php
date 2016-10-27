@@ -38,6 +38,7 @@
                                 <th>Média</th>
                                 <th>Disciplina</th>
                                 <th>Situação</th>
+                                <th>Status</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>

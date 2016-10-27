@@ -40,7 +40,6 @@
             </div>
         </div>
         <div class="ibox-content">
-
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -59,6 +58,34 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    <form id="search-form" class="form-inline" role="form" method="GET">
+                        <div class="form-group">
+                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('turmaSearch', (['' => 'Todos as Turmas'] + $loadFields['posgraduacao\\turma']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::select('situacaoSearch', (['' => 'Todos as Situações'] + $loadFields['situacaoaluno']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::text('globalSearch',  null, array('class' => 'form-control', 'placeholder' => 'Pesquisa...')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <a id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</a>
+                            {{--<button id="reportAluno" class="btn-sm btn-primary">Relatório</button>--}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12">
                     <div class="table-responsive no-padding">
                         <table id="aluno-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -68,7 +95,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Turma</th>
                                 <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
@@ -80,7 +107,7 @@
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
-                                <th>Currículo</th>
+                                <th>Turma</th>
                                 <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
@@ -151,17 +178,34 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.aluno.grid') !!}",
+            bFilter: false,
+            iDisplayLength: 10,
+            bLengthChange: false,
+            ajax: {
+                url: "{!! route('seracademico.posgraduacao.aluno.grid') !!}",
+                data: function (d) {
+                    d.curso = $('select[name=cursoSearch] option:selected').val();
+                    d.turma = $('select[name=turmaSearch] option:selected').val();
+                    d.situacao = $('select[name=situacaoSearch] option:selected').val();
+                    d.globalSearch = $('input[name=globalSearch]').val();
+                }
+            },
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'matricula', name: 'pos_alunos.matricula'},
                 {data: 'celular', name: 'pessoas.celular'},
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'codigoCurso', name: 'fac_cursos.codigo'},
-                {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+                {data: 'codigoTurma', name: 'fac_turmas.codigo'},
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Função do submit do search da grid principal
+        $('#pesquisar').click(function(e) {
+            table.draw();
+            e.preventDefault();
         });
 
         // Id do aluno corrente

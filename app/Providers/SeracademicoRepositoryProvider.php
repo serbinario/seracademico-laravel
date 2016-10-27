@@ -592,8 +592,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		
 
 		$this->app->bind(
-			\Seracademico\Repositories\AlunoFrequenciaRepository::class,
-			\Seracademico\Repositories\AlunoFrequenciaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\AlunoFrequenciaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoFrequenciaRepositoryEloquent::class
 		);
 
 		$this->app->bind(

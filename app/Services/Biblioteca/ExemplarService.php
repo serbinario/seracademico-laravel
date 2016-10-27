@@ -57,7 +57,7 @@ class ExemplarService
     public function findFixa($id)
     {
         $relacionamentos = [
-            'acervo',
+            'acervo.exemplares',
             'acervo.tipoAcervo',
             'acervo.colecao',
             'acervo.genero',

@@ -16,7 +16,6 @@ class Aluno extends Model implements Transformable
     protected $table = "pos_alunos";
 
     protected $dates = [
-        'data_inscricao',
         'data_contrato',
         'data_inscricao',
         'data_colacao',
@@ -112,22 +111,6 @@ class Aluno extends Model implements Transformable
     public function setDataColacaoAttribute($value)
     {
         $this->attributes['data_colacao'] = SerbinarioDateFormat::toUsa($value);
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDefesaAttribute()
-    {
-        return SerbinarioDateFormat::toBrazil($this->attributes['defesa']);
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function setDefesaAttribute($value)
-    {
-        $this->attributes['defesa'] = SerbinarioDateFormat::toUsa($value);
     }
 
     /**
