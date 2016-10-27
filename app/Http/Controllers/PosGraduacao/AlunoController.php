@@ -42,7 +42,6 @@ class AlunoController extends Controller
         'PosGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'FormaAdmissao',
-        'Graduacao\\Semestre',
         'SituacaoAluno',
         'SimpleReport|byCrud,1',
         'PosGraduacao\\Turma|PosGraduacao',
@@ -128,26 +127,36 @@ class AlunoController extends Controller
 
             #Editando a grid
             return Datatables::of($alunos)
-//                ->filter(function ($query) use ($request) {
-//                    # Filtrando por situação
-//                    if ($request->has('situacao')) {
-//                        $query->where('fac_situacao.id', '=', $request->get('situacao'));
-//                    }
-//
-//                    # Filtrando Global
-//                    if ($request->has('globalSearch')) {
-//                        # recuperando o valor da requisição
-//                        $search = $request->get('globalSearch');
-//
-//                        #condição
-//                        $query->where(function ($where) use ($search) {
-//                            $where->orWhere('pessoas.nome', 'like', "%$search%")
-//                                ->orWhere('pessoas.cpf', 'like', "%$search%")
-//                                ->orWhere('fac_alunos.matricula', 'like', "%$search%")
-//                                ->orWhere('fac_curriculos.codigo', 'like', "%$search%");
-//                        });
-//                    }
-//                })
+                ->filter(function ($query) use ($request) {
+                    # Filtrando por curso
+                    if ($request->has('curso')) {
+                        $query->where('fac_cursos.id', '=', $request->get('curso'));
+                    }
+
+                    # Filtrando por turma
+                    if ($request->has('turma')) {
+                        $query->where('fac_turmas.id', '=', $request->get('turma'));
+                    }
+
+                    # Filtrando por situação
+                    if ($request->has('situacao')) {
+                        $query->where('fac_situacao.id', '=', $request->get('situacao'));
+                    }
+
+                    # Filtrando Global
+                    if ($request->has('globalSearch')) {
+                        # recuperando o valor da requisição
+                        $search = $request->get('globalSearch');
+
+                        #condição
+                        $query->where(function ($where) use ($search) {
+                            $where->orWhere('pessoas.nome', 'like', "%$search%")
+                                ->orWhere('pessoas.cpf', 'like', "%$search%")
+                                ->orWhere('pos_alunos.matricula', 'like', "%$search%")
+                                ->orWhere('fac_curriculos.codigo', 'like', "%$search%");
+                        });
+                    }
+                })
                 ->addColumn('action', function ($aluno) {
                     /**
                      *   <li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>
