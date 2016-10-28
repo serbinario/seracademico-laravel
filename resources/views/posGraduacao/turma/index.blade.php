@@ -4,6 +4,13 @@
     <link rel="stylesheet" href="{{ asset('/js/posgraduacao/turma/css/modal_calendario.css') }}">
 
     <style type="text/css">
+        .select2-close-mask{
+            z-index: 2099;
+        }
+
+        .select2-dropdown{
+            z-index: 3051;
+        }
 
         td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-plus.png")}}") no-repeat center center;
@@ -74,6 +81,10 @@
     @include('posGraduacao.turma.modal_frequencias')
     @include('posGraduacao.turma.alunos.modal_turmas_alunos')
     @include('posGraduacao.turma.alunos.modal_add_aluno')
+    @include('posGraduacao.turma.diarioAula.modal_diario_aula')
+    @include('posGraduacao.turma.diarioAula.modal_create_diario_aula')
+    @include('posGraduacao.turma.diarioAula.modal_edit_diario_aula')
+    @include('posGraduacao.turma.planoEnsino.modal_plano_ensino')
 @stop
 
 @section('javascript')
@@ -86,6 +97,13 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_frequencias.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_turmas_alunos.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_add_aluno.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/diario_aula_select2.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -176,6 +194,54 @@
 
             // Abrindo o modal
             $("#modal-turmas-alunos").modal('show');
+        });
+
+        /*Responsável em abrir modal de frequencias*/
+        $(document).on("click", '#btnModalDiarioAula', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, semestre;
+
+            //Recuperando o id da turma selecionada
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
+
+            // setando a descrição
+            $('#daTurma').text(codigo);
+            $('#daPeriodo').text(periodo);
+            $('#daCurriculo').text(codCurriculo);
+            $('#daCurso').text(nomeCurso);
+            $('#daSemestre').text(semestre);
+
+            //Executando as grids
+            runTableDiariosAulas(idTurma);
+        });
+
+        /*Responsável em abrir modal de frequencias*/
+        $(document).on("click", '#btnModalPlanoEnsino', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, semestre;
+
+            //Recuperando o id da turma selecionada
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
+
+            // setando a descrição
+            $('#peTurma').text(codigo);
+            $('#pePeriodo').text(periodo);
+            $('#peCurriculo').text(codCurriculo);
+            $('#peCurso').text(nomeCurso);
+            $('#peSemestre').text(semestre);
+
+            //Executando as grids
+            runTablePlanoEnsino(idTurma);
         });
     </script>
 @stop

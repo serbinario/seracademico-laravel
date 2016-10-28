@@ -76,7 +76,8 @@ class TurmaController extends Controller
                 \DB::raw('DATE_FORMAT(fac_turmas.aula_final, "%d/%m/%Y") as aula_final'),
                 'fac_cursos.codigo',
                 'fac_cursos.nome',
-                'fac_turnos.nome as turno'
+                'fac_turnos.nome as turno',
+                'fac_curriculos.codigo as codigoCurriculo'
             ]);
 
         #Editando a grid
@@ -85,6 +86,8 @@ class TurmaController extends Controller
             return '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
+                        <li><a class="btn-floating green" id="btnModalPlanoEnsino"  title="Planos de Ensino"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
+                        <li><a class="btn-floating green" id="btnModalDiarioAula"  title="Diários de Aulas"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>                                
                         <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
                         <li><a class="modal-calendario btn-floating green" data-id="'.$row->id.'" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
                         <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">spellcheck</i></a></li>
