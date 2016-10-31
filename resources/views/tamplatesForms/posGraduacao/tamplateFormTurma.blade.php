@@ -52,12 +52,12 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    {!! Form::label('descricao', 'Descrição ') !!}
-                    {!! Form::text('descricao', Session::getOldInput('codigo'), array('id' => 'descricao', 'class' => 'form-control')) !!}
-                </div>
-            </div>
+            {{--<div class="col-md-6">--}}
+                {{--<div class="form-group">--}}
+                    {{--{!! Form::label('descricao', 'Descrição ') !!}--}}
+                    {{--{!! Form::text('descricao', Session::getOldInput('codigo'), array('id' => 'descricao', 'class' => 'form-control')) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <div class="col-md-2">
                 {!! Form::label('sede_id', 'Sede *') !!}
@@ -188,13 +188,13 @@
 
             $('#formTurma').bootstrapValidator({
                 fields: {
-                    descricao: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Descrição' })
-                            }
-                        }
-                    },
+//                    descricao: {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Descrição' })
+//                            }
+//                        }
+//                    },
                     codigo: {
                         validators: {
                             notEmpty: {
