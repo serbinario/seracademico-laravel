@@ -57,7 +57,8 @@ class ResponsavelController extends Controller
         #Criando a consulta
         $rows = \DB::table('responsaveis')
             ->join('bib_tipo_reponsavel', 'bib_tipo_reponsavel.id', '=', 'responsaveis.tipo_reponsavel_id')
-            ->select(['responsaveis.id',
+            ->select([
+                'responsaveis.id',
                 'responsaveis.nome',
                 'responsaveis.sobrenome',
                 'bib_tipo_reponsavel.nome as tipo'

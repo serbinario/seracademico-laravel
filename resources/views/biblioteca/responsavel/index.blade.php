@@ -67,9 +67,9 @@
             serverSide: true,
             ajax: "{!! route('seracademico.biblioteca.gridResponsavel') !!}",
             columns: [
-                {data: 'nome', name: 'nome'},
-                {data: 'sobrenome', name: 'sobrenome'},
-                {data: 'tipo', name: 'tipo_reponsavel.nome'},
+                {data: 'nome', name: 'responsaveis.nome'},
+                {data: 'sobrenome', name: 'responsaveis.sobrenome'},
+                {data: 'tipo', name: 'bib_tipo_reponsavel.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

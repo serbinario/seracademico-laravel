@@ -16,7 +16,8 @@ function loadTableAlunos (idTurma) {
             }
         },
         columns: [
-            {data: 'nome', name: 'pessoas.nome'}
+            {data: 'nome', name: 'pessoas.nome'},
+            {data: 'status', name: 'status', orderable:false}
         ]
     });
 

@@ -5,6 +5,8 @@ namespace Seracademico\Entities\PosGraduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Sede;
+use Seracademico\Entities\Turno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Turma extends Model implements Transformable
@@ -24,6 +26,7 @@ class Turma extends Model implements Transformable
     protected $fillable = [ 
 		'curriculo_id',
 		'turno_id',
+        'descricao',
 		'sigla',
 		'valor_turma',
 		'valor_disciplina',
@@ -40,7 +43,8 @@ class Turma extends Model implements Transformable
         'observacao_vagas',
         'vencimento_inicial',
         'tipo_nivel_sistema_id',
-        'duracao_meses'
+        'duracao_meses',
+        'sede_id'
 	];
 
     /**
@@ -120,7 +124,15 @@ class Turma extends Model implements Transformable
      */
     public function setVencimentoInicialAttribute($value)
     {
-        $this->attributes['vencimento_inicial'] = SerbinarioDateFormat::toUsa($value);;
+        $this->attributes['vencimento_inicial'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sede()
+    {
+        return $this->belongsTo(Sede::class, 'sede_id');
     }
 
     /**

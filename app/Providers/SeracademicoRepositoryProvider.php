@@ -592,8 +592,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		
 
 		$this->app->bind(
-			\Seracademico\Repositories\AlunoFrequenciaRepository::class,
-			\Seracademico\Repositories\AlunoFrequenciaRepositoryEloquent::class
+			\Seracademico\Repositories\PosGraduacao\AlunoFrequenciaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\AlunoFrequenciaRepositoryEloquent::class
 		);
 
 		$this->app->bind(
@@ -609,6 +609,27 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		$this->app->bind(
 			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaEquivalenteRepository::class,
 			\Seracademico\Repositories\PosGraduacao\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\PlanoEnsinoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\PlanoEnsinoRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\ConteudoProgramaticoRepository::class,
+			\Seracademico\Repositories\PosGraduacao\ConteudoProgramaticoRepositoryEloquent::class
+		);
+
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\PlanoAulaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\PlanoAulaRepositoryEloquent::class
+		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PosGraduacao\DiarioAulaRepository::class,
+			\Seracademico\Repositories\PosGraduacao\DiarioAulaRepositoryEloquent::class
 		);
 	}
 }
