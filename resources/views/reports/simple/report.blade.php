@@ -51,11 +51,13 @@
                     
                         @foreach($dados['body'] as $bordy)
                             <tr>
+                                <!-- Percorrendo as colunas que tem reflexo no banco -->
                                 @foreach($bordy as $key => $value)
                                     <td>{{ $value }}</td>
                                 @endforeach
 
-                                @for($i = 0; $i < (count($dados['headers'])) - count($dados['body']); $i++)
+                                <!-- Percorrendo as colunas que não tem reflexo no banco -->
+                                @for($i = 0; $i < (count($dados['headers'])) - count(get_object_vars($dados['body'][0] ?? [])); $i++)
                                     <td></td>
                                 @endfor
                             </tr>
