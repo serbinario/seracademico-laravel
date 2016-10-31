@@ -57,6 +57,7 @@
 
         body {
             font-family: arial;
+            font-size: 14px;
         }
         table, th, td {
             border: 1px solid black;
@@ -65,188 +66,260 @@
         table , tr , td {
             font-size: small;
         }
+        .termos{
+            margin-left: 30px;
+            text-align: justify;
+        }
+        .canto {
+            position: fixed;
+            _position:absolute;
+            _margin-right:0;
+            right:0;
+            z-index:100;
+        }
     </style>
     <link href="" rel="stylesheet" media="screen">
 </head>
+<body>
 
-<table style="border: none;" id="topo" class="topo"  width="100%">
-    <tr style="border: none">
-        <td style="border: none; font-size: medium"><center>
-                {{--@if(isset($aluno['img']))
-                    <img src="{{asset('/uploads/fotos/'.$aluno['img'])}}" alt="Foto"  height="100" width="150">
-                @endif--}}
-            </center></td>
-        <td style="border: none; font-size: medium">
-            <center><h4>ALPHA EDUCAÇÃO E TREINAMENTOS</h4></center>
-        </td>
-        <td style="border: none; font-size: medium">
-            <center>
-                <span>CONTRATO</span>
-            </center>
-        </td>
-    </tr>
-</table>
-<center><span>O DE PRESTAÇÕES DE SERVIÇOS EDUCACIONAIS</span></center>
-<center><span>Pós-Graduação “Lato Sensu”</span></center>
-<center><span>Pelo presente instrumento particular de <u>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</u>
-        com a <b>ALPHA EDUCAÇÃO E TREINAMENTOS</b>. Inscrita no CNPJ de nº 22.945385/0001-00, doravante denominado CONTRATADA,
+<div class="canto">
+    <img style="width: 160px; height: 120px" src="{{asset('/img/dd.jpg')}}">
+</div>
+<br /><br /><br /><br /><br /><br />
+<center><h3>ALPHA EDUCAÇÃO E TREINAMENTOS</h3></center>
+
+<center>
+    <span><u>CONTRATO PARTICULAR DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</u></span>
+</center> <br />
+
+<center><span><u>Pós-Graduação “Lato Sensu”</u></span></center><br />
+
+<center><span><u>Pelo presente instrumento particular de CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</u>
+        com a <b><u>ALPHA EDUCAÇÃO E TREINAMENTOS</u></b>. Inscrita no CNPJ de nº 22.945385/0001-00, doravante denominado CONTRATADA,
         e do outro lado, o abaixo qualificado, doravante denominado de CONTRATANTE,
-    </span></center><br />
+    </span></center>
 
-<table width="100%">
+
+<h5><i>01 - Da Identificação do Beneficiário;</i></h5>
+
+<table width="100%" style="background-color: #f1f1f1">
     <tr>
-        <td style="width: 20px"><b>Aluno </b></td>
-        <td>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</td>
+        <td colspan="4"><b>Aluno:</b> {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Endereço:</b> {!! isset($aluno['pessoa']['endereco']) ? $aluno['pessoa']['endereco']['logradouro'] : "" !!}</td>
+        <td><b>Número:</b> {!! isset($aluno['pessoa']['endereco']) ? $aluno['pessoa']['endereco']['numero'] : "" !!}</td>
+    </tr>
+    <tr>
+        <td><b>Apt.:</b> </td>
+        <td><b>Bloco:</b></td>
+        <td colspan="2"><b>Bairro:</b> {!! isset($aluno['pessoa']['endereco']['bairro']) ? $aluno['pessoa']['endereco']['bairro']['nome'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td colspan="2"><b>Cidade:</b> {!! isset($aluno['pessoa']['endereco']['bairro']['cidade']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] : "" !!} </td>
+        <td><b>UF:</b> {!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['estado']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['nome'] : "" !!} </td>
+        <td><b>CEP:</b> {!! isset($aluno['pessoa']['endereco']) ? $aluno['pessoa']['endereco']['cep'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td><b>Tel. Res:</b> {!! isset($aluno['pessoa']['telefone_fixo']) ? $aluno['pessoa']['telefone_fixo'] : "" !!} </td>
+        <td colspan="2"><b>Tel.:</b> {!! isset($aluno['pessoa']['celular']) ? $aluno['pessoa']['celular'] : "" !!} </td>
+        <td><b>Tel.:</b> {!! isset($aluno['pessoa']['celular2']) ? $aluno['pessoa']['celular2'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td colspan="4"><b>E-mail:</b> {!! isset($aluno['pessoa']['email']) ? $aluno['pessoa']['email'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td><b>RG nº:</b> {!! isset($aluno['pessoa']['identidade']) ? $aluno['pessoa']['identidade'] : "" !!} </td>
+        <td><b>Org. Emissor:</b> {!! isset($aluno['pessoa']['orgao_rg']) ? $aluno['pessoa']['orgao_rg'] : "" !!} </td>
+        <td><b>Expedição:</b> {!! isset($aluno['pessoa']['data_expedicao']) ? $aluno['pessoa']['data_expedicao'] : "" !!} </td>
+        <td><b>CPF:</b> {!! isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td colspan="4"><b>Nome do Pai:</b> {!! isset($aluno['pessoa']['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td colspan="4"><b>Nome da Mãe:</b> {!! isset($aluno['pessoa']['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td><b>Estado Civil:</b> {!! isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" !!} </td>
+        <td><b>Data de Nasc.:</b> {!! isset($aluno['pessoa']['data_nasciemento']) ? $aluno['pessoa']['data_nasciemento'] : "" !!} </td>
+        <td><b>Sexo:</b> {!! isset($aluno['pessoa']['sexo']) ? $aluno['pessoa']['sexo']['nome'] : "" !!} </td>
+        <td><b>Local de Nasc.:</b> {!! isset($aluno['pessoa']['ufNascimento']) ? $aluno['pessoa']['ufNascimento']['nome'] : "" !!} </td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Área da Pós-Graduação:</b>  </td>
+        <td><b>Ano:</b>  </td>
     </tr>
 </table>
-<br />
 
-<span><b>Filiação: </b></span><span>{!! isset($aluno['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" !!} </span>e<span> {!! isset($aluno['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" !!}</span><br />
-<span><b>Nacionalidade: </b></span><span>{!! isset($aluno['nacionalidade']) ? $aluno['pessoa']['nacionalidade'] : "" !!} </span><span><b>Naturalidade: </b></span><span>{!! isset($aluno['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" !!} </span><span><b>Estado Civil: </b></span><span>{!! isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" !!} </span><br />
-<span><b>dentidade RG nº: </b></span><span>{!! isset($aluno['identidade']) ? $aluno['pessoa']['identidade'] : "" !!} </span><span><b>Org. Expedidor: </b></span><span>{!! isset($aluno['orgao_rg']) ? $aluno['pessoa']['orgao_rg'] : "" !!} </span><span><b>UF: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['estado']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['nome'] : "" !!} </span><span><b>CPF nº: </b></span><span>{!! isset($aluno['cpf']) ? $aluno['pessoa']['cpf'] : "" !!} </span><br />
+<h5><i>02 – Da Prestadora de Serviços:</i></h5>
+
+<p>
+    <b><i>ALPHA EDUCAÇÃO E TREINAMENTOS</i></b>, Inscrita no CNPJ de nº 22.945/0001-00, doravante denominada de CONTRATADA,
+    a qual oferece serviços educacionais de (Pós graduação  Lato Sensu)
+    a mesma está situada a Rua Gervásio Pires nº826 no Bairro de Santo Amaro na Cidade do Recife no Estado de Pernambuco.
+</p>
+
+<h5><i>03 – Da identificação do Curso, Prazo e Duração:</i></h5>
 <?php
-/*if(isset($aluno['pessoa']['data_nasciemento'])) {
-    dd($aluno['pessoa']['data_nasciemento']);
-    //$date = explode('T', $aluno['pessoa']['data_nasciemento']);
-    $data = \DateTime::createFromFormat('Y-m-d', $aluno['pessoa']['data_nasciemento']);
 
-    $dataFromat = $data->format('d/m/Y');
+if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
+    $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+    $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
 } else {
     $dataFromat = "";
 }
-*/?>
-<span><b>Data de nascimento: </b></span><span>{{$aluno['pessoa']['data_nasciemento']}} </span><span><b>Sexo: </b></span><span>{!! isset($aluno['pessoa']['sexo']) ? $aluno['pessoa']['sexo']['nome'] : "" !!} </span><span><b>Residência: </b></span><span>{!! isset($aluno['pessoa']['endereco']['logradouro']) ? $aluno['pessoa']['endereco']['logradouro'] : "" !!} </span><br />
-<span><b>Bairro: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['nome']) ? $aluno['pessoa']['endereco']['bairro']['nome'] : "" !!} </span><span><b>Cidade: </b></span><span>{!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['nome']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] : "" !!} </span><span><b>CEP: </b></span><span>{!! isset($aluno['endereco']['cep']) ? $aluno['pessoa']['endereco']['cep'] : "" !!} </span><br />
-<span><b>Telefones: {!! isset($aluno['pessoa']['telefone_fixo']) ? $aluno['pessoa']['telefone_fixo'] : "" !!} </b></span><span></span><br />
-<span><b>Profissão: </b>{!! isset($aluno['pessoa']['profissao']['nome']) ? $aluno['pessoa']['profissao']['nome'] : "" !!} </span><br /><br />
+?>
+<table style="width: 100%">
+    <tr>
+        <td><center><b>CURSO Pós-Graduação LATO SENSU em</b></center><br /> {!! isset($curso->nome) ? $curso->nome : "" !!} </td>
+        <td><center><b>DURAÇÃO DO CURSO</b></center> <br /> <center>{!! isset($turma->duracao_meses) ? $turma->duracao_meses : "" !!} meses </center> </td>
+        <td><center><b>INÍCIO DAS AULAS</b></center> <br /> <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> </td>
+        <td><center><b>TÉRMINO DAS AULAS</b></center><br /> <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?> </td>
+    </tr>
+</table>
 
-<span>DOS FUNDAMENTOS LEGAIS</span><br />
-<center><span><b>CLAUSULA I</b></span></center><br />
-<ul>
-    <li>1. O presente contrato é celebrado à vista do que dispõem: inciso IV do art. 1º, inciso II do art. 5º, inciso IV do art. 173</li>
-    <li>2. Os artigos 81,82, 1.025, 1.079, 1.080 e 1.092 do Código Civil Brasileiro</li>
-    <li>3. As Leis nº 8.069/90, 8.078/90, 8.880/94 e 9.069/95</li>
-    <li>4. A Medida Provisória nº 1.477-43, de 03 de dezembro de 1997, com a aplicação dos critérios nela constantes, do conhecimento prévio do CONTRATANTE</li>
-    <li>5. A certificação do contratante será dada pela Faculdade PARCEIRA DA ALPHA de acordo com contrato entre ambos.</li>
-</ul><br />
-<span>DO BENEFICIÁRIO</span><br /><br />
+<p class="termos">
+    1. <b>O OBJETO</b> – O objeto do presente instrumento é a contratação dos serviços da PRESTADORA DE SERVIÇOS,
+    que se compromete a ministrar aulas dos Cursos de Pós Graduação (lato Sensu), em conformidade com o Curso descrito no quadro 03,
+    fornecendo Declaração de Conclusão no final do curso, no prazo máximo de 30 dias,
+    ao aluno que obtiver conceito geral mínimo de 7 (sete) pontos por módulo, comparecido em pelo
+    menos 75% (setenta e cinco por cento) das aulas ministradas, mensalidades em dia,
+    toda documentação entregue, bem como o artigo com o CD.
+    E após 90 dias da entrega da declaração de conclusão será entregue o diploma onde nesta data o aluno deverá assinar o livro ata.
+</p>
 
-<h4>CLAUSULA II</h4>
-<span>O beneficiário do presente Contrato será:</span><br />
-<span><b>Nome: </b></span><span>{!! isset($aluno['pessoa']['nome']) ? $aluno['pessoa']['nome'] : "" !!} </span><span><b>Curso: {!! isset($curso->nome) ? $curso->nome : "" !!} </b></span><span> </span><br />
-<span><b>Dia: </b></span><span></span><span><b>Polo: </b></span><span> </span><br /><br />
-<span>DO OBJETO</span><br /><br />
+<?php
 
-<h4>CLAUSULA III</h4>
-<span>
-    Constitui objeto do presente Contrato, a prestação de Serviços Educacionais para o <b>Curso Pós Graduação “Lato Senso”</b>
-    em <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, ofertado pela ALPHA EDUCAÇÃO E
-    TREINAMENTOS, de acordo com o prescrito na legislação acima citada, Estatuto e no Regimento Interno da ALPHA, as quais se
-    obrigam a prestá-los ao beneficiário indicado neste Contrato, garantindo os padrões de qualidade estabelecidos pelo Ministério
-    da Educação e a regularidade da oferta de ensino superior de qualidade
-</span><br /><br />
-<span>DO PRAZO DE DURAÇÃO</span><br /><br />
+use Seracademico\Uteis\Monetary;
 
-<h4>CLAUSULA IV</h4>
-<span>
-    <?php
+$valorCurso = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, ',', '.');
+$valorCurso2 = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, '.', '');
+$numeroTxt = Monetary::numberToExt($valorCurso2);
+$parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
+?>
 
-        if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
-            $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
-            $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
-        } else {
-            $dataFromat = "";
-        }
-    ?>
-    O presente Contrato terá a duração de {!! isset($turma->duracao_meses) ? $turma->duracao_meses : "" !!} meses, com início <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> e termino em
-        <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>
-</span><br /><br />
-<span>DA MATRÍCULA</span><br /><br />
+<p class="termos">
+    2. <b>DO INVESTIMENTO E FORMA DE PAGAMENTO</b> Como contraprestação dos serviços educacionais, acima referidos,
+    será cobrado do CONTRATANTE um investimento de R$ {{$valorCurso}} ({{$numeroTxt}}),
+    dividido em 1+ {{$turma->qtd_parcelas}} ({{$parcelasTxt}}) parcelas iguais mensais de R$ {{$turma->valor_turma}} com vencimento todo dia 30 de cada mês.
+    As parcelas podem variar de acordo com cada curso. A matricula só será <b>devolvida</b> caso não forme turma
+</p>
 
-<h4>CLAUSULA V</h4>
-<span>
-    A configuração formal do ato de matrícula se procede pelo preenchimento e assinatura do formulário próprio, fornecido
-    pela CONTRATADA, denominado Requerimento de Matricula que desde já, fica fazendo parte integrante deste Contrato
-</span><br /><br />
-<span>DO REGIMENTO ESCOLAR</span><br /><br />
+<p class="termos">
+    3. <b>DOS SERVIÇOS NÃO INCLUSOS NO PREÇO DO INVESTIMENTO</b> Não estão incluídos neste Contrato os serviços especiais e as taxas escolares,
+    assim como: 2º chamada de provas, requerimentos, declarações, certificado e outros serviços.
+</p>
 
-<h4>CLAUSULA VI</h4>
-<span>
-    O beneficiário estará sujeito às normas do Regimento interno da ALPHA, cujo teor está à disposição do
-    CONTRATANTE, considerando-se o aludido Regimento como parte integrante deste Contrato
-</span><br /><br />
-<span>DO INVESTIMENTO E FORMA DE PAGAMENTO</span><br /><br />
+<p class="termos">
+    4. <b>A CARGA HORÁRIA</b>, sua distribuição mensal, o horário das aulas e o prazo de duração do curso encontram-se especificados no quadro 03.
+    A data do termino do Curso poderá ser prorrogada por motivos de força maior ou por
+    eventuais ocorrências geradas no decorrer do Curso descrito no campo 03,
+    o qual concorda expressamente o aluno, desde que justificado pela Prestadora de Serviços.
+</p>
 
-<h4>CLAUSULA VII</h4>
-<span>
-    <?php
+<p class="termos">
+    5. <b>Fica a critério da PRESTADORA DE SERVIÇO </b> a decisão de suspender o Curso a ser iniciado caso não haja o
+    preenchimento de 70% (sententa por cento) da capacidade de alunos por turma ou remanejar a data de início escolhida pelo aluno (a),
+    mediante acordo entre ambas as partes. Caso o aluno não aceite a mudança o mesmo terá direito a devolução do valor da matrícula.
+</p >
 
-        use Seracademico\Uteis\Monetary;
+<p class="termos">
+    6. <b>ATRASO(S) DA(S) MENSALIDADE(S) </b> – O Preço dos Serviços ora contratados, bem como o número de mensalidades e data do vencimento
+    ficará especificado na data da Matrícula, ficando ao aluno, o pagamento através das condições escolhidas no ato da
+    assinatura do presente contrato. Caso seja escolhida a modalidade do pagamento parcelado, será confeccionado carnê de
+    pagamento com a quantidade de mensalidades a serem pagas, o carnê será entregue ao aluno no seu 1º dia de aula,
+    as mensalidades deverão ser pagas no setor financeiro da prestadora de serviços. O desconto que for concedido ao
+    aluno será respeitado desde que, a data do vencimento seja obedecida.
+</p>
 
-        $valorCurso = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, ',', '.');
-        $valorCurso2 = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, '.', '');
-        $numeroTxt = Monetary::numberToExt($valorCurso2);
-    ?>
-    Como contraprestação dos serviços educacionais, acima referidos, será cobrado do CONTRATANTE <br>um investimento de
-    R$ {{$valorCurso}} ({{$numeroTxt}}), dividido em 1+ {{$turma->qtd_parcelas}} (quinze) parcelas iguais mensais de R$ {{$turma->valor_turma}}</b>, com vencimento no
-    dia do módulo presencial. As parcelas podem variar de acordo com cada curso. A matricula só será devolvida caso não forme turma.
-    § 1° O aluno que efetivar as mensalidades até o dia da aula terá um desconto de acordo com a promoção estipulada pela ALPHA
-    sobre o valor da parcela, caso contrário o valor será integral. A Alpha tem um prazo de 4 meses para fechamento de turmas. O aluno
-    será informado caso não feche turma. O aluno caso desista do curso deverá preencher o requerimento de solicitação e está com as
-    parcelas em dias para realizar o trancamento.
-</span><br /><br />
-<span>DOS SERVIÇOS NÃO INCLUSOS NO PREÇO DO INVESTIMENTO</span><br /><br />
+<p class="termos">
+    7. <b>VALOR E PAGAMENTO </b> – O atraso ou não pagamento das mensalidades, resultarão em perda do desconto promocional,
+    mais multa de 2% (dois por cento) sobre a importância devida acrescida de 1% (um por cento)
+    ao mês mais correção com base no IGPM (FGV) sendo que o recebimento da determinada parcela não significará
+    quitação das anteriores. Em caso de mudança na politica financeira nacional convenciona as partes que a
+    presente cláusula será revista e fixado um novo parâmetro para o cálculo da atualização monetária.
+</p>
 
-<h4>CLAUSULA VIII</h4>
-<span>
-    Não estão incluídos neste Contrato os serviços especiais e as taxas escolares, assim como: 2º chamada de provas,
-    requerimentos, segunda via de declarações, certificado e outros serviços
-</span><br /><br />
-<span>DA INADIPLENCIA <b>CLAUSULA IX</b></span><br />
-<span>
-    Em caso de falta de pagamento no vencimento, ao valor da parcela em atraso, será acrescida multa e juros de mora, dentro
-    dos limites da legislação em vigor.<br />
-    § 1º No caso de inadimplência, a CONTRATADA poderá emitir letra de cambio, ou título de crédito legal, acrescido dos juros e da
-    multa estabelecida no “caput” desta clausula e levar a protesto sem oposição do CONTRATANTE, ficando a critério da
-    CONTRATADA promover a cobrança extrajudicial ou judicialmente.
-    § 2º Só poderá receber o Certificado de Conclusão do Curso o beneficiário de cujo CONTRATANTE estiver quitado com a
-    tesouraria da ALPHA.
-</span><br /><br />
-<span>DA RECISÃO</span><br /><br />
+<p class="termos">
+    8. <b>PERCA DO CARNÊ </b> – O aluno que perde o carnê deverá solicitar segunda via através de requerimento à prestadora de serviço,
+    mediante pagamento de uma taxa no valor de R$ 15,00.<br />
+    - Pagamento realizado através de recibo, será acrescida uma taxa de (R$ 5,00) sobre o valor da mensalidade.<br />
+    - Pagamento através de cartão de crédito ou débito o aluno perde o desconto, assim o valor será cheio sem desconto promocional
+    (Desconto promocional apenas para mensalidades pagas em dinheiro na data do vencimento no setor financeiro da prestadora de serviços).
+</p>
 
-<h4>CLAUSULA X</h4>
-<span>
-    Este contrato poderá ser rescindido pelo CONTRATANTE, através de desistência formal, isto é, por pedido de
-    cancelamento de matrícula e ainda pela CONTRATADA, quando o CONTRATANTE ou beneficiário do mesmo infringir o
-    Regimento Interno do Estabelecimento de Ensino.
-</span><br /><br />
-<span>DA DISCUÇÃO JUDICIAL</span><br /><br />
+<p class="termos">
+    9. <b>TRANCAMENTO </b> – Caso precise, o aluno poderá solicitar através de requerimento o trancamento do seu curso,
+    o mesmo deverá está com as mensalidades em dia e pagar uma taxa no valor de R$ 30,00,
+    o trancamento terá a duração de um ano a contar da data da assinatura do requerimento,
+    após este prazo o aluno deverá comparecer a prestadora de serviços para formalizar a sua situação,
+    no caso de não comparecimento o aluno autoriza a prestadora a encaminhar o débito ao Cartório de Protesto,
+    bem como proceder ao registro do débito junto ao serviço de Proteção ao Crédito – SPC e Serasa, ficando a
+    critério da PRESTADORA DE SERVIÇOS, rescindir o presente contrato
+</p>
 
-<h4>CLAUSULA XI</h4>
-<span>
-    Na hipótese de discussão judicial sobre o presente Contrato, o CONTRATANTE continuará pagando o valor acordado
-    neste contrato até a decisão final.<br />
-    § Único: Em caso de interpretação divergente sobre dispositivo legal, entre a CONTRATADA e os órgãos de Defesa de
-    Consumidor, querendo a CONTRATADA recorrerá ao Poder Judiciário, prevalecendo a interpretação da instituição, até decisão
-    judicial transitada em julgado.
-</span><br /><br />
-<span>DA PLENA EFICÁCIA</span><br /><br />
+<p class="termos">
+    10. <b>DESISTÊNCIA  </b> O aluno poderá desistir do presente contrato no prazo de 7 (sete) dias a contar de sua assinatura e os valores
+    eventualmente pagos serão devolvidos. A desistência após este prazo deverá ser solicitada por escrito,
+    com 30 (trinta) dias de antecedência, condicionada ao pagamento da multa rescisória equivalente ao valor de 1 (uma)
+    mensalidade vincenda sem o <b>DESCONTO PROMOCIONAL</b> , sendo assim, valor da <b>MENSALIDADE CHEIA</b>, e deverá estar em dia com os pagamentos contratados.
+</p>
 
-<h4>CLAUSULA XII</h4>
-<span>
-    As partes atribuem ao presente Contrato plena eficácia e força Executiva Extrajudicial.
-</span><br /><br />
-<span>DO FORO</span><br /><br />
+<p>
+    <b>Parágrafo Único:</b> Caso o pedido de desistência previsto nesta cláusula não seja formalizado,
+    o contrato continuará em vigor e a Contratante deverá pagar todas as parcelas previstas no ato da inscrição,
+    podendo a primeira parte Contratada tomar medidas cabíveis de cobrança.
+</p>
 
-<h4>CLAUSULA XIII</h4>
-<span>
-    As partes elegem o foro da cidade de Recife, Estado de Pernambuco, para ajuizamento de qualquer demanda decorrente
-    do presente Contrato, por mais privilegiado que outro tenha ou venha ter, como autora ou ré.<br />
-    E por declararem as partes contratantes que conhecem todas as clausulas do presente contrato, sabendo que estão todos de
-    acordo com a legislação vigente, nesta data, tornando-se as mesmas irretratáveis e irrevogáveis até o termo final deste Contrato,
-    assinam o presente instrumento em 02 (duas) vias de igual teor e forma na presença de 02 (duas) testemunhas abaixo assinadas, para
-    que se produzam todos os efeitos legais.
-</span><br /><br />
+<p class="termos">
+    11. <b>INADIMPLÊNCIA  </b> – O aluno desde já, autoriza a PRESTADORA DE SERVIÇOS em caso de Inadimplência,
+    a emitir a Duplicata de Prestação de Serviços com o vencimento a vista e enviar ao Cartório de Protesto,
+    bem como proceder ao registro do débito junto ao serviço de Proteção ao Crédito – SPC e Serasa,
+    ficando a critério da PRESTADORA DE SERVIÇOS, rescindir o presente contrato nos casos de Inadimplência superior a 60 (sessenta) dias
+</p>
+
+<p class="termos">
+    12. Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito as <b>Contratadas</b>,
+    sob pena de terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior,
+    constante deste contrato.
+</p>
+
+<p>
+    <b>Parágrafo Primeiro:</b> A <b>Contratante</b> deverá possuir um endereço eletrônico permanente para contato com as <b>Contratadas</b> e
+    com o (s) professor (s). É de total responsabilidade da <b>Contratante</b> adquirir e informar um endereço eletrônico as <b>Contratadas</b>,
+    não importando os meios pelos quais irá adquiri-lo.
+</p>
+
+<p>
+    <b>Parágrafo Segundo:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
+</p>
+
+<p class="termos">
+    13. <b>DANOS </b> – O aluno que danificar bens móveis, equipamentos ou mesmo o prédio  da PRESTADORA DE SERVIÇO,
+    deverá ressarcir em dinheiro o dano ou repor os bens danificados por outros equivalentes ou de mesma qualidade
+    e uma vez apurado por ele causado e não havendo ressarcimento ou reposição do bem danificado, fica autorizado a
+    PRESTADORA DE SERVIÇOS, a qualquer tempo, a propositura das ações cabíveis para a satisfação de seu prejuízo e a rescisão contratual.
+</p>
+
+<p class="termos">
+    14. <b>RESCISÃO CONTRATUAL </b> – Constitui em causa para a rescisão contratual, além do constante na cláusula 9,
+    o descumprimento de qualquer cláusula contratual, sendo ainda rescindido o contrato uma vez provado por declarações de terceiros,
+    atos de indisciplina do aluno.
+</p>
+
+<p class="termos">
+    15. <b>TOLERÂNCIA </b> – A tolerância da PRESTADORA DE SERVIÇOS ou do aluno não significará renúncia, perdão, renovação ou alteração do que foi contratado.
+</p>
+
+<p class="termos">
+    16. <b>FORO </b> – As partes elegem o foro desta comarca como o único competente para dirimir qualquer questão oriunda do presente contrato,
+    em detrimento de qualquer outro, por mais privilegiado que possa ser.<br />
+    E por estarem justas e contratadas, as partes firmam o presente contrato em 02 (duas) vias de igual teor,
+    subscritos pelas testemunhas abaixo nomeadas, declarando ainda o aluno/responsável legal haver lido e
+    entendido todas as cláusulas do presente contrato, estabelecendo as partes, ao presente contrato, pela eficácia e
+    força executiva e força executiva extrajudicial.
+</p> <br /><br />
 
 <center>
     <span>

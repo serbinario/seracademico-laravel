@@ -54,6 +54,32 @@ class Monetary
         return trim($value);
     }
 
+    static function numberToExt2($number, $moeda = true)
+    {
+        if ($number >= self::MIN && $number <= self::MAX) {
+            $value = self::conversionR((int)$number);
+            if ($moeda) {
+                if (floor($number) == 1) {
+                    $value .= "";
+                } else if (floor($number) > 1)
+                    $value .= "";
+            }
+
+            $decimals = self::extractDecimals($number);
+            if ($decimals > 0.00) {
+                $decimals = round($decimals * 100);
+                $value .= " e " . self::conversionR($decimals);
+                if ($moeda) {
+                    if ($decimals == 1) {
+                        $value .= "";
+                    } else if ($decimals > 1)
+                        $value .= "";
+                }
+            }
+        }
+        return trim($value);
+    }
+
     private static function extractDecimals($number)
     {
         return $number - floor($number);

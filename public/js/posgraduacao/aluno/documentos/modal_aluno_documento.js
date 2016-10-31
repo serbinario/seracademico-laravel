@@ -12,7 +12,7 @@ function loadFieldsDocumentos()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/posgraduacao/aluno/turma/getLoadFields',
+        url: '/SerAcademmico/public/index.php/seracademico/posgraduacao/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição

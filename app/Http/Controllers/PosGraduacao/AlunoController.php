@@ -387,6 +387,8 @@ class AlunoController extends Controller
             $aluno->save();
         }
 
+        //dd($aluno);
+
         return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
 
     }
