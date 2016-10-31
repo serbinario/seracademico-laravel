@@ -234,9 +234,24 @@
                 {{-- Aba de anexos--}}
                 <div role="tabpanel" class="tab-pane" id="anexos">
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="path_plano_ensino">Anexo</label>
-                            <input name="path_plano_ensino" id="path_plano_ensino" type="file">
+                        <div class="col-md-6">
+                            <br>
+                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                <div class="form-control" data-trigger="fileinput">
+                                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                <span class="fileinput-filename">
+                                    @if (isset($model) && $model->path_plano_ensino != null)
+                                        {{ $model->path_plano_ensino }}
+                                    @endif
+                                </span>
+                                </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo</span><span
+                                                    class="fileinput-exists">Anexo</span>
+                                            <input type="file" name="path_plano_ensino"></span>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                   data-dismiss="fileinput">Remove</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -294,38 +309,10 @@
             loadEditTableConteudoProgramatico(idPlanoEnsino);
         }
 
-        /**
-         * Anexo plano de ensino
-         *
-         * Código que é responsável pelo carregamento de
-         * arquivos no formulário
-         *
-         * http://plugins.krajee.com/
-         * https://github.com/kartik-v/bootstrap-fileinput
-         */
-        $("#path_plano_ensino").fileinput({
-            @if(isset($model->path_plano_ensino))
-            initialPreviewFileType: 'object',
-            initialPreview:[
-                '/images/{{$model->path_plano_ensino}}'
-            ],
-            initialPreviewAsData: true,
-            initialPreviewConfig: [{
-                caption: 'anexo-plano-ensino.pdf',
-                filetype: 'application/pdf',
-                url: false,
-                width: '100%'
-            }],
-            @endif
-            language: 'pt-BR',
-            showUpload: false,
-            showCaption: false,
-            allowedFileExtensions : ['pdf']
-        });
 
         @if(isset($model->path_plano_ensino))
         // Evento para remover o comprovante
-        $(document).on('click', 'button.fileinput-remove-button', function () {
+       /* $(document).on('click', 'button.fileinput-remove-button', function () {
             // Recuperando o anexo
             var anexo = $(this).parent().find('input[type=file]').attr('id');
 
@@ -341,7 +328,7 @@
                     //swal('Erro ao tentar remover o comprovante, atualize a página e tente novamente', '', 'error');
                 }
             });
-        });
+        });*/
         @endif
 
     </script>
