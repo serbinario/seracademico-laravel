@@ -58,12 +58,12 @@
         </div>
 
         <div class="row">
-            {{--<div class="col-md-6">--}}
-                {{--<div class="form-group">--}}
-                    {{--{!! Form::label('descricao', 'Descrição ') !!}--}}
-                    {{--{!! Form::text('descricao', Session::getOldInput('codigo'), array('id' => 'descricao', 'class' => 'form-control')) !!}--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('descricao', 'Descrição ') !!}
+                    {!! Form::text('descricao', Session::getOldInput('codigo'), array('id' => 'descricao', 'class' => 'form-control')) !!}
+                </div>
+            </div>
 
             <div class="col-md-2">
                 {!! Form::label('semestre_id', 'Semestre *') !!}
@@ -97,9 +97,9 @@
                     <li role="presentation" class="active">
                         <a href="#datas" aria-controls="dados" data-toggle="tab">Datas</a>
                     </li>
-                    {{--<li role="presentation">--}}
-                        {{--<a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>--}}
-                    {{--</li>--}}
+                    <li role="presentation">
+                        <a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>
+                    </li>
                     {{--<li role="presentation">--}}
                         {{--<a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>--}}
                     {{--</li>--}}
@@ -205,6 +205,13 @@
 
             $('#formTurma').bootstrapValidator({
                 fields: {
+                    descricao: {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Descrição' })
+                            }
+                        }
+                    },
                     codigo: {
                         validators: {
                             notEmpty: {

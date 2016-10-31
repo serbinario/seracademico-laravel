@@ -5,71 +5,36 @@
                 <div class="form-group">
 				{!! Form::label('curso_id', 'Curso *') !!}
                 @if(isset($model->curriculo->curso->id))
-                    @if(count($model->disciplinas) > 0)
-                        {!! Form::select('curso_id',[$model->curriculo->curso->id => $model->curriculo->curso->nome], $model->curriculo->curso->id, array('id' => 'curso', 'class' => 'form-control', 'readonly' => 'readonly')) !!}
-                    @else
-                        {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], $model->curriculo->curso->id, array('id' => 'curso', 'class' => 'form-control')) !!}
-                    @endif
+				    {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], $model->curriculo->curso->id, array('class' => 'form-control')) !!}
                 @else
-                    {!! Form::select('curso_id', (['' => 'Selecione um curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('id' => 'curso', 'class' => 'form-control')) !!}
+                    {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], null, array('class' => 'form-control')) !!}
                 @endif
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="form-group">
-                    {!! Form::label('curriculo_id', 'Currículo *') !!}
-                    @if(isset($model->curriculo->id))
-                        @if(count($model->disciplinas) > 0)
-                            {!! Form::select('curriculo_id',[$model->curriculo->id => $model->curriculo->nome], $model->curriculo->id, array('id' => 'curriculo', 'class' => 'form-control', 'readonly' => 'readonly')) !!}
-                        @else
-                            {!! Form::select('curriculo_id', [$model->curriculo->id => $model->curriculo->nome], $model->curriculo->id, array('id' => 'curriculo', 'class' => 'form-control')) !!}
-                        @endif
-                    @else
-                        {!! Form::select('curriculo_id', [], null, array('id' => 'curriculo', 'class' => 'form-control')) !!}
-                    @endif
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('codigo', 'Código *') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo'), array('class' => 'form-control')) !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control')) !!}
                 </div>
             </div>
 
             <div class="col-md-2">
-                <div class="form-group">
+                <div class="form-group">                    
 				{!! Form::label('turno_id', 'Turno *') !!}
-                    @if(isset($model->turno->id))
-                        {!! Form::select('turno_id', [$model->turno->id => $model->turno->nome], $model->turno->id, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
-                        {{--{!! Form::select('semestre_id', $loadFields['posgraduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
-                    @else
-                        {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
-                    @endif
+				{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            {{--<div class="col-md-6">--}}
-                {{--<div class="form-group">--}}
-                    {{--{!! Form::label('descricao', 'Descrição ') !!}--}}
-                    {{--{!! Form::text('descricao', Session::getOldInput('codigo'), array('id' => 'descricao', 'class' => 'form-control')) !!}--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            <div class="col-md-2">
-                {!! Form::label('sede_id', 'Sede *') !!}
-
-                {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
-            </div>
-
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('duracao_meses', 'Duração (meses) ') !!}
                     {!! Form::text('duracao_meses', Session::getOldInput('duracao_meses')  , array('class' => 'form-control number')) !!}
                 </div>
+            </div>
+            <div class="col-md-2">
+                {!! Form::label('sede_id', 'Sede *') !!}
+
+                {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <hr class="hr-line-dashed"/>
@@ -78,17 +43,17 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#datas" aria-controls="dados" data-toggle="tab">Datas</a>
+                        <a href="#datas" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Datas</a>
                     </li>
-                    {{--<li role="presentation">--}}
-                        {{--<a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>--}}
-                    {{--</li>--}}
-                    {{--<li role="presentation">--}}
-                        {{--<a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>--}}
-                    {{--</li>--}}
-                    {{--<li role="presentation">--}}
-                        {{--<a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">label</i> Sala de Aula</a>--}}
-                    {{--</li>--}}
+                    <li role="presentation">
+                        <a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">label</i> Sala de Aula</a>
+                    </li>
                 </ul>
                 <!-- End Nav tabs -->
 
@@ -99,7 +64,7 @@
                     <div role="tabpanel" class="tab-pane active" id="datas">
                         <br/>
                         <div class="row">
-                            {{--<div class="col-md-2">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('matricula_inicio', 'Matrícula (Início)') !!}
                                     {!! Form::text('matricula_inicio', Session::getOldInput('matricula_inicio'), array('class' => 'form-control datepicker date')) !!}
@@ -110,7 +75,7 @@
                                     {!! Form::label('matricula_fim', 'Matrícula (Fim)') !!}
                                     {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
-                            </div>--}}
+                            </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('aula_inicio', 'Aula (Início)') !!}
@@ -123,10 +88,103 @@
                                     {!! Form::text('aula_final', Session::getOldInput('aula_final'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     {{--FIM Datas--}}
 
+                    {{--Aba Valores--}}
+                    <div role="tabpanel" class="tab-pane" id="valores">
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('valor_turma', 'Valor Turma') !!}
+                                    {!! Form::text('valor_turma', Session::getOldInput('valor_turma')  , array('class' => 'form-control money')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('valor_disciplina', 'Valor Disciplina') !!}
+                                    {!! Form::text('valor_disciplina', Session::getOldInput('valor_disciplina')  , array('class' => 'form-control money')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('qtd_parcelas', 'Qtd. Parcelas') !!}
+                                    {!! Form::text('qtd_parcelas', Session::getOldInput('qtd_parcelas')  , array('class' => 'form-control numberThree')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('vencimento_inicial', 'Vencimento Inicial') !!}
+                                    {!! Form::text('vencimento_inicial', Session::getOldInput('vencimento_inicial'), array('class' => 'form-control datepicker date')) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--FIM Aba Valores--}}
+
+                    {{--Aba Vagas--}}
+                    <div role="tabpanel" class="tab-pane" id="vagas">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('maximo_vagas', 'Máximo Vagas') !!}
+                                    {!! Form::text('maximo_vagas', Session::getOldInput('maximo_vagas')  , array('class' => 'form-control numberThree')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('minimo_vagas', 'Mínimo Vagas') !!}
+                                    {!! Form::text('minimo_vagas', Session::getOldInput('minimo_vagas')  , array('class' => 'form-control numberThree')) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('observacao_vagas', 'Observação') !!}
+                                    {!! Form::textarea('observacao_vagas', Session::getOldInput('observacao_vagas'), array('class' => 'form-control',  'rows'=>'3')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    {{--FIM Aba Vagas --}}
+
+                    {{--Aba Salas--}}
+                    <div role="tabpanel" class="tab-pane" id="sala">
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+
+                                    {!! Form::label('sala_id', 'Sala') !!}
+                                    {!! Form::select('sala_id', ([null => 'Selecione uma sala'] + $loadFields['sala']->toArray()), null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('obs_sala', 'Observação:') !!}
+                                    {!! Form::textarea('obs_sala', Session::getOldInput('obs_sala') , array('class' => 'form-control',  'rows'=>'3')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    {{--FIM Aba Vagas --}}
                 </div>
                 <!-- FIM Tab panes -->
             </div>
@@ -145,8 +203,8 @@
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
                 </div>
             </div>
-
-
+            
+            
         </div>
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
@@ -156,45 +214,11 @@
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function () {
+            console.log(Lang.getLocale());
             Lang.setLocale('pt-BR');
-
-            // Evento para preenchimento automático da descrição
-            $(document).on('change', '#curso', function () {
-                // Recuperando o texto do option selecionado e preenchendo a descrição
-                $('#descricao').val($(this).find('option:selected').text());
-
-                // Recuperando o id do curso selecionado
-                var cursoId = $('#curso').val();
-
-                // Requisição ajax
-                jQuery.ajax({
-                    type: 'GET',
-                    url: '/index.php/seracademico/posgraduacao/curriculo/getByCurso/' + cursoId,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                    },
-                    datatype: 'json'
-                }).done(function (json) {
-                    var option = '<option value="">Selecione um Currículo</option>';
-
-                    for (var i = 0; i < json.dados.length; i++) {
-                        option += '<option value="' + json.dados[i].id + '">' + json.dados[i].nome + '</option>';
-                    }
-
-                    $('#curriculo option').remove();
-                    $('#curriculo').append(option);
-                });
-            });
 
             $('#formTurma').bootstrapValidator({
                 fields: {
-//                    descricao: {
-//                        validators: {
-//                            notEmpty: {
-//                                message: Lang.get('validation.required', { attribute: 'Descrição' })
-//                            }
-//                        }
-//                    },
                     codigo: {
                         validators: {
                             notEmpty: {
@@ -208,4 +232,4 @@
 
         });
     </script>
-@endsection
+@stop

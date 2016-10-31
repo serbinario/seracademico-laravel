@@ -8,10 +8,10 @@
                     @if(count($model->disciplinas) > 0)
                         {!! Form::select('curso_id',[$model->curriculo->curso->id => $model->curriculo->curso->nome], $model->curriculo->curso->id, array('id' => 'curso', 'class' => 'form-control', 'readonly' => 'readonly')) !!}
                     @else
-                        {!! Form::select('curso_id', $loadFields['graduacao\\curso'], $model->curriculo->curso->id, array('id' => 'curso', 'class' => 'form-control')) !!}
+                        {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'], $model->curriculo->curso->id, array('id' => 'curso', 'class' => 'form-control')) !!}
                     @endif
                 @else
-                    {!! Form::select('curso_id', (['' => 'Selecione um curso'] + $loadFields['graduacao\\curso']->toArray()), null, array('id' => 'curso', 'class' => 'form-control')) !!}
+                    {!! Form::select('curso_id', (['' => 'Selecione um curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('id' => 'curso', 'class' => 'form-control')) !!}
                 @endif
                 </div>
             </div>
@@ -43,16 +43,10 @@
 				{!! Form::label('turno_id', 'Turno *') !!}
                     @if(isset($model->turno->id))
                         {!! Form::select('turno_id', [$model->turno->id => $model->turno->nome], $model->turno->id, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
-                        {{--{!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                        {{--{!! Form::select('semestre_id', $loadFields['posgraduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
                     @else
                         {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                     @endif
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    {!! Form::label('duracao_meses', 'Duração (meses) ') !!}
-                    {!! Form::text('duracao_meses', Session::getOldInput('duracao_meses')  , array('class' => 'form-control number')) !!}
                 </div>
             </div>
         </div>
@@ -66,27 +60,16 @@
             {{--</div>--}}
 
             <div class="col-md-2">
-                {!! Form::label('semestre_id', 'Semestre *') !!}
+                {!! Form::label('sede_id', 'Sede *') !!}
 
-                @if(isset($model->semestre->id))
-                    {!! Form::select('semestre_id', [$model->semestre->id => $model->semestre->nome], $model->semestre->id, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
-                    {{--{!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], $model->semestre->id, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
-                @else
-                    {!! Form::select('semestre_id', $loadFields['graduacao\\semestre'], null, array('class' => 'form-control')) !!}
-                @endif
+                {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
             </div>
 
             <div class="col-md-2">
-                {!! Form::label('periodo', 'Período *') !!}
-                @if(isset($model->periodo))
-                    @if(count($model->disciplinas) > 0)
-                        {!! Form::select('periodo', [$model->periodo => $model->periodo], $model->periodo, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
-                    @else
-                        {!! Form::select('periodo', [1=>1, 2=>2, 3=>3 , 4=>4, 5=>5, 6=>6, 7=>7, 8=>8, 9=>9, 10=>10], $model->periodo, array('class' => 'form-control')) !!}
-                    @endif
-                @else
-                    {!! Form::select('periodo', [1=>1, 2=>2, 3=>3 , 4=>4, 5=>5, 6=>6, 7=>7, 8=>8, 9=>9, 10=>10], null, array('class' => 'form-control')) !!}
-                @endif
+                <div class="form-group">
+                    {!! Form::label('duracao_meses', 'Duração (meses) ') !!}
+                    {!! Form::text('duracao_meses', Session::getOldInput('duracao_meses')  , array('class' => 'form-control number')) !!}
+                </div>
             </div>
         </div>
         <hr class="hr-line-dashed"/>
@@ -157,7 +140,7 @@
             <div class="col-md-3">
                 <div class="btn-group btn-group-justified">
                 <div class="btn-group">
-                <a href="{{ route('seracademico.graduacao.turma.index') }}" class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i>   Voltar</a></div>
+                <a href="{{ route('seracademico.posgraduacao.turma.index') }}" class="btn btn-primary btn-block pull-right"><i class="fa fa-long-arrow-left"></i>   Voltar</a></div>
                 <div class="btn-group">
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
                 </div>
@@ -186,7 +169,7 @@
                 // Requisição ajax
                 jQuery.ajax({
                     type: 'GET',
-                    url: '/index.php/seracademico/graduacao/curriculo/getByCurso/' + cursoId,
+                    url: '/index.php/seracademico/posgraduacao/curriculo/getByCurso/' + cursoId,
                     headers: {
                         'X-CSRF-TOKEN': '{{  csrf_token() }}'
                     },
@@ -205,6 +188,13 @@
 
             $('#formTurma').bootstrapValidator({
                 fields: {
+//                    descricao: {
+//                        validators: {
+//                            notEmpty: {
+//                                message: Lang.get('validation.required', { attribute: 'Descrição' })
+//                            }
+//                        }
+//                    },
                     codigo: {
                         validators: {
                             notEmpty: {
