@@ -146,7 +146,7 @@ class TurmaController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-
+            
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
             

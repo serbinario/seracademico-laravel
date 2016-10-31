@@ -26,6 +26,7 @@ class Turma extends Model implements Transformable
     protected $fillable = [ 
 		'curriculo_id',
 		'turno_id',
+        'descricao',
 		'sigla',
 		'valor_turma',
 		'valor_disciplina',
