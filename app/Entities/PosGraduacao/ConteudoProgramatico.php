@@ -5,7 +5,7 @@ namespace Seracademico\Entities\PosGraduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Graduacao\PlanoEnsino;
+use Seracademico\Entities\PosGraduacao\PlanoEnsino;
 
 class ConteudoProgramatico extends Model implements Transformable
 {

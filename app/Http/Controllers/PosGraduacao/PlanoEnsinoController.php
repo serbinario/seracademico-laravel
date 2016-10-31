@@ -9,9 +9,9 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-use Seracademico\Validators\Graduacao\PlanoEnsinoValidator;
+use Seracademico\Validators\PosGraduacao\PlanoEnsinoValidator;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Graduacao\PlanoEnsinoService;
+use Seracademico\Services\PosGraduacao\PlanoEnsinoService;
 
 class PlanoEnsinoController extends Controller
 {
