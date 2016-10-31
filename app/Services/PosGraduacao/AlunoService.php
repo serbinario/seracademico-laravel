@@ -300,7 +300,7 @@ class AlunoService
         $turmas    = $curriculo->pivot->turmas()->get();
 
         # Verificando se existe turma cadastada
-        if(count($turmas) > 0) {
+        if(count($turmas) > 0 && $turmas->last()->id != $idTurma) {
             # Recuperando o pivot da turma
             $alunoTurma  = $turmas->last()->pivot;
             $lastTurmaId = $alunoTurma->turma_id;
@@ -344,7 +344,7 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
-        } else {
+        } else if(count($turmas) == 0) {
             # Vinculando a turma
             $curriculo->pivot->turmas()->attach($idTurma);
 

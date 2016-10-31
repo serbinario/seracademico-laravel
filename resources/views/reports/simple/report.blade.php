@@ -54,6 +54,10 @@
                                 @foreach($bordy as $key => $value)
                                     <td>{{ $value }}</td>
                                 @endforeach
+
+                                @for($i = 0; $i < (count($dados['headers'])) - count($dados['body']); $i++)
+                                    <td></td>
+                                @endfor
                             </tr>
                         @endforeach
                     </tbody>

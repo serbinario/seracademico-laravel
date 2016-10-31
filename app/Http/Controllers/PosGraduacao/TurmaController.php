@@ -32,6 +32,7 @@ class TurmaController extends Controller
         'Turno',
         'Sala|situacao,1',
         'Professor|getValues',
+        'SimpleReport|byCrud,1',
         'Sede'
     ];
 
@@ -146,7 +147,7 @@ class TurmaController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-            
+
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
             
