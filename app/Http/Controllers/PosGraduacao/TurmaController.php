@@ -31,7 +31,8 @@ class TurmaController extends Controller
         'PosGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
-        'Professor|getValues'
+        'Professor|getValues',
+        'Sede'
     ];
 
     /**
@@ -148,7 +149,7 @@ class TurmaController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
-
+            
             #retorno para view
             return view('posGraduacao.turma.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);

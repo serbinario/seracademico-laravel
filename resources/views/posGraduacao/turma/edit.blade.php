@@ -29,7 +29,7 @@
             @endif
 
             {!! Form::model($model, ['route'=> ['seracademico.posgraduacao.turma.update', $model->id] , 'id' => 'formTurma', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.tamplateFormTurma')
+                @include('tamplatesForms.posGraduacao.tamplateFormTurma')
             {!! Form::close() !!}
         </div>
         

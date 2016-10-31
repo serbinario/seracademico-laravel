@@ -184,6 +184,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\CurriculoController@update']);
                 Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'PosGraduacao\CurriculoController@adicionarDisciplinas']);
                 Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'PosGraduacao\CurriculoController@removerDisciplina']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'PosGraduacao\CurriculoController@getByCurso']);
             });
 
             Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
