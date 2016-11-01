@@ -28,7 +28,8 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'PosGraduacao\\Curso|ativo,1'
+        'PosGraduacao\\Curso|ativo,1',
+        'SimpleReport|byCrud,4'
     ];
 
     /**
@@ -46,7 +47,11 @@ class CurriculoController extends Controller
      */
     public function index()
     {
-        return view('posGraduacao.curriculo.index');
+        #Carregando os dados
+        $loadFields = $this->service->load($this->loadFields);
+
+        # Retorno para view
+        return view('posGraduacao.curriculo.index', compact('loadFields'));
     }
 
     /**
