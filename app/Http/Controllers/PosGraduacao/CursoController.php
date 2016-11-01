@@ -29,7 +29,8 @@ class CursoController extends Controller
     */
     private $loadFields = [
         'TipoCurso',
-        'TipoNivelSistema'
+        'TipoNivelSistema',
+        'Professor|getValues'
     ];
 
     /**
