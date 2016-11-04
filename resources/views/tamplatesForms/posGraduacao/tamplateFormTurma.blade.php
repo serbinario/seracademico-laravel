@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
 				{!! Form::label('curso_id', 'Curso *') !!}
                 @if(isset($model->curriculo->curso->id))
@@ -30,6 +30,11 @@
                     {!! Form::label('duracao_meses', 'Duração (meses) ') !!}
                     {!! Form::text('duracao_meses', Session::getOldInput('duracao_meses')  , array('class' => 'form-control number')) !!}
                 </div>
+            </div>
+            <div class="col-md-2">
+                {!! Form::label('sede_id', 'Sede *') !!}
+
+                {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <hr class="hr-line-dashed"/>
@@ -180,14 +185,6 @@
 
                     </div>
                     {{--FIM Aba Vagas --}}
-
-                    {{--Aba Salas--}}
-                    <div role="tabpanel" class="tab-pane" id="sala">
-                        <br/>
-
-
-                    </div>
-                    {{--FIM Aba Salas --}}
                 </div>
                 <!-- FIM Tab panes -->
             </div>
@@ -212,6 +209,7 @@
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
 </div>
+</div>
 
 @section('javascript')
     <script type="text/javascript">
@@ -221,17 +219,6 @@
 
             $('#formTurma').bootstrapValidator({
                 fields: {
-                    hora_inicial: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 200,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
-                        }
-                    },
                     codigo: {
                         validators: {
                             notEmpty: {

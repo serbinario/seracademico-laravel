@@ -28,7 +28,8 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'PosGraduacao\\Curso|ativo,1'
+        'PosGraduacao\\Curso|ativo,1',
+        'SimpleReport|byCrud,4'
     ];
 
     /**
@@ -46,7 +47,11 @@ class CurriculoController extends Controller
      */
     public function index()
     {
-        return view('posGraduacao.curriculo.index');
+        #Carregando os dados
+        $loadFields = $this->service->load($this->loadFields);
+
+        # Retorno para view
+        return view('posGraduacao.curriculo.index', compact('loadFields'));
     }
 
     /**
@@ -253,6 +258,34 @@ class CurriculoController extends Controller
         } catch (\Throwable $e) {
             #retorno falido
             return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idCurso
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getByCurso($idCurso)
+    {
+        try {
+            # Fazendo a consulta no banco de dados
+            $rows = \DB::table('fac_curriculos')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->where('fac_cursos.id', $idCurso)
+                ->select([
+                    'fac_curriculos.id',
+                    'fac_curriculos.nome',
+                ])->get();
+
+            # Verificando a consulta
+            if(count($rows) == 0) {
+                throw new \Exception('Nenhum dado foi encontrado!');
+            }
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

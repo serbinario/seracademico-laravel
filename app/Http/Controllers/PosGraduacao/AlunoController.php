@@ -115,7 +115,7 @@ class AlunoController extends Controller
                     'pos_alunos_turmas.id as idAlunoTurma',
                     'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
-                    'pessoas.cpf',
+                    \DB::raw('CONCAT(SUBSTR(pessoas.cpf,1,3), ".", SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)) AS cpf'),
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',
@@ -158,16 +158,6 @@ class AlunoController extends Controller
                     }
                 })
                 ->addColumn('action', function ($aluno) {
-                    /**
-                     *   <li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>
-                    <li><a class="btn-floating indigo" title="Histórico do aluno" id="modalHistorico"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-                    <li><a class="btn-floating indigo" title="Currículo do aluno" id="modalCurriculo"><i class="material-icons">assignment</i></a></li>
-                    <li><a class="btn-floating indigo" title="Semestre do aluno"  id="modalSemestre"><i class="material-icons">date_range</i></a></li>
-                    <li><a class="btn-floating indigo" title="Benefícios do Aluno" id="modalBeneficio"><i class="material-icons">account_balance_wallet</i></a></li>
-                    <li><a class="btn-floating indigo" title="Financeiro do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>
-                    <li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
-                     */
-
                     $html = "";
 
                     $html .= '<div class="fixed-action-btn horizontal">';
@@ -270,7 +260,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { 
+        } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -293,205 +283,6 @@ class AlunoController extends Controller
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function documentos(Request $request)
-    {
-        $tipoDocumento = $request->request->get('documentacao_id');
-        $id = $request->request->get('id_aluno');
-
-        if($tipoDocumento === "1") {
-
-            $result  = $this->contrato($id);
-
-            if(!$result['curso'] && !$result['turma']) {
-                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
-            }
-
-            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final || !$result['turma']->qtd_parcelas || !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
-                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
-            aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
-            }
-
-            return \PDF::loadView('reports.contrato', $result)->stream();
-
-        } else if ($tipoDocumento === "2") {
-
-            $result = $this->declaracaoVinculo($id);
-
-            //dd($result);
-
-            if(!$result['curso'] && !$result['turma']) {
-                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
-            }
-
-            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final ) {
-                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
-            aula inicial e aula final");
-            }
-
-            return \PDF::loadView('reports.declaracaoVinculo', $result)->stream();
-
-        } else if ($tipoDocumento === "3") {
-
-            $result = $this->certificadoConclusao($id);
-
-            //dd($result);
-
-            if(!$result['curso'] && !$result['turma']) {
-                return redirect()->back()->with("message", "Este aluno não foi vinculado a um curso e turma!");
-            }
-
-            if(!$result['turma']->aula_inicio || !$result['turma']->aula_final ) {
-                return redirect()->back()->with("message", "Para gerar o contrato é necessário ter as seguintes informações em turmas: 
-            aula inicial e aula final");
-            }
-
-            return \PDF::loadView('reports.certificadoConclusao', $result)->stream();
-            
-        }
-
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function contrato($id) {
-
-        $aluno = $this->service->find($id);
-
-        $data = new \DateTime('now');
-        $curso = "";
-        $turma = "";
-
-        $curso = \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_curriculos.*',
-                'pos_alunos_cursos.id as idCurso'
-            ])->first();
-
-        if ($curso) {
-
-            $turma = \DB::table('pos_alunos_turmas')
-                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
-                ->orderBy('pos_alunos_turmas.id', 'DESC')
-                ->limit(1)
-                ->select([
-                    'fac_turmas.*'
-                ])->first();
-
-        }
-
-        if(!$aluno->data_contrato) {
-            $aluno->data_contrato = $data->format('Y-m-d');
-            $aluno->save();
-        }
-
-        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
-
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function declaracaoVinculo($id) {
-
-        $aluno = $this->service->find($id);
-
-        $data = new \DateTime('now');
-        $curso = "";
-        $turma = "";
-
-        $curso = \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_curriculos.*',
-                'fac_cursos.*',
-                'pos_alunos_cursos.id as idCurso'
-            ])->first();
-
-        if ($curso) {
-
-            $turma = \DB::table('pos_alunos_turmas')
-                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
-                ->orderBy('pos_alunos_turmas.id', 'DESC')
-                ->limit(1)
-                ->select([
-                    'fac_turmas.*'
-                ])->first();
-
-        }
-
-        if(!$aluno->data_contrato) {
-            $aluno->data_contrato = $data->format('Y-m-d');
-            $aluno->save();
-        }
-
-        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
-
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function certificadoConclusao($id) {
-
-        $aluno = $this->service->find($id);
-
-        $data = new \DateTime('now');
-        $curso = "";
-        $turma = "";
-
-        $curso = \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_curriculos.*',
-                'fac_cursos.*',
-                'pos_alunos_cursos.id as idCurso'
-            ])->first();
-
-        if ($curso) {
-
-            $turma = \DB::table('pos_alunos_turmas')
-                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
-                ->orderBy('pos_alunos_turmas.id', 'DESC')
-                ->limit(1)
-                ->select([
-                    'fac_turmas.*'
-                ])->first();
-
-        }
-
-        if(!$aluno->data_contrato) {
-            $aluno->data_contrato = $data->format('Y-m-d');
-            $aluno->save();
-        }
-
-        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
-
     }
 
     /**

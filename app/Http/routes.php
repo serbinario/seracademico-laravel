@@ -80,7 +80,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas de pos-graduação
         Route::group(['prefix' => 'posgraduacao', 'as' => 'posgraduacao.'], function () {
-
+            # Rotas do aluno de posgraduação
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoController@grid']);
@@ -88,7 +88,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoController@update']);
-                Route::get('documentos', ['as' => 'documentos', 'uses' => 'PosGraduacao\AlunoController@documentos']);
                 Route::get('reportViewGeralAlunoCandidato', ['as' => 'reportViewGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@reportViewGeralAlunoCandidato']);
                 Route::get('gridReportGeralAlunoCandidato/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
                 Route::get('graphicBuilderGeral', ['as' => 'graphicBuilderGeral', 'uses' => 'Report\ReportAlunoController@graphicBuilderGeral']);
@@ -99,6 +98,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('updatePretensao/{id}', ['as' => 'updatePretensao', 'uses' => 'Report\ReportPretensaoController@updatePretensao']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@checkDocumento']);
+
+                # Rotas de turmas de pósgraduação
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoTurmaController@grid']);
                     Route::get('gridSituacoes/{idAlunoCurso}', ['as' => 'gridSituacoes', 'uses' => 'PosGraduacao\AlunoTurmaController@gridSituacoes']);
@@ -184,6 +188,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\CurriculoController@update']);
                 Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'PosGraduacao\CurriculoController@adicionarDisciplinas']);
                 Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'PosGraduacao\CurriculoController@removerDisciplina']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'PosGraduacao\CurriculoController@getByCurso']);
             });
 
             Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
@@ -228,8 +233,61 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('attachAluno', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaAlunoController@attachAluno']);
                     Route::post('detachAluno', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaAlunoController@detachAluno']);
                 });
+
+                # Rotaas de diários de aulas
+                Route::group(['prefix' => 'diarioAula', 'as' => 'diarioAula.'], function () {
+                    Route::get('grid/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'PosGraduacao\DiarioAulaController@grid']);
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'PosGraduacao\DiarioAulaController@gridDisciplinas']);
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\DiarioAulaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\DiarioAulaController@store']);
+                    Route::get('getConteudosProgramaticos', ['as' => 'getConteudosProgramaticos', 'uses' => 'PosGraduacao\DiarioAulaController@getConteudosProgramaticos']);
+                    Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'PosGraduacao\DiarioAulaController@delete']);
+                    Route::get('edit/{idDiarioAula}', ['as' => 'edit', 'uses' => 'PosGraduacao\DiarioAulaController@edit']);
+                    Route::post('update/{idDiarioAula}', ['as' => 'update', 'uses' => 'PosGraduacao\DiarioAulaController@update']);
+                    Route::get('gridConteudoProgramatico/{idDiarioAula}', ['as' => 'grid', 'uses' => 'PosGraduacao\DiarioAulaController@gridConteudoProgramatico']);
+                    Route::post('attachConteudo/{idDiarioAula}', ['as' => 'attachConteudo', 'uses' => 'PosGraduacao\DiarioAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idDiarioAula}', ['as' => 'detachConteudo', 'uses' => 'PosGraduacao\DiarioAulaController@detachConteudo']);
+                });
+
+                # Rotaas de planos de ensino
+                Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'PosGraduacao\TurmaPlanoEnsinoController@gridDisciplinas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaPlanoEnsinoController@getLoadFields']);
+                    Route::post('attachPlanoEnsino', ['as' => 'attachPlanoEnsino', 'uses' => 'PosGraduacao\TurmaPlanoEnsinoController@attachPlanoEnsino']);
+
+                });
             });
 
+            # Plano de Ensino
+            Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\PlanoEnsinoController@grid']);
+                Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\PlanoEnsinoController@index']);
+                Route::get('create', ['as' => 'create', 'uses' => 'PosGraduacao\PlanoEnsinoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\PlanoEnsinoController@store']);
+                Route::get('edit/{idplanoEnsino}', ['as' => 'edit', 'uses' => 'PosGraduacao\PlanoEnsinoController@edit']);
+                Route::post('update/{idplanoEnsino}', ['as' => 'update', 'uses' => 'PosGraduacao\PlanoEnsinoController@update']);
+                Route::delete('deleteAnexo/{idplanoEnsino}', ['as' => 'deleteAnexo', 'uses' => 'PosGraduacao\PlanoEnsinoController@deleteAnexo']);
+
+                # Conteúdo programático
+                Route::get('gridConteudoProgramatico/{idPlanoEnsino}', ['as' => 'gridConteudoProgramatico', 'uses' => 'PosGraduacao\PlanoEnsinoController@gridConteudoProgramatico']);
+                Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'PosGraduacao\PlanoEnsinoController@storeConteudoProgramatico']);
+                Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'PosGraduacao\PlanoEnsinoController@deleteConteudoProgramatico']);
+
+                # Planos de aula
+                Route::group(['prefix' => 'planoAula', 'as' => 'planoAula.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\PlanoAulaController@getLoadFields']);
+                    Route::get('grid/{idPlanoEnsino}', ['as' => 'grid', 'uses' => 'PosGraduacao\PlanoAulaController@grid']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\PlanoAulaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\PlanoAulaController@edit']);
+                    Route::post('update/{id}', ['update' => 'edit', 'uses' => 'PosGraduacao\PlanoAulaController@update']);
+                    Route::delete('delete/{id}', ['delete' => 'edit', 'uses' => 'PosGraduacao\PlanoAulaController@delete']);
+                    Route::get('getConteudosIn', ['as' => 'getConteudosIn', 'uses' => 'PosGraduacao\PlanoAulaController@getConteudosIn']);
+                    Route::get('gridConteudos/{idPlanoAula}', ['as' => 'gridConteudos', 'uses' => 'PosGraduacao\PlanoAulaController@gridConteudos']);
+                    Route::post('attachConteudo/{idPlanoAula}', ['as' => 'attachConteudo', 'uses' => 'PosGraduacao\PlanoAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idPlanoAula}', ['as' => 'detachConteudo', 'uses' => 'PosGraduacao\PlanoAulaController@detachConteudo']);
+
+                });
+            });
         });
 
         //Rotas para graduação

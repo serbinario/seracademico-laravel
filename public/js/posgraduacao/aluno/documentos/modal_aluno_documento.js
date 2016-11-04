@@ -45,3 +45,26 @@ function builderHtmlFieldsDocumento (dados) {
     // Abrindo o modal de inserir disciplina
     $("#modal-aluno-documento").modal({show : true});
 }
+
+// Evento para gerar o documento
+$(document).on('click', '#btnGerarDocumento', function () {
+    // Recuperando os dados do formulário
+    var documentacao_id = $('#documentacao_id').val();
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/posgraduacao/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Verificando o retorno da requisição
+        if(retorno.success) {
+            // Executando o relatório e abrindo em outra aba
+            window.open("/index.php/seracademico/posgraduacao/aluno/gerarDocumento/"
+                + documentacao_id + "/" + idAluno, '_blank');
+        } else {
+            // Retorno caso retorno alguma erro
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
