@@ -80,7 +80,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas de pos-graduação
         Route::group(['prefix' => 'posgraduacao', 'as' => 'posgraduacao.'], function () {
-
+            # Rotas do aluno de posgraduação
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'PosGraduacao\AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoController@grid']);
@@ -88,7 +88,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoController@update']);
-                Route::get('documentos', ['as' => 'documentos', 'uses' => 'PosGraduacao\AlunoController@documentos']);
                 Route::get('reportViewGeralAlunoCandidato', ['as' => 'reportViewGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@reportViewGeralAlunoCandidato']);
                 Route::get('gridReportGeralAlunoCandidato/{tipo}', ['as' => 'gridReportGeralAlunoCandidato', 'uses' => 'Report\ReportAlunoController@gridReportGeralAlunoCandidato']);
                 Route::get('graphicBuilderGeral', ['as' => 'graphicBuilderGeral', 'uses' => 'Report\ReportAlunoController@graphicBuilderGeral']);
@@ -99,6 +98,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('updatePretensao/{id}', ['as' => 'updatePretensao', 'uses' => 'Report\ReportPretensaoController@updatePretensao']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@checkDocumento']);
+
+                # Rotas de turmas de pósgraduação
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'PosGraduacao\AlunoTurmaController@grid']);
                     Route::get('gridSituacoes/{idAlunoCurso}', ['as' => 'gridSituacoes', 'uses' => 'PosGraduacao\AlunoTurmaController@gridSituacoes']);

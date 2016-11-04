@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <div class="form-group">                    
 				{!! Form::label('cordenador_id', 'Cordenador') !!}
-				{!! Form::select('cordenador_id', array(), null, array('class' => 'form-control')) !!}
+				{!! Form::select('cordenador_id', (['' =>  'Selecione um Cordenador'] + $loadFields['professor']->toArray()), null, array('class' => 'form-control')) !!}
                 </div>
             </div>
             
@@ -310,7 +310,6 @@
                             }
                         }
                     },
-
                     duracao_meses: {
                         validators: {
                             numeric: {
@@ -322,6 +321,13 @@
                         validators: {
                             numeric: {
                                 message: Lang.get('validation.numeric', { attribute: 'N' })
+                            }
+                        }
+                    },
+                    carga_horaria: {
+                        validators: {
+                            notEmpty: {
+                                message: Lang.get('validation.required', { attribute: 'Carga Horária Total' })
                             }
                         }
                     }

@@ -1,5 +1,6 @@
 <?php
 namespace Seracademico\Uteis\ReportBuilderQuery;
+
 use Seracademico\Contracts\ReportAluno;
 
 /**
@@ -47,7 +48,7 @@ class AlunoPosBuilderQueryForReport implements ReportAluno
         # Retorno da query
         return $this->getQuery()
             ->leftJoin('pos_alunos_cursos', 'pos_alunos_cursos.aluno_id', '=', 'pos_alunos.id')
-            ->leftJoin('pos_alunos_turmas', 'pos_alunos_turmas.aluno_id', '=', 'pos_alunos.id')
+            ->leftJoin('pos_alunos_turmas', 'pos_alunos_turmas.pos_aluno_curso_id', '=', 'pos_alunos_cursos.id')
             ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id');
     }
 }
