@@ -26,7 +26,7 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplar', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplar','id' => 'FormExemplar', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormExemplar')
             {!! Form::close() !!}
         </div>
@@ -35,8 +35,22 @@
 
 @section('javascript')
     <script type="text/javascript">
-        $(document).ready(function(){
 
+        //Validações javascript
+        $('#FormExemplar').bootstrapValidator({
+            fields: {
+                'img': {
+                    validators: {
+                        file: {
+                            maxSize: 512000,   // 2048 * 1024
+                            message: "Tamanho de imagem permitido é de até 500kb"
+                        }
+                    }
+                },
+            },
+        });
+
+        $(document).ready(function(){
 
             /**
              * Comprovante enem
