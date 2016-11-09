@@ -35,11 +35,11 @@
                             <thead>
                             <tr>
                                 <th style="width: 40%">Nome</th>
-                                <th>Média</th>
+                                {{--<th>Média</th>--}}
                                 <th>Disciplina</th>
                                 <th>Situação</th>
                                 <th>Status</th>
-                                <th>Ação</th>
+                                <th>Nota</th>
                             </tr>
                             </thead>
                         </table>
