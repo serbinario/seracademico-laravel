@@ -6,7 +6,7 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
 
-class ExemplarValidator extends LaravelValidator
+class ExemplarPeriodico extends LaravelValidator
 {
 
 	use TraitReplaceRulesValidator;
