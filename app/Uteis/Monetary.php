@@ -87,6 +87,8 @@ class Monetary
 
     static function conversionR($number)
     {
+        $value = '';
+
         if (in_array($number, range(1, 19))) {
             $value = self::$unidades[$number - 1];
         } else if (in_array($number, range(20, 90, 10))) {

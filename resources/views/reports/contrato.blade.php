@@ -194,7 +194,7 @@ if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
 use Seracademico\Uteis\Monetary;
 
 $valorCurso = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, ',', '.');
-$valorCurso2 = $turma->valor_turma * ($turma->qtd_parcelas + 1);
+$valorCurso2 = number_format($turma->valor_turma * ($turma->qtd_parcelas + 1), 2, '.', '');
 $numeroTxt = Monetary::numberToExt($valorCurso2);
 $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 ?>
