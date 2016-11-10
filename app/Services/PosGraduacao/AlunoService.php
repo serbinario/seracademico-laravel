@@ -282,8 +282,10 @@ class AlunoService
 
         #Vinculando o currículo, situação e turma ao aluno
         $aluno->curriculos()->attach($idCurriculo);
-        $aluno->curriculos()->find($idCurriculo)->situacoes()->attach(1, [
-            'turma_origem_id' => $aluno->curriculos->last()->pivot->turmas->last()->id ?? null
+        $aluno->curriculos()->find($idCurriculo)->pivot->situacoes()->attach(1, [
+            'turma_origem_id' => count($aluno->curriculos()->get()->last()->pivot->turmas) > 0
+                ? $aluno->curriculos()->get()->last()->pivot->turmas->last()->id
+                : null
         ]);
     }
 
