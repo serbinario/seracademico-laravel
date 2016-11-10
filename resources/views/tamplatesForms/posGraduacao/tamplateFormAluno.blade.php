@@ -1181,7 +1181,7 @@
                     option += '<option value="">Selecione uma turma</option>';
 
                     for (var i = 0; i < json.dados.length; i++) {
-                        @if(isset($aluno) && count($aluno->curriculos->last()->turmas) > 0)
+                        @if(isset($aluno->curriculos) && count($aluno->curriculos->last()->turmas) > 0)
                             if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
                                 option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                             } else {
