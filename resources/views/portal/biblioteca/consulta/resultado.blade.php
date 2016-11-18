@@ -34,6 +34,8 @@
                                 <option value="2">Título</option>
                                 <option value="3">Assunto</option>
                                 <option value="4">Autor</option>
+                                <option value="5">Palavra chave</option>
+                                <option value="6">Sumário</option>
                             </select>
                         </div>
                         <div class="input-field col s7 m5">

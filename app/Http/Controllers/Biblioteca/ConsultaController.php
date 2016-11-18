@@ -115,9 +115,16 @@ class ConsultaController extends Controller
             $campoLike = 'responsaveis.nome';
         } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '2') {
             $campoLike = 'bib_exemplares.assunto_p';
+        } else if ($this->data['busca_por'] == '5' && $this->data['tipo_obra'] == '1') {
+            $campoLike = 'bib_arcevos.palavras_chaves';
+        } else if ($this->data['busca_por'] == '5' && $this->data['tipo_obra'] == '2') {
+            $campoLike = 'bib_exemplares.palavras_chaves';
+        } else if ($this->data['busca_por'] == '6') {
+            $campoLike = 'bib_arcevos.sumario';
         }
 
-        if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' || $this->data['busca_por'] == '4') {
+        if($this->data['busca_por'] == '2' || $this->data['busca_por'] == '3' 
+            || $this->data['busca_por'] == '4' || $this->data['busca_por'] == '5' || $this->data['busca_por'] == '6') {
 
             $my_query = \DB::table('bib_exemplares')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
@@ -143,7 +150,10 @@ class ConsultaController extends Controller
                         ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.assunto', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.titulo', 'like', "%{$this->data['busca']}%")
-                        ->orWhere('bib_exemplares.assunto_p', 'like', "%{$this->data['busca']}%");
+                        ->orWhere('bib_exemplares.assunto_p', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_arcevos.palavras_chaves', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_exemplares.palavras_chaves', 'like', "%{$this->data['busca']}%")
+                        ->orWhere('bib_arcevos.sumario', 'like', "%{$this->data['busca']}%");
                 })
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
                 ->orderBy('bib_arcevos.titulo','DESC')
