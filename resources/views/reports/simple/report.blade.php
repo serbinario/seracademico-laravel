@@ -17,7 +17,7 @@
         <table width="100%">
             <tr>
                 <td width="20%">
-                    <img alt="image" width="100%" src="{{ asset('/img/logo-alpha.png')}}"/>
+                    <img alt="image" width="100%" src="{{ asset('/img/fasup.png')}}"/>
                 </td>
                 <td width="55%"><br>
                     <h1 style="text-align: center;color: #082652; ">{{ $dados['reportName'] }}</h1>
@@ -29,9 +29,9 @@
                         @endif
                     </h3>
                 </td>
-                <td width="15%">
-                    <img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>
-                </td>
+                {{--<td width="15%">--}}
+                    {{--<img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>--}}
+                {{--</td>--}}
             </tr>
         </table>
     </div>

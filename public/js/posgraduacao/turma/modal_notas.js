@@ -22,7 +22,7 @@ function loadTableNotas (idTurma) {
         },
         columns: [
             {data: 'nomePessoa', name: 'pessoas.nome'},
-            {data: 'nota_final', name: 'fac_alunos_notas.nota_final'},
+            // {data: 'nota_final', name: 'fac_alunos_notas.nota_final'},
             {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
             {data: 'situacao', name: 'fac_situacao_nota.nome'},
             {data: 'status', name: 'status', orderable: false, filterable: false},
@@ -96,3 +96,41 @@ function loadFieldsNotas()
         }
     });
 };
+
+// Evento para alterar a nota
+$(document).on('focusout', '.nota_final', function () {
+    // Recuperando a nota informada
+    var nota_final = $(this).val();
+
+    // Validando a nota
+    if(!(typeof parseFloat(nota_final) == 'number')) {
+        swal('Valor informado é inválido', '', 'error');
+        return false;
+    }
+
+    // Recuperando o id da nota do aluno
+    var idALunoNota = tableNotas.row($(this).parents('tr')).data().idAlunoNota;
+
+    // Dados da requisição
+    var dados = {
+        'nota_final' : nota_final,
+        'situacao_nota_id' : 1
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'POST',
+        data: dados,
+        url: '/index.php/seracademico/posgraduacao/turma/notas/update/' + idALunoNota,
+        datatype: 'json'
+    }).done(function (retorno) {
+        // Verificando o retorno da requisição
+        if(retorno.success) {
+            $('#span_nota_' + retorno.dados.id + ' i').remove()
+            $('#span_nota_' + retorno.dados.id).append('<i class="material-icons">done</i>');
+        } else {
+            // Retorno caso não tenha currículo em uma turma ou algum erro
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});

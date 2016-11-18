@@ -65,6 +65,7 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $this->tratamentoDoCurso($data);
+        $this->tratamentoMoedas($data);
         $data['tipo_nivel_sistema_id'] = 2;
 
         #Salvando o registro pincipal
@@ -92,6 +93,8 @@ class TurmaService
     {
         # Aplicação das regras de negócios
         $this->tratamentoDoCurso($data, $id);
+        $this->tratamentoMoedas($data);
+
         $data['tipo_nivel_sistema_id'] = 2;
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
@@ -423,5 +426,21 @@ class TurmaService
 
         #retorno
         return $this->tratamentoDisciplinas($turma);
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function tratamentoMoedas(&$data)
+    {
+        # Tratamento de modedas
+        $data['valor_turma'] = str_replace(".","", $data['valor_turma']);
+        $data['valor_turma'] = str_replace(",",".", $data['valor_turma']);
+        $data['valor_disciplina'] = str_replace(".","", $data['valor_disciplina']);
+        $data['valor_disciplina'] = str_replace(",",".", $data['valor_disciplina']);
+
+        # Retorno
+        return true;
     }
 }

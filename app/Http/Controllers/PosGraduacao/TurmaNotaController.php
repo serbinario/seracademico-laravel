@@ -70,8 +70,13 @@ class TurmaNotaController extends Controller
                 }
             })
             ->addColumn('action', function ($row) {
+                # Recuperando a nota do aluno
+                $alunoNota = $this->alunoNotaService->find($row->idAlunoNota);
+
                 # html de retorno
-                $html = '<a title="Editar notas" id="btnEditarNotas"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
+                //$html = '<a title="Editar notas" id="btnEditarNotas"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
+                $html = '<input type="text" value="'. ($alunoNota->nota_final ?? "") .'" class="nota_final form-control"
+                 placeholder="informe a nota"><span id="span_nota_'. ($alunoNota->id) .'"></span>';
 
                 # retorno
                 return $html;
@@ -130,10 +135,10 @@ class TurmaNotaController extends Controller
             $data = $request->all();
 
             #Executando a ação
-            $this->alunoNotaService->update($data, $id);
+            $alunoNota = $this->alunoNotaService->update($data, $id);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Edição realizada com sucesso!']);
+            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $alunoNota]);
         } catch (ValidatorException $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
@@ -142,26 +147,4 @@ class TurmaNotaController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
-//
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function delete($id)
-//    {
-//        try {
-//            #Executando a ação
-//            $this->service->delete($id);
-//
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Calendário removido com sucesso!']);
-//        } catch (ValidatorException $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        } catch (\Throwable $e) {
-//            #Retorno para a view
-//            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
-//        }
-//    }
-
 }
