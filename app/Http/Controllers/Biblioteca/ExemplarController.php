@@ -71,8 +71,9 @@ class ExemplarController extends Controller
                 'bib_arcevos.titulo',
                 'bib_arcevos.cutter',
                 'bib_exemplares.edicao',
-                 'bib_situacao.nome as nome_sit',
+                'bib_situacao.nome as nome_sit',
                 'bib_arcevos.subtitulo as subtitulo',
+                'bib_exemplares.codigo_barra',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
                 );
 
