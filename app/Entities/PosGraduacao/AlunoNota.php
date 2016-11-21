@@ -32,6 +32,14 @@ class AlunoNota extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function turma()
+    {
+        return $this->belongsTo(Turma::class, 'turma_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function situacao()
     {
         return $this->belongsTo(SituacaoNota::class, 'situacao_nota_id');
