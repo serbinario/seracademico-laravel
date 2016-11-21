@@ -40,6 +40,7 @@
                                 <th>Edição</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
+                                <th>Código de barra</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                 <th>Edição</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
+                                <th>Código de barra</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -76,6 +78,7 @@
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
+                {data: 'codigo_barra', name: 'bib_exemplares.codigo_barra'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
