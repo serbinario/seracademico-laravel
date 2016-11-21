@@ -54,10 +54,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
-
-        body {
-            font-family: arial;
+        #container {
+            border-style: double;
+            border-color: #000080;
+            border-width: thick;
         }
+
+        #background {
+            width: 100%;
+            height: 100%;
+            background-image: url("{{ asset('/img/marca_dagua_fasupe.png') }}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: top;
+            background-size: 500px 700px;
+            opacity: 0.2;
+            position: absolute;
+        }
+
+        #main {
+            margin: 20px;
+            font-style: normal;
+            font-family: verdana;
+        }
+
+        div#rodape {
+            margin-top: 100px;
+        }
+
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -69,66 +93,89 @@
     <link href="" rel="stylesheet" media="screen">
 </head>
 
-<center><h4>ALPHA EDUCAÇÃO E TREINAMENTOS</h4></center>
+<body>
+    <div id="background">
+    </div>
 
-<center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
+    <div id="container">
+        <div id="main">
+            <div style="margin-right: 500px;">
+                <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
+            </div>
+            <center><h4>FACULDADE DE SAÚDE DE PAULISTA</h4></center>
 
-<center>
-    <span>DECLARAÇÃO DE VÍNCULO</span>
-</center>
+            <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
-<br />
+            <center>
+                <span>DECLARAÇÃO DE VÍNCULO</span>
+            </center>
 
-<p style="font-size: 20px">
-    Declaramos, para os devidos fins de direito, que {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!},
-    matrícula nº {!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!} está regulamente matriculado (a)
-    nesta Instituição de Ensino Superior, ALPHA – ALPHA EDUCAÇÃO E TREINAMENTOS no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
-    {!! isset($curso->nome) ? $curso->nome : "" !!}, realizado e certificado pela Faculdade ALPHA (
-    ALPHA EDUCAÇÃO E TREINAMENTOS ), de acordo com a portaria de
-    credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
-    <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>{{ !empty($data_rec) ? $data_rec->format('d/m/Y'): ''}}.
+            <br />
 
-</p>
+            <p style="font-size: 20px">
+                Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
+                matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
+                nesta Instituição de Ensino Superior, ALPHA – FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
+                <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade  FASUP
+                (Faculdade de Saúde de Paulista), de acordo com a portaria de
+                credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
+                <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>{{ !empty($data_rec) ? $data_rec->format('d/m/Y'): ''}}.
 
-<p style="font-size: 20px">
-    <?php
+            </p>
 
-    if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
-        $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
-        $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
-    } else {
-        $dataFromat = "";
-    }
-    ?>
-    O curso de Pós-Graduação atendeu ao disposto na Resolução CES/CNE-
-    MEC Nº 01 de 2007, com carga horária total de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!}horas/aula, iniciado no dia
-        <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> com previsão de término no dia
-        <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>.
-    Aulas aos sábados, das 08:00 às 17:00 horas.
-</p>
+            <p style="font-size: 20px">
+                <?php
 
-<p>
-    O referido é verdadeiro e dou fé.
-</p>
-<br />
+                if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
+                    $aulaIni = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+                    $aulaFim = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
+                } else {
+                    $dataFromat = "";
+                }
+                ?>
+                O curso de Pós-Graduação atendeu ao disposto na Resolução CES/CNE-
+                MEC Nº 01 de 2007, com carga horária total de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!}horas/aula, iniciado no dia
+                <?php data($aulaIni->format('d'), $aulaIni->format('m'), $aulaIni->format('Y'), $aulaIni->format('w')); ?> com previsão de término no dia
+                <?php data($aulaFim->format('d'), $aulaFim->format('m'), $aulaFim->format('Y'), $aulaFim->format('w')); ?>.
+                Aulas aos sábados, das 08:00 às 17:00 horas.
+            </p>
 
-<center>
-    <span>
-        Recife, <?php $data = new \DateTime('now'); data($data->format('d'), $data->format('m'), $data->format('Y'), $data->format('w')); ?>
-    </span>
-</center>
+            <div id="rodape">
+                <p>
+                    O referido é verdadeiro e dou fé.
+                </p>
+                <br />
 
-<center>
-    <p>
-        Secretária Acadêmica
-    </p>
-</center>
+                <div style="position: absolute; top: 600px; left: 300px">
+                    <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
+                </div>
 
-<p>
-    Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.
-    Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.
-    81-4101- 1117 - www.fasup.com
-</p>
+                <center>
+                    <span>
+                        Recife, <?php $data = new \DateTime('now'); data($data->format('d'), $data->format('m'), $data->format('Y'), $data->format('w')); ?>
+                    </span>
+                </center>
+
+                <center>
+                    <p>
+                        Secretária Acadêmica
+                    </p>
+                </center>
+
+                <div id="rodape" style="margin-top: 50px;">
+                    <center>
+                        <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
+                    </center>
+
+                    <div style="text-align: center; font-size: 11px; opacity: 0.5">
+                        <p>Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
+                        <p style="margin-top: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
+                        <p style="margin-top: 0;">81-4101- 1117 - www.fasup.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
