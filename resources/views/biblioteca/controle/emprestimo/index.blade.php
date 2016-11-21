@@ -47,6 +47,7 @@
                                 <th>Tombo</th>
                                 <th>Situação</th>
                                 <th>Emprestimo</th>
+                                <th>Código de barra</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -60,6 +61,7 @@
                                 <th>Tombo</th>
                                 <th>Situação</th>
                                 <th>Emprestimo</th>
+                                <th>Código de barra</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -142,6 +144,7 @@
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
                 {data: 'nome_emp', name: 'bib_emprestimo.nome'},
+                {data: 'codigo_barra', name: 'bib_exemplares.codigo_barra'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

@@ -90,6 +90,7 @@ class EmprestarController extends Controller
                 'bib_arcevos.subtitulo as subtitulo',
                 'bib_emprestimo.nome as nome_emp',
                 'bib_emprestimo.id as id_emp',
+                'bib_exemplares.codigo_barra as codigo_barra',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
             );
 
