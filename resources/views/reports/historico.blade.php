@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table">
+                        <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Nº</th>
@@ -51,15 +51,15 @@
 
                             <tbody>
                             @for($i = 0;$i < count($dados); $i++)
-                                <?php  $mediaGeral += $dados[$i]->nota; $cargaHorariaCumprida += $dados[$i]->carga_horaria; ?>
+                                <?php $mediaGeral += $dados[$i]['nota']; $cargaHorariaCumprida += $dados[$i]['carga_horaria']; ?>
                                 <tr>
                                     <td>{{ $i +1 }}</td>
-                                    <td>{{ $dados[$i]->disciplina }}</td>
-                                    <td>{{ $dados[$i]->carga_horaria }}</td>
-                                    <td>{{ $dados[$i]->nota }}</td>
-                                    <td>{{ $dados[$i]->frequencia }}</td>
-                                    <td>{{ $dados[$i]->professor }}</td>
-                                    <td>{{ $dados[$i]->titulacao }}</td>
+                                    <td>{{ $dados[$i]['disciplina'] }}</td>
+                                    <td>{{ $dados[$i]['carga_horaria'] }}</td>
+                                    <td>{{ $dados[$i]['nota'] }}</td>
+                                    <td>{{ $dados[$i]['frequencia'] }}</td>
+                                    <td>{{ $dados[$i]['professor'] }}</td>
+                                    <td>{{ $dados[$i]['titulacao'] }}</td>
                                 </tr>
                             @endfor
                             </tbody>
@@ -68,8 +68,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
-                        <table class="table">
+                    <div class="col-md-4" style="width: 50%">
+                        <table class="table table-bordered table-striped">
                             <thead>
                             <th>Média Geral</th>
                             <th>Carga Horária Cumprida</th>

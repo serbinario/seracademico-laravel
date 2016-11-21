@@ -293,13 +293,17 @@ class AlunoDocumentoController extends Controller
         
         # Checanddo a turma do aluno
         if(($turma = $curriculo->pivot->turmas()->get()->last())) {
+            #contador
+            $count = 0;
+
+            # Percorrendo as notas
             foreach($turma->pivot->notas()->get() as $nota) {
                 # Preenchendo os campos
-                $result[]['aluno'] = $aluno->pessoa->nome;
-                $result[]['disciplina'] = $nota->disciplina->nome;
-                $result[]['carga_horaria'] = $nota->disciplina->carga_horaria;
-                $result[]['nota'] = $nota->nota_final;
-                $result[]['frequencia'] = is_numeric($nota->nota_final) ? '100%' : 'FALTOU';
+                $result[$count]['aluno'] = $aluno->pessoa->nome;
+                $result[$count]['disciplina'] = $nota->disciplina->nome;
+                $result[$count]['carga_horaria'] = $nota->disciplina->carga_horaria;
+                $result[$count]['nota'] = $nota->nota_final;
+                $result[$count]['frequencia'] = is_numeric($nota->nota_final) ? '100%' : 'FALTOU';
 
                 # Recuperando o professor
                 $arrayProfessor = \DB::table('fac_professores')
@@ -307,11 +311,11 @@ class AlunoDocumentoController extends Controller
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_calendarios.turma_disciplina_id')
                     ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
                     ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
-                    ->join('pessoas', 'pessoas.id', '=', 'professores.pessoa_id')
-                    ->where('fac_disciplinas.id', $nota->disciplina-id)
+                    ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
+                    ->where('fac_disciplinas.id', $nota->disciplina->id)
                     ->where('fac_turmas.id', $nota->turma->id)
                     ->orderBy('fac_calendarios.id', 'DESC')
-                    ->skip(1)
+                    ->limit(1)
                     ->select([
                         'pessoas.nome',
                         'fac_professores.instituicao_graduacao_id',
@@ -321,9 +325,12 @@ class AlunoDocumentoController extends Controller
                     ])->get();
 
                 # Preenchendo o professor
-                $result[]['professor'] = isset($arrayProfessor[0]->nome) ?? null;
-                $result[]['titulacao'] = isset($arrayProfessor[0]) ?
+                $result[$count]['professor'] = isset($arrayProfessor[0]->nome) ? $arrayProfessor[0]->nome : null;
+                $result[$count]['titulacao'] = isset($arrayProfessor[0]) ?
                     $this->getTitulacaoProfessor($arrayProfessor[0]) : null;
+
+                # incremento
+                $count++;
             }
 
             # Retorno
