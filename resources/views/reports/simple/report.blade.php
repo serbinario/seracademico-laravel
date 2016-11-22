@@ -52,7 +52,7 @@
                         <?php $count = 0; ?>
                         @foreach($dados['body'] as $bordy)
                             <tr>
-                                <th>++$count</th>
+                                <th>{{++$count}}</th>
                                 <!-- Percorrendo as colunas que tem reflexo no banco -->
                                 @foreach($bordy as $key => $value)
                                     <td>{{ $value }}</td>
