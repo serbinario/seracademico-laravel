@@ -153,10 +153,9 @@ class ArcevoController extends Controller
             $model = $retorno['acervo'];
             $segundaEntrada = $retorno['segundaEntrada'];
             $primeiraEntrada = $retorno['primeiraEntrada'];
-            //dd($segundaEntrada);
 
             #Tratando as datas
-           // $aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
+           //$aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
@@ -180,7 +179,7 @@ class ArcevoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

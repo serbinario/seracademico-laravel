@@ -10,7 +10,7 @@ use Seracademico\Services\Biblioteca\ArcevoPeriodicoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Biblioteca\ArcevoValidator;
+use Seracademico\Validators\Biblioteca\ArcevoPeriodicoValidator;
 
 class ArcevoPeriodicoController extends Controller
 {
@@ -43,7 +43,7 @@ class ArcevoPeriodicoController extends Controller
     * @param ArcevoPeriodicoService $service
     * @param ArcevoValidator $validator
     */
-    public function __construct(ArcevoPeriodicoService $service, ArcevoValidator $validator)
+    public function __construct(ArcevoPeriodicoService $service, ArcevoPeriodicoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -117,7 +117,7 @@ class ArcevoPeriodicoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -170,7 +170,7 @@ class ArcevoPeriodicoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

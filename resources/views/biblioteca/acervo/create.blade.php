@@ -28,14 +28,15 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.biblioteca.storeAcervo', 'method' => "POST" ]) !!}
-            @include('tamplatesForms.tamplateFormArcevo')
+            {!! Form::open(['route'=>'seracademico.biblioteca.storeAcervo', 'id' => 'formAcervo', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.tamplateFormArcevo')
             {!! Form::close() !!}
         </div>
     </div>
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_acervo.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cursos').multiselect({

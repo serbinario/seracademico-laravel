@@ -26,7 +26,7 @@
                     @endforeach
                 </div>
             @endif
-            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplarP', 'id' => 'FormExemplar', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.biblioteca.storeExemplarP', 'id' => 'FormExemplarP', 'method' => "POST" , 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormExemplarPeriodico')
             {!! Form::close() !!}
         </div>
@@ -34,6 +34,7 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_exemplar_periodico.js')}}"></script>
     <script type="text/javascript">
 
         //Validações javascript

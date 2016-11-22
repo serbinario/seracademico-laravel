@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateAcervo', $model->id], 'method' => "POST" ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateAcervo', $model->id], 'id' => 'formAcervo','method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormArcevo')
             {!! Form::close() !!}
         </div>
@@ -38,6 +38,7 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_acervo.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cursos').multiselect({
