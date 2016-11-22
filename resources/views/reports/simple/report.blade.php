@@ -42,15 +42,17 @@
                 <table id="report"  width="100%" border="1" cellspacing="0" style="border: 1px solid lightgray;">
                     <thead>
                     <tr>
+                        <th>Nº</th>
                         @foreach($dados['headers'] as $value)
                             <th>{{ $value }}</th>
                         @endforeach
                     </tr>
                     </thead>
                     <tbody>
-                    
+                        <?php $count = 0; ?>
                         @foreach($dados['body'] as $bordy)
                             <tr>
+                                <th>++$count</th>
                                 <!-- Percorrendo as colunas que tem reflexo no banco -->
                                 @foreach($bordy as $key => $value)
                                     <td>{{ $value }}</td>
