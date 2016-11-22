@@ -10,7 +10,7 @@
                 <div class="row">
                     <!-- Linha de descrição -->
                     <div class="col-md-12 infModal">
-                        <div class="col-md-2">
+                        <div class="col-md-12">
                             <span><strong>Turma: </strong><p id="caTurma"></p></span>
                         </div>
                     </div>

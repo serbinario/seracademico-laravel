@@ -5,14 +5,6 @@ $('#btnCancelarNovoCalendario').click( function() {
 
 // Evento abrir o modal
 $('#btnAddCalendario').click( function() {
-
-
-
-    // Ativando o ranger da data
-    $('#datetimepicker3').datetimepicker({
-        format: 'LT'
-    });
-
     // Abrindo o modal
     $('#modal-novo-calendario').modal({show:true});
 });
@@ -30,8 +22,8 @@ $('#btnSalvarCalendario').click(function() {
         'turma_disciplina_id': idTurmaDisciplina,
         'data'               : data,
         'data_final'         : data_final,
-        'hora_inicial'       : hora_inicial,
-        'hora_final'         : hora_final,
+        'hora_inicial'       : hora_inicial + ':00',
+        'hora_final'         : hora_final + ':00',
         'sala_id'            : sala_id,
         'professor_id'       : professor_id,
     };
