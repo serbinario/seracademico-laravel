@@ -28,7 +28,7 @@
                         </table>
                     </div>
                     <div class="col-md-7">
-                        <button class="btn btn-primary pull-right" id="btnAddCalendario" data-toggle="modal" data-target="#modal-novo-calendario" disabled="disabled" style="margin-bottom: 2%;">Novo calendário</button>
+                        <button class="btn btn-primary pull-right" id="btnAddCalendario" disabled="disabled" style="margin-bottom: 2%;">Novo calendário</button>
 
                         <table id="calendario-cargahoraria-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>

@@ -3,6 +3,20 @@ $('#btnCancelarNovoCalendario').click( function() {
     $('#modal-novo-calendario').modal('toggle');
 });
 
+// Evento abrir o modal
+$('#btnAddCalendario').click( function() {
+
+
+
+    // Ativando o ranger da data
+    $('#datetimepicker3').datetimepicker({
+        format: 'LT'
+    });
+
+    // Abrindo o modal
+    $('#modal-novo-calendario').modal({show:true});
+});
+
 // Evento para salvar
 $('#btnSalvarCalendario').click(function() {
     var data         = $("#data").val();
