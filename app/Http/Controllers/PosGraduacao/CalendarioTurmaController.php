@@ -98,9 +98,21 @@ class CalendarioTurmaController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
+            # Html de Retorno
+            $html  = '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a>';
 
-            return '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a>
-                    <a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            # Recuperando as frequências
+            $frequencias = \DB::table('pos_alunos_frequencias')
+                ->where('pos_alunos_frequencias.calendario_id', $row->id)
+                ->select(['pos_alunos_frequencias.id'])->get();
+
+            # Validando as frequências
+            if(count($frequencias) == 0) {
+                $html .= '<a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
+            }
+
+            # Retorno
+            return $html;
         })->make(true);
     }
 
