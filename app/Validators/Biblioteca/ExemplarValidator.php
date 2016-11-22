@@ -14,35 +14,30 @@ class ExemplarValidator extends LaravelValidator
 	protected $messages   = [];
 
 	protected $attributes = [
-		'img' => 'Foto'
+		'img' => 'Foto',
+		'editoras_id' =>  'Editora' ,
+		'numero_pag' =>  'Número de página' ,
+		'isbn' =>  'ISBN' ,
+		'arcevos_id' =>  'Acervo' ,
 	];
 	
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            
-			'ano' =>  '' ,
+
 			'img' => 'image|max:500',
-			'registros' =>  'required' ,
-			'editoras_id' =>  '' ,
-			'ilustracoes_id' =>  '' ,
-			'idiomas_id' =>  '' ,
-			'numero_pag' =>  '' ,
-			'isbn' =>  '' ,
-			'issn' =>  '' ,
-			'data_aquisicao' =>  '' ,
-			'aquisicao_id' =>  '' ,
-			'edicao' =>  '' ,
-			'editor' =>  '' ,
-			'obs_especifica' =>  '' ,
-			'exemp_principal' =>  '' ,
-			'situacao_id' =>  '' ,
-			'emprestimo_id' =>  '' ,
-			'local' =>  '' ,
-			'arcevos_id' =>  '' ,
-			'valor' =>  '' ,
+			'editoras_id' =>  'required' ,
+			'numero_pag' =>  'required' ,
+			'isbn' =>  'required' ,
+			'arcevos_id' =>  'required' ,
 
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+			'img' => 'image|max:500',
+			'editoras_id' =>  'required' ,
+			'numero_pag' =>  'required' ,
+			'isbn' =>  'required' ,
+			'arcevos_id' =>  'required' ,
+		],
    ];
 
 }

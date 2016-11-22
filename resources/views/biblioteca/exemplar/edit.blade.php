@@ -35,21 +35,8 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_exemplar.js')}}"></script>
     <script type="text/javascript">
-
-        //Validações javascript
-        $('#FormExemplar').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 512000,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 500kb"
-                        }
-                    }
-                },
-            },
-        });
 
         $(document).ready(function(){
 

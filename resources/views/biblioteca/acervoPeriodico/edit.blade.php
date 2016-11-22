@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateAcervoP', $model->id], 'method' => "POST" ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateAcervoP', $model->id], 'id' => 'formAcervoP','method' => "POST" ]) !!}
                 @include('tamplatesForms.tamplateFormArcevoPeriodico')
             {!! Form::close() !!}
         </div>
@@ -38,7 +38,5 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript">
-
-    </script>
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_acervo_periodico.js')}}"></script>
 @stop
