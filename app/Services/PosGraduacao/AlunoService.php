@@ -489,18 +489,28 @@ class AlunoService
         foreach ($data as $key => $value) {
             if(is_array($value)) {
                 foreach ($value as $key2 => $value2) {
-                    $explodeKey2 = explode("_", $key2);
+                    if(is_array($value2)) {
+                        foreach ($value2 as $key3 => $value3) {
+                            $explodeKey3 = explode("_", $key3);
 
-                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
-                        $data[$key][$key2] = null;
+                            if ($explodeKey3[count($explodeKey3) -1] == "id" && !$value3 ) {
+                                unset($data[$key][$key2][$key3]);
+                            }
+                        }
+                    } else {
+                        $explodeKey2 = explode("_", $key2);
+
+                        if ($explodeKey2[count($explodeKey2) -1] == "id" && !$value2 ) {
+                            unset($data[$key][$key2]);
+                        }
                     }
                 }
             }
 
             $explodeKey = explode("_", $key);
 
-            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
-                $data[$key] = null;
+            if ($explodeKey[count($explodeKey) -1] == "id" && !$value ) {
+                unset($data[$key]);
             }
         }
 
