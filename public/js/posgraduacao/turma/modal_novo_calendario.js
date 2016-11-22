@@ -3,6 +3,12 @@ $('#btnCancelarNovoCalendario').click( function() {
     $('#modal-novo-calendario').modal('toggle');
 });
 
+// Evento abrir o modal
+$('#btnAddCalendario').click( function() {
+    // Abrindo o modal
+    $('#modal-novo-calendario').modal({show:true});
+});
+
 // Evento para salvar
 $('#btnSalvarCalendario').click(function() {
     var data         = $("#data").val();
@@ -16,8 +22,8 @@ $('#btnSalvarCalendario').click(function() {
         'turma_disciplina_id': idTurmaDisciplina,
         'data'               : data,
         'data_final'         : data_final,
-        'hora_inicial'       : hora_inicial,
-        'hora_final'         : hora_final,
+        'hora_inicial'       : hora_inicial + ':00',
+        'hora_final'         : hora_final + ':00',
         'sala_id'            : sala_id,
         'professor_id'       : professor_id,
     };

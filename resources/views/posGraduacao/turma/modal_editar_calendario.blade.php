@@ -23,14 +23,14 @@
 
                             <div class="form-group col-md-4">
                                 <label for="hora_inicial">Hora inicial</label>
-                                <input type="text" name="hora_inicial" class="form-control time" id="hora_inicial_editar" placeholder="00:00:00">
+                                <input type="text" name="hora_inicial" class="form-control timepicker" id="hora_inicial_editar" placeholder="00:00:00">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="hora_final">Hora final</label>
-                                <input type="text" name="hora_final" class="form-control time" id="hora_final_editar" placeholder="00:00:00">
+                                <input type="text" name="hora_final" class="form-control timepicker" id="hora_final_editar" placeholder="00:00:00">
                             </div>
 
                             <div class="form-group col-md-4">

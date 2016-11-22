@@ -22,9 +22,7 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
      */
     protected $dates    = [
         'data',
-        'data_final',
-        'hora_inicial',
-        'hora_final',
+        'data_final'
     ];
 
     /**
@@ -86,37 +84,5 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
     public function setDataFinalAttribute($value)
     {
         $this->attributes['data_final'] = SerbinarioDateFormat::toUsa($value);
-    }
-
-    /*
-     * @return \DateTime
-     */
-    public function getHoraInicialAttribute()
-    {
-        return SerbinarioDateFormat::toBrazil($this->attributes['hora_inicial'], true);
-    }
-
-    /**
-     * @param $value
-     */
-    public function setHoraInicialAttribute($value)
-    {
-        $this->attributes['hora_inicial'] = SerbinarioDateFormat::toUsa($value);
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getHoraFinalAttribute()
-    {
-        return SerbinarioDateFormat::toBrazil($this->attributes['hora_final'], true);
-    }
-
-    /**
-     * @param $value
-     */
-    public function setHoraFinalAttribute($value)
-    {
-        $this->attributes['hora_final'] = SerbinarioDateFormat::toUsa($value);
     }
 }

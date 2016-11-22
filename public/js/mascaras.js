@@ -71,6 +71,17 @@ $(document).ready(function(){
         allowBlank: true,
     });
 
+    $('.timepicker').datetimepicker({
+        datepicker: false,
+        pickSeconds: false,
+        timepicker: false,
+        format: 'H:i',
+        mask: true,
+        lang: 'pt-BR',
+        allowBlank: true,
+    });
+
+
     //##### Tipos de beneficio
     //##### Submeter formulário
     $('#formTipoBeneficio').submit(function() {

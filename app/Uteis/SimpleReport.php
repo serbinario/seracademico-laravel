@@ -86,7 +86,7 @@ class SimpleReport implements Report
         $fields = implode(',', array_column($this->fields, 'field'));
 
         # Finalizando o sql principal
-        $sql = str_replace('FIELDS', $fields, $this->sql[0]);
+        $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
         # Variável que armazenará a condição where
         $where = "";
@@ -103,7 +103,7 @@ class SimpleReport implements Report
         }
 
         # Executando o sql principal
-        return \DB::select($sql . $where);
+        return \DB::select($sql . $where . " {$this->sql[0]->groupBy}");
     }
 
     /**
@@ -121,7 +121,7 @@ class SimpleReport implements Report
         }
 
         # Finalizando o sql principal
-        $sql = str_replace('FIELDS', $fields, $this->sql[0]);
+        $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
         # Variável que armazenará a condição where
         $where = "";
@@ -138,7 +138,7 @@ class SimpleReport implements Report
         }
 
         # Executando o sql principal
-        return \DB::select($sql . $where);
+        return \DB::select($sql . $where. " {$this->sql[0]->groupBy}");
     }
 
 //    /**
@@ -187,8 +187,9 @@ class SimpleReport implements Report
 
         # Recuperando o sql principal
         $this->sql =  \DB::table('reports')
+            ->select(['reports.sql', 'groupBy'])
             ->where('reports.id', $id)
-            ->lists('reports.sql');
+            ->get();
 
         # Carregando os campos principais
         $this->fields = \DB::table('fields_report')

@@ -152,6 +152,9 @@ class AlunoController extends Controller
                         $query->where(function ($where) use ($search) {
                             $where->orWhere('pessoas.nome', 'like', "%$search%")
                                 ->orWhere('pessoas.cpf', 'like', "%$search%")
+                                ->orWhere('pessoas.telefone_fixo', 'like', "%$search%")
+                                ->orWhere('pessoas.celular', 'like', "%$search%")
+                                ->orWhere('pessoas.celular2', 'like', "%$search%")
                                 ->orWhere('pos_alunos.matricula', 'like', "%$search%")
                                 ->orWhere('fac_curriculos.codigo', 'like', "%$search%");
                         });
