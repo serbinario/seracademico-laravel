@@ -10,7 +10,7 @@ use Seracademico\Services\Biblioteca\ExemplarServicePeriodico;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Biblioteca\ExemplarValidator;
+use Seracademico\Validators\Biblioteca\ExemplarPeriodicoValidator;
 
 class ExemplarPeriodicoController extends Controller
 {
@@ -42,7 +42,7 @@ class ExemplarPeriodicoController extends Controller
     * @param ExemplarServicePeriodico $service
     * @param ExemplarValidator $validator
     */
-    public function __construct(ExemplarServicePeriodico $service, ExemplarValidator $validator)
+    public function __construct(ExemplarServicePeriodico $service, ExemplarPeriodicoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -176,7 +176,7 @@ class ExemplarPeriodicoController extends Controller
             $data = $request->all();
             
             #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

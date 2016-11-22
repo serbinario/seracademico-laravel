@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateExemplarP', $model->id], 'id' => 'FormExemplar', 'method' => "POST", 'enctype' => 'multipart/form-data' ]) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.biblioteca.updateExemplarP', $model->id], 'id' => 'FormExemplarP', 'method' => "POST", 'enctype' => 'multipart/form-data' ]) !!}
                 @include('tamplatesForms.tamplateFormExemplarPeriodico')
             {!! Form::close() !!}
         </div>
@@ -35,21 +35,8 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_exemplar_periodico.js')}}"></script>
     <script type="text/javascript">
-
-        //Validações javascript
-        $('#FormExemplar').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 512000,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 500kb"
-                        }
-                    }
-                },
-            },
-        });
 
         $(document).ready(function(){
 

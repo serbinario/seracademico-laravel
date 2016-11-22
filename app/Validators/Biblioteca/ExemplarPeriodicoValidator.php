@@ -6,7 +6,7 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
 
-class ExemplarPeriodico extends LaravelValidator
+class ExemplarPeriodicoValidator extends LaravelValidator
 {
 
 	use TraitReplaceRulesValidator;
@@ -14,35 +14,33 @@ class ExemplarPeriodico extends LaravelValidator
 	protected $messages   = [];
 
 	protected $attributes = [
-		'img' => 'Foto'
+		'img' => 'Foto',
+		'editoras_id' =>  'Editora' ,
+		'numero_pag' =>  'Número de página' ,
+		'issn' =>  'ISSN' ,
+		'arcevos_id' =>  'Acervo' ,
+		'assunto_p' =>  'Assunto' ,
 	];
 	
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            
-			'ano' =>  '' ,
+
 			'img' => 'image|max:500',
-			'registros' =>  'required' ,
-			'editoras_id' =>  '' ,
-			'ilustracoes_id' =>  '' ,
-			'idiomas_id' =>  '' ,
-			'numero_pag' =>  '' ,
-			'isbn' =>  '' ,
-			'issn' =>  '' ,
-			'data_aquisicao' =>  '' ,
-			'aquisicao_id' =>  '' ,
-			'edicao' =>  '' ,
-			'editor' =>  '' ,
-			'obs_especifica' =>  '' ,
-			'exemp_principal' =>  '' ,
-			'situacao_id' =>  '' ,
-			'emprestimo_id' =>  '' ,
-			'local' =>  '' ,
-			'arcevos_id' =>  '' ,
-			'valor' =>  '' ,
+			'editoras_id' =>  'required' ,
+			'numero_pag' =>  'required' ,
+			'issn' =>  'required' ,
+			'arcevos_id' =>  'required' ,
+			'assunto_p' =>  'required' ,
 
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+			'img' => 'image|max:500',
+			'editoras_id' =>  'required' ,
+			'numero_pag' =>  'required' ,
+			'issn' =>  'required' ,
+			'arcevos_id' =>  'required' ,
+			'assunto_p' =>  'required' ,
+		],
    ];
 
 }

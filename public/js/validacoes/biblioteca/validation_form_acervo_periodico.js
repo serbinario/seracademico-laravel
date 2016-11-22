@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#formAluno').bootstrapValidator({
+    $('#formAcervoP').bootstrapValidator({
         excluded: [':disabled'],
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -7,14 +7,21 @@ $(document).ready(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            'alunos[nomeAlunos]': {
+            'titulo': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
                     },
                 },
             },
-            'alunos[cpfAlunos]': {
+            'cdd': {
+                validators: {
+                    notEmpty: {
+                        message: "Este campo é obrigatório",
+                    },
+                },
+            },
+            'tipos_acervos_id': {
                 validators: {
                     notEmpty: {
                         message: "Este campo é obrigatório",
