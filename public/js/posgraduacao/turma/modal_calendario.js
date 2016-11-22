@@ -7,7 +7,7 @@ function loadTableDisciplina (idTurma) {
         retrieve: true,
         iDisplayLength: 5,
         bLengthChange: false,
-        bFilter: false,
+       // bFilter: false,
         ajax: "/index.php/seracademico/posgraduacao/turma/calendario/grid/" + idTurma,
         columns: [
             {data: 'nome', name: 'fac_disciplinas.nome'},

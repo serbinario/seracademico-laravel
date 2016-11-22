@@ -116,7 +116,7 @@ class CalendarioTurmaController extends Controller
 
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
+            
             #Executando a ação
             $this->service->store($data);
 

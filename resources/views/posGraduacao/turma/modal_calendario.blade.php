@@ -10,7 +10,7 @@
                 <div class="row">
                     <!-- Linha de descrição -->
                     <div class="col-md-12 infModal">
-                        <div class="col-md-2">
+                        <div class="col-md-12">
                             <span><strong>Turma: </strong><p id="caTurma"></p></span>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         </table>
                     </div>
                     <div class="col-md-7">
-                        <button class="btn btn-primary pull-right" id="btnAddCalendario" data-toggle="modal" data-target="#modal-novo-calendario" disabled="disabled" style="margin-bottom: 2%;">Novo calendário</button>
+                        <button class="btn btn-primary pull-right" id="btnAddCalendario" disabled="disabled" style="margin-bottom: 2%;">Novo calendário</button>
 
                         <table id="calendario-cargahoraria-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
