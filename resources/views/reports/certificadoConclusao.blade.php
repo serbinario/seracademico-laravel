@@ -80,7 +80,7 @@
         }
 
         div#rodape {
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         table, th, td {
