@@ -60,8 +60,11 @@ class ReportController extends Controller
         # Recuperando os dados do relatório
         $report = $this->report->generate($idReport, $dados);
 
+        # Recuoerando a view
+        $view = $report['view'] ?? 'report';
+
         # Criando o relatório
-        return \PDF::loadView('reports.simple.report', ['dados' => $report])->stream();
+        return \PDF::loadView("reports.simple.{$view}", ['dados' => $report])->stream();
     }
 
     /**

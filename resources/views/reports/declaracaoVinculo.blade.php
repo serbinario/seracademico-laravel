@@ -93,7 +93,7 @@
             font-size: small;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
+    <link href="" rel="stylesheet" media="print">
 </head>
 
 <body>

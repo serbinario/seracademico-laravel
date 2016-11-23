@@ -78,7 +78,7 @@
             z-index:100;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
+    <link href="" rel="stylesheet" media="print">
 </head>
 <body>
 
