@@ -78,7 +78,7 @@
             font-family: verdana;
             font-weight: normal;
             text-align: justify;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         div#rodape {
