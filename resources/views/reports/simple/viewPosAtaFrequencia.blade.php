@@ -42,6 +42,10 @@
             width: 5%;
         }
 
+        .percentFive {
+            width: 10%;
+        }
+
         .percentSixty {
             width: 60%;
         }
@@ -102,7 +106,9 @@
                         <thead>
                         <tr>
                             <th class="percentFive">Nº</th>
+                            <th class="percentTen">Matrícula</th>
                             <th class="percentSixty">Nome</th>
+                            <th class="percentTen">Turma</th>
                             <th class="percentThirtyFive">Assinatura</th>
                         </tr>
                         </thead>
