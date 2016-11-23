@@ -120,7 +120,7 @@
 
             </p>
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 <?php
 
                 if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
