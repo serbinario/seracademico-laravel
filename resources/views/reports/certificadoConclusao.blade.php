@@ -58,6 +58,7 @@
             border-style: double;
             border-color: #000080;
             border-width: thick;
+            font-size: 12px;
         }
 
         #background {
@@ -77,7 +78,6 @@
             font-style: normal;
             font-family: verdana;
             text-align: justify;
-            font-size: 20%;
         }
 
         div#rodape {
