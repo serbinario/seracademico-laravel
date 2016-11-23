@@ -150,7 +150,7 @@
                 </p>
                 <br />
 
-                <div style="position: absolute; top: 600px; left: 300px">
+                <div style="position: absolute; margin-top: -20px; margin-left: 30%;">
                     <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
                 </div>
 
