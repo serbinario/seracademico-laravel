@@ -76,10 +76,11 @@
             margin: 20px;
             font-style: normal;
             font-family: verdana;
+            text-align: justify;
         }
 
         div#rodape {
-            margin-top: 100px;
+            margin-top: 50px;
         }
 
         table, th, td {
@@ -107,7 +108,7 @@
             <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
             <center>
-                <span>DECLARAÇÃO DE VÍNCULO</span>
+                <span><b>DECLARAÇÃO DE VÍNCULO</b></span>
             </center>
 
             <br />
