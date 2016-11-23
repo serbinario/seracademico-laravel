@@ -77,18 +77,11 @@
             font-style: normal;
             font-family: verdana;
             text-align: justify;
+            font-size: 20%;
         }
 
         div#rodape {
             margin-top: 30px;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        table , tr , td {
-            font-size: small;
         }
     </style>
     <link href="" rel="stylesheet" media="screen">
