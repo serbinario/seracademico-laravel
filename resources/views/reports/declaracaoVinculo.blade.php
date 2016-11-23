@@ -113,7 +113,7 @@
 
             <br />
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
                 nesta Instituição de Ensino Superior, ALPHA – FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
@@ -124,7 +124,7 @@
 
             </p>
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 <?php
 
                 if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
