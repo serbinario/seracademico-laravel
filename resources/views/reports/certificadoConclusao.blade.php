@@ -58,7 +58,6 @@
             border-style: double;
             border-color: #000080;
             border-width: thick;
-            font-size: 12px;
         }
 
         #background {
@@ -106,7 +105,7 @@
 
             <br />
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 RG nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!}</b> – <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE</b>,
                 CPF nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!}</b> Filha de <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!}</b> e
