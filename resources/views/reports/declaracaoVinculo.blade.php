@@ -158,7 +158,7 @@
                 </center>
 
                 <center>
-                    <p style="margin-top: 70px;">
+                    <p style="margin-top: 40px;">
                         Secretária Acadêmica
                     </p>
                 </center>
