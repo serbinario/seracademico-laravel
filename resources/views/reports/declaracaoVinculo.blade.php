@@ -105,9 +105,9 @@
             <div style="margin-right: 500px;">
                 <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
             </div>
-            <center><h4>FACULDADE DE SAÚDE DE PAULISTA</h4></center>
+            <center><h4 style="margin-bottom: 5px;">FACULDADE DE SAÚDE DE PAULISTA</h4></center>
 
-            <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
+            <center><h4 style="margin-top: 5px;">Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
             <center>
                 <span><b>DECLARAÇÃO DE VÍNCULO</b></span>
