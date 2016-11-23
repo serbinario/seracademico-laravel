@@ -109,7 +109,7 @@
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 RG nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!}</b> – <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE</b>,
                 CPF nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!}</b> Filha de <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!}</b> e
-                {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}, concluiu o curso de Pós-
+                <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}</b>, concluiu o curso de Pós-
                 graduação “Lato Sensu” EM <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela ALPHA EDUCAÇÃO E TREINAMENTOS - ALPHA , de acordo com a portaria de credenciamento
                 do MEC de nº {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>
                 {{ !empty($data_rec) ? $data_rec->format('d/m/Y'): "" }}. O referido aluno (a) concluiu o
