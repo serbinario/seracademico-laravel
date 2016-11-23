@@ -147,7 +147,7 @@
                 </p>
                 <br />
 
-                <div style="position: absolute; margin-top: -20px; margin-left: 30%;">
+                <div style="position: absolute; margin-top: -20px; margin-left: 33%;">
                     <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
                 </div>
 
@@ -158,7 +158,7 @@
                 </center>
 
                 <center>
-                    <p>
+                    <p style="margin-top: 70px;">
                         Secretária Acadêmica
                     </p>
                 </center>
