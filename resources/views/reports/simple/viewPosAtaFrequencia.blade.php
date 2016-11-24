@@ -33,6 +33,7 @@
 
         table {
             font-size: 12px;
+            font-weight: bold;
             border-collapse: collapse;
         }
 
@@ -110,7 +111,7 @@
                         <tbody>
                         <tr>
                             <td>Unidade de estudos direcionados: Recife</td>
-                            <td>Pós-Graduação em {{ $dados['filtersBody'][2] ?? ""  }} - {{date('Y') . '.' . ($numberMonth >= 8 ? 2 : 1)}}</td>
+                            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{date('Y') . '.' . ($numberMonth >= 8 ? 2 : 1)}}</td>
                         </tr>
                         <tr>
                             <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
