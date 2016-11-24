@@ -55,7 +55,6 @@
     <title></title>
     <style type="text/css">
         #container {
-            opacity: 1;
             border-style: double;
             border-color: #000080;
             border-width: thick;
@@ -64,18 +63,15 @@
         #background {
             width: 100%;
             height: 100%;
-            background-image: url("{{ asset('/img/marca_dagua_fasupe.png') }}");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: top;
             background-size: 500px 700px;
-            opacity: 0.2;
             position: absolute;
         }
+
         @media print
         {
             body {font-family:georgia, times, serif;}
         }
+        
         #main {
             margin: 20px;
             font-weight: 500;
@@ -101,6 +97,7 @@
 
 <body>
     <div id="background">
+
     </div>
 
     <div id="container">
