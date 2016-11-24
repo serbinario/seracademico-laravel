@@ -27,7 +27,7 @@
         #body {
             margin-top: 50px;
             font-size: 12px;
-            font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
+            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
         table#tableHeader td {
@@ -47,11 +47,11 @@
         }
 
         .percentSixty {
-            width: 60%;
+            width: 50%;
         }
 
         .percentThirtyFive {
-            width: 35%;
+            width: 45%;
         }
 
         /****** Estilos footer *******/
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td>Data: {{ date('d/m/Y') }}</td>
-                            <td>{{ $dados['filtersBody'][3] ?? ""}}</td>
+                            <td>Período: {{ $request['turno'] }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -106,9 +106,7 @@
                         <thead>
                         <tr>
                             <th class="percentFive">Nº</th>
-                            <th class="percentTen">Matrícula</th>
                             <th class="percentSixty">Nome</th>
-                            <th class="percentTen">Turma</th>
                             <th class="percentThirtyFive">Assinatura</th>
                         </tr>
                         </thead>
