@@ -78,7 +78,7 @@
             font-family: "Arial";
             font-weight: normal;
             text-align: justify;
-            line-height: 1.0;
+            line-height: 1.3;
         }
 
         div#rodape {
