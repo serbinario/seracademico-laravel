@@ -83,7 +83,7 @@
             margin-top: 30px;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
+    <link href="" rel="stylesheet" media="print">
 </head>
 
 <body>

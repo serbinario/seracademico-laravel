@@ -93,7 +93,7 @@
             font-size: small;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
+    <link href="" rel="stylesheet" media="print">
 </head>
 
 <body>
@@ -115,10 +115,10 @@
 
             <br />
 
-            <p style="font-size: 18px;text-indent: 2em;">
+            <p style="font-size: 20px;text-indent: 2em;">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
-                nesta Instituição de Ensino Superior, ALPHA – FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
+                nesta Instituição de Ensino Superior, FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
                 <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade  FASUP
                 (Faculdade de Saúde de Paulista), de acordo com a portaria de
                 credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
@@ -126,7 +126,7 @@
 
             </p>
 
-            <p style="font-size: 18px;text-indent: 2em;">
+            <p style="font-size: 20px;text-indent: 2em;">
                 <?php
 
                 if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
@@ -170,10 +170,10 @@
                         <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
                     </center>
 
-                    <div style="text-align: center; font-size: 11px; opacity: 0.5">
-                        <p>Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
-                        <p style="margin-top: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
-                        <p style="margin-top: 0;">81-4101- 1117 - www.fasup.com</p>
+                    <div style="text-align: center; font-size: 11px;">
+                        <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
+                        <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
+                        <p style="margin: 0;">81-4101- 1117 - www.fasup.com</p>
                     </div>
                 </div>
             </div>
