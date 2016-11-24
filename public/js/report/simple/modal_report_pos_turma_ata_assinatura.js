@@ -73,16 +73,18 @@ $('#btnBuilderReportGraTurmaAtaAssinatura').click(function() {
     var cursoId  = $('#curso_gra_turma_ata_assinatura_id').val();
     var turmaId  = $('#turma_gra_turma_ata_assinatura_id').val();
     var disciplinaId  = $('#disciplina_gra_turma_ata_assinatura_id').val();
+    var turno = $('#turno_gra_turma_ata_assinatura_id').val();
 
     // Validando as entradas
-    if(!cursoId || !turmaId || !disciplinaId) {
+    if(!cursoId || !turmaId || !disciplinaId || !turno) {
         swal('Todos os campos do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
         return false;
     }
 
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
-        + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_disciplinas,id="+disciplinaId, '_blank');
+        + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_disciplinas,id="+disciplinaId+'&turno='+turno,
+        '_blank');
 });
 
 // selects 2
