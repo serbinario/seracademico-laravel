@@ -33,6 +33,7 @@
 
         table {
             font-size: 12px;
+            font-weight: bold;
             border-collapse: collapse;
         }
 

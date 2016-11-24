@@ -89,6 +89,7 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+
         table , tr , td {
             font-size: small;
         }
