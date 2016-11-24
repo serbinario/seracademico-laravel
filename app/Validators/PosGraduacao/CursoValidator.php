@@ -22,7 +22,7 @@ class CursoValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
 
 			'nome' =>  'required|max:200|unique:fac_cursos,nome',
-			'codigo' =>  'required|max:15|unique:fac_cursos,codigo',
+			'codigo' =>  'required|max:30|unique:fac_cursos,codigo',
 			'portaria_mec_rec' =>  'max:50',
 			'numero_decreto_rec' =>  '' ,
 			'data_decreto_rec' =>  'serbinario_date_format:"d/m/Y"',
@@ -50,7 +50,7 @@ class CursoValidator extends LaravelValidator
         ValidatorInterface::RULE_UPDATE => [
 
 			'nome' =>  'required|max:200|unique:fac_cursos,nome,:id',
-			'codigo' =>  'required|max:15|unique:fac_cursos,codigo,:id',
+			'codigo' =>  'required|max:30|unique:fac_cursos,codigo,:id',
 			'duracao_meses' =>  'digits_between:1,3|numeric',
 			'portaria_mec_rec' =>  'max:50',
 			'numero_decreto_rec' =>  '' ,
