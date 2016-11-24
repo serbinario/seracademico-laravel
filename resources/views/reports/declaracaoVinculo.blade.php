@@ -75,9 +75,8 @@
 
         #main {
             margin: 20px;
-            font-style: normal;
+            font-weight: 500;
             font-family: "Arial";
-            font-weight: normal;
             text-align: justify;
             line-height: 1.4;
         }
