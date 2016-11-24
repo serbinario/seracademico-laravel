@@ -53,7 +53,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
-    <style type="text/css" class="init">
+    <style type="text/css">
         #container {
             opacity: 1;
             border-style: double;
@@ -72,12 +72,14 @@
             opacity: 0.2;
             position: absolute;
         }
-
+        @media print
+        {
+            body {font-family:georgia, times, serif;}
+        }
         #main {
             margin: 20px;
             font-weight: 500;
-            font-color: black;
-            font-family: "Arial";
+            font-family: Arial, Helvetica, sans-serif;
             text-align: justify;
             line-height: 1.4;
         }
@@ -95,7 +97,6 @@
             font-size: small;
         }
     </style>
-    <link href="" rel="stylesheet" media="print">
 </head>
 
 <body>
