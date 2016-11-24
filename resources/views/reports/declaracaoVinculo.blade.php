@@ -82,7 +82,7 @@
         }
 
         div#rodape {
-            margin-top: 50px;
+            margin-top: 20px;
         }
 
         table, th, td {
@@ -144,7 +144,7 @@
             </p>
 
             <div id="rodape">
-                <p>
+                <p style="text-indent: 2em;">
                     O referido é verdadeiro e dou fé.
                 </p>
                 <br />
