@@ -4,6 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
+        body {
+            font-family: Arial, Helvetica, AppleGothic, sans-serif;
+        }
+
         /****** Estilos Background *******/
         #background {
             width: 100%;
@@ -25,16 +29,17 @@
         /****** Estilos do body *******/
         #body {
             margin-top: 50px;
-            font-size: 12px;
-            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
         table {
+            font-size: 12px;
             border-collapse: collapse;
         }
 
         td {
-          padding: 2.0%;
+            padding-bottom: 1.0%;
+            padding-left: 1.0%;
+            padding-top: 0.5%;
         }
 
         table#tableHeader {
@@ -54,19 +59,15 @@
         }
 
         .percentFive {
-            width: 5%;
-        }
-
-        .percentFive {
-            width: 10%;
+            width: 4%;
         }
 
         .percentSixty {
-            width: 50%;
+            width: 46%;
         }
 
         .percentThirtyFive {
-            width: 45%;
+            width: 50%;
         }
 
         /****** Estilos footer *******/
@@ -122,6 +123,8 @@
                         </tbody>
                     </table>
 
+                    <h4 style="text-align: center">Ata de Frequência</h4>
+
                     <table id="tableBody" border="1">
                         <thead>
                         <tr>
@@ -135,7 +138,7 @@
                         <?php $count = 0; ?>
                         @foreach($dados['body'] as $bordy)
                             <tr>
-                                <td>{{++$count}}</td>
+                                <td>{{++$count}}.</td>
 
                                 <!-- Percorrendo as colunas que tem reflexo no banco -->
                                 @foreach($bordy as $key => $value)
