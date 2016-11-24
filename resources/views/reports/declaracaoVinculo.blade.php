@@ -55,6 +55,7 @@
     <title></title>
     <style type="text/css" class="init">
         #container {
+            opacity: 1;
             border-style: double;
             border-color: #000080;
             border-width: thick;
