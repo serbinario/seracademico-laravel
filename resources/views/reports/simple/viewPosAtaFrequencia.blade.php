@@ -3,7 +3,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
-    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <style type="text/css" class="init">
         /****** Estilos Background *******/
         #background {
@@ -30,12 +29,28 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+          padding: 2.0%;
+        }
+
+        table#tableHeader {
+            margin-bottom: 5%;
+        }
+
         table#tableHeader td {
             width: 50%;
         }
 
-        table#tableBody thead th{
-            font-weight: normal;
+        table#tableHeader,table#tableBody {
+            width : 100%;
+        }
+
+        table#tableBody {
+            margin-bottom: 5%;
         }
 
         .percentFive {
@@ -82,14 +97,19 @@
             <img src="{{ asset('img/logo_fasup.png') }}" alt="Logo Fasupe">
         </div>
 
+        <!-- Lógica do período andrey2030 priscilabarrosbernardos@gmail.com-->
+        <?php
+            $numberMonth = date('m');
+        ?>
+
         <div id="body">
             <div class="row">
                 <div class="col-md-12">
-                    <table id="tableHeader" class="table table-bordered">
+                    <table id="tableHeader" border="1">
                         <tbody>
                         <tr>
                             <td>Unidade de estudos direcionados: Recife</td>
-                            <td>Pós-Graduação em {{ $dados['filtersBody'][2] ?? ""  }} - {{$dados['filtersBody'][1] ?? ""}}</td>
+                            <td>Pós-Graduação em {{ $dados['filtersBody'][2] ?? ""  }} - {{date('Y') . '.' . ($numberMonth >= 8 ? 2 : 1)}}</td>
                         </tr>
                         <tr>
                             <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
@@ -102,7 +122,7 @@
                         </tbody>
                     </table>
 
-                    <table id="tableBody" class="table table-bordered">
+                    <table id="tableBody" border="1">
                         <thead>
                         <tr>
                             <th class="percentFive">Nº</th>
