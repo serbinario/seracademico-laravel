@@ -63,7 +63,7 @@
     <!-- Div container-->
     <div id="container">
         <div id="header">
-            <img src="{{ asset('img/logo-alpha.png') }}" width="200" height="200" alt="Logo Alpha">
+            <img src="{{ asset('img/logo-alpha-b.png') }}" width="200" height="200" alt="Logo Alpha">
         </div>
 
 
