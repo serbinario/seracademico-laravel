@@ -118,12 +118,20 @@ class CurriculoController extends Controller
             $tumas      = $curriculo->turmas;
             $boolReturn = true;
 
-            # percorre as turmas
-            foreach ($tumas as $turma) {
-                if(count($turma->disciplinas) > 0) {
-                    $boolReturn = false;
-                    break;
-                }
+            # Query que vê se a disciplina tem calendário
+            $query = \DB::table('fac_calendarios')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_calendarios.turma_disciplina_id')
+                ->join('fac_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+                ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
+                ->where('fac_disciplinas.id', $row->id)
+                ->where('fac_turmas.curriculo_id', $row->idCurriculo)
+                ->select([
+                    'fac_calendarios.id'
+                ])->get();
+
+            # Verificando
+            if(count($query) > 0) {
+                $boolReturn = false;
             }
 
             # Verifica a se a condição é válida
