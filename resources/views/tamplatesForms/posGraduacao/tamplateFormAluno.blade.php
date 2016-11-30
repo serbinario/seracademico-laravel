@@ -1135,6 +1135,22 @@
             });
         });
 
+
+        // Evento para carregar as sedes a partir do
+        // curso selecionado
+        $(document).ready(function () {
+
+            var cursoId = $('#curso_id').val();
+
+            // Validando o curso
+            if(!cursoId) {
+                return false;
+            }
+
+            // Recuperando as sedes e carregando o select
+            getTurmasByCurso(cursoId);
+        });
+
         // Evento para mudanção de curso carregar automaticamente as sedes
         $(document).on('change', '#curso_id', function () {
             // Recuperando o id do curso
@@ -1163,35 +1179,6 @@
             getTurmaBySede(sedeId, cursoId);
         });
 
-        // Evento para carregar as sedes a partir do
-        // curso selecionado
-        $(document).ready(function () {
-
-            var cursoId = $('#sede_id').val();
-
-            // Validando o curso
-            if(!cursoId) {
-                return false;
-            }
-
-            // Recuperando as sedes e carregando o select
-            getTurmasByCurso(cursoId);
-        });
-
-        //Evento para carregar as turmas a partir do
-        //curso selecionado
-        $(document).ready(function () {
-            // Injetando id da sede no select de sedes
-            var sedeId = $('#turma_id').val();
-
-            // Validando a sede
-            if(!sedeId) {
-                return false;
-            }
-
-            // Recuperando as sedes e carregando o select
-            getTurmasByCurso(cursoId);
-        });
 
         /**
          * Função para retornar as turmas referentes ao curso informado (cursoId)
@@ -1211,22 +1198,36 @@
                 },
             }).done(function (json) {
                 if(json.success) {
+                    // Options da turma
                     var option = "";
+
+                    // Options da turma
                     option += '<option value="">Selecione uma turma</option>';
 
+                    // Percorrendo as turmas
                     for (var i = 0; i < json.dados.length; i++) {
                         @if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)
-                            if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
-                                option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                            } else {
-                                option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {
+                                if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                    option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                } else {
+                                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                }
                             }
                         @else
                             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                         @endif
                     }
 
+                    // Carregando a sede
+                    @if(isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
+                        $('#sede_id option').remove();
+                        $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
+                    @endif
+
+                    // carregando as turmas em caso de edit
                     $('#turma_id option').remove();
+                    $('#turma_id').append(option);
                 }
             });
         }
