@@ -527,9 +527,15 @@
                         @endif
                     </div>
 
+                    <div class="form-group col-md-2">
+                        {!! Form::label('sede_id', 'Sede') !!}
+
+                        {!! Form::select('sede_id', (['' => 'Selecione uma sede'] + $loadFields['sede']->toArray()), null, array('class' => 'form-control', 'id' => 'sede_id')) !!}
+                    </div>
+
                     <div class="form-group col-md-4">
                         {!! Form::label('turma_id', 'Turma') !!}
-                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
+                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control', 'id' => 'turma_id')) !!}
                     </div>
 
                     <div class="form-group col-md-2">
@@ -1129,7 +1135,7 @@
             });
         });
 
-        // Evento para mudanção de curso carregar automaticamente as turmas
+        // Evento para mudanção de curso carregar automaticamente as sedes
         $(document).on('change', '#curso_id', function () {
             // Recuperando o id do curso
             var cursoId = $(this).val();
@@ -1138,33 +1144,61 @@
             if(!cursoId) {
                 return false;
             }
-
-            // Recuperando as turmas e carregando o select
-            getTurmasByCurso(cursoId);
+            // Recuperando as sedes e carregando o select
+            getSedeByCurso(cursoId);
         });
 
-        // Evento para carregar as turmas a partir do
+        // Evento para mudança de turma
+        $(document).on('change', '#sede_id', function () {
+            // Recuperando o id do curso
+            var sedeId  = $(this).val();
+            var cursoId = $('#curso_id').val();
+
+            // Validando o curso
+            if(!sedeId || !cursoId) {
+                return false;
+            }
+
+            // Recuperando as sedes e carregando o select
+            getTurmaBySede(sedeId, cursoId);
+        });
+
+        // Evento para carregar as sedes a partir do
         // curso selecionado
         $(document).ready(function () {
-            // Recuperando o id do curso
-            var cursoId = $('#curso_id').val();
+
+            var cursoId = $('#sede_id').val();
 
             // Validando o curso
             if(!cursoId) {
                 return false;
             }
 
-            // Recuperando as turmas e carregando o select
+            // Recuperando as sedes e carregando o select
             getTurmasByCurso(cursoId);
         });
 
+        //Evento para carregar as turmas a partir do
+        //curso selecionado
+        $(document).ready(function () {
+            // Injetando id da sede no select de sedes
+            var sedeId = $('#turma_id').val();
+
+            // Validando a sede
+            if(!sedeId) {
+                return false;
+            }
+
+            // Recuperando as sedes e carregando o select
+            getTurmasByCurso(cursoId);
+        });
 
         /**
          * Função para retornar as turmas referentes ao curso informado (cursoId)
-         * e prencher o select de turmas.
+         * e prencher o select de sedes.
          *
          * @param cursoId
-         */
+        **/
         function getTurmasByCurso(cursoId)
         {
             // Requisição
@@ -1193,8 +1227,63 @@
                     }
 
                     $('#turma_id option').remove();
-                    $('#turma_id').append(option);
                 }
+            });
+        }
+
+        /**
+         * Função para retornar as sedes referentes ao curso informado (cursoId)
+         * e prencher o select de sedes.
+         *
+         * @param cursoId
+         */
+        function getSedeByCurso(cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/turma/getSedeByCurso/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
+
+                option += '<option value="">Selecione uma sede</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';
+                }
+
+                $('#turma_id option').remove();
+                $('#sede_id option').remove();
+                $('#sede_id').append(option);
+            });
+        }
+
+        /**
+         *
+         */
+        function getTurmaBySede(sedeId, cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/turma/getTurmaBySede/' + sedeId + '/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
+
+                option += '<option value="">Selecione uma turma</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                }
+
+                $('#turma_id option').remove();
+                $('#turma_id').append(option);
             });
         }
     </script>

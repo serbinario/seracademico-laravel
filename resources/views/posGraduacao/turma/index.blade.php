@@ -44,9 +44,10 @@
                         <table id="turma-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
+                                <th>Código Turma</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
+                                <th>Sede</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -56,9 +57,10 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Código</th>
+                                <th>Código Turma</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
+                                <th>Sede</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -145,6 +147,7 @@
                 {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
+                {data: 'sede', name: 'sedes.nome'},
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},
