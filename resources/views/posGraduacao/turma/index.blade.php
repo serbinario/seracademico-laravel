@@ -115,6 +115,7 @@
     @include('posGraduacao.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_pos_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_pos_turma_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_pos_aluno_turma')
 @stop
 
 @section('javascript')
@@ -136,6 +137,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_aniversariantes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
