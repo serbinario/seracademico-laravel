@@ -79,6 +79,9 @@
                 <a href="#academico" aria-controls="academico" role="tab" data-toggle="tab">
                     Dados Acadêmicos</a>
             </li>
+            <li role="presentation">
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
         <div class="tab-content">
@@ -409,6 +412,95 @@
                     </div>
                 </div>
             </div>
+            {{--Aba Documentos Obrigatorios--}}
+            <div role="tabpanel" class="tab-pane" id="documentosObrig">
+                <br/>
+
+                <div class="row">
+                    {{--Primeria coluna--}}
+                    <div class="col-md-6">
+
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[rg_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[rg_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[rg_doc_obrigatorio]', 'RG', false) !!}
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[cpf_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[cpf_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[cpf_doc_obrigatorio]', 'CPF', false) !!}
+                        </div>
+
+                        <!-- Certidão de Nascimento ou Casamento -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[certidao_nasc_cas_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[certidao_nasc_cas_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[certidao_nasc_cas_doc_obrigatorio]', 'Certidão de nascimento ou casamento ', false) !!}
+                        </div>
+                        <!-- Fim Certidão de Nascimento ou Casamento -->
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[titulo_eleitor_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[titulo_eleitor_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[titulo_eleitor_doc_obrigatorio]', 'Título de eleitor e comprovante de votação', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                        <!-- Histórico Graduação Autenticado -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[histo_gradu_autentic_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[histo_gradu_autentic_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[histo_gradu_autentic_obrigatorio]', 'Histórico Graduação Autenticado', false) !!}
+                        </div>
+                        <!-- Fim Histórico Graduação Autenticado -->
+
+                    </div>
+                    {{--Fim da Primeria coluna--}}
+
+                    {{--Segunda coluna--}}
+                    <div class="col-md-6">
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alaistamento militar ou reservista', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[diploma_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[diploma_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[diploma_doc_obrigatorio]', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[fotos_3x4_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[fotos_3x4_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[fotos_3x4_doc_obrigatorio]', '2 fotos 3x4', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[comp_residencia_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[comp_residencia_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[comp_residencia_doc_obrigatorio]', 'Comprovante de residência ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                    </div>
+                    {{--Fim da Segunda coluna--}}
+                </div>
+            </div>
+            {{--Aba Documentos Obrigatorios--}}
         </div>
     </div>
 </div>

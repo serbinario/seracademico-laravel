@@ -779,7 +779,6 @@
     </div>
 </div>
 
-
 @section('javascript')
     <script type="text/javascript">
         Webcam.set({
