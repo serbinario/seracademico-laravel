@@ -443,13 +443,13 @@
                             {!! Form::label('pessoa[cpf_doc_obrigatorio]', 'CPF', false) !!}
                         </div>
 
-                        <!-- Certidão de Nascimento ou Casamento -->
+                        <!-- Comprovante de residência -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[certidao_nasc_cas_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[certidao_nasc_cas_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[certidao_nasc_cas_doc_obrigatorio]', 'Certidão de nascimento ou casamento ', false) !!}
+                            {!! Form::hidden('pessoa[comp_residencia_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[comp_residencia_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[comp_residencia_doc_obrigatorio]', 'Comprovante de residência ', false) !!}
                         </div>
-                        <!-- Fim Certidão de Nascimento ou Casamento -->
+                        <!-- Fim Comprovante de residência -->
 
                         <!-- Currículo Lattes -->
                         <div class="checkbox checkbox-primary">
