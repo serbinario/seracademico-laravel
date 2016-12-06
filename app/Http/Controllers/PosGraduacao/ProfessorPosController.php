@@ -11,6 +11,7 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\PosGraduacao\ProfessorPosValidator;
+use Illuminate\Http\Response;
 
 class ProfessorPosController extends Controller
 {
@@ -183,8 +184,24 @@ class ProfessorPosController extends Controller
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
         }
+    }
 
-
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function visualizarAnexo($id)
+    {
+        try { 
+            # Retorno
+            return new Response(file_get_contents($this->service->getPathArquivo($id)), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.'contrato.pdf'.'"'
+            ]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
     }
 
 }

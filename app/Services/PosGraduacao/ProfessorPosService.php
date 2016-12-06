@@ -78,14 +78,17 @@ class ProfessorPosService
 
     /**
      * @param array $data
-     * @return Professor
+     * @return ProfessorPos
      * @throws \Exception
      */
     public function store(array $data) : ProfessorPos
     {
-
+        # Tratamento imagens de cam
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
+
+        # Regras de negócios
+        $this->tratamentoImagem($data);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
@@ -147,19 +150,23 @@ class ProfessorPosService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return ProfessorPos
+     * @throws \Exception
      */
     public function update(array $data, int $id) : ProfessorPos
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
+        # Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoDatas($data);
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
+
+        # Regras de negócios
+        $this->tratamentoImagem($data, $professor);
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
@@ -225,6 +232,38 @@ class ProfessorPosService
 
         }
 
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function tratamentoImagem(array &$data, $model = "")
+    {
+        #tratando a imagem
+        foreach ($data as $key => $value) {
+            $explode = explode("_", $key);
+
+            if (count($explode) > 0 && $explode[0] == "path") {
+                $file = $data[$key];
+                $fileName = md5(uniqid(rand(), true)) . "." . $file->getClientOriginalExtension();
+
+                # Validando a atualização
+                if (!empty($model) && $model->{$key} != null) {
+                    unlink(__DIR__ . "/../../../public/" . $this->destinationPath . $model->{$key});
+                }
+
+                #Movendo a imagem
+                $file->move($this->destinationPath, $fileName);
+
+                #renomeando
+                $data[$key] = $fileName;
+
+            }
+        }
+
+        # retorno
+        return $data;
     }
 
     /**
@@ -321,5 +360,18 @@ class ProfessorPosService
 
         #retorno
         return $data;
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getPathArquivo($id)
+    {
+        # Recuperando o contrato
+        $professor = $this->repository->find($id);
+
+        #Retornando o caminho completo do arquivo
+        return $this->destinationPath . $professor->path_anexo;
     }
 }
