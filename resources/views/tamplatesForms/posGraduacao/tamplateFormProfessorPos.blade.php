@@ -82,7 +82,11 @@
             <li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
             </li>
+            <li role="presentation">
+                <a href="#anexoDoc" aria-controls="anexoDoc" role="tab" data-toggle="tab">Anexo</a>
+            </li>
         </ul>
+
         <!-- End Nav tabs -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="dados">
@@ -348,6 +352,7 @@
                                 {!! Form::select('titulacao_id', $loadFields['titulacao'], null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="instituicao-graduacao" class="control-label">Graduação</label>
@@ -358,6 +363,7 @@
                                     @endif
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-6">
                                 <label for="instituicao-pos">Pós Graduação</label>
                                 <select id="instituicao-pos" class="form-control" name="instituicao_pos_id">
@@ -368,16 +374,19 @@
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_graduacao', 'Especificação Graduação') !!}
                                 {!! Form::text('especificacao_graduacao', Session::getOldInput('especificacao_graduacao')  , array('class' => 'form-control')) !!}
                             </div>
+                            
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_pos', 'Especificação Pós') !!}
                                 {!! Form::text('especificacao_pos', Session::getOldInput('especificacao_pos')  , array('class' => 'form-control')) !!}
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="instituicao-mestrado">Mestrado</label>
@@ -388,6 +397,7 @@
                                     @endif
                                 </select>
                             </div>
+                            
                             <div class="form-group col-md-6">
                                 <label for="instituicao-doutorado">Doutorado</label>
                                 <select id="instituicao-doutorado" class="form-control" name="instituicao_doutorado_id">
@@ -398,6 +408,7 @@
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_mestrado', 'Especificação Mestrado') !!}
@@ -408,10 +419,10 @@
                                 {!! Form::text('especificacao_doutorado', Session::getOldInput('especificacao_doutorado')  , array('class' => 'form-control')) !!}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+            
             {{--Aba Documentos Obrigatorios--}}
             <div role="tabpanel" class="tab-pane" id="documentosObrig">
                 <br/>
@@ -440,21 +451,21 @@
                         </div>
                         <!-- Fim Certidão de Nascimento ou Casamento -->
 
-                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <!-- Currículo Lattes -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[titulo_eleitor_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[titulo_eleitor_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[titulo_eleitor_doc_obrigatorio]', 'Título de eleitor e comprovante de votação', false) !!}
+                            {!! Form::hidden('curriculo_lattes_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('curriculo_lattes_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('curriculo_lattes_doc_obrigatorio', 'Currículo Lattes', false) !!}
                         </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+                        <!-- Fim Currículo Lattes -->
 
-                        <!-- Histórico Graduação Autenticado -->
+                        <!-- Certificado Graduação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[histo_gradu_autentic_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[histo_gradu_autentic_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[histo_gradu_autentic_obrigatorio]', 'Histórico Graduação Autenticado', false) !!}
+                            {!! Form::hidden('diploma_graduacao_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('diploma_graduacao_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('diploma_graduacao_obrigatorio', 'Diploma de Graduação', false) !!}
                         </div>
-                        <!-- Fim Histórico Graduação Autenticado -->
+                        <!-- Fim Certificado Graduação -->
 
                     </div>
                     {{--Fim da Primeria coluna--}}
@@ -462,45 +473,67 @@
                     {{--Segunda coluna--}}
                     <div class="col-md-6">
 
-                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <!-- Certificado Pós graduação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alaistamento militar ou reservista', false) !!}
+                            {!! Form::hidden('diploma_pos_obrigatorio', 0) !!}
+                            {!! Form::checkbox('diploma_pos_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('diploma_pos_obrigatorio', 'Certificado de Pós Graduação', false) !!}
                         </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+                        <!-- Fim Certificado Pós graduação -->
 
-                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <!-- Certificado Mestrado  -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[diploma_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[diploma_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[diploma_doc_obrigatorio]', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
+                            {!! Form::hidden('diploma_mestrado_obrigatorio', 0) !!}
+                            {!! Form::checkbox('diploma_mestrado_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('diploma_mestrado_obrigatorio', 'Certificado Mestrado', false) !!}
                         </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+                        <!-- Fim Certificado Mestrado -->
 
 
-                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <!-- Certificado Doutorado -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[fotos_3x4_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[fotos_3x4_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[fotos_3x4_doc_obrigatorio]', '2 fotos 3x4', false) !!}
+                            {!! Form::hidden('diploma_doutorado_obrigatorio', 0) !!}
+                            {!! Form::checkbox('diploma_doutorado_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('diploma_doutorado_obrigatorio', 'Certificado Doutorado', false) !!}
                         </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[comp_residencia_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[comp_residencia_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[comp_residencia_doc_obrigatorio]', 'Comprovante de residência ', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+                        <!-- Fim Certificado Doutorado  -->
 
                     </div>
                     {{--Fim da Segunda coluna--}}
                 </div>
             </div>
             {{--Aba Documentos Obrigatorios--}}
+
+            {{-- Aba anexos --}}
+            <div role="tabpanel" class="tab-pane" id="anexoDoc">
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (Documento)</span><span
+                                                    class="fileinput-exists">Anexo (Documento)</span>
+                                            <input type="file" name="path_anexo"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 col-md-offset-2">
+                                @if(isset($model) && $model->path_anexo)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id]) }}">Visualizar</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- FIM Aba anexos --}}
         </div>
     </div>
 </div>

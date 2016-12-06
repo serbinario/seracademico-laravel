@@ -3,9 +3,9 @@
 /node_modules
 Homestead.yaml
 Homestead.json
-.env
+.envublic/images/*
+    /public/images/
 .idea/*
-/public/images/*
-/public/images/
+/p
 .gitignore
 snappy.php
