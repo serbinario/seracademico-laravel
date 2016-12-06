@@ -527,9 +527,15 @@
                         @endif
                     </div>
 
+                    <div class="form-group col-md-2">
+                        {!! Form::label('sede_id', 'Sede') !!}
+
+                        {!! Form::select('sede_id', (['' => 'Selecione uma sede'] + $loadFields['sede']->toArray()), null, array('class' => 'form-control', 'id' => 'sede_id')) !!}
+                    </div>
+
                     <div class="form-group col-md-4">
                         {!! Form::label('turma_id', 'Turma') !!}
-                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control')) !!}
+                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control', 'id' => 'turma_id')) !!}
                     </div>
 
                     <div class="form-group col-md-2">
@@ -772,7 +778,6 @@
     {{--Fim Buttons Submit e Voltar--}}
     </div>
 </div>
-
 
 @section('javascript')
     <script type="text/javascript">
@@ -1129,7 +1134,23 @@
             });
         });
 
-        // Evento para mudanção de curso carregar automaticamente as turmas
+
+        // Evento para carregar as sedes a partir do
+        // curso selecionado
+        $(document).ready(function () {
+
+            var cursoId = $('#curso_id').val();
+
+            // Validando o curso
+            if(!cursoId) {
+                return false;
+            }
+
+            // Recuperando as sedes e carregando o select
+            getTurmasByCurso(cursoId);
+        });
+
+        // Evento para mudanção de curso carregar automaticamente as sedes
         $(document).on('change', '#curso_id', function () {
             // Recuperando o id do curso
             var cursoId = $(this).val();
@@ -1138,33 +1159,32 @@
             if(!cursoId) {
                 return false;
             }
-
-            // Recuperando as turmas e carregando o select
-            getTurmasByCurso(cursoId);
+            // Recuperando as sedes e carregando o select
+            getSedeByCurso(cursoId);
         });
 
-        // Evento para carregar as turmas a partir do
-        // curso selecionado
-        $(document).ready(function () {
+        // Evento para mudança de turma
+        $(document).on('change', '#sede_id', function () {
             // Recuperando o id do curso
+            var sedeId  = $(this).val();
             var cursoId = $('#curso_id').val();
 
             // Validando o curso
-            if(!cursoId) {
+            if(!sedeId || !cursoId) {
                 return false;
             }
 
-            // Recuperando as turmas e carregando o select
-            getTurmasByCurso(cursoId);
+            // Recuperando as sedes e carregando o select
+            getTurmaBySede(sedeId, cursoId);
         });
 
 
         /**
          * Função para retornar as turmas referentes ao curso informado (cursoId)
-         * e prencher o select de turmas.
+         * e prencher o select de sedes.
          *
          * @param cursoId
-         */
+        **/
         function getTurmasByCurso(cursoId)
         {
             // Requisição
@@ -1177,24 +1197,94 @@
                 },
             }).done(function (json) {
                 if(json.success) {
+                    // Options da turma
                     var option = "";
+
+                    // Options da turma
                     option += '<option value="">Selecione uma turma</option>';
 
+                    // Percorrendo as turmas
                     for (var i = 0; i < json.dados.length; i++) {
                         @if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)
-                            if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
-                                option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                            } else {
-                                option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {
+                                if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                    option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                } else {
+                                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                }
                             }
                         @else
                             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                         @endif
                     }
 
+                    // Carregando a sede
+                    @if(isset($aluno) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
+                        $('#sede_id option').remove();
+                        $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
+                                '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
+                    @endif
+
+                    // carregando as turmas em caso de edit
                     $('#turma_id option').remove();
                     $('#turma_id').append(option);
                 }
+            });
+        }
+
+        /**
+         * Função para retornar as sedes referentes ao curso informado (cursoId)
+         * e prencher o select de sedes.
+         *
+         * @param cursoId
+         */
+        function getSedeByCurso(cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/turma/getSedeByCurso/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
+
+                option += '<option value="">Selecione uma sede</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';
+                }
+
+                $('#turma_id option').remove();
+                $('#sede_id option').remove();
+                $('#sede_id').append(option);
+            });
+        }
+
+        /**
+         *
+         */
+        function getTurmaBySede(sedeId, cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/turma/getTurmaBySede/' + sedeId + '/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
+
+                option += '<option value="">Selecione uma turma</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                }
+
+                $('#turma_id option').remove();
+                $('#turma_id').append(option);
             });
         }
     </script>

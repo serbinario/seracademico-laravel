@@ -67,6 +67,7 @@ class TurmaController extends Controller
         $rows = \DB::table('fac_turmas')
             ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
             ->leftJoin('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+            ->join('sedes', 'sedes.id', '=', 'fac_turmas.sede_id')
             ->leftJoin('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
             ->where('fac_turmas.tipo_nivel_sistema_id', 2)
             ->select([
@@ -79,7 +80,8 @@ class TurmaController extends Controller
                 'fac_cursos.codigo',
                 'fac_cursos.nome',
                 'fac_turnos.nome as turno',
-                'fac_curriculos.codigo as codigoCurriculo'
+                'fac_curriculos.codigo as codigoCurriculo',
+                'sedes.nome as sede'
             ]);
 
         #Editando a grid
@@ -202,8 +204,61 @@ class TurmaController extends Controller
                 ->where('fac_cursos.id', $idCurso)
                 ->select([
                     'fac_turmas.id',
-                    'fac_turmas.codigo'
+                    'fac_turmas.codigo',
+                    'fac_turmas.sede_id'
                 ])->get();
+
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idCurso
+     * @return mixed
+     */
+    public function getSedeByCurso($idCurso)
+    {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('sedes')
+                ->join('fac_turmas', 'fac_turmas.sede_id', '=', 'sedes.id')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->select([
+                    'sedes.id',
+                    'sedes.nome',
+                ])
+                ->where('fac_cursos.id', $idCurso)
+                ->get();
+
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idSede
+     * @return mixed
+     */
+    public function getTurmaBySede($idSede, $idCurso)
+    {
+        try {
+            #Criando a consulta
+            $rows = \DB::table('fac_turmas')
+                ->join('sedes', 'sedes.id', '=', 'fac_turmas.sede_id')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+
+                ->select([
+                    'fac_turmas.id',
+                    'fac_turmas.codigo'
+                ])
+                ->where('fac_turmas.sede_id', $idSede)
+                ->where('fac_curriculos.curso_id', $idCurso)
+                ->get();
 
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
         } catch (\Throwable $e) {

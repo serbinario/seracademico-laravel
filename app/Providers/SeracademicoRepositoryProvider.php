@@ -631,5 +631,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\PosGraduacao\DiarioAulaRepository::class,
 			\Seracademico\Repositories\PosGraduacao\DiarioAulaRepositoryEloquent::class
 		);
+
+		$this->app->bind(
+			\Seracademico\Repositories\PoloRepository::class,
+			\Seracademico\Repositories\PoloRepositoryEloquent::class
+		);
 	}
 }

@@ -37,6 +37,13 @@
                 {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
             </div>
         </div>
+        {{--<div class="row">
+            <div class="col-md-2">
+                {!! Form::label('polo_id', 'Polo *') !!}
+
+                {!! Form::select('polo_id', $loadFields['polo'], null, array('class' => 'form-control')) !!}
+            </div>
+        </div>--}}
         <hr class="hr-line-dashed"/>
         <div class="row">
             <div class="col-md-12">
