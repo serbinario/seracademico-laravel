@@ -260,7 +260,7 @@ class AlunoService
             # Verificando se a turma foi informada
             if(isset($data['turma_id'])) {
                 # Regra de negócio para tratamento da turma em caso de atualização
-                $this->tratamentoTurmaUpdate($aluno, !empty($data['turma_id']) ?? null);
+                $this->tratamentoTurmaUpdate($aluno, !empty($data['turma_id']) ? $data['turma_id'] : null);
             }
         }
 
