@@ -111,7 +111,7 @@ class ProfessorPosController extends Controller
 
             #Executando a ação
             $this->service->store($data);
-            //dd("SSSSSSS");
+
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
@@ -136,7 +136,7 @@ class ProfessorPosController extends Controller
 
             #retorno para view
             return view('posGraduacao.professor.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -165,13 +165,14 @@ class ProfessorPosController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
     /**
      * @param $id
+     * @return $this
      * @throws \Exception
      */
     public function getImg($id)
@@ -203,5 +204,4 @@ class ProfessorPosController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
-
 }

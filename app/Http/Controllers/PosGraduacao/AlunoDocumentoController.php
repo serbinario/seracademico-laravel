@@ -142,7 +142,7 @@ class AlunoDocumentoController extends Controller
             $aluno->data_contrato = $data->format('Y-m-d');
             $aluno->save();
         }
-
+        dd($turma);
         # Verificando se o aluno possui as informações necessárias
         if(!$turma->aula_inicio || !$turma->aula_final || !$turma->qtd_parcelas ||
             !$turma->duracao_meses || !$turma->valor_turma) {
