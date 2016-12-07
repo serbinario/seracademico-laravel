@@ -67,7 +67,7 @@ class TurmaController extends Controller
         $rows = \DB::table('fac_turmas')
             ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
             ->leftJoin('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->join('sedes', 'sedes.id', '=', 'fac_turmas.sede_id')
+            ->leftJoin('sedes', 'sedes.id', '=', 'fac_turmas.sede_id')
             ->leftJoin('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
             ->where('fac_turmas.tipo_nivel_sistema_id', 2)
             ->select([
