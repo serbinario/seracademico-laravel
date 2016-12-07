@@ -366,12 +366,12 @@ class ProfessorPosService
      * @param $id
      * @return string
      */
-    public function getPathArquivo($id)
+    public function getPathArquivo($id, $tipo)
     {
         # Recuperando o contrato
         $professor = $this->repository->find($id);
 
         #Retornando o caminho completo do arquivo
-        return $this->destinationPath . $professor->path_anexo;
+        return $this->destinationPath . $professor->$tipo;
     }
 }

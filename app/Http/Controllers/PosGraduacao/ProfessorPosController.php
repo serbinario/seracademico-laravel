@@ -190,13 +190,13 @@ class ProfessorPosController extends Controller
      * @param $id
      * @return Response
      */
-    public function visualizarAnexo($id)
+    public function visualizarAnexo($id, $tipo)
     {
         try { 
             # Retorno
-            return new Response(file_get_contents($this->service->getPathArquivo($id)), 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.'contrato.pdf'.'"'
+            return new Response(file_get_contents($this->service->getPathArquivo($id, "path_$tipo")), 200, [
+                'Content-Type' => 'image/jpeg',
+                'Content-Disposition' => 'inline; filename="'.'anexo.jpeg'.'"'
             ]);
         } catch (\Throwable $e) {
             #Retorno para a view

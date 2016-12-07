@@ -508,7 +508,7 @@
             <div role="tabpanel" class="tab-pane" id="anexoDoc">
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 3%;">
                             <div class="col-md-4">
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                     <div class="form-control" data-trigger="fileinput">
@@ -516,17 +516,176 @@
                                         <span class="fileinput-filename"></span>
                                     </div>
                                         <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Anexo (Documento)</span><span
-                                                    class="fileinput-exists">Anexo (Documento)</span>
-                                            <input type="file" name="path_anexo"></span>
+                                            <span class="fileinput-new">Anexo (CPF)</span><span
+                                                    class="fileinput-exists">Anexo (CPF)</span>
+                                            <input type="file" name="path_cpf"></span>
                                     <a href="#" class="input-group-addon btn btn-default fileinput-exists"
                                        data-dismiss="fileinput">Remove</a>
                                 </div>
                             </div>
                             
-                            <div class="col-md-4 col-md-offset-2">
-                                @if(isset($model) && $model->path_anexo)
-                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id]) }}">Visualizar</a>
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_cpf)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'cpf']) }}">Visualizar</a>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (RG)</span><span
+                                                    class="fileinput-exists">Anexo (RG)</span>
+                                            <input type="file" name="path_rg"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_rg)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'rg']) }}">Visualizar</a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 3%;">
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (C. de Residência)</span><span
+                                                    class="fileinput-exists">Anexo (C. de Residência)</span>
+                                            <input type="file" name="path_comprovante_residencia"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_comprovante_residencia)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo',
+                                     ['id' => $model->id, 'tipo' => 'comprovante_residencia']) }}">Visualizar</a>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (C. Lattes)</span><span
+                                                    class="fileinput-exists">Anexo (C. Lattes)</span>
+                                            <input type="file" name="path_curriculo_lattes"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_curriculo_lattes)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id,
+                                     'tipo' => 'curriculo_lattes']) }}">Visualizar</a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 3%;">
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (D. Graduação)</span><span
+                                                    class="fileinput-exists">Anexo (D. Graduação)</span>
+                                            <input type="file" name="path_diploma_graduacao"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_diploma_graduacao)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id,
+                                     'tipo' => 'diploma_graduacao']) }}">Visualizar</a>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (C. Pós)</span><span
+                                                    class="fileinput-exists">Anexo (C. Pós)</span>
+                                            <input type="file" name="path_certificado_pos"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_certificado_pos)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id,
+                                     'tipo' => 'certificado_pos']) }}">Visualizar</a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 3%;">
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (C. Mestrado)</span><span
+                                                    class="fileinput-exists">Anexo (C. Mestrado)</span>
+                                            <input type="file" name="path_certificado_mestrado"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_certificado_pos)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id,
+                                     'tipo' => 'certificado_pos']) }}">Visualizar</a>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                        <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Anexo (C. Doutorado)</span><span
+                                                    class="fileinput-exists">Anexo (C. Doutorado)</span>
+                                            <input type="file" name="path_certificado_doutorado"></span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                @if(isset($model) && $model->path_certificado_doutorado)
+                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id,
+                                     'tipo' => 'path_certificado_doutorado']) }}">Visualizar</a>
                                 @endif
                             </div>
                         </div>
