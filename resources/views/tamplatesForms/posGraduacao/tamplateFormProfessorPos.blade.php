@@ -102,10 +102,10 @@
                                 {!! Form::label('pessoa[grau_instrucoes_id]', 'Titulação') !!}
                                 {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], null, array('class' => 'form-control')) !!}
                             </div>
-                            <div class="form-group col-md-4">
-                                {!! Form::label('pessoa[profissoes_id]', 'Profissão') !!}
-                                {!! Form::select('pessoa[profissoes_id]', $loadFields['profissao'], null, array('class' => 'form-control')) !!}
-                            </div>
+                            {{--<div class="form-group col-md-4">--}}
+                                {{--{!! Form::label('pessoa[profissoes_id]', 'Profissão') !!}--}}
+                                {{--{!! Form::select('pessoa[profissoes_id]', $loadFields['profissao'], null, array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
                                 {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], null, array('class' => 'form-control')) !!}
