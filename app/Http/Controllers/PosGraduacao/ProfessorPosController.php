@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Entities\Instituicao;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\PosGraduacao\ProfessorPosService;
@@ -199,6 +200,27 @@ class ProfessorPosController extends Controller
                 'Content-Type' => 'image/jpeg',
                 'Content-Disposition' => 'inline; filename="'.'anexo.jpeg'.'"'
             ]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function createInstituicao(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+            
+            # Salvando os dados
+            Instituicao::create($dados);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
