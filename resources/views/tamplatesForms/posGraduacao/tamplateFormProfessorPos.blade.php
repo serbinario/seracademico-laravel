@@ -5,10 +5,10 @@
                 {!! Form::label('pessoa[nome]', 'Nome') !!}
                 {!! Form::text('pessoa[nome]', Session::getOldInput('pessoa[nome]')  , array('class' => 'form-control')) !!}
             </div>
-            <div class="form-group col-md-2">
-                {!! Form::label('tratamento', 'Tratamento') !!}
-                {!! Form::text('tratamento', Session::getOldInput('tratamento')  , array('class' => 'form-control')) !!}
-            </div>
+            {{--<div class="form-group col-md-2">--}}
+                {{--{!! Form::label('tratamento', 'Tratamento') !!}--}}
+                {{--{!! Form::text('tratamento', Session::getOldInput('tratamento')  , array('class' => 'form-control')) !!}--}}
+            {{--</div>--}}
             <div class="form-group col-md-2">
                 {!! Form::label('pessoa[data_nasciemento]', 'Nascimento') !!}
                 {!! Form::text('pessoa[data_nasciemento]', Session::getOldInput('pessoa[data_nasciemento]'), array('class' => 'form-control datepicker')) !!}
@@ -19,14 +19,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6">
-                {!! Form::label('pessoa[nome_social]', 'Nome Social') !!}
-                {!! Form::text('pessoa[nome_social]', Session::getOldInput('pessoa[nome_social]')  , array('class' => 'form-control')) !!}
-            </div>
-            <div class="form-group col-md-3">
-                {!! Form::label('turno_id', 'Turno') !!}
-                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
-            </div>
+            {{--<div class="form-group col-md-6">--}}
+                {{--{!! Form::label('pessoa[nome_social]', 'Nome Social') !!}--}}
+                {{--{!! Form::text('pessoa[nome_social]', Session::getOldInput('pessoa[nome_social]')  , array('class' => 'form-control')) !!}--}}
+            {{--</div>--}}
+            {{--<div class="form-group col-md-3">--}}
+                {{--{!! Form::label('turno_id', 'Turno') !!}--}}
+                {{--{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}--}}
+            {{--</div>--}}
             <div class="checkbox checkbox-primary checkbox-inline" style="margin-top: 27px">
                 {!! Form::hidden('pos_e_graduacao', 0) !!}
                 {!! Form::checkbox('pos_e_graduacao', 1, null, array('class' => 'form-control')) !!}
@@ -106,14 +106,14 @@
                                 {{--{!! Form::label('pessoa[profissoes_id]', 'Profissão') !!}--}}
                                 {{--{!! Form::select('pessoa[profissoes_id]', $loadFields['profissao'], null, array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
-                            <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
-                                {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], null, array('class' => 'form-control')) !!}
-                            </div>
-                            <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
-                                {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'], null, array('class' => 'form-control')) !!}
-                            </div>
+                            {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}--}}
+                                {{--{!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], null, array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}--}}
+                                {{--{!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'], null, array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
