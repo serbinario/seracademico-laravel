@@ -157,6 +157,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\ProfessorPosController@contrato']);
                 Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'PosGraduacao\ProfessorPosController@getImg']);
                 Route::get('visualizarAnexo/{id}/{tipo}', ['as' => 'visualizarAnexo', 'uses' => 'PosGraduacao\ProfessorPosController@visualizarAnexo']);
+                Route::post('instituicao', ['as' => 'instituicao', 'uses' => 'PosGraduacao\ProfessorPosController@createInstituicao']);
             });
 
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {

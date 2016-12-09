@@ -6,8 +6,8 @@
                 {!! Form::text('pessoa[nome]', Session::getOldInput('pessoa[nome]')  , array('class' => 'form-control')) !!}
             </div>
             {{--<div class="form-group col-md-2">--}}
-                {{--{!! Form::label('tratamento', 'Tratamento') !!}--}}
-                {{--{!! Form::text('tratamento', Session::getOldInput('tratamento')  , array('class' => 'form-control')) !!}--}}
+            {{--{!! Form::label('tratamento', 'Tratamento') !!}--}}
+            {{--{!! Form::text('tratamento', Session::getOldInput('tratamento')  , array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
             <div class="form-group col-md-2">
                 {!! Form::label('pessoa[data_nasciemento]', 'Nascimento') !!}
@@ -20,12 +20,12 @@
         </div>
         <div class="row">
             {{--<div class="form-group col-md-6">--}}
-                {{--{!! Form::label('pessoa[nome_social]', 'Nome Social') !!}--}}
-                {{--{!! Form::text('pessoa[nome_social]', Session::getOldInput('pessoa[nome_social]')  , array('class' => 'form-control')) !!}--}}
+            {{--{!! Form::label('pessoa[nome_social]', 'Nome Social') !!}--}}
+            {{--{!! Form::text('pessoa[nome_social]', Session::getOldInput('pessoa[nome_social]')  , array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
             {{--<div class="form-group col-md-3">--}}
-                {{--{!! Form::label('turno_id', 'Turno') !!}--}}
-                {{--{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}--}}
+            {{--{!! Form::label('turno_id', 'Turno') !!}--}}
+            {{--{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
             <div class="checkbox checkbox-primary checkbox-inline" style="margin-top: 27px">
                 {!! Form::hidden('pos_e_graduacao', 0) !!}
@@ -80,7 +80,8 @@
                     Dados Acadêmicos</a>
             </li>
             <li role="presentation">
-                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
+                <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos
+                    Obrigatórios</a>
             </li>
             <li role="presentation">
                 <a href="#anexoDoc" aria-controls="anexoDoc" role="tab" data-toggle="tab">Anexo</a>
@@ -103,16 +104,16 @@
                                 {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], null, array('class' => 'form-control')) !!}
                             </div>
                             {{--<div class="form-group col-md-4">--}}
-                                {{--{!! Form::label('pessoa[profissoes_id]', 'Profissão') !!}--}}
-                                {{--{!! Form::select('pessoa[profissoes_id]', $loadFields['profissao'], null, array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('pessoa[profissoes_id]', 'Profissão') !!}--}}
+                            {{--{!! Form::select('pessoa[profissoes_id]', $loadFields['profissao'], null, array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
                             {{--<div class="form-group col-md-2">--}}
-                                {{--{!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}--}}
-                                {{--{!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], null, array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}--}}
+                            {{--{!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], null, array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
                             {{--<div class="form-group col-md-2">--}}
-                                {{--{!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}--}}
-                                {{--{!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'], null, array('class' => 'form-control')) !!}--}}
+                            {{--{!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}--}}
+                            {{--{!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'], null, array('class' => 'form-control')) !!}--}}
                             {{--</div>--}}
                         </div>
                         <div class="row">
@@ -343,16 +344,18 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="academico">
-                <br/>
+                <br>
+                <a  data-toggle="modal" href="#modal-create-instituicao">Nova Instituição</a>
+                <br><br>
                 <div class="row">
                     <div class="col-md-12">
                         {{--<div class="row">--}}
-                            {{--<div class="form-group col-md-3">--}}
-                                {{--{!! Form::label('titulacao_id', 'Titulação') !!}--}}
-                                {{--{!! Form::select('titulacao_id', $loadFields['titulacao'], null, array('class' => 'form-control')) !!}--}}
-                            {{--</div>--}}
+                        {{--<div class="form-group col-md-3">--}}
+                        {{--{!! Form::label('titulacao_id', 'Titulação') !!}--}}
+                        {{--{!! Form::select('titulacao_id', $loadFields['titulacao'], null, array('class' => 'form-control')) !!}--}}
                         {{--</div>--}}
-                        
+                        {{--</div>--}}
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="instituicao-graduacao" class="control-label">Graduação</label>
@@ -363,7 +366,7 @@
                                     @endif
                                 </select>
                             </div>
-                            
+
                             <div class="form-group col-md-6">
                                 <label for="instituicao-pos">Pós Graduação</label>
                                 <select id="instituicao-pos" class="form-control" name="instituicao_pos_id">
@@ -374,19 +377,19 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_graduacao', 'Especificação Graduação') !!}
                                 {!! Form::text('especificacao_graduacao', Session::getOldInput('especificacao_graduacao')  , array('class' => 'form-control')) !!}
                             </div>
-                            
+
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_pos', 'Especificação Pós') !!}
                                 {!! Form::text('especificacao_pos', Session::getOldInput('especificacao_pos')  , array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="instituicao-mestrado">Mestrado</label>
@@ -397,7 +400,7 @@
                                     @endif
                                 </select>
                             </div>
-                            
+
                             <div class="form-group col-md-6">
                                 <label for="instituicao-doutorado">Doutorado</label>
                                 <select id="instituicao-doutorado" class="form-control" name="instituicao_doutorado_id">
@@ -408,7 +411,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 {!! Form::label('especificacao_mestrado', 'Especificação Mestrado') !!}
@@ -422,7 +425,7 @@
                     </div>
                 </div>
             </div>
-            
+
             {{--Aba Documentos Obrigatorios--}}
             <div role="tabpanel" class="tab-pane" id="documentosObrig">
                 <br/>
@@ -523,10 +526,11 @@
                                        data-dismiss="fileinput">Remove</a>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-1">
                                 @if(isset($model) && $model->path_cpf)
-                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'cpf']) }}">Visualizar</a>
+                                    <a target="_blank"
+                                       href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'cpf']) }}">Visualizar</a>
                                 @endif
                             </div>
 
@@ -547,7 +551,8 @@
 
                             <div class="col-md-1">
                                 @if(isset($model) && $model->path_rg)
-                                    <a target="_blank" href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'rg']) }}">Visualizar</a>
+                                    <a target="_blank"
+                                       href="{{ route('seracademico.posgraduacao.professorpos.visualizarAnexo', ['id' => $model->id, 'tipo' => 'rg']) }}">Visualizar</a>
                                 @endif
                             </div>
                         </div>
@@ -696,9 +701,9 @@
         </div>
     </div>
 </div>
-{{--Buttons Submit e Voltar--}}
-<div class="row">
 
+
+<div class="row">
     <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
@@ -733,12 +738,8 @@
         </div>
     </div>
 </div>
-{{--Fim Buttons Submit e Voltar--}}
-</div>
 
-</div>
-</div>
-</div>
+@include('posGraduacao.professor.modal_create_instituicao')
 
 @section('javascript')
     <script type="text/javascript">
@@ -798,8 +799,8 @@
 
             if (estado !== "") {
                 var dados = {
-                    'table' : 'cidades',
-                    'field_search' : 'estados_id',
+                    'table': 'cidades',
+                    'field_search': 'estados_id',
                     'value_search': estado,
                 };
 
@@ -809,7 +810,7 @@
                     data: dados,
                     datatype: 'json',
                     headers: {
-                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
                     },
                 }).done(function (json) {
                     var option = "";
@@ -835,8 +836,8 @@
 
             if (cidade !== "") {
                 var dados = {
-                    'table' : 'bairros',
-                    'field_search' : 'cidades_id',
+                    'table': 'bairros',
+                    'field_search': 'cidades_id',
                     'value_search': cidade,
                 };
 
@@ -875,16 +876,16 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_instituicoes',
-                        'fieldName':  'nome',
-                        'fieldWhere':  'nivel',
-                        'valueWhere':  '3',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_instituicoes',
+                        'fieldName': 'nome',
+                        'fieldWhere': 'nivel',
+                        'valueWhere': '3',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -917,16 +918,16 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_instituicoes',
-                        'fieldName':  'nome',
-                        'fieldWhere':  'nivel',
-                        'valueWhere':  '3',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_instituicoes',
+                        'fieldName': 'nome',
+                        'fieldWhere': 'nivel',
+                        'valueWhere': '3',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -959,16 +960,16 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_instituicoes',
-                        'fieldName':  'nome',
-                        'fieldWhere':  'nivel',
-                        'valueWhere':  '3',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_instituicoes',
+                        'fieldName': 'nome',
+                        'fieldWhere': 'nivel',
+                        'valueWhere': '3',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -1001,16 +1002,16 @@
                 crossDomain: true,
                 data: function (params) {
                     return {
-                        'search':     params.term, // search term
-                        'tableName':  'fac_instituicoes',
-                        'fieldName':  'nome',
-                        'fieldWhere':  'nivel',
-                        'valueWhere':  '3',
-                        'page':       params.page || 1
+                        'search': params.term, // search term
+                        'tableName': 'fac_instituicoes',
+                        'fieldName': 'nome',
+                        'fieldWhere': 'nivel',
+                        'valueWhere': '3',
+                        'page': params.page || 1
                     };
                 },
                 headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
                 processResults: function (data, params) {
 
@@ -1028,6 +1029,31 @@
                     };
                 }
             }
+        });
+
+        $(document).on('click', '#btnSaveInstituicao', function () {
+            var nome  = $('#nome_instituicao').val();
+            var nivel = 3;
+
+            if(!nome) {
+                swal('Você deve informar uma instituição', '', 'error');
+                return false;
+            }
+
+            jQuery.ajax({
+                type: 'POST',
+                url: '{{ route('seracademico.posgraduacao.professorpos.instituicao')  }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
+                },
+                data: {'nome' :  nome, 'nivel' : nivel},
+                datatype: 'json'
+            }).done(function (json) {
+                if(json.success) {
+                    swal('Instituição adicionada com sucesso', '', 'success');
+                    $('#modal-create-instituicao').modal('toggle');
+                }
+            });
         });
     </script>
 @stop
