@@ -345,7 +345,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="academico">
                 <br>
-                <a  data-toggle="modal" href="#modal-create-instituicao">Nova Instituição</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create-instituicao">Nova Instituição</button>
                 <br><br>
                 <div class="row">
                     <div class="col-md-12">
