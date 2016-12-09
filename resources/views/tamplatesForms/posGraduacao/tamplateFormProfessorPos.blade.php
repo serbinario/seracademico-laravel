@@ -99,7 +99,7 @@
                                 {!! Form::select('pessoa[estado_civis_id]', $loadFields['estadocivil'], null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de Instrução') !!}
+                                {!! Form::label('pessoa[grau_instrucoes_id]', 'Titulação') !!}
                                 {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
@@ -346,12 +346,12 @@
                 <br/>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="form-group col-md-3">
-                                {!! Form::label('titulacao_id', 'Titulação') !!}
-                                {!! Form::select('titulacao_id', $loadFields['titulacao'], null, array('class' => 'form-control')) !!}
-                            </div>
-                        </div>
+                        {{--<div class="row">--}}
+                            {{--<div class="form-group col-md-3">--}}
+                                {{--{!! Form::label('titulacao_id', 'Titulação') !!}--}}
+                                {{--{!! Form::select('titulacao_id', $loadFields['titulacao'], null, array('class' => 'form-control')) !!}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         
                         <div class="row">
                             <div class="form-group col-md-6">
