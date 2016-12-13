@@ -118,7 +118,7 @@
                             <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
                         </tr>
                         <tr>
-                            <?php dd($dados['filtersBody']);
+                            <?php 
                                 $objDate = $dados['filtersBody'][5] ?? "";
 
                                 if(!empty($objDate)) {
