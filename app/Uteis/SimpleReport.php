@@ -90,7 +90,7 @@ class SimpleReport implements Report
         $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
         # Variável que armazenará a condição where
-        $where = $this->sql[0]->where ? "WHERE" : "";
+        $where = "";
 
         # Percorrendo os filtros
         foreach($this->filters as $filter) {
