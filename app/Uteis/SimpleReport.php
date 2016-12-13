@@ -90,7 +90,7 @@ class SimpleReport implements Report
         $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
         # Variável que armazenará a condição where
-        $where = "";
+        $where = $this->sql[0]->where ? "WHERE" : "";
 
         # Percorrendo os filtros
         foreach($this->filters as $filter) {
@@ -125,7 +125,7 @@ class SimpleReport implements Report
         $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
         # Variável que armazenará a condição where
-        $where = "";
+        $where = $this->sql[0]->where ? "WHERE" : "";
 
         # Percorrendo os filtros
         foreach($this->filters as $filter) {
@@ -188,7 +188,7 @@ class SimpleReport implements Report
 
         # Recuperando o sql principal
         $this->sql =  \DB::table('reports')
-            ->select(['reports.sql', 'groupBy', 'view'])
+            ->select(['reports.sql', 'groupBy', 'view', 'where'])
             ->where('reports.id', $id)
             ->get();
 
