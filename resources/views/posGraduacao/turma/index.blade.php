@@ -44,9 +44,10 @@
                         <table id="turma-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Código</th>
+                                <th>Código Turma</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
+                                <th>Sede</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -56,9 +57,10 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Código</th>
+                                <th>Código Turma</th>
                                 <th>Cód. Curso</th>
                                 <th>Curso</th>
+                                <th>Sede</th>
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
@@ -113,6 +115,7 @@
     @include('posGraduacao.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_pos_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_pos_turma_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_pos_aluno_turma')
 @stop
 
 @section('javascript')
@@ -134,6 +137,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_aniversariantes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
@@ -145,6 +149,7 @@
                 {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
+                {data: 'sede', name: 'sedes.nome'},
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},

@@ -77,10 +77,10 @@ class UtilController extends Controller
                 $qb->where($fieldName,'like', "%$searchValue%");
             } else {
                 #preparando a consulta
-                $qb = DB::table($tableName)->select('id', 'nome');
+                $qb = DB::table($tableName)->select('id', $fieldName);
                 $qb->skip($pageValue);
                 $qb->take(10);
-                $qb->orderBy('nome', 'asc');
+                $qb->orderBy($fieldName, 'asc');
                 $qb->where($fieldName,'like', "%$searchValue%");
             }
 
@@ -125,7 +125,7 @@ class UtilController extends Controller
                 foreach($resultItems as $item) {
                     $result[] = [
                         "id" => $item->id,
-                        "text" => $item->nome
+                        "text" => $item->$fieldName
                     ];
                 }
             }

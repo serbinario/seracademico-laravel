@@ -258,9 +258,9 @@ class AlunoService
             $this->tratamentoCursoUpdate($aluno, $data['curriculo_id']);
 
             # Verificando se a turma foi informada
-            if($data['turma_id']) {
+            if(isset($data['turma_id'])) {
                 # Regra de negócio para tratamento da turma em caso de atualização
-                $this->tratamentoTurmaUpdate($aluno, $data['turma_id']);
+                $this->tratamentoTurmaUpdate($aluno, !empty($data['turma_id']) ? $data['turma_id'] : null);
             }
         }
 
@@ -489,18 +489,28 @@ class AlunoService
         foreach ($data as $key => $value) {
             if(is_array($value)) {
                 foreach ($value as $key2 => $value2) {
-                    $explodeKey2 = explode("_", $key2);
+                    if(is_array($value2)) {
+                        foreach ($value2 as $key3 => $value3) {
+                            $explodeKey3 = explode("_", $key3);
 
-                    if ($explodeKey2[count($explodeKey2) -1] == "id" && $value2 == null ) {
-                        $data[$key][$key2] = null;
+                            if ($explodeKey3[count($explodeKey3) -1] == "id" && !$value3 ) {
+                                unset($data[$key][$key2][$key3]);
+                            }
+                        }
+                    } else {
+                        $explodeKey2 = explode("_", $key2);
+
+                        if ($explodeKey2[count($explodeKey2) -1] == "id" && !$value2 ) {
+                            unset($data[$key][$key2]);
+                        }
                     }
                 }
             }
 
             $explodeKey = explode("_", $key);
 
-            if ($explodeKey[count($explodeKey) -1] == "id" && $value == null ) {
-                $data[$key] = null;
+            if ($explodeKey[count($explodeKey) -1] == "id" && !$value ) {
+                unset($data[$key]);
             }
         }
 

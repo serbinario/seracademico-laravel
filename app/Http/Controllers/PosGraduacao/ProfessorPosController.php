@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
 
+use Seracademico\Entities\Instituicao;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\PosGraduacao\ProfessorPosService;
@@ -11,6 +12,7 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\PosGraduacao\ProfessorPosValidator;
+use Illuminate\Http\Response;
 
 class ProfessorPosController extends Controller
 {
@@ -110,7 +112,7 @@ class ProfessorPosController extends Controller
 
             #Executando a ação
             $this->service->store($data);
-            //dd("SSSSSSS");
+
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
@@ -135,7 +137,7 @@ class ProfessorPosController extends Controller
 
             #retorno para view
             return view('posGraduacao.professor.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -164,13 +166,14 @@ class ProfessorPosController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
     /**
      * @param $id
+     * @return $this
      * @throws \Exception
      */
     public function getImg($id)
@@ -183,8 +186,44 @@ class ProfessorPosController extends Controller
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
         }
-
-
     }
 
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function visualizarAnexo($id, $tipo)
+    {
+        try { 
+            # Retorno
+            return new Response(file_get_contents($this->service->getPathArquivo($id, "path_$tipo")), 200, [
+                'Content-Type' => 'image/jpeg',
+                'Content-Disposition' => 'inline; filename="'.'anexo.jpeg'.'"'
+            ]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function createInstituicao(Request $request)
+    {
+        try {
+            # Recuperando os dados da requisição
+            $dados = $request->all();
+            
+            # Salvando os dados
+            Instituicao::create($dados);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }

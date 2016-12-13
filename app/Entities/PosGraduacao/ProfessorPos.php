@@ -43,7 +43,20 @@ class ProfessorPos extends Model implements Transformable
         'pis',
         'pessoa_id',
         'tipo_nivel_sistema_id',
-        'pos_e_graduacao'
+        'pos_e_graduacao',
+        'path_cpf',
+        'path_rg',
+        'path_comprovante_residencia',
+        'path_curriculo_lattes',
+        'path_diploma_graduacao',
+        'path_certificado_pos',
+        'path_certificado_mestrado',
+        'path_certificado_doutorado',
+        'curriculo_lattes_doc_obrigatorio',
+        'diploma_graduacao_obrigatorio',
+        'diploma_pos_obrigatorio',
+        'diploma_mestrado_obrigatorio',
+        'diploma_doutorado_obrigatorio'
 	];
 
 

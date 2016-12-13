@@ -26,6 +26,11 @@
                        </div>
 
                        <div class="form-group">
+                           {!! Form::label('turnos', 'Turnos') !!}
+                           {!! Form::select('turnos', [0 => 'Selecione um turno', 'Manhã' => 'Manhã', 'Tarde' => 'Tarde'], null, array('class' => 'form-control', 'id' => 'turno_gra_turma_ata_assinatura_id')) !!}
+                       </div>
+
+                       <div class="form-group">
                            <button class="btn-sm btn-primary" type="submit" id="btnBuilderReportGraTurmaAtaAssinatura">Relatório</button>
                        </div>
                    </div>

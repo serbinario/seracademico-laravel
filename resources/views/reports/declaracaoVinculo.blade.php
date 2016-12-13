@@ -53,7 +53,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
-    <style type="text/css" class="init">
+    <style type="text/css">
         #container {
             border-style: double;
             border-color: #000080;
@@ -68,29 +68,33 @@
             background-attachment: fixed;
             background-position: top;
             background-size: 500px 700px;
-            opacity: 0.2;
             position: absolute;
         }
-
+        @media print
+        {
+            body {font-family:georgia, times, serif;}
+        }
         #main {
             margin: 20px;
-            font-style: normal;
-            font-family: verdana;
+            font-weight: 500;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: justify;
+            line-height: 1.4;
         }
 
         div#rodape {
-            margin-top: 100px;
+            margin-top: 20px;
         }
 
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
         }
+
         table , tr , td {
             font-size: small;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
 </head>
 
 <body>
@@ -102,20 +106,20 @@
             <div style="margin-right: 500px;">
                 <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
             </div>
-            <center><h4>FACULDADE DE SAÚDE DE PAULISTA</h4></center>
+            <center><h4 style="margin-top:10px; margin-bottom: 5px;">FACULDADE DE SAÚDE DE PAULISTA</h4></center>
 
-            <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
+            <center><h4 style="margin-top: 5px; margin-bottom: 20px;">Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
             <center>
-                <span>DECLARAÇÃO DE VÍNCULO</span>
+                <span><b>DECLARAÇÃO DE VÍNCULO</b></span>
             </center>
 
             <br />
 
-            <p style="font-size: 20px">
+            <p style="font-size: 20px;text-indent: 2em; margin-top: 10px;">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
-                nesta Instituição de Ensino Superior, ALPHA – FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
+                nesta Instituição de Ensino Superior, FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
                 <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade  FASUP
                 (Faculdade de Saúde de Paulista), de acordo com a portaria de
                 credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
@@ -123,7 +127,7 @@
 
             </p>
 
-            <p style="font-size: 20px">
+            <p style="font-size: 20px;text-indent: 2em;">
                 <?php
 
                 if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
@@ -141,12 +145,12 @@
             </p>
 
             <div id="rodape">
-                <p>
+                <p style="text-indent: 2em;">
                     O referido é verdadeiro e dou fé.
                 </p>
                 <br />
 
-                <div style="position: absolute; top: 600px; left: 300px">
+                <div style="position: absolute; margin-top: -20px; margin-left: 30%;">
                     <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
                 </div>
 
@@ -157,7 +161,7 @@
                 </center>
 
                 <center>
-                    <p>
+                    <p style="margin-top: 60px;">
                         Secretária Acadêmica
                     </p>
                 </center>
@@ -167,10 +171,10 @@
                         <img src="{{ asset('img/logo_fasup.png')  }}" alt="">
                     </center>
 
-                    <div style="text-align: center; font-size: 11px; opacity: 0.5">
-                        <p>Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
-                        <p style="margin-top: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
-                        <p style="margin-top: 0;">81-4101- 1117 - www.fasup.com</p>
+                    <div style="text-align: center; font-size: 11px;">
+                        <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
+                        <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
+                        <p style="margin: 0;">81-4101- 1117 - www.fasup.com</p>
                     </div>
                 </div>
             </div>

@@ -180,8 +180,8 @@ class DisciplinaController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
+     * @return mixed
      */
     public function delete($id)
     {

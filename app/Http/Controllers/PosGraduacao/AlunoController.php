@@ -43,6 +43,7 @@ class AlunoController extends Controller
         'Turno',
         'FormaAdmissao',
         'SituacaoAluno',
+        'Sede',
         'SimpleReport|byCrud,1',
         'PosGraduacao\\Turma|PosGraduacao',
         'PosGraduacao\\Curso|ativo,1',

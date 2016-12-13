@@ -156,6 +156,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\ProfessorPosController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'PosGraduacao\ProfessorPosController@contrato']);
                 Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'PosGraduacao\ProfessorPosController@getImg']);
+                Route::get('visualizarAnexo/{id}/{tipo}', ['as' => 'visualizarAnexo', 'uses' => 'PosGraduacao\ProfessorPosController@visualizarAnexo']);
+                Route::post('instituicao', ['as' => 'instituicao', 'uses' => 'PosGraduacao\ProfessorPosController@createInstituicao']);
             });
 
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
@@ -199,6 +201,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaController@update']);
                 Route::get('getAllByCurso/{idCurso}', ['as' => 'getAllByCurso', 'uses' => 'PosGraduacao\TurmaController@getAllByCurso']);
+                Route::get('getSedeByCurso/{idCurso}', ['as' => 'getSedeByCurso', 'uses' => 'PosGraduacao\TurmaController@getSedeByCurso']);
+                Route::get('getTurmaBySede/{idSede}/{idCurso}', ['as' => 'getTurmaBySede', 'uses' => 'PosGraduacao\TurmaController@getTurmaBySede']);
                 Route::get('getCalendariosByDisciplina/{idTurma}/{idDisciplina}', ['as' => 'getCalendariosByDisciplina', 'uses' => 'PosGraduacao\TurmaController@getCalendariosByDisciplina']);
 
                 Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {

@@ -76,21 +76,14 @@
             margin: 20px;
             font-style: normal;
             font-family: verdana;
+            text-align: justify;
         }
 
         div#rodape {
-            margin-top: 100px;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        table , tr , td {
-            font-size: small;
+            margin-top: 30px;
         }
     </style>
-    <link href="" rel="stylesheet" media="screen">
+    <link href="" rel="stylesheet" media="print">
 </head>
 
 <body>
@@ -107,16 +100,16 @@
             <center><h4>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h4></center>
 
             <center>
-                <span>CERTIDÃO DE CONCLUSÃO DE CURSO</span>
+                <span><b>CERTIDÃO DE CONCLUSÃO DE CURSO</b></span>
             </center>
 
             <br />
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
-                RG nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!} – {!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE,
-                CPF nº {!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!} Filha de {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!} e
-                {!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}, concluiu o curso de Pós-
+                RG nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['identidade'] : "" !!}</b> – <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['orgao_rg'] : "" !!}/PE</b>,
+                CPF nº <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['cpf'] : "" !!}</b> Filha de <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_pai'] : "" !!}</b> e
+                <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome_mae'] : "" !!}</b>, concluiu o curso de Pós-
                 graduação “Lato Sensu” EM <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela ALPHA EDUCAÇÃO E TREINAMENTOS - ALPHA , de acordo com a portaria de credenciamento
                 do MEC de nº {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>
                 {{ !empty($data_rec) ? $data_rec->format('d/m/Y'): "" }}. O referido aluno (a) concluiu o
@@ -127,7 +120,7 @@
 
             </p>
 
-            <p style="font-size: 20px">
+            <p style="font-size: 18px">
                 <?php
 
                 if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
@@ -150,7 +143,7 @@
                 </p>
                 <br />
 
-                <div style="position: absolute; top: 600px; left: 300px">
+                <div style="position: absolute; margin-top: -20px; margin-left: 30%;">
                     <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
                 </div>
 
@@ -161,7 +154,7 @@
                 </center>
 
                 <center>
-                    <p>
+                    <p style="margin-top: 60px;">
                         Secretária Acadêmica
                     </p>
                 </center>

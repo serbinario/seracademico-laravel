@@ -62,6 +62,7 @@ class SimpleReport implements Report
 
         # Array de retorno
         $report = [
+            'view' => $this->sql[0]->view,
             'reportName' => $this->nameReport[0]->nome,
             'body'    => $this->body($filters),
             //'footer'  => $this->footer(),
@@ -187,7 +188,7 @@ class SimpleReport implements Report
 
         # Recuperando o sql principal
         $this->sql =  \DB::table('reports')
-            ->select(['reports.sql', 'groupBy'])
+            ->select(['reports.sql', 'groupBy', 'view'])
             ->where('reports.id', $id)
             ->get();
 
