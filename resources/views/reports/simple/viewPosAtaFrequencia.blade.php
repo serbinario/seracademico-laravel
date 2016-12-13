@@ -118,7 +118,15 @@
                             <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
                         </tr>
                         <tr>
-                            <td>Data: {{ date('d/m/Y') }}</td>
+                            <?php
+                                $objDate = $dados['filtersBody'][5] ?? "";
+
+                                if(!empty($objDate)) {
+                                    $objDate = \DateTime::createFromFormat('Y-m-d', $date);
+                                }
+                            ?>
+
+                            <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
                             <td>Período: {{ $request['turno'] }}</td>
                         </tr>
                         </tbody>
