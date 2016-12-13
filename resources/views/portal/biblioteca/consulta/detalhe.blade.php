@@ -34,6 +34,8 @@
                                 <option value="2">Título</option>
                                 <option value="3">Assunto</option>
                                 <option value="4">Autor</option>
+                                <option value="5">Palavra chave</option>
+                                <option value="6">Sumário</option>
                             </select>
                         </div>
                         <div class="input-field col s7 m5">
@@ -414,7 +416,7 @@
                                     @endif
 
                                 @else
-                                    <b><?php echo ucfirst(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                    <b><?php echo ucwords(mb_strtolower($exemplar['acervo']['titulo'])) ?></b>@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif
                                 @endif
                                 @if($exemplar['edicao'] && $exemplar['acervo']['tipo_periodico'] == '1')
                                     {{$exemplar['edicao']}}. ed.
