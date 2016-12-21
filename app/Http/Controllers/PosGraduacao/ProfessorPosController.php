@@ -72,8 +72,12 @@ class ProfessorPosController extends Controller
             ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
             ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
             ->where('tipo_nivel_sistema.id', '=' , 2)
-            ->orWhere('fac_professores.pos_e_graduacao', '=' , 1)
-            ->select(['fac_professores.id as id', 'pessoas.nome as nome', 'pessoas.cpf as cpf']);
+            //->where('fac_professores.pos_e_graduacao', '=' , 1)
+            ->select([
+                'fac_professores.id',
+                'pessoas.nome',
+                'pessoas.cpf'
+            ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -81,7 +85,8 @@ class ProfessorPosController extends Controller
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a href="edit/'.$row->id.'" class="btn-floating" title="Editar Professor"><i class="material-icons">edit</i></a></li>
-                            </ul></div>';
+                        </ul>
+                    </div>';
         })->make(true);
     }
 
