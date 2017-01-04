@@ -74,6 +74,8 @@
         /****** Estilos footer *******/
         #footer {
             text-align: center;
+            position:absolute;
+            bottom:0;
         }
 
         #footer img {
@@ -107,25 +109,26 @@
         <div id="body">
             <div class="row">
                 <div class="col-md-12">
+
+                    <?php
+                        $objDate = $dados['filtersBody'][5] ?? "";
+
+                        if(!empty($objDate)) {
+                            $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
+                        }
+                    ?>
+
                     <table id="tableHeader" border="1">
                         <tbody>
                         <tr>
                             <td>Unidade de estudos direcionados: Recife</td>
-                            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{date('Y') . '.' . ($numberMonth >= 8 ? 2 : 1)}}</td>
+                            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{($objDate ? $objDate->format('Y') :  '') . '.' . ($numberMonth >= 8 ? 2 : 1)}}</td>
                         </tr>
                         <tr>
                             <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
                             <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
                         </tr>
                         <tr>
-                            <?php
-                                $objDate = $dados['filtersBody'][5] ?? "";
-
-                                if(!empty($objDate)) {
-                                    $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
-                                }
-                            ?>
-
                             <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
                             <td>Período: {{ $request['turno'] }}</td>
                         </tr>
