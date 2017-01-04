@@ -91,7 +91,7 @@
                         @if(isset($model->endereco->bairro->cidade->id))
                             {!! Form::select('cidade', array($model->endereco->bairro->cidade->id => $model->endereco->bairro->cidade->nome), $model->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
                         @else
-                            {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
+                            {!! Form::select('cidade', array(), Session::getOldInput('cidade'), array('class' => 'form-control', 'id' => 'cidade')) !!}
                         @endif
                     </div>
                     <div class="form-group col-md-4">

@@ -225,6 +225,24 @@ class ExemplarService
     }
 
     /**
+     * @param $codigo
+     * @return string
+     */
+    public function tratarCodigoExemplar($codigo)
+    {
+        if($codigo <= 1 || ($this->anoAtual != $this->ultimoAno)) {
+            $newCod2  = '1'.$this->anoAtual;
+        } else {
+            $newCod = $codigo + 1;
+            $newCod2 = $newCod.$this->anoAtual;
+        }
+
+        $newCod2 = str_pad($newCod2,8,"0",STR_PAD_LEFT);
+
+        return $newCod2;
+    }
+
+    /**
      * @param array $data
      * @return array
      */
@@ -238,9 +256,14 @@ class ExemplarService
         $acervo = $this->repoAcervo->find($data['arcevos_id']);
 
         //recupera o maior código ja registrado
-        $codigo = \DB::table('bib_exemplares')->max('codigo');
         $dataObj  = new \DateTime('now');
         $this->anoAtual = date('Y');
+
+        #recuperando o último código
+        $codigo = \DB::table('bib_exemplares')
+            ->where('bib_exemplares.codigo', 'like', '%'.$this->anoAtual)
+            ->max('codigo');
+
         $codigoMax = $codigo != null ? $codigo : "0001{$this->anoAtual}";
         $codigoAtual = substr($codigoMax, 0, -4);
         $this->ultimoAno = substr($codigo, -4);
@@ -480,24 +503,6 @@ class ExemplarService
 
         #return
         return $entity;
-    }
-
-    /**
-     * @param $codigo
-     * @return string
-     */
-    public function tratarCodigoExemplar($codigo)
-    {
-        if($codigo <= 1 || $this->anoAtual != $this->ultimoAno) {
-            $newCod2  = '1'.$this->anoAtual;
-        } else {
-            $newCod = $codigo + 1;
-            $newCod2 = $newCod.$this->anoAtual;
-        }
-
-        $newCod2 = str_pad($newCod2,8,"0",STR_PAD_LEFT);
-
-        return $newCod2;
     }
 
     /**
