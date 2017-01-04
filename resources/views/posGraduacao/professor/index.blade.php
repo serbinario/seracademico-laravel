@@ -54,6 +54,7 @@
         var table = $('#professor-grid').DataTable({
             processing: true,
             serverSide: true,
+            autoWidth: false,
             ajax: "{!! route('seracademico.posgraduacao.professorpos.grid') !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
@@ -61,25 +62,5 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
-
-        /*//Seleciona uma linha
-        $('#aluno-grid tbody').on( 'click', 'tr', function () {
-            if ( $(this).hasClass('selected') ) {
-                $(this).removeClass('selected');
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-        } );
-
-        //Retonra o id do registro
-        $('#aluno-grid tbody').on( 'click', 'tr', function () {
-
-            var rows = table.row( this ).data()
-
-            console.log( rows.id );
-        } );*/
-
     </script>
 @stop

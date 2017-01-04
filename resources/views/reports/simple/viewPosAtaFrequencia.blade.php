@@ -122,7 +122,7 @@
                                 $objDate = $dados['filtersBody'][5] ?? "";
 
                                 if(!empty($objDate)) {
-                                    $objDate = \DateTime::createFromFormat('Y-m-d', $date);
+                                    $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
                                 }
                             ?>
 

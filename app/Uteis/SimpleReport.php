@@ -98,7 +98,7 @@ class SimpleReport implements Report
                 $chave = str_replace(',', '.', $chave);
 
                 if (strcmp($filter->field, $chave) == 0 && !empty($value)) {
-                    $where .= empty($where) ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
+                    $where .= empty($where) && $this->sql[0]->where != 1 ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
                 }
             }
         }
@@ -133,7 +133,7 @@ class SimpleReport implements Report
                 $chave = str_replace(',', '.', $chave);
 
                 if (strcmp($filter->field, $chave) == 0 && !empty($value)) {
-                    $where .= empty($where) ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
+                    $where .= empty($where) && $this->sql[0]->where != 1 ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
                 }
             }
         }
@@ -188,7 +188,7 @@ class SimpleReport implements Report
 
         # Recuperando o sql principal
         $this->sql =  \DB::table('reports')
-            ->select(['reports.sql', 'groupBy', 'view'])
+            ->select(['reports.sql', 'groupBy', 'view', 'where'])
             ->where('reports.id', $id)
             ->get();
 
