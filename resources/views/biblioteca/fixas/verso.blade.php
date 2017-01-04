@@ -154,7 +154,7 @@
             <sup><b>Idioma</b></sup> <br /> {{$result->idioma->nome}}
         </td>
         <td>
-            <sup><b>Nº de pág.</b></sup> <br /> {{count($result->acervo->exemplares)}}
+            <sup><b>Nº de pág.</b></sup> <br /> {{$result->numero_pag}}
         </td>
         <td>
             <sup><b>Aquisição</b></sup> <br /> {{$result->aquisicao->nome}}
@@ -177,7 +177,7 @@
                     $tombo  = $codigo.'/'.$ano;
                 ?>
                 {{$tombo}}
-                    @if($exemplar->ano || $exemplar->edicao) ({{$exemplar->ano}}/{{$exemplar->edicao}}) @endif /
+                    @if($exemplar->ano || $exemplar->edicao) (Ano: {{$exemplar->ano}} / Edição: {{$exemplar->edicao}}) @endif /
             @endforeach
         </td>
     </tr>
