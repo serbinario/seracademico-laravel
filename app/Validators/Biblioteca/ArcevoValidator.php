@@ -33,11 +33,13 @@ class ArcevoValidator extends LaravelValidator
 
         ],
         ValidatorInterface::RULE_UPDATE => [
+
             'titulo' =>  'required' ,
             'cutter' =>  'required' ,
             'tipos_acervos_id' =>  'required' ,
             'assunto' =>  'required' ,
             'cdd' =>  'required'
+            
         ],
     ];
 
