@@ -85,7 +85,8 @@ class AlunoDocumentoController extends Controller
                 case "4" :
                     $result = $this->contratoFasup($idAluno);
                     $nameView = "reports.contratoFasup";
-                    return \PDF::loadView($nameView, $result)->stream();
+                    return view($nameView);
+                    //return \PDF::loadView($nameView, $result)->stream();
                     break;
                 /*case "4" :
                     $result = $this->historico($idAluno);
