@@ -11,7 +11,7 @@
             background-repeat: repeat-y;
             background-attachment: fixed;
             background-position: top;
-            background-size: 800px 1000px;
+            background-size: 800px 1050px;
             opacity: 0.4;
             position: absolute;
         }
@@ -349,7 +349,7 @@
     </div>
 
 
-    <div class="footer" style="margin-top: 40%; text-align: center; font-size: 12px;">
+    <div class="footer" style="margin-top: 45%; text-align: center; font-size: 12px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
         <p style="margin: 0;">81-4101-1117 - www.fasup.com</p>
