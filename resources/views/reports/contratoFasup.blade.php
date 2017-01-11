@@ -33,10 +33,6 @@
         .footer {
             opacity: 0.4;
         }
-
-        .negrito {
-            letter-spacing: 1em;
-        }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
@@ -47,8 +43,8 @@
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b class="negrito">CONTRATO DE
-        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
+        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b> CONTRATO DE
+        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b> CONTRATADA</b>, e assim denominada a
         entidade
         educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da
@@ -68,8 +64,8 @@
 
     <p>
         CONTRATANTE <b>MARLA MENDONÇA GOMES DE SOUZA</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
-        sob obnº <b>028.188.104-93</b> e RG n° <b>9859033</b>, residente e domiciliado na <b>RUA PEDRO LESSA, nº 366, Bairro: VERA
-        CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b>PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
+        sob obnº <b>028.188.104-93</b> e RG n° <b> 9859033</b>, residente e domiciliado na <b>RUA PEDRO LESSA, nº 366, Bairro: VERA
+        CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b> PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
         PEDAGÓGICA</b>.
 
 
