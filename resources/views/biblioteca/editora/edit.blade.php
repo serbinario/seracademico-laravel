@@ -116,7 +116,7 @@
         });
 
         //Validar nome duplicado
-        $(document).on('blur', "#nome", function () {
+        /*$(document).on('blur', "#nome", function () {
 
             //Recuperando o estado
             var nome = $(this).val();
@@ -153,6 +153,6 @@
 
                 });
             }
-        });
+        });*/
     </script>
 @stop
