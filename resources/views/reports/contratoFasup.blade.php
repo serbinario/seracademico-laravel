@@ -12,7 +12,6 @@
             background-attachment: fixed;
             background-position: top;
             background-size: 800px 1050px;
-            opacity: 0.3;
             position: absolute;
         }
 
