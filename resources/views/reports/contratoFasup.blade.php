@@ -156,12 +156,6 @@
         compensação, pelo sistema bancário, do referido cheque.
     </p>
 
-    <p>
-        <b>§ 2°</b> - Na hipótese de frustração do (s) respectivo (s) cheque (s) a qualquer título, fica a matrícula sem
-        efeito de pleno direito,
-        independentemente de qualquer aviso ou notificação.
-    </p>
-
     <div class="footer" style="margin-top: 2%; text-align: center; font-size: 12px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
@@ -169,6 +163,12 @@
     </div>
 
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
+
+    <p>
+        <b>§ 2°</b> - Na hipótese de frustração do (s) respectivo (s) cheque (s) a qualquer título, fica a matrícula sem
+        efeito de pleno direito,
+        independentemente de qualquer aviso ou notificação.
+    </p>
 
     <p>
         <b>§ 3°</b> - O contratante indicado neste contrato cuja conduta implique a prática de crime de estelionato por meio
@@ -283,14 +283,6 @@
         escolar.
     </p>
 
-    <p>
-        <b>CLÁUSULA NONA</b> – A <b>CONTRATADA</b>, livre de qualquer ônus para os <b>CONTRATANTES</b> ou para o ALUNO,
-        poderá utilizar-se da
-        imagem dos mesmos para fins de divulgação da FASUP e de suas atividades, podendo, para tanto, reproduzi-la na
-        internet, em
-        jornais e em todos os meios de publicação públicos ou privados.
-    </p>
-
     <div class="footer" style="margin-top: 2%; text-align: center; font-size: 12px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
@@ -298,6 +290,14 @@
     </div>
 
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
+
+    <p>
+        <b>CLÁUSULA NONA</b> – A <b>CONTRATADA</b>, livre de qualquer ônus para os <b>CONTRATANTES</b> ou para o ALUNO,
+        poderá utilizar-se da
+        imagem dos mesmos para fins de divulgação da FASUP e de suas atividades, podendo, para tanto, reproduzi-la na
+        internet, em
+        jornais e em todos os meios de publicação públicos ou privados.
+    </p>
 
     <p>
         PARÁGRAFO ÚNICO – Em nenhum a hipótese a imagem será usada de forma que contrarie a moral, os bons costumes e a
