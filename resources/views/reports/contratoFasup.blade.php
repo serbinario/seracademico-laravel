@@ -18,7 +18,7 @@
 
         div#container {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 12px;;
+            font-size: 11px;
             text-align: justify;
             word-break: break-all;
         }
@@ -45,21 +45,14 @@
 
     <p>
         <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b> CONTRATO DE
-        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b> CONTRATADA</b>, e assim denominada a
-        entidade
-        educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
-        mantenedora da
-        FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
-        19
-        de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
-        representado pela
-        diretoria financeira da mantida, têm entre si, justo e acordado o presente Contrato de Prestação de Serviços
-        Educacionais,
-        cumulado com Termos de Reconhecimento da Eficácia de Normas Administrativas, Financeiras e Acadêmicas, para o
-        período
-        letivo de 2017.1, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
-        doravante
-        denominado(a) o(a) Senhor(a):
+        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
+        entidade educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
+        mantenedora da FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
+        19 de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
+        representado pela diretoria financeira da mantida, têm entre si, justo e acordado o presente Contrato de Prestação de Serviços
+        Educacionais, cumulado com Termos de Reconhecimento da Eficácia de Normas Administrativas, Financeiras e Acadêmicas, para o
+        período letivo de 2017.1, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
+        doravante denominado(a) o(a) Senhor(a):
     </p>
 
 
@@ -278,7 +271,7 @@
         a
     </p>
 
-    <div class="footer" style="text-align: center; font-size: 12px;">
+    <div class="footer" style="text-align: center; font-size: 11px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
         <p style="margin: 0;">81-4101-1117 - www.fasup.com</p>
