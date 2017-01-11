@@ -200,7 +200,7 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 ?>
 
 <p class="termos">
-    <?php dd($turma->vencimento_inicial); $vencimento = $turma->vencimento_inicial ? \DateTime::createFromFormat('d/m/Y', $turma->vencimento_inicial) : null; ?>
+    <?php $vencimento = $turma->vencimento_inicial ? \DateTime::createFromFormat('Y-m-d', $turma->vencimento_inicial) : null; ?>
 
     2. <b>DO INVESTIMENTO E FORMA DE PAGAMENTO</b> Como contraprestação dos serviços educacionais, acima referidos,
     será cobrado do CONTRATANTE um investimento de R$ {{$valorCurso}} ({{$numeroTxt}}),
