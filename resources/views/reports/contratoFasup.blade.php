@@ -19,7 +19,7 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
-            word-spacing: inherit;
+            word-spacing: .5px;
         }
 
         h3 #img {
