@@ -18,7 +18,7 @@
 
         div#container {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 11px;
+            font-size: 13px;
             text-align: justify;
             word-break: break-all;
         }
@@ -271,7 +271,7 @@
         a
     </p>
 
-    <div class="footer" style="text-align: center; font-size: 11px;">
+    <div class="footer" style="text-align: center; font-size: 12px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
         <p style="margin: 0;">81-4101-1117 - www.fasup.com</p>
