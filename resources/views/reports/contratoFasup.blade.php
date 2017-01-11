@@ -57,7 +57,7 @@
     <p>
         CONTRATANTE <b>MARLA MENDONÇA GOMES DE SOUZA</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
         sob o nº <b>028.188.104-93</b> e RG n° <b> 9859033</b>, residente e domiciliado na <b>&nbsp;RUA PEDRO LESSA, nº 366, Bairro: VERA
-        CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b> PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
+        CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
         PEDAGÓGICA</b>.
 
 
