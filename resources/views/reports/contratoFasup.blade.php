@@ -19,7 +19,7 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
-            word-spacing: .5px;
+            word-spacing: .2px;
         }
 
         h3 #img {
@@ -33,10 +33,6 @@
         .footer {
             opacity: 0.4;
         }
-
-        .negrito {
-            font-weight: 400;
-        }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
@@ -47,8 +43,8 @@
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <span class="negrito">CONTRATO DE
-        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</span>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
+        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b> CONTRATO DE
+        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
         entidade educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
         19 de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
