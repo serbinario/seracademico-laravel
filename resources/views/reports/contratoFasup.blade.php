@@ -11,7 +11,7 @@
             background-repeat: repeat-y;
             background-attachment: fixed;
             background-position: top;
-            background-size: 800px 1100px;
+            background-size: 800px 1000px;
             opacity: 0.4;
             position: absolute;
         }
@@ -272,7 +272,14 @@
         <b>§ 3°</b> - Em qualquer dos casos dos parágrafos anteriores será procedido o competente processo administrativo.
     </p>
 
-    <div class="footer" style=" margin-top: 10%; text-align: center; font-size: 12px;">
+    <p>
+        <b>CLÁUSULA OITAVA</b> – Nos moldes do art. 5° da lei n° 9.870/99, por ninguém estar obrigado a contratar, manter ou
+        renovar
+        contrato, por consistir a Faculdade privada e opção do aluno e/ou responsável legal, a CONTRATADA poderá não aceitar
+        a
+    </p>
+
+    <div class="footer" style="text-align: center; font-size: 12px;">
         <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011. </p>
         <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
         <p style="margin: 0;">81-4101-1117 - www.fasup.com</p>
@@ -281,10 +288,6 @@
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
     <p>
-        <b>CLÁUSULA OITAVA</b> – Nos moldes do art. 5° da lei n° 9.870/99, por ninguém estar obrigado a contratar, manter ou
-        renovar
-        contrato, por consistir a Faculdade privada e opção do aluno e/ou responsável legal, a CONTRATADA poderá não aceitar
-        a
         renovação para o semestre ou módulo seguinte, quando da existência de débito relativo a semestre ou módulo anterior,
         assim
         como, razão de norma prevista no regimento de ensino ou ao relacionamento entre este e o CONTRATANTE ou comunidade
