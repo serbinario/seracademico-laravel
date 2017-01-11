@@ -200,9 +200,11 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 ?>
 
 <p class="termos">
+    <?php $vencimento = $turma->vencimento_incial ? \DateTime::createFromFormat('d/m/Y') : null; ?>
+
     2. <b>DO INVESTIMENTO E FORMA DE PAGAMENTO</b> Como contraprestação dos serviços educacionais, acima referidos,
     será cobrado do CONTRATANTE um investimento de R$ {{$valorCurso}} ({{$numeroTxt}}),
-    dividido em 1+ {{$turma->qtd_parcelas}} ({{$parcelasTxt}}) parcelas iguais mensais de R$ {{$turma->valor_turma}} com vencimento todo dia 30 de cada mês.
+    dividido em 1+ {{$turma->qtd_parcelas}} ({{$parcelasTxt}}) parcelas iguais mensais de R$ {{$turma->valor_turma}} com vencimento todo dia {{ isset($vencimento) ? $vencimento->format('d') : 30 }} de cada mês.
     As parcelas podem variar de acordo com cada curso. A matricula só será <b>devolvida</b> caso não forme turma
 </p>
 
