@@ -35,7 +35,7 @@
         }
 
         .negrito {
-            font-weight: bold;
+            letter-spacing: 1em;
         }
     </style>
     <link href="" rel="stylesheet" media="print">
@@ -47,8 +47,8 @@
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <span class="negrito">CONTRATO DE
-        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</span>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
+        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b class="negrito">CONTRATO DE
+        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
         entidade
         educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da
