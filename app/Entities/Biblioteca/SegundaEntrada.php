@@ -16,6 +16,9 @@ class SegundaEntrada extends Model implements Transformable
 		'tipo_autor_id',
 		'arcevos_id',
 		'responsaveis_id',
+		'para_referencia1',
+		'para_referencia2',
+		'para_referencia3'
 	];
 
 	public function tipoAutor()

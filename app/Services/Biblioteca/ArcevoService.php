@@ -170,16 +170,12 @@ class ArcevoService
         $this->tratamentoCampos($data);
         $this->tratamentoCampos2($data);
 
-        //dd($data);
-
         //campos da tabela de segunda entrada dos acervos
         $entradas = [
             'tipo_autor_id' => "",
             'responsaveis_id' => "",
             'arcevos_id'=> ""
         ];
-
-        //dd($data);
 
         $data['numero_chamada'] = $data['cdd'] . " " . $data['cutter'];
 
@@ -207,6 +203,7 @@ class ArcevoService
             for($i = 0; $i < count($data['segunda']['responsaveis_id']); $i++){
                 $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
                 $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
+                $entradas['para_referencia'] = $data['segunda']['para_referencia'][$i];
                 $entradas['arcevos_id'] = $arcevo->id;
                 $this->segundaRepository->create($entradas);
             }
@@ -229,6 +226,7 @@ class ArcevoService
      */
     public function update(array $data, int $id) : Arcevo
     {
+
         $this->tratamentoCampos($data);
         $this->tratamentoCampos2($data);
 
@@ -276,6 +274,10 @@ class ArcevoService
                 $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
                 $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
                 $entradas['arcevos_id'] = $arcevo->id;
+                $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
+                $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
+                $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
+
                 $this->segundaRepository->create($entradas);
             }
         } else if(count($data['segunda']['responsaveis_id']) <= 0) {
