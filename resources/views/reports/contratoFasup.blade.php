@@ -7,12 +7,12 @@
         #background {
             width: 100%;
             height: 100%;
-            background-image: url("{{ asset('/img/backgroud_fasup.png') }}");
+            background-image: url("{{ asset('/img/backgroud-fasup2.png') }}");
             background-repeat: repeat-y;
             background-attachment: fixed;
             background-position: top;
             background-size: 800px 1050px;
-            opacity: 0.4;
+            opacity: 0.3;
             position: absolute;
         }
 
