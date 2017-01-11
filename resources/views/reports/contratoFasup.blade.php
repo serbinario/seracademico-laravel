@@ -18,7 +18,7 @@
 
         div#container {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 14px;;
+            font-size: 13px;;
             text-align: justify;
         }
 
