@@ -32,7 +32,7 @@ class AlunoDocumentoController extends Controller
      */
     public function checkDocumento($tipoDoc, $idAluno)
     {
-        try {
+        try { 
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
                 case "1" :
@@ -43,6 +43,9 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "3" :
                     $this->certificadoConclusao($idAluno);
+                    break;
+                case "4" :
+                    $this->contratoFasup($idAluno);
                     break;
             }
 
@@ -80,10 +83,15 @@ class AlunoDocumentoController extends Controller
                     $nameView = "reports.certificadoConclusao";
                     break;
                 case "4" :
+                    $result = $this->contratoFasup($idAluno);
+                    $nameView = "reports.contratoFasup";
+                    return \PDF::loadView($nameView, $result)->stream();
+                    break;
+                /*case "4" :
                     $result = $this->historico($idAluno);
                     $nameView = "reports.historico";
                     return \PDF::loadView($nameView, $result)->stream();
-                    break;
+                    break;*/
             }
                
             # Verificando foi vinculado a um curso e turma
@@ -96,6 +104,62 @@ class AlunoDocumentoController extends Controller
         } catch (\Throwable $e) { dd($e);
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function contratoFasup($id)
+    {
+        # Recuperando o aluno
+        $aluno = $this->service->find($id);
+
+        # Declaração e inicialização de variáveis úteis
+        $data = new \DateTime('now');
+        $curso = "";
+        $turma = "";
+
+        # Recuperando as informações no banco
+        $curso = \DB::table('pos_alunos_cursos')
+            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+            ->where('pos_alunos_cursos.aluno_id', '=', $aluno->id)
+            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->limit(1)
+            ->select([
+                'fac_curriculos.*',
+                'pos_alunos_cursos.id as idCurso'
+            ])->first();
+
+        # Verificando o retorno da consulta
+        if ($curso) {
+            # Recuperando outras informações no banco de dados
+            $turma = \DB::table('pos_alunos_turmas')
+                ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+                ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $curso->idCurso)
+                ->orderBy('pos_alunos_turmas.id', 'DESC')
+                ->limit(1)
+                ->select([
+                    'fac_turmas.*'
+                ])->first();
+        }
+
+        # Verificando se a data do contrato está preenchida
+        if(!$aluno->data_contrato) {
+            $aluno->data_contrato = $data->format('Y-m-d');
+            $aluno->save();
+        }
+
+        # Verificando se o aluno possui as informações necessárias
+        if(!$turma->aula_inicio || !$turma->aula_final || !$turma->qtd_parcelas ||
+            !$turma->duracao_meses || !$turma->valor_turma) {
+            throw new \Exception("Para gerar o contrato é necessário ter
+                        as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+        }
+
+        # Retorno
+        return ['aluno' =>  $aluno, 'curso' => $curso, 'turma' => $turma];
     }
 
     /**

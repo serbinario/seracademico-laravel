@@ -271,6 +271,17 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[para_referencia1]', 0) !!}
+                            @if($segundaEntrada[0]->para_referencia1 == '1')
+                                {!! Form::checkbox('segunda[para_referencia1]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[para_referencia1]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('para_referencia1', 'Para referência?', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -294,6 +305,17 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[para_referencia2]', 0) !!}
+                            @if($segundaEntrada[1]->para_referencia2 == '1')
+                                {!! Form::checkbox('segunda[para_referencia2]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[para_referencia2]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('para_referencia2', 'Para referência?', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -315,6 +337,17 @@
                             @else
                                 {!! Form::select('segunda[tipo_autor_id][]', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoautor']->toArray()), NULL, array('class' => 'form-control')) !!}
                             @endif
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[para_referencia3]', 0) !!}
+                            @if($segundaEntrada[2]->para_referencia3 == '1')
+                                {!! Form::checkbox('segunda[para_referencia3]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[para_referencia3]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('para_referencia3', 'Para referência?', false) !!}
                         </div>
                     </div>
                 </div>
