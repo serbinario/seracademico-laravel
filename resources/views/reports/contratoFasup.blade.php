@@ -7,7 +7,7 @@
         #background {
             width: 100%;
             height: 100%;
-            background-image: url("{{ asset('/img/backgroud-fasup2.png') }}");
+            background-image: url("{{ asset('/img/backgroud_fasup.png') }}");
             background-repeat: repeat-y;
             background-attachment: fixed;
             background-position: top;
