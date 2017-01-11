@@ -20,6 +20,7 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;;
             text-align: justify;
+            text-justify: distribute;
         }
 
         h3 #img {
