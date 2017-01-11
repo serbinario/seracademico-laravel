@@ -129,7 +129,7 @@ class AlunoValidator extends LaravelValidator
             'img' => 'image|max:800',
             'matricula' => 'unique:pos_alunos,matricula,:id',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
-            'pessoa.cpf' => 'required_if:tipo_pretensao_id,==, ""|max:20|pos_aluno_unique_in_pessoa:cpf,:id',
+            //'pessoa.cpf' => 'required_if:tipo_pretensao_id,==, ""|max:20|pos_aluno_unique_in_pessoa:cpf,:id',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required_if:tipo_pretensao_id,==, ""|serbinario_date_format:"d/m/Y"',
