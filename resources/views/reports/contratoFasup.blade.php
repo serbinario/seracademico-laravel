@@ -19,7 +19,6 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
-            text-justify: inter-word;
         }
 
         h3 #img {
@@ -43,8 +42,8 @@
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b> CONTRATO DE
-        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>CONTRATADA</b>, e assim denominada a
+        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
+        PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>&nbsp;CONTRATADA</b>, e assim denominada a
         entidade educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
         19 de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
@@ -57,7 +56,7 @@
 
     <p>
         CONTRATANTE <b>MARLA MENDONÇA GOMES DE SOUZA</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
-        sob o nº <b>028.188.104-93</b> e RG n° <b> 9859033</b>, residente e domiciliado na <b>RUA PEDRO LESSA, nº 366, Bairro: VERA
+        sob o nº <b>028.188.104-93</b> e RG n° <b> 9859033</b>, residente e domiciliado na <b>&nbsp;RUA PEDRO LESSA, nº 366, Bairro: VERA
         CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b> PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
         PEDAGÓGICA</b>.
 
