@@ -71,7 +71,6 @@
 
         #container {
             min-height: 100%;
-            margin-bottom: -100%;
         }
 
         #container::after {
@@ -80,9 +79,8 @@
         }
 
         #footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
-            display: block;
         }
 
         #footer img {
