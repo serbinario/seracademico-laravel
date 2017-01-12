@@ -101,7 +101,7 @@ class AlunoDocumentoController extends Controller
 
             # Retorno do arquivo pdf
             return \PDF::loadView($nameView, $result)->stream();
-        } catch (\Throwable $e) { dd($e->getMessage());
+        } catch (\Throwable $e) { dd($e);
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
