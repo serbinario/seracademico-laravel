@@ -74,8 +74,8 @@
     <p>
         CONTRATANTE <b>{{ $aluno->pessoa->nome  }}</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
         sob o nº <b>{{ $aluno->pessoa->cpf }}</b> e RG n° <b> {{ $aluno->pessoa->identidade }}</b>, residente e domiciliado na
-        <b>&nbsp;{{ $aluno->pessoa->endereco->logradouro }}, nº {{ $aluno->pessoa->endereco->numero }}, Bairro: {{ $aluno->pessoa->endereco->bairro->nome }},
-        Cidade: {{ $aluno->pessoa->endereco->bairro->cidade->nome }}</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM {{ $curso->nome }}</b>.
+        <b>&nbsp;{{ $aluno->pessoa->endereco->logradouro ?? '' }}, nº {{ $aluno->pessoa->endereco->numero ?? '' }}, Bairro: {{ $aluno->pessoa->endereco->bairro->nome ?? '' }},
+        Cidade: {{ $aluno->pessoa->endereco->bairro->cidade->nome ?? '' }}</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM {{ $curso->nome }}</b>.
 
 
     <p>
