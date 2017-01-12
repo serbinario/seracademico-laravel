@@ -74,9 +74,7 @@
         /****** Estilos footer *******/
         #footer {
             text-align: center;
-            position:fixed;
-            bottom:0;
-            display: block;
+            margin-top: 100%;
         }
 
         #footer img {
