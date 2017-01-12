@@ -5,6 +5,7 @@
     <title></title>
     <style type="text/css" class="init">
        body {
+           position: relative;
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -19,6 +20,14 @@
             opacity: 0.4;
             position: absolute;
         }
+
+       #header {
+           text-align: center;
+       }
+
+       #body {
+           margin-top: 50px;
+       }
 
         table {
             font-size: 12px;
@@ -60,16 +69,9 @@
             width: 50%;
         }
 
-        #header {
-           text-align: center;
-         }
-
-        #body {
-            margin-top: 50px;
-        }
-
-        #_VReportFooter {
-            text-align: center;
+        #footer {
+            position: absolute;
+            bottom: 0;
         }
 
         #footer img {
@@ -82,17 +84,15 @@
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
     </style>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/VReport_print.css') }}" media="print"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('VReport_screen.css') }}" media="screen" />
-    <script src="{{ asset('js/VReport.js') }}" type="text/javascript"></script>
-    {{--<script type="text/javascript">--}}
-        {{--window.onload = function () {--}}
-            {{--var widthPage = document.getElementById("container").offsetHeight;--}}
-            {{--var widthBody = document.getElementById("body").offsetHeight;--}}
 
-            {{--document.getElementById("footer").style.marginTop = (widthPage - widthBody);--}}
-        {{--}--}}
-    {{--</script>--}}
+    <script type="text/javascript">
+//        window.onload = function () {
+//            var widthPage = document.getElementById("container").offsetHeight;
+//            var widthBody = document.getElementById("body").offsetHeight;
+//
+//            document.getElementById("footer").style.marginTop = (widthPage - widthBody);
+//        }
+    </script>
 
     <link href="" rel="stylesheet" media="print">
 </head>
@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <div id="_VReportFooter">
+        <div id="footer">
             <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
         </div>
     </div>
