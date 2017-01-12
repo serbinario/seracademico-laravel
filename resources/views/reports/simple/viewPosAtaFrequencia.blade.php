@@ -6,7 +6,6 @@
     <style type="text/css" class="init">
         html, body {
            height: 100%;
-            min-height: 100%;
            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -70,9 +69,15 @@
             width: 50%;
         }
 
-        #footer {
-            position: absolute;
-            bottom: 0;
+        @media print {
+            body {
+                position: relative;
+            }
+
+            #footer {
+                position: absolute;
+                bottom: 0;
+            }
         }
 
         #footer img {
