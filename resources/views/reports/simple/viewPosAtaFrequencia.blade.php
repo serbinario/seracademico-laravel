@@ -83,7 +83,7 @@
             display: block;
         }
         .site-footer {
-            position: relative;
+            position: absolute;
             bottom: 0;
         }
 
