@@ -18,13 +18,13 @@
 
         @media print
         {
-            body {
-                font-family:georgia, times, serif;
-                font-size: 12px;
-                text-align: justify;
-            }
+            body {font-family:georgia, times, serif;}
         }
 
+        div#container {
+            font-size: 12px;
+            text-align: justify;
+        }
 
         h3 #img {
             width: 100%;
