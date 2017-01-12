@@ -70,20 +70,14 @@
         }
 
         @media print {
-            body {
+            html, body {
                 height: 100%;
             }
 
-            #container {
-                min-height: 100%;
-                position: relative;
-                margin-bottom: -100px;
-            }
-
             #footer {
-                position: absolute;
+                display: block;
+                position: fixed;
                 bottom: 0;
-                margin-top: 100px;
             }
         }
 
