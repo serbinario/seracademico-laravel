@@ -79,8 +79,10 @@
         }
 
         #footer {
-            position: fixed;
+            display: block;
+            position: absolute;
             bottom: 0;
+            
         }
 
         #footer img {
