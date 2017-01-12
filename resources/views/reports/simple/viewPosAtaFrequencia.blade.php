@@ -71,6 +71,7 @@
 
         @media print {
             body {
+                height: 100%;
                 position: relative;
             }
 
