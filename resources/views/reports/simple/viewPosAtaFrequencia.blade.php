@@ -84,8 +84,8 @@
             display: block;
         }
         .site-footer, .page-wrap:after {
-            margin-top: 100%;
             height: 142px;
+            padding-top: 100%;
         }
 
         #footer img {
