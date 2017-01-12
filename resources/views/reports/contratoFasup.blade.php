@@ -73,15 +73,15 @@
 
     <p>
         CONTRATANTE <b>{{ $aluno->pessoa->nome  }}</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
-        sob o nº <b>{{ $aluno->pessoa->cpf }}</b> e RG n° <b> {{ $aluno->pessoa->rg }}</b>, residente e domiciliado na
+        sob o nº <b>{{ $aluno->pessoa->cpf }}</b> e RG n° <b> {{ $aluno->pessoa->identidade }}</b>, residente e domiciliado na
         <b>&nbsp;{{ $aluno->pessoa->endereco->logradouro }}, nº {{ $aluno->pessoa->endereco->numero }}, Bairro: {{ $aluno->pessoa->endereco->bairro->nome }},
         Cidade: {{ $aluno->pessoa->endereco->bairro->cidade->nome }}</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM {{ $curso->nome }}</b>.
 
 
     <p>
         <b>CLÁUSULA PRIMEIRA</b> – O objeto do presente contrato é a prestação de serviços educacionais, oferecidos e de inteira
-        responsabilidade da FASUP, para o período compreendido entre os meses de <b>{{ strftime('%B', $timeInicial) }}
-        de {{ strtoupper($aulaInicial->format('Y')) }} e {{ strtoupper(strftime('%B', $timeFinal)) }} de {{ $aulaFinal->format('Y') }}</b>, aqui
+        responsabilidade da FASUP, para o período compreendido entre os meses de <b>{{ strtoupper(strftime('%B', $timeInicial)) }}
+        de {{ $aulaInicial->format('Y') }} e {{ strtoupper(strftime('%B', $timeFinal)) }} de {{ $aulaFinal->format('Y') }}</b>, aqui
         designado também como período letivo a ser ministrado em conformidade com o previsto na legislação de ensino
         superior e nas
         normas regimentais da CONTRATADA, ás quais, de:
