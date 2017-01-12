@@ -70,7 +70,7 @@
         }
 
         #footer {
-            margin-top: 50%;
+            margin-top: 100%;
         }
 
         #footer img {
