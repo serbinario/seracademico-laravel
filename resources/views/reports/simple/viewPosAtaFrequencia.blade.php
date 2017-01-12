@@ -69,13 +69,8 @@
             width: 50%;
         }
 
-       
-
-        #footer {
-            display: block;
-            position: absolute;
-            bottom: 0;
-
+        #container {
+            min-height: 100%;
         }
 
         #footer img {
@@ -88,6 +83,16 @@
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
     </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var widthPage = document.getElementById("container").offsetHeight;
+            var widthBody = document.getElementById("body").offsetHeight;
+
+            document.getElementById("footer").style.marginTop = widthPage + widthBody;
+        }
+    </script>
+
     <link href="" rel="stylesheet" media="print">
 </head>
 
