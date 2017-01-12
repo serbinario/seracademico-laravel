@@ -80,9 +80,9 @@
         }
 
         #footer {
-            position: relative;
+            position: absolute;
             bottom: 0;
-            margin-top: 100%
+            display: block;
         }
 
         #footer img {
