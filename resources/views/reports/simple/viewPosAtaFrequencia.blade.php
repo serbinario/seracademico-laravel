@@ -84,7 +84,7 @@
             var widthPage = document.getElementById("container").offsetHeight;
             var widthBody = document.getElementById("body").offsetHeight;
 
-            document.getElementById("footer").style.marginTop = (widthPage  - widthBody) + 500;
+            document.getElementById("footer").style.marginTop = (widthPage  - widthBody) + 1000;
         }
     </script>
 
