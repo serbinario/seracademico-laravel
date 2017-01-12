@@ -21,10 +21,6 @@
             position: absolute;
         }
 
-        #container {
-            height: 100%;
-        }
-
         /****** Estilos do header *******/
         #header {
             text-align: center;
@@ -77,6 +73,7 @@
 
         /****** Estilos footer *******/
         #footer {
+            display: table-footer-group;
             text-align: center;
             position: fixed;
             bottom: 0;
