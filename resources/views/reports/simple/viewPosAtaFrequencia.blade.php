@@ -77,11 +77,13 @@
             #container {
                 min-height: 100%;
                 position: relative;
+                margin-bottom: -100px;
             }
 
             #footer {
                 position: absolute;
                 bottom: 0;
+                margin-top: 100px;
             }
         }
 
