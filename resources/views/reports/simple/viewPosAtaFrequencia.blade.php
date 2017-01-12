@@ -84,7 +84,8 @@
             display: block;
         }
         .site-footer, .page-wrap:after {
-            height: 142px;
+            position: absolute;
+            bottom: 0;
         }
 
         #footer img {
