@@ -34,6 +34,10 @@
         .footer {
             opacity: 0.4;
         }
+
+        b {
+            font-weight: 900;
+        }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
