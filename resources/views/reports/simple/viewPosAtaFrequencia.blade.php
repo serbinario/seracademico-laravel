@@ -61,6 +61,7 @@
         }
 
         #container {
+            height: 100%;
             min-height: 100%;
         }
 
@@ -71,11 +72,14 @@
         #body {
             margin-top: 50px;
             position:relative;
+            height: auto !important;
         }
 
         #footer {
+            height: auto !important;
             position: absolute;
-            bottom: 0;
+            clear: both;
+            bottom: 0 !important;
         }
 
         #footer img {
