@@ -6,6 +6,7 @@
     <style type="text/css" class="init">
        html, body {
            height: 100%;
+           min-height: 100%;
            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -67,6 +68,10 @@
 
         .percentThirtyFive {
             width: 50%;
+        }
+
+        #container {
+            position: relative;
         }
 
         #footer {
