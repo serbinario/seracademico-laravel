@@ -20,7 +20,6 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
-            font-weight: 600;
         }
 
         h3 #img {
@@ -29,10 +28,6 @@
 
         h3 ~ h3 {
             page-break-before: always;
-        }
-
-        .footer {
-            opacity: 0.4;
         }
 
         .negrito {
