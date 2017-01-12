@@ -77,19 +77,17 @@
         .page-wrap {
             min-height: 100%;
             /* equal to footer height */
-            margin-bottom: -142px;
         }
         .page-wrap:after {
             content: "";
             display: block;
         }
-        .site-footer, .page-wrap:after {
-            height: 142px;
+        .site-footer {
+            position: relative;
+            bottom: 0;
         }
 
         #footer img {
-            position: relative;
-            bottom: 0;
             width: 100%;
         }
 
