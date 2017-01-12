@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
-        body {
+        html, body {
+            height: 100%;
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -72,12 +73,22 @@
         }
 
         /****** Estilos footer *******/
-        #footer {
-            text-align: center;
-            margin-top: 100%;
+
+        .page-wrap {
+            min-height: 100%;
+            /* equal to footer height */
+            margin-bottom: -142px;
+        }
+        .page-wrap:after {
+            content: "";
+            display: block;
+        }
+        .site-footer, .page-wrap:after {
+            height: 142px;
         }
 
         #footer img {
+            padding-top: 85%;
             width: 100%;
         }
 
@@ -105,7 +116,7 @@
             $numberMonth = date('m');
         ?>
 
-        <div id="body">
+        <div id="body" class="page-wrap">
             <div class="row">
                 <div class="col-md-12">
 
@@ -168,7 +179,7 @@
             </div>
         </div>
 
-        <div id="footer">
+        <div id="footer" class="site-footer">
             <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
         </div>
     </div>
