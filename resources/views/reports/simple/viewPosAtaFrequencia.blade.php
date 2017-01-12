@@ -69,6 +69,11 @@
             width: 50%;
         }
 
+        #container {
+            min-height: 100%;
+            margin-bottom: -100%;
+        }
+
         #container::after {
             content: "";
             display: block;
@@ -77,7 +82,7 @@
         #footer {
             position: relative;
             bottom: 0;
-            margin-top: 90%
+            margin-top: 100%
         }
 
         #footer img {
