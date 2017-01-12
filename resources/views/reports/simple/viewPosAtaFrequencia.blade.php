@@ -85,10 +85,10 @@
         }
         .site-footer, .page-wrap:after {
             height: 142px;
-            padding-top: 100%;
         }
 
         #footer img {
+            padding-top: 60%;
             width: 100%;
         }
 
