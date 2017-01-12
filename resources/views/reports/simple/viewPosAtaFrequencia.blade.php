@@ -20,8 +20,6 @@
             position: absolute;
         }
 
-
-
         table {
             font-size: 12px;
             font-weight: bold;
@@ -60,6 +58,10 @@
 
         .percentThirtyFive {
             width: 50%;
+        }
+
+        #container {
+            min-height: 100%;
         }
 
         #header {
