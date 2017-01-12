@@ -84,7 +84,17 @@
             var widthPage = document.getElementById("container").offsetHeight;
             var widthBody = document.getElementById("body").offsetHeight;
 
-            document.getElementById("footer").style.marginTop = (widthPage  - widthBody) + 800;
+            document.getElementById("footer").style.marginTop = documentHeight() - widthBody;
+        }
+
+        function documentHeight() {
+            return Math.max(
+                    document.documentElement.clientHeight,
+                    document.body.scrollHeight,
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.offsetHeight
+            );
         }
     </script>
 
