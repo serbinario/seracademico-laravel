@@ -21,6 +21,11 @@
             position: absolute;
         }
 
+        #container {
+            min-height: 100%;
+            position: relative;
+        }
+
         /****** Estilos do header *******/
         #header {
             text-align: center;
@@ -74,7 +79,8 @@
         /****** Estilos footer *******/
         #footer {
             text-align: center;
-            margin-top: 100%;
+            position: absolute;
+            bottom: 0;
         }
 
         #footer img {
