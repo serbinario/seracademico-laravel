@@ -69,11 +69,21 @@
             width: 50%;
         }
 
-        #footer {
-            margin-top: 110%;
+        @media print {
+            body {
+                position: relative;
+            }
+
+            footer {
+                display: block;
+                width:100%;
+                position:absolute;
+                left:0;
+                bottom:0;
+            }
         }
 
-        #footer img {
+        footer img {
             width: 100%;
         }
 
@@ -175,8 +185,8 @@
         </div>
     </div>
 
-    <div id="footer">
+    <footer>
         <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-    </div>
+    </footer>
 </body>
 </html>
