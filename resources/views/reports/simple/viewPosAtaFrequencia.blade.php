@@ -88,7 +88,8 @@
         }
 
         #footer img {
-            padding-top: 85%;
+            position: relative;
+            bottom: 0;
             width: 100%;
         }
 
