@@ -60,26 +60,16 @@
             width: 50%;
         }
 
-        #container {
-            height: 100%;
-            min-height: 100%;
-        }
-
         #header {
            text-align: center;
          }
 
         #body {
             margin-top: 50px;
-            position:relative;
-            height: auto !important;
         }
 
-        #footer {
-            height: auto !important;
-            position: absolute;
-            clear: both;
-            bottom: 0 !important;
+        #_VReportFooter {
+            text-align: center;
         }
 
         #footer img {
@@ -92,7 +82,9 @@
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
     </style>
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/VReport_print.css') }}" media="print"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('VReport_screen.css') }}" media="screen" />
+    <script src="{{ asset('js/VReport.js') }}" type="text/javascript"></script>
     {{--<script type="text/javascript">--}}
         {{--window.onload = function () {--}}
             {{--var widthPage = document.getElementById("container").offsetHeight;--}}
@@ -183,7 +175,7 @@
             </div>
         </div>
 
-        <div id="footer">
+        <div id="_VReportFooter">
             <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
         </div>
     </div>
