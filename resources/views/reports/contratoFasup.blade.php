@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Contrato FASUP</title>
     <style type="text/css">
+
         #background {
             width: 100%;
             height: 100%;
@@ -15,11 +16,15 @@
             position: absolute;
         }
 
-        div#container {
-            font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 12px;
-            text-align: justify;
+        @media print
+        {
+            body {
+                font-family:georgia, times, serif;
+                font-size: 12px;
+                text-align: justify;
+            }
         }
+
 
         h3 #img {
             width: 100%;
