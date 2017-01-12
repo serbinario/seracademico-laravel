@@ -74,7 +74,11 @@
         /****** Estilos footer *******/
         #footer {
             text-align: center;
-            margin-top: 100%;
+            clear: both;
+            position: relative;
+            z-index: 10;
+            height: 3em;
+            margin-top: -3em;
         }
 
         #footer img {
