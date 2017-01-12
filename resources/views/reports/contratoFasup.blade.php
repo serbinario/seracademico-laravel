@@ -80,8 +80,8 @@
 
     <p>
         <b>CLÁUSULA PRIMEIRA</b> – O objeto do presente contrato é a prestação de serviços educacionais, oferecidos e de inteira
-        responsabilidade da FASUP, para o período compreendido entre os meses de <b>{{ strtoupper(strftime('%B', $timeInicial)) }}
-        de {{ $aulaInicial->format('Y') }} e {{ strtoupper(strftime('%B', $timeFinal)) }} de {{ $aulaFinal->format('Y') }}</b>, aqui
+        responsabilidade da FASUP, para o período compreendido entre os meses de <b><span style="text-transform: uppercase">{{ strftime('%B', $timeInicial) }}</span>
+        de {{ $aulaInicial->format('Y') }} e <span style="text-transform: uppercase">{{ strftime('%B', $timeFinal) }}</span> de {{ $aulaFinal->format('Y') }}</b>, aqui
         designado também como período letivo a ser ministrado em conformidade com o previsto na legislação de ensino
         superior e nas
         normas regimentais da CONTRATADA, ás quais, de:
