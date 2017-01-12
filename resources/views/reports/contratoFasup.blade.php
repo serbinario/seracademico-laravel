@@ -41,6 +41,23 @@
 <div id="container">
     <h3><img src="{{ asset('/img/header-fasup.png') }}" alt="" id="img"></h3>
 
+    <?php
+        # Setando a data para brasil
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+
+       // dd(strftime('%A, %d de %B de %Y', strtotime('today')));
+        # Recuperando o semestre atual
+        $numMonth = date('m');
+        $numMonth = $numMonth >= 8 ? 2 : 1;
+
+        # Timestamp das datas iniciais e finais da turma
+        $aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+        $aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
+        $timeInicial = $aulaInicial->getTimestamp();
+        $timeFinal   = $aulaFinal->getTimestamp();
+    ?>
+
     <p>
         <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
         PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>&nbsp;CONTRATADA</b>, e assim denominada a
@@ -49,23 +66,22 @@
         19 de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
         representado pela diretoria financeira da mantida, têm entre si, justo e acordado o presente Contrato de Prestação de Serviços
         Educacionais, cumulado com Termos de Reconhecimento da Eficácia de Normas Administrativas, Financeiras e Acadêmicas, para o
-        período letivo de 2017.1, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
+        período letivo de {{ date('Y') }}.{{ $numMonth }}, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
         doravante denominado(a) o(a) Senhor(a):
     </p>
 
 
     <p>
-        CONTRATANTE <b>MARLA MENDONÇA GOMES DE SOUZA</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
-        sob o nº <b>028.188.104-93</b> e RG n° <b> 9859033</b>, residente e domiciliado na <b>&nbsp;RUA PEDRO LESSA, nº 366, Bairro: VERA
-        CRUZ, Cidade: CAMARAGIBE</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM EDUCAÇÃO INCLUSIVA E COORDENAÇÃO
-        PEDAGÓGICA</b>.
+        CONTRATANTE <b>{{ $aluno->pessoa->nome  }}</b>, brasileiro(a), casado(a) ( ) / solteiro(a) ( ), inscrito no CPF
+        sob o nº <b>{{ $aluno->pessoa->cpf }}</b> e RG n° <b> {{ $aluno->pessoa->rg }}</b>, residente e domiciliado na
+        <b>&nbsp;{{ $aluno->pessoa->endereco->logradouro }}, nº {{ $aluno->pessoa->endereco->numero }}, Bairro: {{ $aluno->pessoa->endereco->bairro->nome }},
+        Cidade: {{ $aluno->pessoa->endereco->bairro->cidade->nome }}</b>, pretendente a aluno da <b>&nbsp;PÓS-GRADUAÇÃO (LATO SENSU) EM {{ $curso->nome }}</b>.
 
 
     <p>
-        <b>CLÁUSULA PRIMEIRA</b> – O objeto do presente contrato é a prestação de serviços educacionais, oferecidos e de
-        inteira
-        responsabilidade da FASUP, para o período compreendido entre os meses de <b>JANEIRO de 2017 e MARÇO de 2018</b>,
-        aqui
+        <b>CLÁUSULA PRIMEIRA</b> – O objeto do presente contrato é a prestação de serviços educacionais, oferecidos e de inteira
+        responsabilidade da FASUP, para o período compreendido entre os meses de <b>{{ strftime('%B', $timeInicial) }}
+        de {{ strtoupper($aulaInicial->format('Y')) }} e {{ strtoupper(strftime('%B', $timeFinal)) }} de {{ $aulaFinal->format('Y') }}</b>, aqui
         designado também como período letivo a ser ministrado em conformidade com o previsto na legislação de ensino
         superior e nas
         normas regimentais da CONTRATADA, ás quais, de:
