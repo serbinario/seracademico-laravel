@@ -203,8 +203,11 @@ class ArcevoService
             for($i = 0; $i < count($data['segunda']['responsaveis_id']); $i++){
                 $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
                 $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
-                $entradas['para_referencia'] = $data['segunda']['para_referencia'][$i];
                 $entradas['arcevos_id'] = $arcevo->id;
+                $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
+                $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
+                $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
+
                 $this->segundaRepository->create($entradas);
             }
         }
