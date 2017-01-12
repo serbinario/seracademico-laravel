@@ -76,8 +76,6 @@
 
             #footer {
                 margin-top: 50%;
-                position: absolute;
-                bottom: 0;
             }
         }
 
