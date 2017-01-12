@@ -16,14 +16,11 @@
             position: absolute;
         }
 
-        @media print
-        {
-            body {font-family:georgia, times, serif;}
-        }
-
         div#container {
+            font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
+            font-weight: bolder;
         }
 
         h3 #img {
@@ -320,7 +317,7 @@
 
 
     <p>
-        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }},
+        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica,
         será
         promovido em parceria operacional e de logística com a <b>Alpha Educação e Treinamentos</b>.
     </p>
@@ -338,7 +335,7 @@
 
 
     <p>
-        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }}, será
+        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica, será
         promovido em parceria operacional e de logística com o <b>Alpha Educação e Treinamentos</b>.
     </p>
 
