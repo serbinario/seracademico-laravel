@@ -274,7 +274,7 @@
                     <div class="col-md-2" style="margin-top: 15px">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('segunda[para_referencia1]', 0) !!}
-                            @if($segundaEntrada[0]->para_referencia1 == '1')
+                            @if(isset($segundaEntrada[0]) && $segundaEntrada[0]->para_referencia1 == '1')
                                 {!! Form::checkbox('segunda[para_referencia1]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
                             @else
                                 {!! Form::checkbox('segunda[para_referencia1]', 1, null, array('class' => 'form-control')) !!}
@@ -308,7 +308,7 @@
                     <div class="col-md-2" style="margin-top: 15px">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('segunda[para_referencia2]', 0) !!}
-                            @if($segundaEntrada[1]->para_referencia2 == '1')
+                            @if(isset($segundaEntrada[1]) && $segundaEntrada[1]->para_referencia2 == '1')
                                 {!! Form::checkbox('segunda[para_referencia2]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
                             @else
                                 {!! Form::checkbox('segunda[para_referencia2]', 1, null, array('class' => 'form-control')) !!}
@@ -342,7 +342,7 @@
                     <div class="col-md-2" style="margin-top: 15px">
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('segunda[para_referencia3]', 0) !!}
-                            @if($segundaEntrada[2]->para_referencia3 == '1')
+                            @if(isset($segundaEntrada[2]) && $segundaEntrada[2]->para_referencia3 == '1')
                                 {!! Form::checkbox('segunda[para_referencia3]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
                             @else
                                 {!! Form::checkbox('segunda[para_referencia3]', 1, null, array('class' => 'form-control')) !!}
