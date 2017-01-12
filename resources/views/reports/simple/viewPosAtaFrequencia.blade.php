@@ -69,20 +69,13 @@
             width: 50%;
         }
 
-        #container {
-            min-height: 100%;
-        }
-
-        #container::after {
-            content: "";
-            display: block;
-        }
+       
 
         #footer {
             display: block;
             position: absolute;
             bottom: 0;
-            
+
         }
 
         #footer img {
