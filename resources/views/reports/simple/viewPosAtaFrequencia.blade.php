@@ -9,7 +9,6 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
-        /****** Estilos Background *******/
         #background {
             width: 100%;
             height: 100%;
@@ -22,12 +21,10 @@
             position: absolute;
         }
 
-        /****** Estilos do header *******/
         #header {
             text-align: center;
         }
 
-        /****** Estilos do body *******/
         #body {
             margin-top: 50px;
         }
@@ -72,19 +69,15 @@
             width: 50%;
         }
 
-        /****** Estilos footer *******/
-
-        .page-wrap {
-            min-height: 100%;
-            /* equal to footer height */
-        }
-        .page-wrap:after {
+        #container::after {
             content: "";
             display: block;
         }
-        .site-footer {
-            position: absolute;
+
+        #footer {
+            position: relative;
             bottom: 0;
+            margin-top: 100%
         }
 
         #footer img {
@@ -115,7 +108,7 @@
             $numberMonth = date('m');
         ?>
 
-        <div id="body" class="page-wrap">
+        <div id="body">
             <div class="row">
                 <div class="col-md-12">
 
@@ -178,7 +171,7 @@
             </div>
         </div>
 
-        <div id="footer" class="site-footer">
+        <div id="footer">
             <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
         </div>
     </div>
