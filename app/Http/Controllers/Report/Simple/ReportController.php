@@ -62,7 +62,7 @@ class ReportController extends Controller
 
         # Recuoerando a view
         $view = $report['view'] ?? 'report';
-        //return view("reports.simple.{$view}", ['dados' => $report, 'request' => $dados]);
+        return view("reports.simple.{$view}", ['dados' => $report, 'request' => $dados]);
         # Criando o relatório
         return \PDF::loadView("reports.simple.{$view}", ['dados' => $report, 'request' => $dados])->stream();
     }
