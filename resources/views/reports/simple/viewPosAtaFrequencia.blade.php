@@ -69,14 +69,8 @@
             width: 50%;
         }
 
-        @media print {
-            html, body {
-                height: 100%;
-            }
-
-            #footer {
-                margin-top: 50%;
-            }
+        #footer {
+            margin-top: 50%;
         }
 
         #footer img {
