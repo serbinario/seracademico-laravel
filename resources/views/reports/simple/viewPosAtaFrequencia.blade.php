@@ -101,7 +101,7 @@
             <img src="{{ asset('img/logo_fasup.png') }}" alt="Logo Fasupe">
         </div>
 
-        <!-- Lógica do período andrey2030 priscilabarrosbernardos@gmail.com-->
+        <!-- Lógica do período-->
         <?php
             $numberMonth = date('m');
         ?>
