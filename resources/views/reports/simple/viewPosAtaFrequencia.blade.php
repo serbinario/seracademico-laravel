@@ -72,6 +72,10 @@
         @media print {
             body {
                 height: 100%;
+            }
+
+            #container {
+                min-height: 100%;
                 position: relative;
             }
 
