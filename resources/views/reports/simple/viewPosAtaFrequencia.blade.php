@@ -88,7 +88,7 @@
         }
 
         #footer img {
-            padding-top: 100%;
+            padding-top: 80%;
             width: 100%;
         }
 
