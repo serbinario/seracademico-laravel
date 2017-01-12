@@ -20,7 +20,7 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 12px;
             text-align: justify;
-            font-weight: bolder;
+            font-weight: 600;
         }
 
         h3 #img {
@@ -35,8 +35,9 @@
             opacity: 0.4;
         }
 
-        b {
+        .negrito {
             font-weight: 900;
+            font-stretch: expanded;
         }
     </style>
     <link href="" rel="stylesheet" media="print">
@@ -65,7 +66,7 @@
     ?>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
+        <b class="negrito">CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
         PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>&nbsp;CONTRATADA</b>, e assim denominada a
         entidade educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
