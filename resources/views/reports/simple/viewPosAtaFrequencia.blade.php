@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
-       body {
-           position: relative;
-            font-family: Arial, Helvetica, AppleGothic, sans-serif;
+       html, body {
+           height: 100%;
+           font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
         #background {
@@ -174,10 +174,10 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="footer">
-            <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-        </div>
+    <div id="footer">
+        <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
     </div>
 </body>
 </html>
