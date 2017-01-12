@@ -6,7 +6,6 @@
     <style type="text/css" class="init">
         body {
            height: 100%;
-           position: relative;
            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -70,8 +69,13 @@
             width: 50%;
         }
 
+        #container {
+            height: 100%;
+            position: relative;
+        }
+
         #footer {
-            position: fixed;
+            position: absolute;
             bottom: 0;
         }
 
