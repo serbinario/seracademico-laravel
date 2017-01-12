@@ -22,8 +22,7 @@
         }
 
         #container {
-            min-height: 100%;
-            position: relative;
+            height: 100%;
         }
 
         /****** Estilos do header *******/
@@ -79,7 +78,7 @@
         /****** Estilos footer *******/
         #footer {
             text-align: center;
-            position: absolute;
+            position: fixed;
             bottom: 0;
         }
 
