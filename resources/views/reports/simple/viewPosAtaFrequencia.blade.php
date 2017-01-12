@@ -77,7 +77,7 @@
         #footer {
             position: relative;
             bottom: 0;
-            margin-top: 100%
+            margin-top: 90%
         }
 
         #footer img {
