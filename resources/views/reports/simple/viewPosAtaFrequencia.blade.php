@@ -4,8 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
-        body {
+        html, body {
            height: 100%;
+            min-height: 100%;
            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -67,11 +68,6 @@
 
         .percentThirtyFive {
             width: 50%;
-        }
-
-        #container {
-            height: 100%;
-            position: relative;
         }
 
         #footer {
