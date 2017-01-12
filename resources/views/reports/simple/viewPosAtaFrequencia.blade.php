@@ -20,13 +20,7 @@
             position: absolute;
         }
 
-        #header {
-            text-align: center;
-        }
 
-        #body {
-            margin-top: 50px;
-        }
 
         table {
             font-size: 12px;
@@ -68,6 +62,20 @@
             width: 50%;
         }
 
+        #header {
+           text-align: center;
+         }
+
+        #body {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+        }
+
         #footer img {
             width: 100%;
         }
@@ -79,14 +87,14 @@
         tfoot { display:table-footer-group }
     </style>
 
-    <script type="text/javascript">
-        window.onload = function () {
-            var widthPage = document.getElementById("container").offsetHeight;
-            var widthBody = document.getElementById("body").offsetHeight;
+    {{--<script type="text/javascript">--}}
+        {{--window.onload = function () {--}}
+            {{--var widthPage = document.getElementById("container").offsetHeight;--}}
+            {{--var widthBody = document.getElementById("body").offsetHeight;--}}
 
-            document.getElementById("footer").style.marginTop = (widthPage - widthBody) * 1.9;
-        }
-    </script>
+            {{--document.getElementById("footer").style.marginTop = (widthPage - widthBody);--}}
+        {{--}--}}
+    {{--</script>--}}
 
     <link href="" rel="stylesheet" media="print">
 </head>
