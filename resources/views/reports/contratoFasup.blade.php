@@ -317,7 +317,7 @@
 
 
     <p>
-        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica,
+        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }},
         será
         promovido em parceria operacional e de logística com a <b>Alpha Educação e Treinamentos</b>.
     </p>
@@ -335,7 +335,7 @@
 
 
     <p>
-        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica, será
+        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }}, será
         promovido em parceria operacional e de logística com o <b>Alpha Educação e Treinamentos</b>.
     </p>
 
