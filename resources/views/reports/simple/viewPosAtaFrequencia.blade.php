@@ -4,8 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css" class="init">
-        html, body {
-            height: 100%;
+       body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -69,10 +68,6 @@
             width: 50%;
         }
 
-        #container {
-            min-height: 100%;
-        }
-
         #footer img {
             width: 100%;
         }
@@ -89,7 +84,7 @@
             var widthPage = document.getElementById("container").offsetHeight;
             var widthBody = document.getElementById("body").offsetHeight;
 
-            document.getElementById("footer").style.marginTop = widthPage - widthBody;
+            document.getElementById("footer").style.marginTop = (widthPage  - widthBody) + 1000;
         }
     </script>
 
