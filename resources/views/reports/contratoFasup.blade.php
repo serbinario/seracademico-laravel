@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Contrato FASUP</title>
     <style type="text/css">
+
         #background {
             width: 100%;
             height: 100%;
@@ -29,8 +30,9 @@
             page-break-before: always;
         }
 
-        .footer {
-            opacity: 0.4;
+        .negrito {
+            font-weight: 900;
+            font-stretch: expanded;
         }
     </style>
     <link href="" rel="stylesheet" media="print">
@@ -59,7 +61,7 @@
     ?>
 
     <p>
-        <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
+        <b class="negrito">CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, Pelo presente instrumento particular de <b>&nbsp;CONTRATO DE
         PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b>, de um lado, na qualidade de <b>&nbsp;CONTRATADA</b>, e assim denominada a
         entidade educacional privada, O Instituto Optométrico de Pernambuco, inscrita no CNPJ sob o n° 05.783.107/0001-77,
         mantenedora da FACULDADE DE SAÚDE DE PAULISTA – FASUP, estabelecimento de ensino superior, autorizada pela Portaria MEC N° 59, de
@@ -315,7 +317,7 @@
 
 
     <p>
-        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica,
+        <b>CLÁUSULA DÉCIMA</b> – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }},
         será
         promovido em parceria operacional e de logística com a <b>Alpha Educação e Treinamentos</b>.
     </p>
@@ -333,7 +335,7 @@
 
 
     <p>
-        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em Gestão Escolar e Coordenação Pedagógica, será
+        PARÁGRAFO ÚNICO – O referido Curso de Pós Graduação Lato Sensu em {{ $curso->nome }}, será
         promovido em parceria operacional e de logística com o <b>Alpha Educação e Treinamentos</b>.
     </p>
 
@@ -346,7 +348,7 @@
         <p style="margin-top: 10%;">
         <table width="100%">
             <tr>
-                <td>____________________________________<br/> FACULDADE DE SAÚDE DO RECIFE
+                <td>____________________________________<br/> FACULDADE DE SAÚDE DE PAULISTA
                 <td>
                 <td>____________________________________<br/> CONTRATANTE</td>
             </tr>
