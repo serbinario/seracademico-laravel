@@ -348,7 +348,7 @@
         <p style="margin-top: 10%;">
         <table width="100%">
             <tr>
-                <td>____________________________________<br/> FACULDADE DE SAÚDE DO RECIFE
+                <td>____________________________________<br/> FACULDADE DE SAÚDE DE PAULISTA
                 <td>
                 <td>____________________________________<br/> CONTRATANTE</td>
             </tr>
