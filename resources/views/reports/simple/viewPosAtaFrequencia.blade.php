@@ -46,9 +46,9 @@
         }
 
         #footer {
-            display: block;
             position: absolute;
             bottom: 0;
+            z-index: -1;
         }
 
         #footer img {
