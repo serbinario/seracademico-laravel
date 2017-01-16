@@ -47,8 +47,7 @@
 
         #footer {
             position: absolute;
-            bottom: 0;
-            top: 100%;
+            bottom: 100%;
         }
 
         #footer img {
