@@ -41,8 +41,12 @@
             width: 50%;
         }
 
-        @page { size: A4 }
-        
+        @page {
+            @bottom {
+                content: counter(footer)
+            }
+        }
+
         #footer {
             position: absolute;
             bottom: 0;
@@ -169,8 +173,8 @@
     </table>
 </div>
 
-<div id="footer">
+<footer id="footer">
     <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-</div>
+</footer>
 </body>
 </html>
