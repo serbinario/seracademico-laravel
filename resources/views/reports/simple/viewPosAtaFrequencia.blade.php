@@ -97,7 +97,7 @@
             var heightAll  = document.getElementById("main").offsetHeight;
             var heightBody = document.getElementById("body").offsetHeight;
 
-            document.getElementById("footer").style.marginTop = heightAll;
+            document.getElementById("footer").style.marginTop = heightBody;
         }
     </script>
 </head>
