@@ -96,9 +96,8 @@
         window.onload = function () {
             var heightAll  = document.getElementById("main").offsetHeight;
             var heightBody = document.getElementById("body").offsetHeight;
-            var heightHtml = document.getElementsByTagName("html");
 
-            document.getElementById("footer").style.marginTop = heightHtml[0].offsetHeight;
+            document.getElementById("footer").style.marginTop = heightAll + (heightBody * 1.6);
         }
     </script>
 </head>
