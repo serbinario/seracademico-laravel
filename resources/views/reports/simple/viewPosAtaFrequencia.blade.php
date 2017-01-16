@@ -46,7 +46,9 @@
         }
 
         #footer img {
-            width: 100%;
+            position: absolute;
+            bottom: 0;
+            page-break-after: always;
         }
 
         table {
