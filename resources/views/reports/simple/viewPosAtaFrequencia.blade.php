@@ -22,14 +22,10 @@
         }
 
         #header {
-            position: absolute;
-            display: block;
             text-align: center;
         }
 
         #body {
-            position: absolute;
-            display: block;
             margin-top: 50px;
         }
 
@@ -45,7 +41,8 @@
             width: 50%;
         }
 
-
+        @page { size: A4 }
+        
         #footer {
             position: absolute;
             bottom: 0;
