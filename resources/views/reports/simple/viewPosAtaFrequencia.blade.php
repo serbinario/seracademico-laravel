@@ -3,7 +3,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
-    <style type="text/css" media="print">
+    <style type="text/css">
         html, body {
             height: 100%;
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
