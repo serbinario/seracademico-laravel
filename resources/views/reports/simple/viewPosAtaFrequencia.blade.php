@@ -42,12 +42,13 @@
         }
 
         #footer {
-            margin-top: 100%;
+            position: absolute;
+            bottom: 0;
+            page-break-after: always;
         }
 
         #footer img {
-            position: absolute;
-            bottom: 0;
+            width: 100%;
         }
 
         table {
