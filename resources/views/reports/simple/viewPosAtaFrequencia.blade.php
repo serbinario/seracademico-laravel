@@ -46,6 +46,7 @@
         }
 
         #footer {
+            display: block;
             position: absolute;
             bottom: 0;
         }
