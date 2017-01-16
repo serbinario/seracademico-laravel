@@ -151,7 +151,7 @@
             <tr>
                 <td>{{++$count}}.</td>
 
-                <!-- Percorrendo as colunas que tem reflexo no banco -->
+                <!-- Percorrendo as colunas que tem reflexo no banco sfdsfsdfs-->
                 @foreach($bordy as $key => $value)
                     <td>{{ $value }}</td>
                 @endforeach
