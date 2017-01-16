@@ -22,10 +22,14 @@
         }
 
         #header {
+            position: absolute;
+            display: block;
             text-align: center;
         }
 
         #body {
+            position: absolute;
+            display: block;
             margin-top: 50px;
         }
 
@@ -41,14 +45,10 @@
             width: 50%;
         }
 
-        @page  {
-            width: 100%;
-        }
 
         #footer {
             position: absolute;
             bottom: 0;
-            z-index: -1;
         }
 
         #footer img {
