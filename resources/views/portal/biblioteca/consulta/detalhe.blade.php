@@ -255,34 +255,34 @@
                                                             @if($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1' || $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == "")
                                                                 <b>1</b>. {{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}},
                                                                 <?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coo) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coord) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Org) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Tra) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edt) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit) ';} ?>et al
                                                             @else
                                                                 <?php echo ucwords(mb_strtoupper($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coo) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coord) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Org) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Tra) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edt) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit) ';} ?>et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
                                                                 @if($autor['responsaveis']['tipo_reponsavel_id'] == '1' || $autor['responsaveis']['tipo_reponsavel_id'] == "")
                                                                     <b>{{$chave + 1}}</b>. {{$autor['responsaveis']['sobrenome']}},
                                                                     <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])) ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>
                                                                     <br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
                                                                     <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])) ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                                    <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>
                                                                     <br />
                                                                 @endif
                                                             @endforeach
@@ -382,10 +382,10 @@
                                         @if($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1' || $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == "")
                                             <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
                                             <?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>
-                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coo) ';} ?>
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Coord) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Org) ';} ?>
-                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Tra) ';} ?>
-                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edt) ';} ?>et al.
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad) ';} ?>
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit) ';} ?>et al.
                                         @else
                                             <span style="text-transform: uppercase"><?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?></span><?php if (strrchr($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'], ".") == ".") { echo "";} else {echo ".";} ?>
                                         @endif
@@ -396,44 +396,44 @@
                                                     @if($chave == 0 && $autor['para_referencia1'] == '1')
                                                         <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                         <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @elseif ($chave == 1 && $autor['para_referencia2'] == '1')
                                                         <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                         <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @elseif ($chave == 2 && $autor['para_referencia3'] == '1')
                                                         <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                         <?php echo ucwords(mb_strtolower($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @endif
                                                 @else
                                                     @if($chave == 0 && $autor['para_referencia1'] == '1')
                                                         <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @elseif ($chave == 1 && $autor['para_referencia2'] == '1')
                                                         <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @elseif ($chave == 2 && $autor['para_referencia3'] == '1')
                                                         <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>
-                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coo)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 1) {echo ' (Coord)';} ?>
                                                         <?php if($autor['tipo_autor_id'] == 2) {echo ' (Org)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Tra)';} ?>
-                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edt)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                        <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad)';} ?>
+                                                        <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                     @endif
                                                 @endif
                                         @endforeach
