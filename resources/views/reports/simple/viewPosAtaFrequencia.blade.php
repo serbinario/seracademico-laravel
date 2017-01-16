@@ -45,6 +45,12 @@
             min-height: 100%;
         }
 
+        #footer {
+            display: table-footer-group;
+            position: absolute;
+            bottom: 0;
+        }
+
         #footer img {
             width: 100%;
         }
@@ -92,14 +98,14 @@
         }
     </style>
 
-    <script type="text/javascript">
-        window.onload = function () {
-            var heightAll  = document.getElementById("main").offsetHeight;
-            var heightBody = document.getElementById("body").offsetHeight;
+    {{--<script type="text/javascript">--}}
+        {{--window.onload = function () {--}}
+            {{--var heightAll  = document.getElementById("main").offsetHeight;--}}
+            {{--var heightBody = document.getElementById("body").offsetHeight;--}}
 
-            document.getElementById("footer").style.marginTop = (heightAll - heightBody) * 3.3;
-        }
-    </script>
+            {{--document.getElementById("footer").style.marginTop = (heightAll - heightBody) * 3.3;--}}
+        {{--}--}}
+    {{--</script>--}}
 </head>
 
 <body>
