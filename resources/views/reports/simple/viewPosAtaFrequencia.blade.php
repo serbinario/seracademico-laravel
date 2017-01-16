@@ -40,16 +40,9 @@
         .percentThirtyFive {
             width: 50%;
         }
-
-        @page {
-            @bottom {
-                content: counter(footer)
-            }
-        }
-
-        #footer {
-            position: absolute;
-            bottom: 0;
+        
+        #main {
+            min-height: 100%;
         }
 
         #footer img {
@@ -98,6 +91,16 @@
             display: table-footer-group
         }
     </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var heightAll  = document.getElementById("main").offsetHeight;
+            var heightBody = document.getElementById("body").offsetHeight;
+            var heightHtml = document.getElementsByTagName("html");
+
+            document.getElementById("footer").style.marginTop = heightHtml[0].offsetHeight;
+        }
+    </script>
 </head>
 
 <body>
@@ -110,71 +113,74 @@
 
 <!-- Lógica do período-->
 <?php
-    $numberMonth = date('m');
+$numberMonth = date('m');
 ?>
 
-<div id="body">
-    <?php
+<div id="main">
+    <div id="body">
+        <?php
         $objDate = $dados['filtersBody'][5] ?? "";
 
         if (!empty($objDate)) {
             $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
         }
-    ?>
-    <br>
+        ?>
+        <br>
 
-    <table id="tableHeader" border="1">
-        <tbody>
-        <tr>
-            <td>Unidade de estudos direcionados: Recife</td>
-            <td>{{ $dados['filtersBody'][2] ?? ""  }}
-                - {{($objDate ? $objDate->format('Y') . '.' . ($numberMonth >= 8 ? 2 : 1) :  '')}}</td>
-        </tr>
-        <tr>
-            <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
-            <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
-        </tr>
-        <tr>
-            <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
-            <td>Período: {{ $request['turno'] }}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <h4 style="text-align: center">Ata de Frequência</h4>
-
-    <table id="tableBody" border="1">
-        <thead>
-        <tr>
-            <th class="percentFive">Nº</th>
-            <th class="percentSixty">Nome</th>
-            <th class="percentThirtyFive">Assinatura</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <?php $count = 0; ?>
-        @foreach($dados['body'] as $bordy)
+        <table id="tableHeader" border="1">
+            <tbody>
             <tr>
-                <td>{{++$count}}.</td>
-
-                <!-- Percorrendo as colunas que tem reflexo no banco sfdsfsdfs-->
-                @foreach($bordy as $key => $value)
-                    <td>{{ $value }}</td>
-                @endforeach
-
-                <!-- Percorrendo as colunas que não tem reflexo no banco -->
-                @for($i = 0; $i < (count($dados['headers'])) - count(get_object_vars($dados['body'][0] ?? [])); $i++)
-                    <td></td>
-                @endfor
+                <td>Unidade de estudos direcionados: Recife</td>
+                <td>{{ $dados['filtersBody'][2] ?? ""  }}
+                    - {{($objDate ? $objDate->format('Y') . '.' . ($numberMonth >= 8 ? 2 : 1) :  '')}}</td>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            <tr>
+                <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
+                <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
+            </tr>
+            <tr>
+                <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
+                <td>Período: {{ $request['turno'] }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4 style="text-align: center">Ata de Frequência</h4>
+
+        <table id="tableBody" border="1">
+            <thead>
+            <tr>
+                <th class="percentFive">Nº</th>
+                <th class="percentSixty">Nome</th>
+                <th class="percentThirtyFive">Assinatura</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php $count = 0; ?>
+            @foreach($dados['body'] as $bordy)
+                <tr>
+                    <td>{{++$count}}.</td>
+
+                    <!-- Percorrendo as colunas que tem reflexo no banco sfdsfsdfs-->
+                    @foreach($bordy as $key => $value)
+                        <td>{{ $value }}</td>
+                        @endforeach
+
+                                <!-- Percorrendo as colunas que não tem reflexo no banco -->
+                        @for($i = 0; $i < (count($dados['headers'])) - count(get_object_vars($dados['body'][0] ?? [])); $i++)
+                            <td></td>
+                        @endfor
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div id="footer">
+        <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
+    </div>
 </div>
 
-<footer id="footer">
-    <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-</footer>
 </body>
 </html>
