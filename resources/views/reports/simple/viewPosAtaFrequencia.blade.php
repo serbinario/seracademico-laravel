@@ -44,9 +44,11 @@
         @page  {
             width: 100%;
         }
-        
+
         #footer {
-            page-break-after: always;
+            position: absolute;
+            bottom: 0;
+            top: 100%;
         }
 
         #footer img {
