@@ -45,10 +45,8 @@
             min-height: 100%;
         }
 
-        #footer {
-            display: table-footer-group;
-            position: absolute;
-            bottom: 0;
+        #main :after {
+            content: attr(footer);
         }
 
         #footer img {
@@ -182,9 +180,9 @@ $numberMonth = date('m');
         </table>
     </div>
 
-    <div id="footer">
+    <footer id="footer">
         <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-    </div>
+    </footer>
 </div>
 
 </body>
