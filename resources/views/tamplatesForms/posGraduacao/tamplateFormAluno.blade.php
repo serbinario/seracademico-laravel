@@ -1217,7 +1217,7 @@
                             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                         @endif
                     }
-                            
+
                     // Carregando a sede
                     @if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
                         $('#sede_id option').remove();
