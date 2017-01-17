@@ -42,7 +42,7 @@
         }
 
         #footer {
-            margin-top: 80%;
+            margin-top: 50%;
         }
 
         #footer img {
