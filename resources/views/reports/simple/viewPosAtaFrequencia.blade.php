@@ -6,6 +6,7 @@
     <style type="text/css">
         html, body {
             height: 100%;
+            height:auto !important;
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -42,8 +43,12 @@
         }
 
         #footer {
-            margin-top: 15%;
+            position: absolute;
+            bottom: 0;
         }
+        /*#footer {
+            margin-top: 15%;
+        }*/
 
         #footer img {
             width: 100%;
