@@ -42,11 +42,11 @@
         }
 
         #footer {
-            margin-top: 100%;
+            margin-top: 80%;
         }
 
         #footer img {
-            width: 80%;
+            width: 100%;
         }
 
         table {
