@@ -49,15 +49,17 @@
         date_default_timezone_set('America/Sao_Paulo');
 
        // dd(strftime('%A, %d de %B de %Y', strtotime('today')));
-        # Recuperando o semestre atual
-        $numMonth = date('m');
-        $numMonth = $numMonth >= 8 ? 2 : 1;
 
         # Timestamp das datas iniciais e finais da turma
         $aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
         $aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
         $timeInicial = $aulaInicial->getTimestamp();
         $timeFinal   = $aulaFinal->getTimestamp();
+
+        # Recuperando o semestre da turma em questão
+        $numMonth = $aulaInicial->format('m');
+        $numMonth = $numMonth >= 8 ? 2 : 1;
+
     ?>
 
     <p>
@@ -68,7 +70,7 @@
         19 de Janeiro de 2011 com sede na Av. Doutor Rodolfo Aureliano, 2182, Vila Torres Galvão, Paulista, PE, neste ato
         representado pela diretoria financeira da mantida, têm entre si, justo e acordado o presente Contrato de Prestação de Serviços
         Educacionais, cumulado com Termos de Reconhecimento da Eficácia de Normas Administrativas, Financeiras e Acadêmicas, para o
-        período letivo de {{ date('Y') }}.{{ $numMonth }}, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
+        período letivo de {{ $aulaInicial->format('Y') }}.{{ $numMonth }}, mediante as cláusulas e condições abaixo e do outro, na qualidade de <b>CONTRATANTE</b>, e assim
         doravante denominado(a) o(a) Senhor(a):
     </p>
 

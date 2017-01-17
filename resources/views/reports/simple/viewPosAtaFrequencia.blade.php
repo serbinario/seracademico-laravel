@@ -3,9 +3,10 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
-    <style type="text/css" media="print">
+    <style type="text/css">
         html, body {
             height: 100%;
+            height:auto !important;
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
@@ -42,8 +43,12 @@
         }
 
         #footer {
-            margin-top: 100%;
+            position: absolute;
+            bottom: 0;
         }
+        /*#footer {
+            margin-top: 15%;
+        }*/
 
         #footer img {
             width: 100%;
@@ -151,7 +156,7 @@
             <tr>
                 <td>{{++$count}}.</td>
 
-                <!-- Percorrendo as colunas que tem reflexo no banco -->
+                <!-- Percorrendo as colunas que tem reflexo no banco sfdsfsdfs-->
                 @foreach($bordy as $key => $value)
                     <td>{{ $value }}</td>
                 @endforeach
