@@ -18,11 +18,7 @@
         #header {
             text-align: center;
         }
-
-        #body {
-            margin-top: 50px;
-        }
-
+        
         .percentFive {
             width: 4%;
         }
