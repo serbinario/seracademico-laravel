@@ -18,7 +18,7 @@
         #header {
             text-align: center;
         }
-        
+
         .percentFive {
             width: 4%;
         }
@@ -32,6 +32,7 @@
         }
 
         #footer {
+            display: block;
             position: absolute;
             bottom: 0;
         }
