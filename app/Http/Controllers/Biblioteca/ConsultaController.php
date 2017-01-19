@@ -134,7 +134,7 @@ class ConsultaController extends Controller
                 ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
                 ->where($campoLike, 'like', "%{$this->data['busca']}%")
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
-                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
+                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
 
@@ -143,7 +143,7 @@ class ConsultaController extends Controller
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
-                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo','bib_exemplares.*')
+                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
                 ->Where(function ($query) {
                     $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
@@ -155,7 +155,7 @@ class ConsultaController extends Controller
                         ->orWhere('bib_exemplares.palavras_chaves', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.sumario', 'like', "%{$this->data['busca']}%");
                 })
-                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
+                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
         }
