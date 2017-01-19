@@ -10,12 +10,8 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
-        @page {
-            width: 100%;
-            height: 100%;
-            background-image: url("{{ asset('/img/backgroud_fasup.png') }}");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+        body {
+            background-image: url("{{ asset('/img/backgroud_fasup_500x529.png') }}");
             background-position: top;
         }
 
@@ -24,8 +20,6 @@
         }
 
         #body {
-            height: 90%;
-            min-height: 90% !important;
             margin-top: 50px;
         }
 
