@@ -16,10 +16,7 @@
     <div class="row">
         <table width="100%">
             <tr>
-                <td width="20%">
-                    <img alt="image" width="100%" src="{{ asset('/img/fasup.png')}}"/>
-                </td>
-                <td width="55%"><br>
+                <td><br>
                     <h1 style="text-align: center;color: #082652; ">{{ $dados['reportName'] }}</h1>
                     <h3 style="text-align: center;color: #082652; ">
                         @if(count($dados['filtersHeaders']) === count($dados['filtersBody']))
