@@ -69,7 +69,7 @@
                                                             <div class="panel-heading" role="tab" id="headingTwo">
                                                                 <p class="panel-title">
                                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#body-{{ $tipo->id }}" aria-expanded="false" aria-controls="body-{{ $tipo->id }}">
-                                                                        {{ $tipo->name }}
+                                                                        {{ utf8_decode($tipo->name) }}
                                                                     </a>
                                                                 </p>
                                                             </div>
@@ -78,9 +78,9 @@
                                                                     @if(count($tipo->permissoes) > 0)
                                                                         @foreach($tipo->permissoes as $permission)
                                                                             @if(\in_array($permission->name, $role->permissions->lists('name')->all()))
-                                                                                <li><input type="checkbox" name="permission[]" checked value="{{ $permission->id  }}"> {{ $permission->description }} </li>
+                                                                                <li><input type="checkbox" name="permission[]" checked value="{{ $permission->id  }}"> {{ utf8_decode($permission->description) }} </li>
                                                                             @else
-                                                                                <li><input type="checkbox" name="permission[]" value="{{ $permission->id  }}"> {{ $permission->description }} </li>
+                                                                                <li><input type="checkbox" name="permission[]" value="{{ $permission->id  }}"> {{ utf8_decode($permission->description) }} </li>
                                                                             @endif
                                                                         @endforeach
                                                                     @endif
