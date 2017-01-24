@@ -150,6 +150,7 @@
     @include('posGraduacao.aluno.turma.modal_create_situacao')
     {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
     @include('reports.simple.modals.modal_report_pos_aluno_geral')
+    @include('reports.simple.modals.modal_report_pos_aluno_documento')
     @include('posGraduacao.aluno.curriculo.modal_curriculo')
     @include('posGraduacao.aluno.curriculo.modal_inserir_dispensar_disciplina')
     @include('posGraduacao.aluno.curriculo.modal_editar_dispensar_disciplina')
@@ -169,6 +170,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_documento.js') }}"></script>
 
     {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>

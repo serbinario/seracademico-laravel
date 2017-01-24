@@ -10,16 +10,9 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
-        #background {
-            width: 100%;
-            height: 100%;
-            background-image: url("{{ asset('/img/backgroud_fasup.png') }}");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+        body {
+            background-image: url("{{ asset('/img/backgroud_fasup_500x529.png') }}");
             background-position: top;
-            background-size: 800px 1000px;
-            opacity: 0.4;
-            position: absolute;
         }
 
         #header {
@@ -27,7 +20,7 @@
         }
 
         #body {
-            margin-top: 50px;
+            margin-bottom: 10px;
         }
 
         .percentFive {
@@ -46,9 +39,6 @@
             position: absolute;
             bottom: 0;
         }
-        /*#footer {
-            margin-top: 15%;
-        }*/
 
         #footer img {
             width: 100%;

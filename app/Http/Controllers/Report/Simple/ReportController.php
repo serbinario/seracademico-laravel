@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\Report\Simple;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\App;
 use Seracademico\Contracts\Report;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
@@ -62,9 +63,15 @@ class ReportController extends Controller
 
         # Recuoerando a view
         $view = $report['view'] ?? 'report';
-        //return view("reports.simple.{$view}", ['dados' => $report, 'request' => $dados]);
-        # Criando o relatório
-        return \PDF::loadView("reports.simple.{$view}", ['dados' => $report, 'request' => $dados])->stream();
+
+        # Recuperando o serviço de pdf / dompdf
+        $PDF = App::make('dompdf.wrapper');
+
+        # Carregando a página
+        $PDF->loadView("reports.simple.{$view}", ['dados' => $report, 'request' => $dados]);
+
+        # Retornando para página
+        return $PDF->stream();
     }
 
     /**
