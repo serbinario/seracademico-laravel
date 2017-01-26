@@ -29,11 +29,11 @@ class ExemplarRepositoryEloquent extends BaseRepository implements ExemplarRepos
     *
     * @return mixed
     */
-    public function validator()
+    /*public function validator()
     {
 
          return ExemplarValidator::class;
-    }
+    }*/
 
 
 
