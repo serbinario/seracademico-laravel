@@ -86,6 +86,10 @@ class SimpleReport implements Report
         # Recuperando os campos e larguras da pesquisa principal
         $fields = implode(',', array_column($this->fields, 'field'));
 
+        if(substr($fields, -1) == ',') {
+            $fields = substr($fields,0,-1);
+        }
+
         # Finalizando o sql principal
         $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);
 
