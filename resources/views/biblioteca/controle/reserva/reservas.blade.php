@@ -104,12 +104,13 @@
         $(document).ready(function () {
 
             function format(d) {
+    console.log(d['acervo']);
                 var acervo = d['reserva_exemplar'];
                 var tipoEmprestimo = d['tipo_emprestimo'];
                 var pessoaId = d['pessoas_id'];
                 var reservaId = d['id'];
                 var qtdExemplar = 0;
-                var qtdExemplarAll = 0;
+                var qtdExemplarAll = d['acervo'];
                 var qtdExempEmprestado = 0;
                 var url = "{!! route('seracademico.biblioteca.saveEmprestimo') !!}";
 
@@ -123,13 +124,13 @@
                 for (var i = 0; i < acervo.length; i++) {
 
                     //vericando quantidade exemplares por acervo
-                    for(var j = 0; j < acervo[i]['exemplares'].length; j++){
+                    /*for(var j = 0; j < acervo[i]['exemplares'].length; j++){
                         if((acervo[i]['exemplares'][j]['edicao'] == acervo[i]['pivot']['edicao'] || acervo[i]['exemplares'][j]['edicao'] == "") && acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
                                 (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] == '0')){
                             qtdExemplar++;
                             qtdExemplarAll = qtdExemplarAll + qtdExemplar;
                         }
-                    }
+                    }*/
 
                     //verificando a quantidade de exemplares já emprestados
                     if(acervo[i]['pivot']['status'] == '1') {
@@ -140,8 +141,8 @@
                     html += "<td>" + acervo[i]['titulo'] + "</td>";
                     html += "<td>" + acervo[i]['subtitulo'] + "</td>";
                     html += "<td>" + acervo[i]['numero_chamada'] + "</td>";
-                    html += "<td>" + qtdExemplar + "</td>";
-                    if(qtdExemplar == 0 || acervo[i]['pivot']['status'] == '1'){
+                    html += "<td>" + qtdExemplarAll + "</td>";
+                    if(qtdExemplarAll == 0 || acervo[i]['pivot']['status'] == '1'){
                         html += "<td></td>";
                     } else {
                         html += "<td><input type='checkbox' name='id[]' value='"+acervo[i]['id']+"'></td>";
@@ -153,7 +154,7 @@
                    // } else {
                   //      html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
                   //  }
-                    qtdExemplar = 0;
+                    //qtdExemplar = 0;
                  }
 
                 html += "</table>";

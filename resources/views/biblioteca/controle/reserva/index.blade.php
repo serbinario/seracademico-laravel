@@ -73,7 +73,7 @@
                                 @foreach($reservasPendentes as $reserva)
                                     <tr>
                                         <td>{{$reserva->pessoa->nome}}</td>
-                                        <td style="width: 10%;"><a href="#" data="{{$reserva->pessoa->id}}" id="continuar">Continuar</a></td>
+                                        <td style="width: 10%;"><a href="#" data="{{$reserva->pessoa->id}}" class="continuar">Continuar</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -272,10 +272,10 @@
 
             $(document).ready(function(){
 
-                $('#continuar').click(function(event){
+                $('.continuar').click(function(event){
                     event.preventDefault();
 
-                    var idPessoa = $('#continuar').attr('data');
+                    var idPessoa = $(this).attr('data');
 
                     jQuery.ajax({
                         type: 'POST',

@@ -191,14 +191,17 @@ class ReservaController extends Controller
 
         #Criando a consulta
         $rows = Reserva::join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
-            ->with(['reservaExemplar.exemplares'])
+            ->with(['reservaExemplar'])
             ->select([
                 'bib_reservas.codigo',
+                'bib_reservas.id as id',
                 'bib_reservas.*',
                 'pessoas.nome',
                 \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
                 \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
                 ]);
+
+        //dd($rows[0]->reservaExemplar[0]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -217,6 +220,32 @@ class ReservaController extends Controller
 
             # Retorno
             return $html;
+        })->addColumn('acervo', function ($row) {
+
+            $rows = Reserva::with(['reservaExemplar.exemplares'])
+                ->where('bib_reservas.id', '=', $row->id)
+                ->select([
+                    'bib_reservas.id',
+                ])->first();
+
+            $qtdExemplarAll = 0;
+
+            for ($i = 0; $i < count($rows->reservaExemplar); $i++) {
+                for($j = 0; $j < count($rows->reservaExemplar[$i]->exemplares); $j++){
+
+                    if(($rows->reservaExemplar[$i]->exemplares[$j]->edicao == $rows->reservaExemplar[$i]->pivot->edicao || $rows->reservaExemplar[$i]->exemplares[$j]->edicao == "")
+                        && $rows->reservaExemplar[$i]->exemplares[$j]->situacao_id == '1' ||
+                        ($rows->reservaExemplar[$i]->exemplares[$j]->situacao_id == '3' && $rows->reservaExemplar[$i]->exemplares[$j]->exemp_principal == '0')){
+                        $qtdExemplarAll++;
+                    }
+
+                }
+            }
+
+//dd($qtdExemplarAll);
+            //dd(count($rows->reservaExemplar[0]->exemplares->toArray()));
+
+            return $qtdExemplarAll;
         })->make(true);
     }
 

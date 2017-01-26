@@ -277,8 +277,8 @@ class EmprestarService
             ->where('bib_parametros.codigo', '=', '007')
             ->get();
 
-        $valorNormal     = $parametros[0]->valor;
-        $valorConsulta   = $parametros[1]->valor;
+        $valorNormal     = isset($parametros[0]) ? $parametros[0]->valor : '';
+        $valorConsulta   = isset($parametros[1]) ? $parametros[1]->valor : "";
 
         if(strtotime($emprestimo->data_devolucao) < strtotime($data)) {
             $time_inicial = strtotime($emprestimo->data_devolucao);
