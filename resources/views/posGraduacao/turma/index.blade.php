@@ -73,31 +73,31 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Relatórios Avançados
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            {!! Form::select('relatorios', ( ['' => 'Selecione um relatório'] + $loadFields['simplereport']->toArray()),
-                                             Session::getOldInput('relatorios'), array('class' => 'form-control', 'id' => 'report_id')) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{--<div class="row">--}}
+                {{--<div class="col-md-6">--}}
+                    {{--<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">--}}
+                        {{--<div class="panel panel-default">--}}
+                            {{--<div class="panel-heading" role="tab" id="headingOne">--}}
+                                {{--<h4 class="panel-title">--}}
+                                    {{--<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">--}}
+                                        {{--Relatórios Avançados--}}
+                                    {{--</a>--}}
+                                {{--</h4>--}}
+                            {{--</div>--}}
+                            {{--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
+                                {{--<div class="panel-body">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="form-group col-md-12">--}}
+                                            {{--{!! Form::select('relatorios', ( ['' => 'Selecione um relatório'] + $loadFields['simplereport']->toArray()),--}}
+                                             {{--Session::getOldInput('relatorios'), array('class' => 'form-control', 'id' => 'report_id')) !!}--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
     @include('posGraduacao.turma.modal_calendario')
