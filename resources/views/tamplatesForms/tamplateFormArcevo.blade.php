@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="form-group">
-                            <button class="btn-sm btn-primary" id="auto-cutter" style="margin-top: 23px; margin-left: -29px;" type="button">Gerar Cutter
+                            <button class="btn-sm btn-primary" id="auto-cutter" style="margin-top: 23px; margin-left: -31px;" type="button">Gerar Cutter
                             </button>
                         </div>
                     </div>

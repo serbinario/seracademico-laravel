@@ -51,7 +51,7 @@
                             {!! Form::text('periodicidade', Session::getOldInput('periodicidade'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('data_vencimento', 'Data de vencimento assinatura') !!}
                             {!! Form::text('data_vencimento', Session::getOldInput('data_vencimento'), array('class' => 'form-control datepicker date data2')) !!}
