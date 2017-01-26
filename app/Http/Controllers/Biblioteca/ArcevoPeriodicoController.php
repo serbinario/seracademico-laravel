@@ -20,7 +20,7 @@ class ArcevoPeriodicoController extends Controller
     private $service;
 
     /**
-    * @var ArcevoValidator
+    * @var ArcevoPeriodicoValidator
     */
     private $validator;
 
@@ -41,7 +41,7 @@ class ArcevoPeriodicoController extends Controller
 
     /**
     * @param ArcevoPeriodicoService $service
-    * @param ArcevoValidator $validator
+    * @param ArcevoPeriodicoValidator $validator
     */
     public function __construct(ArcevoPeriodicoService $service, ArcevoPeriodicoValidator $validator)
     {
