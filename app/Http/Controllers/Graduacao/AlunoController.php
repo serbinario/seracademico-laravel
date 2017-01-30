@@ -152,7 +152,7 @@ class AlunoController extends Controller
                                 ->orWhere('fac_semestres.nome', 'like', "%$search%");
                         });
                     }
-                })
+                }) //  <li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
                 ->addColumn('action', function ($aluno) {
                     return '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
@@ -162,8 +162,7 @@ class AlunoController extends Controller
                             <li><a class="btn-floating indigo" title="Currículo do aluno" id="modalCurriculo"><i class="material-icons">assignment</i></a></li>
                             <li><a class="btn-floating indigo" title="Semestre do aluno"  id="modalSemestre"><i class="material-icons">date_range</i></a></li>
                             <li><a class="btn-floating indigo" title="Benefícios do Aluno" id="modalBeneficio"><i class="material-icons">account_balance_wallet</i></a></li>
-                            <li><a class="btn-floating indigo" title="Financeiro do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>
-                            <li><a class="btn-floating" target="_blank" href="contrato/' . $aluno->id . '" title="Contrato"><i class="material-icons">print</i></a></li>
+                            <li><a class="btn-floating indigo" title="Financeiro do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>                       
                         </ul>
                         </div>';
                 })->make(true);
