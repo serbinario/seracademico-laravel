@@ -748,7 +748,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('indexParametro', ['as' => 'indexParametro', 'uses' => 'Biblioteca\BibParametroController@index']);
             Route::get('gridParametro', ['as' => 'gridParametro', 'uses' => 'Biblioteca\BibParametroController@grid']);
             Route::get('editParametro/{id}', ['as' => 'editParametro', 'uses' => 'Biblioteca\BibParametroController@edit']);
-            Route::get('updateParametro', ['as' => 'updateParametro', 'uses' => 'Biblioteca\BibParametroController@update']);
+            Route::post('updateParametro/{id}', ['as' => 'updateParametro', 'uses' => 'Biblioteca\BibParametroController@update']);
 
             Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
 

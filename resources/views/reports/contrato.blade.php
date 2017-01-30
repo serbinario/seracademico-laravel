@@ -144,7 +144,7 @@
         <td><b>Estado Civil:</b> {!! isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" !!} </td>
         <td><b>Data de Nasc.:</b> {!! isset($aluno['pessoa']['data_nasciemento']) ? $aluno['pessoa']['data_nasciemento'] : "" !!} </td>
         <td><b>Sexo:</b> {!! isset($aluno['pessoa']['sexo']) ? $aluno['pessoa']['sexo']['nome'] : "" !!} </td>
-        <td><b>Local de Nasc.:</b> {!! isset($aluno['pessoa']['ufNascimento']) ? $aluno['pessoa']['ufNascimento']['nome'] : "" !!} </td>
+        <td><b>Local de Nasc.:</b> {!! isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" !!} </td>
     </tr>
     <tr>
         <td colspan="3"><b>Área da Pós-Graduação:</b>  </td>

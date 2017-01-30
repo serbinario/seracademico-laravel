@@ -24,6 +24,7 @@ class Editora extends Model implements Transformable
 		'enderecos_id',
 		'telefone',
 		'pessoa_contato',
+		'banco'
 	];
 
 	public function endereco()

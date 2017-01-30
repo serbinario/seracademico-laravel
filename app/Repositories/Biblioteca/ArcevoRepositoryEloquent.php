@@ -23,19 +23,7 @@ class ArcevoRepositoryEloquent extends BaseRepository implements ArcevoRepositor
     {
         return Arcevo::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return ArcevoValidator::class;
-    }
-
-
+    
 
     /**
      * Boot up the repository, pushing criteria

@@ -181,8 +181,8 @@ class ExemplarServicePeriodico
         $this->ultimoAno = substr($codigo, -4);
 
         //trata a quantidade de exemplar caso o valor informado seja 0
-        $qtdExemplar = $data['registros'] == '0' ? $qtdExemplar = 1 : $qtdExemplar = $data['registros'];
-        //dd($codigoMax);
+        $qtdExemplar = $data['registros'] != '0' && $data['registros'] != '' ? $qtdExemplar = $data['registros'] : $qtdExemplar = '1';
+
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
                 if($i == 0){
