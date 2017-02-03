@@ -57,7 +57,7 @@
 
         body {
             font-family: arial;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         table, th, td {
