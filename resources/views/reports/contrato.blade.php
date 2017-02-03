@@ -336,25 +336,27 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
     </span>
 </center>
 <br /><br />
-<center><span>____________________________________<br />
-                            CONTRATANTE
-    </span></center><br /><br />
-<div style="position: absolute; margin-top: -85px; margin-left: 30%;">
-    <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
+
+<div>
+    <center><span>____________________________________<br />CONTRATANTE</span></center><br /><br />
+
+    <div style="position: absolute; margin-top: -85px; margin-left: 30%;">
+        <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
+    </div>
+
+    <center><span>____________________________________<br />CONTRATADO</span></center><br /><br />
+
+    <table width="100%">
+        <tr>
+            <td><center>____________________________________<br />
+                    TESTEMUNHA</center>
+            </td>
+            <td>
+                <center>____________________________________<br />
+                    TESTEMUNHA</center>
+            </td>
+        </tr>
+    </table>
 </div>
-<center><span>____________________________________<br />
-                            CONTRATADO
-    </span></center><br /><br />
-<table width="100%">
-    <tr>
-        <td><center>____________________________________<br />
-                TESTEMUNHA</center>
-        </td>
-        <td>
-            <center>____________________________________<br />
-                TESTEMUNHA</center>
-        </td>
-    </tr>
-</table>
 </body>
 </html>

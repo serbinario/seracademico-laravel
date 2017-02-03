@@ -98,7 +98,7 @@ class AlunoNotaService
      * @throws \Exception
      */
     public function update(array $data, int $id) : AlunoNota
-    {
+    {   
         #Atualizando no banco de dados
         $alunoNota = $this->repository->update($data, $id);
 

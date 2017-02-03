@@ -133,7 +133,7 @@ class TurmaNotaController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+            
             #Executando a ação
             $alunoNota = $this->alunoNotaService->update($data, $id);
 

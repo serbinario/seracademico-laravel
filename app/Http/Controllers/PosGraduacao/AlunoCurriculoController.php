@@ -139,12 +139,11 @@ class AlunoCurriculoController extends Controller
             ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-            ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_curriculo_disciplina.disciplina_id')
             ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
             ->where('pos_alunos.id', $idAluno)
-            ->whereIn('fac_situacao_nota.id', [1,2,6,7]) // Situação de cumprimento da disciplina
+            ->whereIn('fac_situacao_nota.id', [1]) // Situação de cumprimento da disciplina
             ->select([
                 'pos_alunos_cursos.id',
                 'fac_disciplinas.nome as disciplina_nome',
@@ -155,8 +154,7 @@ class AlunoCurriculoController extends Controller
                 'pos_alunos_notas.nota_final',
                 'fac_situacao_nota.nome as situacao'
             ]);
-
-
+        
         #Editando a grid
         return Datatables::of($rows)->make(true);
     }
