@@ -345,20 +345,8 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 
 <div>
     <div style="text-align: center;"> <!-- position: absolute; margin-top: -85px; margin-left: 30%; -->
-        <img width="300px" height="165px" src="{{ asset('img/assinatura_luciana_edit.png')  }}" alt="">
+        <img width="1000px" height="202px" src="{{ asset('img/assinatura_full.png')  }}" alt="">
     </div>
-
-    <table width="100%">
-        <tr>
-            <td><center>____________________________________<br />
-                    TESTEMUNHA</center>
-            </td>
-            <td>
-                <center>____________________________________<br />
-                    TESTEMUNHA</center>
-            </td>
-        </tr>
-    </table>
 </div>
 </body>
 </html>
