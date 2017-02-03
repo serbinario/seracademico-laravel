@@ -346,7 +346,7 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 
     <center><span>____________________________________<br />CONTRATADO</span></center><br /><br />
 
-    <table width="100%">
+    <table width="100%" style="display: block">
         <tr>
             <td><center>____________________________________<br />
                     TESTEMUNHA</center>
