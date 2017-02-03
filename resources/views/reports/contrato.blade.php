@@ -77,6 +77,11 @@
             right:0;
             z-index:100;
         }
+
+        table { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
@@ -346,7 +351,7 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 
     <center><span>____________________________________<br />CONTRATADO</span></center><br /><br />
 
-    <table width="100%" style="margin-top: 5%;">
+    <table width="100%">
         <tr>
             <td><center>____________________________________<br />
                     TESTEMUNHA</center>
