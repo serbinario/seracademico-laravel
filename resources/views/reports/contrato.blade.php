@@ -59,6 +59,7 @@
             font-family: arial;
             font-size: 14px;
         }
+
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -343,13 +344,9 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 <br /><br />
 
 <div>
-    <center><span>____________________________________<br />CONTRATANTE</span></center><br /><br />
-
-    <div style="position: absolute; margin-top: -85px; margin-left: 30%;">
-        <img width="200px" height="200px" src="{{ asset('img/assinatura_luciana.png')  }}" alt="">
+    <div style="text-align: center;"> <!-- position: absolute; margin-top: -85px; margin-left: 30%; -->
+        <img width="300px" height="200px" src="{{ asset('img/assinatura_luciana_edit.png')  }}" alt="">
     </div>
-
-    <center><span>____________________________________<br />CONTRATADO</span></center><br /><br />
 
     <table width="100%">
         <tr>
