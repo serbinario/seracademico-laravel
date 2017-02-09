@@ -1,16 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers\PosGraduacao;
+namespace Seracademico\Http\Controllers\Mestrado;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\PosGraduacao\CurriculoService;
+use Seracademico\Services\Mestrado\CurriculoService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\PosGraduacao\CurriculoValidator;
+use Seracademico\Validators\Mestrado\CurriculoValidator;
 
 class CurriculoController extends Controller
 {
@@ -51,7 +51,7 @@ class CurriculoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         # Retorno para view
-        return view('posGraduacao.curriculo.index', compact('loadFields'));
+        return view('mestrado.curriculo.index', compact('loadFields'));
     }
 
     /**
@@ -62,7 +62,7 @@ class CurriculoController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_curriculos')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_curriculos.tipo_nivel_sistema_id', 2)
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 3)
             ->select([
                 'fac_curriculos.id',
                 'fac_curriculos.nome',
@@ -107,7 +107,7 @@ class CurriculoController extends Controller
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
             )
-            ->where('fac_curriculos.tipo_nivel_sistema_id', 2)
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 3)
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
@@ -153,7 +153,7 @@ class CurriculoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('posGraduacao.curriculo.create', compact('loadFields'));
+        return view('mestrado.curriculo.create', compact('loadFields'));
     }
 
     /**
@@ -198,7 +198,7 @@ class CurriculoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('posGraduacao.curriculo.edit', compact('model', 'loadFields'));
+            return view('mestrado.curriculo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

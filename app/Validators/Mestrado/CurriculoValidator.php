@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Validators\PosGraduacao;
+namespace Seracademico\Validators\Mestrado;
 
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;

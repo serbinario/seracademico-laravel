@@ -1,11 +1,11 @@
 <?php
 
-namespace Seracademico\Services\PosGraduacao;
+namespace Seracademico\Services\Mestrado;
 
-use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
-use Seracademico\Entities\PosGraduacao\Curriculo;
-use Seracademico\Repositories\PosGraduacao\CursoRepository;
-use Seracademico\Repositories\PosGraduacao\DisciplinaRepository;
+use Seracademico\Repositories\Mestrado\CurriculoRepository;
+use Seracademico\Entities\Mestrado\Curriculo;
+use Seracademico\Repositories\Mestrado\CursoRepository;
+use Seracademico\Repositories\Mestrado\DisciplinaRepository;
 
 class CurriculoService
 {
@@ -56,7 +56,7 @@ class CurriculoService
     public function store(array $data) : Curriculo
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
+        $data['tipo_nivel_sistema_id'] = 3;
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
@@ -81,7 +81,7 @@ class CurriculoService
     public function update(array $data, int $id) : Curriculo
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 2;
+        $data['tipo_nivel_sistema_id'] = 3;
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);

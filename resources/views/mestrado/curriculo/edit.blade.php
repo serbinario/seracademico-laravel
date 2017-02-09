@@ -28,8 +28,8 @@
                     </div>
                 @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.posgraduacao.curriculo.update', $model->id], 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
-                    @include('tamplatesForms.posGraduacao.tamplateFormCurriculo')
+            {!! Form::model($model, ['route'=> ['seracademico.mestrado.curriculo.update', $model->id], 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
+                    @include('tamplatesForms.mestrado.tamplateFormCurriculo')
             {!! Form::close() !!}
         </div>        
     </div>

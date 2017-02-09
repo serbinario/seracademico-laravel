@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Repositories\PosGraduacao;
+namespace Seracademico\Repositories\Mestrado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\PosGraduacao\CurriculoValidator;
-use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
-use Seracademico\Entities\PosGraduacao\Curriculo;
+use Seracademico\Validators\Mestrado\CurriculoValidator;
+use Seracademico\Repositories\Mestrado\CurriculoRepository;
+use Seracademico\Entities\Mestrado\Curriculo;
 
 /**
  * Class CurriculoRepositoryEloquent

@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Repositories\PosGraduacao;
+namespace Seracademico\Repositories\Mestrado;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 

@@ -41,7 +41,7 @@
                 <h4><i class="material-icons">library_books</i> Listar Currículos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.posgraduacao.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
+                <a href="{{ route('seracademico.mestrado.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
             </div>
         </div>
 
@@ -171,7 +171,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.posgraduacao.curriculo.grid') !!}",
+            ajax: "{!! route('seracademico.mestrado.curriculo.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'fac_curriculos.codigo'},
                 {data: 'nome', name: 'fac_curriculos.nome'},
