@@ -36,7 +36,6 @@ class Aluno extends Model implements Transformable
         'tipo_pretensao_id',
         'tipo_img',
         'data_contrato',
-        //
         'titulo',
         'nota_final',
         'defesa',
@@ -54,7 +53,7 @@ class Aluno extends Model implements Transformable
         'inst_ensino_banca_4_id',
         'data_conclusao',
         'data_colacao',
-        'pos_aluno_curso_id'
+        'tipo_aluno_id'
     ];
 
     /**
