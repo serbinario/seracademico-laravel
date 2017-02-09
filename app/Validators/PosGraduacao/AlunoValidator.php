@@ -117,6 +117,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_visual' => 'integer',
             'pessoa.deficiencia_fisica' => 'integer',
             'pessoa.deficiencia_outra' => 'integer',
+            'curso_id' => 'required',
 //
 //            //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
