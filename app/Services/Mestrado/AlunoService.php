@@ -2,8 +2,8 @@
 
 namespace Seracademico\Services\Mestrado;
 
-use Seracademico\Entities\PosGraduacao\Aluno;
-use Seracademico\Repositories\PosGraduacao\AlunoRepository;
+use Seracademico\Entities\Mestrado\Aluno;
+use Seracademico\Repositories\Mestrado\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Services\TraitService;
