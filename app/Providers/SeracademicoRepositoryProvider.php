@@ -636,5 +636,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\PoloRepository::class,
 			\Seracademico\Repositories\PoloRepositoryEloquent::class
 		);
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\DisciplinaRepository::class,
+            \Seracademico\Repositories\Mestrado\DisciplinaRepositoryEloquent::class
+        );
 	}
 }
