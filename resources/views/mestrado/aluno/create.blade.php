@@ -7,7 +7,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-user"></i>
-                Cadastrar Aluno de Pós-graduação
+                Cadastrar Aluno de Mestrado
             </h4>
         </div>
 
@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.posgraduacao.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.mestrado.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.mestrado.tamplateFormAluno')
             {!! Form::close() !!}
         </div>

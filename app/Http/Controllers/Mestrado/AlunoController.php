@@ -5,9 +5,6 @@ namespace Seracademico\Http\Controllers\Mestrado;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Seracademico\Entities\Mestrado\Aluno;
-//use Seracademico\Facades\ParametroMatriculaFacade;
-use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Mestrado\AlunoService;
 use Seracademico\Validators\Mestrado\AlunoValidator;
@@ -52,7 +49,10 @@ class AlunoController extends Controller
     ];
 
     /**
+     * AlunoController constructor.
+     *
      * @param AlunoService $service
+     * @param AlunoValidator $validator
      */
     public function __construct(AlunoService $service, AlunoValidator $validator)
     {
@@ -111,6 +111,8 @@ class AlunoController extends Controller
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->join('pos_tipos_alunos', 'pos_tipos_alunos.id', '=', 'pos_alunos.tipo_aluno_id')
+                ->where('pos_tipos_alunos.id', 2)
                 ->select([
                     'pos_alunos.id',
                     'pos_alunos_turmas.id as idAlunoTurma',
@@ -172,7 +174,7 @@ class AlunoController extends Controller
                     $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
 
                     if($aluno->matricula) {
-                        $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
+                        $html .= '   <li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
                     }
                     
                     $html .=    '</ul>';
@@ -266,7 +268,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -643,6 +643,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
             \Seracademico\Repositories\Mestrado\CursoRepository::class,
             \Seracademico\Repositories\Mestrado\CursoRepositoryEloquent::class
         );
