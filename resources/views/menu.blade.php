@@ -62,6 +62,13 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
+                <li>
+                    <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label">Mestrado</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{ route('seracademico.mestrado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                    </ul>
+                </li>
                 @role('posgraduacao')
                 <li>
                     <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span

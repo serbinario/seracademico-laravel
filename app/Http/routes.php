@@ -78,6 +78,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
         });
 
+        //Rotas de mestrado
+        Route::group(['prefix' => 'mestrado', 'as' => 'mestrado.'], function () {
+            # Rotas do aluno de mestrado
+            Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\AlunoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\AlunoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\AlunoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\AlunoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\AlunoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\AlunoController@update']);
+            });
+        });
+
         //Rotas de pos-graduação
         Route::group(['prefix' => 'posgraduacao', 'as' => 'posgraduacao.'], function () {
             # Rotas do aluno de posgraduação
