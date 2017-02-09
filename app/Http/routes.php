@@ -89,6 +89,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\AlunoController@update']);
             });
+
+            #Rotas de professores
+
+            # Rotas de disciplinas
+            Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\DisciplinaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\DisciplinaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\DisciplinaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\DisciplinaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\DisciplinaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\DisciplinaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\DisciplinaController@delete']);
+            });
         });
 
         //Rotas de pos-graduação

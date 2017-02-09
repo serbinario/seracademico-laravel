@@ -30,7 +30,7 @@
             @endif
 
             {!! Form::model($aluno, ['route'=> ['seracademico.posgraduacao.aluno.update', $aluno->id], 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.posGraduacao.tamplateFormAluno')
+                @include('tamplatesForms.mestrado.tamplateFormAluno')
             {!! Form::close() !!}
         </div>
     </div>

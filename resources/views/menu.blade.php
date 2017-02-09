@@ -63,10 +63,16 @@
                 </li>
 
                 <li>
-                    <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label">Mestrado</span> <span
+                    <a href="index.html"><i class="material-icons"></i> <span class="nav-label">Mestrado</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{ route('seracademico.mestrado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                        <li>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.mestrado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.disciplina.index') }}"><i class="fa fa-users"></i>Disciplina</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 @role('posgraduacao')
