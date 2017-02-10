@@ -42,7 +42,7 @@
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura" style="width: 135px; height: 115px;">
                 @if (isset($aluno) && $aluno->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="{{route('seracademico.posgraduacao.aluno.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo" src="{{route('seracademico.mestrado.aluno.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
                         {{--<img id="logo" src="{{asset("/images/$aluno->path_image")}}"  alt="Foto" height="120" width="100"/><br/>--}}
                     </div>
                 @endif
@@ -80,9 +80,9 @@
             <li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
             </li>
-            {{--<li role="presentation">
+            <li role="presentation">
                 <a href="#abaMatricula" aria-controls="abaMatricula" role="tab" data-toggle="tab">Matrícula</a>
-            </li>--}}
+            </li>
             <li role="presentation">
                 <a href="#monografia" aria-controls="monografia" role="tab" data-toggle="tab">Monografia</a>
             </li>
@@ -328,54 +328,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{--<div class="panel-heading">--}}
-                                    {{--<h4 class="panel-title">--}}
-                                        {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
-                                                    {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
-                                    {{--</h4>--}}
-                                {{--</div>--}}
-                                {{--<div id="endprof" class="panel-collapse collapse">--}}
-                                    {{--<div class="panel-body">--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-12">--}}
-                                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
-                                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
-                                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-4">--}}
-                                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
-                                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
-                                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
-                                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-8">--}}
-                                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
-                                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
-                                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
-                                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -511,7 +463,7 @@
             {{--Aba Documentos Obrigatorios--}}
 
             {{-- Aba admissão --}}
-            {{--<div role="tabpanel" class="tab-pane" id="abaMatricula">
+            <div role="tabpanel" class="tab-pane" id="abaMatricula">
                 <br>
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -520,7 +472,7 @@
                         @if(isset($aluno->id) && count($aluno->curriculos) > 0)
                             {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @else
-                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
+                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['mestrado\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @endif
                     </div>
 
@@ -545,16 +497,16 @@
                     </div>
 
 
-                    --}}{{--<div class="form-group col-md-4">--}}{{--
-                        --}}{{--{!! Form::label('forma_admissao_id', 'Forma de admissão') !!}--}}{{--
-                        --}}{{--@if(isset($aluno->id))--}}{{--
-                            --}}{{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}{{--
-                        --}}{{--@else--}}{{--
-                            --}}{{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}--}}{{--
-                        --}}{{--@endif--}}{{--
-                    --}}{{--</div>--}}{{--
+                    <div class="form-group col-md-4">
+                        {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
+                        @if(isset($aluno->id))
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
+                        @endif
+                    </div>
                 </div>
-            </div>--}}
+            </div>
             {{-- Fim aba Mtrícula--}}
 
             {{-- Aba Monografia --}}
@@ -925,90 +877,6 @@
             }
         });
 
-        //Validações javascript
-        $('#formAluno').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 819200,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 800kb"
-                        }
-                    }
-                },
-            },
-        });
-
-//        $('#formAluno').bootstrapValidator({
-//            fields: {
-//                'pessoa[nome]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome' })
-//                        },
-//                        stringLength: {
-//                            max: 50,
-//                            message: Lang.get('validation.max', { attribute: 'Nome' })
-//                        }
-//                    }
-//                },
-//                'pessoa[data_nasciemento]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-//                        }
-//                    }
-//                },
-//                'pessoa[cpf]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'CPF' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_pai]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_mae]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-//                        }
-//                    }
-//                },
-//                'pessoa[identidade]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-//                        }
-//                    }
-//                }
-//            },
-//        });
-
-        // Path imagem do aluno
-        $("#path_image").fileinput({
-            @if(isset($aluno->path_image))
-            initialPreviewFileType: 'object',
-            initialPreview:[
-                '/images/{{$aluno->path_image}}'
-            ],
-            initialPreviewAsData: true,
-            initialPreviewConfig: [{
-                url: false,
-                width: '100%'
-            }],
-            @endif
-            language: 'pt-BR',
-            showUpload: false,
-            showCaption: false,
-            allowedFileExtensions : ['jpeg', 'gif', 'png'],
-        });
-
         // Evento para pesquisar o cpf do digito no search
         $(document).on('click', '#btnSearchCpf', function () {
             // Recuperndo o valor da consulta
@@ -1139,52 +1007,52 @@
          *
          * @param cursoId
         **/
-        {{--function getTurmasByCurso(cursoId)--}}
-        {{--{--}}
-            {{--// Requisição--}}
-            {{--jQuery.ajax({--}}
-                {{--type: 'GET',--}}
-                {{--url: '/index.php/seracademico/posgraduacao/turma/getAllByCurso/' + cursoId,--}}
-                {{--datatype: 'json',--}}
-                {{--headers: {--}}
-                    {{--'X-CSRF-TOKEN' : '{{  csrf_token() }}'--}}
-                {{--},--}}
-            {{--}).done(function (json) {--}}
-                {{--if(json.success) {--}}
-                    {{--// Options da turma--}}
-                    {{--var option = "";--}}
+        function getTurmasByCurso(cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/mestrado/turma/getAllByCurso/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+            }).done(function (json) {
+                if(json.success) {
+                    // Options da turma
+                    var option = "";
 
-                    {{--// Options da turma--}}
-                    {{--option += '<option value="">Selecione uma turma</option>';--}}
+                    // Options da turma
+                    option += '<option value="">Selecione uma turma</option>';
 
-                    {{--// Percorrendo as turmas--}}
-                    {{--for (var i = 0; i < json.dados.length; i++) {--}}
-                        {{--@if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)--}}
-                            {{--if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {--}}
-                                {{--if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {--}}
-                                    {{--option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';--}}
-                                {{--} else {--}}
-                                    {{--option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';--}}
-                                {{--}--}}
-                            {{--}--}}
-                        {{--@else--}}
-                            {{--option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';--}}
-                        {{--@endif--}}
-                    {{--}--}}
+                    // Percorrendo as turmas
+                    for (var i = 0; i < json.dados.length; i++) {
+                        @if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)
+                            if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {
+                                if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                    option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                } else {
+                                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                                }
+                            }
+                        @else
+                            option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                        @endif
+                    }
 
-                    {{--// Carregando a sede--}}
-                    {{--@if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))--}}
-                        {{--$('#sede_id option').remove();--}}
-                        {{--$('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+--}}
-                                {{--'{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');--}}
-                    {{--@endif--}}
+                    // Carregando a sede
+                    @if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
+                        $('#sede_id option').remove();
+                        $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
+                                '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
+                    @endif
 
-                    {{--// carregando as turmas em caso de edit--}}
-                    {{--$('#turma_id option').remove();--}}
-                    {{--$('#turma_id').append(option);--}}
-                {{--}--}}
-            {{--});--}}
-        {{--}--}}
+                    // carregando as turmas em caso de edit
+                    $('#turma_id option').remove();
+                    $('#turma_id').append(option);
+                }
+            });
+        }
 
         /**
          * Função para retornar as sedes referentes ao curso informado (cursoId)
@@ -1192,56 +1060,56 @@
          *
          * @param cursoId
          */
-        {{--function getSedeByCurso(cursoId)--}}
-        {{--{--}}
-            {{--// Requisição--}}
-            {{--jQuery.ajax({--}}
-                {{--type: 'GET',--}}
-                {{--url: '/index.php/seracademico/posgraduacao/turma/getSedeByCurso/' + cursoId,--}}
-                {{--datatype: 'json',--}}
-                {{--headers: {--}}
-                    {{--'X-CSRF-TOKEN' : '{{  csrf_token() }}'--}}
-                {{--}--}}
-            {{--}).done(function (json) {--}}
-                {{--var option = "";--}}
+        function getSedeByCurso(cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/mestrado/turma/getSedeByCurso/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
 
-                {{--option += '<option value="">Selecione uma sede</option>';--}}
-                {{--for (var i = 0; i < json.dados.length; i++) {--}}
-                    {{--option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';--}}
-                {{--}--}}
+                option += '<option value="">Selecione uma sede</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';
+                }
 
-                {{--$('#turma_id option').remove();--}}
-                {{--$('#sede_id option').remove();--}}
-                {{--$('#sede_id').append(option);--}}
-            {{--});--}}
-        {{--}--}}
+                $('#turma_id option').remove();
+                $('#sede_id option').remove();
+                $('#sede_id').append(option);
+            });
+        }
 
         /**
          *
          * @param sedeId
          * @param cursoId
          */
-        {{--function getTurmaBySede(sedeId, cursoId)--}}
-        {{--{--}}
-            {{--// Requisição--}}
-            {{--jQuery.ajax({--}}
-                {{--type: 'GET',--}}
-                {{--url: '/index.php/seracademico/posgraduacao/turma/getTurmaBySede/' + sedeId + '/' + cursoId,--}}
-                {{--datatype: 'json',--}}
-                {{--headers: {--}}
-                    {{--'X-CSRF-TOKEN' : '{{  csrf_token() }}'--}}
-                {{--}--}}
-            {{--}).done(function (json) {--}}
-                {{--var option = "";--}}
+        function getTurmaBySede(sedeId, cursoId)
+        {
+            // Requisição
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/mestrado/turma/getTurmaBySede/' + sedeId + '/' + cursoId,
+                datatype: 'json',
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                }
+            }).done(function (json) {
+                var option = "";
 
-                {{--option += '<option value="">Selecione uma turma</option>';--}}
-                {{--for (var i = 0; i < json.dados.length; i++) {--}}
-                    {{--option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';--}}
-                {{--}--}}
+                option += '<option value="">Selecione uma turma</option>';
+                for (var i = 0; i < json.dados.length; i++) {
+                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                }
 
-                {{--$('#turma_id option').remove();--}}
-                {{--$('#turma_id').append(option);--}}
-            {{--});--}}
-        {{--}--}}
+                $('#turma_id option').remove();
+                $('#turma_id').append(option);
+            });
+        }
     </script>
 @stop

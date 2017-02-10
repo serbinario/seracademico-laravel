@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Mestrado;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\PosGraduacao\Curso;
+use Seracademico\Entities\Mestrado\Curso;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 

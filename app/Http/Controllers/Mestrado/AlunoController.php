@@ -41,11 +41,11 @@ class AlunoController extends Controller
         'SituacaoAluno',
         'Sede',
         'SimpleReport|byCrud,1',
-        /*'PosGraduacao\\Turma|PosGraduacao',
-        'PosGraduacao\\Curso|ativo,1',
-        'PosGraduacao\\CanalCaptacao',
-        'PosGraduacao\\TipoPretensao,
-        'PosGraduacao\\Curso|byCurriculoAtivo,1',*/
+        'Mestrado\\Turma|PosGraduacao',
+        'Mestrado\\Curso|ativo,1',
+        //'Mestrado\\CanalCaptacao',
+        //'Mestrado\\TipoPretensao',
+        'Mestrado\\Curso|byCurriculoAtivo,1',
     ];
 
     /**
@@ -170,7 +170,7 @@ class AlunoController extends Controller
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
-                    //$html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                    $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
 
                     if($aluno->matricula) {
