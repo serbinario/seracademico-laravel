@@ -133,6 +133,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\CurriculoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\CurriculoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\CurriculoController@delete']);
+
+                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'Mestrado\CurriculoController@adicionarDisciplinas']);
+                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Mestrado\CurriculoController@removerDisciplina']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Mestrado\CurriculoController@getByCurso']);
+                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Mestrado\CurriculoController@gridByCurriculo']);
             });
 
             # Rotas de turma

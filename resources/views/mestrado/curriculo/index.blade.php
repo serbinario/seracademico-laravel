@@ -211,7 +211,7 @@
             });
 
             //Carregando a datatable
-            table2.ajax.url("/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo).load();
+            table2.ajax.url("/index.php/seracademico/mestrado/curriculo/gridByCurriculo/" + idCurriculo).load();
         });
 
          //consulta via select2
@@ -282,7 +282,7 @@
 
             jQuery.ajax({
                 type: 'POST',
-                url: '{{ route('seracademico.posgraduacao.curriculo.adicionarDisciplinas')  }}',
+                url: '{{ route('seracademico.mestrado.curriculo.adicionarDisciplinas')  }}',
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
@@ -308,7 +308,7 @@
 
             jQuery.ajax({
                 type: 'POST',
-                url: '{{ route('seracademico.posgraduacao.curriculo.removerDisciplina')  }}',
+                url: '{{ route('seracademico.mestrado.curriculo.removerDisciplina')  }}',
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
