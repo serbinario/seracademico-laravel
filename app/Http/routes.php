@@ -92,6 +92,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             #Rotas de professores
+            Route::group(['prefix' => 'professor', 'as' => 'professor.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\ProfessorController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\ProfessorController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\ProfessorController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\ProfessorController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\ProfessorController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\ProfessorController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\ProfessorController@delete']);
+            });
 
             # Rotas de disciplinas
             Route::group(['prefix' => 'disciplina', 'as' => 'disciplina.'], function () {

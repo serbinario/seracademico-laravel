@@ -661,5 +661,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Mestrado\TurmaRepository::class,
             \Seracademico\Repositories\Mestrado\TurmaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\ProfessorRepository::class,
+            \Seracademico\Repositories\Mestrado\ProfessorRepositoryEloquent::class
+        );
 	}
 }
