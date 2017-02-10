@@ -73,6 +73,7 @@
                                 <li><a href="{{ route('seracademico.mestrado.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
                             </ul>
                         </li>
                     </ul>

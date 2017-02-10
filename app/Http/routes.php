@@ -80,6 +80,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas de mestrado
         Route::group(['prefix' => 'mestrado', 'as' => 'mestrado.'], function () {
+
             # Rotas do aluno de mestrado
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\AlunoController@index']);
@@ -123,6 +124,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\CurriculoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\CurriculoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\CurriculoController@delete']);
+            });
+
+            # Rotas de turma
+            Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\TurmaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\TurmaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\TurmaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\TurmaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\TurmaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\TurmaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\TurmaController@delete']);
             });
         });
 
