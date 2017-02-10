@@ -1,6 +1,6 @@
 @extends('menu')
 
-{{--@section("css")
+@section("css")
     <link rel="stylesheet" href="{{ asset('/js/posgraduacao/turma/css/modal_calendario.css') }}">
 
     <style type="text/css">
@@ -24,7 +24,7 @@
             padding: 2px 10px;
         }
     </style>
-@stop--}}
+@stop
 
 @section('content')
     <div class="ibox float-e-margins">
@@ -56,7 +56,7 @@
                 </div>
             @endif
 
-            {{--<div class="row">
+            <div class="row">
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
@@ -77,11 +77,11 @@
 
                         <div class="form-group">
                             <a id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</a>
-                            --}}{{--<button id="reportAluno" class="btn-sm btn-primary">Relatório</button>--}}{{--
+                            <button id="reportAluno" class="btn-sm btn-primary">Relatório</button>
                         </div>
                     </form>
                 </div>
-            </div>--}}
+            </div>
             <br>
 
             <div class="row">
@@ -118,22 +118,33 @@
             </div>
         </div>
     </div>
+
+    @include('mestrado.aluno.turma.modal_aluno_turma')
+    @include('mestrado.aluno.turma.modal_nova_turma')
+    @include('mestrado.aluno.turma.modal_create_situacao')
+    {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
+    @include('posGraduacao.aluno.modal_aluno_documento')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_create_situacao.js') }}"></script>
 
+    {{--Fabio--}}
+    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{!! route('seracademico.mestrado.aluno.grid') !!}"
-                /*data: function (d) {
+                url: "{!! route('seracademico.mestrado.aluno.grid') !!}",
+                data: function (d) {
                     d.curso = $('select[name=cursoSearch] option:selected').val();
                     d.turma = $('select[name=turmaSearch] option:selected').val();
                     d.situacao = $('select[name=situacaoSearch] option:selected').val();
                     d.globalSearch = $('input[name=globalSearch]').val();
-                }*/
+                }
             },
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
@@ -145,6 +156,36 @@
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Id do aluno corrente
+        var idAluno, idAlunoTurma, idAlunoCurso;
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#link_modal_curso_turma", function () {
+            // Recuperando o id do aluno selecionado
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            // Recuperando o nome e a matrícula
+            var nomeAluno   = table.row($(this).parents('tr')).data().nome;
+            var matricula   = table.row($(this).parents('tr')).data().matricula;
+
+            // prenchendo o titulo do nome do aluno
+            $('#ctMatricula').text(matricula);
+            $('#ctNomeAluno').text(nomeAluno);
+
+            // Executando o modal
+            runCursoTurma(idAluno);
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#aluno_documentos", function () {
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            $('#id_aluno').val(idAluno);
+            loadFieldsDocumentos();
+
+            $("#modal-aluno-documento").modal({show:true});
         });
     </script>
 @stop

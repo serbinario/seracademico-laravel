@@ -89,6 +89,28 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\AlunoController@update']);
+                Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'Mestrado\AlunoController@getImgAluno']);
+
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'Mestrado\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'Mestrado\AlunoDocumentoController@checkDocumento']);
+
+                # Rotas de turmas de pósgraduação
+                Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+                    Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Mestrado\AlunoTurmaController@grid']);
+                    Route::get('gridSituacoes/{idAlunoCurso}', ['as' => 'gridSituacoes', 'uses' => 'Mestrado\AlunoTurmaController@gridSituacoes']);
+                    Route::get('getCursos', ['as' => 'getCursos', 'uses' => 'Mestrado\AlunoTurmaController@getCursos']);
+                    Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'Mestrado\AlunoTurmaController@getTurmas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\AlunoTurmaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\AlunoTurmaController@store']);
+                    Route::delete('destroy/{idAluno}/{idAlunoCurso}', ['as' => 'destroy', 'uses' => 'Mestrado\AlunoTurmaController@destroy']);
+                    Route::get('getTurmaOrigem/{idAlunoCurso}', ['as' => 'getTurmaOrigem', 'uses' => 'Mestrado\AlunoTurmaController@getTurmaOrigem']);
+                    Route::delete('destroySituacao/{idSituacao}', ['as' => 'destroySituacao', 'uses' => 'Mestrado\AlunoTurmaController@destroySituacao']);
+                    Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'Mestrado\AlunoTurmaController@storeSituacao']);
+//                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
+//                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
+                });
+
             });
 
             #Rotas de professores

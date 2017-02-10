@@ -42,7 +42,7 @@
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="captura" style="width: 135px; height: 115px;">
                 @if (isset($aluno) && $aluno->path_image != null)
                     <div id="midias">
-                        <img id="logo" src="{{route('seracademico.posgraduacao.aluno.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
+                        <img id="logo" src="{{route('seracademico.mestrado.aluno.getImgAluno', ['id' => $aluno->id])}}"  alt="Foto" height="120" width="100"/><br/>
                         {{--<img id="logo" src="{{asset("/images/$aluno->path_image")}}"  alt="Foto" height="120" width="100"/><br/>--}}
                     </div>
                 @endif
@@ -472,7 +472,7 @@
                         @if(isset($aluno->id) && count($aluno->curriculos) > 0)
                             {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @else
-                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
+                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['mestrado\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @endif
                     </div>
 
@@ -1012,7 +1012,7 @@
             // Requisição
             jQuery.ajax({
                 type: 'GET',
-                url: '/index.php/seracademico/posgraduacao/turma/getAllByCurso/' + cursoId,
+                url: '/index.php/seracademico/mestrado/turma/getAllByCurso/' + cursoId,
                 datatype: 'json',
                 headers: {
                     'X-CSRF-TOKEN' : '{{  csrf_token() }}'
@@ -1065,7 +1065,7 @@
             // Requisição
             jQuery.ajax({
                 type: 'GET',
-                url: '/index.php/seracademico/posgraduacao/turma/getSedeByCurso/' + cursoId,
+                url: '/index.php/seracademico/mestrado/turma/getSedeByCurso/' + cursoId,
                 datatype: 'json',
                 headers: {
                     'X-CSRF-TOKEN' : '{{  csrf_token() }}'
@@ -1094,7 +1094,7 @@
             // Requisição
             jQuery.ajax({
                 type: 'GET',
-                url: '/index.php/seracademico/posgraduacao/turma/getTurmaBySede/' + sedeId + '/' + cursoId,
+                url: '/index.php/seracademico/mestrado/turma/getTurmaBySede/' + sedeId + '/' + cursoId,
                 datatype: 'json',
                 headers: {
                     'X-CSRF-TOKEN' : '{{  csrf_token() }}'
