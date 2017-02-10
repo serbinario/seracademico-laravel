@@ -3,6 +3,7 @@
 namespace Seracademico\Services\Mestrado;
 
 use Seracademico\Entities\Mestrado\Aluno;
+use Seracademico\Entities\Mestrado\Curriculo;
 use Seracademico\Repositories\Mestrado\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
@@ -92,7 +93,7 @@ class AlunoService
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
         $this->tratamentoMatricula($data);
-        //$this->tratamentoCurso($data);
+        $this->tratamentoCurso($data);
 
         # Setando o tipo o tipo do aluno para mestrado
         $data['tipo_aluno_id'] = 2;
@@ -109,7 +110,7 @@ class AlunoService
         $this->tratamentoImagem($data, $aluno);
 
         # Tratamento do currículo do aluno
-        /*if(isset($data['curriculo_id'])) {
+        if(isset($data['curriculo_id'])) {
             #Vinculando o currículo, situação e turma ao aluno
             $aluno->curriculos()->attach($data['curriculo_id']);
 
@@ -127,7 +128,7 @@ class AlunoService
                 # notas e frequências
                 $this->tratamentoNotas($aluno);
             }
-        }*/
+        }
         
         #Retorno
         return $aluno;
@@ -147,7 +148,7 @@ class AlunoService
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
         $this->tratamentoMatricula($data);
-        //$this->tratamentoCurso($data);
+        $this->tratamentoCurso($data);
 
         #Atualizando no banco de dados
         $aluno = $this->repository->update($data, $id);
@@ -161,7 +162,7 @@ class AlunoService
         $this->tratamentoImagem($data, $aluno);
 
         # Tratamento do currículo do aluno
-        /*if(isset($data['curriculo_id'])) {
+        if(isset($data['curriculo_id'])) {
             # Regra de negócios para tratamento do curriculo
             $this->tratamentoCursoUpdate($aluno, $data['curriculo_id']);
 
@@ -170,7 +171,7 @@ class AlunoService
                 # Regra de negócio para tratamento da turma em caso de atualização
                 $this->tratamentoTurmaUpdate($aluno, !empty($data['turma_id']) ? $data['turma_id'] : null);
             }
-        }*/
+        }
 
         #Retorno
         return $aluno;
@@ -222,7 +223,7 @@ class AlunoService
      * @param $idCurriculo
      * @return bool
      */
-    /*public function tratamentoCursoUpdate($aluno, $idCurriculo)
+    public function tratamentoCursoUpdate($aluno, $idCurriculo)
     {
         # Verificando se existe currículo cadastrado, se existir se é igual ao informado
         if(count($aluno->curriculos) > 0 && $aluno->curriculos->last()->id == $idCurriculo) {
@@ -236,7 +237,7 @@ class AlunoService
                 ? $aluno->curriculos()->get()->last()->pivot->turmas->last()->id
                 : null
         ]);
-    }*/
+    }
 
     /**
      * @param $aluno
@@ -244,7 +245,7 @@ class AlunoService
      * @return bool
      * @throws \Exception
      */
-    /*public function tratamentoTurmaUpdate($aluno, $idTurma)
+    public function tratamentoTurmaUpdate($aluno, $idTurma)
     {
         # Recuperando o currículo do aluno
         $curriculo = $aluno->curriculos()->get()->last();
@@ -315,13 +316,13 @@ class AlunoService
 
         #retorno
         return true;
-    }*/
+    }
 
     /**
      * @param Aluno $aluno
      * @return bool
      */
-    /*public function tratamentoNotas(Aluno $aluno)
+    public function tratamentoNotas(Aluno $aluno)
     {
         # Recuperando a entidade de currículo
         $curriculo =  $aluno->curriculos()->get()->last();
@@ -371,7 +372,7 @@ class AlunoService
 
         # Retorno
         return true;
-    }*/
+    }
 
 
     /**
@@ -379,7 +380,7 @@ class AlunoService
      * @return bool
      * @throws \Exception
      */
-    /*public function tratamentoCurso(array &$data)
+    public function tratamentoCurso(array &$data)
     {
         # Verificando se o curso foi informado
         if(!isset($data['curso_id'])) {
@@ -401,7 +402,7 @@ class AlunoService
 
         # retorno
         return true;
-    }*/
+    }
 
     /**
      * Método responsável por exucutar regras de negócios
