@@ -63,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html"><i class="material-icons"></i> <span class="nav-label">Mestrado</span> <span
+                    <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
