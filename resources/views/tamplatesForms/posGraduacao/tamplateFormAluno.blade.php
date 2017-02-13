@@ -971,90 +971,6 @@
             }
         });
 
-        //Validações javascript
-        $('#formAluno').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 819200,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 800kb"
-                        }
-                    }
-                },
-            },
-        });
-
-//        $('#formAluno').bootstrapValidator({
-//            fields: {
-//                'pessoa[nome]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome' })
-//                        },
-//                        stringLength: {
-//                            max: 50,
-//                            message: Lang.get('validation.max', { attribute: 'Nome' })
-//                        }
-//                    }
-//                },
-//                'pessoa[data_nasciemento]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-//                        }
-//                    }
-//                },
-//                'pessoa[cpf]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'CPF' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_pai]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_mae]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-//                        }
-//                    }
-//                },
-//                'pessoa[identidade]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-//                        }
-//                    }
-//                }
-//            },
-//        });
-
-        // Path imagem do aluno
-        $("#path_image").fileinput({
-            @if(isset($aluno->path_image))
-            initialPreviewFileType: 'object',
-            initialPreview:[
-                '/images/{{$aluno->path_image}}'
-            ],
-            initialPreviewAsData: true,
-            initialPreviewConfig: [{
-                url: false,
-                width: '100%'
-            }],
-            @endif
-            language: 'pt-BR',
-            showUpload: false,
-            showCaption: false,
-            allowedFileExtensions : ['jpeg', 'gif', 'png'],
-        });
-
         // Evento para pesquisar o cpf do digito no search
         $(document).on('click', '#btnSearchCpf', function () {
             // Recuperndo o valor da consulta
@@ -1133,7 +1049,6 @@
                 }
             });
         });
-
 
         // Evento para carregar as sedes a partir do
         // curso selecionado
