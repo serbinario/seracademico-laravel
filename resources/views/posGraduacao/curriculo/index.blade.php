@@ -112,60 +112,68 @@
         </div>        
     </div>
 
-    <!-- Modal de cadastro das Disciplinas-->
-    <div id="modal-grade-curricular" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Adicionar disciplinas ao currículo</h4>
-                </div>
-                <div class="modal-body" style="alignment-baseline: central">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group">
-                                <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th style="width: 5%;">Qtd. Faltas</th>
-                                    <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th >Acão</th>
-                                </tr>
-                                </thead>
+    {{--<!-- Modal de cadastro das Disciplinas-->--}}
+    {{--<div id="modal-grade-curricular" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">--}}
+        {{--<div class="modal-dialog modal-lg">--}}
+            {{--<div class="modal-content">--}}
+                {{--<div class="modal-header">--}}
+                    {{--<button class="close" type="button" data-dismiss="modal">×</button>--}}
+                    {{--<h4 class="modal-title">Adicionar disciplinas ao currículo</h4>--}}
+                {{--</div>--}}
+                {{--<div class="modal-body" style="alignment-baseline: central">--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div class="input-group">--}}
+                                {{--<select  id="select-disciplina" multiple="multiple" class="form-control"></select>--}}
+                                {{--<span class="input-group-btn">--}}
+                                    {{--<button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>--}}
+                                {{--</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">--}}
+                                {{--<thead>--}}
+                                {{--<tr>--}}
+                                    {{--<th>Nome</th>--}}
+                                    {{--<th style="width: 5%;">Qtd. Faltas</th>--}}
+                                    {{--<th style="width: 10%;">Tipo da disciplina</th>--}}
+                                    {{--<th >Acão</th>--}}
+                                {{--</tr>--}}
+                                {{--</thead>--}}
 
-                                <tfoot>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th style="width: 5%;">Qtd. Faltas</th>
-                                    <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th style="width: 5%;">Acão</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FIM Modal de cadastro das Disciplinas-->
+                                {{--<tfoot>--}}
+                                {{--<tr>--}}
+                                    {{--<th>Nome</th>--}}
+                                    {{--<th style="width: 5%;">Qtd. Faltas</th>--}}
+                                    {{--<th style="width: 10%;">Tipo da disciplina</th>--}}
+                                    {{--<th style="width: 5%;">Acão</th>--}}
+                                {{--</tr>--}}
+                                {{--</tfoot>--}}
+                            {{--</table>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+    {{--<!-- FIM Modal de cadastro das Disciplinas-->--}}
 
+    <!-- Modais -->
+    @include('posGraduacao.curriculo.modal_adicionar_disciplina')
+    @include('posGraduacao.curriculo.modal_inserir_adicionar_disciplina')
+    @include('posGraduacao.curriculo.modal_editar_adicionar_disciplina')
     @include('reports.simple.modals.modal_report_pos_curriculo_disciplina')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_curriculo_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_inserir_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_editar_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript">
+
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
             processing: true,
@@ -178,147 +186,30 @@
                 {data: 'codigo_curso', name: 'fac_cursos.codigo'},
                 {data: 'curso', name: 'fac_cursos.nome'},
                 {data: 'ano', name: 'fac_curriculos.ano'},
-//                {data: 'valido_inicio', name: 'fac_curriculos.valido_inicio'},
-//                {data: 'valido_fim', name: 'fac_curriculos.valido_fim'},
                 {data: 'ativo', name: 'fac_curriculos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
-        //Variável que armazenará o id do currículo
-        var idCurriculo = 0;
-        var table2;
+        //Id e nome do Currículo
+        var idCurriculo   = 0;
+        var nomeCurriculo = "";
 
-        /*Responsável em abrir modal*/
-        $(document).on("click", '.grid-curricular', function () {
-            $("#modal-grade-curricular").modal({show: true, keyboard: true});
-            idCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+        // Evento para abrir a modal de adicionar disciplinas ao currículo
+        $(document).on("click", "#btnPosGraduacaoAddDisciplinaCurriculo", function () {
+            idCurriculo     = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            nomeCurriculo   = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codigoCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
 
-            /*Datatable da grid Modal*/
-            table2 = $('#disciplina-grid').DataTable({
-                retrieve: true,
-                processing: true,
-                serverSide: true,
-                iDisplayLength: 5,
-                bLengthChange: false,
-                ajax: "/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo,
-                columns: [
-                    {data: 'nome', name: 'fac_disciplinas.nome'},
-                    {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
-                    {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
-                ]
-            });
+            //Chmando a modal de adicionar disciplina
+            runTableAdicionarDisciplina(idCurriculo);
 
-            //Carregando a datatable
-            table2.ajax.url("/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo).load();
-        });
+            // Setando a descrição do modal
+            $('#adNomeCurriculo').text(nomeCurriculo);
+            $('#adCodigoCurriculo').text(codigoCurriculo);
 
-         //consulta via select2
-         $("#select-disciplina").select2({
-             placeholder: 'Selecione uma ou mais disciplinas',
-             width: 700,
-             ajax: {
-                 type: 'POST',
-                 url: "{{ route('seracademico.util.select2')  }}",
-                dataType: 'json',
-                delay: 250,
-                crossDomain: true,
-                data: function (params) {
-                    return {
-                        'search':         params.term, // search term
-                        'tableName':      'fac_disciplinas',
-                        'fieldName':      'nome',
-                        'page':           params.page || 1,
-                        'tableNotIn':     'fac_curriculo_disciplina',
-                        'columnWhere' :   'curriculo_id',
-                        'columnNotWhere': 'id',
-                        'culmnNotGet':    'disciplina_id',
-                        'valueNotWhere':    idCurriculo
-                    };
-                },
-                headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                },
-                processResults: function (data, params) {
-
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
-
-                    return {
-                        results: data.data,
-                        pagination: {
-                            more: data.more
-                        }
-                    };
-                }
-            }
-        });
-
-        //Evento do click no botão adicionar disciplina
-        $(document).on('click', '#addDisciplina', function (event) {
-            var array   = $('#select-disciplina').select2('data');
-
-            // Verificando se alguma disciplina foi selecionada
-            if (!array.length > 0) {
-                sweetAlert("Oops...", "Você deve selecionar uma disciplina!", "error");
-                return false;
-            }
-
-            var arrayId = [];
-
-            for (var i = 0; i < array.length; i++) {
-                arrayId[i] = array[i].id
-            }
-
-            //Setando o o json para envio
-            var dados = {
-                'idCurriculo' : idCurriculo,
-                'idDisciplinas' : arrayId
-            };
-
-            jQuery.ajax({
-                type: 'POST',
-                url: '{{ route('seracademico.posgraduacao.curriculo.adicionarDisciplinas')  }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
-                data: dados,
-                datatype: 'json'
-            }).done(function (json) {
-                $('#select-disciplina').select2("val", "");
-                swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
-                table2.ajax.reload();
-            });
-        });
-
-        //Evento de remover a disciplina
-        $(document).on('click', '.removerDisciplina', function () {
-            idCurriculo  = table2.row($(this).parent().parent().parent().parent().parent().index()).data().idCurriculo;
-            idDisciplina = table2.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-
-            //Setando o o json para envio
-            var dados = {
-                'idCurriculo' : idCurriculo,
-                'idDisciplina' : idDisciplina
-            };
-
-            jQuery.ajax({
-                type: 'POST',
-                url: '{{ route('seracademico.posgraduacao.curriculo.removerDisciplina')  }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
-                data: dados,
-                datatype: 'json'
-            }).done(function (retorno) {
-                $('#select-disciplina').select2("val", "");
-                swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
-                table2.ajax.reload();
-            });
+            //mostrando a modal
+            $("#modal-adicionar-disciplina-curriculo").modal({show:true});
         });
 
         // Geriamento dos relatórios avançadas
