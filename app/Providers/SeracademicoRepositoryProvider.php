@@ -666,5 +666,20 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Mestrado\ProfessorRepository::class,
             \Seracademico\Repositories\Mestrado\ProfessorRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepositoryEloquent::class
+        );
 	}
 }

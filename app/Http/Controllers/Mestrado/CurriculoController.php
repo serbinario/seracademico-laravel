@@ -28,7 +28,7 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'PosGraduacao\\Curso|ativo,1',
+        'Mestrado\\Curso|ativo,1',
         'SimpleReport|byCrud,4'
     ];
 
@@ -136,7 +136,7 @@ class CurriculoController extends Controller
 
             # Verifica a se a condição é válida
             if($boolReturn) {
-                $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Remover</a>';
+                $html .= '<a href="#" class="removerDisciplina btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
             }
 
             # retorno

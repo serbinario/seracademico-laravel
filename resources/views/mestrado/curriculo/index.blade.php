@@ -15,9 +15,9 @@
             z-index: 3051;
         }
 
-        #disciplina-grid tbody tr{
-            font-size: 10px;
-        }
+        /*#disciplina-grid tbody tr{*/
+            /*font-size: 10px;*/
+        /*}*/
 
         td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-plus.png")}}") no-repeat center center;
@@ -27,6 +27,7 @@
         tr.details td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
         }
+
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
@@ -123,35 +124,39 @@
                 <div class="modal-body" style="alignment-baseline: central">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="input-group">
-                                <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
-                                </span>
+                            <div class="row" style="margin-bottom: 3%;">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th style="width: 5%;">Qtd. Faltas</th>
-                                    <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th >Acão</th>
-                                </tr>
-                                </thead>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th style="width: 5%;">Qtd. Faltas</th>
+                                            <th style="width: 10%;">Tipo da disciplina</th>
+                                            <th >Acão</th>
+                                        </tr>
+                                        </thead>
 
-                                <tfoot>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th style="width: 5%;">Qtd. Faltas</th>
-                                    <th style="width: 10%;">Tipo da disciplina</th>
-                                    <th style="width: 5%;">Acão</th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th style="width: 5%;">Qtd. Faltas</th>
+                                            <th style="width: 10%;">Tipo da disciplina</th>
+                                            <th style="width: 5%;">Acão</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,7 +222,7 @@
          //consulta via select2
          $("#select-disciplina").select2({
              placeholder: 'Selecione uma ou mais disciplinas',
-             width: 700,
+             width: 600,
              ajax: {
                  type: 'POST',
                  url: "{{ route('seracademico.util.select2')  }}",

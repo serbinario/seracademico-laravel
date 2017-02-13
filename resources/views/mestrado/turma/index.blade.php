@@ -20,6 +20,7 @@
         tr.details td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
         }
+
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
@@ -29,14 +30,15 @@
 
 @section('content')
     <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <div class="col-sm-6 col-md-9">
-                    <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="{{ route('seracademico.mestrado.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
-                </div>
+        <div class="ibox-title">
+            <div class="col-sm-6 col-md-9">
+                <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
             </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{ route('seracademico.mestrado.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
+            </div>
+        </div>
+
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
@@ -100,41 +102,41 @@
             </div>
         </div>
     </div>
-    @include('posGraduacao.turma.modal_calendario')
-    @include('posGraduacao.turma.modal_novo_calendario')
-    @include('posGraduacao.turma.modal_editar_calendario')
-    @include('posGraduacao.turma.modal_incluir_disciplinas')
+    @include('mestrado.turma.modal_calendario')
+    @include('mestrado.turma.modal_novo_calendario')
+    @include('mestrado.turma.modal_editar_calendario')
+    @include('mestrado.turma.modal_incluir_disciplinas')
     @include('posGraduacao.turma.modal_notas')
     @include('posGraduacao.turma.modal_editar_notas')
     @include('posGraduacao.turma.modal_frequencias')
-    @include('posGraduacao.turma.alunos.modal_turmas_alunos')
-    @include('posGraduacao.turma.alunos.modal_add_aluno')
-    @include('posGraduacao.turma.diarioAula.modal_diario_aula')
-    @include('posGraduacao.turma.diarioAula.modal_create_diario_aula')
-    @include('posGraduacao.turma.diarioAula.modal_edit_diario_aula')
-    @include('posGraduacao.turma.planoEnsino.modal_plano_ensino')
+    {{--@include('posGraduacao.turma.alunos.modal_turmas_alunos')--}}
+    {{--@include('posGraduacao.turma.alunos.modal_add_aluno')--}}
+    {{--@include('posGraduacao.turma.diarioAula.modal_diario_aula')--}}
+    {{--@include('posGraduacao.turma.diarioAula.modal_create_diario_aula')--}}
+    {{--@include('posGraduacao.turma.diarioAula.modal_edit_diario_aula')--}}
+    {{--@include('posGraduacao.turma.planoEnsino.modal_plano_ensino')--}}
     @include('reports.simple.modals.modal_report_pos_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_pos_turma_ata_aniversariantes')
     @include('reports.simple.modals.modal_report_pos_aluno_turma')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_novo_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_incluir_disciplinas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_notas.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_editar_notas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/modal_frequencias.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_turmas_alunos.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/alunos/modal_add_aluno.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/diario_aula_select2.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_novo_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_editar_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_incluir_disciplinas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_notas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_frequencias.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/alunos/modal_turmas_alunos.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/alunos/modal_add_aluno.js')  }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_diario_aula.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/diarioAula/diario_aula_select2.js')  }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_aniversariantes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_turma.js') }}"></script>

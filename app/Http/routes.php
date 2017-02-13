@@ -187,6 +187,35 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\TurmaController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\TurmaController@delete']);
+                Route::get('getAllByCurso/{idCurso}', ['as' => 'getAllByCurso', 'uses' => 'Mestrado\TurmaController@getAllByCurso']);
+                Route::get('getSedeByCurso/{idCurso}', ['as' => 'getSedeByCurso', 'uses' => 'Mestrado\TurmaController@getSedeByCurso']);
+                Route::get('getTurmaBySede/{idSede}/{idCurso}', ['as' => 'getTurmaBySede', 'uses' => 'Mestrado\TurmaController@getTurmaBySede']);
+
+
+                Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\CalendarioTurmaController@grid']);
+                    Route::get('gridCalendario/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'Mestrado\CalendarioTurmaController@gridCalendario']);
+                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\CalendarioTurmaController@disciplinasOfCurriculo']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\CalendarioTurmaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\CalendarioTurmaController@edit']);
+                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\CalendarioTurmaController@update']);
+                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\CalendarioTurmaController@delete']);
+                    Route::post('incluir', ['as' => 'incluir', 'uses' => 'Mestrado\CalendarioTurmaController@incluirDisciplina']);
+                    Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'Mestrado\CalendarioTurmaController@removerDisciplina']);
+                });
+
+                Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\TurmaNotaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaNotaController@getLoadFields']);
+                    Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Mestrado\TurmaNotaController@editNota']);
+                    Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Mestrado\TurmaNotaController@updateNota']);
+                });
+
+                Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\TurmaFrequenciaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaFrequenciaController@getLoadFields']);
+                    Route::put('changeFrequencia/{id}', ['as' => 'changeFrequencia', 'uses' => 'Mestrado\TurmaFrequenciaController@changeFrequencia']);
+                });
             });
         });
 

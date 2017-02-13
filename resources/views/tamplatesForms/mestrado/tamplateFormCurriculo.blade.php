@@ -21,9 +21,9 @@
                 <div class="form-group">
                     {!! Form::label('curso_id', 'Curso') !!}
                     @if(isset($model) && count($model->disciplinas) > 0)
-                        {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'] , null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
+                        {!! Form::select('curso_id', $loadFields['mestrado\\curso'] , null, array('class' => 'form-control', 'disabled'=>'disabled')) !!}
                     @else
-                        {!! Form::select('curso_id', $loadFields['posgraduacao\\curso'] , null, array('class' => 'form-control')) !!}
+                        {!! Form::select('curso_id', $loadFields['mestrado\\curso'] , null, array('class' => 'form-control')) !!}
                     @endif
                 </div>
             </div>
