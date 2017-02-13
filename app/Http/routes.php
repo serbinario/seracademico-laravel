@@ -172,6 +172,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\TurmaController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\TurmaController@delete']);
             });
+
+            # Rotas de planos de ensino
+            Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\PlanoEnsinoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\PlanoEnsinoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\PlanoEnsinoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\PlanoEnsinoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\PlanoEnsinoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\PlanoEnsinoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\PlanoEnsinoController@delete']);
+            });
         });
 
         //Rotas de pos-graduação
