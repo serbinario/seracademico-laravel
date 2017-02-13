@@ -62,7 +62,7 @@ class AlunoTurmaService
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
-            ->where('fac_turmas.tipo_nivel_sistema_id', 2)
+            ->where('fac_turmas.tipo_nivel_sistema_id', 3)
             ->groupBy('fac_cursos.nome')
             ->select([
                'fac_curriculos.id as curriculo_id',
