@@ -6,9 +6,12 @@ use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Entities\PosGraduacao\Curriculo;
 use Seracademico\Repositories\PosGraduacao\CursoRepository;
 use Seracademico\Repositories\PosGraduacao\DisciplinaRepository;
+use Seracademico\Services\TraitService;
 
 class CurriculoService
 {
+    use TraitService;
+
     /**
      * @var CurriculoRepository
      */
@@ -20,9 +23,9 @@ class CurriculoService
     private $disciplinaRepository;
 
     /**
+     * CurriculoService constructor.
      * @param CurriculoRepository $repository
      * @param DisciplinaRepository $disciplinaRepository
-     * @param CursoRepository $cursoRepository
      */
     public function __construct(CurriculoRepository $repository, DisciplinaRepository $disciplinaRepository)
     {
@@ -51,7 +54,8 @@ class CurriculoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Curriculo
+     * @throws \Exception
      */
     public function store(array $data) : Curriculo
     {
@@ -76,7 +80,8 @@ class CurriculoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Curriculo
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Curriculo
     {
@@ -99,111 +104,133 @@ class CurriculoService
     }
 
     /**
-     * @param array $data
-     * @return bool|\Exception
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @return array
+     * @throws \Exception
      */
-    public function adicionarDisciplinas(array $data)
+    public function disciplinaFind($idDisciplina, $idCurriculo)
     {
-        #Validando os parametros de entrada
-        if(!isset($data['idCurriculo']) && !isset($data['idDisciplinas'])) {
-            return new \Exception("Parâmetros inválidos");
+        # Recuperando a disciplina
+        $curriculo       = $this->repository->find($idCurriculo);
+        $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
+
+        # Verificando a existência da disciplina
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Disciplina não encontrada!");
         }
 
-        #Recuperando a entidade
-        $curriculo = $this->repository->find($data['idCurriculo']);
+        # Recuperando o pivot
+        $pivotDisciplina = $disciplina->pivot;
 
-        #Percorrendo os id das disciplinas
-        foreach($data['idDisciplinas'] as $id) {
-            #Recuperando a entidade
-            $disciplina = $this->disciplinaRepository->find($id);
-
-            #Válidando a disciplina
-            if(!$disciplina) {
-                return new \Exception("Disciplina não existe");
-            }
-
-            #Adicionando a entidade principal
-            $curriculo->disciplinas()->attach($disciplina->id);
-        }
-
-        #Salvando as adições
-        $curriculo->save();
-
-        #Retorno
-        return true;
+        # Retorno
+        return [
+            'model' => $pivotDisciplina,
+            'nomeDisciplina' => $disciplina->nome,
+            'codigoDisciplina' => $disciplina->codigo
+        ];
     }
 
     /**
      * @param array $data
-     * @return bool|\Exception
+     * @return bool
+     * @throws \Exception
      */
-    public function removerDisciplina(array $data)
+    public function disciplinaStore(array $data)
     {
-        #Validando os parametros de entrada
-        if(!isset($data['idCurriculo']) && !isset($data['idDisciplina'])) {
-            return new \Exception("Parâmetros inválidos");
+        # Regras de negócios
+        $this->tratamentoCampos($data);
+
+        # Recuperando o currículo
+        $curriculo     = $this->repository->find($data['curriculo_id']);
+        $objDisciplina = $this->disciplinaRepository->find($data['disciplina_id']);
+
+        # Verificando se o currículo foi recuperado
+        if(!$curriculo && !$objDisciplina) {
+            throw new \Exception("Curriculo não encontrado!");
         }
 
-        #Recuperando a entidade
-        $curriculo = $this->repository->find($data['idCurriculo']);
+        # atrelando os valores
+        $curriculo->disciplinas()->attach($objDisciplina,
+            [
+                'carga_horaria_total'   => $data['carga_horaria_total'],
+                'qtd_credito' => $data['qtd_credito'],
+                'qtd_faltas'  => $data['qtd_faltas']
+            ]
+        );
 
-        #Recuperando a entidade
+        # Retorno
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function disciplinaDelete($data)
+    {
+        # Recuperando o currículo
+        $curriculo  = $this->repository->find($data['idCurriculo']);
         $disciplina = $this->disciplinaRepository->find($data['idDisciplina']);
 
-        #Válidando a disciplina
-        if(!$disciplina) {
-            return new \Exception("Disciplina não existe");
+        # Verificando se o currículo foi recuperado
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Curriculo não encontrado!");
         }
 
-        #Adicionando a entidade principal
+        #Disvinculando a disciplina do currículo
         $curriculo->disciplinas()->detach($disciplina->id);
-
-
-        #Salvando as adições
-        $curriculo->save();
 
         #Retorno
         return true;
     }
 
     /**
-     * @param array $models
-     * @return array
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @param $dados
+     * @return bool
+     * @throws \Exception
      */
-    public function load(array $models) : array
+    public function disciplinaUpdate($idDisciplina, $idCurriculo, $dados)
     {
-        #Declarando variáveis de uso
-        $result    = [];
-        $expressao = [];
+        # Regras de negócios
+        $this->tratamentoCampos($dados);
 
-        #Criando e executando as consultas
-        foreach ($models as $model) {
-            # separando as strings
-            $explode   = explode("|", $model);
+        # Recuperando a disciplina
+        $curriculo       = $this->repository->find($idCurriculo);
+        $disciplina      = $curriculo->disciplinas()->find($idDisciplina);
 
-            # verificando a condição
-            if(count($explode) > 1) {
-                $model     = $explode[0];
-                $expressao = explode(",", $explode[1]);
-            }
+        # Verificando a existência da disciplina
+        if(!$curriculo && !$disciplina) {
+            throw new \Exception("Disciplina não encontrada!");
+        }
 
-            #qualificando o namespace
-            $nameModel = "\\Seracademico\\Entities\\$model";
+        #Salvando mudanças
+        $disciplina->pivot->update($dados);
 
-            if(count($expressao) > 1) {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
-            } else {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
-            }
+        #retorno
+        return true;
+    }
 
-            # Limpando a expressão
-            $expressao = [];
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getDisciplina($id)
+    {
+        #Recuperando o registro no banco de dados
+        $disciplina = $this->disciplinaRepository->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$disciplina) {
+            throw new \Exception('Disciplina não encontrada!');
         }
 
         #retorno
-        return $result;
+        return $disciplina;
     }
 
     /**
