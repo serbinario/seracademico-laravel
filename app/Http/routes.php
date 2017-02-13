@@ -111,6 +111,22 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
                 });
 
+                Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                    Route::get('gridACursar/{idAluno}', ['as' => 'gridACursar', 'uses' => 'Mestrado\AlunoCurriculoController@gridACursar']);
+                    Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Mestrado\AlunoCurriculoController@gridCursadas']);
+                    Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Mestrado\AlunoCurriculoController@gridDispensadas']);
+                    Route::get('gridDisciplinasExtraCurricular/{idAluno}', ['as' => 'gridDisciplinasExtraCurricular', 'uses' => 'Mestrado\AlunoCurriculoController@gridDisciplinasExtraCurricular']);
+                    Route::get('gridDisciplinasEquivalentes/{idAluno}', ['as' => 'gridDisciplinasEquivalentes', 'uses' => 'Mestrado\AlunoCurriculoController@gridDisciplinasEquivalentes']);
+                    Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Mestrado\AlunoCurriculoController@storeDispensada']);
+                    Route::get('deleteDispensada/{idDispensada}', ['as' => 'deleteDispensada', 'uses' => 'Mestrado\AlunoCurriculoController@deleteDispensada']);
+                    Route::get('editDispensada/{idDispensada}', ['as' => 'editDispensada', 'uses' => 'Mestrado\AlunoCurriculoController@editDispensada']);
+                    Route::post('updateDispensada/{idDispensada}', ['as' => 'updateDispensada', 'uses' => 'Mestrado\AlunoCurriculoController@updateDispensada']);
+                    Route::post('storeDisciplinaExtraCurricular', ['as' => 'storeDisciplinaExtraCurricular', 'uses' => 'Mestrado\AlunoCurriculoController@storeDisciplinaExtraCurricular']);
+                    Route::get('deleteDisciplinaExtraCurricular/{idDisciplina}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'Mestrado\AlunoCurriculoController@deleteDisciplinaExtraCurricular']);
+                    Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'Mestrado\AlunoCurriculoController@getDisciplinasByCurriculo']);
+                    Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Mestrado\AlunoCurriculoController@storeEquivalencia']);
+                    Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Mestrado\AlunoCurriculoController@deleteEquivalencia']);
+                });
             });
 
             #Rotas de professores

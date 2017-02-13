@@ -166,7 +166,7 @@ class Curriculo extends Model implements Transformable
                 # Retorno
                 return $cursos;
             })
-            ->where('tipo_nivel_sistema_id', 2);
+            ->where('tipo_nivel_sistema_id', 3);
     }
 
     /**
