@@ -1,4 +1,4 @@
-// Evento para chamar o modal de inserir adicionar disciplina teste
+// Evento para chamar o modal de inserir adicionar disciplina
 $(document).on("click", "#posgraduacaoAddDisciplina", function () {
     loadFields();
 });

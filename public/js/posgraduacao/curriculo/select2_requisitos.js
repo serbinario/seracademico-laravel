@@ -1,4 +1,4 @@
-// Forçando o focus do modal teste
+// Forçando o focus do modal
 $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 
 //consulta via select2

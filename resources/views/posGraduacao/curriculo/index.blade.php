@@ -169,9 +169,9 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_curriculo_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_adicionar_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_inserir_adicionar_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posGraduacao/curriculo/modal_editar_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/curriculo/modal_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/curriculo/modal_inserir_adicionar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/curriculo/modal_editar_adicionar_disciplina.js') }}"></script>
     <script type="text/javascript">
 
         /*Datatable da grid principal*/
