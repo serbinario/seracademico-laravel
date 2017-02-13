@@ -681,5 +681,20 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepository::class,
             \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\PlanoAulaRepository::class,
+            \Seracademico\Repositories\Mestrado\PlanoAulaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\PlanoEnsinoRepository::class,
+            \Seracademico\Repositories\Mestrado\PlanoEnsinoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\ConteudoProgramaticoRepository::class,
+            \Seracademico\Repositories\Mestrado\ConteudoProgramaticoRepositoryEloquent::class
+        );
 	}
 }
