@@ -52,18 +52,18 @@
         </div>
     </div>
 
-    @include('posGraduacao.planoEnsino.planoAula.modal_planos_aulas')
-    @include('posGraduacao.planoEnsino.planoAula.modal_create_planos_aulas')
-    @include('posGraduacao.planoEnsino.planoAula.modal_edit_planos_aulas')
+    @include('mestrado.planoEnsino.planoAula.modal_planos_aulas')
+    @include('mestrado.planoEnsino.planoAula.modal_create_planos_aulas')
+    @include('mestrado.planoEnsino.planoAula.modal_edit_planos_aulas')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/modal_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/modal_create_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/modal_edit_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/create_conteudo_programatico_plano_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/edit_conteudo_programatico_plano_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/planoEnsino/planoAula/grid_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_create_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_edit_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/create_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/edit_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/grid_conteudo_programatico_plano_aula.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#fac_plano_ensino').DataTable({
             processing: true,
