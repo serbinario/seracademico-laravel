@@ -190,7 +190,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('getAllByCurso/{idCurso}', ['as' => 'getAllByCurso', 'uses' => 'Mestrado\TurmaController@getAllByCurso']);
                 Route::get('getSedeByCurso/{idCurso}', ['as' => 'getSedeByCurso', 'uses' => 'Mestrado\TurmaController@getSedeByCurso']);
                 Route::get('getTurmaBySede/{idSede}/{idCurso}', ['as' => 'getTurmaBySede', 'uses' => 'Mestrado\TurmaController@getTurmaBySede']);
-
+                Route::get('getCalendariosByDisciplina/{idTurma}/{idDisciplina}', ['as' => 'getCalendariosByDisciplina', 'uses' => 'Mestrado\TurmaController@getCalendariosByDisciplina']);
 
                 Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\CalendarioTurmaController@grid']);
@@ -215,6 +215,37 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\TurmaFrequenciaController@grid']);
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaFrequenciaController@getLoadFields']);
                     Route::put('changeFrequencia/{id}', ['as' => 'changeFrequencia', 'uses' => 'Mestrado\TurmaFrequenciaController@changeFrequencia']);
+                });
+
+                Route::group(['prefix' => 'alunos', 'as' => 'alunos.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Mestrado\TurmaAlunoController@grid']);
+                    Route::get('getAlunosByCurso/{idCurso}/{idTurma}/{idDisciplina}', ['as' => 'getAlunosByCurso', 'uses' => 'Mestrado\TurmaAlunoController@getAlunosByCurso']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaAlunoController@getLoadFields']);
+                    Route::post('attachAluno', ['as' => 'edit', 'uses' => 'Mestrado\TurmaAlunoController@attachAluno']);
+                    Route::post('detachAluno', ['as' => 'update', 'uses' => 'Mestrado\TurmaAlunoController@detachAluno']);
+                });
+
+                # Rotaas de diários de aulas
+                Route::group(['prefix' => 'diarioAula', 'as' => 'diarioAula.'], function () {
+                    Route::get('grid/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'Mestrado\DiarioAulaController@grid']);
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'Mestrado\DiarioAulaController@gridDisciplinas']);
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\DiarioAulaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\DiarioAulaController@store']);
+                    Route::get('getConteudosProgramaticos', ['as' => 'getConteudosProgramaticos', 'uses' => 'Mestrado\DiarioAulaController@getConteudosProgramaticos']);
+                    Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\DiarioAulaController@delete']);
+                    Route::get('edit/{idDiarioAula}', ['as' => 'edit', 'uses' => 'Mestrado\DiarioAulaController@edit']);
+                    Route::post('update/{idDiarioAula}', ['as' => 'update', 'uses' => 'Mestrado\DiarioAulaController@update']);
+                    Route::get('gridConteudoProgramatico/{idDiarioAula}', ['as' => 'grid', 'uses' => 'Mestrado\DiarioAulaController@gridConteudoProgramatico']);
+                    Route::post('attachConteudo/{idDiarioAula}', ['as' => 'attachConteudo', 'uses' => 'Mestrado\DiarioAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idDiarioAula}', ['as' => 'detachConteudo', 'uses' => 'Mestrado\DiarioAulaController@detachConteudo']);
+                });
+
+                # Rotaas de planos de ensino
+                Route::group(['prefix' => 'planoEnsino', 'as' => 'planoEnsino.'], function () {
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'Mestrado\TurmaPlanoEnsinoController@gridDisciplinas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaPlanoEnsinoController@getLoadFields']);
+                    Route::post('attachPlanoEnsino', ['as' => 'attachPlanoEnsino', 'uses' => 'Mestrado\TurmaPlanoEnsinoController@attachPlanoEnsino']);
+
                 });
             });
 

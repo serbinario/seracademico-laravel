@@ -32,7 +32,7 @@ class DiarioAulaService
 
         #Verificando se o registro foi encontrado
         if(!$diarioAula) {
-            throw new \Exception('Empresa não encontrada!');
+            throw new \Exception('Diário não encontrado!');
         }
 
         #retorno
