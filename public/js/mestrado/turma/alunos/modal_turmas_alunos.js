@@ -9,7 +9,7 @@ function loadTableAlunos (idTurma) {
         bLengthChange: false,
         bFilter: false,
         ajax: {
-            url: "/index.php/seracademico/posgraduacao/turma/alunos/grid/" + idTurma,
+            url: "/index.php/seracademico/mestrado/turma/alunos/grid/" + idTurma,
             data: function (d) {
                 d.disciplina = $('select[name=disciplinaTurmaALunoSearch] option:selected').val();
                 d.calendario = $('select[name=calendarioTurmaALunoSearch] option:selected').val();
@@ -36,7 +36,7 @@ function runTableAlunos(idTurma) {
     loadFieldsAlunos();
 
     if(tableCargaHoraria != null) {
-        loadTableAlunos(idTurma).ajax.url( "/index.php/seracademico/posgraduacao/turma/alunos/grid/" + idTurma).load();
+        loadTableAlunos(idTurma).ajax.url( "/index.php/seracademico/mestrado/turma/alunos/grid/" + idTurma).load();
     } else {
         loadTableAlunos(idTurma);
     }
@@ -48,7 +48,7 @@ function loadFieldsAlunos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'PosGraduacao\\Disciplina|disciplinasOfTurma,' + idTurma
+            'Mestrado\\Disciplina|disciplinasOfTurma,' + idTurma
         ]
     };
 
@@ -56,7 +56,7 @@ function loadFieldsAlunos()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/posgraduacao/turma/alunos/getLoadFields',
+        url: '/index.php/seracademico/mestrado/turma/alunos/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -65,9 +65,9 @@ function loadFieldsAlunos()
             var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
 
             // Percorrendo o array de disciplina
-            for(var i = 0; i < retorno['posgraduacao\\disciplina'].length; i++) {
+            for(var i = 0; i < retorno['mestrado\\disciplina'].length; i++) {
                 // Criando as options
-                htmlDisciplina += "<option value='" + retorno['posgraduacao\\disciplina'][i].id + "'>"  + retorno['posgraduacao\\disciplina'][i].nome + "</option>";
+                htmlDisciplina += "<option value='" + retorno['mestrado\\disciplina'][i].id + "'>"  + retorno['mestrado\\disciplina'][i].nome + "</option>";
             }
 
             // Preenchendo o select
@@ -94,7 +94,7 @@ $(document).on('change', '#disciplinaTurmaALunoSearch', function () {
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/posgraduacao/turma/getCalendariosByDisciplina/' + idTurma + '/' + idDisciplina,
+        url: '/index.php/seracademico/mestrado/turma/getCalendariosByDisciplina/' + idTurma + '/' + idDisciplina,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
