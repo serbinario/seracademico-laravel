@@ -26,7 +26,10 @@
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
+
+    {{--<link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">--}}
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
 
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
@@ -62,6 +65,24 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
+                <li>
+                    <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.mestrado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
+                                <li><a href="{{ route('seracademico.mestrado.planoEnsino.index') }}"><i class="material-icons">line_weight</i>Planos de Ensino</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 @role('posgraduacao')
                 <li>
                     <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
@@ -330,13 +351,16 @@
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
+{{--<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>--}}
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/webcam.js')  }}"></script>
+
+{{--jquery Validator https://jqueryvalidation.org/ --}}
+<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -379,7 +403,7 @@
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
-<script src="{{ asset('/messages.js')}}"></script>
+{{--<script src="{{ asset('/messages.js')}}"></script>--}}
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
 <script type="text/javascript">

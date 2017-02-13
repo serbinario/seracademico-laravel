@@ -636,5 +636,70 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 			\Seracademico\Repositories\PoloRepository::class,
 			\Seracademico\Repositories\PoloRepositoryEloquent::class
 		);
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\DisciplinaRepository::class,
+            \Seracademico\Repositories\Mestrado\DisciplinaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\CursoRepository::class,
+            \Seracademico\Repositories\Mestrado\CursoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\CurriculoRepository::class,
+            \Seracademico\Repositories\Mestrado\CurriculoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\TurmaRepository::class,
+            \Seracademico\Repositories\Mestrado\TurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\ProfessorRepository::class,
+            \Seracademico\Repositories\Mestrado\ProfessorRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoFrequenciaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\PlanoAulaRepository::class,
+            \Seracademico\Repositories\Mestrado\PlanoAulaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\PlanoEnsinoRepository::class,
+            \Seracademico\Repositories\Mestrado\PlanoEnsinoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\ConteudoProgramaticoRepository::class,
+            \Seracademico\Repositories\Mestrado\ConteudoProgramaticoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\DiarioAulaRepository::class,
+            \Seracademico\Repositories\Mestrado\DiarioAulaRepositoryEloquent::class
+        );
 	}
 }
