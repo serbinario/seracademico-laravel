@@ -1,4 +1,4 @@
-// Id do pivot de curriculo e disciplina teste
+// Id do pivot de curriculo e disciplina
 var idCurriculoDisciplina;
 
 // Evento para chamar o modal de inserir adicionar disciplina
