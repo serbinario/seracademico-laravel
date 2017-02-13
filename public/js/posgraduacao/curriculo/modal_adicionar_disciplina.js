@@ -1,4 +1,4 @@
-// Evento para o fechamento do modal de adicionar disciplina
+// Evento para o fechamento do modal de adicionar disciplina teste
 $('#btnCloseAddDisciplina').click(function () { console.log('dsadsa');
     $('#modal-adicionar-disciplina-curriculo').modal('toggle');
     loadTableAdicionarDisciplina(idCurriculo).ajax.url("/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + 0).load();
