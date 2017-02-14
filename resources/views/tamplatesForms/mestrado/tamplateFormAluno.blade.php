@@ -456,6 +456,22 @@
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('curriculo_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('curriculo_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('curriculo_doc_obrigatorio', 'Currículo com comprovação ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('carta_intensao_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('carta_intensao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('carta_intensao_doc_obrigatorio', 'Carta de intensão ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
                     </div>
                     {{--Fim da Segunda coluna--}}
                 </div>

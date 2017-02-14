@@ -111,6 +111,7 @@ class AlunoController extends Controller
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->where('pos_alunos.tipo_aluno_id', null)
                 ->select([
                     'pos_alunos.id',
                     'pos_alunos_turmas.id as idAlunoTurma',

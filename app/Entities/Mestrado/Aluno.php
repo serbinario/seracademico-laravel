@@ -53,7 +53,9 @@ class Aluno extends Model implements Transformable
         'inst_ensino_banca_4_id',
         'data_conclusao',
         'data_colacao',
-        'tipo_aluno_id'
+        'tipo_aluno_id',
+        'curriculo_doc_obrigatorio',
+        'carta_intensao_doc_obrigatorio'
     ];
 
     /**
