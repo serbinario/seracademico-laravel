@@ -68,7 +68,7 @@ class AlunoDocumentoController extends Controller
             switch ($tipoDoc) {
                 case "1" :
                     $result = $this->contrato($idAluno);
-                    $nameView = "reports.contrato";
+                    $nameView = "reports.contrato_mestrado";
                     break;
                 case "2" :
                     $result = $this->certificadoConclusao($idAluno);
