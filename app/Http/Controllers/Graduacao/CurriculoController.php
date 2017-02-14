@@ -246,42 +246,6 @@ class CurriculoController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function adicionarDisciplinas(Request $request)
-    {
-        try {
-            #Recuperando os valores da requisição e salvando no banco
-            $this->service->adicionarDisciplinas($request->all());
-
-            #retorno sucesso
-            return response()->json(['sucess' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
-        } catch (\Throwable $e) {
-            #retorno falido
-            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function removerDisciplina(Request $request)
-    {
-        try {
-            #Recuperando os valores da requisição e salvando no banco
-            $this->service->removerDisciplina($request->all());
-
-            #retorno sucesso
-            return response()->json(['sucess' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
-        } catch (\Throwable $e) {
-            #retorno falido
-            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
-        }
-    }
-
-    /**
-     * @param Request $request
      * @return mixed
      *
      */
@@ -310,8 +274,6 @@ class CurriculoController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
-            // } catch (ValidatorException $e) {
-            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
@@ -387,16 +349,11 @@ class CurriculoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->disciplinaUpdate($idDisciplina, $idCurriculo, $data);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Edição realizada com sucesso"]);
-            // } catch (ValidatorException $e) {
-            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
