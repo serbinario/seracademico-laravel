@@ -153,7 +153,7 @@ function loadFeldsConteudo() {
     // Definindo os models
     var dados =  {
         'models' : [
-            'mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
+            'Mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
         ]
     };
 
