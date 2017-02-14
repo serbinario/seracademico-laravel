@@ -22,7 +22,7 @@ function loadFieldsPlanoAulaEditar()
     var dados =  {
         'models' : [
             'Professor|getValues',
-            'mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
+            'Mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
         ]
     };
 
@@ -153,7 +153,7 @@ function loadFeldsConteudo() {
     // Definindo os models
     var dados =  {
         'models' : [
-            'mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
+            'Mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
         ]
     };
 
