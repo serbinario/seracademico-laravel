@@ -55,7 +55,7 @@ class Aluno extends Model implements Transformable
         'data_colacao',
         'tipo_aluno_id',
         'curriculo_doc_obrigatorio',
-        'carta_intensao_doc_obrigatorio'
+        'carta_intencao_doc_obrigatorio'
     ];
 
     /**

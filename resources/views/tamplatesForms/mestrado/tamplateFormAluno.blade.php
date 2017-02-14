@@ -466,9 +466,9 @@
 
                         <!-- Título de Eleitor e último comprovante de votação -->
                         <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('carta_intensao_doc_obrigatorio', 0) !!}
-                            {!! Form::checkbox('carta_intensao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('carta_intensao_doc_obrigatorio', 'Carta de intensão ', false) !!}
+                            {!! Form::hidden('carta_intencao_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('carta_intencao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('carta_intencao_doc_obrigatorio', 'Carta de intensão ', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
