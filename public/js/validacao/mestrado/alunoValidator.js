@@ -44,7 +44,7 @@ $(document).ready(function () {
  'pessoa.endereco.complemento' => 'max:100',
  'pessoa.endereco.bairros_id' => 'integer',
  'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',*/
-    $("#formAluno").validate({
+    $("#for").validate({
         rules: {
             'pessoa.nome': {
                 required: true,
@@ -85,7 +85,7 @@ $(document).ready(function () {
                 //required: true,
                 cpfBr: true,
                 // maxlength: 15,
-                unique: [laroute.route('aluno.searchCpf'), $('#idAluno')]
+                //unique: [laroute.route('aluno.searchCpf'), $('#idAluno')]
             },
 
             'cgm[rg]': {

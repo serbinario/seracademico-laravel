@@ -701,5 +701,20 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Mestrado\DiarioAulaRepository::class,
             \Seracademico\Repositories\Mestrado\DiarioAulaRepositoryEloquent::class
         );
-	}
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaDispensadaRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaDispensadaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaExtraCurricularRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepository::class,
+            \Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+        );
+    }
 }

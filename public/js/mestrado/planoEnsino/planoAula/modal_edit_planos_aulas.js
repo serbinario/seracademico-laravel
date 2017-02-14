@@ -22,7 +22,7 @@ function loadFieldsPlanoAulaEditar()
     var dados =  {
         'models' : [
             'Professor|getValues',
-            'mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
+            'Mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
         ]
     };
 
@@ -59,12 +59,14 @@ function builderHtmlFieldsPlanoAulaEditar (dados) {
 
             // Percorrendo o array de cursos
             for (var i = 0; i < dados['professor'].length; i++) {
-                htmlProfessor += "<option value='" + dados['professor'][i].id + "'>" + dados['professor'][i].nome + "</option>";
+                htmlProfessor += "<option value='" + dados['professor'][i].id + "'>"
+                    + dados['professor'][i].nome + "</option>";
             }
 
             // Percorrendo o array de cursos
             for (var i = 0; i < dados['mestrado\\conteudoprogramatico'].length; i++) {
-                htmlConteudo += "<option value='" + dados['mestrado\\conteudoprogramatico'][i].id + "'>" + dados['mestrado\\conteudoprogramatico'][i].nome + "</option>";
+                htmlConteudo += "<option value='" + dados['mestrado\\conteudoprogramatico'][i].id + "'>"
+                    + dados['mestrado\\conteudoprogramatico'][i].nome + "</option>";
             }
             
             // Carregando os selects de professores
@@ -82,11 +84,11 @@ function builderHtmlFieldsPlanoAulaEditar (dados) {
             $("#conteudo_plano_aula_editar").append(htmlConteudo);
 
             // Setando os valores do model no formulário
-            $('#professor_1_id_editar option[value=' + retorno.data.professor_1_id +']').attr('selected', true);
-            $('#professor_2_id_editar option[value=' + retorno.data.professor_2_id +']').attr('selected', true);
-            $('#professor_3_id_editar option[value=' + retorno.data.professor_3_id +']').attr('selected', true);
-            $('#professor_4_id_editar option[value=' + retorno.data.professor_4_id +']').attr('selected', true);
-            $('#professor_5_id_editar option[value=' + retorno.data.professor_5_id +']').attr('selected', true);
+            $('#professor_1_id_editar option[value=' + retorno.data.professor_1_id  +']').attr('selected', true);
+            $('#professor_2_id_editar option[value=' + retorno.data.professor_2_id  +']').attr('selected', true);
+            $('#professor_3_id_editar option[value=' + retorno.data.professor_3_id  +']').attr('selected', true);
+            $('#professor_4_id_editar option[value=' + retorno.data.professor_4_id  +']').attr('selected', true);
+            $('#professor_5_id_editar option[value=' + retorno.data.professor_5_id  +']').attr('selected', true);
             $('#data_editar').val(retorno.data.data);
             $('#hora_inicial_editar').val(retorno.data.hora_inicial);
             $('#hora_final_editar').val(retorno.data.hora_final);
@@ -151,7 +153,7 @@ function loadFeldsConteudo() {
     // Definindo os models
     var dados =  {
         'models' : [
-            'mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
+            'Mestrado\\ConteudoProgramatico|byPlanoAula,' + idPlanoAula + ',' + idPlanoEnsino
         ]
     };
 
