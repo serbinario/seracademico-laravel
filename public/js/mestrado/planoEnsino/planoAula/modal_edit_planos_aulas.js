@@ -84,15 +84,15 @@ function builderHtmlFieldsPlanoAulaEditar (dados) {
             $("#conteudo_plano_aula_editar").append(htmlConteudo);
 
             // Setando os valores do model no formulário
-            $('#professor_1_id_editar option[value=' + (retorno.data.professor_1_id ? retorno.data.professor_1_id : "")  +']').attr('selected', true);
-            $('#professor_2_id_editar option[value=' + (retorno.data.professor_2_id ? retorno.data.professor_2_id : "") +']').attr('selected', true);
-            $('#professor_3_id_editar option[value=' + (retorno.data.professor_3_id ? retorno.data.professor_3_id : "") +']').attr('selected', true);
-            $('#professor_4_id_editar option[value=' + (retorno.data.professor_4_id ? retorno.data.professor_4_id : "") +']').attr('selected', true);
-            $('#professor_5_id_editar option[value=' + (retorno.data.professor_5_id ? retorno.data.professor_5_id : "") +']').attr('selected', true);
-            $('#data_editar').val(retorno.data.data ? retorno.data.data : "");
-            $('#hora_inicial_editar').val(retorno.data.hora_inicial ? retorno.data.hora_inicial : "");
-            $('#hora_final_editar').val(retorno.data.hora_final ? retorno.data.hora_final : "");
-            $('#numero_aula_editar').val(retorno.data.numero_aula ? retorno.data.numero_aula : "");
+            $('#professor_1_id_editar option[value=' + retorno.data.professor_1_id  +']').attr('selected', true);
+            $('#professor_2_id_editar option[value=' + retorno.data.professor_2_id  +']').attr('selected', true);
+            $('#professor_3_id_editar option[value=' + retorno.data.professor_3_id  +']').attr('selected', true);
+            $('#professor_4_id_editar option[value=' + retorno.data.professor_4_id  +']').attr('selected', true);
+            $('#professor_5_id_editar option[value=' + retorno.data.professor_5_id  +']').attr('selected', true);
+            $('#data_editar').val(retorno.data.data);
+            $('#hora_inicial_editar').val(retorno.data.hora_inicial);
+            $('#hora_final_editar').val(retorno.data.hora_final);
+            $('#numero_aula_editar').val(retorno.data.numero_aula);
             
             // Abrindo o modal de inserir disciplina
             $("#modal-edit-planos-aulas").modal({show : true});
