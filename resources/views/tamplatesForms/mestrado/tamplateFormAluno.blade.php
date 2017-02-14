@@ -686,12 +686,12 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}
+    {{--Mensagens personalizadas--}}{{--
     <script type="text/javascript" src="{{ asset('/js/validacao/messages_pt_BR.js')  }}"></script>
-    {{--Regras adicionais--}}
+    --}}{{--Regras adicionais--}}{{--
     <script type="text/javascript" src="{{ asset('/js/validacao/regrasAdicionais/alphaSpace.js')  }}"></script>
-    {{--Regras de validação--}}
-    <script type="text/javascript" src="{{ asset('/js/validacao/mestrado/alunoValidator.js')  }}"></script>
+    --}}{{--Regras de validação--}}{{--
+    <script type="text/javascript" src="{{ asset('/js/validacao/mestrado/alunoValidator.js')  }}"></script>--}}
 
     <script type="text/javascript">
         Webcam.set({
