@@ -4,7 +4,7 @@ namespace Seracademico\Services\Mestrado;
 
 use Seracademico\Entities\Mestrado\AlunoDisciplinaEquivalente;
 use Seracademico\Repositories\Mestrado\AlunoRepository;
-use Seracademico\Repositories\PosGraduacao\AlunoDisciplinaEquivalenteRepository;
+use Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepository;
 
 class AlunoDisciplinaEquivalenteService
 {

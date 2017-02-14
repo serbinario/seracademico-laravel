@@ -2,7 +2,7 @@
 
 namespace Seracademico\Services\Mestrado;
 
-use Seracademico\Repositories\PosGraduacao\AlunoDisciplinaExtraCurricularRepository;
+use Seracademico\Repositories\Mestrado\AlunoDisciplinaExtraCurricularRepository;
 use Seracademico\Entities\Mestrado\AlunoDisciplinaExtraCurricular;
 use Seracademico\Repositories\Mestrado\AlunoRepository;
 
