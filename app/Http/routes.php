@@ -325,8 +325,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
                 #Rotas de Documentos
-                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@gerarDocumento']);
-                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@checkDocumento']);
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'Mestrado\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'Mestrado\AlunoDocumentoController@checkDocumento']);
 
                 # Rotas de turmas de pósgraduação
                 Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {

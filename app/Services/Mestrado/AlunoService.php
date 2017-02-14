@@ -94,7 +94,7 @@ class AlunoService
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
-        $this->tratamentoMatricula($data);
+        //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         # Setando o tipo o tipo do aluno para mestrado
@@ -149,7 +149,7 @@ class AlunoService
         # Regras de negócios pre edição
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
-        $this->tratamentoMatricula($data);
+        //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         #Atualizando no banco de dados
