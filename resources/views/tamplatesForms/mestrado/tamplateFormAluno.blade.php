@@ -456,6 +456,22 @@
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('curriculo_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('curriculo_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('curriculo_doc_obrigatorio', 'Currículo com comprovação ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('carta_intencao_doc_obrigatorio', 0) !!}
+                            {!! Form::checkbox('carta_intencao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('carta_intencao_doc_obrigatorio', 'Carta de intensão ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
                     </div>
                     {{--Fim da Segunda coluna--}}
                 </div>
@@ -686,12 +702,12 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}
+    {{--Mensagens personalizadas--}}{{--
     <script type="text/javascript" src="{{ asset('/js/validacao/messages_pt_BR.js')  }}"></script>
-    {{--Regras adicionais--}}
+    --}}{{--Regras adicionais--}}{{--
     <script type="text/javascript" src="{{ asset('/js/validacao/regrasAdicionais/alphaSpace.js')  }}"></script>
-    {{--Regras de validação--}}
-    <script type="text/javascript" src="{{ asset('/js/validacao/mestrado/alunoValidator.js')  }}"></script>
+    --}}{{--Regras de validação--}}{{--
+    <script type="text/javascript" src="{{ asset('/js/validacao/mestrado/alunoValidator.js')  }}"></script>--}}
 
     <script type="text/javascript">
         Webcam.set({
