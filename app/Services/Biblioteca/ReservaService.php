@@ -264,10 +264,10 @@ class ReservaService
 
         }
 
-        if($data['tipo_emprestimo'] == '1') {
+        if($data['tipo_emprestimo'] == '1' && $data['emprestimoEspecial'] != '1') {
             $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->get();
             $dia = $query[0]->valor - 1;
-        } else if ($data['tipo_emprestimo'] == '2') {
+        } else if ($data['tipo_emprestimo'] == '2' || $data['emprestimoEspecial'] == '1' ) {
             $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
             $dia = $query[0]->valor - 1;
         }
@@ -275,6 +275,7 @@ class ReservaService
         $date->add(new \DateInterval("P{$dia}D"));
         $dataDevolucao = $date->format('Y-m-d');
         $emprestimo['data_devolucao'] = $dataDevolucao;
+        $emprestimo['emprestimo_especial'] = $data['emprestimoEspecial'];
 
         $emprestar =  $this->repoEmprestar->create($emprestimo);
         $emprestar->emprestimoExemplar()->attach($exemplares);

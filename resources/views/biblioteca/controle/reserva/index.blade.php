@@ -88,7 +88,13 @@
                             <input type="hidden" name="edicao" id="edicao">
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
-                        <input type="submit" id="conf_reserva" class="btn btn-success btn-sm" value="Confirmar reserva">
+                        <div class="form-group col-md-3" style="margin-top: -8px">
+                            <div class="checkbox checkbox-primary">
+                                {!! Form::checkbox('emprestimoEspecial', 1, null, array('class' => 'form-control', 'id' => 'emprestimoEspecial')) !!}
+                                {!! Form::label('emprestimoEspecial', 'Para empréstimo especial?', false) !!}
+                            </div>
+                        </div>
+                        <input type="submit" style="margin-left: -50px" id="conf_reserva" class="btn btn-success btn-sm" value="Confirmar reserva">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">

@@ -23,7 +23,8 @@ class Emprestar extends Model implements Transformable
 		'tipo_emprestimo',
 		'status',
 		'users_id',
-		'status_devolucao'
+		'status_devolucao',
+		'emprestimo_especial'
 	];
 
 	public function pessoa()
