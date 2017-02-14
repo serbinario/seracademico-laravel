@@ -21,7 +21,8 @@ class Reserva extends Model implements Transformable
 		'pessoas_id',
 		'tipo_emprestimo',
 		'status',
-		'users_id'
+		'users_id',
+		'emprestimo_especial'
 	];
 
 	public function pessoa()
