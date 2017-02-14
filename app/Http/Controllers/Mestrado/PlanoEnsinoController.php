@@ -58,7 +58,7 @@ class PlanoEnsinoController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_plano_ensino')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_plano_ensino.disciplina_id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 2)
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 3)
             ->select([
                 'fac_plano_ensino.id',
                 'fac_plano_ensino.vigencia',
