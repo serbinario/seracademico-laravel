@@ -3,7 +3,7 @@
 namespace Seracademico\Http\Controllers\Mestrado;
 
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\PosGraduacao\AlunoService;
+use Seracademico\Services\Mestrado\AlunoService;
 
 class AlunoDocumentoController extends Controller
 {
