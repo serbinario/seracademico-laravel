@@ -1,5 +1,5 @@
 // carregando todos os campos preenchidos
-function runSimpleReportPosTurmaAtaFrequencia()
+function runSimpleReportPosTurmaAtaNota()
 {
     // Definindo os models
     var dados =  {
@@ -28,52 +28,19 @@ function runSimpleReportPosTurmaAtaFrequencia()
 };
 
 // Função a montar o html
-function builderFilterGraTurmaAtaDeAssinatura (dados) {
-    //Limpando os campos
-    // $('#curso_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-    // $('#turma_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-    // $('#disciplina_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-
-    // // Variáveis que armazenaram o html
-    // var htmlCurso  = "<option value=''>Selecione um Curso</option>";
-    // var htmlTurma  = "<option value=''>Selecione uma Turma</option>";
-    // var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
-    //
-    // // Percorrendo o array de Curso
-    // for (var i = 0; i < dados['posgraduacao\\curso'].length; i++) {
-    //     htmlCurso += "<option value='" + dados['posgraduacao\\curso'][i].id + "'>" + dados['posgraduacao\\curso'][i].nome + "</option>";
-    // }
-    //
-    // // Percorrendo o array de turma
-    // for (var i = 0; i < dados['posgraduacao\\turma'].length; i++) {
-    //     htmlTurma += "<option value='" + dados['posgraduacao\\turma'][i].id + "'>" + dados['posgraduacao\\turma'][i].nome + "</option>";
-    // }
-    //
-    // // Percorrendo o array de turno
-    // for (var i = 0; i < dados['posgraduacao\\disciplina'].length; i++) {
-    //     htmlDisciplina += "<option value='" + dados['posgraduacao\\disciplina'][i].id + "'>" + dados['posgraduacao\\disciplina'][i].nome + "</option>";
-    // }
-    //
-    // // carregando o html
-    // $("#curso_gra_turma_ata_assinatura_id option").remove();
-    // $("#curso_gra_turma_ata_assinatura_id").append(htmlCurso);
-    // $("#turma_gra_turma_ata_assinatura_id option").remove();
-    // $("#turma_gra_turma_ata_assinatura_id").append(htmlTurma);
-    // $("#disciplina_gra_turma_ata_assinatura_id option").remove();
-    // $("#disciplina_gra_turma_ata_assinatura_id").append(htmlDisciplina);
-
+function builderFilterGraTurmaAtaDeAssinatura (dados) {    
     // Abrindo o modal
-    $("#modal-report-gra-turma-ata-assinatura").modal({show : true});
+    $("#modal-report-gra-turma-ata-nota").modal({show : true});
 }
 
 // Gerar o relatório
-$('#btnBuilderReportGraTurmaAtaAssinatura').click(function() {
+$('#btnBuilderReportPosTurmaAtaNota').click(function() {
     // Recuperando o id do relatório selecionado
     var reportId = $('#report_id').val();
-    var cursoId  = $('#curso_gra_turma_ata_assinatura_id').val();
-    var turmaId  = $('#turma_gra_turma_ata_assinatura_id').val();
-    var disciplinaId  = $('#disciplina_gra_turma_ata_assinatura_id').val();
-    var turno = $('#turno_gra_turma_ata_assinatura_id').val();
+    var cursoId  = $('#curso_gra_turma_ata_nota_id').val();
+    var turmaId  = $('#turma_gra_turma_ata_nota_id').val();
+    var disciplinaId  = $('#disciplina_gra_turma_ata_nota_id').val();
+    var turno = $('#turno_gra_turma_ata_nota_id').val();
 
     // Validando as entradas
     if(!cursoId || !turmaId || !disciplinaId || !turno) {
@@ -89,7 +56,7 @@ $('#btnBuilderReportGraTurmaAtaAssinatura').click(function() {
 
 // selects 2
 //consulta via select2
-$("#curso_gra_turma_ata_assinatura_id").select2({
+$("#curso_gra_turma_ata_nota_id").select2({
     placeholder: 'Selecione uma curso',
     width: 250,
     allowClear: true,
@@ -131,7 +98,7 @@ $("#curso_gra_turma_ata_assinatura_id").select2({
 });
 
 //consulta via select2
-$("#turma_gra_turma_ata_assinatura_id").select2({
+$("#turma_gra_turma_ata_nota_id").select2({
     placeholder: 'Selecione uma turma',
     width: 250,
     allowClear: true,
@@ -170,7 +137,7 @@ $("#turma_gra_turma_ata_assinatura_id").select2({
 });
 
 //consulta via select2
-$("#disciplina_gra_turma_ata_assinatura_id").select2({
+$("#disciplina_gra_turma_ata_nota_id").select2({
     placeholder: 'Selecione uma disciplina',
     width: 250,
     allowClear: true,
