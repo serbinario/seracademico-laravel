@@ -109,7 +109,7 @@
                 var tipoEmprestimo = d['tipo_emprestimo'];
                 var pessoaId = d['pessoas_id'];
                 var reservaId = d['id'];
-                var qtdExemplar = 0;
+                var emprestimoEspecial = d['emprestimo_especial'];
                 var qtdExemplarAll = d['acervo'];
                 var qtdExempEmprestado = 0;
                 var url = "{!! route('seracademico.biblioteca.saveEmprestimo') !!}";
@@ -149,18 +149,13 @@
                         html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
                     }
                     html += "</tr>";
-                    //if(acervo[i]['pivot']['edicao'] == "" && (qtdExemplar == 0 || acervo[i]['pivot']['status'] == '1')){
-                    //    html += "<input type='hidden' name='edicao[]' value='null'>";
-                   // } else {
-                  //      html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
-                  //  }
-                    //qtdExemplar = 0;
                  }
 
                 html += "</table>";
                 html += "<input type='hidden' name='tipo_emprestimo' value='"+tipoEmprestimo+"'>";
                 html += "<input type='hidden' name='id_pessoa' value='"+pessoaId+"'>";
                 html += "<input type='hidden' name='id_reserva' value='"+reservaId+"'>";
+                html += "<input type='hidden' name='emprestimoEspecial' value='"+emprestimoEspecial+"'>";
                 if(qtdExemplarAll > 0 || qtdExempEmprestado < acervo.length) {
                     html += "<input type='submit' class='btn btn-primary' value='Confirmar'>";
                 }

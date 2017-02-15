@@ -134,11 +134,16 @@ class ReservaController extends Controller
      */
     public function confirmarReserva(Request $request)
     {
-        $id = $request->get('id_emp');
+
+        $dados  = $request->all();
+        $id = isset($dados['id_emp']) ? $dados['id_emp'] : "";
+        $empEspecial = isset($dados['emprestimoEspecial']) ? $dados['emprestimoEspecial'] : "0";
+
         $user = \Auth::user();
 
         $data = $this->service->find($id);
         $data->status = '1';
+        $data->emprestimo_especial = $empEspecial;
         $data->users_id = $user->id;
         $data->save();
 
@@ -242,9 +247,6 @@ class ReservaController extends Controller
                 }
             }
 
-//dd($qtdExemplarAll);
-            //dd(count($rows->reservaExemplar[0]->exemplares->toArray()));
-
             return $qtdExemplarAll;
         })->make(true);
     }
@@ -264,8 +266,6 @@ class ReservaController extends Controller
             if(!isset($data['id'])){
                 return redirect()->back()->with("error", "É preciso informar pelo menos um acervo!");
             }
-
-           // dd($data);
 
             #Executando a ação
             $this->service->saveEmprestimo($data);

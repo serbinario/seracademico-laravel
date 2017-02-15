@@ -94,11 +94,17 @@
                         <div class="form-group col-md-5">
                             {!! Form::select('pessoas_id', (["" => "Selecione uma pessoa"] + $loadFields['pessoa']->toArray()), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
                         </div>
-                        <div class="form-group col-md-2">
+                        {{--<div class="form-group col-md-2">
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
+                        </div>--}}
+                        <div class="form-group col-md-3" style="margin-top: -8px">
+                            <div class="checkbox checkbox-primary">
+                                {!! Form::checkbox('emprestimoEspecial', 1, null, array('class' => 'form-control', 'id' => 'emprestimoEspecial')) !!}
+                                {!! Form::label('emprestimoEspecial', 'Empréstimo especial?', false) !!}
+                            </div>
                         </div>
-                        <input type="submit" id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
+                        <input type="submit" style="margin-left: -55px" id="conf_emprestimo" class="btn btn-success btn-sm" value="Confirmar emprestimo">
                     </div>
                     <div class="col-md-12">
                         <div class="table-responsive no-padding">

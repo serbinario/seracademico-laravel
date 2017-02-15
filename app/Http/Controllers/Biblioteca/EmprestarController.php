@@ -176,7 +176,10 @@ class EmprestarController extends Controller
      */
     public function confirmarEmprestimo(Request $request)
     {
-        $id = $request->get('id_emp');
+        $dados  = $request->all();
+        $id = isset($dados['id_emp']) ? $dados['id_emp'] : "";
+        $empEspecial = isset($dados['emprestimoEspecial']) ? $dados['emprestimoEspecial'] : "0";
+
         $user = \Auth::user();
         $dataObj   = new \DateTime('now');
         $dia = "";
@@ -184,10 +187,10 @@ class EmprestarController extends Controller
         $emprestimo = $this->service->find($id);
 
         //Gerando a data de devolução conforme a situação de emprestimo do livro
-        if($emprestimo->tipo_emprestimo == '1') {
+        if($emprestimo->tipo_emprestimo == '1' && $empEspecial != '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->first();
             $dia = $dias->valor;
-        } else if ($emprestimo->tipo_emprestimo == '2') {
+        } else if ($emprestimo->tipo_emprestimo == '2' || $empEspecial == '1') {
             $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->first();
             $dia = $dias->valor - 1;
         }
@@ -197,6 +200,7 @@ class EmprestarController extends Controller
         $emprestimo->data_devolucao = $data;
 
         $emprestimo->status = '1';
+        $emprestimo->emprestimo_especial = $empEspecial;
         $emprestimo->users_id = $user->id;
         $emprestimo->save();
 
@@ -210,7 +214,6 @@ class EmprestarController extends Controller
      */
     public function deleteEmprestimo($id, $id2)
     {
-
         $data = $this->service->deleteEmprestimo($id, $id2);
 
         $result = $data;

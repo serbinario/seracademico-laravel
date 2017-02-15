@@ -88,6 +88,8 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_visual' => 'integer',
             'pessoa.deficiencia_fisica' => 'integer',
             'pessoa.deficiencia_outra' => 'integer',
+            'curso_id' => 'Curso',
+            'turma_id' => 'Turma',
 //
 //            //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
@@ -134,6 +136,8 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_visual' => 'integer',
             'pessoa.deficiencia_fisica' => 'integer',
             'pessoa.deficiencia_outra' => 'integer',
+            'curso_id' => 'Curso',
+            'turma_id' => 'Turma',
 
 //            //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
