@@ -27,11 +27,11 @@
     <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
+    {{--Bootstrap validator--}}
+    {{--<link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
 
-    <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
-
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
     {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
 
@@ -350,7 +350,7 @@
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
+{{--<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>--}}
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
@@ -358,8 +358,8 @@
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/webcam.js')  }}"></script>
 
-{{--jquery Validator https://jqueryvalidation.org/
-<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>--}}
+{{--jquery Validator https://jqueryvalidation.org/--}}
+{{--<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>--}}
 
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

@@ -83,8 +83,16 @@
                 @endif
                 {!! Form::open(['route'=>'seracademico.biblioteca.confirmarReserva', 'method' => "POST", 'id' => 'form' ]) !!}
                     <div class="col-md-12">
+                        <div class="form-group col-md-2">
+                            <select class="form-control" id="tipo_pessoa">
+                                <option value="">Tipo pessoa</option>
+                                <option value="1">Graduação</option>
+                                <option value="2">Pós-graduação</option>
+                                <option value="3">Professor</option>
+                            </select>
+                        </div>
                         <div class="form-group col-md-5">
-                            {!! Form::select('pessoas_id', (["" => "Selecione uma pessoa"] + $loadFields['pessoa']->toArray()), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
+                            {!! Form::select('pessoas_id', array(), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
                             <input type="hidden" name="edicao" id="edicao">
                             <input type="hidden" name="tipo_emprestimo" id="id_emprestimo">
                         </div>
@@ -122,7 +130,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-        select2();
+        $("#pessoa").select2();
         var id_emp1 = "";
         var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
@@ -180,7 +188,9 @@
                 'tipo_emprestimo': data['id_emp'],
                 'pessoas_id': $('#pessoa').val(),
                 'id_acervo': data['id_acervo'],
-                'edicao': edicao
+                'edicao': edicao,
+                'tipo_pessoa': $('#tipo_pessoa').val(),
+                'emprestimo_especial': $('#emprestimoEspecial').val(),
             };
 
             if (!$('#pessoa').val()) {
@@ -234,99 +244,69 @@
             };
         })(jQuery);
 
-        $(document).ready(function(){
-            //consulta via select2 responsável
-            $("#pessoa").select2({
-                placeholder: 'Selecione uma pessoa',
-                minimumInputLength: 1,
-                width: 400,
-                ajax: {
+        // Carregar as reservas pendentes
+        $(document).ready(function () {
+
+            $('.continuar').click(function (event) {
+                event.preventDefault();
+
+                var idPessoa = $(this).attr('data');
+
+                jQuery.ajax({
                     type: 'POST',
-                    url: "{{ route('seracademico.util.queryByselect2Pessoa')  }}",
-                    dataType: 'json',
-                    delay: 250,
-                    crossDomain: true,
-                    data: function (params) {
-                        return {
-                            'search':     params.term, // search term
-                            'tableName':  'pessoas',
-                            'fieldName':  'nome',
-                            'page':       params.page
-                        };
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                    },
-                    processResults: function (data, params) {
+                    url: "{!! route('seracademico.biblioteca.findWhereReserva') !!}",
+                    datatype: 'json',
+                    data: {'id_pessoa': idPessoa}
+                }).done(function (retorno) {
 
-                        // parse the results into the format expected by Select2
-                        // since we are using custom formatting functions we do not need to
-                        // alter the remote JSON data, except to indicate that infinite
-                        // scrolling can be used
-                        params.page = params.page || 1;
+                    var html = "";
+                    if (retorno.length > 0) {
+                        var reservas = retorno[0]['reserva_exemplar'];
+                        var pessoaId = retorno[0]['pessoa']['id'];
+                        var pessoaNome = retorno[0]['pessoa']['nome'];
 
-                        return {
-                            results: data.data,
-                            pagination: {
-                                more: (params.page * 30) < data.total_count
-                            }
-                        };
-                    }
-                }
+                        $('#emprestimos tbody tr').remove();
+                        for (var i = 0; i < reservas.length; i++) {
 
-            });
-
-            $(document).ready(function(){
-
-                $('.continuar').click(function(event){
-                    event.preventDefault();
-
-                    var idPessoa = $(this).attr('data');
-
-                    jQuery.ajax({
-                        type: 'POST',
-                        url: "{!! route('seracademico.biblioteca.findWhereReserva') !!}",
-                        datatype: 'json',
-                        data: {'id_pessoa' : idPessoa}
-                    }).done(function (retorno) {
-
-                        var html= "";
-                        if(retorno.length > 0 ) {
-                            var reservas = retorno[0]['reserva_exemplar'];
-                            var pessoaId = retorno[0]['pessoa']['id'];
-                            var pessoaNome = retorno[0]['pessoa']['nome'];
-
-                            $('#emprestimos tbody tr').remove();
-                            for (var i = 0; i < reservas.length; i++) {
-
-                                html += "<tr>";
-                                html += "<td>" + reservas[i]['titulo'] + "</td>";
-                                html += "<td>" + reservas[i]['cutter'] + "</td>";
-                                html += "<td>" + reservas[i]['subtitulo'] + "</td>";
-                                html += "<td>" + reservas[i]['pivot']['edicao'] + "</td>";
-                                html += "<td>" +
-                                        "<button type='button' data='"+reservas[i]['pivot']['reserva_id']+"' data2='"+reservas[i]['pivot']['id']+"' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
-                                        "<input type='hidden' name='id_emp' value='"+reservas[i]['pivot']['reserva_id']+"'>" +
-                                        "<input type='hidden' name='edicao' value='" + reservas[i]['titulo'] + "'>";
-                                html += "</tr>";
-                            }
-
-                            var option = "<option selected value='"+pessoaId+"'>"+pessoaNome+"</option>";
-
-                            $('#pessoa option').remove();
-                            $('#pessoa').append(option);
-                            select2();
-
-                            $('#emprestimos tbody').append(html);
-                            $('#data').val("");
+                            html += "<tr>";
+                            html += "<td>" + reservas[i]['titulo'] + "</td>";
+                            html += "<td>" + reservas[i]['cutter'] + "</td>";
+                            html += "<td>" + reservas[i]['subtitulo'] + "</td>";
+                            html += "<td>" + reservas[i]['pivot']['edicao'] + "</td>";
+                            html += "<td>" +
+                                    "<button type='button' data='" + reservas[i]['pivot']['reserva_id'] + "' data2='" + reservas[i]['pivot']['id'] + "' class='btn-floating remove' onclick='RemoveTableRow(this)'  title='Deletar'><i class='fa fa-times'></i></button></li></td>" +
+                                    "<input type='hidden' name='id_emp' value='" + reservas[i]['pivot']['reserva_id'] + "'>" +
+                                    "<input type='hidden' name='edicao' value='" + reservas[i]['titulo'] + "'>";
+                            html += "</tr>";
                         }
 
-                    });
+                        var option = "<option selected value='" + pessoaId + "'>" + pessoaNome + "</option>";
+
+                        $('#pessoa option').remove();
+                        $('#pessoa').append(option);
+                        select2(retorno[0]['tipo_pessoa']);
+
+                        $('#emprestimos tbody').append(html);
+
+                        if(retorno[0]['emprestimo_especial'] == '1') {
+                            $('#emprestimoEspecial').prop('checked', true);
+                        } else {
+                            $('#emprestimoEspecial').prop('checked', false);
+                        }
+
+                        $( "#tipo_pessoa option" ).each(function() {
+                            if($(this).val() == retorno[0]['tipo_pessoa']) {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                    }
+
                 });
             });
         });
 
-        function select2(){
+
+        function select2(tipo){
             //consulta via select2 responsável
             $("#pessoa").select2({
                 placeholder: 'Selecione uma pessoa',
@@ -343,6 +323,7 @@
                             'search':     params.term, // search term
                             'tableName':  'pessoas',
                             'fieldName':  'nome',
+                            'parametro':  tipo,
                             'page':       params.page
                         };
                     },
@@ -368,14 +349,36 @@
             });
         }
 
+        // Tratar os tipos de aluoos a seren selecionaods
+        $(document).on('change', '#tipo_pessoa', function (event) {
+
+            var tipo = $(this).val();
+
+            if(tipo) {
+
+                if(tipo == 2) {
+                    $('#emprestimoEspecial').prop('checked', true);
+                } else {
+                    $('#emprestimoEspecial').prop('checked', false);
+                }
+                select2(tipo);
+            }
+
+        });
+
         $(document).on('submit', '#form', function (event) {
             $(document).ready(function(){
-                if($('#emprestimos tbody tr').length <= 0){
+
+                if($("#tipo_pessoa").val() == '2' && !$("#emprestimoEspecial").prop( "checked")) {
+                    bootbox.alert('Esse empréstimos deve ser do tipo especial');
+                    event.preventDefault();
+                } else if($('#emprestimos tbody tr').length <= 0){
                     bootbox.alert('você deve selecionar pelo menos um livro');
                     event.preventDefault();
                 } else {
                     setTimeout(explode, 1000);
                 }
+
             });
 
             function explode(){
