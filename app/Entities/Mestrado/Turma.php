@@ -30,6 +30,7 @@ class Turma extends Model implements Transformable
 		'sigla',
 		'valor_turma',
 		'valor_disciplina',
+        'valor_matricula',
 		'sala_id',
 		'obs_sala',
 		'codigo',

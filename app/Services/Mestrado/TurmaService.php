@@ -70,7 +70,7 @@ class TurmaService
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
-
+        //dd($turma);
         #Verificando se foi criado no banco de dados
         if(!$turma) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -437,6 +437,8 @@ class TurmaService
         # Tratamento de modedas
         $data['valor_turma'] = str_replace(".","", $data['valor_turma']);
         $data['valor_turma'] = str_replace(",",".", $data['valor_turma']);
+        $data['valor_matricula'] = str_replace(",",".", $data['valor_matricula']);
+        $data['valor_matricula'] = str_replace(",",".", $data['valor_matricula']);
         $data['valor_disciplina'] = str_replace(".","", $data['valor_disciplina']);
         $data['valor_disciplina'] = str_replace(",",".", $data['valor_disciplina']);
 

@@ -106,6 +106,12 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
+                                    {!! Form::label('valor_matricula', 'Valor Matricula') !!}
+                                    {!! Form::text('valor_matricula', Session::getOldInput('valor_matricula')  , array('class' => 'form-control money')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
                                     {!! Form::label('valor_turma', 'Valor Turma') !!}
                                     {!! Form::text('valor_turma', Session::getOldInput('valor_turma')  , array('class' => 'form-control money')) !!}
                                 </div>

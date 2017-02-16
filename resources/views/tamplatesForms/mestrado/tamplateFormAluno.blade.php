@@ -426,7 +426,7 @@
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alaistamento militar ou reservista', false) !!}
+                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alistamento militar ou reservista', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
@@ -443,7 +443,7 @@
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[fotos_3x4_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[fotos_3x4_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[fotos_3x4_doc_obrigatorio]', '2 fotos 3x4', false) !!}
+                            {!! Form::label('pessoa[fotos_3x4_doc_obrigatorio]', 'fotos 3x4', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
@@ -465,11 +465,11 @@
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('carta_intencao_doc_obrigatorio', 0) !!}
                             {!! Form::checkbox('carta_intencao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('carta_intencao_doc_obrigatorio', 'Carta de intensão ', false) !!}
-                        </div>
+                            {!! Form::label('carta_intencao_doc_obrigatorio', 'Carta de intenção ', false) !!}
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                     </div>
