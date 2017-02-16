@@ -70,13 +70,14 @@ class ProfessorPosController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_professores')
             ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
+            ->join('grau_instrucoes', 'pessoas.grau_instrucoes_id', '=', 'grau_instrucoes.id')
             ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
             ->where('tipo_nivel_sistema.id', '=' , 2)
             //->where('fac_professores.pos_e_graduacao', '=' , 1)
             ->select([
                 'fac_professores.id',
                 'pessoas.nome',
-                'pessoas.cpf'
+                'grau_instrucoes.nome as titulacao',
             ]);
 
         #Editando a grid

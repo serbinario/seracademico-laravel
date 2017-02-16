@@ -11,9 +11,23 @@ class ProfessorPosValidator extends LaravelValidator
 
 	use TraitReplaceRulesValidator;
 	
-	protected $messages = [];
+	protected $messages = [
+		'required' => ':attribute é requerido',
+		'max' => ':attribute só pode ter no máximo :max caracteres',
+		'serbinario_alpha_space' => ' :attribute deve conter apenas letras e espaços entre palavras',
+		'numeric' => ':attribute deve conter apenas números',
+		'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
+		'digits_between' => ':attribute deve ter entre :min - :max.',
+		'cpf_br' => ':attribute deve ser um número de CPF válido',
+		'unique' => ':attribute já se encontra cadastrado'
+	];
 
-	protected $attributes = [];
+	protected $attributes = [
+		'pessoa.nome' => 'Nome',
+		'pessoa.identidade' => 'Identidade(RG)',
+		'pessoa.cpf' => 'CPF',
+		'pessoa.data_nasciemento' => 'Data de Nascimento',
+	];
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
@@ -29,6 +43,11 @@ class ProfessorPosValidator extends LaravelValidator
 			'especificacao_pos' =>  '' ,
 			'especificacao_mestrado' =>  '' ,
 			'especificacao_doutorado' =>  '' ,
+			'pessoa.nome' => 'required',
+			'pessoa.data_nasciemento' => 'required',
+			'pessoa.cpf' => 'required',
+//			'pessoa.sexos_id' => 'required',
+			'pessoa.identidade' => 'required'
 
         ],
         ValidatorInterface::RULE_UPDATE => [
