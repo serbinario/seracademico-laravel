@@ -43,11 +43,11 @@ class ProfessorPosValidator extends LaravelValidator
 			'especificacao_pos' =>  '' ,
 			'especificacao_mestrado' =>  '' ,
 			'especificacao_doutorado' =>  '' ,
-			'pessoa.nome' => 'required',
-			'pessoa.data_nasciemento' => 'required',
-			'pessoa.cpf' => 'required',
+			'pessoa.nome' => 'required|serbinario_alpha_space|max:120',
+			'pessoa.data_nasciemento' => 'required|max:15',
+			'pessoa.cpf' => 'required|digits_between:3,15',
 //			'pessoa.sexos_id' => 'required',
-			'pessoa.identidade' => 'required'
+			'pessoa.identidade' => 'required|digits_between:4,12'
 
         ],
         ValidatorInterface::RULE_UPDATE => [
@@ -62,6 +62,12 @@ class ProfessorPosValidator extends LaravelValidator
 			'especificacao_pos' =>  '' ,
 			'especificacao_mestrado' =>  '' ,
 			'especificacao_doutorado' =>  '' ,
+			'pessoa.nome' => 'required|serbinario_alpha_space|max:120',
+			'pessoa.data_nasciemento' => 'required|max:15',
+			'pessoa.cpf' => 'required|digits_between:3,15',
+//			'pessoa.sexos_id' => 'required',
+			'pessoa.identidade' => 'required|digits_between:4,12'
+
 		],
    ];
 
