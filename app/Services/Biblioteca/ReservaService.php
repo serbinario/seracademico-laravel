@@ -135,7 +135,10 @@ class ReservaService
         $data['data_vencimento'] = $dataFormat;
         $data['codigo'] = $codigo;
         $data['status'] = '0';
+        $data['emprestimo_especial'] = isset($data['emprestimo_especial']) ? $data['emprestimo_especial'] : "0";
+        
         $parametros = \DB::table('bib_parametros')->select('bib_parametros.*')->where('bib_parametros.codigo', '=', '003')->get();
+        
         $return = [
             'msg',
             'sucesso',
@@ -191,10 +194,6 @@ class ReservaService
             $reservaExem[0]->status = 0;
             $reservaExem[0]->save();
         }
-
-        /*$acervo = $this->repoAcervo->find($data['id_acervo']);
-        $acervo->situacao_id = '3';
-        $acervo->save();*/
 
         //Recuperando a reserva atual para ser listada novamente ao dar refresh na página
         $reservas = $this->findWhere($data);
