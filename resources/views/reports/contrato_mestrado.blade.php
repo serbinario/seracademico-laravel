@@ -6,7 +6,6 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 15px;
         }
         @page {
             border: 1px solid;
@@ -164,7 +163,7 @@
         </table>
     </div>
 
-    <div class="rodape" style="margin-top: 35%">
+    <div class="rodape" style="margin-top: 65%">
         <h1><img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt=""></h1>
     </div>
 
@@ -292,7 +291,7 @@
         custos operacionais, fatos estes que são conhecidos e aceitos pela <b>Contratante</b>.
     </p>
 
-    <div class="rodape" style="margin-top: 0%;">
+    <div class="rodape" style="margin-top: 10%;">
         <h1>
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
@@ -424,7 +423,7 @@
         <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
     </p>
 
-    <div class="rodape" style="margin-top: 3%;">
+    <div class="rodape" style="margin-top: 8%;">
         <h1>
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
@@ -460,7 +459,7 @@
         </h1>
     </div>
 
-    <div style="margin-top: 35%;">
+    <div style="margin-top: 45%;">
         <h1 style="text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
