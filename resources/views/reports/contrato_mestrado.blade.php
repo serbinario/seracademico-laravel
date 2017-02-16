@@ -6,6 +6,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
+            font-size: 15px;
         }
         @page {
             border: 1px solid;
@@ -163,7 +164,7 @@
         </table>
     </div>
 
-    <div class="rodape" style="margin-top: 55%">
+    <div class="rodape" style="margin-top: 45%">
         <h1><img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt=""></h1>
     </div>
 
