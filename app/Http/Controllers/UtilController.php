@@ -369,6 +369,7 @@ class UtilController extends Controller
             $pageValue   = $request->get('page');
             $fieldWhere  = $request->get('fieldWhere');
             $valueWhere  = $request->get('valueWhere');
+            $parametro   = $request->get('parametro');
 
             //consulta para not in que precisarão de outra tabela para recuperar os dados
             $tableNotIn     = $request->get('tableNotIn');
@@ -385,8 +386,11 @@ class UtilController extends Controller
             #preparando a consulta
             $qb = DB::table($tableName)->select('id', 'nome');
             $qb->leftJoin(\DB::raw('fac_alunos'), function ($join) {
-                $join->on('fac_alunos.pessoa_id', '=', 'pessoas.id')/*->where('fac_alunos.id', '!=', "")
-                ->where('fac_alunos.situacao_id', '=', "2")*/
+                $join->on('fac_alunos.pessoa_id', '=', 'pessoas.id')
+                ;
+            });
+            $qb->leftJoin(\DB::raw('pos_alunos'), function ($join) {
+                $join->on('pos_alunos.pessoa_id', '=', 'pessoas.id')
                 ;
             });
             #preparando a consulta
@@ -395,22 +399,14 @@ class UtilController extends Controller
             $qb->take(10);
             $qb->orderBy('nome', 'asc');
             $qb->where('pessoas.' . $fieldName, 'like', "%$searchValue%");
-            $qb->whereExists(function ($query) {
-                $query->select(\DB::raw("fac_alunos.id"))
-                    ->from('fac_alunos')
-                    ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-                    ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                    ->join('fac_alunos_situacoes', function ($join) {
-                        $join->on(
-                            'fac_alunos_situacoes.id', '=',
-                            \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
-                            where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
-                        );
-                    })
-                    ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
-                    ->whereRaw('fac_alunos.pessoa_id = pessoas.id')
-                    ->where('fac_situacao.id', '=', '2');
-            });
+            # Pega só os alunos de graduação
+            if($parametro == '1') {
+                $qb = $this->whereGraduacao($qb);
+            } else if ($parametro == '2') {
+                $qb = $this->wherePosMestrado($parametro, $qb);
+            } else if ($parametro == '3') {
+                $qb = $this->whereProfessor($qb);
+            }
 
 
             #Validando os campos de where
@@ -462,4 +458,89 @@ class UtilController extends Controller
             ]);
         }
     }
+
+    /**
+     * Where de graduação
+     */
+    private function whereGraduacao($query)
+    {
+        $query->whereExists(function ($query) {
+            $query->select(\DB::raw("fac_alunos.id"))
+                ->from('fac_alunos')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+                ->join('fac_alunos_situacoes', function ($join) {
+                    $join->on(
+                        'fac_alunos_situacoes.id', '=',
+                        \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                            where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
+                ->whereRaw('fac_alunos.pessoa_id = pessoas.id')
+                ->where('fac_situacao.id', '=', '2');
+        });
+
+        return $query;
+    }
+
+    /**
+     * Consulra para alunos de pós-graduação e mestrado
+     */
+    private function wherePosMestrado($tipo, $query)
+    {
+        $query->whereExists(function ($query) {
+            $query->select(
+                \DB::raw("pos_alunos.id"))
+                ->from('pos_alunos')
+                ->leftJoin('pos_alunos_cursos', function ($join) {
+                    $join->on(
+                        'pos_alunos_cursos.id', '=',
+                        \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->leftJoin('pos_alunos_turmas', function ($join) {
+                    $join->on(
+                        'pos_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->leftJoin('pos_alunos_situacoes', function ($join) {
+                    $join->on(
+                        'pos_alunos_situacoes.id', '=',
+                        \DB::raw('(SELECT situacao_atual.id FROM pos_alunos_situacoes as situacao_atual
+                        where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
+                ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
+                ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+                ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                //->where('pos_alunos.tipo_aluno_id', null)
+                ->whereRaw('pos_alunos.pessoa_id = pessoas.id');
+        });
+
+        return $query;
+    }
+
+    /**
+     * Consulta para professores
+     */
+    private function whereProfessor($query)
+    {
+        $query->whereExists(function ($query) {
+            $query->select(\DB::raw("fac_professores.id"))
+                ->from('fac_professores')
+                ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
+                ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
+                ->where('tipo_nivel_sistema.id', '=' , 1)
+                ->orWhere('fac_professores.pos_e_graduacao', '=' , 1)
+                ->whereRaw('fac_professores.pessoa_id = pessoas.id');
+        });
+
+        return $query;
+    }
+
 }

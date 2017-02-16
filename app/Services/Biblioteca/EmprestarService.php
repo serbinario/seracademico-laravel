@@ -203,6 +203,7 @@ class EmprestarService
         $data['codigo'] = $codigo;
         $data['status'] = '0';
         $data['status_devolucao'] = '0';
+        $data['emprestimo_especial'] = isset($data['emprestimo_especial']) ? $data['emprestimo_especial'] : "0";
 
         //busca o registro do emprestimo que está sendo usando no momento
         $emprestimo = $this->findWhere($data);
