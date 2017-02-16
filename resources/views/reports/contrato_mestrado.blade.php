@@ -164,7 +164,7 @@
         </table>
     </div>
 
-    <div class="rodape" style="margin-top: 45%">
+    <div class="rodape" style="margin-top: 35%">
         <h1><img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt=""></h1>
     </div>
 
