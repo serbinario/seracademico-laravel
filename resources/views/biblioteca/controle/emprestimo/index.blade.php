@@ -91,8 +91,16 @@
                 @endif
                 {!! Form::open(['route'=>'seracademico.biblioteca.confirmarEmprestimo', 'method' => "POST", 'id' => 'form', 'target' => '__blank' ]) !!}
                     <div class="col-md-12">
+                        <div class="form-group col-md-2">
+                            <select class="form-control" id="tipo_pessoa">
+                                <option value="">Tipo pessoa</option>
+                                <option value="1">Graduação</option>
+                                <option value="2">Pós-graduação</option>
+                                <option value="3">Professor</option>
+                            </select>
+                        </div>
                         <div class="form-group col-md-5">
-                            {!! Form::select('pessoas_id', (["" => "Selecione uma pessoa"] + $loadFields['pessoa']->toArray()), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
+                            {!! Form::select('pessoas_id', array(), null, array('class' => 'form-control', 'id' => 'pessoa')) !!}
                         </div>
                         {{--<div class="form-group col-md-2">
                             {!! Form::text('data_devolucao', null , array('class' => 'form-control data', 'placeholder'=> 'Data de entrega', 'id' => 'data', 'readonly' => 'readonly')) !!}
@@ -133,7 +141,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-        select2();
+        $("#pessoa").select2();
         var id_emp1 = "";
         var id_emp2 = "";
         var table = $('#sala-grid').DataTable({
@@ -189,7 +197,9 @@
                 'tipo_emprestimo': data['id_emp'],
                 'id': data['id'],
                 'pessoas_id': $('#pessoa').val(),
-                'pessoas_nome': $('select[name=pessoas_id] option:selected').text()
+                'pessoas_nome': $('select[name=pessoas_id] option:selected').text(),
+                'tipo_pessoa': $('#tipo_pessoa').val(),
+                'emprestimo_especial': $('#emprestimoEspecial').val(),
             };
 
             if (!$('#pessoa').val()) {
@@ -242,6 +252,7 @@
             };
         })(jQuery);
 
+        // Carregar os empréstimos pendentes
         $(document).ready(function(){
 
             $('.continuar').click(function(event){
@@ -280,10 +291,21 @@
 
                         $('#pessoa option').remove();
                         $('#pessoa').append(option);
-                        select2();
+                        select2(retorno[0]['tipo_pessoa']);
 
                         $('#emprestimos tbody').append(html);
-                        $('#data').val("");
+
+                        if(retorno[0]['emprestimo_especial'] == '1') {
+                            $('#emprestimoEspecial').prop('checked', true);
+                        } else {
+                            $('#emprestimoEspecial').prop('checked', false);
+                        }
+
+                        $( "#tipo_pessoa option" ).each(function() {
+                            if($(this).val() == retorno[0]['tipo_pessoa']) {
+                                $(this).prop('selected', true);
+                            }
+                        });
                     }
 
                 });
@@ -291,7 +313,8 @@
 
         });
 
-        function select2(){
+        function select2(tipo){
+
             //consulta via select2 responsável
             $("#pessoa").select2({
                 placeholder: 'Selecione uma pessoa',
@@ -308,6 +331,7 @@
                             'search':     params.term, // search term
                             'tableName':  'pessoas',
                             'fieldName':  'nome',
+                            'parametro':  tipo,
                             'page':       params.page
                         };
                     },
@@ -333,9 +357,31 @@
             });
         }
 
+        // Tratar os tipos de aluoos a seren selecionaods
+        $(document).on('change', '#tipo_pessoa', function (event) {
+
+            var tipo = $(this).val();
+
+            if(tipo) {
+
+                if(tipo == 2) {
+                    $('#emprestimoEspecial').prop('checked', true);
+                } else {
+                    $('#emprestimoEspecial').prop('checked', false);
+                }
+
+                select2(tipo);
+            }
+
+        });
+
         $(document).on('submit', '#form', function (event) {
             $(document).ready(function(){
-                if($('#emprestimos tbody tr').length <= 0){
+
+                if($("#tipo_pessoa").val() == '2' && !$("#emprestimoEspecial").prop( "checked")) {
+                    bootbox.alert('Esse empréstimos deve ser do tipo especial');
+                    event.preventDefault();
+                } else if($('#emprestimos tbody tr').length <= 0){
                     bootbox.alert('você deve selecionar pelo menos um exemplar');
                     event.preventDefault();
                 } else {
