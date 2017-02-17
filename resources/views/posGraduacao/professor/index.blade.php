@@ -58,7 +58,7 @@
             ajax: "{!! route('seracademico.posgraduacao.professorpos.grid') !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
-                {data: 'titulacao', name: 'grau_instrucoes.titulacao'},
+                {data: 'titulacao', name: 'grau_instrucoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
