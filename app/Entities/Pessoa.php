@@ -38,6 +38,7 @@ class Pessoa extends Model implements Transformable
         'nome_mae',
         'identidade',
         'orgao_rg',
+        'uf_exp',
         'data_expedicao',
         'cpf',
         'titulo_eleitoral',
