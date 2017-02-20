@@ -359,7 +359,7 @@
 <script src="{{ asset('/js/webcam.js')  }}"></script>
 
 {{--jquery Validator https://jqueryvalidation.org/--}}
-{{--<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>--}}
+<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

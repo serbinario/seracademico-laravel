@@ -210,9 +210,9 @@ class Turma extends Model implements Transformable
      * @param $query
      * @return mixed
      */
-    public function scopePosGraduacao($query)
+    public function scopeMestrado($query)
     {
-        return $query->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])->where('tipo_nivel_sistema_id', 2);
+        return $query->select(['fac_turmas.id', 'fac_turmas.codigo as nome'])->where('tipo_nivel_sistema_id', 3);
     }
 
     /**
