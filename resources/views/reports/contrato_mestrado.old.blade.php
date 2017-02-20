@@ -40,6 +40,9 @@
             width: 80%;
             margin-left: 20%;
         }
+        .rodape {
+            page-break-after: always;
+        }
         .rodape h1 {
             text-align: center;
         }
@@ -160,6 +163,16 @@
         </table>
     </div>
 
+    <div class="rodape" style="margin-top: 65%">
+        <h1><img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt=""></h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
     <p>
         <b>1. Do Objeto Contratual</b>
     </p>
@@ -277,6 +290,18 @@
         econômica e financeira vigente na data da assinatura deste instrumento, os custos gerais das <b>Contratadas</b>, incluindo
         custos operacionais, fatos estes que são conhecidos e aceitos pela <b>Contratante</b>.
     </p>
+
+    <div class="rodape" style="margin-top: 10%;">
+        <h1>
+            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
 
     <p class="titulo_paragrafo">
         Cláusula Quinta:
@@ -397,7 +422,19 @@
     <p class="subparagrafo">
         <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
     </p>
-    
+
+    <div class="rodape" style="margin-top: 8%;">
+        <h1>
+            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
     <p class="titulo_paragrafo">
         Cláusula Oitava:
     </p>
