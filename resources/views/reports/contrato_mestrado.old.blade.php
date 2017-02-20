@@ -11,7 +11,7 @@
             border: 1px solid;
         }
         .cabecalho {
-            width: 80%;
+            width: 70%;
             margin: 0 auto;
             margin-bottom: 3%;
         }
@@ -39,6 +39,9 @@
             border-color: black;
             width: 80%;
             margin-left: 20%;
+        }
+        .rodape {
+            page-break-after: always;
         }
         .rodape h1 {
             text-align: center;
@@ -86,10 +89,6 @@
             color: white;
             text-align: center;
         }
-        table { page-break-inside:auto }
-        tr    { page-break-inside:avoid; page-break-after:auto }
-        thead { display:table-header-group }
-        tfoot { display:table-footer-group }
     </style>
 </head>
 <body>
@@ -162,6 +161,16 @@
                 <td>Ano: </td>
             </tr>
         </table>
+    </div>
+
+    <div class="rodape" style="margin-top: 65%">
+        <h1><img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt=""></h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
     </div>
 
     <p>
@@ -281,6 +290,18 @@
         econômica e financeira vigente na data da assinatura deste instrumento, os custos gerais das <b>Contratadas</b>, incluindo
         custos operacionais, fatos estes que são conhecidos e aceitos pela <b>Contratante</b>.
     </p>
+
+    <div class="rodape" style="margin-top: 10%;">
+        <h1>
+            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
 
     <p class="titulo_paragrafo">
         Cláusula Quinta:
@@ -402,6 +423,18 @@
         <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
     </p>
 
+    <div class="rodape" style="margin-top: 8%;">
+        <h1>
+            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
+    <div style="text-align: center">
+        <h1>
+            <img src="{{ asset('/img/cabecalho_contrato_mestrado.png') }}" alt="">
+        </h1>
+    </div>
+
     <p class="titulo_paragrafo">
         Cláusula Oitava:
     </p>
@@ -416,7 +449,7 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 10%; margin-bottom: 10%;">
+   <p style="text-align: center; margin-top: 15%; margin-bottom: 10%;">
        ______________/_______,_______de______________________________de_____________________.
    </p>
 
@@ -426,7 +459,7 @@
         </h1>
     </div>
 
-    <div>
+    <div style="margin-top: 45%;">
         <h1 style="text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
