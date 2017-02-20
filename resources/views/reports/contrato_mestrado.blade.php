@@ -11,7 +11,7 @@
             border: 1px solid;
         }
         .cabecalho {
-            width: 70%;
+            width: 80%;
             margin: 0 auto;
             margin-bottom: 3%;
         }
