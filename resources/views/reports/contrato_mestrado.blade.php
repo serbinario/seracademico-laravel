@@ -86,6 +86,10 @@
             color: white;
             text-align: center;
         }
+        table { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
 </head>
 <body>
@@ -397,7 +401,7 @@
     <p class="subparagrafo">
         <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
     </p>
-    
+
     <p class="titulo_paragrafo">
         Cláusula Oitava:
     </p>
