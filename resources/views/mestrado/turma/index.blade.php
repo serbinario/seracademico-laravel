@@ -139,6 +139,7 @@
     <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/diario_aula_select2.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/mestrado/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_assinatura.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_nota.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_aniversariantes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_turma.js') }}"></script>
     <script type="text/javascript">

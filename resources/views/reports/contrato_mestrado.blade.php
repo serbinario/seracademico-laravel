@@ -420,14 +420,14 @@
        ______________/_______,_______de______________________________de_____________________.
    </p>
 
-    <div style="margin-left: 0;">
+    <div style="margin-top: 15%; margin-left: 0;">
         <h1 style="text-align: left;">
             <img src="{{ asset('/img/assinatura_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
 
     <div>
-        <h1 style="text-align: center">
+        <h1 style="margin-top: 30%; text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
