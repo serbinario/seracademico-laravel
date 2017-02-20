@@ -41,7 +41,7 @@ class AlunoController extends Controller
         'SituacaoAluno',
         'Sede',
         'SimpleReport|byCrud,1',
-        'Mestrado\\Turma|PosGraduacao',
+        'Mestrado\\Turma|Mestrado',
         'Mestrado\\Curso|ativo,1',
         //'Mestrado\\CanalCaptacao',
         //'Mestrado\\TipoPretensao',
