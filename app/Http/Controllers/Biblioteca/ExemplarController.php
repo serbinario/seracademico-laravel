@@ -154,6 +154,8 @@ class ExemplarController extends Controller
             $loadFields = $this->service->load($this->loadFields);
             $acervo = $this->service->acervos($this->loadFields);
 
+            //dd($model);
+
             #retorno para view
             return view('biblioteca.exemplar.edit', compact('model', 'loadFields', 'acervo'));
         } catch (\Throwable $e) {dd($e);

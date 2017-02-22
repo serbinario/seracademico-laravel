@@ -224,7 +224,7 @@
         </thead>
         <tbody>
         <tr>
-            <td>R$ 1000,00</td>
+            <td>$ 1000,00</td>
         </tr>
         </tbody>
     </table>
