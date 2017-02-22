@@ -147,6 +147,10 @@
         var table = $('#aluno-grid').DataTable({
             processing: true,
             serverSide: true,
+            bFilter: false,
+            /*autoWidth: false,
+            iDisplayLength: 10,
+            bLengthChange: false,*/
             ajax: {
                 url: "{!! route('seracademico.mestrado.aluno.grid') !!}",
                 data: function (d) {
@@ -166,6 +170,12 @@
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Função do submit do search da grid principal
+        $('#pesquisar').click(function(e) {
+            table.draw();
+            e.preventDefault();
         });
 
         // Id do aluno corrente
