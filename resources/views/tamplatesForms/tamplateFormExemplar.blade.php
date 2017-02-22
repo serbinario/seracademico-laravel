@@ -37,7 +37,6 @@
 
                 </div>
                 <div class="row">
-
                     <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('codigo_barra', 'Código de barras') !!}
@@ -79,7 +78,15 @@
                             {!! Form::select('situacao_id', $loadFields['situacao'], Session::getOldInput('situacao_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
-
+                    @if(isset($model->id))
+                        <div class="col-md-2" style="margin-top: 16px;">
+                            <div class="checkbox checkbox-primary">
+                                {!! Form::hidden('exemp_principal', 0) !!}
+                                {!! Form::checkbox('exemp_principal', 1, null, array('class' => 'form-control')) !!}
+                                {!! Form::label('exemp_principal', 'Exemplar principal?', false) !!}
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-md-5">
                         <div class="btn-group">
                             <div class="btn-group">
@@ -98,6 +105,7 @@
                         <label for="img">Foto</label>
                         <input class="file-preview-other" name="img" id="img" type="file">
                     </div>--}}
+                    @if (!isset($model))
                     <div class="col-md-2">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">
@@ -117,6 +125,31 @@
                             </div>
                         </div>
                     </div>
+                    @elseif(isset($model->id) && $model->exemp_principal == '1')
+                        <div class="col-md-2">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput"
+                                     style="width: 135px; height: 115px;">
+                                    @if (isset($model) && $model->path_image != null)
+                                        <div id="midias">
+                                            <img id="logo"
+                                                 src="{{route('seracademico.biblioteca.getImg', ['id' => $model->id])}}"
+                                                 alt="Foto" height="120" width="100"/><br/>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div>
+                                 <span class="btn btn-primary btn-xs btn-block btn-file">
+                                     <span class="fileinput-new">Selecionar</span>
+                                     <span class="fileinput-exists">Mudar</span>
+                                     <input type="file" name="img">
+                                 </span>
+                                    <a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6"
+                                       data-dismiss="fileinput">Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
