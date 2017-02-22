@@ -2,7 +2,7 @@
     <div class="col-md-10">
         <div class="row">
             <div class="form-group col-md-6">
-                {!! Form::label('pessoa[nome]', 'Nome') !!}
+                {!! Form::label('pessoa[nome]', 'Nome *') !!}
                 {!! Form::text('pessoa[nome]', Session::getOldInput('pessoa[nome]')  , array('class' => 'form-control')) !!}
             </div>
             {{--<div class="form-group col-md-2">--}}
@@ -10,7 +10,7 @@
             {{--{!! Form::text('tratamento', Session::getOldInput('tratamento')  , array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
             <div class="form-group col-md-2">
-                {!! Form::label('pessoa[data_nasciemento]', 'Nascimento') !!}
+                {!! Form::label('pessoa[data_nasciemento]', 'Nascimento *') !!}
                 {!! Form::text('pessoa[data_nasciemento]', Session::getOldInput('pessoa[data_nasciemento]'), array('class' => 'form-control datepicker')) !!}
             </div>
             <div class="form-group col-md-2">
@@ -164,7 +164,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('pessoa[identidade]', 'Identidade') !!}
+                                                {!! Form::label('pessoa[identidade]', 'Identidade *') !!}
                                                 {!! Form::text('pessoa[identidade]', Session::getOldInput('pessoa[identidade]')  , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                {!! Form::label('pessoa[cpf]', 'CPF') !!}
+                                                {!! Form::label('pessoa[cpf]', 'CPF *') !!}
                                                 {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]')  , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">

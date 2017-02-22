@@ -30,14 +30,14 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF</th>
+                                <th>Titulação</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>CPF</th>
+                                <th>Titulação</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>
@@ -58,7 +58,7 @@
             ajax: "{!! route('seracademico.posgraduacao.professorpos.grid') !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
-                {data: 'cpf', name: 'pessoas.cpf'},
+                {data: 'titulacao', name: 'grau_instrucoes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
