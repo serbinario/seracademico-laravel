@@ -69,13 +69,6 @@
                 //allowedFileExtensions : ['pdf'],
             });
 
-            <?php
-                $data = new \DateTime('now');
-                $data = $data->format('d/m/Y');
-            ?>
-            var  data2 = '{{$data}}';
-            $('.data2').val(data2);
-
             function formatRepo2(repo) {
                 if (repo.loading) return repo.text;
 

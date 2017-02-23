@@ -258,8 +258,14 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
+                            <?php $data = new \DateTime('now'); $data = $data->format('d/m/Y'); ?>
                             {!! Form::label('data_aquisicao', 'Data Aquisição') !!}
-                            {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date data2')) !!}
+                            @if (!isset($model->id))
+                                 {!! Form::text('data_aquisicao',$data, array('class' => 'form-control datepicker date data2')) !!}
+                            @else
+                                 {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date data2')) !!}
+                            @endif
+
                         </div>
                     </div>
 
