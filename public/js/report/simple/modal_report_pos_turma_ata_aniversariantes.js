@@ -4,9 +4,9 @@ function runSimpleReportPosTurmaAtaAniversariante()
     // Definindo os models
     var dados =  {
         'models' : [
-            'PosGraduacao\\Curso|ativo,1',
-            'PosGraduacao\\Turma|posGraduacao',
-            'PosGraduacao\\Disciplina|posGraduacao'
+          //  'PosGraduacao\\Curso|ativo,1',
+          //  'PosGraduacao\\Turma|posGraduacao',
+          //  'PosGraduacao\\Disciplina|posGraduacao'
         ]
     };
 
@@ -29,39 +29,6 @@ function runSimpleReportPosTurmaAtaAniversariante()
 
 // Função a montar o html
 function builderFilterGraTurmaAtaDeAniversariante (dados) {
-    // //Limpando os campos
-    // $('#curso_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-    // $('#turma_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-    // $('#disciplina_gra_turma_ata_assinatura_id option').find('option').prop('selected', false);
-    //
-    // // Variáveis que armazenaram o html
-    // var htmlCurso  = "<option value=''>Selecione um Curso</option>";
-    // var htmlTurma  = "<option value=''>Selecione uma Turma</option>";
-    // var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
-    //
-    // // Percorrendo o array de Curso
-    // for (var i = 0; i < dados['posgraduacao\\curso'].length; i++) {
-    //     htmlCurso += "<option value='" + dados['posgraduacao\\curso'][i].id + "'>" + dados['posgraduacao\\curso'][i].nome + "</option>";
-    // }
-    //
-    // // Percorrendo o array de turma
-    // for (var i = 0; i < dados['posgraduacao\\turma'].length; i++) {
-    //     htmlTurma += "<option value='" + dados['posgraduacao\\turma'][i].id + "'>" + dados['posgraduacao\\turma'][i].nome + "</option>";
-    // }
-    //
-    // // Percorrendo o array de turno
-    // for (var i = 0; i < dados['posgraduacao\\disciplina'].length; i++) {
-    //     htmlDisciplina += "<option value='" + dados['posgraduacao\\disciplina'][i].id + "'>" + dados['posgraduacao\\disciplina'][i].nome + "</option>";
-    // }
-    //
-    // // carregando o html
-    // $("#curso_pos_turma_ata_aniversariante_id option").remove();
-    // $("#curso_pos_turma_ata_aniversariante_id").append(htmlCurso);
-    // $("#turma_pos_turma_ata_aniversariante_id option").remove();
-    // $("#turma_pos_turma_ata_aniversariante_id").append(htmlTurma);
-    // $("#disciplina_pos_turma_ata_aniversariante_id option").remove();
-    // $("#disciplina_pos_turma_ata_aniversariante_id").append(htmlDisciplina);
-
     // Abrindo o modal
     $("#modal-report-pos-turma-ata-aniversariante").modal({show : true});
 }
