@@ -26,6 +26,8 @@
             font-size: 15px;
             text-align: justify;
             word-spacing: 0.1em;
+            letter-spacing: normal;
+            justify-content: space-between;
         }
         .table {
             width: 100%;
@@ -43,13 +45,6 @@
         .rodape h1 {
             text-align: center;
         }
-        /*.rodape div {
-            margin-left: 60%;
-        }
-        .rodape p {
-            text-align: center;
-            font-weight: bold;
-        }*/
         .titulo_paragrafo {
             font-weight: bold;
             text-decoration: underline;
@@ -158,8 +153,7 @@
                 <td>Local Nasc: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
             </tr>
             <tr>
-                <td colspan="3">Área da Pós-Graduação: </td>
-                <td>Ano: </td>
+                <td colspan="4">Área da Pós-Graduação: </td>
             </tr>
         </table>
     </div>
@@ -230,12 +224,13 @@
     </table>
 
     <p class="titulo_paragrafo">
-        Clausula Segunda
+        Cláusula Segunda
     </p>
 
     <p class="paragrafo">
-        As <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
-            APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES BRASILEIROS</b> de sua zona.
+        <span>As</span> <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
+        APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES
+        BRASILEIROS</b> de sua zona.
     </p>
 
     <p class="titulo_paragrafo">
@@ -351,7 +346,7 @@
     <table class="tabela-de-descricao" cellspacing="0" width="45%">
         <thead>
         <tr>
-            <th style="width: 80%">Documento</th>
+            <th style="width: 75%">Documento</th>
             <th>Valor</th>
         </tr>
         </thead>
@@ -416,18 +411,43 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 20%; margin-bottom: 10%;">
-       ______________/_______,_______de______________________________de_____________________.
+   <p style="text-align: center; margin-top: 8%; margin-bottom: 5%;">
+       ______________ , _______________ , _______ de ______________________________ de _____________________.
    </p>
 
-    <div style="margin-top: 10%; margin-left: 0;">
+    <div style="margin-left: 0; margin-top: 5%">
         <h1 style="text-align: left;">
-            <img src="{{ asset('/img/assinatura_contrato_mestrado.png') }}" alt="">
+            <table style="margin-bottom: 5%;">
+                <tr><td>___________________________________________</td></tr>
+                <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
+            </table>
+
+            <table>
+                <tr><td>___________________________________________</td></tr>
+                <tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>
+                <tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>
+            </table>
         </h1>
     </div>
 
+    <div style="margin-left: 0;">
+        <h3 style="text-align: left;">Testemunhas</h3>
+
+        <table style="margin-bottom: 2%;">
+            <tr style="margin-bottom: 2%"><td>1)</td></tr>
+            <tr><td>RG nº</td></tr>
+            <tr><td>CPF nº</td></tr>
+        </table>
+
+        <table>
+            <tr style="margin-bottom: 2%"><td>2)</td></tr>
+            <tr><td>RG nº</td></tr>
+            <tr><td>CPF nº</td></tr>
+        </table>
+    </div>
+
     <div>
-        <h1 style="margin-top: 75%; text-align: center">
+        <h1 style="margin-top: 20%; text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
