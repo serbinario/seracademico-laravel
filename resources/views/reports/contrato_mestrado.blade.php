@@ -380,7 +380,7 @@
     </p>
 
     <p class="paragrafo">
-        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito as <b>Contratadas</b>, sob pena de
+        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span> <b>Contratadas</b>, sob pena de
         terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior, constante deste contrato.
     </p>
 
@@ -431,7 +431,7 @@
         </h1>
     </div>
 
-    <div style="margin-left: 0;">
+    <div style="margin-left: 0; font-size: 12px;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
         <table style="margin-bottom: 2%;">
