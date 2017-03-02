@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\Mestrado;
 
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Mestrado\AlunoService;
+use Seracademico\Uteis\NumeroOrdianalPorExtenso;
 
 class AlunoDocumentoController extends Controller
 {
