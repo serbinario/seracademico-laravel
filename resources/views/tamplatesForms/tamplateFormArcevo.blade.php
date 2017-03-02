@@ -234,7 +234,7 @@
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('etial_autor', 0) !!}
                             {!! Form::checkbox('etial_autor', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('etial_autor', 'Etal', false) !!}
+                            {!! Form::label('etial_autor', 'et al', false) !!}
                         </div>
                     </div>
                 </div>
@@ -356,7 +356,7 @@
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('etial_outros', 0) !!}
                             {!! Form::checkbox('etial_outros', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('etial_outros', 'Etal', false) !!}
+                            {!! Form::label('etial_outros', 'et al', false) !!}
                         </div>
                     </div>
                 </div>

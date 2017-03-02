@@ -86,9 +86,22 @@ class SimpleReport implements Report
         # Recuperando os campos e larguras da pesquisa principal
         $fields = implode(',', array_column($this->fields, 'field'));
 
-        if(substr($fields, -1) == ',') {
-            $fields = substr($fields,0,-1);
+        # Array de caracteres  da string e variável
+        # condicional do while
+        $arrayCharacterFields = str_split($fields);
+
+        # Repeticção para remover as vírgulas
+        # do final da string
+        while (count($arrayCharacterFields) > 0) {
+            if(!($arrayCharacterFields[(count($arrayCharacterFields) - 1)] == ',')) {
+                break;
+            }
+
+            unset($arrayCharacterFields[(count($arrayCharacterFields) - 1)]);
         }
+
+        # Juntando o array em string
+        $fields = \implode($arrayCharacterFields);;
 
         # Finalizando o sql principal
         $sql = str_replace('FIELDS', $fields, $this->sql[0]->sql);

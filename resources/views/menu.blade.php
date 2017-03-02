@@ -28,7 +28,7 @@
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
 
     {{--Bootstrap validator--}}
-    {{--<link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
 
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
@@ -350,7 +350,7 @@
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-{{--<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>--}}
+<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
