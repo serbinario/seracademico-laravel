@@ -344,7 +344,7 @@
         custear as despesas decorrentes da emissão e envio dos mesmos.
     </p>
 
-    <table class="tabela-de-descricao" cellspacing="0" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
         <thead>
         <tr>
             <th style="width: 75%">Documento</th>
@@ -448,7 +448,7 @@
     </div>
 
     <div>
-        <h1 style="margin-top: 20%; text-align: center">
+        <h1 style="margin-top: 10%; text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
