@@ -90,7 +90,7 @@
 </head>
 <body>
 
-<div class="cabecalho">
+<div class="cabecalho" style="font-size: 13px;">
     <p>
         CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
         BRASILEIROS NO EXTERIOR (MODALIDADE ON-LINE)
