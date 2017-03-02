@@ -412,7 +412,7 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 8%; margin-bottom: 5%;">
+   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%;">
        ______________ , _______________ , _______ de ______________________________ de _____________________.
    </p>
 
@@ -448,7 +448,7 @@
     </div>
 
     <div>
-        <h1 style="margin-top: 5%; text-align: center">
+        <h1 style="text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
