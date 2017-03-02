@@ -108,7 +108,7 @@
         Estado Brasileiro, cidadã em pleno gozo de seus direitos cíveis, abaixo qualificada e reconhecida como <b>Contratante</b>:
     </p>
 
-    <div class="informacoes_pessoas">
+    <div class="informacoes_pessoas" style="font-size: 15px;">
         <table class="table">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
