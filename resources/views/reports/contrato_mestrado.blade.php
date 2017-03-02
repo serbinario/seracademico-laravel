@@ -32,6 +32,7 @@
         .table {
             width: 100%;
             background-color: #D3D3D3;
+            font-size: 12px;
         }
         .table td {
             padding: 1%;
@@ -108,7 +109,7 @@
         Estado Brasileiro, cidadã em pleno gozo de seus direitos cíveis, abaixo qualificada e reconhecida como <b>Contratante</b>:
     </p>
 
-    <div class="informacoes_pessoas" style="font-size: 12px;">
+    <div class="informacoes_pessoas">
         <table class="table">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
@@ -191,7 +192,7 @@
     </p>
 
 
-    <table class="tabela-de-descricao" cellspacing="0" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
         <thead>
         <tr>
             <th style="width: 80%">Inscrição</th>
@@ -210,7 +211,7 @@
         </tbody>
     </table>
 
-    <table class="tabela-de-descricao" cellspacing="0" style="margin-top: 3%" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
         <thead>
         <tr>
             <th>Diplomação</th>
