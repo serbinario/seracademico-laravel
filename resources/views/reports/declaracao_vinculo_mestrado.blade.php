@@ -6,6 +6,7 @@
     <title>Declaração de vínculo</title>
     <style type="text/css">
         body {
+            font-size: 12px;
             background-image: url("{{ asset('img/vinculo-mestrado/image3.png') }}");
             background-repeat: no-repeat;
             background-position: center;
@@ -13,6 +14,7 @@
         }
 
         .cabecalho h1 {
+            font-size: 15px;
             text-align: center;
         }
 
@@ -29,7 +31,7 @@
         .rodape {
             position: absolute;
             bottom: 0;
-            font-size: 18px;
+            font-size: 15px;
         }
 
         .rodape > p {
