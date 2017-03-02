@@ -434,21 +434,21 @@
     <div style="margin-left: 0; font-size: 12px;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 2%;">
-            <tr style="margin-bottom: 2%"><td>1)</td></tr>
+        <table style="margin-bottom: 1%;">
+            <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
 
         <table>
-            <tr style="margin-bottom: 2%"><td>2)</td></tr>
+            <tr style="margin-bottom: 1%"><td>2)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
     </div>
 
     <div>
-        <h1 style="margin-top: 10%; text-align: center">
+        <h1 style="margin-top: 5%; text-align: center">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
