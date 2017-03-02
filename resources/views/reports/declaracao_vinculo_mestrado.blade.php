@@ -1,3 +1,4 @@
+@inject('numeroExtenso', 'Seracademico\Uteis\NumeroOrdianalPorExtenso')
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -73,7 +74,7 @@
         <h3><b>Câmara Lusófona de Pós-Graduação</b></h3>
 
         <p>
-            Ao <b>vigésimo terceiro dia do mês de Julho de 2016</b>, sob a <b>Gestão da Câmara Lusófona de Pós-Graduação.</b>
+            <span>Ao</span> <b>{{ $numeroExtenso->porExtenso(new \DateTime()) }}</b>, sob a <b>Gestão da Câmara Lusófona de Pós-Graduação.</b>
             Representada por sua <b>Faculdade de Ciências da Educação – School of Education</b>, sob a gestão representativa
             da representação legal da <b>Holding Britânica UniGrendal</b>, qualificada no Brasil como <b>Universidade Grendal do
             Brasil</b>, CNPJ 12.147.854/0001-84, reuniram-se em local a coberto os <b>Doutores do Comitê Acadêmico da School
