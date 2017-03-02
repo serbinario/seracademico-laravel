@@ -23,7 +23,7 @@
             width: 100%;
         }
         .conteudo p {
-            font-size: 15px;
+            font-size: 12px;
             text-align: justify;
             word-spacing: 0.1em;
             letter-spacing: normal;
