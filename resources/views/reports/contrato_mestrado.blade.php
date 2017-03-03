@@ -6,14 +6,13 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-        }
-        @page {
-            border: 1px solid;
+            font-size: 12px;
         }
         .cabecalho {
             width: 80%;
             margin: 0 auto;
             margin-bottom: 3%;
+            font-size: 15px;
         }
         .cabecalho p {
             text-align: center;
@@ -23,7 +22,6 @@
             width: 100%;
         }
         .conteudo p {
-            font-size: 12px;
             text-align: justify;
             word-spacing: 0.1em;
             letter-spacing: normal;
@@ -32,7 +30,6 @@
         .table {
             width: 100%;
             background-color: #D3D3D3;
-            font-size: 12px;
         }
         .table td {
             padding: 1%;
