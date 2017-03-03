@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 15px;">
+        <table class="table" style="font-size: 18px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -409,7 +409,7 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-after: always;">
+   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-before: always;">
        ______________ , _______________ , _______ de ______________________________ de _____________________.
    </p>
 
