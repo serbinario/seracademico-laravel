@@ -6,7 +6,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 12px;
+            font-size: 15px;
         }
         .cabecalho {
             width: 80%;
@@ -87,7 +87,7 @@
 </head>
 <body>
 
-<div class="cabecalho" style="font-size: 13px;">
+<div class="cabecalho" style="font-size: 18px;">
     <p>
         CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
         BRASILEIROS NO EXTERIOR (MODALIDADE ON-LINE)
@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 12px;">
+        <table class="table" style="font-size: 15px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -409,7 +409,7 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%;">
+   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-after: always;">
        ______________ , _______________ , _______ de ______________________________ de _____________________.
    </p>
 
@@ -431,13 +431,13 @@
     <div style="margin-left: 0;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 1%; font-size: 12px;">
+        <table style="margin-bottom: 1%; font-size: 15px;">
             <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
 
-        <table style="font-size: 12px;">
+        <table style="font-size: 15px;">
             <tr style="margin-bottom: 1%;"><td>2)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
