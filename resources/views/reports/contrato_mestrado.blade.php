@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 18px;">
+        <table class="table" style="font-size: 15px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
