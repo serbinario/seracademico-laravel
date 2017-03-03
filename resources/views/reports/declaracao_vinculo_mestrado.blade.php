@@ -25,7 +25,6 @@
         .conteudo {
             margin-top: 15%;
             text-align: justify;
-            font-size: 22px;
         }
 
         .rodape {
@@ -66,7 +65,6 @@
             <b>Estudante:</b> {{$aluno['pessoa']['nome']}}<br>
             <b>CPF</b>  {{$aluno['pessoa']['cpf']}}<br>
             <b>Curso:</b> {{ isset($curso->nome) ? $curso->nome : ""  }}<br>
-            <b>Faculdade:</b> Faculdade de Ciências da Educação - FCE<br>
             <b>Seccional:</b> Lusófona<br>
             <b>País:</b> Brasil<br>
         </p>
