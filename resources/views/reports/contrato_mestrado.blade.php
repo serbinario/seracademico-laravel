@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table">
+        <table class="table" style="font-size: 12px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -428,17 +428,17 @@
         </h1>
     </div>
 
-    <div style="margin-left: 0; font-size: 12px;">
+    <div style="margin-left: 0;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 1%;">
+        <table style="margin-bottom: 1%; font-size: 12px;">
             <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
 
-        <table>
-            <tr style="margin-bottom: 1%"><td>2)</td></tr>
+        <table style="font-size: 12px;">
+            <tr style="margin-bottom: 1%;"><td>2)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
