@@ -410,7 +410,7 @@
     </p>
 
    <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-before: always;">
-       ______________ , _______________ , _______ de ______________________________ de _____________________.
+       ______________,_______________,_______de_________________ de ___________.
    </p>
 
     <div style="margin-left: 0; margin-top: 5%">
