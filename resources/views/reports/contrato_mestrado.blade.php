@@ -87,7 +87,7 @@
 </head>
 <body>
 
-<div class="cabecalho" style="font-size: 18px;">
+<div class="cabecalho" style="font-size: 15px;">
     <p>
         CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
         BRASILEIROS NO EXTERIOR (MODALIDADE ON-LINE)
@@ -410,7 +410,7 @@
     </p>
 
    <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-before: always;">
-       ______________ , _______________ , _______ de ______________________________ de _____________________.
+       ______________,_______________,_______de_________________ de ___________.
    </p>
 
     <div style="margin-left: 0; margin-top: 5%">
