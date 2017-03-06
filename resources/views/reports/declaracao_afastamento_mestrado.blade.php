@@ -86,7 +86,7 @@
                 <b>IAO n° 2012-07-154568 - 128 Junior, Diretora Executiva e Responsável Técnica</b>, com endereço profissional
                 à American Express Argentina S.A., Arenales, 1210 CABA, Argentina, venho pela presente <b>SOLICITAÇÃO</b>,
                 informá-la sobre a autorização de pesquisa emitida por este comitê em favor de professor sob à vossa
-                gestão, a <b>Prof(a). Maria da Soledade Azevedo da Silva</b>, <b>RG 1.132.708</b> e <b>CPF 149.102.764-91</b>, que recebeu
+                gestão, a <b>Prof(a). {{ $aluno['pessoa']['nome'] }}</b>, <b>RG {{ $aluno['pessoa']['rg'] }}</b> e <b>CPF {{ $aluno['pessoa']['cpf'] }}</b>, que recebeu
                 autorização à pesquisa e orientação à construção de seu trabalho dissertativo, sob a administração do
                 <b>Comitê Acadêmico de Ensino e Pesquisa – MERCOSUL</b>, bem como solicitar à vossa compreensão e deferimento
                 de afastamento da docente qualificada, devido à carga horária exigida à pesquisa e orientação, publicada

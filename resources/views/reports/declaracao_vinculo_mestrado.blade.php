@@ -23,6 +23,8 @@
         }
 
         .conteudo {
+            margin-left: auto;
+            margin-right: auto;
             width: 90%;
             margin-top: 15%;
             text-align: justify;
@@ -90,9 +92,9 @@
         </p>
     </div>
 
-    <div class="assinatura">
+    <div class="assinatura" style="margin-left: 5%;">
         <p>
-            <h1><img width="200" height="180" src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
+            <h1><img  src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
         </p>
     </div>
 
