@@ -89,7 +89,7 @@
 
     <div class="assinatura">
         <p>
-            <h1><img width="250" height="250" src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
+            <h1><img width="200" height="200" src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
         </p>
     </div>
 
