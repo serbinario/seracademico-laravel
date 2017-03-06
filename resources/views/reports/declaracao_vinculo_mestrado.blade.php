@@ -11,6 +11,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: 80%;
+            width: 90%;
         }
 
         .cabecalho h1 {
@@ -30,7 +31,9 @@
         .rodape {
             position: absolute;
             bottom: 0;
+            right: 5%;
             font-size: 15px;
+
         }
 
         .rodape > p {
@@ -89,7 +92,7 @@
 
     <div class="assinatura">
         <p>
-            <h1><img width="200" height="200" src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
+            <h1><img width="200" height="180" src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
         </p>
     </div>
 
