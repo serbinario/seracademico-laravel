@@ -98,7 +98,7 @@
         </p>
     </div>
 
-    <div class="rodape" style="margin-left: 5%;">
+    <div class="rodape" style="margin-left: 6%;">
         <p>
             <b>Ps.</b> The above information is a certified copy of data extracted from the official transcript of the named
             individual. This information is confidential and is for verification purposes only.
