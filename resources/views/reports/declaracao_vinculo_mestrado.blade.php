@@ -11,7 +11,6 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: 80%;
-            width: 90%;
         }
 
         .cabecalho h1 {
@@ -24,6 +23,7 @@
         }
 
         .conteudo {
+            width: 90%;
             margin-top: 15%;
             text-align: justify;
         }
