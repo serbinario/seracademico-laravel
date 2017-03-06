@@ -47,9 +47,9 @@
 
                 <td>
                     <div id="conteudo_cabecalho">
-                        <p><b>UniGrendal Limited</b></p>
-                        <p>American Express Argentina S.A.,</p>
-                        <p>Arenales, 1210 CABA, Argentina</p>
+                        <p style="margin-bottom: 0;"><b>UniGrendal Limited</b></p>
+                        <p style="margin-top: 0; margin-bottom: 0;">American Express Argentina S.A.,</p>
+                        <p style="margin-top: 0; margin-bottom: 10%;">Arenales, 1210 CABA, Argentina</p>
                         <p>www.unigrendal.com.br I info@unigrendal.com.br</p>
                     </div>
                 </td>
