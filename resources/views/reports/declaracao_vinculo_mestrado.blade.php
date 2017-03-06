@@ -6,7 +6,7 @@
     <title>Declaração de vínculo</title>
     <style type="text/css">
         body {
-            font-size: 12px;
+            font-size: 14px;
             background-image: url("{{ asset('img/vinculo-mestrado/image3.png') }}");
             background-repeat: no-repeat;
             background-position: center;
@@ -14,7 +14,7 @@
         }
 
         .cabecalho h1 {
-            font-size: 15px;
+            font-size: 16px;
             text-align: center;
         }
 
@@ -63,7 +63,11 @@
     <div class="conteudo">
         <p>
             <b>Estudante:</b> {{$aluno['pessoa']['nome']}}<br>
-            <b>CPF</b>  {{$aluno['pessoa']['cpf']}}<br>
+            <b>CPF</b>  {{ substr($aluno['pessoa']['cpf'],0,3)
+                            .'.'.substr($aluno['pessoa']['cpf'],3,3)
+                            .'.'.substr($aluno['pessoa']['cpf'],6,3)
+                            .'-'.substr($aluno['pessoa']['cpf'],9,2) }}
+            <br>
             <b>Curso:</b> {{ isset($curso->nome) ? $curso->nome : ""  }}<br>
             <b>Seccional:</b> Lusófona<br>
             <b>País:</b> Brasil<br>
