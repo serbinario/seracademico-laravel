@@ -37,11 +37,11 @@
 
 <body>
     <div class="cabecalho">
-        <table>
+        <table style="font-size: 15px;">
             <tr>
                 <td>
                     <h1>
-                        <img src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="">
+                        <img width="200" src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="">
                     </h1>
                 </td>
 
