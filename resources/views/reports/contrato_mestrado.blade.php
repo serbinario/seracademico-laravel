@@ -413,14 +413,14 @@
        ______________,_______________,_______de_________________ de ___________.
    </p>
 
-    <div style="margin-left: 0; margin-top: 5%">
+    <div style="margin-left: 0; margin-top: 15%">
         <h1 style="text-align: left;">
             <table style="margin-bottom: 2%;">
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
             </table>
 
-            <table>
+            <table style="margin-top: 5%;">
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>
                 <tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>
