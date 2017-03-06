@@ -409,7 +409,7 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%; page-break-before: always;">
+   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%;">
        ______________,_______________,_______de_________________ de ___________.
    </p>
 
