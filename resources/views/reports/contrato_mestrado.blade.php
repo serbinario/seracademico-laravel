@@ -445,7 +445,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 100%;">
+        <h1 style="text-align: center; margin-top: 130%;">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
