@@ -409,13 +409,13 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center;">
+   <p style="text-align: center; margin-top: 5%;">
        _______de_________________ de ___________.
    </p>
 
-    <div style="margin-left: 0;">
+    <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
-            <table style="margin-bottom: 1%;">
+            <table style="margin-bottom: 3%;">
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
             </table>
@@ -431,7 +431,7 @@
     <div style="margin-left: 0;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 1%; font-size: 12px;">
+        <table style="margin-bottom: 5%; font-size: 12px;">
             <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
