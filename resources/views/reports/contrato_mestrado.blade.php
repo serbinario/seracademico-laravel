@@ -416,7 +416,7 @@
     <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
             <table>
-                <tr><td><b>___________________________________________</b></td></tr>
+                <tr><td style="font-weight: 800">___________________________________________</td></tr>
                 <tr><td style="font-family: arial; text-align: center"><b>(Assinatura contratante)</b></td></tr>
             </table>
 
