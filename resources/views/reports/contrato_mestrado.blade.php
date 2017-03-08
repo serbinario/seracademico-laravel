@@ -423,7 +423,7 @@
             <table style="">
                 <tr>
                     <td>
-                        <img width="250" style="position:absolute; margin-bottom: 10%;" src="{{ asset('img/assinatura_luciana.png') }}" alt="">
+                        <img width="250" style="position:absolute; top: 10%;" src="{{ asset('img/assinatura_luciana.png') }}" alt="">
                         ___________________________________________
                     </td>
                 </tr>
