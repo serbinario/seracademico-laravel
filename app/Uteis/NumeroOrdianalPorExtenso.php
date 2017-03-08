@@ -41,7 +41,7 @@ class NumeroOrdianalPorExtenso
     {
         # Recuperando os dados da data
         $dia = (int) $data->format('d');
-        $mes = (int) $data->format('m');
+        $mes = ((int) $data->format('m')) - 1;
         $ano = $data->format('Y');
 
         return "{$this->tratamentoDoDia($dia)} dia do mês de {$this->meses[$mes]} de {$ano} ";
