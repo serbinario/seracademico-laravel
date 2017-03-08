@@ -409,18 +409,18 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 8%; margin-bottom: 2%;">
-       ______________,_______________,_______de_________________ de ___________.
+   <p style="text-align: center;">
+       _______de_________________ de ___________.
    </p>
 
-    <div style="margin-left: 0; margin-top: 15%">
+    <div style="margin-left: 0;">
         <h1 style="text-align: left;">
-            <table style="margin-bottom: 2%;">
+            <table style="margin-bottom: 1%;">
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
             </table>
 
-            <table style="margin-top: 5%;">
+            <table style="">
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>
                 <tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>
@@ -431,13 +431,13 @@
     <div style="margin-left: 0;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 1%; font-size: 15px;">
+        <table style="margin-bottom: 1%; font-size: 12px;">
             <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
 
-        <table style="font-size: 15px;">
+        <table style="font-size: 12px;">
             <tr style="margin-bottom: 1%;"><td>2)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
