@@ -22,7 +22,7 @@
         }
 
         .conteudo > #conteudo_1 {
-            margin-left: 20%;
+            margin-left: 10%;
         }
 
         .rodape {
@@ -78,8 +78,8 @@
             <h2>Ex.ma Sec. de Educação do Estado</h2>
         </div>
 
-        <div style="margin-left: 10%; page-break-after: always;">
-            <p style="text-indent: 11%; line-height: 200%; text-align: justify;">
+        <div style="page-break-after: always;">
+            <p style="text-indent: 10%; line-height: 200%; text-align: justify;">
                 Eu, <b>Dra. Maria Eugenia Cunselmo</b>, profissional liberal devidamente habilitada e credenciada junto
                 ao <b>Conselho de Ensino e Pesquisa do MERCOSUL</b>, inscrição/habilitação profissional uno a agência de
                 reconhecimento estadunidense (USA) <b>International Accreditation Organization – IAO</b>, sob registro
@@ -94,11 +94,11 @@
             </p>
         </div>
 
-        <div style="margin-left: 20%;">
+        <div style="margin-left: 10%;">
             <h2>Riscado e traçado do Gabinete do Comitê Acadêmico de Ensino e Pesquisa</h2>
         </div>
 
-        <div style="margin-left: 60%; margin-top: 20%;">
+        <div style="margin-left: 50%; margin-top: 20%;">
             <p>Atenciosamente</p>
         </div>
 
