@@ -416,8 +416,8 @@
     <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
             <table>
-                <tr><td>___________________________________________</td></tr>
-                <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
+                <tr><td><b>___________________________________________</b></td></tr>
+                <tr><td style="font-family: arial; text-align: center"><b>(Assinatura contratante)</b></td></tr>
             </table>
 
             <table style="">
@@ -446,7 +446,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 20%">
+        <h1 style="text-align: center; margin-top: 23%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
