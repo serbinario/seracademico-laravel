@@ -185,7 +185,7 @@
     </p>
 
     <p class="uppercase">
-        MESTRADO INTERNACIONAL EM {{ isset($curso->nome) ? $curso->nome : ""  }}
+        {{ isset($curso->nome) ? $curso->nome : ""  }}
     </p>
 
 
