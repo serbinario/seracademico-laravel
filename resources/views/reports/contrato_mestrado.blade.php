@@ -6,7 +6,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 12px;
+            font-size: 13px;
         }
         .cabecalho {
             width: 80%;
@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 12px;">
+        <table class="table" style="font-size: 13px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
