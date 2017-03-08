@@ -6,7 +6,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-            font-size: 13px;
+            font-size: 14px;
         }
         .cabecalho {
             width: 80%;
@@ -107,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 13px;">
+        <table class="table" style="font-size: 14px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -445,7 +445,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 110%;">
+        <h1 style="text-align: center;">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
