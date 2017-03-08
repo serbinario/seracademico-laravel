@@ -33,6 +33,11 @@
             border-top: solid;
         }
     </style>
+
+    <?php
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+    ?>
 </head>
 
 <body>
@@ -72,7 +77,7 @@
             </p>
 
             <p style="margin-left: 60%; margin-top: 10%; margin-bottom: 20%">
-                Buenos Aires, 03 de agosto de 2016.
+                Buenos Aires, <?php echo strftime('%d de %B de %Y', strtotime('today')); ?>.
             </p>
 
             <h2>Ex.ma Sec. de Educação do Estado</h2>
