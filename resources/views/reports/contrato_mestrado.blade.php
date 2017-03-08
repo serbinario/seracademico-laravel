@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Relatório de notas</title>
+    <title>Contrato - Mestrado</title>
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
@@ -415,7 +415,7 @@
 
     <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
-            <table style="margin-bottom: 3%;">
+            <table>
                 <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">(Assinatura contratante)</td></tr>
             </table>
@@ -446,7 +446,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 30%">
+        <h1 style="text-align: center; margin-top: 20%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
