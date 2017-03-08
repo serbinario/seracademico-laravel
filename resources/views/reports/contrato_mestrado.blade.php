@@ -421,12 +421,7 @@
             </table>
 
             <table style="">
-                <tr>
-                    <td>
-                        <img width="250" style="position:absolute; top: 200%;" src="{{ asset('img/assinatura_luciana.png') }}" alt="">
-                        ___________________________________________
-                    </td>
-                </tr>
+                <tr><td>___________________________________________</td></tr>
                 <tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>
                 <tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>
             </table>
