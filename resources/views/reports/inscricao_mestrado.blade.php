@@ -36,7 +36,7 @@
 
         #imagem-um {
             width: 90px;
-            margin-left: 5%;
+            margin-left: 10%;
         }
 
         #imagem-dois {
@@ -89,7 +89,7 @@
 
 <body>
 
-<div id="header">
+<div id="header" style="margin-bottom: 0;">
     <img id="imagem-um" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo">
     <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">
     <img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">
@@ -230,7 +230,7 @@
 
 <div id="footer">
     <p>
-        Matrícula de:_______________ Data:______/_______/________ Recebido por:____________________Valor: R$_________
+        Matrícula de:___________ Data:______/_______/________ Recebido por:____________________Valor: R$_______
     </p>
 
     <p>
