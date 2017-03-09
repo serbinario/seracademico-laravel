@@ -36,17 +36,17 @@
 
         #imagem-um {
             width: 90px;
-            margin-left: 10%;
+            margin-left: 7%;
         }
 
         #imagem-dois {
             width: 70px;
-            margin-left: 10%;
+            margin-left: 13%;
         }
 
         #imagem-tres {
             width: 60px;
-            margin-left: 10%;
+            margin-left: 13%;
         }
 
         #imagem-quatro {
