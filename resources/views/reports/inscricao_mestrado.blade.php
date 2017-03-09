@@ -57,7 +57,8 @@
         #header h1 {
             font-size: 12px;
             text-align: center;
-            margin-top: 3%;
+            margin-top: 1%;
+            margin-bottom: 1%;
         }
 
         #cursos {
@@ -78,7 +79,7 @@
         }
 
         #footer {
-            margin-bottom: 5%;
+            margin-bottom: 1%;
         }
 
         #footer p {
