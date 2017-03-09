@@ -79,7 +79,9 @@
         }
 
         #footer {
-            margin-bottom: 1%;
+            position: absolute;
+            bottom: 0;
+
         }
 
         #footer p {
@@ -195,38 +197,38 @@
         </table>
     </div>
 
-    <div id="profissional">
-        <table class="table" style="margin-top: 0; margin-bottom: 2%;">
-            <tr>
-                <td><b>Endereço profissional:</b></td>
-                <td>Nº</td>
-            </tr>
+    {{--<div id="profissional">--}}
+        {{--<table class="table" style="margin-top: 0; margin-bottom: 2%;">--}}
+            {{--<tr>--}}
+                {{--<td><b>Endereço profissional:</b></td>--}}
+                {{--<td>Nº</td>--}}
+            {{--</tr>--}}
 
-            <tr>
-                <td>BAIRRO:</td>
-                <td>CIDADE:</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td>BAIRRO:</td>--}}
+                {{--<td>CIDADE:</td>--}}
+            {{--</tr>--}}
 
-            <tr>
-                <td>UF:</td>
-                <td>Cep:</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td>UF:</td>--}}
+                {{--<td>Cep:</td>--}}
+            {{--</tr>--}}
 
-            <tr>
-                <td>Telefone fixo:</td>
-                <td>Celular:</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td>Telefone fixo:</td>--}}
+                {{--<td>Celular:</td>--}}
+            {{--</tr>--}}
 
-            <tr>
-                <td>Cargo que ocupa:</td>
-                <td>Setor:</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td>Cargo que ocupa:</td>--}}
+                {{--<td>Setor:</td>--}}
+            {{--</tr>--}}
 
-            <tr>
-                <td colspan="2">Email institucional:</td>
-            </tr>
-        </table>
-    </div>
+            {{--<tr>--}}
+                {{--<td colspan="2">Email institucional:</td>--}}
+            {{--</tr>--}}
+        {{--</table>--}}
+    {{--</div>--}}
 </div>
 
 <div id="footer">
