@@ -13,7 +13,7 @@
             padding: 0;
         }
 
-        table { page-break-inside:auto }
+        table { page-break-inside:auto; margin-top: 0; margin-bottom: 2%; }
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
@@ -35,22 +35,22 @@
         }
 
         #imagem-um {
-            width: 110px;
+            width: 90px;
             margin-left: 5%;
         }
 
         #imagem-dois {
-            width: 90px;
-            margin-left: 8%;
-        }
-
-        #imagem-tres {
             width: 70px;
             margin-left: 8%;
         }
 
+        #imagem-tres {
+            width: 50px;
+            margin-left: 8%;
+        }
+
         #imagem-quatro {
-            width: 195px;
+            width: 175px;
             margin-left: 5%;
         }
         
@@ -74,10 +74,6 @@
             margin-left: 5%;
             margin-bottom: 1%;
             font-size: 15px;
-        }
-
-        #pessoas table {
-            margin-top: 0;
         }
 
         #footer {
