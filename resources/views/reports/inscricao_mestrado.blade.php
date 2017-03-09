@@ -230,7 +230,7 @@
 
 <div id="footer">
     <p>
-        Matrícula de:_______________ Data:______/_______/________ Recebido por:____________________Valor: R$_________
+        Matrícula de:___________ Data:______/_______/________ Recebido por:____________________Valor: R$_______
     </p>
 
     <p>
