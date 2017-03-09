@@ -41,6 +41,9 @@ class AlunoDocumentoController extends Controller
                 case "7" :
                     $this->declaracaoAfastamento($idAluno);
                     break;
+                case "8" :
+                    $this->inscricao($idAluno);
+                    break;
             }
 
             # Retorno
@@ -75,6 +78,11 @@ class AlunoDocumentoController extends Controller
                 case "7" :
                     $result = $this->declaracaoAfastamento($idAluno);
                     $nameView = "reports.declaracao_afastamento_mestrado";
+                    break;
+                case "8" :
+                    $result = $this->inscricao($idAluno);
+                    $nameView = "reports.inscricao_mestrado";
+                    break;
             }
 
             # Verificando foi vinculado a um curso e turma
@@ -136,6 +144,26 @@ class AlunoDocumentoController extends Controller
      * @throws \Exception
      */
     public function declaracaoAfastamento($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function inscricao($id)
     {
         # Recuperando os dados padrões para esse documento
         $result = $this->getDadosPadraoParaGerarDocumento($id);
