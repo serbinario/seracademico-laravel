@@ -7,7 +7,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
+            font-size: 12px;
             border: 3px solid;
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             margin-left: 5%;
             margin-top: 5%;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
+            font-size: 15px;
             width: 92%;
         }
 
@@ -73,7 +73,7 @@
             margin-top: 3%;
             margin-left: 5%;
             margin-bottom: 1%;
-            font-size: 20px;
+            font-size: 15px;
         }
 
         #pessoas table {
