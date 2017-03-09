@@ -41,17 +41,17 @@
 
         #imagem-dois {
             width: 70px;
-            margin-left: 8%;
+            margin-left: 10%;
         }
 
         #imagem-tres {
             width: 60px;
-            margin-left: 8%;
+            margin-left: 10%;
         }
 
         #imagem-quatro {
             width: 155px;
-            margin-left: 5%;
+            margin-left: 10%;
         }
         
         #header h1 {
