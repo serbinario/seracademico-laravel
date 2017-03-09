@@ -35,22 +35,22 @@
         }
 
         #imagem-um {
-            width: 140px;
+            width: 110px;
             margin-left: 5%;
         }
 
         #imagem-dois {
-            width: 120px;
+            width: 90px;
             margin-left: 8%;
         }
 
         #imagem-tres {
-            width: 100px;
+            width: 70px;
             margin-left: 8%;
         }
 
         #imagem-quatro {
-            width: 225px;
+            width: 195px;
             margin-left: 5%;
         }
         
