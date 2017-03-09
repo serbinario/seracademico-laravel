@@ -81,12 +81,7 @@
         #footer {
             position: absolute;
             bottom: 0;
-            left: 10%;
-
-        }
-
-        #footer p {
-            text-align: center;
+            left: 5%;
         }
     </style>
 </head>
