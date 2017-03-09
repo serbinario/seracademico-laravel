@@ -13,7 +13,7 @@
             padding: 0;
         }
 
-        table { page-break-inside:auto; margin-top: 0; margin-bottom: 2%; }
+        table { page-break-inside:auto; }
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
@@ -45,12 +45,12 @@
         }
 
         #imagem-tres {
-            width: 50px;
+            width: 60px;
             margin-left: 8%;
         }
 
         #imagem-quatro {
-            width: 175px;
+            width: 155px;
             margin-left: 5%;
         }
         
@@ -67,6 +67,7 @@
 
         #cursos table {
             font-weight: bold;
+            width: 100%;
         }
 
         #pessoas h2 {
@@ -118,7 +119,7 @@
     <div id="pessoas">
         <h2>Dados Pessoas</h2>
 
-        <table class="table">
+        <table class="table" style="margin-top: 0; margin-bottom: 2%;">
             <tr>
                 <td colspan="3">Nome: {{ $aluno['pessoa']['nome'] }}</td>
             </tr>
@@ -166,7 +167,7 @@
     </div>
 
     <div id="endereco">
-        <table class="table">
+        <table class="table" style="margin-top: 0; margin-bottom: 2%;">
             <tr>
                 <td><b>Endereço residencial: {{ $aluno['pessoa']['endereco']['logradouro'] ?? '' }}</b></td>
                 <td>Nº {{ $aluno['pessoa']['endereco']['numero'] ?? '' }}</td>
@@ -194,7 +195,7 @@
     </div>
 
     <div id="profissional">
-        <table class="table">
+        <table class="table" style="margin-top: 0; margin-bottom: 2%;">
             <tr>
                 <td><b>Endereço profissional:</b></td>
                 <td>Nº</td>
