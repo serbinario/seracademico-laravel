@@ -22,7 +22,7 @@
             margin-left: 5%;
             margin-top: 5%;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
+            font-size: 12px;
             width: 92%;
         }
 
@@ -55,7 +55,7 @@
         }
         
         #header h1 {
-            font-size: 15px;
+            font-size: 12px;
             text-align: center;
             margin-top: 3%;
         }
@@ -103,7 +103,7 @@
 
 <div id="body">
     <div id="cursos">
-        <table>
+        <table style="font-size: 12px;">
             <tr>
                 <td>(    ) MESTRADO EM EDUCAÇÃO</td>
                 <td>(    ) MESTRADO EM PSICOLOGIA</td>
