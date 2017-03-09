@@ -51,7 +51,7 @@
 
         #imagem-quatro {
             width: 155px;
-            margin-left: 10%;
+            margin-left: 7%;
         }
         
         #header h1 {
