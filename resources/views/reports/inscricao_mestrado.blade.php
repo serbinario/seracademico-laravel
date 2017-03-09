@@ -58,11 +58,11 @@
             font-size: 12px;
             text-align: center;
             margin-top: 1%;
-            margin-bottom: 1%;
+            margin-bottom: 5%;
         }
 
         #cursos {
-            margin-top: 1%;
+            margin-top: 5%;
             margin-left: 5%;
         }
 
@@ -81,6 +81,7 @@
         #footer {
             position: absolute;
             bottom: 0;
+            left: 10%;
 
         }
 
