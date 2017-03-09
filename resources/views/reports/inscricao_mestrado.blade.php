@@ -72,7 +72,7 @@
         }
 
         #pessoas h2 {
-            margin-top: 1%;
+            margin-top: 5%;
             margin-left: 5%;
             margin-bottom: 1%;
             font-size: 12px;
@@ -102,16 +102,16 @@
     <div id="cursos">
         <table style="font-size: 12px;">
             <tr>
-                <td>(    ) MESTRADO EM EDUCAÇÃO</td>
-                <td>(    ) MESTRADO EM PSICOLOGIA</td>
+                <td>({{ $curso->id == 25 ? 'X' : '' }}) MESTRADO EM EDUCAÇÃO</td>
+                <td>({{ $curso->id == 28 ? 'X' : '' }}) MESTRADO EM PSICOLOGIA</td>
             </tr>
             <tr>
-                <td>(    ) MESTRADO EM SERVIÇO SOCIAL</td>
-                <td>(    ) MESTRADO EM POLÍTICAS PÚBLICAS COM ÊNFASE EM SAÚDE</td>
+                <td>({{ $curso->id == 0 ? 'X' : '' }}) MESTRADO EM SERVIÇO SOCIAL</td>
+                <td>({{ $curso->id == 24 ? 'X' : '' }}) MESTRADO EM POLÍTICAS PÚBLICAS COM ÊNFASE EM SAÚDE</td>
             </tr>
             <tr>
-                <td>(    ) MESTRADO EM ADMINISTRAÇÃO</td>
-                <td>(    ) MESTRADO EM CIÊNCIAS JURÍDICAS</td>
+                <td>({{ $curso->id == 27 ? 'X' : '' }}) MESTRADO EM ADMINISTRAÇÃO</td>
+                <td>({{ $curso->id == 26 ? 'X' : '' }}) MESTRADO EM CIÊNCIAS JURÍDICAS</td>
             </tr>
         </table>
     </div>
