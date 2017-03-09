@@ -67,6 +67,7 @@ class AlunoService
             'pessoa.profissao',
             'pessoa.corRaca',
             'pessoa.ufNascimento',
+            'pessoa.cursoSuperior',
             'curriculos'
         ];
 
