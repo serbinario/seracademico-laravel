@@ -179,7 +179,7 @@
             </tr>
 
             <tr>
-                <td>UF: {{ $aluno['pessoa']['endereco']['bairro']['estado']['nome'] ?? '' }}</td>
+                <td>UF: {{ $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['nome'] ?? '' }}</td>
                 <td>Cep: {{ $aluno['pessoa']['endereco']['cep'] ?? '' }}</td>
             </tr>
 
