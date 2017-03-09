@@ -57,11 +57,12 @@
         #header h1 {
             font-size: 12px;
             text-align: center;
-            margin-top: 3%;
+            margin-top: 1%;
+            margin-bottom: 1%;
         }
 
         #cursos {
-            margin-top: 3%;
+            margin-top: 1%;
             margin-left: 5%;
         }
 
@@ -71,14 +72,14 @@
         }
 
         #pessoas h2 {
-            margin-top: 3%;
+            margin-top: 1%;
             margin-left: 5%;
             margin-bottom: 1%;
-            font-size: 15px;
+            font-size: 12px;
         }
 
         #footer {
-            margin-bottom: 5%;
+            margin-bottom: 1%;
         }
 
         #footer p {
@@ -89,7 +90,7 @@
 
 <body>
 
-<div id="header" style="margin-bottom: 0;">
+<div id="header">
     <img id="imagem-um" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo">
     <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">
     <img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">
@@ -230,11 +231,11 @@
 
 <div id="footer">
     <p>
-        Matrícula de:___________ Data:______/_______/________ Recebido por:____________________Valor: R$_______
+        Matrícula de:_________ Data:______/_______/________ Recebido por:____________________Valor: R$_______
     </p>
 
     <p>
-        Assinatura do Aluno: ___________________________________________________________________________________
+        Assinatura do Aluno: ________________________________________________________________________________
     </p>
 </div>
 
