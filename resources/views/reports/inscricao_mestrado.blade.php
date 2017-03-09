@@ -7,7 +7,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 15px;
+            font-size: 12px;
             border: 3px solid;
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
             margin-left: 5%;
             margin-top: 5%;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
+            font-size: 15px;
             width: 92%;
         }
 
@@ -35,22 +35,22 @@
         }
 
         #imagem-um {
-            width: 140px;
+            width: 110px;
             margin-left: 5%;
         }
 
         #imagem-dois {
-            width: 120px;
+            width: 90px;
             margin-left: 8%;
         }
 
         #imagem-tres {
-            width: 100px;
+            width: 70px;
             margin-left: 8%;
         }
 
         #imagem-quatro {
-            width: 225px;
+            width: 195px;
             margin-left: 5%;
         }
         
@@ -73,7 +73,7 @@
             margin-top: 3%;
             margin-left: 5%;
             margin-bottom: 1%;
-            font-size: 20px;
+            font-size: 15px;
         }
 
         #pessoas table {
