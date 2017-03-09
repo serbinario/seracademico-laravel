@@ -149,8 +149,8 @@
             </tr>
 
             <tr>
-                <td style="width: 20%">R.G: {{ $aluno['pessoa']['identidade'] ?? '' }}</td>
-                <td>Órgão emissor: {{ $aluno['pessoa']['orgao_rg'] ?? '' }}</td>
+                <td style="width: 30%">R.G: {{ $aluno['pessoa']['identidade'] ?? '' }}</td>
+                <td style="width: 30%">Órgão emissor: {{ $aluno['pessoa']['orgao_rg'] ?? '' }}</td>
                 <td>Data de expedição: {{ $aluno['pessoa']['data_expedicao'] ?? '' }}</td>
             </tr>
 
