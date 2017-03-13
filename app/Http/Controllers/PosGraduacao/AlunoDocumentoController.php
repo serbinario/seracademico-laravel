@@ -47,6 +47,9 @@ class AlunoDocumentoController extends Controller
                 case "4" :
                     $this->contratoFasup($idAluno);
                     break;
+                case "9" :
+                    $this->inscricao($idAluno);
+                    break;
             }
 
             # Retorno
@@ -86,11 +89,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->contratoFasup($idAluno);
                     $nameView = "reports.contratoFasup";
                     break;
-                /*case "4" :
-                    $result = $this->historico($idAluno);
-                    $nameView = "reports.historico";
-                    return \PDF::loadView($nameView, $result)->stream();
-                    break;*/
+                case "9" :
+                    $result = $this->inscricao($idAluno);
+                    $nameView = "reports.inscricao_fasup";
+                    break;
             }
 
             # Verificando foi vinculado a um curso e turma
@@ -189,6 +191,26 @@ class AlunoDocumentoController extends Controller
     }
 
     /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function inscricao($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
      * @param $idAluno
      * @return array
      * @throws \Exception
@@ -266,102 +288,4 @@ class AlunoDocumentoController extends Controller
                 'fac_turmas.*'
             ])->first();
     }
-
-//    /**
-//     * @param $id
-//     * @return array
-//     * @throws \Exception
-//     */
-//    public function historico($id)
-//    {
-//        # array de retorno
-//        $result = [];
-//
-//        # Recuperando o registro do aluno
-//        $aluno = $this->service->find($id);
-//
-//        # Recuperando o ultimo curriculo do aluno
-//        $curriculo = $aluno->curriculos()->get()->last();
-//
-//        # Checando o currículo
-//        if (!$curriculo) {
-//            throw new \Exception('Esse aluno não tem curso vinculado');
-//        }
-//
-//        # Checanddo a turma do aluno
-//        if (($turma = $curriculo->pivot->turmas()->get()->last())) {
-//            #contador
-//            $count = 0;
-//
-//            # Percorrendo as notas
-//            foreach ($turma->pivot->notas()->get() as $nota) {
-//                # Preenchendo os campos
-//                $result[$count]['aluno'] = $aluno->pessoa->nome;
-//                $result[$count]['disciplina'] = $nota->disciplina->nome;
-//                $result[$count]['carga_horaria'] = $nota->disciplina->carga_horaria;
-//                $result[$count]['nota'] = $nota->nota_final;
-//                $result[$count]['frequencia'] = is_numeric($nota->nota_final) ? '100%' : 'FALTOU';
-//
-//                # Recuperando o professor
-//                $arrayProfessor = \DB::table('fac_professores')
-//                    ->join('fac_calendarios', 'fac_calendarios.professor_id', '=', 'fac_professores.id')
-//                    ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_calendarios.turma_disciplina_id')
-//                    ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
-//                    ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
-//                    ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
-//                    ->where('fac_disciplinas.id', $nota->disciplina->id)
-//                    ->where('fac_turmas.id', $nota->turma->id)
-//                    ->orderBy('fac_calendarios.id', 'DESC')
-//                    ->limit(1)
-//                    ->select([
-//                        'pessoas.nome',
-//                        'fac_professores.instituicao_graduacao_id',
-//                        'fac_professores.instituicao_pos_id',
-//                        'fac_professores.instituicao_mestrado_id',
-//                        'fac_professores.instituicao_doutorado_id',
-//                    ])->get();
-//
-//                # Preenchendo o professor
-//                $result[$count]['professor'] = isset($arrayProfessor[0]->nome) ? $arrayProfessor[0]->nome : null;
-//                $result[$count]['titulacao'] = isset($arrayProfessor[0]) ?
-//                    $this->getTitulacaoProfessor($arrayProfessor[0]) : null;
-//
-//                # incremento
-//                $count++;
-//            }
-//
-//            # Retorno
-//            return ['dados' => $result];
-//        }
-//
-//        # Exceção de falta de turma
-//        throw new \Exception('O aluno não possui turma vinculada');
-//    }
-//
-//    /**
-//     * @param $dados
-//     * @return string
-//     */
-//    private function getTitulacaoProfessor($dados)
-//    {
-//        # Variávle que armazenará o resultado
-//        $result = "";
-//
-//        # Validando os dados de entrada
-//        if (!$dados) {
-//            return $result;
-//        }
-//
-//        # Tratando o retorno
-//        if ($dados->instituicao_doutorado_id) {
-//            $result = "Doutor";
-//        } else if ($dados->instituicao_mestrado_id) {
-//            $result = "Mestre";
-//        } else if ($dados->instituicao_pos_id) {
-//            $result = "Especialista";
-//        }
-//
-//        # Retorno
-//        return $result;
-//    }
 }
