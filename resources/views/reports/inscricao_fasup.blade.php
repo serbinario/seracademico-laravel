@@ -122,7 +122,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Nome do Pai:<span class="column" style="width: 88%">{{ $aluno['pessoa']['nome_pai'] }}</span></td>
+            <td colspan="4">Nome do Pai:<span class="column" style="width: 89%">{{ $aluno['pessoa']['nome_pai'] }}</span></td>
         </tr>
         <tr>
             <td colspan="4">Nome da Mãe: <span class="column" style="width: 88%">{{ $aluno['pessoa']['nome_mae'] }}</span></td>
@@ -145,7 +145,7 @@
         </tr>
         <tr>
             <td colspan="4">
-                Título de Eleitor: Nº <span class="column" style="width: 17%">{{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</span>
+                Título de Eleitor: Nº <span >{{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</span>
                 Zona:<span class="column" style="width: 17%">{{ $aluno['pessoa']['zona'] ?? '' }}</span>
                 Seção:<span class="column" style="width: 17%">{{ $aluno['pessoa']['secao'] ?? '' }}</span>
                 Expedição:<span class="column" style="width: 17%">{{ $aluno['pessoa']['data_expedicao'] ?? '' }}</span>
@@ -198,7 +198,7 @@
         </tr>
     </table>
 
-    <div style="margin-left: 1%; margin-top: 5%">
+    <div style="margin-left: 1%; margin-top: 4%">
         <p>Assinatura do Aluno _______________________________________________________________________________</p>
         <p>Matrícula de :  ANA PAULA SANTANA  &nbsp; Data: ________/________/_____________</p>
         <p>Matrícula recebida por :_____________________________________  Data: _______/________/______________</p>
