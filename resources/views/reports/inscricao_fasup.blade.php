@@ -145,7 +145,7 @@
         </tr>
         <tr>
             <td colspan="4">
-                Título de Eleitor: Nº<span class="column" style="width: 17%">{{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</span>
+                Título de Eleitor: Nº <span class="column" style="width: 17%">{{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</span>
                 Zona:<span class="column" style="width: 17%">{{ $aluno['pessoa']['zona'] ?? '' }}</span>
                 Seção:<span class="column" style="width: 17%">{{ $aluno['pessoa']['secao'] ?? '' }}</span>
                 Expedição:<span class="column" style="width: 17%">{{ $aluno['pessoa']['data_expedicao'] ?? '' }}</span>
@@ -198,7 +198,7 @@
         </tr>
     </table>
 
-    <div style="margin-left: 1%; margin-top: 10%">
+    <div style="margin-left: 1%; margin-top: 5%">
         <p>Assinatura do Aluno _______________________________________________________________________________</p>
         <p>Matrícula de :  ANA PAULA SANTANA  &nbsp; Data: ________/________/_____________</p>
         <p>Matrícula recebida por :_____________________________________  Data: _______/________/______________</p>
