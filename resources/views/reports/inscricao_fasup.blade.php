@@ -80,7 +80,7 @@
     <table class="table" style="font-size: 11px;">
         <tr>
             <td colspan="4">
-                PÓS-GRADUAÇÃO:<span class="column">{{ $curso->nome }}</span>
+                PÓS-GRADUAÇÃO:<span class="column" style="width: 80%">{{ $curso->nome }}</span>
             </td>
         </tr>
 
@@ -198,7 +198,7 @@
         </tr>
     </table>
 
-    <div style="margin-left: 1%; margin-top: 20%">
+    <div style="margin-left: 1%; margin-top: 10%">
         <p>Assinatura do Aluno _______________________________________________________________________________</p>
         <p>Matrícula de :  ANA PAULA SANTANA  &nbsp; Data: ________/________/_____________</p>
         <p>Matrícula recebida por :_____________________________________  Data: _______/________/______________</p>
