@@ -80,7 +80,7 @@
     <table class="table" style="font-size: 11px;">
         <tr>
             <td colspan="4">
-                PÓS-GRADUAÇÃO:<span class="column" style="width: 80%">{{ $curso->nome }}</span>
+                PÓS-GRADUAÇÃO:<span class="column" style="width: 84%">{{ $curso->nome }}</span>
             </td>
         </tr>
 
@@ -122,10 +122,10 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Nome do Pai:<span class="column" style="width: 90%">{{ $aluno['pessoa']['nome_pai'] }}</span></td>
+            <td colspan="4">Nome do Pai:<span class="column" style="width: 88%">{{ $aluno['pessoa']['nome_pai'] }}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Nome da Mãe: <span class="column" style="width: 89%">{{ $aluno['pessoa']['nome_mae'] }}</span></td>
+            <td colspan="4">Nome da Mãe: <span class="column" style="width: 88%">{{ $aluno['pessoa']['nome_mae'] }}</span></td>
         </tr>
         <tr>
             <td style="width: 40%">
