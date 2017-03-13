@@ -77,7 +77,7 @@
 </div>
 
 <div class="conteudo">
-    <table class="table">
+    <table class="table" style="font-size: 11px;">
         <tr>
             <td colspan="4">
                 PÓS-GRADUAÇÃO:<span class="column">{{ $curso->nome }}</span>
