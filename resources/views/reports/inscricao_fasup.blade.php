@@ -31,7 +31,7 @@
         }
 
         .table {
-            font-size: 12px;
+            font-size: 11px;
             font-family: Arial, Helvetica, sans-serif;
             width: 100%;
         }
