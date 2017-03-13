@@ -7,7 +7,7 @@
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             margin: 0;
             padding: 0;
             background-image: url("{{ asset('img/backgroud_fasup_500x529.png') }}");
@@ -27,7 +27,7 @@
         .cabecalho h2 {
             margin-left: 1%;
             margin-top: 10%;
-            font-size: 15px;
+            font-size: 12px;
         }
 
         .table {
