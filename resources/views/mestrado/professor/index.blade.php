@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-
+            {{--Modal--}}
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -71,6 +71,7 @@
                     </div>
                 </div>
             </div>
+            {{--Fim Modal--}}
         </div>
     </div>
     @include('reports.simple.modals.modal_report_mestrado_prof_ata_aniversariantes')
