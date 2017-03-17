@@ -39,7 +39,8 @@ class Professor extends Model implements Transformable
         'pis',
         'pessoa_id',
         'pos_e_graduacao',
-        'tipo_nivel_sistema_id'
+        'tipo_nivel_sistema_id',
+        'termo_biblioteca'
 	];
 
 
