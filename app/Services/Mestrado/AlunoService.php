@@ -95,7 +95,7 @@ class AlunoService
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
-        //$this->tratamentoMatricula($data);
+        $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         # Setando o tipo o tipo do aluno para mestrado
@@ -150,7 +150,6 @@ class AlunoService
         # Regras de negócios pre edição
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
-        //$this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         #Atualizando no banco de dados
@@ -408,9 +407,6 @@ class AlunoService
     }
 
     /**
-     * Método responsável por exucutar regras de negócios
-     * antes da geração da matrícula.
-     *
      * @param array $data
      * @return mixed
      */
@@ -424,9 +420,6 @@ class AlunoService
     }
 
     /**
-     * Método responsável por executar o algoritmo para
-     * geração de metrícula.
-     *
      * @return string
      */
     public function gerarMatricula()
@@ -434,13 +427,19 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
-        # Recuperando todos os alunos
-        $arrayAlunos   = collect($this->repository->all());
-        $lastIncricao  = $arrayAlunos->max('matricula');
+        # Recuperando o último aluno cadastrado
+        $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+
+        # Recuperando a matrícula
+        $lastIncricao = $aluno->matricula;
+
+        # Recuperando o mês
+        $numberMonth    = date('m');
+        $numberSemestre = $numberMonth >= 8 ? 2 : 1;
 
         # Verificando se o vestibular possui vestibulando
         if(!$lastIncricao) {
-            return $now->format('Y') . '0001';
+            return $now->format('Y') . $numberSemestre . '0001';
         }
 
         # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
@@ -449,6 +448,6 @@ class AlunoService
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
 
         # retorno
-        return $now->format('Y') . $newInscricao;
+        return $now->format('Y') . $numberSemestre . $newInscricao;
     }
 }
