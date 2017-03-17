@@ -17,6 +17,7 @@ class ReservaExemplar extends Model implements Transformable
 		'arcevos_id',
         'edicao',
         'status',
+        'status_fila'
 	];
 
     public function reserva()

@@ -17,6 +17,7 @@ class EmprestimoExemplar extends Model implements Transformable
 		'emprestimo_id',
 		'exemplar_id',
 		'taxa_id',
+		'valor_multa'
 	];
 
 	public function emprestimo()

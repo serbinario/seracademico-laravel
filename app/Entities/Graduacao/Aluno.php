@@ -44,7 +44,8 @@ class Aluno extends Model implements Transformable
         'vestibulando_id',
         'path_image',
         'tipo_img',
-        'data_contrato'
+        'data_contrato',
+        'termo_biblioteca'
     ];
 
     /**
