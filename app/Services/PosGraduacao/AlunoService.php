@@ -112,7 +112,7 @@ class AlunoService
 
         #regras de negócios
         $this->tratamentoCampos($data);
-        //$this->tratamentoMatricula($data);
+        $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
 
         # Recuperando a pessoa pelo cpf
@@ -216,7 +216,6 @@ class AlunoService
         #Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoCurso($data);
-        //$this->tratamentoMatricula($data);
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
@@ -556,11 +555,8 @@ class AlunoService
      */
     public function tratamentoMatricula(array &$data) : array
     {
-        # Validando o parâmetro
-       // if(isset($data['gerar_matricula']) && $data['gerar_matricula'] == 1) {
         # Gerando a matrícula
         $data['matricula'] = $this->gerarMatricula();
-        //}
 
         # retorno
         return $data;
@@ -574,13 +570,19 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
-        # Recuperando todos os alunos
-        $arrayAlunos   = collect($this->repository->all());
-        $lastIncricao  = $arrayAlunos->max('matricula');
+        # Recuperando o último aluno cadastrado
+        $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+
+        # Recuperando a matrícula
+        $lastIncricao = $aluno->matricula;
+
+        # Recuperando o mês
+        $numberMonth    = date('m');
+        $numberSemestre = $numberMonth >= 8 ? 2 : 1;
 
         # Verificando se o vestibular possui vestibulando
         if(!$lastIncricao) {
-            return $now->format('Y') . '0001';
+            return $now->format('Y') . $numberSemestre . '0001';
         }
 
         # Recuperando a ultima inscrição do vestibular, algoritmo de incremento
@@ -589,7 +591,7 @@ class AlunoService
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
 
         # retorno
-        return $now->format('Y') . $newInscricao;
+        return $now->format('Y') . $numberSemestre . $newInscricao;
     }
 
     /**
