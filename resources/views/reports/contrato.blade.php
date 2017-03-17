@@ -228,7 +228,7 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
     5. <b>Fica a critério da PRESTADORA DE SERVIÇO </b>&nbsp;&nbsp; a decisão de suspender o Curso a ser iniciado caso não haja o
     preenchimento de 70% (sententa por cento) da capacidade de alunos por turma ou remanejar a data de início escolhida pelo aluno (a),
     mediante acordo entre ambas as partes. Caso o aluno não aceite a mudança o mesmo terá direito a devolução do valor da matrícula.
-</p >
+</p>
 
 <p class="termos">
     6. <b>ATRASO(S) DA(S) MENSALIDADE(S) </b>&nbsp;&nbsp;&nbsp; – O Preço dos Serviços ora contratados, bem como o número de mensalidades e data do vencimento
