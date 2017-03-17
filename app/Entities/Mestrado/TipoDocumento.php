@@ -14,6 +14,12 @@ class TipoDocumento extends Model implements Transformable
 
     protected $fillable = [ 
 		'nome',
+        'tipo_nivel_mestrado_id',
 	];
+
+    public function scopeNivelDeMestrado($query)
+    {
+        return $query->where('tipo_nivel_sistema_id', 3);
+    }
 
 }

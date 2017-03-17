@@ -1,19 +1,18 @@
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Relatório de notas</title>
+    <title>Contrato - Mestrado</title>
     <style type="text/css">
         body {
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
-        }
-        @page {
-            border: 1px solid;
+            font-size: 14px;
         }
         .cabecalho {
             width: 80%;
             margin: 0 auto;
             margin-bottom: 3%;
+            font-size: 15px;
         }
         .cabecalho p {
             text-align: center;
@@ -23,9 +22,10 @@
             width: 100%;
         }
         .conteudo p {
-            font-size: 15px;
             text-align: justify;
             word-spacing: 0.1em;
+            letter-spacing: normal;
+            justify-content: space-between;
         }
         .table {
             width: 100%;
@@ -43,13 +43,6 @@
         .rodape h1 {
             text-align: center;
         }
-        /*.rodape div {
-            margin-left: 60%;
-        }
-        .rodape p {
-            text-align: center;
-            font-weight: bold;
-        }*/
         .titulo_paragrafo {
             font-weight: bold;
             text-decoration: underline;
@@ -94,7 +87,7 @@
 </head>
 <body>
 
-<div class="cabecalho">
+<div class="cabecalho" style="font-size: 15px;">
     <p>
         CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
         BRASILEIROS NO EXTERIOR (MODALIDADE ON-LINE)
@@ -114,7 +107,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table">
+        <table class="table" style="font-size: 14px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -158,8 +151,7 @@
                 <td>Local Nasc: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
             </tr>
             <tr>
-                <td colspan="3">Área da Pós-Graduação: </td>
-                <td>Ano: </td>
+                <td colspan="4">Área da Pós-Graduação: </td>
             </tr>
         </table>
     </div>
@@ -193,11 +185,11 @@
     </p>
 
     <p class="uppercase">
-        MESTRADO INTERNACIONAL EM {{ isset($curso->nome) ? $curso->nome : ""  }}
+        {{ isset($curso->nome) ? $curso->nome : ""  }}
     </p>
 
 
-    <table class="tabela-de-descricao" cellspacing="0" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
         <thead>
         <tr>
             <th style="width: 80%">Inscrição</th>
@@ -216,7 +208,7 @@
         </tbody>
     </table>
 
-    <table class="tabela-de-descricao" cellspacing="0" style="margin-top: 3%" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
         <thead>
         <tr>
             <th>Diplomação</th>
@@ -230,12 +222,13 @@
     </table>
 
     <p class="titulo_paragrafo">
-        Clausula Segunda
+        Cláusula Segunda
     </p>
 
     <p class="paragrafo">
-        As <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
-            APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES BRASILEIROS</b> de sua zona.
+        <span>As</span> <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
+        APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES
+        BRASILEIROS</b> de sua zona.
     </p>
 
     <p class="titulo_paragrafo">
@@ -348,10 +341,10 @@
         custear as despesas decorrentes da emissão e envio dos mesmos.
     </p>
 
-    <table class="tabela-de-descricao" cellspacing="0" width="45%">
+    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
         <thead>
         <tr>
-            <th style="width: 80%">Documento</th>
+            <th style="width: 75%">Documento</th>
             <th>Valor</th>
         </tr>
         </thead>
@@ -384,7 +377,7 @@
     </p>
 
     <p class="paragrafo">
-        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito as <b>Contratadas</b>, sob pena de
+        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span> <b>Contratadas</b>, sob pena de
         terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior, constante deste contrato.
     </p>
 
@@ -416,18 +409,44 @@
         igual teor e forma, para que produza seus jurídicos e legais efeitos.
     </p>
 
-   <p style="text-align: center; margin-top: 20%; margin-bottom: 10%;">
-       ______________/_______,_______de______________________________de_____________________.
+   <p style="text-align: center; margin-top: 10%;">
+       _______de_________________ de ___________.
    </p>
 
-    <div style="margin-top: 10%; margin-left: 0;">
+    <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
-            <img src="{{ asset('/img/assinatura_contrato_mestrado.png') }}" alt="">
+            <table>
+                <tr><td>___________________________________________</td></tr>
+                <tr><td style="font-family: arial; text-align: center"><b>(Assinatura contratante)</b></td></tr>
+            </table>
+
+            <table style="">
+                <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
+                {{--<tr><td>___________________________________________</td></tr>--}}
+                {{--<tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>--}}
+                {{--<tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>--}}
+            </table>
         </h1>
     </div>
 
+    <div style="margin-left: 0;">
+        <h3 style="text-align: left;">Testemunhas</h3>
+
+        <table style="margin-bottom: 1%; font-size: 12px;">
+            <tr style="margin-bottom: 1%"><td>1)</td></tr>
+            <tr><td>RG nº</td></tr>
+            <tr><td>CPF nº</td></tr>
+        </table>
+
+        <table style="font-size: 12px;">
+            <tr style="margin-bottom: 1%;"><td>2)</td></tr>
+            <tr><td>RG nº</td></tr>
+            <tr><td>CPF nº</td></tr>
+        </table>
+    </div>
+
     <div>
-        <h1 style="margin-top: 75%; text-align: center">
+        <h1 style="text-align: center; margin-top: 24%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>

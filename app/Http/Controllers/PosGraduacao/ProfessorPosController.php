@@ -41,7 +41,8 @@ class ProfessorPosController extends Controller
         'CorRaca',
         'Titulacao',
         'Instituicao',
-        'Religiao'
+        'Religiao',
+        'SimpleReport|byCrud,9'
     ];
 
     /**
@@ -59,7 +60,11 @@ class ProfessorPosController extends Controller
      */
     public function index()
     {
-        return view('posGraduacao.professor.index');
+        #Carregando os dados para o cadastro
+        $loadFields = $this->service->load($this->loadFields);
+
+        #retorno
+        return view('posGraduacao.professor.index', compact('loadFields'));
     }
 
     /**

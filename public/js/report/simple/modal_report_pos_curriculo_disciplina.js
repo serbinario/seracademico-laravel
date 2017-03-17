@@ -4,7 +4,7 @@ function runSimpleReportPosCurriculoDisciplina()
     // Definindo os models
     var dados =  {
         'models' : [
-            'PosGraduacao\\Curriculo|posGraduacao',
+            'PosGraduacao\\Curriculo|posGraduacaoAndActive',
         ]
     };
 

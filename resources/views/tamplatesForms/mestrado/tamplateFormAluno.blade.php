@@ -31,7 +31,7 @@
 
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
-                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'disabled' => true)) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
         </div>
@@ -98,8 +98,8 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[estado_civis_id]', 'Estado Civil ') !!}
-                                {!! Form::select('pessoa[estado_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estado_civis_id]'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
+                                {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}

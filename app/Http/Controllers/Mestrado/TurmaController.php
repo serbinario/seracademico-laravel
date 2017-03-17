@@ -32,7 +32,7 @@ class TurmaController extends Controller
         'Turno',
         'Sala|situacao,1',
         'Professor|getValues',
-        'SimpleReport|byCrud,6',
+        'SimpleReport|byCrud,7',
         'Sede'
     ];
 
