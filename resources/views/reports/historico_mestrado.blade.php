@@ -8,18 +8,15 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 11px;
             border: 4px solid #0000cc;
-            padding: 1%;
-            background-image: url("{{ asset('img/marca_dagua_fasup_600.png')  }}");
-            background-position: center;
-            background-repeat: no-repeat;
+            padding: 2%;
         }
 
         h1 {font-size: 14px;}
         h2 {font-size: 13px;}
         h3 {font-size: 12px;}
 
-        .cabecalho h1 img {
-            margin-left: 5%;
+        .cabecalho h1 {
+            text-align: center;
         }
 
         .cabecalho .titulo h2,
@@ -33,8 +30,8 @@
         }
 
         .corpo {
-            margin-left: 3%;
-            margin-top: 5%;
+            margin-left: auto;
+            margin-top: auto;
         }
 
         .corpo .table_dados_pessoais {
@@ -72,7 +69,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img src="{{ asset('img/fasup.png') }}" alt="FASUP">
+        <img width="200" src="{{ asset('img/logo_alpha_treinamentos.png') }}" alt="FASUP">
     </h1>
 
     <div class="titulo">
@@ -128,23 +125,23 @@
 
     <table class="table_grade_curricular" cellspacing="0">
         <thead>
-            <tr>
-                <td style="width: 50%; text-align: center;"><b>Disciplina</b></td>
-                <td style="width: 30%; text-align: center;"><b>Carga Horária</b></td>
-                <td style="width: 20%; text-align: center;"><b>Nota</b></td>
-            </tr>
+        <tr>
+            <td style="width: 50%; text-align: center;"><b>Disciplina</b></td>
+            <td style="width: 30%; text-align: center;"><b>Carga Horária</b></td>
+            <td style="width: 20%; text-align: center;"><b>Nota</b></td>
+        </tr>
         </thead>
 
         <tbody>
-            @foreach($notas as $nota)
-                <tr>
-                    <td style="padding-left: 1%;">  {{ $nota['disciplina']['nome'] ?? '' }} </td>
-                    <td style="text-align: center">
-                        {{ $nota['disciplina']['carga_horaria_total'] ?? $nota['disciplina']['carga_horaria'] ?? 0 }}h
-                    </td>
-                    <td style="text-align: center"> {{ $nota['disciplina']['nota'] ?? 'FALTA' }} </td>
-                </tr>
-            @endforeach
+        @foreach($notas as $nota)
+            <tr>
+                <td style="padding-left: 1%;">  {{ $nota['disciplina']['nome'] ?? '' }} </td>
+                <td style="text-align: center">
+                    {{ $nota['disciplina']['carga_horaria_total'] ?? $nota['disciplina']['carga_horaria'] ?? 0 }}h
+                </td>
+                <td style="text-align: center"> {{ $nota['disciplina']['nota'] ?? 'FALTA' }} </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </div>

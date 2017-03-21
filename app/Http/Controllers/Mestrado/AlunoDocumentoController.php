@@ -2,6 +2,7 @@
 
 namespace Seracademico\Http\Controllers\Mestrado;
 
+use Illuminate\Support\Facades\App;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Mestrado\AlunoService;
 use Seracademico\Uteis\NumeroOrdianalPorExtenso;
@@ -44,6 +45,9 @@ class AlunoDocumentoController extends Controller
                 case "8" :
                     $this->inscricao($idAluno);
                     break;
+                case "11" :
+                    $this->historico($idAluno);
+                    break;
             }
 
             # Retorno
@@ -82,6 +86,10 @@ class AlunoDocumentoController extends Controller
                 case "8" :
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_mestrado";
+                    break;
+                case "11" :
+                    $result = $this->historico($idAluno);
+                    $nameView = "reports.historico_mestrado";
                     break;
             }
 
@@ -177,6 +185,31 @@ class AlunoDocumentoController extends Controller
         # retorno dos dados
         return $result;
     }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function historico($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Recuperando as notas do aluno
+        $notasDoAluno = $result['aluno']->curriculos->last()
+            ->pivot->turmas->last()
+            ->pivot->notas()
+            ->with('disciplina', 'turma')
+            ->get();
+
+        #Adicionando as notas ao array de resultado
+        $result['notas'] = $notasDoAluno->toArray();
+
+        # retorno dos dados
+        return $result;
+    }
+
 
 
     /**
