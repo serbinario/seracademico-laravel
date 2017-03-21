@@ -716,5 +716,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepository::class,
             \Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\InstituicaoRepository::class,
+            \Seracademico\Repositories\InstituicaoRepositoryEloquent::class
+        );
     }
 }
