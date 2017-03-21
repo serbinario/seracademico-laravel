@@ -72,11 +72,6 @@
         <img width="200" src="{{ asset('img/logo_alpha_treinamentos.png') }}" alt="FASUP">
     </h1>
 
-    <div class="titulo">
-        <h1>FACULDADE DE SAÚDE DE PAULISTA</h1>
-        <h2>Portaria n° 59 de 19/01/2011 – CNPJ nº 05.783.107/0001-77</h2>
-    </div>
-
     <div class="subtitulo">
         <h2>HISTÓRICO ESCOLAR</h2>
     </div>
