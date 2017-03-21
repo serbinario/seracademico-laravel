@@ -324,6 +324,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('updatePretensao/{id}', ['as' => 'updatePretensao', 'uses' => 'Report\ReportPretensaoController@updatePretensao']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
 
+                #Rota de instituição
+                Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'PosGraduacao\AlunoController@storeInstituicao']);
+
                 #Rotas de Documentos
                 Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@gerarDocumento']);
                 Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@checkDocumento']);

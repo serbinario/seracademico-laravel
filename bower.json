@@ -48,6 +48,7 @@
     "select2-bootstrap-theme": "^0.1.0-beta.9",
     "bootstrap-growl": "remarkable-bootstrap-notify#2.0.1",
     "jquery-slimscroll": "jquery.slimscroll#^1.3.8",
-    "fastclick": "^1.0.6"
+    "fastclick": "^1.0.6",
+    "selectize": "^0.12.4"
   }
 }
