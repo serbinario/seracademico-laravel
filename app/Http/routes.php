@@ -9,6 +9,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     });
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
+
+        #Rota de instituição
+        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
+            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
+        });
+
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
             Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);
@@ -323,9 +329,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('editPretensao/{id}', ['as' => 'editPretensao', 'uses' => 'Report\ReportPretensaoController@editPretensao']);
                 Route::post('updatePretensao/{id}', ['as' => 'updatePretensao', 'uses' => 'Report\ReportPretensaoController@updatePretensao']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'PosGraduacao\AlunoController@getImgAluno']);
-
-                #Rota de instituição
-                Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'PosGraduacao\AlunoController@storeInstituicao']);
 
                 #Rotas de Documentos
                 Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'PosGraduacao\AlunoDocumentoController@gerarDocumento']);
