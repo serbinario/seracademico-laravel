@@ -225,7 +225,7 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
-
+                @endrole
 
                 <li>
                     <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -245,7 +245,7 @@
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="flaticon-settings"></i> Configurações</a></li>
                     </ul>
                 </li>
-                @endrole
+
 
 
                 @role('biblioteca')
