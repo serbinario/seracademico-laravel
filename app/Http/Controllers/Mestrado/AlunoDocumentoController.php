@@ -64,6 +64,10 @@ class AlunoDocumentoController extends Controller
      */
     public function gerarDocumento($tipoDoc, $idAluno)
     {
+        // Setando a localidade da aplicação
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+        
         try {
             # Variáveis úteis
             $result = [];
@@ -206,6 +210,22 @@ class AlunoDocumentoController extends Controller
         #Adicionando as notas ao array de resultado
         $result['notas'] = $notasDoAluno->toArray();
 
+        # Alterando a carga horária para a do currículo
+        foreach($result['notas'] as &$nota) {
+            $carga_horaria_curriculo = $this->getCargaHorariaDoCurriculo(
+                $nota['disciplina']['id'],
+                $nota['turma']['curriculo_id']
+            );
+
+            $nota['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0];
+        }
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
         # retorno dos dados
         return $result;
     }
@@ -289,5 +309,18 @@ class AlunoDocumentoController extends Controller
             ->select([
                 'fac_turmas.*'
             ])->first();
+    }
+
+    /**
+     * @param $idDisciplina
+     * @param $idCurriculo
+     * @return mixed
+     */
+    private function getCargaHorariaDoCurriculo($idDisciplina, $idCurriculo)
+    {
+        return \DB::table('fac_curriculo_disciplina')
+            ->where('fac_curriculo_disciplina.disciplina_id', $idDisciplina)
+            ->where('fac_curriculo_disciplina.curriculo_id', $idCurriculo)
+            ->lists('carga_horaria_total');
     }
 }
