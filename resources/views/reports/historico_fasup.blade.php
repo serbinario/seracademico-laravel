@@ -98,8 +98,8 @@
             <td colspan="2"><b>DADOS PESSOAIS</b></td>
         </tr>
         <tr>
-            <td style="width: 60%">Aluno(a): {{ utf8_decode($aluno['pessoa']['nome'] ??  "")}}</td>
-            <td style="width: 40%">Matrícula: {{ utf8_decode($aluno['matricula'] ??  "")}}</td>
+            <td style="width: 60%">Aluno(a): {{ $aluno['pessoa']['nome'] ??  "" }}</td>
+            <td style="width: 40%">Matrícula: {{ $aluno['matricula'] ??  ""}}</td>
         </tr>
         <tr>
             <td style="width: 50%">RG: {{ utf8_decode($aluno['pessoa']['identidade'] ??  "")}}</td>
