@@ -685,16 +685,4 @@ class AlunoService
         #retorno
         return $result;
     }
-
-    /**
-     * @param $data
-     */
-    public function inserirInstituicaoSelect($data) {
-
-        #
-        $novaInstituicao = $this->instituicaoRepository->create($data);
-
-        #
-        return $novaInstituicao;
-    }
 }

@@ -407,9 +407,9 @@
                                         <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
                                     @endif
                                 </select>
-                                {{--<span style="margin-left:16px;">--}}
-                                    {{--<a id="linkNovaInstituicao">Nova Instituição</a>--}}
-                                {{--</span>--}}
+                                <span style="margin-left:16px;">
+                                    <a id="linkNovaInstituicao">Nova Instituição</a>
+                                </span>
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
@@ -417,7 +417,7 @@
                             </div>
                         </div>
 
-                        {{--<div class="row">
+                        <div class="row">
                             <div class="col-md-4 form-group">
                                 <div class="input-group">
                                     <input type="text" id="novaInstituicao" class="form-control">
@@ -426,7 +426,7 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -789,7 +789,7 @@
 @section('javascript')
     <script type="text/javascript">
 
-        /*//
+        //
         $('#linkNovaInstituicao').on('click', function(){
             $('#linkNovaInstituicao').hide();
             $('#novaInstituicao').show();
@@ -808,11 +808,11 @@
                 //Persistindo o dado inserido
                 $.ajax({
                     type: 'POST',
-                    url: ' route('seracademico.posgraduacao.aluno.storeInstituicao')  ',
+                    url: '{{ route('seracademico.instituicao.storeInstituicao') }}',
                     data: {nome : novaInstituicao},
                     datatype: 'json',
                     headers: {
-                        'X-CSRF-TOKEN' : '  csrf_token() '
+                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
                     },
                 }).done(function(retorno) {
                     // Adiciona um novo
@@ -825,7 +825,7 @@
                     $('#novaInstituicao').val("");
                 });
             }
-        })*/
+        })
 
         //
         Webcam.set({
@@ -1101,9 +1101,9 @@
         // Evento para carregar as sedes a partir do
         // curso selecionado
         $(document).ready(function () {
-            /*//Ocultando o campo p/ adição de nova instituição
+            //Ocultando o campo p/ adição de nova instituição
             $('#novaInstituicao').hide();
-            $('#addInstituicao').hide();*/
+            $('#addInstituicao').hide();
 
             var cursoId = $('#curso_id').val();
 

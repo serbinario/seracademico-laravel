@@ -207,7 +207,7 @@ class AlunoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-dd($data);
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -393,25 +393,6 @@ dd($data);
             return response($model->path_image) ->header('Content-Type', 'image/jpeg');
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
-        }
-    }
-
-    /**
-     * Metodo de controle de inserção de dados no select de instituição
-     */
-    public function storeInstituicao(Request $request) {
-
-        try {
-            #
-            $dados = $request->all();
-
-            #Executando a ação
-            $novaInstituicao = $this->service->inserirInstituicaoSelect($dados);
-
-            #
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }
