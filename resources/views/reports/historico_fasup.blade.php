@@ -8,7 +8,7 @@
             font-family: Arial, Helvetica, AppleGothic, sans-serif;
             font-size: 11px;
             border: 4px solid #0000cc;
-            padding: 1%;
+            padding: 2%;
             background-image: url("{{ asset('img/marca_dagua_fasup_600.png')  }}");
             background-position: center;
             background-repeat: no-repeat;
@@ -33,7 +33,6 @@
         }
 
         .corpo {
-            margin-left: 3%;
             margin-top: 5%;
         }
 
