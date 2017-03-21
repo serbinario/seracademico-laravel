@@ -378,13 +378,13 @@ class UtilController extends Controller
             $columnWhere    = $request->get('columnWhere');
             $valueNotWhere  = $request->get('valueNotWhere');
 
-//            #Validando os parametros
-//            if($searchValue == null || $tableName == null || $fieldName == null || $pageValue == null) {
-//                throw new \Exception('Parametros inválidos');
-//            }
+           #Validando os parametros
+           /*if($searchValue == null || $tableName == null || $fieldName == null || $pageValue == null) {
+                throw new \Exception('Parametros inválidos');
+           }*/
 
             #preparando a consulta
-            $qb = DB::table($tableName)->select('id', 'nome');
+            /*$qb = DB::table($tableName)->select('id', 'nome');
             $qb->leftJoin(\DB::raw('fac_alunos'), function ($join) {
                 $join->on('fac_alunos.pessoa_id', '=', 'pessoas.id')
                 ;
@@ -392,20 +392,45 @@ class UtilController extends Controller
             $qb->leftJoin(\DB::raw('pos_alunos'), function ($join) {
                 $join->on('pos_alunos.pessoa_id', '=', 'pessoas.id')
                 ;
-            });
+            });*/
+
             #preparando a consulta
-            $qb = DB::table($tableName)->select('pessoas.id as pessoa_id', 'pessoas.nome as nome');
+            $qb = DB::table($tableName);
             $qb->skip($pageValue);
             $qb->take(10);
             $qb->orderBy('nome', 'asc');
             $qb->where('pessoas.' . $fieldName, 'like', "%$searchValue%");
-            # Pega só os alunos de graduação
+
+            # tratando as consulta de acordo com o tipo de pessoa
             if($parametro == '1') {
                 $qb = $this->whereGraduacao($qb);
-            } else if ($parametro == '2') {
+                $qb->join(\DB::raw('fac_alunos'), function ($join) {
+                    $join->on('fac_alunos.pessoa_id', '=', 'pessoas.id')
+                    ;
+                });
+                $qb->orWhere('fac_alunos.matricula', 'like', "%$searchValue%");
+                $qb->select('pessoas.id as pessoa_id',
+                    'pessoas.nome as nome',
+                    'fac_alunos.id as id_graduacao');
+            } else if ($parametro == '2' || $parametro == '3') {
                 $qb = $this->wherePosMestrado($parametro, $qb);
-            } else if ($parametro == '3') {
+                $qb->join(\DB::raw('pos_alunos'), function ($join) {
+                    $join->on('pos_alunos.pessoa_id', '=', 'pessoas.id')
+                    ;
+                });
+                $qb->orWhere('pos_alunos.matricula', 'like', "%$searchValue%");
+                $qb->select('pessoas.id as pessoa_id',
+                    'pessoas.nome as nome',
+                    'pos_alunos.id as id_pos');
+            } else if ($parametro == '4') {
                 $qb = $this->whereProfessor($qb);
+                $qb->join(\DB::raw('fac_professores'), function ($join) {
+                    $join->on('fac_professores.pessoa_id', '=', 'pessoas.id')
+                    ;
+                });
+                $qb->select('pessoas.id as pessoa_id',
+                    'pessoas.nome as nome',
+                    'fac_professores.id as id_professor');
             }
 
 
@@ -429,7 +454,7 @@ class UtilController extends Controller
 
             #executando a consulta e recuperando os dados
             $resultTotal = $qb->get();
-            
+
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
@@ -439,10 +464,30 @@ class UtilController extends Controller
 
             #criando o array de retorno
             foreach ($resultItems as $item) {
-                $result[] = [
-                    "id" => $item->pessoa_id,
-                    "text" => $item->nome
-                ];
+                if($parametro == '1') {
+                    $result[] = [
+                        "id" => $item->pessoa_id,
+                        "text" => $item->nome,
+                        'id_graduacao' => $item->id_graduacao,
+                    ];
+                } else if ($parametro == '2' || $parametro == '3') {
+                    $result[] = [
+                        "id" => $item->pessoa_id,
+                        "text" => $item->nome,
+                        'id_pos' => $item->id_pos
+                    ];
+                } else if ($parametro == '4') {
+                    $result[] = [
+                        "id" => $item->pessoa_id,
+                        "text" => $item->nome,
+                        'id_professor' => $item->id_professor
+                    ];
+                } else {
+                    $result[] = [
+                        "id" => $item->pessoa_id,
+                        "text" => $item->nome
+                    ];
+                }
             }
 
             $resultRetorno = [
@@ -518,9 +563,15 @@ class UtilController extends Controller
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-                //->where('pos_alunos.tipo_aluno_id', null)
+                ->where('pos_alunos.tipo_aluno_id', null)
                 ->whereRaw('pos_alunos.pessoa_id = pessoas.id');
         });
+
+        /*if($tipo == '2') {
+            $query->where('pos_alunos.tipo_aluno_id', 3);
+        } else if ($tipo == '3') {
+            $query->where('pos_alunos.tipo_aluno_id', 3);
+        }*/
 
         return $query;
     }
@@ -533,11 +584,12 @@ class UtilController extends Controller
         $query->whereExists(function ($query) {
             $query->select(\DB::raw("fac_professores.id"))
                 ->from('fac_professores')
-                ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
-                ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
-                ->where('tipo_nivel_sistema.id', '=' , 1)
-                ->orWhere('fac_professores.pos_e_graduacao', '=' , 1)
-                ->whereRaw('fac_professores.pessoa_id = pessoas.id');
+                ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id');
+                //->whereRaw('fac_professores.pessoa_id = pessoas.id');
+               // ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id');
+                //->where('tipo_nivel_sistema.id', '=' , 1)
+                //->orWhere('fac_professores.pos_e_graduacao', '=' , 1)
+                //->where('fac_professores.pessoa_id = pessoas.id');
         });
 
         return $query;

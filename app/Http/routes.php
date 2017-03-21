@@ -1005,11 +1005,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('dataDevolucaoEmprestimo', ['as' => 'dataDevolucaoEmprestimo', 'uses' => 'Biblioteca\EmprestarController@dataDevolucao']);
             Route::get('viewDevolucaoEmprestimo', ['as' => 'viewDevolucaoEmprestimo', 'uses' => 'Biblioteca\EmprestarController@viewDevolucao']);
             Route::get('devolucaoEmprestimo', ['as' => 'devolucaoEmprestimo', 'uses' => 'Biblioteca\EmprestarController@gridDevolucao']);
+            Route::get('devolucaoEmprestimoPorAluno', ['as' => 'devolucaoEmprestimoPorAluno', 'uses' => 'Biblioteca\EmprestarController@gridDevolucaoPorAluno']);
             Route::get('confirmarDevolucao/{id}', ['as' => 'confirmarDevolucao', 'uses' => 'Biblioteca\EmprestarController@confirmarDevolucao']);
+            Route::get('confirmarDevolucaoPorAluno/{id}', ['as' => 'confirmarDevolucaoPorAluno', 'uses' => 'Biblioteca\EmprestarController@confirmarDevolucaoPorAluno']);
             Route::get('renovacao/{id}', ['as' => 'renovacao', 'uses' => 'Biblioteca\EmprestarController@renovacao']);
             Route::post('findWhereEmprestimo', ['as' => 'findWhereEmprestimo', 'uses' => 'Biblioteca\EmprestarController@findWhereEmprestimo']);
             Route::post('confirmarEmprestimo', ['as' => 'confirmarEmprestimo', 'uses' => 'Biblioteca\EmprestarController@confirmarEmprestimo']);
             Route::get('deleteEmprestimo/{id}/{id2}', ['as' => 'deleteEmprestimo', 'uses' => 'Biblioteca\EmprestarController@deleteEmprestimo']);
+            
+            //baixa pagamento
+            Route::get('baixaPagamento/{id}', ['as' => 'baixaPagamento', 'uses' => 'Biblioteca\EmprestarController@baixaPagamento']);
+            Route::get('baixaPagamentoPorAluno/{id}', ['as' => 'baixaPagamentoPorAluno', 'uses' => 'Biblioteca\EmprestarController@baixaPagamentoPorAluno']);
+            
+            //Termo de biblioteca
+            Route::post('validarTermoBiblioteca', ['as' => 'validarTermoBiblioteca', 'uses' => 'Biblioteca\EmprestarController@validarTermoBiblioteca']);
+            Route::post('confirmarTermoBiblioteca', ['as' => 'confirmarTermoBiblioteca', 'uses' => 'Biblioteca\EmprestarController@confirmarTermoBiblioteca']);
 
 
             Route::get('indexReserva', ['as' => 'indexReserva', 'uses' => 'Biblioteca\ReservaController@index']);
@@ -1021,6 +1031,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('findWhereReserva', ['as' => 'findWhereReserva', 'uses' => 'Biblioteca\ReservaController@findWhereReserva']);
             Route::get('deleteReserva/{id}/{id2}', ['as' => 'deleteReserva', 'uses' => 'Biblioteca\ReservaController@deleteReserva']);
             Route::post('confirmarReserva', ['as' => 'confirmarReserva', 'uses' => 'Biblioteca\ReservaController@confirmarReserva']);
+            Route::post('listaPessoasReservas', ['as' => 'listaPessoasReservas', 'uses' => 'Biblioteca\ReservaController@listaPessoasReservas']);
 
 
             Route::get('indexColecao', ['as' => 'indexColecao', 'uses' => 'Biblioteca\ColecaoController@index']);

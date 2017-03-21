@@ -44,6 +44,8 @@
                                 <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
+                                <th>Data de previsão</th>
+                                <th>Quantidade de reservas</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -54,7 +56,9 @@
                                 <th>Cutter</th>
                                 <th>Subtítulo</th>
                                 <th>Edição</th>
-                                <th style="width: 5%;">Acão</th>
+                                <th>Data de previsão</th>
+                                <th>Quantidade de reservas</th>
+                                <th style="width: 10%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -88,7 +92,8 @@
                                 <option value="">Tipo pessoa</option>
                                 <option value="1">Graduação</option>
                                 <option value="2">Pós-graduação</option>
-                                <option value="3">Professor</option>
+                                <option value="3">Mestrado</option>
+                                <option value="4">Professor</option>
                             </select>
                         </div>
                         <div class="form-group col-md-5">
@@ -98,7 +103,7 @@
                         </div>
                         <div class="form-group col-md-3" style="margin-top: -8px">
                             <div class="checkbox checkbox-primary">
-                                {!! Form::checkbox('emprestimoEspecial', 1, null, array('class' => 'form-control', 'id' => 'emprestimoEspecial')) !!}
+                                <input type="checkbox" class="form-control" id="emprestimoEspecial">
                                 {!! Form::label('emprestimoEspecial', 'Para empréstimo especial?', false) !!}
                             </div>
                         </div>
@@ -126,6 +131,8 @@
             </div>
         </div>
     </div>
+
+    @include('biblioteca.controle.reserva.modal_fila_de_reserva')
 @stop
 
 @section('javascript')
@@ -144,10 +151,13 @@
                 {data: 'cutter', name: 'bib_arcevos.cutter'},
                 {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
+                {data: 'previsao', name: 'previsao', orderable: false, searchable: false},
+                {data: 'qtdReservas', name: 'qtdReservas', orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
+        // Adicionar um acervos para reserva
         $('#sala-grid tbody').on('click', '.add', function (event) {
             event.preventDefault();
             if ($(this).parent().parent().hasClass('selected')) {
@@ -164,7 +174,7 @@
             var edicao = "";
 
             if(data['edicao'] == "") {
-                edicao = 'null'
+                edicao = ""
             } else {
                 edicao = data['edicao'];
             }
@@ -174,6 +184,7 @@
                 id_emp2 = "";
                 $('#id_emprestimo').val("");
             }
+
             if(data['id_emp'] == '1'){ id_emp1 = data['id_emp']; $('#id_emprestimo').val(id_emp1);}
             if(data['id_emp'] == '2'){ id_emp2 = data['id_emp']; $('#id_emprestimo').val(id_emp2);}
 
@@ -190,7 +201,7 @@
                 'id_acervo': data['id_acervo'],
                 'edicao': edicao,
                 'tipo_pessoa': $('#tipo_pessoa').val(),
-                'emprestimo_especial': $('#emprestimoEspecial').val(),
+                'emprestimo_especial': $('#emprestimoEspecial').is(":checked") ? '1' : '0'
             };
 
             if (!$('#pessoa').val()) {
@@ -231,6 +242,44 @@
             }
 
         });
+
+        // Exibir pessoas na fila de reservas
+        $('#sala-grid tbody').on('click', '.fila-reserva', function (event) {
+            event.preventDefault();
+            if ($(this).parent().parent().hasClass('selected')) {
+                $(this).parent().parent().removeClass('selected');
+                return false;
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).parent().parent().addClass('selected');
+            }
+
+            var data = table.rows('.selected').data()[0];
+            var acervo = data['id_acervo'];
+
+            jQuery.ajax({
+                type: 'POST',
+                url: "{!! route('seracademico.biblioteca.listaPessoasReservas') !!}",
+                data: {'acervo' : acervo},
+                datatype: 'json'
+            }).done(function (retorno) {
+
+                var html = "";
+
+                for (var i = 0; i < retorno.length; i++) {
+                    html += "<tr>";
+                    html += "<td>"+retorno[i]['nome']+"</td>";
+                    html += "</tr>";
+                }
+
+                $('#table-fila tbody tr').remove();
+                $('#table-fila tbody').append(html);
+                $("#modal-fila-reserva").modal({show:true});
+
+            });
+        });
+
 
         //Excluir tr da tabela
         (function ($) {
@@ -306,6 +355,7 @@
         });
 
 
+        // Função para chamar o select dois
         function select2(tipo){
             //consulta via select2 responsável
             $("#pessoa").select2({
@@ -356,7 +406,7 @@
 
             if(tipo) {
 
-                if(tipo == 2) {
+                if(tipo == 2 || tipo == 3) {
                     $('#emprestimoEspecial').prop('checked', true);
                 } else {
                     $('#emprestimoEspecial').prop('checked', false);
@@ -366,10 +416,11 @@
 
         });
 
+        // Confirmação do empréstimo
         $(document).on('submit', '#form', function (event) {
             $(document).ready(function(){
 
-                if($("#tipo_pessoa").val() == '2' && !$("#emprestimoEspecial").prop( "checked")) {
+                if(($("#tipo_pessoa").val() == '2' || $("#tipo_pessoa").val() == '3') && !$("#emprestimoEspecial").prop( "checked")) {
                     bootbox.alert('Esse empréstimos deve ser do tipo especial');
                     event.preventDefault();
                 } else if($('#emprestimos tbody tr').length <= 0){
@@ -377,6 +428,9 @@
                     event.preventDefault();
                 } else {
                     setTimeout(explode, 1000);
+                    $( "#tipo_pessoa option" ).each(function() {
+                        $(this).prop('selected', false);
+                    });
                 }
 
             });
@@ -387,6 +441,7 @@
 
         });
 
+        // Remover um acervo da reserva
         $(document).on('click', 'button.remove', function (event) {
             event.preventDefault();
             var id = $(this).attr('data');

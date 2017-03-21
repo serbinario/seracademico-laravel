@@ -78,16 +78,89 @@ class ReservaController extends Controller
                 'bib_exemplares.emprestimo_id as id_emp',
                 'bib_arcevos.subtitulo as subtitulo'
                 )
-            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_exemplares.isbn')
+            ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_arcevos.id')
             ->having(\DB::raw('sum(bib_exemplares.situacao_id) = count(*) * 5'), '=', '1');
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+            $html   =    '<a class="btn-floating add" href="" title="Adicionar acervo"><i class="fa fa-plus"></i></a></li>';
+            $html   .=   ' <a class="btn-floating fila-reserva" href="" title="Lista de pessoas"><i class="fa fa-bars"></i></a></li>';
 
             # Retorno
             return $html;
+        })->addColumn('previsao', function ($row) {
+
+            $query = \DB::table('bib_emprestimos_exemplares')
+                ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_arcevos.id', '=', $row->id_acervo)
+                ->where('bib_emprestimos.status', '=', '1')
+                ->where('bib_emprestimos.status_devolucao', '=', '0')
+                ->select([
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao')
+                ])->first();
+
+            if($query) {
+                $dataPrevisao = $query->data_devolucao;
+            } else {
+                $dataPrevisao = "";
+            }
+
+            return $dataPrevisao;
+
+        })->addColumn('qtdReservas', function ($row) {
+
+            $date = new \DateTime('now');
+            $date->setTimezone( new \DateTimeZone('BRT') );
+            $data = $date->format('Y-m-d H:i:s');
+
+            $query = \DB::table('bib_reservas_exemplares')
+                ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+                ->where('bib_arcevos.id', '=', $row->id_acervo)
+                ->where('bib_reservas.status', '=', '1')
+                ->where('bib_reservas_exemplares.status', '=', '0')
+                ->where('bib_reservas.data_vencimento', '>', $data)
+                ->select([
+                    \DB::raw('COUNT(bib_reservas_exemplares.arcevos_id) as qtdReservas')
+                ])->first();
+
+            if($query) {
+                $qtdReservas = $query->qtdReservas;
+            } else {
+                $qtdReservas = "";
+            }
+
+            return $qtdReservas;
+
         })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function listaPessoasReservas(Request $request)
+    {
+
+        $date = new \DateTime('now');
+        $date->setTimezone( new \DateTimeZone('BRT') );
+        $data = $date->format('Y-m-d H:i:s');
+
+        $query = \DB::table('bib_reservas_exemplares')
+            ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
+            ->where('bib_arcevos.id', '=', $request->get('acervo'))
+            ->where('bib_reservas.status', '=', '1')
+            ->where('bib_reservas_exemplares.status', '=', '0')
+            ->where('bib_reservas.data_vencimento', '>', $data)
+            ->orderBy('bib_reservas.data_vencimento')
+            ->select([
+                'pessoas.nome'
+            ])->get();
+
+        return $query;
     }
 
     /**
@@ -137,13 +210,11 @@ class ReservaController extends Controller
 
         $dados  = $request->all();
         $id = isset($dados['id_emp']) ? $dados['id_emp'] : "";
-        $empEspecial = isset($dados['emprestimoEspecial']) ? $dados['emprestimoEspecial'] : "0";
 
         $user = \Auth::user();
 
         $data = $this->service->find($id);
         $data->status = '1';
-        $data->emprestimo_especial = $empEspecial;
         $data->users_id = $user->id;
         $data->save();
 
@@ -196,58 +267,135 @@ class ReservaController extends Controller
 
         #Criando a consulta
         $rows = Reserva::join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
-            ->with(['reservaExemplar'])
+            ->join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->groupBy('bib_reservas.id')
             ->select([
                 'bib_reservas.codigo',
                 'bib_reservas.id as id',
-                'bib_reservas.*',
+                'bib_reservas.tipo_emprestimo',
+                'bib_reservas.emprestimo_especial',
                 'pessoas.nome',
+                'pessoas.id as pessoas_id',
+                'pessoas.identidade',
+                'bib_reservas.tipo_pessoa',
                 \DB::raw('DATE_FORMAT(bib_reservas.data,"%d/%m/%Y") as data'),
                 \DB::raw('DATE_FORMAT(bib_reservas.data_vencimento,"%d/%m/%Y") as data_vencimento'),
                 ]);
 
-        //dd($rows[0]->reservaExemplar[0]);
-
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
             $html = "";
-            //if(!$row->data_devolucao_real) {
-                $html .= '<div class="fixed-action-btn horizontal">
-                      <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                       <ul>
-                       <li><a class="btn-floating excluir" href="" title="Devolver"><i class="material-icons">delete</i></a></li>';
-                //if($row->tipo_emprestimo == '1' && strtotime($row->data_devolucao) > strtotime($this->data)) {
-                    $html .= '<li><a class="btn-floating renovar" href="" title="Renovar"><i class="material-icons">edit</i></a></li>
-                </ul>
-                </div>';
-               // }
-            //}
 
             # Retorno
             return $html;
-        })->addColumn('acervo', function ($row) {
+        })->addColumn('acervos', function ($row) {
 
-            $rows = Reserva::with(['reservaExemplar.exemplares'])
+            $date = new \DateTime('now');
+            $date->setTimezone( new \DateTimeZone('BRT') );
+            $data = $date->format('Y-m-d H:i:s');
+
+            // Recuperando todos os acervos da reserva
+            $consulta = \DB::table('bib_reservas_exemplares')
+                ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
                 ->where('bib_reservas.id', '=', $row->id)
                 ->select([
-                    'bib_reservas.id',
-                ])->first();
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.subtitulo',
+                    'bib_arcevos.numero_chamada',
+                    'bib_arcevos.id as acervo_id',
+                    'bib_reservas_exemplares.status',
+                    'bib_reservas_exemplares.edicao',
+                    'bib_reservas.pessoas_id',
+                    'bib_reservas.data_vencimento',
+                    'bib_reservas_exemplares.id',
+                    'bib_reservas_exemplares.status_fila',
+                ]);
 
-            $qtdExemplarAll = 0;
+            $acervosParaTratamento = $consulta;
+            $fila = "";
 
-            for ($i = 0; $i < count($rows->reservaExemplar); $i++) {
-                for($j = 0; $j < count($rows->reservaExemplar[$i]->exemplares); $j++){
+            foreach ($acervosParaTratamento->get() as $acervo){
 
-                    if(($rows->reservaExemplar[$i]->exemplares[$j]->edicao == $rows->reservaExemplar[$i]->pivot->edicao || $rows->reservaExemplar[$i]->exemplares[$j]->edicao == "")
-                        && $rows->reservaExemplar[$i]->exemplares[$j]->situacao_id == '1' ||
-                        ($rows->reservaExemplar[$i]->exemplares[$j]->situacao_id == '3' && $rows->reservaExemplar[$i]->exemplares[$j]->exemp_principal == '0')){
-                        $qtdExemplarAll++;
+                //Pega todos os acervos que não pertence a reserva da pessoal atual
+                $query = \DB::table('bib_reservas_exemplares')
+                    ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+                    ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+                    ->where('bib_reservas.pessoas_id', '!=', $acervo->pessoas_id)
+                    ->where('bib_reservas_exemplares.arcevos_id', '=', $acervo->acervo_id)
+                    ->where('bib_reservas_exemplares.edicao', '=', $acervo->edicao)
+                    ->where('bib_reservas_exemplares.status', '=', '0')
+                    ->where('bib_reservas.data_vencimento', '>', $data)
+                    ->select([
+                        'bib_reservas_exemplares.status',
+                        'bib_reservas_exemplares.status_fila',
+                        'bib_reservas.data_vencimento',
+                    ])->get();
+
+                // Valida se já existe alguma reserva e coloca a reserva atual na fila caso seja validado se a mesma acima das demais por data e hora
+                if(count($query) > 0) {
+
+                    foreach ($query as $q) {
+                        if(strtotime($acervo->data_vencimento) > strtotime($data)
+                            && (strtotime($acervo->data_vencimento) < strtotime($q->data_vencimento))) {
+                            $fila = '1';
+                        } else {
+                            $fila = '0';
+                            break;
+                        }
                     }
-
+                    
+                } else {
+                    $fila = '1';
                 }
+
+                // Caso seja validado se a reserva atual está propícia a ser a primeita da fila, seu status é atualizado
+                if ($fila == '1' && $acervo->status_fila != '2') {
+                    \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 1]);
+                }
+
+                // Caso a reserva tenha sua data de vencimento expirada, a mesma recebe status 2 sendo removida da fila
+                if ((strtotime($acervo->data_vencimento) < strtotime($data))) {
+                    \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
+                }
+
             }
 
-            return $qtdExemplarAll;
+            $acervos = $consulta->get();
+
+            //Pegando a quantidade de exemplares disponíveis para empréstimo
+            foreach ($acervos as $chave => $acervo) {
+
+                $qtdExemplares = \DB::table('bib_exemplares')
+                    ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                    ->join('bib_reservas_exemplares', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+                    ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+                    ->where('bib_reservas.id', '=', $row->id)
+                    ->where('bib_arcevos.id', '=', $acervo->acervo_id)
+                    ->where('bib_exemplares.edicao', '=', $acervo->edicao)
+                    ->where(function ($query) use ($acervo) {
+                        $query->orWhere('bib_exemplares.edicao', '=', $acervo->edicao)
+                            ->orWhere('bib_exemplares.edicao', '=', "");
+                    })
+                    ->where('bib_exemplares.situacao_id', '=', '1')
+                    ->orWhere(function ($query) {
+                        $query->where('bib_exemplares.situacao_id', '=', '3')
+                            ->where('bib_exemplares.exemp_principal', '=', "0");
+                    })
+                    ->select([
+                        \DB::raw('COUNT(bib_exemplares.id) as qtdExemplares'),
+                    ])->first();
+
+                // Inserindo quantidade de exemplares disponível em cada registro de acervo
+                $arrayTemp = (array) $acervos[$chave];
+                $acervos[$chave] = (object) array_merge($arrayTemp, ['qtdExemplares' => $qtdExemplares->qtdExemplares]);
+
+            }
+
+            # Retorno
+            return $acervos;
+
         })->make(true);
     }
 
@@ -261,17 +409,15 @@ class ReservaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            //dd($data);
-
             if(!isset($data['id'])){
                 return redirect()->back()->with("error", "É preciso informar pelo menos um acervo!");
             }
 
             #Executando a ação
-            $this->service->saveEmprestimo($data);
-
+            $result = $this->service->saveEmprestimo($data);
+            
             #Retorno para a view
-            return redirect()->back()->with("message", "Emprestimo realizado com sucesso!");
+            return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {print_r($e->getMessage()); exit;

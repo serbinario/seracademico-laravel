@@ -77,6 +77,7 @@
                                 <th>Data</th>
                                 <th>Data de vencimento</th>
                                 <th>Aluno</th>
+                                <th>RG</th>
                                 <th >Acão</th>
                             </tr>
                             </thead>
@@ -87,6 +88,7 @@
                                 <th>Data</th>
                                 <th>Data de vencimento</th>
                                 <th>Aluno</th>
+                                <th>RG</th>
                                 <th >Acão</th>
                             </tr>
                             </tfoot>
@@ -104,36 +106,27 @@
         $(document).ready(function () {
 
             function format(d) {
-    console.log(d['acervo']);
-                var acervo = d['reserva_exemplar'];
+
+                var acervo = d['acervos'];
                 var tipoEmprestimo = d['tipo_emprestimo'];
                 var pessoaId = d['pessoas_id'];
                 var reservaId = d['id'];
                 var emprestimoEspecial = d['emprestimo_especial'];
-                var qtdExemplarAll = d['acervo'];
                 var qtdExempEmprestado = 0;
                 var url = "{!! route('seracademico.biblioteca.saveEmprestimo') !!}";
+                var tipoPessoa = d['tipo_pessoa'];
 
-                var html = "<form action='"+url+"' method='post'>";
+                var html = "<form action='"+url+"' id='form' method='post' target='_blank'>";
                 html += "<table class='table table-bordered'>";
                 html += "<thead>" +
                         "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td>" +
-                        "<td>Selecionar</td></tr>" +
+                        "<td>Situação da fila</td><td>Selecionar</td></tr>" +
                         "</thead>";
 
                 for (var i = 0; i < acervo.length; i++) {
 
-                    //vericando quantidade exemplares por acervo
-                    /*for(var j = 0; j < acervo[i]['exemplares'].length; j++){
-                        if((acervo[i]['exemplares'][j]['edicao'] == acervo[i]['pivot']['edicao'] || acervo[i]['exemplares'][j]['edicao'] == "") && acervo[i]['exemplares'][j]['situacao_id'] == '1' ||
-                                (acervo[i]['exemplares'][j]['situacao_id'] == '3' && acervo[i]['exemplares'][j]['exemp_principal'] == '0')){
-                            qtdExemplar++;
-                            qtdExemplarAll = qtdExemplarAll + qtdExemplar;
-                        }
-                    }*/
-
                     //verificando a quantidade de exemplares já emprestados
-                    if(acervo[i]['pivot']['status'] == '1') {
+                    if(acervo[i]['status'] == '1') {
                         qtdExempEmprestado++;
                     }
 
@@ -141,13 +134,21 @@
                     html += "<td>" + acervo[i]['titulo'] + "</td>";
                     html += "<td>" + acervo[i]['subtitulo'] + "</td>";
                     html += "<td>" + acervo[i]['numero_chamada'] + "</td>";
-                    html += "<td>" + qtdExemplarAll + "</td>";
-                    if(qtdExemplarAll == 0 || acervo[i]['pivot']['status'] == '1'){
-                        html += "<td></td>";
-                    } else {
-                        html += "<td><input type='checkbox' name='id[]' value='"+acervo[i]['id']+"'></td>";
-                        html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['pivot']['edicao']+"'>";
+                    html += "<td>" + acervo[i]['qtdExemplares'] + "</td>";
+
+                    if(acervo[i]['status_fila'] == 0) {
+                        html += "<td>Em espera</td>";
+                    } else if (acervo[i]['status_fila'] == 1) {
+                        html += "<td>Disponível</td>";
                     }
+
+                    if(acervo[i]['qtdExemplares'] == 0 || acervo[i]['status'] == '1' || acervo[i]['status_fila'] == '2'){
+                        html += "<td></td>";
+                    } else if (acervo[i]['qtdExemplares'] > 0 && acervo[i]['status'] == '0' && acervo[i]['status_fila'] == '1') {
+                        html += "<td><input class='acervo' type='checkbox' name='id[]' value='"+acervo[i]['acervo_id']+"'></td>";
+                        html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['edicao']+"'>";
+                    }
+
                     html += "</tr>";
                  }
 
@@ -156,9 +157,12 @@
                 html += "<input type='hidden' name='id_pessoa' value='"+pessoaId+"'>";
                 html += "<input type='hidden' name='id_reserva' value='"+reservaId+"'>";
                 html += "<input type='hidden' name='emprestimoEspecial' value='"+emprestimoEspecial+"'>";
-                if(qtdExemplarAll > 0 || qtdExempEmprestado < acervo.length) {
+                html += "<input type='hidden' name='tipo_pessoa' value='"+tipoPessoa+"'>";
+
+                if(qtdExempEmprestado < acervo.length) {
                     html += "<input type='submit' class='btn btn-primary' value='Confirmar'>";
                 }
+
                 html += "</form>";
 
                 return  html;
@@ -180,6 +184,7 @@
                     {data: 'data', name: 'bib_reservas.data'},
                     {data: 'data_vencimento', name: 'bib_reservas.data_vencimento'},
                     {data: 'nome', name: 'pessoas.nome'},
+                    {data: 'identidade', name: 'pessoas.identidade'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -202,32 +207,21 @@
             });
         });
 
-        $(document).on('click', 'a.excluir', function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            bootbox.confirm("Tem certeza que deseja devolver esse emprestimo?", function (result) {
-                if (result) {
-                    window.open(url, '_blank');
-                    location.reload();
-                    //location.href = url
+        $(document).on('submit', '#form', function (event) {
+            $(document).ready(function(){
+
+                if(!$(".acervo").prop( "checked")) {
+                    bootbox.alert('Marque ao menos um livro para empréstimo!');
+                    event.preventDefault();
                 } else {
-                    false;
+                    setTimeout(explode, 1000);
                 }
             });
+
+            function explode(){
+                location.reload();
+            }
         });
 
-        $(document).on('click', 'a.renovar', function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            bootbox.confirm("Tem certeza que deseja renovar esse emprestimo?", function (result) {
-                if (result) {
-                    window.open(url, '_blank');
-                    location.reload();
-                    //location.href = url
-                } else {
-                    false;
-                }
-            });
-        });
     </script>
 @stop

@@ -15,6 +15,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\Biblioteca\EmprestarValidator;
 use Seracademico\Services\Biblioteca\ExemplarService;
 use Seracademico\Entities\Biblioteca\Emprestar;
+use Seracademico\Contracts\Report;
 
 class EmprestarController extends Controller
 {
@@ -84,6 +85,8 @@ class EmprestarController extends Controller
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
                 'bib_arcevos.cutter',
+                'bib_arcevos.cdd',
+                'bib_arcevos.id as acervo_id',
                 'bib_exemplares.edicao',
                 'bib_situacao.nome as nome_sit',
                 'bib_situacao.id as id_sit',
@@ -125,8 +128,6 @@ class EmprestarController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            //dd($data);
-
             #tratando as rules
             //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
@@ -156,7 +157,9 @@ class EmprestarController extends Controller
 
         $request->session()->put('id_pessoa', ['id' => $request['pessoas_id'], 'nome' => $request['pessoas_nome']]);
 
-        return $data;
+
+        return \Illuminate\Support\Facades\Response::json($data);
+        //return $data;
     }
 
     /**
@@ -168,7 +171,10 @@ class EmprestarController extends Controller
 
         $data = $this->service->findWhere(['pessoas_id' => $pessoaId]);
 
+       //dd($data);
+
         return $data;
+        //return $data;
     }
 
     /**
@@ -178,29 +184,11 @@ class EmprestarController extends Controller
     {
         $dados  = $request->all();
         $id = isset($dados['id_emp']) ? $dados['id_emp'] : "";
-        $empEspecial = isset($dados['emprestimoEspecial']) ? $dados['emprestimoEspecial'] : "0";
-
         $user = \Auth::user();
-        $dataObj   = new \DateTime('now');
-        $dia = "";
 
         $emprestimo = $this->service->find($id);
 
-        //Gerando a data de devolução conforme a situação de emprestimo do livro
-        if($emprestimo->tipo_emprestimo == '1' && $empEspecial != '1') {
-            $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '002')->first();
-            $dia = $dias->valor;
-        } else if ($emprestimo->tipo_emprestimo == '2' || $empEspecial == '1') {
-            $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->first();
-            $dia = $dias->valor - 1;
-        }
-
-        $dataObj->add(new \DateInterval("P{$dia}D"));
-        $data = $dataObj->format('Y-m-d');
-        $emprestimo->data_devolucao = $data;
-
         $emprestimo->status = '1';
-        $emprestimo->emprestimo_especial = $empEspecial;
         $emprestimo->users_id = $user->id;
         $emprestimo->save();
 
@@ -235,38 +223,200 @@ class EmprestarController extends Controller
     public function gridDevolucao(Request $request)
     {
         $dataObj = new \DateTime('now');
-        $this->data    = $dataObj->format('d/m/Y');
+        $this->data    = $dataObj->format('Y-m-d');
 
         #Criando a consulta
         $rows = Emprestar::join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
-            ->with(['emprestimoExemplar.acervo'])
-            ->select(
-                ['bib_emprestimos.codigo',
-                    'bib_emprestimos.*',
+            ->join('bib_emprestimos_exemplares', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->groupBy('bib_emprestimos.id')
+            ->where('bib_emprestimos.status', '=', '1')
+            ->select([
+                    'bib_emprestimos.codigo',
+                    'bib_emprestimos.tipo_emprestimo',
+                    'bib_emprestimos.id',
                     'pessoas.nome',
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                    'bib_emprestimos.data_devolucao as devolucao',
+                    'bib_emprestimos.status_pagamento'
                 ]);
         
         #Editando a grid
-        return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html = "";
-            if(!$row->data_devolucao_real) {
-            $html .= '<div class="fixed-action-btn horizontal">
-                      <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                       <ul>
-                       <li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">delete</i></a></li>';
-                if($row->tipo_emprestimo == '1' && strtotime($row->data_devolucao) > strtotime($this->data)) {
-                    $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">edit</i></a></li>
-                </ul>
-                </div>';
-                }
-            }
+        return Datatables::of($rows)
+            ->filter(function ($query) use ($request) {
+                // Filtrando Global
+                if ($request->has('globalSearch')) {
+                    # recuperando o valor da requisição
+                    $search = $request->get('globalSearch');
 
+                    #condição
+                    $query->where(function ($where) use ($search) {
+                        $where->orWhere('bib_exemplares.codigo', 'like', "%$search%")
+                            ->orWhere('bib_emprestimos.codigo', 'like', "%$search%")
+                            ->orWhere('pessoas.nome', 'like', "%$search%");
+                    });
+
+                }
+            })
+            ->addColumn('action', function ($row) {
+                
+                
+                
+                $html = "";
+                if(!$row->data_devolucao_real) {
+                    $html .= '<div class="fixed-action-btn horizontal">
+                              <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                              <ul>
+                              <li>
+                                <a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">done</i></a>
+                              </li>';
+                    if($row->tipo_emprestimo == '1' && strtotime($row->devolucao) >= strtotime($this->data)) {
+                            $html .= '<li>
+                                      <a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">restore</i></a>
+                                      </li>
+                                      </ul>
+                                      </div>';
+                    }
+                }
+                if($row->status_pagamento == '1') {
+                    $html .= '<div class="fixed-action-btn horizontal">
+                                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                                    <ul>
+                                    <li>
+                                    <a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a>
+                                    </li>
+                                    </ul>
+                                    </div>';
+                }
             # Retorno
             return $html;
+        })->addColumn('exemplares', function ($row) {
+
+            $exemplares = \DB::table('bib_emprestimos_exemplares')
+                ->join('bib_emprestimos', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+                ->where('bib_emprestimos.status', '=', '1')
+                ->where('bib_emprestimos.id', '=', $row->id)
+                ->select([
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.cutter',
+                    'bib_arcevos.subtitulo',
+                    'bib_exemplares.edicao',
+                    \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                    'bib_emprestimos_exemplares.id',
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.numero_chamada'
+                ])->get();
+
+            # Retorno
+            return $exemplares;
+                
         })->make(true);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function gridDevolucaoPorAluno(Request $request)
+    {
+        $dataObj = new \DateTime('now');
+        $this->data    = $dataObj->format('Y-m-d');
+
+        #Criando a consulta
+        $rows = Emprestar::join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->join('bib_emprestimos_exemplares', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->groupBy('pessoas.id')
+            ->where('bib_emprestimos.status', '=', '1')
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
+            ->orWhere('bib_emprestimos.status_pagamento', '=', '1')
+            ->select([
+                'pessoas.id as pessoa_id',
+                'pessoas.nome',
+                'pessoas.identidade',
+                'pessoas.cpf',
+                'bib_emprestimos.id',
+                \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                'bib_emprestimos.status_devolucao',
+                'bib_emprestimos.status_pagamento'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)
+            ->filter(function ($query) use ($request) {
+                // Filtrando Global
+                if ($request->has('globalSearchAluno')) {
+                    # recuperando o valor da requisição
+                    $search = $request->get('globalSearchAluno');
+
+                    #condição
+                    $query->where(function ($where) use ($search) {
+                        $where->orWhere('bib_exemplares.codigo', 'like', "%$search%")
+                            ->orWhere('bib_emprestimos.codigo', 'like', "%$search%")
+                            ->orWhere('pessoas.nome', 'like', "%$search%")
+                            ->orWhere('pessoas.identidade', 'like', "%$search%")
+                            ->orWhere('pessoas.cpf', 'like', "%$search%");
+                    });
+
+                }
+            })
+            ->addColumn('action', function ($row) {
+                $html = "";
+                if($row->status_devolucao == '0') {
+                    $html .= '<div class="fixed-action-btn horizontal">
+                          <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                          <ul>
+                          <li>
+                            <a class="btn-floating devolver-aluno" href="confirmarDevolucaoPorAluno/'.$row->pessoa_id.'" title="Devolver"><i class="material-icons">done_all</i></a>
+                          </li>
+                          </ul>
+                          </div>';
+                }
+                if($row->status_pagamento == '1') {
+                    $html .= '<div class="fixed-action-btn horizontal">
+                                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                                    <ul>
+                                    <li>
+                                    <a class="btn-floating baixa-pagamento-aluno" href="baixaPagamentoPorAluno/'.$row->pessoa_id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a>
+                                    </li>
+                                    </ul>
+                                    </div>';
+                }
+                # Retorno
+                return $html;
+            })->addColumn('exemplares', function ($row) {
+
+                $exemplares = \DB::table('bib_emprestimos_exemplares')
+                    ->join('bib_emprestimos', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+                    ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                    ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                    ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+                    ->where('bib_emprestimos.status', '=', '1')
+                    ->where('bib_emprestimos.status_devolucao', '=', '0')
+                    ->where('pessoas.id', '=', $row->pessoa_id)
+                    ->select([
+                        'bib_arcevos.titulo',
+                        'bib_arcevos.cutter',
+                        'bib_arcevos.subtitulo',
+                        'bib_exemplares.edicao',
+                        \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                        'bib_emprestimos_exemplares.id',
+                        'bib_arcevos.titulo',
+                        'bib_arcevos.numero_chamada',
+                        'bib_emprestimos.codigo',
+                        \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                        \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                    ])->get();
+
+                # Retorno
+                return $exemplares;
+            })->make(true);
     }
 
     /**
@@ -275,12 +425,91 @@ class EmprestarController extends Controller
     public function confirmarDevolucao($id)
     {
         try {
+
             #Executando a ação
-            $this->service->devolucao($id);
+            $result = $this->service->devolucao($id);
+
+            //Pegando o empréstimo
+            $emprestimo = \DB::table('bib_emprestimos')
+                ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+                ->where('bib_emprestimos.id', '=', $result->id)
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'pessoas.identidade',
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                    'bib_emprestimos.codigo',
+                    'bib_emprestimos.valor_multa',
+                ])->first();
+
+            //Pegando os exemplares
+            $exemplares = \DB::table('bib_emprestimos_exemplares')
+                ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_emprestimos.id', '=', $result->id)
+                ->select([
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.cutter',
+                    'bib_arcevos.cdd',
+                    \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                    'bib_emprestimos_exemplares.valor_multa',
+                ])->get();
 
             #Retorno para a view
-            return view('biblioteca.controle.emprestimo.cupomDevolucao');
-            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
+            return view('biblioteca.controle.emprestimo.cupomDevolucao', compact('emprestimo', 'exemplares'));
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function confirmarDevolucaoPorAluno($id)
+    {
+        try {
+
+            #Executando a ação
+            $result = $this->service->devolucaoPorAluno($id);
+
+            $totalMulta = $result['toltaMulta'];
+
+            //Pegando o empréstimo
+            $emprestimo = \DB::table('bib_emprestimos')
+                ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+                ->whereIn('bib_emprestimos.id', $result['idEmprestimo'])
+                ->groupBy('pessoas.id')
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'pessoas.identidade',
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                    'bib_emprestimos.codigo',
+                    'bib_emprestimos.valor_multa',
+                ])->first();
+
+            //Pegando os exemplares
+            $exemplares = \DB::table('bib_emprestimos_exemplares')
+                ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->whereIn('bib_emprestimos.id', $result['idEmprestimo'])
+                ->select([
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.cutter',
+                    'bib_arcevos.cdd',
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                    \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                    'bib_emprestimos.codigo',
+                    'bib_emprestimos_exemplares.valor_multa',
+                ])->get();
+
+            #Retorno para a view
+            return view('biblioteca.controle.emprestimo.cupomDevolucaoPorAluno', compact('emprestimo', 'exemplares', 'totalMulta'));
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -295,6 +524,10 @@ class EmprestarController extends Controller
             #Executando a ação
             $result = $this->service->renovacao($id);
 
+            if(!$result){
+                return redirect()->back()->with("error", "Não será possível a renovação, pois há livros em reserva!");
+            }
+
             #Retorno para a view
             return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
             //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
@@ -303,4 +536,160 @@ class EmprestarController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
+    public function validarTermoBiblioteca(Request $request)
+    {
+        if($request->has('tipo_pessoa') && $request->get('tipo_pessoa') == '1') {
+
+            $query = \DB::table('pessoas')
+                ->join('fac_alunos', 'fac_alunos.pessoa_id', '=', 'pessoas.id')
+                ->where('fac_alunos.termo_biblioteca', '=', null)
+                ->where('fac_alunos.id', '=', $request->get('idAlunoProfessor'))
+                ->where('pessoas.id', '=', $request->get('id_pessoa'))
+                ->select('fac_alunos.id')->first();
+
+        } else if ($request->has('tipo_pessoa') && ($request->get('tipo_pessoa') == '2' || $request->get('tipo_pessoa') == '3')) {
+
+            $query = \DB::table('pessoas')
+                ->join('pos_alunos', 'pos_alunos.pessoa_id', '=', 'pessoas.id')
+                ->where('pos_alunos.termo_biblioteca', '=', null)
+                ->where('pos_alunos.id', '=', $request->get('idAlunoProfessor'))
+                ->where('pessoas.id', '=', $request->get('id_pessoa'))
+                ->select('pos_alunos.id')->first();
+
+        } else if ($request->has('tipo_pessoa') && $request->get('tipo_pessoa') == '4') {
+
+            $query = \DB::table('pessoas')
+                ->join('fac_professores', 'fac_professores.pessoa_id', '=', 'pessoas.id')
+                ->where('fac_professores.termo_biblioteca', '=', null)
+                ->where('fac_professores.id', '=', $request->get('idAlunoProfessor'))
+                ->where('pessoas.id', '=', $request->get('id_pessoa'))
+                ->select('fac_professores.id')->first();
+
+        }
+        
+        if($query) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function confirmarTermoBiblioteca(Request $request)
+    {
+        if($request->has('tipo_pessoa') && $request->get('tipo_pessoa') == '1') {
+
+            $query = \DB::table('pessoas')
+                ->join('fac_alunos', 'fac_alunos.pessoa_id', '=', 'pessoas.id')
+                ->join('enderecos', 'enderecos.id', '=', 'pessoas.enderecos_id')
+                ->where('fac_alunos.termo_biblioteca', '=', null)
+                ->where('fac_alunos.id', '=', $request->get('idAlunoProfessor'))
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'enderecos.logradouro',
+                    'fac_alunos.matricula',
+                    'pessoas.email'
+                ])->first();
+
+            \DB::table('fac_alunos')->where('id', $request->get('idAlunoProfessor'))->update(['termo_biblioteca' => 1]);
+
+            return \PDF::loadView('biblioteca.termo.termo', ['dados' =>  $query])->stream();
+
+        } else if ($request->has('tipo_pessoa') && ($request->get('tipo_pessoa') == '2' || $request->get('tipo_pessoa') == '3')) {
+
+            $query = \DB::table('pessoas')
+                ->join('enderecos', 'enderecos.id', '=', 'pessoas.enderecos_id')
+                ->join('pos_alunos', 'pos_alunos.pessoa_id', '=', 'pessoas.id')
+                ->where('pos_alunos.termo_biblioteca', '=', null)
+                ->where('pos_alunos.id', '=', $request->get('idAlunoProfessor'))
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'enderecos.logradouro',
+                    'pos_alunos.matricula',
+                    'pessoas.email'
+                ])->first();
+
+            \DB::table('pos_alunos')->where('id', $request->get('idAlunoProfessor'))->update(['termo_biblioteca' => 1]);
+
+            return \PDF::loadView('biblioteca.termo.termo', ['dados' =>  $query])->stream();
+
+        } else if ($request->has('tipo_pessoa') && $request->get('tipo_pessoa') == '4') {
+
+            $query = \DB::table('pessoas')
+                ->join('enderecos', 'enderecos.id', '=', 'pessoas.enderecos_id')
+                ->join('fac_professores', 'fac_professores.pessoa_id', '=', 'pessoas.id')
+                ->where('fac_professores.termo_biblioteca', '=', null)
+                ->where('fac_professores.id', '=', $request->get('idAlunoProfessor'))
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'enderecos.logradouro',
+                    'pessoas.email'
+                ])->first();
+
+            \DB::table('fac_professores')->where('id', $request->get('idAlunoProfessor'))->update(['termo_biblioteca' => 1]);
+
+            return \PDF::loadView('biblioteca.termo.termo', ['dados' =>  $query])->stream();
+
+        }
+        
+    }
+
+    /**
+     * @return mixed
+     */
+    public function baixaPagamento($id)
+    {
+        try {
+
+            #Executando a ação
+            $result = \DB::table('bib_emprestimos')
+                ->where('id', $id)
+                ->where('status_pagamento', '1')
+                ->update(['status_pagamento' => 2]);
+
+            if(!$result){
+                return redirect()->back()->with("error", "Não foi possível confirmar o pagamento!");
+            }
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Pagamento confirmado com sucesso!");
+            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function baixaPagamentoPorAluno($id)
+    {
+        try {
+
+            #Executando a ação
+            $result = \DB::table('bib_emprestimos')
+                ->where('pessoas_id', $id)
+                ->where('status_pagamento', '1')
+                ->update(['status_pagamento' => 2]);
+
+            if(!$result){
+                return redirect()->back()->with("error", "Não foi possível confirmar o pagamento!");
+            }
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Pagamento confirmado com sucesso!");
+            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

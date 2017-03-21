@@ -25,7 +25,9 @@ class Emprestar extends Model implements Transformable
 		'users_id',
 		'status_devolucao',
 		'emprestimo_especial',
-		'tipo_pessoa'
+		'tipo_pessoa',
+		'valor_multa',
+		'status_pagamento'
 	];
 
 	public function pessoa()
@@ -37,6 +39,10 @@ class Emprestar extends Model implements Transformable
 	{
 		return $this->belongsToMany(Exemplar::class, 'bib_emprestimos_exemplares', 'emprestimo_id', "exemplar_id")
 			->withPivot(['id', 'emprestimo_id', 'exemplar_id']);;
+	}
+
+	public function exemplaresPivot(){
+		return $this->hasMany(EmprestimoExemplar::class, 'emprestimo_id', 'id');
 	}
 
 }

@@ -31,7 +31,7 @@
 
             <div class="form-group col-md-2">
                 {!! Form::label('matricula', 'Matrícula ') !!}
-                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control')) !!}
+                {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'disabled' => true)) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
             </div>
         </div>
