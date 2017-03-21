@@ -92,7 +92,7 @@
 ?>
 
 <div class="corpo">
-    <table class="table_dados_pessoais">
+    <table class="table_dados_pessoais" style="font-size: 12px">
         <tr>
             <td colspan="2"><b>DADOS PESSOAIS</b></td>
         </tr>
@@ -125,7 +125,7 @@
 
     <h3>GRADE CURRICULAR</h3>
 
-    <table class="table_grade_curricular" cellspacing="0">
+    <table class="table_grade_curricular" cellspacing="0" style="font-size: 12px">
         <thead>
             <tr>
                 <td style="width: 50%; text-align: center;"><b>Disciplina</b></td>
