@@ -69,7 +69,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="200" src="{{ asset('img/logo_alpha_treinamentos.png') }}" alt="FASUP">
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
     </h1>
 
     <div class="subtitulo">
