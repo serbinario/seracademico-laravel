@@ -22,12 +22,8 @@
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
     {{--Bootstrap validator--}}
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
-<<<<<<< HEAD
     <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
 
-=======
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
->>>>>>> ebdca679a69ad6037e3f9dfda779734f06ee6270
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
