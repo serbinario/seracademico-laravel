@@ -170,7 +170,7 @@
         </tr>
         <tr>
             <td style="width: 30%;">Cep:<span class="column" style="width: 50%">{{ $aluno['pessoa']['endereco']['cep'] ?? '' }}</span></td>
-            <td style="width: 20%;">UF:<span class="column" style="width: 20%">{{ $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['sigla'] ?? '' }}</span></td>
+            <td style="width: 20%;">UF:<span class="column" style="width: 20%">{{ $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['prefixo'] ?? '' }}</span></td>
         </tr>
         <tr>
             <td>Telefone Residencial:<span class="column" style="width: 55%">{{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</span></td>
@@ -182,8 +182,8 @@
         <tr>
             <td colspan="4">E-mail:<span class="column" style="width: 93%">{{ $aluno['pessoa']['email'] ?? '' }}</span></td>
         </tr>
-        <tr>
-            <td colspan="4">Instituição Anterior: <span class="column" style="width: 85%"></span></td>
+        <tr> 
+            <td colspan="4">Instituição Anterior: <span class="column" style="width: 85%"> {{ $aluno['pessoa']['instituicaoEscolar']['nome'] ?? ''}}</span></td>
         </tr>
         <tr>
             <td>Origem: Estadual ( )</td>
