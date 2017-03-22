@@ -986,6 +986,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('gridParametro', ['as' => 'gridParametro', 'uses' => 'Biblioteca\BibParametroController@grid']);
             Route::get('editParametro/{id}', ['as' => 'editParametro', 'uses' => 'Biblioteca\BibParametroController@edit']);
             Route::post('updateParametro/{id}', ['as' => 'updateParametro', 'uses' => 'Biblioteca\BibParametroController@update']);
+            Route::get('diasLetivosBiblioteca', ['as' => 'diasLetivosBiblioteca', 'uses' => 'Biblioteca\BibParametroController@diasLetivosBiblioteca']);
+            Route::post('storeDiasLetivosBiblioteca', ['as' => 'storeDiasLetivosBiblioteca', 'uses' => 'Biblioteca\BibParametroController@storeDiasLetivosBiblioteca']);
 
             Route::get('dashboardBliblioteca', ['as' => 'dashboardBliblioteca', 'uses' => 'DashboardController@dashboardBliblioteca']);
 
