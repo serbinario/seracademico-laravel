@@ -8,7 +8,7 @@ use Seracademico\Entities\Instituicao;
 class InstituicaoService
 {
     /**
-     * @var InstituicaoRepository|HoraRepository
+     * @var InstituicaoRepository
      */
     private $repository;
 
@@ -23,10 +23,23 @@ class InstituicaoService
     /**
      * @param $data
      */
-    public function inserirInstituicaoSelect($data) {
+    public function inserirInstituicaoSelect($data)
+    {
+        #
+        $novaInstituicao = "";
 
         #
-        $novaInstituicao = $this->repository->create($data);
+        $validacao = $this->repository->findWhere(['nome' => $data]);
+
+        #
+        if (count($validacao) > 0) {
+
+            $novaInstituicao = null;
+
+        } else {
+            #
+            $novaInstituicao = $this->repository->create($data);
+        }
 
         #
         return $novaInstituicao;

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\PosGraduacao\InstituicaoService;
+use Seracademico\Services\InstituicaoService;
 
 class InstituicaoController extends Controller
 {
@@ -35,9 +35,9 @@ class InstituicaoController extends Controller
 
             #Executando a ação
             $novaInstituicao = $this->service->inserirInstituicaoSelect($dados);
-
+            //dd('stop');
             #
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $novaInstituicao]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }

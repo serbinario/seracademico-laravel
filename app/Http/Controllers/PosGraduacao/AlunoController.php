@@ -207,7 +207,7 @@ class AlunoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            //removido dd()
+
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 

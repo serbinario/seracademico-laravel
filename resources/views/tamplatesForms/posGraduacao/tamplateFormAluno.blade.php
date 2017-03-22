@@ -261,9 +261,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-8">
                                 {!! Form::label('pessoa[endereco][logradouro]', 'Endereço ') !!}
                                 {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {!! Form::label('pessoa[endereco][cep]', 'CEP ') !!}
+                                {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
@@ -789,7 +793,7 @@
 @section('javascript')
     <script type="text/javascript">
 
-        //
+        //Evento para exibir input e botão
         $('#linkNovaInstituicao').on('click', function(){
             $('#linkNovaInstituicao').hide();
             $('#novaInstituicao').show();
@@ -798,9 +802,10 @@
 
         //
         $('#addInstituicao').on('click', function(){
+            //variavel de uso
             var novaInstituicao = $('#novaInstituicao').val();
-            console.log(novaInstituicao);
-            //Se existir somente busca e retorna
+
+            //
             if ($("#instituicao").find("option[value=" + novaInstituicao + "]").length) {
                 $("#instituicao").val(novaInstituicao).trigger("change");
 
@@ -810,15 +815,15 @@
                     type: 'POST',
                     url: '{{ route('seracademico.instituicao.storeInstituicao') }}',
                     data: {nome : novaInstituicao},
-                    datatype: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                    },
-                }).done(function(retorno) {
-                    // Adiciona um novo
-                    var newState = new Option(retorno.nome, retorno.id, true, true);
-                    // Seleciona
-                    $("#instituicao").append(newState).trigger('change');
+                    datatype: 'json'
+
+                }).done(function(json) {
+                    console.log(json);
+                    //Montando o option
+                    var newState = new Option(json.dados.nome, json.dados.id, true, true);
+
+                    //Injetando option no select2
+                    $("#instituicao").append(newState).trigger("change");
                     $('#novaInstituicao').hide();
                     $('#addInstituicao').hide();
                     $('#linkNovaInstituicao').show();
@@ -837,7 +842,7 @@
 
         //
         $(document).on('click', '#foto', function(){
-            Webcam.attach( '#my_camera' );
+            Webcam.attach('#my_camera');
         });
 
         function take_snapshot() {
