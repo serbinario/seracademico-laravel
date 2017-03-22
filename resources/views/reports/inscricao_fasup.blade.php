@@ -182,7 +182,7 @@
         <tr>
             <td colspan="4">E-mail:<span class="column" style="width: 93%">{{ $aluno['pessoa']['email'] ?? '' }}</span></td>
         </tr>
-        <tr> 
+        <tr>
             <td colspan="4">Instituição Anterior: <span class="column" style="width: 85%"> {{ $aluno['pessoa']['instituicaoEscolar']['nome'] ?? ''}}</span></td>
         </tr>
         <tr>
