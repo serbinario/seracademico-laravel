@@ -141,7 +141,7 @@
                     <td style="text-align: center">
                         {{ $nota['disciplina']['carga_horaria_total'] ?? $nota['disciplina']['carga_horaria'] ?? 0 }}h
                     </td>
-                    <td style="text-align: center"> {{ $nota['disciplina']['nota'] ?? 'FALTA' }} </td>
+                    <td style="text-align: center"> {{ $nota['nota_final'] ?? 'FALTA' }} </td>
                 </tr>
             @endforeach
         </tbody>
