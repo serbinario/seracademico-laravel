@@ -5,6 +5,7 @@ namespace Seracademico\Uteis;
 class NumeroOrdianalPorExtenso
 {
     private $numerosUnidade = [
+        0 => '',
         1 => 'primeiro',
         2 => 'segundo',
         3 => 'terceiro',

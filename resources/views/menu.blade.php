@@ -8,47 +8,36 @@
     <title>SerAcadêmico - Gestão Acadêmica</title>
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
-    {{--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
-
     <link href="{{ asset('/fonts/iconfont/material-icons.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300" rel="stylesheet">
     <link href="{{ asset('/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/animate.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/style.css')}}" rel="stylesheet">
-
     <link href="{{ asset('/css/jquery-ui.css')}}" rel="stylesheet">
-    {{--<link href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">--}}
-
     {{--Fontes personalizadas--}}
     <link href="{{ asset('/fonts/pkt4/font/flaticon.css')}}" rel="stylesheet">
-
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
-
     {{--Bootstrap validator--}}
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
+<<<<<<< HEAD
     <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
 
+=======
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
+>>>>>>> ebdca679a69ad6037e3f9dfda779734f06ee6270
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
-    {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
-
     <link href="{{ asset('/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
-    {{--<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">--}}
-
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
-
-    <!-- Krajee -->
-    {{--<link rel="stylesheet" href="{{ asset('/css/plugins/Krajee/fileinput.min.css')  }}">--}}
-
+    <!-- Selectize -->
+    <link rel="stylesheet" href="{{ asset('/lib/selectize/dist/css/selectize.css')  }}">
     <!-- zTree-->
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
-    {{--<link rel="stylesheet" href="{{ asset('/css/plugins/zTree/demo.css')  }}">--}}
-
     <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
@@ -225,7 +214,7 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
-
+                @endrole
 
                 <li>
                     <a href="index.html"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -245,7 +234,7 @@
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="flaticon-settings"></i> Configurações</a></li>
                     </ul>
                 </li>
-                @endrole
+
 
 
                 @role('biblioteca')
@@ -363,44 +352,32 @@
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/webcam.js')  }}"></script>
-
 {{--jquery Validator https://jqueryvalidation.org/--}}
 <script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
-
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-
 <script src="{{ asset('/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
-
-{{--<script src="{{ asset('/js/jquery.datatables.customsearch.js')}}" type="text/javascript"></script>--}}
-
 <!-- zTree -->
 <script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
-
 <!-- Krajee -->
 {{--<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>--}}
 <script src="{{ asset('/js/plugins/Krajee/locale/pt-BR.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/canvas-to-blob.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/sortable.min.js')}}"></script>
-
 <!-- Angular -->
 <script type="text/javascript" src="{{ asset('/js/plugins/angular/angular.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
-
 <!-- Mascaras -->
 <script src="{{ asset('/js/jquery.maskMoney.min.js')}}"></script>
-
 <!-- Flot -->
 <script src="{{ asset('js/plugins/flot/jquery.flot.js') }}"></script>
 <script src="{{ asset('js/plugins/flot/jquery.flot.categories.js') }}"></script>
-{{--<script src="{{ asset('js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>--}}
 <script src="{{ asset('js/plugins/flot/jquery.flot.resize.js') }}"></script>
 <script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }} "></script>
 <script src="{{ asset('js/plugins/flot/jquery.flot.time.js') }}"></script>
-
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/js/inspinia.js')}}"></script>
 <script src="{{ asset('/js/plugins/pace/pace.min.js')}}"></script>
@@ -408,10 +385,15 @@
 <script src="{{ asset('/js/jquery.mask.js')}}"></script>
 <script src="{{ asset('/js/mascaras.js')}}"></script>
 <script src="{{ asset('/js/sb-admin-2.js')}}"></script>
-{{--<script src="{{ asset('/messages.js')}}"></script>--}}
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
+<!-- Selectize -->
+<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
+<script src="{{ asset('/lib/sifter/sifter.js')  }}"></script>
+<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script type="text/javascript">
+
+    //
     $(document).on({
         'show.bs.modal': function () {
             var zIndex = 1040 + (10 * $('.modal:visible').length);

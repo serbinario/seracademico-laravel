@@ -23,8 +23,6 @@ class InstituicaoRepositoryEloquent extends BaseRepository implements Instituica
         return Instituicao::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */

@@ -261,9 +261,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-8">
                                 {!! Form::label('pessoa[endereco][logradouro]', 'Endereço ') !!}
                                 {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {!! Form::label('pessoa[endereco][cep]', 'CEP ') !!}
+                                {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
@@ -398,7 +402,8 @@
                                     @endif
                                 </select>
                             </div>
-
+                        </div>
+                        <div class="row">
                             <div class="form-group col-md-10">
                                 <label for="instituicao">Instituição</label><br>
                                 <select id="instituicao" class="form-control" name="pessoa[instituicao_escolar_id]">
@@ -406,17 +411,24 @@
                                         <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
                                     @endif
                                 </select>
+                                <span style="margin-left:16px;">
+                                    <a id="linkNovaInstituicao">Nova Instituição</a>
+                                </span>
                             </div>
-
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
                                 {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="form-group col-md-12">
-                                {!! Form::label('pessoas[outra_escola]', 'Outra Instituição') !!}
-                                {!! Form::text('pessoas[outra_escola]', Session::getOldInput('pessoas[outra_escola]'), array('class' => 'form-control')) !!}
+                            <div class="col-md-4 form-group">
+                                <div class="input-group">
+                                    <input type="text" id="novaInstituicao" class="form-control">
+                                    <span class="input-group-btn">
+                                        <a id="addInstituicao" class="btn-sm btn-primary">Adicionar</a>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -774,13 +786,53 @@
         </div>
     </div>
 
-
     {{--Fim Buttons Submit e Voltar--}}
     </div>
 </div>
 
 @section('javascript')
     <script type="text/javascript">
+
+        //Evento para exibir input e botão
+        $('#linkNovaInstituicao').on('click', function(){
+            $('#linkNovaInstituicao').hide();
+            $('#novaInstituicao').show();
+            $('#addInstituicao').show();
+        })
+
+        //
+        $('#addInstituicao').on('click', function(){
+            //variavel de uso
+            var novaInstituicao = $('#novaInstituicao').val();
+
+            //
+            if ($("#instituicao").find("option[value=" + novaInstituicao + "]").length) {
+                $("#instituicao").val(novaInstituicao).trigger("change");
+
+            } else {
+                //Persistindo o dado inserido
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('seracademico.instituicao.storeInstituicao') }}',
+                    data: {nome : novaInstituicao},
+                    datatype: 'json'
+
+                }).done(function(json) {
+                    console.log(json);
+                    //Montando o option
+                    var newState = new Option(json.dados.nome, json.dados.id, true, true);
+
+                    //Injetando option no select2
+                    $("#instituicao").append(newState).trigger("change");
+                    $('#novaInstituicao').hide();
+                    $('#addInstituicao').hide();
+                    $('#linkNovaInstituicao').show();
+                    $('#novaInstituicao').val("");
+                });
+            }
+        })
+
+        //
         Webcam.set({
             width: 260,
             height: 240,
@@ -788,8 +840,9 @@
             jpeg_quality: 90
         });
 
+        //
         $(document).on('click', '#foto', function(){
-            Webcam.attach( '#my_camera' );
+            Webcam.attach('#my_camera');
         });
 
         function take_snapshot() {
@@ -1053,6 +1106,9 @@
         // Evento para carregar as sedes a partir do
         // curso selecionado
         $(document).ready(function () {
+            //Ocultando o campo p/ adição de nova instituição
+            $('#novaInstituicao').hide();
+            $('#addInstituicao').hide();
 
             var cursoId = $('#curso_id').val();
 

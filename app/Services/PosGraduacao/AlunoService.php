@@ -10,6 +10,7 @@ use Seracademico\Repositories\PosGraduacao\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
+use Seracademico\Repositories\InstituicaoRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 use Seracademico\Facades\ParametroMatriculaFacade;
 
@@ -36,6 +37,11 @@ class AlunoService
     private $situacaoRepository;
 
     /**
+     * @var InstituicaoRepository
+     */
+    private $instituicaoRepository;
+
+    /**
      * @var string
      */
     private $destinationPath = "images/";
@@ -58,13 +64,15 @@ class AlunoService
         EnderecoRepository $enderecoRepository,
         PessoaRepository $pessoaRepository,
         SituacaoAlunoRepositoryEloquent $situacaoRepository,
-        CurriculoRepository $curriculoRepository)
+        CurriculoRepository $curriculoRepository,
+        InstituicaoRepository $instituicaoRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaRepository   = $pessoaRepository;
         $this->situacaoRepository = $situacaoRepository;
         $this->curriculoRepository = $curriculoRepository;
+        $this->instituicaoRepository = $instituicaoRepository;
     }
 
     /**
@@ -124,7 +132,7 @@ class AlunoService
             $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
         }
 
-        # Verificando se a pesso já existe
+        # Verificando se a pessoa já existe
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);

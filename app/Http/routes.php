@@ -9,6 +9,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     });
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
+
+        #Rota de instituição
+        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
+            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
+        });
+
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
             Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);

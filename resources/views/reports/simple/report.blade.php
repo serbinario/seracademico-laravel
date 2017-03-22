@@ -7,14 +7,20 @@
     <style type="text/css">
         table tbody th, table tbody td {
             padding: 2px 2px;
-            font-size: 15px;
+            font-size: 11px;
         }
+
+        table {
+            margin: 0 auto;
+        }
+
+
     </style>
 </head>
 
 <body>
     <div class="row">
-        <table width="100%">
+        <table>
             <tr>
                 <td><br>
                     <h1 style="text-align: center;color: #082652; ">{{ $dados['reportName'] }}</h1>
