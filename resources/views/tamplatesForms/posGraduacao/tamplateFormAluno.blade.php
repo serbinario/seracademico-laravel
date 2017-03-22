@@ -416,8 +416,8 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
-                                {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoas[ano_conclusao_superior]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoas[ano_conclusao_superior]', Session::getOldInput('pessoas[ano_conclusao_superior]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 

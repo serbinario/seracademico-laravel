@@ -191,7 +191,7 @@
             <td>Particular ( )</td>
         </tr>
         <tr>
-            <td colspan="4">Ano de Conclusão:<span class="column" style="width: 85%"></span></td>
+            <td colspan="4">Ano de Conclusão:<span class="column" style="width: 85%">{{ $aluno['pessoa']['ano_conclusao_superior'] ?? '' }}</span></td>
         </tr>
         <tr>
             <td colspan="4">Observações<span class="column" style="width: 89%"></span></td>
