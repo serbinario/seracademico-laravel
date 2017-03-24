@@ -132,7 +132,7 @@
                 <td style="padding-left: 1%;">  {{ $nota->nota_2_chamada ? number_format((float) $nota->nota_2_chamada, 2, '.', '') : '' }} </td>
                 <td style="padding-left: 1%;">  {{ $nota->nota_final ? number_format((float) $nota->nota_final, 2, '.', '') : '' }} </td>
                 <td style="padding-left: 1%;">  {{ $nota->nota_media ? number_format((float) $nota->nota_media, 2, '.', '') : '' }} </td>
-                <td style="padding-left: 1%;">  {{ $nota->nomeSituacao ? number_format((float) $nota->nomeSituacao, 2, '.', '') : '' }} </td>
+                <td style="padding-left: 1%;">  {{ $nota->nomeSituacao }} </td>
             </tr>
         @endforeach
 
