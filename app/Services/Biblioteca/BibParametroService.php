@@ -79,6 +79,28 @@ class BibParametroService
     }
 
     /**
+     * @param array $data
+     * @param int $id
+     * @return mixed
+     */
+    public function storeDiasLetivosBiblioteca(array $data)
+    {
+
+        // Atualizando os parâmetros
+        if(isset($data['dias_letivos']) && count($data['dias_letivos']) > 0) {
+            foreach ($data['dias_letivos'] as $dias) {
+                \DB::table('bib_dias_letivos_emprestimo')->where('id', $dias)->update(['ativo' => '1']);
+            }
+            \DB::table('bib_dias_letivos_emprestimo')->whereNotIn('id', $data['dias_letivos'])->update(['ativo' => '0']);
+        } else {
+            \DB::table('bib_dias_letivos_emprestimo')->update(['ativo' => '0']);
+        }
+
+        #Retorno
+        return true;
+    }
+
+    /**
      * @param array $models
      * @return array
      */

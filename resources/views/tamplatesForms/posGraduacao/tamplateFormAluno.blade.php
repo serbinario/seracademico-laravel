@@ -101,8 +101,8 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[estado_civis_id]', 'Estado Civil ') !!}
-                                {!! Form::select('pessoa[estado_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estado_civis_id]'),array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
+                                {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
@@ -416,8 +416,8 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
-                                {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoas[ano_conclusao_superior]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoas[ano_conclusao_superior]', Session::getOldInput('pessoas[ano_conclusao_superior]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
 

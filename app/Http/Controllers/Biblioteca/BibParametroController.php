@@ -27,7 +27,9 @@ class BibParametroController extends Controller
     /**
     * @var array
     */
-    private $loadFields = [];
+    private $loadFields = [
+        'Biblioteca\DiasLetivosEmprestimo'
+    ];
 
     /**
     * @param BibParametroService $service
@@ -110,4 +112,44 @@ class BibParametroController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function diasLetivosBiblioteca()
+    {
+        try {
+
+            #Carregando os dados para o cadastro
+            $loadFields = \DB::table('bib_dias_letivos_emprestimo')->get();
+
+            #retorno para view
+            return view('biblioteca.parametro.diasLetivos', compact('loadFields'));
+        } catch (\Throwable $e) {dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function storeDiasLetivosBiblioteca(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->storeDiasLetivosBiblioteca($data);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
 }

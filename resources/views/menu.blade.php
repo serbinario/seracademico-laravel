@@ -22,7 +22,8 @@
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
     {{--Bootstrap validator--}}
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
+
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/buttons.dataTables.min.css')}}" rel="stylesheet"/>
@@ -263,7 +264,13 @@
                                 <li><a href="{{ route('seracademico.biblioteca.reservados') }}"><i class="flaticon-read"></i> Reservas</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexParametro') }}"><i class="material-icons">perm_identity</i> Parâmetros</a></li>
+                        <li>
+                            <a href="#"><i class="material-icons">perm_identity</i> Parâmetros <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.biblioteca.indexParametro') }}"><i class="material-icons">perm_identity</i> Empréstimo e Reserva</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.diasLetivosBiblioteca') }}"><i class="material-icons">perm_identity</i> Dias Letivos</a></li>
+                            </ul>
+                        </li>
                         <li><a href="{{ route('seracademico.biblioteca.indexColecao') }}"><i class="material-icons">card_travel</i> Coleções/Séries</a></li>
                         <li><a href="{{ route('seracademico.biblioteca.indexGenero') }}"><i class="material-icons">card_travel</i> Áreas de conhecimento</a></li>
                     </ul>

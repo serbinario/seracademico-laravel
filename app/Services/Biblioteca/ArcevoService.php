@@ -207,6 +207,9 @@ class ArcevoService
                 $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
                 $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
                 $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
+                $entradas['exibir_tipo1'] = $i == 0 && $data['segunda']['exibir_tipo1'] == '1' ? $data['segunda']['exibir_tipo1'] : "0";
+                $entradas['exibir_tipo2'] = $i == 1 && $data['segunda']['exibir_tipo2'] == '1' ? $data['segunda']['exibir_tipo2'] : "0";
+                $entradas['exibir_tipo3'] = $i == 2 && $data['segunda']['exibir_tipo3'] == '1' ? $data['segunda']['exibir_tipo3'] : "0";
 
                 $this->segundaRepository->create($entradas);
             }
@@ -280,6 +283,9 @@ class ArcevoService
                 $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
                 $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
                 $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
+                $entradas['exibir_tipo1'] = $i == 0 && $data['segunda']['exibir_tipo1'] == '1' ? $data['segunda']['exibir_tipo1'] : "0";
+                $entradas['exibir_tipo2'] = $i == 1 && $data['segunda']['exibir_tipo2'] == '1' ? $data['segunda']['exibir_tipo2'] : "0";
+                $entradas['exibir_tipo3'] = $i == 2 && $data['segunda']['exibir_tipo3'] == '1' ? $data['segunda']['exibir_tipo3'] : "0";
 
                 $this->segundaRepository->create($entradas);
             }

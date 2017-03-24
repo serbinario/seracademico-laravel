@@ -10,9 +10,6 @@ use Seracademico\Repositories\Biblioteca\ReservaExemplarRepository;
 use Seracademico\Repositories\Biblioteca\ReservaRepository;
 use Seracademico\Entities\Biblioteca\Reserva;
 use Seracademico\Entities\Biblioteca\ReservaExemplar;
-use Seracademico\Services\Biblioteca\RNEmprestimos\GerarDataDeDevolucaoDoEmprestimo;
-use Seracademico\Services\Biblioteca\RNReservas\ReservasChainOfResponsibility;
-
 //use Carbon\Carbon;
 
 class ReservaService
@@ -154,9 +151,61 @@ class ReservaService
             'reserva'
         ];
 
-        // Regras de nogócio para validação da reserva
-        if($resultChain = ReservasChainOfResponsibility::processChain($data, $dataFormat, $return)) {
-            return $resultChain;
+        //validando se a pessoa possui empréstimo em atraso
+        $emprestimoAtraso = \DB::table('bib_emprestimos')->
+        where('bib_emprestimos.pessoas_id', '=', $data['pessoas_id'])
+            ->whereDate('bib_emprestimos.data_devolucao', '<', $dataFormat)
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
+            ->orWhere('bib_emprestimos.status_pagamento', '=', '1')
+            ->select('bib_emprestimos.*')
+            ->first();
+
+        //Busca quantidade de reserva do aluno
+        $validarQtdReserva = Reserva::join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->where('bib_reservas.pessoas_id', '=', $data['pessoas_id'])
+            ->where('bib_reservas_exemplares.status', '=', '0')
+            ->groupBy('bib_reservas.pessoas_id')
+            ->select([
+                \DB::raw('count(bib_reservas_exemplares.reserva_id) as qtd'),
+            ])
+            ->first();
+
+        //Verificando se a pessoa está tentando reservar um livro que o mesmo já tenha pego emprestado
+        $acervoEmprestado = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.id', '=', $data['id_acervo'])
+            ->where('bib_emprestimos.pessoas_id', '=', $data['pessoas_id'])
+            ->where('bib_emprestimos.status', '=', '1')
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
+            ->select([
+                'bib_arcevos.id'
+            ])->first();
+
+        //Valida se a quantidade de reserva atinge o limite máximo, ou se a pessoa possui empréstimo em atraso
+        if ($emprestimoAtraso) {
+            $return[1] = "Esta pessoa possui empréstimo em atraso!";
+            $return[2] = false;
+            return $return;
+        } else if ($validarQtdReserva && $tipoPessoa == '1' && $validarQtdReserva->qtd >= $qtdReservas[0]->valor) { # Aluno Graduação
+            $return[1] = "Limite de até {$qtdReservas[0]->valor} reservas foi atingido";
+            $return[2] = false;
+            return $return;
+        } else if ($validarQtdReserva && ($tipoPessoa == '2' || $tipoPessoa == '3')
+            && $validarQtdReserva->qtd >= $qtdReservas[2]->valor) {  # Aluno pós-graduação, mestrado, doutorado
+            $return[1] = "Limite de até {$qtdReservas[2]->valor} reservas foi atingido";
+            $return[2] = false;
+            return $return;
+        } else if ($validarQtdReserva && $tipoPessoa == '4' && $validarQtdReserva->qtd >= $qtdReservas[1]->valor) { # Professores
+            $return[1] = "Limite de até {$qtdReservas[1]->valor} reservas foi atingido";
+            $return[2] = false;
+            return $return;
+        } else if ($acervoEmprestado) {
+            $return[1] = "Este livro consta como emprestado para esta pessoa!";
+            $return[2] = false;
+            return $return;
         }
 
         //busca o registro de reserva que está sendo usando no momento para reservas
@@ -172,6 +221,7 @@ class ReservaService
         }
 
         //Atualizando as reservas para status em que ainda n foi feito emprestimos para as mesmas de acordo com a edição
+       // if ($data['edicao'] != 'null') {
         $reservaExem = $this->repoReseExemp->findWhere(['reserva_id' => $reserva->id, 'arcevos_id' => $data['id_acervo']]);
         $reservaExem[0]->edicao = $data['edicao'];
         $reservaExem[0]->status = 0;
@@ -215,6 +265,7 @@ class ReservaService
 
     public function deleteReserva($id, $id2)
     {
+
         //Deletando reserva
         \DB::table('bib_reservas_exemplares')
             ->where('id', '=', $id2)
@@ -241,6 +292,11 @@ class ReservaService
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
         $codigo = $date->format('YmdHis');
+        $dia       = 0;
+
+        # Pegas os parâmetros para saber a quantidade de dias de empréstimo por tipo de pessoa
+        $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')
+            ->whereIn('bib_parametros.codigo', ['002', '006', '008'])->get();
 
         $emprestimo = array();
         $exemplares = array();
@@ -255,7 +311,6 @@ class ReservaService
         $emprestimo['status_pagamento'] = '0';
         $emprestimo['tipo_pessoa'] = $data['tipo_pessoa'];
         $emprestimo['users_id'] = $user->id;
-        $emprestimo['emprestimo_especial'] = $data['emprestimoEspecial'];
 
         // Pega os exemplares a serem emprestados
         for ($i = 0; $i < count($data['id']); $i++) {
@@ -277,8 +332,25 @@ class ReservaService
 
         }
 
-        // Determinando a data de vecimento do empréstimo
-        $emprestimo['data_devolucao'] = GerarDataDeDevolucaoDoEmprestimo::getResult($date, $emprestimo);
+        // Faz a contagem de dias para entrega dos livros conforme a situação do livro, se livro de consulta ou não
+        if($data['tipo_emprestimo'] == '1' && $data['emprestimoEspecial'] == '0') {
+            if($data['tipo_pessoa'] == '1') {
+                $dia = $dias[0]->valor;
+            } else if ($data['tipo_pessoa'] == '2' || $data['tipo_pessoa'] == '3') {
+                $dia = $dias[2]->valor - 1;
+            } else if ($data['tipo_pessoa'] == '4') {
+                $dia = $dias[1]->valor;
+            }
+        } else if ($data['tipo_emprestimo'] == '2' || $data['emprestimoEspecial'] == '1' ) {
+            $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
+            $dia = $query[0]->valor - 1;
+        }
+
+        // Atribuindo a data de devolução e se é empréstimo especial
+        $date->add(new \DateInterval("P{$dia}D"));
+        $dataDevolucao = $date->format('Y-m-d');
+        $emprestimo['data_devolucao'] = $dataDevolucao;
+        $emprestimo['emprestimo_especial'] = $data['emprestimoEspecial'];
 
         // Salvando o empréstimo e adicioando os exemplares
         $emprestar =  $this->repoEmprestar->create($emprestimo);

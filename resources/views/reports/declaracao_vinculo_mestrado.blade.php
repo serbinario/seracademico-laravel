@@ -88,7 +88,7 @@
             da representação legal da <b>Holding Britânica UniGrendal</b>, qualificada no Brasil como <b>Universidade Grendal do
             Brasil</b>, CNPJ 12.147.854/0001-84, reuniram-se em local a coberto os <b>Doutores do Comitê Acadêmico da School
             of Education</b>, a fim de declararem que o aluno(a) citado(a) acima encontra-se devidamente matriculado(a) e
-            ativo(a) no curso de Mestrado Internacional em Políticas Públicas com Ênfase em Saúde.
+            ativo(a) no curso de {{ isset($curso->nome) ? $curso->nome : ""  }}.
         </p>
     </div>
 

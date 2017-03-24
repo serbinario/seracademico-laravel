@@ -261,7 +261,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[0]))
@@ -282,6 +282,17 @@
                             {!! Form::label('para_referencia1', 'Para referência?', false) !!}
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[exibir_tipo1]', 0) !!}
+                            @if(isset($segundaEntrada[0]) && $segundaEntrada[0]->exibir_tipo1 == '1')
+                                {!! Form::checkbox('segunda[exibir_tipo1]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[exibir_tipo1]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('exibir_tipo1', 'Exibir Tipo?', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -295,7 +306,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[1]))
@@ -316,6 +327,17 @@
                             {!! Form::label('para_referencia2', 'Para referência?', false) !!}
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[exibir_tipo2]', 0) !!}
+                            @if(isset($segundaEntrada[1]) && $segundaEntrada[1]->exibir_tipo2 == '1')
+                                {!! Form::checkbox('segunda[exibir_tipo2]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[exibir_tipo2]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('exibir_tipo2', 'Exibir Tipo?', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
@@ -329,7 +351,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('segunda[tipo_autor_id]', 'Tipo reponsável') !!}
                             @if(isset($segundaEntrada[2]))
@@ -348,6 +370,17 @@
                                 {!! Form::checkbox('segunda[para_referencia3]', 1, null, array('class' => 'form-control')) !!}
                             @endif
                             {!! Form::label('para_referencia3', 'Para referência?', false) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 15px">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('segunda[exibir_tipo3]', 0) !!}
+                            @if(isset($segundaEntrada[2]) && $segundaEntrada[2]->exibir_tipo3 == '1')
+                                {!! Form::checkbox('segunda[exibir_tipo3]', 1, null, array('class' => 'form-control', 'checked' => 'checked')) !!}
+                            @else
+                                {!! Form::checkbox('segunda[exibir_tipo3]', 1, null, array('class' => 'form-control')) !!}
+                            @endif
+                            {!! Form::label('exibir_tipo3', 'Exibir Tipo?', false) !!}
                         </div>
                     </div>
                 </div>

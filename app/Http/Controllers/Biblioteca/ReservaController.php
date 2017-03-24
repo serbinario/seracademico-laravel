@@ -289,6 +289,50 @@ class ReservaController extends Controller
 
             # Retorno
             return $html;
+        })->addColumn('qtdEmprestimos', function ($row) {
+
+
+            # Variáveis
+            $qtdEmprestimoAtual = '';
+            $qtdEmprestimoMaximo = '';
+
+            # Pegas os parâmetros para saber a quantidade de exemplares por tipo de pessoa
+            $qtdEmprestimos = \DB::table('bib_parametros')->select('bib_parametros.*')
+                ->whereIn('bib_parametros.codigo',['003', '007', '009'] )->get();
+
+            //Pega a quantidade de emprestimo da pessoa
+            $validarQtdEmprestimo = \DB::table('bib_emprestimos')
+                ->join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->where('bib_emprestimos.pessoas_id', '=', $row->pessoas_id)
+                ->where('bib_exemplares.situacao_id', '=', '5')
+                ->where('bib_emprestimos.status_devolucao', '=', '0')
+                ->groupBy('bib_emprestimos.pessoas_id')
+                ->select([
+                    \DB::raw('count(bib_emprestimos_exemplares.emprestimo_id) as qtd'),
+                ])
+                ->first();
+
+            # Pegando a quantidade de empréstimo atual
+            $qtdEmprestimoAtual = $validarQtdEmprestimo ? "$validarQtdEmprestimo->qtd" : "0";
+
+            # Pegando a quantidade de empréstimo máximo
+            if ($row->tipo_pessoa == '1') { # Aluno Graduação
+                $qtdEmprestimoMaximo =  $qtdEmprestimos[0]->valor;
+            } else if ($row->tipo_pessoa == '2' || $row->tipo_pessoa == '3') {  # Aluno pós-graduação, mestrado, doutorado
+                $qtdEmprestimoMaximo =  $qtdEmprestimos[2]->valor;
+            } else if ($row->tipo_pessoa == '4') { # Professores
+                $qtdEmprestimoMaximo =  $qtdEmprestimos[1]->valor;
+            }
+
+            // Montando um array de retorno
+            $result = array (
+                'qtdEmprestimoAtual' => $qtdEmprestimoAtual,
+                'qtdEmprestimoMaximo' => $qtdEmprestimoMaximo,
+            );
+
+            # Retorno
+            return $result;
         })->addColumn('acervos', function ($row) {
 
             $date = new \DateTime('now');
