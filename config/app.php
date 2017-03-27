@@ -140,7 +140,7 @@ return [
         /*
         * Gerador de PDF
         */
-        Barryvdh\Snappy\ServiceProvider::class,
+       // Barryvdh\Snappy\ServiceProvider::class,
 
         //Form
        //Illuminate\Html\HtmlServiceProvider::class,
@@ -156,7 +156,7 @@ return [
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \Seracademico\Providers\SeracademicoRepositoryProvider::class,
-//        Barryvdh\DomPDF\ServiceProvider::class,
+        //Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
         * Laravel Framework Service Providers...
