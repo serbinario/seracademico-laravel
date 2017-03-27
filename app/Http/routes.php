@@ -1,5 +1,7 @@
 <?php
 
+Route::get("", ['middleware' => 'auth', 'uses' => 'DefaultController@index']);
+
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'auth'], function () {
@@ -348,6 +350,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
 //                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
 //                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
+
+
+
                 });
 
                 Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
@@ -551,6 +556,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('reportFilter', ['as' => 'reportFilter', 'uses' => 'Graduacao\AlunoController@reportFilter']);
                 Route::get('getImgAluno/{id}', ['as' => 'getImgAluno', 'uses' => 'Graduacao\AlunoController@getImgAluno']);
 
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'Graduacao\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'Graduacao\AlunoDocumentoController@checkDocumento']);
+
                 // Histórico do aluno
                 Route::group(['prefix' => 'historico', 'as' => 'historico.'], function () {
                     Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Graduacao\HistoricoAlunoController@gridHistorico']);
@@ -601,6 +610,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('adicionarHorarioAluno/{idSemestre}', ['as' => 'adicionarHorarioAluno', 'uses' => 'Graduacao\DisciplinaAlunoController@adicionarHorarioAluno']);
                     Route::post('getDisciplinas', ['as' => 'getDisciplinas', 'uses' => 'Graduacao\DisciplinaAlunoController@getDisciplinas']);
                     Route::post('removerHorario', ['as' => 'removerHorario', 'uses' => 'Graduacao\DisciplinaAlunoController@removerHorario']);
+                });
+
+                Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\AlunoTurmaController@getLoadFields']);
                 });
             });
 

@@ -153,6 +153,7 @@
     @include('graduacao.aluno.modal_inserir_dispensar_disciplina')
     @include('graduacao.aluno.modal_editar_dispensar_disciplina')
     @include('graduacao.aluno.modal_semestre')
+    @include('graduacao.aluno.modal_aluno_documento')
     @include('graduacao.aluno.financeiro.modal_debitos')
     @include('graduacao.aluno.financeiro.modal_create_debito_aberto')
     @include('graduacao.aluno.financeiro.modal_create_fechamento')
@@ -168,7 +169,6 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_historico.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('modal_aluno_documentmodal_aluno_documento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_curriculo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
@@ -194,6 +194,8 @@
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_trancado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_graduado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_ativo.js') }}"></script>
+    {{----}}
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -339,6 +341,16 @@
 
             // Carregando o modal
             runBeneficio(idAluno);
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#aluno_documentos", function () {
+            idAluno = table.row($(this).parents('tr')).data().id;
+
+            $('#id_aluno').val(idAluno);
+            loadFieldsDocumentos();
+
+            $("#modal-aluno-documento").modal({show:true});
         });
 
         /**

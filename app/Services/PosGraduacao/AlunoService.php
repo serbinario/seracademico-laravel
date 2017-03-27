@@ -12,7 +12,6 @@ use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Repositories\InstituicaoRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
-use Seracademico\Facades\ParametroMatriculaFacade;
 
 class AlunoService
 {

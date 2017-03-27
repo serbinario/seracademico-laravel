@@ -260,14 +260,14 @@
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Col.) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al
                                                             @else
                                                                 <?php echo ucwords(mb_strtoupper($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Org.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Col.) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
@@ -279,6 +279,7 @@
                                                                     <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
                                                                     <br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
@@ -287,6 +288,7 @@
                                                                     <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
                                                                     <br />
                                                                 @endif
                                                             @endforeach
@@ -385,12 +387,12 @@
                                     @if($exemplar['acervo']['etial_outros'] == '1')
                                         @if($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1' || $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == "")
                                             <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
-                                            <?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?>
+                                            <?php echo $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'] ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Org.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Col.) ';} ?>et al.
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al.
                                         @else
                                             <span style="text-transform: uppercase"><?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?></span><?php if (strrchr($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'], ".") == ".") { echo "";} else {echo ".";} ?>
                                         @endif
@@ -406,7 +408,7 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -419,7 +421,7 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -432,7 +434,7 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -441,12 +443,12 @@
                                                 @else
                                                     @if($chave == 0 && $autor['para_referencia1'] == '1')
                                                             @if($autor['exibir_tipo1'] == '1')
-                                                            <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>
+                                                                <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>
                                                                 <?php if($autor['tipo_autor_id'] == 1) {echo ' (Org.)';} ?>
                                                                 <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                                 <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                 <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                                <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                                <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                             @else
                                                                 <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                                 <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -458,7 +460,7 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -470,7 +472,7 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Col.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo ucwords(mb_strtoupper($autor['responsaveis']['nome'])); ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -590,21 +592,24 @@
                     <section class="arg-list">
                         <div class="col s12">
                             <div class="card" style="margin-top: 0px;">
-                                <div class="card-image waves-effect waves-block waves-light" >
+                                <div class="card-image waves-effect waves-block waves-light">
                                     <div class="book-search">
                                         @if($exemplar['path_image'] != null)
-                                            <img src="{{route('seracademico.biblioteca.getImg', ['id' => $exemplar['id']])}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                            <img src="{{route('seracademico.biblioteca.getImg', ['id' => $exemplar['id']])}}"
+                                                 style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
                                         @else
-                                            <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}" style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
+                                            <img src="{{ asset('/biblioteca/img/capa_livro3.jpg')}}"
+                                                 style="min-height: 0;width: 130px;max-width: 130px;max-height: 165px;">
                                         @endif
                                     </div>
                                     {{-- <img class="activator" src="{{ asset('/biblioteca/img/Capa-Livro-Propague-2.jpg')}}">--}}
                                 </div>
                             </div>
                             <br/>
-                            <a href="javascript:window.history.go(-1)" class="btn waves-effect waves-light"><i class="material-icons left">arrow_back</i>Voltar</a>
+                            <a href="javascript:window.history.go(-1)" class="btn waves-effect waves-light"><i
+                                        class="material-icons left">arrow_back</i>Voltar</a>
+                        </div>
                     </section>
-                </div>
             </div>
         </div>
     </div>
