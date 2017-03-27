@@ -13,7 +13,6 @@
         "laravelcollective/html": "5.1.*",
         "bican/roles": "2.1.*",
         "mcamara/laravel-localization": "1.0.*",
-        "barryvdh/laravel-snappy": "0.2.x",
         "doctrine/dbal": "~2.3",
         "nesbot/carbon": "~1.14",
         "mariuzzo/laravel-js-localization": "^1.2",

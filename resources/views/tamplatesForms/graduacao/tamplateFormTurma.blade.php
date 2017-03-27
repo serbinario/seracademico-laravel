@@ -173,7 +173,7 @@
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function () {
-            Lang.setLocale('pt-BR');
+            //Lang.setLocale('pt-BR');
 
             // Evento para preenchimento automático da descrição
             $(document).on('change', '#curso', function () {
