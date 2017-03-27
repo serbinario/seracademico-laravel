@@ -10,9 +10,9 @@
             font-size: 11px;
             margin: 0;
             padding: 0;
-            background-image: url("{{ asset('img/backgroud_fasup_500x529.png') }}");
+            background-image: url("{{ asset('img/background-alpha.png') }}");
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: center center;
         }
 
         table { page-break-inside:auto; }
@@ -25,9 +25,11 @@
         }
 
         .cabecalho h2 {
+            text-align: center;
             margin-left: 1%;
-            margin-top: 10%;
             font-size: 12px;
+            text-decoration: underline;
+            margin-bottom: 10%;
         }
 
         .table {
@@ -51,18 +53,6 @@
             display: inline-block;
         }
 
-        .rodape {
-            position: absolute;
-            bottom: 0;
-        }
-
-        .rodape h1 {
-            text-align: center;
-        }
-
-        .rodape h1 img {
-            width: 100%;
-        }
     </style>
 </head>
 
@@ -70,7 +60,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img src="{{ asset('img/logo_fasup.png') }}">
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
     </h1>
 
     <h2>Ficha matrícula</h2>
@@ -205,10 +195,11 @@
     </div>
 </div>
 
-<div class="rodape">
-    <h1>
-        <img width="100" src="{{ asset('img/rodape_fasupe.png') }}" alt="">
-    </h1>
+<div class="rodape" style="text-align: center; margin-top: 22%;">
+    <p style="margin-bottom: 0; text-align: center;">Rua Gervásio Pires, 826 Santo Amaro – Recife – PE</p>
+    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">Email: alphaatendimentorecife@gmail.com</p>
+    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">facebook.com/faculdadealpha</p>
+    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">(81) 3071-7249/9516-2229</p>
 </div>
 
 </body>
