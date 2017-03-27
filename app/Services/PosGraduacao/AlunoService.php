@@ -12,7 +12,6 @@ use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Repositories\InstituicaoRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
-use Seracademico\Facades\ParametroMatriculaFacade;
 
 class AlunoService
 {
@@ -96,8 +95,8 @@ class AlunoService
             'pessoa.instituicaoEscolar',
             'curriculos'
         ];
-
-        $aluno = $this->repository->find($id);
+        dd(\DB::table('pos_alunos')->where('id', $id)->select('id')->get());
+        $aluno = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
         if(!$aluno) {
