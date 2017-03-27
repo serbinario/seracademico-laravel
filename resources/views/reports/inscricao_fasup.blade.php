@@ -22,6 +22,7 @@
 
         .cabecalho h1 {
             text-align: center;
+            margin-top: 0;
         }
 
         .cabecalho h2 {
@@ -59,7 +60,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+        <img width="100" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
     </h1>
 
     <h2>Ficha matrícula</h2>
@@ -194,7 +195,7 @@
     </div>
 </div>
 
-<div class="rodape" style="text-align: center; margin-top: 22%;">
+<div class="rodape" style="text-align: center;">
     <p style="margin-bottom: 0; text-align: center;">Rua Gervásio Pires, 826 Santo Amaro – Recife – PE</p>
     <p style="margin-bottom: 0; margin-top: 0; text-align: center;">Email: alphaatendimentorecife@gmail.com</p>
     <p style="margin-bottom: 0; margin-top: 0; text-align: center;">facebook.com/faculdadealpha</p>
