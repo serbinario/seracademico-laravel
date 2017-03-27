@@ -60,7 +60,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+        <img width="100" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
     </h1>
 
     <h2>Ficha matrícula</h2>
