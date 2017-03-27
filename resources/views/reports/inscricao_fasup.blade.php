@@ -29,7 +29,6 @@
             margin-left: 1%;
             font-size: 12px;
             text-decoration: underline;
-            margin-bottom: 10%;
         }
 
         .table {
