@@ -96,9 +96,9 @@ class AlunoService
             'pessoa.instituicaoEscolar',
             'curriculos'
         ];
+        dd('dsadsa');
+        $aluno = $this->repository->with($relacionamentos)->find($id);
 
-        $aluno = $this->repository->find($id);
-        dd($aluno);
         #Verificando se o registro foi encontrado
         if(!$aluno) {
             throw new \Exception('Aluno não encontrado!');
