@@ -512,10 +512,10 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         {!! Form::label('curso_id', 'Curso') !!}
-                        @if(isset($aluno->id) && count($aluno->curriculos) > 0) 
+                        @if(isset($aluno->id) && count($aluno->curriculos) > 0)
                             {!! Form::select('curso_id', [$aluno->curriculos->last()->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
                         @else
-                            {!! Form::select('curso_id', $loadFields['graduacao\\curso'], null, array('class' => 'form-control')) !!}
+                            {!! Form::select('curso_id', (['' => 'Selecione um curso'] + $loadFields['graduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
                         @endif
                     </div>
 
