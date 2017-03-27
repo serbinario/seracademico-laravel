@@ -44,7 +44,8 @@ class AlunoValidator extends LaravelValidator
         'pessoa.endereco.numero' => 'Número',
         'pessoa.endereco.complemento' => 'Complemento',
         'pessoa.uf_exp' => 'UF(Documentos)',
-        'img' => 'Foto'
+        'img' => 'Foto',
+        'curso_id' => 'Curso',
 
 
 //        'pessoa.outra_escola' => 'Outra Instituição',
