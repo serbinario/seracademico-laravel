@@ -356,7 +356,7 @@
 <!-- zTree -->
 <script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
 <!-- Krajee -->
-{{--<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>--}}
+<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/locale/pt-BR.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/canvas-to-blob.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
