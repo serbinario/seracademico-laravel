@@ -96,7 +96,7 @@ class AlunoService
             'pessoa.instituicaoEscolar',
             'curriculos'
         ];
-        dd($id);
+     
         $aluno = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
