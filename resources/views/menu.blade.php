@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
-    <!-- Selectize -->
-    <link rel="stylesheet" href="{{ asset('/lib/selectize/dist/css/selectize.css')  }}">
     <!-- zTree-->
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
     <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
@@ -384,9 +382,9 @@
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
 <!-- Selectize -->
-<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
+{{--<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
 <script src="{{ asset('/lib/sifter/sifter.js')  }}"></script>
-<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
+<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>--}}
 <script type="text/javascript">
 
     //
