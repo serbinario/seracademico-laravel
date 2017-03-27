@@ -225,6 +225,8 @@ class MatriculaAlunoController extends Controller
 
                 // Recuperando as turmas
                 $rowsTurma = \DB::table('fac_turmas')
+                    ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                    ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                     ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_turmas.semestre_id')
                     ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
                     ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
@@ -234,6 +236,7 @@ class MatriculaAlunoController extends Controller
                         'fac_turmas_disciplinas.id as idTurmaDisciplina',
                         'fac_turmas.codigo as codigoTurma',
                         'fac_turmas.descricao as nomeTurma',
+                        'fac_cursos.nome as nomeCurso',
                     ])->get();
 
                 // Percorrendo e criando o array de turmas
@@ -241,7 +244,7 @@ class MatriculaAlunoController extends Controller
                 foreach ($rowsTurma as $turma) {
                     $arrayTurmas[$countTurmas]['idTurmaDisciplina'] = $turma->idTurmaDisciplina;
                     $arrayTurmas[$countTurmas]['codigoTurma']       = $turma->codigoTurma;
-                    $arrayTurmas[$countTurmas]['nomeTurma']         = $turma->nomeTurma;
+                    $arrayTurmas[$countTurmas]['nomeTurma']         = $turma->nomeCurso;
                     $arrayTurmas[$countTurmas]['horarios']          = \DB::table('fac_horarios')
                         ->join('fac_horas', 'fac_horas.id', '=', 'fac_horarios.hora_id')
                         ->join('fac_dias', 'fac_dias.id', '=', 'fac_horarios.dia_id')
