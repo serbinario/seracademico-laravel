@@ -1,5 +1,5 @@
 // Evento para chamar o modal de adicionar matéria ao curso
-$(document).on("click", "#btnAddHistorico", function () {
+$(document).on("click", "#btnAddHistorico", function () { 
     loadFieldsHistorico();
 });
 

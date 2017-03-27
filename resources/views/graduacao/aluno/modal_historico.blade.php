@@ -33,7 +33,7 @@
                     </div>
                     </div>
                     <div class="col-md-12">
-                        <a href="#" id="btnAddHistorico" class="btn-sm btn-primary pull-right">Novo Histórico</a><br><br>
+                        <a id="btnAddHistorico" class="btn-sm btn-primary pull-right">Novo Histórico</a><br><br>
                         <table id="grid-historico" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
