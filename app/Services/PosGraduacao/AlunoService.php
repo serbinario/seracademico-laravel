@@ -95,7 +95,7 @@ class AlunoService
             'pessoa.instituicaoEscolar',
             'curriculos'
         ];
-        dd(\DB::table('pos_alunos')->where('id', $id)->select('id')->get());
+        
         $aluno = $this->repository->with($relacionamentos)->find($id);
 
         #Verificando se o registro foi encontrado
