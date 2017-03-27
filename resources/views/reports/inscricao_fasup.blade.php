@@ -195,7 +195,7 @@
     </div>
 </div>
 
-<div class="rodape" style="text-align: center;">
+<div class="rodape" style="text-align: center; margin-top: 5%;">
     <p style="margin-bottom: 0; text-align: center;">Rua Gervásio Pires, 826 Santo Amaro – Recife – PE</p>
     <p style="margin-bottom: 0; margin-top: 0; text-align: center;">Email: alphaatendimentorecife@gmail.com</p>
     <p style="margin-bottom: 0; margin-top: 0; text-align: center;">facebook.com/faculdadealpha</p>
