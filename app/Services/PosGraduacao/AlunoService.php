@@ -98,7 +98,7 @@ class AlunoService
         ];
 
         $aluno = $this->repository->with($relacionamentos)->find($id);
-
+        dd($aluno);
         #Verificando se o registro foi encontrado
         if(!$aluno) {
             throw new \Exception('Aluno não encontrado!');
