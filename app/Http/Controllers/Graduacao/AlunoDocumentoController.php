@@ -2,7 +2,7 @@
 
 namespace Seracademico\Http\Controllers\Graduacao;
 
-use Illuminate\Support\Facades\App;
+use Knp\Snappy\Pdf;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Services\Graduacao\Documento\DocumentoHelper;
@@ -63,7 +63,7 @@ class AlunoDocumentoController extends Controller
             $resultado = $documento->processaDocumento($idAluno, []);
 
             # Retorno do arquivo pdf
-            return \PDF::loadView($resultado['nomeDaView'], $resultado)->stream();
+            return Pdf::loadView($resultado['nomeDaView'], $resultado)->stream();
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
