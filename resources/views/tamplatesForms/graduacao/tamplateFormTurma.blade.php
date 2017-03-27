@@ -202,20 +202,6 @@
                     $('#curriculo').append(option);
                 });
             });
-
-            $('#formTurma').bootstrapValidator({
-                fields: {
-                    codigo: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Código' })
-                            }
-                        }
-                    }
-
-                }
-            });
-
         });
     </script>
 @endsection
