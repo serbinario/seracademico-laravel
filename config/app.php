@@ -137,6 +137,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /*
+        * Gerador de PDF
+        */
+        Barryvdh\Snappy\ServiceProvider::class,
+
         //Form
        //Illuminate\Html\HtmlServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -151,6 +156,7 @@ return [
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \Seracademico\Providers\SeracademicoRepositoryProvider::class,
+//        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
         * Laravel Framework Service Providers...
@@ -231,9 +237,15 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Gerador de PDF
+         */
+        /*'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,*/
+
         //Form
         //'Html'      => Illuminate\Html\HtmlFacade::class,
-        // 'Form'      => Illuminate\Html\FormFacade::class,
+       // 'Form'      => Illuminate\Html\FormFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
