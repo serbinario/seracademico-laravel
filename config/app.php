@@ -240,8 +240,8 @@ return [
         /*
          * Gerador de PDF
          */
-        /*'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,*/
+        'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'Image'     => Barryvdh\Snappy\Facades\SnappyImage::class,
 
         //Form
         //'Html'      => Illuminate\Html\HtmlFacade::class,
