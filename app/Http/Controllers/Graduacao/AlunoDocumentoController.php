@@ -2,7 +2,6 @@
 
 namespace Seracademico\Http\Controllers\Graduacao;
 
-use Illuminate\Support\Facades\App;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Services\Graduacao\Documento\DocumentoHelper;
