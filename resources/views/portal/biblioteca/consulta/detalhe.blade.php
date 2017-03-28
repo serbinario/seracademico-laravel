@@ -489,7 +489,7 @@
                                         $paravra = "";
 
                                         if (strlen($array[0]) <= 1) {
-                                            $paravra .= strtoupper($array[0] . " " . $array[1]) . " ";
+                                            $paravra .= ucwords(mb_strtoupper($array[0] . " " . $array[1])) . " ";
                                             for ($i = 2; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
                                                 if ($i >= count($array)) {
@@ -499,7 +499,7 @@
                                                 }
                                             };
                                         } else {
-                                            $paravra .= strtoupper($array[0]) . " ";
+                                            $paravra .= ucwords(mb_strtoupper($array[0])) . " ";
                                             for ($i = 1; $i < count($array); $i++) {
                                                 $paravra .= mb_strtolower($array[$i]);
                                                 if ($i >= count($array)) {
