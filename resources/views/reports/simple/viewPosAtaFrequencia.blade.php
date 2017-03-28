@@ -11,8 +11,8 @@
         }
 
         body {
-            background-image: url("{{ asset('/img/backgroud_fasup_500x529.png') }}");
-            background-position: top;
+            background-image: url("{{ asset('img/background-alpha.png') }}");
+            background-position: center center;
         }
 
         #header {
@@ -93,7 +93,9 @@
 <div id="background"></div>
 
 <div id="header">
-    <img src="{{ asset('img/logo_fasup.png') }}" alt="Logo Fasupe">
+    <<h1>
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+    </h1>
 </div>
 
 <!-- Lógica do período-->
@@ -161,8 +163,5 @@
     </table>
 </div>
 
-<div id="footer">
-    <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-</div>
 </body>
 </html>

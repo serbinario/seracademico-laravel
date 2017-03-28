@@ -169,6 +169,7 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_historico.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_historico.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_curriculo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
