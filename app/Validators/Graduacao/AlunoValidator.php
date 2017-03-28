@@ -45,6 +45,7 @@ class AlunoValidator extends LaravelValidator
         'pessoa.endereco.complemento' => 'Complemento',
         'pessoa.uf_exp' => 'UF(Documentos)',
         'img' => 'Foto',
+        'curso_id' => 'Curso',
 
 
 //        'pessoa.outra_escola' => 'Outra Instituição',
@@ -117,6 +118,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_visual' => 'integer',
             'pessoa.deficiencia_fisica' => 'integer',
             'pessoa.deficiencia_outra' => 'integer',
+            'curso_id' => 'required',
 
             //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
@@ -132,7 +134,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             'pessoa.cpf' => 'required|max:20|graduacao_aluno_unique_in_pessoa:cpf,:id',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
-            'pessoa.nome_mae' => 'required|max:60|serbinario_alpha_space_especial',
+            'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required|serbinario_date_format:"d/m/Y"',
             'pessoa.identidade' => 'required|digits_between:4,11|numeric',
             'pessoa.enderecos_id' => 'integer',

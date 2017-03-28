@@ -109,6 +109,7 @@ $('#btnSaveSituacao').click(function() {
     }).done(function (retorno) {
         if(retorno.success) {
             // Recarregando as grids
+            table.ajax.reload();
             tableSituacao.ajax.reload();
             tableHistorico.ajax.reload(function () {
                 tableHistorico.row(indexRowSelectedHistorico).nodes().to$().find('td').addClass("row_selected");
@@ -134,6 +135,7 @@ $(document).on('click', '#btnDeleteSituacao', function () {
         url: '/index.php/seracademico/graduacao/aluno/historico/situacao/delete/' + idAlunoSituacao,
         datatype: 'json'
     }).done(function (retorno) {
+        table.ajax.reload();
         tableSituacao.ajax.reload();
         tableHistorico.ajax.reload(function () {
             tableHistorico.row(indexRowSelectedHistorico).nodes().to$().find('td').addClass("row_selected");

@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/sweetalert/sweetalert.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/plugins/botao/botao-fab.css')  }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap-multiselect.css')  }}">
-    <!-- Selectize -->
-    <link rel="stylesheet" href="{{ asset('/lib/selectize/dist/css/selectize.css')  }}">
     <!-- zTree-->
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
     <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
@@ -180,14 +178,6 @@
                         </li>
                         @endpermission
 
-                        <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level collapse">
-                                <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
-                                <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
-                                <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
-                            </ul>
-                        </li>
-
                         {{--<li>
                             <a href="#">Tesouraria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
@@ -201,6 +191,14 @@
                     </ul>
                 </li>
                 @endpermission
+
+                <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level collapse">
+                        <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
+                        <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
+                        <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
+                    </ul>
+                </li>
 
                 @role('admin')
                 <li><a href="index.html"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
@@ -358,7 +356,7 @@
 <!-- zTree -->
 <script src="{{ asset('/js/plugins/zTree/jquery.ztree.core.min.js')}}"></script>
 <!-- Krajee -->
-{{--<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>--}}
+<script src="{{ asset('/js/plugins/Krajee/fileinput.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/locale/pt-BR.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/canvas-to-blob.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/Krajee/plugins/purify.min.js')}}"></script>
@@ -384,9 +382,9 @@
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
 <!-- Selectize -->
-<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
+{{--<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
 <script src="{{ asset('/lib/sifter/sifter.js')  }}"></script>
-<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
+<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>--}}
 <script type="text/javascript">
 
     //
