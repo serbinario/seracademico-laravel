@@ -25,23 +25,18 @@ class InstituicaoService
      */
     public function inserirInstituicaoSelect($data)
     {
-        #
-        $novaInstituicao = "";
+        #verificando se o valor inserido já existe no banco de dados
+        $objInstituicao = $this->repository->findWhere(['nome' => $data['nome']]);
 
-        #
-        $validacao = $this->repository->findWhere(['nome' => $data]);
+        #se já existir, retorne, se não, cadastre.
+        if (count($objInstituicao) > 0) {
 
-        #
-        if (count($validacao) > 0) {
-
-            $novaInstituicao = null;
-
-        } else {
-            #
-            $novaInstituicao = $this->repository->create($data);
+            return $objInstituicao[0];
         }
 
-        #
+        #persistindo
+        $novaInstituicao = $this->repository->create($data);
+
         return $novaInstituicao;
     }
 }

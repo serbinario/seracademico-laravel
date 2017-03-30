@@ -12,11 +12,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
 
-        #Rota de instituição
-        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
-            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
-        });
-
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
             Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);
@@ -1201,6 +1196,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getIn', ['as' => 'getIn', 'uses' => 'Financeiro\BeneficioController@getIn']);
                 });
             });
+        });
+
+        #Rota de instituição
+        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
+            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
+        });
+
+        #Rota de instituição
+        Route::group(['prefix' => 'cursoPosGraduacao', 'as' => 'cursoPosGraduacao.'], function () {
+            Route::post('storeCursoPosGraduacao', ['as' => 'storeCursoPosGraduacao', 'uses' => 'CursoPosGraduacaoController@storeCursoPosGraduacao']);
+        });
+
+        #Rota de formação acadêmica
+        Route::group(['prefix' => 'cursoFormacao', 'as' => 'cursoFormacao.'], function () {
+            Route::post('storeCursoFormacao', ['as' => 'storeCursoFormacao', 'uses' => 'CursoFormacaoController@storeCursoFormacao']);
         });
     });
 

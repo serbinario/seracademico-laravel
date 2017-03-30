@@ -4,14 +4,15 @@ namespace Seracademico\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\CursoSuperiorRepository;
-use Seracademico\Entities\CursoSuperior;
+use Seracademico\Repositories\CursoPosGraduacaoRepository;
+use Seracademico\Entities\CursoPosGraduacao;
+use Seracademico\Validators\CursoPosGraduacaoValidator;
 
 /**
- * Class CursoSuperiorRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class CursoPosGraduacaoRepositoryRepositoryEloquent
+ * @package namespace Seracademico\Repositories;
  */
-class CursoSuperiorRepositoryEloquent extends BaseRepository implements CursoSuperiorRepository
+class CursoPosGraduacaoRepositoryEloquent extends BaseRepository implements CursoPosGraduacaoRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +21,7 @@ class CursoSuperiorRepositoryEloquent extends BaseRepository implements CursoSup
      */
     public function model()
     {
-        return CursoSuperior::class;
+        return CursoPosGraduacao::class;
     }
 
     /**

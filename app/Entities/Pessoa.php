@@ -5,6 +5,7 @@ namespace Seracademico\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Mestrado\Aluno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 
@@ -280,5 +281,13 @@ class Pessoa extends Model implements Transformable
     public function setDataExameNacionalDoisAttribute($value)
     {
         $this->attributes['data_exame_nacional_dois'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function aluno()
+    {
+        return $this->hasMany(Aluno::class);
     }
 }
