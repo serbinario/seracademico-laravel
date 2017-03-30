@@ -120,7 +120,7 @@ class AlunoController extends Controller
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',
-                    \DB::raw('IF(pos_alunos.matricula = "", "PENDENTE",fac_situacao.nome) as nomeSituacao'),
+                    'fac_situacao.nome as nomeSituacao',
                     'fac_cursos.codigo as codigoCurso',
                     'fac_cursos.nome as nomeCurso',
                     'fac_turmas.codigo as codigoTurma'
