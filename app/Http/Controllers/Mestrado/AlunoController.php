@@ -113,6 +113,7 @@ class AlunoController extends Controller
                 ->where('pos_tipos_alunos.id', 2)
                 ->select([
                     'pos_alunos.id',
+                    'pos_alunos.data_matricula',
                     'pos_alunos_turmas.id as idAlunoTurma',
                     'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
