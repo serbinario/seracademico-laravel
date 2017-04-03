@@ -1165,9 +1165,8 @@
                 datatype: 'json',
                 headers: {
                     'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                },
+                }
             }).done(function (json) {
-                if(json.success) {
                 if(json.success) {
                     // Options da turma
                     var option = "";
