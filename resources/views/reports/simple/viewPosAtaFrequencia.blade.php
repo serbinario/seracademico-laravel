@@ -116,7 +116,7 @@
     <table id="tableHeader" border="1">
         <tbody>
         <tr>
-            <td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""  }}</td>
+            <td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""}}</td>
             <td>{{ $dados['filtersBody'][2] ?? ""  }}
                 - {{($objDate ? $objDate->format('Y') . '.' . ($numberMonth >= 8 ? 2 : 1) :  '')}}</td>
         </tr>
@@ -128,6 +128,7 @@
             <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
             <td>Período: {{ $request['turno'] }}</td>
         </tr>
+        {{--{{dd($dados)}}--}}
         </tbody>
     </table>
 
