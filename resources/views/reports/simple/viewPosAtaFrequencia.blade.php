@@ -117,8 +117,7 @@
         <tbody>
         <tr>
             <td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""}}</td>
-            <td>{{ $dados['filtersBody'][2] ?? ""  }}
-                - {{($objDate ? $objDate->format('Y') . '.' . ($numberMonth >= 8 ? 2 : 1) :  '')}}</td>
+            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{ $dados['filtersBody'][1] ?? ""  }}</td>
         </tr>
         <tr>
             <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
