@@ -1168,6 +1168,7 @@
                 },
             }).done(function (json) {
                 if(json.success) {
+                if(json.success) {
                     // Options da turma
                     var option = "";
 

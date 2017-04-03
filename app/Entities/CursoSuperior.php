@@ -22,4 +22,12 @@ class CursoSuperior extends Model implements Transformable
         return $this->hasMany(Aluno::class, "fac_cursos_superiores_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pessoa()
+    {
+        return $this->hasMany(CursoSuperior::class);
+    }
+
 }
