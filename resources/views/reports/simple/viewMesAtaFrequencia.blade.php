@@ -111,7 +111,7 @@
     <table style="width: 90%; margin-left: auto; margin-right: auto;" id="tableHeader" border="1">
         <tbody>
         <tr>
-            <td>CAMPUS: Recife</td>
+            <td>CAMPUS: {{ $dados['filtersBody'][6] ?? ""}}</td>
             <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
 
         </tr>
