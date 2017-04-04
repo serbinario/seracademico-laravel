@@ -92,6 +92,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Matrícula</th>
+                                <th>Data Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
@@ -104,6 +105,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Matrícula</th>
+                                <th>Data Matrícula</th>
                                 <th>Telefones</th>
                                 <th>CPF</th>
                                 <th>Curso</th>
@@ -195,6 +197,7 @@
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'matricula', name: 'pos_alunos.matricula'},
+                {data: 'data_matricula', name: 'pos_alunos.data_matricula'},
                 {data: 'celular', name: 'pessoas.celular'},
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'codigoCurso', name: 'fac_cursos.codigo'},

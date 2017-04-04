@@ -36,6 +36,13 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group col-md-2">
+                {!! Form::label('data_matricula', 'Data de Matrícula') !!}
+                {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
+            </div>
+        </div>
+
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">

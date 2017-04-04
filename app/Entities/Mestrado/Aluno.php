@@ -38,6 +38,7 @@ class Aluno extends Model implements Transformable
         'tipo_pretensao_id',
         'tipo_img',
         'data_contrato',
+        'data_matricula',
         'titulo',
         'nota_final',
         'defesa',
@@ -166,5 +167,21 @@ class Aluno extends Model implements Transformable
     public function cursoSuperior()
     {
         return $this->belongsTo(CursoSuperior::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataMatriculaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDataMatriculaAttribute($value)
+    {
+        $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
     }
 }
