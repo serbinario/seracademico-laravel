@@ -39,18 +39,17 @@ $('#btnBuilderReportMesTurmaAtaAniversariante').click(function() {
     var reportId = $('#report_id').val();
     var cursoId  = $('#curso_mes_turma_ata_aniversariante_id').val();
     var turmaId  = $('#turma_mes_turma_ata_aniversariante_id').val();
-    var disciplinaId   = $('#disciplina_mes_turma_ata_aniversariante_id').val();
     var mesAniversario = $('#mes_aniversario_mes_turma_ata_aniversariante').val();
 
     // Validando as entradas
-    if(!cursoId || !turmaId || !disciplinaId || !mesAniversario) {
+    if(!cursoId || !turmaId || !mesAniversario) {
         swal('Todos os cammes do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
         return false;
     }
 
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
-        + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&fac_disciplinas,id="+disciplinaId+"&MONTH(pessoas,data_nasciemento)=" + mesAniversario, '_blank');
+        + reportId + "?fac_cursos,id="+cursoId+"&fac_turmas,id="+turmaId+"&MONTH(pessoas,data_nasciemento)=" + mesAniversario, '_blank');
 });
 
 // selects 2
@@ -112,45 +111,6 @@ $("#turma_mes_turma_ata_aniversariante_id").select2({
                 'search':     params.term, // search term
                 'tableName':  'fac_turmas',
                 'fieldName':  'codigo',
-                'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
-                'page':       params.page || 1
-            };
-        },
-        processResults: function (data, params) {
-
-            // parse the results into the format expected by Select2
-            // since we are using custom formatting functions we do not need to
-            // alter the remote JSON data, except to indicate that infinite
-            // scrolling can be used
-            params.page = params.page || 1;
-
-            return {
-                results: data.data,
-                pagination: {
-                    more: data.more
-                }
-            };
-        }
-    }
-});
-
-//consulta via select2
-$("#disciplina_mes_turma_ata_aniversariante_id").select2({
-    placeholder: 'Selecione uma disciplina',
-    width: 250,
-    allowClear: true,
-    ajax: {
-        type: 'POST',
-        url: "/index.php/seracademico/util/select2",
-        dataType: 'json',
-        delay: 250,
-        crossDomain: true,
-        data: function (params) {
-            return {
-                'search':     params.term, // search term
-                'tableName':  'fac_disciplinas',
-                'fieldName':  'nome',
                 'fieldWhere':  'tipo_nivel_sistema_id',
                 'valueWhere':  '3',
                 'page':       params.page || 1

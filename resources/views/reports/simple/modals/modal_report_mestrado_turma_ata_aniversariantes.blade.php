@@ -21,11 +21,6 @@
                        </div>
 
                        <div class="form-group">
-                           {!! Form::label('disciplinas', 'Disciplinas') !!}
-                           {!! Form::select('disciplinas', [], null, array('class' => 'form-control', 'id' => 'disciplina_mes_turma_ata_aniversariante_id')) !!}
-                       </div>
-
-                       <div class="form-group">
                            {!! Form::label('disciplinas', 'Mês') !!}
                            {!! Form::select('disciplinas',
                             [1 => 'Janiero', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho',
