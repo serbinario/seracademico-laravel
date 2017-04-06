@@ -229,8 +229,6 @@
                     </ul>
                 </li>
 
-
-
                 @role('biblioteca')
                 <li>
                     <a href="index.html"><i class="fa fa-book"></i> <span class="nav-label"> Biblioteca</span> <span
