@@ -77,6 +77,7 @@
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/calendario/selectModalAddEvento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_controller_calendario.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_adicionar_eventos.js') }}"></script>
     <script type="text/javascript">
