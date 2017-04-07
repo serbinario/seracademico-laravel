@@ -35,10 +35,6 @@
             width: 50%;
         }
 
-        #footer img {
-            width: 100%;
-        }
-
         table {
             font-size: 12px;
             font-weight: bold;
@@ -64,7 +60,6 @@
         }
 
         /**** Estilos da table em duas páginas *****/
-        table { page-break-inside:auto }
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
@@ -72,8 +67,6 @@
 </head>
 
 <body>
-<!-- Div de backgrund de imagem -->
-<div id="background"></div>
 
 <div id="header">
     <<h1>
