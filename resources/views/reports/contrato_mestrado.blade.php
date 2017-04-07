@@ -135,7 +135,7 @@
             </tr>
             <tr>
                 <td>RGº: {{ isset($aluno['pessoa']['identidade']) ? $aluno['pessoa']['identidade'] : "" }}</td>
-                <td>SDS: {{ isset($aluno['pessoa']['uf_exp']) ? $aluno['pessoa']['uf_exp'] : "" }}</td>
+                <td>{{ isset($aluno['pessoa']['orgao_rg']) ? $aluno['pessoa']['orgao_rg'] : "" }}</td>
                 <td colspan="2">CPF: {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }} </td>
             </tr>
             <tr>
