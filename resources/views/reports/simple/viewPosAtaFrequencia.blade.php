@@ -57,10 +57,6 @@
             width: 100%;
         }
 
-        table#tableBody {
-            margin-bottom: 5%;
-        }
-
         td {
             padding-bottom: 1.0%;
             padding-left: 1.0%;
