@@ -1208,7 +1208,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendarioController@update']);
             Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioController@delete']);
 
-                // Modais
+                // Modal
                 // Eventos
                 Route::get('selectTipoEvento', ['as' => 'selectTipoEvento', 'uses' => 'EventoController@selectTipoEvento']);
                 Route::get('selectDiaLetivo', ['as' => 'selectDiaLetivo', 'uses' => 'EventoController@selectDiaLetivo']);
@@ -1216,22 +1216,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventoController@storeEvento']);
                 Route::post('updateEvento', ['as' => 'updateEvento', 'uses' => 'EventoController@updateEvento']);
                 Route::get('removerEvento/{id}', ['as' => 'removerEvento', 'uses' => 'EventoController@removerEvento']);
-
-                //Períodos
-                Route::get('selectTipoEvento', ['as' => 'selectTipoEvento', 'uses' => 'EventoController@selectTipoEvento']);
-                Route::get('selectDiaLetivo', ['as' => 'selectDiaLetivo', 'uses' => 'EventoController@selectDiaLetivo']);
-                Route::get('gridEvento', ['as' => 'gridEvento', 'uses' => 'EventoController@gridEvento']);
-                Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventoController@storeEvento']);
-                Route::post('updateEvento', ['as' => 'updateEvento', 'uses' => 'EventoController@updateEvento']);
-                Route::get('removerEvento/{id}', ['as' => 'removerEvento', 'uses' => 'EventoController@removerEvento']);
-
-                /*Route::get('gridEvento/{id}', ['middleware' => 'permission:calendario.add.evento', 'as' => 'gridEvento', 'uses' => 'EventosController@grid']);
-                Route::post('getTipoEvento/{id}', ['middleware' => 'permission:calendario.add.evento', 'as' => 'getTipoEvento', 'uses' => 'EventosController@getTipoEvento']);
-                Route::post('getDiaLetivo/{id}', ['middleware' => 'permission:calendario.add.evento', 'as' => 'getDiaLetivo', 'uses' => 'EventosController@getDiaLetivo']);
-                Route::post('storeEvento', ['middleware' => 'permission:calendario.add.evento', 'as' => 'storeEvento', 'uses' => 'EventosController@store']);
-                Route::post('updateEvento/{id}', ['middleware' => 'permission:calendario.add.evento', 'as' => 'updateEvento', 'uses' => 'EventosController@update']);
-                Route::post('removerEvento/{id}', ['middleware' => 'permission:calendario.add.evento', 'as' => 'removerEvento', 'uses' => 'EventosController@destroy']);
-                Route::post('getDiaSemana', ['middleware' => 'permission:calendario.add.evento', 'as' => 'getDiaSemana', 'uses' => 'EventosController@getDiaSemana']);*/
+                Route::post('getDiaSemana', ['as' => 'getDiaSemana', 'uses' => 'EventoController@getDiaSemana']);
         });
 
         #Rota de instituição

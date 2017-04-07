@@ -83,4 +83,47 @@ class EventoService
         #retorno
         return true;
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function buscarDiaSemana($dados)
+    {
+        # Valida se o campo data existe
+        if($dados['data'] && $dados['data'] != "") {
+
+            $dia_semana = "";
+
+            // Pega a data requisitada
+            $dia = $dados['data'];
+            $diaa = substr($dia,0,2);
+            $mes = substr($dia,3,2);
+            $ano = substr($dia,6,4);
+
+            // Recupera o dia da semana
+            $diasemana = date("w", mktime(0,0,0,$mes,$diaa,$ano) );
+
+            switch($diasemana) {
+
+                case"0": $dia_semana = "DOMINGO"; break;
+                case"1": $dia_semana = "SEGUNDA"; break;
+                case"2": $dia_semana = "TERÇA"; break;
+                case"3": $dia_semana = "QUARTA"; break;
+                case"4": $dia_semana = "QUINTA"; break;
+                case"5": $dia_semana = "SEXTA"; break;
+                case"6": $dia_semana = "SÁBADO"; break;
+            }
+
+            #retorno
+            $retorno = $dia_semana;
+
+            return $retorno;
+        }
+
+        #retorno
+        $retorno = "";
+
+        return $retorno;
+    }
 }

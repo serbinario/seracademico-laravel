@@ -16,7 +16,7 @@ function loadTableEventos() {
             {data: 'data_feriado', name: 'feriados_eventos.data_feriado'},
             {data: 'dia_semana', name: 'feriados_eventos.dia_semana'},
             {data: 'dia_letivo', name: 'dia_letivo.nome'},
-            {data: 'tipo_evento', name: 'tipo_evento.nome'},
+            //{data: 'tipo_evento', name: 'tipo_evento.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
@@ -41,21 +41,19 @@ function runModalAdicionarEventos()
 //Evento do click no botão adicionar evento
 $(document).on('click', '#addEvento', function(event) {
     //Recuperando os valores dos campos do fomulário
-    var tipoEvento = $('#tipoEvento').val();
     var nome       = $('#nome').val();
     var dtFeriado  = $('#dtFeriado').val();
     var diaSemana  = $('#diaSemana').val();
     var diaLetivo  = $('#diaLetivo').val();
     
     // Verificando se os campos de preenchimento obrigatório foram preenchidos
-    if (!tipoEvento || !nome || !dtFeriado || !diaLetivo) {
+    if (!nome || !dtFeriado || !diaLetivo) {
         swal("Oops...", "Há campos obrigatórios que não foram preenchidos!", "error");
         return false;
     }
 
     //Setando o o json para envio
     var dados = {
-        'tipo_evento_id' : tipoEvento,
         'nome' : nome,
         'data_feriado' : dtFeriado,
         'dia_semana' : diaSemana,
@@ -69,11 +67,8 @@ $(document).on('click', '#addEvento', function(event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        console.log(tableEventos);
         swal("Evento adicionado com sucesso!", "Click no botão abaixo!", "success");
-        //$('#eventos-grid').DataTable().ajax.reload();
         tableEventos.ajax.reload();
-        //table.ajax.reload();
 
         //Limpar os campos do formulário
         limparCamposEvento();
@@ -99,11 +94,33 @@ $(document).on('click', '#deleteEvento', function () {
     });
 });
 
+//Evento para pegar o dia da semana da data de feriado informado
+$(document).on('focusout', '#dtFeriado', function () {
+
+    // Recuperando o valor da data inicial
+    var data = $('#dtFeriado').val();
+
+    //Setando o o json para envio
+    var dados = {
+        'data' : data
+    };
+
+    // Requisição Ajax
+    jQuery.ajax({
+        type: 'POST',
+        url: "/index.php/seracademico/calendarioAnual/getDiaSemana",
+        data: dados,
+        datatype: 'json'
+    }).done(function (json) {
+
+        $('#diaSemana').val(json.dados);
+
+    });
+});
+
 //Limpar os campos do formulário
 function limparCamposEvento()
 {
-    /*tipoEvento("");
-    diaLetivo("");*/
     $('#nome').val("");
     $('#dtFeriado').val("");
     $('#diaSemana').val("");

@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\EventoService;
+use Seracademico\Validators\EventoValidator;
 use Yajra\Datatables\Datatables;
+use Prettus\Validator\Exceptions\ValidatorException;
+use \Prettus\Validator\Contracts\ValidatorInterface;
 
 class EventoController extends Controller
 {
@@ -19,9 +22,11 @@ class EventoController extends Controller
     /**
      * @param EventoService $service
      */
-    public function __construct(EventoService $service)
+    public function __construct(EventoService $service,
+                                EventoValidator $validator)
     {
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
@@ -69,6 +74,10 @@ class EventoController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function storeEvento(Request $request)
     {
         try {
@@ -131,7 +140,6 @@ class EventoController extends Controller
         #Criando a consulta
         $rows = \DB::table('feriados_eventos')
             ->join('dia_letivo', 'dia_letivo.id', '=', 'feriados_eventos.dia_letivo_id')
-            ->join('tipo_evento', 'tipo_evento.id', '=', 'feriados_eventos.tipo_evento_id')
             ->select([
                 'feriados_eventos.id as id',
                 'feriados_eventos.nome as nome',
@@ -139,8 +147,6 @@ class EventoController extends Controller
                 'feriados_eventos.dia_semana',
                 'dia_letivo.nome as dia_letivo',
                 'dia_letivo.id as dia_letivo_id',
-                'tipo_evento.nome as tipo_evento',
-                'tipo_evento.id as tipo_evento_id',
             ]);
 
         #Editando a grid
@@ -153,7 +159,6 @@ class EventoController extends Controller
         } catch (\Exception $e) {
             abort(500, $e->getMessage());
         }
-
     }
 
     /**
@@ -179,8 +184,18 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getDiaSemana(Request $request)
     {
-        //
+        try {
+            #Recuperando os dados da requisição
+            $dados = $request->all();
+
+            $diaSemana = $this->service->buscarDiaSemana($dados);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $diaSemana]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
+        }
     }
 }

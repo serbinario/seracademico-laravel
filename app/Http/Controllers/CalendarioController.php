@@ -79,20 +79,10 @@ class CalendarioController extends Controller
         try {
             #Criando a consulta
             $rows = \DB::table('fac_calendarios_escolares')
-                ->join('fac_calendarios_duracao', 'fac_calendarios_duracao.id', '=', 'fac_calendarios_escolares.duracao_id')
                 ->select([
-                    'fac_calendarios_escolares.id',
-                    'fac_calendarios_escolares.nome',
-                    'fac_calendarios_escolares.ano',
-                    'fac_calendarios_escolares.data_inicial',
-                    'fac_calendarios_escolares.data_final',
-                    'fac_calendarios_escolares.dias_letivos',
-                    'fac_calendarios_escolares.semanas_letivas',
-                    'fac_calendarios_escolares.data_resultado_final',
-                    'fac_calendarios_escolares.duracao_id',
-                    'fac_calendarios_escolares.status_id',
-                    'fac_calendarios_duracao.nome as duracao',
-                    \DB::raw('IF(fac_calendarios_escolares.status_id = 1,"Sim","Não") as status_id'),
+                    'id',
+                    'nome',
+                    'ano'
                 ]);
             #Editando a grid
             return Datatables::of($rows)->addColumn('action', function ($row) {
@@ -101,7 +91,6 @@ class CalendarioController extends Controller
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/' . $row->id . '" title="Editar Calendário"><i class="material-icons">edit</i></a></li>
                         <li><a class="btn-floating indigo" href="delete/' . $row->id . '" title="Remover Calendário"><i class="material-icons">delete</i></a></li>
-                        <li><a style="margin-right: 5%;" title="Adicionar Período de Avaliação" id="btnModalAdicionarPeriodo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a></li>
                         <li><a title="Adicionar Evento" id="btnModalAdicionarEvento" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></a></li>
                     </ul>
                     </div>';
