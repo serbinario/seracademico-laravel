@@ -221,9 +221,7 @@
                         <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}"><i class="fa fa-star-half-empty"></i> Tipos de Avaliações</a></li>
                         <li><a href="{{ route('seracademico.tipoDisciplina.index') }}"><i class="fa fa-tags"></i> Tipos de Disciplinas</a></li>
                         <li><a href="{{ route('seracademico.graduacao.semestre.index') }}"><i class="fa fa-calendar"></i> Semestres</a></li>
-
-                        <li><a href="{{ route('seracademico.calendarioAnual.index') }}"><i class="fa fa-calendar"></i>Calendários</a></li>
-
+                        {{--<li><a href="{{ route('seracademico.calendarioAnual.index') }}"><i class="fa fa-calendar"></i>Calendários</a></li>--}}
                         <li><a href="{{ route('seracademico.tipoCurso.index') }}"><i class="flaticon-portfolio-filled-open-folder"></i> Tipos de Cursos</a></li>
                         <li><a href="{{ route('seracademico.tipoVencimento.index') }}"><i class="flaticon-tool"></i> Tipo de Vencimento</a></li>
                         <li><a href="{{ route('seracademico.graduacao.motivo.index') }}"><i class="material-icons">rate_review</i> Motivos</a></li>
