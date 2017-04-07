@@ -78,7 +78,6 @@
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_controller_calendario.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/calendario/modal_adicionar_periodos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_adicionar_eventos.js') }}"></script>
     <script type="text/javascript">
         var table = $('#calendario-grid').DataTable({
