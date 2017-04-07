@@ -89,13 +89,6 @@
             columns: [
                 {data: 'nome', name: 'fac_calendarios_escolares.nome'},
                 {data: 'ano', name: 'fac_calendarios_escolares.ano'},
-                /*{data: 'data_inicial', name: 'fac_calendarios_escolares.data_inicial'},
-                {data: 'data_final', name: 'fac_calendarios_escolares.data_final'},
-                {data: 'dias_letivos', name: 'fac_calendarios_escolares.dias_letivos'},
-                {data: 'semanas_letivas', name: 'fac_calendarios_escolares.semanas_letivas'},
-                {data: 'status_id', name: 'fac_calendarios_escolares.status_id'},
-                {data: 'data_resultado_final', name: 'fac_calendarios_escolares.data_resultado_final'},
-                {data: 'duracao', name: 'fac_calendarios_duracao.nome'},*/
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
