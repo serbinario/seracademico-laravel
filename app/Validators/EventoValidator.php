@@ -34,14 +34,14 @@ class EventoValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required|max:150',
-            'data_feriado' => 'required|max:150|between0,11',
+            'data_feriado' => 'required|max:150|between:0,11',
             'dia_semana' => '', //campo desabilitado na view
             'dia_letivo_id' => 'required|integer',
         ],
 
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:150',
-            'data_feriado' => 'required|max:150|between0,11',
+            'data_feriado' => 'required|max:150|between:0,11',
             'dia_semana' => '', //campo desabilitado na view
             'dia_letivo_id' => 'required|integer',
         ],
