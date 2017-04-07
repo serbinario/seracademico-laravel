@@ -60,6 +60,7 @@
         }
 
         /**** Estilos da table em duas páginas *****/
+        table#tableBody { page-break-inside:auto }
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
