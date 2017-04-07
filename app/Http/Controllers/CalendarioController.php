@@ -34,8 +34,7 @@ class CalendarioController extends Controller
      * @var array
      */
     private $loadFields = [
-        'CalendarioDuracao',
-        'CalendarioStatus'
+
     ];
 
     /**
