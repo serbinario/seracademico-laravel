@@ -34,7 +34,7 @@ class CalendarioValidator extends LaravelValidator {
 
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required|max:150',
-            'ano' => 'required|numeric|between:0,4'
+            'ano' => 'required|numeric|max:9999'
         ],
    ];
 
