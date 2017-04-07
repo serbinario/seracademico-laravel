@@ -61,8 +61,8 @@ class EventoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -84,8 +84,8 @@ class EventoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            /*#Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);*/
+            #Validando a requisição
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -141,12 +141,11 @@ class EventoController extends Controller
         $rows = \DB::table('feriados_eventos')
             ->join('dia_letivo', 'dia_letivo.id', '=', 'feriados_eventos.dia_letivo_id')
             ->select([
-                'feriados_eventos.id as id',
-                'feriados_eventos.nome as nome',
+                'feriados_eventos.id',
+                'feriados_eventos.nome',
                 \DB::raw('DATE_FORMAT(feriados_eventos.data_feriado,"%d/%m/%Y") as data_feriado'),
                 'feriados_eventos.dia_semana',
                 'dia_letivo.nome as dia_letivo',
-                'dia_letivo.id as dia_letivo_id',
             ]);
 
         #Editando a grid
