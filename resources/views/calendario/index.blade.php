@@ -73,12 +73,10 @@
             </div>
         </div>        
     </div>
-    @include('calendario.modal_adicionar_periodos_avaliacao')
     @include('calendario.modal_adicionar_eventos')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/calendario/selectModalAddEvento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_controller_calendario.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_adicionar_periodos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/calendario/modal_adicionar_eventos.js') }}"></script>
