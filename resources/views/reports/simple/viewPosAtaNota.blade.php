@@ -35,15 +35,6 @@
             width: 50%;
         }
 
-        #footer {
-            position: absolute;
-            bottom: 0;
-        }
-
-        #footer img {
-            width: 100%;
-        }
-
         table {
             font-size: 12px;
             font-weight: bold;
@@ -63,10 +54,6 @@
             width: 100%;
         }
 
-        table#tableBody {
-            margin-bottom: 5%;
-        }
-
         tr {
             page-break-inside: avoid;
             page-break-after: auto
@@ -78,19 +65,15 @@
             padding-top: 0.5%;
         }
 
-        thead {
-            display: table-header-group
-        }
-
-        tfoot {
-            display: table-footer-group
-        }
+        /**** Estilos da table em duas páginas *****/
+        table#tableBody { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
 </head>
 
 <body>
-<!-- Div de backgrund de imagem -->
-<div id="background"></div>
 
 <div id="header">
     <h1>
