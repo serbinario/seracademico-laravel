@@ -30,18 +30,18 @@
                     <div class="col-md-12">
                         <!-- Adicionar Disciplina -->
                         <div class="row" style="margin-top: -2%; margin-bottom: 3%;">
-                            <div class="form-group col-md-2">
-                                <div class=" fg-line">
-                                    <label for="tipoEvento">Tipo evento *</label>
-                                    <div class="select">
-                                        {!! Form::select("tipo_evento", array(), null, array('class'=> 'form-control', 'id' => 'tipoEvento')) !!}
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="form-group col-md-2">--}}
+                                {{--<div class=" fg-line">--}}
+                                    {{--<label for="tipoEvento">Tipo evento *</label>--}}
+                                    {{--<div class="select">--}}
+                                        {{--{!! Form::select("tipo_evento", array(), null, array('class'=> 'form-control', 'id' => 'tipoEvento')) !!}--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     <div class="fg-line">
-                                        <label for="nome">Nome *</label>
+                                        <label for="nome">Descrição *</label>
                                         {!! Form::text('nome', null, array('class' => 'form-control input-sm', 'id' => 'nome', 'placeholder' => 'Nome')) !!}
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="fg-line">
                                     <div class="fg-line">
                                         <label for="dtFeriado">Data feriado *</label>
-                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
+                                        {!! Form::text('data_feriado', null, array('class' => 'form-control input-sm datepicker date', 'id' => 'dtFeriado', 'placeholder' => 'Data feriado')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,6 @@
                                     <th>Data Feriado</th>
                                     <th>Dia da semana</th>
                                     <th>Dia letivo</th>
-                                    <th>Tipo do evento</th>
                                     <th style="width: 3%;">Acão</th>
                                 </tr>
                                 </thead>

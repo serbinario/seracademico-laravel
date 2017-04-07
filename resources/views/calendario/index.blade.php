@@ -56,29 +56,15 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Ano</th>
-                                <th>Data Inicial</th>
-                                <th>Data Final</th>
-                                <th>Dias Letivos</th>
-                                <th>Semanas Letivas</th>
-                                <th>Status</th>
-                                <th>Data Resultado Final</th>
-                                <th>Duração</th>
-                                <th style="width: 5%;">Acão</th>
+                                <th style="width: 2%;">Ano</th>
+                                <th style="width: 2%;">Acão</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>Ano</th>
-                                <th>Data Inicial</th>
-                                <th>Data Final</th>
-                                <th>Dias Letivos</th>
-                                <th>Semanas Letivas</th>
-                                <th>Status</th>
-                                <th>Data Resultado Final</th>
-                                <th>Duração</th>
-                                <th style="width: 5%;">Acão</th>
+                                <th style="width: 2%;">Ano</th>
+                                <th style="width: 2%;">Acão</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -105,13 +91,13 @@
             columns: [
                 {data: 'nome', name: 'fac_calendarios_escolares.nome'},
                 {data: 'ano', name: 'fac_calendarios_escolares.ano'},
-                {data: 'data_inicial', name: 'fac_calendarios_escolares.data_inicial'},
+                /*{data: 'data_inicial', name: 'fac_calendarios_escolares.data_inicial'},
                 {data: 'data_final', name: 'fac_calendarios_escolares.data_final'},
                 {data: 'dias_letivos', name: 'fac_calendarios_escolares.dias_letivos'},
                 {data: 'semanas_letivas', name: 'fac_calendarios_escolares.semanas_letivas'},
                 {data: 'status_id', name: 'fac_calendarios_escolares.status_id'},
                 {data: 'data_resultado_final', name: 'fac_calendarios_escolares.data_resultado_final'},
-                {data: 'duracao', name: 'fac_calendarios_duracao.nome'},
+                {data: 'duracao', name: 'fac_calendarios_duracao.nome'},*/
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

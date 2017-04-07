@@ -40,10 +40,10 @@ function runModalAdicionarPeriodos(idCalendario)
 
     // Desabilitando o botão de editar
     $('#edtPeriodo').prop('disabled', true);
-    $('#edtPeriodo').hide();*/
+    $('#edtPeriodo').hide();
 
     // Exibindo o modal
-    $('#modal-adicionar-periodos').modal({'show' : true});
+    $('#modal-adicionar-periodos').modal({'show' : true});*/
 }
 
 // Id do periodo
