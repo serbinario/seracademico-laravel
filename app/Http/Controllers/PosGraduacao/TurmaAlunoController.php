@@ -160,7 +160,8 @@ class TurmaAlunoController extends Controller
                         ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
                         ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
                         ->where('fac_turmas.id', '=', $idTurma)
-                        ->where('fac_disciplinas.id', '=', $idDisciplina);
+                        ->where('fac_disciplinas.id', '=', $idDisciplina)
+                        ->select(['pos_alunos.id']);
                 })
 
                 ->select([
