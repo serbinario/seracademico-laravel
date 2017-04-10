@@ -141,19 +141,7 @@ class TurmaAlunoController extends Controller
                 ->groupBy('pos_alunos.id')
                 ->where('fac_cursos.id', $idCurso)
                 //->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
-                ->whereNotIn('pos_alunos.id', function ($query) use ($idDisciplina, $idTurma) {
-                    $query->from('pos_alunos_notas')
-                        ->join('pos_alunos_turmas', 'pos_alunos_turmas.id', '=', 'pos_alunos_notas.pos_aluno_turma_id')
-                        ->join('pos_alunos_cursos', 'pos_alunos_cursos.id', '=', 'pos_alunos_turmas.pos_aluno_curso_id')
-                        ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
-                        ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
-                        ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
-                        ->select([
-                            'pos_alunos.id'
-                        ])
-                        ->where('fac_turmas.id', '=', $idTurma)
-                        ->where('fac_disciplinas.id', '=', $idDisciplina);
-                })
+                
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome'
