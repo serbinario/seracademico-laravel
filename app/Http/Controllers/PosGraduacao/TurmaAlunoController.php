@@ -138,10 +138,10 @@ class TurmaAlunoController extends Controller
                         where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
                     );
                 })
-                ->groupBy('pos_alunos.id')
+                ->groupBy('pessoas.nome')
                 ->where('fac_cursos.id', $idCurso)
                 //->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
-                
+
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome'
