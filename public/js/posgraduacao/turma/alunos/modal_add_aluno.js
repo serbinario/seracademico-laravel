@@ -149,10 +149,10 @@ $(document).on("click", "#btnSaveAddAluno", function () {
             tableAlunos.ajax.reload();
 
             // Limpando os campos
-            clearValueFields();
+            //clearValueFields();
 
             // Fechando o modal
-            $("#modal-add-aluno").modal('toggle');
+            //$("#modal-add-aluno").modal('toggle');
 
             // Mensagem de retorno
             swal(retorno.msg, "Click no botão abaixo!", "success");
