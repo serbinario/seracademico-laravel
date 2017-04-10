@@ -69,7 +69,7 @@ $(document).on('click', '#addEvento', function(event) {
         data: dados,
         datatype: 'json'
     }).done(function (json) {
-        
+
         swal("Evento adicionado com sucesso!", "Click no botão abaixo!", "success");
         tableEventos.ajax.reload();
 
