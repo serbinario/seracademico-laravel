@@ -140,7 +140,28 @@ class TurmaAlunoController extends Controller
                 })
                 ->groupBy('pessoas.nome')
                 ->where('fac_cursos.id', $idCurso)
-                //->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
+                ->whereNotIn('pos_alunos.id', function ($query) use ($idDisciplina, $idTurma) {
+                    $query->from('pos_alunos')
+                        ->join('pos_alunos_cursos', function ($join) {
+                            $join->on(
+                                'pos_alunos_cursos.id', '=',
+                                \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+                                 where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                            );
+                        })
+                        ->join('pos_alunos_turmas', function ($join) {
+                            $join->on(
+                                'pos_alunos_turmas.id', '=',
+                                \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                                where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                            );
+                        })
+                        ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
+                        ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
+                        ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
+                        ->where('fac_turmas.id', '=', $idTurma)
+                        ->where('fac_disciplinas.id', '=', $idDisciplina);
+                })
 
                 ->select([
                     'pos_alunos.id',
