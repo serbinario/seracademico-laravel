@@ -18,6 +18,7 @@ class Evento extends Model implements Transformable
         'data_feriado',
         'dia_semana',
         'dia_letivo_id',
+        'calendarios_id'
     ];
 
     /**
