@@ -27,7 +27,7 @@ function loadFieldsDocumentos()
 };
 
 // Função a montar o html
-function builderHtmlFieldsDocumento (dados) {
+function builderHtmlFieldsDocumento(dados) {
     //Limpando os campos
     $('#documentacao_id option').attr('selected', false);
     

@@ -1,4 +1,5 @@
 <div class="row">
+    <input type="hidden" id="id_aluno" value="{{ isset($aluno->id) ? $aluno->id : null }}">
     <div class="col-md-10">
         <!-- Busca por cpf, caso exista em pessoa -->
         @if(!isset($aluno))
@@ -41,6 +42,15 @@
                 {!! Form::label('data_matricula', 'Data de Matrícula') !!}
                 {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
             </div>
+            <div class="form-group col-md-2">
+                <label for="documentacao_id">Documentos</label>
+                <select name="documentacao_id" class="form-control" id="documentacao_id">
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+            <a id="btnGerarDocumento" class="btn-sm btn-primary">Gerar</a>
+
+        </div>
         </div>
 
     </div>
@@ -798,7 +808,11 @@
 </div>
 
 @section('javascript')
+    {{--Carrega o select de documentos em update--}}
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
+        var idAluno = $('#id_aluno').val();
+        loadFieldsDocumentos();
 
         //Evento para exibir input e botão
         $('#linkNovaInstituicao').on('click', function(){
