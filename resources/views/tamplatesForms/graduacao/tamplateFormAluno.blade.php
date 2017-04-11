@@ -243,6 +243,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{--Portal do aluno--}}
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
+                                                    class="fa fa-plus-circle"></i>Portal do Aluno</a>
+                                    </h4>
+                                </div>
+                                <div id="portaAluno" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <h5>Senha de acesso ao portal</h5>
+                                                <div class="form-group col-md-7">
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Portal do aluno--}}
                             </div>
                         </div>
                     </div>

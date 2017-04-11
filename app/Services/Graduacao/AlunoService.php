@@ -95,15 +95,15 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
         #regras de negócios
         //$this->tratamentoImagem($data);
-        $this->tratamentoMatricula($data);
+        $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
-    
+        $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+
         # Recuperando os semestres de configurção de matrícula
         $semestres = [
             ParametroMatriculaFacade::getSemestreVigente(),
@@ -182,7 +182,6 @@ class AlunoService
      */
     public function update(array $data, int $id) : Aluno
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
@@ -214,6 +213,18 @@ class AlunoService
             $pdo->query($query);
 
         }
+
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
@@ -283,6 +294,19 @@ class AlunoService
 
         # retorno
         return true;
+    }
+
+    /**
+     * @param $data
+     * @param $numeroMatricula
+     */
+    public function loginPortalAluno(&$data, $numeroMatricula){
+
+        #tratando a senha
+        $data['password'] = \bcrypt($data['password']);
+
+        #setando número de matricula como login do portal do aluno
+        $data['login'] = $numeroMatricula;
     }
 
     /**

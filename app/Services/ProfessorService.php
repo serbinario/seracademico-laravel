@@ -83,7 +83,6 @@ class ProfessorService
      */
     public function store(array $data) : Professor
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
@@ -108,6 +107,9 @@ class ProfessorService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
         $data['tipo_nivel_sistema_id'] = 1;
+
+        #salvando senha de acesso ao portal do aluno
+        $this->loginPortalAluno($data);
 
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));
@@ -142,6 +144,15 @@ class ProfessorService
 
         #Retorno
         return $professor;
+    }
+
+    /**
+     * @param $data
+     * @param $numeroMatricula
+     */
+    public function loginPortalAluno(&$data) {
+        #tratando a senha
+        $data['password'] = \bcrypt($data['password']);
     }
 
     /**
@@ -183,6 +194,18 @@ class ProfessorService
             $pdo->query($query);
 
         }
+
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
 
         #Atualizando no banco de dados
         $professor = $this->repository->update($this->tratamentoDatas($data), $id);
