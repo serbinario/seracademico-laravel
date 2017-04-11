@@ -1,4 +1,5 @@
 <div class="row">
+    <input type="hidden" id="id_aluno" value="{{ isset($aluno->id) ? $aluno->id : null }}">
     <div class="col-md-10">
         <!-- Busca por cpf, caso exista em pessoa -->
         @if(!isset($aluno))
@@ -810,7 +811,7 @@
     {{--Carrega o select de documentos em update--}}
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
-        //
+        var idAluno = $('#id_aluno').val();
         loadFieldsDocumentos();
 
         //Evento para exibir input e botão
