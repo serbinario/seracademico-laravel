@@ -43,7 +43,7 @@
                 {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
             </div>
         </div>
-        
+
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -782,11 +782,13 @@
                 </div>
             </div>--}}
             <div class="col-md-3 col-md-offset-9">
+                @if(isset($aluno))
                 <div style="position: relative; top: 34px; left: -245px;">
                     <label for="documentacao_id">Documentos</label>
                     <select name="documentacao_id" class="form-control" id="documentacao_id">
                     </select>
                 </div>
+                @endif
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <a href="{{ route('seracademico.posgraduacao.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
