@@ -109,7 +109,7 @@ class ProfessorController extends Controller
 
             #Executando a ação
             $this->service->store($data);
-            //dd("SSSSSSS");
+
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {

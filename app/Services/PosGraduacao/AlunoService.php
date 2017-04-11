@@ -120,8 +120,9 @@ class AlunoService
 
         #regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoMatricula($data);
+        $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+        $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = [];
@@ -148,6 +149,18 @@ class AlunoService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
+
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -484,6 +497,19 @@ class AlunoService
 
         # retorno
         return true;
+    }
+
+    /**
+     * @param $data
+     * @param $numeroMatricula
+     */
+    public function loginPortalAluno(&$data, $numeroMatricula){
+
+        #tratando a senha
+        $data['password'] = \bcrypt($data['password']);
+
+        #setando número de matricula como login do portal do aluno
+        $data['login'] = $numeroMatricula;
     }
 
     /**
