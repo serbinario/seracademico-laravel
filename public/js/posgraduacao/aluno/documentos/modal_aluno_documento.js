@@ -51,9 +51,6 @@ $(document).on('click', '#btnGerarDocumento', function () {
     // Recuperando os dados do formulário
     var documentacao_id = $('#documentacao_id').val();
 
-    console.log('documento: ' + documentacao_id);
-    console.log('id aluno: ' + idAluno);
-
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
