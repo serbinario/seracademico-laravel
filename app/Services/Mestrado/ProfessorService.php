@@ -90,6 +90,9 @@ class ProfessorService
         # Regras de negócios
         $this->tratamentoImagem($data);
 
+        #injetando senha de acesso ao portal do aluno no array principal
+        $this->loginPortalAluno($data);
+
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
         $endereco  = null;
@@ -148,6 +151,14 @@ class ProfessorService
     }
 
     /**
+     * @param $data
+     */
+    public function loginPortalAluno(&$data) {
+        #tratando a senha
+        $data['password'] = \bcrypt($data['password']);
+    }
+
+    /**
      * @param array $data
      * @param int $id
      * @return Professor
@@ -190,6 +201,18 @@ class ProfessorService
             $pdo->query($query);
 
         }
+
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
 
         #Atualizando no banco de dados
         $professor = $this->repository->update($this->tratamentoDatas($data), $id);
