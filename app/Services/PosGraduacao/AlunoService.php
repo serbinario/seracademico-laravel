@@ -503,8 +503,8 @@ class AlunoService
      * @param $data
      * @param $numeroMatricula
      */
-    public function loginPortalAluno(&$data, $numeroMatricula){
-
+    public function loginPortalAluno(&$data, $numeroMatricula)
+    {
         #tratando a senha
         $data['password'] = \bcrypt($data['password']);
 

@@ -108,7 +108,7 @@ class ProfessorService
         $data['pessoa_id'] = $pessoa->id;
         $data['tipo_nivel_sistema_id'] = 1;
 
-        #salvando senha de acesso ao portal do aluno
+        #injetando senha de acesso ao portal do aluno no array principal
         $this->loginPortalAluno($data);
 
         #Salvando o registro pincipal
@@ -148,7 +148,6 @@ class ProfessorService
 
     /**
      * @param $data
-     * @param $numeroMatricula
      */
     public function loginPortalAluno(&$data) {
         #tratando a senha

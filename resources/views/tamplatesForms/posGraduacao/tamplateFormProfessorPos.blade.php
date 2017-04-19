@@ -750,8 +750,7 @@
         </div>
     </div>
 
-    <div class="col-md-9"></div>
-    <div class="col-md-3">
+    <div class="col-md-3  col-md-offset-9">
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
                 <a href="{{ route('seracademico.posgraduacao.professorpos.index') }}" class="btn btn-primary"><i
