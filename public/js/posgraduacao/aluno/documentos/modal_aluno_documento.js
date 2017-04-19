@@ -1,5 +1,5 @@
 // carregando todos os campos preenchidos
-function loadFieldsDocumentos()
+function loadFieldsDocumentos(idAluno)
 {
     // Definindo os models
     var dados =  {

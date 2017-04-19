@@ -95,12 +95,13 @@ class AlunoService
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
-        $this->tratamentoMatricula($data);
+        $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+        $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Setando o tipo o tipo do aluno para mestrado
         $data['tipo_aluno_id'] = 2;
-
+        //dd($data);
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
 
@@ -138,6 +139,28 @@ class AlunoService
     }
 
     /**
+     * @param $data
+     * @param $numeroMatricula
+     */
+    public function loginPortalAluno(&$data, $numeroMatricula)
+    {
+        //tratamento de senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
+
+        //setando número de matricula como login do portal do aluno
+        $data['login'] = $numeroMatricula;
+    }
+
+    /**
      * Método reponsável por atualizar o aluno.
      *
      * @param array $data
@@ -151,6 +174,18 @@ class AlunoService
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
         $this->tratamentoCurso($data);
+
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
 
         #Atualizando no banco de dados
         $aluno = $this->repository->update($data, $id);

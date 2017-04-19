@@ -345,9 +345,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
 //                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
 //                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
-
-
-
                 });
 
                 Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
@@ -539,6 +536,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas para graduação
         Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduacao.'], function () {
+
+            Route::group(['prefix' => 'professor', 'as' => 'professor.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'ProfessorController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'ProfessorController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'ProfessorController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'ProfessorController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProfessorController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProfessorController@update']);
+                Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'ProfessorController@contrato']);
+                Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'ProfessorController@getImg']);
+            });
+
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\AlunoController@grid']);

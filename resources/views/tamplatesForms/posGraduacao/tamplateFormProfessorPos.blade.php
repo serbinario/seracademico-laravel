@@ -183,7 +183,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[cpf]', 'CPF *') !!}
-                                                {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]')  , array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]')  , array('id' => 'cpf', 'class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[titulo_eleitoral]', 'Titulo Eleitoral') !!}
@@ -258,6 +258,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{--Portal do aluno--}}
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
+                                                    class="material-icons">arrow_drop_down_circle</i>Portal do Aluno</a>
+                                    </h4>
+                                </div>
+                                <div id="portaAluno" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <h5>Senha de acesso ao portal</h5>
+                                                <div class="form-group col-md-6">
+                                                    {!! Form::label('login', 'Login') !!}
+                                                    {!! Form::text('login', Session::getOldInput('login'), array('id' => 'login', 'class' => 'form-control', 'readonly' => 'true')) !!}
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Portal do aluno--}}
                             </div>
                         </div>
                     </div>
@@ -725,8 +750,7 @@
         </div>
     </div>
 
-    <div class="col-md-9"></div>
-    <div class="col-md-3">
+    <div class="col-md-3  col-md-offset-9">
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
                 <a href="{{ route('seracademico.posgraduacao.professorpos.index') }}" class="btn btn-primary"><i
@@ -743,6 +767,12 @@
 
 @section('javascript')
     <script type="text/javascript">
+
+        //Setando cpf como login
+        $(document).on('focusout', '#cpf', function () {
+            var cpf = $('#cpf').val();
+            $('#login').val(cpf);
+        });
 
         Webcam.set({
             width: 260,

@@ -31,7 +31,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.posgraduacao.professor.store', 'method' => "POST", 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.graduacao.professor.store', 'method' => "POST", 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormProfessor')
             {!! Form::close() !!}
         </div>
