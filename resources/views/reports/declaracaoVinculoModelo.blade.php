@@ -44,10 +44,10 @@
         #background {
             width: 100%;
             height: 100%;
-            background-image: url("{{ asset('/img/marca_dagua_modelo.jpeg') }}");
+            background-image: url("{{ asset('/img/marca_dagua_modelo.png') }}");
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: top;
+            background-position: center;
             background-size: 500px 700px;
             position: absolute;
         }
