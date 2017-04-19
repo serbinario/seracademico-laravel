@@ -41,7 +41,7 @@ class AlunoDocumentoController extends Controller
                     $this->contrato($idAluno);
                     break;
                 case "2" :
-                    $this->certificadoConclusao($idAluno);
+                    $this->declaracaoVinculo($idAluno);
                     break;
                 case "3" :
                     $this->certificadoConclusao($idAluno);
@@ -54,6 +54,10 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "10":
                     $this->historico($idAluno);
+                    break;
+                case "12":
+                    $this->declaracaoVinculoModelo($idAluno);
+                    break;
             }
 
             # Retorno
@@ -86,7 +90,7 @@ class AlunoDocumentoController extends Controller
                     $nameView = "reports.contrato";
                     break;
                 case "2" :
-                    $result = $this->certificadoConclusao($idAluno);
+                    $result = $this->declaracaoVinculo($idAluno);
                     $nameView = "reports.declaracaoVinculo";
                     break;
                 case "3" :
@@ -100,6 +104,10 @@ class AlunoDocumentoController extends Controller
                 case "9" :
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_fasup";
+                    break;
+                case "12" :
+                    $result = $this->declaracaoVinculoModelo($idAluno);
+                    $nameView = "reports.declaracaoVinculoModelo";
                     break;
                 case "10" :
                     $result = $this->historico($idAluno);
@@ -176,6 +184,26 @@ class AlunoDocumentoController extends Controller
      * @throws \Exception
      */
     public function declaracaoVinculo($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function declaracaoVinculoModelo($id)
     {
         # Recuperando os dados padrões para esse documento
         $result = $this->getDadosPadraoParaGerarDocumento($id);
