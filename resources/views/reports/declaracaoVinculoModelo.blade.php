@@ -1,33 +1,52 @@
 <?php
-    // leitura das datas automaticamente
-    function data($dia, $mes, $ano, $semana) {
-        // configuração mes
-        switch ($mes){
-            case 1: $mes = "Janeiro"; break;
-            case 2: $mes = "Fevereiro"; break;
-            case 3: $mes = "Março"; break;
-            case 4: $mes = "Abril"; break;
-            case 5: $mes = "Maio"; break;
-            case 6: $mes = "Junho"; break;
-            case 7: $mes = "Julho"; break;
-            case 8: $mes = "Agosto"; break;
-            case 9: $mes = "Setembro"; break;
-            case 10: $mes = "Outubro"; break;
-            case 11: $mes = "Novembro"; break;
-            case 12: $mes = "Dezembro"; break;
-        }
+// leitura das datas automaticamente
 
-        // configuração semana
-        switch ($semana) {
-            case 0: $semana = "Domingo"; break;
-            case 1: $semana = "Segunda Feira"; break;
-            case 2: $semana = "Terça Feira"; break;
-            case 3: $semana = "Quarta Feira"; break;
-            case 4: $semana = "Quinta Feira"; break;
-            case 5: $semana = "Sexta Feira"; break;
-            case 6: $semana = "Sábado"; break;
-        }
+function data($dia, $mes, $ano, $semana) {
+
+    /*$dia = date('d');
+    $mes = date('m');
+    $ano = date('Y');
+    $semana = date('w');*/
+//$cidade = "Digite aqui sua cidade";
+
+// configuração mes
+
+    switch ($mes){
+
+        case 1: $mes = "Janeiro"; break;
+        case 2: $mes = "Fevereiro"; break;
+        case 3: $mes = "Março"; break;
+        case 4: $mes = "Abril"; break;
+        case 5: $mes = "Maio"; break;
+        case 6: $mes = "Junho"; break;
+        case 7: $mes = "Julho"; break;
+        case 8: $mes = "Agosto"; break;
+        case 9: $mes = "Setembro"; break;
+        case 10: $mes = "Outubro"; break;
+        case 11: $mes = "Novembro"; break;
+        case 12: $mes = "Dezembro"; break;
+
     }
+
+
+// configuração semana
+
+    switch ($semana) {
+
+        case 0: $semana = "Domingo"; break;
+        case 1: $semana = "Segunda Feira"; break;
+        case 2: $semana = "Terça Feira"; break;
+        case 3: $semana = "Quarta Feira"; break;
+        case 4: $semana = "Quinta Feira"; break;
+        case 5: $semana = "Sexta Feira"; break;
+        case 6: $semana = "Sábado"; break;
+
+    }
+
+    echo ("$semana, $dia de $mes de $ano");
+}
+//Agora basta imprimir na tela...
+//echo ("$cidade, $semana, $dia de $mes de $ano");
 ?>
 <html>
 <head>
@@ -148,9 +167,9 @@
                 <div id="rodape" style="margin-top: 50px;">
                     <div style="text-align: center; font-size: 11px;">
                         <p style="margin: 0;"><b>Faculdade Modelo - FACIMOD.</b></p>
-                        <p style="margin: 0;">Credenciada pelo MEC, Portaria nº 59 de 19/01/2011, publicada no DOU em 20/01/2011.</p>
-                        <p style="margin: 0;">Av. Dr. Rodolfo Aureliano, 2182, Vila Torres Galvão – 53430-740 - Paulista-PE.</p>
-                        <p style="margin: 0;">81-4101- 1117 - www.fasup.com</p>
+                        <p style="margin: 0;">Credenciada pela Portaria Ministerial n° 2.413 de 11/08/2004 (D.O.U. de 12/08/2004).</p>
+                        <p style="margin: 0;">Mantida pelo  Instituto Modelo de Ensino Superior Ltda.</p>
+                        <p style="margin: 0;">CNPJ: 05.121.388/0001-00</p>
                     </div>
                 </div>
             </div>
