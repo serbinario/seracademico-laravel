@@ -21,7 +21,6 @@
         tfoot { display:table-footer-group }
 
         .cabecalho h1 {
-            text-align: center;
             margin-top: 0;
         }
 
@@ -60,7 +59,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="100" src="{{ asset('img/logo_modelo.jpg') }}" alt="FASUP">
+        <img width="100" src="{{ asset('img/logo_modelo.png') }}" alt="FASUP">
     </h1>
 
     <h2>Ficha matrícula</h2>
