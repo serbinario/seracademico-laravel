@@ -117,6 +117,7 @@
     @include('reports.simple.modals.modal_report_pos_turma_ata_nota')
     @include('reports.simple.modals.modal_report_pos_turma_ata_aniversariantes')
     @include('reports.simple.modals.modal_report_pos_aluno_turma')
+    @include('reports.simple.modals.modal_report_pos_aluno_caderneta')
 @stop
 
 @section('javascript')
@@ -140,6 +141,7 @@
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_nota.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_turma_ata_aniversariantes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_caderneta.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
