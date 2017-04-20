@@ -10,7 +10,7 @@
             font-size: 11px;
             margin: 0;
             padding: 0;
-            background-image: url("{{ asset('img/background-alpha.png') }}");
+            background-image: url("{{ asset('img/marca_dagua_modelo.png') }}");
             background-repeat: no-repeat;
             background-position: center center;
         }
@@ -60,7 +60,7 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="100" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+        <img width="100" src="{{ asset('img/logo_modelo.jpg') }}" alt="FASUP">
     </h1>
 
     <h2>Ficha matrícula</h2>
@@ -196,10 +196,10 @@
 </div>
 
 <div class="rodape" style="text-align: center; margin-top: 10%;">
-    <p style="margin-bottom: 0; text-align: center;">Rua Gervásio Pires, 826 Santo Amaro – Recife – PE</p>
-    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">Email: alphaatendimentorecife@gmail.com</p>
-    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">facebook.com/faculdadealpha</p>
-    <p style="margin-bottom: 0; margin-top: 0; text-align: center;">(81) 3071-7249/9516-2229</p>
+    <p style="margin: 0;"><b>Faculdade Modelo - FACIMOD.</b></p>
+    <p style="margin: 0;">Credenciada pela Portaria Ministerial n° 2.413 de 11/08/2004 (D.O.U. de 12/08/2004).</p>
+    <p style="margin: 0;">Mantida pelo  Instituto Modelo de Ensino Superior Ltda.</p>
+    <p style="margin: 0;">CNPJ: 05.121.388/0001-00</p>
 </div>
 
 </body>
