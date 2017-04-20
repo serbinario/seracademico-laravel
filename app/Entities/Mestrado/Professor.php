@@ -56,7 +56,9 @@ class Professor extends Model implements Transformable
         'diploma_graduacao_obrigatorio',
         'diploma_pos_obrigatorio',
         'diploma_mestrado_obrigatorio',
-        'diploma_doutorado_obrigatorio'
+        'diploma_doutorado_obrigatorio',
+        'login',
+        'password'
 	];
 
 

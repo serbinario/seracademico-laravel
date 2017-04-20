@@ -113,6 +113,7 @@ class AlunoController extends Controller
                 ->where('pos_tipos_alunos.id', 2)
                 ->select([
                     'pos_alunos.id',
+                    'pos_alunos.data_matricula',
                     'pos_alunos_turmas.id as idAlunoTurma',
                     'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
@@ -120,7 +121,7 @@ class AlunoController extends Controller
                     'pos_alunos.matricula',
                     'pessoas.celular',
                     'fac_curriculos.codigo as codigoCurriculo',
-                    \DB::raw('IF(pos_alunos.matricula = "", "PENDENTE",fac_situacao.nome) as nomeSituacao'),
+                    'fac_situacao.nome as nomeSituacao',
                     'fac_cursos.codigo as codigoCurso',
                     'fac_cursos.nome as nomeCurso',
                     'fac_turmas.codigo as codigoTurma'
@@ -231,7 +232,7 @@ class AlunoController extends Controller
         try {
             #Recuperando o aluno
             $aluno = $this->service->find($id);
-
+            //dd($aluno);
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 

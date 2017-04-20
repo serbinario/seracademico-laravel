@@ -1,6 +1,5 @@
 @extends('menu')
 
-
 @section('content')
 
     <div class="ibox float-e-margins">

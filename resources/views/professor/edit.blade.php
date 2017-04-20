@@ -32,7 +32,7 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.posgraduacao.professor.update', $model->id], 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($model, ['route'=> ['seracademico.graduacao.professor.update', $model->id], 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.tamplateFormProfessor')
                 {{--<a href="{{ route('seracademico.report.contratoProfessor', ['id' => $professor->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
             {!! Form::close() !!}

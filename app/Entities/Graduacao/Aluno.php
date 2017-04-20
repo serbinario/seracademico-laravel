@@ -45,7 +45,9 @@ class Aluno extends Model implements Transformable
         'path_image',
         'tipo_img',
         'data_contrato',
-        'termo_biblioteca'
+        'termo_biblioteca',
+        'login',
+        'password'
     ];
 
     /**

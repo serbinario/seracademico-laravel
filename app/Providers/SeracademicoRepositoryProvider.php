@@ -721,5 +721,25 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\InstituicaoRepository::class,
             \Seracademico\Repositories\InstituicaoRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\CursoPosGraduacaoRepository::class,
+            \Seracademico\Repositories\CursoPosGraduacaoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\CursoSuperiorRepository::class,
+            \Seracademico\Repositories\CursoSuperiorRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\CalendarioRepository::class,
+            \Seracademico\Repositories\CalendarioRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\EventoRepository::class,
+            \Seracademico\Repositories\EventoRepositoryEloquent::class
+        );
     }
 }

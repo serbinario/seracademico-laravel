@@ -11,8 +11,8 @@
         }
 
         body {
-            background-image: url("{{ asset('/img/backgroud_fasup_500x529.png') }}");
-            background-position: top;
+            background-image: url("{{ asset('img/background-alpha.png') }}");
+            background-position: center center;
         }
 
         #header {
@@ -35,15 +35,6 @@
             width: 50%;
         }
 
-        #footer {
-            position: absolute;
-            bottom: 0;
-        }
-
-        #footer img {
-            width: 100%;
-        }
-
         table {
             font-size: 12px;
             font-weight: bold;
@@ -63,10 +54,6 @@
             width: 100%;
         }
 
-        table#tableBody {
-            margin-bottom: 5%;
-        }
-
         tr {
             page-break-inside: avoid;
             page-break-after: auto
@@ -78,22 +65,20 @@
             padding-top: 0.5%;
         }
 
-        thead {
-            display: table-header-group
-        }
-
-        tfoot {
-            display: table-footer-group
-        }
+        /**** Estilos da table em duas páginas *****/
+        table#tableBody { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
 </head>
 
 <body>
-<!-- Div de backgrund de imagem -->
-<div id="background"></div>
 
 <div id="header">
-    <img src="{{ asset('img/logo_fasup.png') }}" alt="Logo Fasupe">
+    <h1>
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+    </h1>
 </div>
 
 <!-- Lógica do período-->
@@ -159,10 +144,6 @@
         @endforeach
         </tbody>
     </table>
-</div>
-
-<div id="footer">
-    <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
 </div>
 </body>
 </html>

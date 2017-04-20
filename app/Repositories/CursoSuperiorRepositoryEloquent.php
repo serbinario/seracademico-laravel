@@ -23,8 +23,6 @@ class CursoSuperiorRepositoryEloquent extends BaseRepository implements CursoSup
         return CursoSuperior::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */

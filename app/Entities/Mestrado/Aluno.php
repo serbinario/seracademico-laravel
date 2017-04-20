@@ -5,6 +5,8 @@ namespace Seracademico\Entities\Mestrado;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\CursoPosGraduacao;
+use Seracademico\Entities\CursoSuperior;
 use Seracademico\Entities\Mestrado\Curso;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Uteis\SerbinarioDateFormat;
@@ -36,6 +38,7 @@ class Aluno extends Model implements Transformable
         'tipo_pretensao_id',
         'tipo_img',
         'data_contrato',
+        'data_matricula',
         'titulo',
         'nota_final',
         'defesa',
@@ -56,7 +59,12 @@ class Aluno extends Model implements Transformable
         'tipo_aluno_id',
         'curriculo_doc_obrigatorio',
         'carta_intencao_doc_obrigatorio',
-        'termo_biblioteca'
+        'termo_biblioteca',
+        'curso_superior_id',
+        'curso_pos_graduacao_id',
+        'fac_instituicao_id',
+        'password',
+        'login'
     ];
 
     /**
@@ -145,5 +153,37 @@ class Aluno extends Model implements Transformable
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cursoPosGraduacao()
+    {
+        return $this->belongsTo(CursoPosGraduacao::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cursoSuperior()
+    {
+        return $this->belongsTo(CursoSuperior::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataMatriculaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDataMatriculaAttribute($value)
+    {
+        $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
     }
 }

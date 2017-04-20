@@ -90,6 +90,9 @@ class ProfessorPosService
         # Regras de negócios
         $this->tratamentoImagem($data);
 
+        #injetando senha de acesso ao portal do aluno no array principal
+        $this->loginPortalAluno($data);
+
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
         $endereco  = null;
@@ -145,6 +148,14 @@ class ProfessorPosService
 
         #Retorno
         return $professor;
+    }
+
+    /**
+     * @param $data
+     */
+    public function loginPortalAluno(&$data) {
+        #tratando a senha
+        $data['password'] = \bcrypt($data['password']);
     }
 
     /**

@@ -114,6 +114,7 @@ class AlunoController extends Controller
                 ->where('pos_alunos.tipo_aluno_id', null)
                 ->select([
                     'pos_alunos.id',
+                    'pos_alunos.data_matricula',
                     'pos_alunos_turmas.id as idAlunoTurma',
                     'pos_alunos_cursos.id as idAlunoCurso',
                     'pessoas.nome',
@@ -253,7 +254,7 @@ class AlunoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-           
+
             #tratando as rules
             $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 

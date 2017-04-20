@@ -11,8 +11,8 @@
         }
 
         body {
-            background-image: url("{{ asset('/img/backgroud_fasup_500x529.png') }}");
-            background-position: top;
+            background-image: url("{{ asset('img/background-alpha.png') }}");
+            background-position: center center;
         }
 
         #header {
@@ -35,20 +35,10 @@
             width: 50%;
         }
 
-        #footer {
-            position: absolute;
-            bottom: 0;
-        }
-
-        #footer img {
-            width: 100%;
-        }
-
         table {
             font-size: 12px;
             font-weight: bold;
             border-collapse: collapse;
-            page-break-inside: auto
         }
 
         table#tableHeader {
@@ -63,37 +53,26 @@
             width: 100%;
         }
 
-        table#tableBody {
-            margin-bottom: 5%;
-        }
-
-        tr {
-            page-break-inside: avoid;
-            page-break-after: auto
-        }
-
         td {
             padding-bottom: 1.0%;
             padding-left: 1.0%;
             padding-top: 0.5%;
         }
 
-        thead {
-            display: table-header-group
-        }
-
-        tfoot {
-            display: table-footer-group
-        }
+        /**** Estilos da table em duas páginas *****/
+        table#tableBody { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
 </head>
 
 <body>
-<!-- Div de backgrund de imagem -->
-<div id="background"></div>
 
 <div id="header">
-    <img src="{{ asset('img/logo_fasup.png') }}" alt="Logo Fasupe">
+    <<h1>
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+    </h1>
 </div>
 
 <!-- Lógica do período-->
@@ -114,9 +93,8 @@
     <table id="tableHeader" border="1">
         <tbody>
         <tr>
-            <td>Unidade de estudos direcionados: Recife</td>
-            <td>{{ $dados['filtersBody'][2] ?? ""  }}
-                - {{($objDate ? $objDate->format('Y') . '.' . ($numberMonth >= 8 ? 2 : 1) :  '')}}</td>
+            <td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""}}</td>
+            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{ $dados['filtersBody'][1] ?? ""  }}</td>
         </tr>
         <tr>
             <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
@@ -126,6 +104,7 @@
             <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
             <td>Período: {{ $request['turno'] }}</td>
         </tr>
+        {{--{{dd($dados)}}--}}
         </tbody>
     </table>
 
@@ -161,8 +140,5 @@
     </table>
 </div>
 
-<div id="footer">
-    <img src="{{ asset('img/rodape_fasupe.png') }}" alt="Logo Fasupe">
-</div>
 </body>
 </html>

@@ -36,7 +36,7 @@ class Aluno extends Model implements Transformable
         'tipo_pretensao_id',
         'tipo_img',
         'data_contrato',
-        //
+        'data_matricula',
         'titulo',
         'nota_final',
         'defesa',
@@ -55,7 +55,9 @@ class Aluno extends Model implements Transformable
         'data_conclusao',
         'data_colacao',
         'pos_aluno_curso_id',
-        'termo_biblioteca'
+        'termo_biblioteca',
+        'login',
+        'password'
     ];
 
     /**
@@ -144,5 +146,21 @@ class Aluno extends Model implements Transformable
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataMatriculaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDataMatriculaAttribute($value)
+    {
+        $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
     }
 }

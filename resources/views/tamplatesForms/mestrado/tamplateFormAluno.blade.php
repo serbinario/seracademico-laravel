@@ -36,6 +36,13 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group col-md-2">
+                {!! Form::label('data_matricula', 'Data de Matrícula') !!}
+                {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
+            </div>
+        </div>
+
     </div>
     <div class="col-md-2">
         <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -247,6 +254,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{--Portal do aluno--}}
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
+                                                    class="fa fa-plus-circle"></i>Portal do Aluno</a>
+                                    </h4>
+                                </div>
+                                <div id="portaAluno" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <h5>Senha de acesso ao portal</h5>
+                                                <div class="form-group col-md-7">
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Portal do aluno--}}
                             </div>
                         </div>
                     </div>
@@ -345,33 +373,93 @@
                         <div class="row">
                             <div class="form-group col-md-5">
                                 <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
-                                <select id="formacao" name="fac_cursos_superiores_id" class="form-control">
-                                    @if(isset($aluno->id) && $aluno->pessoa->cursoSuperior != null)
-                                    <option value="{{ $aluno->pessoa->cursoSuperior->id  }}" selected="selected">{{ $aluno->pessoa->cursoSuperior->nome }}</option>
+                                <select id="cursoSuperior" name="curso_superior_id" class="form-control">
+                                    @if(isset($aluno->id) && $aluno->cursoSuperior != null)
+                                    <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
                                     @endif
                                 </select>
+                                <span style="margin-left:auto;">
+                                    <div class="input-group">
+                                        <input type="text" id="novaFormacao" class="form-control">
+                                        <span class="input-group-btn">
+                                            <a id="btnNovaFormacao" class="btn-sm btn-primary">Adicionar</a>
+                                        </span>
+                                    </div>
+                                </span>
+                                <span style="margin-left:auto;">
+                                    <a id="linkNovaFormacao">Adicionar nova formação</a>
+                                </span>
                             </div>
-
-                            <div class="form-group col-md-10">
+                            <div class="form-group col-md-5">
                                 <label for="instituicao">Instituição</label><br>
                                 <select id="instituicao" class="form-control" name="pessoa[instituicao_escolar_id]">
                                     @if(isset($aluno->id) && $aluno->pessoa->instituicaoEscolar != null)
                                         <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
                                     @endif
                                 </select>
+                                <span style="margin-left:auto;">
+                                    <div class="input-group">
+                                        <input type="text" id="novaInstituicao" class="form-control">
+                                    <span class="input-group-btn">
+                                        <a id="btnNovaInstituicao" class="btn-sm btn-primary">Adicionar</a>
+                                    </span>
+                                    </div>
+                                </span>
+                                <span style="margin-left:auto;">
+                                    <a id="linkNovaInstituicao">Adicionar nova instituição</a>
+                                </span>
                             </div>
-
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
                                 {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
+                            <div class="form-group col-md-5">
+                                <label for="fac_cursos_superiores_id">Pós-graduação</label>
+                                <select id="cursoPosGraduacao" name="curso_pos_graduacao_id" class="form-control">
+                                    @if(isset($aluno->id) && $aluno->curso_pos_graduacao_id != null)
+                                        <option value="{{ $aluno->cursoPosGraduacao->id  }}" selected="selected">{{ $aluno->cursoPosGraduacao->nome }}</option>
+                                    @endif
+                                </select>
+                                <span style="margin-left:auto;">
+                                    <div class="input-group">
+                                        <input type="text" id="novaPosGraduacao" class="form-control">
+                                    <span class="input-group-btn">
+                                        <a id="btnNovaPosGraduacao" class="btn-sm btn-primary">Adicionar</a>
+                                    </span>
+                                    </div>
+                                </span>
+                                <span style="margin-left:auto;">
+                                    <a id="linkNovaPosGraduacao">Adicionar pós-graduação</a>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="instituicao">Instituição</label><br>
+                                <select id="instituicaoDePos" class="form-control" name="fac_instituicao_id">
+                                    @if(isset($aluno->id) && $aluno->pessoa->instituicaoEscolar != null)
+                                        <option value="{{ $aluno->pessoa->instituicaoEscolar->id  }}" selected="selected">{{ $aluno->pessoa->instituicaoEscolar->nome }}</option>
+                                    @endif
+                                </select>
+                                <span style="margin-left:auto;">
+                                    <div class="input-group">
+                                        <input type="text" id="novaInstituicaoDePos" class="form-control">
+                                    <span class="input-group-btn">
+                                        <a id="btnNovaInstituicaoDePos" class="btn-sm btn-primary">Adicionar</a>
+                                    </span>
+                                    </div>
+                                </span>
+                                <span style="margin-left:auto;">
+                                    <a id="linkNovaInstituicaoDePos">Adicionar nova instituição</a>
+                                </span>
+                            </div>
+                        </div>
+                        {{--<div class="row">
                             <div class="form-group col-md-12">
                                 {!! Form::label('pessoas[outra_escola]', 'Outra Instituição') !!}
                                 {!! Form::text('pessoas[outra_escola]', Session::getOldInput('pessoas[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -706,14 +794,103 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}{{--
-    <script type="text/javascript" src="{{ asset('/js/validacao/messages_pt_BR.js')  }}"></script>
-    --}}{{--Regras adicionais--}}{{--
-    <script type="text/javascript" src="{{ asset('/js/validacao/regrasAdicionais/alphaSpace.js')  }}"></script>
-    --}}{{--Regras de validação--}}{{--
-    <script type="text/javascript" src="{{ asset('/js/validacao/mestrado/alunoValidator.js')  }}"></script>--}}
-
+    <script type="text/javascript" src="{{ asset('/js/createInstituicao/createInstituicao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/createCursoPosGraduacao/createCursoPosGraduacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/createCursoFormacao/createFormacao.js') }}"></script>
     <script type="text/javascript">
+
+        //Evento para exibir input e botão curso pós
+        $('#linkNovaPosGraduacao').on('click', function(){
+            $('#linkNovaPosGraduacao').hide();
+            $('#novaPosGraduacao').show();
+            $('#btnNovaPosGraduacao').show();
+        })
+
+        //Evento para exibir input e botão curso graduação
+        $('#linkNovaFormacao').on('click', function(){
+            $('#linkNovaFormacao').hide();
+            $('#novaFormacao').show();
+            $('#btnNovaFormacao').show();
+        })
+
+        //Evento para exibir input e botão de instituição (graduação)
+        $('#linkNovaInstituicao').on('click', function(){
+            $('#linkNovaInstituicao').hide();
+            $('#novaInstituicao').show();
+            $('#btnNovaInstituicao').show();
+        })
+
+        //Evento para exibir input e botão de instituição
+        $('#linkNovaInstituicaoDePos').on('click', function(){
+            $('#linkNovaInstituicaoDePos').hide();
+            $('#novaInstituicaoDePos').show();
+            $('#btnNovaInstituicaoDePos').show();
+        })
+
+        //Inserindo nova formação a nível de pós-graduação
+        $('#btnNovaPosGraduacao').on('click', function(){
+            var valor = $('#novaPosGraduacao').val();
+            var nivel = 2;
+            var idSelect = $('#cursoPosGraduacao');
+
+            //Persistindo e injetando o dado no select2
+            createCursoPosGraduacao(valor, nivel, idSelect);
+
+            //Ocultando componentes do formulário
+            $('#novaPosGraduacao').hide();
+            $('#btnNovaPosGraduacao').hide();
+            $('#linkNovaPosGraduacao').show();
+            $('#novaPosGraduacao').val("");
+        })
+
+        //Inserindo nova formação (nível superior)
+        $('#btnNovaFormacao').on('click', function(){
+            var valor = $('#novaFormacao').val();
+            var idArea = 3;
+            var idSelect = $('#cursoSuperior');
+
+            //Persistindo e injetando o dado no select2
+            createFormacao(valor, idArea, idSelect);
+
+            //Ocultando componentes do formulário
+            $('#novaFormacao').hide();
+            $('#btnNovaFormacao').hide();
+            $('#linkNovaFormacao').show();
+            $('#novaFormacao').val("");
+        })
+
+        //Inserindo nova instituição
+        $('#btnNovaInstituicao').on('click', function(){
+            var valor = $('#novaInstituicao').val();
+            var nivel = 3;
+            var idSelect = $('#instituicao');
+
+            //Persistindo e injetando o dado no select2
+            createInstituicao(valor, nivel, idSelect);
+
+            //Ocultando componentes do formulário
+            $('#novaInstituicao').hide();
+            $('#btnNovaInstituicao').hide();
+            $('#linkNovaInstituicao').show();
+            $('#novaInstituicao').val("");
+        })
+
+        //Inserindo nova instituição
+        $('#btnNovaInstituicaoDePos').on('click', function(){
+            var valor = $('#novaInstituicaoDePos').val();
+            var nivel = 3;
+            var idSelect = $('#instituicaoDePos');
+
+            //Persistindo e injetando o dado no select2
+            createInstituicao(valor, nivel, idSelect);
+
+            //Ocultando componentes do formulário
+            $('#novaInstituicaoDePos').hide();
+            $('#btnNovaInstituicaoDePos').hide();
+            $('#linkNovaInstituicaoDePos').show();
+            $('#novaInstituicaoDePos').val("");
+        })
+
         Webcam.set({
             width: 260,
             height: 240,
@@ -823,7 +1000,7 @@
         $("#instituicao").select2({
             placeholder: 'Selecione uma instituição',
             minimumInputLength: 3,
-            width: 750,
+            width: 398,
             allowClear: true,
             ajax: {
                 type: 'POST',
@@ -863,7 +1040,50 @@
         });
 
         //consulta via select2
-        $("#formacao").select2({
+        $("#instituicaoDePos").select2({
+            placeholder: 'Selecione uma instituição',
+            minimumInputLength: 3,
+            width: 398,
+            allowClear: true,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_instituicoes',
+                        'fieldName':  'nome',
+                        'fieldWhere':  'nivel',
+                        'valueWhere':  '3',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                }
+            }
+        });
+
+        //consulta via select2
+        $("#cursoSuperior").select2({
             placeholder: 'Selecione uma formação acadêmica',
             minimumInputLength: 3,
             width: 400,
@@ -878,6 +1098,48 @@
                     return {
                         'search':     params.term, // search term
                         'tableName':  'fac_cursos_superiores',
+                        'fieldName':  'nome',
+                        'page':       params.page || 1
+                    };
+                },
+                headers: {
+                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
+                },
+                processResults: function (data, params) {
+
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.data,
+                        pagination: {
+                            more: data.more
+                        }
+                    };
+                },
+                cache: true
+            }
+        });
+
+        //consulta via select2
+        $("#cursoPosGraduacao").select2({
+            placeholder: 'Selecione uma formação acadêmica',
+            minimumInputLength: 3,
+            width: 400,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
+                dataType: 'json',
+                delay: 250,
+                crossDomain: true,
+                allowClear: true,
+                data: function (params) {
+                    return {
+                        'search':     params.term, // search term
+                        'tableName':  'fac_pos_graduacoes',
                         'fieldName':  'nome',
                         'page':       params.page || 1
                     };
@@ -987,6 +1249,15 @@
         // Evento para carregar as sedes a partir do
         // curso selecionado
         $(document).ready(function () {
+            //Ocultando o campo p/ adição de nova instituição
+            $('#novaPosGraduacao').hide();
+            $('#novaFormacao').hide();
+            $('#novaInstituicao').hide();
+            $('#novaInstituicaoDePos').hide();
+            $('#btnNovaPosGraduacao').hide();
+            $('#btnNovaFormacao').hide();
+            $('#btnNovaInstituicao').hide();
+            $('#btnNovaInstituicaoDePos').hide();
 
             var cursoId = $('#curso_id').val();
 

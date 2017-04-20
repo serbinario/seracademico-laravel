@@ -1,4 +1,5 @@
 <div class="row">
+    <input type="hidden" id="id_aluno" value="{{ isset($aluno->id) ? $aluno->id : null }}">
     <div class="col-md-10">
         <!-- Busca por cpf, caso exista em pessoa -->
         @if(!isset($aluno))
@@ -33,6 +34,13 @@
                 {!! Form::label('matricula', 'Matrícula ') !!}
                 {!! Form::text('matricula', Session::getOldInput('nome') , array('class' => 'form-control', 'disabled' => true)) !!}
                 <input type="hidden" value="" id="idAluno" name="idAluno">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-2">
+                {!! Form::label('data_matricula', 'Data de Matrícula') !!}
+                {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
             </div>
         </div>
 
@@ -250,6 +258,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{--Portal do aluno--}}
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
+                                                    class="fa fa-plus-circle"></i>Portal do Aluno</a>
+                                    </h4>
+                                </div>
+                                <div id="portaAluno" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <h5>Senha de acesso ao portal</h5>
+                                                <div class="form-group col-md-7">
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Portal do aluno--}}
                             </div>
                         </div>
                     </div>
@@ -774,6 +803,13 @@
                 </div>
             </div>--}}
             <div class="col-md-3 col-md-offset-9">
+                @if(isset($aluno))
+                <div style="position: relative; top: 34px; left: -245px;">
+                    <label for="documentacao_id">Documentos</label>
+                    <select name="documentacao_id" class="form-control" id="documentacao_id">
+                    </select>
+                </div>
+                @endif
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <a href="{{ route('seracademico.posgraduacao.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
@@ -791,7 +827,35 @@
 </div>
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
+
+        //select de documentos no formulário de edição de aluno
+        var idAluno = $('#id_aluno').val();
+        loadFieldsDocumentos();
+
+        // Evento para gerar o documento
+        $(document).on('change', '#documentacao_id', function () {
+            // Recuperando os dados do formulário
+            var documentacao_id = $('#documentacao_id').val();
+
+            // Fazendo a requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/posgraduacao/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
+                datatype: 'json'
+            }).done(function (retorno) {
+                // Verificando o retorno da requisição
+                if(retorno.success) {
+                    // Executando o relatório e abrindo em outra aba
+                    window.open("/index.php/seracademico/posgraduacao/aluno/gerarDocumento/"
+                            + documentacao_id + "/" + idAluno, '_blank');
+                } else {
+                    // Retorno caso retorno alguma erro
+                    swal(retorno.msg, "Click no botão abaixo!", "error");
+                }
+            });
+        });
 
         //Evento para exibir input e botão
         $('#linkNovaInstituicao').on('click', function(){
@@ -818,7 +882,6 @@
                     datatype: 'json'
 
                 }).done(function(json) {
-                    console.log(json);
                     //Montando o option
                     var newState = new Option(json.dados.nome, json.dados.id, true, true);
 
@@ -1165,7 +1228,7 @@
                 datatype: 'json',
                 headers: {
                     'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                },
+                }
             }).done(function (json) {
                 if(json.success) {
                     // Options da turma

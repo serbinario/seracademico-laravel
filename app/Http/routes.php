@@ -12,11 +12,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
 
-        #Rota de instituição
-        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
-            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
-        });
-
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
             Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);
@@ -350,9 +345,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'PosGraduacao\AlunoTurmaController@storeSituacao']);
 //                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
 //                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
-
-
-
                 });
 
                 Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
@@ -544,6 +536,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //Rotas para graduação
         Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduacao.'], function () {
+
+            Route::group(['prefix' => 'professor', 'as' => 'professor.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'ProfessorController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'ProfessorController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'ProfessorController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'ProfessorController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ProfessorController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProfessorController@update']);
+                Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'ProfessorController@contrato']);
+                Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'ProfessorController@getImg']);
+            });
+
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\AlunoController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\AlunoController@grid']);
@@ -1201,6 +1205,42 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getIn', ['as' => 'getIn', 'uses' => 'Financeiro\BeneficioController@getIn']);
                 });
             });
+        });
+
+        // Rotas de calendario
+        Route::group(['prefix' => 'calendarioAnual', 'as' => 'calendarioAnual.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'CalendarioController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'CalendarioController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'CalendarioController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CalendarioController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CalendarioController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'CalendarioController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'CalendarioController@delete']);
+
+                // Modal
+                // Eventos
+                Route::get('selectTipoEvento', ['as' => 'selectTipoEvento', 'uses' => 'EventoController@selectTipoEvento']);
+                Route::get('selectDiaLetivo', ['as' => 'selectDiaLetivo', 'uses' => 'EventoController@selectDiaLetivo']);
+                Route::get('gridEvento', ['as' => 'gridEvento', 'uses' => 'EventoController@gridEvento']);
+                Route::post('storeEvento', ['as' => 'storeEvento', 'uses' => 'EventoController@storeEvento']);
+                Route::post('updateEvento', ['as' => 'updateEvento', 'uses' => 'EventoController@updateEvento']);
+                Route::get('removerEvento/{id}', ['as' => 'removerEvento', 'uses' => 'EventoController@removerEvento']);
+                Route::post('getDiaSemana', ['as' => 'getDiaSemana', 'uses' => 'EventoController@getDiaSemana']);
+        });
+
+        #Rota de instituição
+        Route::group(['prefix' => 'instituicao', 'as' => 'instituicao.'], function () {
+            Route::post('storeInstituicao', ['as' => 'storeInstituicao', 'uses' => 'InstituicaoController@storeInstituicao']);
+        });
+
+        #Rota de instituição
+        Route::group(['prefix' => 'cursoPosGraduacao', 'as' => 'cursoPosGraduacao.'], function () {
+            Route::post('storeCursoPosGraduacao', ['as' => 'storeCursoPosGraduacao', 'uses' => 'CursoPosGraduacaoController@storeCursoPosGraduacao']);
+        });
+
+        #Rota de formação acadêmica
+        Route::group(['prefix' => 'cursoFormacao', 'as' => 'cursoFormacao.'], function () {
+            Route::post('storeCursoFormacao', ['as' => 'storeCursoFormacao', 'uses' => 'CursoFormacaoController@storeCursoFormacao']);
         });
     });
 
