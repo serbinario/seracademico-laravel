@@ -194,7 +194,7 @@
     </div>
 </div>
 
-<div class="rodape" style="text-align: center; margin-top: 10%;">
+<div class="rodape" style="text-align: center; margin-top: 5%;">
     <p style="margin: 0;"><b>Faculdade Modelo - FACIMOD.</b></p>
     <p style="margin: 0;">Credenciada pela Portaria Ministerial n° 2.413 de 11/08/2004 (D.O.U. de 12/08/2004).</p>
     <p style="margin: 0;">Mantida pelo  Instituto Modelo de Ensino Superior Ltda.</p>
