@@ -159,6 +159,7 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
         //Id da turma corrente
         var idTurma;
 

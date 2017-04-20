@@ -54,13 +54,19 @@ class GerarDataDeDevolucaoDoEmprestimo
             $diaDaSemana = GerarDataDeDevolucaoDoEmprestimo::getDiaDaSemana($data);
 
             //valida se a data gerada está dentro dos dias letivos de funcionamento da biblioteca
-            $validarDataPorDiaLetivo = \DB::table('bib_dias_letivos_emprestimo')
+            $validarDataPorDiaLetivoEmprestimo = \DB::table('bib_dias_letivos_emprestimo')
                 ->where('nome', '=', $diaDaSemana)
                 ->where('ativo', '=', '0')
                 ->select('nome')->first();
 
+            //valida se a data gerada está dentro dos dias de feriado da instituição
+            $validarDataPorDiaLetivo = \DB::table('feriados_eventos')
+                ->where('data_feriado', '=', $dataReal)
+                ->where('dia_letivo_id', '=', '2')
+                ->select('data_feriado')->first();
+
             // Validando o retorno da consulta e se a data para empréstimo não será para ser entregue no mesmo dia
-            if($validarDataPorDiaLetivo && $dados['tipo_emprestimo'] == '1' && $emprestimoEspecial == '0'
+            if(($validarDataPorDiaLetivoEmprestimo || $validarDataPorDiaLetivo) && $dados['tipo_emprestimo'] == '1' && $emprestimoEspecial == '0'
                && ($tipoPessoa == '1' || $tipoPessoa == '4')) {
 
                 $dia = $dia + 1;
