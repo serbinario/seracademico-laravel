@@ -31,10 +31,8 @@ class ProfissaoRepositoryEloquent extends BaseRepository implements ProfissaoRep
     */
     public function validator()
     {
-
         return ProfissaoValidator::class;
     }
-
 
     /**
      * Boot up the repository, pushing criteria

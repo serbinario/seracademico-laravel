@@ -116,9 +116,9 @@
                                 {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
                                 {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2 col-sm-2">
                                 {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
-                                {!! Form::select('pessoa[profissoes_id]', array(), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
+                                {!! Form::select('pessoa[profissoes_id]', array(), Session::getOldInput('pessoa[profissoes_id]'),array('id' => 'profissao', 'class' => 'selectize form-control input-sm')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
@@ -829,6 +829,46 @@
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
+        //selectize profissões
+        var totalCount;
+        var page;
+        var perPage = 50;
+
+        $('#profissao').selectize({
+            plugins: {'infinite_scroll': {'scrollRatio': 0.85, 'scrollStep': 20}},
+            valueField: 'id',
+            labelField: 'title',
+            searchField: 'title',
+            create: function (value, $item) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/index.php/seracademico/posgraduacao/selectProfissao/store',
+                    data: {'nome' : value },
+                    datatype: 'json'
+                }).done(function(retorno) {
+                });
+            },
+            load: function(query, callback) {
+                //query = JSON.parse(query)
+
+                page = query.page || 1
+
+                if(!totalCount || totalCount > ( (page - 1) * perPage) ){
+                    $.ajax({
+                        url: '/index.php/seracademico/posgraduacao/selectProfissao/find',
+                        error: function() {
+                            callback();
+                        },
+                        success: function(res) {
+                            totalCount = res.total_count;
+                            callback(res.items);
+                        }
+                    });
+                } else {
+                    callback();
+                }
+            }
+        })
 
         //select de documentos no formulário de edição de aluno
         var idAluno = $('#id_aluno').val();

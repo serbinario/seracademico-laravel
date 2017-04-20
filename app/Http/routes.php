@@ -532,6 +532,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
                 });
             });
+            Route::group(['prefix' => 'selectProfissao', 'as' => 'selectProfissao.'], function () {
+                Route::post('store', ['as' => 'store', 'uses' => 'PosGraduacao\AlunoController@storeProfissao']);
+                Route::get('find', ['as' => 'find', 'uses' => 'PosGraduacao\AlunoController@findProfissao']);
+            });
         });
 
         //Rotas para graduação

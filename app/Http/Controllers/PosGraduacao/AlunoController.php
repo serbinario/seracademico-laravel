@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Entities\PosGraduacao\Aluno;
@@ -208,7 +209,7 @@ class AlunoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+dd($data);
             #Validando a requisição
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
@@ -394,6 +395,44 @@ class AlunoController extends Controller
             return response($model->path_image) ->header('Content-Type', 'image/jpeg');
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function storeProfissao(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->insertValor($data);
+
+            #Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findProfissao()
+    {
+        try{
+            $profissoes = \DB::table('profissoes')
+                ->select(['id', 'nome as title'])
+                ->get();
+
+            //retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'items' => $profissoes]);
+        } catch (\Throwable $e) {
+            dd($e->getMessage());
+//            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
     }
 }
