@@ -834,7 +834,7 @@
         var page;
         var perPage = 50;
 
-        $('#profissao').selectize({
+    /*    $('#profissao').selectize({
             plugins: {'infinite_scroll': {'scrollRatio': 0.85, 'scrollStep': 20}},
             valueField: 'id',
             labelField: 'title',
@@ -868,7 +868,7 @@
                     callback();
                 }
             }
-        })
+        });*/
 
         //select de documentos no formulário de edição de aluno
         var idAluno = $('#id_aluno').val();
