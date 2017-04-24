@@ -11,6 +11,7 @@ use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Repositories\PosGraduacao\CurriculoRepository;
 use Seracademico\Repositories\InstituicaoRepository;
+use Seracademico\Repositories\ProfissaoRepository;
 use Seracademico\Repositories\SituacaoAlunoRepositoryEloquent;
 
 class AlunoService
@@ -51,6 +52,11 @@ class AlunoService
     private $curriculoRepository;
 
     /**
+     * @var ProfissaoRepository
+     */
+    private $profissaoRepository;
+
+    /**
      * AlunoService constructor.
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
@@ -64,7 +70,8 @@ class AlunoService
         PessoaRepository $pessoaRepository,
         SituacaoAlunoRepositoryEloquent $situacaoRepository,
         CurriculoRepository $curriculoRepository,
-        InstituicaoRepository $instituicaoRepository)
+        InstituicaoRepository $instituicaoRepository,
+        ProfissaoRepository $profissaoRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
@@ -72,6 +79,7 @@ class AlunoService
         $this->situacaoRepository = $situacaoRepository;
         $this->curriculoRepository = $curriculoRepository;
         $this->instituicaoRepository = $instituicaoRepository;
+        $this->profissaoRepository = $profissaoRepository;
     }
 
     /**
@@ -710,5 +718,16 @@ class AlunoService
 
         #retorno
         return $result;
+    }
+
+    /**
+     * @param $dado
+     */
+    public function insertValor($data)
+    {
+        #Salvando registro
+        $retorno = $this->profissaoRepository->create($data);
+
+        return true;
     }
 }

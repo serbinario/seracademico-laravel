@@ -34,6 +34,10 @@
     <link rel="stylesheet" href="{{ asset('/css/plugins/zTree/zTreeStyle.css')  }}">
     <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <!-- Selectize -->
+    {{--<link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.css" />--}}
+    <link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.bootstrap3.css" />
+    <link rel="stylesheet" type="text/css" href="/css/selectize/dimenssoesSelectize.css" />
 
     @yield('css')
 </head>
@@ -382,11 +386,11 @@
 <script src="{{ asset('/js/plugins/sweetalert/sweetalert.min.js')  }}"></script>
 <script src="{{ asset('/js/plugins/botao/materialize.min.js')  }}"></script>
 <!-- Selectize -->
-{{--<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
+<script src="{{ asset('/lib/microplugin/src/microplugin.js')  }}"></script>
 <script src="{{ asset('/lib/sifter/sifter.js')  }}"></script>
-<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>--}}
+<script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
+<script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
 <script type="text/javascript">
-
     //
     $(document).on({
         'show.bs.modal': function () {

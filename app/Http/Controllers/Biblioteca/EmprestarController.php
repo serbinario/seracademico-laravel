@@ -368,6 +368,8 @@ class EmprestarController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $html = "";
+
+                # Valida se foi realizado o pagamento ou não de no caso o empréstmimo atrasado
                 if($row->status_devolucao == '0') {
                     $html .= '<div class="fixed-action-btn horizontal">
                           <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
