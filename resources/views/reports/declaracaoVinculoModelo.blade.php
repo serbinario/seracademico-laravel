@@ -101,7 +101,7 @@ function data($dia, $mes, $ano, $semana) {
     <div id="background">
     </div>
 
-    < id="container">
+    <div id="container">
         <div id="main">
             <div style="margin-right: 500px;">
                 <img src="{{ asset('img/logo_modelo.png')  }}" alt="">
@@ -178,7 +178,7 @@ function data($dia, $mes, $ano, $semana) {
                 </div>
             </div>
         </div>
-    
+    </div>
 
 </body>
 </html>
