@@ -124,12 +124,6 @@ function data($dia, $mes, $ano, $semana) {
                 de acordo com a portaria de credenciamento do MEC de n° 2.413 de 11/08/2004.
             </p>
 
-            {{--NÚMERO DA PORTARIA E DATA
-            {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de
-            <?php $data_rec = $curso->data_dou_rec ? \DateTime::createFromFormat('Y-m-d', $curso->data_dou_rec): '';  ?>
-            {{ !empty($data_rec) ? $data_rec->format('d/m/Y'): ''}}
-            NÚMERO DA PORTARIA E DATA --}}
-
             <p style="font-size: 20px;text-indent: 2em;">
                 <?php
                     if(isset($turma->aula_inicio) && isset($turma->aula_final)) {
