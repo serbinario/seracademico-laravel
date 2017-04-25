@@ -27,31 +27,29 @@
         .cabecalho h2 {
             text-align: center;
             margin-left: 1%;
-            font-size: 12px;
+            font-size: 15px;
             text-decoration: underline;
         }
 
         .table {
-            font-size: 11px;
+            margin-left: 5%;
+            margin-top: 5%;
             font-family: Arial, Helvetica, sans-serif;
-            width: 100%;
+            font-size: 12px;
+            width: 92%;
         }
 
         .table tr {
             width: 100%;
         }
 
+        .table tr, .table tr td  {
+            border: 1px solid;
+        }
+
         .table td {
             padding: 1%;
         }
-
-        .column {
-            border-bottom: 1px solid;
-            width: 86%;
-            margin-left: 1%;
-            display: inline-block;
-        }
-
     </style>
 </head>
 
@@ -62,132 +60,129 @@
         <img width="100" src="{{ asset('img/logo_modelo.png') }}" alt="FASUP">
     </h1>
 
-    <h2>Ficha matrícula</h2>
+    <h2>FICHA DE MATRÍCULA</h2>
 </div>
 
 <div class="conteudo">
-    <table class="table" style="font-size: 11px;">
+
+    <table class="table" style="font-size: 11px; margin-bottom: 5%;">
         <tr>
             <td colspan="4">
-                PÓS-GRADUAÇÃO:<span class="column" style="width: 84%">{{ $curso->nome }}</span>
+                <b>PÓS-GRADUAÇÃO:</b> &nbsp;&nbsp; {{ $curso->nome }}
             </td>
         </tr>
+    </table>
 
-        <tr>
-            <td colspan="4" style="text-align: center">
-                <b>Informações Pessoais: (Todos os campos são de preenchimento obrigatório)</b>
-            </td>
-        </tr>
-
+    <table class="table" style="font-size: 11px; margin-bottom: 5%;">
         <tr>
             <td colspan="4">
-                Nome Completo:<span class="column" style="width: 87%">{{ $aluno['pessoa']['nome'] }}</span>
+                <b>Nome Completo:</b>&nbsp;&nbsp;{{ $aluno['pessoa']['nome'] }}
             </td>
         </tr>
 
         <tr>
-            <td style="width: 30%">
-                Data de Nascimento:<span class="column" style="width: 50%">{{ $aluno['pessoa']['data_nasciemento']  }}</span>
+            <td style="width: 50%;" colspan="2">
+                <b>Data de Nascimento:</b>&nbsp;&nbsp;{{ $aluno['pessoa']['data_nasciemento']  }}
             </td>
 
             <?php $sexo = $aluno['pessoa']['sexo']['nome']?>
-            <td style="width: 30%">
-                Sexo: &nbsp;&nbsp; ({{ $sexo == 'Masculino' ? 'X' : ' ' }}) Masculino &nbsp;&nbsp; ({{ $sexo == 'Feminino' ? 'X' : ' ' }}) Feminino
-            </td>
-
-            <td colspan="2">
-                Naturalidade:<span class="column" style="width: 66%">{{ $aluno['pessoa']['naturalidade'] }}</span>
+            <td style="width: 50%;" colspan="2">
+                <b>Sexo:</b>&nbsp;&nbsp;({{ $sexo == 'Masculino' ? 'X' : ' ' }}) Masculino &nbsp;&nbsp;&nbsp; ({{ $sexo == 'Feminino' ? 'X' : ' ' }}) Feminino
             </td>
         </tr>
+
+        <tr>
+            <td colspan="4">
+                <b>Naturalidade:</b>&nbsp;&nbsp;{{ $aluno['pessoa']['naturalidade'] }}
+            </td>
+        </tr>
+
         <tr>
             <?php $estadoCivil = $aluno['pessoa']['estadoCivil']['id'] ?? ''; ?>
             <td colspan="4">
-                Estado civil:
-                ({{$estadoCivil == 1 ? 'X' : ' '}}) Solteiro
-                ({{$estadoCivil == 2 ? 'X' : ' '}}) Casado
-                ({{$estadoCivil == 5 ? 'X' : ' '}}) Divorciado
-                ({{$estadoCivil == 6 ? 'X' : ' '}}) Viúvo
+                <b>Estado civil:</b>&nbsp;&nbsp;
+                ({{$estadoCivil == 1 ? 'X' : ' '}}) Solteiro &nbsp;&nbsp;
+                ({{$estadoCivil == 2 ? 'X' : ' '}}) Casado &nbsp;&nbsp;&nbsp;&nbsp;
+                ({{$estadoCivil == 5 ? 'X' : ' '}}) Divorciado &nbsp;&nbsp;&nbsp;&nbsp;
+                ({{$estadoCivil == 6 ? 'X' : ' '}}) Viúvo &nbsp;&nbsp;&nbsp;&nbsp;
                 ({{$estadoCivil == 3 ? 'X' : ' '}}) Separado
             </td>
         </tr>
         <tr>
-            <td colspan="4">Nome do Pai:<span class="column" style="width: 89%">{{ $aluno['pessoa']['nome_pai'] }}</span></td>
+            <td colspan="4"><b>Nome do Pai:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['nome_pai'] }}</td>
         </tr>
         <tr>
-            <td colspan="4">Nome da Mãe: <span class="column" style="width: 88%">{{ $aluno['pessoa']['nome_mae'] }}</span></td>
+            <td colspan="4"><b>Nome da Mãe:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['nome_mae'] }}</td>
         </tr>
         <tr>
             <td style="width: 40%">
-                Identidade: Nº <span class="column" style="width: 70%">{{ $aluno['pessoa']['identidade'] }}</span>
+                <b>Identidade: Nº</b> &nbsp;&nbsp; {{ $aluno['pessoa']['identidade'] }}
             </td>
 
             <td style="width: 20%">
-                Órgão Emissor:<span class="column" style="width: 48%">{{ $aluno['pessoa']['orgao_rg'] ?? '' }}</span>
+                <b>Órgão Emissor:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['orgao_rg'] ?? '' }}
             </td>
 
             <td colspan="2" style="width: 50%">
-                Expedição:<span class="column" style="width: 73%">{{ $aluno['pessoa']['data_expedicao'] ?? '' }}</span>
+                <b>Expedição:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['data_expedicao'] ?? '' }}
             </td>
         </tr>
         <tr>
-            <td>CPF:<span class="column" style="width: 47%">{{ $aluno['pessoa']['cpf'] ?? '' }}</span></td>
+            <td colspan="4"><b>CPF:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['cpf'] ?? '' }}</td>
         </tr>
         <tr>
-            <td colspan="4">
-                Título de Eleitor: Nº <span class="column" style="width: 10%">{{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</span>
-                Zona:<span class="column" style="width: 17%">{{ $aluno['pessoa']['zona'] ?? '' }}</span>
-                Seção:<span class="column" style="width: 17%">{{ $aluno['pessoa']['secao'] ?? '' }}</span>
-                Expedição:<span class="column" style="width: 17%">{{ $aluno['pessoa']['data_expedicao'] ?? '' }}</span>
-            </td>
+            <td><b>Título de Eleitor: Nº</b> &nbsp;&nbsp; {{ $aluno['pessoa']['titulo_eleitoral'] ?? '' }}</td>
+            <td><b>Zona:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['zona'] ?? '' }}</td>
+            <td><b>Seção:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['secao'] ?? '' }}</td>
+            <td><b>Expedição:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['data_expedicao'] ?? '' }}</td>
         </tr>
         <tr>
-            <td colspan="4">
-                Carteira de Reservista: Nº <span class="column" style="width: 17%">{{ $aluno['pessoa']['resevista'] ?? '' }}</span>
-                Data de Expedição: <span class="column" style="width: 17%"></span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                Endereço: <span class="column" style="width: 80%">{{ $aluno['pessoa']['endereco']['logradouro'] ?? '' }}</span>
-                Nº <span class="column" style="width: 8%">{{ $aluno['pessoa']['endereco']['numero'] ?? '' }}</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Bairro:<span class="column" style="width: 80%">{{ $aluno['pessoa']['endereco']['bairro']['nome'] ?? '' }}</span></td>
-            <td>Cidade:<span class="column" style="width: 80%">{{ $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] ?? '' }}</span></td>
-            <td colspan="2">Complemento:<span class="column" style="width: 62%">{{ $aluno['pessoa']['endereco']['complemento'] ?? '' }}</span></td>
-        </tr>
-        <tr>
-            <td style="width: 30%;">Cep:<span class="column" style="width: 50%">{{ $aluno['pessoa']['endereco']['cep'] ?? '' }}</span></td>
-            <td style="width: 20%;">UF:<span class="column" style="width: 20%">{{ $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['prefixo'] ?? '' }}</span></td>
-        </tr>
-        <tr>
-            <td>Telefone Residencial:<span class="column" style="width: 55%">{{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</span></td>
-            <td>Telefone Celular:<span class="column" style="width: 55%">{{ $aluno['pessoa']['celular'] ?? '' }}</span></td>
-        </tr>
-        <tr>
-            <td>Telefone Comercial:<span class="column" style="width: 55%"></span></td>
-        </tr>
-        <tr>
-            <td colspan="4">E-mail:<span class="column" style="width: 93%">{{ $aluno['pessoa']['email'] ?? '' }}</span></td>
-        </tr>
-        <tr>
-            <td colspan="4">Instituição Anterior: <span class="column" style="width: 85%"> {{ $aluno['pessoa']['instituicaoEscolar']['nome'] ?? ''}}</span></td>
-        </tr>
-        <tr>
-            <td>Origem: Estadual ( )</td>
-            <td>Federal ( )</td>
-            <td>Particular ( )</td>
-        </tr>
-        <tr>
-            <td colspan="4">Ano de Conclusão:<span class="column" style="width: 85%">{{ $aluno['pessoa']['ano_conclusao_superior'] ?? '' }}</span></td>
-        </tr>
-        <tr>
-            <td colspan="4">Observações<span class="column" style="width: 89%"></span></td>
+            <td colspan="2"><b>Carteira de Reservista Nº :</b> &nbsp;&nbsp; {{ $aluno['pessoa']['resevista'] ?? '' }}</td>
+            <td colspan="2"><b>Data de Expedição:</b> &nbsp;&nbsp; </td>
         </tr>
     </table>
 
-    <div style="margin-left: 1%; margin-top: 3%">
+    <table class="table">
+        <tr>
+            <td colspan="3">
+                <b>Endereço Residencial:</b>  &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['logradouro'] ?? '' }}
+            </td>
+            <td>
+                <b>Nº</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['numero'] ?? '' }}
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;" colspan="2"><b>Bairro:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['bairro']['nome'] ?? '' }}</td>
+            <td style="width: 50%;" colspan="2"><b>Cidade:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>Cep:</b> &nbsp;&nbsp;{{ $aluno['pessoa']['endereco']['cep'] ?? '' }}</td>
+            <td colspan="2"><b>UF:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['prefixo'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"><b>Complemento:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['complemento'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 33.33%"><b>Telefone Residencial:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</td>
+            <td style="width: 33.33%"><b>Telefone Celular:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['celular'] ?? '' }}</td>
+            <td style="width: 33.33%"><b>Telefone Comercial:</b> &nbsp;&nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="4"><b>E-mail (EM LETRA DE FORMA):</b> &nbsp;&nbsp; {{ $aluno['pessoa']['email'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"><b>Instituição Anterior:</b>  &nbsp;&nbsp; {{ $aluno['pessoa']['instituicaoEscolar']['nome'] ?? ''}}</td>
+        </tr>
+        <tr>
+            <td colspan="3"><b>Origem:</b> &nbsp;&nbsp; Estadual ( ) &nbsp;&nbsp;&nbsp;&nbsp; Federal ( ) &nbsp;&nbsp;&nbsp;&nbsp;  Particular ( ) </td>
+            <td><b>Ano de Conclusão:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['ano_conclusao_superior'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"><b>Portador de necessidades Especiais</b>: &nbsp;&nbsp; Sim ( ) &nbsp;&nbsp;&nbsp;&nbsp; Não ( ) &nbsp;&nbsp;&nbsp;&nbsp; <b>Se sim, qual ?</b></td>
+        </tr>
+    </table>
+
+    <div style="margin-left: 5%; margin-top: 3%">
         <p>Assinatura do Aluno _______________________________________________________________________________</p>
         <p>Matrícula de :  _________________  &nbsp; Data: ________/________/_____________</p>
         <p>Matrícula recebida por :_____________________________________  Data: _______/________/______________</p>
