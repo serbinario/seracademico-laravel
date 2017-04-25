@@ -65,7 +65,7 @@
 
 <div class="conteudo">
 
-    <table class="table" style="font-size: 11px; margin-bottom: 2%;">
+    <table class="table" style="font-size: 11px;">
         <tr>
             <td colspan="4">
                 <b>PÓS-GRADUAÇÃO:</b> &nbsp;&nbsp; {{ $curso->nome }}
@@ -73,7 +73,7 @@
         </tr>
     </table>
 
-    <table class="table" style="font-size: 11px; margin-bottom: 2%;">
+    <table class="table" style="font-size: 11px;">
         <tr>
             <td colspan="4">
                 <b>Nome Completo:</b>&nbsp;&nbsp;{{ $aluno['pessoa']['nome'] }}
