@@ -20,6 +20,10 @@
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
 
+        .cabecalho {
+            margin-bottom: 2%;
+        }
+
         .cabecalho h1 {
             margin-top: 0;
         }
@@ -163,8 +167,8 @@
             <td colspan="4"><b>Complemento:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['complemento'] ?? '' }}</td>
         </tr>
         <tr>
-            <td colspan="2" style="width: 40%"><b>Telefone Residencial:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</td>
-            <td style="width: 30%"><b>Telefone Celular:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['celular'] ?? '' }}</td>
+            <td colspan="2" style="width: 35%"><b>Telefone Residencial:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</td>
+            <td style="width: 35%"><b>Telefone Celular:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['celular'] ?? '' }}</td>
             <td style="width: 30%"><b>Telefone Comercial:</b> &nbsp;&nbsp; </td>
         </tr>
         <tr>
