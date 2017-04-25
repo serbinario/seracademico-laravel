@@ -101,6 +101,7 @@ class AlunoService
         #regras de negócios
         //$this->tratamentoImagem($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
+
         $this->tratamentoCurso($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
