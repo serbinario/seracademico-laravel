@@ -119,15 +119,15 @@
             <td colspan="4"><b>Nome da Mãe:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['nome_mae'] }}</td>
         </tr>
         <tr>
-            <td style="width: 40%">
+            <td style="width: 30%">
                 <b>Identidade: Nº</b> &nbsp;&nbsp; {{ $aluno['pessoa']['identidade'] }}
             </td>
 
-            <td style="width: 20%">
+            <td style="width: 30%">
                 <b>Órgão Emissor:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['orgao_rg'] ?? '' }}
             </td>
 
-            <td colspan="2" style="width: 50%">
+            <td colspan="2" style="width: 40%">
                 <b>Expedição:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['data_expedicao'] ?? '' }}
             </td>
         </tr>
