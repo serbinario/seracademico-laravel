@@ -35,9 +35,9 @@
     <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <!-- Selectize -->
-    {{--<link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.css" />--}}
+    {{--<link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.css" />
     <link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.bootstrap3.css" />
-    <link rel="stylesheet" type="text/css" href="/css/selectize/dimenssoesSelectize.css" />
+    <link rel="stylesheet" type="text/css" href="/css/selectize/dimenssoesSelectize.css" />--}}
 
     @yield('css')
 </head>

@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group col-md-2 col-sm-2">
                                 {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
-                                {!! Form::select('pessoa[profissoes_id]', array(), Session::getOldInput('pessoa[profissoes_id]'),array('id' => 'profissao', 'class' => 'selectize form-control input-sm')) !!}
+                                {!! Form::select('pessoa[profissoes_id]', (['' => 'Selecione uma Profissão'] + $loadFields['profissao']->toArray()), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
@@ -830,11 +830,11 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
         //selectize profissões
-        var totalCount;
+        /*var totalCount;
         var page;
         var perPage = 50;
 
-    /*    $('#profissao').selectize({
+        $('#profissao').selectize({
             plugins: {'infinite_scroll': {'scrollRatio': 0.85, 'scrollStep': 20}},
             valueField: 'id',
             labelField: 'title',
