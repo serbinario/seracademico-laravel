@@ -132,7 +132,7 @@ class ConsultaController extends Controller
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                ->where('bib_exemplares.exemp_principal', '=', '1')
+                //->where('bib_exemplares.exemp_principal', '=', '1')
                 ->where($campoLike, 'like', "%{$this->data['busca']}%")
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                 ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_arcevos.id')
@@ -146,7 +146,7 @@ class ConsultaController extends Controller
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                ->where('bib_exemplares.exemp_principal', '=', '1')
+                //->where('bib_exemplares.exemp_principal', '=', '1')
                 ->Where(function ($query) {
                     $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
