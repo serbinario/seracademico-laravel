@@ -65,7 +65,7 @@
 
 <div class="conteudo">
 
-    <table class="table" style="font-size: 11px;">
+    <table class="table" style="font-size: 11px; margin-bottom: 1%;">
         <tr>
             <td colspan="4">
                 <b>PÓS-GRADUAÇÃO:</b> &nbsp;&nbsp; {{ $curso->nome }}
@@ -73,7 +73,7 @@
         </tr>
     </table>
 
-    <table class="table" style="font-size: 11px;">
+    <table class="table" style="font-size: 11px; margin-top: 1%; margin-bottom: 1%;">
         <tr>
             <td colspan="4">
                 <b>Nome Completo:</b>&nbsp;&nbsp;{{ $aluno['pessoa']['nome'] }}
@@ -142,7 +142,7 @@
         </tr>
     </table>
 
-    <table class="table">
+    <table class="table" style="margin-top: 1%; margin-bottom: 1%;">
         <tr>
             <td colspan="3">
                 <b>Endereço Residencial:</b>  &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['logradouro'] ?? '' }}
@@ -163,9 +163,9 @@
             <td colspan="4"><b>Complemento:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['endereco']['complemento'] ?? '' }}</td>
         </tr>
         <tr>
-            <td colspan="2" style="width: 33.33%"><b>Telefone Residencial:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</td>
-            <td style="width: 33.33%"><b>Telefone Celular:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['celular'] ?? '' }}</td>
-            <td style="width: 33.33%"><b>Telefone Comercial:</b> &nbsp;&nbsp; </td>
+            <td colspan="2" style="width: 40%"><b>Telefone Residencial:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['telefone_fixo'] ?? '' }}</td>
+            <td style="width: 30%"><b>Telefone Celular:</b> &nbsp;&nbsp; {{ $aluno['pessoa']['celular'] ?? '' }}</td>
+            <td style="width: 30%"><b>Telefone Comercial:</b> &nbsp;&nbsp; </td>
         </tr>
         <tr>
             <td colspan="4"><b>E-mail (EM LETRA DE FORMA):</b> &nbsp;&nbsp; {{ $aluno['pessoa']['email'] ?? '' }}</td>
