@@ -2,13 +2,15 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title></title>
+    <title>Caderneta de Frequência</title>
     <style type="text/css">
         #logoTopo {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            width: 80px;
+            height: auto;
         }
 
-        #tituloDocumento {
+        #tituloSituacaoAlunos {
             background-color: #c8c8c8;
             font-family: Arial;
             font-size: 16px;
@@ -16,15 +18,16 @@
             margin-bottom: 0;
         }
 
-        table {
-            margin-top: 0;
-        }
-
-        #subTitulo {
+        #tituloDiarioAula {
             background-color: #c8c8c8;
             font-family: Arial;
-            font-size: 15px;
-            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #tabelaSuperior {
+            margin-bottom: 15px;
         }
 
         td, th {
@@ -43,13 +46,45 @@
             padding: 0;
         }
 
+        .textCenter {
+            text-align: center;
+        }
+
+        .textRight {
+            text-align: right;
+        }
+
         .textLeft {
             text-align: left;
         }
 
-        .textCenter {
-            text-align: center;
+        #detalhePlanoAulaHora {
+            margin-top: 15px;
+            margin-bottom: 40px;
+        }
 
+        #linhAssinaturaProf {
+            position: relative;
+            top: 25px;
+            left: 50px;
+        }
+
+        #linhAssinaturaCoor {
+            position: relative;
+            top: -10px;
+            left: 400px;
+        }
+
+        #assinaturaProf {
+            position: relative;
+            top: -25px;
+            left: 58px;
+        }
+
+        #assinaturaCoor {
+            position: relative;
+            top: -60px;
+            left: 435px;
         }
     </style>
 </head>
@@ -60,10 +95,10 @@
     <h1>
         <img id="logoTopo" src="{{ asset('img/logo_modelo.png') }}" alt="Logo faculdade modelo">
     </h1>
-    <h1 id="tituloDocumento">
+    <h2 id="tituloSituacaoAlunos">
         DIÁRIO DE CLASSE
-    </h1>
-    <table id="tabelaSupeior" width="544" cellspacing="0">
+    </h2>
+    <table id="tabelaSuperior" width="544" cellspacing="0">
         <tbody>
         <tr>
             <td>Curso: </td>
@@ -79,11 +114,11 @@
             <td>Professor Responsável: </td>
             <td>Titulação: </td>
         </tr>
+        <tr>
+            <td style="background-color: #c8c8c8; font-weight: bold;" colspan="2" class="textCenter">ALUNOS EFETIVOS</td>
+        </tr>
         </tbody>
     </table>
-    <h1 id="subTitulo" class="textCenter">
-        ALUNOS EFETIVOS
-    </h1>
     {{--Dados da turma--}}
 </div>
 <div id="body">
@@ -100,9 +135,10 @@
         <tr>
             <th class="textCenter">Mês</th>
             {{--colunas verticais abaixo de dias letivos--}}
-            <td class="textCenter">1</td>
-            <td class="textCenter">2</td>
-            <td class="textCenter">3</td>
+            {{--mês--}}
+            <td class="textCenter">8</td>
+            <td class="textCenter">9</td>
+            <td class="textCenter">10</td>
             {{--colunas abaixo da coluna notas--}}
             <th rowspan="2">Prova</th>
             <th rowspan="2">Trab.</th>
@@ -110,6 +146,7 @@
         </tr>
         <tr>
             <th class="textCenter">Dias</th>
+            {{--dia--}}
             <td class="textCenter">7</td>
             <td class="textCenter">8</td>
             <td class="textCenter">9</td>
@@ -132,41 +169,42 @@
     </table>
     {{--Dados dos alunos--}}
     {{--Diario de aula--}}
-    <h1 id="tituloDocumento">
+    <h2 id="tituloDiarioAula">
         RESUMO DO CONTEÚDO MINISTRADO
-    </h1>
-    <table>
+    </h2>
+    <table style="width: 100%">
         <thead>
             <tr>
-                <th rowspan="6">1ª Aula</th>
-                <th>Data: ...... / ...... /........</th>
-                <th>Horas</th>
+                <th width="160px" rowspan="6" height="120px">1ª Aula</th>
+                <td>Data: ...... / ...... /........</td>
+                <td>Horas</td>
             </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1</td>
-            <td>2</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td>3</td>
-            <td>4</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td>5</td>
-            <td>6</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td>7</td>
-            <td>8</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td>9</td>
-            <td>10</td>
+            <td colspan="2"></td>
         </tr>
         </tbody>
     </table>
-    {{--Diario de aula--}}
+    <p id="detalhePlanoAulaHora" class="textLeft">Total de horas ministradas:___________________</p>
+    <p class="textRight">_______________, _____ de __________________ de ________.</p>
+    <p id="linhAssinaturaProf">_______________________________</p>
+    <p id="linhAssinaturaCoor">_______________________________</p>
+    <p id="assinaturaProf">Assinatura do Professor Ministrante</p>
+    <p id="assinaturaCoor">Assinatura da Coordenação</p>
+
 </div>
 </body>
 </html>
