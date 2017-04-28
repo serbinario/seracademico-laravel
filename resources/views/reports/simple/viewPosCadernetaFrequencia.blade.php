@@ -2,32 +2,34 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Caderneta de Frequência</title>
+    <title></title>
     <style type="text/css">
-        #logoTopo {
-            margin-bottom: 10px;
-            width: 80px;
-            height: auto;
+        body {
+            font-family: Arial, Helvetica, AppleGothic, sans-serif;
         }
 
-        #tituloSituacaoAlunos {
-            background-color: #c8c8c8;
+        #logoTopo {
+            margin-bottom: 20px;
+        }
+
+        #tituloDocumento {
+            background-color: #DCDCDC;
             font-family: Arial;
             font-size: 16px;
             text-align: center;
             margin-bottom: 0;
         }
 
-        #tituloDiarioAula {
-            background-color: #c8c8c8;
-            font-family: Arial;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 10px;
+        table {
+            font-size: 12px;
+            margin-top: 0;
         }
 
-        #tabelaSuperior {
-            margin-bottom: 15px;
+        #subTitulo {
+            background-color: #DCDCDC;
+            font-family: Arial;
+            font-size: 15px;
+            margin-bottom: 20px;
         }
 
         td, th {
@@ -35,8 +37,12 @@
             margin: 0;
         }
 
+        td {
+            padding: 0.8%;
+        }
+
         thead th {
-            background-color: #c8c8c8;
+            background-color: #DCDCDC;
             text-align: center;
         }
 
@@ -46,45 +52,14 @@
             padding: 0;
         }
 
-        .textCenter {
-            text-align: center;
-        }
-
-        .textRight {
-            text-align: right;
-        }
-
         .textLeft {
             text-align: left;
         }
 
-        #detalhePlanoAulaHora {
-            margin-top: 15px;
-            margin-bottom: 40px;
-        }
+        .textCenter {
+            width: 4%;
+            text-align: center;
 
-        #linhAssinaturaProf {
-            position: relative;
-            top: 25px;
-            left: 50px;
-        }
-
-        #linhAssinaturaCoor {
-            position: relative;
-            top: -10px;
-            left: 400px;
-        }
-
-        #assinaturaProf {
-            position: relative;
-            top: -25px;
-            left: 58px;
-        }
-
-        #assinaturaCoor {
-            position: relative;
-            top: -60px;
-            left: 435px;
         }
     </style>
 </head>
@@ -95,30 +70,34 @@
     <h1>
         <img id="logoTopo" src="{{ asset('img/logo_modelo.png') }}" alt="Logo faculdade modelo">
     </h1>
-    <h2 id="tituloSituacaoAlunos">
+
+    <h1 id="tituloDocumento">
         DIÁRIO DE CLASSE
-    </h2>
-    <table id="tabelaSuperior" width="544" cellspacing="0">
+    </h1>
+
+    <table id="tabelaSupeior" style="margin-bottom: 2%" width="544" cellspacing="0">
         <tbody>
         <tr>
-            <td>Curso: </td>
-            <td>Turma: </td>
+            <td><b>Curso:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->nomeCurso ?? "" }}</td>
+            <td><b>Turma:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->codigoTurma ?? "" }}</td>
         </tr>
         <tr>
-            <td colspan="2">Disciplina: </td>
+            <td colspan="2"><b>Disciplina:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->nomeDisciplina ?? "" }}</td>
         </tr>
         <tr>
-            <td colspan="2">Carga Horária: </td>
+            <td colspan="2"><b>Carga Horária:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->cargaHoraria ?? "" }}</td>
         </tr>
         <tr>
-            <td>Professor Responsável: </td>
-            <td>Titulação: </td>
-        </tr>
-        <tr>
-            <td style="background-color: #c8c8c8; font-weight: bold;" colspan="2" class="textCenter">ALUNOS EFETIVOS</td>
+            <td><b>Professor Responsável:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->nomeProfessor ?? "" }}</td>
+            <td><b>Titulação:</b> {{ $dados["cursoTurmaDisciplinaProfessor"][0]->nomeTitulacao ?? "" }}</td>
         </tr>
         </tbody>
     </table>
+
+    <h1 id="subTitulo" style="text-align: center;">
+        ALUNOS EFETIVOS
+    </h1>
+
     {{--Dados da turma--}}
 </div>
 <div id="body">
@@ -128,17 +107,24 @@
         <tr>
             <th rowspan="3">N°</th>
             <th rowspan="3">Nome do(a) Aluno(a)</th>
-            <th colspan="4">Dias Letivos</th>
+            <th colspan="11">Dias Letivos</th>
             <th rowspan="3">Percentual de Frequência (%)</th>
             <th colspan="3">Notas</th>
         </tr>
         <tr>
             <th class="textCenter">Mês</th>
             {{--colunas verticais abaixo de dias letivos--}}
-            {{--mês--}}
-            <td class="textCenter">8</td>
-            <td class="textCenter">9</td>
-            <td class="textCenter">10</td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+
             {{--colunas abaixo da coluna notas--}}
             <th rowspan="2">Prova</th>
             <th rowspan="2">Trab.</th>
@@ -146,65 +132,94 @@
         </tr>
         <tr>
             <th class="textCenter">Dias</th>
-            {{--dia--}}
-            <td class="textCenter">7</td>
-            <td class="textCenter">8</td>
-            <td class="textCenter">9</td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
+            <td class="textCenter"></td>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="textCenter">1</td>
-            <td>Francisco</td>
-            <td></td>
-            <td class="textCenter">F</td>
-            <td class="textCenter">P</td>
-            <td class="textCenter">F</td>
-            <td class="textCenter">50%</td>
-            <td class="textCenter">7,0</td>
-            <td class="textCenter">7,0</td>
-            <td class="textCenter">7,0</td>
-        </tr>
+
+        <?php $cout = 0; ?>
+
+        @foreach($dados["alunos"] as $aluno)
+            <tr>
+                <td class="textCenter">{{ ++$cout }}</td>
+                <td style="font-size: 10px; padding-top: 0;">{{ $aluno->nome }}</td>
+                <td></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+                <td class="textCenter"></td>
+            </tr>
+        @endforeach
+
         </tbody>
     </table>
     {{--Dados dos alunos--}}
     {{--Diario de aula--}}
-    <h2 id="tituloDiarioAula">
+    <h1 id="tituloDocumento" style="margin-bottom: 3%; page-break-before: always;">
         RESUMO DO CONTEÚDO MINISTRADO
-    </h2>
-    <table style="width: 100%">
+    </h1>
+
+    <table class="tabelaDiario" style="width: 100%;" cellspacing="0">
         <thead>
             <tr>
-                <th width="160px" rowspan="6" height="120px">1ª Aula</th>
-                <td>Data: ...... / ...... /........</td>
-                <td>Horas</td>
+                <th rowspan="11">1ª Aula</th>
+                <th style="text-align: left">Data: ...... / ...... /........</th>
+                <th style="text-align: left" >Horas: </th>
             </tr>
         </thead>
         <tbody>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="2" style="height: 2%"></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="2" style="height: 2%"></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="2" style="height: 2%"></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="2" style="height: 2%"></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="2" style="height: 2%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 2%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 2%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 2%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 2%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 2%"></td>
         </tr>
         </tbody>
     </table>
-    <p id="detalhePlanoAulaHora" class="textLeft">Total de horas ministradas:___________________</p>
-    <p class="textRight">_______________, _____ de __________________ de ________.</p>
-    <p id="linhAssinaturaProf">_______________________________</p>
-    <p id="linhAssinaturaCoor">_______________________________</p>
-    <p id="assinaturaProf">Assinatura do Professor Ministrante</p>
-    <p id="assinaturaCoor">Assinatura da Coordenação</p>
-
+    {{--Diario de aula--}}
 </div>
 </body>
 </html>

@@ -10,20 +10,20 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                    <div class="col-md-12">
-                       {{--<div class="form-group">
-                           {!! Form::label('', 'Semestres') !!}
-                           {!! Form::select('', [], null, array('class' => 'form-control', 'id' => 'semestre_gra_aluno_por_periodo_id')) !!}
-                       </div>
-
-                       <div class="form-group">
-                           {!! Form::label('periodos', 'Período') !!}
-                           {!! Form::select('periodos', [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10], null, array('class' => 'form-control', 'id' => 'periodo_gra_aluno_por_periodo_id')) !!}
-                       </div>
-
                        <div class="form-group">
                            {!! Form::label('cursos', 'Cursos') !!}
-                           {!! Form::select('cursos', [], null, array('class' => 'form-control', 'id' => 'curso_gra_aluno_por_periodo_id')) !!}
-                       </div>--}}
+                           {!! Form::select('cursos', [], null, array('class' => 'form-control', 'id' => 'curso_pos_turma_caderneta_id')) !!}
+                       </div>
+
+                       <div class="form-group">
+                           {!! Form::label('turmas', 'Turmas') !!}
+                           {!! Form::select('turmas', [], null, array('class' => 'form-control', 'id' => 'turma_pos_turma_caderneta_id')) !!}
+                       </div>
+
+                       <div class="form-group">
+                           {!! Form::label('disciplinas', 'Disciplinas') !!}
+                           {!! Form::select('disciplinas', [], null, array('class' => 'form-control', 'id' => 'disciplina_pos_turma_caderneta_id')) !!}
+                       </div>
 
                        <div class="form-group">
                            <button class="btn-sm btn-primary" type="submit" id="btnBuilderReportPosAlunoCaderneta">Gerar</button>

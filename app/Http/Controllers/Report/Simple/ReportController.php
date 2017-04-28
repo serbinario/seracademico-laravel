@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Seracademico\Contracts\Report;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
+use Seracademico\Uteis\RelatorioCadernetaFrequencia;
 
 class ReportController extends Controller
 {
@@ -18,12 +19,18 @@ class ReportController extends Controller
     private $report;
 
     /**
+     * @var RelatorioCadernetaFrequencia
+     */
+    private $relatorioCadernetaFrequencia;
+
+    /**
      * ReportController constructor.
      * @param Report $report
      */
-    public function __construct(Report $report)
+    public function __construct(Report $report, RelatorioCadernetaFrequencia $relatorioCadernetaFrequencia)
     {
         $this->report = $report;
+        $this->relatorioCadernetaFrequencia = $relatorioCadernetaFrequencia;
     }
 
     /**
@@ -56,19 +63,25 @@ class ReportController extends Controller
     public function report(Request $request, $idReport)
     {
         # Recuperando os dados de filtros
-        $dados = $request->all();
+        $dadosDaRequisicao = $request->all();
+        $dadosParaRelatorio = [];
+        $view  = "";
 
-        # Recuperando os dados do relatório
-        $report = $this->report->generate($idReport, $dados);
+        if($idReport == 22) {
+            $dadosParaRelatorio = $this->relatorioCadernetaFrequencia->obtemDados($dadosDaRequisicao);
+        } else {
+            # Recuperando os dados do relatório
+            $dadosParaRelatorio = $this->report->generate($idReport, $dadosDaRequisicao);
+        }
 
         # Recuoerando a view
-        $view = $report['view'] ?? 'report';
+        $view = $dadosParaRelatorio['view'] ?? 'report';
 
         # Recuperando o serviço de pdf / dompdf
         $PDF = App::make('dompdf.wrapper');
 
         # Carregando a página
-        $PDF->loadView("reports.simple.{$view}", ['dados' => $report, 'request' => $dados]);
+        $PDF->loadView("reports.simple.{$view}", ['dados' => $dadosParaRelatorio, 'request' => $dadosDaRequisicao]);
 
         # Retornando para página
         return $PDF->stream();
