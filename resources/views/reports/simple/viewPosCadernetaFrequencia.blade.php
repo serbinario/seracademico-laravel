@@ -40,7 +40,7 @@
         td {
             padding: 0.8%;
         }
-
+a
         thead th {
             background-color: #DCDCDC;
             text-align: center;
