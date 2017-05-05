@@ -220,6 +220,19 @@ a
         </tbody>
     </table>
     {{--Diario de aula--}}
+
+    {{-- --}}
+    <div>
+        <div style="position:relative; top:10px; left:0;">Total de horas ministradas:_________________</div>
+        <div style="position:relative; top:55px; left:250px;">_______________, _____ de __________________ de ________.</div>
+        {{--left--}}
+        <div style="position:relative; top:100px; left:30px;">_______________________________</div>
+        {{--right--}}
+        <div style="position:relative; top:80px; left:416px;">_______________________________</div>
+        <div style="position:relative; top:80px; left:42px;">Assinatura do Professor Ministrante</div>
+        <div style="position:relative; top:60px; left:455px;">Assinatura da Coordenação</div>
+    </div>
+    {{-- --}}
 </div>
 </body>
 </html>
