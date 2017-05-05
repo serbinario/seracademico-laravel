@@ -78,7 +78,7 @@ class RelatorioCadernetaFrequencia
             ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
             ->where("fac_disciplinas.id", $dadosDaRequisicao["disciplina"])
             ->where("fac_turmas.id", $dadosDaRequisicao["turma"])
-            ->orderBy("pessoas.nome", "asc")
+            ->orderBy("pessoas.nome", "desc")
             ->select([
                 "pessoas.nome"
             ])
