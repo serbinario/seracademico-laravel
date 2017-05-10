@@ -340,7 +340,7 @@
 <script src="{{ asset('/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
 {{--<script src="{{ asset('/js/bootstrap.min.js')}}"></script>--}}
-<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/lib/bootstrap/dist/js/bootstrap.js')}}"></script>
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
