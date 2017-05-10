@@ -70,57 +70,10 @@
 </div>
 
 @section('javascript')
-    {{--Mensagens personalizadas--}}
+    {{--Mensagens personalizadas--}}{{--
     <script type="text/javascript" src="{{ asset('/js/validacoes/messages_pt_BR.js')  }}"></script>
-    {{--Regras adicionais--}}
+    --}}{{--Regras adicionais--}}{{--
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
-    {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/disciplinaValidator.js')  }}"></script>--}}
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            console.log(Lang.getLocale());
-            Lang.setLocale('pt-BR');
-
-            /*$('#formDisciplina').bootstrapValidator({
-                fields: {
-                    nome: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 200,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
-                        }
-                    },
-                    codigo: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Código' })
-                            }
-                        }
-                    },
-                    carga_horaria: {
-                        validators: {
-                            stringLength: {
-                                max: 6,
-                                message: Lang.get('validation.max.numeric', { attribute: 'Carga Horária', max: '4' })
-                            }
-                        }
-                    },
-                    qtd_falta: {
-                        validators: {
-                            stringLength: {
-                                max: 4,
-                                message: Lang.get('validation.max', { attribute: 'Quantidade de Faltas' })
-                            }
-                        }
-                    }
-                }
-            });*/
-
-        });
-    </script>
+    --}}{{--Regras de validação--}}{{--
+    <script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/disciplinaValidator.js')  }}"></script>--}}
 @stop

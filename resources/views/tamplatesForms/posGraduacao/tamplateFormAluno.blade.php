@@ -23,7 +23,7 @@
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('pessoa[data_nasciemento]', 'Nascimento *') !!}
-                {!! Form::text('pessoa[data_nasciemento]', null, array('class' => 'form-control datepicker date')) !!}
+                {!! Form::text('pessoa[data_nasciemento]', null, array('class' => 'form-control date')) !!}
             </div>
             <div class="form-group col-md-2">
                 {!! Form::label('pessoa[sexos_id]', 'Sexo ') !!}
@@ -40,7 +40,7 @@
         <div class="row">
             <div class="form-group col-md-2">
                 {!! Form::label('data_matricula', 'Data de Matrícula') !!}
-                {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control datepicker date')) !!}
+                {!! Form::text('data_matricula',  Session::getOldInput('data_matricula') , array('class' => 'form-control date')) !!}
             </div>
         </div>
 
@@ -190,7 +190,7 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[data_expedicao]', 'Data expedição') !!}
-                                                {!! Form::text('pessoa[data_expedicao]', null , array('class' => 'form-control datepicker date')) !!}
+                                                {!! Form::text('pessoa[data_expedicao]', null , array('class' => 'form-control date')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
@@ -755,11 +755,11 @@
                         <div classe="row">
                             <div class="form-group col-md-2">
                                 {!! Form::label('data_conclusao', 'Data Conclusão') !!}
-                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
+                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control date')) !!}
                             </div>
                             <div class="form-group col-md-2">
                                 {!! Form::label('data_colacao', 'Data Colação') !!}
-                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
+                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control date')) !!}
                             </div>
                         </div>
                     </div>

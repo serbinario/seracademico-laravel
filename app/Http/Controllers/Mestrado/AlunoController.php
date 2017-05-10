@@ -232,7 +232,7 @@ class AlunoController extends Controller
         try {
             #Recuperando o aluno
             $aluno = $this->service->find($id);
-            //dd($aluno);
+
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 

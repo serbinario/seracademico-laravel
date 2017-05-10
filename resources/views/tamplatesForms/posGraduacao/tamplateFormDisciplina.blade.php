@@ -70,11 +70,15 @@
 </div>
 
 @section('javascript')
+    {{--Mensagens personalizadas--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/messages_pt_BR.js')  }}"></script>
+    {{--Regras adicionais--}}
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/alphanumeric.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validator/src/additional/integer.js')  }}"></script>
+    {{--Regras de validação--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/disciplinaValidator.js')  }}"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            console.log(Lang.getLocale());
-            Lang.setLocale('pt-BR');
-
+        /*$(document).ready(function () {
             $('#formDisciplina').bootstrapValidator({
                 fields: {
                     nome: {
@@ -114,6 +118,6 @@
                 }
             });
 
-        });
+        });*/
     </script>
 @stop

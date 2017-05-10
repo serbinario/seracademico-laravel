@@ -12,5 +12,5 @@ snappy.php
 .idea/
 public/js/plugins/angular/i18n/ngLocale/
 public/js/plugins/flot/examples/gauge/
-/public/lib/*
-/public/lib/
+public/lib/*
+public/lib/
