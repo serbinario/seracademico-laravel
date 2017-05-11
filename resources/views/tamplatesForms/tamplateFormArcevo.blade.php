@@ -160,29 +160,29 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('obs_geral', 'Observação Geral') !!}
-                            {!! Form::textarea('obs_geral', Session::getOldInput('obs_geral')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('obs_geral', Session::getOldInput('obs_geral')  , array('class' => 'form-control', 'rows' => '5')) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('palavras_chaves', 'Palavras chave') !!}
-                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves')  ,['size' => '55x5'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('palavras_chaves', Session::getOldInput('palavras_chaves') , array('class' => 'form-control', 'rows' => '5')) !!}
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('resumo', 'Notas') !!}
-                            {!! Form::textarea('resumo', Session::getOldInput('resumo')  ,['size' => '117x6'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('resumo', Session::getOldInput('resumo') , array('class' => 'form-control', 'rows' => '5')) !!}
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('sumario', 'Sumário') !!}
-                            {!! Form::textarea('sumario', Session::getOldInput('sumario')  ,['size' => '117x6'] , array('class' => 'form-control')) !!}
+                            {!! Form::textarea('sumario', Session::getOldInput('sumario'), array('class' => 'form-control', 'rows' => '5')) !!}
                         </div>
                     </div>
                 </div>
