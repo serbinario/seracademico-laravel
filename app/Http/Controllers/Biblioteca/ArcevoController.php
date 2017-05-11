@@ -81,7 +81,9 @@ class ArcevoController extends Controller
             'bib_arcevos.cutter',
             'bib_arcevos.cdd',
             'exemplares.qtd_exemplares',
-            \DB::raw('CONCAT (responsaveis.sobrenome, ", ", responsaveis.nome) as autor'),
+            \DB::raw('CASE responsaveis.tipo_reponsavel_id WHEN "2"
+            THEN responsaveis.nome WHEN "1"
+            THEN CONCAT(responsaveis.sobrenome, ", ", responsaveis.nome) END as autor'),
             ]);
 
         #Editando a grid
