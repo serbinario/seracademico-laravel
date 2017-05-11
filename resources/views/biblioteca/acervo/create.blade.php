@@ -344,7 +344,7 @@
                     'tipo_reponsavel_id': $('#tipo_reponsavel_id').val(),
                 };
 
-                if($('#nome').val() != "" && $('#sobrenome').val() != "" && $('#tipo_reponsavel_id').val() != "") {
+                if($('#nome').val() != "" && $('#tipo_reponsavel_id').val() != "") {
                     $.ajax({
                         url: "{{ route('seracademico.biblioteca.storeAjaxResponsavel')  }}",
                         data: {
@@ -363,7 +363,7 @@
                         }
                     });
                 } else {
-                    swal("Os campos nome, sobrenome e tipo responsável são obrigatórios", "Click no botão abaixo!", "warning");
+                    swal("Os campos nome e tipo responsável são obrigatórios", "Click no botão abaixo!", "warning");
                 }
             });
 
