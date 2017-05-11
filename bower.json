@@ -8,8 +8,9 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
-    "jquery-validator": "^1.0.0",
+    "jquery-validation": "^1.15.1",
     "selectize": "^0.12.4",
-    "selectize-infinite_scroll": "*"
+    "selectize-infinite_scroll": "*",
+    "bootstrap": "^3.3.7"
   }
 }
