@@ -14,13 +14,6 @@ $(document).ready(function () {
                     },
                 },
             },
-            'isbn': {
-                validators: {
-                    notEmpty: {
-                        message: "Este campo é obrigatório",
-                    },
-                },
-            },
             'img': {
                 validators: {
                     file: {
