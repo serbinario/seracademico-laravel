@@ -17,7 +17,6 @@ class ExemplarValidator extends LaravelValidator
 		'img' => 'Foto',
 		'editoras_id' =>  'Editora' ,
 		'numero_pag' =>  'Número de página' ,
-		'isbn' =>  'ISBN' ,
 		'arcevos_id' =>  'Acervo' ,
 	];
 	
@@ -27,7 +26,6 @@ class ExemplarValidator extends LaravelValidator
 			'img' => 'image|max:500',
 			'editoras_id' =>  'required' ,
 			'numero_pag' =>  'required' ,
-			'isbn' =>  'required' ,
 			'arcevos_id' =>  'required' ,
 
         ],
@@ -35,7 +33,6 @@ class ExemplarValidator extends LaravelValidator
 			'img' => 'image|max:500',
 			'editoras_id' =>  'required' ,
 			'numero_pag' =>  'required' ,
-			'isbn' =>  'required' ,
 			'arcevos_id' =>  'required' ,
 		],
    ];
