@@ -297,6 +297,12 @@
                                             </div>
                                         </a>
                                     @endif
+                                    <a class="collection-item">
+                                        <div class="row">
+                                            <div class="col s4"><b>Observação Geral</b></div>
+                                            <div class="col s8">{{$exemplar['acervo']['obs_geral']}}</div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div id="test2" class="col s12">
