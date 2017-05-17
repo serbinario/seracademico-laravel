@@ -165,7 +165,7 @@ class ConsultaController extends Controller
 
         }
 
-        $my_query->setPath(url('seracademico/biblioteca/seachSimplePage'));
+        $my_query->setPath(url('seachSimplePage'));
 
         return $my_query;
 
