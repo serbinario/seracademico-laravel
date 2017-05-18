@@ -19,7 +19,7 @@
     <div class="row">
         <div class="card col s12">
             <div class="card-content">
-                <form action="{{url('seachSimple')}}" class="form-horizontal" method="post">
+                <form action="{{url('seachSimple')}}" class="form-horizontal" method="get">
                     <div class="row">
                         <span class="card-title col s12">Busca rápida</span>
                         {{--<div class="input-field col s2">
@@ -117,7 +117,7 @@
         @endforeach
         <div class="row">
             <div class="col s12 m12 center">
-                {!!  $resultado->render() !!}
+                {!!  $resultado->appends(Input::except('page'))->render() !!}
             </div>
         </div>
     </div>
