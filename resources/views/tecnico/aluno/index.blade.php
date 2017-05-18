@@ -32,11 +32,11 @@
             <div class="col-sm-6 col-md-9">
                 <h4>
                     <i class="fa fa-users"></i>
-                    Listar Alunos de Mestrado
+                    Listar Alunos de Curso Técnico
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.aluno.create')}}" class="btn-sm btn-primary pull-right">Novo Aluno</a>
+                <a href="{{ route('seracademico.tecnico.aluno.create')}}" class="btn-sm btn-primary pull-right">Novo Aluno</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -147,34 +147,34 @@
         </div>
     </div>
 
-    @include('mestrado.aluno.turma.modal_aluno_turma')
-    @include('mestrado.aluno.turma.modal_nova_turma')
-    @include('mestrado.aluno.turma.modal_create_situacao')
+    @include('tecnico.aluno.turma.modal_aluno_turma')
+    @include('tecnico.aluno.turma.modal_nova_turma')
+    @include('tecnico.aluno.turma.modal_create_situacao')
     {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
-    @include('mestrado.aluno.modal_aluno_documento')
-    @include('mestrado.aluno.curriculo.modal_curriculo')
-    @include('mestrado.aluno.curriculo.modal_inserir_dispensar_disciplina')
-    @include('mestrado.aluno.curriculo.modal_editar_dispensar_disciplina')
-    @include('mestrado.aluno.curriculo.modal_create_disciplina_extra_curricular')
-    @include('mestrado.aluno.curriculo.modal_create_equivalencia')
+    @include('tecnico.aluno.modal_aluno_documento')
+    @include('tecnico.aluno.curriculo.modal_curriculo')
+    @include('tecnico.aluno.curriculo.modal_inserir_dispensar_disciplina')
+    @include('tecnico.aluno.curriculo.modal_editar_dispensar_disciplina')
+    @include('tecnico.aluno.curriculo.modal_create_disciplina_extra_curricular')
+    @include('tecnico.aluno.curriculo.modal_create_equivalencia')
     @include('reports.simple.modals.modal_report_mes_aluno_geral')
     @include('reports.simple.modals.modal_report_mes_aluno_documento')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_aluno_turma.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_nova_turma.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_create_situacao.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_curriculo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_nova_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_create_situacao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_curriculo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
 
     {{--Fabio--}}
-    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/documentos/modal_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -184,7 +184,7 @@
             iDisplayLength: 10,
             bLengthChange: false,*/
             ajax: {
-                url: "{!! route('seracademico.mestrado.aluno.grid') !!}",
+                url: "{!! route('seracademico.tecnico.aluno.grid') !!}",
                 data: function (d) {
                     d.curso = $('select[name=cursoSearch] option:selected').val();
                     d.turma = $('select[name=turmaSearch] option:selected').val();

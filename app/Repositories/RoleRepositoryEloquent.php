@@ -6,7 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Repositories\RoleRepository;
 use Seracademico\Entities\Role;
-use Seracademico\Validators\RoleValidator;;
+//use Seracademico\Validators\RoleValidator;;
 
 /**
  * Class RoleRepositoryEloquent

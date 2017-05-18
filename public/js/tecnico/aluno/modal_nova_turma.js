@@ -26,7 +26,7 @@ function loadFields()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/tecnico/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -62,7 +62,7 @@ function loadCursosAluno()
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/turma/getCursos',
+        url: '/index.php/seracademico/tecnico/aluno/turma/getCursos',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -93,7 +93,7 @@ function loadTurmasAluno(idCurriculo)
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/turma/getTurmas/' + idCurriculo,
+        url: '/index.php/seracademico/tecnico/aluno/turma/getTurmas/' + idCurriculo,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -177,7 +177,7 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
     // Transação com banco de dados
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/turma/store',
+        url: '/index.php/seracademico/tecnico/aluno/turma/store',
         data: dados,
         datatype: 'json',
         beforeSend: function() {
@@ -191,7 +191,7 @@ $(document).on("click", "#btnSalvarTurmaAluno", function () {
             // Recarregando as grids
             table.ajax.reload();
             tableCursoTurma.ajax.reload();
-            loadTableSituacoes(0).ajax.url("/index.php/seracademico/mestrado/aluno/turma/gridSituacoes/" + 0).load();
+            loadTableSituacoes(0).ajax.url("/index.php/seracademico/tecnico/aluno/turma/gridSituacoes/" + 0).load();
 
             // desabilitando o butão
             $('#btnAdicionarSituacao').attr('disabled', true);

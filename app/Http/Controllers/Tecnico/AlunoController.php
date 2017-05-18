@@ -68,7 +68,7 @@ class AlunoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             # retorno
-            return view('mestrado.aluno.index', compact('loadFields'));
+            return view('tecnico.aluno.index', compact('loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -195,7 +195,7 @@ class AlunoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.aluno.create', compact('loadFields'));
+        return view('tecnico.aluno.create', compact('loadFields'));
     }
 
     /**
@@ -237,7 +237,7 @@ class AlunoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.aluno.edit', compact('aluno', 'loadFields'));
+            return view('tecnico.aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

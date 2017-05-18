@@ -9,8 +9,8 @@ function loadFieldsAddEquivalencia()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Curriculo|lessOfAluno,' + idAluno,
-            'Mestrado\\Disciplina|curriculoByAluno,' + idAluno
+            'Tecnico\\Curriculo|lessOfAluno,' + idAluno,
+            'Tecnico\\Disciplina|curriculoByAluno,' + idAluno
         ]
     };
 
@@ -18,7 +18,7 @@ function loadFieldsAddEquivalencia()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/tecnico/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -44,15 +44,15 @@ function builderHtmlFieldsAddEquivalencia (dados) {
     var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
 
     // Percorrendo o array de cursos
-    for (var i = 0; i < dados['mestrado\\curriculo'].length; i++) {
-        htmlCurriculo += "<option value='" + dados['mestrado\\curriculo'][i].id + "'>"
-            + dados['mestrado\\curriculo'][i].codigo +  ' : ' + dados['mestrado\\curriculo'][i].nome + "</option>";
+    for (var i = 0; i < dados['tecnico\\curriculo'].length; i++) {
+        htmlCurriculo += "<option value='" + dados['tecnico\\curriculo'][i].id + "'>"
+            + dados['tecnico\\curriculo'][i].codigo +  ' : ' + dados['tecnico\\curriculo'][i].nome + "</option>";
     }
 
     // Percorrendo o array de disciplinas
-    for (var i = 0; i < dados['mestrado\\disciplina'].length; i++) {
-        htmlDisciplina += "<option value='" + dados['mestrado\\disciplina'][i].id + "'>"
-            + dados['mestrado\\disciplina'][i].codigo +  ' : ' + dados['mestrado\\disciplina'][i].nome + "</option>";
+    for (var i = 0; i < dados['tecnico\\disciplina'].length; i++) {
+        htmlDisciplina += "<option value='" + dados['tecnico\\disciplina'][i].id + "'>"
+            + dados['tecnico\\disciplina'][i].codigo +  ' : ' + dados['tecnico\\disciplina'][i].nome + "</option>";
     }
 
     // carregando o html
@@ -78,7 +78,7 @@ $(document).on('change', '#curriculo_equivalencia_id', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/getDisciplinasByCurriculo/' + idCurriculo,
+        url: '/index.php/seracademico/tecnico/aluno/curriculo/getDisciplinasByCurriculo/' + idCurriculo,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -121,7 +121,7 @@ $('#btnSaveEquivalencia').click(function() {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/storeEquivalencia',
+        url: '/index.php/seracademico/tecnico/aluno/curriculo/storeEquivalencia',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -147,7 +147,7 @@ $(document).on('click', '#btnDeleteEquivalencia', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/deleteEquivalencia/' + idDicilinaEquivalente,
+        url: '/index.php/seracademico/tecnico/aluno/curriculo/deleteEquivalencia/' + idDicilinaEquivalente,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

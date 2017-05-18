@@ -92,7 +92,7 @@ class AlunoService
      */
     public function store(array $data) : Aluno
     {
-        dd($data);
+        //dd($data);
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
@@ -101,7 +101,7 @@ class AlunoService
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Setando o tipo o tipo do aluno para mestrado
-        $data['tipo_aluno_id'] = 4;
+        $data['tipo_aluno_id'] = 3;
         //dd($data);
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);

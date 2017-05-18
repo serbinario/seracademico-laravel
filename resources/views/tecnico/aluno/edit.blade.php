@@ -7,7 +7,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-user"></i>
-                Editar Aluno de Mestrado
+                Editar Aluno de Curso Técnico
             </h4>
         </div>
         <div class="ibox-content">
@@ -29,8 +29,8 @@
                 </div>
             @endif
 
-            {!! Form::model($aluno, ['route'=> ['seracademico.mestrado.aluno.update', $aluno->id], 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.mestrado.tamplateFormAluno')
+            {!! Form::model($aluno, ['route'=> ['seracademico.tecnico.aluno.update', $aluno->id], 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
+                @include('tamplatesForms.tecnico.tamplateFormAluno')
             {!! Form::close() !!}
         </div>
     </div>

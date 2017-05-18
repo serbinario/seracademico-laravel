@@ -4,7 +4,7 @@ function loadFieldsDocumentos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\TipoDocumento|nivelDeMestrado'
+            'Tecnico\\TipoDocumento|nivelDeMestrado'
         ]
     };
 
@@ -12,7 +12,7 @@ function loadFieldsDocumentos()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/tecnico/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -54,13 +54,13 @@ $(document).on('click', '#btnGerarDocumento', function () {
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
+        url: '/index.php/seracademico/tecnico/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno.success) {
             // Executando o relatório e abrindo em outra aba
-            window.open("/index.php/seracademico/mestrado/aluno/gerarDocumento/"
+            window.open("/index.php/seracademico/tecnico/aluno/gerarDocumento/"
                 + documentacao_id + "/" + idAluno, '_blank');
         } else {
             // Retorno caso retorno alguma erro
