@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="input-field col s5 m3">
                             <select name="busca_por" class="form-control">
-                                <option value="1" selected>Todos os campos</option>
+                                <option value="1" selected >Todos os campos</option>
                                 <option value="2">Título</option>
                                 <option value="3">Assunto</option>
                                 <option value="4">Autor</option>

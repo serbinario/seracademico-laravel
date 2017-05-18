@@ -107,6 +107,8 @@ class ConsultaController extends Controller
         $this->data = $dados;
         $campoLike = "";
 
+        //dd($dados);
+
         if($this->data['busca_por'] == '2') {
             $campoLike = 'bib_arcevos.titulo';
         } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '1') {
