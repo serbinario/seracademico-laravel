@@ -26,7 +26,7 @@
                      Listar Cursos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.curso.create')}}" class="btn-sm btn-primary pull-right">Novo Curso</a>
+                <a href="{{ route('seracademico.tecnico.curso.create')}}" class="btn-sm btn-primary pull-right">Novo Curso</a>
             </div>
         </div>
 
@@ -84,7 +84,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.mestrado.curso.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.curso.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'fac_cursos.codigo'},
                 {data: 'nome', name: 'fac_cursos.nome'},
