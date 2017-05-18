@@ -48,7 +48,7 @@ class CursoService
     public function store(array $data) : Curso
     {
         # Regra de negócio
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Salvando o registro pincipal
         $curso =  $this->repository->create($data);
@@ -71,7 +71,7 @@ class CursoService
     public function update(array $data, int $id) : Curso
     {
         # Regra de negócio
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Atualizando no banco de dados
         $curso = $this->repository->update($data, $id);

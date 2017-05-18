@@ -62,17 +62,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 });
             });
 
-            # Rotas de cursos
-            Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
-                Route::get('index', ['as' => 'index', 'uses' => 'Mestrado\CursoController@index']);
-                Route::get('grid', ['as' => 'grid', 'uses' => 'Mestrado\CursoController@grid']);
-                Route::get('create', ['as' => 'create', 'uses' => 'Mestrado\CursoController@create']);
-                Route::post('store', ['as' => 'store', 'uses' => 'Mestrado\CursoController@store']);
-                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\CursoController@edit']);
-                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\CursoController@update']);
-                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\CursoController@delete']);
-            });
-
             Route::group(['prefix' => 'professor', 'middleware' => 'auth', 'as' => 'professor.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\ProfessorController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\ProfessorController@grid']);

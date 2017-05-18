@@ -48,7 +48,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-        return view('mestrado.curso.index');
+        return view('tecnico.curso.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class CursoController extends Controller
         $rows = \DB::table('fac_cursos')
             ->join('fac_tipo_cursos', 'fac_cursos.tipo_curso_id', '=', 'fac_tipo_cursos.id')
             ->leftJoin('sedes', 'fac_cursos.sede_id', '=', 'sedes.id')
-            ->where('fac_cursos.tipo_nivel_sistema_id', 3)
+            ->where('fac_cursos.tipo_nivel_sistema_id', 4)
             ->select([
                 'fac_cursos.id',
                 'fac_cursos.nome',
@@ -98,7 +98,7 @@ class CursoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.curso.create', compact('loadFields'));
+        return view('tecnico.curso.create', compact('loadFields'));
     }
 
     /**
@@ -143,7 +143,7 @@ class CursoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.curso.edit', compact('model', 'loadFields'));
+            return view('tecnico.curso.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
