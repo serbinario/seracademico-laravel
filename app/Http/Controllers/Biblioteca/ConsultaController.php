@@ -131,11 +131,12 @@ class ConsultaController extends Controller
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                //->where('bib_exemplares.exemp_principal', '=', '1')
+                ->leftJoin('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
+                ->where('bib_tipos_acervos.tipo', '=', $this->data['tipo_obra'])
+                ->where('bib_exemplares.exemp_principal', '=', '1')
                 ->where($campoLike, 'like', "%{$this->data['busca']}%")
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
-                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_arcevos.id')
+                ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
 
@@ -145,8 +146,9 @@ class ConsultaController extends Controller
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
                 ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
-                ->where('bib_arcevos.tipos_acervos_id', '=', $this->data['tipo_obra'])
-                //->where('bib_exemplares.exemp_principal', '=', '1')
+                ->leftJoin('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
+                ->where('bib_tipos_acervos.tipo', '=', $this->data['tipo_obra'])
+                ->where('bib_exemplares.exemp_principal', '=', '1')
                 ->Where(function ($query) {
                     $query->orWhere('responsaveis.nome', 'like', "%{$this->data['busca']}%")
                         ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
@@ -157,13 +159,13 @@ class ConsultaController extends Controller
                         ->orWhere('bib_exemplares.palavras_chaves', 'like', "%{$this->data['busca']}%")
                         ->orWhere('bib_arcevos.sumario', 'like', "%{$this->data['busca']}%");
                 })
-                ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_arcevos.id')
+                ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
                 ->paginate(10);
 
         }
 
-        $my_query->setPath(url('seracademico/biblioteca/seachSimplePage'));
+        $my_query->setPath(url('seachSimplePage'));
 
         return $my_query;
 
