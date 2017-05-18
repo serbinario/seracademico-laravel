@@ -718,6 +718,86 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \Seracademico\Repositories\Tecnico\DisciplinaRepository::class,
+            \Seracademico\Repositories\Tecnico\DisciplinaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\CursoRepository::class,
+            \Seracademico\Repositories\Tecnico\CursoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\CurriculoRepository::class,
+            \Seracademico\Repositories\Tecnico\CurriculoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\TurmaRepository::class,
+            \Seracademico\Repositories\Tecnico\TurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\ProfessorRepository::class,
+            \Seracademico\Repositories\Tecnico\ProfessorRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Tecnico\CalendarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoFrequenciaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\PlanoAulaRepository::class,
+            \Seracademico\Repositories\Tecnico\PlanoAulaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\PlanoEnsinoRepository::class,
+            \Seracademico\Repositories\Tecnico\PlanoEnsinoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\ConteudoProgramaticoRepository::class,
+            \Seracademico\Repositories\Tecnico\ConteudoProgramaticoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\DiarioAulaRepository::class,
+            \Seracademico\Repositories\Tecnico\DiarioAulaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaDispensadaRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaDispensadaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaExtraCurricularRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaEquivalenteRepository::class,
+            \Seracademico\Repositories\Tecnico\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+        );
+
+        $this->app->bind(
             \Seracademico\Repositories\InstituicaoRepository::class,
             \Seracademico\Repositories\InstituicaoRepositoryEloquent::class
         );

@@ -2,7 +2,6 @@
 
 namespace Seracademico\Services;
 
-
 use Seracademico\Repositories\RoleRepository;
 use Seracademico\Entities\User;
 use Seracademico\Repositories\PermissionRepository;
