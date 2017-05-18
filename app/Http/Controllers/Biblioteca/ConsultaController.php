@@ -69,10 +69,7 @@ class ConsultaController extends Controller
 
         $dados = $request->request->all();
 
-        $request->session()->set('dados', $dados);
-        $data = $request->session()->get('dados');
-
-        $resultado = $this->query($data);
+        $resultado = $this->query($dados);
 
         return \View::make('portal.biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
@@ -89,10 +86,7 @@ class ConsultaController extends Controller
 
         $dados = $request->request->all();
 
-        $data = $request->session()->get('dados');
-        $data['page'] = $dados['page'];
-
-        $resultado = $this->query($data);
+        $resultado = $this->query($dados);
 
         return \View::make('portal.biblioteca.consulta.resultado')->with(compact('resultado', 'loadFields'));
 
@@ -106,6 +100,8 @@ class ConsultaController extends Controller
 
         $this->data = $dados;
         $campoLike = "";
+
+        //dd($dados);
 
         if($this->data['busca_por'] == '2') {
             $campoLike = 'bib_arcevos.titulo';
