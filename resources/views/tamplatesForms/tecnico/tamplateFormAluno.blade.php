@@ -580,7 +580,7 @@
                         @if(isset($aluno->id) && count($aluno->curriculos) > 0)
                             {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @else
-                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['mestrado\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
+                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['tecnico\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
                         @endif
                     </div>
 

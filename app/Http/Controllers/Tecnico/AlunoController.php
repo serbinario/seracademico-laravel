@@ -42,8 +42,8 @@ class AlunoController extends Controller
         'Sede',
         'SimpleReport|byCrud,10',
         'Mestrado\\Turma|Mestrado',
-        'Mestrado\\Curso|ativo,1',
-        'Mestrado\\Curso|byCurriculoAtivo,1',
+        'Tecnico\\Curso|ativo,1',
+        'Tecnico\\Curso|byCurriculoAtivo,1',
     ];
 
     /**

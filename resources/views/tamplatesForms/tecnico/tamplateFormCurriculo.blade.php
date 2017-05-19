@@ -73,6 +73,7 @@
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
 </div>
+</div>
 
 @section('javascript')
     <script type="text/javascript">
@@ -81,46 +82,14 @@
                 if($(this).is(':checked')) {
                     swal("Marcando esse currículo como ativo, estará automaticamente desativando o atual ativo.", "Click no botão abaixo!", "warning");
                 }
-            })
+            });
 
             // Setando o texto do nome pelo curso escolhido
             $(document).on('change', "#curso_id", function () {
                 var textCurso = $(this).find("option:selected").text();
                 $("#nome").val(textCurso);
-            })
-
-            /*Lang.setLocale('pt-BR');
-
-            $('#formCurriculo').bootstrapValidator({
-                fields: {
-                    nome: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 200,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
-                        }
-                    },
-                    codigo: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Código' })
-                            }
-                        }
-                    },
-                    ano: {
-                        validators: {
-                            numeric: {
-                                message: Lang.get('validation.numeric', { attribute: 'Ano' })
-                            }
-                        }
-                    }
-                }
             });
 
-        });*/
+            });
     </script>
 @stop

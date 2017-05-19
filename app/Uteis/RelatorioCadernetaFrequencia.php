@@ -73,11 +73,13 @@ class RelatorioCadernetaFrequencia
                        where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
                 );
             })
+            ->join('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
             ->join("fac_turmas_disciplinas", "fac_turmas_disciplinas.turma_id", "=", "fac_turmas.id")
             ->join("fac_disciplinas", "fac_disciplinas.id", "=", "fac_turmas_disciplinas.disciplina_id")
             ->where("fac_disciplinas.id", $dadosDaRequisicao["disciplina"])
             ->where("fac_turmas.id", $dadosDaRequisicao["turma"])
+            ->whereNotIn("fac_situacao.id", [10,4])
             ->orderBy("pessoas.nome", "asc")
             ->select([
                 "pessoas.nome"
