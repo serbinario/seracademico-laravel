@@ -30,8 +30,8 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.mestrado.professor.store', 'method' => "POST", 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.mestrado.tamplateFormProfessor')
+            {!! Form::open(['route'=>'seracademico.tecnico.professor.store', 'method' => "POST", 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
+                @include('tamplatesForms.tecnico.tamplateFormProfessor')
             {!! Form::close() !!}
         </div>
     </div>

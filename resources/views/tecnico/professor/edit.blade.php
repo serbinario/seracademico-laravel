@@ -32,8 +32,8 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.mestrado.professor.update', $model->id], 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.mestrado.tamplateFormProfessor')
+            {!! Form::model($model, ['route'=> ['seracademico.tecnico.professor.update', $model->id], 'id' => 'formProfessor', 'enctype' => 'multipart/form-data']) !!}
+                @include('tamplatesForms.tecnico.tamplateFormProfessor')
                 {{--<a href="{{ route('seracademico.report.contratoProfessor', ['id' => $professor->id]) }}" target="_blank" class="btn btn-info">Contrato</a>--}}
             {!! Form::close() !!}
         </div>

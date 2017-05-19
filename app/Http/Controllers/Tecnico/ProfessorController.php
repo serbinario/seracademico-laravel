@@ -64,7 +64,7 @@ class ProfessorController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #retorno
-        return view('mestrado.professor.index', compact('loadFields'));
+        return view('tecnico.professor.index', compact('loadFields'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ProfessorController extends Controller
         $rows = \DB::table('fac_professores')
             ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id')
             ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id')
-            ->where('tipo_nivel_sistema.id', '=' , 3)
+            ->where('tipo_nivel_sistema.id', '=' , 4)
             //->where('fac_professores.pos_e_graduacao', '=' , 1)
             ->select([
                 'fac_professores.id',
@@ -104,7 +104,7 @@ class ProfessorController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.professor.create', compact('loadFields'));
+        return view('tecnico.professor.create', compact('loadFields'));
     }
 
     /**
@@ -146,7 +146,7 @@ class ProfessorController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.professor.edit', compact('model', 'loadFields'));
+            return view('tecnico.professor.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

@@ -113,7 +113,7 @@ class ProfessorService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));

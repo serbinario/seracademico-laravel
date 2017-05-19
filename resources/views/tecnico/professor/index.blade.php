@@ -19,7 +19,7 @@
                     Listar Professores</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.professor.create')}}" class="btn-sm btn-primary pull-right">Novo Professor</a>
+                <a href="{{ route('seracademico.tecnico.professor.create')}}" class="btn-sm btn-primary pull-right">Novo Professor</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -85,7 +85,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.mestrado.professor.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.professor.grid') !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'cpf', name: 'pessoas.cpf'},
