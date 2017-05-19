@@ -147,7 +147,7 @@
             serverSide: true,
             autoWidth: false,
 
-            ajax: "{!! route('seracademico.mestrado.turma.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.turma.grid') !!}",
             columns: [
                 {data: 'codigo_turma', name: 'fac_turmas.codigo'},
                 {data: 'codigo', name: 'fac_cursos.codigo'},

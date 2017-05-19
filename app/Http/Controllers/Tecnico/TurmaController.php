@@ -28,7 +28,7 @@ class TurmaController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Mestrado\\Curso|byCurriculoAtivo,1',
+        'Tecnico\\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
         'Professor|getValues',
@@ -55,7 +55,7 @@ class TurmaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #retorno
-        return view('mestrado.turma.index', compact('loadFields'));
+        return view('tecnico.turma.index', compact('loadFields'));
     }
 
     /**
@@ -69,7 +69,7 @@ class TurmaController extends Controller
             ->leftJoin('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->leftJoin('sedes', 'sedes.id', '=', 'fac_turmas.sede_id')
             ->leftJoin('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
-            ->where('fac_turmas.tipo_nivel_sistema_id', 3)
+            ->where('fac_turmas.tipo_nivel_sistema_id', 4)
             ->select([
                 'fac_turmas.id',
                 'fac_turmas.codigo as codigo_turma',
@@ -112,7 +112,7 @@ class TurmaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.turma.create', compact('loadFields'));
+        return view('tecnico.turma.create', compact('loadFields'));
     }
 
     /**
@@ -154,7 +154,7 @@ class TurmaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
             
             #retorno para view
-            return view('mestrado.turma.edit', compact('model', 'loadFields'));
+            return view('tecnico.turma.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

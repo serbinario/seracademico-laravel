@@ -66,7 +66,7 @@ class TurmaService
         #Aplicação das regras de negócios
         $this->tratamentoDoCurso($data);
         $this->tratamentoMoedas($data);
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
@@ -95,7 +95,7 @@ class TurmaService
         $this->tratamentoDoCurso($data, $id);
         $this->tratamentoMoedas($data);
 
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         # Verifica se é o mesmo currículo (false), se não for, se pode ser alterado (true).
         # Se não poder ser alterado lançará uma exception.
