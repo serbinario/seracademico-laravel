@@ -96,14 +96,14 @@
                             </ul>
                         </li>
                         {{--<li>--}}
-                            {{--<a href="#">Tesouraria <span class="fa arrow"></span></a>--}}
-                            {{--<ul class="nav nav-third-level">--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>--}}
-                                {{--<li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
-                            {{--</ul>--}}
+                        {{--<a href="#">Tesouraria <span class="fa arrow"></span></a>--}}
+                        {{--<ul class="nav nav-third-level">--}}
+                        {{--<li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}">Alunos</a></li>--}}
+                        {{--<li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}">Disciplinas</a></li>--}}
+                        {{--<li><a href="{{ route('seracademico.posgraduacao.curso.index') }}">Cursos</a></li>--}}
+                        {{--<li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}">Currículos</a></li>--}}
+                        {{--<li><a href="{{ route('seracademico.posgraduacao.turma.index') }}">Turmas</a></li>--}}
+                        {{--</ul>--}}
                         {{--</li>--}}
                     </ul>
                 </li>
@@ -346,7 +346,6 @@
 <script src="{{ asset('/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
-{{--<script src="{{ asset('/lib/bootstrap/dist/js/bootstrap.js')}}"></script>--}}
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -357,6 +356,8 @@
 <script src="{{ asset('/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/bootbox.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/webcam.js')  }}"></script>
+{{--jquery Validator https://jqueryvalidation.org/--}}
+<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <!-- Include Date Range Picker http://www.daterangepicker.com/#examples -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -395,9 +396,6 @@
 <script src="{{ asset('/lib/sifter/sifter.js')  }}"></script>
 <script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
-{{--jquery Validator https://jqueryvalidation.org/--}}
-{{--<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>--}}
-<script src="{{ asset('/lib/jquery-validation/dist/jquery.validate.js') }}"></script>
 <script type="text/javascript">
     //
     $(document).on({

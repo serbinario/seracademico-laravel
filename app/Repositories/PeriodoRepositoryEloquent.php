@@ -24,8 +24,6 @@ class PeriodoRepositoryEloquent extends BaseRepository implements PeriodoReposit
         return Periodo::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
