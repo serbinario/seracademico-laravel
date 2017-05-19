@@ -56,7 +56,7 @@ class CurriculoService
     public function store(array $data) : Curriculo
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);
@@ -81,7 +81,7 @@ class CurriculoService
     public function update(array $data, int $id) : Curriculo
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Executando regras de negócios
         $this->tratamentoCurriculoAtivo($data);

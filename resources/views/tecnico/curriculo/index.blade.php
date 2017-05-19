@@ -42,7 +42,7 @@
                 <h4><i class="material-icons">library_books</i> Listar Currículos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
+                <a href="{{ route('seracademico.tecnico.curriculo.create')}}" class="btn-sm btn-primary pull-right">Novo Curriculo</a>
             </div>
         </div>
 
@@ -176,7 +176,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.mestrado.curriculo.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.curriculo.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'fac_curriculos.codigo'},
                 {data: 'nome', name: 'fac_curriculos.nome'},
@@ -206,7 +206,7 @@
                 serverSide: true,
                 iDisplayLength: 5,
                 bLengthChange: false,
-                ajax: "/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo,
+                ajax: "/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo,
                 columns: [
                     {data: 'nome', name: 'fac_disciplinas.nome'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
@@ -216,7 +216,7 @@
             });
 
             //Carregando a datatable
-            table2.ajax.url("/index.php/seracademico/mestrado/curriculo/gridByCurriculo/" + idCurriculo).load();
+            table2.ajax.url("/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo).load();
         });
 
          //consulta via select2
@@ -287,7 +287,7 @@
 
             jQuery.ajax({
                 type: 'POST',
-                url: '{{ route('seracademico.mestrado.curriculo.adicionarDisciplinas')  }}',
+                url: '{{ route('seracademico.tecnico.curriculo.adicionarDisciplinas')  }}',
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },
@@ -313,7 +313,7 @@
 
             jQuery.ajax({
                 type: 'POST',
-                url: '{{ route('seracademico.mestrado.curriculo.removerDisciplina')  }}',
+                url: '{{ route('seracademico.tecnico.curriculo.removerDisciplina')  }}',
                 headers: {
                     'X-CSRF-TOKEN': '{{  csrf_token() }}'
                 },

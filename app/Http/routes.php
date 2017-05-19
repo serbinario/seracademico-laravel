@@ -100,6 +100,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\CurriculoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\CurriculoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\CurriculoController@delete']);
+
+                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'Tecnico\CurriculoController@adicionarDisciplinas']);
+                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Tecnico\CurriculoController@removerDisciplina']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Tecnico\CurriculoController@getByCurso']);
+                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Tecnico\CurriculoController@gridByCurriculo']);
             });
 
             Route::group(['prefix' => 'turma', 'middleware' => 'auth', 'as' => 'turma.'], function () {

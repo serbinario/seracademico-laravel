@@ -28,8 +28,8 @@
                     </div>
                 @endif
 
-            {!! Form::open(['route'=>'seracademico.mestrado.curriculo.store', 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
-                    @include('tamplatesForms.mestrado.tamplateFormCurriculo')
+            {!! Form::open(['route'=>'seracademico.tecnico.curriculo.store', 'id' => 'formCurriculo', 'method' => "POST" ]) !!}
+                    @include('tamplatesForms.tecnico.tamplateFormCurriculo')
             {!! Form::close() !!}
         </div>        
     </div>

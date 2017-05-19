@@ -28,7 +28,7 @@ class CurriculoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Mestrado\\Curso|ativo,1',
+        'Tecnico\\Curso|ativo,1',
         'SimpleReport|byCrud,4'
     ];
 
@@ -51,7 +51,7 @@ class CurriculoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         # Retorno para view
-        return view('mestrado.curriculo.index', compact('loadFields'));
+        return view('tecnico.curriculo.index', compact('loadFields'));
     }
 
     /**
@@ -62,7 +62,7 @@ class CurriculoController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_curriculos')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_curriculos.tipo_nivel_sistema_id', 3)
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 4)
             ->select([
                 'fac_curriculos.id',
                 'fac_curriculos.nome',
@@ -107,7 +107,7 @@ class CurriculoController extends Controller
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao']
             )
-            ->where('fac_curriculos.tipo_nivel_sistema_id', 3)
+            ->where('fac_curriculos.tipo_nivel_sistema_id', 4)
             ->where('fac_curriculos.id', $id);
 
         #Editando a grid
@@ -153,7 +153,7 @@ class CurriculoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.curriculo.create', compact('loadFields'));
+        return view('tecnico.curriculo.create', compact('loadFields'));
     }
 
     /**
@@ -198,7 +198,7 @@ class CurriculoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.curriculo.edit', compact('model', 'loadFields'));
+            return view('tecnico.curriculo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
