@@ -21,7 +21,7 @@ $('#btnCreateConteudoEditar').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/posgraduacao/planoEnsino/storeConteudoProgramatico',
+        url: '/index.php/seracademico/posgraduacao/planoensino/storeConteudoProgramatico',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -43,7 +43,7 @@ $(document).on( 'click', '#btnRemoverConteudoEditar', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/posgraduacao/planoEnsino/deleteConteudoProgramatico/' + conteudoId,
+        url: '/index.php/seracademico/posgraduacao/planoensino/deleteConteudoProgramatico/' + conteudoId,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

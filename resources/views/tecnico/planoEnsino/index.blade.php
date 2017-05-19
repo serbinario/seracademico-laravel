@@ -21,7 +21,7 @@
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.planoEnsino.create')}}" class="btn-sm btn-primary pull-right">Novo Plano de Ensino</a>
+                <a href="{{ route('seracademico.tecnico.planoensino.create')}}" class="btn-sm btn-primary pull-right">Novo Plano de Ensino</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -52,23 +52,23 @@
         </div>
     </div>
 
-    @include('mestrado.planoEnsino.planoAula.modal_planos_aulas')
-    @include('mestrado.planoEnsino.planoAula.modal_create_planos_aulas')
-    @include('mestrado.planoEnsino.planoAula.modal_edit_planos_aulas')
+    @include('tecnico.planoEnsino.planoAula.modal_planos_aulas')
+    @include('tecnico.planoEnsino.planoAula.modal_create_planos_aulas')
+    @include('tecnico.planoEnsino.planoAula.modal_edit_planos_aulas')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_create_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/modal_edit_planos_aulas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/create_conteudo_programatico_plano_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/edit_conteudo_programatico_plano_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/planoEnsino/planoAula/grid_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/modal_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/modal_create_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/modal_edit_planos_aulas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/create_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/edit_conteudo_programatico_plano_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/planoEnsino/planoAula/grid_conteudo_programatico_plano_aula.js')  }}"></script>
     <script type="text/javascript">
         var table = $('#fac_plano_ensino').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{!! route('seracademico.mestrado.planoEnsino.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.planoensino.grid') !!}",
             columns: [
                 {data: 'nome', name: 'nome'},
                 {data: 'nomeDisciplina', name: 'fac_disciplinas.nome'},

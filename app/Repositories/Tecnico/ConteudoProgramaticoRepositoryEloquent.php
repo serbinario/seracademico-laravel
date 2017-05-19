@@ -23,7 +23,6 @@ class ConteudoProgramaticoRepositoryEloquent extends BaseRepository implements C
         return ConteudoProgramatico::class;
     }
 
-
     /**
      * Boot up the repository, pushing criteria
      */

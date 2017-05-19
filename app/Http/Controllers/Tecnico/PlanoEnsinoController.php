@@ -28,7 +28,7 @@ class PlanoEnsinoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Mestrado\\Disciplina|mestrado'
+        'Tecnico\\Disciplina|tecnico'
     ];
 
     /**
@@ -46,7 +46,7 @@ class PlanoEnsinoController extends Controller
      */
     public function index()
     {
-        return view('mestrado.planoEnsino.index');
+        return view('tecnico.planoEnsino.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class PlanoEnsinoController extends Controller
         #Criando a consulta
         $rows = \DB::table('fac_plano_ensino')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_plano_ensino.disciplina_id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 3)
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 4)
             ->select([
                 'fac_plano_ensino.id',
                 'fac_plano_ensino.vigencia',
@@ -101,7 +101,7 @@ class PlanoEnsinoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.planoEnsino.create', compact('loadFields'));
+        return view('tecnico.planoEnsino.create', compact('loadFields'));
     }
 
     /**
@@ -143,7 +143,7 @@ class PlanoEnsinoController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.planoEnsino.edit', compact('model', 'loadFields'));
+            return view('tecnico.planoEnsino.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

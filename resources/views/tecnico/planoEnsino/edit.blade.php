@@ -27,8 +27,8 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.mestrado.planoEnsino.update', $model->id], 'method' => "POST", "id" => "formPlanoEnsino", 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.mestrado.tamplateFormPlanoEnsino')
+            {!! Form::model($model, ['route'=> ['seracademico.tecnico.planoensino.update', $model->id], 'method' => "POST", "id" => "formPlanoEnsino", 'enctype' => 'multipart/form-data']) !!}
+                @include('tamplatesForms.tecnico.tamplateFormPlanoEnsino')
             {!! Form::close() !!}
         </div>
 

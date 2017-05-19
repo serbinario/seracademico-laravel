@@ -27,8 +27,8 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.mestrado.planoEnsino.store', 'method' => "POST", "id" => "formPlanoEnsino", 'enctype' => 'multipart/form-data' ]) !!}
-                @include('tamplatesForms.mestrado.tamplateFormPlanoEnsino')
+            {!! Form::open(['route'=>'seracademico.tecnico.planoensino.store', 'method' => "POST", "id" => "formPlanoEnsino", 'enctype' => 'multipart/form-data' ]) !!}
+                @include('tamplatesForms.tecnico.tamplateFormPlanoEnsino')
             {!! Form::close() !!}
         </div>
     </div>

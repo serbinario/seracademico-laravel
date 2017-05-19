@@ -125,6 +125,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\PlanoEnsinoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\PlanoEnsinoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\PlanoEnsinoController@delete']);
+
+                # Conteúdo programático
+                Route::get('gridConteudoProgramatico/{idPlanoEnsino}', ['as' => 'gridConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@gridConteudoProgramatico']);
+                Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@storeConteudoProgramatico']);
+                Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@deleteConteudoProgramatico']);
             });
         });
 

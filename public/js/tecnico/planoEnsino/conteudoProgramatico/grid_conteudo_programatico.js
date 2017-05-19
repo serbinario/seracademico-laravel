@@ -21,7 +21,7 @@ function loadEditTableConteudoProgramatico(idPlanoEnsino)
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/posgraduacao/planoEnsino/gridConteudoProgramatico/" + idPlanoEnsino,
+        ajax: "/index.php/seracademico/posgraduacao/planoensino/gridConteudoProgramatico/" + idPlanoEnsino,
         columns: [
             {data: 'nome', name: 'nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}

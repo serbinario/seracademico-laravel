@@ -101,8 +101,8 @@ class Disciplina extends Model implements Transformable
      * @param $query
      * @return mixed
      */
-    public function scopeMestrado($query)
+    public function scopeTecnico($query)
     {
-        return $query->where('tipo_nivel_sistema_id', 3);
+        return $query->where('tipo_nivel_sistema_id', 4);
     }
 }
