@@ -25,18 +25,6 @@ class EnderecoRepositoryEloquent extends BaseRepository implements EnderecoRepos
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return EnderecoValidator::class;
-    }
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

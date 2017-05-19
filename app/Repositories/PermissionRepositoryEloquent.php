@@ -23,8 +23,6 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
         return Permission::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */

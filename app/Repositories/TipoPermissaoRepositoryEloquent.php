@@ -23,8 +23,6 @@ class TipoPermissaoRepositoryEloquent extends BaseRepository implements TipoPerm
         return TipoPermissao::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */

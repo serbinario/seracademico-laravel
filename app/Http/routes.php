@@ -12,6 +12,127 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::group(['prefix' => 'seracademico', 'middleware' => 'auth', 'as' => 'seracademico.'], function () {
 
+        //INICIO DE ROTAS DO MODULO CURSO TÉCNICO
+        Route::group(['prefix' => 'tecnico', 'middleware' => 'auth', 'as' => 'tecnico.'], function () {
+
+            Route::group(['prefix' => 'aluno', 'middleware' => 'auth', 'as' => 'aluno.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\AlunoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\AlunoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\AlunoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\AlunoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\AlunoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\AlunoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\AlunoController@delete']);
+
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idAluno}', ['as' => 'gerarDocumento', 'uses' => 'Tecnico\AlunoDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idAluno}', ['as' => 'checkDocumento', 'uses' => 'Tecnico\AlunoDocumentoController@checkDocumento']);
+
+                # Rotas de turmas de técnico
+                Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
+                    Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Tecnico\AlunoTurmaController@grid']);
+                    Route::get('gridSituacoes/{idAlunoCurso}', ['as' => 'gridSituacoes', 'uses' => 'Tecnico\AlunoTurmaController@gridSituacoes']);
+                    Route::get('getCursos', ['as' => 'getCursos', 'uses' => 'Tecnico\AlunoTurmaController@getCursos']);
+                    Route::get('getTurmas/{idCurriculo}', ['as' => 'getCursos', 'uses' => 'Tecnico\AlunoTurmaController@getTurmas']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\AlunoTurmaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\AlunoTurmaController@store']);
+                    Route::delete('destroy/{idAluno}/{idAlunoCurso}', ['as' => 'destroy', 'uses' => 'Tecnico\AlunoTurmaController@destroy']);
+                    Route::get('getTurmaOrigem/{idAlunoCurso}', ['as' => 'getTurmaOrigem', 'uses' => 'Tecnico\AlunoTurmaController@getTurmaOrigem']);
+                    Route::delete('destroySituacao/{idSituacao}', ['as' => 'destroySituacao', 'uses' => 'Tecnico\AlunoTurmaController@destroySituacao']);
+                    Route::post('storeSituacao', ['as' => 'storeSituacao', 'uses' => 'Tecnico\AlunoTurmaController@storeSituacao']);
+//                    Route::get('edit/{idAlunoTurma}', ['as' => 'edit', 'uses' => 'PosGraduacao\AlunoTurmaController@edit']);
+//                    Route::post('update/{idAlunoTurma}', ['as' => 'update', 'uses' => 'PosGraduacao\AlunoTurmaController@update']);
+                });
+
+                Route::group(['prefix' => 'curriculo', 'as' => 'curriculo.'], function () {
+                    Route::get('gridACursar/{idAluno}', ['as' => 'gridACursar', 'uses' => 'Tecnico\AlunoCurriculoController@gridACursar']);
+                    Route::get('gridCursadas/{idAluno}', ['as' => 'gridCursadas', 'uses' => 'Tecnico\AlunoCurriculoController@gridCursadas']);
+                    Route::get('gridDispensadas/{idAluno}', ['as' => 'gridDispensadas', 'uses' => 'Tecnico\AlunoCurriculoController@gridDispensadas']);
+                    Route::get('gridDisciplinasExtraCurricular/{idAluno}', ['as' => 'gridDisciplinasExtraCurricular', 'uses' => 'Tecnico\AlunoCurriculoController@gridDisciplinasExtraCurricular']);
+                    Route::get('gridDisciplinasEquivalentes/{idAluno}', ['as' => 'gridDisciplinasEquivalentes', 'uses' => 'Tecnico\AlunoCurriculoController@gridDisciplinasEquivalentes']);
+                    Route::post('storeDispensada', ['as' => 'storeDispensada', 'uses' => 'Tecnico\AlunoCurriculoController@storeDispensada']);
+                    Route::get('deleteDispensada/{idDispensada}', ['as' => 'deleteDispensada', 'uses' => 'Tecnico\AlunoCurriculoController@deleteDispensada']);
+                    Route::get('editDispensada/{idDispensada}', ['as' => 'editDispensada', 'uses' => 'Tecnico\AlunoCurriculoController@editDispensada']);
+                    Route::post('updateDispensada/{idDispensada}', ['as' => 'updateDispensada', 'uses' => 'Tecnico\AlunoCurriculoController@updateDispensada']);
+                    Route::post('storeDisciplinaExtraCurricular', ['as' => 'storeDisciplinaExtraCurricular', 'uses' => 'Tecnico\AlunoCurriculoController@storeDisciplinaExtraCurricular']);
+                    Route::get('deleteDisciplinaExtraCurricular/{idDisciplina}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'Tecnico\AlunoCurriculoController@deleteDisciplinaExtraCurricular']);
+                    Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'Tecnico\AlunoCurriculoController@getDisciplinasByCurriculo']);
+                    Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Tecnico\AlunoCurriculoController@storeEquivalencia']);
+                    Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Tecnico\AlunoCurriculoController@deleteEquivalencia']);
+                });
+            });
+
+            Route::group(['prefix' => 'professor', 'middleware' => 'auth', 'as' => 'professor.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\ProfessorController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\ProfessorController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\ProfessorController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\ProfessorController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\ProfessorController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\ProfessorController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ProfessorController@delete']);
+            });
+
+            Route::group(['prefix' => 'disciplina', 'middleware' => 'auth', 'as' => 'disciplina.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\DisciplinaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\DisciplinaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\DisciplinaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\DisciplinaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\DisciplinaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\DisciplinaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\DisciplinaController@delete']);
+            });
+
+            Route::group(['prefix' => 'curso', 'middleware' => 'auth', 'as' => 'curso.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\CursoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\CursoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\CursoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\CursoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\CursoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\CursoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\CursoController@delete']);
+            });
+
+            Route::group(['prefix' => 'curriculo', 'middleware' => 'auth', 'as' => 'curriculo.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\CurriculoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\CurriculoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\CurriculoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\CurriculoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\CurriculoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\CurriculoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\CurriculoController@delete']);
+
+                Route::post('adicionarDisciplinas', ['as' => 'adicionarDisciplinas', 'uses' => 'Tecnico\CurriculoController@adicionarDisciplinas']);
+                Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Tecnico\CurriculoController@removerDisciplina']);
+                Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Tecnico\CurriculoController@getByCurso']);
+                Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Tecnico\CurriculoController@gridByCurriculo']);
+            });
+
+            Route::group(['prefix' => 'turma', 'middleware' => 'auth', 'as' => 'turma.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\TurmaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\TurmaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\TurmaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\TurmaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\TurmaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\TurmaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\TurmaController@delete']);
+            });
+
+            Route::group(['prefix' => 'planoensino', 'middleware' => 'auth', 'as' => 'planoensino.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\PlanoEnsinoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\PlanoEnsinoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\PlanoEnsinoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\PlanoEnsinoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\PlanoEnsinoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\PlanoEnsinoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\PlanoEnsinoController@delete']);
+
+                # Conteúdo programático
+                Route::get('gridConteudoProgramatico/{idPlanoEnsino}', ['as' => 'gridConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@gridConteudoProgramatico']);
+                Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@storeConteudoProgramatico']);
+                Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@deleteConteudoProgramatico']);
+            });
+        });
+
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
             Route::get('gridAluno', ['as' => 'gridAluno', 'uses' => 'Graduacao\MatriculaAlunoController@gridAluno']);
