@@ -47,7 +47,7 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        return view('mestrado.disciplina.index');
+        return view('tecnico.disciplina.index');
     }
 
     /**
@@ -59,7 +59,7 @@ class DisciplinaController extends Controller
         $rows = \DB::table('fac_disciplinas')
             ->leftjoin('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
             //->leftjoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 3)
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 4)
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome',
@@ -102,7 +102,7 @@ class DisciplinaController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('mestrado.disciplina.create', compact('loadFields'));
+        return view('tecnico.disciplina.create', compact('loadFields'));
     }
 
     /**
@@ -147,7 +147,7 @@ class DisciplinaController extends Controller
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('mestrado.disciplina.edit', compact('model', 'loadFields'));
+            return view('tecnico.disciplina.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

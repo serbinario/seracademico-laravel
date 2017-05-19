@@ -28,7 +28,7 @@
                 </h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.disciplina.create')}}" class="btn-sm btn-primary pull-right">Nova Disciplina</a>
+                <a href="{{ route('seracademico.tecnico.disciplina.create')}}" class="btn-sm btn-primary pull-right">Nova Disciplina</a>
             </div>
         </div>
         <div class="ibox-content">
@@ -87,7 +87,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{!! route('seracademico.mestrado.disciplina.grid') !!}",
+            ajax: "{!! route('seracademico.tecnico.disciplina.grid') !!}",
             columns: [
                 {data: 'codigo', name: 'fac_disciplinas.codigo'},
                 {data: 'nome', name: 'fac_disciplinas.nome'},

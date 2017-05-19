@@ -47,7 +47,7 @@ class DisciplinaService
     public function store(array $data) : Disciplina
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Salvando o registro pincipal
         $disciplina =  $this->repository->create($data);
@@ -70,7 +70,7 @@ class DisciplinaService
     public function update(array $data, int $id) : Disciplina
     {
         #setando o nivel do sistema
-        $data['tipo_nivel_sistema_id'] = 3;
+        $data['tipo_nivel_sistema_id'] = 4;
 
         #Atualizando no banco de dados
         $disciplina = $this->repository->update($data, $id);
