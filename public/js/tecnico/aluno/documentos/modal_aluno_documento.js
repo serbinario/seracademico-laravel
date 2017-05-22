@@ -35,8 +35,8 @@ function builderHtmlFieldsDocumento (dados) {
     var htmlDocumento     = "";
 
     // Percorrendo o array de cursos
-    for (var i = 0; i < dados['mestrado\\tipodocumento'].length; i++) {
-        htmlDocumento += "<option value='" + dados['mestrado\\tipodocumento'][i].id + "'>" + dados['mestrado\\tipodocumento'][i].nome + "</option>";
+    for (var i = 0; i < dados['tecnico\\tipodocumento'].length; i++) {
+        htmlDocumento += "<option value='" + dados['tecnico\\tipodocumento'][i].id + "'>" + dados['tecnico\\tipodocumento'][i].nome + "</option>";
     }
 
     $("#documentacao_id option").remove();

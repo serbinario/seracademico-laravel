@@ -25,19 +25,6 @@ class CurriculoRepositoryEloquent extends BaseRepository implements CurriculoRep
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return CurriculoValidator::class;
-    }
-
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

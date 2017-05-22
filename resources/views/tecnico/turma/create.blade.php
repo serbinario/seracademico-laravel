@@ -27,8 +27,8 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.mestrado.turma.store' , 'id' => 'formTurma', 'method' => "POST" ]) !!}
-                @include('tamplatesForms.mestrado.tamplateFormTurma')
+            {!! Form::open(['route'=>'seracademico.tecnico.turma.store' , 'id' => 'formTurma', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.tecnico.tamplateFormTurma')
             {!! Form::close() !!}
         </div>        
     </div>
