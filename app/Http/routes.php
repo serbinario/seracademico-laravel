@@ -1168,6 +1168,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('confirmarTermoBiblioteca', ['as' => 'confirmarTermoBiblioteca', 'uses' => 'Biblioteca\EmprestarController@confirmarTermoBiblioteca']);
 
 
+            // Crud de reservas
             Route::get('indexReserva', ['as' => 'indexReserva', 'uses' => 'Biblioteca\ReservaController@index']);
             Route::get('gridReserva', ['as' => 'gridReserva', 'uses' => 'Biblioteca\ReservaController@grid']);
             Route::post('storeReserva', ['as' => 'storeReserva', 'uses' => 'Biblioteca\ReservaController@store']);
@@ -1180,6 +1181,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('listaPessoasReservas', ['as' => 'listaPessoasReservas', 'uses' => 'Biblioteca\ReservaController@listaPessoasReservas']);
 
 
+            // Crud de coleção
             Route::get('indexColecao', ['as' => 'indexColecao', 'uses' => 'Biblioteca\ColecaoController@index']);
             Route::get('createColecao', ['as' => 'createColecao', 'uses' => 'Biblioteca\ColecaoController@create']);
             Route::get('gridColecao', ['as' => 'gridColecao', 'uses' => 'Biblioteca\ColecaoController@grid']);
@@ -1189,6 +1191,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('deleteColecao/{id}', ['as' => 'deleteColecao', 'uses' => 'Biblioteca\ColecaoController@delete']);
 
 
+            // Crud de gênero
             Route::get('indexGenero', ['as' => 'indexGenero', 'uses' => 'Biblioteca\GeneroController@index']);
             Route::get('createGenero', ['as' => 'createGenero', 'uses' => 'Biblioteca\GeneroController@create']);
             Route::get('gridGenero', ['as' => 'gridGenero', 'uses' => 'Biblioteca\GeneroController@grid']);
@@ -1197,10 +1200,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('updateGenero/{id}', ['as' => 'updateGenero', 'uses' => 'Biblioteca\GeneroController@update']);
             Route::get('deleteGenero/{id}', ['as' => 'deleteGenero', 'uses' => 'Biblioteca\GeneroController@delete']);
 
+            // Gerar cutter
             Route::post('getCutter', ['as' => 'getCutter', 'uses' => 'Biblioteca\ArcevoController@getCutter']);
 
+            // Gerar fixas
             Route::get('fixaFrente/{id}', ['as' => 'fixaFrente', 'uses' => 'Biblioteca\ExemplarController@fixaFrente']);
             Route::get('fixaVerso/{id}', ['as' => 'fixaVerso', 'uses' => 'Biblioteca\ExemplarController@fixaVerso']);
+
+            // Relatórios
+            Route::get('indexRelatorioLivrosPorCurso', ['as' => 'indexRelatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioLivrosPorCurso']);
+            Route::post('relatorioLivrosPorCurso', ['as' => 'relatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@relatorioLivrosPorCurso']);
             
         });
 

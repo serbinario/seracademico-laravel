@@ -266,6 +266,12 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="flaticon-book"></i> Relatórios <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioLivrosPorCurso') }}"><i class="flaticon-interface-1"></i> Livros por curso</a></li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="material-icons">perm_identity</i> Parâmetros <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexParametro') }}"><i class="material-icons">perm_identity</i> Empréstimo e Reserva</a></li>
