@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.biblioteca.storeDiasLetivosBiblioteca', 'method' => "POST" ]) !!}
+            {!! Form::open(['route'=>'seracademico.biblioteca.relatorioLivrosPorCurso', 'method' => "POST", 'target' => '_blank']) !!}
 
             <div class="row">
                 <div class="col-md-12">
@@ -87,58 +87,74 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-1">
+                            <div class="radio radio-primary">
+                                <input type="radio" id="tipo-relatorio-1" name="tipo_relatorio" value="1" class="form-control">
+                                {!! Form::label('tipo_relatorio', "Campos", false) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="radio radio-primary">
+                                <input type="radio" id="tipo-relatorio-2" checked name="tipo_relatorio" value="2" class="form-control">
+                                {!! Form::label('tipo_relatorio', "Referência", false) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row campo-tabela">
+                        <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="cutter_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="cutter_ch" value="1" class="form-control">
                                 {!! Form::label('cutter_ch', "Cutter", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="area_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="area_ch" value="1" class="form-control">
                                 {!! Form::label('area_ch', "Área", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="titulo_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="titulo_ch" value="1" class="form-control">
                                 {!! Form::label('titulo_ch', "Título", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="autor_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="autor_ch" value="1" class="form-control">
                                 {!! Form::label('autor_ch', "Autor", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="outro_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="outro_ch" value="1" class="form-control">
                                 {!! Form::label('outro_ch', "Outro", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="ano_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="ano_ch" value="1" class="form-control">
                                 {!! Form::label('ano_ch', "Ano", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="cdd_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="cdd_ch" value="1" class="form-control">
                                 {!! Form::label('cdd_ch', "CDD", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="cutter_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="cutter_ch" value="1" class="form-control">
                                 {!! Form::label('cutter_ch', "CUTTER", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="checkbox checkbox-primary">
-                                <input type="checkbox" name="assunto_ch" value="" class="form-control">
+                                <input type="checkbox" checked name="assunto_ch" value="1" class="form-control">
                                 {!! Form::label('assunto_ch', "Assunto", false) !!}
                             </div>
                         </div>
@@ -164,6 +180,23 @@
 
 @section('javascript')
     <script type="text/javascript">
+
+        // Exibir campos para seleção de exibição em campos no relatório
+        $(document).ready(function(){
+
+            $('.campo-tabela').hide();
+
+            // Exibi a mensagem de informação para caso da opção de "Deseja sigilo" esta marcada
+            $('#tipo-relatorio-1, #tipo-relatorio-2').on('click', function(){
+                if($("#tipo-relatorio-1").prop( "checked")) {
+                    $('.campo-tabela').show();
+                } else if ($("#tipo-relatorio-2").prop( "checked")) {
+                    $('.campo-tabela').hide();
+                }
+            });
+
+        });
+
         //Generico para os selects2
         function formatRepo(repo) {
             if (repo.loading) return repo.text;

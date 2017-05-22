@@ -367,6 +367,9 @@
                                     </table>
                                 @endif
                             </div>
+
+                            {{--Começa referência--}}
+
                             <div id="test4" class="col s12" style="font-size: 15px;">
                                 <br>
                                 <?php $count = 0; ?>
@@ -554,8 +557,11 @@
                                 @endif
                             </div>
 
+                            {{--Termina referência--}}
+
                             @if($exemplar['acervo']['tipo_periodico'] == '1')
-                            <div id="test5" class="col s12">
+
+                                <div id="test5" class="col s12">
                                 <div class="collection">
                                     <a class="collection-item">
                                         <div class="row">

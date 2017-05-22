@@ -1209,6 +1209,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
             // Relatórios
             Route::get('indexRelatorioLivrosPorCurso', ['as' => 'indexRelatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioLivrosPorCurso']);
+            Route::post('relatorioLivrosPorCurso', ['as' => 'relatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@relatorioLivrosPorCurso']);
             
         });
 
