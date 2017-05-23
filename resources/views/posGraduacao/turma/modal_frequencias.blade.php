@@ -35,8 +35,8 @@
                         <table id="frequencias-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Disciplina</th>
+                                <th style="width: 50%;">Nome</th>
+                                <th>Matrícula</th>
                                 <th>Status</th>
                                 <th>Frequências</th>
                             </tr>

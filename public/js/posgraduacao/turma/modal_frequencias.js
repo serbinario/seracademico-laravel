@@ -14,6 +14,7 @@ function loadTableFrequencias (idTurma) {
         bLengthChange: false,
         bFilter: false,
         bPaginate: false,
+        autoWidth: true,
         ajax: {
             url: "/index.php/seracademico/posgraduacao/turma/frequencias/grid/" + idTurma,
             data: function (d) {
@@ -22,7 +23,7 @@ function loadTableFrequencias (idTurma) {
         },
         columns: [
             {data: 'nomePessoa', name: 'pessoas.nome'},
-            {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
+            {data: 'matricula', name: 'pos_alunos.matricula'},
             {data: 'status', name: 'status', orderable: false, filterable: false},
             {data: 'frequencia', name: 'frequencia', orderable: false, filterable: false}
         ]

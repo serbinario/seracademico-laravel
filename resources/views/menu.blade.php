@@ -20,9 +20,9 @@
     <link href="{{ asset('/css/jquery.tree.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/jasny-bootstrap.css')  }}" rel="stylesheet">
     <link href="{{ asset('/css/awesome-bootstrap-checkbox.css')  }}" rel="stylesheet">
-    {{--Bootstrap validator--}}
+    {{--Bootstrap validator
     <link href="{{ asset('/css/bootstrapValidation.mim.css')}}" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/validate.css') }}"  media="screen,projection"/>--}}
 
     <link href="{{ asset('/css/jquery.datetimepicker.css')}}" rel="stylesheet"/>
     <link href="{{ asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
@@ -269,6 +269,9 @@
                             <a href="#"><i class="flaticon-book"></i> Relatórios <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexRelatorioLivrosPorCurso') }}"><i class="flaticon-interface-1"></i> Livros por curso</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeAtividades') }}"><i class="flaticon-interface-1"></i> De Atividades</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeEmprestimos') }}"><i class="flaticon-interface-1"></i> De Empréstimos</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexEditBiblioteca') }}"><i class="flaticon-interface-1"></i> Biblioteca</a></li>
                             </ul>
                         </li>
                         <li>
@@ -349,7 +352,7 @@
 <script src="{{ asset('/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 <script src="{{ asset('/js/plugins/toastr.min.js')}}"></script>
 <script src="{{ asset('/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>
+{{--<script src="{{ asset('/js/bootstrapvalidator.js')}}" type="text/javascript"></script>--}}
 <script src="{{ asset('/js/jquery.tree.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.datetimepicker.js')}}" type="text/javascript"></script>
 <script src="{{ asset('/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
@@ -397,6 +400,12 @@
 <script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
 <script type="text/javascript">
+    //Metodos para uso da API validator
+    $.validator.setDefaults({
+        debug: false, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão
+        ignore: []    //metodo que possibilita validar campos que estejam ocultos, em accordeon por exemplo
+    });
+
     //
     $(document).on({
         'show.bs.modal': function () {

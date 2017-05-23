@@ -71,6 +71,7 @@ class TurmaFrequenciaController extends Controller
             ->select([
                 'fac_disciplinas.id',
                 'fac_disciplinas.nome as nome_disciplina',
+                'pos_alunos.matricula',
                 'pos_alunos_notas.id as idAlunoNota',
                 'pos_alunos.id as idAluno',
                 'pessoas.nome as nomePessoa',

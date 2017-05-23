@@ -42,6 +42,12 @@ $(document).ready(function(){
     //Numeros
     $('.numberFive').mask('00000');
 
+    //Numeros
+    $('.elevenNumbers').mask('00000000000');
+
+    //Numeros
+    $('.twelveNumbers').mask('000000000000');
+
     //notasComuns
     $('.notasComuns').mask('00,00');
 

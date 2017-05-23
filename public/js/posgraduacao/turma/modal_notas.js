@@ -14,6 +14,7 @@ function loadTableNotas (idTurma) {
         bLengthChange: false,
         bFilter: false,
         bPaginate: false,
+        autoWidth: true,
         ajax: {
             url: "/index.php/seracademico/posgraduacao/turma/notas/grid/" + idTurma,
             data: function (d) {
@@ -23,7 +24,7 @@ function loadTableNotas (idTurma) {
         columns: [
             {data: 'nomePessoa', name: 'pessoas.nome'},
             // {data: 'nota_final', name: 'fac_alunos_notas.nota_final'},
-            {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
+            {data: 'matricula', name: 'pos_alunos.matricula'},
             {data: 'situacao', name: 'fac_situacao_nota.nome'},
             {data: 'status', name: 'status', orderable: false, filterable: false},
             {data: 'action', name: 'action'}
