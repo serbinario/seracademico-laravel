@@ -1210,6 +1210,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             // Relatórios
             Route::get('indexRelatorioLivrosPorCurso', ['as' => 'indexRelatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioLivrosPorCurso']);
             Route::post('relatorioLivrosPorCurso', ['as' => 'relatorioLivrosPorCurso', 'uses' => 'Biblioteca\RelatorioController@relatorioLivrosPorCurso']);
+
+            Route::get('indexRelatorioDeAtividades', ['as' => 'indexRelatorioDeAtividades', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeAtividades']);
+            Route::get('relatorioDeAtividades', ['as' => 'relatorioDeAtividades', 'uses' => 'Biblioteca\RelatorioController@relatorioDeAtividades']);
+
+            Route::get('indexRelatorioDeEmprestimos', ['as' => 'indexRelatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeEmprestimos']);
+            Route::get('relatorioDeEmprestimos', ['as' => 'relatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@relatorioDeEmprestimos']);
+
+            Route::get('indexEditBiblioteca', ['as' => 'indexEditBiblioteca', 'uses' => 'Biblioteca\RelatorioController@indexEditBiblioteca']);
+            Route::get('editBiblioteca', ['as' => 'editBiblioteca', 'uses' => 'Biblioteca\RelatorioController@editBiblioteca']);
             
         });
 

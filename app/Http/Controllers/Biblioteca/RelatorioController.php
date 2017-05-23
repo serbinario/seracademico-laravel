@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Biblioteca\GeneroService;
+use Seracademico\Uteis\SerbinarioDateFormat;
 use Seracademico\Validators\SalaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -217,4 +218,196 @@ class RelatorioController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexRelatorioDeAtividades()
+    {
+        return view('biblioteca.relatorios.report_atividades');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function relatorioDeAtividades(Request $request)
+    {
+
+        $ano = $request->has('ano') ? $request->get('ano') : "";
+
+        $qtdLivros = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdLivros->where(\DB::raw('DATE_FORMAT(bib_exemplares.data_aquisicao,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdLivros = $qtdLivros->first();
+
+        ###################################################################
+
+        $qtdLivrosComprados = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->where('bib_exemplares.aquisicao_id', '=', '1')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ]);
+
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdLivrosComprados->where(\DB::raw('DATE_FORMAT(bib_exemplares.data_aquisicao,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdLivrosComprados = $qtdLivrosComprados->first();
+
+        ###################################################################
+
+        $qtdLivrosDoados = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->where('bib_exemplares.aquisicao_id', '=', '2')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdLivrosDoados->where(\DB::raw('DATE_FORMAT(bib_exemplares.data_aquisicao,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdLivrosDoados = $qtdLivrosDoados->first();
+
+        ###################################################################
+
+        $qtdEmprestimos = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->select([
+                \DB::raw('COUNT(bib_emprestimos_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdEmprestimos->where(\DB::raw('DATE_FORMAT(bib_emprestimos.data,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdEmprestimos = $qtdEmprestimos->first();
+
+        ###################################################################
+
+        $qtdTotalLivros = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ])->first();
+
+        return \PDF::loadView('reports.biblioteca.relatorio_deAtividades',
+            compact('qtdLivros', 'qtdLivrosComprados', 'qtdLivrosDoados',
+                'qtdEmprestimos','qtdTotalLivros', 'ano'))->stream();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexRelatorioDeEmprestimos()
+    {
+        return view('biblioteca.relatorios.relatorio_emprestimos');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function relatorioDeEmprestimos(Request $request)
+    {
+
+        $requisicao = $request->request->all();
+
+        $dataIni = SerbinarioDateFormat::toUsa($requisicao['data_inicial']);
+        $dataFim = SerbinarioDateFormat::toUsa($requisicao['data_final']);
+
+        $emprestimos = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->select([
+                'pessoas.identidade',
+                'pessoas.nome',
+                \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as registro'),
+                'bib_arcevos.titulo',
+                \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+            ]);
+
+        if($dataIni && $dataIni) {
+            $emprestimos->whereBetween('bib_emprestimos.data', array($dataIni, $dataFim));
+        };
+
+        $emprestimos = $emprestimos->get();
+
+        return \PDF::loadView('reports.biblioteca.relatorioDeEmprestimos', compact('emprestimos', 'requisicao'))->setOrientation('landscape')->stream();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexEditBiblioteca()
+    {
+        return view('biblioteca.relatorios.relatorio_editBiblioteca');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editBiblioteca(Request $request)
+    {
+
+        $ano = $request->has('ano') ? $request->get('ano') : "";
+
+        $qtdLivrosPeriodicos = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '2')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdLivrosPeriodicos->where(\DB::raw('DATE_FORMAT(bib_exemplares.data_aquisicao,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdLivrosPeriodicos = $qtdLivrosPeriodicos->first();
+
+        ##########################################################
+
+        $qtdLivrosNaoPeriodicos = \DB::table('bib_exemplares')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_arcevos.tipo_periodico', '=', '1')
+            ->select([
+                \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdLivrosNaoPeriodicos->where(\DB::raw('DATE_FORMAT(bib_exemplares.data_aquisicao,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdLivrosNaoPeriodicos = $qtdLivrosNaoPeriodicos->first();
+
+        ##########################################################
+
+        $qtdEmprestimos = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->select([
+                \DB::raw('COUNT(bib_emprestimos_exemplares.id) as qtd'),
+            ]);
+
+        if($request->has('ano') && $request->get('ano') != "") {
+            $qtdEmprestimos->where(\DB::raw('DATE_FORMAT(bib_emprestimos.data,"%Y")'), '=', $request->get('ano'));
+        }
+
+        $qtdEmprestimos = $qtdEmprestimos->first();
+
+        return \PDF::loadView('reports.biblioteca.relatorio_biblioteca',
+            compact('qtdLivrosPeriodicos', 'qtdLivrosNaoPeriodicos', 'qtdEmprestimos', 'ano'))->stream();
+    }
 }

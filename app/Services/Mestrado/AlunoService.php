@@ -333,6 +333,10 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
+
+            # Tratamento das notas do aluno
+            $this->tratamentoNotas($aluno);
+
         } else if(count($turmas) == 0) {
             # Vinculando a turma
             $curriculo->pivot->turmas()->attach($idTurma);
@@ -346,10 +350,10 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
-        }
 
-        # Tratamento das notas do aluno
-        $this->tratamentoNotas($aluno);
+            # Tratamento das notas do aluno
+            $this->tratamentoNotas($aluno);
+        }
 
         #retorno
         return true;
