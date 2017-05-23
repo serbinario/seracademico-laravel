@@ -402,7 +402,7 @@
 <script type="text/javascript">
     //Metodos para uso da API validator
     $.validator.setDefaults({
-        debug: true, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão
+        debug: false, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão
         ignore: []    //metodo que possibilita validar campos que estejam ocultos, em accordeon por exemplo
     });
 
