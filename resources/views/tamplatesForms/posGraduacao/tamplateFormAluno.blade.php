@@ -20,7 +20,7 @@
             <div class="form-group col-md-6">
                 <div class="fg-line">
                     {!! Form::label('pessoa[nome]', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
-                    {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
+                    {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('id' => 'nome', 'class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="form-group col-md-2">
@@ -1265,11 +1265,6 @@
                 return false;
             }
 
-            /*$("#searchCpf").keyup(function() {
-                serachValue = $("#searchCpf").val().replace(/[^[0-9]]+/g,'');
-                $("#searchCpf").val(serachValue);
-            });*/
-
             // Requisição ajax
             jQuery.ajax({
                 type: 'GET',
@@ -1278,6 +1273,9 @@
                 datatype: 'json'
             }).done(function (json) {
                 if (json.success) {
+                    $('#nome').parent().parent().removeClass("has-error");
+                    $("div small").remove();
+
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
                     $("select[name='pessoa[sexos_id]'] option[value='" + json.dados[0].sexos_id + "']").attr("selected", "selected");

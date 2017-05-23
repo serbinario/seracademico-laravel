@@ -10,7 +10,7 @@ $(document).ready(function () {
 
             'pessoa[data_nasciemento]': {
                 required: true,
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -20,7 +20,7 @@ $(document).ready(function () {
             },
 
             'data_matricula': {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
             },
 
             'pessoa[orgao_rg]': {
-                maxlength: 10,
+                maxlength: 10
                 //alphaSpace: true
             },
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
             },
 
             'pessoa[data_expedicao]': {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -106,12 +106,12 @@ $(document).ready(function () {
             },
 
             'pessoa[ano_conclusao_superior]': {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
             'pessoa[data_exame_nacional_um]': {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -219,7 +219,7 @@ $(document).ready(function () {
             },
 
             data_inscricao: {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -323,7 +323,7 @@ $(document).ready(function () {
             },
 
             data_colacao: {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
@@ -360,7 +360,7 @@ $(document).ready(function () {
         },
 
         highlight: function(element, errorClass) {
-            //console.log("Error");
+            //console.log(errorClass);
             $(element).parent().parent().addClass("has-error");
         },
 
