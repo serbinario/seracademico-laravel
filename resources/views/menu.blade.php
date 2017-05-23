@@ -269,6 +269,9 @@
                             <a href="#"><i class="flaticon-book"></i> Relatórios <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexRelatorioLivrosPorCurso') }}"><i class="flaticon-interface-1"></i> Livros por curso</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeAtividades') }}"><i class="flaticon-interface-1"></i> De Atividades</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeEmprestimos') }}"><i class="flaticon-interface-1"></i> De Empréstimos</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexEditBiblioteca') }}"><i class="flaticon-interface-1"></i> Biblioteca</a></li>
                             </ul>
                         </li>
                         <li>
