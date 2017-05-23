@@ -221,7 +221,7 @@ class AlunoController extends Controller
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            return redirect()->back()->withErrors([$e->getMessage()]);
         }
     }
 
@@ -241,7 +241,7 @@ class AlunoController extends Controller
             #retorno para view
             return view('posGraduacao.aluno.edit', compact('aluno', 'loadFields'));
         } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            return redirect()->back()->withErrors([$e->getMessage()]);
         }
     }
 
@@ -269,8 +269,8 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors([$e->getMessage()]);
         }
     }
 
@@ -378,7 +378,7 @@ class AlunoController extends Controller
             # Retorno
             return \PDF::loadView('reports.alunos.relatorioFilter', ['rows' => $rows])->stream();
         } catch (\Throwable $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            return redirect()->back()->withErrors([$e->getMessage()]);
         }
     }
 

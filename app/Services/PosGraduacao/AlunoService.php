@@ -126,10 +126,8 @@ class AlunoService
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
-        #regras de negócios
         $this->tratamentoCampos($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
-        $this->tratamentoCurso($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Recuperando a pessoa pelo cpf
@@ -138,7 +136,8 @@ class AlunoService
 
         # Validando o cpf
         if($data['pessoa']['cpf']) {
-            $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
+            $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')
+                ->findWhere(['cpf' => $data['pessoa']['cpf']]);
         }
 
         # Verificando se a pessoa já existe
@@ -154,6 +153,8 @@ class AlunoService
             $data['pessoa']['enderecos_id'] = $endereco->id;
             $pessoa  = $this->pessoaRepository->create($data['pessoa']);
         }
+
+        $this->tratamentoCurso($data, $pessoa);
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
@@ -207,15 +208,15 @@ class AlunoService
             #Vinculando o currículo, situação e turma ao aluno
             $aluno->curriculos()->attach($data['curriculo_id']);
 
-            # Recuperando o ultimo registro e vinculando a situação
-            $aluno->curriculos()->get()->last()->pivot->situacoes()->attach(1, [
-                'turma_origem_id' => $data['turma_id'] ?? null
-            ]);
-
             # Verificando se a turma foi informada
             if($data['turma_id']) {
                 # Recuperando o ultimo registro e vinculando a turma ao curso
                 $aluno->curriculos()->get()->last()->pivot->turmas()->attach($data['turma_id']);
+
+                # Recuperando o ultimo registro e vinculando a situação
+                $aluno->curriculos()->get()->last()->pivot->situacoes()->attach(1, [
+                    'turma_origem_id' => $data['turma_id'] ?? null
+                ]);
 
                 # Regras de negócios para cadastro automático de
                 # notas e frequências
@@ -374,6 +375,10 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
+
+            # Tratamento das notas do aluno
+            $this->tratamentoNotas($aluno);
+
         } else if(count($turmas) == 0) {
             # Vinculando a turma
             $curriculo->pivot->turmas()->attach($idTurma);
@@ -387,10 +392,10 @@ class AlunoService
                 # Retorno ficticio
                 return false;
             });
-        }
 
-        # Tratamento das notas do aluno
-        $this->tratamentoNotas($aluno);
+            # Tratamento das notas do aluno
+            $this->tratamentoNotas($aluno);
+        }
 
         #retorno
         return true;
@@ -480,15 +485,14 @@ class AlunoService
 
     /**
      * @param array $data
+     * @param $pessoa
      * @return bool
      * @throws \Exception
      */
-    public function tratamentoCurso(array &$data)
+    public function tratamentoCurso(array &$data, $pessoa)
     {
-        # Verificando se o curso foi informado
-        if(!isset($data['curso_id'])) {
-            //throw new \Exception('Curso não informado');
-            return true;
+        if($this->repository->verificaCursoAtivoEmOutroCadastro($data['curso_id'], $pessoa)) {
+            throw new \Exception("Existe para esse aluno um outro cadastro com o mesmo curso ativo");
         }
 
         # recuperando o currículo
@@ -721,7 +725,8 @@ class AlunoService
     }
 
     /**
-     * @param $dado
+     * @param $data
+     * @return bool
      */
     public function insertValor($data)
     {
