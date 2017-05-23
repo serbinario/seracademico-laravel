@@ -954,7 +954,7 @@
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
     {{--<script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/cpfBr.js')  }}"></script>--}}
     {{--Regras de validação--}}
-    <script type="text/javascript" src="{{ asset('/js/validacoes/posGraduacao/aluno.js')  }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/posGraduacao/aluno.js')  }}"></script>--}}
     <script type="text/javascript">
         //selectize profissões
         /*var totalCount;
@@ -1273,8 +1273,8 @@
                 datatype: 'json'
             }).done(function (json) {
                 if (json.success) {
-                    $('#nome').parent().parent().removeClass("has-error");
-                    $("div small").remove();
+                    /*$('#nome').parent().parent().removeClass("has-error");
+                    $("div small").remove();*/
 
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);

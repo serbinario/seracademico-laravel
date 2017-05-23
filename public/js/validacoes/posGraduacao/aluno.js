@@ -19,10 +19,9 @@ $(document).ready(function () {
                 //cpfBR: true
             },
 
-            'data_matricula': {
-                //dateBr: true,
-                maxlength: 10
-            },
+            /*data_matricula: {
+                required: true
+            },*/
 
             'pessoa[email]': {
                 email: true,
@@ -318,7 +317,7 @@ $(document).ready(function () {
             },
 
             data_conclusao: {
-                dateBr: true,
+                //dateBr: true,
                 maxlength: 10
             },
 
