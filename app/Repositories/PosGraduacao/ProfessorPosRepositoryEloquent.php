@@ -24,16 +24,6 @@ class ProfessorPosRepositoryEloquent extends BaseRepository implements Professor
         return ProfessorPos::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return ProfessorPosValidator::class;
-    }
 
     /**
      * Boot up the repository, pushing criteria
