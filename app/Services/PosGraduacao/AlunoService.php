@@ -489,9 +489,10 @@ class AlunoService
      * @return bool
      * @throws \Exception
      */
-    public function tratamentoCurso(array &$data, $pessoa)
+    public function tratamentoCurso(array &$data, $pessoa = "")
     {
-        if($this->repository->verificaCursoAtivoEmOutroCadastro($data['curso_id'], $pessoa)) {
+        if(!empty($pessoa)
+            && $this->repository->verificaCursoAtivoEmOutroCadastro($data['curso_id'], $pessoa)) {
             throw new \Exception("Existe para esse aluno um outro cadastro com o mesmo curso ativo");
         }
 
