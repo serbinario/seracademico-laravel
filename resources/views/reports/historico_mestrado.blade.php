@@ -125,7 +125,6 @@
             <td style="width: 5%; text-align: center;"><b>C. H.</b></td>
             <td style="width: 7%; text-align: center;"><b>Nota</b></td>
             <td style="width: 40%; text-align: center;"><b>Docente</b></td>
-            <td style="width: 15%; text-align: center;"><b>Titulação</b></td>
         </tr>
         </thead>
 
@@ -138,7 +137,6 @@
                 </td>
                 <td style="text-align: center"> {{ $nota['nota_final'] ?? 'FALTA' }} </td>
                 <td style="text-align: center"> {{ $nota['disciplina']['professor'] }} </td>
-                <td style="text-align: center"> {{ $nota['disciplina']['titulacao']  }} </td>
             </tr>
         @endforeach
         </tbody>
