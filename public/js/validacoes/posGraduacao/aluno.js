@@ -29,7 +29,6 @@ $(document).ready(function () {
             },
 
             'pessoa[telefone_fixo]': {
-                email: true,
                 maxlength: 15
             },
 

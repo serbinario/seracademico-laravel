@@ -115,6 +115,7 @@ $(document).ready(function(){
     $('#formAluno').submit(function() {
         $('.cpf').unmask();
         $('.phone').unmask();
+        console.log(data);
     });
 
     //##### Submeter formulário
