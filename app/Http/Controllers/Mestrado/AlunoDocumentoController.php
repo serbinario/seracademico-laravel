@@ -204,7 +204,8 @@ class AlunoDocumentoController extends Controller
         $notasDoAluno = $result['aluno']->curriculos->last()
             ->pivot->turmas->last()
             ->pivot->notas()
-            ->with('disciplina', 'turma')
+            ->with('disciplina', 'turma', 'frequencias.calendario.professor.pessoa',
+                'frequencias.calendario.professor.titulacao')
             ->get();
 
         #Adicionando as notas ao array de resultado
@@ -218,6 +219,8 @@ class AlunoDocumentoController extends Controller
             );
 
             $nota['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0];
+            $nota['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
+            $nota['disciplina']['titulacao'] = $nota['frequencias'][0]['calendario']['professor']['titulacao']['nome'] ?? "";
         }
 
         # Verificando se o aluno possui as informações necessárias
