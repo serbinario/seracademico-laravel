@@ -51,10 +51,10 @@
         }
 
         /**** Estilos da table em duas páginas *****/
-        table { page-break-inside:auto }
-        tr    { page-break-inside:avoid; page-break-after:auto }
-        thead { display:table-header-group }
-        tfoot { display:table-footer-group }
+        table#tableBody {page-break-inside:auto}
+        #tableBody tr    { page-break-inside:avoid; page-break-after:auto }
+        #tableBody thead { display:table-header-group }
+        #tableBody tfoot { display:table-footer-group }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
@@ -66,22 +66,13 @@
             <img src="{{ asset('img/logo-alpha-b.png') }}" width="200" height="200" alt="Logo Alpha">
         </div>
 
-
         <div id="body">
             <div class="row">
                 <div class="col-md-12">
-                    <table id="tableHeader" border="1">
-                        <tbody>
-                        <tr>
-                            <td>Turma:</td>
-                            <td>{{ $dados['filtersBody'][0] ?? ""  }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
 
-                    <h4 style="text-align: center">Alunos por turma</h4>
+                    <h4 style="text-align: center">Alunos da Turma : {{ $dados['filtersBody'][0] ?? ""  }}</h4>
 
-                    <table id="tableBody" border="1">
+                    <table id="tableBody"  border="1">
                         <thead>
                         <tr>
                             <th class="percentFive">Nº</th>
