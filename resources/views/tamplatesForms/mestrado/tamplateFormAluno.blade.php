@@ -916,7 +916,7 @@
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
     {{--Regras de validação--}}
-    <script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>--}}
     <script type="text/javascript">
 
         //Evento para exibir input e botão curso pós

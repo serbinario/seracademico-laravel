@@ -85,9 +85,12 @@ class AlunoTurmaService
      */
     public function getTurmas($idCurriculo)
     {
+        $curriculo = $this->curriculoRepository->find($idCurriculo);
+
         $query = DB::table('fac_turmas')
             ->join('fac_curriculos', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
-            ->where('fac_curriculos.id', $idCurriculo)
+            ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+            ->where('fac_cursos.id', $curriculo->curso->id)
             ->groupBy('fac_turmas.codigo')
             ->select([
                 'fac_turmas.id',
