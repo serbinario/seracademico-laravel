@@ -97,6 +97,7 @@ class AlunoService
         $this->tratamentoDePessoaEEndereco($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+        $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Setando o tipo o tipo do aluno para mestrado
@@ -136,6 +137,16 @@ class AlunoService
         
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param $emBranco
+     * Metodo reponsavel por remover espaços em branco dos dados que veem do formulário
+     */
+    public function remocaoEspacos(&$data)
+    {
+        # tratando nome do aluno
+        $data['pessoa']['nome'] = trim($data['pessoa']['nome']);
     }
 
     /**

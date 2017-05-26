@@ -127,7 +127,7 @@ class AlunoService
         $img    = isset($data['img']) ? $data['img'] : "";
 
         $this->tratamentoCampos($data);
-        /*$this->remocaoEspacos($data);*/
+        $this->remocaoEspacos($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
@@ -565,11 +565,15 @@ class AlunoService
         return $data;
     }
 
-    /*public function remocaoEspacos($data)
+    /**
+     * @param $emBranco
+     * Metodo reponsavel por remover espaços em branco dos dados que veem do formulário
+     */
+    public function remocaoEspacos(&$data)
     {
-        $array = array_map('trim', $data);
-        dd($array);
-    }*/
+        # tratando nome do aluno
+        $data['pessoa']['nome'] = trim($data['pessoa']['nome']);
+    }
 
     /**
      * @param array $data
