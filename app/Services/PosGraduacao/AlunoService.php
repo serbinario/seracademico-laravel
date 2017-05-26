@@ -127,6 +127,7 @@ class AlunoService
         $img    = isset($data['img']) ? $data['img'] : "";
 
         $this->tratamentoCampos($data);
+        /*$this->remocaoEspacos($data);*/
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
@@ -563,6 +564,12 @@ class AlunoService
         #Retorno
         return $data;
     }
+
+    /*public function remocaoEspacos($data)
+    {
+        $array = array_map('trim', $data);
+        dd($array);
+    }*/
 
     /**
      * @param array $data

@@ -1,6 +1,111 @@
 // Regras de validação
 $(document).ready(function () {
 
+    /*ALUNO
+    * 'matricula',
+     'data_inscricao',
+     'pessoa_id',
+     'turno_id',
+     'path_image',
+     'curso_pretendido_1_id',
+     'curso_pretendido_2_id',
+     'curso_pretendido_3_id',
+     'obs_cursos_pretendidos',
+     'canal_captacao_id',
+     'tipo_pretensao_id',
+     'tipo_img',
+     'data_contrato',
+     'data_matricula',
+     'titulo',
+     'nota_final',
+     'defesa',
+     'media',
+     'media_conceito',
+     'defendeu',
+     'professor_orientador_id',
+     'professor_banca_1_id',
+     'professor_banca_2_id',
+     'professor_banca_3_id',
+     'professor_banca_4_id',
+     'inst_ensino_banca_1_id',
+     'inst_ensino_banca_2_id',
+     'inst_ensino_banca_3_id',
+     'inst_ensino_banca_4_id',
+     'data_conclusao',
+     'data_colacao',
+     'tipo_aluno_id',
+     'curriculo_doc_obrigatorio',
+     'carta_intencao_doc_obrigatorio',
+     'termo_biblioteca',
+     'curso_superior_id',
+     'curso_pos_graduacao_id',
+     'fac_instituicao_id',
+     'password',
+     'login'
+    * */
+    /*PESSOA
+    * 'nome',
+     'email',
+     'telefone_fixo',
+     'celular',
+     'celular2',
+     'nome_pai',
+     'nome_social',
+     'nome_mae',
+     'identidade',
+     'orgao_rg',
+     'uf_exp',
+     'data_expedicao',
+     'cpf',
+     'titulo_eleitoral',
+     'zona',
+     'secao',
+     'resevista',
+     'catagoria_resevista',
+     'data_nasciemento',
+     'nacionalidade',
+     'naturalidade',
+     'ano_conclusao_superior',
+     'outra_instituicao',
+     'data_exame_nacional_um',
+     'nota_exame_nacional_um',
+     'data_exame_nacional_dois',
+     'nota_exame_nacional_dois',
+     'enderecos_id',
+     'sexos_id',
+     'turnos_id',
+     'grau_instrucoes_id',
+     'profissoes_id',
+     'religioes_id',
+     'estados_civis_id',
+     'tipos_sanguinios_id',
+     'cores_racas_id',
+     'exames1_id',
+     'exames2_id',
+     'uf_nascimento_id',
+     'deficiencia_fisica',
+     'deficiencia_auditiva',
+     'deficiencia_visual',
+     'deficiencia_outra',
+     'instituicoes_id',
+     'cursos_superiores_id',
+     'ano_conclusao_superior',
+     'tipo_nivel_sistema_id',
+     'rg_doc_obrigatorio',
+     'cpf_doc_obrigatorio',
+     'certidao_nasc_cas_doc_obrigatorio',
+     'titulo_eleitor_doc_obrigatorio',
+     'reservista_doc_obrigatorio',
+     'diploma_doc_obrigatorio',
+     'fotos_3x4_doc_obrigatorio',
+     'comp_residencia_doc_obrigatorio',
+     'histo_gradu_autentic_obrigatorio',
+     'ativo',
+     'instituicao_escolar_id',
+     'ano_conclusao_medio',
+     'outra_escola'
+    * */
+
     $("#formAluno").validate({
         rules: {
             'pessoa[nome]': {
@@ -216,11 +321,6 @@ $(document).ready(function () {
                 maxlength: 15
             },
 
-            data_inscricao: {
-                //dateBr: true,
-                maxlength: 10
-            },
-
             turno_id: {
                 integer: true
             },
@@ -228,30 +328,6 @@ $(document).ready(function () {
             /*path_image: {
                 maxlength: 10
             },*/
-
-            curso_pretendido_1_id: {
-                integer: true
-            },
-
-            curso_pretendido_2_id: {
-                integer: true
-            },
-
-            curso_pretendido_3_id: {
-                integer: true
-            },
-
-            obs_cursos_pretendidos: {
-                maxlength: 200
-            },
-
-            canal_captacao_id: {
-                integer: true
-            },
-
-            tipo_pretensao_id: {
-                integer: true
-            },
 
             titulo: {
                 maxlength: 80

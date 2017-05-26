@@ -350,7 +350,7 @@
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[endereco][cep]', 'CEP ') !!}
-                                    {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control')) !!}
+                                    {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control cep')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-2">
@@ -386,8 +386,10 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
-                                {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
+                                <div class="fg-line">
+                                    {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
+                                    {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
+                                </div>
                             </div>
                         </div>
                         <legend><i class="fa fa-phone"></i> Contato</legend>
@@ -410,20 +412,20 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <div class="fg-line">
-                                                    {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
+                                                    {!! Form::label('pessoa[telefone_fixo]', 'Telefone') !!}
                                                     {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <div class="fg-line">
                                                     {!! Form::label('pessoa[celular]', 'Celular') !!}
-                                                    {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control phone')) !!}
+                                                    {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control celPhone')) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <div class="fg-line">
                                                     {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
-                                                    {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control phone')) !!}
+                                                    {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control celPhone')) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -660,7 +662,6 @@
                             @endif
                         </div>
                     </div>
-
 
                     {{--<div class="form-group col-md-4">--}}
                         {{--{!! Form::label('forma_admissao_id', 'Forma de admissão') !!}--}}
@@ -952,7 +953,6 @@
     <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/cpfBr.js')  }}"></script>--}}
     {{--Regras de validação--}}
     {{--<script type="text/javascript" src="{{ asset('/js/validacoes/posGraduacao/aluno.js')  }}"></script>--}}
     <script type="text/javascript">
@@ -1273,8 +1273,9 @@
                 datatype: 'json'
             }).done(function (json) {
                 if (json.success) {
-                    /*$('#nome').parent().parent().removeClass("has-error");
-                    $("div small").remove();*/
+                    //remoção de possiveis mensagens de validação
+                    $('form div').removeClass("has-error");
+                    $('div small').remove();
 
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
