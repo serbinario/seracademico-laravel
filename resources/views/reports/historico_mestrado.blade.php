@@ -21,7 +21,7 @@
 
         .cabecalho .titulo h2,
         .cabecalho .titulo h1,
-        .cabecalho .subtitulo h2{
+        .cabecalho .subtitulo h2 {
             text-align: center;
         }
 
