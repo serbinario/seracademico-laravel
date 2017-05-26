@@ -58,7 +58,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required_if:tipo_pretensao_id,==, ""|serbinario_date_format:"d/m/Y"',
-            'pessoa.identidade' => 'required_if:tipo_pretensao_id,==, ""|digits_between:4,11|numeric',
+            'pessoa.identidade' => 'required_if:tipo_pretensao_id,==, ""|digits_between:4,13|numeric',
             'pessoa.enderecos_id' => 'integer',
             'pessoa.sexos_id' => 'integer',
             'pessoa.turnos_id' => 'integer',
