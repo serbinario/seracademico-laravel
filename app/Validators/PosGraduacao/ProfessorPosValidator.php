@@ -32,7 +32,7 @@ class ProfessorPosValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
 
-			'img' => 'image|max:800',
+			/*'img' => 'image|max:800',
 			'tratamento' =>  '' ,
 			'path_image' =>  '' ,
 			'instituicao_graduacao_id' =>  '' ,
@@ -47,11 +47,11 @@ class ProfessorPosValidator extends LaravelValidator
 			'pessoa.data_nasciemento' => 'required|max:15',
 			'pessoa.cpf' => 'required|digits_between:3,15',
 //			'pessoa.sexos_id' => 'required',
-			'pessoa.identidade' => 'required|digits_between:4,12'
+			'pessoa.identidade' => 'required|digits_between:4,12'*/
 
         ],
         ValidatorInterface::RULE_UPDATE => [
-			'img' => 'image|max:800',
+			/*'img' => 'image|max:800',
 			'tratamento' =>  '' ,
 			'path_image' =>  '' ,
 			'instituicao_graduacao_id' =>  '' ,
@@ -66,7 +66,7 @@ class ProfessorPosValidator extends LaravelValidator
 			'pessoa.data_nasciemento' => 'required|max:15',
 			'pessoa.cpf' => 'required|digits_between:3,15',
 //			'pessoa.sexos_id' => 'required',
-			'pessoa.identidade' => 'required|digits_between:4,12'
+			'pessoa.identidade' => 'required|digits_between:4,12'*/
 
 		],
    ];

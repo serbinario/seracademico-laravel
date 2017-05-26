@@ -116,6 +116,31 @@ class AlunoService
     }
 
     /**
+     * @param $dados
+     */
+    public function arrayTeste(&$dados)
+    {
+        #variavel de uso
+        $data = [];
+
+        #separando dados da matriz
+        $arrayPessoa   = $dados['pessoa'];
+        $arrayPessoas  = $dados['pessoas'];
+        $arrayEndereco = $dados['pessoa']['endereco'];
+
+        #removendo-os da matriz
+        unset($arrayPessoa['endereco']);
+        unset($dados['pessoa']);
+        unset($dados['pessoas']);
+
+        #removendo espaços em branco
+        $data = array_map('trim', $dados);
+        $data['pessoa'] = array_map('trim', $arrayPessoa);
+        $data['pessoas'] = array_map('trim', $arrayPessoas);
+        $data['pessoa']['endereco'] = array_map('trim', $arrayEndereco);
+    }
+
+    /**
      * @param array $data
      * @return Aluno
      * @throws \Exception
@@ -130,6 +155,11 @@ class AlunoService
         $this->remocaoEspacos($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+
+        /* @felipe
+         * Favor, não remover. Algoritmo em fase de testes
+         * $retorno = $this->arrayTeste($data);
+         * */
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = [];
