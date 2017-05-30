@@ -97,12 +97,12 @@ class AlunoService
         $this->tratamentoDePessoaEEndereco($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
-        $this->remocaoEspacos($data);
+        $data = $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Setando o tipo o tipo do aluno para mestrado
         $data['tipo_aluno_id'] = 2;
-        //dd($data);
+
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
 
@@ -140,13 +140,35 @@ class AlunoService
     }
 
     /**
-     * @param $emBranco
-     * Metodo reponsavel por remover espaços em branco dos dados que veem do formulário
+     * @param $dados
+     * @author felipe
+     * @description
+     * Metodo responsavel por remover possiveis espaços em branco nos formularios de cadastro e edição de alunos.
+     * ATENÇÃO: Se estiver dando problema na senha de login do portal, verificar se este metodo esta modificando de
+     * alguma forma a integridade da senha inserida pelo usuário.
      */
-    public function remocaoEspacos(&$data)
+    public function remocaoEspacos($dados)
     {
-        # tratando nome do aluno
-        $data['pessoa']['nome'] = trim($data['pessoa']['nome']);
+        #variavel de uso
+        $data = [];
+
+        #separando dados da matriz
+        $arrayPessoa   = $dados['pessoa'];
+        $arrayPessoas  = $dados['pessoas'];
+        $arrayEndereco = $dados['pessoa']['endereco'];
+
+        #removendo-os da matriz
+        unset($arrayPessoa['endereco']);
+        unset($dados['pessoa']);
+        unset($dados['pessoas']);
+
+        #removendo espaços em branco
+        $data = array_map('trim', $dados);
+        $data['pessoa'] = array_map('trim', $arrayPessoa);
+        $data['pessoas'] = array_map('trim', $arrayPessoas);
+        $data['pessoa']['endereco'] = array_map('trim', $arrayEndereco);
+
+        return $data;
     }
 
     /**

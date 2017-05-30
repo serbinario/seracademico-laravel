@@ -1300,10 +1300,19 @@
             // Requisição ajax
             jQuery.ajax({
                 type: 'GET',
-                url: '{{ route('seracademico.graduacao.aluno.search')  }}',
+                url: '{{ route('seracademico.mestrado.aluno.search')  }}',
                 data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
+                //verificando se o aluno já se encontra cadastrado com situação diferente de cancelado
+                if (json.verificador == true) {
+                    swal({
+                        title: 'O aluno em questão já se encontra cadastrado.',
+                        text: 'Esta janela será fechada em 5 segundos.',
+                        timer: 5000
+                    })
+                }
+
                 //remoção de possiveis mensagens de validação
                 $('form div').removeClass("has-error");
                 $('div small').remove();

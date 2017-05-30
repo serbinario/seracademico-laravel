@@ -1268,15 +1268,24 @@
             // Requisição ajax
             jQuery.ajax({
                 type: 'GET',
-                url: '{{ route('seracademico.graduacao.aluno.search')  }}',
+                url: '{{ route('seracademico.posgraduacao.aluno.search')  }}',
                 data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
-                if (json.success) {
-                    //remoção de possiveis mensagens de validação
-                    $('form div').removeClass("has-error");
-                    $('div small').remove();
+                //verificando se o aluno já se encontra cadastrado com situação diferente de cancelado
+                if (json.verificador == true) {
+                    swal({
+                        title: 'O aluno em questão já se encontra cadastrado.',
+                        text: 'Esta janela será fechada em 5 segundos.',
+                        timer: 5000
+                    })
+                }
 
+                //remoção de possiveis mensagens de validação
+                $('form div').removeClass("has-error");
+                $('div small').remove();
+
+                if (json.success) {
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);
                     $("select[name='pessoa[sexos_id]'] option[value='" + json.dados[0].sexos_id + "']").attr("selected", "selected");
