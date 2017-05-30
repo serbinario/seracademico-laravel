@@ -248,6 +248,32 @@ class AlunoService
     }
 
     /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public function search($key, $value)
+    {
+        # Joins
+        $relacionamentos = [
+            'instituicaoEscolar',
+            'endereco.bairro.cidade.estado',
+        ];
+
+        # Fazendo a consulta
+        $aluno = $this->pessoaRepository->with($relacionamentos)->findWhere([ $key =>$value ]);
+
+        # Verificando o se o vestibulando foi recuperado
+        if(count($aluno) == 0) {
+            throw new \Exception("Dados não encontrados");
+        }
+
+        # Retorno
+        return $aluno;
+    }
+
+    /**
      * Método responsável por gerenciar os cadastros e edições das
      * entidades de pessoa e endereço do aluno.
      *
