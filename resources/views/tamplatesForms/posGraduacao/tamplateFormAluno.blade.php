@@ -1275,8 +1275,8 @@
                 //verificando se o aluno já se encontra cadastrado com situação diferente de cancelado
                 if (json.verificador == true) {
                     swal({
-                        title: 'O aluno em questão já se encontra cadastrado.',
-                        text: 'Esta janela será fechada em 5 segundos.',
+                        title: 'O aluno em questão já se encontra cadastrado',
+                        text: 'Esta janela será fechada em 5 segundos',
                         timer: 5000
                     })
                 }

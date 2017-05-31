@@ -12,7 +12,7 @@ function getDisciplinasOfCurriculoAndLoadGrid(idTurma)
 {
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/calendario/disciplinas/' + idTurma,
+        url: '/index.php/seracademico/tecnico/turma/calendario/disciplinas/' + idTurma,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -66,7 +66,7 @@ $(document).on('click', '#btnIncluirDisciplina', function () {
 
             jQuery.ajax({
                 type: 'POST',
-                url: '/index.php/seracademico/mestrado/turma/calendario/incluir',
+                url: '/index.php/seracademico/tecnico/turma/calendario/incluir',
                 data: dadosAjax,
                 datatype: 'json'
             }).done(function (retorno) {
@@ -90,7 +90,7 @@ $(document).on('click', '#removerDisciplina', function () {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/calendario/remover-disciplina',
+        url: '/index.php/seracademico/tecnico/turma/calendario/remover-disciplina',
         data: dadosAjax,
         datatype: 'json'
     }).done(function (retorno) {

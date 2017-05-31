@@ -8,7 +8,7 @@ $(document).on("click", "#btnEditDiarioAula", function () {
 
     // Carregando a grid de conteúdos programáticos
     if(tableConteudoProgramaticoDiarioAulaEdit) {
-        loadTableConteudoProgramaticoDiarioAulaEdit().ajax.url("/index.php/seracademico/mestrado/turma/diarioAula/gridConteudoProgramatico/" + idDiarioAula).load();
+        loadTableConteudoProgramaticoDiarioAulaEdit().ajax.url("/index.php/seracademico/tecnico/turma/diarioAula/gridConteudoProgramatico/" + idDiarioAula).load();
     } else {
         loadTableConteudoProgramaticoDiarioAulaEdit();
     }
@@ -28,7 +28,7 @@ function loadFieldsDiarioAulaEditar()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/getLoadFields',
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -47,7 +47,7 @@ function builderHtmlFieldsDiarioAulaEditar (dados) {
     // Fazendo a requisição para recuperar os dados do curriculoDisciplina
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/edit/' + idDiarioAula,
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/edit/' + idDiarioAula,
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
@@ -111,7 +111,7 @@ $('#btnUpdateDiarioAula').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/update/' + idDiarioAula,
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/update/' + idDiarioAula,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {

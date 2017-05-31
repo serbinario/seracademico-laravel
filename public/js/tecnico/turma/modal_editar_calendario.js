@@ -9,7 +9,7 @@ $(document).on('click', '#btnRemoverCalendario', function () {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/calendario/delete/' + idCalendario,
+        url: '/index.php/seracademico/tecnico/turma/calendario/delete/' + idCalendario,
         datatype: 'json'
     }).done(function (retorno) {
         tableCargaHoraria.load();
@@ -35,7 +35,7 @@ $(document).on('click', '#btnEditarCalendario', function () {
     //Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/calendario/edit/' + idCalendario,
+        url: '/index.php/seracademico/tecnico/turma/calendario/edit/' + idCalendario,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -78,7 +78,7 @@ $(document).on('click', '#btnUpdateCalendario', function () {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/calendario/update/' + idCalendario,
+        url: '/index.php/seracademico/tecnico/turma/calendario/update/' + idCalendario,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {

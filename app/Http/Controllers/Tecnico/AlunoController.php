@@ -41,7 +41,7 @@ class AlunoController extends Controller
         'SituacaoAluno',
         'Sede',
         'SimpleReport|byCrud,10',
-        'Mestrado\\Turma|Mestrado',
+        'Tecnico\\Turma|Tecnico',
         'Tecnico\\Curso|ativo,1',
         'Tecnico\\Curso|byCurriculoAtivo,1',
     ];

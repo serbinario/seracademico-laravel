@@ -107,7 +107,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Tecnico\CurriculoController@gridByCurriculo']);
             });
 
-            Route::group(['prefix' => 'turma', 'middleware' => 'auth', 'as' => 'turma.'], function () {
+            Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\TurmaController@index']);
                 Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\TurmaController@grid']);
                 Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\TurmaController@create']);
@@ -115,6 +115,58 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\TurmaController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\TurmaController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\TurmaController@delete']);
+                Route::get('getAllByCurso/{idCurso}', ['as' => 'getAllByCurso', 'uses' => 'Tecnico\TurmaController@getAllByCurso']);
+                Route::get('getSedeByCurso/{idCurso}', ['as' => 'getSedeByCurso', 'uses' => 'Tecnico\TurmaController@getSedeByCurso']);
+                Route::get('getTurmaBySede/{idSede}/{idCurso}', ['as' => 'getTurmaBySede', 'uses' => 'Tecnico\TurmaController@getTurmaBySede']);
+                Route::get('getCalendariosByDisciplina/{idTurma}/{idDisciplina}', ['as' => 'getCalendariosByDisciplina', 'uses' => 'Tecnico\TurmaController@getCalendariosByDisciplina']);
+
+                Route::group(['prefix' => 'calendario', 'as' => 'calendario.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Tecnico\CalendarioTurmaController@grid']);
+                    Route::get('gridCalendario/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'Tecnico\CalendarioTurmaController@gridCalendario']);
+                    Route::get('disciplinas/{idTurma}', ['as' => 'grid', 'uses' => 'Tecnico\CalendarioTurmaController@disciplinasOfCurriculo']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\CalendarioTurmaController@store']);
+                    Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\CalendarioTurmaController@edit']);
+                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\CalendarioTurmaController@update']);
+                    Route::post('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\CalendarioTurmaController@delete']);
+                    Route::post('incluir', ['as' => 'incluir', 'uses' => 'Tecnico\CalendarioTurmaController@incluirDisciplina']);
+                    Route::post('remover-disciplina', ['as' => 'removerDisciplina', 'uses' => 'Tecnico\CalendarioTurmaController@removerDisciplina']);
+                });
+
+                Route::group(['prefix' => 'notas', 'as' => 'notas.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Tecnico\TurmaNotaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\TurmaNotaController@getLoadFields']);
+                    Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Tecnico\TurmaNotaController@editNota']);
+                    Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Tecnico\TurmaNotaController@updateNota']);
+                });
+
+                Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Tecnico\TurmaFrequenciaController@grid']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\TurmaFrequenciaController@getLoadFields']);
+                    Route::put('changeFrequencia/{id}', ['as' => 'changeFrequencia', 'uses' => 'Tecnico\TurmaFrequenciaController@changeFrequencia']);
+                });
+
+                Route::group(['prefix' => 'alunos', 'as' => 'alunos.'], function () {
+                    Route::get('grid/{idTurma}', ['as' => 'grid', 'uses' => 'Tecnico\TurmaAlunoController@grid']);
+                    Route::get('getAlunosByCurso/{idCurso}/{idTurma}/{idDisciplina}', ['as' => 'getAlunosByCurso', 'uses' => 'Tecnico\TurmaAlunoController@getAlunosByCurso']);
+                    Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\TurmaAlunoController@getLoadFields']);
+                    Route::post('attachAluno', ['as' => 'edit', 'uses' => 'Tecnico\TurmaAlunoController@attachAluno']);
+                    Route::post('detachAluno', ['as' => 'update', 'uses' => 'Tecnico\TurmaAlunoController@detachAluno']);
+                });
+
+                # Rotaas de diários de aulas
+                Route::group(['prefix' => 'diarioAula', 'as' => 'diarioAula.'], function () {
+                    Route::get('grid/{idTurmaDisciplina}', ['as' => 'grid', 'uses' => 'Tecnico\DiarioAulaController@grid']);
+                    Route::get('gridDisciplinas/{idTurma}', ['as' => 'gridDisciplinas', 'uses' => 'Tecnico\DiarioAulaController@gridDisciplinas']);
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\DiarioAulaController@getLoadFields']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\DiarioAulaController@store']);
+                    Route::get('getConteudosProgramaticos', ['as' => 'getConteudosProgramaticos', 'uses' => 'Tecnico\DiarioAulaController@getConteudosProgramaticos']);
+                    Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\DiarioAulaController@delete']);
+                    Route::get('edit/{idDiarioAula}', ['as' => 'edit', 'uses' => 'Tecnico\DiarioAulaController@edit']);
+                    Route::post('update/{idDiarioAula}', ['as' => 'update', 'uses' => 'Tecnico\DiarioAulaController@update']);
+                    Route::get('gridConteudoProgramatico/{idDiarioAula}', ['as' => 'grid', 'uses' => 'Tecnico\DiarioAulaController@gridConteudoProgramatico']);
+                    Route::post('attachConteudo/{idDiarioAula}', ['as' => 'attachConteudo', 'uses' => 'Tecnico\DiarioAulaController@attachConteudo']);
+                    Route::post('detachConteudo/{idDiarioAula}', ['as' => 'detachConteudo', 'uses' => 'Tecnico\DiarioAulaController@detachConteudo']);
+                });
             });
 
             Route::group(['prefix' => 'planoensino', 'middleware' => 'auth', 'as' => 'planoensino.'], function () {
@@ -132,6 +184,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@deleteConteudoProgramatico']);
             });
         });
+        //FIM TÉCNICO
 
         Route::group(['prefix' => 'matricula', 'as' => 'matricula.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\MatriculaAlunoController@index']);
@@ -1387,7 +1440,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeCursoFormacao', ['as' => 'storeCursoFormacao', 'uses' => 'CursoFormacaoController@storeCursoFormacao']);
         });
     });
-
 
 });
 

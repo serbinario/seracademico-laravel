@@ -24,7 +24,7 @@ function loadFieldsDiarioAula()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/getLoadFields',
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -100,7 +100,7 @@ $('#btnSaveDiarioAula').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/store',
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/store',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -142,7 +142,7 @@ $(document).on('click', '#btnDeleteDiarioAula', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/delete/' + diarioAulaId,
+        url: '/index.php/seracademico/tecnico/turma/diarioAula/delete/' + diarioAulaId,
         datatype: 'json'
     }).done(function (retorno) {
         tableDiarioAula.ajax.reload();

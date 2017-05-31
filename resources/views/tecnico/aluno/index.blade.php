@@ -60,11 +60,11 @@
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
-                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['mestrado\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['tecnico\\curso']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::select('turmaSearch', (['' => 'Todos as Turmas'] + $loadFields['mestrado\\turma']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('turmaSearch', (['' => 'Todos as Turmas'] + $loadFields['tecnico\\turma']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
