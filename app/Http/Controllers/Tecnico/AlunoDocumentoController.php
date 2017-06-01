@@ -33,19 +33,19 @@ class AlunoDocumentoController extends Controller
         try {
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
-                case "5" :
+                case "13" :
                     $this->contrato($idAluno);
                     break;
-                case "6" :
+                case "14" :
                     $this->declaracaoVinculo($idAluno);
                     break;
-                case "7" :
-                    $this->declaracaoAfastamento($idAluno);
-                    break;
-                case "8" :
+                case "16" :
+                   $this->declaracaoAfastamento($idAluno);
+                   break;
+                case "18" :
                     $this->inscricao($idAluno);
                     break;
-                case "11" :
+                case "17" :
                     $this->historico($idAluno);
                     break;
             }
@@ -75,25 +75,25 @@ class AlunoDocumentoController extends Controller
 
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
-                case "5" :
+                case "13" :
                     $result = $this->contrato($idAluno);
-                    $nameView = "reports.contrato_mestrado";
+                    $nameView = "reports.contrato_tecnico";
                     break;
-                case "6" :
+                case "14" :
                     $result = $this->declaracaoVinculo($idAluno);
-                    $nameView = "reports.declaracao_vinculo_mestrado";
+                    $nameView = "reports.declaracao_vinculo_tecnico";
                     break;
-                case "7" :
+                case "16" :
                     $result = $this->declaracaoAfastamento($idAluno);
-                    $nameView = "reports.declaracao_afastamento_mestrado";
+                    $nameView = "reports.declaracao_afastamento_tecnico";
                     break;
-                case "8" :
+                case "18" :
                     $result = $this->inscricao($idAluno);
-                    $nameView = "reports.inscricao_mestrado";
+                    $nameView = "reports.inscricao_tecnico";
                     break;
-                case "11" :
+                case "17" :
                     $result = $this->historico($idAluno);
-                    $nameView = "reports.historico_mestrado";
+                    $nameView = "reports.historico_tecnico";
                     break;
             }
 
