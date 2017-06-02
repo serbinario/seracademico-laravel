@@ -42,7 +42,7 @@ class ProfessorController extends Controller
         'Titulacao',
         'Instituicao',
         'Religiao',
-        'SimpleReport|byCrud,8'
+        'SimpleReport|byCrud,12'
     ];
 
     /**
