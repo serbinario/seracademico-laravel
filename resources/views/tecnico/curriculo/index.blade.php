@@ -166,6 +166,9 @@
     <!-- FIM Modal de cadastro das Disciplinas-->
 
     @include('reports.simple.modals.modal_report_tecnico_curriculo_disciplina')
+    @include('tecnico.curriculo.modal_adicionar_disciplina')
+    @include('tecnico.curriculo.modal_inserir_adicionar_disciplina')
+    @include('tecnico.curriculo.modal_editar_adicionar_disciplina')
 @stop
 
 @section('javascript')

@@ -119,8 +119,8 @@ function data($dia, $mes, $ano, $semana) {
             <p style="font-size: 20px;text-indent: 2em; margin-top: 10px;">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
-                nesta Instituição de Ensino Superior, no curso de Pós-graduação “Lato Sensu”, em ESPECIALIZAÇÃO EM
-                <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade Modelo - FACIMOD
+                nesta Instituição de Ensino Superior, no curso de Pós-graduação “Lato Sensu”,
+                em <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade Modelo - FACIMOD
                 de acordo com a portaria de credenciamento do MEC de n° 2.413 de 11/08/2004.
             </p>
 
