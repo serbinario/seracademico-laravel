@@ -27,7 +27,8 @@ class Curriculo extends Model implements Transformable
 		'valido_fim',
 		'curso_id',
         'tipo_nivel_sistema_id',
-        'ativo'
+        'ativo',
+        'modulo_id'
 	];
 
     /**
@@ -37,7 +38,6 @@ class Curriculo extends Model implements Transformable
     {
         return $this->belongsTo(Curso::class);
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -59,7 +59,7 @@ class Curriculo extends Model implements Transformable
                 'pre_requisito_3_id',
                 'pre_requisito_4_id',
                 'pre_requisito_5_id',
-                'co_requisito_1_id'
+                'co_requisito_1_id',
             ]);
     }
 

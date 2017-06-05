@@ -40,7 +40,6 @@ class AlunoController extends Controller
         'Estado',
         'CorRaca',
         'SituacaoAluno',
-        'PosGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'FormaAdmissao',
         'SituacaoAluno',
@@ -49,7 +48,8 @@ class AlunoController extends Controller
         'PosGraduacao\\Turma|PosGraduacao',
         'PosGraduacao\\Curso|ativo,1',
         'PosGraduacao\\CanalCaptacao',
-        'PosGraduacao\\TipoPretensao'
+        'PosGraduacao\\TipoPretensao',
+        'PosGraduacao\\Curso|byCurriculoAtivo,1'
     ];
 
     /**

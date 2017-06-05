@@ -183,6 +183,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('storeConteudoProgramatico', ['as' => 'storeConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@storeConteudoProgramatico']);
                 Route::delete('deleteConteudoProgramatico/{id}', ['as' => 'deleteConteudoProgramatico', 'uses' => 'Tecnico\PlanoEnsinoController@deleteConteudoProgramatico']);
             });
+
+            Route::group(['prefix' => 'modulo', 'middleware' => 'auth', 'as' => 'modulo.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\ModuloController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\ModuloController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\ModuloController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\ModuloController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\ModuloController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\ModuloController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ModuloController@delete']);
+            });
         });
         //FIM TÉCNICO
 
