@@ -50,8 +50,31 @@ class CurriculoController extends Controller
         #Carregando os dados
         $loadFields = $this->service->load($this->loadFields);
 
+        $modulos = $this->selectModulos();
+
         # Retorno para view
-        return view('tecnico.curriculo.index', compact('loadFields'));
+        return view('tecnico.curriculo.index', compact('loadFields', 'modulos'));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function selectModulos()
+    {
+        $arrayModulos = [];
+
+        $modulos = \DB::table('tec_modulos')
+            ->select([
+                'id',
+                'nome'
+            ])
+            ->get();
+
+        foreach ($modulos as $modulo) {
+            $arrayModulos[$modulo->id] = $modulo->nome;
+        }
+
+        return $arrayModulos;
     }
 
     /**
