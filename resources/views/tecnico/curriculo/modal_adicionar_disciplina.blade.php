@@ -19,8 +19,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                {!! Form::label('', 'Módulo') !!}
-                                {!! Form::select('modulo_id', (["" => "Selecione o módulo"] + $modulos), Session::getOldInput('modulo_id'), array('class' => 'form-control', 'id' => 'modulo_id')) !!}
+                                <div class="fg-line">
+                                    {!! Form::label('', 'Módulo') !!}
+                                    {!! Form::select('modulo_id', ([0 => "Selecione o módulo"] + $modulos), Session::getOldInput('modulo_id'), array('class' => 'form-control', 'id' => 'modulo_id')) !!}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -31,6 +33,7 @@
                                         <th>Nome</th>
                                         <th style="width: 5%;">Qtd. Faltas</th>
                                         <th style="width: 10%;">Tipo da disciplina</th>
+                                        <th style="width: 10%;">Modulo</th>
                                         <th >Acão</th>
                                     </tr>
                                     </thead>
@@ -40,6 +43,7 @@
                                         <th>Nome</th>
                                         <th style="width: 5%;">Qtd. Faltas</th>
                                         <th style="width: 10%;">Tipo da disciplina</th>
+                                        <th style="width: 10%;">Modulo</th>
                                         <th style="width: 5%;">Acão</th>
                                     </tr>
                                     </tfoot>

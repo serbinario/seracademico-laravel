@@ -113,8 +113,6 @@
         </div>        
     </div>
 
-
-
     @include('reports.simple.modals.modal_report_tecnico_curriculo_disciplina')
     @include('tecnico.curriculo.modal_adicionar_disciplina')
     {{--@include('tecnico.curriculo.modal_inserir_adicionar_disciplina')
@@ -122,7 +120,7 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_curriculo_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_curriculo_disciplina.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
@@ -150,7 +148,7 @@
         /*Responsável em abrir modal*/
         $(document).on("click", '.grid-curricular', function () {
             $("#modal-grade-curricular").modal({show: true, keyboard: true});
-            idCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idCurriculo = table.row($(this).parents('tr').index()).data().id;
 
             /*Datatable da grid Modal*/
             table2 = $('#disciplina-grid').DataTable({
@@ -164,6 +162,7 @@
                     {data: 'nome', name: 'fac_disciplinas.nome'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
                     {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
+                    {data: 'modulo', name: 'tec_modulos.nome'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -172,13 +171,13 @@
             table2.ajax.url("/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo).load();
         });
 
-         //consulta via select2
-         $("#select-disciplina").select2({
-             placeholder: 'Selecione uma ou mais disciplinas',
-             width: 600,
-             ajax: {
-                 type: 'POST',
-                 url: "{{ route('seracademico.util.select2')  }}",
+        //consulta via select2
+        $("#select-disciplina").select2({
+            placeholder: 'Selecione uma ou mais disciplinas',
+            width: 600,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
                 dataType: 'json',
                 delay: 250,
                 crossDomain: true,
@@ -219,12 +218,11 @@
         //Evento do click no botão adicionar disciplina
         $(document).on('click', '#addDisciplina', function (event) {
             var array   = $('#select-disciplina').select2('data');
-            var modulo   = $('#modulo_id').val();
-            console.log(modulo);
+            var modulo  = $('#modulo_id').val();
 
-            // Verificando se alguma disciplina foi selecionada
-            if (!array.length > 0) {
-                sweetAlert("Oops...", "Você deve selecionar uma disciplina!", "error");
+            // Verificando preenchimento dos campos disciplina e modulo
+            if (!array.length > 0 || modulo == 0) {
+                sweetAlert("Oops...", "Por favor, selecione a disciplina e um modulo", "error");
                 return false;
             }
 
@@ -263,8 +261,8 @@
 
             //Setando o o json para envio
             var dados = {
-                'idCurriculo' : idCurriculo,
-                'idDisciplina' : idDisciplina
+                'idCurriculo'  : idCurriculo,
+                'idDisciplina' : idDisciplina,
             };
 
             jQuery.ajax({

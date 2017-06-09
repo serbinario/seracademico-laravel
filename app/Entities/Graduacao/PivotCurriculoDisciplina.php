@@ -33,7 +33,8 @@ class PivotCurriculoDisciplina extends Pivot implements Transformable
         'pre_requisito_3_id',
         'pre_requisito_4_id',
         'pre_requisito_5_id',
-        'co_requisito_1_id'
+        'co_requisito_1_id',
+        'modulo_id'
     ];
 
     /**

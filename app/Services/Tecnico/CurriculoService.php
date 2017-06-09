@@ -103,7 +103,7 @@ class CurriculoService
      * @return bool|\Exception
      */
     public function adicionarDisciplinas(array $data)
-    {//dd($data);
+    {
         #Validando os parametros de entrada
         if(!isset($data['idCurriculo']) && !isset($data['idDisciplinas'])) {
             return new \Exception("Parâmetros inválidos");
@@ -114,6 +114,7 @@ class CurriculoService
 
         #Percorrendo os id das disciplinas
         foreach($data['idDisciplinas'] as $id) {
+
             #Recuperando a entidade
             $disciplina = $this->disciplinaRepository->find($id);
 
@@ -123,10 +124,9 @@ class CurriculoService
             }
 
             #Adicionando a entidade principal
-            $curriculo->disciplinas()->attach(['disciplina_id' => $disciplina->id]);
-
+            $curriculo->disciplinas()->attach($disciplina->id, ['modulo_id' => $data['modulo_id']]);
         }
-        dd($curriculo);
+
         #Salvando as adições
         $curriculo->save();
 

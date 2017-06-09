@@ -28,7 +28,6 @@ class Curriculo extends Model implements Transformable
 		'curso_id',
         'tipo_nivel_sistema_id',
         'ativo',
-        'modulo_id'
 	];
 
     /**
@@ -60,7 +59,28 @@ class Curriculo extends Model implements Transformable
                 'pre_requisito_4_id',
                 'pre_requisito_5_id',
                 'co_requisito_1_id',
+                'modulo_id'
             ]);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Disciplina) {
+            return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
+        }
+
+        if ($parent instanceof Aluno) {
+            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
 
@@ -111,26 +131,6 @@ class Curriculo extends Model implements Transformable
     public function setValidoFimAttribute($value)
     {
         $this->attributes['valido_fim'] = SerbinarioDateFormat::toUsa($value);
-    }
-
-    /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-     */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
-    {
-        if ($parent instanceof Disciplina) {
-            return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
-        }
-
-        if ($parent instanceof Aluno) {
-            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
-        }
-
-        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
     /**
