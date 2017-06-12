@@ -118,7 +118,7 @@
     @include('tecnico.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_tecnico_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_tecnico_turma_ata_aniversariantes')
-    @include('reports.simple.modals.modal_report_mes_aluno_turma')
+    @include('reports.simple.modals.modal_report_tec_aluno_turma')
 @stop
 
 @section('javascript')
@@ -140,7 +140,7 @@
     <script type="text/javascript" src="{{ asset('/js/tecnico/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_turma_ata_aniversariantes.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,
