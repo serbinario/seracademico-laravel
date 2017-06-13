@@ -954,7 +954,7 @@
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/posGraduacao/aluno.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/posGraduacao/aluno.js')  }}"></script>
     <script type="text/javascript">
         //selectize profissões
         /*var totalCount;

@@ -114,54 +114,38 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
-                                    {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
+                                {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
-                                    {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
+                                {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
                             </div>
-                            <div class="form-group col-md-2 col-sm-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
-                                    {!! Form::select('pessoa[profissoes_id]', (['' => 'Selecione uma Profissão'] + $loadFields['profissao']->toArray()), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
-                                </div>
+                            <div class="form-group col-md-4">
+                                {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
+                                {!! Form::select('pessoa[profissoes_id]', array(), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
-                                    {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
+                                {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
-                                    {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
+                                {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[nacionalidade]', 'Nacionalidade ') !!}
-                                    {!! Form::text('pessoa[nacionalidade]', Session::getOldInput('pessoa[nacionalidade]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[nacionalidade]', 'Nacionalidade ') !!}
+                                {!! Form::text('pessoa[nacionalidade]', Session::getOldInput('pessoa[nacionalidade]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[uf_nascimento_id]', 'UF Nascimento') !!}
-                                    {!! Form::select('pessoa[uf_nascimento_id]', $loadFields['estado'], Session::getOldInput('pessoa[uf_nascimento_id]'),array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[uf_nascimento_id]', 'UF Nascimento') !!}
+                                {!! Form::select('pessoa[uf_nascimento_id]', $loadFields['estado'], Session::getOldInput('pessoa[uf_nascimento_id]'),array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[naturalidade]', 'Naturalidade ') !!}
-                                    {!! Form::text('pessoa[naturalidade]', Session::getOldInput('pessoas[naturalidade]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[naturalidade]', 'Naturalidade ') !!}
+                                {!! Form::text('pessoa[naturalidade]', Session::getOldInput('pessoas[naturalidade]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-archive"></i> Outros dados</legend>
@@ -177,16 +161,12 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[nome_pai]', 'Nome Pai max 60 caracteres (0-9 A-Z .-[ ])') !!}
-                                                    {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[nome_pai]', 'Nome Pai max 60 caracteres (0-9 A-Z .-[ ])') !!}
+                                                {!! Form::text('pessoa[nome_pai]', Session::getOldInput('pessoa[nome_pai]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[nome_mae]', 'Nome Mãe * max 60 caracteres (0-9 A-Z .-[ ])') !!}
-                                                    {!! Form::text('pessoa[nome_mae]',Session::getOldInput('pessoa[nome_mae]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[nome_mae]', 'Nome Mãe * max 60 caracteres (0-9 A-Z .-[ ])') !!}
+                                                {!! Form::text('pessoa[nome_mae]',Session::getOldInput('pessoa[nome_mae]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -202,66 +182,46 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[identidade]', 'Identidade *') !!}
-                                                    {!! Form::text('pessoa[identidade]', Session::getOldInput('pessoa[identidade]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[identidade]', 'Identidade *') !!}
+                                                {!! Form::text('pessoa[identidade]', Session::getOldInput('pessoa[identidade]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[orgao_rg]', 'Orgão RG ') !!}
-                                                    {!! Form::text('pessoa[orgao_rg]', Session::getOldInput('pessoa[orgao_rg]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[orgao_rg]', 'Orgão RG ') !!}
+                                                {!! Form::text('pessoa[orgao_rg]', Session::getOldInput('pessoa[orgao_rg]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[uf_exp]', 'UF') !!}
-                                                    {!! Form::text('pessoa[uf_exp]', Session::getOldInput('pessoa[uf_exp]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[uf_exp]', 'UF') !!}
+                                                {!! Form::text('pessoa[uf_exp]', Session::getOldInput('pessoa[uf_exp]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[data_expedicao]', 'Data expedição') !!}
-                                                    {!! Form::text('pessoa[data_expedicao]', null , array('class' => 'form-control date')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[data_expedicao]', 'Data expedição') !!}
+                                                {!! Form::text('pessoa[data_expedicao]', null , array('class' => 'form-control datepicker date')) !!}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[cpf]', 'CPF *') !!}
-                                                    {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[cpf]', 'CPF *') !!}
+                                                {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[titulo_eleitoral]', 'Título Eleitoral') !!}
-                                                    {!! Form::text('pessoa[titulo_eleitoral]', Session::getOldInput('pessoa[titulo_eleitoral]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[titulo_eleitoral]', 'Título Eleitoral') !!}
+                                                {!! Form::text('pessoa[titulo_eleitoral]', Session::getOldInput('pessoa[titulo_eleitoral]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[zona]', 'Zona') !!}
-                                                    {!! Form::text('pessoa[zona]', Session::getOldInput('pessoas[zona]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[zona]', 'Zona') !!}
+                                                {!! Form::text('pessoa[zona]', Session::getOldInput('pessoas[zona]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-1">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[secao]', 'Seção') !!}
-                                                    {!! Form::text('pessoa[secao]', Session::getOldInput('pessoa[secao]') , array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[secao]', 'Seção') !!}
+                                                {!! Form::text('pessoa[secao]', Session::getOldInput('pessoa[secao]') , array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[resevista]', 'Reservista') !!}
-                                                    {!! Form::text('pessoa[resevista]', Session::getOldInput('pessoa[resevista]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[resevista]', 'Reservista') !!}
+                                                {!! Form::text('pessoa[resevista]', Session::getOldInput('pessoa[resevista]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[catagoria_resevista]', 'Categoria Reservista') !!}
-                                                    {!! Form::text('pessoa[catagoria_resevista]', Session::getOldInput('pessoa[catagoria_resevista]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[catagoria_resevista]', 'Categoria Reservista') !!}
+                                                {!! Form::text('pessoa[catagoria_resevista]', Session::getOldInput('pessoa[catagoria_resevista]'), array('class' => 'form-control')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -316,10 +276,8 @@
                                             <div class="form-group col-md-4">
                                                 <h5>Senha de acesso ao portal</h5>
                                                 <div class="form-group col-md-7">
-                                                    <div class="fg-line">
-                                                        {!! Form::label('password', 'Senha') !!}
-                                                        {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
-                                                    </div>
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -338,22 +296,16 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="form-group col-md-8">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[endereco][logradouro]', 'Endereço ') !!}
-                                    {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[endereco][logradouro]', 'Endereço ') !!}
+                                {!! Form::text('pessoa[endereco][logradouro]', Session::getOldInput('pessoa[endereco][logradouro]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[endereco][cep]', 'CEP ') !!}
-                                    {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control cep')) !!}
-                                </div>
+                                {!! Form::label('pessoa[endereco][cep]', 'CEP ') !!}
+                                {!! Form::text('pessoa[endereco][cep]', Session::getOldInput('pessoa[endereco][cep]'), array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
-                                    {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control numberFive')) !!}
-                                </div>
+                                {!! Form::label('pessoa[endereco][numero]', 'Número: max 6') !!}
+                                {!! Form::text('pessoa[endereco][numero]', Session::getOldInput('pessoa[endereco][numero]'), array('class' => 'form-control numberFive')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -382,10 +334,8 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
-                                    {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
+                                {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <legend><i class="fa fa-phone"></i> Contato</legend>
@@ -401,28 +351,20 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="form-group col-md-5">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[email]', 'E-mail') !!}
-                                                    {!! Form::text('pessoa[email]', Session::getOldInput('pessoas[email]'), array('class' => 'form-control')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[email]', 'E-mail') !!}
+                                                {!! Form::text('pessoa[email]', Session::getOldInput('pessoas[email]'), array('class' => 'form-control')) !!}
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[telefone_fixo]', 'Telefone') !!}
-                                                    {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
+                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[celular]', 'Celular') !!}
-                                                    {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control celPhone')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[celular]', 'Celular') !!}
+                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <div class="fg-line">
-                                                    {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
-                                                    {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control celPhone')) !!}
-                                                </div>
+                                                {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
+                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control phone')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -442,7 +384,7 @@
                                 <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
                                 <select id="cursoSuperior" name="curso_superior_id" class="form-control">
                                     @if(isset($aluno->id) && $aluno->cursoSuperior != null)
-                                        <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
+                                    <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
                                     @endif
                                 </select>
                                 <span style="margin-left:auto;">
@@ -477,10 +419,8 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
-                                    {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -644,49 +584,43 @@
                 <br>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <div class="fg-line">
-                            {!! Form::label('curso_id', 'Curso') !!}
-                            @if(isset($aluno->id) && count($aluno->curriculos) > 0)
-                                {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
-                            @else
-                                {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['tecnico\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
-                            @endif
-                        </div>
+                        {!! Form::label('curso_id', 'Curso') !!}
+
+                        @if(isset($aluno->id) && count($aluno->curriculos) > 0)
+                            {!! Form::select('curso_id', [$aluno->curriculos->last()->curso->id => $aluno->curriculos->last()->nome], null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
+                        @else
+                            {!! Form::select('curso_id', (['' => 'Selecione um Curso'] + $loadFields['tecnico\\curso']->toArray()), null, array('class' => 'form-control', 'id' => 'curso_id')) !!}
+                        @endif
                     </div>
 
                     <div class="form-group col-md-2">
-                        <div class="fg-line">
-                            {!! Form::label('sede_id', 'Sede') !!}
-                            {!! Form::select('sede_id', (['' => 'Selecione uma sede'] + $loadFields['sede']->toArray()), null, array('class' => 'form-control', 'id' => 'sede_id')) !!}
-                        </div>
+                        {!! Form::label('sede_id', 'Sede') !!}
+
+                        {!! Form::select('sede_id', (['' => 'Selecione uma sede'] + $loadFields['sede']->toArray()), null, array('class' => 'form-control', 'id' => 'sede_id')) !!}
                     </div>
 
                     <div class="form-group col-md-4">
-                        <div class="fg-line">
-                            {!! Form::label('turma_id', 'Turma') !!}
-                            {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control', 'id' => 'turma_id')) !!}
-                        </div>
+                        {!! Form::label('turma_id', 'Turma') !!}
+                        {!! Form::select('turma_id', ['' => 'Selecione uma turma'], null, array('class' => 'form-control', 'id' => 'turma_id')) !!}
                     </div>
 
                     <div class="form-group col-md-2">
-                        <div class="fg-line">
-                            {!! Form::label('turno_id', 'Turno') !!}
-                            @if(isset($aluno->id))
-                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
-                            @else
-                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
-                            @endif
-                        </div>
+                        {!! Form::label('turno_id', 'Turno') !!}
+                        @if(isset($aluno->id))
+                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                        @else
+                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                        @endif
                     </div>
+
+
                     <div class="form-group col-md-4">
-                        <div class="fg-line">
-                            {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
-                            @if(isset($aluno->id))
-                                {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                            @else
-                                {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
-                            @endif
-                        </div>
+                        {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
+                        @if(isset($aluno->id))
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        @else
+                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -713,54 +647,40 @@
                     <div role="tabpanel" class="tab-pane active" id="monografiaGerais">
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('titulo', 'Título') !!}
-                                    {!! Form::text('titulo', Session::getOldInput('titulo'), array('class' => 'form-control', 'placeholder' => 'Informe um título')) !!}
-                                </div>
+                                {!! Form::label('titulo', 'Título') !!}
+                                {!! Form::text('titulo', Session::getOldInput('titulo'), array('class' => 'form-control', 'placeholder' => 'Informe um título')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('nota_final', 'Nota Final') !!}
-                                    {!! Form::text('nota_final', Session::getOldInput('nota_final'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('nota_final', 'Nota Final') !!}
+                                {!! Form::text('nota_final', Session::getOldInput('nota_final'), array('class' => 'form-control')) !!}
                             </div>
 
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('media', 'Média') !!}
-                                    {!! Form::text('media', Session::getOldInput('media'), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('media', 'Média') !!}
+                                {!! Form::text('media', Session::getOldInput('media'), array('class' => 'form-control')) !!}
                             </div>
 
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('media_conceito', 'Média Conceito') !!}
-                                    {!! Form::select('media_conceito', ['' => 'Selecione', '1' => 'CUMPRIO', '2' => 'NÃO CUMPRIO'], null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('media_conceito', 'Média Conceito') !!}
+                                {!! Form::select('media_conceito', ['' => 'Selecione', '1' => 'CUMPRIO', '2' => 'NÃO CUMPRIO'], null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('defendeu', 'Defendeu') !!}
-                                    {!! Form::select('defendeu', ['' => 'Selecione', '1' => 'Sim', '2' => 'Não'], null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('defendeu', 'Defendeu') !!}
+                                {!! Form::select('defendeu', ['' => 'Selecione', '1' => 'Sim', '2' => 'Não'], null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_orientador_id', 'Professor Orientador') !!}
-                                    {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('professor_orientador_id', 'Professor Orientador') !!}
+                                {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('defesa', 'Defesa') !!}
-                                    {!! Form::text('defesa', Session::getOldInput(''), array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('defesa', 'Defesa') !!}
+                                {!! Form::text('defesa', Session::getOldInput(''), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                     </div>
@@ -769,60 +689,44 @@
                     {{-- Inicio Monografia/gerais --}}
                     </br>
                     <div role="tabpanel" class="tab-pane" id="monografiaBanca">
-                        <div class="row">
+                        <div classe="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_1_id', 'Professor 01') !!}
-                                    {!! Form::select('professor_banca_1_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('professor_banca_1_id', 'Professor 01') !!}
+                                {!! Form::select('professor_banca_1_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_1_id', 'Instituição 01') !!}
-                                    {!! Form::select('inst_ensino_banca_1_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('inst_ensino_banca_1_id', 'Instituição 01') !!}
+                                {!! Form::select('inst_ensino_banca_1_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        <div class="row">
+                        <div classe="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_2_id', 'Professor 02') !!}
-                                    {!! Form::select('professor_banca_2_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('professor_banca_2_id', 'Professor 02') !!}
+                                {!! Form::select('professor_banca_2_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_2_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_2_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('inst_ensino_banca_2_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_2_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        <div class="row">
+                        <div classe="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_3_id', 'Professor 03') !!}
-                                    {!! Form::select('professor_banca_3_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('professor_banca_3_id', 'Professor 03') !!}
+                                {!! Form::select('professor_banca_3_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_3_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_3_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('inst_ensino_banca_3_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_3_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                        <div class="row">
+                        <div classe="row">
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_4_id', 'Professor 04') !!}
-                                    {!! Form::select('professor_banca_4_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('professor_banca_4_id', 'Professor 04') !!}
+                                {!! Form::select('professor_banca_4_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_4_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_4_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
+                                {!! Form::label('inst_ensino_banca_4_id', 'Instituição 02') !!}
+                                {!! Form::select('inst_ensino_banca_4_id', array(), null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
                     </div>
@@ -830,18 +734,14 @@
 
                     {{-- Fim Monografia/gerais --}}
                     <div role="tabpanel" class="tab-pane" id="formatura">
-                        <div class="row">
+                        <div classe="row">
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('data_conclusao', 'Data Conclusão') !!}
-                                    {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
-                                </div>
+                                {!! Form::label('data_conclusao', 'Data Conclusão') !!}
+                                {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
                             </div>
                             <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('data_colacao', 'Data Colação') !!}
-                                    {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
-                                </div>
+                                {!! Form::label('data_colacao', 'Data Colação') !!}
+                                {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
                             </div>
                         </div>
                     </div>
@@ -850,53 +750,55 @@
             </div>
             {{-- Fim Monografia--}}
 
-            {{--Buttons Submit e Voltar--}}
-            <div class="row">
+        {{--Buttons Submit e Voltar--}}
+        <div class="row">
 
-                <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Foto</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div style="margin-left: -11px;" id="my_camera"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                                <button type="button" onClick="take_snapshot()" class="btn btn-primary">Tirar foto</button>
-                            </div>
+            <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Foto</h4>
                         </div>
-                    </div>
-                </div>
-
-                {{-- <div class="col-md-9">
-                     <div class="checkbox checkbox-primary">
-                         @if(isset($aluno) && !empty($aluno->matricula))
-                             {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                         @else
-                             {!! Form::hidden('gerar_matricula', 0) !!}
-                             {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
-                         @endif
-                         {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
-                     </div>
-                 </div>--}}
-                <div class="col-md-3 col-md-offset-9">
-                    <div class="btn-group btn-group-justified">
-                        <div class="btn-group">
-                            <a href="{{ route('seracademico.tecnico.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                        <div class="modal-body">
+                            <div style="margin-left: -11px;" id="my_camera"></div>
                         </div>
-                        <div class="btn-group">
-                            {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                            <button type="button" onClick="take_snapshot()" class="btn btn-primary">Tirar foto</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+           {{-- <div class="col-md-9">
+                <div class="checkbox checkbox-primary">
+                    @if(isset($aluno) && !empty($aluno->matricula))
+                        {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                    @else
+                        {!! Form::hidden('gerar_matricula', 0) !!}
+                        {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
+                    @endif
+                    {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+                </div>
+            </div>--}}
+            <div class="col-md-3 col-md-offset-9">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <a href="{{ route('seracademico.tecnico.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
+                    </div>
+                    <div class="btn-group">
+                        {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block pull-right', 'id' => 'submitForm')) !!}
+                    </div>
+                </div>
+            </div>
         </div>
-        {{--Fim Buttons Submit e Voltar--}}
+    </div>
+
+
+    {{--Fim Buttons Submit e Voltar--}}
     </div>
 </div>
 
@@ -1301,11 +1203,6 @@
                 data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
-
-                //remoção de possiveis mensagens de validação
-                $('form div').removeClass("has-error");
-                $('div small').remove();
-
                 if (json.success) {
                     $("input:text[name='pessoa[nome]']").val(json.dados[0].nome);
                     $("input:text[name='pessoa[data_nasciemento]']").val(json.dados[0].data_nasciemento);

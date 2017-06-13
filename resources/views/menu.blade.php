@@ -419,7 +419,7 @@
 <script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
 <script type="text/javascript">
-    //Metodos para uso da API validator
+    //Metodos para uso da API jquery.validator
     $.validator.setDefaults({
         debug: false, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão
         ignore: []    //metodo que possibilita validar campos que estejam ocultos, em accordeon por exemplo
