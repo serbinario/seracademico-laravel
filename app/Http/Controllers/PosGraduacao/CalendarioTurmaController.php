@@ -87,8 +87,8 @@ class CalendarioTurmaController extends Controller
             ->leftJoin('fac_salas', 'fac_calendarios.sala_id', '=', 'fac_salas.id')
             ->select([
                 'fac_calendarios.id',
-                'fac_calendarios.data',
-                'fac_calendarios.data_final',
+                \DB::raw('DATE_FORMAT(fac_calendarios.data, "%d/%m/%Y") as data'),
+                \DB::raw('DATE_FORMAT(fac_calendarios.data_final, "%d/%m/%Y") as data_final'),
                 'fac_calendarios.hora_inicial',
                 'fac_calendarios.hora_final',
                 'pessoas.nome as professor',
@@ -100,16 +100,7 @@ class CalendarioTurmaController extends Controller
         return Datatables::of($rows)->addColumn('action', function ($row) {
             # Html de Retorno
             $html  = '<a title="Editar Calendário" id="btnEditarCalendario" href="#" class="btn-floating indigo"><i class="material-icons">edit</i></a>';
-
-            # Recuperando as frequências
-            $frequencias = \DB::table('pos_alunos_frequencias')
-                ->where('pos_alunos_frequencias.calendario_id', $row->id)
-                ->select(['pos_alunos_frequencias.id'])->get();
-
-            # Validando as frequências
-            if(count($frequencias) == 0) {
-                $html .= '<a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
-            }
+            $html .= '<a title="Remover Calendário" id="btnRemoverCalendario" href="#" class="btn-floating red"><i class="material-icons">delete</i></a>';
 
             # Retorno
             return $html;

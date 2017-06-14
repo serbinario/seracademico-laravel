@@ -26,6 +26,7 @@ class CalendarioDisciplinaTurmaRepositoryEloquent extends BaseRepository impleme
         return CalendarioDisciplinaTurma::class;
     }
 
+
     /**
      * Boot up the repository, pushing criteria
      */

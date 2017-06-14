@@ -3,11 +3,12 @@
 namespace Seracademico\Services\Mestrado;
 
 use Seracademico\Entities\Mestrado\AlunoFrequencia;
-use Seracademico\Entities\Mestrado\AlunoNota;
 use Seracademico\Entities\Mestrado\TurmaDisciplina;
+use Seracademico\Repositories\Mestrado\AlunoNotaRepository;
 use Seracademico\Repositories\Mestrado\AlunoRepository;
 use Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepository;
 use Seracademico\Entities\Mestrado\CalendarioDisciplinaTurma;
+use Seracademico\Repositories\Mestrado\TurmaRepository;
 
 class CalendarioDisciplinaTurmaService
 {
@@ -22,13 +23,31 @@ class CalendarioDisciplinaTurmaService
     private $alunoRepository;
 
     /**
+     * @var TurmaRepository
+     */
+    private $turmaRepository;
+
+    /**
+     * @var AlunoNotaRepository
+     */
+    private $alunoNotaRepository;
+
+    /**
+     * CalendarioDisciplinaTurmaService constructor.
+     *
      * @param CalendarioDisciplinaTurmaRepository $repository
+     * @param AlunoRepository $alunoRepository
+     * @param TurmaRepository $turmaRepository
      */
     public function __construct(CalendarioDisciplinaTurmaRepository $repository,
-                                AlunoRepository $alunoRepository)
+                                AlunoRepository $alunoRepository,
+                                TurmaRepository $turmaRepository,
+                                AlunoNotaRepository $alunoNotaRepository)
     {
         $this->repository = $repository;
         $this->alunoRepository = $alunoRepository;
+        $this->turmaRepository = $turmaRepository;
+        $this->alunoNotaRepository = $alunoNotaRepository;
     }
 
     /**
@@ -158,7 +177,42 @@ class CalendarioDisciplinaTurmaService
      */
     public function delete(int $id)
     {
+        # Recuperando o calendário
+        $calendario = $this->repository->find($id);
+
+        # Removendo as frequências do calendário
+        $calendario->frequencias()->delete();
+
+        # Recuperando a turma e a disciplina
+        $turmaDisciplina = \DB::table('fac_turmas_disciplinas')
+            ->select('turma_id', 'disciplina_id')
+            ->where('id', $calendario->turma_disciplina_id)
+            ->get();
+
+        # Recupernado a turma
+        $turma = $this->turmaRepository->find($turmaDisciplina[0]->turma_id);
+
+        # Recuperando os calendários da turma
+        $calendariosDaTurma = $turma->disciplinas()->find($turmaDisciplina[0]
+            ->disciplina_id)->pivot->calendarios()->get();
+
+        # Verificando se existe mais de um calendário para a disciplina e se é o que será removido
+        if(count($calendariosDaTurma) == 1 && $calendariosDaTurma[0]->id == $calendario->id) {
+            # Recuperando todas as notas referente ao calendário
+            $notas = $this->alunoNotaRepository->findWhere([
+                'disciplina_id' => $turmaDisciplina[0]->disciplina_id,
+                'turma_id' => $turmaDisciplina[0]->turma_id
+            ]);
+
+            # Percorrendo e removendo as notas
+            foreach ($notas as $nota) {
+                $this->alunoNotaRepository->delete($nota->id);
+            }
+        }
+
+        # Removendo o calendário
         $this->repository->delete($id);
+
 
         return true;
     }
