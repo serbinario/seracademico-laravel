@@ -39,7 +39,7 @@
                                 <th>Hora Final</th>
                                 <th>Sala</th>
                                 <th>Nome Professor</th>
-                                <th>Acão</th>
+                                <th style="width: 15%;">Acão</th>
                             </tr>
                             </thead>
                         </table>

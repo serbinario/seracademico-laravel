@@ -26,17 +26,6 @@ class CalendarioDisciplinaTurmaRepositoryEloquent extends BaseRepository impleme
         return CalendarioDisciplinaTurma::class;
     }
 
-    /**
-     * Specify Validator class name
-     *
-     * @return mixed
-     */
-    public function validator()
-    {
-
-        return CalendarioDisciplinaTurmaValidator::class;
-    }
-
 
     /**
      * Boot up the repository, pushing criteria

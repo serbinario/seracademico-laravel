@@ -55,6 +55,15 @@ class CalendarioDisciplinaTurma extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function frequencias()
+    {
+        return $this->hasMany(AlunoFrequencia::class, 'calendario_id');
+    }
+
+
+    /**
      * @return \DateTime
      */
     public function getDataAttribute()
