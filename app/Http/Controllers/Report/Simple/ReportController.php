@@ -74,12 +74,12 @@ class ReportController extends Controller
             $dadosParaRelatorio = $this->report->generate($idReport, $dadosDaRequisicao);
         }
 
-        # Recuoerando a view
+        # Recuperando a view
         $view = $dadosParaRelatorio['view'] ?? 'report';
 
         # Recuperando o serviço de pdf / dompdf
         $PDF = App::make('dompdf.wrapper');
-
+        //dd($dadosParaRelatorio);
         # Carregando a página
         $PDF->loadView("reports.simple.{$view}", ['dados' => $dadosParaRelatorio, 'request' => $dadosDaRequisicao]);
 

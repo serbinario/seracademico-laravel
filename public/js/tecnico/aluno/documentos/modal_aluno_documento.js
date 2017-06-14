@@ -4,7 +4,7 @@ function loadFieldsDocumentos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Tecnico\\TipoDocumento|nivelDeMestrado'
+            'Tecnico\\TipoDocumento|NivelTecnico'
         ]
     };
 

@@ -196,6 +196,25 @@
                 </li>
                 @endpermission
 
+                <li>
+                    <a href="index.html"><i class="material-icons">school</i> <span class="nav-label">Técnico</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="#"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.tecnico.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.planoensino.index') }}"><i class="material-icons">line_weight</i>Planos de Ensino</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
                 <li><a href="#"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level collapse">
                         <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
@@ -400,7 +419,7 @@
 <script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
 <script type="text/javascript">
-    //Metodos para uso da API validator
+    //Metodos para uso da API jquery.validator
     $.validator.setDefaults({
         debug: false, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão
         ignore: []    //metodo que possibilita validar campos que estejam ocultos, em accordeon por exemplo

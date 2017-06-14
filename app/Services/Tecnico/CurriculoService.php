@@ -114,6 +114,7 @@ class CurriculoService
 
         #Percorrendo os id das disciplinas
         foreach($data['idDisciplinas'] as $id) {
+
             #Recuperando a entidade
             $disciplina = $this->disciplinaRepository->find($id);
 
@@ -123,7 +124,7 @@ class CurriculoService
             }
 
             #Adicionando a entidade principal
-            $curriculo->disciplinas()->attach($disciplina->id);
+            $curriculo->disciplinas()->attach($disciplina->id, ['modulo_id' => $data['modulo_id']]);
         }
 
         #Salvando as adições

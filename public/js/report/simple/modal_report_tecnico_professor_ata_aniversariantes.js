@@ -1,11 +1,11 @@
 // carregando todos os cammes preenchidos
 function runSimpleReportTecProfAtaAniversariante()
 {
-    builderFilterMesProfAtaDeAniversariante([]);
+    builderFilterTecProfAtaDeAniversariante([]);
 }
 
 // Função a montar o html
-function builderFilterMesProfAtaDeAniversariante(dados) {
+function builderFilterTecProfAtaDeAniversariante(dados) {
     // Abrindo o modal
     $("#modal-report-tec-prof-ata-aniversariante").modal({show : true});
 }

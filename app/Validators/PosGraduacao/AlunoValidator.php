@@ -128,7 +128,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.catagoria_resevista' => 'max:20',
             'pessoa.nacionalidade' => 'max:30|serbinario_alpha_space',
             'pessoa.naturalidade' => 'max:30|serbinario_alpha_space',
-            'pessoa.email' => 'email|max:50|pos_aluno_unique_in_pessoa:email,:id',
+            'pessoa.email' => 'required|email|max:50', //|pos_aluno_unique_in_pessoa:email,:id
             'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
             'pessoa.celular' => 'digits_between:9,11|numeric',
             'pessoa.celular2' => 'digits_between:9,11|numeric',

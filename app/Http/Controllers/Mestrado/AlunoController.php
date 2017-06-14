@@ -284,12 +284,41 @@ class AlunoController extends Controller
 
             #Executando a ação
             $dados = $this->service->search(key($data), $data[key($data)]);
+            $verificador = $this->verificarMatriculaPor($data);
 
             #retorno para view
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados]);
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $dados, 'verificador' => $verificador]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     * @author felipe
+     * @description possibilita verificar, através do cpf inserido no campo de busca, se o aluno já se encontra cadas-
+     * trado com situação diferente de cancelado.
+     * @consumer search()
+     */
+    public function verificarMatriculaPor($data)
+    {
+        $retorno = false;
+
+        $query = \DB::table('pessoas')
+            ->join('pos_alunos', 'pessoas.id', '=', 'pos_alunos.pessoa_id')
+            ->join('pos_alunos_cursos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->join('pos_alunos_situacoes', 'pos_alunos_cursos.id', '=', 'pos_alunos_situacoes.pos_aluno_curso_id')
+            ->where('pessoas.cpf', '=', $data['cpf'])
+            ->where('pos_alunos_situacoes.situacao_id', '!=', 10) //10 = cancelado
+            ->where('pos_alunos.tipo_aluno_id', '=', 2) //mestrado = 2
+            ->get();
+
+        if (count($query) > 0) {
+            $retorno = true;
+        }
+
+        return $retorno;
     }
 
     /**

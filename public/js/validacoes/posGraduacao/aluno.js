@@ -10,13 +10,11 @@ $(document).ready(function () {
 
             'pessoa[data_nasciemento]': {
                 required: true,
-                //dateBr: true,
                 maxlength: 10
             },
 
             'pessoa[cpf]': {
-                required: true,
-                //cpfBR: true
+                required: true
             },
 
             /*data_matricula: {
@@ -56,7 +54,6 @@ $(document).ready(function () {
 
             'pessoa[orgao_rg]': {
                 maxlength: 10
-                //alphaSpace: true
             },
 
             'pessoa[uf_exp]': {
@@ -65,7 +62,6 @@ $(document).ready(function () {
             },
 
             'pessoa[data_expedicao]': {
-                //dateBr: true,
                 maxlength: 10
             },
 
@@ -104,12 +100,10 @@ $(document).ready(function () {
             },
 
             'pessoa[ano_conclusao_superior]': {
-                //dateBr: true,
                 maxlength: 10
             },
 
             'pessoa[data_exame_nacional_um]': {
-                //dateBr: true,
                 maxlength: 10
             },
 
@@ -217,7 +211,6 @@ $(document).ready(function () {
             },
 
             data_inscricao: {
-                //dateBr: true,
                 maxlength: 10
             },
 
@@ -316,12 +309,10 @@ $(document).ready(function () {
             },
 
             data_conclusao: {
-                //dateBr: true,
                 maxlength: 10
             },
 
             data_colacao: {
-                //dateBr: true,
                 maxlength: 10
             },
 

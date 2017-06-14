@@ -97,11 +97,12 @@ class AlunoService
         $this->tratamentoDePessoaEEndereco($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
+        $data = $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Setando o tipo o tipo do aluno para mestrado
         $data['tipo_aluno_id'] = 2;
-        //dd($data);
+
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
 
@@ -136,6 +137,38 @@ class AlunoService
         
         #Retorno
         return $aluno;
+    }
+
+    /**
+     * @param $dados
+     * @author felipe
+     * @description
+     * Metodo responsavel por remover possiveis espaços em branco nos formularios de cadastro e edição de alunos.
+     * ATENÇÃO: Se estiver dando problema na senha de login do portal, verificar se este metodo esta modificando de
+     * alguma forma a integridade da senha inserida pelo usuário.
+     */
+    public function remocaoEspacos($dados)
+    {
+        #variavel de uso
+        $data = [];
+
+        #separando dados da matriz
+        $arrayPessoa   = $dados['pessoa'];
+        $arrayPessoas  = $dados['pessoas'];
+        $arrayEndereco = $dados['pessoa']['endereco'];
+
+        #removendo-os da matriz
+        unset($arrayPessoa['endereco']);
+        unset($dados['pessoa']);
+        unset($dados['pessoas']);
+
+        #removendo espaços em branco
+        $data = array_map('trim', $dados);
+        $data['pessoa'] = array_map('trim', $arrayPessoa);
+        $data['pessoas'] = array_map('trim', $arrayPessoas);
+        $data['pessoa']['endereco'] = array_map('trim', $arrayEndereco);
+
+        return $data;
     }
 
     /**
@@ -211,6 +244,32 @@ class AlunoService
         }
 
         #Retorno
+        return $aluno;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
+    public function search($key, $value)
+    {
+        # Joins
+        $relacionamentos = [
+            'instituicaoEscolar',
+            'endereco.bairro.cidade.estado',
+        ];
+
+        # Fazendo a consulta
+        $aluno = $this->pessoaRepository->with($relacionamentos)->findWhere([ $key =>$value ]);
+
+        # Verificando o se o vestibulando foi recuperado
+        if(count($aluno) == 0) {
+            throw new \Exception("Dados não encontrados");
+        }
+
+        # Retorno
         return $aluno;
     }
 

@@ -113,59 +113,10 @@
         </div>        
     </div>
 
-    <!-- Modal de cadastro das Disciplinas-->
-    <div id="modal-grade-curricular" class="modal fade modal-profile" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Adicionar disciplinas ao currículo</h4>
-                </div>
-                <div class="modal-body" style="alignment-baseline: central">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row" style="margin-bottom: 3%;">
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="disciplina-grid" class="display table table-bordered" cellspacing="0" width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th style="width: 5%;">Qtd. Faltas</th>
-                                            <th style="width: 10%;">Tipo da disciplina</th>
-                                            <th >Acão</th>
-                                        </tr>
-                                        </thead>
-
-                                        <tfoot>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th style="width: 5%;">Qtd. Faltas</th>
-                                            <th style="width: 10%;">Tipo da disciplina</th>
-                                            <th style="width: 5%;">Acão</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FIM Modal de cadastro das Disciplinas-->
-
-    @include('reports.simple.modals.modal_report_pos_curriculo_disciplina')
+    @include('reports.simple.modals.modal_report_tecnico_curriculo_disciplina')
+    @include('tecnico.curriculo.modal_adicionar_disciplina')
+    {{--@include('tecnico.curriculo.modal_inserir_adicionar_disciplina')
+    @include('tecnico.curriculo.modal_editar_adicionar_disciplina')--}}
 @stop
 
 @section('javascript')
@@ -197,7 +148,7 @@
         /*Responsável em abrir modal*/
         $(document).on("click", '.grid-curricular', function () {
             $("#modal-grade-curricular").modal({show: true, keyboard: true});
-            idCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            idCurriculo = table.row($(this).parents('tr').index()).data().id;
 
             /*Datatable da grid Modal*/
             table2 = $('#disciplina-grid').DataTable({
@@ -211,6 +162,7 @@
                     {data: 'nome', name: 'fac_disciplinas.nome'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
                     {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
+                    {data: 'modulo', name: 'tec_modulos.nome'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -219,13 +171,13 @@
             table2.ajax.url("/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo).load();
         });
 
-         //consulta via select2
-         $("#select-disciplina").select2({
-             placeholder: 'Selecione uma ou mais disciplinas',
-             width: 600,
-             ajax: {
-                 type: 'POST',
-                 url: "{{ route('seracademico.util.select2')  }}",
+        //consulta via select2
+        $("#select-disciplina").select2({
+            placeholder: 'Selecione uma ou mais disciplinas',
+            width: 600,
+            ajax: {
+                type: 'POST',
+                url: "{{ route('seracademico.util.select2')  }}",
                 dataType: 'json',
                 delay: 250,
                 crossDomain: true,
@@ -266,10 +218,11 @@
         //Evento do click no botão adicionar disciplina
         $(document).on('click', '#addDisciplina', function (event) {
             var array   = $('#select-disciplina').select2('data');
+            var modulo  = $('#modulo_id').val();
 
-            // Verificando se alguma disciplina foi selecionada
-            if (!array.length > 0) {
-                sweetAlert("Oops...", "Você deve selecionar uma disciplina!", "error");
+            // Verificando preenchimento dos campos disciplina e modulo
+            if (!array.length > 0 || modulo == 0) {
+                sweetAlert("Oops...", "Por favor, selecione a disciplina e um modulo", "error");
                 return false;
             }
 
@@ -282,7 +235,8 @@
             //Setando o o json para envio
             var dados = {
                 'idCurriculo' : idCurriculo,
-                'idDisciplinas' : arrayId
+                'idDisciplinas' : arrayId,
+                'modulo_id' : modulo
             };
 
             jQuery.ajax({
@@ -307,8 +261,8 @@
 
             //Setando o o json para envio
             var dados = {
-                'idCurriculo' : idCurriculo,
-                'idDisciplina' : idDisciplina
+                'idCurriculo'  : idCurriculo,
+                'idDisciplina' : idDisciplina,
             };
 
             jQuery.ajax({

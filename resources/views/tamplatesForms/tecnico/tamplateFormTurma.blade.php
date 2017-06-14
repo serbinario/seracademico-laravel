@@ -225,24 +225,14 @@
 </div>
 
 @section('javascript')
-    <script type="text/javascript">
-        /*$(document).ready(function () {
-            console.log(Lang.getLocale());
-            Lang.setLocale('pt-BR');
-
-            $('#formTurma').bootstrapValidator({
-                fields: {
-                    codigo: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Código' })
-                            }
-                        }
-                    }
-
-                }
-            });
-
-        });*/
-    </script>
+    {{--Mensagens personalizadas--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/messages_pt_BR.js')  }}"></script>
+    {{--Regras adicionais--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/alphaSpace.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/integer.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/lib/jquery-validation/src/additional/cpfBR.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
+    {{--Regras de validação--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/tecnico/turma.js')  }}"></script>
 @stop

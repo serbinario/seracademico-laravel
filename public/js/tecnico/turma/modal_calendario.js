@@ -8,7 +8,7 @@ function loadTableDisciplina (idTurma) {
         iDisplayLength: 5,
         bLengthChange: false,
        // bFilter: false,
-        ajax: "/index.php/seracademico/mestrado/turma/calendario/grid/" + idTurma,
+        ajax: "/index.php/seracademico/tecnico/turma/calendario/grid/" + idTurma,
         columns: [
             {data: 'nome', name: 'fac_disciplinas.nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -29,7 +29,7 @@ function runtableCargaHoraria () {
         bLengthChange: false,
         bFilter: false,
 
-        ajax: "/index.php/seracademico/mestrado/turma/calendario/gridCalendario/" + idTurmaDisciplina,
+        ajax: "/index.php/seracademico/tecnico/turma/calendario/gridCalendario/" + idTurmaDisciplina,
         columns: [
             {data: 'data', name: 'fac_calendarios.data'},
             {data: 'data_final', name: 'fac_calendarios.data_final'},
@@ -62,7 +62,7 @@ $(document).on('click', '#calendario-disciplina-grid tbody tr', function () {
         indexRowSelectedDisciplina =  $(this).index();
 
         var tableCargaHoraria = runtableCargaHoraria();
-        tableCargaHoraria.ajax.url( "/index.php/seracademico/mestrado/turma/calendario/gridCalendario/" + idTurmaDisciplina).load();
+        tableCargaHoraria.ajax.url( "/index.php/seracademico/tecnico/turma/calendario/gridCalendario/" + idTurmaDisciplina).load();
     }
 });
 
@@ -70,8 +70,8 @@ $(document).on('click', '#calendario-disciplina-grid tbody tr', function () {
 // Função para executar a grid
 function runTableDisciplina(idTurma) {
     $("#btnAddCalendario").attr("disabled", true);
-    loadTableDisciplina().ajax.url( "/index.php/seracademico/mestrado/turma/calendario/grid/" + idTurma).load();
+    loadTableDisciplina().ajax.url( "/index.php/seracademico/tecnico/turma/calendario/grid/" + idTurma).load();
     if(tableCargaHoraria != null) {
-        tableCargaHoraria.ajax.url( "/index.php/seracademico/mestrado/turma/calendario/gridCalendario/" + 0).load();
+        tableCargaHoraria.ajax.url( "/index.php/seracademico/tecnico/turma/calendario/gridCalendario/" + 0).load();
     }
 }

@@ -11,6 +11,7 @@
     "jquery-validation": "^1.15.1",
     "selectize": "^0.12.4",
     "selectize-infinite_scroll": "*",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "jquery-mask-plugin": "jquery.mask.min#^1.14.11"
   }
 }

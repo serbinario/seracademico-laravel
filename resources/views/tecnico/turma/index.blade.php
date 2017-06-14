@@ -35,7 +35,7 @@
                 <h4><i class="material-icons">turned_in</i> Listar Turmas</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.mestrado.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
+                <a href="{{ route('seracademico.tecnico.turma.create')}}" class="btn-sm btn-primary pull-right">Nova Turma</a>
             </div>
         </div>
 
@@ -103,44 +103,44 @@
         </div>
     </div>
 
-    @include('mestrado.turma.modal_calendario')
-    @include('mestrado.turma.modal_novo_calendario')
-    @include('mestrado.turma.modal_editar_calendario')
-    @include('mestrado.turma.modal_incluir_disciplinas')
-    @include('mestrado.turma.modal_notas')
-    @include('mestrado.turma.modal_editar_notas')
-    @include('mestrado.turma.modal_frequencias')
-    @include('mestrado.turma.alunos.modal_turmas_alunos')
-    @include('mestrado.turma.alunos.modal_add_aluno')
-    @include('mestrado.turma.diarioAula.modal_diario_aula')
-    @include('mestrado.turma.diarioAula.modal_create_diario_aula')
-    @include('mestrado.turma.diarioAula.modal_edit_diario_aula')
-    @include('mestrado.turma.planoEnsino.modal_plano_ensino')
-    @include('reports.simple.modals.modal_report_mestrado_turma_ata_assinatura')
-    @include('reports.simple.modals.modal_report_mestrado_turma_ata_aniversariantes')
-    @include('reports.simple.modals.modal_report_mes_aluno_turma')
+    @include('tecnico.turma.modal_calendario')
+    @include('tecnico.turma.modal_novo_calendario')
+    @include('tecnico.turma.modal_editar_calendario')
+    @include('tecnico.turma.modal_incluir_disciplinas')
+    @include('tecnico.turma.modal_notas')
+    @include('tecnico.turma.modal_editar_notas')
+    @include('tecnico.turma.modal_frequencias')
+    @include('tecnico.turma.alunos.modal_turmas_alunos')
+    @include('tecnico.turma.alunos.modal_add_aluno')
+    @include('tecnico.turma.diarioAula.modal_diario_aula')
+    @include('tecnico.turma.diarioAula.modal_create_diario_aula')
+    @include('tecnico.turma.diarioAula.modal_edit_diario_aula')
+    @include('tecnico.turma.planoEnsino.modal_plano_ensino')
+    @include('reports.simple.modals.modal_report_tecnico_turma_ata_assinatura')
+    @include('reports.simple.modals.modal_report_tecnico_turma_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_tec_aluno_turma')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_novo_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_editar_calendario.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_incluir_disciplinas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_notas.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_editar_notas.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/modal_frequencias.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/alunos/modal_turmas_alunos.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/alunos/modal_add_aluno.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/modal_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/diarioAula/diario_aula_select2.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_turma_ata_assinatura.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_turma_ata_aniversariantes.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_novo_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_editar_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_incluir_disciplinas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_notas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_editar_notas.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/modal_frequencias.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/alunos/modal_turmas_alunos.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/alunos/modal_add_aluno.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/modal_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/modal_create_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/modal_edit_diario_aula.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/conteudo_programatico_create.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/conteudo_programatico_edit.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/diarioAula/diario_aula_select2.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_turma_ata_assinatura.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_turma_ata_aniversariantes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,

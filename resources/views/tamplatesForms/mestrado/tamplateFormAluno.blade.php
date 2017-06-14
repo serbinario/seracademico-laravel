@@ -896,8 +896,6 @@
             </div>
         </div>
     </div>
-
-
     {{--Fim Buttons Submit e Voltar--}}
     </div>
 </div>
@@ -916,7 +914,7 @@
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
     {{--Regras de validação--}}
-    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>
     <script type="text/javascript">
 
         //Evento para exibir input e botão curso pós
@@ -1300,10 +1298,19 @@
             // Requisição ajax
             jQuery.ajax({
                 type: 'GET',
-                url: '{{ route('seracademico.graduacao.aluno.search')  }}',
+                url: '{{ route('seracademico.mestrado.aluno.search')  }}',
                 data: {'cpf': serachValue},
                 datatype: 'json'
             }).done(function (json) {
+                //verificando se o aluno já se encontra cadastrado com situação diferente de cancelado
+                if (json.verificador == true) {
+                    swal({
+                        title: 'O aluno em questão já se encontra cadastrado',
+                        text: 'Esta janela será fechada em 5 segundos',
+                        timer: 5000
+                    })
+                }
+
                 //remoção de possiveis mensagens de validação
                 $('form div').removeClass("has-error");
                 $('div small').remove();

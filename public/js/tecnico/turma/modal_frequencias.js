@@ -15,7 +15,7 @@ function loadTableFrequencias (idTurma) {
         bFilter: false,
         bPaginate: false,
         ajax: {
-            url: "/index.php/seracademico/mestrado/turma/frequencias/grid/" + idTurma,
+            url: "/index.php/seracademico/tecnico/turma/frequencias/grid/" + idTurma,
             data: function (d) {
                 d.disciplina = $('select[name=disciplinaFrequenciasSearch] option:selected').val();
             }
@@ -41,7 +41,7 @@ function loadTableFrequencias (idTurma) {
 // Função para executar a grid
 function runTableFrequencias(idTurma) {
     if (tableFrequencias) {
-        tableFrequencias.ajax.url( "/index.php/seracademico/mestrado/turma/frequencias/grid/" + idTurma).load();
+        tableFrequencias.ajax.url( "/index.php/seracademico/tecnico/turma/frequencias/grid/" + idTurma).load();
     } else {
         // Carregamento da grids
         loadTableFrequencias(idTurma);
@@ -61,7 +61,7 @@ function loadFieldsFrequencias()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Disciplina|disciplinasOfTurma,' + idTurma
+            'Tecnico\\Disciplina|disciplinasOfTurma,' + idTurma
         ]
     };
 
@@ -69,7 +69,7 @@ function loadFieldsFrequencias()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/frequencias/getLoadFields',
+        url: '/index.php/seracademico/tecnico/turma/frequencias/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -78,9 +78,9 @@ function loadFieldsFrequencias()
             var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
 
             // Percorrendo o array de disciplina
-            for(var i = 0; i < retorno['mestrado\\disciplina'].length; i++) {
+            for(var i = 0; i < retorno['tecnico\\disciplina'].length; i++) {
                 // Criando as options
-                htmlDisciplina += "<option value='" + retorno['mestrado\\disciplina'][i].id + "'>"  + retorno['mestrado\\disciplina'][i].nome + "</option>";
+                htmlDisciplina += "<option value='" + retorno['tecnico\\disciplina'][i].id + "'>"  + retorno['tecnico\\disciplina'][i].nome + "</option>";
             }
 
             // Preenchendo o select
@@ -102,7 +102,7 @@ $(document).on('click', '.frequencia', function () {
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'PUT',
-        url: '/index.php/seracademico/mestrado/turma/frequencias/changeFrequencia/' + idFrequencia,
+        url: '/index.php/seracademico/tecnico/turma/frequencias/changeFrequencia/' + idFrequencia,
         data: {'frequencia' : frequencia},
         datatype: 'json'
     }).done(function (retorno) {

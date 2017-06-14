@@ -119,7 +119,7 @@
             <p style="font-size: 20px;text-indent: 2em; margin-top: 10px;">
                 Declaramos, para os devidos fins de direito, que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
                 matrícula nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b> está regulamente matriculado (a)
-                nesta Instituição de Ensino Superior, FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, ESPECIALIZAÇÃO EM
+                nesta Instituição de Ensino Superior, FASUP – Faculdade de Saúde de Paulista no curso de Pós-graduação “Lato Sensu”, em
                 <b>{!! isset($curso->nome) ? $curso->nome : "" !!}</b>, realizado e certificado pela Faculdade  FASUP
                 (Faculdade de Saúde de Paulista), de acordo com a portaria de
                 credenciamento do MEC de n° {!! isset($curso->portaria_mec_rec) ? $curso->portaria_mec_rec : "" !!} de

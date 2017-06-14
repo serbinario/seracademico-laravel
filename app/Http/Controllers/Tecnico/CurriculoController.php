@@ -29,7 +29,7 @@ class CurriculoController extends Controller
     */
     private $loadFields = [
         'Tecnico\\Curso|ativo,1',
-        'SimpleReport|byCrud,4'
+        'SimpleReport|byCrud,11'
     ];
 
     /**
@@ -50,8 +50,31 @@ class CurriculoController extends Controller
         #Carregando os dados
         $loadFields = $this->service->load($this->loadFields);
 
+        $modulos = $this->selectModulos();
+
         # Retorno para view
-        return view('tecnico.curriculo.index', compact('loadFields'));
+        return view('tecnico.curriculo.index', compact('loadFields', 'modulos'));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function selectModulos()
+    {
+        $arrayModulos = [];
+
+        $modulos = \DB::table('tec_modulos')
+            ->select([
+                'id',
+                'nome'
+            ])
+            ->get();
+
+        foreach ($modulos as $modulo) {
+            $arrayModulos[$modulo->id] = $modulo->nome;
+        }
+
+        return $arrayModulos;
     }
 
     /**
@@ -98,6 +121,7 @@ class CurriculoController extends Controller
             ->join('fac_disciplinas', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_curriculos', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_tipo_disciplinas', 'fac_disciplinas.tipo_disciplina_id', '=', 'fac_tipo_disciplinas.id')
+            ->join('tec_modulos', 'tec_modulos.id', '=', 'fac_curriculo_disciplina.modulo_id')
             ->leftJoin('fac_tipo_avaliacoes', 'fac_disciplinas.tipo_avaliacao_id', '=', 'fac_tipo_avaliacoes.id')
             ->select([
                     'fac_curriculos.id as idCurriculo',
@@ -105,8 +129,9 @@ class CurriculoController extends Controller
                     'fac_disciplinas.nome',
                     'fac_disciplinas.qtd_falta',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
-                    'fac_tipo_avaliacoes.nome as tipo_avaliacao']
-            )
+                    'fac_tipo_avaliacoes.nome as tipo_avaliacao',
+                    'tec_modulos.nome as modulo'
+                ])
             ->where('fac_curriculos.tipo_nivel_sistema_id', 4)
             ->where('fac_curriculos.id', $id);
 

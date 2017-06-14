@@ -60,11 +60,11 @@
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
                         <div class="form-group">
-                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['mestrado\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('cursoSearch', (['' => 'Todos os Cursos'] + $loadFields['tecnico\\curso']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
-                            {!! Form::select('turmaSearch', (['' => 'Todos as Turmas'] + $loadFields['mestrado\\turma']->toArray()), null, array('class' => 'form-control')) !!}
+                            {!! Form::select('turmaSearch', (['' => 'Todos as Turmas'] + $loadFields['tecnico\\turma']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
 
                         <div class="form-group">
@@ -150,15 +150,14 @@
     @include('tecnico.aluno.turma.modal_aluno_turma')
     @include('tecnico.aluno.turma.modal_nova_turma')
     @include('tecnico.aluno.turma.modal_create_situacao')
-    {{--@include('posGraduacao.aluno.turma.modal_edit_nova_turma')--}}
     @include('tecnico.aluno.modal_aluno_documento')
     @include('tecnico.aluno.curriculo.modal_curriculo')
     @include('tecnico.aluno.curriculo.modal_inserir_dispensar_disciplina')
     @include('tecnico.aluno.curriculo.modal_editar_dispensar_disciplina')
     @include('tecnico.aluno.curriculo.modal_create_disciplina_extra_curricular')
     @include('tecnico.aluno.curriculo.modal_create_equivalencia')
-    @include('reports.simple.modals.modal_report_mes_aluno_geral')
-    @include('reports.simple.modals.modal_report_mes_aluno_documento')
+    @include('reports.simple.modals.modal_report_tecnico_aluno_geral')
+    @include('reports.simple.modals.modal_report_tecnico_aluno_documento')
 @stop
 
 @section('javascript')
@@ -170,8 +169,8 @@
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_geral.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_documento.js') }}"></script>
 
     {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/documentos/modal_aluno_documento.js') }}"></script>

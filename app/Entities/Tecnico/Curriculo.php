@@ -27,7 +27,7 @@ class Curriculo extends Model implements Transformable
 		'valido_fim',
 		'curso_id',
         'tipo_nivel_sistema_id',
-        'ativo'
+        'ativo',
 	];
 
     /**
@@ -37,7 +37,6 @@ class Curriculo extends Model implements Transformable
     {
         return $this->belongsTo(Curso::class);
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -59,8 +58,29 @@ class Curriculo extends Model implements Transformable
                 'pre_requisito_3_id',
                 'pre_requisito_4_id',
                 'pre_requisito_5_id',
-                'co_requisito_1_id'
+                'co_requisito_1_id',
+                'modulo_id'
             ]);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        if ($parent instanceof Disciplina) {
+            return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
+        }
+
+        if ($parent instanceof Aluno) {
+            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
+        }
+
+        return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
 
@@ -114,26 +134,6 @@ class Curriculo extends Model implements Transformable
     }
 
     /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-     */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
-    {
-        if ($parent instanceof Disciplina) {
-            return new PivotCurriculoDisciplina($parent, $attributes, $table, $exists);
-        }
-
-        if ($parent instanceof Aluno) {
-            return new PivotAlunoCurso($parent, $attributes, $table, $exists);
-        }
-
-        return parent::newPivot($parent, $attributes, $table, $exists);
-    }
-
-    /**
      * @param $query
      * @param $value
      * @return mixed
@@ -173,8 +173,8 @@ class Curriculo extends Model implements Transformable
      * @param $query
      * @return mixed
      */
-    public function scopePosGraduacao($query)
+    public function scopeTecnico($query)
     {
-        return $query->where('tipo_nivel_sistema_id', 2);
+        return $query->where('tipo_nivel_sistema_id', 4);
     }
 }

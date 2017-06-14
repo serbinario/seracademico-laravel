@@ -74,11 +74,11 @@
             {{--Fim Modal--}}
         </div>
     </div>
-    @include('reports.simple.modals.modal_report_mestrado_prof_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_tecnico_prof_ata_aniversariantes')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_ata_aniversariantes.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_professor_ata_aniversariantes.js')  }}"></script>
 
     <script type="text/javascript">
         var table = $('#professor-grid').DataTable({

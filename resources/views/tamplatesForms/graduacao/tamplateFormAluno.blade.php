@@ -596,7 +596,7 @@
                     {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-9">
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <a href="{{ route('seracademico.graduacao.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
