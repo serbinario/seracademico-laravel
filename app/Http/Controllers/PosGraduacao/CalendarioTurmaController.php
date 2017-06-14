@@ -87,8 +87,8 @@ class CalendarioTurmaController extends Controller
             ->leftJoin('fac_salas', 'fac_calendarios.sala_id', '=', 'fac_salas.id')
             ->select([
                 'fac_calendarios.id',
-                'fac_calendarios.data',
-                'fac_calendarios.data_final',
+                \DB::raw('DATE_FORMAT(fac_calendarios.data, "%d/%m/%Y") as data'),
+                \DB::raw('DATE_FORMAT(fac_calendarios.data_final, "%d/%m/%Y") as data_final'),
                 'fac_calendarios.hora_inicial',
                 'fac_calendarios.hora_final',
                 'pessoas.nome as professor',
