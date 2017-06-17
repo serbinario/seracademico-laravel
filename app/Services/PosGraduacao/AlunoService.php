@@ -309,6 +309,12 @@ class AlunoService
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
+        if(!$aluno->matricula) {
+            $arrayMatricula = $this->tratamentoMatricula($data);
+            $aluno->matricula = $arrayMatricula['matricula'];
+            $aluno->save();
+        }
+
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
