@@ -8,10 +8,7 @@ $(document).ready(function () {
                 maxlength: 200
             },
 
-            'pessoa[data_nasciemento]': {
-                required: true,
-                maxlength: 10
-            },
+
 
             'pessoa[cpf]': {
                 required: true
