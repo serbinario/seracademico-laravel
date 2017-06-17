@@ -163,7 +163,6 @@ class TurmaAlunoController extends Controller
                         ->where('fac_disciplinas.id', '=', $idDisciplina)
                         ->select(['pos_alunos.id']);
                 })
-
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome'

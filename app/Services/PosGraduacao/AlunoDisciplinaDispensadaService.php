@@ -22,7 +22,8 @@ class AlunoDisciplinaDispensadaService
      * AlunoDisciplinaDispensadaService constructor.
      * @p ram AlunoRepository $alunoRepository
      */
-    public function __construct(AlunoDisciplinaDispensadaRepository $repository, AlunoRepository $alunoRepository)
+    public function __construct(AlunoDisciplinaDispensadaRepository $repository,
+                                AlunoRepository $alunoRepository)
     {
         $this->repository = $repository;
         $this->alunoRepository = $alunoRepository;
@@ -53,7 +54,7 @@ class AlunoDisciplinaDispensadaService
      * @throws \Exception
      */
     public function store(array $data) : AlunoDisciplinaDispensada
-    {;
+    {
         # Validando a entrada
         if(!isset($data['disciplina_id']) && !isset($data['aluno_id'])
             && !isset($data['pos_aluno_turma_id']) && !isset($data['motivo'])) {
