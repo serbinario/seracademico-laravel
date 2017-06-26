@@ -125,7 +125,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('valor_turma', 'Valor Turma') !!}
-                                        {!! Form::text('valor_turma', Session::getOldInput('valor_turma')  , array('class' => 'form-control money')) !!}
+                                        {!! Form::text('valor_turma', Session::getOldInput('valor_turma')  , array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('valor_disciplina', 'Valor Disciplina') !!}
-                                        {!! Form::text('valor_disciplina', Session::getOldInput('valor_disciplina')  , array('class' => 'form-control money')) !!}
+                                        {!! Form::text('valor_disciplina', Session::getOldInput('valor_disciplina')  , array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('qtd_parcelas', 'Qtd. Parcelas') !!}
-                                        {!! Form::text('qtd_parcelas', Session::getOldInput('qtd_parcelas')  , array('class' => 'form-control numberThree')) !!}
+                                        {!! Form::text('qtd_parcelas', Session::getOldInput('qtd_parcelas')  , array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('maximo_vagas', 'Máximo Vagas') !!}
-                                        {!! Form::text('maximo_vagas', Session::getOldInput('maximo_vagas')  , array('class' => 'form-control numberThree')) !!}
+                                        {!! Form::text('maximo_vagas', Session::getOldInput('maximo_vagas')  , array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('minimo_vagas', 'Mínimo Vagas') !!}
-                                        {!! Form::text('minimo_vagas', Session::getOldInput('minimo_vagas')  , array('class' => 'form-control numberThree')) !!}
+                                        {!! Form::text('minimo_vagas', Session::getOldInput('minimo_vagas')  , array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
