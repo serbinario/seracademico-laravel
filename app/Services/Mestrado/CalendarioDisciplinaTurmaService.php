@@ -91,7 +91,7 @@ class CalendarioDisciplinaTurmaService
         $this->tratamentoCampos($data);
 
         $dataFinal = $data['data_final'] ?? null;
-        $dataHoje  = \DateTime("now");
+        $dataHoje  = new \DateTime("now");
 
         if($dataFinal) {
             $dataFinal = \DateTime::createFromFormat("d/m/Y", $dataFinal);
