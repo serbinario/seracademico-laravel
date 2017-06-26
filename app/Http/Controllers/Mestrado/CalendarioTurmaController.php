@@ -261,7 +261,7 @@ class CalendarioTurmaController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
      * @return mixed
      */
     public function removerDisciplina(Request $request)

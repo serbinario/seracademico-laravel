@@ -140,7 +140,7 @@ class TurmaAlunoController extends Controller
                 })
                 ->groupBy('pos_alunos.id')
                 ->where('fac_cursos.id', $idCurso)
-                ->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
+                //->where('pos_alunos_turmas.turma_id', '!=', $idTurma)
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome'
