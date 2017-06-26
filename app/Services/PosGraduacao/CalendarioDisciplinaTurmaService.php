@@ -91,6 +91,13 @@ class CalendarioDisciplinaTurmaService
         #Aplicação das regras de negócios
         $this->tratamentoCampos($data);
 
+        $dataFinal = $data['data_final'] ?? null;
+        $dataHoje  = new \DateTime("now");
+
+        if($dataFinal) {
+            $dataFinal = \DateTime::createFromFormat("d/m/Y", $dataFinal);
+        }
+
         #Salvando o registro pincipal
         $calendarioTurma = $this->repository->create($data);
         $turmaDisciplina = \DB::table('fac_turmas_disciplinas')
@@ -112,7 +119,7 @@ class CalendarioDisciplinaTurmaService
                 $turma = $curriculo->pivot->turmas()->get()->last();
 
                 # Verificando se a turma existe
-                if($turma && $turma->id == $turmaDisciplina[0]->turma_id) {
+                if($turma && $turma->id == $turmaDisciplina[0]->turma_id && $dataFinal > $dataHoje) {
                     # Filtrando se o aluno possui nota cadastrada
                     $nota = $turma->pivot->notas()->get()->filter(function ($nota) use ($turmaDisciplina) {
                         return $nota->disciplina_id == $turmaDisciplina[0]->disciplina_id;
