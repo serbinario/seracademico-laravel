@@ -3,6 +3,7 @@
 namespace Seracademico\Services\Mestrado;
 
 use Seracademico\Entities\Mestrado\AlunoFrequencia;
+use Seracademico\Entities\Mestrado\AlunoNota;
 use Seracademico\Entities\Mestrado\TurmaDisciplina;
 use Seracademico\Repositories\Mestrado\AlunoNotaRepository;
 use Seracademico\Repositories\Mestrado\AlunoRepository;
