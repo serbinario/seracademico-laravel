@@ -44,12 +44,10 @@ $(document).ready(function () {
             },
 
             valor_turma: {
-                integer: true,
                 maxlength: 12
             },
 
             valor_disciplina: {
-                integer: true,
                 maxlength: 12
             },
 
