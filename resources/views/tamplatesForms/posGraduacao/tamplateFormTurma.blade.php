@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('matricula_inicio', 'Matrícula (Início)') !!}
-                                        {!! Form::text('matricula_inicio', Session::getOldInput('matricula_inicio'), array('class' => 'form-control datepicker date')) !!}
+                                        {!! Form::text('matricula_inicio', Session::getOldInput('matricula_inicio'), array('class' => 'form-control datepicker')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('matricula_fim', 'Matrícula (Fim)') !!}
-                                        {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker date')) !!}
+                                        {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('aula_inicio', 'Aula (Início)') !!}
-                                        {!! Form::text('aula_inicio', Session::getOldInput('aula_inicio'), array('class' => 'form-control datepicker date')) !!}
+                                        {!! Form::text('aula_inicio', Session::getOldInput('aula_inicio'), array('class' => 'form-control datepicker')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('aula_final', 'Aula (Final)') !!}
-                                        {!! Form::text('aula_final', Session::getOldInput('aula_final'), array('class' => 'form-control datepicker date')) !!}
+                                        {!! Form::text('aula_final', Session::getOldInput('aula_final'), array('class' => 'form-control datepicker')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         {!! Form::label('vencimento_inicial', 'Vencimento Inicial') !!}
-                                        {!! Form::text('vencimento_inicial', Session::getOldInput('vencimento_inicial'), array('class' => 'form-control datepicker date')) !!}
+                                        {!! Form::text('vencimento_inicial', Session::getOldInput('vencimento_inicial'), array('class' => 'form-control datepicker')) !!}
                                     </div>
                                 </div>
                             </div>
