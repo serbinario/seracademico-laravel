@@ -177,5 +177,6 @@ function data($dia, $mes, $ano, $semana) {
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
