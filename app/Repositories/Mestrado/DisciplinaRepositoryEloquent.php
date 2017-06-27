@@ -25,19 +25,6 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return DisciplinaValidator::class;
-    }
-
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
