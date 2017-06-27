@@ -118,7 +118,7 @@ class CalendarioDisciplinaTurmaService
                 $turma = $curriculo->pivot->turmas()->get()->last();
 
                 # Verificando se a turma existe
-                if($turma && $turma->id == $turmaDisciplina[0]->turma_id && $dataFinal > $dataHoje) {
+                if($turma && $turma->id == $turmaDisciplina[0]->turma_id && $dataFinal >= $dataHoje) {
                     # Filtrando se o aluno possui nota cadastrada
                     $nota = $turma->pivot->notas()->get()->filter(function ($nota) use ($turmaDisciplina) {
                         return $nota->disciplina_id == $turmaDisciplina[0]->disciplina_id;
