@@ -155,12 +155,17 @@ function data($dia, $mes, $ano, $semana) {
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 130px;">
-                Luciana Teixeira Vitor<br>
-                Gestora do Centro de Estudos Avançados<br>
-                De Extensão Pós Graduação<br>
-                CEA/PE
-            </p></center>
+        <center>
+            <div style="margin-top: 130px;">
+                <h1 style="position: absolute; left: 0; right: 0; top: 660px;"><img width="220px;" src="{{ asset('img/assinatura_luciana.png') }}" alt=""></h1>
+                <p style="font-size: 15px;text-indent: 2em;">
+                    Luciana Teixeira Vitor<br>
+                    Gestora do Centro de Estudos Avançados<br>
+                    De Extensão Pós Graduação<br>
+                    CEA/PE
+                </p>
+            </div>
+        </center>
 
         <div id="rodape" style="position: absolute; bottom: 0; margin-left: auto; margin-right: auto; left: 0; right: 0;">
             <div style="text-align: center; font-size: 11px;">
