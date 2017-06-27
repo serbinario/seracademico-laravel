@@ -138,6 +138,7 @@ function data($dia, $mes, $ano, $semana) {
             c) Parecer CNE/CES n° 263/2006.
         </div>
 
+
         <p style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             Declara para os devidos fins que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
             matricula de Nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b>,
@@ -147,8 +148,9 @@ function data($dia, $mes, $ano, $semana) {
             está matriculada (o) no Curso de Especialização de
             Pós Graduação LATO SENSU em {{ $curso->nome }}, ministrado por esta
             Instituição o qual está devidamente registrado no Sistema e-MEC.
-            Com carga horária total de 420 horas/aulas, iniciado em 04 de março de 2017 com previsão de término no
-            dia, 05 de Maio de 2018. Aulas aos sábados, das 08h às 17h.
+            Com carga horária total de {{ $curso->carga_horaria }} horas/aulas, iniciado em
+            {{ strftime('%d de %B de %Y', strtotime($turma->aula_inicio)) }} com previsão de término no
+            dia, {{ strftime('%d de %B de %Y', strtotime($turma->aula_final)) }}. Aulas aos sábados, das 08h às 17h.
         </p>
 
         <p style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
