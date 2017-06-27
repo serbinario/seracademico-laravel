@@ -19,12 +19,12 @@ $(document).ready(function () {
             },
 
             duracao_meses: {
-                integer: 3
+                integer: true
             },
 
             sede_id: {
                 required: true,
-                integer: 1
+                integer: true
             },
 
             matricula_inicio: {
@@ -75,8 +75,7 @@ $(document).ready(function () {
             },
 
             sala_id: {
-                integer: true,
-                maxlength: 1
+                integer: true
             },
 
             obs_sala: {
@@ -85,11 +84,11 @@ $(document).ready(function () {
         },
         //For custom messages
         /*messages: {
-            nome_operadores:{
-                required: "Enter a username",
-                minlength: "Enter at least 5 characters"
-            }
-        },*/
+         nome_operadores:{
+         required: "Enter a username",
+         minlength: "Enter at least 5 characters"
+         }
+         },*/
         //Define qual elemento será adicionado
         errorElement : 'small',
         errorPlacement: function(error, element) {

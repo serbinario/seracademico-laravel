@@ -25,16 +25,6 @@ class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-         return TurmaValidator::class;
-    }
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

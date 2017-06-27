@@ -19,12 +19,12 @@ $(document).ready(function () {
             },
 
             duracao_meses: {
-                integer: true
+                integer: 3
             },
 
             sede_id: {
                 required: true,
-                integer: true
+                integer: 1
             },
 
             matricula_inicio: {
@@ -57,6 +57,7 @@ $(document).ready(function () {
             },
 
             vencimento_inicial: {
+                integer: true,
                 maxlength: 12
             },
 
@@ -75,7 +76,8 @@ $(document).ready(function () {
             },
 
             sala_id: {
-                integer: true
+                integer: true,
+                maxlength: 1
             },
 
             obs_sala: {
