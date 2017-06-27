@@ -145,7 +145,7 @@ function data($dia, $mes, $ano, $semana) {
             RG: <b>{!! isset($aluno->pessoa['identidade']) ? $aluno->pessoa['identidade'] : "" !!}</b>
             <b>{!! isset($aluno->pessoa['orgao_rg']) ? $aluno->pessoa['orgao_rg'] : "" !!}</b>,
             está matriculada (o) no Curso de Especialização de
-            Pós Graduação LATO SENSU em Educação Inclusiva e Coordenação Pedagógica, ministrado por esta
+            Pós Graduação LATO SENSU em {{ $curso->nome }}, ministrado por esta
             Instituição o qual está devidamente registrado no Sistema e-MEC.
             Com carga horária total de 420 horas/aulas, iniciado em 04 de março de 2017 com previsão de término no
             dia, 05 de Maio de 2018. Aulas aos sábados, das 08h às 17h.
