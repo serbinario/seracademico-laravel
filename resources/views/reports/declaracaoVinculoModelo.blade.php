@@ -154,14 +154,14 @@ function data($dia, $mes, $ano, $semana) {
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 40px;">
+        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 70px;">
                 Luciana Teixeira Vitor<br>
                 Gestora do Centro de Estudos Avançados<br>
                 De Extensão Pós Graduação<br>
                 CEA/PE
             </p></center>
 
-        <div id="rodape" style="position: absolute; bottom: 0">
+        <div id="rodape" style="position: absolute; bottom: 0; margin-left: auto; margin-right: auto; left: 0; right: 0;">
             <div style="text-align: center; font-size: 11px;">
                 <p style="margin: 0;">Rua Engenheiro Benedito Mario da Silva nº 95, Bairro Cajuru</p>
                 <p style="margin: 0;">Curitiba – Paraná Te 041 32 26 454 5 – http://www.facimod.com.br/</p>
