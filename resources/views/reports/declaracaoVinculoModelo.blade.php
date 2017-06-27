@@ -55,11 +55,11 @@ function data($dia, $mes, $ano, $semana) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title></title>
     <style type="text/css">
-        #container {
-            border-style: double;
-            border-color: #000080;
-            border-width: thick;
-        }
+        /*#container {*/
+            /*border-style: double;*/
+            /*border-color: #000080;*/
+            /*border-width: thick;*/
+        /*}*/
 
         /*#background {
             width: 100%;
@@ -114,7 +114,7 @@ function data($dia, $mes, $ano, $semana) {
             <img src="{{ asset('img/logo_modelo.png')  }}" alt="" id="logo">
         </div>
         <br/>
-        <center><div style="font-size: 10px; margin-top:10px; margin-bottom: 5px;">
+        <center><div style="font-size: 11px; margin-top:10px; margin-bottom: 5px;">
                 Credenciada pela Portaria Ministerial n° 2.413 de 11/08/2004 (D.O.U. de 12/08/2004)</br>
                 Mantida pelo Instituto Modelo de Ensino Superior Ltda.</br>
                 CNPJ: 05.121.388/0001-00</br>
@@ -124,21 +124,21 @@ function data($dia, $mes, $ano, $semana) {
             <span><b>DECLARAÇÃO DE VÍNCULO</b></span>
         </center>
         <br/>
-        <div style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <div style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             O Centro de Estudos Avançados de Extensão e Pós Graduação da Faculdade Modelo – CEA/PE por competência delegada e amparado:
         </div>
-        <div style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <div style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             a) Nota Técnica n° 388/2013 – CGLNRS/DPR/SERES/MEC, de 21 de junho de 2013.
         </div>
-        <div style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <div style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             b) Resolução CNE/CES n° 01/2007, n° 04/2011 e n° 07/2011, por dispositivo da Portaria Normativa MEC n° 40/2007, republicada em 29/12/2010.
         </div>
-        <div style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <div style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             c) Parecer CNE/CES n° 263/2006.
         </div>
 
-        <p style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
-            Declara que para os devidos fins que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
+        <p style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
+            Declara para os devidos fins que <b>{!! isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" !!}</b>,
             matricula de Nº <b>{!! isset($aluno['matricula']) ? $aluno['matricula'] : "" !!}</b>,
             portadora do CPF: <b>{!! isset($aluno->pessoa['cpf']) ? $aluno->pessoa['cpf'] : "" !!}</b> e
             RG: <b>{!! isset($aluno->pessoa['identidade']) ? $aluno->pessoa['identidade'] : "" !!}</b>
@@ -150,11 +150,11 @@ function data($dia, $mes, $ano, $semana) {
             dia, 05 de Maio de 2018. Aulas aos sábados, das 08h às 17h.
         </p>
 
-        <p style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <p style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <center><p style="font-size: 14px;text-indent: 2em; margin-top: 10px;">
+        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 12px;">
                 Luciana Teixeira Vitor<br>
                 Gestora do Centro de Estudos Avançados<br>
                 De Extensão Pós Graduação<br>
