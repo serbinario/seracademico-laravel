@@ -120,7 +120,8 @@ function data($dia, $mes, $ano, $semana) {
                 CNPJ: 05.121.388/0001-00</br>
                 Centro de Estudos Avançados de Extensão e Pós Graduação – CEA</div></center>
         <br/>
-        <center>
+
+        <center style="margin-top: 8%;">
             <span><b>DECLARAÇÃO DE VÍNCULO</b></span>
         </center>
         <br/>
@@ -154,7 +155,7 @@ function data($dia, $mes, $ano, $semana) {
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 150px;">
+        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 130px;">
                 Luciana Teixeira Vitor<br>
                 Gestora do Centro de Estudos Avançados<br>
                 De Extensão Pós Graduação<br>
