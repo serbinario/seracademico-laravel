@@ -154,7 +154,7 @@ function data($dia, $mes, $ano, $semana) {
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 70px;">
+        <center><p style="font-size: 15px;text-indent: 2em; margin-top: 150px;">
                 Luciana Teixeira Vitor<br>
                 Gestora do Centro de Estudos Avançados<br>
                 De Extensão Pós Graduação<br>
