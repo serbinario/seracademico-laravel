@@ -807,7 +807,7 @@
             }
         });
 
-        //Validações javascript
+        /*//Validações javascript
         $('#formAluno').bootstrapValidator({
             fields: {
                 'img': {
@@ -819,7 +819,7 @@
                     }
                 },
             },
-        });
+        });*/
 
 //        $('#formAluno').bootstrapValidator({
 //            fields: {

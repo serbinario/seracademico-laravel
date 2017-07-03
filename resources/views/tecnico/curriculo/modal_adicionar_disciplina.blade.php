@@ -10,18 +10,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row" style="margin-bottom: 3%;">
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary" type="button" id="addDisciplina">Adicionar Disciplinas</button>
-                                        </span>
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="fg-line">
                                     {!! Form::label('', 'Módulo') !!}
                                     {!! Form::select('modulo_id', ([0 => "Selecione o módulo"] + $modulos), Session::getOldInput('modulo_id'), array('class' => 'form-control', 'id' => 'modulo_id')) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <label>Disciplinas</label>
+                                    <select  id="select-disciplina" multiple="multiple" class="form-control"></select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary" type="button" id="addDisciplina" style="margin-top:23px">Adicionar Disciplinas</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +38,6 @@
                                         <th >Acão</th>
                                     </tr>
                                     </thead>
-
                                     <tfoot>
                                     <tr>
                                         <th>Nome</th>

@@ -768,7 +768,7 @@
 
 @section('javascript')
     <script type="text/javascript">
-        //Setando cpf como login
+        //Setando cpf como login para uso no portal
         $(document).on('focusout', '#cpf', function () {
             var cpf = $('#cpf').val();
             $('#login').val(cpf);
@@ -803,7 +803,7 @@
         }
 
         //Validações javascript
-        $('#formProfessor').bootstrapValidator({
+        /*$('#formProfessor').bootstrapValidator({
             fields: {
                 'img': {
                     validators: {
@@ -814,7 +814,7 @@
                     }
                 },
             },
-        });
+        });*/
 
         //Carregando as cidades
         $(document).on('change', "#estado", function () {

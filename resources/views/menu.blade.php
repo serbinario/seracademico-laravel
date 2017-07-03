@@ -205,6 +205,7 @@
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.tecnico.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.modulo.index') }}"><i class="material-icons">collections_bookmark</i>Módulos</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
@@ -312,7 +313,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('seracademico.portal.indexPortal') }}" target="__blank"><i class="flaticon-business"></i> Portal</a>
+                    <a href="http://portalacademico-alpha.com/index.php" target="__blank"><i class="flaticon-business"></i> Portal</a>
                 </li>
                 @endrole
             </ul>

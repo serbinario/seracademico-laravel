@@ -234,5 +234,5 @@
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/dateBr.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/validacoes/regrasAdicionais/decimal.js')  }}"></script>
     {{--Regras de validação--}}
-    <script type="text/javascript" src="{{ asset('/js/validacoes/tecnico/turma.js')  }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/validacoes/tecnico/turma.js')  }}"></script>--}}
 @stop

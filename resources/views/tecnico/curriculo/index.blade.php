@@ -191,6 +191,8 @@
                         'columnWhere' :   'curriculo_id',
                         'columnNotWhere': 'id',
                         'culmnNotGet':    'disciplina_id',
+                        'valueWhere':     4,
+                        'fieldWhere':     'tipo_nivel_sistema_id',
                         'valueNotWhere':    idCurriculo
                     };
                 },

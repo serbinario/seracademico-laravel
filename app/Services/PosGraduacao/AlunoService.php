@@ -280,6 +280,18 @@ class AlunoService
         $this->tratamentoCampos($data);
         $this->tratamentoCurso($data);
 
+        //encriptando senha
+        $newPassword = "";
+
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $newPassword = \bcrypt($data['password']);
+        }
+
+        //inserindo senha encriptada no array principal
+        $data['password'] = $newPassword;
+
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
             # Recuperando a conexão

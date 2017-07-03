@@ -5,6 +5,7 @@ namespace Seracademico\Validators\Tecnico;
 use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
+use Seracademico\Providers\Validators\UniqueTecDisciplina;
 
 class DisciplinaValidator extends LaravelValidator
 {
@@ -18,7 +19,9 @@ class DisciplinaValidator extends LaravelValidator
 		'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
 		'digits_between' => ':attribute deve ter entre :min - :max.',
 		'cpf_br' => ':attribute deve ser um número de CPF válido',
-		'unique' => ':attribute já se encontra cadastrado'
+		'unique' => ':attribute já se encontra cadastrado(a)',
+		'tec_unique_disciplina' => ':attribute já se encontra cadastrado(a)',
+		'tec_unique_codigo' => ':attribute já se encontra cadastrado(a)'
 	];
 
 	protected $attributes = [
@@ -32,8 +35,8 @@ class DisciplinaValidator extends LaravelValidator
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             
-			'nome' =>  'required|max:200|unique:fac_disciplinas,nome',
-			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo',
+			'nome' => 'required|max:200|tec_unique_disciplina',
+			'codigo' => 'required|max:15|tec_unique_codigo',
 			'carga_horaria' => 'required|digits_between:1,5|numeric' ,
 			'qtd_falta' =>  'required|numeric' ,
 			'tipo_disciplina_id' =>  'integer' ,
