@@ -32,7 +32,17 @@ $('#btnSalvarCalendario').click(function() {
         type: 'POST',
         url: '/index.php/seracademico/posgraduacao/turma/calendario/store',
         data: dados,
-        datatype: 'json'
+        datatype: 'json',
+        beforeSend: function(){
+            $(".carregamento").show();
+            $('#btnSalvarCalendario').attr('disabled', 'disabled');
+            $('#btnCancelarNovoCalendario').attr('disabled', 'disabled');
+        },
+        complete: function(){
+            $(".carregamento").hide();
+            $('#btnSalvarCalendario').removeAttr('disabled');
+            $('#btnCancelarNovoCalendario').removeAttr('disabled');
+        }
     }).done(function (retorno) {
         $('#modal-novo-calendario').modal('toggle');
         tableCargaHoraria.load();
