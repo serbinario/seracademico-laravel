@@ -1,9 +1,20 @@
 <!-- Modal principal de disciplinas -->
-<div id="modal-novo-calendario" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
+<style type="text/css">
+    .carregamento{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0;
+        left: 0;
+        display: none;
+    }
+</style>
+<div id="modal-novo-calendario" class="modal fade modal-profile" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 40%">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
                 <h4 class="modal-title">Criação do calendário das disciplinas</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
@@ -51,11 +62,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="carregamento">
+                        <img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" id="btnSalvarCalendario">Salvar</button>
-                <button class="btn btn-default" data-dismiss="modal" id="btnCancelarNovoCalendario">Cancelar</button>
+                <button class="btn btn-default" data-dismiss="modal" id="btnCancelarNovoCalendario">Fechar</button>
             </div>
         </div>
     </div>

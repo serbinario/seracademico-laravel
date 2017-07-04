@@ -25,14 +25,24 @@ $('#btnSalvarCalendario').click(function() {
         'hora_inicial'       : hora_inicial + ':00',
         'hora_final'         : hora_final + ':00',
         'sala_id'            : sala_id,
-        'professor_id'       : professor_id,
+        'professor_id'       : professor_id
     };
 
     jQuery.ajax({
         type: 'POST',
         url: '/index.php/seracademico/mestrado/turma/calendario/store',
         data: dados,
-        datatype: 'json'
+        datatype: 'json',
+        beforeSend: function(){
+            $(".carregamento").show();
+            $('#btnSalvarCalendario').attr('disabled', 'disabled');
+            $('#btnCancelarNovoCalendario').attr('disabled', 'disabled');
+        },
+        complete: function(){
+            $(".carregamento").hide();
+            $('#btnSalvarCalendario').removeAttr('disabled');
+            $('#btnCancelarNovoCalendario').removeAttr('disabled');
+        }
     }).done(function (retorno) {
         $('#modal-novo-calendario').modal('toggle');
         tableCargaHoraria.load();
