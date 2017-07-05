@@ -329,6 +329,5 @@
         $('#disciplinaFrequenciasSearch').select2({ width: 360 });
         //modal add notas
         $('#disciplinaSearch').select2({ width: 360 });
-
     </script>
 @stop
