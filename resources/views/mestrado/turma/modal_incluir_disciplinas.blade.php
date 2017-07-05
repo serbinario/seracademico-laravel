@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="incluir-disciplinas">Disciplinas</label>
-                        <select name="incluir-disciplinas" id="incluir-disciplinas" class="form-control"></select>
+                        <select name="incluir-disciplinas" id="incluir-disciplinas" class="form-control select2"></select>
                     </div>
                 </div>
             </div>

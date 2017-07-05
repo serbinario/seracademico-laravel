@@ -38,7 +38,6 @@
     {{--<link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.css" />
     <link rel="stylesheet" type="text/css" href="/lib/selectize/dist/css/selectize.bootstrap3.css" />
     <link rel="stylesheet" type="text/css" href="/css/selectize/dimenssoesSelectize.css" />--}}
-
     @yield('css')
 </head>
 
@@ -420,6 +419,8 @@
 <script src="{{ asset('lib/selectize/dist/js/selectize.js')  }}"></script>
 <script src="{{ asset('/lib/selectize-infinite_scroll/infinite_scroll/plugin.js')  }}"></script>
 <script type="text/javascript">
+    //$('.select2').select2();
+
     //Metodos para uso da API jquery.validator
     $.validator.setDefaults({
         debug: false, //metodo que permite visualizar erros que normalmente não são exibidos. Desabilitar por padrão

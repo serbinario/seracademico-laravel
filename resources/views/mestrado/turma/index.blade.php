@@ -312,5 +312,23 @@
         function execute(callback) {
             callback();
         }
+
+        //modal calendario > modal adicionar calendario > select professor
+        $('#professor_id').select2({ width: 142 });
+        //modal calendario > modal adicionar disciplina > select disciplina
+        $('#incluir-disciplinas').select2({ width: 250 });
+        //modal gerencimaneto alunos
+        $('#disciplinaTurmaALunoSearch').select2({ width: 360 });
+        //modal gerencimaneto alunos > adicionar aluno (reposição)
+        $('#calendarioTurmaALunoSearch').select2({ width: 190 });
+        //modal gerencimaneto alunos > adicionar aluno (reposição)
+        $('#turma_disciplina_id').select2({ width: 250 });
+        $('#add_aluno_curso').select2({ width: 250 });
+        $('#turma_aluno_id').select2({ width: 250 });
+        //modal add frequencia
+        $('#disciplinaFrequenciasSearch').select2({ width: 360 });
+        //modal add notas
+        $('#disciplinaSearch').select2({ width: 360 });
+
     </script>
 @stop

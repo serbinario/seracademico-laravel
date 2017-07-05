@@ -54,7 +54,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="professor_id">Professor</label>
-                                <select name="professor_id" class="form-control" id="professor_id">
+                                <select name="professor_id" class="form-control select2" id="professor_id">
                                     @foreach($loadFields['professor'] as $key => $value)
                                         <option value="{{ $key  }}">{{ $value  }}</option>
                                     @endforeach

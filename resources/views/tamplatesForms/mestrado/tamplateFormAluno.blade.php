@@ -31,7 +31,7 @@
             <div class="form-group col-md-2">
                 <div class="fg-line">
                     {!! Form::label('pessoa[sexos_id]', 'Sexo ') !!}
-                    {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control')) !!}
+                    {!! Form::select('pessoa[sexos_id]', $loadFields['sexo'], Session::getOldInput('pessoa[sexos_id]'), array('class' => 'form-control select2')) !!}
                 </div>
             </div>
             <div class="form-group col-md-2">
@@ -116,31 +116,31 @@
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[estados_civis_id]', 'Estado Civil ') !!}
-                                    {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[estados_civis_id]', $loadFields['estadocivil'], Session::getOldInput('pessoa[estados_civis_id]'),array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[grau_instrucoes_id]', 'Grau de instrução') !!}
-                                    {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-2 col-sm-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
-                                    {!! Form::select('pessoa[profissoes_id]', (['' => 'Selecione uma Profissão'] + $loadFields['profissao']->toArray()), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[profissoes_id]', (['' => 'Selecione uma Profissão'] + $loadFields['profissao']->toArray()), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}
-                                    {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
-                                    {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                             <div class="form-group col-md-3">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[uf_nascimento_id]', 'UF Nascimento') !!}
-                                    {!! Form::select('pessoa[uf_nascimento_id]', $loadFields['estado'], Session::getOldInput('pessoa[uf_nascimento_id]'),array('class' => 'form-control')) !!}
+                                    {!! Form::select('pessoa[uf_nascimento_id]', $loadFields['estado'], Session::getOldInput('pessoa[uf_nascimento_id]'),array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
@@ -360,7 +360,7 @@
                             <div class="form-group col-md-3">
                                 {!! Form::label('estado', 'UF ') !!}
                                 @if(isset($aluno->pessoa->endereco->bairro->cidade->estado->id))
-                                    {!! Form::select('estado', $loadFields['estado'], $aluno->pessoa->endereco->bairro->cidade->estado->id, array('class' => 'form-control', 'id' => 'estado')) !!}
+                                    {!! Form::select('estado', $loadFields['estado'], $aluno->pessoa->endereco->bairro->cidade->estado->id, array('class' => 'form-control ', 'id' => 'estado')) !!}
                                 @else
                                     {!! Form::select('estado', $loadFields['estado'], Session::getOldInput('estado'), array('class' => 'form-control', 'id' => 'estado')) !!}
                                 @endif
@@ -368,7 +368,7 @@
                             <div class="form-group col-md-4">
                                 {!! Form::label('cidade', 'Cidade ') !!}
                                 @if(isset($aluno->pessoa->endereco->bairro->cidade->id))
-                                    {!! Form::select('cidade', array($aluno->pessoa->endereco->bairro->cidade->id => $aluno->pessoa->endereco->bairro->cidade->nome), $aluno->pessoa->endereco->bairro->cidade->id,array('class' => 'form-control', 'id' => 'cidade')) !!}
+                                    {!! Form::select('cidade', array($aluno->pessoa->endereco->bairro->cidade->id => $aluno->pessoa->endereco->bairro->cidade->nome), $aluno->pessoa->endereco->bairro->cidade->id,array('class' => 'form-control ', 'id' => 'cidade')) !!}
                                 @else
                                     {!! Form::select('cidade', array(), Session::getOldInput('cidade'),array('class' => 'form-control', 'id' => 'cidade')) !!}
                                 @endif
@@ -376,7 +376,7 @@
                             <div class="form-group col-md-3">
                                 {!! Form::label('pessoas[endereco][bairros_id]', 'Bairro ') !!}
                                 @if(isset($aluno->pessoa->endereco->bairro->id))
-                                    {!! Form::select('pessoa[endereco][bairros_id]', array($aluno->pessoa->endereco->bairro->id => $aluno->pessoa->endereco->bairro->nome), $aluno->pessoa->endereco->bairro->id,array('class' => 'form-control', 'id' => 'bairro')) !!}
+                                    {!! Form::select('pessoa[endereco][bairros_id]', array($aluno->pessoa->endereco->bairro->id => $aluno->pessoa->endereco->bairro->nome), $aluno->pessoa->endereco->bairro->id,array('class' => 'form-control ', 'id' => 'bairro')) !!}
                                 @else
                                     {!! Form::select('pessoa[endereco][bairros_id]', array(), null,array('class' => 'form-control', 'id' => 'bairro')) !!}
                                 @endif
@@ -384,7 +384,7 @@
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[endereco][complemento]', 'Complemento ') !!}
-                                    {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control')) !!}
+                                    {!! Form::text('pessoa[endereco][complemento]', Session::getOldInput('pessoa[endereco][complemento]'), array('class' => 'form-control ')) !!}
                                 </div>
                             </div>
                         </div>
@@ -672,9 +672,9 @@
                         <div class="fg-line">
                             {!! Form::label('turno_id', 'Turno') !!}
                             @if(isset($aluno->id))
-                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control select2')) !!}
                             @else
-                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
+                                {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control select2')) !!}
                             @endif
                         </div>
                     </div>
@@ -753,7 +753,7 @@
                             <div class="form-group col-md-4">
                                 <div class="fg-line">
                                     {!! Form::label('professor_orientador_id', 'Professor Orientador') !!}
-                                    {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control select2')) !!}
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
@@ -916,7 +916,6 @@
     {{--Regras de validação--}}
     {{--<script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>--}}
     <script type="text/javascript">
-
         //Evento para exibir input e botão curso pós
         $('#linkNovaPosGraduacao').on('click', function(){
             $('#linkNovaPosGraduacao').hide();
