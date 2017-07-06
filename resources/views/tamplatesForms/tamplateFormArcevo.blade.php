@@ -457,3 +457,8 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_acervo.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/js/biblioteca/acervoNPeriodico/script_crud.js')}}"></script>
+@stop
