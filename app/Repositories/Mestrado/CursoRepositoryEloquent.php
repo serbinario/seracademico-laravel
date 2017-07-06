@@ -25,16 +25,6 @@ class CursoRepositoryEloquent extends BaseRepository implements CursoRepository
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-         return CursoValidator::class;
-    }
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
