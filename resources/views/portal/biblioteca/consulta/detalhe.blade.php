@@ -532,13 +532,17 @@
                                 @endif
                                 @if($exemplar['edicao'] && $exemplar['acervo']['tipo_periodico'] == '1')
                                     {{$exemplar['edicao']}}. ed.
-                                    @if($exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada']) ampl.
-                                    @elseif($exemplar['revisada'] && !$exemplar['ampliada'] && !$exemplar['atualizada']) rev.
-                                    @elseif($exemplar['atualizada'] && !$exemplar['ampliada'] && !$exemplar['revisada']) atual.
+                                    @if($exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada'] && !$exemplar['revista']) ampl.
+                                    @elseif($exemplar['revisada'] && !$exemplar['ampliada'] && !$exemplar['atualizada'] && !$exemplar['revista'] ) rev.
+                                    @elseif($exemplar['atualizada'] && !$exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['revista']) atual.
+                                    @elseif($exemplar['revista'] && !$exemplar['ampliada'] && !$exemplar['revisada'] && !$exemplar['atualizada']) revis.
                                     @elseif($exemplar['ampliada'] && $exemplar['revisada']) ampl. e rev.
                                     @elseif($exemplar['ampliada'] && $exemplar['atualizada']) ampl. e atual.
                                     @elseif($exemplar['revisada'] && $exemplar['atualizada']) rev. e atual.
-                                    @elseif($exemplar['revisada'] && $exemplar['atualizada'] && $exemplar['ampliada']) ampl. e rev. e atual.
+                                    @elseif($exemplar['revista'] && $exemplar['atualizada']) revis. e atual.
+                                    @elseif($exemplar['revista'] && $exemplar['revisada']) revis. e rev.
+                                    @elseif($exemplar['revista'] && $exemplar['ampliada']) revis. e ampl.
+                                    @elseif($exemplar['revisada'] && $exemplar['atualizada'] && $exemplar['ampliada'] && $exemplar['revista']) ampl. e rev. e atual. e revis.
                                     @endif
                                 @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')

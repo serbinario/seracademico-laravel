@@ -42,6 +42,7 @@ class Exemplar extends Model implements Transformable
 		'artigos',
 		'ampliada',
 		'revisada',
+		'revista',
 		'atualizada',
 		'vol_periodico',
 		'link',

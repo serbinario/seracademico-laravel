@@ -224,6 +224,13 @@
                             {!! Form::label('atualizada', 'Atualizada', false) !!}
                         </div>
                     </div>
+                    <div class="col-md-2" style="margin-top: 16px;">
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('revista', 0) !!}
+                            {!! Form::checkbox('revista', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('revista', 'Revista', false) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">

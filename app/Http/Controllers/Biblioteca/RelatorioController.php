@@ -301,6 +301,7 @@ class RelatorioController extends Controller
             ->where('bib_arcevos.tipo_periodico', '=', '1')
             ->select([
                 \DB::raw('COUNT(bib_exemplares.id) as qtd'),
+                \DB::raw('SUM(bib_exemplares.valor) as valorTotal'),
             ])->first();
 
         return \PDF::loadView('reports.biblioteca.relatorio_deAtividades',
