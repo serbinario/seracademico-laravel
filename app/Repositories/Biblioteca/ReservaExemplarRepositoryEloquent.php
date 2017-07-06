@@ -25,19 +25,6 @@ class ReservaExemplarRepositoryEloquent extends BaseRepository implements Reserv
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return ReservaExemplarValidator::class;
-    }
-
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

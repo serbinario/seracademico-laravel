@@ -36,3 +36,7 @@
     </div>
     {{--Fim Buttons Submit e Voltar--}}
 </div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{asset('/js/biblioteca/responsavel/script_crud.js')}}"></script>
+@stop

@@ -227,10 +227,10 @@ class EmprestarService
      * @param $id
      * @return mixed
      */
-    public function renovacao($id){
+    public function renovacao($id) {
 
         $emprestimo = $this->repository->find($id);
-        $dataObj   = \DateTime::createFromFormat('Y-m-d', $emprestimo->data_devolucao);
+        $dataObj   = \DateTime::createFromFormat('Y-m-d H:i:s', $emprestimo->data_devolucao);
         $dia       = 0;
 
         # Pegas os parâmetros para saber a quantidade de dias de empréstimo por tipo de pessoa
@@ -239,6 +239,7 @@ class EmprestarService
 
         //Validando se algum dos livros emprestados está sem reserva
         foreach ($emprestimo->emprestimoExemplar as $exemplar) {
+
 
             $validarReserva = \DB::table('bib_reservas_exemplares')
                 ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
@@ -270,11 +271,17 @@ class EmprestarService
             $dia = $query[0]->valor - 1;
         }
 
+
+
         $dataObj->add(new \DateInterval("P{$dia}D"));
+
         $data = $dataObj->format('Y-m-d');
+
+
 
         $emprestimo->data_devolucao = $data;
         $emprestimo->save();
+
 
         return $emprestimo;
     }

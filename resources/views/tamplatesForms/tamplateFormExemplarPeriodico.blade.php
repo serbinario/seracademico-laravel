@@ -273,3 +273,63 @@
     </div>
     {{--Fim Buttons Submit e Voltar--}}
 </div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{asset('/js/validacoes/biblioteca/validation_form_exemplar_periodico.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/js/biblioteca/exemplar/script_crud_exemp_periodico.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            //Validações javascript
+            /*$('#FormExemplar').bootstrapValidator({
+                fields: {
+                    'img': {
+                        validators: {
+                            file: {
+                                maxSize: 512000,   // 2048 * 1024
+                                message: "Tamanho de imagem permitido é de até 500kb"
+                            }
+                        }
+                    }
+                }
+            });*/
+
+            /**
+             * Comprovante enem
+             *
+             * Código que é responsável pelo carregamento de
+             * arquivos no formulário
+             *
+             * http://plugins.krajee.com/
+             * https://github.com/kartik-v/bootstrap-fileinput
+             */
+            $("#img").fileinput({
+                @if (isset($model) && $model->path_image != null)
+                initialPreviewFileType: 'object',
+                initialPreview:[
+                    '{{route('seracademico.biblioteca.getImg', ['id' => $model->id])}}'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [{
+                    caption: 'comprovante-enem.pdf',
+                    //filetype: 'application/pdf',
+                    url: false,
+                    width: '100%'
+                }],
+                @endif
+
+            language: 'pt-BR',
+                showUpload: false,
+                showCaption: false,
+                //allowedFileExtensions : ['pdf'],
+            });
+
+            <?php
+                $data = new \DateTime('now');
+                $data = $data->format('d/m/Y');
+            ?>
+             data2 = '{{$data}}';
+
+        });
+    </script>
+@stop

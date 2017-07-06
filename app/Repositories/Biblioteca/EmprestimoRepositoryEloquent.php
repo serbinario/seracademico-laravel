@@ -24,18 +24,6 @@ class EmprestimoRepositoryEloquent extends BaseRepository implements EmprestimoR
         return Emprestimo::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return EmprestimoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria
