@@ -169,6 +169,10 @@ function data($dia, $mes, $ano, $semana) {
             <td>TOTAL DE AQUISIÇÕES DE LIVROS NO GERAL</td>
             <td>{{$qtdTotalLivros->qtd}}</td>
         </tr>
+        <tr>
+            <td>VALOR TOTAL DE AQUISIÇÕES DE LIVROS NO GERAL</td>
+            <td>{{$qtdTotalLivros->valorTotal}}</td>
+        </tr>
     </table>
     <br />
 
