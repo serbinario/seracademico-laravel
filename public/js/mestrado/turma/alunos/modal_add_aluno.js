@@ -105,7 +105,9 @@ $(document).on("change", "#add_aluno_curso", function () {
 function clearValueFields()
 {
     // Iniciais
-    $("#turma_aluno_id option").remove();
+    $("#turma_disciplina_id").val(null).trigger("change");
+    $("#add_aluno_curso").val(null).trigger("change");
+    $("#turma_aluno_id").val(null).trigger("change");
 }
 
 // Recuperando os valores dos campos

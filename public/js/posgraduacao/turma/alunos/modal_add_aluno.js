@@ -61,6 +61,14 @@ function builderHtmlFieldsAddAluno (dados) {
     $("#turma_disciplina_id").append(htmlDisciplina);
 }
 
+// Limpa os valores dos campos
+function clearValueFields()
+{
+    // Iniciais
+    $("#turma_disciplina_id").val(null).trigger("change");
+    $("#add_aluno_curso").val(null).trigger("change");
+    $("#turma_aluno_id").val(null).trigger("change");
+}
 
 // evento quando selecionar o curso
 $(document).on("change", "#add_aluno_curso", function () {
@@ -105,7 +113,9 @@ $(document).on("change", "#add_aluno_curso", function () {
 function clearValueFields()
 {
     // Iniciais
-    $("#turma_aluno_id option").remove();
+    $("#turma_disciplina_id").val(null).trigger("change");
+    $("#add_aluno_curso").val(null).trigger("change");
+    $("#turma_aluno_id").val(null).trigger("change");
 }
 
 // Recuperando os valores dos campos
@@ -149,7 +159,7 @@ $(document).on("click", "#btnSaveAddAluno", function () {
             tableAlunos.ajax.reload();
 
             // Limpando os campos
-            //clearValueFields();
+            clearValueFields();
 
             // Fechando o modal
             //$("#modal-add-aluno").modal('toggle');
