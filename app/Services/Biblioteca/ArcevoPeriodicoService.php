@@ -97,7 +97,8 @@ class ArcevoPeriodicoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Arcevo
+     * @throws \Exception
      */
     public function store(array $data) : Arcevo
     {
@@ -122,7 +123,8 @@ class ArcevoPeriodicoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Arcevo
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Arcevo
     {

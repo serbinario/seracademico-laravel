@@ -24,18 +24,6 @@ class IdiomaRepositoryEloquent extends BaseRepository implements IdiomaRepositor
         return Idioma::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return IdiomaValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

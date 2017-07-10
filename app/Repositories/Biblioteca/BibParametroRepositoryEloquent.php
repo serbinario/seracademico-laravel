@@ -24,18 +24,6 @@ class BibParametroRepositoryEloquent extends BaseRepository implements BibParame
         return BibParametro::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return BibParametroValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

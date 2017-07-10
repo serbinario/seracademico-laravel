@@ -24,18 +24,6 @@ class TipoAcervoRepositoryEloquent extends BaseRepository implements TipoAcervoR
         return TipoAcervo::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return TipoAcervoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

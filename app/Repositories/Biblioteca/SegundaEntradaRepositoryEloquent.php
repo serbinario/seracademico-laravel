@@ -25,19 +25,6 @@ class SegundaEntradaRepositoryEloquent extends BaseRepository implements Segunda
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return SegundaEntradaValidator::class;
-    }
-
-
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

@@ -24,18 +24,6 @@ class ExemplarRepositoryEloquent extends BaseRepository implements ExemplarRepos
         return Exemplar::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    /*public function validator()
-    {
-
-         return ExemplarValidator::class;
-    }*/
-
-
 
     /**
      * Boot up the repository, pushing criteria
