@@ -24,18 +24,6 @@ class TipoAutorRepositoryEloquent extends BaseRepository implements TipoAutorRep
         return TipoAutor::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return TipoAutorValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

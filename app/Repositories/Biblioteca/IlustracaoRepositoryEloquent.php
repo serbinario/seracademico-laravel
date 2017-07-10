@@ -24,18 +24,6 @@ class IlustracaoRepositoryEloquent extends BaseRepository implements IlustracaoR
         return Ilustracao::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return IlustracaoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria
