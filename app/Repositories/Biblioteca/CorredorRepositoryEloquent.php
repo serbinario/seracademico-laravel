@@ -24,18 +24,6 @@ class CorredorRepositoryEloquent extends BaseRepository implements CorredorRepos
         return Corredor::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return CorredorValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

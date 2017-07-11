@@ -25,17 +25,6 @@ class ResponsavelRepositoryEloquent extends BaseRepository implements Responsave
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return ResponsavelValidator::class;
-    }
-
-    /**
      * Boot up the repository, pushing criteria
      */
     public function boot()

@@ -24,18 +24,6 @@ class PrimeiraEntradaRepositoryEloquent extends BaseRepository implements Primei
         return PrimeiraEntrada::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return PrimeiraEntradaValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

@@ -422,9 +422,6 @@
 
             <table style="">
                 <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
-                {{--<tr><td>___________________________________________</td></tr>--}}
-                {{--<tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>--}}
-                {{--<tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>--}}
             </table>
         </h1>
     </div>
@@ -446,7 +443,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 13%">
+        <h1 style="text-align: center; margin-top: 25%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>

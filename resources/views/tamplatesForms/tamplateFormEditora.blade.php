@@ -178,3 +178,7 @@
     </div>
     {{--Fim Buttons Submit e Voltar--}}
 </div>
+
+@section('javascript')
+    <script type="text/javascript" src="{{asset('/js/biblioteca/editora/script_crud.js')}}"></script>
+@stop

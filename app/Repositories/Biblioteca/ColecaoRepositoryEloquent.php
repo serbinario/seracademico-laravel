@@ -24,18 +24,6 @@ class ColecaoRepositoryEloquent extends BaseRepository implements ColecaoReposit
         return Colecao::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return ColecaoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

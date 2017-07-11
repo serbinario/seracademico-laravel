@@ -162,7 +162,8 @@ class ArcevoService
 
     /**
      * @param array $data
-     * @return array
+     * @return Arcevo
+     * @throws \Exception
      */
     public function store(array $data) : Arcevo
     {
@@ -228,7 +229,8 @@ class ArcevoService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Arcevo
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Arcevo
     {
@@ -253,8 +255,7 @@ class ArcevoService
             $arcevo->cursos()->attach($data['cursos']);
         }
 
-        //dd($data['primeira']['responsaveis_id']);
-        //Inserir segunda entrada do acervos
+        //Inserir primeira entrada (responsável) do acervos
         if(count($data['primeira']['responsaveis_id']) > 0) {
 
             PrimeiraEntrada::where('arcevos_id', $arcevo->id)->delete();
@@ -269,25 +270,32 @@ class ArcevoService
             PrimeiraEntrada::where('arcevos_id', $arcevo->id)->delete();
         }
 
-        //Inserir segunda entrada do acervos
-        if(count($data['segunda']['responsaveis_id']) > 0 &&
-            count($data['segunda']['tipo_autor_id']) > 0  &&
-            count($data['segunda']['responsaveis_id']) == count($data['segunda']['tipo_autor_id'])) {
+        //Inserir segunda entrada (outros responsáveis) do acervos
+        if(count($data['segunda']['responsaveis_id']) > 0) {
 
+            // Deleta todos os outros responsáveis
             SegundaEntrada::where('arcevos_id', $arcevo->id)->delete();
 
             for($i = 0; $i < count($data['segunda']['responsaveis_id']); $i++){
-                $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
-                $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
-                $entradas['arcevos_id'] = $arcevo->id;
-                $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
-                $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
-                $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
-                $entradas['exibir_tipo1'] = $i == 0 && $data['segunda']['exibir_tipo1'] == '1' ? $data['segunda']['exibir_tipo1'] : "0";
-                $entradas['exibir_tipo2'] = $i == 1 && $data['segunda']['exibir_tipo2'] == '1' ? $data['segunda']['exibir_tipo2'] : "0";
-                $entradas['exibir_tipo3'] = $i == 2 && $data['segunda']['exibir_tipo3'] == '1' ? $data['segunda']['exibir_tipo3'] : "0";
 
-                $this->segundaRepository->create($entradas);
+                // Valida se para cada responsável foi definido também um tipo, caso não, esse outro responsável
+                // não será cadastrado
+                if(isset($data['segunda']['tipo_autor_id'][$i]) && isset($data['segunda']['responsaveis_id'][$i])) {
+
+                    $entradas['tipo_autor_id'] = $data['segunda']['tipo_autor_id'][$i];
+                    $entradas['responsaveis_id'] = $data['segunda']['responsaveis_id'][$i];
+                    $entradas['arcevos_id'] = $arcevo->id;
+                    $entradas['para_referencia1'] = $i == 0 && $data['segunda']['para_referencia1'] == '1' ? $data['segunda']['para_referencia1'] : "0";
+                    $entradas['para_referencia2'] = $i == 1 && $data['segunda']['para_referencia2'] == '1' ? $data['segunda']['para_referencia2'] : "0";
+                    $entradas['para_referencia3'] = $i == 2 && $data['segunda']['para_referencia3'] == '1' ? $data['segunda']['para_referencia3'] : "0";
+                    $entradas['exibir_tipo1'] = $i == 0 && $data['segunda']['exibir_tipo1'] == '1' ? $data['segunda']['exibir_tipo1'] : "0";
+                    $entradas['exibir_tipo2'] = $i == 1 && $data['segunda']['exibir_tipo2'] == '1' ? $data['segunda']['exibir_tipo2'] : "0";
+                    $entradas['exibir_tipo3'] = $i == 2 && $data['segunda']['exibir_tipo3'] == '1' ? $data['segunda']['exibir_tipo3'] : "0";
+
+                    $this->segundaRepository->create($entradas);
+
+                }
+
             }
         } else if(count($data['segunda']['responsaveis_id']) <= 0) {
             SegundaEntrada::where('arcevos_id', $arcevo->id)->delete();

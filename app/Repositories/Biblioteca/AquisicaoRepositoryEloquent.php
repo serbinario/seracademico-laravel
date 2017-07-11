@@ -24,18 +24,6 @@ class AquisicaoRepositoryEloquent extends BaseRepository implements AquisicaoRep
         return Aquisicao::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return AquisicaoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

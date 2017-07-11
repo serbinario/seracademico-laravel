@@ -67,8 +67,6 @@
                 {!! Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) !!}
                 </div>
             </div>
-            
-            
         </div>
         {{--Fim Buttons Submit e Voltar--}}
 	</div>
@@ -88,39 +86,6 @@
                 var textCurso = $(this).find("option:selected").text();
                 $("#nome").val(textCurso);
             });
-
-            Lang.setLocale('pt-BR');
-
-            $('#formCurriculo').bootstrapValidator({
-                fields: {
-                    nome: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Nome' })
-                            },
-                            stringLength: {
-                                max: 200,
-                                message: Lang.get('validation.max', { attribute: 'Nome' })
-                            }
-                        }
-                    },
-                    codigo: {
-                        validators: {
-                            notEmpty: {
-                                message: Lang.get('validation.required', { attribute: 'Código' })
-                            }
-                        }
-                    },
-                    ano: {
-                        validators: {
-                            numeric: {
-                                message: Lang.get('validation.numeric', { attribute: 'Ano' })
-                            }
-                        }
-                    }
-                }
-            });
-
         });
     </script>
 @stop
