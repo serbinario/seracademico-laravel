@@ -296,9 +296,6 @@ $(document).ready(function () {
                 data: {
                     dados: dados,
                 },
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
                 dataType: "json",
                 type: "POST",
                 success: function (data) {

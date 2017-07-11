@@ -17,7 +17,7 @@ var table = $('#sala-grid').DataTable({
     serverSide: true,
     iDisplayLength: 5,
     bLengthChange: false,
-    ajax: '/seracademico/biblioteca/gridEmprestimo',
+    ajax: '/index.php/seracademico/biblioteca/gridEmprestimo',
     columns: [
         {data: 'titulo', name: 'bib_arcevos.titulo'},
         {data: 'cdd', name: 'bib_arcevos.cdd'},
@@ -84,7 +84,7 @@ $('#sala-grid tbody').on('click', '.add', function (event) {
 
         jQuery.ajax({
             type: 'POST',
-            url: "/seracademico/biblioteca/dataDevolucaoEmprestimo",
+            url: "/index.php/seracademico/biblioteca/dataDevolucaoEmprestimo",
             data: dadosAjax,
             datatype: 'json'
         }).done(function (retorno) {
@@ -137,7 +137,7 @@ $(document).ready(function(){
 
         jQuery.ajax({
             type: 'POST',
-            url: "/seracademico/biblioteca/findWhereEmprestimo",
+            url: "/index.php/seracademico/biblioteca/findWhereEmprestimo",
             datatype: 'json',
             data: {'id_pessoa' : idPessoa},
         }).done(function (retorno) {
@@ -211,7 +211,7 @@ function select2(tipo){
         width: 400,
         ajax: {
             type: 'POST',
-            url: "/seracademico/util/queryByselect2Pessoa",
+            url: "/index.php/seracademico/util/queryByselect2Pessoa",
             dataType: 'json',
             delay: 250,
             crossDomain: true,
@@ -223,9 +223,6 @@ function select2(tipo){
                     'parametro':  tipo,
                     'page':       params.page
                 };
-            },
-            headers: {
-                'X-CSRF-TOKEN' : '{{  csrf_token() }}'
             },
             processResults: function (data, params) {
 
@@ -313,7 +310,7 @@ $(document).on('click', 'button.remove', function (event) {
     var id2 = $(this).attr('data2');
     jQuery.ajax({
         type: 'get',
-        url: "/seracademico/biblioteca/deleteEmprestimo/"+id+"/"+id2,
+        url: "/index.php/seracademico/biblioteca/deleteEmprestimo/"+id+"/"+id2,
         datatype: 'json'
     }).done(function (retorno) {
 
@@ -339,7 +336,7 @@ $(document).on('change', '#pessoa', function (event) {
 
         jQuery.ajax({
             type: 'POST',
-            url: "/seracademico/biblioteca/validarTermoBiblioteca",
+            url: "/index.php/seracademico/biblioteca/validarTermoBiblioteca",
             data: {
                 'id_pessoa' : idPessoa,
                 'tipo_pessoa' : tipoPessoa,

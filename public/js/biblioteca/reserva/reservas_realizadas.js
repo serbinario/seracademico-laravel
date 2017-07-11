@@ -86,7 +86,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         order: [[ 1, "asc" ]],
-        ajax: '/seracademico/biblioteca/gridReservados',
+        ajax: '/index.php/seracademico/biblioteca/gridReservados',
         columns: [
             {
                 "className":      'details-control',
