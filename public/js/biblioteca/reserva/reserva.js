@@ -10,7 +10,7 @@ var table = $('#sala-grid').DataTable({
     serverSide: true,
     iDisplayLength: 5,
     bLengthChange: false,
-    ajax: '/seracademico/biblioteca/gridReserva',
+    ajax: '/index.php/seracademico/biblioteca/gridReserva',
     columns: [
         {data: 'titulo', name: 'bib_arcevos.titulo'},
         {data: 'cutter', name: 'bib_arcevos.cutter'},
@@ -76,7 +76,7 @@ $('#sala-grid tbody').on('click', '.add', function (event) {
 
         jQuery.ajax({
             type: 'POST',
-            url: '/seracademico/biblioteca/storeReserva',
+            url: '/index.php/seracademico/biblioteca/storeReserva',
             data: dadosAjax,
             datatype: 'json'
         }).done(function (retorno) {
@@ -125,7 +125,7 @@ $('#sala-grid tbody').on('click', '.fila-reserva', function (event) {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/seracademico/biblioteca/listaPessoasReservas',
+        url: '/index.php/seracademico/biblioteca/listaPessoasReservas',
         data: {'acervo' : acervo},
         datatype: 'json'
     }).done(function (retorno) {
@@ -168,7 +168,7 @@ $(document).ready(function () {
 
         jQuery.ajax({
             type: 'POST',
-            url: '/seracademico/biblioteca/findWhereReserva',
+            url: '/index.php/seracademico/biblioteca/findWhereReserva',
             datatype: 'json',
             data: {'id_pessoa': idPessoa}
         }).done(function (retorno) {
@@ -229,7 +229,7 @@ function select2(tipo){
         width: 400,
         ajax: {
             type: 'POST',
-            url: '/seracademico/util/queryByselect2Pessoa',
+            url: '/index.php/seracademico/util/queryByselect2Pessoa',
             dataType: 'json',
             delay: 250,
             crossDomain: true,
@@ -241,9 +241,6 @@ function select2(tipo){
                     'parametro':  tipo,
                     'page':       params.page
                 };
-            },
-            headers: {
-                'X-CSRF-TOKEN' : '{{  csrf_token() }}'
             },
             processResults: function (data, params) {
 
@@ -313,7 +310,7 @@ $(document).on('click', 'button.remove', function (event) {
     var id2 = $(this).attr('data2');
     jQuery.ajax({
         type: 'get',
-        url: "/seracademico/biblioteca/deleteReserva/"+id+"/"+id2,
+        url: "/index.php/seracademico/biblioteca/deleteReserva/"+id+"/"+id2,
         datatype: 'json'
     }).done(function (retorno) {
 
