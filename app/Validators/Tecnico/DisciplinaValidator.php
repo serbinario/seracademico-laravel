@@ -20,12 +20,12 @@ class DisciplinaValidator extends LaravelValidator
 		'digits_between' => ':attribute deve ter entre :min - :max.',
 		'cpf_br' => ':attribute deve ser um número de CPF válido',
 		'unique' => ':attribute já se encontra cadastrado(a)',
-		'tec_unique_disciplina' => ':attribute já se encontra cadastrado(a)',
-		'tec_unique_codigo' => ':attribute já se encontra cadastrado(a)'
+		'tec_unique_disciplina' => 'Esta :attribute já se encontra cadastrado(a)',
+		'tec_unique_codigo' => 'Este :attribute já se encontra cadastrado(a)'
 	];
 
 	protected $attributes = [
-		'nome' => 'Nome',
+		'nome' => 'Disciplina',
 		'codigo' => 'Código',
 		'carga_horaria' => '',
 		'qtd_falta' => 'Quantidade de Faltas',

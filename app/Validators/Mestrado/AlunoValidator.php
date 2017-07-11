@@ -46,7 +46,7 @@ class AlunoValidator extends LaravelValidator
         'pessoa.endereco.complemento' => 'Complemento',
         'pessoa.uf_exp' => 'UF(Documentos)',
         'img' => 'Foto',
-
+        'password' => 'Senha (portal do aluno)'
     ];
 
     protected $rules = [
@@ -95,6 +95,8 @@ class AlunoValidator extends LaravelValidator
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.bairros_id' => 'integer',
+            'password' => '',
+            'password_confirmation' => 'same:password'
 
         ],
         ValidatorInterface::RULE_UPDATE => [
@@ -137,12 +139,13 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => 'integer',
             'curso_id' => 'required',
             'turma_id' => 'required',
-
 //            //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.bairros_id' => 'integer',
+            'password' => '',
+            'password_confirmation' => 'same:password'
         ],
     ];
 

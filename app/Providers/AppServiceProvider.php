@@ -167,6 +167,48 @@ class AppServiceProvider extends ServiceProvider
 
             return true;
         });
+
+        /**
+         * O algoritmo verifica se o curso que o usuário insere no formulário já se encontra cadastrada
+         * no modulo em questão (técnico)
+         */
+        Validator::extend('tec_unique_curso_nome', function ($attribute, $value, $formats, $validator) {
+            $dados = \DB::table('fac_cursos')
+                ->select([
+                    'id',
+                    'nome'
+                ])
+                ->where('nome', $value)
+                ->where('tipo_nivel_sistema_id', 4)
+                ->get();
+
+            if ($dados){
+                return false;
+            };
+
+            return true;
+        });
+
+        /**
+         * O algoritmo verifica se o código do curso que o usuário insere no formulário já se encontra
+         * cadastrada no modulo em questão (técnico)
+         */
+        Validator::extend('tec_unique_curso_codigo', function ($attribute, $value, $formats, $validator) {
+            $dados = \DB::table('fac_cursos')
+                ->select([
+                    'id',
+                    'codigo'
+                ])
+                ->where('codigo', $value)
+                ->where('tipo_nivel_sistema_id', 4)
+                ->get();
+
+            if ($dados){
+                return false;
+            };
+
+            return true;
+        });
     }
 
     /**

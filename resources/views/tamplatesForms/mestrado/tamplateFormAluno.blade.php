@@ -313,13 +313,18 @@
                                 <div id="portaAluno" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <h5>Senha de acesso ao portal</h5>
-                                                <div class="form-group col-md-7">
-                                                    <div class="fg-line">
-                                                        {!! Form::label('password', 'Senha') !!}
-                                                        {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
-                                                    </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="fg-line">
+                                                    {!! Form::label('password', 'Senha') !!}
+                                                    {!! Form::password('password', Session::getOldInput('password'), array('id' => 'password', 'class' => 'form-control')) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="fg-line">
+                                                    <label>Confirmação</label>
+                                                    <input type="text" name="password_confirmation">
+                                                    {{--{!! Form::label('password_confirmation', 'Confirmação') !!}
+                                                    {!! Form::password('password_confirmation', Session::getOldInput('password_confirmation'), array('class' => 'form-control')) !!}--}}
                                                 </div>
                                             </div>
                                         </div>

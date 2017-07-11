@@ -1,4 +1,16 @@
 <!-- Modal principal de disciplinas -->
+<style type="text/css">
+    .carregamento{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0;
+        left: 0;
+        display: none;
+    }
+</style>
 <div id="modal-novo-calendario" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 40%">
         <div class="modal-content">
@@ -50,6 +62,9 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="carregamento">
+                        <img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">
                     </div>
                 </div>
             </div>
