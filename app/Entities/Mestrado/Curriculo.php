@@ -173,8 +173,8 @@ class Curriculo extends Model implements Transformable
      * @param $query
      * @return mixed
      */
-    public function scopePosGraduacao($query)
+    public function scopeMestrado($query)
     {
-        return $query->where('tipo_nivel_sistema_id', 2);
+        return $query->where('tipo_nivel_sistema_id', 3);
     }
 }

@@ -317,6 +317,7 @@
 
         //modal calendario > modal adicionar calendario > select professor
         $('#professor_id').select2({ width: 142 });
+        $('#professor_id_editar').select2({ width: 142 });
         //modal calendario > modal adicionar disciplina > select disciplina
         $('#incluir-disciplinas').select2({ width: 250 });
         //modal gerencimaneto alunos

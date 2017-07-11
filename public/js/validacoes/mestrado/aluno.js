@@ -222,7 +222,7 @@ $(document).ready(function () {
             },
 
             nota_final: {
-                decimal: true,
+                //decimal: true,
                 maxlength: 5
             },
 
@@ -231,7 +231,7 @@ $(document).ready(function () {
             },
 
             media: {
-                decimal: true,
+                //decimal: true,
                 maxlength: 5
             },
 
@@ -288,7 +288,14 @@ $(document).ready(function () {
             },
 
             password: {
+                required: true,
                 maxlength: 80
+            },
+
+            password_confirmation: {
+                required: true,
+                maxlength: 80,
+                equalTo: '#password'
             },
 
             curso_id: {
