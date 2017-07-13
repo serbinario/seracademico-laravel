@@ -27,7 +27,7 @@
             {{--{!! Form::label('turno_id', 'Turno') !!}--}}
             {{--{!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}--}}
             {{--</div>--}}
-            <div class="checkbox checkbox-primary checkbox-inline" style="margin-top: 27px">
+            <div class="checkbox checkbox-primary checkbox-inline" style="margin-left: 15px; margin-top: 20px">
                 {!! Form::hidden('pos_e_graduacao', 0) !!}
                 {!! Form::checkbox('pos_e_graduacao', 1, null, array('class' => 'form-control')) !!}
                 {!! Form::label('pos_e_graduacao', 'Professor de graduação', false) !!}

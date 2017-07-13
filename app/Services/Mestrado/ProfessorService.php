@@ -61,12 +61,12 @@ class ProfessorService
             'pessoa.grauInstrucao',
             'pessoa.profissao',
             'pessoa.corRaca',
-            'pessoa.ufNascimento',
+            'pessoa.ufNascimento'
         ];
 
         #Recuperando o registro no banco de dados
         $professor = $this->repository->with($relacionamentos)->find($id);
-        //dd($professor->endereco->cep);
+        
         #Verificando se o registro foi encontrado
         if(!$professor) {
             throw new \Exception('Empresa não encontrada!');

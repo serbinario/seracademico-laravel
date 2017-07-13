@@ -75,10 +75,14 @@
         </div>
     </div>
     @include('reports.simple.modals.modal_report_mestrado_prof_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_mestrado_professor_vinculo')
+    @include('mestrado.professor.modal_professor_documento')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_ata_aniversariantes.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/professor/documentos/modal_professor_documento.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_vinculo.js')  }}"></script>
 
     <script type="text/javascript">
         var table = $('#professor-grid').DataTable({
@@ -91,6 +95,16 @@
                 {data: 'cpf', name: 'pessoas.cpf'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Evento para abrir o modal de cursos/turmas
+        $(document).on("click", "#professor_documentos", function () {
+            idProfessor = table.row($(this).parents('tr')).data().id;
+
+            $('#id_professor').val(idProfessor);
+            loadFieldsDocumentos();
+
+            $("#modal-professor-documento").modal({show:true});
         });
 
         // Geriamento dos relatórios avançadas

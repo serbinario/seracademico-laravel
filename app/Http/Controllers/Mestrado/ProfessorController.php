@@ -92,6 +92,7 @@ class ProfessorController extends Controller
                             <li><a href="edit/'.$row->id.'" class="btn-floating" title="Editar Professor"><i class="material-icons">edit</i></a></li>
                         </ul>
                     </div>';
+                    /*<li><a class="btn-floating" id="professor_documentos" title="Documentos"><i class="material-icons">print</i></a></li>*/
         })->make(true);
     }
 
@@ -234,6 +235,22 @@ class ProfessorController extends Controller
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+     /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }
