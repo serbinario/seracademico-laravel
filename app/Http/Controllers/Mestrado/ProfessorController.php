@@ -12,6 +12,8 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\Mestrado\ProfessorValidator;
+use Seracademico\Repositories\Mestrado\ProfessorRepository;
+use Seracademico\Repositories\Mestrado\DisciplinaRepository;
 use Illuminate\Http\Response;
 
 class ProfessorController extends Controller
@@ -25,6 +27,16 @@ class ProfessorController extends Controller
     * @var ProfessorValidator
     */
     private $validator;
+
+    /**
+    * @var ProfessorRespository
+    */
+    private $repository;
+
+    /**
+    * @var DisciplinaRepository
+    */
+    private $disciplinaRepository;
 
     /**
     * @var array
@@ -48,11 +60,17 @@ class ProfessorController extends Controller
     /**
     * @param ProfessorService $service
     * @param ProfessorValidator $validator
+    * @param ProfessorRespository $repository
     */
-    public function __construct(ProfessorService $service, ProfessorValidator $validator)
+    public function __construct(ProfessorService $service, 
+                                ProfessorValidator $validator,
+                                ProfessorRepository $repository,
+                                DisciplinaRepository $disciplinaRepository)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
+        $this->repository =  $repository;
+        $this->disciplinaRepository =  $disciplinaRepository;
     }
 
     /**
@@ -251,6 +269,38 @@ class ProfessorController extends Controller
             return \Illuminate\Support\Facades\Response::json([
                 'error' => $e->getMessage()
             ]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessor()
+    {
+        try {
+            $professores = $this->repository->getProfessores();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $professores, 'success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisciplina()
+    {
+        try {
+            $disciplinas = $this->disciplinaRepository->getDisciplinas();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $disciplinas, 'success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

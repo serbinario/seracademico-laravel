@@ -10,5 +10,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface DisciplinaRepository extends RepositoryInterface
 {
-    //
+    /**/
+    public function getDisciplinas();
 }

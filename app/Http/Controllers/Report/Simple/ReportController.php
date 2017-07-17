@@ -62,6 +62,9 @@ class ReportController extends Controller
      */
     public function report(Request $request, $idReport)
     {
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+
         # Recuperando os dados de filtros
         $dadosDaRequisicao = $request->all();
         $dadosParaRelatorio = [];

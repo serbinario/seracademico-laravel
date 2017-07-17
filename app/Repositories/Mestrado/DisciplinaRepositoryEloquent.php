@@ -31,4 +31,21 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDisciplinas()
+    {
+        $disciplinas = \DB::table('fac_disciplinas')
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.nome'
+            ])
+            ->orderBy('fac_disciplinas.nome')
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 3)
+            ->get();
+
+        return $disciplinas;
+    }
 }

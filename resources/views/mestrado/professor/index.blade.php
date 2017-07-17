@@ -1,13 +1,11 @@
 @extends('menu')
 
 @section("css")
-
     <style type="text/css">
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
     </style>
-
 @stop
 
 @section('content')
@@ -137,5 +135,10 @@
         function execute(callback) {
             callback();
         }
+
+        /*$('#mes_professor_id').select2({
+            placeholder: 'Selecione uma disciplina',
+            width: 250,
+        });*/
     </script>
 @stop
