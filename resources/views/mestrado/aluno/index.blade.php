@@ -172,7 +172,6 @@
     <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/mestrado/professor/documentos/modal_professor_documento.js') }}"></script>
 
     {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/documentos/modal_aluno_documento.js') }}"></script>
