@@ -27,22 +27,31 @@
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
             <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime('today')) }}.
         </p>
+        <div style="text-align: center; font-size: 18px; margin-top: 55px;">
+            <p>
+                O referido é verdadeiro e dou fé.
+            </p>
+            <p style="margin-top: 75px;">
+                <strong>Recife, {{ strftime('%d, %B de %Y', strtotime('today')) }}</strong>
+            </p>
+        </div>
     </div>
 
-    <div class="assinatura" style="margin-left: 5%;">
+    <div class="assinatura" style="font-size: 18px">
         <p>
-            <h1><img  src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
+            <h1><img  src="{{ asset('img/assinatura_luciana.png') }}" alt="" style="margin-left: 20%; width: 330px; height: auto;"></h1>
+        </p>
+        <p style="position: absolute; top: 80px; margin-left: 27%;">
+            ___________________________________
+        </p>
+        <p style="position: absolute; top: 80px; margin-left: 45%;">
+            Direção
         </p>
     </div>
 
-    <div class="rodape" style="margin-left: 6%;">
+    <div class="rodape" style="text-align: center; font-size: 18px">
         <p>
-            <b>Ps.</b> The above information is a certified copy of data extracted from the official transcript of the named
-            individual. This information is confidential and is for verification purposes only.
-        </p>
-
-        <p>
-            Email: registrar@grendaluniversity.org.uk I www.grendaluniversity.org.uk
+            Email: registrar@grendaluniversity.org.uk | www.grendaluniversity.org.uk
         </p>
     </div>
 </body>
