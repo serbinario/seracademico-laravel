@@ -10,5 +10,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ProfessorRepository extends RepositoryInterface
 {
-    //
+    /**/
+    public function getProfessores();
 }

@@ -31,4 +31,26 @@ class ProfessorRepositoryEloquent extends BaseRepository implements ProfessorRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessores()
+    {
+        $professores = \DB::table('fac_professores')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
+            ->select([
+                'fac_professores.id',
+                'pessoas.nome'
+            ])
+            ->orderBy('pessoas.nome')
+            ->where('fac_professores.tipo_nivel_sistema_id', 3)
+            ->get();
+
+        /*if (count($professores) == 0){
+            throw new \Exception('Professores não encontrados.');
+        }*/
+
+        return $professores;
+    }
 }

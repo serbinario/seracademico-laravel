@@ -12,6 +12,8 @@ use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Seracademico\Validators\Mestrado\ProfessorValidator;
+use Seracademico\Repositories\Mestrado\ProfessorRepository;
+use Seracademico\Repositories\Mestrado\DisciplinaRepository;
 use Illuminate\Http\Response;
 
 class ProfessorController extends Controller
@@ -25,6 +27,16 @@ class ProfessorController extends Controller
     * @var ProfessorValidator
     */
     private $validator;
+
+    /**
+    * @var ProfessorRespository
+    */
+    private $repository;
+
+    /**
+    * @var DisciplinaRepository
+    */
+    private $disciplinaRepository;
 
     /**
     * @var array
@@ -48,11 +60,17 @@ class ProfessorController extends Controller
     /**
     * @param ProfessorService $service
     * @param ProfessorValidator $validator
+    * @param ProfessorRespository $repository
     */
-    public function __construct(ProfessorService $service, ProfessorValidator $validator)
+    public function __construct(ProfessorService $service, 
+                                ProfessorValidator $validator,
+                                ProfessorRepository $repository,
+                                DisciplinaRepository $disciplinaRepository)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
+        $this->repository =  $repository;
+        $this->disciplinaRepository =  $disciplinaRepository;
     }
 
     /**
@@ -92,6 +110,7 @@ class ProfessorController extends Controller
                             <li><a href="edit/'.$row->id.'" class="btn-floating" title="Editar Professor"><i class="material-icons">edit</i></a></li>
                         </ul>
                     </div>';
+                    /*<li><a class="btn-floating" id="professor_documentos" title="Documentos"><i class="material-icons">print</i></a></li>*/
         })->make(true);
     }
 
@@ -231,6 +250,54 @@ class ProfessorController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+     /**
+     * @param Request $request
+     * @return mixed
+     *
+     */
+    public function getLoadFields(Request $request)
+    {
+        try {
+            return $this->service->load($request->get("models"), true);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessor()
+    {
+        try {
+            $professores = $this->repository->getProfessores();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $professores, 'success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisciplina()
+    {
+        try {
+            $disciplinas = $this->disciplinaRepository->getDisciplinas();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $disciplinas, 'success' => true]);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);

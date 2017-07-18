@@ -326,6 +326,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Mestrado\ProfessorController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Mestrado\ProfessorController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Mestrado\ProfessorController@delete']);
+
+                #Rotas de Documentos
+                Route::get('gerarDocumento/{tipoDoc}/{idProfessor}', ['as' => 'gerarDocumento', 'uses' => 'Mestrado\ProfessorDocumentoController@gerarDocumento']);
+                Route::get('checkDocumento/{tipoDoc}/{idProfessor}', ['as' => 'checkDocumento', 'uses' => 'Mestrado\ProfessorDocumentoController@checkDocumento']);
+                Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\ProfessorController@getLoadFields']);
+                Route::post('getProfessor', ['as' => 'getProfessor', 'uses' => 'Mestrado\ProfessorController@getProfessor']);
+                Route::post('getDisciplina', ['as' => 'getDisciplina', 'uses' => 'Mestrado\ProfessorController@getDisciplina']);
             });
 
             # Rotas de disciplinas
