@@ -29,4 +29,9 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function obtemDisciplinasDispensadasPelo($id)
+    {
+        // TODO: Implement obtemDisciplinasDispensadasPelo() method.
+    }
 }
