@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface AlunoRepository extends RepositoryInterface
 {
-    //
+    public function obtemDisciplinasDispensadasPelo($id);
 }
