@@ -291,10 +291,10 @@ class ProfessorController extends Controller
     /**
      * @return mixed
      */
-    public function getDisciplina()
+    public function getDisciplina($idProfessor)
     {
         try {
-            $disciplinas = $this->disciplinaRepository->getDisciplinas();
+            $disciplinas = $this->disciplinaRepository->getDisciplinas($idProfessor);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['dados' => $disciplinas, 'success' => true]);

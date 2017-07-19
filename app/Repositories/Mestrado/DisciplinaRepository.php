@@ -11,5 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface DisciplinaRepository extends RepositoryInterface
 {
     /**/
-    public function getDisciplinas();
+    public function getDisciplinas($idProfessor);
 }
