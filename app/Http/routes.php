@@ -332,7 +332,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('checkDocumento/{tipoDoc}/{idProfessor}', ['as' => 'checkDocumento', 'uses' => 'Mestrado\ProfessorDocumentoController@checkDocumento']);
                 Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\ProfessorController@getLoadFields']);
                 Route::post('getProfessor', ['as' => 'getProfessor', 'uses' => 'Mestrado\ProfessorController@getProfessor']);
-                Route::post('getDisciplina', ['as' => 'getDisciplina', 'uses' => 'Mestrado\ProfessorController@getDisciplina']);
+                Route::post('getDisciplina/{idProfessor}', ['as' => 'getDisciplina', 'uses' => 'Mestrado\ProfessorController@getDisciplina']);
             });
 
             # Rotas de disciplinas
