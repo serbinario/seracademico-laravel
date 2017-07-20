@@ -16,7 +16,7 @@ function loadFieldsDiarioAula()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Professor|getValues'
+            'Mestrado\\Professor|getValues'
         ]
     };
 
@@ -55,8 +55,8 @@ function builderHtmlFieldsDiarioAula (dados) {
     var htmlProfessor = "<option value=''>Selecione um Professor</option>";
 
     // Percorrendo o array de tipos valores
-    for (var i = 0; i < dados['professor'].length; i++) {
-        htmlProfessor += "<option value='" + dados['professor'][i].id + "'>" + dados['professor'][i].nome + "</option>";
+    for (var i = 0; i < dados['mestrado\\professor'].length; i++) {
+        htmlProfessor += "<option value='" + dados['mestrado\\professor'][i].id + "'>" + dados['mestrado\\professor'][i].nome + "</option>";
     }
 
     // Carregado os selects

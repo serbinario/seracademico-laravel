@@ -45,7 +45,7 @@
                             <div class="form-group col-md-4">
                                 <label for="professor_id">Professor</label>
                                 <select name="professor_id" class="form-control" id="professor_id_editar">
-                                    @foreach($loadFields['professor'] as $key => $value)
+                                    @foreach($loadFields['mestrado\\professor'] as $key => $value)
                                         <option value="{{ $key  }}">{{ $value  }}</option>
                                     @endforeach
                                 </select>
