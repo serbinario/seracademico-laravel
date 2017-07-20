@@ -95,7 +95,7 @@
             ]
         });
 
-        // Evento para abrir o modal de cursos/turmas
+        /*// Evento para abrir o modal de cursos/turmas
         $(document).on("click", "#professor_documentos", function () {
             idProfessor = table.row($(this).parents('tr')).data().id;
 
@@ -103,7 +103,7 @@
             loadFieldsDocumentos();
 
             $("#modal-professor-documento").modal({show:true});
-        });
+        });*/
 
         // Geriamento dos relatórios avançadas
         $(document).on('change', '#report_id', function () {
