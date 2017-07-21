@@ -31,7 +31,7 @@ class TurmaController extends Controller
         'PosGraduacao\\Curso|byCurriculoAtivo,1',
         'Turno',
         'Sala|situacao,1',
-        'Professor|getValues',
+        'PosGraduacao\\ProfessorPos|getValues',
         'SimpleReport|byCrud,6',
         'Sede'
     ];
