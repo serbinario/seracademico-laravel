@@ -24,7 +24,7 @@
             Declaramos para fins de comprovação que o(a) Professor(a)
             <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, CPF:
             <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição a Disciplina
-            <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no
+            <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no curso de 
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
             <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime('today')) }}.
         </p>
