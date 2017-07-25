@@ -21,9 +21,10 @@
         </h2>
         <hr style="margin-bottom: 25px; margin-top: 25px;">
         <p style="font-size: 18px">
-            Declaramos para fins de comprovação que o(a) Professor(a) <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>,
-            <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição
-            Disciplina <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no
+            Declaramos para fins de comprovação que o(a) Professor(a)
+            <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, CPF:
+            <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição a Disciplina
+            <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
             <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime('today')) }}.
         </p>
@@ -32,7 +33,7 @@
                 O referido é verdadeiro e dou fé.
             </p>
             <p style="margin-top: 75px;">
-                <strong>Recife, {{ strftime('%d, %B de %Y', strtotime('today')) }}</strong>
+                <strong>Recife, {{ strftime('%d de %B de %Y', strtotime('today')) }}</strong>
             </p>
         </div>
     </div>
