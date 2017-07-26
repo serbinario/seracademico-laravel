@@ -11,6 +11,7 @@ class AlunoValidator extends LaravelValidator
     use TraitReplaceRulesValidator;
 
     protected $messages   = [
+        'serbinario_date_format' => 'O campo :attribute é inválido!'
     ];
 
     protected $attributes = [
