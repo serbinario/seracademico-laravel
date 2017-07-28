@@ -50,6 +50,25 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
+                {{--<li>
+                    <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Doutorado</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="javascript:void(0)"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.doutorado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
+                                <li><a href="{{ route('seracademico.doutorado.planoensino.index') }}"><i class="material-icons">line_weight</i>Planos de Ensino</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>--}}
+
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span
                                 class="fa arrow"></span></a>
