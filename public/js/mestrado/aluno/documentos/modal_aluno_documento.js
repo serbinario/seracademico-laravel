@@ -50,7 +50,7 @@ function builderHtmlFieldsDocumento (dados) {
 $(document).on('click', '#btnGerarDocumento', function () {
     // Recuperando os dados do formulário
     var documentacao_id = $('#documentacao_id').val();
-console.log('aa');
+    console.log(documentacao_id);
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',

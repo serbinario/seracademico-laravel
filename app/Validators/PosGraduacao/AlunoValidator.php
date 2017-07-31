@@ -49,7 +49,6 @@ class AlunoValidator extends LaravelValidator
         'img' => 'Foto',
         'curso_id' => 'Curso',
         'turma_id' => 'Turma'
-
     ];
 
     protected $rules = [
@@ -97,8 +96,8 @@ class AlunoValidator extends LaravelValidator
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.bairros_id' => 'integer',
-
         ],
+
         ValidatorInterface::RULE_UPDATE => [
             'img' => 'image|max:800',
             'matricula' => 'unique:pos_alunos,matricula,:id',

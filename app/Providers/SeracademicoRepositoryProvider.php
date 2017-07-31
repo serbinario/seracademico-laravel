@@ -826,5 +826,52 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\EventoRepository::class,
             \Seracademico\Repositories\EventoRepositoryEloquent::class
         );
+        /*
+         *
+         *
+         * ###### Doutorado ######
+         *
+         *
+         *
+        */
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\CursoRepository::class,
+            \Seracademico\Repositories\Doutorado\CursoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\TurmaRepository::class,
+            \Seracademico\Repositories\Doutorado\TurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\CurriculoRepository::class,
+            \Seracademico\Repositories\Doutorado\CurriculoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\DisciplinaRepository::class,
+            \Seracademico\Repositories\Doutorado\DisciplinaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\ProfessorRepository::class,
+            \Seracademico\Repositories\Doutorado\ProfessorRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\PlanoEnsinoRepository::class,
+            \Seracademico\Repositories\Doutorado\PlanoEnsinoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepository::class,
+            \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepositoryEloquent::class
+        );
     }
 }

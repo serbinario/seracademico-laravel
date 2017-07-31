@@ -30,9 +30,8 @@ class CursoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-
-			'nome' =>  'tec_unique_curso_nome|required|max:200|unique:fac_cursos,nome',
-			'codigo' =>  'tec_unique_curso_codigo|required|max:30|unique:fac_cursos,codigo',
+			'nome' =>  'tec_unique_curso_nome|required|max:200|tec_unique_curso_nome',
+			'codigo' =>  'tec_unique_curso_codigo|required|max:30|tec_unique_curso_codigo',
 			'portaria_mec_rec' =>  'max:50',
 			'numero_decreto_rec' =>  '' ,
 			'data_decreto_rec' =>  'serbinario_date_format:"d/m/Y"',
@@ -57,8 +56,8 @@ class CursoValidator extends LaravelValidator
 			'carga_horaria' => 'required'
 
         ],
-        ValidatorInterface::RULE_UPDATE => [
 
+        ValidatorInterface::RULE_UPDATE => [
 			'nome' =>  'tec_unique_curso_nome|required|max:200|unique:fac_cursos,nome,:id',
 			'codigo' =>  'tec_unique_curso_codigo|required|max:30|unique:fac_cursos,codigo,:id',
 			'duracao_meses' =>  'digits_between:1,3|numeric',
@@ -86,5 +85,4 @@ class CursoValidator extends LaravelValidator
 			'carga_horaria' => 'required'
 		],
    ];
-
 }
