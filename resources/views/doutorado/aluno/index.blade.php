@@ -147,10 +147,10 @@
         </div>
     </div>
 
+    @include('doutorado.aluno.modal_aluno_documento')
     {{--@include('doutorado.aluno.turma.modal_aluno_turma')
     @include('doutorado.aluno.turma.modal_nova_turma')
     @include('doutorado.aluno.turma.modal_create_situacao')
-    @include('doutorado.aluno.modal_aluno_documento')
     @include('doutorado.aluno.curriculo.modal_curriculo')
     @include('doutorado.aluno.curriculo.modal_inserir_dispensar_disciplina')
     @include('doutorado.aluno.curriculo.modal_editar_dispensar_disciplina')
@@ -161,19 +161,17 @@
 @stop
 
 @section('javascript')
-    {{--<script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_aluno_turma.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/documentos/modal_aluno_documento.js') }}"></script>
+    {{--<script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_create_situacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_curriculo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_inserir_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
-
-    {{--Fabio
-    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/documentos/modal_aluno_documento.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>--}}
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,

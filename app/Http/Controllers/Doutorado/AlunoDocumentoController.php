@@ -1,10 +1,10 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Support\Facades\App;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Mestrado\AlunoService;
+use Seracademico\Services\Doutorado\AlunoService;
 use Seracademico\Uteis\NumeroOrdianalPorExtenso;
 
 class AlunoDocumentoController extends Controller
@@ -33,7 +33,7 @@ class AlunoDocumentoController extends Controller
         try {
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
-                case "5" :
+                case "19" :
                     $this->contrato($idAluno);
                     break;
                 case "6" :
@@ -75,13 +75,13 @@ class AlunoDocumentoController extends Controller
 
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
-                case "5" :
+                case "19" :
                     $result = $this->contrato($idAluno);
-                    $nameView = "reports.contrato_mestrado";
+                    $nameView = "reports.contrato_doutorado";
                     break;
                 case "6" :
                     $result = $this->declaracaoVinculo($idAluno);
-                    $nameView = "reports.declaracao_vinculo_mestrado";
+                    $nameView = "reports.declaracao_vinculo_doutorado";
                     break;
                 case "7" :
                     $result = $this->declaracaoAfastamento($idAluno);

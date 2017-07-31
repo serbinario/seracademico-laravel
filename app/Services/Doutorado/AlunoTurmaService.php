@@ -1,16 +1,16 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
 use Illuminate\Support\Facades\DB;
-use Seracademico\Entities\Mestrado\Aluno;
-use Seracademico\Entities\Mestrado\AlunoFrequencia;
-use Seracademico\Entities\Mestrado\AlunoNota;
-use Seracademico\Repositories\Mestrado\AlunoRepository;
-use Seracademico\Repositories\Mestrado\CurriculoRepository;
-use Seracademico\Repositories\Mestrado\CursoRepository;
+use Seracademico\Entities\Doutorado\Aluno;
+use Seracademico\Entities\Doutorado\AlunoFrequencia;
+use Seracademico\Entities\Doutorado\AlunoNota;
+use Seracademico\Repositories\Doutorado\AlunoRepository;
+use Seracademico\Repositories\Doutorado\CurriculoRepository;
+use Seracademico\Repositories\Doutorado\CursoRepository;
 use Seracademico\Repositories\NotaRepository;
-use Seracademico\Repositories\Mestrado\TurmaRepository;
+use Seracademico\Repositories\Doutorado\TurmaRepository;
 
 class AlunoTurmaService
 {
@@ -62,7 +62,7 @@ class AlunoTurmaService
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
             ->join('fac_turmas', 'fac_turmas.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
-            ->where('fac_turmas.tipo_nivel_sistema_id', 3)
+            ->where('fac_turmas.tipo_nivel_sistema_id', 5)
             ->groupBy('fac_cursos.nome')
             ->select([
                'fac_curriculos.id as curriculo_id',

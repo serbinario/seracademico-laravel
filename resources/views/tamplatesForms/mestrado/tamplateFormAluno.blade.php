@@ -16,6 +16,7 @@
         @endif
 
         <div class="row">
+            <input type="hidden" id="id_aluno" value="{{ isset($aluno->id) ? $aluno->id : null }}">
             <div class="form-group col-md-6">
                 <div class="fg-line">
                     {!! Form::label('pessoa[nome]', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
@@ -890,6 +891,13 @@
                 </div>
             </div>--}}
             <div class="col-md-3 col-md-offset-9">
+                @if(isset($aluno))
+                    <div style="position: relative; top: 34px; left: -245px;">
+                        <label for="documentacao_id">Documentos</label>
+                        <select name="documentacao_id" class="form-control" id="documentacao_id">
+                        </select>
+                    </div>
+                @endif
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <a href="{{ route('seracademico.mestrado.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
@@ -909,7 +917,7 @@
     <script type="text/javascript" src="{{ asset('/js/createInstituicao/createInstituicao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/createCursoPosGraduacao/createCursoPosGraduacao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/createCursoFormacao/createFormacao.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/mestrado/aluno/documentos/modal_aluno_documento.js') }}"></script>
     {{--Mensagens personalizadas--}}
     <script type="text/javascript" src="{{ asset('/js/validacoes/messages_pt_BR.js')  }}"></script>
     {{--Regras adicionais--}}
@@ -921,6 +929,33 @@
     {{--Regras de validação--}}
     {{--<script type="text/javascript" src="{{ asset('/js/validacoes/mestrado/aluno.js')  }}"></script>--}}
     <script type="text/javascript">
+        //select de documentos no formulário de edição de aluno
+        var idAluno = $('#id_aluno').val();
+        loadFieldsDocumentos();
+
+        // Evento para gerar o documento
+        $(document).on('change', '#documentacao_id', function () {
+            // Recuperando os dados do formulário
+            var documentacao_id = $('#documentacao_id').val();
+
+            // Fazendo a requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/mestrado/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
+                datatype: 'json'
+            }).done(function (retorno) {
+                // Verificando o retorno da requisição
+                if(retorno.success) {
+                    // Executando o relatório e abrindo em outra aba
+                    window.open("/index.php/seracademico/mestrado/aluno/gerarDocumento/"
+                            + documentacao_id + "/" + idAluno, '_blank');
+                } else {
+                    // Retorno caso retorno alguma erro
+                    swal(retorno.msg, "Click no botão abaixo!", "error");
+                }
+            });
+        });
+
         //Evento para exibir input e botão curso pós
         $('#linkNovaPosGraduacao').on('click', function(){
             $('#linkNovaPosGraduacao').hide();

@@ -40,8 +40,8 @@ class DisciplinaValidator extends LaravelValidator
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-			'nome' =>  'required|max:200|unique:fac_disciplinas,nome,:id',
-			'codigo' => 'required|max:15|unique:fac_disciplinas,codigo,:id',
+			'nome' =>  'required|max:200',
+			'codigo' => 'required|max:15',
 			'carga_horaria' => 'digits_between:1,5|numeric' ,
 			'qtd_falta' =>  'numeric' ,
 			'tipo_disciplina_id' =>  'integer' ,

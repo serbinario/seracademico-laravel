@@ -4,7 +4,7 @@ function loadFieldsDocumentos()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\TipoDocumento|nivelDeMestrado'
+            'Doutorado\\TipoDocumento|nivelDeMestrado'
         ]
     };
 
@@ -12,7 +12,7 @@ function loadFieldsDocumentos()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -35,8 +35,8 @@ function builderHtmlFieldsDocumento (dados) {
     var htmlDocumento     = "";
 
     // Percorrendo o array de cursos
-    for (var i = 0; i < dados['mestrado\\tipodocumento'].length; i++) {
-        htmlDocumento += "<option value='" + dados['mestrado\\tipodocumento'][i].id + "'>" + dados['mestrado\\tipodocumento'][i].nome + "</option>";
+    for (var i = 0; i < dados['doutorado\\tipodocumento'].length; i++) {
+        htmlDocumento += "<option value='" + dados['doutorado\\tipodocumento'][i].id + "'>" + dados['doutorado\\tipodocumento'][i].nome + "</option>";
     }
 
     $("#documentacao_id option").remove();
@@ -50,17 +50,17 @@ function builderHtmlFieldsDocumento (dados) {
 $(document).on('click', '#btnGerarDocumento', function () {
     // Recuperando os dados do formulário
     var documentacao_id = $('#documentacao_id').val();
-    console.log(documentacao_id);
+console.log('aa');
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
+        url: '/index.php/seracademico/doutorado/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno.success) {
             // Executando o relatório e abrindo em outra aba
-            window.open("/index.php/seracademico/mestrado/aluno/gerarDocumento/"
+            window.open("/index.php/seracademico/doutorado/aluno/gerarDocumento/"
                 + documentacao_id + "/" + idAluno, '_blank');
         } else {
             // Retorno caso retorno alguma erro

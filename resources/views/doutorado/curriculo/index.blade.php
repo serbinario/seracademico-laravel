@@ -165,11 +165,11 @@
     </div>
     <!-- FIM Modal de cadastro das Disciplinas-->
 
-    @include('reports.simple.modals.modal_report_mestrado_curriculo_disciplina')
+    @include('reports.simple.modals.modal_report_doutorado_curriculo_disciplina')
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_curriculo_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_dou_curriculo_disciplina.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
@@ -239,7 +239,7 @@
                         'columnWhere' :   'curriculo_id',
                         'columnNotWhere': 'id',
                         'culmnNotGet':    'disciplina_id',
-                        'valueWhere':     3,
+                        'valueWhere':     5,
                         'fieldWhere':     'tipo_nivel_sistema_id',
                         'valueNotWhere':    idCurriculo
                     };

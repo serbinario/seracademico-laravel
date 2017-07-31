@@ -4,7 +4,7 @@ namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Entities\Mestrado\Aluno;
+use Seracademico\Entities\Doutorado\Aluno;
 
 /**
  * Class AlunoRepositoryEloquent
