@@ -40,7 +40,7 @@ class AlunoController extends Controller
         'FormaAdmissao',
         'SituacaoAluno',
         'Sede',
-        'SimpleReport|byCrud,10',
+        'SimpleReport|byCrud,15',
         'Doutorado\\Turma|Doutorado',
         'Doutorado\\Curso|ativo,1',
         'Doutorado\\Curso|byCurriculoAtivo,1',

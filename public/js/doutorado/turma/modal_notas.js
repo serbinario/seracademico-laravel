@@ -15,7 +15,7 @@ function loadTableNotas (idTurma) {
         bFilter: false,
         bPaginate: false,
         ajax: {
-            url: "/index.php/seracademico/mestrado/turma/notas/grid/" + idTurma,
+            url: "/index.php/seracademico/doutorado/turma/notas/grid/" + idTurma,
             data: function (d) {
                 d.disciplina = $('select[name=disciplinaSearch] option:selected').val();
             }
@@ -43,7 +43,7 @@ function loadTableNotas (idTurma) {
 // Função para executar a grid
 function runTableNotas(idTurma) {
     if (tableNotas) {
-        tableNotas.ajax.url( "/index.php/seracademico/mestrado/turma/notas/grid/" + idTurma).load();
+        tableNotas.ajax.url( "/index.php/seracademico/doutorado/turma/notas/grid/" + idTurma).load();
     } else {
         // Carregamento da grids
         loadTableNotas(idTurma);
@@ -64,7 +64,7 @@ function loadFieldsNotas()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Disciplina|disciplinasOfTurma,' + idTurma
+            'Doutorado\\Disciplina|disciplinasOfTurma,' + idTurma
         ]
     };
 
@@ -72,7 +72,7 @@ function loadFieldsNotas()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/notas/getLoadFields',
+        url: '/index.php/seracademico/doutorado/turma/notas/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -81,9 +81,9 @@ function loadFieldsNotas()
             var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
 
             // Percorrendo o array de disciplina
-            for(var i = 0; i < retorno['mestrado\\disciplina'].length; i++) {
+            for(var i = 0; i < retorno['doutorado\\disciplina'].length; i++) {
                 // Criando as options
-                htmlDisciplina += "<option value='" + retorno['mestrado\\disciplina'][i].id + "'>"  + retorno['mestrado\\disciplina'][i].nome + "</option>";
+                htmlDisciplina += "<option value='" + retorno['doutorado\\disciplina'][i].id + "'>"  + retorno['doutorado\\disciplina'][i].nome + "</option>";
             }
 
             // Preenchendo o select
@@ -121,7 +121,7 @@ $(document).on('focusout', '.nota_final', function () {
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/notas/update/' + idALunoNota,
+        url: '/index.php/seracademico/doutorado/turma/notas/update/' + idALunoNota,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição

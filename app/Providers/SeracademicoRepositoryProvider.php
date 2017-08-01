@@ -884,14 +884,29 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
         );
 
-        /*$this->app->bind(
-            \Seracademico\Repositories\Doutorado\AlunoDisciplinaRepository::class,
-            \Seracademico\Repositories\Doutorado\AlunoDisciplinaRepositoryEloquent::class
-        );*/
-
         $this->app->bind(
             \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepository::class,
             \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoFrequenciaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\DiarioAulaRepository::class,
+            \Seracademico\Repositories\Doutorado\DiarioAulaRepositoryEloquent::class
         );
     }
 }

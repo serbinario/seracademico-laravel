@@ -8,7 +8,7 @@ function loadTableDisciplinasDiarioAula (idTurma) {
         iDisplayLength: 5,
         bLengthChange: false,
         bFilter: false,
-        ajax: "/index.php/seracademico/mestrado/turma/diarioAula/gridDisciplinas/" + idTurma,
+        ajax: "/index.php/seracademico/doutorado/turma/diarioAula/gridDisciplinas/" + idTurma,
         columns: [
             {data: 'codigo', name: 'fac_disciplinas.codigo', orderable: false},
             {data: 'nome', name: 'fac_disciplinas.nome', orderable: false}
@@ -28,7 +28,7 @@ function loadTableDiarioAula (idTurmaDisciplina) {
         iDisplayLength: 5,
         bLengthChange: false,
         bFilter: false,
-        ajax: "/index.php/seracademico/mestrado/turma/diarioAula/grid/" + idTurmaDisciplina,
+        ajax: "/index.php/seracademico/doutorado/turma/diarioAula/grid/" + idTurmaDisciplina,
         columns: [
             {
                 "className":      'details-control',
@@ -108,7 +108,7 @@ function formatDiarioAula ( d ) {
 function runTableDiariosAulas(idTurma) {
     // Verificando se a grid está carregada
     if (tableDisciplinasDiarioAula) { 
-        tableDisciplinasDiarioAula.ajax.url("/index.php/seracademico/mestrado/turma/diarioAula/gridDisciplinas/" + idTurma).load();
+        tableDisciplinasDiarioAula.ajax.url("/index.php/seracademico/doutorado/turma/diarioAula/gridDisciplinas/" + idTurma).load();
     } else {
         loadTableDisciplinasDiarioAula(idTurma);
     }
@@ -137,12 +137,12 @@ $(document).on('click', '#diario-aula-disciplina-grid tbody tr', function (event
         indexRowSelectedDisciplinaDiarioAula =  $(this).index();
         idPlanoEnsinoDiarioAula = tableDisciplinasDiarioAula.row($(this).index()).data().plano_ensino_id;
 
-        loadTableDiarioAula(idTurmaDisciplinaDiarioAula).ajax.url( "/index.php/seracademico/mestrado/turma/diarioAula/grid/" + idTurmaDisciplinaDiarioAula).load();
+        loadTableDiarioAula(idTurmaDisciplinaDiarioAula).ajax.url( "/index.php/seracademico/doutorado/turma/diarioAula/grid/" + idTurmaDisciplinaDiarioAula).load();
     }
 });
 
 // Evento do fechamento da modal
 $('#modal-diario-aula').on('hidden.bs.modal', function () {
     // Limpando a grid de diários de aulas
-    loadTableDiarioAula(idTurmaDisciplinaDiarioAula).ajax.url( "/index.php/seracademico/mestrado/turma/diarioAula/grid/" + 0).load();
+    loadTableDiarioAula(idTurmaDisciplinaDiarioAula).ajax.url( "/index.php/seracademico/doutorado/turma/diarioAula/grid/" + 0).load();
 });

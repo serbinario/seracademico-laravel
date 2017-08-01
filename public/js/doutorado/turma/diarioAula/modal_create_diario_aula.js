@@ -16,7 +16,7 @@ function loadFieldsDiarioAula()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Professor|getValues'
+            'doutorado\\Professor|getValues'
         ]
     };
 
@@ -24,7 +24,7 @@ function loadFieldsDiarioAula()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/getLoadFields',
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -55,8 +55,8 @@ function builderHtmlFieldsDiarioAula (dados) {
     var htmlProfessor = "<option value=''>Selecione um Professor</option>";
 
     // Percorrendo o array de tipos valores
-    for (var i = 0; i < dados['mestrado\\professor'].length; i++) {
-        htmlProfessor += "<option value='" + dados['mestrado\\professor'][i].id + "'>" + dados['mestrado\\professor'][i].nome + "</option>";
+    for (var i = 0; i < dados['doutorado\\professor'].length; i++) {
+        htmlProfessor += "<option value='" + dados['doutorado\\professor'][i].id + "'>" + dados['doutorado\\professor'][i].nome + "</option>";
     }
 
     // Carregado os selects
@@ -100,7 +100,7 @@ $('#btnSaveDiarioAula').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/store',
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/store',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -142,7 +142,7 @@ $(document).on('click', '#btnDeleteDiarioAula', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/delete/' + diarioAulaId,
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/delete/' + diarioAulaId,
         datatype: 'json'
     }).done(function (retorno) {
         tableDiarioAula.ajax.reload();

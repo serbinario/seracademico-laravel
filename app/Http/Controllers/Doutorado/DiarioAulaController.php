@@ -1,13 +1,13 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Mestrado\DiarioAulaService;
-use Seracademico\Validators\Mestrado\DiarioAulaValidator;
+use Seracademico\Services\Doutorado\DiarioAulaService;
+use Seracademico\Validators\Doutorado\DiarioAulaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
