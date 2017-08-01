@@ -9,7 +9,7 @@ function loadFieldsDispensarDisciplina()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Disciplina|curriculoByAluno,' + idAluno,
+            'Doutorado\\Disciplina|curriculoByAluno,' + idAluno,
             'Instituicao|byNivel,3',
             'Graduacao\\Motivo'
         ]
@@ -19,11 +19,11 @@ function loadFieldsDispensarDisciplina()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
-        if(retorno['mestrado\\disciplina'].length > 0) {
+        if(retorno['doutorado\\disciplina'].length > 0) {
             builderHtmlFieldsDispensarDisciplina(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
@@ -50,7 +50,7 @@ function builderHtmlFieldsDispensarDisciplina (dados) {
     $htmlMotivo      = '<option value="">Selecione um motivo</option>';
 
     // Preenchendo as disciplinas
-    $.each(dados['mestrado\\disciplina'], function (index, value) {
+    $.each(dados['doutorado\\disciplina'], function (index, value) {
         $htmlDisciplina += '<option value="' + value.id + '">' + value.nome + '</option>';
     });
 
@@ -60,7 +60,7 @@ function builderHtmlFieldsDispensarDisciplina (dados) {
     });
 
     // Preenchendo os motivos
-    $.each(dados['graduacao\\motivo'], function (index, value) {
+    $.each(dados['doutorado\\motivo'], function (index, value) {
         $htmlMotivo += '<option value="' + value.id + '">' + value.nome + '</option>';
     });
 
@@ -102,7 +102,7 @@ $('#btnSalvarDispensarDisciplina').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/storeDispensada',
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/storeDispensada',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -125,7 +125,7 @@ $(document).on('click', '#btnDeleteDisciplinaDispensada', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/deleteDispensada/' + idDispensada,
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/deleteDispensada/' + idDispensada,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

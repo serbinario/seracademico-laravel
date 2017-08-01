@@ -1,10 +1,10 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Repositories\Mestrado\AlunoDisciplinaDispensadaRepository;
-use Seracademico\Entities\Mestrado\AlunoDisciplinaDispensada;
-use Seracademico\Repositories\Mestrado\AlunoRepository;
+use Seracademico\Repositories\Doutorado\AlunoDisciplinaDispensadaRepository;
+use Seracademico\Entities\Doutorado\AlunoDisciplinaDispensada;
+use Seracademico\Repositories\Doutorado\AlunoRepository;
 
 class AlunoDisciplinaDispensadaService
 {

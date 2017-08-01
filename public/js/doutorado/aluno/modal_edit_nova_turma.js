@@ -26,7 +26,7 @@ function loadFieldsNovaTurmaEditar()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -80,7 +80,7 @@ function builderHtmlFieldsNovaTurmaEditar (dados) {
     //Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/turma/edit/' + posAlunoTurmaId,
+        url: '/index.php/seracademico/doutorado/aluno/turma/edit/' + posAlunoTurmaId,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -140,7 +140,7 @@ function loadTurmasAlunoEditar(idCurriculo, idTurma)
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/turma/getTurmas/' + idCurriculo,
+        url: '/index.php/seracademico/doutorado/aluno/turma/getTurmas/' + idCurriculo,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -235,7 +235,7 @@ $('#btnUpdateTurmaAluno').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/turma/update/' + posAlunoTurmaId,
+        url: '/index.php/seracademico/doutorado/aluno/turma/update/' + posAlunoTurmaId,
         data: getValueFieldsEditar(),
         datatype: 'json'
     }).done(function (retorno) {

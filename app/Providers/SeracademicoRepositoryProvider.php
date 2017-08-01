@@ -873,5 +873,25 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepository::class,
             \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaDispensadaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaDispensadaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+        );
+
+        /*$this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaRepositoryEloquent::class
+        );*/
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+        );
     }
 }

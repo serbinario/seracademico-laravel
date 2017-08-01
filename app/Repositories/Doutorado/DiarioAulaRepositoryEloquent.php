@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Repositories\Mestrado;
+namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Mestrado\DiarioAulaValidator;
-use Seracademico\Repositories\Mestrado\DiarioAulaRepository;
-use Seracademico\Entities\Mestrado\DiarioAula;
+use Seracademico\Validators\Doutorado\DiarioAulaValidator;
+use Seracademico\Repositories\Doutorado\DiarioAulaRepository;
+use Seracademico\Entities\Doutorado\DiarioAula;
 
 /**
  * Class DiarioAulaRepositoryEloquent

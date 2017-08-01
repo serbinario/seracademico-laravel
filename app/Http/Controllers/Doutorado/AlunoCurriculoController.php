@@ -1,13 +1,13 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Mestrado\AlunoDisciplinaDispensadaService;
-use Seracademico\Services\Mestrado\AlunoDisciplinaEquivalenteService;
-use Seracademico\Services\Mestrado\AlunoDisciplinaExtraCurricularService;
-use Seracademico\Services\Mestrado\AlunoService;
+use Seracademico\Services\Doutorado\AlunoDisciplinaDispensadaService;
+use Seracademico\Services\Doutorado\AlunoDisciplinaEquivalenteService;
+use Seracademico\Services\Doutorado\AlunoDisciplinaExtraCurricularService;
+use Seracademico\Services\Doutorado\AlunoService;
 use Seracademico\Uteis\ConsultationsBuilders\Aluno\PosGraduacao\BuildersUniosCurriculo;
 use Yajra\Datatables\Datatables;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Entities\Mestrado\AlunoDisciplinaEquivalente;
-use Seracademico\Repositories\Mestrado\AlunoRepository;
-use Seracademico\Repositories\Mestrado\AlunoDisciplinaEquivalenteRepository;
+use Seracademico\Entities\Doutorado\AlunoDisciplinaEquivalente;
+use Seracademico\Repositories\Doutorado\AlunoRepository;
+use Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepository;
 
 class AlunoDisciplinaEquivalenteService
 {

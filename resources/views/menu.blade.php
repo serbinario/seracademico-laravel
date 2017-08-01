@@ -50,7 +50,7 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
-                {{--<li>
+                <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Doutorado</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -67,7 +67,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>--}}
+                </li>
 
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span

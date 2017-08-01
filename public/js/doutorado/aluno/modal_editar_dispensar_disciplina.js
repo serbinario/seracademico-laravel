@@ -16,7 +16,7 @@ function loadFieldsDispensarDisciplinaEditar()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Disciplina|curriculoByAluno,' + idAluno,
+            'Doutorado\\Disciplina|curriculoByAluno,' + idAluno,
             'Instituicao|byNivel,3',
             'Graduacao\\Motivo'
         ]
@@ -26,11 +26,11 @@ function loadFieldsDispensarDisciplinaEditar()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {// validado as disciplinas do currículo
         // Verificando o retorno da requisição
-        if(retorno['mestrado\\disciplina'].length > 0) {
+        if(retorno['doutorado\\disciplina'].length > 0) {
             builderHtmlFieldsDispensarDisciplinaEditar(retorno);
         } else {
             // Retorno caso não tenha currículo em uma turma ou algum erro
@@ -54,7 +54,7 @@ function builderHtmlFieldsDispensarDisciplinaEditar (dados) {
     //Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/editDispensada/' + idAlunoDisciplinaDispensada,
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/editDispensada/' + idAlunoDisciplinaDispensada,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -64,7 +64,7 @@ function builderHtmlFieldsDispensarDisciplinaEditar (dados) {
             $htmlMotivo      = '<option value="">Selecione um motivo</option>';
 
             // Preenchendo as disciplinas
-            $.each(dados['mestrado\\disciplina'], function (index, value) {
+            $.each(dados['doutorado\\disciplina'], function (index, value) {
                 $htmlDisciplina += '<option value="' + value.id + '">' + value.nome + '</option>';
             });
 

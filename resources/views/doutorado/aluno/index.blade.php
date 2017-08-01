@@ -148,7 +148,7 @@
     </div>
 
     @include('doutorado.aluno.modal_aluno_documento')
-    {{--@include('doutorado.aluno.turma.modal_aluno_turma')
+    @include('doutorado.aluno.turma.modal_aluno_turma')
     @include('doutorado.aluno.turma.modal_nova_turma')
     @include('doutorado.aluno.turma.modal_create_situacao')
     @include('doutorado.aluno.curriculo.modal_curriculo')
@@ -157,12 +157,12 @@
     @include('doutorado.aluno.curriculo.modal_create_disciplina_extra_curricular')
     @include('doutorado.aluno.curriculo.modal_create_equivalencia')
     @include('reports.simple.modals.modal_report_mes_aluno_geral')
-    @include('reports.simple.modals.modal_report_mes_aluno_documento')--}}
+    @include('reports.simple.modals.modal_report_mes_aluno_documento')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/documentos/modal_aluno_documento.js') }}"></script>
-    {{--<script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_documento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_aluno_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_nova_turma.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_create_situacao.js') }}"></script>
@@ -171,15 +171,12 @@
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/modal_editar_dispensar_disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_disciplina_extra_curricular.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mes_aluno_geral.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
             serverSide: true,
             bFilter: false,
-            /*autoWidth: false,
-            iDisplayLength: 10,
-            bLengthChange: false,*/
             ajax: {
                 url: "{!! route('seracademico.doutorado.aluno.grid') !!}",
                 data: function (d) {
@@ -263,7 +260,7 @@
         $(document).on('change', '#report_id', function () {
             // Recuperando o id do relatório
             var reportId = $('#report_id').val();
-
+            console.log(reportId);
             // Validando o id do relatório
             if(!reportId) {
                 return false;
