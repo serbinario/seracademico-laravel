@@ -5,7 +5,7 @@ namespace Seracademico\Entities\Doutorado;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Seracademico\Entities\Mestrado\Turma;
+use Seracademico\Entities\Doutorado\Turma;
 use Seracademico\Entities\SituacaoAluno;
 use Illuminate\Database\Eloquent\Model;
 
