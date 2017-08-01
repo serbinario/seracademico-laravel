@@ -118,7 +118,7 @@
     @include('doutorado.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_doutorado_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_doutorado_turma_ata_aniversariantes')
-    @include('reports.simple.modals.modal_report_mes_aluno_turma')
+    @include('reports.simple.modals.modal_report_doutorado_aluno_turma')
 @stop
 
 @section('javascript')

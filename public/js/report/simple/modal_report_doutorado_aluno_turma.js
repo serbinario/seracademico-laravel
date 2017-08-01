@@ -1,20 +1,20 @@
 // carregando todos os cammes preenchidos
-function runSimpleReportMesAlunoTurma()
+function runSimpleReportDouAlunoTurma()
 {
-    builderFilterMesAlunoTurma();
+    builderFilterDouAlunoTurma();
 };
 
 // Função a montar o html
-function builderFilterMesAlunoTurma () {
+function builderFilterDouAlunoTurma () {
     // Abindo o modal
-    $("#modal-report-mes-aluno-turma").modal({show : true});
+    $("#modal-report-dou-aluno-turma").modal({show : true});
 }
 
 // Gerar o relatório
-$('#btnBuilderReportMesAlunoTurma').click(function() {
+$('#btnBuilderReportDouAlunoTurma').click(function() {
     // Recuperando o id do relatório selecionado
     var reportId = $('#report_id').val();
-    var turmaId  = $('#turma_mes_aluno_turma_id').val();
+    var turmaId  = $('#turma_dou_aluno_turma_id').val();
 
     // Validando as entradas
     if(!turmaId) {
@@ -28,7 +28,7 @@ $('#btnBuilderReportMesAlunoTurma').click(function() {
 });
 
 //consulta via select2
-$("#turma_mes_aluno_turma_id").select2({
+$("#turma_dou_aluno_turma_id").select2({
     placeholder: 'Selecione uma turma',
     width: 250,
     allowClear: true,
@@ -44,7 +44,7 @@ $("#turma_mes_aluno_turma_id").select2({
                 'tableName':  'fac_turmas',
                 'fieldName':  'codigo',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },

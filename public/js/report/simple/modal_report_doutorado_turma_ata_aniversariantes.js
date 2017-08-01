@@ -1,12 +1,12 @@
 // carregando todos os cammes preenchidos
-function runSimpleReportMesTurmaAtaAniversariante()
+function runSimpleReportDouTurmaAtaAniversariante()
 {
     // Definindo os models
     var dados =  {
         'models' : [
-        //    'Mestrado\\Curso|ativo,1',
-        //    'Mestrado\\Turma|Mestrado',
-        //    'Mestrado\\Disciplina|Mestrado'
+        //    'Doutrado\\Curso|ativo,1',
+        //    'Doutrado\\Turma|Doutrado',
+        //    'Doutrado\\Disciplina|Doutrado'
         ]
     };
 
@@ -30,20 +30,20 @@ function runSimpleReportMesTurmaAtaAniversariante()
 // Função a montar o html
 function builderFilterGraTurmaAtaDeAniversariante (dados) {
     // Abrindo o modal
-    $("#modal-report-mes-turma-ata-aniversariante").modal({show : true});
+    $("#modal-report-dou-turma-ata-aniversariante").modal({show : true});
 }
 
 // Gerar o relatório
-$('#btnBuilderReportMesTurmaAtaAniversariante').click(function() {
+$('#btnBuilderReportDouTurmaAtaAniversariante').click(function() {
     // Recuperando o id do relatório selecionado
     var reportId = $('#report_id').val();
-    var cursoId  = $('#curso_mes_turma_ata_aniversariante_id').val();
-    var turmaId  = $('#turma_mes_turma_ata_aniversariante_id').val();
+    var cursoId  = $('#curso_dou_turma_ata_aniversariante_id').val();
+    var turmaId  = $('#turma_dou_turma_ata_aniversariante_id').val();
     var mesAniversario = $('#mes_aniversario_mes_turma_ata_aniversariante').val();
 
     // Validando as entradas
     if(!cursoId || !turmaId || !mesAniversario) {
-        swal('Todos os cammes do filtros são obrigatórios!', 'Click no botão abaixo', 'error');
+        swal('Todos os campos dos filtros são obrigatórios!', 'Click no botão abaixo', 'error');
         return false;
     }
 
@@ -54,7 +54,7 @@ $('#btnBuilderReportMesTurmaAtaAniversariante').click(function() {
 
 // selects 2
 //consulta via select2
-$("#curso_mes_turma_ata_aniversariante_id").select2({
+$("#curso_dou_turma_ata_aniversariante_id").select2({
     placeholder: 'Selecione uma curso',
     width: 250,
     allowClear: true,
@@ -70,7 +70,7 @@ $("#curso_mes_turma_ata_aniversariante_id").select2({
                 'tableName':  'fac_cursos',
                 'fieldName':  'nome',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },
@@ -96,7 +96,7 @@ $("#curso_mes_turma_ata_aniversariante_id").select2({
 });
 
 //consulta via select2
-$("#turma_mes_turma_ata_aniversariante_id").select2({
+$("#turma_dou_turma_ata_aniversariante_id").select2({
     placeholder: 'Selecione uma turma',
     width: 250,
     allowClear: true,
@@ -112,7 +112,7 @@ $("#turma_mes_turma_ata_aniversariante_id").select2({
                 'tableName':  'fac_turmas',
                 'fieldName':  'codigo',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },

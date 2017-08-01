@@ -1,5 +1,5 @@
 // carregando todos os campos preenchidos
-function runSimpleReportMesTurmaAtaFrequencia()
+function runSimpleReportDouTurmaAtaFrequencia()
 {
     // Definindo os models
     var dados =  {
@@ -19,7 +19,7 @@ function runSimpleReportMesTurmaAtaFrequencia()
     }).done(function (retorno) {
         // Verificando o retorno da requisição
         if(retorno) {
-            builderFilterMesTurmaAtaDeAssinatura(retorno);
+            builderFilterDouTurmaAtaDeAssinatura(retorno);
         } else {
             // Retorno tenha dado erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
@@ -28,19 +28,19 @@ function runSimpleReportMesTurmaAtaFrequencia()
 };
 
 // Função a montar o html
-function builderFilterMesTurmaAtaDeAssinatura (dados) {
+function builderFilterDouTurmaAtaDeAssinatura (dados) {
     // Abrindo o modal
-    $("#modal-report-mes-turma-ata-assinatura").modal({show : true});
+    $("#modal-report-dou-turma-ata-assinatura").modal({show : true});
 }
 
 // Gerar o relatório
-$('#btnBuilderReportMesTurmaAtaAssinatura').click(function() {
+$('#btnBuilderReportDouTurmaAtaAssinatura').click(function() {
     // Recuperando o id do relatório selecionado
     var reportId = $('#report_id').val();
-    var cursoId  = $('#curso_mes_turma_ata_assinatura_id').val();
-    var turmaId  = $('#turma_mes_turma_ata_assinatura_id').val();
-    var disciplinaId  = $('#disciplina_mes_turma_ata_assinatura_id').val();
-    var turno = $('#turno_mes_turma_ata_assinatura_id').val();
+    var cursoId  = $('#curso_dou_turma_ata_assinatura_id').val();
+    var turmaId  = $('#turma_dou_turma_ata_assinatura_id').val();
+    var disciplinaId  = $('#disciplina_dou_turma_ata_assinatura_id').val();
+    var turno = $('#turno_dou_turma_ata_assinatura_id').val();
 
     // Validando as entradas
     if(!cursoId || !turmaId || !disciplinaId || !turno) {
@@ -56,7 +56,7 @@ $('#btnBuilderReportMesTurmaAtaAssinatura').click(function() {
 
 // selects 2
 //consulta via select2
-$("#curso_mes_turma_ata_assinatura_id").select2({
+$("#curso_dou_turma_ata_assinatura_id").select2({
     placeholder: 'Selecione uma curso',
     width: 250,
     allowClear: true,
@@ -72,7 +72,7 @@ $("#curso_mes_turma_ata_assinatura_id").select2({
                 'tableName':  'fac_cursos',
                 'fieldName':  'nome',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },
@@ -98,7 +98,7 @@ $("#curso_mes_turma_ata_assinatura_id").select2({
 });
 
 //consulta via select2
-$("#turma_mes_turma_ata_assinatura_id").select2({
+$("#turma_dou_turma_ata_assinatura_id").select2({
     placeholder: 'Selecione uma turma',
     width: 250,
     allowClear: true,
@@ -114,7 +114,7 @@ $("#turma_mes_turma_ata_assinatura_id").select2({
                 'tableName':  'fac_turmas',
                 'fieldName':  'codigo',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },
@@ -137,7 +137,7 @@ $("#turma_mes_turma_ata_assinatura_id").select2({
 });
 
 //consulta via select2
-$("#disciplina_mes_turma_ata_assinatura_id").select2({
+$("#disciplina_dou_turma_ata_assinatura_id").select2({
     placeholder: 'Selecione uma disciplina',
     width: 250,
     allowClear: true,
@@ -153,7 +153,7 @@ $("#disciplina_mes_turma_ata_assinatura_id").select2({
                 'tableName':  'fac_disciplinas',
                 'fieldName':  'nome',
                 'fieldWhere':  'tipo_nivel_sistema_id',
-                'valueWhere':  '3',
+                'valueWhere':  '5',
                 'page':       params.page || 1
             };
         },
