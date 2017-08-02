@@ -7,7 +7,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-user"></i>
-                Cadastrar Aluno de Mestrado
+                Cadastrar Aluno de Doutorado
             </h4>
         </div>
 
