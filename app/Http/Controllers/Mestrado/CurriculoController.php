@@ -29,7 +29,7 @@ class CurriculoController extends Controller
     */
     private $loadFields = [
         'Mestrado\\Curso|ativo,1',
-        'SimpleReport|byCrud,15'
+        'SimpleReport|byCrud,17'
     ];
 
     /**
