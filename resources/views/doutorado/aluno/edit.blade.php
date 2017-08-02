@@ -7,7 +7,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="fa fa-user"></i>
-                Editar Aluno de Mestrado
+                Editar Aluno de Doutorado
             </h4>
         </div>
         <div class="ibox-content">
