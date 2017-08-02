@@ -130,7 +130,15 @@ class AppServiceProvider extends ServiceProvider
          * O algoritmo verifica se a disciplina que o usuário insere no formulário já se encontra cadastrada
          * no modulo em questão.
          */
-        Validator::extend('tec_unique_disciplina', function ($attribute, $value, $formats, $validator) {
+
+        Validator::extend('tec_unique_disciplina', function ($attribute, $value, $formats, $validator, $idDisciplina) {
+
+            /*$where = '';
+
+            if ($idDisciplina){
+                $where = "->whereNotIn('fac_disciplinas.id', $idDisciplina)";
+            }*/
+
             $dados = \DB::table('fac_disciplinas')
                 ->select([
                     'id',
@@ -138,6 +146,7 @@ class AppServiceProvider extends ServiceProvider
                 ])
                 ->where('nome', $value)
                 ->where('tipo_nivel_sistema_id', 4)
+
                 ->get();
 
             if ($dados){
@@ -151,7 +160,8 @@ class AppServiceProvider extends ServiceProvider
          * O algoritmo verifica se o código da disciplina que o usuário insere no formulário já se encontra
          * cadastrada no modulo em questão.
          */
-        Validator::extend('tec_unique_codigo', function ($attribute, $value, $formats, $validator) {
+
+        Validator::extend('tec_unique_codigo', function ($attribute, $value, $formats, $validator, $idDisciplina) {
             $dados = \DB::table('fac_disciplinas')
                 ->select([
                     'id',

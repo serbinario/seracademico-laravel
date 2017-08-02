@@ -54,7 +54,6 @@ class CursoValidator extends LaravelValidator
 			'tipo_curso_id' =>  '' ,
 			'cordenador_id' =>  '' ,
 			'carga_horaria' => 'required'
-
         ],
 
         ValidatorInterface::RULE_UPDATE => [
