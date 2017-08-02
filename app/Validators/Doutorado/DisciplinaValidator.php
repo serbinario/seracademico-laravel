@@ -18,7 +18,9 @@ class DisciplinaValidator extends LaravelValidator
 		'email' => ':attribute deve seguir esse exemplo: exemplo@dominio.com',
 		'digits_between' => ':attribute deve ter entre :min - :max.',
 		'cpf_br' => ':attribute deve ser um número de CPF válido',
-		'unique' => ':attribute já se encontra cadastrado'
+		'unique' => ':attribute já se encontra cadastrado',
+		'dou_unique_disciplina' => 'A disciplina :attribute já se encontra cadastrada',
+		'dou_unique_codigo' => 'O código :attribute já se encontra cadastrado'
 	];
 
 	protected $attributes = [
