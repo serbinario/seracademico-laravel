@@ -19,8 +19,8 @@ class CursoValidator extends LaravelValidator
 		'digits_between' => ':attribute deve ter entre :min - :max.',
 		'cpf_br' => ':attribute deve ser um número de CPF válido',
 		'unique' => ':attribute já se encontra cadastrado',
-		'dou_unique_curso_nome' => 'O curso :attribute já se encontra cadastrado',
-		'dou_unique_curso_codigo' => 'O código :attribute já se encontra cadastrado'
+		'dou_unique_curso_nome' => ':attribute já se encontra cadastrado',
+		'dou_unique_curso_codigo' => ':attribute já se encontra cadastrado'
 	];
 
 	protected $attributes = [

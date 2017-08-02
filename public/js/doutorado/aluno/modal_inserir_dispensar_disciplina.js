@@ -60,7 +60,7 @@ function builderHtmlFieldsDispensarDisciplina (dados) {
     });
 
     // Preenchendo os motivos
-    $.each(dados['doutorado\\motivo'], function (index, value) {
+    $.each(dados['graduacao\\motivo'], function (index, value) {
         $htmlMotivo += '<option value="' + value.id + '">' + value.nome + '</option>';
     });
 
