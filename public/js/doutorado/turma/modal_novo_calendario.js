@@ -30,7 +30,7 @@ $('#btnSalvarCalendario').click(function() {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/calendario/store',
+        url: '/index.php/seracademico/doutorado/turma/calendario/store',
         data: dados,
         datatype: 'json',
         beforeSend: function(){

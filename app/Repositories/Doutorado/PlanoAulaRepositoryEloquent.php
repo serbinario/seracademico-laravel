@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Repositories\Mestrado;
+namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Mestrado\PlanoAulaValidator;
-use Seracademico\Repositories\Mestrado\PlanoAulaRepository;
-use Seracademico\Entities\Mestrado\PlanoAula;
+use Seracademico\Validators\Doutorado\PlanoAulaValidator;
+use Seracademico\Repositories\Doutorado\PlanoAulaRepository;
+use Seracademico\Entities\Doutorado\PlanoAula;
 
 /**
  * Class PlanoAulaRepositoryEloquent

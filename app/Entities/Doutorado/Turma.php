@@ -201,7 +201,6 @@ class Turma extends Model implements Transformable
             return new AlunoTurma($parent, $attributes, $table, $exists);
         }
 
-
         # Retorno do novo pivot
         return parent::newPivot($parent, $attributes, $table, $exists);
     }

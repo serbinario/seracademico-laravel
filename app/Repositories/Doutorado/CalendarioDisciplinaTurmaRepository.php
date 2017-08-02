@@ -6,7 +6,7 @@
  * Time: 12:59
  */
 
-namespace Seracademico\Repositories\Mestrado;
+namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 

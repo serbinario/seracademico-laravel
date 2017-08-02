@@ -1,11 +1,11 @@
 <?php
 
-namespace Seracademico\Repositories\Mestrado;
+namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Mestrado\AlunoDisciplinaExtraCurricularRepository;
-use Seracademico\Entities\Mestrado\AlunoDisciplinaExtraCurricular;
+use Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepository;
+use Seracademico\Entities\Doutorado\AlunoDisciplinaExtraCurricular;
 
 /**
  * Class AlunoDisciplinaExtraCurricularRepositoryEloquent

@@ -1,8 +1,8 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Repositories\Mestrado\AlunoFrequenciaRepository;
+use Seracademico\Repositories\Doutorado\AlunoFrequenciaRepository;
 
 class AlunoFrequenciaService
 {

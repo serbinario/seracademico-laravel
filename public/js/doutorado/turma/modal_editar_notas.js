@@ -21,7 +21,7 @@ function loadFieldsNotasEditar()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/notas/getLoadFields',
+        url: '/index.php/seracademico/doutorado/turma/notas/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -40,7 +40,7 @@ function builderHtmlFieldsNotasEditar (dados) {
     // Fazendo a requisição para recuperar os dados do curriculoDisciplina
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/notas/edit/' + idAlunoNota,
+        url: '/index.php/seracademico/doutorado/turma/notas/edit/' + idAlunoNota,
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
@@ -89,7 +89,7 @@ $('#btnUpdateNotas').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/notas/update/' + idAlunoNota,
+        url: '/index.php/seracademico/doutorado/turma/notas/update/' + idAlunoNota,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {

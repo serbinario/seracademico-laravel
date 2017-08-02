@@ -11,7 +11,7 @@ function loadTableConteudoProgramaticoDiarioAulaEdit() {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/mestrado/turma/diarioAula/gridConteudoProgramatico/" + idDiarioAula,
+        ajax: "/index.php/seracademico/doutorado/turma/diarioAula/gridConteudoProgramatico/" + idDiarioAula,
         columns: [
             {data: 'nome', name: 'nome'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
@@ -34,7 +34,7 @@ $('#btnAddConteudoProgramaticoDiarioAulaEdit').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/attachConteudo/' + idDiarioAula,
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/attachConteudo/' + idDiarioAula,
         data: {'conteudos' : [conteudos]},
         datatype: 'json'
     }).done(function (retorno) {
@@ -58,7 +58,7 @@ $(document).on( 'click', '#btnRemoverConteudoProgramaticoDiarioAulaEditar', func
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/detachConteudo/' + idDiarioAula,
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/detachConteudo/' + idDiarioAula,
         data: {'conteudos' : [conteudo]},
         datatype: 'json'
     }).done(function (retorno) {

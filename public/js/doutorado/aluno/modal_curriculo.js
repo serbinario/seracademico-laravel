@@ -1,7 +1,7 @@
 // Evento quando o modal fechar
 $('#modal-curriculo').on('hidden.bs.modal', function () {
-    loadTableDisciplinasACursar(0).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridACursar/" + 0).load();
-    loadTableDisciplinasCursadas(0).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridCursadas/" + 0).load();
+    loadTableDisciplinasACursar(0).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridACursar/" + 0).load();
+    loadTableDisciplinasCursadas(0).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridCursadas/" + 0).load();
 })
 
 // carregamento da grid de disciplinas a cursar
@@ -15,7 +15,7 @@ function loadTableDisciplinasACursar(idAlunoTurma) {
         bLengthChange: false,
         //bFilter: false,
         //bPaginate: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/curriculo/gridACursar/" + idAlunoTurma,
+        ajax: "/index.php/seracademico/doutorado/aluno/curriculo/gridACursar/" + idAlunoTurma,
         columns: [
             {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo', orderable: false},
             {data: 'disciplina_nome', name: 'fac_disciplinas.nome', orderable: false},
@@ -40,7 +40,7 @@ function loadTableDisciplinasCursadas(idAlunoTurma) {
         bLengthChange: false,
         //bFilter: false,
         //bPaginate: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/curriculo/gridCursadas/" + idAlunoTurma,
+        ajax: "/index.php/seracademico/doutorado/aluno/curriculo/gridCursadas/" + idAlunoTurma,
         columns: [
             {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo', orderable: false, searchable: false},
             {data: 'disciplina_nome', name: 'fac_disciplinas.nome', orderable: false, searchable: false},
@@ -59,6 +59,7 @@ function loadTableDisciplinasCursadas(idAlunoTurma) {
 // // carregamento da grid de disciplinas cursadas
 var tableDisciplinasDispensadas;
 function loadTableDisciplinasDispensadas(idAlunoTurma) {
+    console.log('aa');
     tableDisciplinasDispensadas = $('#grid-dispensadas').DataTable({
         processing: true,
         serverSide: true,
@@ -67,7 +68,7 @@ function loadTableDisciplinasDispensadas(idAlunoTurma) {
         bLengthChange: false,
         bFilter: false,
         //bPaginate: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/curriculo/gridDispensadas/" + idAlunoTurma,
+        ajax: "/index.php/seracademico/doutorado/aluno/curriculo/gridDispensadas/" + idAlunoTurma,
         columns: [
             {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo', orderable: false, searchable: false},
             {data: 'disciplina_nome', name: 'fac_disciplinas.nome', orderable: false, searchable: false},
@@ -94,7 +95,7 @@ function loadTableDisciplinasExtraCurricular (idAluno) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno,
+        ajax: "/index.php/seracademico/doutorado/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno,
         columns: [
             {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo'},
             {data: 'disciplina_nome', name: 'fac_disciplinas.nome'},
@@ -119,7 +120,7 @@ function loadTableDisciplinasEquivalentes (idAluno) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/curriculo/gridDisciplinasEquivalentes/" + idAluno,
+        ajax: "/index.php/seracademico/doutorado/aluno/curriculo/gridDisciplinasEquivalentes/" + idAluno,
         columns: [
             {data: 'disciplina_codigo', name: 'fac_disciplinas.codigo'},
             {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
@@ -137,35 +138,35 @@ function loadTableDisciplinasEquivalentes (idAluno) {
 function runCurriculo(idAluno) {
     // Carregando a grid de ACursar
     if(tableDisciplinasACursar) {
-        loadTableDisciplinasACursar(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridACursar/" + idAluno).load();
+        loadTableDisciplinasACursar(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridACursar/" + idAluno).load();
     } else {
         loadTableDisciplinasACursar(idAluno);
     }
 
     // Carregando a grid de cursadas
     if(tableDisciplinasCursadas) {
-        loadTableDisciplinasCursadas(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridCursadas/" + idAluno).load();
+        loadTableDisciplinasCursadas(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridCursadas/" + idAluno).load();
     } else {
         loadTableDisciplinasCursadas(idAluno);
     }
 
     // Carregando a grid de dispensadas
     if(tableDisciplinasDispensadas) {
-        loadTableDisciplinasDispensadas(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridDispensadas/" + idAluno).load();
+        loadTableDisciplinasDispensadas(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridDispensadas/" + idAluno).load();
     } else {
         loadTableDisciplinasDispensadas(idAluno);
     }
 
     // Carregando a grid de extras curriculares
     if(tableDisciplinasExtraCurricular) {
-        loadTableDisciplinasExtraCurricular(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno).load();
+        loadTableDisciplinasExtraCurricular(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridDisciplinasExtraCurricular/" + idAluno).load();
     } else {
         loadTableDisciplinasExtraCurricular(idAluno);
     }
 
     // Carregando a grid de extras curriculares
     if(tableDisciplinasEquivalentes) {
-        loadTableDisciplinasEquivalentes(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/curriculo/gridDisciplinasEquivalentes/" + idAluno).load();
+        loadTableDisciplinasEquivalentes(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/curriculo/gridDisciplinasEquivalentes/" + idAluno).load();
     } else {
         loadTableDisciplinasEquivalentes(idAluno);
     }

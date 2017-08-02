@@ -6,13 +6,12 @@
  * Time: 13:00
  */
 
-namespace Seracademico\Repositories\Mestrado;
+namespace Seracademico\Repositories\Doutorado;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepository;
-use Seracademico\Entities\Mestrado\CalendarioDisciplinaTurma;
-use Seracademico\Validators\Mestrado\CalendarioDisciplinaTurmaValidator;
+use Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepository;
+use Seracademico\Entities\Doutorado\CalendarioDisciplinaTurma;
 
 class CalendarioDisciplinaTurmaRepositoryEloquent extends BaseRepository implements CalendarioDisciplinaTurmaRepository
 {
@@ -25,7 +24,6 @@ class CalendarioDisciplinaTurmaRepositoryEloquent extends BaseRepository impleme
     {
         return CalendarioDisciplinaTurma::class;
     }
-
 
     /**
      * Boot up the repository, pushing criteria

@@ -1,9 +1,9 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Repositories\Mestrado\DiarioAulaRepository;
-use Seracademico\Entities\Mestrado\DiarioAula;
+use Seracademico\Repositories\Doutorado\DiarioAulaRepository;
+use Seracademico\Entities\Doutorado\DiarioAula;
 
 class DiarioAulaService
 {

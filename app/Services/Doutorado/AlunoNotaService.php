@@ -1,9 +1,9 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Repositories\Mestrado\AlunoNotaRepository;
-use Seracademico\Entities\Mestrado\AlunoNota;
+use Seracademico\Repositories\Doutorado\AlunoNotaRepository;
+use Seracademico\Entities\Doutorado\AlunoNota;
 
 class AlunoNotaService
 {

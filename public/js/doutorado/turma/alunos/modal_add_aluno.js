@@ -13,8 +13,8 @@ function loadFieldsAddAluno()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Curso|ativo,1',
-            'Mestrado\\Disciplina|disciplinasOfTurma,' + idTurma
+            'Doutorado\\Curso|ativo,1',
+            'Doutorado\\Disciplina|disciplinasOfTurma,' + idTurma
         ]
     };
 
@@ -22,7 +22,7 @@ function loadFieldsAddAluno()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/alunos/getLoadFields',
+        url: '/index.php/seracademico/doutorado/turma/alunos/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -43,15 +43,15 @@ function builderHtmlFieldsAddAluno (dados) {
     var htmlCurso      = "<option value=''>Selecione um Curso</option>";
 
     // Percorrendo o array de situacaoaluno
-    for(var i = 0; i < dados['mestrado\\curso'].length; i++) {
+    for(var i = 0; i < dados['doutorado\\curso'].length; i++) {
         // Criando as options
-        htmlCurso += "<option value='" + dados['mestrado\\curso'][i].id + "'>"  + dados['mestrado\\curso'][i].nome + "</option>";
+        htmlCurso += "<option value='" + dados['doutorado\\curso'][i].id + "'>"  + dados['doutorado\\curso'][i].nome + "</option>";
     }
 
     // Percorrendo o array de situacaoaluno
-    for(var i = 0; i < dados['mestrado\\disciplina'].length; i++) {
+    for(var i = 0; i < dados['doutorado\\disciplina'].length; i++) {
         // Criando as options
-        htmlDisciplina += "<option value='" + dados['mestrado\\disciplina'][i].id + "'>"  + dados['mestrado\\disciplina'][i].nome + "</option>";
+        htmlDisciplina += "<option value='" + dados['doutorado\\disciplina'][i].id + "'>"  + dados['doutorado\\disciplina'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de situacao aluno
@@ -77,7 +77,7 @@ $(document).on("change", "#add_aluno_curso", function () {
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/alunos/getAlunosByCurso/' + idCurso + '/' + idTurma + '/' + idDisciplina,
+        url: '/index.php/seracademico/doutorado/turma/alunos/getAlunosByCurso/' + idCurso + '/' + idTurma + '/' + idDisciplina,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -142,7 +142,7 @@ $(document).on("click", "#btnSaveAddAluno", function () {
     // Transação com banco de dados
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/turma/alunos/attachAluno',
+        url: '/index.php/seracademico/doutorado/turma/alunos/attachAluno',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {

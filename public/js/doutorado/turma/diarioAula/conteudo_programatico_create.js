@@ -26,7 +26,7 @@ $('#btnAddConteudoProgramaticoDiarioAula').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/turma/diarioAula/getConteudosProgramaticos',
+        url: '/index.php/seracademico/doutorado/turma/diarioAula/getConteudosProgramaticos',
         data: {'conteudos' : [conteudo]},
         datatype: 'json'
     }).done(function (retorno) {

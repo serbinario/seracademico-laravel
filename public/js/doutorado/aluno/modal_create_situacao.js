@@ -16,7 +16,7 @@ function loadFieldsSituacao()
     var dados =  {
         'models' : [
             'SituacaoAluno',
-            'Mestrado\\Turma|posGraduacaoByAlunoCurso,' + idAlunoCurso
+            'Doutorado\\Turma|posGraduacaoByAlunoCurso,' + idAlunoCurso
         ]
     };
 
@@ -24,7 +24,7 @@ function loadFieldsSituacao()
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -58,10 +58,10 @@ function builderHtmlFieldsSituacao (dados) {
     }
 
     // Percorrendo o array de professor
-    for(var i = 0; i < dados['mestrado\\turma'].length; i++) {
+    for(var i = 0; i < dados['doutorado\\turma'].length; i++) {
 
         // Criando as options
-        htmlTurma += "<option value='" + dados['mestrado\\turma'][i].id + "'>"  + dados['mestrado\\turma'][i].nome + "</option>";
+        htmlTurma += "<option value='" + dados['doutorado\\turma'][i].id + "'>"  + dados['doutorado\\turma'][i].nome + "</option>";
     }
 
     // Removendo e adicionando as options de situacao
@@ -85,7 +85,7 @@ function loadTurmaOrigem()
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/turma/getTurmaOrigem/' + idAlunoCurso,
+        url: '/index.php/seracademico/doutorado/aluno/turma/getTurmaOrigem/' + idAlunoCurso,
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -163,7 +163,7 @@ $(document).on("click", "#btnSalvarSituacao", function () {
     // Transação com banco de dados
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/turma/storeSituacao',
+        url: '/index.php/seracademico/doutorado/aluno/turma/storeSituacao',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -196,7 +196,7 @@ $(document).on('click', '#btnRemoverSituacao', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/mestrado/aluno/turma/destroySituacao/' + idAlunoSituacao,
+        url: '/index.php/seracademico/doutorado/aluno/turma/destroySituacao/' + idAlunoSituacao,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

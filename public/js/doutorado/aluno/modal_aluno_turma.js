@@ -9,7 +9,7 @@ function loadTableCursoTurma(idAluno) {
         bLengthChange: false,
         bFilter: false,
         //bPaginate: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/turma/grid/" + idAluno,
+        ajax: "/index.php/seracademico/doutorado/aluno/turma/grid/" + idAluno,
         columns: [
             {data: 'codigo_curso', name: 'fac_cursos.codigo'},
             // {data: 'nome_curso', name: 'fac_cursos.nome'},
@@ -36,7 +36,7 @@ function loadTableSituacoes(idAlunoCurso) {
         bLengthChange: false,
         bFilter: false,
         //bPaginate: false,
-        ajax: "/index.php/seracademico/mestrado/aluno/turma/gridSituacoes/" + idAlunoCurso,
+        ajax: "/index.php/seracademico/doutorado/aluno/turma/gridSituacoes/" + idAlunoCurso,
         columns: [
             {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
             {data: 'codigoCurso', name: 'fac_cursos.codigo'},
@@ -69,7 +69,7 @@ $(document).on("click", "#curso-turma-grid tbody tr", function (event) {
 
         //Carregando as grids de situações
         if(tableSituacoes) {
-            loadTableSituacoes(idAlunoCurso).ajax.url("/index.php/seracademico/mestrado/aluno/turma/gridSituacoes/" + idAlunoCurso).load();
+            loadTableSituacoes(idAlunoCurso).ajax.url("/index.php/seracademico/doutorado/aluno/turma/gridSituacoes/" + idAlunoCurso).load();
         } else {
             loadTableSituacoes(idAlunoCurso);
         }
@@ -88,13 +88,13 @@ function runCursoTurma(idAluno) {
 
     // Carregando a grid de alunos cursos
     if(tableCursoTurma) {
-        loadTableCursoTurma(idAluno).ajax.url("/index.php/seracademico/mestrado/aluno/turma/grid/" + idAluno).load();
+        loadTableCursoTurma(idAluno).ajax.url("/index.php/seracademico/doutorado/aluno/turma/grid/" + idAluno).load();
     } else {
         loadTableCursoTurma(idAluno);
     }
 
     // Carregamento inicial
-    loadTableSituacoes(0).ajax.url("/index.php/seracademico/mestrado/aluno/turma/gridSituacoes/" + 0).load();
+    loadTableSituacoes(0).ajax.url("/index.php/seracademico/doutorado/aluno/turma/gridSituacoes/" + 0).load();
 
 
     // Exibindi o modal
@@ -110,13 +110,13 @@ $(document).on('click', '#btnRemoverCurso', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/mestrado/aluno/turma/destroy/' + idAluno + '/' + id,
+        url: '/index.php/seracademico/doutorado/aluno/turma/destroy/' + idAluno + '/' + id,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
             // Recarregando as grids
             tableCursoTurma.ajax.reload();
-            loadTableSituacoes(0).ajax.url("/index.php/seracademico/mestrado/aluno/turma/gridSituacoes/" + 0).load();
+            loadTableSituacoes(0).ajax.url("/index.php/seracademico/doutorado/aluno/turma/gridSituacoes/" + 0).load();
 
             // desabilitando o butão
             $('#btnAdicionarSituacao').attr('disabled', true);

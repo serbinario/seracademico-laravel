@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    {{--@include('doutorado.turma.modal_calendario')
+    @include('doutorado.turma.modal_calendario')
     @include('doutorado.turma.modal_novo_calendario')
     @include('doutorado.turma.modal_editar_calendario')
     @include('doutorado.turma.modal_incluir_disciplinas')
@@ -118,11 +118,11 @@
     @include('doutorado.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_doutorado_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_doutorado_turma_ata_aniversariantes')
-    @include('reports.simple.modals.modal_report_mes_aluno_turma')--}}
+    @include('reports.simple.modals.modal_report_doutorado_aluno_turma')
 @stop
 
 @section('javascript')
-    {{--<script type="text/javascript" src="{{ asset('/js/doutorado/turma/modal_calendario.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/turma/modal_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/turma/modal_novo_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/turma/modal_editar_calendario.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/doutorado/turma/modal_incluir_disciplinas.js')  }}"></script>
@@ -140,7 +140,7 @@
     <script type="text/javascript" src="{{ asset('/js/doutorado/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_turma_ata_aniversariantes.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_aluno_turma.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_aluno_turma.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,

@@ -873,5 +873,40 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepository::class,
             \Seracademico\Repositories\Doutorado\ConteudoProgramaticoRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaDispensadaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaDispensadaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaExtraCurricularRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoDisciplinaEquivalenteRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoFrequenciaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoFrequenciaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\AlunoNotaRepository::class,
+            \Seracademico\Repositories\Doutorado\AlunoNotaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepository::class,
+            \Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Doutorado\DiarioAulaRepository::class,
+            \Seracademico\Repositories\Doutorado\DiarioAulaRepositoryEloquent::class
+        );
     }
 }

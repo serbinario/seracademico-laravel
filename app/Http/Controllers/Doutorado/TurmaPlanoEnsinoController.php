@@ -1,12 +1,12 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Mestrado\TurmaService;
+use Seracademico\Services\Doutorado\TurmaService;
 use Yajra\Datatables\Datatables;
 
 class TurmaPlanoEnsinoController extends Controller

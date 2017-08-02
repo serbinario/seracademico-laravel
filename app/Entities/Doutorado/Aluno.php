@@ -7,7 +7,7 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\CursoPosGraduacao;
 use Seracademico\Entities\CursoSuperior;
-use Seracademico\Entities\Mestrado\Curso;
+use Seracademico\Entities\Doutorado\Curso;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 

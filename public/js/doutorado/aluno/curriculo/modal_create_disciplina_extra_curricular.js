@@ -9,15 +9,15 @@ function loadFieldsAddDisciplinaExtraCurricular()
     // Definindo os models
     var dados =  {
         'models' : [
-            'Mestrado\\Curriculo|lessOfAluno,' + idAluno
+            'Doutorado\\Curriculo|lessOfAluno,' + idAluno
         ]
     };
-
+console.log(dados);
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/aluno/turma/getLoadFields',
+        url: '/index.php/seracademico/doutorado/aluno/turma/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -41,9 +41,9 @@ function builderHtmlFieldsAddDisciplinaExtraCurricular (dados) {
     var htmlCurriculo  = "<option value=''>Selecione um currículo</option>";
 
     // Percorrendo o array de cursos
-    for (var i = 0; i < dados['mestrado\\curriculo'].length; i++) {
-        htmlCurriculo += "<option value='" + dados['mestrado\\curriculo'][i].id + "'>"
-            + dados['mestrado\\curriculo'][i].codigo +  ' : ' + dados['mestrado\\curriculo'][i].nome + "</option>";
+    for (var i = 0; i < dados['doutorado\\curriculo'].length; i++) {
+        htmlCurriculo += "<option value='" + dados['doutorado\\curriculo'][i].id + "'>"
+            + dados['doutorado\\curriculo'][i].codigo +  ' : ' + dados['doutorado\\curriculo'][i].nome + "</option>";
     }
 
     // carregando o html
@@ -67,7 +67,7 @@ $(document).on('change', '#curriculo_extra_curricular_id', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/getDisciplinasByCurriculo/' + idCurriculo,
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/getDisciplinasByCurriculo/' + idCurriculo,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {
@@ -108,7 +108,7 @@ $('#btnSaveDisciplinaExtraCurricular').click(function() {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/storeDisciplinaExtraCurricular',
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/storeDisciplinaExtraCurricular',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -133,7 +133,7 @@ $(document).on('click', '#btnDeleteDisciplinaExtraCurricular', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/mestrado/aluno/curriculo/deleteDisciplinaExtraCurricular/' + idDicilinaExtraCurricular,
+        url: '/index.php/seracademico/doutorado/aluno/curriculo/deleteDisciplinaExtraCurricular/' + idDicilinaExtraCurricular,
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno.success) {

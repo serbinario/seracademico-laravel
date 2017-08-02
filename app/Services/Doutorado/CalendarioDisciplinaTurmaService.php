@@ -1,15 +1,15 @@
 <?php
 
-namespace Seracademico\Services\Mestrado;
+namespace Seracademico\Services\Doutorado;
 
-use Seracademico\Entities\Mestrado\AlunoFrequencia;
-use Seracademico\Entities\Mestrado\AlunoNota;
-use Seracademico\Entities\Mestrado\TurmaDisciplina;
-use Seracademico\Repositories\Mestrado\AlunoNotaRepository;
-use Seracademico\Repositories\Mestrado\AlunoRepository;
-use Seracademico\Repositories\Mestrado\CalendarioDisciplinaTurmaRepository;
-use Seracademico\Entities\Mestrado\CalendarioDisciplinaTurma;
-use Seracademico\Repositories\Mestrado\TurmaRepository;
+use Seracademico\Entities\Doutorado\AlunoFrequencia;
+use Seracademico\Entities\Doutorado\AlunoNota;
+use Seracademico\Entities\Doutorado\TurmaDisciplina;
+use Seracademico\Repositories\Doutorado\AlunoNotaRepository;
+use Seracademico\Repositories\Doutorado\AlunoRepository;
+use Seracademico\Repositories\Doutorado\CalendarioDisciplinaTurmaRepository;
+use Seracademico\Entities\Doutorado\CalendarioDisciplinaTurma;
+use Seracademico\Repositories\Doutorado\TurmaRepository;
 
 class CalendarioDisciplinaTurmaService
 {

@@ -11,7 +11,7 @@ function loadTableDisciplinasPlanoEnsino (idTurma) {
         iDisplayLength: 5,
         bLengthChange: false,
         bFilter: false,
-        ajax: "/index.php/seracademico/mestrado/turma/planoEnsino/gridDisciplinas/" + idTurma,
+        ajax: "/index.php/seracademico/doutorado/turma/planoEnsino/gridDisciplinas/" + idTurma,
         columns: [
             {data: 'codigo', name: 'fac_disciplinas.codigo', orderable: false},
             {data: 'nome', name: 'fac_disciplinas.nome', orderable: false},
@@ -26,7 +26,7 @@ function loadTableDisciplinasPlanoEnsino (idTurma) {
 function runTablePlanoEnsino(idTurma) {
     // Verificando se a grid está carregada
     if (tableDisciplinasPlanoEnsino) {
-        tableDisciplinasPlanoEnsino.ajax.url("/index.php/seracademico/mestrado/turma/planoEnsino/gridDisciplinas/" + idTurma).load();
+        tableDisciplinasPlanoEnsino.ajax.url("/index.php/seracademico/doutorado/turma/planoEnsino/gridDisciplinas/" + idTurma).load();
     } else {
         loadTableDisciplinasPlanoEnsino(idTurma);
     }
@@ -53,7 +53,7 @@ $(document).on('click', '#plano-ensino-disciplina-grid tbody tr td', function ()
             'idTurma': idTurma,
             'disciplinaId' : disciplinaPlanoEnsinoId,
             'models' : [
-                'Mestrado\\PlanoEnsino|byDisciplinaAndCargaHoraria,' + disciplinaPlanoEnsinoId + ',' + cargaHoraria
+                'Doutorado\\PlanoEnsino|byDisciplinaAndCargaHoraria,' + disciplinaPlanoEnsinoId + ',' + cargaHoraria
             ]
         };
 
@@ -61,18 +61,18 @@ $(document).on('click', '#plano-ensino-disciplina-grid tbody tr td', function ()
         jQuery.ajax({
             type: 'POST',
             data: dados,
-            url: '/index.php/seracademico/mestrado/turma/planoEnsino/getLoadFields',
+            url: '/index.php/seracademico/doutorado/turma/planoEnsino/getLoadFields',
             datatype: 'json'
         }).done(function (retorno) {
             // Variáveis que armazenaram o html
             var htmlPlanoEnsino     = "<option value=''>Selecione um plano de ensino</option>";
 
             // Verificando o retorno da requisição
-            if(retorno['mestrado\\planoensino'].length > 0) {
+            if(retorno['doutorado\\planoensino'].length > 0) {
                 // Percorrendo o array de disciplinacurriculo
-                for(var i = 0; i < retorno['mestrado\\planoensino'].length; i++) {
+                for(var i = 0; i < retorno['doutorado\\planoensino'].length; i++) {
                     // Criando as options
-                    htmlPlanoEnsino += "<option value='" + retorno['mestrado\\planoensino'][i].id + "'>" + retorno['mestrado\\planoensino'][i].nome + "</option>";
+                    htmlPlanoEnsino += "<option value='" + retorno['doutorado\\planoensino'][i].id + "'>" + retorno['doutorado\\planoensino'][i].nome + "</option>";
                 }
 
                 // Removendo e adicionando as options de período
@@ -125,7 +125,7 @@ $(document).on('click', '#addPlanoEnsino', function () {
     jQuery.ajax({
         type: 'POST',
         data: dados,
-        url: '/index.php/seracademico/mestrado/turma/planoEnsino/attachPlanoEnsino',
+        url: '/index.php/seracademico/doutorado/turma/planoEnsino/attachPlanoEnsino',
         datatype: 'json'
     }).done(function (retorno) {
         swal(retorno['msg'], 'Click no Ok para sair!', retorno['success'] ? 'success' : 'error')

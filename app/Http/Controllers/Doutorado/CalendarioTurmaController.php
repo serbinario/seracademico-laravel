@@ -1,14 +1,14 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Services\Mestrado\CalendarioDisciplinaTurmaService;
-use Seracademico\Services\Mestrado\TurmaService;
-use Seracademico\Validators\Mestrado\CalendarioDisciplinaTurmaValidator;
+use Seracademico\Services\Doutorado\CalendarioDisciplinaTurmaService;
+use Seracademico\Services\Doutorado\TurmaService;
+use Seracademico\Validators\Doutorado\CalendarioDisciplinaTurmaValidator;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Contracts\ValidatorInterface;
 

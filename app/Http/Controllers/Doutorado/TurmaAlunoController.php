@@ -1,16 +1,16 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 
-use Seracademico\Entities\Mestrado\AlunoFrequencia;
-use Seracademico\Entities\Mestrado\AlunoNota;
+use Seracademico\Entities\Doutorado\AlunoFrequencia;
+use Seracademico\Entities\Doutorado\AlunoNota;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
-use Seracademico\Repositories\Mestrado\AlunoRepository;
-use Seracademico\Repositories\Mestrado\TurmaRepository;
-use Seracademico\Services\Mestrado\TurmaService;
+use Seracademico\Repositories\Doutorado\AlunoRepository;
+use Seracademico\Repositories\Doutorado\TurmaRepository;
+use Seracademico\Services\Doutorado\TurmaService;
 use Yajra\Datatables\Datatables;
 
 class TurmaAlunoController extends Controller
