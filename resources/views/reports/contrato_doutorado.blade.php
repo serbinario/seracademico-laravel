@@ -199,11 +199,11 @@
         <tbody>
         <tr>
             <td>Matrícula</td>
-            <td>R$ 400,00</td>
+            <td>R$ 500,00</td>
         </tr>
         <tr>
             <td>Nº de Mensalidades:30</td>
-            <td>R$ 500,00</td>
+            <td>R$ 600,00</td>
         </tr>
         </tbody>
     </table>
@@ -216,7 +216,7 @@
         </thead>
         <tbody>
         <tr>
-            <td>$ 1000,00</td>
+            <td>US$ 2000,00</td>
         </tr>
         </tbody>
     </table>
