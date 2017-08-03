@@ -897,13 +897,13 @@
                 </div>
             </div>--}}
             <div class="col-md-3 col-md-offset-9">
-                {{--@if(isset($aluno))
+                @if(isset($aluno))
                     <div style="position: relative; top: 34px; left: -245px;">
                         <label for="documentacao_id">Documentos</label>
                         <select name="documentacao_id" class="form-control" id="documentacao_id">
                         </select>
                     </div>
-                @endif--}}
+                @endif
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
                         <a href="{{ route('seracademico.doutorado.aluno.index') }}" class="btn btn-primary btn-block pull-right"> <i class="fa fa-long-arrow-left"></i>  Voltar</a>
@@ -942,7 +942,7 @@
         $(document).on('change', '#documentacao_id', function () {
             // Recuperando os dados do formulário
             var documentacao_id = $('#documentacao_id').val();
-        console.log(documentacao_id);
+        
             // Fazendo a requisição ajax
             jQuery.ajax({
                 type: 'GET',
