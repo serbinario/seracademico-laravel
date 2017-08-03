@@ -8,32 +8,29 @@
 <body>
     <div class="cabecalho">
         <h1>
-            <img width="150" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="" style="margin-left: 50px;">
-        </h1>
-        <h1>
-            <img width="150" src="{{ asset('img/dd.jpg') }}" alt="" style="position: absolute; left: 500px; top: 50px;">
+            <img width="185" src="{{ asset('img/dd.jpg') }}" alt="" style="position: relative; left: 500px; top: 50px;">
         </h1>
     </div>
 
     <div class="conteudo">
-        <h2 style="text-align: center; margin-top: 70px;">
+        <h2 style="text-align: center; margin-top: 30px;">
             DECLARAÇÃO
         </h2>
         <hr style="margin-bottom: 25px; margin-top: 25px;">
         <p style="font-size: 18px">
             Declaramos para fins de comprovação que o(a) Professor(a)
-            <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, CPF:
+            <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, Portadora do CPF:
             <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição a Disciplina
-            <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no curso de
+            <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, no Curso de Especialização, Pós-Graduação (LATO SENSU) em
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
-            <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}.
+            <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime('today')) }}.
         </p>
         <div style="text-align: center; font-size: 18px; margin-top: 55px;">
-            <p>
+            <div>
                 O referido é verdadeiro e dou fé.
-            </p>
+            </div>
             <p style="margin-top: 75px;">
-                <strong>Recife, {{ strftime('%d de %B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}</strong>
+                <strong>Recife, {{ strftime('%d de %B de %Y', strtotime('today')) }}</strong>
             </p>
         </div>
     </div>
@@ -50,10 +47,19 @@
         </p>
     </div>
 
-    <div class="rodape" style="text-align: center; font-size: 18px">
-        <p>
-            Email: registrar@grendaluniversity.org.uk | www.grendaluniversity.org.uk
-        </p>
+    <div class="rodape" style="text-align: center; font-size: 18px; margin-top: 40px">
+        <div>
+            ALPHA EDUCAÇÃO E TREINAMENTOS – CNPJ: 22.945.385/0001-00
+        </div>
+        <div>
+            Rua Gervásio Pires, nº 826, Santo Amaro – Recife – PE.
+        </div>
+        <div>
+            Facebook.com/faculdadealpha
+        </div>
+        <div>
+            Fones: (81) 3071-7249 / 99516-2229 / 98446-0808
+        </div>
     </div>
 </body>
 </html>

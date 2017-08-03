@@ -775,6 +775,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'ProfessorController@update']);
                 Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'ProfessorController@contrato']);
                 Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'ProfessorController@getImg']);
+
+                //Declaração de vinculo
+                Route::post('getProfessor', ['as' => 'getProfessor', 'uses' => 'PosGraduacao\ProfessorPosController@getProfessor']);
+                Route::post('getDisciplina/{idProfessor}', ['as' => 'getDisciplina', 'uses' => 'PosGraduacao\ProfessorPosController@getDisciplina']);
             });
 
             Route::group(['prefix' => 'professorpos', 'as' => 'professorpos.'], function () {
