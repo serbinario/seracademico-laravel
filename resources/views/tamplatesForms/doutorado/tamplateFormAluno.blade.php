@@ -23,12 +23,6 @@
                     {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="form-group col-md-6">
-                <div class="fg-line">
-                    {!! Form::label('pessoa[nome]', 'Nome * max 60 caracteres (0-9 A-Z .-[ ])') !!}
-                    {!! Form::text('pessoa[nome]',  Session::getOldInput('pessoa[nome]') , array('class' => 'form-control')) !!}
-                </div>
-            </div>
             <div class="form-group col-md-2">
                 <div class="fg-line">
                     {!! Form::label('pessoa[data_nasciemento]', 'Nascimento *') !!}
