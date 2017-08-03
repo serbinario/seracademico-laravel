@@ -36,10 +36,10 @@ class AlunoDocumentoController extends Controller
                 case "19" :
                     $this->contrato($idAluno);
                     break;
-                case "20" :
+                case "21" :
                     $this->declaracaoVinculo($idAluno);
                     break;
-                case "21" :
+                case "20" :
                     $this->declaracaoAfastamento($idAluno);
                     break;
                 case "22" :
@@ -79,11 +79,11 @@ class AlunoDocumentoController extends Controller
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.contrato_doutorado";
                     break;
-                case "20" :
+                case "21" :
                     $result = $this->declaracaoVinculo($idAluno);
                     $nameView = "reports.declaracao_vinculo_doutorado";
                     break;
-                case "21" :
+                case "20" :
                     $result = $this->declaracaoAfastamento($idAluno);
                     $nameView = "reports.declaracao_afastamento_mestrado";
                     break;

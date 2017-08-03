@@ -17,7 +17,7 @@ class TipoDocumento extends Model implements Transformable
         'tipo_nivel_mestrado_id',
 	];
 
-    public function scopeNivelDeMestrado($query)
+    public function scopeNivelDeDoutorado($query)
     {
         return $query->where('tipo_nivel_sistema_id', 5);
     }
