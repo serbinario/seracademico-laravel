@@ -942,7 +942,7 @@
         $(document).on('change', '#documentacao_id', function () {
             // Recuperando os dados do formulário
             var documentacao_id = $('#documentacao_id').val();
-        
+
             // Fazendo a requisição ajax
             jQuery.ajax({
                 type: 'GET',

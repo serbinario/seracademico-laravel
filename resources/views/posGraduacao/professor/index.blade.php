@@ -75,10 +75,12 @@
         </div>
     </div>
     @include('reports.simple.modals.modal_report_pos_prof_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_pos_professor_vinculo')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_professor_ata_aniversariantes.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_professor_vinculo.js')  }}"></script>
 
     <script type="text/javascript">
         var table = $('#professor-grid').DataTable({

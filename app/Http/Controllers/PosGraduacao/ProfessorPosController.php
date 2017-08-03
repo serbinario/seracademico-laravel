@@ -8,6 +8,8 @@ use Seracademico\Entities\Instituicao;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\PosGraduacao\ProfessorPosService;
+use Seracademico\Repositories\PosGraduacao\ProfessorPosRepository;
+use Seracademico\Repositories\PosGraduacao\DisciplinaRepository;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -49,10 +51,15 @@ class ProfessorPosController extends Controller
     * @param ProfessorPosService $service
     * @param ProfessorPosValidator $validator
     */
-    public function __construct(ProfessorPosService $service, ProfessorPosValidator $validator)
+    public function __construct(ProfessorPosService $service,
+                                ProfessorPosValidator $validator,
+                                ProfessorPosRepository $repository,
+                                DisciplinaRepository $disciplinaRepository)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
+        $this->repository =  $repository;
+        $this->disciplinaRepository =  $disciplinaRepository;
     }
 
     /**
@@ -232,6 +239,38 @@ class ProfessorPosController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessor()
+    {
+        try {
+            $professores = $this->repository->getProfessores();
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $professores, 'success' => true]);
+        } catch (\Throwable $e) {
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisciplina($idProfessor)
+    {
+        try {
+            $disciplinas = $this->disciplinaRepository->getDisciplinas($idProfessor);
+
+            #Retorno para a view
+            return \Illuminate\Support\Facades\Response::json(['dados' => $disciplinas, 'success' => true]);
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
