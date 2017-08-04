@@ -146,7 +146,8 @@ class Professor extends Model implements Transformable
                 'fac_professores.id',
                 'pessoas.nome'
             ])
-            ->where('tipo_nivel_sistema_id', 3);
+            ->where('tipo_nivel_sistema_id', 3)
+            ->orWhere('tipo_nivel_sistema_id', 5);
     }
 
 }
