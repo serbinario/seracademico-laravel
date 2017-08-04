@@ -311,7 +311,7 @@ class AlunoController extends Controller
             ->join('pos_alunos_situacoes', 'pos_alunos_cursos.id', '=', 'pos_alunos_situacoes.pos_aluno_curso_id')
             ->where('pessoas.cpf', '=', $data['cpf'])
             ->where('pos_alunos_situacoes.situacao_id', '!=', 10) //10 = cancelado
-            ->where('pos_alunos.tipo_aluno_id', '=', 2) //doutorado = 2
+            ->where('pos_alunos.tipo_aluno_id', '=', 4) //doutorado = 4
             ->get();
 
         if (count($query) > 0) {
