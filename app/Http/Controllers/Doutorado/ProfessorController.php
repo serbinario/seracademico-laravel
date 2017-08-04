@@ -29,7 +29,7 @@ class ProfessorController extends Controller
     private $validator;
 
     /**
-    * @var ProfessorRespository
+    * @var ProfessorRespository Gustavo Buldog
     */
     private $repository;
 

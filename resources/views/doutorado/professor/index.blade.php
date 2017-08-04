@@ -78,9 +78,9 @@
 @stop
 
 @section('javascript')
-    {{--<script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_ata_aniversariantes.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_ata_aniversariantes.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/mestrado/professor/documentos/modal_professor_documento.js')  }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_vinculo.js')  }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_mestrado_professor_vinculo.js')  }}"></script>
 
     <script type="text/javascript">
         var table = $('#professor-grid').DataTable({
