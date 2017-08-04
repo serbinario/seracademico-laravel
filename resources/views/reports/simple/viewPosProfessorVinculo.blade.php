@@ -16,8 +16,7 @@
         <h2 style="text-align: center; margin-top: 30px;">
             DECLARAÇÃO
         </h2>
-        <hr style="margin-bottom: 25px; margin-top: 25px;">
-        <p style="font-size: 18px">
+        <p style="font-size: 18px; text-align: justify; line-height: 50px; text-indent: 30px;">
             Declaramos para fins de comprovação que o(a) Professor(a)
             <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, Portadora do CPF:
             <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição a Disciplina
@@ -25,11 +24,11 @@
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
             <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime('today')) }}.
         </p>
-        <div style="text-align: center; font-size: 18px; margin-top: 55px;">
+        <div style="text-align: center; font-size: 18px; margin-top: 40px;">
             <div>
                 O referido é verdadeiro e dou fé.
             </div>
-            <p style="margin-top: 75px;">
+            <p style="margin-top: 20px;">
                 <strong>Recife, {{ strftime('%d de %B de %Y', strtotime('today')) }}</strong>
             </p>
         </div>
@@ -47,7 +46,7 @@
         </p>
     </div>
 
-    <div class="rodape" style="text-align: center; font-size: 18px; margin-top: 40px">
+    <div class="rodape" style="text-align: center; font-size: 18px; margin-top: 10px">
         <div>
             ALPHA EDUCAÇÃO E TREINAMENTOS – CNPJ: 22.945.385/0001-00
         </div>
