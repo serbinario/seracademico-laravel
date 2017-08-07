@@ -52,7 +52,7 @@ $('#btnBuilderReportMesProfessorVinculo').click(function() {
     var reportId = $('#report_id').val();
     var idProfessor = $('#mes_professor_id').val();
     var idDisciplina = $('#mes_disciplina_id').val();
-    console.log(idDisciplina);
+
     // Validando as entradas
     if(!idProfessor && !idDisciplina) {
         swal('Todos os campos do filtro são obrigatórios!', 'Click no botão abaixo', 'error');

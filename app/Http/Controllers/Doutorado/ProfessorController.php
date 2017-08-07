@@ -54,7 +54,7 @@ class ProfessorController extends Controller
         'Titulacao',
         'Instituicao',
         'Religiao',
-        'SimpleReport|byCrud,8'
+        'SimpleReport|byCrud,19'
     ];
 
     /**
@@ -258,7 +258,6 @@ class ProfessorController extends Controller
      /**
      * @param Request $request
      * @return mixed
-     *
      */
     public function getLoadFields(Request $request)
     {

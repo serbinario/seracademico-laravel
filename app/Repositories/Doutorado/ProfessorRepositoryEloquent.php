@@ -44,7 +44,9 @@ class ProfessorRepositoryEloquent extends BaseRepository implements ProfessorRep
             ])
             ->orderBy('pessoas.nome')
             ->where('fac_professores.tipo_nivel_sistema_id', 3)
+            ->orWhere('fac_professores.tipo_nivel_sistema_id', 5)
             ->get();
+
 
         /*if (count($professores) == 0){
             throw new \Exception('Professores não encontrados.');
