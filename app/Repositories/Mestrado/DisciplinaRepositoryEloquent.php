@@ -47,7 +47,8 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
             ])
             ->groupBy('fac_disciplinas.nome')
             ->orderBy('fac_disciplinas.id')
-            ->where('fac_disciplinas.tipo_nivel_sistema_id', 3)
+            ->where('fac_disciplinas.tipo_nivel_sistema_id', 5)
+            ->orWhere('fac_disciplinas.tipo_nivel_sistema_id', 3)
             ->where('fac_professores.id', $idProfessor)
             ->get();
 
