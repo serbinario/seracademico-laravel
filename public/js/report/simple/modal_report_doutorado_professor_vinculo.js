@@ -1,23 +1,22 @@
 var idProfessor;
 
 // carregando todos os campos preenchidos
-function runSimpleReportPosProfessorVinculo()
+function runSimpleReportDouProfessorVinculo()
 {
-    builderFilterPosProfessorVinculo([]);
+    builderFilterDouProfessorVinculo([]);
 }
 
 // Função a montar o html
-function builderFilterPosProfessorVinculo(dados) {
+function builderFilterDouProfessorVinculo(dados) {
     // Abrindo o modal
-    $("#modal-report-pos-prof-vinculo").modal({show : true});
+    $("#modal-report-dou-prof-vinculo").modal({show : true});
 }
 
 jQuery.ajax({
     type: 'POST',
-    url: '/index.php/seracademico/posgraduacao/professor/getProfessor',
+    url: '/index.php/seracademico/doutorado/professor/getProfessor',
     datatype: 'json'
 }).done(function (json) {
-    console.log(json.dados);
     var option = "";
     option += '<option value="">Selecione um professor</option>';
 
@@ -25,14 +24,14 @@ jQuery.ajax({
         option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';
     }
 
-    $('#pos_professor_id option').remove();
-    $('#pos_professor_id').append(option);
+    $('#dou_professor_id option').remove();
+    $('#dou_professor_id').append(option);
 });
 
-$("#pos_professor_id").change(function() {
+$("#dou_professor_id").change(function() {
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/posgraduacao/professor/getDisciplina/' + $('#pos_professor_id').val(),
+        url: '/index.php/seracademico/doutorado/professor/getDisciplina/' + $('#dou_professor_id').val(),
         datatype: 'json'
     }).done(function (json) {
         var option = "";
@@ -42,18 +41,18 @@ $("#pos_professor_id").change(function() {
             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['nome'] + '</option>';
         }
 
-        $('#pos_disciplina_id option').remove();
-        $('#pos_disciplina_id').append(option);
+        $('#dou_disciplina_id option').remove();
+        $('#dou_disciplina_id').append(option);
     });
 });
 
 // Gerar o relatório
-$('#btnBuilderReportPosProfessorVinculo').click(function() {
+$('#btnBuilderReportDouProfessorVinculo').click(function() {
     // Recuperando o id do relatório selecionado
     var reportId = $('#report_id').val();
-    var idProfessor = $('#pos_professor_id').val();
-    var idDisciplina = $('#pos_disciplina_id').val();
-    
+    var idProfessor = $('#dou_professor_id').val();
+    var idDisciplina = $('#dou_disciplina_id').val();
+    console.log(idDisciplina);
     // Validando as entradas
     if(!idProfessor && !idDisciplina) {
         swal('Todos os campos do filtro são obrigatórios!', 'Click no botão abaixo', 'error');
