@@ -17,7 +17,7 @@ jQuery.ajax({
     url: '/index.php/seracademico/posgraduacao/professor/getProfessor',
     datatype: 'json'
 }).done(function (json) {
-    console.log(json.dados);
+
     var option = "";
     option += '<option value="">Selecione um professor</option>';
 
@@ -53,7 +53,7 @@ $('#btnBuilderReportPosProfessorVinculo').click(function() {
     var reportId = $('#report_id').val();
     var idProfessor = $('#pos_professor_id').val();
     var idDisciplina = $('#pos_disciplina_id').val();
-    
+
     // Validando as entradas
     if(!idProfessor && !idDisciplina) {
         swal('Todos os campos do filtro são obrigatórios!', 'Click no botão abaixo', 'error');
