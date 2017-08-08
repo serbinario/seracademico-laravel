@@ -18,17 +18,15 @@ class CurriculoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-
-			'nome' =>  'required|max:200|unique:fac_curriculos,nome',
-			'codigo' =>  'required|max:15|unique:fac_curriculos,codigo',
+			'nome' =>  'required|max:200|tec_unique_nome_curriculo',
+			'codigo' =>  'required|max:15|tec_unique_codigo_curriculo',
 			'ano' =>  'digits_between:1,4|numeric' ,
 			'valido_inicio' =>  'serbinario_date_format:"d/m/Y"' ,
 			'valido_fim' =>  'serbinario_date_format:"d/m/Y"' ,
 			'curso_id' =>  'integer' ,
-
         ],
-        ValidatorInterface::RULE_UPDATE => [
 
+        ValidatorInterface::RULE_UPDATE => [
 			'nome' =>  'required|max:200|unique:fac_curriculos,nome,:id',
 			'codigo' =>  'required|max:15|unique:fac_curriculos,codigo,:id',
 			'ano' =>  'digits_between:1,4|numeric' ,

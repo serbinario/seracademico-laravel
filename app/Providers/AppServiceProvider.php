@@ -130,15 +130,52 @@ class AppServiceProvider extends ServiceProvider
          * O algoritmo verifica se a disciplina que o usuário insere no formulário já se encontra cadastrada
          * no modulo em questão.
          */
+        Validator::extend('tec_unique_nome_curriculo', function ($attribute, $value, $formats, $validator) {
+            $dados = \DB::table('fac_curriculos')
+                ->select([
+                    'id',
+                    'nome'
+                ])
+                ->where('nome', $value)
+                ->where('tipo_nivel_sistema_id', 4)
 
-        Validator::extend('tec_unique_disciplina', function ($attribute, $value, $formats, $validator, $idDisciplina) {
+                ->get();
 
-            /*$where = '';
+            if ($dados){
+                return false;
+            };
 
-            if ($idDisciplina){
-                $where = "->whereNotIn('fac_disciplinas.id', $idDisciplina)";
-            }*/
+            return true;
+        });
 
+        /**
+         * O algoritmo verifica se a disciplina que o usuário insere no formulário já se encontra cadastrada
+         * no modulo em questão.
+         */
+        Validator::extend('tec_unique_codigo_curriculo', function ($attribute, $value, $formats, $validator) {
+            $dados = \DB::table('fac_curriculos')
+                ->select([
+                    'id',
+                    'codigo'
+                ])
+                ->where('codigo', $value)
+                ->where('tipo_nivel_sistema_id', 4)
+
+                ->get();
+
+            if ($dados){
+                return false;
+            };
+
+            return true;
+        });
+
+        /**
+         * O algoritmo verifica se a disciplina que o usuário insere no formulário já se encontra cadastrada
+         * no modulo em questão.
+         */
+
+        Validator::extend('tec_unique_disciplina', function ($attribute, $value, $formats, $validator) {
             $dados = \DB::table('fac_disciplinas')
                 ->select([
                     'id',
@@ -161,7 +198,7 @@ class AppServiceProvider extends ServiceProvider
          * cadastrada no modulo em questão.
          */
 
-        Validator::extend('tec_unique_codigo', function ($attribute, $value, $formats, $validator, $idDisciplina) {
+        Validator::extend('tec_unique_codigo', function ($attribute, $value, $formats, $validator) {
             $dados = \DB::table('fac_disciplinas')
                 ->select([
                     'id',

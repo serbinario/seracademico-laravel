@@ -63,7 +63,7 @@ class CurriculoService
 
         #Salvando o registro pincipal
         $curriculo =  $this->repository->create($data);
-
+        dd($curriculo);
         #Verificando se foi criado no banco de dados
         if(!$curriculo) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
