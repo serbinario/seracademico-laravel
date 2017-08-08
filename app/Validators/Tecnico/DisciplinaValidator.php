@@ -37,7 +37,7 @@ class DisciplinaValidator extends LaravelValidator
 			'nome' => 'required|max:200|tec_unique_disciplina',
 			'codigo' => 'required|max:15|tec_unique_codigo',
 			'carga_horaria' => 'required|digits_between:1,5|numeric' ,
-			'qtd_falta' =>  'required|numeric' ,
+			'qtd_falta' =>  'numeric' ,
 			'tipo_disciplina_id' =>  'integer' ,
 			'tipo_avaliacao_id' =>  'integer' ,
         ],
