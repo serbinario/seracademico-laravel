@@ -120,7 +120,7 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_curriculo_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_curriculo_disciplina.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
