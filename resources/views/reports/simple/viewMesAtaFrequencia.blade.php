@@ -99,9 +99,14 @@
 <div id="body">
     <?php
         $objDate = $dados['filtersBody'][5] ?? "";
+        $dataFinal = $dados['filtersBody'][7] ?? "";
 
         if (!empty($objDate)) {
             $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
+        }
+
+        if (!empty($dataFinal)) {
+            $dataFinal = \DateTime::createFromFormat('Y-m-d', $dataFinal);
         }
     ?>
     <br>
@@ -112,7 +117,7 @@
         <tbody>
         <tr>
             <td>CAMPUS: {{ $dados['filtersBody'][6] ?? ""}}</td>
-            <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
+            <td>Data: {{ !empty($dataFinal) ? $dataFinal->format('d/m/Y') : ""}}</td>
 
         </tr>
         <tr>
