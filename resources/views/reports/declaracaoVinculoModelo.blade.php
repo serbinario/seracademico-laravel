@@ -159,7 +159,7 @@ $dataEmissao = new \DateTime('now');
             O Referido é verdadeiro e dou fé.
         </p>
 
-        <p>
+        <p style="font-size: 15px;text-indent: 2em;">
             Data Emissão: {{ $dataEmissao->format('d/m/Y') }}
         </p>
 
