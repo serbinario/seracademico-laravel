@@ -48,6 +48,8 @@ function data($dia, $mes, $ano, $semana) {
 }
 //Agora basta imprimir na tela...
 //echo ("$cidade, $semana, $dia de $mes de $ano");
+
+$dataEmissao = new \DateTime('now');
 ?>
 <html>
 <head>
@@ -155,6 +157,10 @@ function data($dia, $mes, $ano, $semana) {
 
         <p style="font-size: 15px;text-indent: 2em; margin-top: 10px;">
             O Referido é verdadeiro e dou fé.
+        </p>
+
+        <p>
+            Data Emissão: {{ $dataEmissao->format('d/m/Y') }}
         </p>
 
         <center>
