@@ -165,7 +165,7 @@ $dataEmissao = new \DateTime('now');
 
         <center>
             <div style="margin-top: 130px;">
-                <h1 style="position: absolute; left: 0; right: 0; top: 700px;"><img width="220px;" src="{{ asset('img/assinatura_luciana.png') }}" alt=""></h1>
+                <h1 style="position: absolute; left: 0; right: 0; top: 750px;"><img width="220px;" src="{{ asset('img/assinatura_luciana.png') }}" alt=""></h1>
                 <p style="font-size: 15px;text-indent: 2em;">
                     Luciana Teixeira Vitor<br>
                     Gestora do Centro de Estudos Avançados<br>
