@@ -252,7 +252,6 @@ class ExemplarService
         $data = $this->tratamentoDatas($data);
         $data = $this->tratamentoCampos($data);
 
-        //dd($data);
         //recupera o acervo
         $acervo = $this->repoAcervo->find($data['arcevos_id']);
 
