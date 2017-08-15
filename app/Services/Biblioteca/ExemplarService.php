@@ -270,7 +270,7 @@ class ExemplarService
         
         //trata a quantidade de exemplar caso o valor informado seja 0
         $qtdExemplar = $data['registros'] != '0' && $data['registros'] != '' ? $qtdExemplar = $data['registros'] : $qtdExemplar = '1';
-       
+
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
                 if($i == 0){
@@ -279,7 +279,6 @@ class ExemplarService
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
-                    $data = $this->insertImg($data);
 
                     #Salvando o registro principal
                     $exemplar =  $this->repository->create($data);
