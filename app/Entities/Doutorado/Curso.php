@@ -235,7 +235,7 @@ class Curso extends Model implements Transformable
     {
         return $query->select('fac_cursos.nome', 'fac_cursos.id')
             ->join('fac_curriculos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_cursos.tipo_nivel_sistema_id', 4)
+            ->where('fac_cursos.tipo_nivel_sistema_id', 5)
             ->where("fac_cursos.ativo", $value)
             ->where('fac_curriculos.ativo', $value);
     }
@@ -246,6 +246,6 @@ class Curso extends Model implements Transformable
      */
     public function scopeAtivo($query, $value)
     {
-        return $query->where('tipo_nivel_sistema_id', 4)->where("ativo", $value);
+        return $query->where('tipo_nivel_sistema_id', 5)->where("ativo", $value);
     }
 }

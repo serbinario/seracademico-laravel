@@ -5,7 +5,6 @@ namespace Seracademico\Repositories\Graduacao;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Entities\Graduacao\Vestibulando;
-use Seracademico\Validators\Graduacao\VestibulandoValidator;
 
 /**
  * Class VestibulandoRepositoryEloquent
@@ -22,17 +21,6 @@ class VestibulandoRepositoryEloquent extends BaseRepository implements Vestibula
     {
         return Vestibulando::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-        return VestibulandoValidator::class;
-    }
-
 
     /**
      * Boot up the repository, pushing criteria

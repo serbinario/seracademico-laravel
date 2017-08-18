@@ -5,7 +5,6 @@ namespace Seracademico\Repositories\Graduacao;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Entities\Graduacao\Aluno;
-use Seracademico\Validators\Graduacao\AlunoValidator;
 
 /**
  * Class AlunoRepositoryEloquent
@@ -22,18 +21,6 @@ class AlunoRepositoryEloquent extends BaseRepository implements AlunoRepository
     {
         return Aluno::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    //public function validator()
-    //{
-
-    //    return AlunoValidator::class;
-    //}
-
 
     /**
      * Boot up the repository, pushing criteria

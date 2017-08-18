@@ -4,7 +4,6 @@ namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Graduacao\MateriaValidator;
 use Seracademico\Repositories\Graduacao\MateriaRepository;
 use Seracademico\Entities\Graduacao\Materia;
 
@@ -22,16 +21,6 @@ class MateriaRepositoryEloquent extends BaseRepository implements MateriaReposit
     public function model()
     {
         return Materia::class;
-    }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-         return MateriaValidator::class;
     }
 
     /**

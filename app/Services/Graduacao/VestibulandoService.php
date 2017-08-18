@@ -149,12 +149,12 @@ class VestibulandoService
      */
     public function store(array $data) : Vestibulando
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
         # Regras de negócios
         $this->tratamentoCampos($data);
+
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -248,6 +248,8 @@ class VestibulandoService
      */
     public function update(array $data, int $id) : Vestibulando
     {
+        #variavel de uso
+        $endereco = '';
 
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
@@ -275,7 +277,6 @@ class VestibulandoService
             $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
 
             $pdo->query($query);
-
         }
 
         # Regras de negócios
@@ -284,11 +285,26 @@ class VestibulandoService
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
-
         #Atualizando no banco de dados
         $vestibulando = $this->repository->update($data, $id);
         $pessoa       = $this->pessoaRepository->update($data['pessoa'], $vestibulando->pessoa->id);
-        $endereco     = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+
+        /*
+         * Atualiza somente se o endereço já existir
+         */
+        if(isset($pessoa->endereco)){
+            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+        }
+
+        /*
+         * Condição de atualização (criação) quando o vestibulando foi cadastrado pela interface pública de cadastro de vestibulandos.
+         * Isso ocorre pois, quando é feito o cadastro, não é possível cadastrar um endereço até que o próprio vestibulando
+         * faça isso após o seu primeiro login.
+         * A primeira linha cria o registro
+         * A segunda vincula com pessoa
+        */
+        $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+        $this->pessoaRepository->update(['enderecos_id' => $endereco->id], $pessoa->id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$vestibulando || !$endereco || !$pessoa) {

@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Repositories\TurnoRepository;
 use Seracademico\Entities\Turno;
-use Seracademico\Validators\TurnoValidator;
 
 /**
  * Class TurnoRepositoryEloquent
@@ -23,18 +22,6 @@ class TurnoRepositoryEloquent extends BaseRepository implements TurnoRepository
     {
         return Turno::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return TurnoValidator::class;
-    }
-
 
     /**
      * Boot up the repository, pushing criteria
