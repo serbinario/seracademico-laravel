@@ -63,9 +63,9 @@ class ExemplarPeriodicoController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('bib_exemplares')
-            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-            ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
-            ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
+            ->leftJoin('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->leftJoin('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
+            ->leftJoin('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
             ->where('bib_arcevos.tipo_periodico', '=', '2')
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
