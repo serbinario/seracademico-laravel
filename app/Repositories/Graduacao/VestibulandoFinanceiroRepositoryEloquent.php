@@ -5,7 +5,6 @@ namespace Seracademico\Repositories\Graduacao;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Entities\Graduacao\VestibulandoFinanceiro;
-use Seracademico\Validators\Graduacao\VestibulandoValidator;
 
 /**
  * Class VestibulandoRepositoryEloquent

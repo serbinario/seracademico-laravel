@@ -4,7 +4,6 @@ namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Graduacao\CursoValidator;
 use Seracademico\Repositories\Graduacao\CursoRepository;
 use Seracademico\Entities\Graduacao\Curso;
 
@@ -22,16 +21,6 @@ class CursoRepositoryEloquent extends BaseRepository implements CursoRepository
     public function model()
     {
         return Curso::class;
-    }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-         return CursoValidator::class;
     }
 
     /**

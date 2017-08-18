@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Repositories\Graduacao\SemestreRepository;
 use Seracademico\Entities\Graduacao\Semestre;
-use Seracademico\Validators\Graduacao\SemestreValidator;
 
 /**
  * Class SemestreRepositoryEloquent
@@ -23,18 +22,6 @@ class SemestreRepositoryEloquent extends BaseRepository implements SemestreRepos
     {
         return Semestre::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-        return SemestreValidator::class;
-    }
-
 
     /**
      * Boot up the repository, pushing criteria
