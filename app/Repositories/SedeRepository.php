@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface SedeRepository extends RepositoryInterface
 {
-    //
+    public function sedes();
 }

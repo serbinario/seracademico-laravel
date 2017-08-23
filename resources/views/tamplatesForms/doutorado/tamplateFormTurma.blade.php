@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                {!! Form::label('sede_id', 'Sede *') !!}
+                {!! Form::label('sede_id', 'Polo *') !!}
 
                 {!! Form::select('sede_id', $loadFields['sede'], null, array('class' => 'form-control')) !!}
             </div>

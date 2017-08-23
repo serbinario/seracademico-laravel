@@ -10,5 +10,9 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface VestibulandoRepository extends RepositoryInterface
 {
-    //
+    /**
+     * @param $idVestibulando
+     * @return mixed
+     */
+    public function dadosVestibulando($idVestibulando);
 }

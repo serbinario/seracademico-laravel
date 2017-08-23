@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="fa fa-building"></i> Listar Sedes</h4>
+                <h4><i class="fa fa-building"></i>Listar Polos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
                 <a href="{{ route('seracademico.sede.create')}}" class="btn-sm btn-primary pull-right">Nova Sede</a>

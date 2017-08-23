@@ -13,6 +13,7 @@ use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
+use Seracademico\Repositories\Graduacao\VestibulandoRepository;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
@@ -59,10 +60,11 @@ class VestibulandoController extends Controller
      * @param VestibulandoService $service
      * @param VestibulandoValidator $validator
      */
-    public function __construct(VestibulandoService $service, VestibulandoValidator $validator)
+    public function __construct(VestibulandoService $service, VestibulandoValidator $validator, VestibulandoRepository $repository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
+        $this->repository  = $repository;
     }
 
     /**
@@ -339,9 +341,10 @@ class VestibulandoController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+            $documentos = $this->repository->dadosVestibulando($aluno->id);
 
             #retorno para view
-            return view('vestibulando.edit', compact('aluno', 'loadFields'));
+            return view('vestibulando.edit', compact('aluno', 'loadFields', 'documentos'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -364,7 +367,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
+dd($data);
             $vestibulando = $this->service->find($id);
 
             #retornando Id de pessoa

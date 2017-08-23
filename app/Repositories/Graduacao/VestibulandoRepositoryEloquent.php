@@ -2,6 +2,7 @@
 
 namespace Seracademico\Repositories\Graduacao;
 
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Seracademico\Entities\Graduacao\Vestibulando;
@@ -28,5 +29,31 @@ class VestibulandoRepositoryEloquent extends BaseRepository implements Vestibula
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * @param $idVestibulando
+     * @return mixed
+     * @throws \Exception
+     */
+    public function dadosVestibulando($idVestibulando)
+    {
+        $documentos = DB::table('vest_documentos')
+            ->select([
+                'id',
+                'path',
+                'tipo_documento_id',
+                'vestibulando_id',
+                'confirmacao',
+                'observacao'
+            ])
+            ->where('vestibulando_id', $idVestibulando)
+            ->get();
+
+        /*if(count($documentos) == 0) {
+            throw new \Exception('Nenhum documento encontrado');
+        }*/
+
+        return $documentos;
     }
 }
