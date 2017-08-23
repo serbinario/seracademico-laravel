@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\TipoPermissaoRepository;
+use Seracademico\Repositories\SedeRepository;
 use Seracademico\Services\UserService;
 use Seracademico\Validators\UserValidator;
 use Yajra\Datatables\Datatables;
@@ -43,11 +44,15 @@ class UserController extends Controller
      * @param UserValidator $validator
      * @param TipoPermissaoRepository $tipoPermissaoRepository
      */
-    public function __construct(UserService $service, UserValidator $validator, TipoPermissaoRepository $tipoPermissaoRepository)
+    public function __construct(UserService $service,
+                                UserValidator $validator,
+                                TipoPermissaoRepository $tipoPermissaoRepository,
+                                SedeRepository $sedeRepository)
     {
         $this->service   = $service;
         $this->validator = $validator;
         $this->tipoPermissaoRepository = $tipoPermissaoRepository;
+        $this->sedeRepository = $sedeRepository;
     }
 
     /**
@@ -64,7 +69,14 @@ class UserController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $users = \DB::table('users')->select(['id', 'name', 'email']);
+        $users = \DB::table('users')
+            ->join('sedes', 'sedes.id', '=', 'users.sede_id')
+            ->select([
+                'users.id',
+                'users.name',
+                'users.email',
+                'sedes.nome as sede'
+            ]);
 
         #Editando a grid
         return Datatables::of($users)->addColumn('action', function ($user) {
@@ -84,12 +96,13 @@ class UserController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $loadFields['sede'] = $this->sedeRepository->sedes();
 
         # Recuperando todos os tipos de permissão
         $loadFields['tipopermissao'] = $this->tipoPermissaoRepository->all();
 
         #Retorno para view
-        return view('user.create', compact('loadFields'));
+        return view('user.create', compact('loadFields', 'sedes'));
     }
 
     /**

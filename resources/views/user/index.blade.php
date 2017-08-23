@@ -38,6 +38,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Email</th>
+                                <th>Polo</th>
                                 <th width="5%">Acão</th>
                             </tr>
                             </thead>
@@ -59,6 +60,7 @@
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'sede', name: 'sede'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

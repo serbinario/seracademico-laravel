@@ -257,7 +257,7 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{ route('seracademico.empresa.check') }}"><i class="flaticon-3d-buildings"></i> Empresa</a></li>
-                        <li><a href="{{ route('seracademico.sede.index') }}"><i class="fa fa-building"></i> Sedes</a></li>
+                        <li><a href="{{ route('seracademico.sede.index') }}"><i class="fa fa-building"></i>Polos</a></li>
                         <li><a href="{{ route('seracademico.departamento.index') }}"><i class="material-icons">view_module</i> Dpts/Sede</a></li>
                         <li><a href="{{ route('seracademico.sala.index') }}"><i class="flaticon-audience-in-presentation-of-business"></i> Salas</a></li>
                         <li><a href="{{ route('seracademico.tipoAvaliacao.index') }}"><i class="fa fa-star-half-empty"></i> Tipos de Avaliações</a></li>

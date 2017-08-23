@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-md-10">
         @if(!isset($aluno))
@@ -85,6 +86,9 @@
             </li>--}}
             <li role="presentation">
                 <a href="#vestibular" aria-controls="vestibular" role="tab" data-toggle="tab">Vestibular</a>
+            </li>
+            <li role="presentation">
+                <a href="#docsCandidato" aria-controls="docsCandidato" role="tab" data-toggle="tab">Documentos do Candidato</a>
             </li>
         </ul>
         <!-- End Nav tabs -->
@@ -799,12 +803,36 @@
                 </div>
             </div>
             {{-- Fim da aba vestibular --}}
+            {{-- Aba documentos do candidato --}}
+            <div role="tabpanel" class="tab-pane" id="docsCandidato">
+                <br>
+                <div class="row">
+                    @foreach($documentos as $documento)
+                        <div class="form-group col-md-4">
+                            <img src="http://localhost/AlphaVestibular/public/storage/vestibulandos/documentos/{{$documento->path}}" alt="" height="200" width="auto">
+                            <div>
+                                {!! Form::label('observacao', 'Observação') !!}
+                                {!! Form::textarea('observacao', Session::getOldInput('observacao') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                            </div>
+                            <div>
+                                {!! Form::label('observacao', 'Confirmar entrega') !!}<br/>
+
+                                {!! Form::label('sim', 'Sim') !!}
+                                {!! Form::radio('confirmacao', '1') !!}
+
+                                {!! Form::label('nao', 'Não') !!}
+                                {!! Form::radio('confirmacao', '0', true) !!}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            {{-- Fim Aba documentos do candidato --}}
         </div>
 
 
         {{--Buttons Submit e Voltar--}}
         <div class="row">
-
             <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
@@ -1056,103 +1084,6 @@
                 }
             }
         });
-
-
-
-         //Validações javascript
-        $('#formVestibulando').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 819200,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 800kb"
-                        }
-                    }
-                },
-            },
-        });
-
-        // Validações javascript
-        //        $('#formVestibulando').bootstrapValidator({
-        //            fields: {
-        //                'pessoa[nome]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Nome' })
-        //                        },
-        //                        stringLength: {
-        //                            max: 50,
-        //                            message: Lang.get('validation.max', { attribute: 'Nome' })
-        //                        }
-        //                    }
-        //                },
-        //                'pessoa[data_nasciemento]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-        //                        }
-        //                    }
-        //                },
-        //                'pessoa[cpf]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'CPF' })
-        //                        }
-        //                    }
-        //                },
-        //                'pessoa[nome_pai]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-        //                        }
-        //                    }
-        //                },
-        //                'pessoa[nome_mae]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-        //                        }
-        //                    }
-        //                },
-        //                'pessoa[identidade]': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-        //                        }
-        //                    }
-        //                },
-        //                'vestibular_id': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Vestibular' })
-        //                        }
-        //                    }
-        //                },
-        //                'data_insricao_vestibular': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Data da inscrição' })
-        //                        }
-        //                    }
-        //                },
-        //                'primeira_opcao_curso_id': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Primeira opção de curso' })
-        //                        }
-        //                    }
-        //                },
-        //                'primeira_opcao_turno_id': {
-        //                    validators: {
-        //                        notEmpty: {
-        //                            message: Lang.get('validation.required', { attribute: 'Primeira opção de turno' })
-        //                        }
-        //                    }
-        //                }
-        //
-        //            },
-        //        });
 
         // Regra para carregamento dos cursos a partir do vestibular escolhido
         $(document).on('change', '#vestibular_id', function () {

@@ -26,7 +26,8 @@
             <strong>{{ $dados['body'][count($dados['body'])-1]->cpf }}</strong> ministrou em nossa instituição a Disciplina
             <strong>{{ $dados['body'][count($dados['body'])-1]->disciplina }}</strong>, como Professor(ar) Convidado(a), no curso de
             <strong>{{ $dados['body'][count($dados['body'])-1]->curso }}</strong>, com carga horária de
-            <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em {{ strftime('%B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}.
+            <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em
+            {{ strftime('%B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}.
         </p>
         <div style="text-align: center; font-size: 18px; margin-top: 55px;">
             <p>
