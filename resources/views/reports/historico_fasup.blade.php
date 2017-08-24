@@ -116,8 +116,8 @@
         <thead>
         <tr>
             <td style="width: 40%; text-align: center;"><b>Disciplina</b></td>
-            <td style="width: 5%; text-align: center;"><b>Carga Horária</b></td>
-            <td style="width: 5%; text-align: center;"><b>Data</b></td>
+            <td style="width: 4%; text-align: center;"><b>Carga Horária</b></td>
+            <td style="width: 6%; text-align: center;"><b>Data</b></td>
             <td style="width: 10%; text-align: center;"><b>Nota</b></td>
             <td style="width: 40%; text-align: center;"><b>Professor</b></td>
         </tr>
