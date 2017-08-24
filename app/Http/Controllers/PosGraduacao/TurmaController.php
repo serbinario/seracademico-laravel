@@ -86,7 +86,7 @@ class TurmaController extends Controller
             ]);
 
         # Verificando se o usuário possui sede
-        if(Auth::user()->sede_id) {
+        if(Auth::user()->sede_id != 1) {
             $rows->where('fac_turmas.sede_id', Auth::user()->sede_id);
         }
 
