@@ -288,6 +288,7 @@ class AlunoDocumentoController extends Controller
             $arrayDeNotas[$count]['disciplina']['nome'] = $nota['disciplina']['nome'];
             $arrayDeNotas[$count]['disciplina']['carga_horaria'] = $nota['disciplina']['carga_horaria'];
             $arrayDeNotas[$count]['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0] ?? null;
+            $arrayDeNotas[$count]['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
             $arrayDeNotas[$count]['nota_final'] = $nota['nota_final'];
 
             $count++;
