@@ -204,21 +204,31 @@ class AlunoDocumentoController extends Controller
         $notasDoAluno = $result['aluno']->curriculos->last()
             ->pivot->turmas->last()
             ->pivot->notas()
-            ->with('disciplina', 'turma')
+            ->with('disciplina', 'turma', 'frequencias.calendario.professor.pessoa')
             ->get();
 
-        #Adicionando as notas ao array de resultado
-        $result['notas'] = $notasDoAluno->toArray();
+        $arrayDeNotas = [];
+        $count = 0;
 
         # Alterando a carga horária para a do currículo
-        foreach($result['notas'] as &$nota) {
+        foreach($notasDoAluno->toArray() as $nota) {
             $carga_horaria_curriculo = $this->getCargaHorariaDoCurriculo(
                 $nota['disciplina']['id'],
                 $nota['turma']['curriculo_id']
             );
 
-            $nota['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0];
+            $arrayDeNotas[$count]['disciplina']['nome'] = $nota['disciplina']['nome'];
+            $arrayDeNotas[$count]['disciplina']['carga_horaria'] = $nota['disciplina']['carga_horaria'];
+            $arrayDeNotas[$count]['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0] ?? null;
+            $arrayDeNotas[$count]['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
+            $arrayDeNotas[$count]['disciplina']['data'] = $nota['frequencias'][0]['calendario']['data_final'] ?? "";
+            $arrayDeNotas[$count]['nota_final'] = $nota['nota_final'];
+
+            $count++;
         }
+
+        #Adicionando as notas ao array de resultado
+        $result['notas'] = $arrayDeNotas;
 
         # Verificando se o aluno possui as informações necessárias
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
