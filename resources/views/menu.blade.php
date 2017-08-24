@@ -92,7 +92,8 @@
                 </li>
                 @endrole
 
-                @role('posgraduacao|admin')
+
+                @if(\Auth::user()->is('admin|posgraduacao|polo'))
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -101,12 +102,15 @@
                             <a href="javascript:void(0)"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.posgraduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+
+                                @if(\Auth::user()->is('admin|posgraduacao'))
                                 <li><a href="{{ route('seracademico.posgraduacao.professorpos.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curso.index') }}"><i class="material-icons">next_week</i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
                                 <li><a href="{{ route('seracademico.posgraduacao.planoEnsino.index') }}"><i class="material-icons">line_weight</i> Planos de Ensino</a></li>
+                                @endif
                             </ul>
                         </li>
 
@@ -130,7 +134,7 @@
                         {{--</li>--}}
                     </ul>
                 </li>
-                @endrole
+                @endif
 
                 @role('graduacao|admin')
                 <li>
