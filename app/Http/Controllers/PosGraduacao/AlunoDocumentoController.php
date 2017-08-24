@@ -272,7 +272,7 @@ class AlunoDocumentoController extends Controller
         $notasDoAluno = $result['aluno']->curriculos->last()
             ->pivot->turmas->last()
             ->pivot->notas()
-            ->with('disciplina', 'turma')
+            ->with('disciplina', 'turma', 'frequencias.calendario.professor.pessoa')
             ->get();
 
         $arrayDeNotas = [];
