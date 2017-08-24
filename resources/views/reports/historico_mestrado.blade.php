@@ -121,8 +121,9 @@
     <table class="table_grade_curricular" cellspacing="0" style="font-size: 12px">
         <thead>
         <tr>
-            <td style="width: 40%; text-align: center;"><b>Disciplina</b></td>
+            <td style="width: 30%; text-align: center;"><b>Disciplina</b></td>
             <td style="width: 5%; text-align: center;"><b>C. H.</b></td>
+            <td style="width: 10%; text-align: center;"><b>Data</b></td>
             <td style="width: 7%; text-align: center;"><b>Nota</b></td>
             <td style="width: 40%; text-align: center;"><b>Docente</b></td>
         </tr>
@@ -135,6 +136,7 @@
                 <td style="text-align: center">
                     {{ $nota['disciplina']['carga_horaria_total'] ?? $nota['disciplina']['carga_horaria'] ?? 0 }}h
                 </td>
+                <td style="text-align: center"> {{ $nota['disciplina']['data']}} </td>
                 <td style="text-align: center"> {{ $nota['nota_final'] ?? '' }} </td>
                 <td style="text-align: center"> {{ $nota['disciplina']['professor'] }} </td>
             </tr>

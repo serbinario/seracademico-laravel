@@ -220,6 +220,7 @@ class AlunoDocumentoController extends Controller
 
             $nota['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0];
             $nota['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
+            $nota['disciplina']['data'] = $nota['frequencias'][0]['calendario']['data_final'] ?? "";
             //$nota['disciplina']['titulacao'] = $nota['frequencias'][0]['calendario']['professor']['titulacao']['nome'] ?? "";
         }
 
