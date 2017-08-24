@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\PosGraduacao;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -129,6 +130,11 @@ class AlunoController extends Controller
                     'fac_turmas.codigo as codigoTurma'
                 ]);
 
+            # Verificando se o usuário possui sede
+            if(Auth::user()->sede_id) {
+                $alunos->where('fac_turmas.sede_id', Auth::user()->sede_id);
+            }
+
             #Editando a grid
             return Datatables::of($alunos)
                 ->filter(function ($query) use ($request) {
@@ -171,13 +177,14 @@ class AlunoController extends Controller
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
-                    $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
-                    $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
 
-                    //if($aluno->matricula) {
-                        $html .= '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
-                    //}
-                    
+                    # Verificando se o usuário possui sede
+                    if(!Auth::user()->sede_id) {
+                        $html .=    '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        $html .=    '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        $html .=    '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
+                    }
+
                     $html .=    '</ul>';
                     $html .= '</div>';
 

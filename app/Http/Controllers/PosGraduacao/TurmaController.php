@@ -5,6 +5,7 @@ namespace Seracademico\Http\Controllers\PosGraduacao;
 use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Seracademico\Http\Requests;
 use Seracademico\Services\PosGraduacao\TurmaService;
 use Yajra\Datatables\Datatables;
@@ -83,6 +84,11 @@ class TurmaController extends Controller
                 'fac_curriculos.codigo as codigoCurriculo',
                 'sedes.nome as sede'
             ]);
+
+        # Verificando se o usuário possui sede
+        if(Auth::user()->sede_id) {
+            $rows->where('fac_turmas.sede_id', Auth::user()->sede_id);
+        }
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
