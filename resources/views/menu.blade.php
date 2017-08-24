@@ -50,6 +50,7 @@
                     <img alt="image" class="logoDash" src="{{ asset('/img/logoser2.png')}}"/>
                 </li>
 
+                @role('doutorado|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Doutorado</span> <span
                                 class="fa arrow"></span></a>
@@ -68,7 +69,9 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
 
+                @role('mestrado|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span
                                 class="fa arrow"></span></a>
@@ -87,7 +90,9 @@
                         </li>
                     </ul>
                 </li>
-                @role('posgraduacao')
+                @endrole
+
+                @role('posgraduacao|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Pós-Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -127,26 +132,17 @@
                 </li>
                 @endrole
 
-                @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select|graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
+                @role('graduacao|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        @permission('graduacao.materia.select|graduacao.vestibular.select|graduacao.vestibulando.select')
                         <li>
                             <a href="javascript:void(0)"><i class="flaticon-test"></i> Vestibular <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
-                                @permission('graduacao.materia.select')
                                 <li><a href="{{ route('seracademico.materia.index') }}"><i class="flaticon-passed-exam"></i> Matérias</a></li>
-                                @endpermission
-
-                                @permission('graduacao.vestibular.select')
                                 <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="flaticon-exam-1"></i> Vestibulares</a></li>
-                                @endpermission
-
-                                @permission('graduacao.vestibulando.select')
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="flaticon-employment-test"></i> Vestibulando</a></li>
-                                @endpermission
 
                                 <li>
                                     <a href="javascript:void(0)"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
@@ -159,34 +155,17 @@
 
                             </ul>
                         </li>
-                        @endpermission
 
-                        @permission('graduacao.aluno.select|graduacao.disciplina.select|graduacao.curso.select|graduacao.curriculo.select|graduacao.turma.select')
+
                         <li><a href="javascript:void(0)"><i class="material-icons">markunread_mailbox</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
-
-                                @permission('graduacao.aluno.select')
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.disciplina.select')
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
-                                @endpermission
-
-                                @permission('graduacao.curso.select')
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="flaticon-book-4"></i> Cursos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.curriculo.select')
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
-                                @endpermission
-
-                                @permission('graduacao.turma.select')
                                 <li><a href="{{ route('seracademico.graduacao.turma.index') }}"><i class="material-icons">turned_in</i> Turmas</a></li>
-                                @endpermission
-
                                 <li><a href="{{ route('seracademico.graduacao.planoEnsino.index') }}"><i class="material-icons">line_weight</i> Planos de Ensino</a></li>
 
                                 <li>
@@ -198,7 +177,6 @@
                                 </li>
                             </ul>
                         </li>
-                        @endpermission
 
                         {{--<li>
                             <a href="javascript:void(0)">Tesouraria <span class="fa arrow"></span></a>
@@ -212,8 +190,9 @@
                         </li>--}}
                     </ul>
                 </li>
-                @endpermission
+                @endrole
 
+                @role('tecnico|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Técnico</span> <span
                                 class="fa arrow"></span></a>
@@ -233,7 +212,9 @@
                         </li>
                     </ul>
                 </li>
+                @endrole
 
+                @role('financeiro|admin')
                 <li><a href="javascript:void(0)"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level collapse">
                         <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
@@ -241,6 +222,7 @@
                         <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
                     </ul>
                 </li>
+                @endrole
 
                 @role('admin')
                 <li><a href="javascript:void(0)"><i class="material-icons">lock</i> <span class="nav-label">Segurança</span> <span
@@ -250,7 +232,6 @@
                         <li><a href="{{ route('seracademico.role.index') }}"><i class="material-icons">account_box</i> Perfís</a></li>
                     </ul>
                 </li>
-                @endrole
 
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">perm_data_setting</i> <span class="nav-label">Parâmetros</span> <span
@@ -271,8 +252,9 @@
                         <li><a href="{{ route('seracademico.parametro.index') }}"><i class="flaticon-settings"></i> Configurações</a></li>
                     </ul>
                 </li>
+                @endrole
 
-                @role('biblioteca')
+                @role('biblioteca|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> Biblioteca</span> <span
                                 class="fa arrow"></span></a>
