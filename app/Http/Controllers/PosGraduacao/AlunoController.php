@@ -131,7 +131,7 @@ class AlunoController extends Controller
                 ]);
 
             # Verificando se o usuário possui sede
-            if(Auth::user()->sede_id) {
+            if(Auth::user()->sede_id != 1) {
                 $alunos->where('fac_turmas.sede_id', Auth::user()->sede_id);
             }
 
@@ -179,7 +179,7 @@ class AlunoController extends Controller
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
 
                     # Verificando se o usuário possui sede
-                    if(!Auth::user()->sede_id) {
+                    if(Auth::user()->sede_id == 1) {
                         $html .=    '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                         $html .=    '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
                         $html .=    '<li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
