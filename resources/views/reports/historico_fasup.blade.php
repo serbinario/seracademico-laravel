@@ -115,10 +115,10 @@
     <table class="table_grade_curricular" cellspacing="0" style="font-size: 12px">
         <thead>
         <tr>
-            <td style="width: 50%; text-align: center;"><b>Disciplina</b></td>
+            <td style="width: 40%; text-align: center;"><b>Disciplina</b></td>
             <td style="width: 10%; text-align: center;"><b>Carga Horária</b></td>
-            <td style="width: 20%; text-align: center;"><b>Nota</b></td>
-            <td style="width: 20%; text-align: center;"><b>Professor</b></td>
+            <td style="width: 10%; text-align: center;"><b>Nota</b></td>
+            <td style="width: 40%; text-align: center;"><b>Professor</b></td>
         </tr>
         </thead>
 
