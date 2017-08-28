@@ -1474,6 +1474,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('updateColecao/{id}', ['as' => 'updateColecao', 'uses' => 'Biblioteca\ColecaoController@update']);
             Route::get('deleteColecao/{id}', ['as' => 'deleteColecao', 'uses' => 'Biblioteca\ColecaoController@delete']);
 
+            // Crud de série
+            Route::get('indexSerie', ['as' => 'indexSerie', 'uses' => 'Biblioteca\SerieController@index']);
+            Route::get('createSerie', ['as' => 'createSerie', 'uses' => 'Biblioteca\SerieController@create']);
+            Route::get('gridSerie', ['as' => 'gridSerie', 'uses' => 'Biblioteca\SerieController@grid']);
+            Route::get('editSerie/{id}', ['as' => 'editSerie', 'uses' => 'Biblioteca\SerieController@edit']);
+            Route::post('storeSerie', ['as' => 'storeSerie', 'uses' => 'Biblioteca\SerieController@store']);
+            Route::post('updateSerie/{id}', ['as' => 'updateSerie', 'uses' => 'Biblioteca\SerieController@update']);
+            Route::get('deleteSerie/{id}', ['as' => 'deleteSerie', 'uses' => 'Biblioteca\SerieController@delete']);
 
             // Crud de gênero
             Route::get('indexGenero', ['as' => 'indexGenero', 'uses' => 'Biblioteca\GeneroController@index']);
