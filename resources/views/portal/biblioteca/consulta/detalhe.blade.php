@@ -128,6 +128,19 @@
                                                 <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
                                             </div>
                                         </a>
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Coleção/Série</b></div>
+                                                <div class="col s8">
+                                                    @if($exemplar['acervo']['colecao_id'] && !$exemplar['acervo']['serie_id'])
+                                                        ({{ $exemplar['acervo']['colecao']['nome'] }})
+                                                    @elseif($exemplar['acervo']['serie_id'] && !$exemplar['acervo']['colecao_id'])
+                                                        ({{ $exemplar['acervo']['serie']['nome'] }})
+                                                    @elseif($exemplar['acervo']['serie_id'] && $exemplar['acervo']['colecao_id'])
+                                                        ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }}) @endif
+                                                </div>
+                                            </div>
+                                        </a>
                                     @else
                                         <a class="collection-item">
                                             <div class="row">
@@ -550,10 +563,16 @@
                                 @endif
                                 @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
                                 @if($exemplar['editora']['nome'])<?php echo $exemplar['editora']['nome'] ?>, @endif
-                                @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p., @endif
+                                @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
-                                    @if($exemplar['ilustracoes_id'] == '1')il., @endif
+                                    @if($exemplar['ilustracoes_id'] == '1'), il.@endif
                                 @endif
+                                @if($exemplar['acervo']['colecao_id'] && !$exemplar['acervo']['serie_id'])
+                                    ({{ $exemplar['acervo']['colecao']['nome'] }})
+                                @elseif($exemplar['acervo']['serie_id'] && !$exemplar['acervo']['colecao_id'])
+                                    ({{ $exemplar['acervo']['serie']['nome'] }})
+                                @elseif($exemplar['acervo']['serie_id'] && $exemplar['acervo']['colecao_id'])
+                                    ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }})@else, @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                     @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                                 @else

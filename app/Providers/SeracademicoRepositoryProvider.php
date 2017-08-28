@@ -913,5 +913,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Doutorado\DiarioAulaRepository::class,
             \Seracademico\Repositories\Doutorado\DiarioAulaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Biblioteca\SerieRepository::class,
+            \Seracademico\Repositories\Biblioteca\SerieRepositoryEloquent::class
+        );
     }
 }

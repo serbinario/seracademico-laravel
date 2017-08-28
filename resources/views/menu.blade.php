@@ -305,7 +305,8 @@
                                 <li><a href="{{ route('seracademico.biblioteca.diasLetivosBiblioteca') }}"><i class="material-icons">perm_identity</i> Dias Letivos</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ route('seracademico.biblioteca.indexColecao') }}"><i class="material-icons">card_travel</i> Coleções/Séries</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexColecao') }}"><i class="material-icons">card_travel</i> Coleções</a></li>
+                        <li><a href="{{ route('seracademico.biblioteca.indexSerie') }}"><i class="material-icons">card_travel</i> Séries</a></li>
                         <li><a href="{{ route('seracademico.biblioteca.indexGenero') }}"><i class="material-icons">card_travel</i> Áreas de conhecimento</a></li>
                     </ul>
                 </li>

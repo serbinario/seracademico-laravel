@@ -38,7 +38,8 @@ class Arcevo extends Model implements Transformable
 		'uso_global',
 		'periodicidade',
 		'outro_cdd',
-		'data_vencimento'
+		'data_vencimento',
+		'serie_id'
 	];
 
 	public function tipoAcervo()
@@ -49,6 +50,11 @@ class Arcevo extends Model implements Transformable
 	public function colecao()
 	{
 		return $this->belongsTo(Colecao::class, 'colecao_id');
+	}
+
+	public function serie()
+	{
+		return $this->belongsTo(Serie::class, 'serie_id');
 	}
 
 	public function genero()
