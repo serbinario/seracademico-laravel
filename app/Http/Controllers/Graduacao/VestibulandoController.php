@@ -14,6 +14,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
+use Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepository;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
@@ -60,11 +61,15 @@ class VestibulandoController extends Controller
      * @param VestibulandoService $service
      * @param VestibulandoValidator $validator
      */
-    public function __construct(VestibulandoService $service, VestibulandoValidator $validator, VestibulandoRepository $repository)
+    public function __construct(VestibulandoService $service,
+                                VestibulandoValidator $validator,
+                                VestibulandoRepository $repository,
+                                VestibulandoDocumentoRepository $vestibulandoDocumentoRepository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
         $this->repository  = $repository;
+        $this->vestibulandoDocumentoRepository  = $vestibulandoDocumentoRepository;
     }
 
     /**
@@ -367,7 +372,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-dd($data);
+
             $vestibulando = $this->service->find($id);
 
             #retornando Id de pessoa
@@ -390,6 +395,16 @@ dd($data);
 
             #Executando a ação
             $this->service->update($data, $id);
+
+            foreach ($data['documentos'] as $key => $value) {
+                $chaveArray = explode('_', $key);
+
+                if(count($chaveArray) == 2) {
+                    $documento = $this->vestibulandoDocumentoRepository->find($chaveArray[1]);
+                    $documento->{$chaveArray[0]} = $value;
+                    $documento->save();
+                }
+            }
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
