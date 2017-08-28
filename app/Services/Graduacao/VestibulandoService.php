@@ -154,7 +154,6 @@ class VestibulandoService
 
         # Regras de negócios
         $this->tratamentoCampos($data);
-
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
 
@@ -179,7 +178,6 @@ class VestibulandoService
         # [RFV003-RN012] - Documento de Requisitos
         # Verificando se a pessoa já existe
         if(count($objPessoa) > 0) {
-
             #aAlterando a pessoa e o endereço
             $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
             $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $objPessoa[0]->endereco->id);

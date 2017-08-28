@@ -206,7 +206,7 @@
                 serverSide: true,
                 iDisplayLength: 5,
                 bLengthChange: false,
-                ajax: "/index.php/seracademico/posgraduacao/curriculo/gridByCurriculo/" + idCurriculo,
+                ajax: "/index.php/seracademico/mestrado/curriculo/gridByCurriculo/" + idCurriculo,
                 columns: [
                     {data: 'nome', name: 'fac_disciplinas.nome'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},

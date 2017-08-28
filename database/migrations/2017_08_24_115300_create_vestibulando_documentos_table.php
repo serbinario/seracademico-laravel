@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnderecosTable extends Migration
+class CreateVestibulandoDocumentosTable extends Migration
 {
 
 	/**
@@ -13,7 +13,7 @@ class CreateEnderecosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('enderecos', function(Blueprint $table) {
+		Schema::create('vestibulando_documentos', function(Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateEnderecosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('enderecos');
+		Schema::drop('vestibulando_documentos');
 	}
 
 }
