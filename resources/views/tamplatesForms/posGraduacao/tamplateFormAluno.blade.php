@@ -106,6 +106,9 @@
             <li role="presentation">
                 <a href="#monografia" aria-controls="monografia" role="tab" data-toggle="tab">Monografia</a>
             </li>
+            <li role="presentation">
+                <a href="#anotacao" aria-controls="anotacao" role="tab" data-toggle="tab">Anotações</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
 
@@ -432,52 +435,52 @@
                                     </div>
                                 </div>
                                 {{--<div class="panel-heading">--}}
-                                    {{--<h4 class="panel-title">--}}
-                                        {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
-                                                    {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
-                                    {{--</h4>--}}
+                                {{--<h4 class="panel-title">--}}
+                                {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
+                                {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
+                                {{--</h4>--}}
                                 {{--</div>--}}
                                 {{--<div id="endprof" class="panel-collapse collapse">--}}
-                                    {{--<div class="panel-body">--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-12">--}}
-                                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
-                                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
-                                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-4">--}}
-                                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
-                                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
-                                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
-                                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-8">--}}
-                                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
-                                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
-                                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
-                                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                {{--<div class="panel-body">--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-12">--}}
+                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
+                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-3">--}}
+                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
+                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-4">--}}
+                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
+                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-3">--}}
+                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
+                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
+                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-8">--}}
+                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
+                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
+                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
+                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
                                 {{--</div>--}}
                             </div>
                         </div>
@@ -494,7 +497,7 @@
                                 <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
                                 <select id="formacao" name="fac_cursos_superiores_id" class="form-control">
                                     @if(isset($aluno->id) && $aluno->pessoa->cursoSuperior != null)
-                                    <option value="{{ $aluno->pessoa->cursoSuperior->id  }}" selected="selected">{{ $aluno->pessoa->cursoSuperior->nome }}</option>
+                                        <option value="{{ $aluno->pessoa->cursoSuperior->id  }}" selected="selected">{{ $aluno->pessoa->cursoSuperior->nome }}</option>
                                     @endif
                                 </select>
                             </div>
@@ -664,37 +667,37 @@
                     </div>
 
                     {{--<div class="form-group col-md-4">--}}
-                        {{--{!! Form::label('forma_admissao_id', 'Forma de admissão') !!}--}}
-                        {{--@if(isset($aluno->id))--}}
-                            {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
-                        {{--@else--}}
-                            {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}--}}
-                        {{--@endif--}}
+                    {{--{!! Form::label('forma_admissao_id', 'Forma de admissão') !!}--}}
+                    {{--@if(isset($aluno->id))--}}
+                    {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}--}}
+                    {{--@else--}}
+                    {{--{!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}--}}
+                    {{--@endif--}}
                     {{--</div>--}}
                 </div>
             </div>
             {{-- Fim aba Mtrícula--}}
 
-             {{-- Aba Cursos pretendidos --}}
+            {{-- Aba Cursos pretendidos --}}
             <div role="tabpanel" class="tab-pane" id="cursosPretendidos">
                 <br>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <div class="fg-line">
-                        {!! Form::label('curso_pretendido_1_id', '1º Opção de Curso') !!}                    
-                        {!! Form::select('curso_pretendido_1_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}                        
-                    </div>
+                            {!! Form::label('curso_pretendido_1_id', '1º Opção de Curso') !!}
+                            {!! Form::select('curso_pretendido_1_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
+                        </div>
                     </div>
 
-                     <div class="form-group col-md-4">
-                         <div class="fg-line">
+                    <div class="form-group col-md-4">
+                        <div class="fg-line">
                             {!! Form::label('curso_pretendido_2_id', '2º Opção de Curso') !!}
                             {!! Form::select('curso_pretendido_2_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
                     </div>
 
-                     <div class="form-group col-md-4">
-                         <div class="fg-line">
+                    <div class="form-group col-md-4">
+                        <div class="fg-line">
                             {!! Form::label('curso_pretendido_3_id', '3º Opção de Curso') !!}
                             {!! Form::select('curso_pretendido_3_id', (['' => 'Selecione um Curso'] + $loadFields['posgraduacao\\curso']->toArray()), null, array('class' => 'form-control')) !!}
                         </div>
@@ -755,7 +758,7 @@
                                     {!! Form::text('titulo', Session::getOldInput('titulo'), array('class' => 'form-control', 'placeholder' => 'Informe um título')) !!}
                                 </div>
                             </div>
-                         </div>
+                        </div>
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <div class="fg-line">
@@ -884,10 +887,20 @@
                 </div>
             </div>
             {{-- Fim Monografia--}}
-
+            {{-- Início anotações--}}
+            <div role="tabpanel" class="tab-pane" id="anotacao">
+                </br>
+                <div class="form-group col-md-12">
+                    <div class="fg-line">
+                        {!! Form::label('anotacao', 'Anotações') !!}
+                        {!! Form::textarea('anotacao', Session::getOldInput('anotacao'), array('class' => 'form-control')) !!}
+                    </div>
+                </div>
+            </div>
+            {{-- Fim anotações--}}
+        </div>
         {{--Buttons Submit e Voltar--}}
         <div class="row">
-
             <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
@@ -908,24 +921,24 @@
                 </div>
             </div>
 
-           {{-- <div class="col-md-9">
-                <div class="checkbox checkbox-primary">
-                    @if(isset($aluno) && !empty($aluno->matricula))
-                        {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                    @else
-                        {!! Form::hidden('gerar_matricula', 0) !!}
-                        {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
-                    @endif
-                    {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
-                </div>
-            </div>--}}
+            {{-- <div class="col-md-9">
+                 <div class="checkbox checkbox-primary">
+                     @if(isset($aluno) && !empty($aluno->matricula))
+                         {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                     @else
+                         {!! Form::hidden('gerar_matricula', 0) !!}
+                         {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
+                     @endif
+                     {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+                 </div>
+             </div>--}}
             <div class="col-md-3 col-md-offset-9">
                 @if(isset($aluno))
-                <div style="position: relative; top: 34px; left: -245px;">
-                    <label for="documentacao_id">Documentos</label>
-                    <select name="documentacao_id" class="form-control" id="documentacao_id">
-                    </select>
-                </div>
+                    <div style="position: relative; top: 34px; left: -245px;">
+                        <label for="documentacao_id">Documentos</label>
+                        <select name="documentacao_id" class="form-control" id="documentacao_id">
+                        </select>
+                    </div>
                 @endif
                 <div class="btn-group btn-group-justified">
                     <div class="btn-group">
@@ -940,7 +953,7 @@
     </div>
 
     {{--Fim Buttons Submit e Voltar--}}
-    </div>
+</div>
 </div>
 
 @section('javascript')
@@ -958,44 +971,44 @@
     <script type="text/javascript">
         //selectize profissões
         /*var totalCount;
-        var page;
-        var perPage = 50;
+         var page;
+         var perPage = 50;
 
-        $('#profissao').selectize({
-            plugins: {'infinite_scroll': {'scrollRatio': 0.85, 'scrollStep': 20}},
-            valueField: 'id',
-            labelField: 'title',
-            searchField: 'title',
-            create: function (value, $item) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/index.php/seracademico/posgraduacao/selectProfissao/store',
-                    data: {'nome' : value },
-                    datatype: 'json'
-                }).done(function(retorno) {
-                });
-            },
-            load: function(query, callback) {
-                //query = JSON.parse(query)
+         $('#profissao').selectize({
+         plugins: {'infinite_scroll': {'scrollRatio': 0.85, 'scrollStep': 20}},
+         valueField: 'id',
+         labelField: 'title',
+         searchField: 'title',
+         create: function (value, $item) {
+         $.ajax({
+         type: 'POST',
+         url: '/index.php/seracademico/posgraduacao/selectProfissao/store',
+         data: {'nome' : value },
+         datatype: 'json'
+         }).done(function(retorno) {
+         });
+         },
+         load: function(query, callback) {
+         //query = JSON.parse(query)
 
-                page = query.page || 1
+         page = query.page || 1
 
-                if(!totalCount || totalCount > ( (page - 1) * perPage) ){
-                    $.ajax({
-                        url: '/index.php/seracademico/posgraduacao/selectProfissao/find',
-                        error: function() {
-                            callback();
-                        },
-                        success: function(res) {
-                            totalCount = res.total_count;
-                            callback(res.items);
-                        }
-                    });
-                } else {
-                    callback();
-                }
-            }
-        });*/
+         if(!totalCount || totalCount > ( (page - 1) * perPage) ){
+         $.ajax({
+         url: '/index.php/seracademico/posgraduacao/selectProfissao/find',
+         error: function() {
+         callback();
+         },
+         success: function(res) {
+         totalCount = res.total_count;
+         callback(res.items);
+         }
+         });
+         } else {
+         callback();
+         }
+         }
+         });*/
 
         //select de documentos no formulário de edição de aluno
         var idAluno = $('#id_aluno').val();
@@ -1087,7 +1100,7 @@
 
                 $(".my-profile").modal('hide');
                 Webcam.reset();
-               // $(".modal-dialog").modal('toggle');
+                // $(".modal-dialog").modal('toggle');
 
             } );
         }
@@ -1398,7 +1411,7 @@
          * e prencher o select de sedes.
          *
          * @param cursoId
-        **/
+         **/
         function getTurmasByCurso(cursoId)
         {
             // Requisição
@@ -1421,12 +1434,12 @@
                     for (var i = 0; i < json.dados.length; i++) {
                         @if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)
                             if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {
-                                if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
-                                    option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                                } else {
-                                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                                }
+                            if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            } else {
+                                option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                             }
+                        }
                         @else
                             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                         @endif
@@ -1435,8 +1448,8 @@
                     // Carregando a sede
                     @if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
                         $('#sede_id option').remove();
-                        $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
-                                '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
+                    $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
+                            '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
                     @endif
 
                     // carregando as turmas em caso de edit

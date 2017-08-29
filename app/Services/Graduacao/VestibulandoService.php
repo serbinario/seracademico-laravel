@@ -276,7 +276,7 @@ class VestibulandoService
 
             $pdo->query($query);
         }
-
+dd($data);
         # Regras de negócios
         $this->tratamentoCampos($data);
         //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
@@ -288,7 +288,7 @@ class VestibulandoService
         $pessoa       = $this->pessoaRepository->update($data['pessoa'], $vestibulando->pessoa->id);
 
         /*
-         * Atualiza somente se o endereço já existir
+         * Atualiza endereço somente se já existir
          */
         if(isset($pessoa->endereco)){
             $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);

@@ -64,7 +64,8 @@ class Aluno extends Model implements Transformable
         'curso_pos_graduacao_id',
         'fac_instituicao_id',
         'password',
-        'login'
+        'login',
+        'anotacao'
     ];
 
     /**
