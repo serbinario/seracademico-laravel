@@ -72,7 +72,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('volume', 'Volume') !!}
                             {!! Form::text('volume', Session::getOldInput('volume') , array('class' => 'form-control')) !!}
@@ -90,18 +90,24 @@
                             {!! Form::text('outro_cdd', Session::getOldInput('outro_cdd')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('tipos_acervos_id', 'Tipo do acervo') !!}
                             {!! Form::select('tipos_acervos_id', (["" => "Selecione o tipo"] + $loadFields['biblioteca\tipoacervo']->toArray()), Session::getOldInput('tipos_acervos_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('colecao_id', 'Coleção/Série') !!}
-                            {!! Form::select('colecao_id', (["" => "Selecione a coleção/série"] + $loadFields['biblioteca\colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
+                            {!! Form::label('colecao_id', 'Coleção') !!}
+                            {!! Form::select('colecao_id', (["" => "Selecione a coleção"] + $loadFields['biblioteca\colecao']->toArray()), Session::getOldInput('colecao_id'), array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('serie_id', 'Série') !!}
+                            {!! Form::select('serie_id', (["" => "Selecione a série"] + $loadFields['biblioteca\serie']->toArray()), Session::getOldInput('serie_id'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-md-4">

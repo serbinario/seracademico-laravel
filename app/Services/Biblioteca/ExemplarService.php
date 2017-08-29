@@ -163,6 +163,8 @@ class ExemplarService
     {
         $relacionamentos = [
             'acervo.primeiraEntrada.responsaveis',
+            'acervo.colecao',
+            'acervo.serie'
         ];
 
         $exemplar = $this->repository->with($relacionamentos)->find($id);
@@ -177,7 +179,7 @@ class ExemplarService
                 //->where('bib_exemplares.exemp_principal', '!=', '1')
                 ->select('bib_arcevos.*', 'bib_situacao.*','bib_exemplares.*')
                 ->get();
-        } else if($exemplar->edicao && !$exemplar->ano) {
+        } else if ($exemplar->edicao && !$exemplar->ano) {
             $exemplares = \DB::table('bib_exemplares')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
