@@ -18,7 +18,8 @@ class VestibulandoDocumento extends Model implements Transformable
         'observacao',
         'vestibulando_id',
         'tipo_documento_id',
-        'entregar_pessoalmente'
+        'entregar_pessoalmente',
+        'documento_estado_id'
     ];
 
 }
