@@ -1,17 +1,18 @@
 <?php
 
-namespace Seracademico\Repositories\Tecnico;
+namespace Seracademico\Repositories\Biblioteca;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Tecnico\ModuloRepository;
-use Seracademico\Entities\Tecnico\Modulo;
+use Seracademico\Validators\SerieValidator;
+use Seracademico\Repositories\Biblioteca\SerieRepository;
+use Seracademico\Entities\Biblioteca\Serie;
 
 /**
- * Class ModuloRepositoryEloquent
- * @package namespace Seracademico\Repositories;
+ * Class ColecaoRepositoryEloquent
+ * @package namespace App\Repositories;
  */
-class ModuloRepositoryEloquent extends BaseRepository implements ModuloRepository
+class SerieRepositoryEloquent extends BaseRepository implements SerieRepository
 {
     /**
      * Specify Model class name
@@ -20,8 +21,9 @@ class ModuloRepositoryEloquent extends BaseRepository implements ModuloRepositor
      */
     public function model()
     {
-        return Modulo::class;
+        return Serie::class;
     }
+
 
     /**
      * Boot up the repository, pushing criteria

@@ -87,9 +87,11 @@
             <li role="presentation">
                 <a href="#vestibular" aria-controls="vestibular" role="tab" data-toggle="tab">Vestibular</a>
             </li>
-            <li role="presentation">
-                <a href="#docsCandidato" aria-controls="docsCandidato" role="tab" data-toggle="tab">Documentos do Candidato</a>
-            </li>
+            @if(isset($documentos))
+                <li role="presentation">
+                    <a href="#docsCandidato" aria-controls="docsCandidato" role="tab" data-toggle="tab">Documentos do Candidato</a>
+                </li>
+            @endif
         </ul>
         <!-- End Nav tabs -->
 
@@ -804,6 +806,7 @@
             </div>
             {{-- Fim da aba vestibular --}}
             {{-- Aba documentos do candidato --}}
+            @if(isset($documentos))
             <div role="tabpanel" class="tab-pane" id="docsCandidato">
                 <br>
                 <div class="row">
@@ -812,21 +815,22 @@
                             <img src="http://localhost/AlphaVestibular/public/storage/vestibulandos/documentos/{{$documento->path}}" alt="" height="200" width="auto">
                             <div>
                                 {!! Form::label('observacao', 'Observação') !!}
-                                {!! Form::textarea('observacao', Session::getOldInput('observacao') , array('class' => 'form-control', 'rows'=>'3')) !!}
+                                {!! Form::textarea("documentos[observacao_{$documento->id}]", $documento->observacao, array('class' => 'form-control', 'rows'=>'3')) !!}
                             </div>
                             <div>
                                 {!! Form::label('observacao', 'Confirmar entrega') !!}<br/>
 
                                 {!! Form::label('sim', 'Sim') !!}
-                                {!! Form::radio('confirmacao', '1') !!}
+                                {!! Form::radio("documentos[confirmacao_{$documento->id}]", '1', $documento->confirmacao == 1 ? true : false) !!}
 
                                 {!! Form::label('nao', 'Não') !!}
-                                {!! Form::radio('confirmacao', '0', true) !!}
+                                {!! Form::radio("documentos[confirmacao_{$documento->id}]", '2', $documento->confirmacao == 2 ? true : false) !!}
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
+            @endif
             {{-- Fim Aba documentos do candidato --}}
         </div>
 

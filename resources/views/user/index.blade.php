@@ -58,9 +58,9 @@
             serverSide: true,
             ajax: "{!! route('seracademico.user.grid') !!}",
             columns: [
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
-                {data: 'sede', name: 'sede'},
+                {data: 'name', name: 'users.name'},
+                {data: 'email', name: 'users.email'},
+                {data: 'sede', name: 'sedes.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

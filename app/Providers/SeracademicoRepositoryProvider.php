@@ -240,6 +240,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Graduacao\PrecoDisciplinaCursoRepositoryEloquent::class);
 
         $this->app->bind(
+            \Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepository::class,
+            \Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
             \Seracademico\Repositories\Biblioteca\EditoraRepository::class,
             \Seracademico\Repositories\Biblioteca\EditoraRepositoryEloquent::class
         );
@@ -907,6 +912,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         $this->app->bind(
             \Seracademico\Repositories\Doutorado\DiarioAulaRepository::class,
             \Seracademico\Repositories\Doutorado\DiarioAulaRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Biblioteca\SerieRepository::class,
+            \Seracademico\Repositories\Biblioteca\SerieRepositoryEloquent::class
         );
     }
 }

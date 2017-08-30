@@ -1,17 +1,17 @@
 <?php
 
-namespace Seracademico\Repositories\Tecnico;
+namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Tecnico\ModuloRepository;
-use Seracademico\Entities\Tecnico\Modulo;
+use Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepository;
+use Seracademico\Entities\Graduacao\VestibulandoDocumento;
 
 /**
- * Class ModuloRepositoryEloquent
+ * Class VestibulandoDocumentoRepositoryEloquent
  * @package namespace Seracademico\Repositories;
  */
-class ModuloRepositoryEloquent extends BaseRepository implements ModuloRepository
+class VestibulandoDocumentoRepositoryEloquent extends BaseRepository implements VestibulandoDocumentoRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class ModuloRepositoryEloquent extends BaseRepository implements ModuloRepositor
      */
     public function model()
     {
-        return Modulo::class;
+        return VestibulandoDocumento::class;
     }
 
     /**

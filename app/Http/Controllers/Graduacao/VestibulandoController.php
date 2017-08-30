@@ -60,7 +60,9 @@ class VestibulandoController extends Controller
      * @param VestibulandoService $service
      * @param VestibulandoValidator $validator
      */
-    public function __construct(VestibulandoService $service, VestibulandoValidator $validator, VestibulandoRepository $repository)
+    public function __construct(VestibulandoService $service,
+                                VestibulandoValidator $validator,
+                                VestibulandoRepository $repository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
@@ -367,7 +369,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-dd($data);
+
             $vestibulando = $this->service->find($id);
 
             #retornando Id de pessoa

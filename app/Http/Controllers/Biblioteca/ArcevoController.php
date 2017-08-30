@@ -34,6 +34,7 @@ class ArcevoController extends Controller
         'Biblioteca\Corredor',
         'Biblioteca\Estante',
         'Biblioteca\Colecao',
+        'Biblioteca\Serie',
         'Biblioteca\Genero',
         'Biblioteca\Situacao',
         'Graduacao\Curso',

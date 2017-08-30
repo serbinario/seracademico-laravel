@@ -103,6 +103,9 @@
             <li role="presentation">
                 <a href="#monografia" aria-controls="monografia" role="tab" data-toggle="tab">Monografia</a>
             </li>
+            <li role="presentation">
+                <a href="#anotacao" aria-controls="anotacao" role="tab" data-toggle="tab">Anotações</a>
+            </li>
         </ul>
         <!-- End Nav tabs -->
 
@@ -448,7 +451,7 @@
                                 <label for="fac_cursos_superiores_id">Formação Acadêmica</label>
                                 <select id="cursoSuperior" name="curso_superior_id" class="form-control">
                                     @if(isset($aluno->id) && $aluno->cursoSuperior != null)
-                                    <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
+                                        <option value="{{ $aluno->cursoSuperior->id  }}" selected="selected">{{ $aluno->cursoSuperior->nome }}</option>
                                     @endif
                                 </select>
                                 <span style="margin-left:auto;">
@@ -855,10 +858,20 @@
                 </div>
             </div>
             {{-- Fim Monografia--}}
-
+            {{-- Início anotações--}}
+            <div role="tabpanel" class="tab-pane" id="anotacao">
+                </br>
+                <div class="form-group col-md-12">
+                    <div class="fg-line">
+                        {!! Form::label('anotacao', 'Anotações') !!}
+                        {!! Form::textarea('anotacao', Session::getOldInput('anotacao'), array('class' => 'form-control')) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Fim anotações--}}
         {{--Buttons Submit e Voltar--}}
         <div class="row">
-
             <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
@@ -879,17 +892,17 @@
                 </div>
             </div>
 
-           {{-- <div class="col-md-9">
-                <div class="checkbox checkbox-primary">
-                    @if(isset($aluno) && !empty($aluno->matricula))
-                        {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                    @else
-                        {!! Form::hidden('gerar_matricula', 0) !!}
-                        {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
-                    @endif
-                    {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
-                </div>
-            </div>--}}
+            {{-- <div class="col-md-9">
+                 <div class="checkbox checkbox-primary">
+                     @if(isset($aluno) && !empty($aluno->matricula))
+                         {!! Form::checkbox('gerar_matricula', 1, true, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                     @else
+                         {!! Form::hidden('gerar_matricula', 0) !!}
+                         {!! Form::checkbox('gerar_matricula', 1, null, array('class' => 'form-control')) !!}
+                     @endif
+                     {!! Form::label('gerar_matricula', 'Gerar número de Matrícula', false) !!}
+                 </div>
+             </div>--}}
             <div class="col-md-3 col-md-offset-9">
                 @if(isset($aluno))
                     <div style="position: relative; top: 34px; left: -245px;">
@@ -910,7 +923,7 @@
         </div>
     </div>
     {{--Fim Buttons Submit e Voltar--}}
-    </div>
+</div>
 </div>
 
 @section('javascript')
@@ -1070,7 +1083,7 @@
 
                 $(".my-profile").modal('hide');
                 Webcam.reset();
-               // $(".modal-dialog").modal('toggle');
+                // $(".modal-dialog").modal('toggle');
 
             } );
         }
@@ -1473,7 +1486,7 @@
          * e prencher o select de sedes.
          *
          * @param cursoId
-        **/
+         **/
         function getTurmasByCurso(cursoId)
         {
             // Requisição
@@ -1496,12 +1509,12 @@
                     for (var i = 0; i < json.dados.length; i++) {
                         @if((isset($aluno->curriculos) && count($aluno->curriculos) > 0) && count($aluno->curriculos->last()->turmas) > 0)
                             if(json.dados[i]['sede_id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->sede_id ?? null }}") {
-                                if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
-                                    option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                                } else {
-                                    option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
-                                }
+                            if(json.dados[i]['id'] == "{{ $aluno->curriculos->last()->pivot->turmas->last()->id ?? null }}") {
+                                option += '<option selected="true" value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
+                            } else {
+                                option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                             }
+                        }
                         @else
                             option += '<option value="' + json.dados[i]['id'] + '">' + json.dados[i]['codigo'] + '</option>';
                         @endif
@@ -1510,8 +1523,8 @@
                     // Carregando a sede
                     @if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
                         $('#sede_id option').remove();
-                        $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
-                                '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
+                    $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
+                            '{{$aluno->curriculos->last()->pivot->turmas->last()->sede->nome ?? ""}}</option>');
                     @endif
 
                     // carregando as turmas em caso de edit
