@@ -218,7 +218,7 @@ class CalendarioTurmaController extends Controller
         } catch (ValidatorException $e) {
             #Retorno para a view
             return response()->json(['success' => false,'msg' => $e->getMessage()]);
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             #Retorno para a view
             return response()->json(['success' => false,'msg' => $e->getMessage()]);
         }

@@ -79,7 +79,7 @@ $(document).on('click', '#btnIncluirDisciplina', function () {
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#removerDisciplina', function () {
-    
+
     var idDisciplina = tableDisciplina.row($(this).parents('tr').index()).data().idDisciplina;
     var dadosAjax    = {
         'idDisciplina' : idDisciplina,
