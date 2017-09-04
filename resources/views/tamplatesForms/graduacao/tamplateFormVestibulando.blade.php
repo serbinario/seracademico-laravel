@@ -833,8 +833,6 @@
             @endif
             {{-- Fim Aba documentos do candidato --}}
         </div>
-
-
         {{--Buttons Submit e Voltar--}}
         <div class="row">
             <div class="modal fade my-profile" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
