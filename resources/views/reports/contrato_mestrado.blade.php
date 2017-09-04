@@ -160,9 +160,11 @@
         </table>
     </div>
 
-    <p>
-        <b>1. Do Objeto Contratual</b>
-    </p>
+    <div style="margin-top: 50px;">
+        <p>
+            <b>1. Do Objeto Contratual</b>
+        </p>
+    </div>
 
     <p class="paragrafo">
         O objeto do presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO
