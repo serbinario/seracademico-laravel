@@ -80,7 +80,10 @@
             color: white;
             text-align: center;
         }
-        table { page-break-inside:auto }
+        table {
+            page-break-inside:auto;
+        }
+
         tr    { page-break-inside:avoid; page-break-after:auto }
         thead { display:table-header-group }
         tfoot { display:table-footer-group }
@@ -108,7 +111,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 14px;">
+        <table class="table" style="font-size: 14px; margin-bottom: 30px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -271,9 +274,11 @@
         exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
     </p>
 
-    <p class="titulo_paragrafo">
-        Cláusula Quarta:
-    </p>
+    <div style='margin-top: 70px;'>
+        <p class="titulo_paragrafo">
+            Cláusula Quarta:
+        </p>
+    </div>
 
     <p class="paragrafo">
         O valor dos serviços educacionais contratados neste instrumento decorreu do equiparamento feito entre a realidade
@@ -343,9 +348,11 @@
         desistência no prazo de até 7 dias após a formalização da matrícula.
     </p>
 
-    <p class="titulo_paragrafo">
-        Cláusula Sexta:
-    </p>
+    <div style='margin-top: 90px;'>
+        <p class="titulo_paragrafo">
+            Cláusula Sexta:
+        </p>
+    </div>
 
     <p class="paragrafo">
         A <b>Contratante</b> que solicitar certidões ou outros documentos as <b>Contratadas</b> deverá pagar  por cada documento solicitado,
