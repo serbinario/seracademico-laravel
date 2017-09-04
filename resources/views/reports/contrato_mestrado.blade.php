@@ -425,7 +425,7 @@
         pela <b>Contratante</b>.
     </p>
 
-    <div style="margin-top: 40%;">
+    <div style="margin-top: 50%;">
         <p class="paragrafo">
             E assim por estarem juntos, firmes e contratados, firmam os signatários, o presente instrumento, em duas vias de
             igual teor e forma, para que produza seus jurídicos e legais efeitos.
