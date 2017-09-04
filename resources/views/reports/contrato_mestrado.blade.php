@@ -425,7 +425,7 @@
         pela <b>Contratante</b>.
     </p>
 
-    <div style="margin-top: 50%;">
+    <div style="margin-top: 55%;">
         <p class="paragrafo">
             E assim por estarem juntos, firmes e contratados, firmam os signatários, o presente instrumento, em duas vias de
             igual teor e forma, para que produza seus jurídicos e legais efeitos.
@@ -465,7 +465,7 @@
         </div>
     </div>
     <div>
-        <h1 style="text-align: center; margin-top: 80%;">
+        <h1 style="text-align: center; margin-top: 70%;">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
