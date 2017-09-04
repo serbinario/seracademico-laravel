@@ -157,7 +157,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 45%">
+        <h1 style="text-align: center; margin-top: 15%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>
@@ -256,11 +256,6 @@
     </p>
 
     <p class="paragrafo">
-        A <b>Contratante</b> se compromete a elaborar e publicar até o 24º mês de aula, 2 artigos, no valor de R$ 400,00
-        (quatrocentos reais) cada publicação.
-    </p>
-
-    <p class="paragrafo">
         A <b>Contratante</b> se compromete a pagar o preço ajustado pela prestação dos serviços ora contratados, no valor e na
         forma prevista no presente contrato, estando ciente que em caso de inadimplência <b>terá seus dados incluídos nos
         serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
@@ -301,8 +296,7 @@
     <p class="subparagrafo">
         b. Através do requerimento expresso da <b>Contratante</b>, assistido ou representado, quando for o caso de cancelamento
         de inscrição, sendo em qualquer caso, condição obrigatória de sua eficácia a comunicação da desistência da
-        primeira parte <b>Contratada</b>, e o pagamento de multa no valor de R$50,00 referente a taxa de trancamento,
-        onde o mesmo poderá retornar ao curso em até 12 meses, fazendo o pagamento da rematrícula.
+        primeira parte <b>Contratada</b>, e o pagamento de multa no valor de 10% do contrato;
     </p>
 
     <p class="subparagrafo">
@@ -343,11 +337,6 @@
         a primeira parte <b>Contratada</b> tomar medidas cabíveis de cobrança.
     </p>
 
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Sexto:</b> A devolução da matrícula só ocorrerá em caso de não fechamento de turma ou de
-        desistência no prazo de até 7 dias após a formalização da matrícula.
-    </p>
-
     <p class="titulo_paragrafo">
         Cláusula Sexta:
     </p>
@@ -376,7 +365,15 @@
         </tr>
         <tr>
             <td>2º Via de boleto</td>
-            <td>R$ 10,00</td>
+            <td>R$ 15,00</td>
+        </tr>
+        <tr>
+            <td>Solicitação de disciplina como curso de extensão</td>
+            <td>R$ 30,00</td>
+        </tr>
+        <tr>
+            <td>Trancamento do curso</td>
+            <td>R$ 50,00</td>
         </tr>
         </tbody>
     </table>
@@ -386,20 +383,18 @@
     </p>
 
     <p class="paragrafo">
-        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span>
-        <b>Contratadas</b>, sob pena de terem-se como válidas e eficazes todas as correspondências enviadas pelas
-        <b>Contratadas</b> para endereço anterior, constante deste contrato.
+        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span> <b>Contratadas</b>, sob pena de
+        terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior, constante deste contrato.
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Primeiro:</b> A <b>Contratante</b> deverá possuir um endereço eletrônico permanente para contato com
-        as <b>Contratadas</b> e com o (s) professor (s). É de total responsabilidade da <b>Contratante</b>
-        adquirir e informar um endereço eletrônico as <b>Contratadas</b>, não importando os meios pelos quais irá adquiri-lo.
+        <b>Parágrafo Primeiro:</b> A <b>Contratante</b> deverá possuir um endereço eletrônico permanente para contato com as <b>Contratadas</b>
+        e com o (s) professor (s). É de total responsabilidade da <b>Contratante</b> adquirir e informar um endereço eletrônico
+        as <b>Contratadas</b>, não importando os meios pelos quais irá adquiri-lo.
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Segundo:</b> A <b>Contratante</b> deverá responder a todas as mensagens enviadas em seu endereço
-        eletrônico, no prazo máximo de 72 horas.
+        <b>Parágrafo Segundo:</b> A <b>Contratante</b> deverá responder a todas as mensagens enviadas em seu endereço eletrônico, no prazo máximo de 72 horas.
     </p>
 
     <p class="subparagrafo">
