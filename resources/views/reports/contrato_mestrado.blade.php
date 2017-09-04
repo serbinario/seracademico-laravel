@@ -160,11 +160,9 @@
         </table>
     </div>
 
-    <div style="margin-bottom: 150px;">
-        <p>
-            <b>1. Do Objeto Contratual</b>
-        </p>
-    </div>
+    <p>
+        <b>1. Do Objeto Contratual</b>
+    </p>
 
     <p class="paragrafo">
         O objeto do presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO
@@ -180,9 +178,11 @@
         os documentos  estrangeiros no Estado Brasileiro sob segunda contratação entre Contratadas e Contratante.
     </p>
 
-    <p class="titulo_paragrafo">
-        Cláusula Primeira:
-    </p>
+    <div style="margin-top: 100px;">
+        <p class="titulo_paragrafo">
+            Cláusula Primeira:
+        </p>
+    </div>
 
     <p class="paragrafo">
         Como contraprestação aos serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
