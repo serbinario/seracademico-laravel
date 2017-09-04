@@ -111,7 +111,7 @@
     </p>
 
     <div class="informacoes_pessoas">
-        <table class="table" style="font-size: 14px; margin-bottom: 30px;">
+        <table class="table" style="font-size: 14px;">
             <tr>
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
@@ -160,7 +160,7 @@
         </table>
     </div>
 
-    <div style="margin-top: 80px;">
+    <div style="margin-top: 150px;">
         <p>
             <b>1. Do Objeto Contratual</b>
         </p>
