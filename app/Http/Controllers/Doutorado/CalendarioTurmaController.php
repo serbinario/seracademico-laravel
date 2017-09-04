@@ -214,13 +214,13 @@ class CalendarioTurmaController extends Controller
             $this->service->delete($id);
 
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => 'Calendário removido com sucesso!']);
+            return response()->json(['success' => true,'msg' => 'Calendário removido com sucesso!']);
         } catch (ValidatorException $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+            return response()->json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+            return response()->json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 

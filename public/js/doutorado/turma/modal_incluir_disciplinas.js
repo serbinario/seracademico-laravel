@@ -79,10 +79,8 @@ $(document).on('click', '#btnIncluirDisciplina', function () {
 
 // Evento para o click no botão de remover disciplina
 $(document).on('click', '#removerDisciplina', function () {
-    //Id da turma corrente e disciplina selecionada
-    var id = idTurma;
-    console.log(tableDisciplina.row($(this).index()).data());
-    var idDisciplina = tableDisciplina.row($(this).index()).data().idDisciplina;
+
+    var idDisciplina = tableDisciplina.row($(this).parents('tr').index()).data().idDisciplina;
     var dadosAjax    = {
         'idDisciplina' : idDisciplina,
         'idTurma'      : idTurma

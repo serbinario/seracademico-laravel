@@ -13,6 +13,7 @@ use Seracademico\Repositories\Graduacao\VestibulandoNotaVestibularRepository;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
 use Seracademico\Repositories\Graduacao\VestibularRepository;
 use Seracademico\Repositories\PessoaRepository;
+use Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepository;
 use Seracademico\Facades\ParametroMatriculaFacade;
 
 class VestibulandoService
@@ -53,6 +54,11 @@ class VestibulandoService
     private $financeiroRepository;
 
     /**
+     * @var VestibulandoFinanceiroRepository
+     */
+    private $vestibulandoDocumentoRepository;
+
+    /**
      * @var string
      */
     private $destinationPath = "images/";
@@ -86,7 +92,8 @@ class VestibulandoService
         VestibulandoNotaVestibularRepository $notaRepository,
         AlunoRepository $alunoRepository,
         VestibulandoFinanceiroRepository $financeiroRepository,
-        AlunoService $alunoService)
+        AlunoService $alunoService,
+        VestibulandoDocumentoRepository $vestibulandoDocumentoRepository)
     {
         $this->repository           = $repository;
         $this->pessoaRepository     = $pessoaRepository;
@@ -95,7 +102,8 @@ class VestibulandoService
         $this->notaRepository       = $notaRepository;
         $this->alunoRepository      = $alunoRepository;
         $this->financeiroRepository = $financeiroRepository;
-        $this->alunoService = $alunoService;
+        $this->alunoService         = $alunoService;
+        $this->vestibulandoDocumentoRepository  = $vestibulandoDocumentoRepository;
     }
 
     /**
@@ -282,13 +290,14 @@ class VestibulandoService
         //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
+        $this->salvarDocumentos($data['documentos']);
 
         #Atualizando no banco de dados
         $vestibulando = $this->repository->update($data, $id);
         $pessoa       = $this->pessoaRepository->update($data['pessoa'], $vestibulando->pessoa->id);
 
         /*
-         * Atualiza somente se o endereço já existir
+         * Atualiza endereço somente se já existir
          */
         if(isset($pessoa->endereco)){
             $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
@@ -311,6 +320,37 @@ class VestibulandoService
 
         #Retorno
         return $vestibulando;
+    }
+
+    /**
+     * @param $data
+     * @description Este metodo tem a função de receber o array com os documentos e o id de seus respectivos registros
+     * na base de dados.Sua principal função é ornganizar e salvar o estado atual de cada documento, se existe ou não alguma
+     * observação referente a ele, status, se confirma a entrega ou não, e estado, se aceito ou não.
+     */
+    private function salvarDocumentos(array $documentos)
+    {
+        foreach ($documentos as $key => $value) {
+            $chaveArray = explode('_', $key);
+
+            if(count($chaveArray) == 2) {
+                $documento = $this->vestibulandoDocumentoRepository->find($chaveArray[1]);
+
+                /**
+                 * status entrega, caso o operador rejeite o documento, seu estado passa a ser "aguardando reenvio" e
+                 * confirmacao passa a ficar aguardando nova alteração, aparecendo em branco para o operador
+                 **/
+                if($chaveArray[0] == 'confirmacao' && $value == 2) {
+                    $documento->documento_estado_id = 3;
+                    //$documento->confirmacao = null;
+                } else {
+                    $documento->documento_estado_id = 4;
+                }
+
+                $documento->{$chaveArray[0]} = $value;
+                $documento->save();
+            }
+        }
     }
 
     /**

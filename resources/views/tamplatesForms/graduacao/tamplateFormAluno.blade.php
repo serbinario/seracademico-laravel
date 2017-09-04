@@ -56,7 +56,7 @@
                 <input type=button id="foto" value="Webcam" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#myModal">
                 <!--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>-->
             </div>
-        </div>        
+        </div>
     </div>
 </div>
 
@@ -81,6 +81,9 @@
             </li>
             <li role="presentation">
                 <a href="#admissao" aria-controls="admissao" role="tab" data-toggle="tab">Admissão</a>
+            </li>
+            <li role="presentation">
+                <a href="#anotacao" aria-controls="anotacao" role="tab" data-toggle="tab">Anotações</a>
             </li>
         </ul>
         <!-- End Nav tabs -->
@@ -346,52 +349,52 @@
                                     </div>
                                 </div>
                                 {{--<div class="panel-heading">--}}
-                                    {{--<h4 class="panel-title">--}}
-                                        {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
-                                                    {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
-                                    {{--</h4>--}}
+                                {{--<h4 class="panel-title">--}}
+                                {{--<a data-toggle="collapse" data-parent="#accordion" href="#endprof"> <i--}}
+                                {{--class="fa fa-plus-circle"></i> Contato profissional</a>--}}
+                                {{--</h4>--}}
                                 {{--</div>--}}
                                 {{--<div id="endprof" class="panel-collapse collapse">--}}
-                                    {{--<div class="panel-body">--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-12">--}}
-                                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
-                                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
-                                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-4">--}}
-                                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
-                                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-3">--}}
-                                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
-                                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
-                                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="row">--}}
-                                            {{--<div class="form-group col-md-8">--}}
-                                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
-                                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
-                                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group col-md-2">--}}
-                                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
-                                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                {{--<div class="panel-body">--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-12">--}}
+                                {{--{!! Form::label('pessoa[nome_emp]', 'Nome da empresa') !!}--}}
+                                {{--{!! Form::text('pessoa[nome_emp]',Session::getOldInput('pessoa[nome_emp]'), array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-3">--}}
+                                {{--{!! Form::label('pessoa[uf_pro]', 'UF ') !!}--}}
+                                {{--{!! Form::select('pessoa[uf_pro]', array(), Session::getOldInput('pessoa[uf_pro]'), array('class' => 'form-control', 'id' => 'estadoPro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-4">--}}
+                                {{--{!! Form::label('pessoa[cidade]', 'Cidade ') !!}--}}
+                                {{--{!! Form::select('pessoa[cidade]', array(), Session::getOldInput('pessoa[cidade]'),array('class' => 'form-control', 'id' => 'cidadePro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-3">--}}
+                                {{--{!! Form::label('pessoa[bairro]', 'Bairro ') !!}--}}
+                                {{--{!! Form::select('pessoa[bairro]', array(), Session::getOldInput('pessoa[bairro]'),array('class' => 'form-control', 'id' => 'bairroPro')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[cep_pro]', 'CEP') !!}--}}
+                                {{--{!! Form::text('pessoa[cep_pro]',Session::getOldInput('pessoa[cep_pro]') , array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="row">--}}
+                                {{--<div class="form-group col-md-8">--}}
+                                {{--{!! Form::label('pessoa[email_institucional]', 'E-mail institucional') !!}--}}
+                                {{--{!! Form::text('pessoa[email_institucional]',Session::getOldInput('pessoa[email_institucional]') , array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[tel_fixo_pro]', 'Telefone Fixo') !!}--}}
+                                {{--{!! Form::text('pessoa[tel_fixo_pro]', Session::getOldInput('pessoa[tel_fixo_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group col-md-2">--}}
+                                {{--{!! Form::label('pessoa[cel_pro]', 'Celular') !!}--}}
+                                {{--{!! Form::text('pessoa[cel_pro]',Session::getOldInput('pessoa[cel_pro]') , array('class' => 'form-control phone')) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
                                 {{--</div>--}}
                             </div>
                         </div>
@@ -560,6 +563,17 @@
                 </div>
             </div>
             {{-- Fim aba admissão--}}
+            {{-- Início anotações--}}
+            <div role="tabpanel" class="tab-pane" id="anotacao">
+                </br>
+                <div class="form-group col-md-12">
+                    <div class="fg-line">
+                        {!! Form::label('anotacao', 'Anotações') !!}
+                        {!! Form::textarea('anotacao', Session::getOldInput('anotacao'), array('class' => 'form-control')) !!}
+                    </div>
+                </div>
+            </div>
+            {{-- Fim anotações--}}
         </div>
 
         {{--Buttons Submit e Voltar--}}
@@ -808,69 +822,69 @@
         });
 
         /*//Validações javascript
-        $('#formAluno').bootstrapValidator({
-            fields: {
-                'img': {
-                    validators: {
-                        file: {
-                            maxSize: 819200,   // 2048 * 1024
-                            message: "Tamanho de imagem permitido é de até 800kb"
-                        }
-                    }
-                },
-            },
-        });*/
+         $('#formAluno').bootstrapValidator({
+         fields: {
+         'img': {
+         validators: {
+         file: {
+         maxSize: 819200,   // 2048 * 1024
+         message: "Tamanho de imagem permitido é de até 800kb"
+         }
+         }
+         },
+         },
+         });*/
 
-//        $('#formAluno').bootstrapValidator({
-//            fields: {
-//                'pessoa[nome]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome' })
-//                        },
-//                        stringLength: {
-//                            max: 50,
-//                            message: Lang.get('validation.max', { attribute: 'Nome' })
-//                        }
-//                    }
-//                },
-//                'pessoa[data_nasciemento]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
-//                        }
-//                    }
-//                },
-//                'pessoa[cpf]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'CPF' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_pai]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
-//                        }
-//                    }
-//                },
-//                'pessoa[nome_mae]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
-//                        }
-//                    }
-//                },
-//                'pessoa[identidade]': {
-//                    validators: {
-//                        notEmpty: {
-//                            message: Lang.get('validation.required', { attribute: 'Identidade' })
-//                        }
-//                    }
-//                }
-//            },
-//        });
+        //        $('#formAluno').bootstrapValidator({
+        //            fields: {
+        //                'pessoa[nome]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome' })
+        //                        },
+        //                        stringLength: {
+        //                            max: 50,
+        //                            message: Lang.get('validation.max', { attribute: 'Nome' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[data_nasciemento]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Data Nascimento' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[cpf]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'CPF' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[nome_pai]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome Pai' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[nome_mae]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Nome Mae' })
+        //                        }
+        //                    }
+        //                },
+        //                'pessoa[identidade]': {
+        //                    validators: {
+        //                        notEmpty: {
+        //                            message: Lang.get('validation.required', { attribute: 'Identidade' })
+        //                        }
+        //                    }
+        //                }
+        //            },
+        //        });
 
         // Path imagem do aluno
         $("#path_image").fileinput({

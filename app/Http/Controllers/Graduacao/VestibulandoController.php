@@ -14,7 +14,6 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
-use Seracademico\Repositories\Graduacao\VestibulandoDocumentoRepository;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
@@ -63,13 +62,11 @@ class VestibulandoController extends Controller
      */
     public function __construct(VestibulandoService $service,
                                 VestibulandoValidator $validator,
-                                VestibulandoRepository $repository,
-                                VestibulandoDocumentoRepository $vestibulandoDocumentoRepository)
+                                VestibulandoRepository $repository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
         $this->repository  = $repository;
-        $this->vestibulandoDocumentoRepository  = $vestibulandoDocumentoRepository;
     }
 
     /**
@@ -395,16 +392,6 @@ class VestibulandoController extends Controller
 
             #Executando a ação
             $this->service->update($data, $id);
-
-            foreach ($data['documentos'] as $key => $value) {
-                $chaveArray = explode('_', $key);
-
-                if(count($chaveArray) == 2) {
-                    $documento = $this->vestibulandoDocumentoRepository->find($chaveArray[1]);
-                    $documento->{$chaveArray[0]} = $value;
-                    $documento->save();
-                }
-            }
 
             #Retorno para a view
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");

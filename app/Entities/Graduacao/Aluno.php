@@ -47,7 +47,8 @@ class Aluno extends Model implements Transformable
         'data_contrato',
         'termo_biblioteca',
         'login',
-        'password'
+        'password',
+        'anotacao'
     ];
 
     /**
