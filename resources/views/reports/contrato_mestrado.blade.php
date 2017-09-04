@@ -98,8 +98,8 @@
 <div class="conteudo">
     <p>
         Pelo presente instrumento particular de <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO
-        DE CENTRO DE APOIO A ESTUDANTES  BRASILEIROS NO EXTERIOR</b>, celebrado pela <b>Universidade Grendal do Brasil – Unigrendal
-        (CNPJ 12.147.854/0001-84)</b>, como primeira parte, <b>ALPHA EDUCAÇÃO E TREINAMENTOS Ltda – Me (22.945.385/0001-00)</b> como
+            DE CENTRO DE APOIO A ESTUDANTES  BRASILEIROS NO EXTERIOR</b>, celebrado pela <b>Universidade Grendal do Brasil – Unigrendal
+            (CNPJ 12.147.854/0001-84)</b>, como primeira parte, <b>ALPHA EDUCAÇÃO E TREINAMENTOS Ltda – Me (22.945.385/0001-00)</b> como
         segunda parte, instituições de direito privado, autorizadas à gerencia de Seminários Culturais, Fóruns de Debates,
         Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
         Mini Cursos Livres e Seminários Culturais, com endereço profissional à Rua Gervásio Pires, 826, Boa Vista, Recife,
@@ -169,11 +169,11 @@
 
     <p class="paragrafo">
         O objeto do presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO
-        DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, é a prestação de serviços das <b>Contratadas</b> a <b>Contratante</b>,
+            DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, é a prestação de serviços das <b>Contratadas</b> a <b>Contratante</b>,
         visando a administração de centros de apoio à pesquisadores admitidos na <b>Grendal College and University
-        dos USA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
-        Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
-        Mini Cursos Livres e Seminários</b>, tomando como base o modelo internacional de integralização de créditos
+            dos USA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
+            Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
+            Mini Cursos Livres e Seminários</b>, tomando como base o modelo internacional de integralização de créditos
         <b>Profile Evaluation System - CPAAS</b>, fortemente amparado  por organismos internacionais como UNESCO/CEPES
         (International Policy Seminar Co-organised by IIEP/UNESCO and KRIVET), International Accreditation
         Organization – (IAO/USA), United States Distance Learning Association (USDLA), National Academic Higher
@@ -187,7 +187,7 @@
 
     <p class="paragrafo">
         Como contraprestação aos serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS</b>, prestados e/ou a serem prestados, conforme prevê a Cláusula Segunda, a Contratante confessa
+            BRASILEIROS</b>, prestados e/ou a serem prestados, conforme prevê a Cláusula Segunda, a Contratante confessa
         dívida e se obriga a pagar as Contratadas, o número e valor de parcelas descritas abaixo:
     </p>
 
@@ -234,8 +234,8 @@
 
     <p class="paragrafo">
         <span>As</span> <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
-        APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS</b> de sua zona.
+            APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES
+            BRASILEIROS</b> de sua zona.
     </p>
 
     <p class="titulo_paragrafo">
@@ -264,7 +264,7 @@
     <p class="paragrafo">
         A <b>Contratante</b> se compromete a pagar o preço ajustado pela prestação dos serviços ora contratados, no valor e na
         forma prevista no presente contrato, estando ciente que em caso de inadimplência <b>terá seus dados incluídos nos
-        serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
+            serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
         administrativa e/ou acadêmica, fica eleito o foro de sua comarca de origem.
     </p>
 
@@ -315,7 +315,7 @@
         <b>Parágrafo Primeiro:</b> Os pedidos de desistência unilaterais do contrato, feitos pela <b>Contratante</b> deverão ser
         fundamentados e protocolados sob gerência da primeira parte <b>Contratada</b>, tendo prazo máximo de 30 (trinta)
         dias antes do vencimento da parcela a vencer. <b>Após este prazo, entende-se que o contrato é perfeito e não
-        passível de rescisão, podendo ser exigido  o pagamento de todas as parcelas</b>, não dispensando a <b>Contratante</b> da
+            passível de rescisão, podendo ser exigido  o pagamento de todas as parcelas</b>, não dispensando a <b>Contratante</b> da
         quitação do pagamento referente ao nível de acesso escolhido, bem como também as outras despesas eventualmente
         ocasionadas pela <b>Contratante</b>.
     </p>
@@ -425,15 +425,15 @@
         pela <b>Contratante</b>.
     </p>
 
-    <div style="margin-top: 35%;">
+    <div style="margin-top: 40%;">
         <p class="paragrafo">
             E assim por estarem juntos, firmes e contratados, firmam os signatários, o presente instrumento, em duas vias de
             igual teor e forma, para que produza seus jurídicos e legais efeitos.
         </p>
 
-       <p style="text-align: center; margin-top: 10%;">
-           _______de_________________ de ___________.
-       </p>
+        <p style="text-align: center; margin-top: 10%;">
+            _______de_________________ de ___________.
+        </p>
 
         <div style="margin-left: 0; margin-top: 5%;">
             <h1 style="text-align: left;">
@@ -470,6 +470,5 @@
         </h1>
     </div>
 </div>
-
 </body>
 </html>
