@@ -568,11 +568,11 @@
                                     @if($exemplar['ilustracoes_id'] == '1'), il.@endif
                                 @endif
                                 @if($exemplar['acervo']['colecao_id'] && !$exemplar['acervo']['serie_id'])
-                                    ({{ $exemplar['acervo']['colecao']['nome'] }})
+                                    ({{ $exemplar['acervo']['colecao']['nome'] }}).
                                 @elseif($exemplar['acervo']['serie_id'] && !$exemplar['acervo']['colecao_id'])
-                                    ({{ $exemplar['acervo']['serie']['nome'] }})
+                                    ({{ $exemplar['acervo']['serie']['nome'] }}).
                                 @elseif($exemplar['acervo']['serie_id'] && $exemplar['acervo']['colecao_id'])
-                                    ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }})@else, @endif
+                                    ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }}).@else, @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                     @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                                 @else

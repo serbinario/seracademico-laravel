@@ -113,10 +113,10 @@ class ArcevoController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
-        //dd($loadFields);
+        $cursos =   $this->service->loadCursos();
 
         #Retorno para view
-        return view('biblioteca.acervo.create', compact('loadFields'));
+        return view('biblioteca.acervo.create', compact('loadFields', 'cursos'));
     }
 
     /**
@@ -157,14 +157,12 @@ class ArcevoController extends Controller
             $segundaEntrada = $retorno['segundaEntrada'];
             $primeiraEntrada = $retorno['primeiraEntrada'];
 
-            #Tratando as datas
-           //$aluno = $this->service->getAlunoWithDateFormatPtBr($aluno);
-
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+            $cursos =   $this->service->loadCursos();
 
             #retorno para view
-            return view('biblioteca.acervo.edit', compact('model', 'segundaEntrada', 'primeiraEntrada','loadFields'));
+            return view('biblioteca.acervo.edit', compact('model', 'segundaEntrada', 'primeiraEntrada','loadFields', 'cursos'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }

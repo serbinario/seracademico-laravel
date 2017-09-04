@@ -422,6 +422,35 @@ class ArcevoService
     }
 
     /**
+     * @return array
+     */
+    public function loadCursos()
+    {
+        $cursosGraduacao = \DB::table('fac_cursos')
+            ->whereIn('fac_cursos.tipo_curso_id', [1,2,5])
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosPosGraduacao = \DB::table('fac_cursos')
+            ->whereIn('fac_cursos.tipo_curso_id', [3,4])
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosMestrado = \DB::table('fac_cursos')
+            ->where('fac_cursos.tipo_curso_id', 6)
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosTecnico = \DB::table('fac_cursos')
+            ->where('fac_cursos.tipo_curso_id', 7)
+            ->select('id', 'nome')
+            ->get();
+
+        return ['graduacao' => $cursosGraduacao, 'pos' => $cursosPosGraduacao,
+            'mestrado' => $cursosMestrado, 'tecnico' => $cursosTecnico];
+    }
+
+    /**
      * Método load
      *
      * Método responsável por recuperar todos os models (com seus repectivos
