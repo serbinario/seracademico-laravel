@@ -156,12 +156,6 @@
         </table>
     </div>
 
-    <div>
-        <h1 style="text-align: center; margin-top: 15%">
-            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
-        </h1>
-    </div>
-
     <p>
         <b>1. Do Objeto Contratual</b>
     </p>
@@ -408,15 +402,6 @@
     <p class="paragrafo">
         A emissão dos diplomas internacionais ocorrerá em até 150 dias úteis e o prazo para entrega do diploma
         convalidado nacionalmente é de até 300 dias úteis a contar da data da entrega da dissertação definitiva.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Nona:
-    </p>
-
-    <p class="paragrafo">
-        As <b>Contratadas</b> prestarão assessoramento à legalização externa mediante pagamento de emolumentos (honorários)
-        pela <b>Contratante</b>.
     </p>
 
     <p class="paragrafo">
