@@ -4,6 +4,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais
                     dados</a></li>
+            <li role="presentation"><a href="#curso" aria-controls="curso" role="tab" data-toggle="tab">Cursos</a></li>
             <li role="presentation"><a href="#infoAdd" aria-controls="infoAdd" role="tab" data-toggle="tab">Informações
                     adicionais</a></li>
             <li role="presentation"><a href="#autores" aria-controls="autores" role="tab" data-toggle="tab">Autores</a>
@@ -38,24 +39,6 @@
                         <div class="form-group">
                             {!! Form::label('assunto', 'Assunto') !!}
                             {!! Form::text('assunto', Session::getOldInput('assunto') , array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('cursos', 'Cursos') !!}
-                            {{--{{dd($model->cursos->lists('id')->all())}}--}}
-                            @if(isset($model->id))
-                                <select class="form-control" multiple="multiple" name="cursos[]" id="cursos">
-                                    @foreach($loadFields['graduacao\curso'] as $key => $value)
-                                        <option value="{{$key}}"
-                                                @foreach($model->cursos->lists('id') as $c) @if($key == $c)selected="selected"@endif @endforeach>{{$value}}</option>
-                                    @endforeach
-                                </select>
-                            @else
-                                {!! Form::select('cursos[]', $loadFields['graduacao\curso'], null, ['id' => 'cursos', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -157,6 +140,87 @@
                             </div>
                         </div>
                     @endif
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="curso">
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-graduacao', 'Graduação/Tecnólogo') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-graduacao">
+                                    @foreach($cursos['graduacao'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-graduacao">
+                                    @foreach($cursos['graduacao'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-posgraduacao', 'Pós-Graduação/Curso Extensão') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-posgraduacao">
+                                    @foreach($cursos['pos'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-posgraduacao">
+                                    @foreach($cursos['pos'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-mestrado', 'Mestrado') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-mestrado">
+                                    @foreach($cursos['mestrado'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-mestrado">
+                                    @foreach($cursos['mestrado'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-tecnico', 'Técnico') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-tecnico">
+                                    @foreach($cursos['tecnico'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-tecnico">
+                                    @foreach($cursos['tecnico'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="infoAdd">
