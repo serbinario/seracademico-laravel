@@ -3,7 +3,8 @@
  */
 
 $(document).ready(function () {
-    $('#cursos').multiselect({
+
+    $('.cursos').multiselect({
         buttonClass: 'btn-default',
         nonSelectedText: 'Selecione um Curso'
     });
