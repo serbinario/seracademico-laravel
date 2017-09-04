@@ -276,7 +276,7 @@
         exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
     </p>
 
-    <div style='margin-top: 100px;'>
+    <div style='margin-top: 130px;'>
         <p class="titulo_paragrafo">
             Cláusula Quarta:
         </p>
