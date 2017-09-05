@@ -385,7 +385,7 @@
         </tbody>
     </table>
 
-    <p class="titulo_paragrafo">
+    <p class="titulo_paragrafo" style="margin-top: 25px;">
         Cláusula Sétima:
     </p>
 
