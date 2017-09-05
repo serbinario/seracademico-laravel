@@ -276,7 +276,7 @@
         exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
     </p>
 
-    <div style='margin-top: 130px;'>
+    <div style='margin-top: 10px;'>
         <p class="titulo_paragrafo">
             Cláusula Quarta:
         </p>
@@ -350,7 +350,7 @@
         desistência no prazo de até 7 dias após a formalização da matrícula.
     </p>
 
-    <div style='margin-top: 130px;'>
+    <div style='margin-top: 0px;'>
         <p class="titulo_paragrafo">
             Cláusula Sexta:
         </p>
@@ -428,13 +428,13 @@
         pela <b>Contratante</b>.
     </p>
 
-    <div style="margin-top: 85%;">
+    <div style="margin-top: 0px;">
         <p class="paragrafo">
             E assim por estarem juntos, firmes e contratados, firmam os signatários, o presente instrumento, em duas vias de
             igual teor e forma, para que produza seus jurídicos e legais efeitos.
         </p>
 
-        <p style="text-align: center; margin-top: 10%;">
+        <p style="text-align: center; margin-top: 8%;">
             _______de_________________ de ___________.
         </p>
 
@@ -454,23 +454,18 @@
         <div style="margin-left: 0;">
             <h3 style="text-align: left;">Testemunhas</h3>
 
-            <table style="margin-bottom: 1%; font-size: 12px;">
+            <table style="margin-bottom: 1%; font-size: 12px; float:left;">
                 <tr style="margin-bottom: 1%"><td>1)</td></tr>
                 <tr><td>RG nº</td></tr>
                 <tr><td>CPF nº</td></tr>
             </table>
 
-            <table style="font-size: 12px;">
+            <table style="margin-left: 300px; font-size: 12px; float:left;">
                 <tr style="margin-bottom: 1%;"><td>2)</td></tr>
                 <tr><td>RG nº</td></tr>
                 <tr><td>CPF nº</td></tr>
             </table>
         </div>
-    </div>
-    <div>
-        <h1 style="text-align: center; margin-top: 65%;">
-            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
-        </h1>
     </div>
 </div>
 </body>
