@@ -350,7 +350,7 @@
         desistência no prazo de até 7 dias após a formalização da matrícula.
     </p>
 
-    <div style='margin-top: 0px;'>
+    <div style='margin-top: 15px;'>
         <p class="titulo_paragrafo">
             Cláusula Sexta:
         </p>
