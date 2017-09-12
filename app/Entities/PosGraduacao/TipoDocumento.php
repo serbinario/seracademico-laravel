@@ -3,6 +3,7 @@
 namespace Seracademico\Entities\PosGraduacao;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -19,7 +20,13 @@ class TipoDocumento extends Model implements Transformable
 
     public function scopeNivelDePosGraduacao($query)
     {
-        return $query->where('tipo_nivel_sistema_id', 2);
+        $queryResult = $query->where('tipo_nivel_sistema_id', 2);
+
+        if(Auth::user()->sede_id != 1) {
+            $queryResult->whereIn('nome', ['FICHA INSCRIÇÃO', 'DECLARAÇÃO VÍNCULO MODELO']);
+        }
+
+        return $queryResult;
     }
 
 }
