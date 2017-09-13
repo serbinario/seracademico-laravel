@@ -77,10 +77,10 @@ class AlunoValidator extends LaravelValidator
             'pessoa.estados_civis_id' => 'integer',
             'pessoa.tipos_sanguinios_id' => 'integer',
             'pessoa.cores_racas_id' => 'integer',
-            'estados_id' => 'required|integer',
+            /*'estados_id' => 'required|integer',
             'cidade' => 'required|integer',
             'estado' => 'required|integer',
-            'bairro' => 'required|integer',
+            'bairro' => 'required|integer',*/
             'pessoa.uf_nascimento_id' => 'required|integer',
             'pessoa.uf_exp' => 'required',
             'pessoa.nome_social' => 'max:200|serbinario_alpha_space',
@@ -103,11 +103,11 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => 'integer',
             'curso_id' => 'required',
             'turma_id' => 'required',
-            'pessoa.endereco.logradouro' => 'required|serbinario_alpha_space|max:100',
+            /*'pessoa.endereco.logradouro' => 'required|serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'required|numeric|max:99999',
             'pessoa.endereco.cep' => 'required|max:999999999',
             'pessoa.endereco.complemento' => 'max:100',
-            'pessoa.endereco.bairros_id' => 'integer',
+            'pessoa.endereco.bairros_id' => 'integer',*/
             'data_matricula' => 'required'
         ],
 
@@ -129,7 +129,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.estados_civis_id' => 'required|integer',
             'pessoa.tipos_sanguinios_id' => 'integer',
             'pessoa.cores_racas_id' => 'integer',
-            'estados_id' => 'integer',
+            //'estados_id' => 'integer',
             'pessoa.uf_nascimento_id' => 'required|integer',
             'pessoa.nome_social' => 'max:200|serbinario_alpha_space',
             'pessoa.orgao_rg' => 'max:30',
@@ -151,11 +151,11 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => 'integer',
             'curso_id' => 'required',
             'turma_id' => 'required',
-            'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
+            /*'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'required|numeric|max:99999',
             'pessoa.endereco.cep' => 'required|max:999999999',
             'pessoa.endereco.complemento' => 'max:100',
-            'pessoa.endereco.bairros_id' => 'integer',
+            'pessoa.endereco.bairros_id' => 'integer',*/
             'pessoa.uf_exp' => 'required'
         ],
     ];
