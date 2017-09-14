@@ -333,6 +333,7 @@ class RelatorioController extends Controller
             ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->where('bib_emprestimos.status_devolucao', 0)
             ->select([
                 'pessoas.identidade',
                 'pessoas.nome',

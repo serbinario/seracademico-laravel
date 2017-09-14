@@ -32,7 +32,7 @@ class QuantidadeDeEmprestimo
         # Pegas os parâmetros para saber a quantidade de exemplares por tipo de pessoa
         $qtdEmprestimos = \DB::table('bib_parametros')->select('bib_parametros.*')
             ->whereIn('bib_parametros.codigo',['003', '007', '009'] )->get();
-        
+
         //Pega a quantidade de emprestimo da pessoa
         $validarQtdEmprestimo = \DB::table('bib_emprestimos')
             ->join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
