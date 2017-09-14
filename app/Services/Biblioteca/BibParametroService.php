@@ -65,9 +65,11 @@ class BibParametroService
      */
     public function update(array $data, int $id) : BibParametro
     {
+
+
+
         #Atualizando no banco de dados
         $bibParametro = $this->repository->update($data, $id);
-
 
         #Verificando se foi atualizado no banco de dados
         if(!$bibParametro) {
