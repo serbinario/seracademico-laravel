@@ -85,7 +85,7 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "20" :
                     $result = $this->declaracaoAfastamento($idAluno);
-                    $nameView = "reports.declaracao_afastamento_mestrado";
+                    $nameView = "reports.declaracao_afastamento_doutorado";
                     break;
                 case "22" :
                     $result = $this->inscricao($idAluno);
