@@ -99,11 +99,11 @@
 
         if (!empty($objDate)) {
             $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
+            $numberMonth = $objDate->format('m');
         }
 
         if (!empty($dataFinal)) {
             $dataFinal = \DateTime::createFromFormat('Y-m-d', $dataFinal);
-            $numberMonth = $dataFinal->format('m');
         }
     ?>
     <br>
