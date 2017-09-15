@@ -267,7 +267,7 @@ $(document).on('change', '#tipo_pessoa', function (event) {
 $(document).on('submit', '#form', function (event) {
     $(document).ready(function(){
 
-        if(($("#tipo_pessoa").val() == '2' || $("#tipo_pessoa").val() == '3') && !$("#emprestimoEspecial").prop( "checked")) {
+        if($("#tipo_pessoa").val() == '3' && !$("#emprestimoEspecial").prop( "checked")) {
             bootbox.alert('Esse empréstimos deve ser do tipo especial');
             event.preventDefault();
         } else if($('#emprestimos tbody tr').length <= 0){

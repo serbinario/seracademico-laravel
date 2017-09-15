@@ -240,7 +240,8 @@ class EmprestarController extends Controller
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
                     'bib_emprestimos.data_devolucao as devolucao',
-                    'bib_emprestimos.status_pagamento'
+                    'bib_emprestimos.status_pagamento',
+                    'bib_emprestimos.status_devolucao'
                 ]);
         
         #Editando a grid
@@ -262,34 +263,26 @@ class EmprestarController extends Controller
             })
             ->addColumn('action', function ($row) {
                 
-                
-                
-                $html = "";
+
+                $html = '<div class="fixed-action-btn horizontal">';
+                $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
+                $html .= '<ul>';
+
+
                 if(!$row->data_devolucao_real) {
-                    $html .= '<div class="fixed-action-btn horizontal">
-                              <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                              <ul>
-                              <li>
-                                <a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">done</i></a>
-                              </li>';
+                    $html .= '<li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">done</i></a></li>';
                     if($row->tipo_emprestimo == '1' && strtotime($row->devolucao) >= strtotime($this->data)) {
-                            $html .= '<li>
-                                      <a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">restore</i></a>
-                                      </li>
-                                      </ul>
-                                      </div>';
+                            $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">restore</i></a></li>';
                     }
                 }
-                if($row->status_pagamento == '1') {
-                    $html .= '<div class="fixed-action-btn horizontal">
-                                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                                    <ul>
-                                    <li>
-                                    <a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a>
-                                    </li>
-                                    </ul>
-                                    </div>';
+
+                if($row->status_devolucao == 1 && $row->status_pagamento == '0') {
+                    $html .= '<li><a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
                 }
+
+
+                $html .= '</ul></div>';
+
             # Retorno
             return $html;
         })->addColumn('exemplares', function ($row) {
@@ -367,29 +360,22 @@ class EmprestarController extends Controller
                 }
             })
             ->addColumn('action', function ($row) {
-                $html = "";
+
+                $html = '<div class="fixed-action-btn horizontal">';
+                $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
+                $html .= '<ul>';
 
                 # Valida se foi realizado o pagamento ou não de no caso o empréstmimo atrasado
                 if($row->status_devolucao == '0') {
-                    $html .= '<div class="fixed-action-btn horizontal">
-                          <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                          <ul>
-                          <li>
-                            <a class="btn-floating devolver-aluno" href="confirmarDevolucaoPorAluno/'.$row->pessoa_id.'" title="Devolver"><i class="material-icons">done_all</i></a>
-                          </li>
-                          </ul>
-                          </div>';
+                    $html .= '<li><a class="btn-floating devolver-aluno" href="confirmarDevolucaoPorAluno/'.$row->pessoa_id.'" title="Devolver"><i class="material-icons">done_all</i></a></li>';
                 }
-                if($row->status_pagamento == '1') {
-                    $html .= '<div class="fixed-action-btn horizontal">
-                                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                                    <ul>
-                                    <li>
-                                    <a class="btn-floating baixa-pagamento-aluno" href="baixaPagamentoPorAluno/'.$row->pessoa_id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a>
-                                    </li>
-                                    </ul>
-                                    </div>';
+
+                if($row->status_devolucao == '1' && $row->status_pagamento == '0') {
+                    $html .= '<li><a class="btn-floating baixa-pagamento-aluno" href="baixaPagamentoPorAluno/'.$row->pessoa_id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
                 }
+
+                $html .= '</ul></div>';
+
                 # Retorno
                 return $html;
             })->addColumn('exemplares', function ($row) {
@@ -655,8 +641,8 @@ class EmprestarController extends Controller
             #Executando a ação
             $result = \DB::table('bib_emprestimos')
                 ->where('id', $id)
-                ->where('status_pagamento', '1')
-                ->update(['status_pagamento' => 2]);
+                ->where('status_pagamento', '0')
+                ->update(['status_pagamento' => 1]);
 
             if(!$result){
                 return redirect()->back()->with("error", "Não foi possível confirmar o pagamento!");
