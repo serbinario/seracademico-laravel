@@ -262,6 +262,9 @@ class AlunoDocumentoController extends Controller
      * @param $id
      * @return array
      * @throws \Exception
+     * $nota['disciplina']['carga_horaria_total'] = count($carga_horaria_curriculo) > 0
+     * ? $carga_horaria_curriculo[0]
+     * : $nota['disciplina']['carga_horaria'];
      */
     public function historico($id)
     {

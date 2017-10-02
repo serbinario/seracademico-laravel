@@ -1,3 +1,4 @@
+
 // carregando todos os campos preenchidos
 function loadFieldsDocumentos()
 {
@@ -50,13 +51,14 @@ function builderHtmlFieldsDocumento (dados) {
 $(document).on('click', '#btnGerarDocumento', function () {
     // Recuperando os dados do formulário
     var documentacao_id = $('#documentacao_id').val();
-    console.log(documentacao_id);
+console.log(idAluno);
     // Fazendo a requisição ajax
     jQuery.ajax({
         type: 'GET',
         url: '/index.php/seracademico/mestrado/aluno/checkDocumento/'+ documentacao_id + "/" + idAluno,
         datatype: 'json'
     }).done(function (retorno) {
+        console.log(retorno);
         // Verificando o retorno da requisição
         if(retorno.success) {
             // Executando o relatório e abrindo em outra aba

@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\Mestrado;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Mestrado\AlunoService;
 use Seracademico\Uteis\NumeroOrdianalPorExtenso;
@@ -47,6 +48,9 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "11" :
                     $this->historico($idAluno);
+                    break;
+                case "24" :
+                    $this->gradeCurricular($idAluno);
                     break;
             }
 
@@ -94,6 +98,10 @@ class AlunoDocumentoController extends Controller
                 case "11" :
                     $result = $this->historico($idAluno);
                     $nameView = "reports.historico_mestrado";
+                    break;
+                case "24" :
+                    $result = $this->gradeCurricular($idAluno);
+                    $nameView = "reports.grade_curricular_mestrado";
                     break;
             }
 
@@ -218,7 +226,10 @@ class AlunoDocumentoController extends Controller
                 $nota['turma']['curriculo_id']
             );
 
-            $nota['disciplina']['carga_horaria_total'] = $carga_horaria_curriculo[0];
+            $nota['disciplina']['carga_horaria_total'] = count($carga_horaria_curriculo) > 0
+                ? $carga_horaria_curriculo[0]
+                : $nota['disciplina']['carga_horaria'];
+
             $nota['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
             $nota['disciplina']['data'] = $nota['frequencias'][0]['calendario']['data_final'] ?? "";
             //$nota['disciplina']['titulacao'] = $nota['frequencias'][0]['calendario']['professor']['titulacao']['nome'] ?? "";
@@ -234,7 +245,50 @@ class AlunoDocumentoController extends Controller
         return $result;
     }
 
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function gradeCurricular($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
 
+        #
+        $result['gradeCurricular'] = $this->getDadosGradeCurricular($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        /*if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }*/
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
+     *
+     */
+    public function getDadosGradeCurricular($id)
+    {
+        $query = \DB::table('fac_curriculos')
+            ->join('fac_curriculo_disciplina', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_curriculo_disciplina.disciplina_id')
+            ->join('pos_alunos_cursos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->select([
+                'fac_curriculos.id',
+                'fac_curriculos.codigo',
+                'fac_disciplinas.nome',
+                'fac_disciplinas.carga_horaria'
+            ])
+            ->where('pos_alunos.id', $id)
+            ->get();
+
+        return $query;
+    }
 
     /**
      * @param $idAluno
