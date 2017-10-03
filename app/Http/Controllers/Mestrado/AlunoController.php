@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\Mestrado;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Http\Controllers\Controller;
