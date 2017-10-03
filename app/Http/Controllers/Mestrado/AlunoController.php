@@ -3,6 +3,7 @@
 namespace Seracademico\Http\Controllers\Mestrado;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Seracademico\Http\Controllers\Controller;
@@ -168,12 +169,16 @@ class AlunoController extends Controller
                     $html .= '<div class="fixed-action-btn horizontal">';
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
-                    $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
-                    $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
-                    $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
 
-                    if($aluno->matricula) {
-                        $html .= '   <li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
+                    $html .= '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
+
+                    if(Auth::user()->sede_id == 1) {
+                        $html .= '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
+                        $html .= '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
+
+                        if ($aluno->matricula) {
+                            $html .= '   <li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>';
+                        }
                     }
                     
                     $html .=    '</ul>';
