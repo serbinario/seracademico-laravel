@@ -373,7 +373,8 @@ class ExemplarService
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Exemplar
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Exemplar
     {

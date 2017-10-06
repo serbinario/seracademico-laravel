@@ -498,7 +498,7 @@ class EmprestarController extends Controller
 
             #Retorno para a view
             return view('biblioteca.controle.emprestimo.cupomDevolucaoPorAluno', compact('emprestimo', 'exemplares', 'totalMulta'));
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
