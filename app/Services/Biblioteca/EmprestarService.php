@@ -300,10 +300,10 @@ class EmprestarService
         $dataObj = new \DateTime("now");
         $data = $dataObj->format('Y-m-d');
 
-        $parametros = \DB::table('bib_parametros')->where('codigo', '=', '004')->orWhere('codigo', '=', '005')->get();
+        $parametros = \DB::table('bib_parametros')->whereIn('codigo', ['004', '005'])->get();
 
-        $valorNormal     = isset($parametros[0]) ? $parametros[0]->valor : "";
-        $valorConsulta   = isset($parametros[1]) ? $parametros[1]->valor : "";
+        $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
+        $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
         $multa           = "";
 
         if(strtotime($emprestimo->data_devolucao) < strtotime($data)) {
@@ -319,12 +319,17 @@ class EmprestarService
             //pegando a quantidade de exemplares emprestados
             $qtdExemplar = count($emprestimo->emprestimoExemplar);
 
+           // dd($valorNormal);
+
             // Calculando a multa geral do atraso
             if($emprestimo->tipo_emprestimo == '1' && $emprestimo->emprestimo_especial == '0') {
+               // dd('normal');
                 $multa = ($valorNormal * $qtdExemplar) * $dias;
             } else if ($emprestimo->tipo_emprestimo == '2' || $emprestimo->emprestimo_especial == '1') {
+                //dd('consulta');
                 $multa = ($valorConsulta * $qtdExemplar) * $dias;
             }
+
 
             // Calculando multa por exemplar
             foreach ($emprestimo->exemplaresPivot as $exemplar) {
@@ -341,6 +346,8 @@ class EmprestarService
 
             $emprestimo->valor_multa = $multa;
         }
+
+        //dd($emprestimo->exemplaresPivot);
 
         // Setando data e status de devolução
         $emprestimo->data_devolucao_real = $data;
