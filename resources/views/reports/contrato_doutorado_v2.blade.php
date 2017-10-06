@@ -167,10 +167,10 @@
         dos USA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
         Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
         Mini Cursos Livres e Seminários</b>, tomando como base o modelo internacional de integralização de créditos
-        <b>Profile Evaluation System - CPAAS</b>, fortemente amparado  por organismos internacionais como <i>UNESCO/CEPES
+        <b>Profile Evaluation System - CPAAS</b>, fortemente amparado  por organismos internacionais como UNESCO/CEPES
         (International Policy Seminar Co-organised by IIEP/UNESCO and KRIVET), International Accreditation
         Organization – (IAO/USA), United States Distance Learning Association (USDLA), National Academic Higher
-        Education e pelo Council for Adult and Experiential Learning (CAEL)</i>, bem como assessorá-la a nacionalizar
+        Education e pelo Council for Adult and Experiential Learning (CAEL), bem como assessorá-la a nacionalizar
         os documentos  estrangeiros no Estado Brasileiro sob segunda contratação entre Contratadas e Contratante.
     </p>
 
@@ -180,8 +180,8 @@
 
     <p class="paragrafo">
         Como contraprestação aos serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS</b>, prestados e/ou a serem prestados, conforme prevê a Cláusula Segunda, a Contratante
-        confessa dívida e se obriga a pagar as Contratadas, o número e valor de parcelas descritas abaixo:
+        BRASILEIROS</b>, prestados e/ou a serem prestados, conforme prevê a Cláusula Segunda, a Contratante confessa
+        dívida e se obriga a pagar as Contratadas, o número e valor de parcelas descritas abaixo:
     </p>
 
     <p class="uppercase">
@@ -216,7 +216,7 @@
         </thead>
         <tbody>
         <tr>
-            <td>US$ 2.000,00</td>
+            <td>US$ 2000,00</td>
         </tr>
         </tbody>
     </table>
@@ -245,8 +245,8 @@
     </p>
 
     <p class="paragrafo">
-        A Contratante se compromete a elaborar e publicar até o 24º mês de aula, 2 artigos, no valor de
-        R$ 400,00 (quatrocentos reais) cada publicação.
+        Reafirma sua completa ciência sobre os processos de convalidação de títulos,mediante pagamento da taxa cobrada em dólar,
+        caso o contratante não efetue o pagamento da referida taxa, não terá seu título convalidado.
     </p>
 
     <p class="paragrafo">
@@ -288,15 +288,14 @@
     </p>
 
     <p class="subparagrafo">
-        b. Através do requerimento expresso da <b>Contratante</b>, assistido ou representado, quando for o caso de
-        cancelamento de inscrição, sendo em qualquer caso, condição obrigatória de sua eficácia a comunicação da
-        desistência da primeira parte <b>Contratada</b>, e o pagamento de multa no valor de R$ 50,00 referente a taxa de
-        trancamento, onde o mesmo poderá retornar ao curso em até 12 meses, fazendo o pagamento da rematrícula.
+        b. Através do requerimento expresso da <b>Contratante</b>, assistido ou representado, quando for o caso de cancelamento
+        de inscrição, sendo em qualquer caso, condição obrigatória de sua eficácia a comunicação da desistência da
+        primeira parte <b>Contratada</b>, e o pagamento de multa no valor de 10% do contrato;
     </p>
 
     <p class="subparagrafo">
         c. Quando por decisão da primeira parte <b>Contratada</b>, houver o cancelamento compulsório da inscrição, pela exclusão
-        da <b>Contratante</b> em decorrência de descumprimento das normas internas da primeira parte <b>Contratada</b>;
+        da Contratante em decorrência de descumprimento das normas internas da primeira parte <b>Contratada</b>;
     </p>
 
     <p class="subparagrafo-3-nivel">
@@ -322,9 +321,8 @@
     </p>
 
     <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Quarto:</b> No caso de desistência, a <b>Contratante</b>, deverá estar em dia com seus pagamentos
-        e comunicar por escrito a primeira parte <b>Contratada</b> no prazo máximo de 30 dias antes do vencimento da
-        parcela a vencer, e neste caso perderá o direito a retorno ao curso.
+        <b>Parágrafo Quarto:</b> No caso de desistência, a <b>Contratante</b>, deverá estar em dia com seus pagamentos e comunicar por
+        escrito a primeira parte <b>Contratada</b> no prazo máximo de 30 dias antes do vencimento da parcela a vencer.
     </p>
 
     <p class="subparagrafo-3-nivel">
@@ -333,19 +331,14 @@
         a primeira parte <b>Contratada</b> tomar medidas cabíveis de cobrança.
     </p>
 
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Sexto:</b> A devolução da matrícula só ocorrerá em caso de não fechamento de turma ou de
-        desistência no prazo de até 7 dias após a formalização da matrícula.
-    </p>
-
     <p class="titulo_paragrafo">
         Cláusula Sexta:
     </p>
 
     <p class="paragrafo">
-        A <b>Contratante</b> que solicitar certidões ou outros documentos as <b>Contratadas</b> deverá pagar  por cada
-        documento solicitado, tomando como base os valores estipulados em tabela elaborada e informada a
-        <b>Contratante</b>, os quais se destinam a custear as despesas decorrentes da emissão e envio dos mesmos.
+        A <b>Contratante</b> que solicitar certidões ou outros documentos as <b>Contratadas</b> deverá pagar  por cada documento solicitado,
+        tomando como base os valores estipulados em tabela elaborada e informada a <b>Contratante</b>, os quais se destinam a
+        custear as despesas decorrentes da emissão e envio dos mesmos.
     </p>
 
     <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
@@ -366,7 +359,15 @@
         </tr>
         <tr>
             <td>2º Via de boleto</td>
-            <td>R$ 10,00</td>
+            <td>R$ 15,00</td>
+        </tr>
+        <tr>
+            <td>Solicitação de disciplina como curso de extensão</td>
+            <td>R$ 30,00</td>
+        </tr>
+        <tr>
+            <td>Trancamento do curso</td>
+            <td>R$ 50,00</td>
         </tr>
         </tbody>
     </table>
@@ -377,8 +378,7 @@
 
     <p class="paragrafo">
         Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span> <b>Contratadas</b>, sob pena de
-        terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior,
-        constante deste contrato.
+        terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior, constante deste contrato.
     </p>
 
     <p class="subparagrafo">
@@ -388,17 +388,11 @@
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Segundo:</b> A <b>Contratante</b> deverá responder a todas as mensagens enviadas em seu endereço
-        eletrônico, no prazo máximo de 72 horas.
+        <b>Parágrafo Segundo:</b> A <b>Contratante</b> deverá responder a todas as mensagens enviadas em seu endereço eletrônico, no prazo máximo de 72 horas.
     </p>
 
     <p class="subparagrafo">
         <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
-    </p>
-
-    <p class="subparagrafo">
-        <b>Parágrafo Quarto:</b> A <b>Contratante</b> deverá comprovar em caso de falta o motivo para que possa repor a
-        disciplina posteriormente, caso não ocorra a comprovação, pagará uma taxa de R$ 50,00 para repor a disciplina.
     </p>
 
     <p class="titulo_paragrafo">
@@ -406,17 +400,8 @@
     </p>
 
     <p class="paragrafo">
-        A emissão dos diplomas internacionais ocorrerá em até 150 dias úteis e o prazo para entrega do diploma
-        convalidado nacionalmente é de até 300 dias úteis a contar da data da entrega da dissertação definitiva.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Nona:
-    </p>
-
-    <p class="paragrafo">
         As <b>Contratadas</b> prestarão assessoramento à legalização externa mediante pagamento de emolumentos (honorários)
-        pela Contratante.
+        pela <b>Contratante</b>.
     </p>
 
     <p class="paragrafo">
@@ -444,13 +429,13 @@
     <div style="margin-left: 0;">
         <h3 style="text-align: left;">Testemunhas</h3>
 
-        <table style="margin-bottom: 1%; font-size: 12px; float:left;">
+        <table style="margin-bottom: 1%; font-size: 12px;">
             <tr style="margin-bottom: 1%"><td>1)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
         </table>
 
-        <table style="margin-left: 300px; font-size: 12px; float:left;">
+        <table style="font-size: 12px;">
             <tr style="margin-bottom: 1%;"><td>2)</td></tr>
             <tr><td>RG nº</td></tr>
             <tr><td>CPF nº</td></tr>
@@ -458,7 +443,7 @@
     </div>
 
     <div>
-        <h1 style="text-align: center; margin-top: 40%">
+        <h1 style="text-align: center; margin-top: 15%">
             <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
         </h1>
     </div>

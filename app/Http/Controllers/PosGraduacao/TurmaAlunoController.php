@@ -140,7 +140,7 @@ class TurmaAlunoController extends Controller
                 })
                 ->groupBy('pessoas.nome')
                 ->where('fac_cursos.id', $idCurso)
-                ->whereNotIn('pos_alunos.id', function ($query) use ($idDisciplina, $idTurma) {
+                /*->whereNotIn('pos_alunos.id', function ($query) use ($idDisciplina, $idTurma) {
                     $query->from('pos_alunos')
                         ->join('pos_alunos_cursos', function ($join) {
                             $join->on(
@@ -162,7 +162,7 @@ class TurmaAlunoController extends Controller
                         ->where('fac_turmas.id', '=', $idTurma)
                         ->where('fac_disciplinas.id', '=', $idDisciplina)
                         ->select(['pos_alunos.id']);
-                })
+                })*/
                 ->select([
                     'pos_alunos.id',
                     'pessoas.nome'

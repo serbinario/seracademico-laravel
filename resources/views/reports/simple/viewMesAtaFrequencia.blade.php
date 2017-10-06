@@ -91,18 +91,15 @@
     <img style="margin-top: 2%" width="150" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo">
 </div>
 
-<!-- Lógica do período-->
-<?php
-    $numberMonth = date('m');
-?>
-
 <div id="body">
     <?php
         $objDate = $dados['filtersBody'][5] ?? "";
         $dataFinal = $dados['filtersBody'][7] ?? "";
+        $numberMonth = '';
 
         if (!empty($objDate)) {
             $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
+            $numberMonth = $objDate->format('m');
         }
 
         if (!empty($dataFinal)) {

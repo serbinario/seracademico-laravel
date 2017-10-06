@@ -71,7 +71,7 @@
                 </li>
                 @endrole
 
-                @role('mestrado|admin')
+                @role('mestrado|admin|polo')
                 <li>
                     <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Mestrado</span> <span
                                 class="fa arrow"></span></a>
@@ -80,12 +80,15 @@
                             <a href="javascript:void(0)"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.mestrado.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+
+                                @role('mestrado|admin')
                                 <li><a href="{{ route('seracademico.mestrado.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i>Professor</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.disciplina.index') }}"><i class="material-icons">collections_bookmark</i>Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.curso.index') }}"><i class="material-icons">next_week</i>Cursos</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
                                 <li><a href="{{ route('seracademico.mestrado.planoEnsino.index') }}"><i class="material-icons">line_weight</i>Planos de Ensino</a></li>
+                                @endrole
                             </ul>
                         </li>
                     </ul>
