@@ -390,11 +390,10 @@ class EmprestarService
         $dataObj = new \DateTime("now");
         $data = $dataObj->format('Y-m-d');
 
-        $parametros = \DB::table('bib_parametros')->where('codigo', '=', '006')->orWhere('codigo', '=', '007')->get();
+        $parametros = \DB::table('bib_parametros')->whereIn('codigo', ['004', '005'])->get();
 
-        // Pegando os valores das multas contidas no banco de dados
-        $valorNormal     = isset($parametros[0]) ? $parametros[0]->valor : "";
-        $valorConsulta   = isset($parametros[1]) ? $parametros[1]->valor : "";
+        $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
+        $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
         $multaTotal      = 0;
         $idEmprestimos   = [];
 
