@@ -22,7 +22,7 @@ function loadInfoDebitoDom(debito) {
     $('#infoValorTaxa').html(debito.taxa.valor);
     $('#infoVencimentoDebito').html(debito.data_vencimento);
     $('#infoValorDebito').html(debito.valor_debito);
-    $('#infoSituacaoDebito').html(debito.pago ? "Pago" : "Aberto");
+    $('#infoSituacaoDebito').html(debito.pago ? "Sim" : "Não");
     $('#infoBoletoCodigo').html(debito.boleto.gnet_charge);
     $('#infoValorBoleto').html(debito.boleto.gnet_valor);
     $('#infoSituacaoBoleto').html(debito.boleto.status_gnet.nome);

@@ -49,7 +49,7 @@
                                         <td><span id="infoValorDebito"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-weight: bold; width: 50%;">Situação</td>
+                                        <td style="font-weight: bold; width: 50%;">Pago</td>
                                         <td><span id="infoSituacaoDebito"></span></td>
                                     </tr>
                                 </table>
