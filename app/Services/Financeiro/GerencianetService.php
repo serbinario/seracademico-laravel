@@ -2,6 +2,7 @@
 namespace Seracademico\Services\Financeiro;
 
 use Seracademico\Contracts\GnetBoleto;
+use Seracademico\Contracts\GnetCustomer;
 use Seracademico\Repositories\BoletoRepository;
 use Seracademico\Entities\Financeiro\Boleto;
 use Seracademico\Entities\Pessoa;
@@ -76,12 +77,12 @@ class GerencianetService
     }
 
     /**
-     * @param Pessoa $pessoa
+     * @param GnetCustomer $pessoa
      * @param GnetBoleto $boleto
      * @return array
      * @throws \Exception
      */
-    public function setFormOfPayment(Pessoa $pessoa, GnetBoleto $boleto)
+    public function setFormOfPayment(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
         $charge = $this->initTransaction($boleto);
 
@@ -109,16 +110,16 @@ class GerencianetService
     }
 
     /**
-     * @param Pessoa $pessoa
+     * @param GnetCustomer $pessoa
      * @param GnetBoleto $boleto
      * @return array
      */
-    protected function formatBodyPay(Pessoa $pessoa, GnetBoleto $boleto)
+    protected function formatBodyPay(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
         $customer = [
-            'name' => $pessoa->nome,
-            'cpf' => $pessoa->cpf ,
-            'phone_number' => $pessoa->telefone_fixo
+            'name' => $pessoa->getName(),
+            'cpf' => $pessoa->getCpf() ,
+            'phone_number' => $pessoa->getPhone()
         ];
 
 

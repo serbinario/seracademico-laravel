@@ -5,11 +5,12 @@ namespace Seracademico\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Contracts\GnetCustomer;
 use Seracademico\Entities\Mestrado\Aluno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 
-class Pessoa extends Model implements Transformable
+class Pessoa extends Model implements Transformable, GnetCustomer
 {
     use TransformableTrait;
 
@@ -289,5 +290,43 @@ class Pessoa extends Model implements Transformable
     public function aluno()
     {
         return $this->hasMany(Aluno::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getPhone()
+    {
+        $telefone = '';
+
+        if($this->celular2) {
+            $telefone = $this->celular2;
+        }
+
+        if($this->celular) {
+            $telefone = $this->celular;
+        }
+
+        if($this->telefone_fixo) {
+            $telefone = $this->telefone_fixo;
+        }
+
+        return $telefone;
     }
 }
