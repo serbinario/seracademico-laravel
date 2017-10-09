@@ -94,7 +94,7 @@ class AlunoService
      * @throws \Exception
      */
     public function store(array $data) : Aluno
-    { dd($data);
+    {
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
