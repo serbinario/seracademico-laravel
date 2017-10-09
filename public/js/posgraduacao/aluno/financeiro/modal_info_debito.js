@@ -25,13 +25,11 @@ function loadInfoDebitoDom(debito) {
     $('#infoSituacaoDebito').html(debito.pago ? "Sim" : "Não");
 
     $('#infoBoletoCodigo').html(debito.boleto ? debito.boleto.gnet_charge : '');
-    $('#infoValorBoleto').html(debito.boleto.gnet_valor ? debito.boleto.gnet_valor : '');
+    $('#infoValorBoleto').html(debito.boleto ? debito.boleto.gnet_valor : '');
     $('#infoSituacaoBoleto').html(debito.boleto ? debito.boleto.status_gnet.nome : '');
-
-    var htmlLink = '<a target="_blank" href="'+ debito.boleto.gnet_link +'">Abrir o boleto em outra página</a>';
     $('#infoLinkBoleto').html(
         debito.boleto
-            ? htmlLink
+            ? '<a target="_blank" href="'+ debito.boleto.gnet_link +'">Abrir o boleto em outra página</a>'
             : ''
     );
 }
