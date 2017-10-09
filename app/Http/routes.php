@@ -1635,9 +1635,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getIn', ['as' => 'getIn', 'uses' => 'Financeiro\BeneficioController@getIn']);
                 });
             });
-
-            # Rota de processamento das notificações do gerencianet
-            Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
         });
 
         // Rotas de calendario
@@ -1685,3 +1682,6 @@ Route::get('seachSimplePage', ['as' => 'seachSimplePage', 'uses' => 'Biblioteca\
 Route::get('seachDetalhe/exemplar/{id}', ['as' => 'seachDetalhe', 'uses' => 'Biblioteca\ConsultaController@seachDetalhe']);
 Route::get('meusEmprestimos', ['as' => 'meusEmprestimos', 'uses' => 'Biblioteca\ConsultaController@meusEmprestimos']);
 Route::get('seracademico/biblioteca/getImg/{id}', ['as' => 'seracademico.biblioteca.getImg', 'uses' => 'Biblioteca\ExemplarController@getImg']);
+
+# Rota de processamento das notificações do gerencianet
+Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
