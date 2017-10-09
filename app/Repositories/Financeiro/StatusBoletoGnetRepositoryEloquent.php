@@ -1,17 +1,15 @@
 <?php
-
 namespace Seracademico\Repositories\Financeiro;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository;
-use Seracademico\Entities\Financeiro\DebitoAbertoAluno;
+use Seracademico\Entities\Financeiro\StatusBoletoGnet;
 
 /**
- * Class DebitoAbertoAlunoRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class StatusBoletoGnetRepositoryEloquent
+ * @package namespace Seracademico\Repositories;
  */
-class DebitoAbertoAlunoRepositoryEloquent extends BaseRepository implements DebitoAbertoAlunoRepository
+class StatusBoletoGnetRepositoryEloquent extends BaseRepository implements StatusBoletoGnetRepository
 {
     /**
      * Specify Model class name
@@ -20,9 +18,11 @@ class DebitoAbertoAlunoRepositoryEloquent extends BaseRepository implements Debi
      */
     public function model()
     {
-        return DebitoAbertoAluno::class;
+        return StatusBoletoGnet::class;
     }
+
     
+
     /**
      * Boot up the repository, pushing criteria
      */

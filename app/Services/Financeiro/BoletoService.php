@@ -4,7 +4,7 @@ namespace Seracademico\Services\Financeiro;
 
 use Seracademico\Repositories\Financeiro\BoletoRepository;
 use Seracademico\Entities\Financeiro\Boleto;
-//use Carbon\Carbon;
+use Seracademico\Repositories\Financeiro\StatusBoletoGnetRepository;
 
 class BoletoService
 {
@@ -14,11 +14,20 @@ class BoletoService
     private $repository;
 
     /**
-     * @param BoletoRepository $repository
+     * @var StatusBoletoGnetRepository
      */
-    public function __construct(BoletoRepository $repository)
+    private $statusBoletoGnetRepository;
+
+    /**
+     * @param BoletoRepository $repository
+     * @param StatusBoletoGnetRepository $statusBoletoGnetRepository
+     */
+    public function __construct(
+        BoletoRepository $repository,
+        StatusBoletoGnetRepository $statusBoletoGnetRepository)
     {
         $this->repository = $repository;
+        $this->statusBoletoGnetRepository = $statusBoletoGnetRepository;
     }
 
     /**
@@ -80,43 +89,59 @@ class BoletoService
         return $boleto;
     }
 
+
     /**
-     * @param array $models
-     * @return array
+     * @param $codigo
+     * @return mixed
+     * @throws \Exception
      */
-    public function load(array $models) : array
+    public function obtemStatusPelo($codigo)
     {
-         #Declarando variáveis de uso
-         $result    = [];
-         $expressao = [];
+        // Recuperando o status da notificação
+        $status = $this->statusBoletoGnetRepository->findWhere(['codigo' => $codigo]);
 
-         #Criando e executando as consultas
-         foreach ($models as $model) {
-            # separando as strings
-            $explode   = explode("|", $model);
+        // Verificando se foi encontrado o status e o boleto
+        if(!(count($status) == 1)) {
+            throw new \Exception("Status ou boleto não encontrado");
+        }
 
-            # verificando a condição
-            if(count($explode) > 1) {
-                $model     = $explode[0];
-                $expressao = explode(",", $explode[1]);
-            }
+        // Retorno
+        return $status[0];
+    }
 
-            #qualificando o namespace
-            $nameModel = "\\Seracademico\\Entities\\$model";
 
-            if(count($expressao) > 1) {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
-            } else {
-                #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
-            }
+    /**
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     */
+    public function editarStatusPelaNotificacao(array $data)
+    {
+        # Recuperando o status da notificação
+        $status = $this->statusBoletoGnetRepository->findWhere(['codigo' => $data['status']]);
 
-            # Limpando a expressão
-            $expressao = [];
-         }
+        # Recuperando o boleto da transação
+        $boleto = $this->repository->findWhere(['gnet_charge' => $data['charge']]);
 
-         #retorno
-         return $result;
+        # Verificando se foi encontrado o status e o boleto
+        if(!(count($status) == 1 || count($boleto) == 1)) {
+            throw new \Exception("Status ou boleto não encontrado");
+        }
+
+        # Alterando o status do boleto
+        $boleto[0]->gnet_status_id = $status[0]->id;
+        $boleto[0]->save();
+
+        # Retorno
+        return true;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function obtemModel()
+    {
+        return new Boleto();
     }
 }
