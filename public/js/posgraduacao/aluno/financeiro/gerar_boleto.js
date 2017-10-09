@@ -15,6 +15,7 @@ $(document).on("click", "#btnGerarBoleto", function () {
         }
     }).done(function (retorno) {
         if(retorno.success) {
+            tableDebitos.ajax.reload();
             window.open(retorno.boleto.gnet_link,  '_blank');
         } else {
             swal(retorno.msg, "Click no botão abaixo!", "error");
