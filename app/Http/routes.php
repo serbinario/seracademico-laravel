@@ -1637,7 +1637,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             # Rota de processamento das notificações do gerencianet
-            Route::post(env('GNET_LINK'), ['as' => 'notificacaoGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
+            Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
         });
 
         // Rotas de calendario
