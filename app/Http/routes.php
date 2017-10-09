@@ -759,6 +759,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('editDebito/{idDebito}', ['as' => 'editDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@editDebito']);
                     Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@updateDebito']);
                     Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'PosGraduacao\AlunoFinanceiroController@gerarBoleto']);
+                    Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@infoDebito']);
                 });
             });
 

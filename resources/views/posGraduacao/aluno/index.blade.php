@@ -177,6 +177,7 @@
     @include('posGraduacao.aluno.financeiro.modal_debitos')
     @include('posGraduacao.aluno.financeiro.modal_create_debito')
     @include('posGraduacao.aluno.financeiro.modal_edit_debito')
+    @include('posGraduacao.aluno.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
@@ -196,6 +197,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_create_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_edit_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_info_debito.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
 
     <script type="text/javascript">

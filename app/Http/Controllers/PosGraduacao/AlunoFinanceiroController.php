@@ -72,13 +72,22 @@ class AlunoFinanceiroController extends Controller
     {
         try {
             $consulta = $this->debitoRepository
-                ->obtemConsultaDebitosPorDebitante($id,Aluno::class);
+                ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
+                ->leftJoin('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
+                ->leftJoin('fin_status_gnet', 'fin_boletos.gnet_status_id', '=', 'fin_status_gnet.id')
+                ->addSelect('fin_status_gnet.nome as situacaoBoleto');
 
             return DataTables::of($consulta)
-                ->addColumn('action', function ($debito) {
-                    $html  = '<a class="btn-floating" id="btnEditarDebito" title="Editar aluno"><i class="material-icons">edit</i></a>';
-                    $html .= '<a class="btn-floating" id="btnGerarBoleto" title="Gerar boleto"><i class="material-icons">account_balance_wallet</i></a>';
-                    $html .= '<a class="btn-floating" id="btnVisualizarBoleto" title="Visualizar boleto"><i class="material-icons">search</i></a>';
+                ->addColumn('action', function () {
+                    $html = "";
+                    $html .= '<div class="fixed-action-btn horizontal">';
+                    $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
+                    $html .=    '<ul>';
+                    $html .= '       <li><a class="btn-floating" id="btnEditarDebito" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
+                    $html .= '       <li><a class="btn-floating" id="btnGerarBoleto" title="Gerar boleto"><i class="material-icons">account_balance_wallet</i></a></li>';
+                    $html .= '       <li><a class="btn-floating" id="btnInfoDebito" title="Visualizar informações do débito"><i class="material-icons">search</i></a></li>';
+                    $html .= '  </ul>';
+                    $html .= '</div>';
                     return $html;
                 })->make(true);
         } catch (\Throwable $e) {
@@ -149,6 +158,21 @@ class AlunoFinanceiroController extends Controller
             $boleto = $this->debitoService->gerarBoleto($idDebito);
 
             return response()->json(['success' => true, 'boleto' => $boleto]);
+        } catch (\Throwable $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idDebito
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function infoDebito($idDebito)
+    {
+        try {
+            $debito = $this->debitoService->find($idDebito);
+
+            return response()->json(['success' => true, 'debito' => $debito]);
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }

@@ -86,4 +86,12 @@ class Boleto extends Model implements Transformable, GnetBoleto
         $vencimento = Carbon::createFromFormat('d/m/Y', $this->vencimento);
         return $vencimento->format('Y-m-d');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function statusGnet()
+    {
+        return $this->belongsTo(StatusBoletoGnet::class, 'gnet_status_id');
+    }
 }

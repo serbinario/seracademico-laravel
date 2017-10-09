@@ -51,7 +51,8 @@ class DebitoService
     {
         # Definindo os relacionamentos
         $relacionamentos = [
-            'taxa'
+            'taxa.tipoTaxa',
+            'boleto.statusGnet'
         ];
 
         # Recuperando o débito
