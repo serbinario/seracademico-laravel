@@ -41,7 +41,7 @@ class NotificacoesGnetController extends Controller
             $notificacao = $this->gerencianetService->notification($request->get('notification'));
             $this->boletoService->editarStatusPelaNotificacao($notificacao);
 
-            return true;
+            return response()->json(['success' => true]);
         } catch (\Throwable $e) {
             return [
                 'message' => $e->getMessage(),
