@@ -24,7 +24,6 @@ function loadInfoDebitoDom(debito) {
     $('#infoValorDebito').html(debito.valor_debito);
     $('#infoFormPagDebito').html(debito.forma_pagamento ? debito.forma_pagamento.nome : '');
     $('#infoSituacaoDebito').html(debito.pago ? "Sim" : "Não");
-
     $('#infoBoletoCodigo').html(debito.boleto ? debito.boleto.gnet_charge : '');
     $('#infoValorBoleto').html(debito.boleto ? debito.boleto.gnet_valor : '');
     $('#infoSituacaoBoleto').html(debito.boleto ? debito.boleto.status_gnet.nome : '');

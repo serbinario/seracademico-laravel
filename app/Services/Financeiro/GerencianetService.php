@@ -116,12 +116,13 @@ class GerencianetService
      */
     protected function formatBodyPay(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
+        $this->validateOrFail($pessoa, $boleto);
+
         $customer = [
             'name' => $pessoa->getName(),
             'cpf' => $pessoa->getCpf() ,
             'phone_number' => $pessoa->getPhone()
         ];
-
 
         $bankingBillet = [
             'expire_at' => $boleto->getDueDate(),
@@ -139,6 +140,30 @@ class GerencianetService
         return [
             'payment' => $payment
         ];
+    }
+
+    /**
+     * @param GnetCustomer $pessoa
+     * @param GnetBoleto $
+     * @throws \Exception
+     */
+    private function validateOrFail(GnetCustomer $pessoa, GnetBoleto)
+    {
+        if (!$pessoa->getName()) {
+            throw new \Exception('Nome da pessoa não informado');
+        }
+
+        if (!$pessoa->getCpf()) {
+            throw new \Exception('CPF da pessoa não informado');
+        }
+
+        if (!$pessoa->getPhone()) {
+            throw new \Exception('Telefone da pessoa não informado');
+        }
+
+        if (!$pessoa->getDueDate()) {
+            throw new \Exception('Data de vencimento não informada');
+        }
     }
 
     /**
