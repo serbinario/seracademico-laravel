@@ -49,6 +49,10 @@
                                         <td><span id="infoValorDebito"></span></td>
                                     </tr>
                                     <tr>
+                                        <td style="font-weight: bold; width: 50%;">Forma de pagamento</td>
+                                        <td><span id="infoFormPagDebito"></span></td>
+                                    </tr>
+                                    <tr>
                                         <td style="font-weight: bold; width: 50%;">Pago</td>
                                         <td><span id="infoSituacaoDebito"></span></td>
                                     </tr>
