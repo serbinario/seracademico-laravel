@@ -147,7 +147,7 @@ class GerencianetService
      * @param GnetBoleto $
      * @throws \Exception
      */
-    private function validateOrFail(GnetCustomer $pessoa, GnetBoleto)
+    private function validateOrFail(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
         if (!$pessoa->getName()) {
             throw new \Exception('Nome da pessoa não informado');
