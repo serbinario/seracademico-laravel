@@ -7,7 +7,8 @@ function loadFieldsDebitoEditar()
 {
     var dados =  {
         'models' : [
-            'Financeiro\\Taxa'
+            'Financeiro\\Taxa',
+            'Financeiro\\ContaBancaria'
         ]
     };
 
@@ -33,25 +34,33 @@ function builderHtmlFieldsDebitoEditar (dados) {
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
-            var htmlTaxa = "<option value=''>Selecione uma taxa</option>";
+            var htmlTaxa = "";
+            var htmlContaBancaria = "";
 
             for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
                 htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>"
                     + dados['financeiro\\taxa'][i].nome + "</option>";
             }
 
+            for (var i = 0; i < dados['financeiro\\contabancaria'].length; i++) {
+                htmlContaBancaria += "<option value='" + dados['financeiro\\contabancaria'][i].id + "'>"
+                    + dados['financeiro\\contabancaria'][i].nome + "</option>";
+            }
+
             $("#taxa_id_editar option").remove();
             $("#taxa_id_editar").append(htmlTaxa);
+            $("#conta_bancaria_id_editar option").remove();
+            $("#conta_bancaria_id_editar").append(htmlContaBancaria);
 
             // Setando os valores do model no formulário
             $('#taxa_id_editar option[value=' + retorno.data.taxa_id  +']').attr('selected', true);
             $('#pago_editar option[value=' + retorno.data.pago  +']').attr('selected', true);
+            $('#conta_bancaria_id_editar option[value=' + retorno.data.conta_bancaria_id  +']').attr('selected', true);
             $('#data_vencimento_editar').val(retorno.data.data_vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
             $('#valor_taxa_editar').val(retorno.data.taxa.valor);
             $('#mes_referencia_editar').val(retorno.data.mes_referencia);
             $('#ano_referencia_editar').val(retorno.data.ano_referencia);
-            $('#conta_bancaria_id_editar').val(retorno.data.conta_bancaria_id);
 
             // Abrindo o modal de inserir disciplina
             $("#modal-edit-debito").modal({show : true});

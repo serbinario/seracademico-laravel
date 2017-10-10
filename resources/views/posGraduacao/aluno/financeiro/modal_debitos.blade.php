@@ -46,8 +46,8 @@
                                         <th style="width: 30%">Taxa</th>
                                         <th style="width: 15%">Vencimento</th>
                                         <th style="width: 15%">Valor</th>
-                                        <th style="width: 5%">Pago</th>
                                         <th style="width: 20%">Sit. Boleto</th>
+                                        <th style="width: 5%">Pago</th>
                                         <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>

@@ -20,8 +20,8 @@ function loadTableDebitos (idAluno) {
             {data: 'nomeTaxa', name: 'nomeTaxa'},
             {data: 'data_vencimento', name: 'data_vencimento'},
             {data: 'valor_debito', name: 'valor_debito'},
-            {data: 'pago', name: 'pago'},
             {data: 'situacaoBoleto', name: 'situacaoBoleto'},
+            {data: 'pago', name: 'pago'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });

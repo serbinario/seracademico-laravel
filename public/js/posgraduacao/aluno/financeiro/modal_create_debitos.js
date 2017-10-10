@@ -9,7 +9,8 @@ function loadFieldsDebito()
 {
     var dados =  {
         'models' : [
-            'Financeiro\\Taxa'
+            'Financeiro\\Taxa',
+            'Financeiro\\ContaBancaria'
         ]
     };
 
@@ -60,14 +61,22 @@ function builderHtmlFieldsDebito (dados) {
     $('#ano_referencia').val('');
 
     var htmlTaxa = "";
+    var htmlContaBancaria = "";
 
     for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
         htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>"
             + dados['financeiro\\taxa'][i].nome + "</option>";
     }
 
+    for (var i = 0; i < dados['financeiro\\contabancaria'].length; i++) {
+        htmlContaBancaria += "<option value='" + dados['financeiro\\contabancaria'][i].id + "'>"
+            + dados['financeiro\\contabancaria'][i].nome + "</option>";
+    }
+
     $("#taxa_id option").remove();
     $("#taxa_id").append(htmlTaxa);
+    $("#conta_bancaria_id option").remove();
+    $("#conta_bancaria_id").append(htmlContaBancaria);
 
     // Carregando os campos do formulário referentes a taxa
     var idTaxa = $('#taxa_id').find('option:selected').val();

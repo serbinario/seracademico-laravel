@@ -75,7 +75,7 @@ class AlunoFinanceiroController extends Controller
                 ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
                 ->leftJoin('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
                 ->leftJoin('fin_status_gnet', 'fin_boletos.gnet_status_id', '=', 'fin_status_gnet.id')
-                ->addSelect('fin_status_gnet.nome as situacaoBoleto');
+                ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"));
 
             return DataTables::of($consulta)
                 ->addColumn('action', function () {

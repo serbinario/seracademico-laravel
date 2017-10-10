@@ -923,5 +923,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Financeiro\StatusBoletoGnetRepository::class,
             \Seracademico\Repositories\Financeiro\StatusBoletoGnetRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Financeiro\ContaBancariaRepository::class,
+            \Seracademico\Repositories\Financeiro\ContaBancariaRepositoryEloquent::class
+        );
     }
 }
