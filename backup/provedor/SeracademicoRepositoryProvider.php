@@ -464,8 +464,8 @@ class SeracademicoRepositoryProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			\Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository::class,
-			\Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepositoryEloquent::class
+			\Seracademico\Repositories\Financeiro\DebitoRepository::class,
+			\Seracademico\Repositories\Financeiro\DebitoRepositoryEloquent::class
 		);
 
 		$this->app->bind(

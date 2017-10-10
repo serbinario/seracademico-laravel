@@ -4,14 +4,13 @@ namespace Seracademico\Repositories\Financeiro;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository;
-use Seracademico\Entities\Financeiro\DebitoAbertoAluno;
+use Seracademico\Entities\Financeiro\ContaBancaria;
 
 /**
- * Class DebitoAbertoAlunoRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class ContaBancariaRepositoryEloquent
+ * @package namespace Seracademico\Repositories;
  */
-class DebitoAbertoAlunoRepositoryEloquent extends BaseRepository implements DebitoAbertoAlunoRepository
+class ContaBancariaRepositoryEloquent extends BaseRepository implements ContaBancariaRepository
 {
     /**
      * Specify Model class name
@@ -20,9 +19,10 @@ class DebitoAbertoAlunoRepositoryEloquent extends BaseRepository implements Debi
      */
     public function model()
     {
-        return DebitoAbertoAluno::class;
+        return ContaBancaria::class;
     }
-    
+
+
     /**
      * Boot up the repository, pushing criteria
      */

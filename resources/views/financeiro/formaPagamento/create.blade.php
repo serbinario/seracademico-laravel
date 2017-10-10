@@ -4,12 +4,13 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
-                <i class="fa fa-user"></i>
-                Cadastrar Aluno de Pós-graduação
+                <i class="fa fa-university"></i>
+                Cadastrar Forma de Pagamento
             </h4>
         </div>
 
         <div class="ibox-content">
+
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -25,10 +26,8 @@
                     @endforeach
                 </div>
             @endif
-
-            {!! Form::open(['route'=>'seracademico.posgraduacao.aluno.store',
-                'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
-                @include('tamplatesForms.posGraduacao.tamplateFormAluno')
+            {!! Form::open(['route'=>'seracademico.financeiro.formaPagamento.store', 'method' => "POST" ]) !!}
+                @include('tamplatesForms.financeiro.tamplateFormFormaPagamento')
             {!! Form::close() !!}
         </div>
     </div>

@@ -20,9 +20,24 @@
         tr.details td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
         }
+
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
+
+
+        .carregamento{
+            width: 200px;
+            height: auto;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            right: 0;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
     </style>
 @stop
 
@@ -159,6 +174,10 @@
     @include('posGraduacao.aluno.modal_aluno_documento')
     @include('posGraduacao.aluno.curriculo.modal_create_disciplina_extra_curricular')
     @include('posGraduacao.aluno.curriculo.modal_create_equivalencia')
+    @include('posGraduacao.aluno.financeiro.modal_debitos')
+    @include('posGraduacao.aluno.financeiro.modal_create_debito')
+    @include('posGraduacao.aluno.financeiro.modal_edit_debito')
+    @include('posGraduacao.aluno.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
@@ -173,9 +192,14 @@
     {{--<script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/modal_edit_nova_turma.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_geral.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_pos_aluno_documento.js') }}"></script>
-
-    {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
 
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
@@ -262,6 +286,23 @@
             loadFieldsDocumentos();
 
             $("#modal-aluno-documento").modal({show:true});
+        });
+
+        // Evento para abrir o modal do financeiro
+        $(document).on("click", "#btnModalFinanceiro", function () {
+            // Recuperando os dados do aluno selecionado
+            var rowTable = $(this).parents('tr');
+            idAluno = table.row(rowTable).data().id;
+            var nomeAluno   = table.row(rowTable).data().nome;
+            var matricula   = table.row(rowTable).data().matricula;
+            var codigoCurso = table.row(rowTable).data().codigoCurso;
+
+            // prenchendo o titulo do nome do aluno
+            $('#finMatricula').text(matricula);
+            $('#finNomeAluno').text(nomeAluno);
+            $('#finCurso').text(codigoCurso);
+
+            runFinanceiro(idAluno);
         });
 
         // Geriamento dos relatórios avançadas

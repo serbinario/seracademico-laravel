@@ -1,20 +1,20 @@
 <?php
 namespace Seracademico\Services\Financeiro;
 
-use Seracademico\Repositories\Financeiro\DebitoAbertoAlunoRepository;
+use Seracademico\Repositories\Financeiro\DebitoRepository;
 
 class DebitoAbertoAlunoService
 {
     /**
-     * @var DebitoAbertoAlunoRepository
+     * @var DebitoRepository
      */
     private $repository;
 
     /**
      * DebitoAbertoAlunoService constructor.
-     * @param DebitoAbertoAlunoRepository $repository
+     * @param DebitoRepository $repository
      */
-    public function __construct(DebitoAbertoAlunoRepository $repository)
+    public function __construct(DebitoRepository $repository)
     {
         $this->repository = $repository;
     }

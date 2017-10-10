@@ -248,21 +248,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('edit/{idVestibulando}', ['as' => 'edit', 'uses' => 'Graduacao\VestibulandoController@editInclusao']);
                 Route::post('update/{idVestibulando}', ['as' => 'update', 'uses' => 'Graduacao\VestibulandoController@updateInclusao']);
             });
-
-            Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
-                Route::get('gridDebitosAbertos/{idVestibulando}', ['as' => 'gridDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gridDebitosAbertos']);
-                Route::get('gridDebitosPagos/{idVestibulando}', ['as' => 'gridDebitosPagos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gridDebitosPagos']);
-                Route::get('gridBoletos/{idVestibulando}', ['as' => 'gridBoletos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gridBoletos']);
-                Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibulandoFinanceiroController@getLoadFields']);
-                Route::post('storeDebitosAbertos', ['as' => 'storeDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitosAbertos']);
-                Route::get('editDebitosAbertos/{id}', ['as' => 'editDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@editDebitosAbertos']);
-                Route::post('updateDebitosAbertos/{id}', ['as' => 'updateDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@updateDebitosAbertos']);
-                Route::get('deleteDebitosAbertos/{id}', ['as' => 'deleteDebitosAbertos', 'uses' => 'Graduacao\VestibulandoFinanceiroController@deleteDebitosAbertos']);
-                Route::put('closeDebitoAberto/{id}', ['as' => 'closeDebitoAberto', 'uses' => 'Graduacao\VestibulandoFinanceiroController@closeDebitoAberto']);
-                Route::post('storeBoleto', ['as' => 'storeBoleto', 'uses' => 'Graduacao\VestibulandoFinanceiroController@storeBoleto']);
-                Route::get('gerarBoleto/{idBoleto}', ['as' => 'gerarBoleto', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gerarBoleto']);
-                Route::get('gerarComprovanteInscricao/{id}', ['as' => 'gerarComprovanteInscricao', 'uses' => 'Graduacao\VestibulandoFinanceiroController@gerarComprovanteInscricao']);
-            });
         });
 
         //Rotas de Doutorado
@@ -763,6 +748,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'PosGraduacao\AlunoCurriculoController@getDisciplinasByCurriculo']);
                     Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'PosGraduacao\AlunoCurriculoController@storeEquivalencia']);
                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'PosGraduacao\AlunoCurriculoController@deleteEquivalencia']);
+                });
+
+                # Rotas para o financeiro do aluno de pós
+                Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\AlunoFinanceiroController@getLoadFields']);
+                    Route::get('gridDebitos/{id}', ['as' => 'gridDebitos', 'uses' => 'PosGraduacao\AlunoFinanceiroController@gridDebitos']);
+                    Route::post('storeDebito/{id}', ['as' => 'storeDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@storeDebito']);
+                    Route::get('getDebito/{idDebito}', ['as' => 'getDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@getDebito']);
+                    Route::get('editDebito/{idDebito}', ['as' => 'editDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@editDebito']);
+                    Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@updateDebito']);
+                    Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'PosGraduacao\AlunoFinanceiroController@gerarBoleto']);
+                    Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@infoDebito']);
                 });
             });
 
@@ -1614,7 +1611,27 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BancoController@update']);
             });
 
-            # Rotas para aluno
+            # Rotas para conta bancária
+            Route::group(['prefix' => 'contaBancaria', 'as' => 'contaBancaria.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\ContaBancariaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Financeiro\ContaBancariaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Financeiro\ContaBancariaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\ContaBancariaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\ContaBancariaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\ContaBancariaController@update']);
+            });
+
+            # Rotas para formas de pagamento
+            Route::group(['prefix' => 'formaPagamento', 'as' => 'formaPagamento.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\FormaPagamentoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Financeiro\FormaPagamentoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Financeiro\FormaPagamentoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\FormaPagamentoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\FormaPagamentoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\FormaPagamentoController@update']);
+            });
+
+            # Rotas para aluno | será removido
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);
                 Route::get('gridDebitosAbertos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridDebitosAbertos']);
@@ -1686,3 +1703,6 @@ Route::get('seachSimplePage', ['as' => 'seachSimplePage', 'uses' => 'Biblioteca\
 Route::get('seachDetalhe/exemplar/{id}', ['as' => 'seachDetalhe', 'uses' => 'Biblioteca\ConsultaController@seachDetalhe']);
 Route::get('meusEmprestimos', ['as' => 'meusEmprestimos', 'uses' => 'Biblioteca\ConsultaController@meusEmprestimos']);
 Route::get('seracademico/biblioteca/getImg/{id}', ['as' => 'seracademico.biblioteca.getImg', 'uses' => 'Biblioteca\ExemplarController@getImg']);
+
+# Rota de processamento das notificações do gerencianet
+Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
