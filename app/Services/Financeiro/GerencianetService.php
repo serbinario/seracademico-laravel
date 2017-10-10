@@ -84,6 +84,7 @@ class GerencianetService
      */
     public function setFormOfPayment(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
+        $this->validateOrFail($pessoa, $boleto);
         $charge = $this->initTransaction($boleto);
 
         if (!$charge) {
@@ -116,8 +117,6 @@ class GerencianetService
      */
     protected function formatBodyPay(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
-        $this->validateOrFail($pessoa, $boleto);
-
         $customer = [
             'name' => $pessoa->getName(),
             'cpf' => $pessoa->getCpf() ,
