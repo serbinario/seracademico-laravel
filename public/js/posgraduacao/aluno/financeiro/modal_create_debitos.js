@@ -1,16 +1,15 @@
-// Evento para chamar o modal de adicionar matéria ao curso
 $(document).on("click", "#btnModalCreateDebitos", function () {
     loadFieldsDebito();
 });
 
 
-// carregando todos os campos preenchidos
 function loadFieldsDebito()
 {
     var dados =  {
         'models' : [
             'Financeiro\\Taxa',
-            'Financeiro\\ContaBancaria'
+            'Financeiro\\ContaBancaria',
+            'Financeiro\\FormaPagamento'
         ]
     };
 
@@ -49,7 +48,6 @@ function preencheCamposTaxa (retorno) {
     }
 }
 
-// Função a montar o html
 function builderHtmlFieldsDebito (dados) {
     $('#taxa_id option').attr('selected', false);
     $('#conta_bancaria_id option').attr('selected', false);
@@ -62,6 +60,7 @@ function builderHtmlFieldsDebito (dados) {
 
     var htmlTaxa = "";
     var htmlContaBancaria = "";
+    var htmlFormaPagamento = "<option value=''>Selecione uma forma de pagamento</option>";
 
     for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
         htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>"
@@ -73,10 +72,17 @@ function builderHtmlFieldsDebito (dados) {
             + dados['financeiro\\contabancaria'][i].nome + "</option>";
     }
 
+    for (var i = 0; i < dados['financeiro\\formapagamento'].length; i++) {
+        htmlFormaPagamento += "<option value='" + dados['financeiro\\formapagamento'][i].id + "'>"
+            + dados['financeiro\\formapagamento'][i].nome + "</option>";
+    }
+
     $("#taxa_id option").remove();
     $("#taxa_id").append(htmlTaxa);
     $("#conta_bancaria_id option").remove();
     $("#conta_bancaria_id").append(htmlContaBancaria);
+    $("#forma_pagamento_id option").remove();
+    $("#forma_pagamento_id").append(htmlFormaPagamento);
 
     // Carregando os campos do formulário referentes a taxa
     var idTaxa = $('#taxa_id').find('option:selected').val();
@@ -85,7 +91,6 @@ function builderHtmlFieldsDebito (dados) {
     $("#modal-create-debito").modal({show : true});
 }
 
-// Evento para salvar histórico
 $('#btnSalvarDebito').click(function() {
     var taxa_id = $("#taxa_id option:selected").val();
     var data_vencimento = $("#data_vencimento").val();
@@ -94,6 +99,7 @@ $('#btnSalvarDebito').click(function() {
     var mes_referencia = $("#mes_referencia").val();
     var ano_referencia = $("#ano_referencia").val();
     var conta_bancaria_id = $('#conta_bancaria_id option:selected').val();
+    var forma_pagamento_id = $('#forma_pagamento_id option:selected').val();
     var pago = $('#pago option:selected').val();
 
     var dados = {
@@ -104,8 +110,14 @@ $('#btnSalvarDebito').click(function() {
         'mes_referencia' : mes_referencia,
         'ano_referencia' : ano_referencia,
         'conta_bancaria_id' : conta_bancaria_id,
+        'forma_pagamento_id': forma_pagamento_id,
         'pago': pago
     };
+
+    var resultValidate = validaCampos(dados);
+    if (!resultValidate) {
+        return false;
+    }
 
     jQuery.ajax({
         type: 'POST',
@@ -122,7 +134,6 @@ $('#btnSalvarDebito').click(function() {
         }
     });
 });
-
 
 /**
  * Evento para ser disparado quando mudar de taxa

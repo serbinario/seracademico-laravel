@@ -1621,6 +1621,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\ContaBancariaController@update']);
             });
 
+            # Rotas para formas de pagamento
+            Route::group(['prefix' => 'formaPagamento', 'as' => 'formaPagamento.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\FormaPagamentoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Financeiro\FormaPagamentoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Financeiro\FormaPagamentoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\FormaPagamentoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\FormaPagamentoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\FormaPagamentoController@update']);
+            });
+
             # Rotas para aluno | será removido
             Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
                 Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);

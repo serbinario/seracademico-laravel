@@ -64,7 +64,3 @@
         </div>
     </div>
 </div>
-
-@section('javascript')
-    <script type="text/javascript" src="{{ asset('js/vestibular/validacao/form_validation.js')  }}"></script>
-@stop

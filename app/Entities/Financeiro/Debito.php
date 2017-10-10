@@ -35,6 +35,8 @@ class Debito extends Model implements Transformable
 		'valor_desconto',
         'debitante_id',
         'debitante_type',
+        'forma_pagamento_id',
+        'conta_bancaria_id',
         'pago'
 	];
 
@@ -54,6 +56,15 @@ class Debito extends Model implements Transformable
 	{
 		return $this->hasOne(Boleto::class, 'debito_id');
 	}
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function formaPagamento()
+    {
+        return $this->belongsTo(FormaPagamento::class, 'forma_pagamento_id');
+    }
 
 
 	/**

@@ -928,5 +928,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Financeiro\ContaBancariaRepository::class,
             \Seracademico\Repositories\Financeiro\ContaBancariaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Financeiro\ExtratoRepository::class,
+            \Seracademico\Repositories\Financeiro\ExtratoRepositoryEloquent::class
+        );
     }
 }

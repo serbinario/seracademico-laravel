@@ -5,7 +5,7 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
 
-class ContaBancariaValidator extends LaravelValidator
+class FormaPagamentoValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 
@@ -13,10 +13,7 @@ class ContaBancariaValidator extends LaravelValidator
 
     protected $attributes = [
         'nome' => 'Nome',
-        'codigo' => 'Código',
-        'agencia' => 'Agência',
-        'conta' => 'Conta',
-        'banco_id' => 'Banco'
+        'codigo' => 'Código'
     ];
 
 
@@ -24,18 +21,11 @@ class ContaBancariaValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required',
             'codigo' => 'required',
-            'agencia' => 'required',
-            'conta' => 'required',
-            'banco_id' => 'required|integer'
 
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required',
-            'codigo' => 'required',
-            'agencia' => 'required',
-            'conta' => 'required',
-            'banco_id' => 'required'
-
+            'codigo' => 'required'
         ],
     ];
 }

@@ -8,7 +8,8 @@ function loadFieldsDebitoEditar()
     var dados =  {
         'models' : [
             'Financeiro\\Taxa',
-            'Financeiro\\ContaBancaria'
+            'Financeiro\\ContaBancaria',
+            'Financeiro\\FormaPagamento'
         ]
     };
 
@@ -36,6 +37,7 @@ function builderHtmlFieldsDebitoEditar (dados) {
         if (retorno.success) {
             var htmlTaxa = "";
             var htmlContaBancaria = "";
+            var htmlFormaPagamento = "<option value=''>Selecione uma forma de pagamento</option>";
 
             for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
                 htmlTaxa += "<option value='" + dados['financeiro\\taxa'][i].id + "'>"
@@ -47,15 +49,24 @@ function builderHtmlFieldsDebitoEditar (dados) {
                     + dados['financeiro\\contabancaria'][i].nome + "</option>";
             }
 
+            for (var i = 0; i < dados['financeiro\\formapagamento'].length; i++) {
+                htmlFormaPagamento += "<option value='" + dados['financeiro\\formapagamento'][i].id + "'>"
+                    + dados['financeiro\\formapagamento'][i].nome + "</option>";
+            }
+
             $("#taxa_id_editar option").remove();
             $("#taxa_id_editar").append(htmlTaxa);
             $("#conta_bancaria_id_editar option").remove();
             $("#conta_bancaria_id_editar").append(htmlContaBancaria);
+            $("#forma_pagamento_id_editar option").remove();
+            $("#forma_pagamento_id_editar").append(htmlFormaPagamento);
 
             // Setando os valores do model no formulário
             $('#taxa_id_editar option[value=' + retorno.data.taxa_id  +']').attr('selected', true);
             $('#pago_editar option[value=' + retorno.data.pago  +']').attr('selected', true);
             $('#conta_bancaria_id_editar option[value=' + retorno.data.conta_bancaria_id  +']').attr('selected', true);
+            var forma_pagamento_id = retorno.data.forma_pagamento ?  retorno.data.forma_pagamento.id : null;
+            $('#forma_pagamento_id_editar option[value=' + forma_pagamento_id  +']').attr('selected', true);
             $('#data_vencimento_editar').val(retorno.data.data_vencimento);
             $('#valor_debito_editar').val(retorno.data.valor_debito);
             $('#valor_taxa_editar').val(retorno.data.taxa.valor);
@@ -78,6 +89,7 @@ $('#btnUpdateDebito').click(function() {
     var mes_referencia = $("#mes_referencia_editar").val();
     var ano_referencia = $("#ano_referencia_editar").val();
     var conta_bancaria_id = $('#conta_bancaria_id_editar option:selected').val();
+    var forma_pagamento_id = $('#forma_pagamento_id_editar option:selected').val();
     var pago = $('#pago_editar option:selected').val();
 
     var dados = {
@@ -88,8 +100,14 @@ $('#btnUpdateDebito').click(function() {
         'mes_referencia' : mes_referencia,
         'ano_referencia' : ano_referencia,
         'conta_bancaria_id' : conta_bancaria_id,
+        'forma_pagamento_id' : forma_pagamento_id,
         'pago': pago
     };
+
+    var resultValidate = validaCampos(dados);
+    if (!resultValidate) {
+        return false;
+    }
 
     jQuery.ajax({
         type: 'POST',

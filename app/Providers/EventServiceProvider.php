@@ -4,6 +4,10 @@ namespace Seracademico\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Seracademico\Events\DebitoStored;
+use Seracademico\Events\DebitoUpdated;
+use Seracademico\Listeners\ContaBancariaAdicionarBalanco;
+use Seracademico\Listeners\ContaBancariaEditarBalaco;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -16,6 +20,12 @@ class EventServiceProvider extends ServiceProvider
         'Seracademico\Events\SomeEvent' => [
             'Seracademico\Listeners\EventListener',
         ],
+        DebitoStored::class => [
+            ContaBancariaAdicionarBalanco::class
+        ],
+        DebitoUpdated::class => [
+            ContaBancariaEditarBalaco::class
+        ]
     ];
 
     /**
@@ -27,7 +37,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
-        //
     }
 }

@@ -198,6 +198,7 @@
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_edit_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/gerar_boleto.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/posgraduacao/aluno/financeiro/valida_campos_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
 
     <script type="text/javascript">

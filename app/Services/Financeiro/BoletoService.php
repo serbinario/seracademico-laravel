@@ -130,6 +130,14 @@ class BoletoService
 
         # Alterando o status do boleto
         $boleto[0]->gnet_status_id = $status[0]->id;
+
+        if ($status[0]->codigo == 'paid') {
+            $debito = $boleto[0]->debito;
+            $debito->forma_pagamento_id = 3;
+            $debito->pago = 1;
+            $debito->save();
+        }
+
         $boleto[0]->save();
 
         # Retorno

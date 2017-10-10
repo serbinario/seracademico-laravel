@@ -52,6 +52,11 @@
                         </div>
 
                         <div class="form-group col-md-4">
+                            <label for="forma_pagamento_id_editar">Formas de Pagamento</label>
+                            <select class="form-control" name="forma_pagamento_id_editar" id="forma_pagamento_id_editar"></select>
+                        </div>
+
+                        <div class="form-group col-md-4">
                             <label for="pago_editar">Pago ?</label>
                             <select class="form-control" name="pago_editar" id="pago_editar">
                                 <option value="0">Não</option>

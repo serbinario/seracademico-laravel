@@ -1,6 +1,8 @@
 <?php
 namespace Seracademico\Services\Financeiro;
 
+use Seracademico\Events\DebitoStored;
+use Seracademico\Events\DebitoUpdated;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
 use Seracademico\Services\TraitService;
 
@@ -49,41 +51,40 @@ class DebitoService
      */
     public function find($id)
     {
-        # Definindo os relacionamentos
         $relacionamentos = [
             'taxa.tipoTaxa',
-            'boleto.statusGnet'
+            'boleto.statusGnet',
+            'formaPagamento'
         ];
 
-        # Recuperando o débito
         $debito = $this->repository->with($relacionamentos)->find($id);
 
-        #Verificando se foi criado no banco de dados
         if(!$debito) {
             throw new \Exception('Débito não encontrado!');
         }
 
-        #Retorno
         return $debito;
     }
 
 
     /**
-     * @param array $data
+     * @param $debitante
+     * @param array $dados
      * @return mixed
      * @throws \Exception
      */
-    public function store($debitante, array $data)
+    public function store($debitante, array $dados)
     {
-        #Salvando o registro pincipal
-        $debito =  $debitante->debitos()->create($data);
+        $this->tratamentoCampos($dados);
 
-        #Verificando se foi criado no banco de dados
+        $debito =  $debitante->debitos()->create($dados);
+
         if(!$debito) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
-        #Retorno
+        event(new DebitoStored($debito));
+
         return $debito;
     }
 
@@ -96,13 +97,17 @@ class DebitoService
      */
     public function update(array $dados, $id)
     {
-        $debito = $this->find($id);
+        $this->tratamentoCampos($dados);
 
-        if (!$debito) {
+        $debitoAnterior = $this->find($id);
+
+        if (!$debitoAnterior) {
             throw new \Exception("Débito não encontrado");
         }
 
-        $debito = $this->repository->update($dados, $debito->id);
+        $debito = $this->repository->update($dados, $debitoAnterior->id);
+
+        event(new DebitoUpdated($debitoAnterior, $debito));
 
         return $debito;
     }
