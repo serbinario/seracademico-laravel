@@ -60,7 +60,7 @@ class AlunoController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -127,6 +127,11 @@ class AlunoController extends Controller
                     'fac_cursos.nome as nomeCurso',
                     'fac_turmas.codigo as codigoTurma'
                 ]);
+
+            # Verificando se o usuário possui sede
+            if(Auth::user()->sede_id != 1) {
+                $alunos->where('fac_turmas.sede_id', Auth::user()->sede_id);
+            }
 
             #Editando a grid
             return Datatables::of($alunos)

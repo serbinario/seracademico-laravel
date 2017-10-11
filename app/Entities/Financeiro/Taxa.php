@@ -1,5 +1,4 @@
 <?php
-
 namespace Seracademico\Entities\Financeiro;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,14 +18,14 @@ class Taxa extends Model implements Transformable
      *
      * @var string
      */
-    protected $table    = 'fin_taxas';
+    protected $table = 'fin_taxas';
 
     /**
      * Fields type date
      *
      * @var array
      */
-    protected $dates    = [
+    protected $dates = [
         'valido_inicio',
         'valido_fim'
     ];
@@ -85,9 +84,9 @@ class Taxa extends Model implements Transformable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function debitosAlunos()
+    public function debitos()
     {
-        return $this->hasMany(DebitoAbertoAluno::class, 'taxa_id');
+        return $this->hasMany(Debito::class, 'taxa_id');
     }
 
     /**

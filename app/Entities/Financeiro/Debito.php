@@ -1,5 +1,4 @@
 <?php
-
 namespace Seracademico\Entities\Financeiro;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,19 +7,19 @@ use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Graduacao\Aluno;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
-class DebitoAbertoAluno extends Model implements Transformable
+class Debito extends Model implements Transformable
 {
     use TransformableTrait;
 
     /**
      * @var string
      */
-    protected $table    = 'fin_debitos';
+    protected $table = 'fin_debitos';
 
     /**
      * @var array
      */
-    protected $dates    = [
+    protected $dates = [
         'data_vencimento'
     ];
 
@@ -34,7 +33,11 @@ class DebitoAbertoAluno extends Model implements Transformable
 		'mes_referencia',
 		'ano_referencia',
 		'valor_desconto',
-		'aluno_id'
+        'debitante_id',
+        'debitante_type',
+        'forma_pagamento_id',
+        'conta_bancaria_id',
+        'pago'
 	];
 
 	/**
@@ -45,13 +48,6 @@ class DebitoAbertoAluno extends Model implements Transformable
 		return $this->belongsTo(Taxa::class, 'taxa_id');
 	}
 
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function aluno()
-	{
-		return $this->belongsTo(Aluno::class, 'aluno_id');
-	}
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -61,13 +57,38 @@ class DebitoAbertoAluno extends Model implements Transformable
 		return $this->hasOne(Boleto::class, 'debito_id');
 	}
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function formaPagamento()
+    {
+        return $this->belongsTo(FormaPagamento::class, 'forma_pagamento_id');
+    }
+
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function beneficios()
 	{
-		return $this->belongsToMany(Beneficio::class, 'fin_debitos_beneficios', 'debito_id', 'beneficio_id');
+		return $this->belongsToMany(
+		    Beneficio::class,
+            'fin_debitos_beneficios',
+            'debito_id',
+            'beneficio_id'
+        );
 	}
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+	public function debitante()
+    {
+        return $this->morphTo();
+    }
+
 
     /**
      *
@@ -77,6 +98,7 @@ class DebitoAbertoAluno extends Model implements Transformable
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_vencimento']);
     }
+
 
     /**
      *

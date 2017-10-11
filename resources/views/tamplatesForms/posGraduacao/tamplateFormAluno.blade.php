@@ -324,8 +324,8 @@
                                                 <h5>Senha de acesso ao portal</h5>
                                                 <div class="form-group col-md-7">
                                                     <div class="fg-line">
-                                                        {!! Form::label('password', 'Senha') !!}
-                                                        {!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}
+                                                        {{--{!! Form::label('password', 'Senha') !!}--}}
+                                                        {{--{!! Form::password('password', Session::getOldInput('password'), array('class' => 'form-control')) !!}--}}
                                                     </div>
                                                 </div>
                                             </div>

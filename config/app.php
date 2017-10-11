@@ -159,6 +159,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \Seracademico\Providers\SeracademicoRepositoryProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        \Seracademico\Providers\GerencianetProvider::class,
 
         /*
         * Laravel Framework Service Providers...

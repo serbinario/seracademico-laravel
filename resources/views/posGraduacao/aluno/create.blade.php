@@ -1,8 +1,6 @@
 @extends('menu')
 
-
 @section('content')
-
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h4>
@@ -12,7 +10,6 @@
         </div>
 
         <div class="ibox-content">
-
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -29,7 +26,8 @@
                 </div>
             @endif
 
-            {!! Form::open(['route'=>'seracademico.posgraduacao.aluno.store', 'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route'=>'seracademico.posgraduacao.aluno.store',
+                'method' => "POST", 'id' => 'formAluno', 'enctype' => 'multipart/form-data']) !!}
                 @include('tamplatesForms.posGraduacao.tamplateFormAluno')
             {!! Form::close() !!}
         </div>

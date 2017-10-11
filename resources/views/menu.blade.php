@@ -224,9 +224,11 @@
                 @role('financeiro|admin')
                 <li><a href="javascript:void(0)"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level collapse">
+                        <li><a href="{{ route('seracademico.financeiro.formaPagamento.index') }}"><i class="material-icons">payment</i> Formas de Pag. </a></li>
                         <li><a href="{{ route('seracademico.financeiro.taxa.index') }}"><i class="flaticon-currency-rates"></i> Taxas </a></li>
                         <li><a href="{{ route('seracademico.financeiro.banco.index') }}"><i class="fa fa-university"></i> Bancos </a></li>
-                        <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos de Beneficios </a></li>
+                        <li><a href="{{ route('seracademico.financeiro.contaBancaria.index') }}"><i class="material-icons">account_balance</i> Contas Bancárias </a></li>
+                        <li><a href="{{ route('seracademico.financeiro.tipoBeneficio.index') }}"><i class="material-icons">account_balance_wallet</i> Tipos Beneficios </a></li>
                     </ul>
                 </li>
                 @endrole
