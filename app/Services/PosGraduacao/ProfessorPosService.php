@@ -91,7 +91,7 @@ class ProfessorPosService
         $this->tratamentoImagem($data);
 
         #injetando senha de acesso ao portal do aluno no array principal
-        $this->loginPortalAluno($data);
+        $this->loginPortalAluno($data, $data['pessoa']['cpf']);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
@@ -114,6 +114,7 @@ class ProfessorPosService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
         $data['tipo_nivel_sistema_id'] = 2;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));
@@ -153,9 +154,15 @@ class ProfessorPosService
     /**
      * @param $data
      */
-    public function loginPortalAluno(&$data) {
+    public function loginPortalAluno(&$data, $cpf) {
+
+        $cpf = str_replace(array('.', '-'), "", $cpf);
+
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = \bcrypt($cpf);
+
+        #setando número de matricula como login do portal do aluno
+        $data['login'] = $cpf;
     }
 
     /**
@@ -175,6 +182,8 @@ class ProfessorPosService
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
+
+        $this->loginPortalAluno($data, $professor->pessoa->cpf);
 
         # Regras de negócios
         $this->tratamentoImagem($data, $professor);

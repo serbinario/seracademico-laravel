@@ -65,7 +65,8 @@ class Aluno extends Model implements Transformable
         'fac_instituicao_id',
         'password',
         'login',
-        'anotacao'
+        'anotacao',
+        'primeiro_acesso'
     ];
 
     /**

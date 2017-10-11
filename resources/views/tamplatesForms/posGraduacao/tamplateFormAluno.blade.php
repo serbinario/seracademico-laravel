@@ -311,7 +311,7 @@
                                     </div>
                                 </div>
                                 {{--Portal do aluno--}}
-                                <div class="panel-heading">
+                                {{--<div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
                                                     class="fa fa-plus-circle"></i>Portal do Aluno</a>
@@ -331,7 +331,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{--Portal do aluno--}}
                             </div>
                         </div>

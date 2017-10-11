@@ -95,6 +95,7 @@ class AlunoService
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
+
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
         $data = $this->remocaoEspacos($data);
@@ -102,6 +103,7 @@ class AlunoService
 
         # Setando o tipo o tipo do aluno para doutorado
         $data['tipo_aluno_id'] = 4;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -177,17 +179,17 @@ class AlunoService
      */
     public function loginPortalAluno(&$data, $numeroMatricula)
     {
-        //tratamento de senha
+        /*//tratamento de senha
         $newPassword = "";
 
         if(empty($data['password'])) {
             unset($data['password']);
         } else {
             $newPassword = \bcrypt($data['password']);
-        }
+        }*/
 
         //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
+        $data['password'] = \bcrypt($numeroMatricula);
 
         //setando número de matricula como login do portal do aluno
         $data['login'] = $numeroMatricula;
@@ -208,7 +210,11 @@ class AlunoService
         $this->tratamentoDePessoaEEndereco($data);
         $this->tratamentoCurso($data);
 
-        //encriptando senha
+
+        # Recuperando o vestibulando
+        $aluno = $this->repository->find($id);
+
+        /*//encriptando senha
         $newPassword = "";
 
         if(empty($data['password'])) {
@@ -218,7 +224,17 @@ class AlunoService
         }
 
         //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
+        $data['password'] = $newPassword;*/
+
+
+        if(!$aluno->matricula) {
+            $arrayMatricula = $this->tratamentoMatricula($data);
+            $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+            $aluno->matricula = $arrayMatricula['matricula'];
+            $aluno->save();
+        } else {
+            $this->loginPortalAluno($data, $aluno->matricula);
+        }
 
         #Atualizando no banco de dados
         $aluno = $this->repository->update($data, $id);

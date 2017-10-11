@@ -91,14 +91,14 @@ class ProfessorService
         $this->tratamentoImagem($data);
 
         #injetando senha de acesso ao portal do aluno no array principal
-        $this->loginPortalAluno($data);
+        $this->loginPortalAluno($data, $data['pessoa']['cpf']);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
         $endereco  = null;
 
         # Verificando se a pesso já existe
-        if(count($objPessoa) > 0) {
+        if (count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
             $endereco =$this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
@@ -114,6 +114,7 @@ class ProfessorService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
         $data['tipo_nivel_sistema_id'] = 3;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
         $professor =  $this->repository->create($this->tratamentoDatas($data));
@@ -153,9 +154,15 @@ class ProfessorService
     /**
      * @param $data
      */
-    public function loginPortalAluno(&$data) {
+    public function loginPortalAluno(&$data, $cpf) {
+
+        $cpf = str_replace(array('.', '-'), "", $cpf);
+
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = \bcrypt($cpf);
+
+        #setando número de matricula como login do portal do aluno
+        $data['login'] = $cpf;
     }
 
     /**
@@ -175,6 +182,8 @@ class ProfessorService
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
+
+        $this->loginPortalAluno($data, $professor->pessoa->cpf);
 
         # Regras de negócios
         $this->tratamentoImagem($data, $professor);
@@ -203,7 +212,7 @@ class ProfessorService
         }
 
         //encriptando senha
-        $newPassword = "";
+        /*$newPassword = "";
 
         if(empty($data['password'])) {
             unset($data['password']);
@@ -212,7 +221,7 @@ class ProfessorService
         }
 
         //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
+        $data['password'] = $newPassword;*/
 
         #Atualizando no banco de dados
         $professor = $this->repository->update($this->tratamentoDatas($data), $id);
