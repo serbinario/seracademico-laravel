@@ -21,7 +21,7 @@ class TipoDocumento extends Model implements Transformable
     {
         $queryResult = $query->where('tipo_nivel_sistema_id', 3);
 
-        if(Auth::user()->sede_id != 1) {
+        if (Auth::user()->sede_id != 1) {
             $queryResult->whereIn('nome', ['CONTRATO']);
         }
 
