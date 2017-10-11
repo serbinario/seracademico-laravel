@@ -131,6 +131,7 @@ class AlunoService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -186,11 +187,17 @@ class AlunoService
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
-        # Regras de negócio
-        $this->tratamentoMatricula($data);
-
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);
+
+        if(!$aluno->matricula) {
+            $arrayMatricula = $this->tratamentoMatricula($data);
+            $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+            $aluno->matricula = $arrayMatricula['matricula'];
+            $aluno->save();
+        } else {
+            $this->loginPortalAluno($data, $aluno->matricula);
+        }
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
@@ -215,7 +222,7 @@ class AlunoService
 
         }
 
-        //encriptando senha
+        /*//encriptando senha
         $newPassword = "";
 
         if(empty($data['password'])) {
@@ -225,7 +232,7 @@ class AlunoService
         }
 
         //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
+        $data['password'] = $newPassword;*/
 
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
@@ -304,7 +311,7 @@ class AlunoService
     public function loginPortalAluno(&$data, $numeroMatricula){
 
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = \bcrypt($numeroMatricula);
 
         #setando número de matricula como login do portal do aluno
         $data['login'] = $numeroMatricula;

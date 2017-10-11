@@ -58,7 +58,8 @@ class ProfessorPos extends Model implements Transformable
         'diploma_mestrado_obrigatorio',
         'diploma_doutorado_obrigatorio',
         'login',
-        'password'
+        'password',
+        'primeiro_acesso'
 	];
 
 

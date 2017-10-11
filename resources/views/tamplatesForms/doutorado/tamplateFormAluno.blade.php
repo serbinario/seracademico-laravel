@@ -308,7 +308,7 @@
                                     </div>
                                 </div>
                                 {{--Portal do aluno--}}
-                                <div class="panel-heading">
+                                {{--<div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
                                                     class="fa fa-plus-circle"></i>Portal do Aluno</a>
@@ -327,13 +327,13 @@
                                                 <div class="fg-line">
                                                     <label>Confirmação</label>
                                                     <input type="text" name="password_confirmation">
-                                                    {{--{!! Form::label('password_confirmation', 'Confirmação') !!}
-                                                    {!! Form::password('password_confirmation', Session::getOldInput('password_confirmation'), array('class' => 'form-control')) !!}--}}
+                                                    --}}{{--{!! Form::label('password_confirmation', 'Confirmação') !!}
+                                                    {!! Form::password('password_confirmation', Session::getOldInput('password_confirmation'), array('class' => 'form-control')) !!}--}}{{--
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{--Portal do aluno--}}
                             </div>
                         </div>
