@@ -44,10 +44,10 @@ class AlunoValidator extends LaravelValidator
         'pessoa.nacionalidade' => 'Nacionalidade',
         'pessoa.naturalidade' => 'Naturalidade',
         'pessoa.ano_conclusao_2_grau' => 'Ano de Conclusao 2 Grau',
-        /*'pessoa.endereco.logradouro' => 'Logradouro',
+        'pessoa.endereco.logradouro' => 'Logradouro',
         'pessoa.endereco.cep' => 'CEP',
         'pessoa.endereco.numero' => 'Número',
-        'pessoa.endereco.complemento' => 'Complemento',*/
+        'pessoa.endereco.complemento' => 'Complemento',
         'pessoa.uf_exp' => 'UF(Documentos)',
         'img' => 'Foto',
         'curso_id' => 'Curso',
@@ -61,7 +61,7 @@ class AlunoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            /*'img' => 'image|max:800',
+            'img' => 'image|max:800',
             'matricula' => 'unique:pos_alunos,matricula',
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             'pessoa.cpf' => 'required|max:20|serbinario_cpf_valido',
@@ -103,12 +103,12 @@ class AlunoValidator extends LaravelValidator
             'pessoa.deficiencia_outra' => 'integer',
             'curso_id' => 'required',
             'turma_id' => 'required',
-            'pessoa.endereco.logradouro' => 'required|serbinario_alpha_space|max:100',
+            /*'pessoa.endereco.logradouro' => 'required|serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'required|numeric|max:99999',
             'pessoa.endereco.cep' => 'required|max:999999999',
             'pessoa.endereco.complemento' => 'max:100',
-            'pessoa.endereco.bairros_id' => 'integer',
-            'data_matricula' => 'required'*/
+            'pessoa.endereco.bairros_id' => 'integer',*/
+            'data_matricula' => 'required'
         ],
 
         ValidatorInterface::RULE_UPDATE => [
