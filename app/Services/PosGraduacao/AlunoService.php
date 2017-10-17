@@ -191,18 +191,7 @@ class AlunoService
 
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
-
-        //encriptando senha
-        $newPassword = "";
-
-        if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }
-
-        //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
@@ -256,7 +245,7 @@ class AlunoService
                 $this->tratamentoNotas($aluno);
             }
         }
-        
+        //dd($aluno);
         #Retorno
         return $aluno;
     }
@@ -279,18 +268,6 @@ class AlunoService
         #Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoCurso($data);
-
-        //encriptando senha
-        $newPassword = "";
-
-        if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }
-
-        //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
@@ -316,16 +293,20 @@ class AlunoService
             $pdo->query($query);
         }
 
+        if(!$aluno->matricula) {
+            $arrayMatricula = $this->tratamentoMatricula($data);
+            $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+            $aluno->matricula = $arrayMatricula['matricula'];
+            $aluno->save();
+        } else {
+            $this->loginPortalAluno($data, $aluno->matricula);
+        }
+
         #Atualizando no banco de dados
         $aluno    = $this->repository->update($data, $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 
-        if(!$aluno->matricula) {
-            $arrayMatricula = $this->tratamentoMatricula($data);
-            $aluno->matricula = $arrayMatricula['matricula'];
-            $aluno->save();
-        }
 
         #Verificando se foi atualizado no banco de dados
         if(!$aluno || !$endereco) {
@@ -596,7 +577,7 @@ class AlunoService
     public function loginPortalAluno(&$data, $numeroMatricula)
     {
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = \bcrypt($numeroMatricula);
 
         #setando número de matricula como login do portal do aluno
         $data['login'] = $numeroMatricula;

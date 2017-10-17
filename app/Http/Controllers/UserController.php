@@ -141,6 +141,7 @@ class UserController extends Controller
             $user = $this->service->find($id);
 
             #Carregando os dados para o cadastro
+            //$loadFields['sede'] = $this->sedeRepository->sedes();
             $loadFields = $this->service->load($this->loadFields);
 
             # Recuperando todos os tipos de permissão

@@ -76,37 +76,19 @@
                                         {!! Form::password('password', '', array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
-                                {{--<div class="col-md-4">--}}
-                                    {{--<div class="fileinput fileinput-new" data-provides="fileinput">--}}
-                                        {{--<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 135px; height: 115px;">--}}
-                                            {{--@if ($user->path_image != null)--}}
-                                                {{--<div id="midias">--}}
-                                                    {{--<img id="logo" src="/seracademico-laravel/public/images/{{$user->path_image}}"  alt="Foto" height="120" width="100"/><br/>--}}
-                                                {{--</div>--}}
-                                            {{--@endif--}}
-                                        {{--</div>--}}
-                                        {{--<div>--}}
-                                            {{--<span class="btn btn-primary btn-xs btn-block btn-file">--}}
-                                                {{--<span class="fileinput-new">Selecionar</span>--}}
-                                                {{--<span class="fileinput-exists">Mudar</span>--}}
-                                                {{--<input type="file" name="img">--}}
-                                            {{--</span>--}}
-                                            {{--<a href="#" class="btn btn-warning btn-xs fileinput-exists col-md-6" data-dismiss="fileinput">Remover</a>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="col-md-1">
-                                    <div class="checkbox checkbox-primary">
-                                        {!! Form::hidden('active', 0) !!}
-                                        {!! Form::checkbox('active', 1, null, array('class' => 'form-control')) !!}
-                                        {!! Form::label('active', 'Ativo') !!}
+                                    <div class="form-group">
+                                        <div class="checkbox checkbox-primary">
+                                            {!! Form::hidden('active', 0) !!}
+                                            {!! Form::checkbox('active', 1, null, array('class' => 'form-control')) !!}
+                                            {!! Form::label('active', 'Ativo') !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="permission">
                             <br/>
-
                             <div id="tree-role">
                                 <ul>
                                     <li>
@@ -117,34 +99,34 @@
                                         @endif
                                         <ul>
                                             @if(isset($loadFields['tipopermissao']))
-                                                @foreach($loadFields['tipopermissao'] as $tipo)
+                                            @foreach($loadFields['tipopermissao'] as $tipo)
                                                     <!-- Inicio Accordion  -->
-                                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading" role="tab" id="headingTwo">
-                                                                <h4 class="panel-title">
-                                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#body-{{ $tipo->id }}" aria-expanded="false" aria-controls="body-{{ $tipo->id }}">
-                                                                        {{ $tipo->name }}
-                                                                    </a>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="body-{{ $tipo->id  }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                                <div class="panel-body">
-                                                                    @if(count($tipo->permissoes) > 0)
-                                                                        @foreach($tipo->permissoes as $permission)
-                                                                            @if(\in_array($permission->name, $user->permissions->lists('name')->all()))
-                                                                                <li><input type="checkbox" name="permission[]" checked value="{{ $permission->id  }}"> {{ $permission->description }} </li>
-                                                                            @else
-                                                                                <li><input type="checkbox" name="permission[]" value="{{ $permission->id  }}"> {{ $permission->description }} </li>
-                                                                            @endif
-                                                                        @endforeach
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#body-{{ $tipo->id }}" aria-expanded="false" aria-controls="body-{{ $tipo->id }}">
+                                                                {{ $tipo->name }}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="body-{{ $tipo->id  }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                        <div class="panel-body">
+                                                            @if(count($tipo->permissoes) > 0)
+                                                                @foreach($tipo->permissoes as $permission)
+                                                                    @if(\in_array($permission->name, $user->permissions->lists('name')->all()))
+                                                                        <li><input type="checkbox" name="permission[]" checked value="{{ $permission->id  }}"> {{ $permission->description }} </li>
+                                                                    @else
+                                                                        <li><input type="checkbox" name="permission[]" value="{{ $permission->id  }}"> {{ $permission->description }} </li>
                                                                     @endif
-                                                                </div>
-                                                            </div>
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                    <!-- Fim Accordion  -->
-                                                @endforeach
+                                                </div>
+                                            </div>
+                                            <!-- Fim Accordion  -->
+                                            @endforeach
                                             @endif
                                         </ul>
                                     </li>
@@ -186,25 +168,25 @@
                         </div>
                         {{--Fim Buttons Submit e Voltar--}}
 
+                    </div>
+
+
                 </div>
-
-
+                {!! Form::close() !!}
             </div>
-            {!! Form::close() !!}
+
         </div>
-        
-    </div>
-@stop
+        @stop
 
-@section('javascript')
-    <script type="text/javascript" class="init">
-        $(document).ready(function () {
-            $("#tree-role, #tree-permission").tree();
+        @section('javascript')
+            <script type="text/javascript" class="init">
+                $(document).ready(function () {
+                    $("#tree-role, #tree-permission").tree();
 
-            $('#user a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
-        });
-    </script>
+                    $('#user a').click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                });
+            </script>
 @stop

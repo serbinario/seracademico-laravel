@@ -33,7 +33,7 @@ class NumeroOrdianalPorExtenso
         'Julho',
         'Agosto',
         'Setembro',
-        'Otrubro',
+        'Outubro',
         'Novembro',
         'Dezembro'
     ];
