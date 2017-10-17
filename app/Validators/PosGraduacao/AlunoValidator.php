@@ -77,10 +77,10 @@ class AlunoValidator extends LaravelValidator
             'pessoa.estados_civis_id' => 'integer',
             'pessoa.tipos_sanguinios_id' => 'integer',
             'pessoa.cores_racas_id' => 'integer',
-            'estados_id' => 'required|integer',
+            /*'estados_id' => 'required|integer',
             'cidade' => 'required|integer',
             'estado' => 'required|integer',
-            'bairro' => 'required|integer',
+            'bairro' => 'required|integer',*/
             'pessoa.uf_nascimento_id' => 'required|integer',
             'pessoa.uf_exp' => 'required',
             'pessoa.nome_social' => 'max:200|serbinario_alpha_space',
