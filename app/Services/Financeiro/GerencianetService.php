@@ -160,7 +160,7 @@ class GerencianetService
             throw new \Exception('Telefone da pessoa não informado');
         }
 
-        if (!$pessoa->getDueDate()) {
+        if (!$boleto->getDueDate()) {
             throw new \Exception('Data de vencimento não informada');
         }
     }

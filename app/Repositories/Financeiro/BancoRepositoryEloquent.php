@@ -24,18 +24,6 @@ class BancoRepositoryEloquent extends BaseRepository implements BancoRepository
         return Banco::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return BancoValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria
