@@ -24,16 +24,16 @@ class ContaBancariaValidator extends LaravelValidator
         ValidatorInterface::RULE_CREATE => [
             'nome' => 'required',
             'codigo' => 'required',
-            'agencia' => 'required',
-            'conta' => 'required',
+            //'agencia' => 'required',
+            //'conta' => 'required',
             'banco_id' => 'required|integer'
 
         ],
         ValidatorInterface::RULE_UPDATE => [
             'nome' => 'required',
             'codigo' => 'required',
-            'agencia' => 'required',
-            'conta' => 'required',
+            //'agencia' => 'required',
+            //'conta' => 'required',
             'banco_id' => 'required'
 
         ],
