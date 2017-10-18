@@ -1103,7 +1103,7 @@
          * Evento para carregar as opções de cursos, só os cursos
          * que estiverem vinculados com o vestibular
          */
-        $(document).on('ready', function () {
+        $(document).ready(function () {
             // Recuperando o id do vestibular selecionado
             var vestibularId = $("#vestibular_id").find("option:selected").val();
 
