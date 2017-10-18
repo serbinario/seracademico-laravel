@@ -193,18 +193,6 @@ class AlunoService
         $data['pessoa_id'] = $pessoa->id;
         $data['primeiro_acesso'] = 0;
 
-        //encriptando senha
-        /*$newPassword = "";*/
-
-        /*if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }*/
-
-        //inserindo senha encriptada no array principal
-        /*$data['password'] = $newPassword; */
-
         #Salvando o registro pincipal
         $aluno =  $this->repository->create($data);
 
@@ -257,7 +245,7 @@ class AlunoService
                 $this->tratamentoNotas($aluno);
             }
         }
-        
+        //dd($aluno);
         #Retorno
         return $aluno;
     }
@@ -280,18 +268,6 @@ class AlunoService
         #Regras de negócios
         $this->tratamentoCampos($data);
         $this->tratamentoCurso($data);
-
-        //encriptando senha
-        //$newPassword = "";
-
-        /*if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }*/
-
-        //inserindo senha encriptada no array principal
-        //$data['password'] = $newPassword;
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {

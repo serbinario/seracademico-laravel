@@ -44,10 +44,10 @@ class AlunoValidator extends LaravelValidator
         'pessoa.nacionalidade' => 'Nacionalidade',
         'pessoa.naturalidade' => 'Naturalidade',
         'pessoa.ano_conclusao_2_grau' => 'Ano de Conclusao 2 Grau',
-        /*'pessoa.endereco.logradouro' => 'Logradouro',
+        'pessoa.endereco.logradouro' => 'Logradouro',
         'pessoa.endereco.cep' => 'CEP',
         'pessoa.endereco.numero' => 'Número',
-        'pessoa.endereco.complemento' => 'Complemento',*/
+        'pessoa.endereco.complemento' => 'Complemento',
         'pessoa.uf_exp' => 'UF(Documentos)',
         'img' => 'Foto',
         'curso_id' => 'Curso',
