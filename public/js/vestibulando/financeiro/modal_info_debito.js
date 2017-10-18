@@ -1,11 +1,13 @@
 $(document).on("click", "#btnInfoDebito", function () {
     var tipoDebito = $(this).attr('data-debito');
     var table;
+
     if (tipoDebito == 'pago') {
         table = tableDebitosPagos;
     } else {
         table = tableDebitosAbertos;
     }
+
     var idDebito = table.row($(this).parents('tr')).data().id;
 
     jQuery.ajax({
