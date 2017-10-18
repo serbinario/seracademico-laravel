@@ -11,7 +11,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('codigo', 'Código * max 6') !!}
-                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control numberFive' , 'placeholder'=>'Código da Taxa')) !!}
+                    {!! Form::text('codigo', Session::getOldInput('codigo')  , array('class' => 'form-control' , 'placeholder'=>'Código da Taxa')) !!}
                 </div>
             </div>
 

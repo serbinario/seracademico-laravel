@@ -5,6 +5,7 @@ namespace Seracademico\Entities\Graduacao;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Financeiro\Debito;
 use Seracademico\Entities\Graduacao\HorarioDisciplinaTurma;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Entities\Graduacao\Vestibular;
@@ -65,115 +66,72 @@ class Vestibulando extends Model implements Transformable
         'tipo_img'
     ];
 
-    /**
-     *
-     * @return \DateTime
-     */
+
     public function getDataInsricaoVestibularAttribute()
     {
         return SerbinarioDateFormat::toBrazil($this->attributes['data_insricao_vestibular']);
     }
 
-    /**
-     *
-     * @return \DateTime
-     */
     public function setDataInsricaoVestibularAttribute($value)
     {
         $this->attributes['data_insricao_vestibular'] = SerbinarioDateFormat::toUsa($value);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function pessoa()
     {
         return $this->belongsTo(Pessoa::class, 'pessoa_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function vestibular()
     {
         return $this->belongsTo(Vestibular::class, 'vestibular_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function notasVestibular()
     {
         return $this->hasMany(VestibulandoNotaVestibular::class, 'vestibulando_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function horarios()
     {
         return $this->belongsToMany(HorarioDisciplinaTurma::class, "alunos_horarios", "aluno_id", "horario_id");
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function aluno()
     {
         return $this->hasOne(Aluno::class, 'vestibulando_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function debitos()
     {
-        return $this->hasMany(VestibulandoFinanceiro::class, 'vestibulando_id');
+        return $this->morphMany(Debito::class, 'debitante');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function primeiraOpcaoCurso()
     {
         return $this->belongsTo(Curso::class, 'primeira_opcao_curso_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function segundaOpcaoCurso()
     {
         return $this->belongsTo(Curso::class, 'segunda_opcao_curso_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function terceiraOpcaoCurso()
     {
         return $this->belongsTo(Curso::class, 'terceira_opcao_curso_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function primeiraOpcaoTurno()
     {
         return $this->belongsTo(Turno::class, 'primeira_opcao_turno_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function segundaOpcaoTurno()
     {
         return $this->belongsTo(Turno::class, 'segunda_opcao_turno_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function terceiraOpcaoTurno()
     {
         return $this->belongsTo(Turno::class, 'terceira_opcao_turno_id');
