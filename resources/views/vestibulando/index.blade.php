@@ -22,6 +22,18 @@
             padding-top: 6px;
             width: 100%;
         }
+
+        .carregamento{
+            width: 200px;
+            height: auto;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            right: 0;
+            left: 0;
+            top: 0;
+            display: none;
+        }
     </style>
 @stop
 
@@ -112,20 +124,23 @@
     @include('vestibulando.modal_notas')
     @include('vestibulando.modal_notas_update')
     @include('vestibulando.modal_inclusao')
-    @include('vestibulando.modal_debitos')
-    @include('vestibulando.modal_debitos_abertos_store')
-    @include('vestibulando.modal_debitos_abertos_update')
-    @include('vestibulando.modal_debitos_pagos_update')
+    @include('vestibulando.financeiro.modal_debitos')
+    @include('vestibulando.financeiro.modal_create_debito')
+    @include('vestibulando.financeiro.modal_edit_debito')
+    @include('vestibulando.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_notas_update.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_inclusao.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_abertos_update.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/vestibulando/modal_debitos_pagos_update.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format ( d ) {
