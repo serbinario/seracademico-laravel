@@ -146,23 +146,23 @@ class VestibulandoController extends Controller
         #Editando a grid
         return Datatables::of($vestibulandos)
             ->filter(function ($query) use ($request) {
-                // Filtranto por vestibular
+                # Filtranto por vestibular
                 if ($request->has('vestibular')) {
                     $query->where('fac_vestibulares.id', '=', $request->get('vestibular'));
                 }
 
-                // Filtrando por pagos
+                # Filtrando por pagos
                 if ($request->has('pago')) {
                     $query->where('fac_vestibulandos_financeiros.pago', '=', $request->get('pago'));
                     $query->where('fin_tipos_taxas.id', '=', 1);
                 }
 
-                // Filtrando por forma de avaliação
+                # Filtrando por forma de avaliação
                 if ($request->has('formaAvaliacao')) {
                     $query->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
                 }
 
-                // Filtrando Por Curso
+                # Filtrando Por Curso
                 if ($request->has('cursoSearch')) {
                     # recuperando o valor da requisição
                     $cursoSearch = $request->get('cursoSearch');
@@ -181,8 +181,7 @@ class VestibulandoController extends Controller
                     }
                 }
 
-
-                    // Filtrando Global
+                # Filtrando Global
                 if ($request->has('globalSearch')) {
                     # recuperando o valor da requisição
                     $search = $request->get('globalSearch');
@@ -197,7 +196,6 @@ class VestibulandoController extends Controller
                 }
             })
             ->addColumn('action', function ($row) {
-                # inicio do html
                 $html = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
