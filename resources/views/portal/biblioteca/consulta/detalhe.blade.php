@@ -537,7 +537,7 @@
                                     @if($exemplar['acervo']['tipo_periodico'] == '1')
                                           <b> {{$paravra}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif  </b>
                                     @elseif($exemplar['acervo']['tipo_periodico'] == '2')
-                                          {{mb_strtoupper($paravra)}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtoupper($exemplar['acervo']['subtitulo']) ?>.@else.@endif
+                                          {{mb_strtoupper($paravra)}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. $exemplar['acervo']['subtitulo'] ?>.@else.@endif
                                     @endif
 
                                 @else
