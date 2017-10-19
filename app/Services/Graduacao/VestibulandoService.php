@@ -300,7 +300,11 @@ class VestibulandoService
         //$this->tratamentoInscricao($data, $id); // [RFV003-RN004]
         $this->tratamentoMediaEnem($data);
         $this->tratamentoMediaFicha($data);
-        $this->salvarDocumentos($data['documentos']);
+
+        //só será executado se o vestibulando veio por meio do portal do vestibulando
+        if(isset($data['documentos'])) {
+            $this->salvarDocumentos($data['documentos']);
+        }
 
         #Atualizando no banco de dados
         $vestibulando = $this->repository->update($data, $id);
