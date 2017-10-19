@@ -564,7 +564,11 @@
                                 @endif
                                 @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
                                 @if($exemplar['editora']['nome'])<?php echo $exemplar['editora']['nome'] ?>, @endif
-                                @if($exemplar['ano']){{$exemplar['ano']}}. @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
+                                @if($exemplar['ano']){{$exemplar['ano']}}.
+                                @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                    @if($exemplar['acervo']['periodicidade']){{$exemplar['acervo']['periodicidade']}}. @endif
+                                @endif
+                                @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                     @if($exemplar['ilustracoes_id'] == '1'), il.@endif
                                 @endif
