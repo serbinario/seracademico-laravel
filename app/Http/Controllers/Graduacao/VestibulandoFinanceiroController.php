@@ -208,4 +208,21 @@ class VestibulandoFinanceiroController extends Controller
             ]);
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function storeDebitoInscricaoByPortal(Request $request)
+    {
+        try {
+            $vestibulando = $this->repository->find($request->get('id'));
+            $dadosDebito = $this->service->formatDebitoInscricao($vestibulando);
+            $this->debitoService->store($vestibulando, $dadosDebito);
+
+            return response()->json(['status' => 200]);
+        } catch (\Throwable $e) {
+            return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
+        }
+    }
 }

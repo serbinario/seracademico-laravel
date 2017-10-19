@@ -102,7 +102,6 @@ class VestibularService
         # Regras de Negócios
         $this->tratamentoVestibularAtivo($data);
         $this->tratamentoDataRanger($data);
-        $this->tratamentoFinanceiro($data);
 
         #Atualizando no banco de dados
         $vestibular = $this->repository->update($data, $id);
@@ -187,11 +186,6 @@ class VestibularService
 
         #retorno
         return $data;
-    }
-
-    private function tratamentoFinanceiro(array &$data)
-    {
-
     }
 
     /**

@@ -30,4 +30,20 @@ class ContaBancariaRepositoryEloquent extends BaseRepository implements ContaBan
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getContaBancariaPadrao()
+    {
+        $contaBancaria = $this->findWhere(['codigo' => 'CBGNET']);
+
+        if (count($contaBancaria) == 0) {
+            throw new \Exception('Conta bancária padrão não encontrada');
+        }
+
+        return $contaBancaria[0];
+    }
 }
