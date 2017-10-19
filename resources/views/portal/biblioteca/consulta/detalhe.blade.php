@@ -149,8 +149,7 @@
                                                     {{$exemplar['acervo']['numero_chamada']}} /
                                                     @if($exemplar['vol_periodico'])v. {{$exemplar['vol_periodico']}}. @endif
                                                     @if($exemplar['num_periodico'])n. {{$exemplar['num_periodico']}}. @endif
-
-                                                        @if($exemplar['ano']){{$exemplar['ano']}}. @endif
+                                                    @if($exemplar['ano']){{$exemplar['ano']}}. @endif
                                                 </div>
                                             </div>
                                         </a>
