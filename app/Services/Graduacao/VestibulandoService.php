@@ -2,6 +2,7 @@
 
 namespace Seracademico\Services\Graduacao;
 
+use Carbon\Carbon;
 use Seracademico\Entities\Graduacao\Curriculo;
 use Seracademico\Entities\Graduacao\Vestibulando;
 use Seracademico\Entities\Graduacao\VestibulandoFinanceiro;
@@ -217,25 +218,15 @@ class VestibulandoService
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
-
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$vestibulando->id} ";
-
             $pdo->query($query);
-
         } else if ($img && !$imgCam) {
-
             $this->insertImg($vestibulando->id, 1);
-
         } else if ($imgCam && $img) {
-
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$vestibulando->id} ";
-
             $pdo->query($query);
-
         }
 
         #Verificando se foi criado no banco de dados
@@ -275,23 +266,14 @@ class VestibulandoService
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
-
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
-
             $pdo->query($query);
-
         } else if ($img && !$imgCam) {
-
             $this->insertImg($vestibulando->id, 1);
-
         } else if ($imgCam && $img) {
-
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE fac_vestibulandos SET path_image = '{$imgCam}', tipo_img = 2 where id = {$id} ";
-
             $pdo->query($query);
         }
 
@@ -337,7 +319,7 @@ class VestibulandoService
     }
 
     /**
-     * @param $data
+     * @param $documentos
      * @description Este metodo tem a função de receber o array com os documentos e o id de seus respectivos registros
      * na base de dados.Sua principal função é ornganizar e salvar o estado atual de cada documento, se existe ou não alguma
      * observação referente a ele, status, se confirma a entrega ou não, e estado, se aceito ou não.
@@ -374,23 +356,14 @@ class VestibulandoService
     {
         #tratando a imagem
         if(isset($_FILES['img']['tmp_name']) && $_FILES['img']['tmp_name'] != null) {
-
             $tmpName = $_FILES['img']['tmp_name'];
-
             $fp = fopen($tmpName, 'r');
-
             $add = fread($fp, filesize($tmpName));
-
             $add = addslashes($add);
-
             fclose($fp);
-
             $pdo = \DB::connection()->getPdo();
-
             $query = "UPDATE fac_vestibulandos SET path_image = '{$add}', tipo_img = {$tipo} where id =  $id ";
-
             $pdo->query($query);
-
         }
 
     }
@@ -574,10 +547,21 @@ class VestibulandoService
      */
     public function tratamentoDebitoInscricao(Vestibulando $vestibulando)
     {
-        $now = new \DateTime('now');
+        $this->debitoService->store($vestibulando, $this->formatDebitoInscricao($vestibulando));
+        return true;
+    }
+
+    /**
+     * @param Vestibulando $vestibulando
+     * @return mixed
+     */
+    public function formatDebitoInscricao(Vestibulando $vestibulando)
+    {
         $vestibular = $vestibulando->vestibular;
         $taxaVestibular = $vestibular->taxa;
         $contaBancaria = $this->contaBancariaRepository->getContaBancariaPadrao();
+        $now = new Carbon();
+        $now->day($taxaVestibular->dia_vencimento);
 
         $dados['data_vencimento'] = $now->format('d/m/Y');
         $dados['mes_referencia'] = $now->format('m');
@@ -587,9 +571,7 @@ class VestibulandoService
         $dados['conta_bancaria_id'] = $contaBancaria->id;
         $dados['pago'] = 0;
 
-        $this->debitoService->store($vestibulando, $dados);
-
-        return true;
+        return $dados;
     }
 
     /**
