@@ -18,6 +18,12 @@
                             {!! Form::text('titulo', Session::getOldInput('titulo') , array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('subtitulo', 'Subtítulo') !!}
+                            {!! Form::text('subtitulo', Session::getOldInput('subtitulo') ,  array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">

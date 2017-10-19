@@ -126,7 +126,6 @@ class ConsultaController extends Controller
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
-                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->leftJoin('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
                 ->where('bib_tipos_acervos.tipo', '=', $this->data['tipo_obra'])
                 ->where('bib_exemplares.exemp_principal', '=', '1')
@@ -134,6 +133,7 @@ class ConsultaController extends Controller
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                 ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
+                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->paginate(10);
 
         } else {
@@ -141,7 +141,6 @@ class ConsultaController extends Controller
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->leftJoin('primeira_entrada', 'bib_arcevos.id', '=', 'primeira_entrada.arcevos_id')
                 ->leftJoin('responsaveis', 'responsaveis.id', '=', 'primeira_entrada.responsaveis_id')
-                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->leftJoin('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
                 ->where('bib_tipos_acervos.tipo', '=', $this->data['tipo_obra'])
                 ->where('bib_exemplares.exemp_principal', '=', '1')
@@ -157,6 +156,7 @@ class ConsultaController extends Controller
                 })
                 ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
+                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
                 ->paginate(10);
 
         }

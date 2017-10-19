@@ -171,7 +171,13 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('vol_periodico', 'Volume/Ano') !!}
+                            {!! Form::label('ano', 'Ano') !!}
+                            {!! Form::text('ano', Session::getOldInput('ano'), array('class' => 'form-control numberFor')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('vol_periodico', 'Volume') !!}
                             {!! Form::text('vol_periodico', Session::getOldInput('vol_periodico')  , array('class' => 'form-control numberFive')) !!}
                         </div>
                     </div>

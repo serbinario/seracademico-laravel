@@ -65,7 +65,7 @@
         <div class="col s12 m12">
             <div class="row section">
                 <div class="col s12 m9">
-                    <section class="">
+                    <section>
                         <div class="row">
                             <div class="col s12">
                                 <ul class="tabs">
@@ -115,17 +115,17 @@
                                             </div>
                                         </a>
                                     @endif
-                                    <a class="collection-item">
+                                    {{--<a class="collection-item">
                                         <div class="row">
                                             <div class="col s4"><b>Número de chamada</b></div>
                                             <div class="col s8">{{$exemplar['acervo']['numero_chamada']}}</div>
                                         </div>
-                                    </a>
+                                    </a>--}}
                                     @if($exemplar['acervo']['tipo_periodico'] == '1')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Edição</b></div>
-                                                <div class="col s8">@if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
+                                                <div class="col s8">{{$exemplar['acervo']['numero_chamada']}} / @if($exemplar['edicao']){{$exemplar['edicao']}}. ed. @endif</div>
                                             </div>
                                         </a>
                                         <a class="collection-item">
@@ -146,10 +146,10 @@
                                             <div class="row">
                                                 <div class="col s4"><b>Edição</b></div>
                                                 <div class="col s8">
+                                                    {{$exemplar['acervo']['numero_chamada']}} /
                                                     @if($exemplar['vol_periodico'])v. {{$exemplar['vol_periodico']}}. @endif
                                                     @if($exemplar['num_periodico'])n. {{$exemplar['num_periodico']}}. @endif
-
-                                                        @if($exemplar['ano']){{$exemplar['ano']}}. @endif
+                                                    @if($exemplar['ano']){{$exemplar['ano']}}. @endif
                                                 </div>
                                             </div>
                                         </a>
@@ -169,7 +169,11 @@
                                     <a class="collection-item active">
                                         <div class="row">
                                             <div class="col s4"><b>Título</b></div>
-                                            <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}}</b></div>
+                                            @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                                <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}} </b></div>
+                                            @elseif($exemplar['acervo']['tipo_periodico'] == '2')
+                                                <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}@if($exemplar['acervo']['subtitulo']): {{$exemplar['acervo']['subtitulo']}} @endif</b></div>
+                                            @endif
                                         </div>
                                     </a>
                                     @if($exemplar['acervo']['tipo_periodico'] == '1')
@@ -354,20 +358,19 @@
                                                     ?>
                                                     {{$tombo}}
                                                 </td>
-                                                <td>
-                                                    @if($e->tipo_periodico == '1' && $e->edicao)
-                                                        {{$e->edicao}}. ed.
-                                                    @elseif($e->tipo_periodico == '2' && $e->edicao)
-                                                        v. {{$e->edicao}}
-                                                    @endif
-                                                </td>
-                                                @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                                @if($e->tipo_periodico == '1' && $e->edicao)
+                                                    <td>{{$e->edicao}}. ed.</td>
+                                                @elseif($e->tipo_periodico == '2' && $e->edicao)
                                                     <td>n. {{$e->edicao}}</td>
                                                 @endif
-                                                <td>@if($e->ano){{$e->ano}} @endif</td>
                                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                                     <td>{{$e->volume}}</td>
                                                 @endif
+                                                @if($exemplar['acervo']['tipo_periodico'] == '2')
+                                                    <td>{{ $e->vol_periodico }}</td>
+                                                    <td>{{ $e->num_periodico }}</td>
+                                                @endif
+                                                <td>@if($e->ano){{$e->ano}} @endif</td>
                                                 <td>{{$e->cdd}}</td>
                                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                                     <td>{{$e->cutter}}</td>
@@ -531,11 +534,9 @@
                                                 }
                                             };
                                         }
-                                        //echo $paravra;
                                         ?>
-
                                     @if($exemplar['acervo']['tipo_periodico'] == '1')
-                                          <b> {{$paravra}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif  </b>
+                                          <b> {{$paravra}}@if($exemplar['acervo']['subtitulo'])<?php echo ': '. mb_strtolower($exemplar['acervo']['subtitulo']) ?>.@else.@endif  </b>
                                     @elseif($exemplar['acervo']['tipo_periodico'] == '2')
                                           {{mb_strtoupper($paravra)}} @if($exemplar['acervo']['subtitulo'])<?php echo ': '. $exemplar['acervo']['subtitulo'] ?>.@else.@endif
                                     @endif
@@ -648,4 +649,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

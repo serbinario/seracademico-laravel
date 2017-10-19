@@ -211,6 +211,7 @@ class ExemplarService
                 ->get();
         }
 
+        //dd($exemplares);
 
         $data = [
             'exemplar' => $exemplar,
