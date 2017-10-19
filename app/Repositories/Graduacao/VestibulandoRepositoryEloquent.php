@@ -35,6 +35,7 @@ class VestibulandoRepositoryEloquent extends BaseRepository implements Vestibula
      * @param $idVestibulando
      * @return mixed
      * @throws \Exception
+     * @description verificando se existem documentos para o vestibulando em questão
      */
     public function dadosVestibulando($idVestibulando)
     {
@@ -50,10 +51,12 @@ class VestibulandoRepositoryEloquent extends BaseRepository implements Vestibula
             ->where('vestibulando_id', $idVestibulando)
             ->get();
 
-        /*if(count($documentos) == 0) {
+        /*if(count(!$documentos) == 0) {
             throw new \Exception('Nenhum documento encontrado');
         }*/
 
-        return $documentos;
+        if(count($documentos) > 0) {
+            return $documentos;
+        }
     }
 }

@@ -263,7 +263,7 @@ class AlunoService
         $img    = isset($data['img']) ? $data['img'] : "";
 
         # Recuperando o vestibulando
-        $aluno = $this->repository->find($id);     
+        $aluno = $this->repository->find($id);
 
         #Regras de negócios
         $this->tratamentoCampos($data);

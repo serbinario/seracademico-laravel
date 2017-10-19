@@ -323,7 +323,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="http://portal-alpha.serbinario.com.br/" target="__blank"><i class="flaticon-business"></i> Portal</a>
+                    <a href="http://www.portal-academico.serbinario.com.br/index.php/" target="__blank"><i class="flaticon-business"></i> Portal</a>
                 </li>
                 @endrole
             </ul>
