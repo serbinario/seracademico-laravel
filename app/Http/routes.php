@@ -1719,3 +1719,10 @@ Route::get('seracademico/biblioteca/getImg/{id}', ['as' => 'seracademico.bibliot
 
 # Rota de processamento das notificações do gerencianet
 Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financeiro\NotificacoesGnetController@processarNotificacao']);
+
+
+# Rotas de acesso para operações financeiras do portal
+Route::post('vestibulando/financeiro/storeDebitoInscricaoByPortal', [
+    'as' => 'vestibulando.financeiro.storeDebitoInscricaoByPortal',
+    'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitoInscricaoByPortal'
+]);
