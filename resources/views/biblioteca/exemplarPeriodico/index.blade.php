@@ -35,6 +35,8 @@
                             <thead>
                             <tr>
                                 <th>Acervo - Título</th>
+                                <th>Acervo - Subtítulo</th>
+                                <th>Edição</th>
                                 <th>Número do Periódico</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
@@ -46,6 +48,8 @@
                             <tfoot>
                             <tr>
                                 <th>Acervo - Título</th>
+                                <th>Acervo - Subtítulo</th>
+                                <th>Edição</th>
                                 <th>Número do Periódico</th>
                                 <th>Situação</th>
                                 <th>Tombo</th>
@@ -69,7 +73,9 @@
             ajax: "{!! route('seracademico.biblioteca.gridExemplarP') !!}",
             columns: [
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
+                {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'edicao', name: 'bib_exemplares.edicao'},
+                {data: 'num_periodico', name: 'bib_exemplares.num_periodico'},
                 {data: 'nome_sit', name: 'bib_emprestimo.nome'},
                 {data: 'tombo', name: 'bib_exemplares.codigo'},
                 {data: 'link', name: 'link', orderable: false, searchable: false},
