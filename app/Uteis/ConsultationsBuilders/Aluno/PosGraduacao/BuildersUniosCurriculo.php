@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: AndreyPriscila
- * Date: 19/09/2016
- * Time: 09:24
- */
 
 namespace Seracademico\Uteis\ConsultationsBuilders\Aluno\PosGraduacao;
-
 
 class BuildersUniosCurriculo
 {

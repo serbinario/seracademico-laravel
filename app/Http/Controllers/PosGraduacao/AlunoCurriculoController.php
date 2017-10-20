@@ -121,7 +121,6 @@ class AlunoCurriculoController extends Controller
                 'fac_disciplinas.qtd_credito'
             ]);
 
-
         #Editando a grid
         return Datatables::of($rows)->make(true);
     }
