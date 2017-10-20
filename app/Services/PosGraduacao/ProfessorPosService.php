@@ -83,6 +83,9 @@ class ProfessorPosService
      */
     public function store(array $data) : ProfessorPos
     {
+        #trata campos vazios
+        $this->tratamentoCampos($data);
+
         # Tratamento imagens de cam
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
