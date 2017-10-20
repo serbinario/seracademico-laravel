@@ -56,8 +56,15 @@ class AlunoCurriculoController extends Controller
     public function gridACursar($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('pos_alunos_cursos')
-            ->leftJoin('pos_alunos_turmas', function ($join) {
+        $rows = \DB::table('pos_alunos')
+            ->join('pos_alunos_cursos', function ($join) {
+                $join->on(
+                    'pos_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                );
+            })
+            ->join('pos_alunos_turmas', function ($join) {
                 $join->on(
                     'pos_alunos_turmas.id', '=',
                     \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
@@ -65,7 +72,6 @@ class AlunoCurriculoController extends Controller
                 );
             })
             ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.curriculo_id', '=', 'fac_curriculos.id')
@@ -115,7 +121,6 @@ class AlunoCurriculoController extends Controller
                 'fac_disciplinas.qtd_credito'
             ]);
 
-
         #Editando a grid
         return Datatables::of($rows)->make(true);
     }
@@ -127,7 +132,14 @@ class AlunoCurriculoController extends Controller
     public function gridCursadas($idAluno)
     {
         #Criando a consulta
-        $rows = \DB::table('pos_alunos_cursos')
+        $rows = \DB::table('pos_alunos')
+            ->join('pos_alunos_cursos', function ($join) {
+                $join->on(
+                    'pos_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+                        where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
+                );
+            })
             ->join('pos_alunos_turmas', function ($join) {
                 $join->on(
                     'pos_alunos_turmas.id', '=',
@@ -136,7 +148,6 @@ class AlunoCurriculoController extends Controller
                 );
             })
             ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
             ->join('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
             ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
