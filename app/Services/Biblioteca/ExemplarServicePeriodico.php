@@ -173,10 +173,15 @@ class ExemplarServicePeriodico
         $acervo = $this->repoAcervo->find($data['arcevos_id']);
 
         //recupera o maior código ja registrado
-        $codigo = \DB::table('bib_exemplares')->max('codigo');
         $dataObj  = new \DateTime('now');
-        $this->anoAtual = $dataObj->format('Y');
-        $codigoMax = $codigo != null ? $codigoMax = $codigo : $codigoMax = "0001{$this->anoAtual}";
+        $this->anoAtual = date('Y');
+
+        #recuperando o último código
+        $codigo = \DB::table('bib_exemplares')
+            ->where('bib_exemplares.codigo', 'like', '%'.$this->anoAtual)
+            ->max('codigo');
+
+        $codigoMax = $codigo != null ? $codigo : "0001{$this->anoAtual}";
         $codigoAtual = substr($codigoMax, 0, -4);
         $this->ultimoAno = substr($codigo, -4);
 
@@ -191,7 +196,6 @@ class ExemplarServicePeriodico
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
-                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -204,7 +208,6 @@ class ExemplarServicePeriodico
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
                     $data['codigo'] = $this->tombo;
-                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -222,7 +225,6 @@ class ExemplarServicePeriodico
                     $data['situacao_id'] = '3';
                     $this->tombo = $this->tratarCodigoExemplar($codigoAtual);
                     $data['codigo'] = $this->tombo;
-                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);
@@ -235,7 +237,6 @@ class ExemplarServicePeriodico
                     $data['emprestimo_id'] = '1';
                     $data['situacao_id'] = '1';
                     $data['codigo'] = $this->tombo;
-                    $data['ano'] = $dataObj->format('Y');
                     
                     #Salvando o registro pincipal
                     $exemplar =  $this->repository->create($data);

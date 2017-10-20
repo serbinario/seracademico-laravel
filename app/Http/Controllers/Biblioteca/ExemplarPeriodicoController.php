@@ -69,7 +69,9 @@ class ExemplarPeriodicoController extends Controller
             ->where('bib_arcevos.tipo_periodico', '=', '2')
             ->select('bib_exemplares.id as id',
                 'bib_arcevos.titulo',
+                'bib_arcevos.subtitulo',
                 'bib_exemplares.edicao',
+                'bib_exemplares.num_periodico',
                 'bib_situacao.nome as nome_sit',
                 'bib_exemplares.link as link',
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo')
