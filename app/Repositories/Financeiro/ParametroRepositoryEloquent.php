@@ -4,15 +4,14 @@ namespace Seracademico\Repositories\Financeiro;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Financeiro\BancoValidator;
-use Seracademico\Repositories\Financeiro\BancoRepository;
-use Seracademico\Entities\Financeiro\Banco;
+use Seracademico\Repositories\Financeiro\ParametroRepository;
+use Seracademico\Entities\Financeiro\Parametro;
 
 /**
  * Class BancoRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class BancoRepositoryEloquent extends BaseRepository implements BancoRepository
+class ParametroRepositoryEloquent extends BaseRepository implements ParametroRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +20,7 @@ class BancoRepositoryEloquent extends BaseRepository implements BancoRepository
      */
     public function model()
     {
-        return Banco::class;
+        return Parametro::class;
     }
 
 

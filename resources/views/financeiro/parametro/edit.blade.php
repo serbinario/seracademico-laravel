@@ -5,7 +5,7 @@
         <div class="ibox-title">
             <h4>
                 <i class="flaticon-currency-rates"></i>
-                Editar Taxa
+                Editar Parâmetro
             </h4>
         </div>
 
@@ -27,8 +27,8 @@
                 </div>
             @endif
 
-            {!! Form::model($model, ['route'=> ['seracademico.financeiro.taxa.update', $model->id], 'method' => "POST", 'id' => 'formTaxa' ]) !!}
-                @include('tamplatesForms.financeiro.tamplateFormTaxa')
+            {!! Form::model($model, ['route'=> ['seracademico.financeiro.parametro.update', $model->id], 'method' => "POST", 'id' => 'formParametro' ]) !!}
+                @include('tamplatesForms.financeiro.tamplateFormParametro')
             {!! Form::close() !!}
         </div>
         

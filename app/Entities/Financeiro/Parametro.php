@@ -6,26 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Extrato extends Model implements Transformable
+class Parametro extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'fin_extratos';
+    protected $table = 'fin_parametros';
 
     protected $fillable = [
-        'conta_bancaria_id',
-        'debito_id',
-        'balanco',
-        'valor'
+        'nome',
+        'taxa_id',
+        'codigo',
     ];
 
-    public function contaBancaria()
+    public function taxa()
     {
-        return $this->belongsTo(ContaBancaria::class, 'conta_bancaria_id');
-    }
-
-    public function debito()
-    {
-        return $this->belongsTo(Debito::class, 'debito_id');
+        return $this->belongsTo(Taxa::class, 'taxa_id');
     }
 }
