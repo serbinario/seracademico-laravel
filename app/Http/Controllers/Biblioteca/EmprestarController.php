@@ -159,7 +159,6 @@ class EmprestarController extends Controller
 
 
         return \Illuminate\Support\Facades\Response::json($data);
-        //return $data;
     }
 
     /**
@@ -171,10 +170,7 @@ class EmprestarController extends Controller
 
         $data = $this->service->findWhere(['pessoas_id' => $pessoaId]);
 
-       //dd($data);
-
         return $data;
-        //return $data;
     }
 
     /**

@@ -220,7 +220,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('data_aquisicao', 'Data Aquisição') !!}
-                            {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date data2')) !!}
+                            {!! Form::text('data_aquisicao', Session::getOldInput('data_aquisicao'), array('class' => 'form-control datepicker date ')) !!}
                         </div>
                     </div>
                     <div class="col-md-2">

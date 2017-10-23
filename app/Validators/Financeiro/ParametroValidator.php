@@ -6,7 +6,7 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 use \Prettus\Validator\LaravelValidator;
 use Seracademico\Validators\TraitReplaceRulesValidator;
 
-class BancoValidator extends LaravelValidator
+class ParametroValidator extends LaravelValidator
 {
     use TraitReplaceRulesValidator;
 

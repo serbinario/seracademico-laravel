@@ -2,21 +2,20 @@
 
 namespace Seracademico\Services\Financeiro;
 
-use Seracademico\Repositories\Financeiro\BancoRepository;
-use Seracademico\Entities\Financeiro\Banco;
-//use Carbon\Carbon;
+use Seracademico\Repositories\Financeiro\ParametroRepository;
+use Seracademico\Entities\Financeiro\Parametro;
 
-class BancoService
+class ParametroService
 {
     /**
-     * @var BancoRepository
+     * @var ParametroRepository
      */
     private $repository;
 
     /**
-     * @param BancoRepository $repository
+     * @param ParametroRepository $repository
      */
-    public function __construct(BancoRepository $repository)
+    public function __construct(ParametroRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -29,63 +28,56 @@ class BancoService
     public function find($id)
     {
         #Recuperando o registro no banco de dados
-        $banco = $this->repository->find($id);
+        $parametro = $this->repository->find($id);
 
         #Verificando se o registro foi encontrado
-        if(!$banco) {
+        if(!$parametro) {
             throw new \Exception('Empresa não encontrada!');
         }
 
         #retorno
-        return $banco;
+        return $parametro;
     }
 
     /**
      * @param array $data
-     * @return Banco
+     * @return Parametro
      * @throws \Exception
      */
-    public function store(array $data) : Banco
+    public function store(array $data) : Parametro
     {
-        # Regras de negócio
-        $this->tratamentoCampos($data);
-        $this->tratamentoBancoAtivo($data);
         
         #Salvando o registro pincipal
-        $banco =  $this->repository->create($data);
+        $parametro =  $this->repository->create($data);
 
         #Verificando se foi criado no banco de dados
-        if(!$banco) {
+        if(!$parametro) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $banco;
+        return $parametro;
     }
 
     /**
      * @param array $data
      * @param int $id
-     * @return Banco
+     * @return Parametro
      * @throws \Exception
      */
-    public function update(array $data, int $id) : Banco
+    public function update(array $data, int $id) : Parametro
     {
-        # Regras de negócio
-        $this->tratamentoCampos($data);
-        $this->tratamentoBancoAtivo($data);
-
         #Atualizando no banco de dados
-        $banco = $this->repository->update($data, $id);
+        $parametro = $this->repository->update($data, $id);
 
 
         #Verificando se foi atualizado no banco de dados
-        if(!$banco) {
+        if(!$parametro) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Retorno
-        return $banco;
+        return $parametro;
     }
 
     /**
