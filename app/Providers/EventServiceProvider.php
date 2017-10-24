@@ -8,6 +8,7 @@ use Seracademico\Events\DebitoStored;
 use Seracademico\Events\DebitoUpdated;
 use Seracademico\Listeners\ContaBancariaAdicionarBalanco;
 use Seracademico\Listeners\ContaBancariaEditarBalaco;
+use Seracademico\Listeners\GerarCarneGnet;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,7 +22,8 @@ class EventServiceProvider extends ServiceProvider
             'Seracademico\Listeners\EventListener',
         ],
         DebitoStored::class => [
-            ContaBancariaAdicionarBalanco::class
+            ContaBancariaAdicionarBalanco::class,
+            GerarCarneGnet::class
         ],
         DebitoUpdated::class => [
             ContaBancariaEditarBalaco::class

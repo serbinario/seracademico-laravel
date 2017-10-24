@@ -83,7 +83,7 @@ class DebitoService
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
-        event(new DebitoStored($debito));
+        event(new DebitoStored($debito, $dados));
 
         return $debito;
     }

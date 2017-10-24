@@ -35,7 +35,9 @@ class Boleto extends Model implements Transformable, GnetBoleto
         'gnet_nome',
         'gnet_link',
         'gnet_charge',
-        'gnet_status_id'
+        'gnet_status_id',
+        'gnet_parcel',
+        'gnet_barcode'
 	];
 
     /**

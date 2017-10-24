@@ -73,9 +73,11 @@ class AlunoFinanceiroController extends Controller
         try {
             $consulta = $this->debitoRepository
                 ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
+                ->leftJoin('fin_carnes', 'fin_debitos.carne_id', '=', 'fin_carnes.id')
                 ->leftJoin('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
                 ->leftJoin('fin_status_gnet', 'fin_boletos.gnet_status_id', '=', 'fin_status_gnet.id')
-                ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"));
+                ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"))
+                ->addSelect('fin_carnes.gnet_carnet_id');
 
             return DataTables::of($consulta)
                 ->addColumn('action', function () {
@@ -89,6 +91,32 @@ class AlunoFinanceiroController extends Controller
                     $html .= '  </ul>';
                     $html .= '</div>';
                     return $html;
+                })->make(true);
+        } catch (\Throwable $e) {
+            abort(500, $e->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this
+     */
+    public function gridCarnes(Request $request, $id)
+    {
+        try {
+            $consulta = $this->debitoRepository
+                ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
+                ->join('fin_carnes', 'fin_debitos.carne_id', '=', 'fin_carnes.id')
+                ->addSelect(\DB::raw('count(fin_debitos.id) as qtd_parcelas'))
+                ->addSelect('fin_carnes.gnet_carnet_id')
+                ->addSelect('fin_carnes.gnet_link')
+                ->addSelect(\DB::raw("DATE_FORMAT(fin_carnes.created_at, '%d/%m/%Y') as data_criacao"))
+                ->groupBy('fin_carnes.id', 'fin_taxas.id');
+
+            return DataTables::of($consulta)
+                ->addColumn('link', function ($row) {
+                    return '<a target="_blank" href="'. $row->gnet_link .'">Visualizar carnê em outra página</a>';
                 })->make(true);
         } catch (\Throwable $e) {
             abort(500, $e->getMessage());

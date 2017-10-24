@@ -14,12 +14,18 @@ class DebitoStored extends Event
     private $debito;
 
     /**
+     * @var array
+     */
+    private $dados;
+
+    /**
      * DebitoStored constructor.
      * @param Debito $debito
      */
-    public function __construct(Debito $debito)
+    public function __construct(Debito $debito, $dados = [])
     {
         $this->debito = $debito;
+        $this->dados = $dados;
     }
 
     /**
@@ -28,5 +34,13 @@ class DebitoStored extends Event
     public function getDebito()
     {
         return $this->debito;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDados()
+    {
+        return $this->dados;
     }
 }

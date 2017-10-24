@@ -773,6 +773,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@updateDebito']);
                     Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'PosGraduacao\AlunoFinanceiroController@gerarBoleto']);
                     Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'PosGraduacao\AlunoFinanceiroController@infoDebito']);
+                    Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'PosGraduacao\AlunoFinanceiroController@gridCarnes']);
                 });
             });
 
@@ -1733,7 +1734,15 @@ Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financei
 
 
 # Rotas de acesso para operações financeiras do portal
-Route::post('vestibulando/financeiro/storeDebitoInscricaoByPortal', [
-    'as' => 'vestibulando.financeiro.storeDebitoInscricaoByPortal',
-    'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitoInscricaoByPortal'
-]);
+Route::group(['prefix' => 'vestibulando/financeiro', 'as' => 'vestibulando.financeiro.'], function () {
+    Route::post('storeDebitoInscricaoByPortal', [
+        'as' => 'storeDebitoInscricaoByPortal',
+        'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitoInscricaoByPortal'
+    ]);
+    Route::get('getBoletoVestibulandoByPortal', [
+        'as' => 'getBoletoVestibulandoByPortal',
+        'uses' => 'Graduacao\VestibulandoFinanceiroController@getBoletoVestibulandoByPortal'
+    ]);
+});
+
+

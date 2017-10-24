@@ -57,6 +57,7 @@ class DebitoRepositoryEloquent extends BaseRepository implements DebitoRepositor
                 "fin_debitos.id",
                 "fin_debitos.valor_debito",
                 "fin_taxas.nome as nomeTaxa",
+                "fin_taxas.valor as valorTaxa",
                 "fin_debitos.data_vencimento",
                 \DB::raw("IF(fin_debitos.pago = 1, 'Sim', 'Não') as pago")
             ]);
