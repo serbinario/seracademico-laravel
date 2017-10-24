@@ -156,4 +156,16 @@ class Taxa extends Model implements Transformable
                     ->where('fin_beneficios_taxas.beneficio_id', $idBeneficio)->get();
             });
     }
+
+    /**
+     * @param $query
+     * @param $value
+     * @return mixed
+     */
+    public function scopeTaxaByBiblioteca($query, $value)
+    {
+        return $query
+            ->select(['id', 'nome'])
+            ->whereIn('id', [15,16]);
+    }
 }

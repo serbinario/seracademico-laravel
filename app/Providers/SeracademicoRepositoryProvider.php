@@ -938,5 +938,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Financeiro\CarneRepository::class,
             \Seracademico\Repositories\Financeiro\CarneRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Financeiro\ParametroRepository::class,
+            \Seracademico\Repositories\Financeiro\ParametroRepositoryEloquent::class
+        );
     }
 }

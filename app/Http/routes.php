@@ -1589,6 +1589,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         # Rotas para o financeiro
         Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
+
             # Rotas para a taxa
             Route::group(['prefix' => 'taxa', 'as' => 'taxa.'], function () {
                 Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\TaxaController@index']);
@@ -1623,6 +1624,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\BancoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\BancoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BancoController@update']);
+            });
+
+            # Rotas para parâmetros
+            Route::group(['prefix' => 'parametro', 'as' => 'parametro.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Financeiro\ParametroController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Financeiro\ParametroController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Financeiro\ParametroController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\ParametroController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Financeiro\ParametroController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\ParametroController@update']);
             });
 
             # Rotas para conta bancária

@@ -237,8 +237,10 @@ class VestibulandoFinanceiroController extends Controller
             $vestibulando = $this->repository->find($request->get('id'));
             $debito = $vestibulando->debitos->last();
             $boleto = $debito->boleto;
+            $status = $boleto->statusGnet;
+            $responseBoleto = array_merge($boleto->toArray(), $status->toArray());
 
-            return response()->json(['status' => 200, 'boleto' => $boleto->toArray()]);
+            return response()->json(['status' => 200, 'boleto' => $responseBoleto]);
         } catch (\Throwable $e) {
             return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
         }

@@ -8,6 +8,7 @@ use Seracademico\Repositories\Biblioteca\ExemplarRepository;
 use Seracademico\Repositories\Biblioteca\EmprestimoExemplarRepository;
 use Seracademico\Services\Biblioteca\RNEmprestimos\EmprestimosChainOfResponsibility;
 use Seracademico\Services\Biblioteca\RNEmprestimos\GerarDataDeDevolucaoDoEmprestimo;
+use Seracademico\Services\Financeiro\DebitoService;
 
 //use Carbon\Carbon;
 
@@ -29,14 +30,25 @@ class EmprestarService
     private $emprestimoExemplar;
 
     /**
-     * @param EmprestarRepository $repository
+     * @var DebitoService
      */
-    public function __construct(EmprestarRepository $repository, ExemplarRepository $repoExemplar,
-                                EmprestimoExemplarRepository $emprestimoExemplar)
+    private $debitoService;
+
+    /**
+     * @param EmprestarRepository $repository
+     * @param ExemplarRepository $repoExemplar
+     * @param EmprestimoExemplarRepository $emprestimoExemplar
+     * @param DebitoService $debitoService
+     */
+    public function __construct(EmprestarRepository $repository,
+                                ExemplarRepository $repoExemplar,
+                                EmprestimoExemplarRepository $emprestimoExemplar,
+                                DebitoService $debitoService)
     {
         $this->repository   = $repository;
         $this->repoExemplar = $repoExemplar;
         $this->emprestimoExemplar = $emprestimoExemplar;
+        $this->debitoService = $debitoService;
     }
 
     /**
@@ -300,7 +312,9 @@ class EmprestarService
         $dataObj = new \DateTime("now");
         $data = $dataObj->format('Y-m-d');
 
-        $parametros = \DB::table('bib_parametros')->whereIn('codigo', ['004', '005'])->get();
+        $parametros = \DB::table('fin_parametros')
+            ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
+            ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
 
         $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
         $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
@@ -319,17 +333,12 @@ class EmprestarService
             //pegando a quantidade de exemplares emprestados
             $qtdExemplar = count($emprestimo->emprestimoExemplar);
 
-           // dd($valorNormal);
-
             // Calculando a multa geral do atraso
             if($emprestimo->tipo_emprestimo == '1' && $emprestimo->emprestimo_especial == '0') {
-               // dd('normal');
                 $multa = ($valorNormal * $qtdExemplar) * $dias;
             } else if ($emprestimo->tipo_emprestimo == '2' || $emprestimo->emprestimo_especial == '1') {
-                //dd('consulta');
                 $multa = ($valorConsulta * $qtdExemplar) * $dias;
             }
-
 
             // Calculando multa por exemplar
             foreach ($emprestimo->exemplaresPivot as $exemplar) {
@@ -347,18 +356,16 @@ class EmprestarService
             $emprestimo->valor_multa = $multa;
         }
 
-        //dd($emprestimo->exemplaresPivot);
-
         // Setando data e status de devolução
         $emprestimo->data_devolucao_real = $data;
         $emprestimo->status_devolucao = '1';
-        $emprestimo->status_pagamento = $multa ? '1' : '0';
+        $emprestimo->status_pagamento = $multa ? '0' : '1';
         $emprestimo->save();
 
         // Alterando o status dos exemplares a serem devolvidos
         foreach ($emprestimo->emprestimoExemplar as $e) {
             $exemplar =  $this->repoExemplar->find($e->id);
-            if($exemplar->emprestimo_id == '1') {
+            if ($exemplar->emprestimo_id == '1') {
                 $exemplar->situacao_id = '1';
                 $exemplar->save();
             } else if ($exemplar->emprestimo_id == '2') {
@@ -390,7 +397,9 @@ class EmprestarService
         $dataObj = new \DateTime("now");
         $data = $dataObj->format('Y-m-d');
 
-        $parametros = \DB::table('bib_parametros')->whereIn('codigo', ['004', '005'])->get();
+        $parametros = \DB::table('fin_parametros')
+            ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
+            ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
 
         $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
         $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
