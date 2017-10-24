@@ -218,9 +218,27 @@ class VestibulandoFinanceiroController extends Controller
         try {
             $vestibulando = $this->repository->find($request->get('id'));
             $dadosDebito = $this->service->formatDebitoInscricao($vestibulando);
-            $this->debitoService->store($vestibulando, $dadosDebito);
+            $debito = $this->debitoService->store($vestibulando, $dadosDebito);
+            $boleto = $this->debitoService->gerarBoleto($debito->id);
 
-            return response()->json(['status' => 200]);
+            return response()->json(['status' => 200, 'boleto' => $boleto->toArray()]);
+        } catch (\Throwable $e) {
+            return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getBoletoVestibulandoByPortal(Request $request)
+    {
+        try {
+            $vestibulando = $this->repository->find($request->get('id'));
+            $debito = $vestibulando->debitos->last();
+            $boleto = $debito->boleto;
+
+            return response()->json(['status' => 200, 'boleto' => $boleto->toArray()]);
         } catch (\Throwable $e) {
             return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
         }

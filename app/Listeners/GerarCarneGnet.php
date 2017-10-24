@@ -65,14 +65,18 @@ class GerarCarneGnet
      */
     public function handle(DebitoStored $event)
     {
+        if (!isset($dados['quantidade'])) {
+            return;
+        }
+
+        if(!$dados['quantidade'] > 0) {
+            return;
+        }
+
         $debito = $event->getDebito();
         $dados = $event->getDados();
         $pessoa = $debito->debitante->pessoa;
         $dadosGnet = $this->formatDataForGnet($debito, $dados);
-
-        if (!(isset($dados['quantidade']) && $dados['quantidade'] > 0)) {
-            return;
-        }
 
         try {
             \DB::beginTransaction();

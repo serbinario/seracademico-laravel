@@ -1723,7 +1723,15 @@ Route::post('notificacoesGnet', ['as' => 'notificacoesGnet', 'uses' => 'Financei
 
 
 # Rotas de acesso para operações financeiras do portal
-Route::post('vestibulando/financeiro/storeDebitoInscricaoByPortal', [
-    'as' => 'vestibulando.financeiro.storeDebitoInscricaoByPortal',
-    'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitoInscricaoByPortal'
-]);
+Route::group(['prefix' => 'vestibulando/financeiro', 'as' => 'vestibulando.financeiro.'], function () {
+    Route::post('storeDebitoInscricaoByPortal', [
+        'as' => 'storeDebitoInscricaoByPortal',
+        'uses' => 'Graduacao\VestibulandoFinanceiroController@storeDebitoInscricaoByPortal'
+    ]);
+    Route::get('getBoletoVestibulandoByPortal', [
+        'as' => 'getBoletoVestibulandoByPortal',
+        'uses' => 'Graduacao\VestibulandoFinanceiroController@getBoletoVestibulandoByPortal'
+    ]);
+});
+
+
