@@ -73,9 +73,11 @@ class AlunoFinanceiroController extends Controller
         try {
             $consulta = $this->debitoRepository
                 ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
+                ->leftJoin('fin_carnes', 'fin_debitos.carne_id', '=', 'fin_carnes.id')
                 ->leftJoin('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
                 ->leftJoin('fin_status_gnet', 'fin_boletos.gnet_status_id', '=', 'fin_status_gnet.id')
-                ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"));
+                ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"))
+                ->addSelect('fin_carnes.gnet_carnet_id');
 
             return DataTables::of($consulta)
                 ->addColumn('action', function () {
@@ -110,7 +112,7 @@ class AlunoFinanceiroController extends Controller
                 ->addSelect('fin_carnes.gnet_carnet_id')
                 ->addSelect('fin_carnes.gnet_link')
                 ->addSelect(\DB::raw("DATE_FORMAT(fin_carnes.created_at, '%d/%m/%Y') as data_criacao"))
-                ->groupBy('fin_carnes.id');
+                ->groupBy('fin_carnes.id', 'fin_taxas.id');
 
             return DataTables::of($consulta)
                 ->addColumn('link', function ($row) {
