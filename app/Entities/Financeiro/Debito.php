@@ -37,6 +37,7 @@ class Debito extends Model implements Transformable
         'debitante_type',
         'forma_pagamento_id',
         'conta_bancaria_id',
+        'carne_id',
         'pago'
 	];
 
@@ -73,10 +74,8 @@ class Debito extends Model implements Transformable
 	public function beneficios()
 	{
 		return $this->belongsToMany(
-		    Beneficio::class,
-            'fin_debitos_beneficios',
-            'debito_id',
-            'beneficio_id'
+		    Beneficio::class, 'fin_debitos_beneficios',
+            'debito_id', 'beneficio_id'
         );
 	}
 
@@ -87,6 +86,15 @@ class Debito extends Model implements Transformable
 	public function debitante()
     {
         return $this->morphTo();
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function carne()
+    {
+        return $this->belongsTo(Carne::class, 'carne_id');
     }
 
 

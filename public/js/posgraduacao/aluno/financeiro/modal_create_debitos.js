@@ -49,9 +49,10 @@ function preencheCamposTaxa (retorno) {
 }
 
 function builderHtmlFieldsDebito (dados) {
-    $('#taxa_id option').attr('selected', false);
-    $('#conta_bancaria_id option').attr('selected', false);
-    $('#pago option').attr('selected', false);
+    $('#taxa_id option').prop('selected', false);
+    $('#conta_bancaria_id option').prop('selected', false);
+    $('#pago option').prop('selected', false);
+    $('#gerar_care option').prop('selected', false);
     $('#data_vencimento').val('');
     $('#valor_taxa').val('');
     $('#valor_debito').val('');
@@ -100,6 +101,8 @@ $('#btnSalvarDebito').click(function() {
     var ano_referencia = $("#ano_referencia").val();
     var conta_bancaria_id = $('#conta_bancaria_id option:selected').val();
     var forma_pagamento_id = $('#forma_pagamento_id option:selected').val();
+    var gerar_carne = $('#gerar_carne option:selected').val();
+    var quantidade = $('#quantidade').val();
     var pago = $('#pago option:selected').val();
 
     var dados = {
@@ -111,6 +114,8 @@ $('#btnSalvarDebito').click(function() {
         'ano_referencia' : ano_referencia,
         'conta_bancaria_id' : conta_bancaria_id,
         'forma_pagamento_id': forma_pagamento_id,
+        'gerar_carne' : gerar_carne,
+        'quantidade' : quantidade,
         'pago': pago
     };
 
@@ -123,7 +128,13 @@ $('#btnSalvarDebito').click(function() {
         type: 'POST',
         url: '/index.php/seracademico/posgraduacao/aluno/financeiro/storeDebito/' + idAluno,
         data: dados,
-        datatype: 'json'
+        datatype: 'json',
+        beforeSend: function() {
+            $(".carregamento").show();
+        },
+        complete: function() {
+            $(".carregamento").hide();
+        }
     }).done(function (retorno) {
         if(retorno.success) {
             tableDebitos.ajax.reload();

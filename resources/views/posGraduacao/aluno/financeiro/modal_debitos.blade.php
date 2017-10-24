@@ -29,6 +29,10 @@
                             <li role="presentation" class="active">
                                 <a href="#debitos" aria-controls="debitos" data-toggle="tab">Débitos</a>
                             </li>
+
+                            <li role="presentation">
+                                <a href="#carnes" aria-controls="carnes" data-toggle="tab">Carnês</a>
+                            </li>
                         </ul>
 
                         <!-- Conteúdo de navegação de abas -->
@@ -54,14 +58,28 @@
                                 </table>
                             </div>
 
-                        </div>
+                            <div role="tabpanel" class="tab-pane" id="carnes">
 
-                        <div class="carregamento">
-                            <img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">
+                                <table style="margin-top: 2%" id="grid-carnes" class="display table table-bordered"
+                                       cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Data Criação</th>
+                                        <th>Qtd. Parcelas</th>
+                                        <th>Link</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="carregamento">
+    {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
 </div>

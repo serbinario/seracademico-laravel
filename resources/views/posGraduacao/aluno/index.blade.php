@@ -25,19 +25,31 @@
             padding: 2px 10px;
         }
 
-
         .carregamento{
-            width: 200px;
-            height: auto;
-            position: absolute;
-            margin-left: auto;
-            margin-right: auto;
-            right: 0;
-            left: 0;
-            top: 0;
-            display: none;
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+            url("{{ asset('/img/pre-loader/gears_200x200.gif') }}")
+            50% 50%
+            no-repeat;
         }
 
+        /* When the body has the loading class, we turn
+        the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+        /* Anytime the body has the loading class, our
+           modal element will be visible */
+        body.loading .carregamento {
+            display: block;
+        }
     </style>
 @stop
 
@@ -160,6 +172,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="carregamento">
+        {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
     </div>
 
     @include('posGraduacao.aluno.turma.modal_aluno_turma')

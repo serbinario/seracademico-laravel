@@ -100,6 +100,35 @@ class GerencianetService
     }
 
     /**
+     * @param GnetCustomer $pessoa
+     * @param array $data
+     * @return mixed
+     */
+    public function createCarnet(GnetCustomer $pessoa, array $data)
+    {
+        $this->validateCustomer($pessoa);
+        $this->validateDataCarnet($data);
+
+        $item_1 = [
+            'name' => $data['name'],
+            'amount' => 1,
+            'value' => $data['value']
+        ];
+
+        $body = [
+            'items' => [$item_1],
+            'customer' => $this->formatCustomer($pessoa),
+            'expire_at' => $data['expire_at'],
+            'repeats' => $data['qtd'],
+            'split_items' => false
+        ];
+
+        $carnet = $this->apiGerencianet->createCarnet([], $body);
+
+        return $carnet;
+    }
+
+    /**
      * @param $charge
      * @return array
      */
@@ -117,15 +146,9 @@ class GerencianetService
      */
     protected function formatBodyPay(GnetCustomer $pessoa, GnetBoleto $boleto)
     {
-        $customer = [
-            'name' => $pessoa->getName(),
-            'cpf' => $pessoa->getCpf() ,
-            'phone_number' => $pessoa->getPhone()
-        ];
-
         $bankingBillet = [
             'expire_at' => $boleto->getDueDate(),
-            'customer' => $customer,
+            'customer' => $this->formatCustomer($pessoa),
             'configurations' => [
                 'interest' => 0
             ],
@@ -143,10 +166,33 @@ class GerencianetService
 
     /**
      * @param GnetCustomer $pessoa
+     * @return array
+     */
+    protected function formatCustomer(GnetCustomer $pessoa)
+    {
+        return [
+            'name' => $pessoa->getName(),
+            'cpf' => $pessoa->getCpf() ,
+            'phone_number' => $pessoa->getPhone()
+        ];
+    }
+
+    /**
+     * @param GnetCustomer $pessoa
      * @param GnetBoleto $
      * @throws \Exception
      */
     private function validateOrFail(GnetCustomer $pessoa, GnetBoleto $boleto)
+    {
+        $this->validateCustomer($pessoa);
+        $this->validateBoleto($boleto);
+    }
+
+    /**
+     * @param GnetCustomer $pessoa
+     * @throws \Exception
+     */
+    private function validateCustomer(GnetCustomer $pessoa)
     {
         if (!$pessoa->getName()) {
             throw new \Exception('Nome da pessoa não informado');
@@ -159,9 +205,39 @@ class GerencianetService
         if (!$pessoa->getPhone()) {
             throw new \Exception('Telefone da pessoa não informado');
         }
+    }
 
+    /**
+     * @param GnetBoleto $boleto
+     * @throws \Exception
+     */
+    private function validateBoleto(GnetBoleto $boleto)
+    {
         if (!$boleto->getDueDate()) {
             throw new \Exception('Data de vencimento não informada');
+        }
+    }
+
+    /**
+     * @param array $data
+     * @throws \Exception
+     */
+    private function validateDataCarnet(array $data)
+    {
+        if (!isset($data['expire_at'])) {
+            throw new \Exception('Data do vencimento não informado!');
+        }
+
+        if (!isset($data['qtd'])) {
+            throw new \Exception('Quantidade de repetições não informado');
+        }
+
+        if (!isset($data['value'])) {
+            throw new \Exception('Valor não informado');
+        }
+
+        if (!isset($data['name'])) {
+            throw new \Exception('Nome não informado');
         }
     }
 

@@ -63,15 +63,46 @@ function loadTableDebitos (idAluno) {
     return tableDebitos;
 }
 
+var tableCarnes;
+function loadTableCarnes (idAluno) {
+    tableCarnes = $('#grid-carnes').DataTable({
+        processing: true,
+        serverSide: true,
+        retrieve: true,
+        iDisplayLength: 5,
+        bLengthChange: false,
+        bFilter: false,
+        autoWidth: false,
+        ajax: "/index.php/seracademico/posgraduacao/aluno/financeiro/gridCarnes/" + idAluno,
+        columns: [
+            {data: 'gnet_carnet_id', name: 'fin_carnes.gnet_carnet_id'},
+            {data: 'data_criacao', name: 'fin_carnes.created_at'},
+            {data: 'qtd_parcelas', name: 'qtd_parcelas', orderable: false, searchable: false},
+            {data: 'link', name: 'link', orderable: false, searchable: false}
+        ]
+    });
+
+    return tableCarnes;
+}
+
 // Função para executar a grid
 function runFinanceiro(idAluno) {
-    // Carregando a grid de debitos
     if(tableDebitos) {
-        loadTableDebitos(idAluno).ajax
+        loadTableDebitos(idAluno)
+            .ajax
             .url("/index.php/seracademico/posgraduacao/aluno/financeiro/gridDebitos/" + idAluno)
             .load();
     } else {
         loadTableDebitos(idAluno);
+    }
+
+    if(tableCarnes) {
+        loadTableCarnes(idAluno)
+            .ajax
+            .url("/index.php/seracademico/posgraduacao/aluno/financeiro/gridCarnes/" + idAluno)
+            .load();
+    } else {
+        loadTableCarnes(idAluno);
     }
 
     // carregando a modal
