@@ -60,6 +60,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Tecnico\AlunoCurriculoController@storeEquivalencia']);
                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Tecnico\AlunoCurriculoController@deleteEquivalencia']);
                 });
+
+                # Rotas para o financeiro do aluno
+                Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\AlunoFinanceiroController@getLoadFields']);
+                    Route::get('gridDebitos/{id}', ['as' => 'gridDebitos', 'uses' => 'Tecnico\AlunoFinanceiroController@gridDebitos']);
+                    Route::post('storeDebito/{id}', ['as' => 'storeDebito', 'uses' => 'Tecnico\AlunoFinanceiroController@storeDebito']);
+                    Route::get('getDebito/{idDebito}', ['as' => 'getDebito', 'uses' => 'Tecnico\AlunoFinanceiroController@getDebito']);
+                    Route::get('editDebito/{idDebito}', ['as' => 'editDebito', 'uses' => 'Tecnico\AlunoFinanceiroController@editDebito']);
+                    Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'Tecnico\AlunoFinanceiroController@updateDebito']);
+                    Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'Tecnico\AlunoFinanceiroController@gerarBoleto']);
+                    Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Tecnico\AlunoFinanceiroController@infoDebito']);
+                    Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Tecnico\AlunoFinanceiroController@gridCarnes']);
+                });
             });
 
             Route::group(['prefix' => 'professor', 'middleware' => 'auth', 'as' => 'professor.'], function () {
