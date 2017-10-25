@@ -313,6 +313,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'Mestrado\AlunoCurriculoController@storeEquivalencia']);
                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'Mestrado\AlunoCurriculoController@deleteEquivalencia']);
                 });
+
+                # Rotas para o financeiro do aluno de pós
+                Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\AlunoFinanceiroController@getLoadFields']);
+                    Route::get('gridDebitos/{id}', ['as' => 'gridDebitos', 'uses' => 'Mestrado\AlunoFinanceiroController@gridDebitos']);
+                    Route::post('storeDebito/{id}', ['as' => 'storeDebito', 'uses' => 'Mestrado\AlunoFinanceiroController@storeDebito']);
+                    Route::get('getDebito/{idDebito}', ['as' => 'getDebito', 'uses' => 'Mestrado\AlunoFinanceiroController@getDebito']);
+                    Route::get('editDebito/{idDebito}', ['as' => 'editDebito', 'uses' => 'Mestrado\AlunoFinanceiroController@editDebito']);
+                    Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'Mestrado\AlunoFinanceiroController@updateDebito']);
+                    Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'Mestrado\AlunoFinanceiroController@gerarBoleto']);
+                    Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Mestrado\AlunoFinanceiroController@infoDebito']);
+                    Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Mestrado\AlunoFinanceiroController@gridCarnes']);
+                });
             });
 
             #Rotas de professores

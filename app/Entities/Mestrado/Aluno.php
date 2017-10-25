@@ -7,6 +7,7 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\CursoPosGraduacao;
 use Seracademico\Entities\CursoSuperior;
+use Seracademico\Entities\Financeiro\Debito;
 use Seracademico\Entities\Mestrado\Curso;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Uteis\SerbinarioDateFormat;
@@ -70,14 +71,6 @@ class Aluno extends Model implements Transformable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function pessoa()
-    {
-        return $this->belongsTo(Pessoa::class, 'pessoa_id');
-    }
-
-    /**
      * @return \DateTime
      */
     public function getDataInscricaoAttribute()
@@ -123,6 +116,30 @@ class Aluno extends Model implements Transformable
     public function setDataColacaoAttribute($value)
     {
         $this->attributes['data_colacao'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataMatriculaAttribute()
+    {
+        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setDataMatriculaAttribute($value)
+    {
+        $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pessoa()
+    {
+        return $this->belongsTo(Pessoa::class, 'pessoa_id');
     }
 
     /**
@@ -174,18 +191,10 @@ class Aluno extends Model implements Transformable
     }
 
     /**
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function getDataMatriculaAttribute()
+    public function debitos()
     {
-        return SerbinarioDateFormat::toBrazil($this->attributes['data_matricula']);
-    }
-
-    /**
-     * @param $value
-     */
-    public function setDataMatriculaAttribute($value)
-    {
-        $this->attributes['data_matricula'] = SerbinarioDateFormat::toUsa($value);
+        return $this->morphMany(Debito::class, 'debitante');
     }
 }
