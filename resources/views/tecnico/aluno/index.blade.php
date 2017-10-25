@@ -20,8 +20,35 @@
         tr.details td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-minus.png")}}") no-repeat center center;
         }
+
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
+        }
+
+        .carregamento{
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+            url("{{ asset('/img/pre-loader/gears_200x200.gif') }}")
+            50% 50%
+            no-repeat;
+        }
+
+        /* When the body has the loading class, we turn
+        the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+        /* Anytime the body has the loading class, our
+           modal element will be visible */
+        body.loading .carregamento {
+            display: block;
         }
     </style>
 @stop
@@ -147,6 +174,10 @@
         </div>
     </div>
 
+    <div class="carregamento">
+        {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
+    </div>
+
     @include('tecnico.aluno.turma.modal_aluno_turma')
     @include('tecnico.aluno.turma.modal_nova_turma')
     @include('tecnico.aluno.turma.modal_create_situacao')
@@ -158,6 +189,10 @@
     @include('tecnico.aluno.curriculo.modal_create_equivalencia')
     @include('reports.simple.modals.modal_report_tecnico_aluno_geral')
     @include('reports.simple.modals.modal_report_tecnico_aluno_documento')
+    @include('tecnico.aluno.financeiro.modal_debitos')
+    @include('tecnico.aluno.financeiro.modal_create_debito')
+    @include('tecnico.aluno.financeiro.modal_edit_debito')
+    @include('tecnico.aluno.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
@@ -171,6 +206,13 @@
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_geral.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
 
     {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/documentos/modal_aluno_documento.js') }}"></script>
