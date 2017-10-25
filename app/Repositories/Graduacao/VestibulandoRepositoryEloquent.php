@@ -40,15 +40,20 @@ class VestibulandoRepositoryEloquent extends BaseRepository implements Vestibula
     public function dadosVestibulando($idVestibulando)
     {
         $documentos = DB::table('vest_documentos')
+            ->join('vest_tipos_documentos', 'vest_tipos_documentos.id', '=', 'vest_documentos.tipo_documento_id')
             ->select([
-                'id',
-                'path',
-                'tipo_documento_id',
-                'vestibulando_id',
-                'confirmacao',
-                'observacao'
+                'vest_documentos.id',
+                'vest_tipos_documentos.nome',
+                'vest_documentos.confirmacao',
+                'vest_documentos.path',
+                'vest_tipos_documentos.descricao',
+                'vest_documentos.observacao',
+                'vest_documentos.vestibulando_id',
+                'vest_documentos.tipo_documento_id',
+                'vest_documentos.entregar_pessoalmente',
+                'vest_documentos.documento_estado_id',
             ])
-            ->where('vestibulando_id', $idVestibulando)
+            ->where('vest_documentos.vestibulando_id', $idVestibulando)
             ->get();
 
         /*if(count(!$documentos) == 0) {
