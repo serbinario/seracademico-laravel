@@ -65,6 +65,9 @@ class GerarCarneGnet
      */
     public function handle(DebitoStored $event)
     {
+        $debito = $event->getDebito();
+        $dados = $event->getDados();
+
         if (!isset($dados['quantidade'])) {
             return;
         }
@@ -73,8 +76,6 @@ class GerarCarneGnet
             return;
         }
 
-        $debito = $event->getDebito();
-        $dados = $event->getDados();
         $pessoa = $debito->debitante->pessoa;
         $dadosGnet = $this->formatDataForGnet($debito, $dados);
 

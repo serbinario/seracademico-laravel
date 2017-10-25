@@ -16,7 +16,7 @@ function loadFieldsDebito()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/posgraduacao/aluno/financeiro/getLoadFields',
+        url: '/index.php/seracademico/tecnico/aluno/financeiro/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         if(retorno) {
@@ -126,7 +126,7 @@ $('#btnSalvarDebito').click(function() {
 
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/posgraduacao/aluno/financeiro/storeDebito/' + idAluno,
+        url: '/index.php/seracademico/tecnico/aluno/financeiro/storeDebito/' + idAluno,
         data: dados,
         datatype: 'json',
         beforeSend: function() {
