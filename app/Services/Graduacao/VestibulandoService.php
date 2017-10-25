@@ -350,6 +350,38 @@ class VestibulandoService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #deletando o vstibulando
+        $vestibulando = $this->repository->find($id);
+
+        \DB::table('vest_documentos')->where('vestibulando_id', $id)->delete();
+        \DB::table('fin_boletos_vestibulandos')->where('vestibulando_id', $id)->delete();
+        \DB::table('fac_vestibulandos_financeiros')->where('vestibulando_id', $id)->delete();
+        \DB::table('fac_vestibulandos_notas_vestibulares')->where('vestibulando_id', $id)->delete();
+
+        #deletando o vstibulando
+        $result = $this->repository->delete($id);
+
+        $pessoa = \DB::table('pessoas')->where('id', $vestibulando->pessoa_id)->select()->first();
+
+        \DB::table('pessoas')->where('id', $pessoa->id)->delete();
+        \DB::table('enderecos')->where('id', $pessoa->enderecos_id)->delete();
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
+    }
+
+    /**
      * @param $id
      */
     public function insertImg($id, $tipo)
