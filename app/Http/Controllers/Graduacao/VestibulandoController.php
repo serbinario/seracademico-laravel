@@ -199,7 +199,8 @@ class VestibulandoController extends Controller
                 $html = '<div class="fixed-action-btn horizontal">
                             <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                             <ul>
-                                <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>                           
+                                <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar aluno"><i class="material-icons">edit</i></a></li>
+                                <li><a class="btn-floating" href="delete/'.$row->id.'" title="Deletar aluno"><i class="material-icons">delete</i></a></li>
                          ';
 
                 # regra de negócio para transferir o vestibulando
@@ -397,6 +398,23 @@ class VestibulandoController extends Controller
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
