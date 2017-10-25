@@ -812,7 +812,7 @@
                 <div class="row">
                     @foreach($documentos as $documento)
                         <div class="form-group col-md-4">
-                            <a target="_blank" href="http://localhost/AlphaVestibular/public/storage/vestibulandos/documentos/{{$documento->path}}" alt="">Visualizar {{$documento->descricao}}</a>
+                            <a target="_blank" href="http://alpha-vestibular.serbinario.com.br/storage/vestibulandos/documentos/{{$documento->path}}" alt="">Visualizar {{$documento->descricao}}</a>
                             <div>
                                 {!! Form::label('observacao', 'Observação') !!}
                                 {!! Form::textarea("documentos[observacao_{$documento->id}]", $documento->observacao, array('class' => 'form-control', 'rows'=>'3')) !!}
