@@ -23,6 +23,32 @@
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
+
+        .carregamento{
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+            url("{{ asset('/img/pre-loader/gears_200x200.gif') }}")
+            50% 50%
+            no-repeat;
+        }
+
+        /* When the body has the loading class, we turn
+        the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+        /* Anytime the body has the loading class, our
+           modal element will be visible */
+        body.loading .carregamento {
+            display: block;
+        }
     </style>
 @stop
 
@@ -147,6 +173,10 @@
         </div>
     </div>
 
+    <div class="carregamento">
+        {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
+    </div>
+
     @include('doutorado.aluno.modal_aluno_documento')
     @include('doutorado.aluno.turma.modal_aluno_turma')
     @include('doutorado.aluno.turma.modal_nova_turma')
@@ -158,6 +188,10 @@
     @include('doutorado.aluno.curriculo.modal_create_equivalencia')
     @include('reports.simple.modals.modal_report_doutorado_aluno_geral')
     @include('reports.simple.modals.modal_report_doutorado_aluno_documento')
+    @include('doutorado.aluno.financeiro.modal_debitos')
+    @include('doutorado.aluno.financeiro.modal_create_debito')
+    @include('doutorado.aluno.financeiro.modal_edit_debito')
+    @include('doutorado.aluno.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
@@ -172,6 +206,14 @@
     <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/curriculo/modal_create_equivalencia.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_aluno_geral.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_doutorado_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/doutorado/aluno/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
+
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -254,6 +296,23 @@
             loadFieldsDocumentos();
 
             $("#modal-aluno-documento").modal({show:true});
+        });
+
+        // Evento para abrir o modal do financeiro
+        $(document).on("click", "#btnModalFinanceiro", function () {
+            // Recuperando os dados do aluno selecionado
+            var rowTable = $(this).parents('tr');
+            idAluno = table.row(rowTable).data().id;
+            var nomeAluno   = table.row(rowTable).data().nome;
+            var matricula   = table.row(rowTable).data().matricula;
+            var codigoCurso = table.row(rowTable).data().codigoCurso;
+
+            // prenchendo o titulo do nome do aluno
+            $('#finMatricula').text(matricula);
+            $('#finNomeAluno').text(nomeAluno);
+            $('#finCurso').text(codigoCurso);
+
+            runFinanceiro(idAluno);
         });
 
         // Geriamento dos relatórios avançadas
