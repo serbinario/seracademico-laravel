@@ -46,9 +46,9 @@ class AlunoDocumentoController extends Controller
                 case "3" :
                     $this->certificadoConclusao($idAluno);
                     break;
-                case "4" :
+                /*case "4" :
                     $this->contratoFasup($idAluno);
-                    break;
+                    break;*/
                 case "9" :
                     $this->inscricao($idAluno);
                     break;
@@ -103,10 +103,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->certificadoConclusao($idAluno);
                     $nameView = "reports.certificadoConclusao";
                     break;
-                case "4" :
+                /*case "4" :
                     $result = $this->contratoFasup($idAluno);
                     $nameView = "reports.contratoFasup";
-                    break;
+                    break;*/
                 case "9" :
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_fasup";
