@@ -5,10 +5,10 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">receipt</i> Listar Exemplares Periódicos</h4>
+                <h4><i class="material-icons">receipt</i> Listar Exemplares - Revistas</h4>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="{{ route('seracademico.biblioteca.createExemplarP')}}" class="btn-sm btn-primary pull-right">Novo Exemplar Periódico</a>
+                <a href="{{ route('seracademico.biblioteca.createExemplarP')}}" class="btn-sm btn-primary pull-right">Novo Exemplar</a>
             </div>
         </div>
         <div class="ibox-content">
