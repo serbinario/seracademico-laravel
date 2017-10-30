@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-md-10">
         @if(!isset($aluno))
@@ -483,11 +482,6 @@
                             </div>
                         </div>
 
-                        <div class="row">
-
-
-                        </div>
-
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
@@ -872,8 +866,6 @@
         </div>
         {{--Fim Buttons Submit e Voltar--}}
     </div>
-
-
 </div>
 
 @section('javascript')

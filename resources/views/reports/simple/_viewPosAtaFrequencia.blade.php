@@ -11,9 +11,8 @@
         }
 
         body {
-            background-image: url("{{ asset('img/marca_dagua_logo-alpha-b.png') }}");
+            background-image: url("{{ asset('img/background-alpha.png') }}");
             background-position: center center;
-            background-repeat: no-repeat;
         }
 
         #header {
@@ -71,8 +70,8 @@
 <body>
 
 <div id="header">
-    <h1>
-        <img width="200" src="{{ asset('img/logo-alpha-b.png') }}" alt="alpha">
+    <<h1>
+        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
     </h1>
 </div>
 

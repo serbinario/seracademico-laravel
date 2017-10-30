@@ -372,6 +372,13 @@ class VestibulandoService
         \DB::table('pessoas')->where('id', $pessoa->id)->delete();
         \DB::table('enderecos')->where('id', $pessoa->enderecos_id)->delete();
 
+        // Deletando o registro de contato do vestibulando
+        if ($vestibulando->contato_id) {
+            $contato = \DB::table('pessoas')->where('id', $vestibulando->contato_id)->select()->first();
+
+            \DB::table('pessoas')->where('id', $contato->id)->delete();
+        }
+
         # Verificando se a execução foi bem sucessida
         if(!$result) {
             throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
