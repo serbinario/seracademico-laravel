@@ -46,9 +46,9 @@ class AlunoDocumentoController extends Controller
                 case "3" :
                     $this->certificadoConclusao($idAluno);
                     break;
-                case "4" :
+                /*case "4" :
                     $this->contratoFasup($idAluno);
-                    break;
+                    break;*/
                 case "9" :
                     $this->inscricao($idAluno);
                     break;
@@ -57,6 +57,12 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "12":
                     $this->declaracaoVinculoModelo($idAluno);
+                    break;
+                case "24":
+                    $this->inscricao_alpha($idAluno);
+                    break;
+                case "25":
+                    $this->declaracao_vinculo_alpha($idAluno);
                     break;
             }
 
@@ -97,10 +103,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->certificadoConclusao($idAluno);
                     $nameView = "reports.certificadoConclusao";
                     break;
-                case "4" :
+                /*case "4" :
                     $result = $this->contratoFasup($idAluno);
                     $nameView = "reports.contratoFasup";
-                    break;
+                    break;*/
                 case "9" :
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_fasup";
@@ -108,6 +114,14 @@ class AlunoDocumentoController extends Controller
                 case "12" :
                     $result = $this->declaracaoVinculoModelo($idAluno);
                     $nameView = "reports.declaracaoVinculoModelo";
+                    break;
+                case "24" :
+                    $result = $this->inscricao_alpha($idAluno);
+                    $nameView = "reports.inscricao_alpha_pos-graduacao";
+                    break;
+                case "25" :
+                    $result = $this->declaracao_vinculo_alpha($idAluno);
+                    $nameView = "reports.declaracao_vinculo_alpha_pos_graduacao";
                     break;
                 case "10" :
                     $result = $this->historico($idAluno);
@@ -223,6 +237,26 @@ class AlunoDocumentoController extends Controller
      * @return array
      * @throws \Exception
      */
+    public function declaracao_vinculo_alpha($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
     public function certificadoConclusao($id)
     {
         # Recuperando os dados padrões para esse documento
@@ -244,6 +278,26 @@ class AlunoDocumentoController extends Controller
      * @throws \Exception
      */
     public function inscricao($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Verificando se o aluno possui as informações necessárias
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
+            throw new \Exception("Para gerar o contrato é necessário ter as seguintes
+                     informações em turmas: aula inicial e aula final");
+        }
+
+        # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function inscricao_alpha($id)
     {
         # Recuperando os dados padrões para esse documento
         $result = $this->getDadosPadraoParaGerarDocumento($id);
