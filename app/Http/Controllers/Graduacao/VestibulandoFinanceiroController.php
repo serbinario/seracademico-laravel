@@ -217,7 +217,7 @@ class VestibulandoFinanceiroController extends Controller
     {
         try {
             $vestibulando = $this->repository->find($request->get('id'));
-            $dadosDebito = $this->service->formatDebitoInscricao($vestibulando);
+            $dadosDebito = $this->service->formatDebitoInscricao($vestibulando, 3);
             $debito = $this->debitoService->store($vestibulando, $dadosDebito);
             $boleto = $this->debitoService->gerarBoleto($debito->id);
 

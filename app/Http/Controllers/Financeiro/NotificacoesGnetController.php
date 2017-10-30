@@ -2,6 +2,7 @@
 namespace Seracademico\Http\Controllers\Financeiro;
 
 use Illuminate\Http\Request;
+use Seracademico\Entities\Graduacao\Vestibulando;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\BoletoService;
 use Seracademico\Services\Financeiro\GerencianetService;
@@ -39,7 +40,16 @@ class NotificacoesGnetController extends Controller
     {
         try {
             $notificacao = $this->gerencianetService->notification($request->get('notification'));
-            $this->boletoService->editarStatusPelaNotificacao($notificacao);
+            $boleto = $this->boletoService->editarStatusPelaNotificacao($notificacao);
+            $debito = $boleto->debito;
+
+            if ($debito->debitante instanceof (Vestibulando::class)) {
+                if ($boleto->statusGnet->codigo == 'paid') {
+                    $debitante = $debito->debitante;
+                    $debitante->terceiro_passo = true;
+                    $debitante->save();
+                }
+            }
 
             return response()->json(['success' => true]);
         } catch (\Throwable $e) {

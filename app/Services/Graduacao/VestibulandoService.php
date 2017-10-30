@@ -587,13 +587,19 @@ class VestibulandoService
      * @param Vestibulando $vestibulando
      * @return mixed
      */
-    public function formatDebitoInscricao(Vestibulando $vestibulando)
+    public function formatDebitoInscricao(Vestibulando $vestibulando, $addDiasVencimento = "")
     {
         $vestibular = $vestibulando->vestibular;
         $taxaVestibular = $vestibular->taxa;
         $contaBancaria = $this->contaBancariaRepository->getContaBancariaPadrao();
+
         $now = new Carbon();
-        $now->day($taxaVestibular->dia_vencimento);
+
+        if (is_numeric($addDiasVencimento)) {
+            $now->addDays($addDiasVencimento);
+        } else {
+            $now->day($taxaVestibular->dia_vencimento);
+        }
 
         $dados['data_vencimento'] = $now->format('d/m/Y');
         $dados['mes_referencia'] = $now->format('m');
