@@ -274,15 +274,15 @@
                         <li>
                             <a href="javascript:void(0)"><i class="flaticon-book"></i> Acervos <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
-                                <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}"><i class="flaticon-interface-1"></i> Não periódico</a></li>
-                                <li><a href="{{ route('seracademico.biblioteca.indexAcervoP') }}"><i class="flaticon-interface"></i> Periódico</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}"><i class="flaticon-interface-1"></i> Livros</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexAcervoP') }}"><i class="flaticon-interface"></i> Revistas</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="javascript:void(0)"><i class="flaticon-library"></i> Exemplar <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
-                                <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="flaticon-interface-1"></i> Não periódico</a></li>
-                                <li><a href="{{ route('seracademico.biblioteca.indexExemplarP') }}"><i class="flaticon-interface"></i> Periódico</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="flaticon-interface-1"></i> Livros</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexExemplarP') }}"><i class="flaticon-interface"></i> Revistas</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ route('indexConsulta') }}" target="__blank"><i class="flaticon-book-with-magnifying-glass"></i> Consulta</a></li>

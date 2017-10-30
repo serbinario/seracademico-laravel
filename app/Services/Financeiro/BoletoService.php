@@ -141,7 +141,7 @@ class BoletoService
         $boleto[0]->save();
 
         # Retorno
-        return true;
+        return $boleto[0];
     }
 
 

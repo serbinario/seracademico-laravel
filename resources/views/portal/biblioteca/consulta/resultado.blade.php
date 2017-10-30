@@ -102,12 +102,34 @@
                                     @endif
                                 </p></a>
                             <p style="font-size: 11px;color: #0c0c0c;">{{$f->sobrenome}}, {{$f->nome}}</p>
-                            <div class="col s12"><p class="labels-cc"><b>Número de chamada</b><br/>
-                                    {{ $f->cdd }} @if($f->edicao) / {{ $f->edicao }} @endif
-                                    @if($f->vol_periodico)v. {{$f->vol_periodico}}. @endif
-                                    @if($f->num_periodico)n. {{$f->num_periodico}}. @endif
-                                    @if($f->ano){{$f->ano}}. @endif
-                                </p></div>
+                            @if($f->tipos_acervos_id == '1')
+                                <div class="col s6">
+                                    <p class="labels-cc"><b>Nº de chamada</b><br/>
+                                        {{ $f->cdd }} @if($f->edicao) / {{ $f->edicao }} @endif
+                                        @if($f->vol_periodico)v. {{$f->vol_periodico}}. @endif
+                                        @if($f->num_periodico)n. {{$f->num_periodico}}. @endif
+                                        @if($f->ano){{$f->ano}}.
+                                          @endif
+                                    </p>
+                                </div>
+                            @else
+                                <div class="col s12">
+                                    <p class="labels-cc"><b>Nº de chamada</b><br/>
+                                        {{ $f->cdd }} @if($f->edicao) / {{ $f->edicao }} @endif
+                                        @if($f->vol_periodico)v. {{$f->vol_periodico}}. @endif
+                                        @if($f->num_periodico)n. {{$f->num_periodico}}. @endif
+                                        @if($f->ano){{$f->ano}}.
+                                        @endif
+                                    </p>
+                                </div>
+                            @endif
+                            @if($f->tipos_acervos_id == '1')
+                            <div class="col s6">
+                                <p class="labels-cc"><b>CUTTER</b><br/>
+                                    {{ $f->cutter }}
+                                </p>
+                            </div>
+                            @endif
                             <div class="col s12"><div class="chip tooltipped" data-position="bottom" data-delay="30" data-tooltip="{{$f->assunto}}" style="font-size: 10px;">{{$f->assunto}}</div></div>
                         </div>
                     </div>
