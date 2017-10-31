@@ -44,7 +44,7 @@ class NotificacoesGnetController extends Controller
             $boleto = $this->boletoService->editarStatusPelaNotificacao($notificacao);
             $debito = $boleto->debito;
 
-            if ($debito->debitante instanceof (Vestibulando::class)) {
+            if (is_a($debito->debitante, Vestibulando::class)) {
                 if ($boleto->statusGnet->codigo == 'paid') {
                     $debitante = $debito->debitante;
                     $debitante->terceiro_passo = true;
