@@ -94,15 +94,15 @@ class NotificacoesGnetController extends Controller
 
         # Verificando a pessoa
         if(!$vestibulando) {
-            throw new \Exception('Vestibulando n�o encontrada');
+            throw new \Exception('Vestibulando não encontrada');
         }
 
-        # Enviando o email de gera��o do boleto
+        # Enviando o email de geração do boleto
         Mail::send('emails.emailConfPagamentoVestibulando', ['vestibulando' => $vestibulando, 'vestibular' => $vestibularAtivo->codigo],
             function ($email) use ($vestibulando) {
                 $email->from('enviar@alpha.rec.br', 'Alpha');
-                $email->subject('Confirma��o de pagamento do vestibular - Faculdade Alpha');
-                $email->to($vestibulando->email, 'Alpha Educa��o e Treinamentos');
+                $email->subject('Confirmação de pagamento do vestibular - Faculdade Alpha');
+                $email->to($vestibulando->email, 'Alpha Educação e Treinamentos');
             });
 
         # Retorno
