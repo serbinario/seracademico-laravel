@@ -5,7 +5,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">receipt</i> Listar Exemplares</h4>
+                <h4><i class="material-icons">receipt</i> Listar Exemplares - Livros</h4>
             </div>
             <div class="col-sm-6 col-md-3">
                 <a href="{{ route('seracademico.biblioteca.createExemplar')}}" class="btn-sm btn-primary pull-right">Novo Exemplar</a>

@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">find_in_page</i> Editar Periódico</h4>
+                <h4><i class="material-icons">find_in_page</i> Editar Revista</h4>
             </div>
             <div class="col-sm-6 col-md-3">
 
