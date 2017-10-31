@@ -45,7 +45,7 @@ class NotificacoesGnetController extends Controller
             $debito = $boleto->debito;
 
             if ($debito->debitante instanceof (Vestibulando::class)) {
-                if ($boleto->statusGnet->codigo == 'paid') {
+                if ($boleto->statusGnet->codigo == 'canceled') {
                     $debitante = $debito->debitante;
                     $debitante->terceiro_passo = true;
                     $debitante->save();
