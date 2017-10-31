@@ -372,6 +372,13 @@ class VestibulandoService
         \DB::table('pessoas')->where('id', $pessoa->id)->delete();
         \DB::table('enderecos')->where('id', $pessoa->enderecos_id)->delete();
 
+        // Deletando o registro de contato do vestibulando
+        if ($vestibulando->contato_id) {
+            $contato = \DB::table('pessoas')->where('id', $vestibulando->contato_id)->select()->first();
+
+            \DB::table('pessoas')->where('id', $contato->id)->delete();
+        }
+
         # Verificando se a execução foi bem sucessida
         if(!$result) {
             throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
@@ -587,13 +594,19 @@ class VestibulandoService
      * @param Vestibulando $vestibulando
      * @return mixed
      */
-    public function formatDebitoInscricao(Vestibulando $vestibulando)
+    public function formatDebitoInscricao(Vestibulando $vestibulando, $addDiasVencimento = "")
     {
         $vestibular = $vestibulando->vestibular;
         $taxaVestibular = $vestibular->taxa;
         $contaBancaria = $this->contaBancariaRepository->getContaBancariaPadrao();
+
         $now = new Carbon();
-        $now->day($taxaVestibular->dia_vencimento);
+
+        if (is_numeric($addDiasVencimento)) {
+            $now->addDays($addDiasVencimento);
+        } else {
+            $now->day($taxaVestibular->dia_vencimento);
+        }
 
         $dados['data_vencimento'] = $now->format('d/m/Y');
         $dados['mes_referencia'] = $now->format('m');
