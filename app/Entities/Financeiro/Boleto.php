@@ -45,7 +45,7 @@ class Boleto extends Model implements Transformable, GnetBoleto
      */
     public function debito()
     {
-        return $this->belongsTo(DebitoAbertoAluno::class, 'debito_id');
+        return $this->belongsTo(Debito::class, 'debito_id');
     }
 
     /**
