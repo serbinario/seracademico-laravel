@@ -76,7 +76,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.titulo_eleitoral' => 'digits_between:4,30|numeric',
             'pessoa.zona' => 'digits_between:1,11|numeric',
             'pessoa.secao' => 'digits_between:1,11|numeric',
-            'pessoa.resevista' => 'digits_between:4,11|numeric',
+            'pessoa.resevista' => 'digits_between:4,30|numeric',
             'pessoa.catagoria_resevista' => 'max:20',
             'pessoa.nacionalidade' => 'max:30|serbinario_alpha_space',
             'pessoa.naturalidade' => 'max:30|serbinario_alpha_space',
@@ -97,7 +97,6 @@ class AlunoValidator extends LaravelValidator
             'pessoa.endereco.bairros_id' => 'integer',
             'password' => '',
             'password_confirmation' => 'same:password'
-
         ],
         ValidatorInterface::RULE_UPDATE => [
             'img' => 'image|max:800',
@@ -125,7 +124,7 @@ class AlunoValidator extends LaravelValidator
             'pessoa.titulo_eleitoral' => 'digits_between:4,30|numeric',
             'pessoa.zona' => 'digits_between:1,11|numeric',
             'pessoa.secao' => 'digits_between:1,11|numeric',
-            'pessoa.resevista' => 'digits_between:4,11|numeric',
+            'pessoa.resevista' => 'digits_between:4,30|numeric',
             'pessoa.catagoria_resevista' => 'max:20',
             'pessoa.nacionalidade' => 'max:30|serbinario_alpha_space',
             'pessoa.naturalidade' => 'max:30|serbinario_alpha_space',

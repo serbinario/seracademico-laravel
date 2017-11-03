@@ -9,6 +9,8 @@
         }
 
         #logoTopo {
+            height: 110px;
+            width: auto;
             margin-bottom: 20px;
         }
 
@@ -68,7 +70,7 @@ a
 <div id="header">
     {{--Dados da turma--}}
     <h1>
-        <img id="logoTopo" src="{{ asset('img/logo_modelo.png') }}" alt="Logo faculdade modelo">
+        <img id="logoTopo" src="{{ asset('img/logo-alpha_640x344.png') }}" alt="Logo faculdade alpha">
     </h1>
 
     <h1 id="tituloDocumento">
