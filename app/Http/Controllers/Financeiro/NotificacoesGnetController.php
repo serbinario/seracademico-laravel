@@ -44,8 +44,8 @@ class NotificacoesGnetController extends Controller
             $boleto = $this->boletoService->editarStatusPelaNotificacao($notificacao);
             $debito = $boleto->debito;
 
-            if ($debito->debitante instanceof (Vestibulando::class)) {
-                if ($boleto->statusGnet->codigo == 'canceled') {
+            if (is_a($debito->debitante, Vestibulando::class)) {
+                if ($boleto->statusGnet->codigo == 'paid') {
                     $debitante = $debito->debitante;
                     $debitante->terceiro_passo = true;
                     $debitante->save();
@@ -94,15 +94,15 @@ class NotificacoesGnetController extends Controller
 
         # Verificando a pessoa
         if(!$vestibulando) {
-            throw new \Exception('Vestibulando n„o encontrada');
+            throw new \Exception('Vestibulando n√£o encontrada');
         }
 
-        # Enviando o email de geraÁ„o do boleto
+        # Enviando o email de gera√ß√£o do boleto
         Mail::send('emails.emailConfPagamentoVestibulando', ['vestibulando' => $vestibulando, 'vestibular' => $vestibularAtivo->codigo],
             function ($email) use ($vestibulando) {
                 $email->from('enviar@alpha.rec.br', 'Alpha');
-                $email->subject('ConfirmaÁ„o de pagamento do vestibular - Faculdade Alpha');
-                $email->to($vestibulando->email, 'Alpha EducaÁ„o e Treinamentos');
+                $email->subject('Confirma√ß√£o de pagamento do vestibular - Faculdade Alpha');
+                $email->to($vestibulando->email, 'Alpha Educa√ß√£o e Treinamentos');
             });
 
         # Retorno
