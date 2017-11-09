@@ -1,49 +1,41 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Biblioteca;
+namespace Seracademico\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Services\Biblioteca\ArcevoPeriodicoService;
+use Seracademico\Services\BairroService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Biblioteca\ArcevoPeriodicoValidator;
+use Seracademico\Validators\BairroValidator;
 
-class ArcevoPeriodicoController extends Controller
+class BairroController extends Controller
 {
     /**
-    * @var ArcevoPeriodicoService
+    * @var BairroService
     */
     private $service;
 
     /**
-    * @var ArcevoPeriodicoValidator
+    * @var BairroValidator
     */
     private $validator;
 
     /**
-     * @var array
-     */
+    * @var array
+    */
     private $loadFields = [
-        'Biblioteca\\TipoAcervo|tipoAcervoP,2',
-        'Biblioteca\Responsavel',
-        'Biblioteca\TipoAutor',
-        'Biblioteca\Corredor',
-        'Biblioteca\Estante',
-        'Biblioteca\Colecao',
-        'Biblioteca\Genero',
-        'Biblioteca\Situacao',
-        'Graduacao\Curso'
+        'Estado',
+        'Cidade'
     ];
 
     /**
-    * @param ArcevoPeriodicoService $service
-    * @param ArcevoPeriodicoValidator $validator
+    * @param BairroService $service
+    * @param BairroValidator $validator
     */
-    public function __construct(ArcevoPeriodicoService $service, ArcevoPeriodicoValidator $validator)
+    public function __construct(BairroService $service, BairroValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -54,7 +46,7 @@ class ArcevoPeriodicoController extends Controller
      */
     public function index()
     {
-        return view('biblioteca.acervoPeriodico.index');
+        return view('bairro.index');
     }
 
     /**
@@ -63,35 +55,19 @@ class ArcevoPeriodicoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('bib_arcevos')
-            ->leftJoin(\DB::raw('(SELECT arcevos_id, count(*) as qtd_exemplares FROM bib_exemplares GROUP BY arcevos_id)exemplares'), function ($join) {
-                $join->on('exemplares.arcevos_id', '=', 'bib_arcevos.id');
-            })
-            ->where('tipo_periodico', '=', '2')
-            ->select([
-                'bib_arcevos.id',
-                'bib_arcevos.titulo',
-                'bib_arcevos.subtitulo',
-                'bib_arcevos.cdd',
-                'exemplares.qtd_exemplares',
-            ]);
+        $rows = \DB::table('bairros')
+            ->join('cidades', 'cidades.id', '=', 'bairros.cidades_id')
+            ->select(['bairros.id', 'bairros.nome', 'cidades.nome as cidade']);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html       = '<div class="fixed-action-btn horizontal">
-                            <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                            <ul>
-                            <li><a class="btn-floating" href="editAcervoP/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
-            $obra = $this->service->find($row->id);
-            # Verificando se existe vinculo com o currículo
-            if(count($obra['acervo']->exemplares) == 0) {
-                $html .= '<li><a class="btn-floating excluir" href="deleteAcervoP/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>
-                            </ul>
-                           </div>';
-            }
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar departamento"><i class="material-icons">edit</i></a></li>                        
+                    </ul>
+                    </div>';
 
-            # Retorno
-            return $html;
         })->make(true);
     }
 
@@ -104,7 +80,7 @@ class ArcevoPeriodicoController extends Controller
         $loadFields = $this->service->load($this->loadFields);
 
         #Retorno para view
-        return view('biblioteca.acervoPeriodico.create', compact('loadFields'));
+        return view('bairro.create', compact('loadFields'));
     }
 
     /**
@@ -140,20 +116,13 @@ class ArcevoPeriodicoController extends Controller
     {
         try {
             #Recuperando a empresa
-            $retorno = $this->service->find($id);
-            $model = $retorno['acervo'];
-            $segundaEntrada = $retorno['segundaEntrada'];
-            $primeiraEntrada = $retorno['primeiraEntrada'];
-
-
-            #Tratando as datas
-            $model = $this->service->getDateFormatPtBr($model);
+            $model = $this->service->find($id);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
 
             #retorno para view
-            return view('biblioteca.acervoPeriodico.edit', compact('model', 'segundaEntrada', 'primeiraEntrada','loadFields'));
+            return view('bairro.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -180,23 +149,6 @@ class ArcevoPeriodicoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     */
-    public function delete($id)
-    {
-        try {
-            #Executando a ação
-            $this->service->delete($id);
-
-            #Retorno para a view
-            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) { dd($e);
             return redirect()->back()->with('message', $e->getMessage());
         }
