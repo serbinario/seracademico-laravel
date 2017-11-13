@@ -1333,6 +1333,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('update/{id}', ['as' => 'update', 'uses' => 'SedeController@update']);
         });
 
+        Route::group(['prefix' => 'bairro', 'as' => 'bairro.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'BairroController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'BairroController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'BairroController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'BairroController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'BairroController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'BairroController@update']);
+        });
+
         Route::group(['prefix' => 'departamento', 'as' => 'departamento.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'DepartamentoController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'DepartamentoController@grid']);

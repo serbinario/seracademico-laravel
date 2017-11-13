@@ -80,12 +80,19 @@ class NotificacoesGnetController extends Controller
             ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulandos.primeira_opcao_curso_id')
             ->select([
                 'fac_vestibulandos.id',
+                'fac_vestibulandos.enem',
                 'pessoas.nome',
                 'pessoas.email',
                 'pessoas.cpf',
                 \DB::raw('DATE_FORMAT(vest_agendamento.data,"%d/%m/%Y") as dataProva'),
                 'fac_cursos.nome as primeiraOpcaoCurso'
             ])->where('fac_vestibulandos.id', $debitante)->first();
+
+
+        // Documentos
+        $documentos = \DB::table('vest_tipos_documentos')
+            ->select(['descricao'])
+            ->get();
 
         $vestibularAtivo = \DB::table('fac_vestibulares')
             ->select(['codigo'])
@@ -98,7 +105,8 @@ class NotificacoesGnetController extends Controller
         }
 
         # Enviando o email de geração do boleto
-        Mail::send('emails.emailConfPagamentoVestibulando', ['vestibulando' => $vestibulando, 'vestibular' => $vestibularAtivo->codigo],
+        Mail::send('emails.emailConfPagamentoVestibulando', ['vestibulando' => $vestibulando,
+            'vestibular' => $vestibularAtivo->codigo, 'documentos' => $documentos],
             function ($email) use ($vestibulando) {
                 $email->from('enviar@alpha.rec.br', 'Alpha');
                 $email->subject('Confirmação de pagamento do vestibular - Faculdade Alpha');

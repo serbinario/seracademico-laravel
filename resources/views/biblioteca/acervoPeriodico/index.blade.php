@@ -36,6 +36,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Título</th>
+                                <th>Subtítulo</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
                                 <th >Acão</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Título</th>
+                                <th>Subtítulo</th>
                                 <th>CDD</th>
                                 <th>Qtd. Exemplares</th>
                                 <th style="width: 5%;">Acão</th>
@@ -68,6 +70,7 @@
             columns: [
                 {data: 'id', name: 'bib_arcevos.id'},
                 {data: 'titulo', name: 'bib_arcevos.titulo'},
+                {data: 'subtitulo', name: 'bib_arcevos.subtitulo'},
                 {data: 'cdd', name: 'bib_arcevos.cdd'},
                 {data: 'qtd_exemplares', name: 'exemplares.qtd_exemplares'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
