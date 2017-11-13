@@ -90,7 +90,7 @@
     <img style="width: 160px; height: 120px" src="{{asset('/img/dd.jpg')}}">
 </div>
 <br /><br /><br /><br /><br /><br />
-<center><h3>ALPHA EDUCAÇÃO E TREINAMENTOS</h3></center>
+<center><h3>ALPHA SISTEMAS EDUCACIONAL E TREINAMENTOS LTDA - ME</h3></center>
 
 <center>
     <span><u>CONTRATO PARTICULAR DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</u></span>
@@ -99,8 +99,8 @@
 <center><span><u>Pós-Graduação “Lato Sensu”</u></span></center><br />
 
 <center><span><u>Pelo presente instrumento particular de CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</u>
-        com a <b><u>ALPHA EDUCAÇÃO E TREINAMENTOS</u></b>. Inscrita no CNPJ de nº 22.945385/0001-00, doravante denominado CONTRATADA,
-        e do outro lado, o abaixo qualificado, doravante denominado de CONTRATANTE,
+        com a <b>ALPHA SISTEMAS EDUCACIONAL E TREINAMENTOS LTDA - ME.</b>. Inscrita no CNPJ de nº 15.708.483/0001-50,
+        doravante denominado CONTRATADA, e do outro lado, o abaixo qualificado, doravante denominado de CONTRATANTE,
     </span></center>
 
 
@@ -159,7 +159,7 @@
 <h5><i>02 – Da Prestadora de Serviços:</i></h5>
 
 <p>
-    <b><i>ALPHA EDUCAÇÃO E TREINAMENTOS</i></b>, Inscrita no CNPJ de nº 22.945/0001-00, doravante denominada de CONTRATADA,
+    <b><i>ALPHA SISTEMAS EDUCACIONAL E TREINAMENTOS LTDA - ME,</i></b>, Inscrita no CNPJ de nº 22.945/0001-00, doravante denominada de CONTRATADA,
     a qual oferece serviços educacionais de (Pós graduação  Lato Sensu)
     a mesma está situada a Rua Gervásio Pires nº826 no Bairro de Santo Amaro na Cidade do Recife no Estado de Pernambuco.
 </p>
@@ -204,7 +204,6 @@ $parcelasTxt = Monetary::numberToExt2($turma->qtd_parcelas);
 ?>
 
 <p class="termos">
-   {{-- <?php $vencimento = $turma->vencimento_inicial ? \DateTime::createFromFormat('Y-m-d', $turma->vencimento_inicial) : null; ?>--}}
     <?php $vencimento = $aluno['data_matricula'] ? \DateTime::createFromFormat('d/m/Y', $aluno['data_matricula']) : null;?>
 
     2. <b>DO INVESTIMENTO E FORMA DE PAGAMENTO</b>&nbsp;&nbsp;&nbsp; Como contraprestação dos serviços educacionais, acima referidos,
