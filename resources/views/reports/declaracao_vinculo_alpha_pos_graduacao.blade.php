@@ -135,7 +135,9 @@ $dataEmissao = new \DateTime('now');
             </div>
             <div>
                 O curso de Pós-Graduação atendeu ao disposto na Resolução CES/CNE-MEC Nº 01 de 2007, com carga horária total
-                de 600 horas/aula, iniciado no dia 06 de Agosto de 2016 com previsão de término no dia 03 de Fevereiro de 2018.
+                de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!} horas/aula, iniciado no dia
+                {{ strftime('%d de %B de %Y', strtotime($turma->aula_inicio)) }}
+                com previsão de término no dia {{ strftime('%d de %B de %Y', strtotime($turma->aula_final)) }}.
                 Aulas aos sábados, das 08:00 às 17:00 horas.
             </div>
             <div>
