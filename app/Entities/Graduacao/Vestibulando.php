@@ -63,7 +63,8 @@ class Vestibulando extends Model implements Transformable
         'media_ficha',
         'enem',
         'path_image',
-        'tipo_img'
+        'tipo_img',
+        'agendamento_id'
     ];
 
 
@@ -75,6 +76,11 @@ class Vestibulando extends Model implements Transformable
     public function setDataInsricaoVestibularAttribute($value)
     {
         $this->attributes['data_insricao_vestibular'] = SerbinarioDateFormat::toUsa($value);
+    }
+
+    public function agendamento()
+    {
+        return $this->belongsTo(Agendamento::class, 'agendamento_id');
     }
 
     public function pessoa()
