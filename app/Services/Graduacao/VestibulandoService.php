@@ -141,7 +141,8 @@ class VestibulandoService
             'pessoa.corRaca',
             'pessoa.ufNascimento',
             'vestibular.semestre',
-            'aluno'
+            'aluno',
+            'agendamento'
         ];
 
         $vestibulando = $this->repository->with($relacionamentos)->find($id);
