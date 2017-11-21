@@ -159,7 +159,7 @@
 <h5><i>02 – Da Prestadora de Serviços:</i></h5>
 
 <p>
-    <b><i>ALPHA SISTEMAS EDUCACIONAL E TREINAMENTOS LTDA - ME,</i></b>, Inscrita no CNPJ de nº 22.945/0001-00, doravante denominada de CONTRATADA,
+    <b><i>ALPHA SISTEMAS EDUCACIONAL E TREINAMENTOS LTDA - ME,</i></b>, Inscrita no CNPJ de nº 15.708.483/0001-50, doravante denominada de CONTRATADA,
     a qual oferece serviços educacionais de (Pós graduação  Lato Sensu)
     a mesma está situada a Rua Gervásio Pires nº826 no Bairro de Santo Amaro na Cidade do Recife no Estado de Pernambuco.
 </p>
