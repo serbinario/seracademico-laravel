@@ -480,6 +480,13 @@
                                     {!! Form::label('enem', 'Enem', false) !!}
                                 </div>
                             </div>
+
+                            @if(isset($aluno->agendamento->id))
+                                <div class="form-group col-md-2">
+                                    {!! Form::label('vestibular_id', 'Data do vestibular') !!}
+                                    {!! Form::text('agendamento', $aluno->agendamento->data, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Nav tabs -->
