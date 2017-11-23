@@ -324,7 +324,7 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
-                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
+                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control celPhone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[celular]', 'Celular') !!}
