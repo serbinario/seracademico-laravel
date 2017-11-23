@@ -65,7 +65,7 @@ $(document).ready(function(){
     $('.date').mask('00/00/0000');
 
     //Enem
-    $('.enem').mask("0##0.00", {reverse: true, maxlength: false});
+    $('.enem').mask("0##0.0", {reverse: true, maxlength: false});
 
     //ficha19
     $('.ficha19').mask("0#.00", {reverse: true, maxlength: false});
