@@ -52,6 +52,7 @@ class TurmaNotaController extends Controller
                 'fac_disciplinas.nome as nome_disciplina',
                 'pos_alunos_notas.id as idAlunoNota',
                 'pos_alunos.id as idAluno',
+                'pos_alunos.matricula',
                 'pessoas.nome as nomePessoa',
                 'pos_alunos_notas.nota_final',
                 'fac_situacao_nota.nome as situacao',
@@ -76,11 +77,15 @@ class TurmaNotaController extends Controller
                 # html de retorno
                 //$html = '<a title="Editar notas" id="btnEditarNotas"  href="#" class="btn-floating red"><i class="material-icons">edit</i></a>';
                 $html = '<input type="text" value="'. ($alunoNota->nota_final ?? "") .'" class="nota_final form-control"
-                 placeholder="informe a nota"><span id="span_nota_'. ($alunoNota->id) .'"></span>';
+                 placeholder="Nota"><span id="span_nota_'. ($alunoNota->id) .'"></span>';
 
                 # retorno
                 return $html;
-        })->make(true);
+            })
+            ->addColumn('delete', function ($row) {
+                return '<a class="btn-floating red" id="removerNota" href="javascript:void(0)" title="Excluir Nota"><i class="material-icons">delete</i></a>';
+            })
+            ->make(true);
     }
 
     /**
@@ -145,6 +150,24 @@ class TurmaNotaController extends Controller
         } catch (\Throwable $e) {
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteNota($id)
+    {
+        try {
+            #Executando a ação
+            $this->alunoNotaService->delete($id);
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'msg' => 'Nota removida com sucesso']);
+        }  catch (\Throwable $e) {
+            #Retorno para a view
+            return response()->json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }
