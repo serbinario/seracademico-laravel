@@ -90,9 +90,9 @@
             <li role="presentation">
                 <a href="#contato" aria-controls="contato" role="tab" data-toggle="tab">Informações para contato</a>
             </li>
-            <li role="presentation">
+           {{-- <li role="presentation">
                 <a href="#graduacao" aria-controls="graduacao" role="tab" data-toggle="tab">Graduação</a>
-            </li>
+            </li>--}}
             <li role="presentation">
                 <a href="#documentosObrig" aria-controls="documentosObrig" role="tab" data-toggle="tab">Documentos Obrigatórios</a>
             </li>
@@ -230,13 +230,25 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-3">
+                                           <div class="form-group col-md-3">
                                                 <div class="fg-line">
                                                     {!! Form::label('pessoa[cpf]', 'CPF *') !!}
                                                     {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]'), array('class' => 'form-control cpf', 'id' => 'cpfAlunos')) !!}
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="form-group col-md-3">
+                                                <div class="fg-line">
+                                                    {!! Form::label('cpf_responsavel', 'CPF do responsável') !!}
+                                                    {!! Form::text('cpf_responsavel', Session::getOldInput('cpf_responsavel'), array('class' => 'form-control cpf', 'id' => 'cpfResponsavel')) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <div class="fg-line">
+                                                    {!! Form::label('rg_responsavel', 'RG do responsável') !!}
+                                                    {!! Form::text('rg_responsavel', Session::getOldInput('rg_responsavel'), array('class' => 'form-control', 'id' => 'rgResponsavel')) !!}
+                                                </div>
+                                            </div>
+                                            {{--<div class="form-group col-md-2">
                                                 <div class="fg-line">
                                                     {!! Form::label('pessoa[titulo_eleitoral]', 'Título Eleitoral') !!}
                                                     {!! Form::text('pessoa[titulo_eleitoral]', Session::getOldInput('pessoa[titulo_eleitoral]'), array('class' => 'form-control')) !!}
@@ -265,7 +277,7 @@
                                                     {!! Form::label('pessoa[catagoria_resevista]', 'Categoria Reservista') !!}
                                                     {!! Form::text('pessoa[catagoria_resevista]', Session::getOldInput('pessoa[catagoria_resevista]'), array('class' => 'form-control')) !!}
                                                 </div>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -307,7 +319,7 @@
                                     </div>
                                 </div>
                                 {{--Portal do aluno--}}
-                                <div class="panel-heading">
+                                {{--<div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#portaAluno"> <i
                                                     class="fa fa-plus-circle"></i>Portal do Aluno</a>
@@ -327,7 +339,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{--Portal do aluno--}}
                             </div>
                         </div>
@@ -436,7 +448,7 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="graduacao">
+            {{--<div role="tabpanel" class="tab-pane" id="graduacao">
                 <br/>
                 <div class="row">
                     <div class="col-md-12">
@@ -526,15 +538,15 @@
                                 </span>
                             </div>
                         </div>
-                        {{--<div class="row">
+                        --}}{{--<div class="row">
                             <div class="form-group col-md-12">
                                 {!! Form::label('pessoas[outra_escola]', 'Outra Instituição') !!}
                                 {!! Form::text('pessoas[outra_escola]', Session::getOldInput('pessoas[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
-                        </div>--}}
+                        </div>--}}{{--
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             {{--Aba Documentos Obrigatorios--}}
             <div role="tabpanel" class="tab-pane" id="documentosObrig">
@@ -681,7 +693,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                    {{--<div class="form-group col-md-4">
                         <div class="fg-line">
                             {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
                             @if(isset($aluno->id))
@@ -690,7 +702,7 @@
                                 {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
                             @endif
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
             {{-- Fim aba Mtrícula--}}
