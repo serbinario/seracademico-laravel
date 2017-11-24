@@ -180,6 +180,9 @@
                                         '<td>' + d.media_enem+ '</td>' +
                                         '<td>' + d.media_ficha+ '</td>' +
                                     '</tr>' +
+                                    '<tr>' +
+                                        '<td style="position: relative; left: 350px;" colspan="2">' + ((d.media_enem > 900) ? 'Candidato aprovado' : 'Candidato reprovado') + '</td>' +
+                                    '</tr>' +
                                 '</tbody>' +
                             '</table>' +
                         '</div>' +
