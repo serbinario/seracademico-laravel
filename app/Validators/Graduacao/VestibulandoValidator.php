@@ -49,7 +49,6 @@ class VestibulandoValidator extends LaravelValidator
         'pessoa.uf_nascimento_id' => 'UF(Documentos)',
         'pessoa.uf_exp' => 'UF(Documentos)',
         'img' => 'Foto'
-
 //        'pessoa.data_exame_nacional_um' => 'serbinario_date_format:"d/m/Y"',
 //        'pessoa.nota_exame_nacional_um' => '',
 //        'pessoa.data_exame_nacional_dois' => 'serbinario_date_format:"d/m/Y"',
@@ -67,7 +66,6 @@ class VestibulandoValidator extends LaravelValidator
 //        'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
 //        'pessoa.celular' => 'digits_between:9,11|numeric',
 //        'pessoa.celular2' => 'digits_between:9,11|numeric',
-
     ];
 
     protected $rules = [
@@ -81,7 +79,7 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required|serbinario_date_format:"d/m/Y"',
-            'pessoa.identidade' => 'required|digits_between:4,11|numeric',
+            'pessoa.identidade' => 'digits_between:4,11|numeric',
             'pessoa.enderecos_id' => 'integer',
             'pessoa.sexos_id' => 'integer',
             'pessoa.turnos_id' => 'integer',
@@ -99,7 +97,7 @@ class VestibulandoValidator extends LaravelValidator
             'vestibular_id' => 'required|numeric',
             'pessoa.orgao_rg' => 'max:30',
             'pessoa.data_expedicao' => 'serbinario_date_format:"d/m/Y"',
-            'pessoa.titulo_eleitoral' => 'digits_between:4,11|numeric',
+            'pessoa.titulo_eleitoral' => 'digits_between:4,13|numeric',
             'pessoa.zona' => 'digits_between:1,11|numeric',
             'pessoa.secao' => 'digits_between:1,11|numeric',
             'pessoa.resevista' => 'digits_between:4,11|numeric',
@@ -113,14 +111,13 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.data_exame_nacional_dois' => 'serbinario_date_format:"d/m/Y"',
             'pessoa.nota_exame_nacional_dois' => '',
             //'pessoa.email' => 'email|max:50|unique:pessoas,email',
-            'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
-            'pessoa.celular' => 'digits_between:9,11|numeric',
-            'pessoa.celular2' => 'digits_between:9,11|numeric',
+            'pessoa.telefone_fixo' => 'digits_between:9,16',
+            'pessoa.celular' => 'digits_between:9,16',
+            'pessoa.celular2' => 'digits_between:9,16',
             'pessoa.deficiencia_auditiva' => 'integer',
             'pessoa.deficiencia_visual' => 'integer',
             'pessoa.deficiencia_fisica' => 'integer',
             'pessoa.deficiencia_outra' => 'integer',
-
             //Opções de Curso
             'primeira_opcao_curso_id' => 'required|integer',
             'primeira_opcao_turno_id' => 'required|integer',
@@ -128,14 +125,12 @@ class VestibulandoValidator extends LaravelValidator
             'segunda_opcao_turno_id' => 'integer',
             'terceira_opcao_curso_id' => 'integer',
             'terceira_opcao_turno_id' => 'integer',
-
             //Tabela Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.cep' => 'numeric|max:99999999',
             'pessoa.endereco.bairros_id' => 'integer',
-
             //Notas ficha 19
             'pessoa.ficha_nota_portugues' => 'numeric',
             'pessoa.ficha_nota_matematica' => 'numeric',
@@ -147,14 +142,12 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.ficha_nota_lingua_estrangeira' => 'numeric',
             'pessoa.ficha_nota_quimica' => 'numeric',
             'pessoa.ficha_nota_fisica' => 'numeric',
-
             //Notas ENEM
             'pessoa.nota_humanas' => 'numeric',
             'pessoa.nota_matematica' => 'numeric',
             'pessoa.nota_natureza' => 'numeric',
             'pessoa.nota_linguagem' => 'numeric',
             'pessoa.nota_redacao' => 'numeric',
-
         ],
         ValidatorInterface::RULE_UPDATE => [
             'path_comprovante_enem' => 'pdf',
@@ -164,14 +157,14 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.nome' => 'required|max:60|serbinario_alpha_space_especial',
             //'pessoa.cpf' => 'max:20|unique:pessoas,cpf,:cpf',
             'pessoa.nome_pai' => 'max:60|serbinario_alpha_space_especial',
-            'pessoa.nome_mae' => 'required|max:60|serbinario_alpha_space_especial',
+            'pessoa.nome_mae' => 'max:60|serbinario_alpha_space_especial',
             'pessoa.data_nasciemento' => 'required|serbinario_date_format:"d/m/Y"',
-            'pessoa.identidade' => 'required|digits_between:4,11|numeric',
+            'pessoa.identidade' => 'digits_between:4,11|numeric',
             //'pessoa.nome_social' => 'max:200|serbinario_alpha_space',
             'vestibular_id' => 'integer',
             'pessoa.orgao_rg' => 'max:30',
             'pessoa.data_expedicao' => 'serbinario_date_format:"d/m/Y"',
-            'pessoa.titulo_eleitoral' => 'digits_between:4,11|numeric',
+            'pessoa.titulo_eleitoral' => 'digits_between:4,13|numeric',
             'pessoa.zona' => 'digits_between:1,11|numeric',
             'pessoa.secao' => 'digits_between:1,11|numeric',
             'pessoa.resevista' => 'digits_between:4,11|numeric',
@@ -198,15 +191,14 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.exames2_id' => 'integer',
             'pessoa.uf_nascimento_id' => 'integer',
             'pessoa.uf_exp' => '',
-           // 'pessoa.email' => 'email|max:50|unique:pessoas,email,:email',
-            'pessoa.telefone_fixo' => 'digits_between:9,11|numeric',
-            'pessoa.celular' => 'digits_between:9,11|numeric',
-            'pessoa.celular2' => 'digits_between:9,11|numeric',
+            //'pessoa.email' => 'email|max:50|unique:pessoas,email,:email',
+            'pessoa.telefone_fixo' => 'digits_between:9,16',
+            'pessoa.celular' => '',
+            'pessoa.celular2' => '',
             'pessoa.deficiencia_auditiva' => '',
             'pessoa.deficiencia_visual' => '',
             'pessoa.deficiencia_fisica' => '',
             'pessoa.deficiencia_outra' => '',
-
             //Opções de Curso
             'primeira_opcao_curso_id' => 'integer',
             'primeira_opcao_turno_id' => 'integer',
@@ -214,14 +206,12 @@ class VestibulandoValidator extends LaravelValidator
             'segunda_opcao_turno_id' => 'integer',
             'terceira_opcao_curso_id' => 'integer',
             'terceira_opcao_turno_id' => 'integer',
-
             //Endereço
             'pessoa.endereco.logradouro' => 'serbinario_alpha_space|max:100',
             'pessoa.endereco.numero' => 'numeric|max:99999',
             'pessoa.endereco.complemento' => 'max:100',
             'pessoa.endereco.cep' => 'numeric|max:99999999',
             'pessoa.endereco.bairros_id' => 'integer',
-
             //Notas ficha 19
             'pessoa.ficha_nota_portugues' => 'numeric',
             'pessoa.ficha_nota_matematica' => 'numeric',
@@ -233,7 +223,6 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.ficha_nota_lingua_estrangeira' => 'numeric',
             'pessoa.ficha_nota_quimica' => 'numeric',
             'pessoa.ficha_nota_fisica' => 'numeric',
-
             //Notas ENEM
             'pessoa.nota_humanas' => 'numeric',
             'pessoa.nota_matematica' => 'numeric',
@@ -242,7 +231,4 @@ class VestibulandoValidator extends LaravelValidator
             'pessoa.nota_redacao' => 'numeric',
         ],
     ];
-
-
-
 }
