@@ -181,7 +181,7 @@
                                         '<td>' + d.media_ficha+ '</td>' +
                                     '</tr>' +
                                     '<tr>' +
-                                        '<td style="text-align: center;" colspan="2">' + ((d.media_enem > 900) ? 'Candidato aprovado' : 'Candidato reprovado') + '</td>' +
+                                        '<td style="text-align: center;" colspan="2">' + ((d.media_enem >= 900) ? 'Candidato aprovado' : 'Candidato reprovado') + '</td>' +
                                     '</tr>' +
                                 '</tbody>' +
                             '</table>' +

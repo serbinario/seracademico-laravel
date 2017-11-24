@@ -667,7 +667,7 @@ class VestibulandoService
         # Testando se os campos foram preenchidos
         # array_sum() soma os elementos de um array
         if($divisor){
-            $mediaEnem = (((array_sum($notas))/$divisor) + $notaRedacao) / 2;
+            $mediaEnem = (((array_sum($notas))/$divisor) + $notaRedacao);
         }
 
         # Calculando a média - Andrey
