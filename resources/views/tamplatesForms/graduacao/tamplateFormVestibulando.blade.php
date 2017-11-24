@@ -324,15 +324,15 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[telefone_fixo]', 'Telefone fixo') !!}
-                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control phone')) !!}
+                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]') , array('class' => 'form-control celPhone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[celular]', 'Celular') !!}
-                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control phone')) !!}
+                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]'), array('class' => 'form-control celPhone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
-                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control phone')) !!}
+                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]'), array('class' => 'form-control celPhone')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -480,6 +480,13 @@
                                     {!! Form::label('enem', 'Enem', false) !!}
                                 </div>
                             </div>
+
+                            @if(isset($aluno->agendamento->id))
+                                <div class="form-group col-md-2">
+                                    {!! Form::label('vestibular_id', 'Data do vestibular') !!}
+                                    {!! Form::text('agendamento', $aluno->agendamento->data, array('class' => 'form-control', 'readonly' => 'readonly')) !!}
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Nav tabs -->
