@@ -752,8 +752,6 @@ class VestibulandoController extends Controller
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
         }
-
-
     }
 
     /**

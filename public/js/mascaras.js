@@ -106,13 +106,9 @@ $(document).ready(function(){
 
     //##### Submeter formulário
     $('#formTaxa').submit(function() {
-
         $('.moneyReal').each(function (index, value) {
-
             $(value).val($('.moneyReal').maskMoney('unmasked')[index]);
-
         });
-
     });
 
     //##### Submeter formulário
@@ -127,6 +123,7 @@ $(document).ready(function(){
     $('#formVestibulando').submit(function() {
         $('.cpf').unmask();
         $('.phone').unmask();
+        $('.celPhone').unmask();
     });
      
     //Vaga disponível

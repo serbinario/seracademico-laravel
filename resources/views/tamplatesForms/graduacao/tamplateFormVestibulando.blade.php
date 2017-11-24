@@ -585,7 +585,6 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
                                         {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control enem')) !!}
