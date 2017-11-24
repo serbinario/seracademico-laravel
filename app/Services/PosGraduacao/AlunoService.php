@@ -293,12 +293,15 @@ class AlunoService
             $pdo->query($query);
         }
 
+        // validando se possui matrícuça
         if(!$aluno->matricula) {
-            $arrayMatricula = $this->tratamentoMatricula($data);
-            $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+            $arrayMatricula  = $this->tratamentoMatricula($data);
             $aluno->matricula = $arrayMatricula['matricula'];
             $aluno->save();
-        } else {
+        }
+
+        // valida se possui login e senha
+        if (!$aluno->password) {
             $this->loginPortalAluno($data, $aluno->matricula);
         }
 
@@ -694,9 +697,16 @@ class AlunoService
         # para nova inscrição
         $lastIncricao = (int) (substr($lastIncricao, -4));
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
+        $newInscricao = $now->format('Y') . $numberSemestre . $newInscricao;
+
+        $result = $this->repository->findWhere(['matricula' => $newInscricao]);
+
+        if (count($result) > 0) {
+            $this->gerarMatricula();
+        }
 
         # retorno
-        return $now->format('Y') . $numberSemestre . $newInscricao;
+        return $newInscricao;
     }
 
     /**

@@ -190,12 +190,15 @@ class AlunoService
         # Recuperando o vestibulando
         $aluno = $this->repository->find($id);
 
+        // validando se possui matrícuça
         if(!$aluno->matricula) {
-            $arrayMatricula = $this->tratamentoMatricula($data);
-            $this->loginPortalAluno($data, $arrayMatricula['matricula']);
+            $arrayMatricula  = $this->tratamentoMatricula($data);
             $aluno->matricula = $arrayMatricula['matricula'];
             $aluno->save();
-        } else {
+        }
+
+        // valida se possui login e senha
+        if (!$aluno->password) {
             $this->loginPortalAluno($data, $aluno->matricula);
         }
 
