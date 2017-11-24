@@ -119,6 +119,9 @@ class AlunoNotaService
     public function delete(int $id)
     {
         #deletando o alunoNota
+        $nota = $this->find($id);
+        $nota->frequencias()->delete();
+
         $result = $this->repository->delete($id);
 
         # Verificando se a execução foi bem sucessida
