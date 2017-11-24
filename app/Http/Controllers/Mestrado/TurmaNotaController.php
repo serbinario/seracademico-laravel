@@ -52,6 +52,7 @@ class TurmaNotaController extends Controller
                 'fac_disciplinas.nome as nome_disciplina',
                 'pos_alunos_notas.id as idAlunoNota',
                 'pos_alunos.id as idAluno',
+                'pos_alunos.matricula',
                 'pessoas.nome as nomePessoa',
                 'pos_alunos_notas.nota_final',
                 'fac_situacao_nota.nome as situacao',
