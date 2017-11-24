@@ -127,6 +127,7 @@ $(document).ready(function(){
     $('#formVestibulando').submit(function() {
         $('.cpf').unmask();
         $('.phone').unmask();
+        $('.celPhone').unmask();
     });
      
     //Vaga disponível
