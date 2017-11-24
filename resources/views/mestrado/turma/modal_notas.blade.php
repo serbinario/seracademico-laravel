@@ -34,12 +34,12 @@
                         <table id="alunos-notas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th style="width: 40%">Nome</th>
-                                {{--<th>Média</th>--}}
-                                <th>Disciplina</th>
-                                <th>Situação</th>
-                                <th>Status</th>
-                                <th>Nota</th>
+                                <th style="width: 55%;">Nome</th>
+                                <th style="width: 10%;">Matrícula</th>
+                                <th style="width: 20%;">Situação</th>
+                                <th style="width: 10%;">Status</th>
+                                <th style="width: 10%;">Nota</th>
+                                <th style="width: 5%;">Ação</th>
                             </tr>
                             </thead>
                         </table>

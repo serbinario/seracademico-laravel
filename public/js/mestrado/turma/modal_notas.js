@@ -26,7 +26,8 @@ function loadTableNotas (idTurma) {
             {data: 'nome_disciplina', name: 'fac_disciplinas.nome'},
             {data: 'situacao', name: 'fac_situacao_nota.nome'},
             {data: 'status', name: 'status', orderable: false, filterable: false},
-            {data: 'action', name: 'action'}
+            {data: 'action', name: 'action'},
+            {data: 'delete', name: 'delete'}
         ]
     });
 
@@ -132,5 +133,19 @@ $(document).on('focusout', '.nota_final', function () {
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
         }
+    });
+});
+
+// Evento para o click no botão de remover disciplina
+$(document).on('click', '#removerNota', function () {
+    var idALunoNota = tableNotas.row($(this).parents('tr')).data().idAlunoNota;
+
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/posgraduacao/turma/notas/delete/' + idALunoNota,
+        datatype: 'json'
+    }).done(function (retorno) {
+        tableNotas.ajax.reload();
+        swal(retorno.msg, "Click no botão abaixo!", "success");
     });
 });

@@ -429,6 +429,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Mestrado\TurmaNotaController@getLoadFields']);
                     Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Mestrado\TurmaNotaController@editNota']);
                     Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Mestrado\TurmaNotaController@updateNota']);
+                    Route::get('delete/{idAlunoNota}', ['as' => 'delete', 'uses' => 'Mestrado\TurmaNotaController@deleteNota']);
                 });
 
                 Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
@@ -629,6 +630,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Doutorado\TurmaNotaController@getLoadFields']);
                     Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Doutorado\TurmaNotaController@editNota']);
                     Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Doutorado\TurmaNotaController@updateNota']);
+                    Route::get('delete/{idAlunoNota}', ['as' => 'delete', 'uses' => 'Doutorado\TurmaNotaController@deleteNota']);
                 });
 
                 Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
@@ -918,6 +920,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'PosGraduacao\TurmaNotaController@getLoadFields']);
                     Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'PosGraduacao\TurmaNotaController@editNota']);
                     Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'PosGraduacao\TurmaNotaController@updateNota']);
+                    Route::get('delete/{idAlunoNota}', ['as' => 'delete', 'uses' => 'PosGraduacao\TurmaNotaController@deleteNota']);
+
                 });
 
                 Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {
