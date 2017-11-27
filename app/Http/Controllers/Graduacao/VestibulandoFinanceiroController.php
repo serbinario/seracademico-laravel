@@ -219,6 +219,8 @@ class VestibulandoFinanceiroController extends Controller
             $vestibulando = $this->repository->find($request->get('id'));
             $dadosDebito = $this->service->formatDebitoInscricao($vestibulando, 3);
             $debito = $this->debitoService->store($vestibulando, $dadosDebito);
+            $debito->pago = 1;
+            $debito->save();
             $vestibulando->terceiro_passo = true;
             $vestibulando->save();
 
