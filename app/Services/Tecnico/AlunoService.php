@@ -96,6 +96,7 @@ class AlunoService
         #regras de negócios pre cadastro
         $this->tratamentoCampos($data);
         $this->tratamentoDePessoaEEndereco($data);
+        //dd($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
         $this->tratamentoCurso($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
@@ -234,13 +235,17 @@ class AlunoService
                 ->findWhere(['cpf' => $data['pessoa']['cpf']]);
         }
 
+
         # Verificando se a pesso já existe
         if(count($resultPessoa) > 0) {
+
             #aAlterando a o registro de pessoa e recuperando o registro
             $objPessoa = $this->pessoaRepository->update($data['pessoa'], $resultPessoa[0]->id);
+            if (isset($objPessoa->endereco->id)) {
+                # Alterando o registor de endereço
+                $this->enderecoRepository->update($data['pessoa']['endereco'], $objPessoa->endereco->id);
+            }
 
-            # Alterando o registor de endereço
-            $this->enderecoRepository->update($data['pessoa']['endereco'], $objPessoa->endereco->id);
         } else {
             #Criando o registro de endereço
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
