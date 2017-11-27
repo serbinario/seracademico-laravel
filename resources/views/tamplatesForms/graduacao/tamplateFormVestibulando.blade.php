@@ -876,7 +876,6 @@
 
 @section('javascript')
     <script type="text/javascript">
-
         Webcam.set({
             width: 260,
             height: 240,
@@ -889,7 +888,6 @@
         });
 
         function take_snapshot() {
-
             // take snapshot and get image data
             Webcam.snap(function (data_uri) {
 
@@ -901,11 +899,8 @@
                 $(".my-profile").modal('hide');
                 Webcam.reset();
                 // $(".modal-dialog").modal('toggle');
-
             });
         }
-
-
         /**
          * Cidades
          *
