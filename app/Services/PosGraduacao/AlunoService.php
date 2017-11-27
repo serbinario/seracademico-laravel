@@ -332,6 +332,11 @@ class AlunoService
         return $aluno;
     }
 
+    public function delete($id)
+    {
+
+    }
+
     /**
      * @param $key
      * @param $value
