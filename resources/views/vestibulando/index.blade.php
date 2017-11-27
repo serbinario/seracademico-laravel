@@ -137,7 +137,6 @@
             </div>
         </div>
     </div>
-
     @include('vestibulando.modal_notas')
     @include('vestibulando.modal_notas_update')
     @include('vestibulando.modal_inclusao')
@@ -160,7 +159,7 @@
     <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
-        function format ( d ) {
+        function format(d) {
             return  '<div class="row">' +
                         '<div class="col-md-4">' +
                             '<h3>Forma de avaliação : ' + d.formaAvaliacao + '</h3>' +
