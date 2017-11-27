@@ -587,27 +587,27 @@
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_humanas', 'Ciências Humanas e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control enem')) !!}
+                                        {!! Form::text('nota_humanas', Session::getOldInput('nota_humanas'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_matematica', 'Matemática e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control enem ')) !!}
+                                        {!! Form::text('nota_matematica', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
                                     </div>
 
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_natureza', 'Ciências da Natureza e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control enem')) !!}
+                                        {!! Form::text('nota_natureza', Session::getOldInput('nota_natureza'), array('class' => 'form-control')) !!}
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_linguagem', 'Linguagens, Códigos e suas Tecnologias ') !!}
-                                        {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control enem')) !!}
+                                        {!! Form::text('nota_linguagem', Session::getOldInput('nota_linguagem'), array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="form-group col-md-4">
                                         {!! Form::label('nota_redacao', 'Redação ') !!}
-                                        {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control enem')) !!}
+                                        {!! Form::text('nota_redacao', Session::getOldInput('nota_redacao'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
