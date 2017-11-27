@@ -39,9 +39,9 @@
                                 <a href="#dispensadas" aria-controls="cursadas" data-toggle="tab">Dispensadas</a>
                             </li>
 
-                            <li role="presentation">
+                            {{--<li role="presentation">
                                 <a href="#extra" aria-controls="extra" data-toggle="tab">Extra Curriculares</a>
-                            </li>
+                            </li>--}}
 
                             <li role="presentation">
                                 <a href="#equivalencia" aria-controls="equivalencia" data-toggle="tab">Equivalências</a>
@@ -112,7 +112,7 @@
                             </div>
 
                             <!-- Aba Extra -->
-                            <div role="tabpanel" class="tab-pane" id="extra">
+                            {{--<div role="tabpanel" class="tab-pane" id="extra">
                                 <br/>
 
                                 <!-- Adicinar disciplina extra curricular-->
@@ -131,7 +131,7 @@
                                     </tr>
                                     </thead>
                                 </table>
-                            </div>
+                            </div>--}}
 
                             <!-- Aba Eletiva -->
                             <div role="tabpanel" class="tab-pane" id="equivalencia">

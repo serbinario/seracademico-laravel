@@ -219,9 +219,15 @@ class VestibulandoFinanceiroController extends Controller
             $vestibulando = $this->repository->find($request->get('id'));
             $dadosDebito = $this->service->formatDebitoInscricao($vestibulando, 3);
             $debito = $this->debitoService->store($vestibulando, $dadosDebito);
-            $boleto = $this->debitoService->gerarBoleto($debito->id);
+            $debito->pago = 1;
+            $debito->save();
+            $vestibulando->terceiro_passo = true;
+            $vestibulando->save();
 
-            return response()->json(['status' => 200, 'boleto' => $boleto->toArray()]);
+            //$boleto = $this->debitoService->gerarBoleto($debito->id);
+            $boleto = [];
+
+            return response()->json(['status' => 200, 'boleto' => $boleto]);
         } catch (\Throwable $e) {
             return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
         }
@@ -236,10 +242,11 @@ class VestibulandoFinanceiroController extends Controller
         try {
             $vestibulando = $this->repository->find($request->get('id'));
             $debito = $vestibulando->debitos->last();
-            $boleto = $debito->boleto;
+           /* $boleto = $debito->boleto;
             $status = $boleto->statusGnet;
             $responseBoleto = array_merge($boleto->toArray(), $status->toArray());
-
+            */
+           $responseBoleto = [];
             return response()->json(['status' => 200, 'boleto' => $responseBoleto]);
         } catch (\Throwable $e) {
             return response()->json(['msg' => $e->getMessage(), 'status' => 500]);

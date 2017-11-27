@@ -177,6 +177,7 @@ class AlunoController extends Controller
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
+                    $html .=        '<li><a class="btn-floating" href="delete/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">delete</i></a></li>';
 
                     # Verificando se o usuário possui sede
                     if(Auth::user()->sede_id == 1) {
@@ -282,6 +283,25 @@ class AlunoController extends Controller
             return redirect()->back()->withErrors([$e->getMessage()]);
         }
     }
+
+    /**
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        try {
+
+            #Executando a ação
+            //$this->service->d($data, $id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Exclusão realizada com sucesso!");
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors([$e->getMessage()]);
+        }
+    }
+
 
     /**
      * @param Request $request
