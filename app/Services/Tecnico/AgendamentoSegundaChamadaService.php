@@ -72,6 +72,8 @@ class AgendamentoSegundaChamadaService
         if (isset($data['disciplinas'])) {
             $resultado->disciplinas()->detach();
             $resultado->disciplinas()->attach($data['disciplinas']);
+        } else {
+            $resultado->disciplinas()->detach();
         }
 
         #Verificando se foi atualizado no banco de dados
