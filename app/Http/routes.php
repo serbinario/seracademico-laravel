@@ -249,6 +249,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
         });
 
+        Route::group(['prefix' => 'releasenote', 'middleware' => 'auth', 'as' => 'releasenote.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ReleasesController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ReleasesController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ReleasesController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ReleasesController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ReleasesController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ReleasesController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'ReleasesController@delete']);
+        });
+
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {
             Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\VestibulandoController@getLoadFields']);
             Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\VestibulandoController@index']);
