@@ -215,6 +215,7 @@
                                 <li><a href="{{ route('seracademico.tecnico.curriculo.index') }}"><i class="material-icons">library_books</i>Currículos</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.turma.index') }}"><i class="material-icons">turned_in</i>Turmas</a></li>
                                 <li><a href="{{ route('seracademico.tecnico.planoensino.index') }}"><i class="material-icons">line_weight</i>Planos de Ensino</a></li>
+                                <li><a href="{{ route('seracademico.tecnico.agendamento.index') }}"><i class="material-icons">line_weight</i>Segunda Chamada</a></li>
                             </ul>
                         </li>
                     </ul>

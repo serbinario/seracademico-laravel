@@ -57,8 +57,8 @@ class CursoValidator extends LaravelValidator
         ],
 
         ValidatorInterface::RULE_UPDATE => [
-			'nome' =>  'tec_unique_curso_nome|required|max:200|unique:fac_cursos,nome,:id',
-			'codigo' =>  'tec_unique_curso_codigo|required|max:30|unique:fac_cursos,codigo,:id',
+			'nome' =>  'required|max:200',
+			'codigo' =>  'required|max:30',
 			'duracao_meses' =>  'digits_between:1,3|numeric',
 			'portaria_mec_rec' =>  'max:50',
 			'numero_decreto_rec' =>  '' ,
