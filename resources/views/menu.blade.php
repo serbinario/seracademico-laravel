@@ -327,6 +327,9 @@
                 <li>
                     <a href="http://www.portal-academico.serbinario.com.br/index.php/" target="__blank"><i class="flaticon-business"></i> Portal</a>
                 </li>
+                <li>
+                    <a href="{{ route('seracademico.releasenote.index') }}"><i class="flaticon-settings"></i>Sobre</a>
+                </li>
                 @endrole
             </ul>
         </div>
