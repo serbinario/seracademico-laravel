@@ -72,7 +72,7 @@
                                 <td>@if(isset($disciplina->curriculos->last()->curso->nome)){{ $disciplina->curriculos->last()->curso->nome }}@endif</td>
                                 <td>@if(isset($disciplina->nome)){{ $disciplina->nome }}@endif
                                     <input type='hidden' name='disciplinas[]' value='@if(isset($disciplina->id)){{ $disciplina->id }}@endif'></td>
-                                <td style='width: 10px'><button type='button' class='btn btn-danger delete-informatica'>Excluir</button></td>
+                                <td style='width: 10px'><button type='button' class='btn btn-danger delete-disciplina'>Excluir</button></td>
                             </tr>
                         @endforeach
                     @endif
