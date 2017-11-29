@@ -1,16 +1,17 @@
 <?php
 
-namespace Seracademico\Repositories\Graduacao;
+namespace Seracademico\Repositories\Tecnico;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Entities\Graduacao\Turma;
+use Seracademico\Entities\Tecnico\AgendamentoAluno;
 
 /**
- * Class TurmaRepositoryEloquent
+ * Class AlunoRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
+class AgendamentoAlunoRepositoryEloquent
+    extends BaseRepository implements AgendamentoAlunoRepository
 {
     /**
      * Specify Model class name
@@ -19,7 +20,7 @@ class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
      */
     public function model()
     {
-        return Turma::class;
+        return AgendamentoAluno::class;
     }
 
     /**
