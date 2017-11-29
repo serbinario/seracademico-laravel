@@ -945,6 +945,11 @@ class SeracademicoRepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \Seracademico\Repositories\ReleaseRepository::class,
+            \Seracademico\Repositories\ReleaseRepositoryEloquent::class
+        );
+
+        $this->app->bind(
             \Seracademico\Repositories\Tecnico\AgendamentoSegundaChamadaRepository::class,
             \Seracademico\Repositories\Tecnico\AgendamentoSegundaChamadaRepositoryEloquent::class
         );

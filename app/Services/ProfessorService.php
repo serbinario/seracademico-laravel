@@ -66,7 +66,7 @@ class ProfessorService
 
         #Recuperando o registro no banco de dados
         $professor = $this->repository->with($relacionamentos)->find($id);
-        //dd($professor->endereco->cep);
+
         #Verificando se o registro foi encontrado
         if(!$professor) {
             throw new \Exception('Empresa não encontrada!');
@@ -161,7 +161,6 @@ class ProfessorService
      */
     public function update(array $data, int $id) : Professor
     {
-
         $imgCam = isset($data['cod_img']) ? $data['cod_img'] : "";
         $img    = isset($data['img']) ? $data['img'] : "";
 
