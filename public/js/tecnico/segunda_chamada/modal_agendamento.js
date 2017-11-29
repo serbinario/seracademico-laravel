@@ -130,6 +130,7 @@ function runTableDisciplina(idAgendamento) {
 // carregando todos os campos preenchidos
 function loadFieldsAlunos()
 {
+    // pega o id do aluno
     $("#aluno option").remove();
 
     // Fazendo a requisição ajax
