@@ -27,6 +27,12 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
+                    {!! Form::label('valor', 'Valor') !!}
+                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control decimal')) !!}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     {!! Form::label('carga_horaria', 'Carga horária total') !!}
                     {!! Form::text('carga_horaria', Session::getOldInput('carga_horaria')  , array('class' => 'form-control number')) !!}
                 </div>

@@ -206,6 +206,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\ModuloController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ModuloController@delete']);
             });
+
+            Route::group(['prefix' => 'agendamento', 'middleware' => 'auth', 'as' => 'agendamento.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@delete']);
+                Route::post('getdisciplina', ['as' => 'getdisciplina', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@getDisciplinas']);
+            });
         });
         //FIM TÉCNICO
 
@@ -236,6 +247,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ParametroController@editItem']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'ParametroController@updateItem']);
             });
+        });
+
+        Route::group(['prefix' => 'releasenote', 'middleware' => 'auth', 'as' => 'releasenote.'], function () {
+            Route::get('index', ['as' => 'index', 'uses' => 'ReleasesController@index']);
+            Route::get('grid', ['as' => 'grid', 'uses' => 'ReleasesController@grid']);
+            Route::get('create', ['as' => 'create', 'uses' => 'ReleasesController@create']);
+            Route::post('store', ['as' => 'store', 'uses' => 'ReleasesController@store']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ReleasesController@edit']);
+            Route::post('update/{id}', ['as' => 'update', 'uses' => 'ReleasesController@update']);
+            Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'ReleasesController@delete']);
         });
 
         Route::group(['prefix' => 'vestibulando', 'as' => 'vestibulando.'], function () {

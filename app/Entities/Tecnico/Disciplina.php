@@ -105,4 +105,13 @@ class Disciplina extends Model implements Transformable
     {
         return $query->where('tipo_nivel_sistema_id', 4);
     }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeDisciplinaTecnico($query)
+    {
+        return $query->select(['fac_disciplinas.id', 'fac_disciplinas.nome as nome'])->where('tipo_nivel_sistema_id', 4);
+    }
 }
