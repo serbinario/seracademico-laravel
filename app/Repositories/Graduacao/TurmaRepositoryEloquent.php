@@ -4,8 +4,6 @@ namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Graduacao\TurmaValidator;
-use Seracademico\Repositories\Graduacao\TurmaRepository;
 use Seracademico\Entities\Graduacao\Turma;
 
 /**
@@ -22,16 +20,6 @@ class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
     public function model()
     {
         return Turma::class;
-    }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-         return TurmaValidator::class;
     }
 
     /**
