@@ -948,5 +948,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Tecnico\AgendamentoSegundaChamadaRepository::class,
             \Seracademico\Repositories\Tecnico\AgendamentoSegundaChamadaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\AgendamentoAlunoRepository::class,
+            \Seracademico\Repositories\Tecnico\AgendamentoAlunoRepositoryEloquent::class
+        );
     }
 }
