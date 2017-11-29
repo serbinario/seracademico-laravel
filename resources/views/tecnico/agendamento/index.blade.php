@@ -1,12 +1,8 @@
 @extends('menu')
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('/js/posgraduacao/turma/css/modal_agendamento_segunda_chamada.css') }}">
     <style type="text/css">
-        .select2-container {
-            width: 100% !important;
-            padding: 0;
-        }
-
         .select2-close-mask{
             z-index: 2099;
         }
@@ -14,10 +10,6 @@
         .select2-dropdown{
             z-index: 3051;
         }
-
-        /*#disciplina-grid tbody tr{*/
-            /*font-size: 10px;*/
-        /*}*/
 
         td.details-control {
             background: url("{{asset("imagemgrid/icone-produto-plus.png")}}") no-repeat center center;
@@ -80,9 +72,12 @@
             </div>
         </div>        
     </div>
+
+    @include('tecnico.agendamento.modal_agendamento_aluno')
 @stop
 
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/tecnico/segunda_chamada/modal_agendamento.js')  }}"></script>
     <script type="text/javascript">
         /* Datatable da grid principal */
         var table = $('#agendamento-grid').DataTable({
@@ -99,5 +94,28 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '.modal-aluno', function () {
+            // declaração de variáveis locais
+            var data;
+
+            //Recuperando o id da turma selecionada
+            idAgendamento = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            data  = table.row($(this).parent().parent().parent().parent().parent().index()).data().data;
+
+            // setando a descrição
+            $('#dtAgendamento').text(data);
+
+            //Executando a grid
+            runTableDisciplina(idAgendamento);
+
+            $("#modal-agendamento-aluno").find('.modal-dialog').css("width", "70%");
+            $("#modal-agendamento-aluno").find('.modal-dialog').css("max-height", "70%");
+            $("#modal-agendamento-aluno").modal({show: true, keyboard: true});
+        });
+
+        //modal add aluno
+        $('#aluno').select2({ width: 360 });
     </script>
 @stop

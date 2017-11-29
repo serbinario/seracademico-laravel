@@ -217,6 +217,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@delete']);
                 Route::post('getdisciplina', ['as' => 'getdisciplina', 'uses' => 'Tecnico\AgendamentoSegundaChamadaController@getDisciplinas']);
             });
+
+            Route::group(['prefix' => 'agendamentoaluno', 'middleware' => 'auth', 'as' => 'agendamentoaluno.'], function () {
+                Route::get('griddisciplina/{id}', ['as' => 'griddisciplina', 'uses' => 'Tecnico\AgendamentoAlunoController@gridDisciplina']);
+                Route::get('gridaluno/{id}/{idagenda}', ['as' => 'gridaluno', 'uses' => 'Tecnico\AgendamentoAlunoController@gridAluno']);
+                Route::post('getLoadFieldsAluno', ['as' => 'getLoadFieldsAluno', 'uses' => 'Tecnico\AgendamentoAlunoController@getLoadFieldsAluno']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\AgendamentoAlunoController@store']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\AgendamentoAlunoController@update']);
+                Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\AgendamentoAlunoController@delete']);
+            });
         });
         //FIM TÉCNICO
 

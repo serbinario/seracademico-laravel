@@ -1,0 +1,9 @@
+.row_selected {
+    background-color: #69aaa6 !important;
+    color: #FFF;
+    font-weight: bold;
+}
+
+#agendamento-disciplina-grid tbody tr td {
+    font-size: 12px;
+}
