@@ -80,6 +80,7 @@ function builderHtmlFieldsDispensarDisciplina (dados) {
 $('#btnSalvarDispensarDisciplina').click(function() {
     // Recuperando os parametros
     var disciplina_id  = $("#disciplina_id option:selected").val();
+   // var disciplina_origem_id  = $("#disciplina_origem_id option:selected").val();
     var instituicao_id = $("#instituicao_id option:selected").val();
     var motivo_id      = $("#motivo_id option:selected").val();
     var carga_horaria  = $("#carga_horaria").val();
@@ -91,6 +92,7 @@ $('#btnSalvarDispensarDisciplina').click(function() {
     var dados = {
         'pos_aluno_curso_id' : idAlunoCurso,
         'disciplina_id'  : disciplina_id,
+        'disciplina_origem_id' : disciplina_origem_id,
         'instituicao_id' : instituicao_id,
         'motivo_id'      : motivo_id,
         'carga_horaria'  : carga_horaria,
@@ -109,6 +111,7 @@ $('#btnSalvarDispensarDisciplina').click(function() {
         if(retorno.success) {
             tableDisciplinasDispensadas.ajax.reload();
             tableDisciplinasACursar.ajax.reload();
+            tableDisciplinasCursadas.ajax.reload();
 
             $('#modal-inserir-dispensar-disciplina').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
