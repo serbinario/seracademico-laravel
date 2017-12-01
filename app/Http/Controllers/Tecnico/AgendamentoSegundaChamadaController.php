@@ -83,9 +83,11 @@ class AgendamentoSegundaChamadaController extends Controller
             return '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
+                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Agendamento"><i class="material-icons">edit</i></a></li>
+                        <li><a class="modal-aluno btn-floating green" data-id="'.$row->id.'" href="#" title="Agendar aluno"><i class="material-icons">date_range</i></a></li>
                     </ul>
                     </div>';
+
         })->make(true);
     }
 
