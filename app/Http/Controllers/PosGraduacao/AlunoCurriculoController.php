@@ -155,6 +155,7 @@ class AlunoCurriculoController extends Controller
             ->join('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'pos_alunos_notas.situacao_nota_id')
             ->where('pos_alunos.id', $idAluno)
             ->whereIn('fac_situacao_nota.id', [1]) // Situação de cumprimento da disciplina
+            ->union(BuildersUniosCurriculo::getDispensadas($idAluno))
             ->select([
                 'pos_alunos_cursos.id',
                 'fac_disciplinas.nome as disciplina_nome',
@@ -293,6 +294,7 @@ class AlunoCurriculoController extends Controller
         try {
             # Recuperando os dados da requisição
             $dados = $request->all();
+            $dados['situacao_nota_id'] = 1;
 
             # Persistindo os dados no banco de dados
             $this->alunoDisciplinaDispensadaService->store($dados);

@@ -10,6 +10,7 @@ use Seracademico\Http\Requests;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\PosGraduacao\CalendarioDisciplinaTurmaRepository;
 use Seracademico\Services\PosGraduacao\AlunoService;
+use Seracademico\Uteis\ConsultationsBuilders\Aluno\PosGraduacao\BuildersUniosCurriculo;
 
 class AlunoDocumentoController extends Controller
 {
@@ -324,6 +325,7 @@ class AlunoDocumentoController extends Controller
     {
         # Recuperando os dados padrões para esse documento
         $result = $this->getDadosPadraoParaGerarDocumento($id);
+        $dispensadas = BuildersUniosCurriculo::getDispensadas($id)->get();
 
         # Recuperando as notas do aluno
         $notasDoAluno = $result['aluno']->curriculos->last()
@@ -348,6 +350,19 @@ class AlunoDocumentoController extends Controller
             $arrayDeNotas[$count]['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
             $arrayDeNotas[$count]['disciplina']['data'] = $nota['frequencias'][0]['calendario']['data_final'] ?? "";
             $arrayDeNotas[$count]['nota_final'] = $nota['nota_final'];
+
+            $count++;
+        }
+
+        $count++;
+
+        foreach ($dispensadas as $dispensada) {
+            $arrayDeNotas[$count]['disciplina']['nome'] = $dispensada->disciplina_nome;
+            $arrayDeNotas[$count]['disciplina']['carga_horaria'] = $dispensada->carga_horaria;
+            $arrayDeNotas[$count]['disciplina']['carga_horaria_total'] = null;
+            $arrayDeNotas[$count]['disciplina']['professor'] =  "DISPENSADA";
+            $arrayDeNotas[$count]['disciplina']['data'] = "";
+            $arrayDeNotas[$count]['nota_final'] = $dispensada->nota_final;
 
             $count++;
         }
