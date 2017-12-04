@@ -28,6 +28,7 @@ class AlunoDisciplinaDispensada extends Model implements Transformable
 		'carga_horaria',
 		'data',
 		'qtd_credito',
+        'situacao_nota_id'
 	];
 
 	/**

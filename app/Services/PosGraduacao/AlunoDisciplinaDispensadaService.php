@@ -22,8 +22,9 @@ class AlunoDisciplinaDispensadaService
      * AlunoDisciplinaDispensadaService constructor.
      * @p ram AlunoRepository $alunoRepository
      */
-    public function __construct(AlunoDisciplinaDispensadaRepository $repository,
-                                AlunoRepository $alunoRepository)
+    public function __construct(
+        AlunoDisciplinaDispensadaRepository $repository,
+        AlunoRepository $alunoRepository)
     {
         $this->repository = $repository;
         $this->alunoRepository = $alunoRepository;
