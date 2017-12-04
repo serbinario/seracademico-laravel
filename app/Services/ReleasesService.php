@@ -75,7 +75,7 @@ class ReleasesService
     }
 
     /**
-     * @return mixed
+     * @return array|static
      */
     public function buscarLancamentos()
     {
@@ -108,11 +108,11 @@ class ReleasesService
                 'desenvolvedor' => $lancamento->desenvolvedor,
                 'tipo' => $lancamento->tipo,
                 'sistema' => $lancamento->sistema
-
             ];
         });
 
         $lacamentosFormatados = $lancamentosMap->groupBy('data');
+        $lancamentoDesc = $lacamentosFormatados->reverse();
 
         return $lacamentosFormatados;
     }
