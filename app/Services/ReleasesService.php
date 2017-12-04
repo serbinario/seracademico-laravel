@@ -114,6 +114,6 @@ class ReleasesService
         $lacamentosFormatados = $lancamentosMap->groupBy('data');
         $lancamentoDesc = $lacamentosFormatados->reverse();
 
-        return $lacamentosFormatados;
+        return $lancamentoDesc;
     }
 }
