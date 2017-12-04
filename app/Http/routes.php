@@ -831,6 +831,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::post('storeDisciplinaExtraCurricular', ['as' => 'storeDisciplinaExtraCurricular', 'uses' => 'PosGraduacao\AlunoCurriculoController@storeDisciplinaExtraCurricular']);
                     Route::get('deleteDisciplinaExtraCurricular/{idDisciplina}', ['as' => 'deleteDisciplinaExtraCurricular', 'uses' => 'PosGraduacao\AlunoCurriculoController@deleteDisciplinaExtraCurricular']);
                     Route::get('getDisciplinasByCurriculo/{idCurriculo}', ['as' => 'getDisciplinasByCurriculo', 'uses' => 'PosGraduacao\AlunoCurriculoController@getDisciplinasByCurriculo']);
+                    Route::get('getDisciplinasByCurriculoWithNota/{idAluno}/{idCurriculo}', ['as' => 'getDisciplinasByCurriculoWithNota', 'uses' => 'PosGraduacao\AlunoCurriculoController@getDisciplinasByCurriculoWithNota']);
+                    Route::get('getNota', ['as' => 'getNota', 'uses' => 'PosGraduacao\AlunoCurriculoController@getNota']);
                     Route::post('storeEquivalencia', ['as' => 'storeEquivalencia', 'uses' => 'PosGraduacao\AlunoCurriculoController@storeEquivalencia']);
                     Route::get('deleteEquivalencia/{id}', ['as' => 'deleteEquivalencia', 'uses' => 'PosGraduacao\AlunoCurriculoController@deleteEquivalencia']);
                 });
