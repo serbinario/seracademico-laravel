@@ -138,16 +138,4 @@ class ReleasesController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
-
-    /*public function tableLancamentos()
-    {
-        try{
-            $lancamentos = $this->service->buscarLancamentos();
-
-            #retorno para view
-            return view('releasenote.index', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
-        }
-    }*/
 }
