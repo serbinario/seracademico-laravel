@@ -372,7 +372,11 @@ class AlunoCurriculoController extends Controller
                 ->join('fac_curriculo_disciplina', 'fac_curriculo_disciplina.disciplina_id', '=', 'fac_disciplinas.id')
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
                 ->where('fac_curriculos.id', $idCurriculo)
-                ->select(['fac_disciplinas.id', 'fac_disciplinas.nome', 'fac_disciplinas.codigo'])->get();
+                ->select([
+                    'fac_disciplinas.id',
+                    'fac_disciplinas.nome',
+                    'fac_disciplinas.codigo'
+                ])->get();
 
             # Verificando se os registros foram encontrados
             if(count($rows) === 0) {
@@ -383,6 +387,67 @@ class AlunoCurriculoController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+
+    /**
+     * @param $idCurriculo
+     * @return mixed
+     */
+    public function getDisciplinasByCurriculoWithNota($idAluno, $idCurriculo)
+    {
+        try {
+            # Query de busca das discplinas do currículo ($idCurriculo)
+            $rows = \DB::table('fac_curriculos')
+                ->join('pos_alunos_cursos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+                ->join('pos_alunos_turmas', 'pos_alunos_turmas.pos_aluno_curso_id', '=', 'pos_alunos_cursos.id')
+                ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
+                ->where('fac_curriculos.id', $idCurriculo)
+                ->where('pos_alunos_cursos.aluno_id', $idAluno)
+                ->where('pos_alunos_notas.situacao_nota_id', 1)
+                ->select([
+                    'fac_disciplinas.id',
+                    'fac_disciplinas.nome',
+                    'fac_disciplinas.codigo'
+                ])->get();
+
+            # Verificando se os registros foram encontrados
+            if(count($rows) === 0) {
+                throw new \Exception('Nenhum resultado encontrado!');
+            }
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    public function getNota(Request $request)
+    {
+        try {
+            $idAluno = $request->get('aluno_id');
+            $idDisciplina = $request->get('disciplina_id');
+            $idCurriculo = $request->get('curriculo_id');
+
+            $nota = \DB::table('pos_alunos_notas')
+                ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
+                ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
+                ->join('pos_alunos_cursos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+                ->where('fac_disciplinas.id', $idDisciplina)
+                ->where('fac_curriculos.id', $idCurriculo)
+                ->where('pos_alunos_cursos.aluno_id', $idAluno)
+                ->where('pos_alunos_notas.situacao_nota_id', 1)
+                ->select([
+                    'pos_alunos_notas.nota_final'
+                ])->first();
+
+            return response()->json(['dados' => $nota]);
+        } catch (\Throwable $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 

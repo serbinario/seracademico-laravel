@@ -3,6 +3,7 @@
 namespace Seracademico\Entities\PosGraduacao;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Seracademico\Entities\Graduacao\PivotCurriculoDisciplina;
@@ -167,6 +168,31 @@ class Curriculo extends Model implements Transformable
                 return $cursos;
             })
             ->where('tipo_nivel_sistema_id', 2);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeByAluno($query, $idAluno)
+    {
+        $query->where('fac_curriculos.tipo_nivel_sistema_id', 2);
+
+        $cursos = \DB::table('pos_alunos_cursos')
+            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+            ->where('pos_alunos.id', $idAluno)
+            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->select(['pos_alunos_cursos.curriculo_id as id'])->get();
+
+        # Verificando se algum registro foi retornado
+        if(count($cursos) > 0) {
+            $cursos = new Collection($cursos);
+            $cursos = $cursos->map(function ($item) {return $item->id;});
+            $cursos->shift();
+            $query->whereIn('id', $cursos->all());
+        }
+
+        return $query;
     }
 
     /**
