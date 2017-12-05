@@ -162,7 +162,7 @@ class AlunoController extends Controller
                             <li><a class="btn-floating indigo" title="Currículo do aluno" id="modalCurriculo"><i class="material-icons">assignment</i></a></li>
                             <li><a class="btn-floating indigo" title="Semestre do aluno"  id="modalSemestre"><i class="material-icons">date_range</i></a></li>
                             <li><a class="btn-floating indigo" title="Benefícios do Aluno" id="modalBeneficio"><i class="material-icons">account_balance_wallet</i></a></li>
-                            <li><a class="btn-floating indigo" title="Financeiro do Aluno" id="modalFinanceiro"><i class="material-icons">attach_money</i></a></li>
+                            <li><a class="btn-floating" title="Financeiro do Aluno" id="btnModalFinanceiro"><i class="material-icons">attach_money</i></a></li>
                             <li><a class="btn-floating" id="aluno_documentos" title="Documentos"><i class="material-icons">print</i></a></li>
                         </ul>
                         </div>';
@@ -171,6 +171,7 @@ class AlunoController extends Controller
             abort(500, $e->getMessage());
         }
     }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

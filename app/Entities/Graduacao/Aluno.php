@@ -12,6 +12,7 @@ use Seracademico\Entities\Endereco;
 use Seracademico\Entities\Estado;
 use Seracademico\Entities\EstadoCivil;
 use Seracademico\Entities\Exame;
+use Seracademico\Entities\Financeiro\Debito;
 use Seracademico\Entities\FormaAdmissao;
 use Seracademico\Entities\GrauInstrucao;
 use Seracademico\Entities\InclusaoALuno;
@@ -125,4 +126,11 @@ class Aluno extends Model implements Transformable
         return parent::newPivot($parent, $attributes, $table, $exists);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function debitos()
+    {
+        return $this->morphMany(Debito::class, 'debitante');
+    }
 }
