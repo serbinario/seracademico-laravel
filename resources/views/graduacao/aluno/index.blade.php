@@ -23,6 +23,20 @@
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
+
+        .carregamento{
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+            url("{{ asset('/img/pre-loader/gears_200x200.gif') }}")
+            50% 50%
+            no-repeat;
+        }
     </style>
 
 @stop
@@ -146,6 +160,10 @@
         </div>
     </div>
 
+    <div class="carregamento">
+        {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
+    </div>
+
     @include('graduacao.aluno.modal_historico')
     @include('graduacao.aluno.modal_create_historico')
     @include('graduacao.aluno.modal_create_situacao')
@@ -154,9 +172,6 @@
     @include('graduacao.aluno.modal_editar_dispensar_disciplina')
     @include('graduacao.aluno.modal_semestre')
     @include('graduacao.aluno.modal_aluno_documento')
-    @include('graduacao.aluno.financeiro.modal_debitos')
-    @include('graduacao.aluno.financeiro.modal_create_debito_aberto')
-    @include('graduacao.aluno.financeiro.modal_create_fechamento')
     @include('graduacao.aluno.beneficio.modal_beneficios')
     @include('graduacao.aluno.beneficio.modal_create_beneficio')
     @include('graduacao.aluno.beneficio.modal_edit_beneficio')
@@ -165,6 +180,10 @@
     @include('graduacao.aluno.curriculo.modal_create_equivalencia')
     @include('reports.simple.modals.modal_report_gra_aluno_por_vestibular')
     @include('reports.simple.modals.modal_report_gra_aluno_por_periodo')
+    @include('graduacao.aluno.financeiro.modal_debitos')
+    @include('graduacao.aluno.financeiro.modal_create_debito')
+    @include('graduacao.aluno.financeiro.modal_edit_debito')
+    @include('graduacao.aluno.financeiro.modal_info_debito')
 @stop
 
 @section('javascript')
@@ -178,9 +197,6 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/funcoes.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/disciplina.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/gerenciar-disciplinas/horario.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debito_aberto.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_fechamento.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/create_beneficio_financeiro_aluno.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/grid_beneficio_financeiro_aluno.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/beneficio/modal_beneficios.js') }}"></script>
@@ -195,8 +211,14 @@
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_trancado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_graduado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_ativo.js') }}"></script>
-    {{----}}
     <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/documentos/modal_aluno_documento.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/graduacao/aluno/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -352,6 +374,23 @@
             loadFieldsDocumentos();
 
             $("#modal-aluno-documento").modal({show:true});
+        });
+
+        // Evento para abrir o modal do financeiro
+        $(document).on("click", "#btnModalFinanceiro", function () {
+            // Recuperando os dados do aluno selecionado
+            var rowTable = $(this).parents('tr');
+            idAluno = table.row(rowTable).data().id;
+            var nomeAluno   = table.row(rowTable).data().nome;
+            var matricula   = table.row(rowTable).data().matricula;
+            var codigoCurso = table.row(rowTable).data().codigoCurso;
+
+            // prenchendo o titulo do nome do aluno
+            $('#finMatricula').text(matricula);
+            $('#finNomeAluno').text(nomeAluno);
+            $('#finCurso').text(codigoCurso);
+
+            runFinanceiro(idAluno);
         });
 
         /**
