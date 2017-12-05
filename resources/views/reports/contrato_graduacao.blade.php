@@ -6,7 +6,7 @@
     <style type="text/css" class="init">
         body {
             font-family: arial;
-            font-size: 15px;
+            font-size: 22px;
         }
 
         .termos{
