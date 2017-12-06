@@ -117,6 +117,7 @@ $('#btnUpdateDebito').click(function() {
     }).done(function (retorno) {
         if(retorno.success) {
             tableDebitos.ajax.reload();
+            table.ajax.reload();
             $('#modal-edit-debito').modal('toggle');
             swal(retorno.msg, "Click no botão abaixo!", "success");
         } else {
