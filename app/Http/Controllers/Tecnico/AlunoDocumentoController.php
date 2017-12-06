@@ -262,6 +262,7 @@ class AlunoDocumentoController extends Controller
         # Recuperando as informações no banco
         $curso = $this->getCursoAtivoDoAluno($aluno->id);
 
+
         # Verificando o retorno da consulta
         if ($curso) {
             # Recuperando outras informações no banco de dados
@@ -317,7 +318,9 @@ class AlunoDocumentoController extends Controller
             ->orderBy('pos_alunos_turmas.id', 'DESC')
             ->limit(1)
             ->select([
-                'fac_turmas.*'
+                'fac_turmas.*',
+                \DB::raw('DATE_FORMAT(fac_turmas.aula_inicio, "%d/%m/%Y") as aula_inicio'),
+                \DB::raw('DATE_FORMAT(fac_turmas.vencimento_inicial, "%d/%m/%Y") as vencimento_inicial'),
             ])->first();
     }
 
