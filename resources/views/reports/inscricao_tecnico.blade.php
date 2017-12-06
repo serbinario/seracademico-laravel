@@ -69,7 +69,7 @@
         <div id="conteudo_1" style="margin-top: 80px">
 
             <p style="text-align: justify">
-                NOME: _______________________________________________________________________________________
+                NOME: ______________________________________________________________________________________
             </p>
 
             <br />
@@ -112,7 +112,7 @@
 
     </div>
 
-    <div class="rodape" style="margin-top: 45%;">
+    <div class="rodape" style="margin-top: 35%;">
         <hr style="color: #bfbfbf">
         <hr>
         <p style="text-align: center">
