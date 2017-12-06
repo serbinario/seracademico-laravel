@@ -139,6 +139,7 @@ $('#btnSalvarDebito').click(function() {
         if(retorno.success) {
             tableDebitos.ajax.reload();
             tableCarnes.ajax.reload();
+            table.ajax.reload();
             $('#modal-create-debito').modal('toggle');
             swal("Débito cadastrado com sucesso", "Click no botão abaixo!", "success");
         } else {

@@ -3,6 +3,7 @@ namespace Seracademico\Http\Controllers\Graduacao;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Seracademico\Entities\Graduacao\Aluno;
 use Seracademico\Facades\ParametroBancoFacade;
 use Seracademico\Http\Controllers\Controller;
@@ -148,8 +149,10 @@ class AlunoFinanceiroController extends Controller
     {
         try {
             $aluno = $this->alunoRepository->find($id);
-            $this->debitoService->store($aluno, $request->all());
+            $debito = $this->debitoService->store($aluno, $request->all());
             $message = 'Débito cadastrado com sucesso';
+
+            $this->updateSituacaoPeloDebito($debito, $aluno);
 
             return response()->json(['success' => true, 'msg' => $message]);
         } catch (\Throwable $e) {
@@ -166,12 +169,26 @@ class AlunoFinanceiroController extends Controller
     public function updateDebito(Request $request, $idDebito)
     {
         try {
-            $this->debitoService->update($request->all(), $idDebito);
+            $debito = $this->debitoService->update($request->all(), $idDebito);
             $message = "Débito atualizado com sucesso";
+
+            $this->updateSituacaoPeloDebito($debito, $debito->debitante);
 
             return response()->json(['success' => true, 'msg' => $message]);
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $aluno
+     */
+    private function updateSituacaoPeloDebito($debito, $aluno)
+    {
+        if ($debito->taxa->tipo_taxa_id == 2 && $debito->pago) {
+            $aluno->semestres()->get()
+                ->last()->pivot->situacoes()
+                ->attach(2, ['data'=> new \DateTime('now')]);
         }
     }
 
