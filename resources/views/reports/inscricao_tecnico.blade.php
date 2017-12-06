@@ -112,7 +112,7 @@
 
     </div>
 
-    <div class="rodape" style="margin-top: 35%;">
+    <div class="rodape" style="margin-top: 32%;">
         <hr style="color: #bfbfbf">
         <hr>
         <p style="text-align: center">
