@@ -4,7 +4,6 @@ namespace Seracademico\Repositories\Graduacao;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Seracademico\Validators\Graduacao\DisciplinaValidator;
 use Seracademico\Repositories\Graduacao\DisciplinaRepository;
 use Seracademico\Entities\Graduacao\Disciplina;
 
@@ -23,19 +22,6 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
     {
         return Disciplina::class;
     }
-
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return DisciplinaValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria
