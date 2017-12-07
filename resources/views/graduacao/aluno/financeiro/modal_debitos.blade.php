@@ -1,4 +1,3 @@
-<!-- Modal principal de disciplinas -->
 <div id="modal-debitos" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -23,98 +22,67 @@
                             <div class="col-md-2">
                                 <span><strong>Curso: </strong><p id="finCurso"></p></span>
                             </div>
-
-                            <div class="col-md-2">
-                                <span><strong>Período: </strong><p id="finPeriodo"></p></span>
-                            </div>
                         </div>
 
                         <!-- Links para a navegação -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#debitos-abertos" aria-controls="debitos-abertos" data-toggle="tab">Débitos Abertos</a>
+                                <a href="#debitos" aria-controls="debitos" data-toggle="tab">Débitos</a>
                             </li>
 
                             <li role="presentation">
-                                <a href="#debitos-fechados" aria-controls="debitos-fechados" data-toggle="tab">Débitos Fechados</a>
-                            </li>
-
-                            <li role="presentation">
-                                <a href="#boletos" aria-controls="boletos" data-toggle="tab">Boletos</a>
+                                <a href="#carnes" aria-controls="carnes" data-toggle="tab">Carnês</a>
                             </li>
                         </ul>
 
-                        <!-- Conteúdo de navegação de pastas -->
+                        <!-- Conteúdo de navegação de abas -->
                         <div class="tab-content">
 
-                            {{--Aba A Cursar --}}
-                            <div role="tabpanel" class="tab-pane active" id="debitos-abertos">
-                                <br>
-
-                                <div class="col-md-3 col-md-offset-9">
-                                    <a id="btnCreateDebitoAberto" class="btn-sm btn-primary pull-right">Novo Débito</a>
+                            <div role="tabpanel" class="tab-pane active" id="debitos">
+                                <div class="row">
+                                    <div style="margin-top: 1%;" class="col-md-2">
+                                        <a id="btnModalCreateDebitos" class="btn-sm btn-primary pull-left">Novo Débito</a>
+                                    </div>
                                 </div>
-                                <br><br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="grid-debitos" class="display table table-bordered"
+                                               cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 30%">Taxa</th>
+                                                <th style="width: 15%">Vencimento</th>
+                                                <th style="width: 15%">Valor</th>
+                                                <th style="width: 20%">Sit. Boleto</th>
+                                                <th>Carnê</th>
+                                                <th style="width: 5%">Pago</th>
+                                                <th style="width: 5%">Ação</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <!-- Table a cursar -->
-                                <table id="grid-debitos-abertos" class="display table table-bordered" cellspacing="0" width="100%">
+                            <div role="tabpanel" class="tab-pane" id="carnes">
+
+                                <table style="margin-top: 2%" id="grid-carnes" class="display table table-bordered"
+                                       cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Cod. Taxa</th>
+                                        <th>Código</th>
+                                        <th>Data Criação</th>
+                                        <th>Qtd. Parcelas</th>
                                         <th>Taxa</th>
-                                        <th>V. Taxa</th>
-                                        <th>Vencimento</th>
-                                        <th>V. Multa</th>
-                                        <th>V. Juros</th>
                                         <th>Valor</th>
-                                        <th>Mês</th>
-                                        <th>Ano</th>
-                                        <th>Ação</th>
+                                        <th style="width: 30%">Link</th>
                                     </tr>
                                     </thead>
                                 </table>
                             </div>
 
-                            <!-- Aba Cursadas -->
-                            <div role="tabpanel" class="tab-pane" id="debitos-fechados">
-                                <br/>
-
-                                <!-- Table a cursadas -->
-                                <table id="grid-debitos-fechados" class="display table table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Cod. Taxa</th>
-                                        <th>Taxa</th>
-                                        <th>V. Taxa</th>
-                                        <th>Vencimento</th>
-                                        <th>V. Multa</th>
-                                        <th>V. Juros</th>
-                                        <th>Valor</th>
-                                        <th>Mês</th>
-                                        <th>Ano</th>
-                                        {{--<th>Ação</th>--}}
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-
-                            <!-- Aba Boletos -->
-                            <div role="tabpanel" class="tab-pane" id="boletos">
-                                <br/>
-
-                                <!-- Table a cursadas -->
-                                <table id="grid-boletos" class="display table table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Nosso Número</th>
-                                        <th>Vencimento</th>
-                                        <th>Valor</th>
-                                        <th>Data Doc.</th>
-                                        <th>Nº Doc.</th>
-                                        {{--<th>Ação</th>--}}
-                                    </tr>
-                                    </thead>
-                                </table>
+                            <div class="carregamento">
+                                {{--<img src="{{ asset('/img/pre-loader/gears_200x200.gif') }}" alt="carregamento">--}}
                             </div>
                         </div>
                     </div>
@@ -123,4 +91,3 @@
         </div>
     </div>
 </div>
-<!-- FIM Modal de cadastro das Disciplinas-->
