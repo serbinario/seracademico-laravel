@@ -450,7 +450,7 @@ class AlunoCurriculoController extends Controller
                 ->where('pos_alunos_notas.situacao_nota_id', 1)
                 ->select([
                     'pos_alunos_notas.nota_final'
-                ])->get();
+                ])->first();
 
             return response()->json(['dados' => $nota]);
         } catch (\Throwable $e) {
