@@ -238,6 +238,8 @@ class AlunoService
             $this->loginPortalAluno($data, $aluno->matricula);
         }
 
+        unset($data['fac_instituicao_id']);
+
         #Atualizando no banco de dados
         $aluno = $this->repository->update($data, $id);
 
