@@ -432,18 +432,25 @@ class AlunoCurriculoController extends Controller
             $idDisciplina = $request->get('disciplina_id');
             $idCurriculo = $request->get('curriculo_id');
 
-            $nota = \DB::table('pos_alunos_notas')
+            $nota = \DB::table('pos_alunos_cursos')
+                ->join('pos_alunos_turmas', function ($join) {
+                    $join->on(
+                        'pos_alunos_turmas.id', '=',
+                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                        where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
+                    );
+                })
+                ->join('pos_alunos_notas', 'pos_alunos_notas.pos_aluno_turma_id', '=', 'pos_alunos_turmas.id')
                 ->join('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_notas.turma_id')
                 ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'pos_alunos_notas.disciplina_id')
                 ->join('fac_curriculos', 'fac_curriculos.id', '=', 'fac_turmas.curriculo_id')
-                ->join('pos_alunos_cursos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
                 ->where('fac_disciplinas.id', $idDisciplina)
                 ->where('fac_curriculos.id', $idCurriculo)
                 ->where('pos_alunos_cursos.aluno_id', $idAluno)
                 ->where('pos_alunos_notas.situacao_nota_id', 1)
                 ->select([
                     'pos_alunos_notas.nota_final'
-                ])->first();
+                ])->get();
 
             return response()->json(['dados' => $nota]);
         } catch (\Throwable $e) {
