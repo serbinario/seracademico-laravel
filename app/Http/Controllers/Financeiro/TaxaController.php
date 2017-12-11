@@ -34,7 +34,8 @@ class TaxaController extends Controller
         'Financeiro\Exigencia',
         'Financeiro\TipoMulta',
         'Financeiro\TipoJuro',
-        'Graduacao\\Semestre'
+        'Graduacao\\Semestre',
+        'TipoNivelSistema'
     ];
 
     /**
@@ -75,8 +76,8 @@ class TaxaController extends Controller
                             <li><a href="edit/'.$row->id.'" class="btn-floating"><i class="material-icons">edit</i></a></li>';
 
             # Verificação de possibilidade de remoção
-            if(count($objTaxa->beneficios) == 0 && count($objTaxa->debitosAlunos) == 0 &&
-                count($objTaxa->debitosVestibulandos) == 0 && count($objTaxa->vestibulares) == 0) {
+            if(count($objTaxa->beneficios) == 0 && count($objTaxa->debitos) == 0
+                && count($objTaxa->vestibulares) == 0) {
                 # Html de retorno
                 $html .= '<li><a href="delete/'.$row->id.'" class="btn-floating"><i class="material-icons">delete</i></a></li>';
             }
