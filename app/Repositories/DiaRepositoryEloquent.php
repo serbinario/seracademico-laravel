@@ -24,8 +24,6 @@ class DiaRepositoryEloquent extends BaseRepository implements DiaRepository
         return Dia::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
