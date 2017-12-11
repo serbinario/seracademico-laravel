@@ -15,11 +15,9 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
-                <div class="form-group">
-                    {!! Form::label('valor', 'Valor *') !!}
-                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal' , 'placeholder'=>'R$')) !!}
-                </div>
+            <div class="form-group col-md-2">
+                {!! Form::label('tipo_nivel_sistema_id', 'Nível da Taxa * ') !!}
+                {!! Form::select('tipo_nivel_sistema_id', $loadFields['tiponivelsistema'], Session::getOldInput('tipo_nivel_sistema_id'), array('class' => 'form-control')) !!}
             </div>
 
             <div class="form-group col-md-2">
@@ -29,6 +27,13 @@
         </div>
 
         <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {!! Form::label('valor', 'Valor *') !!}
+                    {!! Form::text('valor', Session::getOldInput('valor')  , array('class' => 'form-control moneyReal' , 'placeholder'=>'R$')) !!}
+                </div>
+            </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('valido_inicio', 'Valido Inicio ') !!}

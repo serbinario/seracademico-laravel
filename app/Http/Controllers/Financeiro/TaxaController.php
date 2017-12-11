@@ -34,7 +34,8 @@ class TaxaController extends Controller
         'Financeiro\Exigencia',
         'Financeiro\TipoMulta',
         'Financeiro\TipoJuro',
-        'Graduacao\\Semestre'
+        'Graduacao\\Semestre',
+        'TipoNivelSistema'
     ];
 
     /**
