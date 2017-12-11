@@ -88,6 +88,10 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::select('dataAvaliacaoSearch', $datas, null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::select('opcaoSearch', (['' => 'Todas as Opções de Curso', 1 => '1º Opção', 2 => '2º Opção', 3 => '3º Opção']), null, array('class' => 'form-control')) !!}
                         </div>
 

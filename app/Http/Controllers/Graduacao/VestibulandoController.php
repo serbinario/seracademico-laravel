@@ -14,6 +14,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
+use Seracademico\Repositories\Vestibular\VestibularAgendamentoRepository;
 use Yajra\Datatables\Datatables;
 
 class VestibulandoController extends Controller
@@ -48,7 +49,7 @@ class VestibulandoController extends Controller
         'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
-        'LinguaExtrangeira',
+        'LinguaExtrangeira'
     ];
 
     /**
@@ -63,11 +64,13 @@ class VestibulandoController extends Controller
     public function __construct(
         VestibulandoService $service,
         VestibulandoValidator $validator,
-        VestibulandoRepository $repository)
+        VestibulandoRepository $repository,
+        VestibularAgendamentoRepository $agendamentoRepository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
         $this->repository  = $repository;
+        $this->agendamentoRepository  = $agendamentoRepository;
     }
 
     /**
@@ -86,12 +89,13 @@ class VestibulandoController extends Controller
 
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($arrayLoadFields);
+        $datas = $this->agendamentoRepository->buscarDatas();
 
         # Recuperando o vestibular ativo
         $vestibularAtivo = ParametroVestibularFacade::getAtivo();
 
         # Retorno
-        return view('vestibulando.index', compact('loadFields', 'vestibularAtivo'));
+        return view('vestibulando.index', compact('loadFields', 'vestibularAtivo', 'datas'));
     }
 
     /**
@@ -120,6 +124,7 @@ class VestibulandoController extends Controller
             ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'fac_vestibulandos.segunda_opcao_turno_id')
             ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'fac_vestibulandos.terceira_opcao_turno_id')
             ->leftJoin('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
+            ->leftJoin('vest_agendamento', 'vest_agendamento.id', '=', 'fac_vestibulandos.agendamento_id')
             ->groupBy('fac_vestibulandos.id')
             ->select([
                 'fac_vestibulandos.id',
@@ -140,6 +145,7 @@ class VestibulandoController extends Controller
                 'fin_tipos_taxas.id as idTipoTaxa',
                 'fac_vestibulandos_financeiros.pago',
                 'fac_semestres.nome as nomeSemestre',
+                'vest_agendamento.id as idData',
                 \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
                 \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
             ]);
@@ -161,6 +167,11 @@ class VestibulandoController extends Controller
                 # Filtrando por forma de avaliação
                 if ($request->has('formaAvaliacao')) {
                     $query->where('fac_vestibulandos.enem', '=', $request->get('formaAvaliacao'));
+                }
+
+                # Filtrando por data de realização de prova
+                if ($request->has('dataAvaliacaoSearch')) {
+                    $query->where('vest_agendamento.id', '=', $request->get('dataAvaliacaoSearch'));
                 }
 
                 # Filtrando Por Curso
@@ -193,7 +204,6 @@ class VestibulandoController extends Controller
                             ->orWhere('pessoas.cpf', 'like', "%$search%")
                             ->orWhere(\DB::raw('CONCAT(fac_vestibulares.codigo,fac_vestibulandos.inscricao)'), 'like', "%$search%");
                     });
-
                 }
             })
             ->addColumn('action', function ($row) {

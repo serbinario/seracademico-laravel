@@ -88,23 +88,19 @@
 <body>
 
 <div class="cabecalho" style="font-size: 15px;">
-    <p>
-        CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS NO EXTERIOR (MODALIDADE ON-LINE)
-    </p>
+    <table width="100%">
+        <tr>
+            <td width="20%">
+                <img alt="image" width="100%" src="{{ asset('/img/logo_alpha_tec.jpg')}}"/>
+            </td>
+            <td width="55%"><br>
+                <h3 style="text-align: center; ">CONTRATO DE PRESTAÇÃO DE SERVIÇOS </h3>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div class="conteudo">
-    <p>
-        Pelo presente instrumento particular de <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO
-        DE CENTRO DE APOIO A ESTUDANTES  BRASILEIROS NO EXTERIOR</b>, celebrado pela <b>Universidade Grendal do Brasil – Unigrendal
-        (CNPJ 12.147.854/0001-84)</b>, como primeira parte, <b>ALPHA EDUCAÇÃO E TREINAMENTOS Ltda – Me (22.945.385/0001-00)</b> como
-        segunda parte, instituições de direito privado, autorizadas à gerencia de Seminários Culturais, Fóruns de Debates,
-        Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
-        Mini Cursos Livres e Seminários Culturais, com endereço profissional à Rua Gervásio Pires, 826, Boa Vista, Recife,
-        PE,  CEP 50050-070, Brasil, neste ato reconhecidas como <b>Contratadas</b> e pessoa natural de direito, residente no
-        Estado Brasileiro, cidadã em pleno gozo de seus direitos cíveis, abaixo qualificada e reconhecida como <b>Contratante</b>:
-    </p>
 
     <div class="informacoes_pessoas">
         <table class="table" style="font-size: 14px;">
@@ -112,16 +108,18 @@
                 <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
             </tr>
             <tr>
+                <td colspan="2">CPF: {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }} </td>
+                <td>RGº: {{ isset($aluno['pessoa']['identidade']) ? $aluno['pessoa']['identidade'] : "" }}</td>
+                <td>Data de Nasc: {{ isset($aluno['pessoa']['data_nasciemento']) ? $aluno['pessoa']['data_nasciemento'] : "" }}</td>
+            </tr>
+
+            <tr>
                 <td colspan="3">Endereço: {{ isset($aluno['pessoa']['endereco']) ? $aluno['pessoa']['endereco']['logradouro'] : "" }}</td>
                 <td>Nº {{ isset($aluno['pessoa']['endereco']) ? $aluno['pessoa']['endereco']['numero'] : "" }}</td>
             </tr>
             <tr>
-                <td>APT: </td>
-                <td>COMP: {{ isset($aluno['pessoa']['endereco']['complemento']) ? $aluno['pessoa']['endereco']['complemento'] : "" }}</td>
-                <td colspan="2">BAIRRO: {{ isset($aluno['pessoa']['endereco']['bairro']) ? $aluno['pessoa']['endereco']['bairro']['nome'] : "" }}</td>
-            </tr>
-            <tr>
-                <td colspan="2">CIDADE: {{ isset($aluno['pessoa']['endereco']['bairro']['cidade']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] : "" }}</td>
+                <td>BAIRRO: {{ isset($aluno['pessoa']['endereco']['bairro']) ? $aluno['pessoa']['endereco']['bairro']['nome'] : "" }}</td>
+                <td>CIDADE: {{ isset($aluno['pessoa']['endereco']['bairro']['cidade']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['nome'] : "" }}</td>
                 <td>UF: {{ isset($aluno['pessoa']['endereco']['bairro']['cidade']['estado']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['nome'] : "" }}</td>
                 <td>CEP: {{ isset($aluno['pessoa']['endereco']['cep']) ? $aluno['pessoa']['endereco']['cep'] : "" }}</td>
             </tr>
@@ -131,12 +129,13 @@
                 <td colspan="2">TEL. CEL: {{ isset($aluno['pessoa']['celular2']) ? $aluno['pessoa']['celular2'] : "" }}</td>
             </tr>
             <tr>
-                <td colspan="4">E-mail: {{ isset($aluno['pessoa']['email']) ? $aluno['pessoa']['email'] : "" }}</td>
-            </tr>
-            <tr>
-                <td>RGº: {{ isset($aluno['pessoa']['identidade']) ? $aluno['pessoa']['identidade'] : "" }}</td>
-                <td>{{ isset($aluno['pessoa']['orgao_rg']) ? $aluno['pessoa']['orgao_rg'] : "" }}</td>
-                <td colspan="2">CPF: {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }} </td>
+                <td colspan="4">
+                    <p style="text-align: justify">
+                    Doravante: Denominado CONTRATENTE E, DO OUTRO LADO, ALPHA SERVIÇOS ALPHA SISTEMASEDUCACIONAL E
+                    TREINAMENTOS LTDA. ME , inscrita  no CNPJ: 15.708.483/000150, Situado na rua Gervásio Pires 826, bairro Boa vista, Recife-
+                    PE, Neste ato, Por seu representante legal, doravante designada CONTRATADA, tendo ainda como responsável financeiro solidário.
+                    </p>
+                </td>
             </tr>
             <tr>
                 <td colspan="4">Nome do Pai: {{ isset($aluno['pessoa']['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" }}</td>
@@ -145,309 +144,313 @@
                 <td colspan="4">Nome da Mãe: {{ isset($aluno['pessoa']['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" }}</td>
             </tr>
             <tr>
-                <td>Estado Civil: {{ isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" }}</td>
-                <td>Data de Nasc: {{ isset($aluno['pessoa']['data_nasciemento']) ? $aluno['pessoa']['data_nasciemento'] : "" }}</td>
-                <td>Sexo: {{ isset($aluno['pessoa']['sexo']) ? $aluno['pessoa']['sexo']['nome'] : "" }}</td>
-                <td>Local Nasc: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
+                <td colspan="2">CPF do responsável: {{ isset($aluno['cpf_responsavel']) ? $aluno['cpf_responsavel'] : "" }} </td>
+                <td colspan="2">RGº do responsável: {{ isset($aluno['rg_responsavel']) ? $aluno['rg_responsavel'] : "" }}</td>
             </tr>
             <tr>
-                <td colspan="4">Área da Pós-Graduação: </td>
+                <td colspan="4">
+                    <p style="text-align: justify">
+                        Estando ciente do projeto pedagógico, plano de curso e do regimento Escolar , firmam o presente CONTRATO DE SERVIÇOS EDUCACIONAIS .
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">CURSO: {{ isset($curso->nome) ? $curso->nome : "" }} </td>
+                <td colspan="2">TURMA: {{ isset($turma->codigo) ? $turma->codigo : "" }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">INICIO DAS AULAS (PREVISÃO): {{ isset($turma->aula_inicio) ? $turma->aula_inicio : "" }} </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p style="text-align: justify">
+                        Ficando estabelecido, como  CONDIÇÃO  DE PAGAMENTO :
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>MATRICULA: {{ isset($aluno['matricula']) ? $aluno['matricula'] : "" }}</td>
+                <td>VALOR DO CURSO: {{ isset($curso->valor) ? $curso->valor : "" }}</td>
+                <td>VALOR DAS PARCELAS:
+                    @if(isset($curso->valor) && $curso->valor != null)
+                        @if($turma->turno_id == '1' || $turma->turno_id == '2')
+                            {{ $curso->valor * 14 }}
+                        @else
+                            {{ $curso->valor * 17 }}
+                        @endif
+                    @endif
+                </td>
+                <td>N. PARCELAS: {{ isset($turma->qtd_parcelas) ? $turma->qtd_parcelas : "" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">DIA DE VENCIMENTO DAS PARCELAS: : {{ isset($turma->vencimento_inicial) ? $turma->vencimento_inicial : "" }} </td>
+                <td colspan="2">DESC DE PONTUALIDADE: </td>
             </tr>
         </table>
     </div>
 
     <p>
-        <b>1. Do Objeto Contratual</b>
+        <b>Em observâncias as normas a seguir enunciadas</b>
     </p>
 
     <p class="paragrafo">
-        O objeto do presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO
-        DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, é a prestação de serviços das <b>Contratadas</b> a <b>Contratante</b>,
-        visando a administração de centros de apoio à pesquisadores admitidos na <b>Grendal College and University
-        dos USA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
-        Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,
-        Mini Cursos Livres e Seminários</b>, tomando como base o modelo internacional de integralização de créditos
-        <b>Profile Evaluation System - CPAAS</b>, fortemente amparado  por organismos internacionais como UNESCO/CEPES
-        (International Policy Seminar Co-organised by IIEP/UNESCO and KRIVET), International Accreditation
-        Organization – (IAO/USA), United States Distance Learning Association (USDLA), National Academic Higher
-        Education e pelo Council for Adult and Experiential Learning (CAEL), bem como assessorá-la a nacionalizar
-        os documentos  estrangeiros no Estado Brasileiro sob segunda contratação entre Contratadas e Contratante.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Primeira:
+        <b>CLAUSULA PRIMEIRA:</b> O presente contrato tem como objeto a prestação de serviços de capacitação por meio de
+        realização de cursos Técnicos profissionalizante, com aula presencial, em conformidade com o previsto em regimento
+        interno e o planejamento pedagógico, observando-se ainda a legislação em vigor.
     </p>
 
     <p class="paragrafo">
-        Como contraprestação aos serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS</b>, prestados e/ou a serem prestados, conforme prevê a Cláusula Segunda, a Contratante confessa
-        dívida e se obriga a pagar as Contratadas, o número e valor de parcelas descritas abaixo:
-    </p>
-
-    <p class="uppercase">
-        {{ isset($curso->nome) ? $curso->nome : ""  }}
-    </p>
-
-
-    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
-        <thead>
-        <tr>
-            <th style="width: 80%">Inscrição</th>
-            <th>Valor</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Matrícula</td>
-            <td>R$ 400,00</td>
-        </tr>
-        <tr>
-            <td>Nº de Mensalidades:30</td>
-            <td>R$ 500,00</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
-        <thead>
-        <tr>
-            <th>Diplomação</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>$ 1000,00</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <p class="titulo_paragrafo">
-        Cláusula Segunda
+        <b>Parágrafo Primeiro:</b> As aulas e demais atividades serão ministradas ordinariamente nas sala de aula,
+        e laboratórios localizados no estabelecimento da contratada, sendo admitidas troca de salas, aulas externas e visitações técnicas,
+        cujas as despesas inclusive  com o deslocamento, serão de responsabilidade do contratante, caso necessário.
     </p>
 
     <p class="paragrafo">
-        <span>As</span> <b>Contratadas</b> comprometem-se a prestar serviços de <b>ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE
-        APOIO A ESTUDANTES BRASILEIROS</b> a <b>Contratante</b>, a autorizando a acessar o <b>CENTRO DE APOIO A ESTUDANTES
-        BRASILEIROS</b> de sua zona.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Terceira:
+        <b>Parágrafo Segundo:</b> As aulas e demais atividades serão ministradas ordinariamente nas sala de aula,
+        e laboratórios localizados no estabelecimento da contratada, sendo admitidas troca de salas, aulas externas e visitações técnicas,
+        cujas as despesas inclusive  com o deslocamento, serão de responsabilidade do contratante, caso necessário.
     </p>
 
     <p class="paragrafo">
-        A <b>Contratante</b> declara expressamente estar ciente dos termos da presente contratação, <b>a qual foi por
-            ela firmada de livre e espontânea vontade</b>, sendo <b>sua a opção pelo ensino à distância euro-estadunidense</b>.
-        <b>Possui total e completa ciência dos procedimentos de nacionalização e convalidação de seus títulos
-            emitidos no exterior</b>, por intermédio de diplomação junto a programas baseados em experiência de vida
-        <b>“Prior Learning Assessment Programs”</b>, bem como tem ciência, que sua participação no <b>CENTRO DE APOIO A ESTUDANTES BRASILEIROS</b>
-        não configura aulas e/ou qualquer atividade regulamentada no Brasil, mas sim oferta de subsídios à educação realizada online nos USA.
+        <b>Parágrafo Terceiro:</b> Para efeito do presente contrato fica desde logo estipulado que será cobrada uma taxa para a realização de
+        cada aula de reposição e uma taxa para cada prova de segunda chamada solicitada pelo contratante, valores especificados na secretaria.
     </p>
 
     <p class="paragrafo">
-        Reafirma sua completa ciência sobre os processos de convalidação de títulos,mediante pagamento da taxa cobrada em dólar,
-        caso o contratante não efetue o pagamento da referida taxa, não terá seu título convalidado.
+        <b>Parágrafo Quarto:</b> O contratante autoriza o uso de sua imagem e som para fins de exibição nos murais da escola e
+        meios de comunicação existentes, por tempo indeterminado.
     </p>
 
     <p class="paragrafo">
-        A <b>Contratante</b> se compromete a pagar o preço ajustado pela prestação dos serviços ora contratados, no valor e na
-        forma prevista no presente contrato, estando ciente que em caso de inadimplência <b>terá seus dados incluídos nos
-        serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
-        administrativa e/ou acadêmica, fica eleito o foro de sua comarca de origem.
+        <b>CLAUSULA SEGUNDA:</b> Todo material didático será acessados pelos alunos via on-line gratuitamente.
+        Os demais materiais didáticos, tais como artigos, anotações das aulas realizadas pelos docentes (professores),
+        textos digitados e materiais de uso pessoal, entre outros, seus respectivos custos são de responsabilidade do contratante.
     </p>
 
-    <p class="subparagrafo">
-        <b>Parágrafo Primeiro:</b> Pagamentos em atraso após dois dias úteis serão corrigidos monetariamente pelo IGPM/FGV,
-        acrescido de multa de 2% (dois por cento), além de juros moratórios de 1% (um por cento) ao mês, e pro rata
-        / dia na fração do  mês, podendo a cobrança passar a ser feita, neste caso, por advogado ou por empresa especializada
-        em cobrança, quando então, tais valores serão também acrescidos de honorários advocatícios de 10% (dez por cento)
-        em caso de acerto amigável ou 20% (vinte por cento) se for judicial, além das demais despesas decorrentes da
-        exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Quarta:
+    <p>
+        <b>Contrato de prestação de Serviços</b>
     </p>
 
     <p class="paragrafo">
-        O valor dos serviços educacionais contratados neste instrumento decorreu do equiparamento feito entre a realidade
-        econômica e financeira vigente na data da assinatura deste instrumento, os custos gerais das <b>Contratadas</b>, incluindo
-        custos operacionais, fatos estes que são conhecidos e aceitos pela <b>Contratante</b>.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Quinta:
-    </p>
-
-    <p class="justificado">
-        O presente instrumento poderá ser rescindido nas seguintes hipóteses:
-    </p>
-
-    <p class="subparagrafo">
-        a. Ocorrendo a extinção da primeira parte <b>Contratada</b>;
-    </p>
-
-    <p class="subparagrafo">
-        b. Através do requerimento expresso da <b>Contratante</b>, assistido ou representado, quando for o caso de cancelamento
-        de inscrição, sendo em qualquer caso, condição obrigatória de sua eficácia a comunicação da desistência da
-        primeira parte <b>Contratada</b>, e o pagamento de multa no valor de 10% do contrato;
-    </p>
-
-    <p class="subparagrafo">
-        c. Quando por decisão da primeira parte <b>Contratada</b>, houver o cancelamento compulsório da inscrição, pela exclusão
-        da Contratante em decorrência de descumprimento das normas internas da primeira parte <b>Contratada</b>;
-    </p>
-
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Primeiro:</b> Os pedidos de desistência unilaterais do contrato, feitos pela <b>Contratante</b> deverão ser
-        fundamentados e protocolados sob gerência da primeira parte <b>Contratada</b>, tendo prazo máximo de 30 (trinta)
-        dias antes do vencimento da parcela a vencer. <b>Após este prazo, entende-se que o contrato é perfeito e não
-        passível de rescisão, podendo ser exigido  o pagamento de todas as parcelas</b>, não dispensando a <b>Contratante</b> da
-        quitação do pagamento referente ao nível de acesso escolhido, bem como também as outras despesas eventualmente
-        ocasionadas pela <b>Contratante</b>.
-    </p>
-
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Segundo:</b> O compromisso ora assumido pela <b>Contratante</b> com primeira parte <b>Contratada</b> é global e
-        abrange a totalidade das obrigações ora pactuadas, e sua falta de freqüência ou impontualidade nos  pagamentos
-        não o isentam de responder integralmente por todas as obrigações aqui assumidas, e constituem causa de rescisão
-        unilateral pelas <b>Contratadas</b> da presente contratação.
-    </p>
-
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Terceiro:</b> Ocorrendo a desistência unilateral do contrato, com comunicação escrita de 30 dias antes de
-        vencer a parcela seguinte, o <b>Contratado</b> fica autorizado a cobrar ou reter 10% (dez por cento) do saldo total do
-        plano financeiro escolhido.
-    </p>
-
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Quarto:</b> No caso de desistência, a <b>Contratante</b>, deverá estar em dia com seus pagamentos e comunicar por
-        escrito a primeira parte <b>Contratada</b> no prazo máximo de 30 dias antes do vencimento da parcela a vencer.
-    </p>
-
-    <p class="subparagrafo-3-nivel">
-        <b>Parágrafo Quinto:</b> Caso o pedido de desistência previsto nesta cláusula não seja formalizado, o contrato
-        continuará em vigor e a <b>Contratante</b> deverá pagar todas as parcelas previstas no ato da inscrição, podendo
-        a primeira parte <b>Contratada</b> tomar medidas cabíveis de cobrança.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Sexta:
+        <b>Parágrafo Único:</b> O contratante também deverá pagar pelos serviços especiais de : recuperação, reforço,
+        segunda chamada, exames especiais ou substitutivos, reciclagem, contratação isolada de disciplina,
+        aula de reposição e todo e qualquer outro serviço não discriminado na Clausula Primeira.
     </p>
 
     <p class="paragrafo">
-        A <b>Contratante</b> que solicitar certidões ou outros documentos as <b>Contratadas</b> deverá pagar  por cada documento solicitado,
-        tomando como base os valores estipulados em tabela elaborada e informada a <b>Contratante</b>, os quais se destinam a
-        custear as despesas decorrentes da emissão e envio dos mesmos.
-    </p>
-
-    <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
-        <thead>
-        <tr>
-            <th style="width: 75%">Documento</th>
-            <th>Valor</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>2º Via de declaração de vínculo</td>
-            <td>R$ 15,00</td>
-        </tr>
-        <tr>
-            <td>Declaração de afastamento</td>
-            <td>R$ 15,00</td>
-        </tr>
-        <tr>
-            <td>2º Via de boleto</td>
-            <td>R$ 15,00</td>
-        </tr>
-        <tr>
-            <td>Solicitação de disciplina como curso de extensão</td>
-            <td>R$ 30,00</td>
-        </tr>
-        <tr>
-            <td>Trancamento do curso</td>
-            <td>R$ 50,00</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <p class="titulo_paragrafo">
-        Cláusula Sétima:
+        <b>CLAUSULA TERCEIRA:</b> O contratante está ciente de que a contratada poderá adiar o inicio do curso por 60 dias( sessenta) da data prevista,
+        sem que isto lhe assegure o direito de cancelar este contrato ou lhe
+        permita obter o reembolso da quantia paga, mesmo que parcial, ou ainda reparação de qualquer espécie.
     </p>
 
     <p class="paragrafo">
-        Sempre que a <b>Contratante</b> mudar de endereço deverá comunicar de imediato por escrito <span>as</span> <b>Contratadas</b>, sob pena de
-        terem-se como válidas e eficazes todas as correspondências enviadas pelas <b>Contratadas</b> para endereço anterior, constante deste contrato.
-    </p>
-
-    <p class="subparagrafo">
-        <b>Parágrafo Primeiro:</b> A <b>Contratante</b> deverá possuir um endereço eletrônico permanente para contato com as <b>Contratadas</b>
-        e com o (s) professor (s). É de total responsabilidade da <b>Contratante</b> adquirir e informar um endereço eletrônico
-        as <b>Contratadas</b>, não importando os meios pelos quais irá adquiri-lo.
-    </p>
-
-    <p class="subparagrafo">
-        <b>Parágrafo Segundo:</b> A <b>Contratante</b> deverá responder a todas as mensagens enviadas em seu endereço eletrônico, no prazo máximo de 72 horas.
-    </p>
-
-    <p class="subparagrafo">
-        <b>Parágrafo Terceiro:</b> A <b>Contratante</b> autoriza a divulgação de sua imagem nas propagandas da instituição.
-    </p>
-
-    <p class="titulo_paragrafo">
-        Cláusula Oitava:
+        <b>Parágrafo Primeiro:</b> O contratante terá o direito de cancelar(rescindir) o contrato, sem quaisquer ônus,
+        com a restituição de todos valores pagos, caso as aulas não sejam iniciadas após o período de prorrogação ou se
+        for remanejado para outra turma, cujos dias e horários não sejam convenientes.
     </p>
 
     <p class="paragrafo">
-        As <b>Contratadas</b> prestarão assessoramento à legalização externa mediante pagamento de emolumentos (honorários)
-        pela <b>Contratante</b>.
+        <b>Parágrafo Segundo:</b> Mediante requerimento escrito e, após o pagamento de encargo correspondente a R$ 30,00(trinta reais),
+        o contratante poderá solicitar a transferência de turma, ficando o deferimento de tal pedido condicionada a disponibilidade de vagas.
     </p>
 
     <p class="paragrafo">
-        E assim por estarem juntos, firmes e contratados, firmam os signatários, o presente instrumento, em duas vias de
-        igual teor e forma, para que produza seus jurídicos e legais efeitos.
+        <b>Parágrafo Terceiro:</b> O estudante que estiver cursando não poderá transferir para uma turma que não tenha iniciado.
     </p>
 
-   <p style="text-align: center; margin-top: 10%;">
-       _______de_________________ de ___________.
-   </p>
+    <p class="paragrafo">
+        <b>Parágrafo Quarto:</b> Havendo necessidade, seja por força maior ou mesmo por situação fortuita,
+        a contratada promoverá a substituição de professor, não podendo tal feito ser apontado como motivo para
+        cancelamento do contrato, uma vez que não ocorrerá qualquer prejuízo  para o contratante.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA QUARTA:</b> Em caso de reprovação em alguma disciplina em um dos módulos ou em qualquer outra hipótese em que o
+        contratante pretenda cursá-la novamente, será admitida a sua contratação isolada, por meio de requerimento expresso e
+        pagamento da importância correspondente ao modulo sem desconto.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Único:</b> O CONTRATANTE ESTÁ CIENTE DE QUE OS SERVIÇOS E DEMAIS ATIVIDADES PRESTADAS
+        NO TURNO DA NOITE SERÃO MAIS ONEROSOS DO QUE AQUELES REALIZADOS EM PERIODO DIURNO, INCLUINDO MATRICULAS,
+        MENSALIDADES E DEMAIS DOCUMENTOS E DECLARAÇÕES SOLICITADO COMO  SEGUNDA VIA.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA QUINTA:</b> O pagamento de totós dos os serviços ora descritos deverá ser realizados, em conformidade com o PROGRAMA DE PAGAMENTO,
+        sendo admitidas as seguintes formas de pagamento: a) Cartão de Credito; b) Boleto bancário, cujo pagamento poderá excepcionalmente ser realizado
+        no próprio estabelecimento da contratada, em dinheiro, cartão de credito/debito ou em cheque, desde que emitido pelo próprio contratante ou de seu
+        representante, ficando sua quitação vinculada a efetiva compensação bancaria.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Primeiro:</b> A contratada poderá conceder descontos nas parcelas , mas tal beneficio apenas será valido para pagamentos
+        realizados até a data do seu vencimento, o atraso no pagamento da prestação implicara na perda automática dos descontos, bem como na
+        incidência dos encargos previstos na clausula sexta.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Segundo:</b> OS BOLETOS SERÃO ENTREGUES NO ATO DA MATRICULA, CASO O CONTRATANTE TENHA ALGUM TIPO DE PROBLEMA PARA EFETUAR O PAGAMENTO,
+        DEVERA REALIZA-LO NA SEDE DO ESTABELECIEMNTO DA CONTRATADA, O MESMO NÃO EXIME O CONTRATANTE DE FAZER O PAGAMENTO.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Terceiro:</b> É obrigatório do contratante apresentar , sempre que solicitado,
+        os documentos que comprovem o pagamento das prestações previstas nesse contrato, sob pena de não se dar a respectiva quitação.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA SEXTA:</b> O atraso do pagamento de qualquer parcela dará causa ao pagamento de multa no valor de 2%(dois por cento)
+        do valor debito, alem de juros moratórios de 0,034%( trinta e quatro milésimo por cento), correspondente a 1%( um por cento ) ao mês,
+        computando desde o dia seguinte ao vencimento da obrigação ate a data do efetivo pagamento.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Primeiro:</b> QUANDO O ATRASO FOR SUPERIOR A 30 (TRINTA) DIAS ANTES DA INCIDENCIA DOS JUROS MORATORIOS E DA MULTA
+        A DIVIDA DEVERÁ SER CORRIGIDA PELA VARIAÇÃO DO INDICE DE PREÇOS AO CONSUMIDOR- IPC, ACUMULADO DESDE A DATA DO SEU VENCIMENTO.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Segundo:</b> PODERÁ A CONTRATADA PARA COBRANÇA DO SEU CREDITO, VALER-SE DE FIRMA ESPECIALIZADA,
+        OU DE PROFISSIONAIS DE ADVOCACIA, SENDO QUE NESTE CASO, O CONTRATANTE E SEU RESPONSAVEL FINANCEIRO,
+        RESPONDERÃO TAMBEM POR HONORARIOS A ESTES DEVIDOS, NO PERCENTUAL CORRESPONDENTE A 20%(VINTE PORCENTO) SOBRE O TOTAL DA DIVIDA.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Terceiro:</b> o inadimplemento de parcelas mensais, da multa, ou outra obrigação contratual de qualquer natureza,
+        por prazo superior a 10(dez) dias autoriza a contratada a promover a inscrição do contratante em cadastros de devedores.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Quarto:</b> A tolerância quanto ao descumprimento de qualquer obrigação contratual, não significará renuncia, perdão ou inovação.
+    </p>
+
+    <p class="paragrafo">
+        <b>Clausula Sétima:</b> Toda e qualquer solicitação – Incluído, mas não se limitando aos casos de rescisão, emissão de certificados,
+        cancelamento – Deverá ser feita mediante requerimento por escrito, assinado e datado, a ser preenchido e entregue, mediante protocolo, na secretaria da contratada.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Primeiro:</b> O simples fato de o contratante deixar de comparecer as aulas e demais atividades ministradas não dará causa ao imediato
+        cancelamento do contrato, nem tampouco assegurará ao contratante o direito de efetuar o seu pagamento proporcional.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Segundo:</b> Na hipótese de abandono de curso, sem a devida formalização, o contratante ou seu responsável financeiro,
+        continuara a responder pelas obrigações financeiras até a data da regularização de seu cancelamento.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Terceiro:</b> No caso de abandono do curso no qual estava matriculado, o contratante terá trinta dias após a solicitação de afastamento,
+        para reativar a sua matricula, desde que regularizado o debito, e existam vagas disponíveis.
+    </p>
+
+    <p class="paragrafo">
+        <b>Parágrafo Quarto:</b> O cancelamento (resolução) do presente contrato ocorrera automaticamente,
+        em caso de inadimplemento de qualquer parcela por mais de 60 dias (sessenta), independentemente de solicitação do contratante.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA OITAVA:</b> O CANCELAMENTO (RESOLUÇÃO) DO CONTRADO, AUTOMATICAMENTE OU A REQUERIMENTO DO CONTRATANTE,
+        IMPORTARÁ NA INCIDENCIA DE MULTA CORRESPONDENTE A 10%( DEZ POR CENTO) DO VALOR DAS PARCELAS RESTANTES OU O MONTANTE EQUIVALENTE A 1 (UMA) PARCELA,
+        O QUE FOR MAIOR, SEM PREJUIZO AS DEMAIS OBRIGAÇÕES JÁ CONSTITUIDAS.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA NONA:</b> QUALQUER  QUE SEJA O FUNDAMENTO PARA A EXTINÇÃO DO CONTRATO ( RESCISÃO OU RESOLUÇÃO) A
+        CONTRATANTE NÃO TERÁ DIREITO A RESTITUIÇÃO A RESTITUIÇÃO DOS VALORES PAGOS A TITULO DE MATRICULA, OS QUAIS SÃO DESTINADOS AO PAGAMENTO DE DESPESAS ADMINISTRATIVA.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA DECIMA:</b> <b>O CONTRATANTE</b> tem ciência e concorda expressamente que os livros de consulta ou acervo de reserva não podem ser retirados da Biblioteca,
+        e servem, exclusivamente, para consultas no local. Caso o aluno precise retirar um livro, devera assinar os termos de contrato pré existentes na biblioteca,
+        Caso o livro já tenha seu exemplar retirado, o mesmo não poderá sair para que o acervo não fique desfalcado.
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA DECIMA PRIMEIRA:</b> O Contratante deve ter ciência que a contratada não possui estacionamento e que de sua
+        responsabilidade a seguridade do seu transporte. (carro, Moto).
+    </p>
+
+    <p class="paragrafo">
+        <b>CLAUSULA DECINA SEGUNDA:</b> A contratada não se responsabiliza pela perda, furto, roubo ou danos de quaisquer objetos portados pelo contratante em qualquer das suas pendências físicas.
+    </p>
+
+    <p class="paragrafo">
+        Por estarem, assim, justos e contratados, ora assinam o presente instrumento em duas vias de igual teor e forma, para que se produzam todos os efeitos legais
+    </p>
+
+    <p style="text-align: left; margin-top: 3%;">
+        _______de_________________ de ___________.
+    </p>
 
     <div style="margin-left: 0; margin-top: 5%;">
         <h1 style="text-align: left;">
             <table>
-                <tr><td>___________________________________________</td></tr>
-                <tr><td style="font-family: arial; text-align: center"><b>(Assinatura contratante)</b></td></tr>
+                <tr>
+                    <td>___________________________________________</td>
+                    <td> <span style="margin-left: 30px">___________________________________________</span></td>
+                </tr>
+                <tr>
+                    <td style="font-family: arial; text-align: center"><b>(Assinatura contratante)</b></td>
+                    <td style="font-family: arial; text-align: center"><span style="margin-left: 30px"><b>(Assinatura contratado)</b></span></td>
+                </tr>
             </table>
 
-            <table style="">
+            {{--<table style="">
                 <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
-                {{--<tr><td>___________________________________________</td></tr>--}}
-                {{--<tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>--}}
-                {{--<tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>--}}
-            </table>
+                --}}{{--<tr><td>___________________________________________</td></tr>--}}{{--
+                --}}{{--<tr><td style="text-align: center">Alpha Educação e Treinamentos</td></tr>--}}{{--
+                --}}{{--<tr><td style="text-align: center">CNPJ: 22.945.385/0001-00</td></tr>--}}{{--
+            </table>--}}
         </h1>
     </div>
 
-    <div style="margin-left: 0;">
-        <h3 style="text-align: left;">Testemunhas</h3>
+    <div style="margin-left: 0; margin-top: 5%;">
+        <h1 style="text-align: left;">
+            <table>
+                <tr>
+                    <td>___________________________________________</td>
+                </tr>
+                <tr>
+                    <td style="font-family: arial; text-align: center"><b>Responsável Financeiro</b></td>
+                </tr>
+            </table>
 
-        <table style="margin-bottom: 1%; font-size: 12px;">
-            <tr style="margin-bottom: 1%"><td>1)</td></tr>
-            <tr><td>RG nº</td></tr>
-            <tr><td>CPF nº</td></tr>
-        </table>
-
-        <table style="font-size: 12px;">
-            <tr style="margin-bottom: 1%;"><td>2)</td></tr>
-            <tr><td>RG nº</td></tr>
-            <tr><td>CPF nº</td></tr>
-        </table>
+        </h1>
     </div>
 
-    <div>
-        <h1 style="text-align: center; margin-top: 13%">
-            <img src="{{ asset('/img/rodape_contrato_mestrado.png') }}" alt="">
+    <br />
+    <p>
+        <b>TESTEMUNHAS</b>
+    </p>
+
+    <div style="margin-left: 0; margin-top: 5%;">
+        <h1 style="text-align: left;">
+            <table>
+                <tr>
+                    <td>___________________________________________</td>
+                    <td> <span style="margin-left: 30px">___________________________________________</span></td>
+                </tr>
+                <tr>
+                    <td style="font-family: arial; text-align: left">
+                        <b>NOME:</b> <br />
+                        <b>CPF:</b>
+                    </td>
+                    <td style="font-family: arial; text-align: left">
+                        <span style="margin-left: 30px"><b>NOME:</b> <br /></span>
+                        <span style="margin-left: 30px"><b>CPF:</b></span>
+                    </td>
+                </tr>
+            </table>
+
+
+            <br />
+            <center>
+            <table style="">
+                <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
+            </table>
+            </center>
         </h1>
     </div>
 </div>
