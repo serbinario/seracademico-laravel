@@ -17,6 +17,7 @@ function loadFieldsDispensarDisciplinaEditar()
     var dados =  {
         'models' : [
             'PosGraduacao\\Disciplina|curriculoByAluno,' + idAluno,
+            'PosGraduacao\\Curriculo|byAluno,' + idAluno,
             'Instituicao|byNivel,3',
             'Graduacao\\Motivo'
         ]
@@ -46,6 +47,7 @@ function builderHtmlFieldsDispensarDisciplinaEditar (dados) {
     $("#motivo_id_editar").find("option").eq(0).prop("selected", true);
     $("#disciplina_id_editar").find("option").eq(0).prop("selected", true);
     $("#insituicao_id_editar").find("option").eq(0).prop("selected", true);
+    $("#disciplina_origem_id_editar option").remove();
     $("#media_editar").val("");
     $("#carga_horaria_editar").val("");
     $("#qtd_credito_editar").val("");
@@ -60,12 +62,18 @@ function builderHtmlFieldsDispensarDisciplinaEditar (dados) {
         if(retorno.success) {
             // Declaradno as variávies html
             $htmlDisciplina  = '<option value="">Selecione uma disciplina</option>';
+            $htmlCurriculo  = '<option value="">Selecione um currículo de origem</option>';
             $htmlInstituicao = '<option value="">Selecione um motivo</option>';
             $htmlMotivo      = '<option value="">Selecione um motivo</option>';
 
             // Preenchendo as disciplinas
             $.each(dados['posgraduacao\\disciplina'], function (index, value) {
                 $htmlDisciplina += '<option value="' + value.id + '">' + value.nome + '</option>';
+            });
+
+            // Preenchendo os curriculos
+            $.each(dados['posgraduacao\\curriculo'], function (index, value) {
+                $htmlCurriculo += '<option value="' + value.id + '">' + value.nome + '</option>';
             });
 
             // Preenchendo os motivos
@@ -81,6 +89,8 @@ function builderHtmlFieldsDispensarDisciplinaEditar (dados) {
             // carregando os selects
             $('#disciplina_id_editar option').remove();
             $('#disciplina_id_editar').append($htmlDisciplina);
+            $('#curriculo_origem_id_editar option').remove();
+            $('#curriculo_origem_id_editar').append($htmlCurriculo);
             $('#instituicao_id_editar option').remove();
             $('#instituicao_id_editar').append($htmlInstituicao);
             $('#motivo_id_editar option').remove();
@@ -144,3 +154,55 @@ $('#btnUpdateDispensarDisciplina').click(function() {
     });
 });
 
+
+$(document).on('change', '#curriculo_origem_id_editar', function () {
+    var curriculo_id = $(this).val();
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/posgraduacao/aluno/curriculo/getDisciplinasByCurriculoWithNota/' + idAluno + '/' + curriculo_id,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            $htmlDisciplina   = '<option value="">Escolha uma disciplina</option>';
+
+            // Preenchendo as disciplinas
+            $.each(retorno.dados, function (index, value) {
+                $htmlDisciplina += '<option value="' + value.id + '">' + value.nome + '</option>';
+            });
+
+            $('#disciplina_origem_id_editar option').remove();
+            $('#disciplina_origem_id_editar').append($htmlDisciplina);
+        } else {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        }
+    });
+});
+
+$(document).on('change', '#disciplina_origem_id_editar', function () {
+    var disciplina_origem_id = $(this).val();
+    var curriculo_origem_id = $('#curriculo_origem_id_editar option:selected').val();
+
+    var dados = {
+        'disciplina_id' : disciplina_origem_id,
+        'curriculo_id' : curriculo_origem_id,
+        'aluno_id' : idAluno
+    };
+
+    // Requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/posgraduacao/aluno/curriculo/getNota',
+        datatype: 'json',
+        data: dados
+    }).done(function (retorno) {
+        if(retorno.dados) {
+            $('#media_editar').val(retorno.dados.nota_final);
+        } else if (retorno.error)  {
+            swal(retorno.msg, "Click no botão abaixo!", "error");
+        } else {
+            swal('Não existe nota para essa disciplina', "Click no botão abaixo!", "error");
+        }
+    });
+});

@@ -10,6 +10,20 @@
             <div class="modal-body" style="alignment-baseline: central">
                 <div class="row">
                     <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="curriculo_origem_id_editar">Currículo de origem</label>
+                            <select name="curriculo_origem_id_editar" class="form-control" id="curriculo_origem_id_editar">
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="disciplina_origem_id_editar">Disciplina de origem</label>
+                            <select name="disciplina_origem_id_editar" class="form-control" id="disciplina_origem_id_editar">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="form-group col-md-8">
                             <label for="disciplina_id_editar">Disciplina *</label>
                             <select name="disciplina_id_editar" class="form-control" id="disciplina_id_editar">
