@@ -275,10 +275,13 @@ class AlunoFinanceiroController extends Controller
                 $configuracaoAtiva = $precoAtivo->precosDisciplaCurso()->get()->last();
                 $valorCredito = $configuracaoAtiva->preco;
                 $quantidadeCredito = $configuracaoAtiva->qtd_disciplinas;
+                $qtdCreditoDisciplinas = 0;
 
                 foreach ($disciplinas as $disciplina) {
-                    $retorno['valor'] += ($disciplina->qtd_credito / $quantidadeCredito) * $valorCredito;
+                    $qtdCreditoDisciplinas += $disciplina->qtd_credito;
                 }
+
+                $retorno['valor'] = (float) (((int) $qtdCreditoDisciplinas / $quantidadeCredito) * $valorCredito);
             }
 
             return response()->json(['success' => true, 'dados' => $retorno]);
