@@ -7,7 +7,7 @@ function loadFieldsDebito()
 {
     var dados =  {
         'models' : [
-            'Financeiro\\Taxa',
+            'Financeiro\\Taxa|byNivel,' + 1,
             'Financeiro\\ContaBancaria',
             'Financeiro\\FormaPagamento'
         ]
@@ -87,7 +87,7 @@ function builderHtmlFieldsDebito (dados) {
 
     // Carregando os campos do formulário referentes a taxa
     var idTaxa = $('#taxa_id').find('option:selected').val();
-    getInfoTaxa(idTaxa, preencheCamposTaxa);
+    processamentoTaxa(idTaxa, preencheCamposTaxa);
 
     $("#modal-create-debito").modal({show : true});
 }
@@ -153,5 +153,38 @@ $('#btnSalvarDebito').click(function() {
  */
 $(document).on('change', '#taxa_id', function () {
     var idTaxa = $('#taxa_id').find('option:selected').val();
-    getInfoTaxa(idTaxa, preencheCamposTaxa);
+    processamentoTaxa(idTaxa, preencheCamposTaxa);
 });
+
+/**
+ *
+ * @param idTaxa
+ * @param preencheCamposTaxa
+ */
+function processamentoTaxa(idTaxa, preencheCamposTaxa) {
+    var dados = {
+        'idTaxa' : idTaxa
+    };
+
+    jQuery.ajax({
+        type: 'GET',
+        url: '/index.php/seracademico/graduacao/aluno/financeiro/getMensalidade/' + idAluno,
+        data: dados,
+        datatype: 'json'
+    }).done(function (retorno) {
+        if(retorno.success) {
+            var dados = retorno.dados;
+            var taxa = dados.taxa;
+            var now = new Date();
+            var dataVencimento = (taxa.dia_vencimento
+                ? taxa.dia_vencimento
+                : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear();
+
+            $('#valor_taxa').val(dados.valor);
+            $('#valor_debito').val(dados.valor);
+            $('#data_vencimento').val(dataVencimento);
+        } else {
+            getInfoTaxa(idTaxa, preencheCamposTaxa);
+        }
+    });
+}

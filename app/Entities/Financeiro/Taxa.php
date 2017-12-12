@@ -169,4 +169,14 @@ class Taxa extends Model implements Transformable
             ->select(['id', 'nome'])
             ->whereIn('id', [15,16]);
     }
+
+    /**
+     * @param $query
+     * @param $idNivel
+     * @return mixed
+     */
+    public function scopeByNivel($query, $idNivel)
+    {
+        return $query->where('tipo_nivel_sistema_id', $idNivel);
+    }
 }

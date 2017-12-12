@@ -1127,6 +1127,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'Graduacao\AlunoFinanceiroController@gerarBoleto']);
                     Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@infoDebito']);
                     Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Graduacao\AlunoFinanceiroController@gridCarnes']);
+                    Route::get('getMensalidade/{id}', ['as' => 'getMensalidade', 'uses' => 'Graduacao\AlunoFinanceiroController@getMensalidade']);
                 });
             });
 
