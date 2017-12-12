@@ -17,12 +17,6 @@ class PrecoDisciplinaCursoController extends Controller
      * @var PrecoDisciplinaCursoService
      */
     private $service;
-//
-//    /**
-//    * @var CursoValidator
-//    */
-//    private $validator;
-//
 
     /**
      * @param PrecoDisciplinaCursoService $service
@@ -90,8 +84,6 @@ class PrecoDisciplinaCursoController extends Controller
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
-       // } catch (ValidatorException $e) {
-       //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
@@ -106,15 +98,6 @@ class PrecoDisciplinaCursoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
             #Executando a ação
             $this->service->update($request->all(), $id);
 

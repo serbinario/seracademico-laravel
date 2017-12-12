@@ -5,9 +5,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Seracademico\Entities\Graduacao\Aluno;
+use Seracademico\Entities\Graduacao\Disciplina;
 use Seracademico\Facades\ParametroBancoFacade;
+use Seracademico\Facades\ParametroMatriculaFacade;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
+use Seracademico\Repositories\Financeiro\TaxaRepository;
 use Seracademico\Repositories\Graduacao\AlunoRepository;
 use Seracademico\Services\Financeiro\DebitoService;
 use Yajra\Datatables\Datatables;
@@ -29,21 +32,29 @@ class AlunoFinanceiroController extends Controller
      */
     private $alunoRepository;
 
+    /**
+     * @var TaxaRepository
+     */
+    private $taxaRepository;
+
 
     /**
      * AlunoFinanceiroController constructor.
      * @param DebitoRepository $debitoRepository
      * @param DebitoService $debitoService
      * @param AlunoRepository $alunoRepository
+     * @param TaxaRepository $taxaRepository
      */
     public function __construct(
         DebitoRepository $debitoRepository,
         DebitoService $debitoService,
-        AlunoRepository $alunoRepository)
+        AlunoRepository $alunoRepository,
+        TaxaRepository $taxaRepository)
     {
         $this->debitoRepository = $debitoRepository;
         $this->debitoService = $debitoService;
         $this->alunoRepository = $alunoRepository;
+        $this->taxaRepository = $taxaRepository;
     }
 
 
@@ -218,6 +229,59 @@ class AlunoFinanceiroController extends Controller
             $debito = $this->debitoService->find($idDebito);
 
             return response()->json(['success' => true, 'debito' => $debito]);
+        } catch (\Throwable $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $idAluno
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getMensalidade(Request $request, $idAluno)
+    {
+        try {
+            $taxa = $this->taxaRepository->find($request->get('idTaxa'));
+
+            if ($taxa->tipoTaxa->nome !== 'Mensalidade') {
+                throw new \Exception('Taxa infornada não é uma mensalidade');
+            }
+
+            $retorno = ['valor'  => 0, 'taxa' => $taxa];
+            $semestreAtivo =  ParametroMatriculaFacade::getSemestreVigente();
+            $aluno = $this->alunoRepository->find($idAluno);
+            $cursoAtivo = $aluno->curriculos()->get()->last()->curso;
+            $precoAtivo = $cursoAtivo->precosCursos()->get()
+                ->filter(function ($preco) use ($semestreAtivo, $aluno) {
+                    return $preco->turno_id == $aluno->turno_id
+                        && $preco->semestre_id == $semestreAtivo->id;
+            })->first();
+
+            $disciplinas = \DB::table('fac_alunos')
+                ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+                ->join('fac_horarios', 'fac_horarios.id', '=', 'fac_alunos_semestres_horarios.horario_id')
+                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+                ->where('fac_alunos.id', $aluno->id)
+                ->where('fac_alunos_semestres.semestre_id', $semestreAtivo->id)
+                ->select([
+                    'fac_disciplinas.qtd_credito'
+                ])->get();
+
+
+            if ($precoAtivo->tipo->nome == 'Crédito') {
+                $configuracaoAtiva = $precoAtivo->precosDisciplaCurso()->get()->last();
+                $valorCredito = $configuracaoAtiva->preco;
+                $quantidadeCredito = $configuracaoAtiva->qtd_disciplinas;
+
+                foreach ($disciplinas as $disciplina) {
+                    $retorno['valor'] += ($disciplina->qtd_credito / $quantidadeCredito) * $valorCredito;
+                }
+            }
+
+            return response()->json(['success' => true, 'dados' => $retorno]);
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
