@@ -17,12 +17,6 @@ class TabelaPrecoCursoController extends Controller
      * @var TabelaPrecoCursoService
      */
     private $service;
-//
-//    /**
-//    * @var CursoValidator
-//    */
-//    private $validator;
-//
 
     /**
      * @param TabelaPrecoCursoService $service
@@ -91,16 +85,11 @@ class TabelaPrecoCursoController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->store($data);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Cadastro realizado com sucesso"]);
-       // } catch (ValidatorException $e) {
-       //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
@@ -115,29 +104,18 @@ class TabelaPrecoCursoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            #Recuperando os dados da requisição
-            $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
             #Executando a ação
             $this->service->update($request->all(), $id);
 
             #Retorno para a view
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Alteração realizada com sucesso"]);
-            // } catch (ValidatorException $e) {
-            //     return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
     /**
-     * @param $id
+     * @param $idPrecoCurso
      * @return mixed
      */
     public function edit($idPrecoCurso)

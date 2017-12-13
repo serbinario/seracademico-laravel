@@ -49,4 +49,12 @@ class PrecoCurso extends Model implements Transformable
     {
         return $this->hasMany(PrecoDisciplinaCurso::class, "preco_curso_id", "id");
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipo()
+    {
+        return $this->belongsTo(TipoPrecoCurso::class, 'tipo_preco_curso_id');
+    }
 }
