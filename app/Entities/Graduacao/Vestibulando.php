@@ -64,7 +64,8 @@ class Vestibulando extends Model implements Transformable
         'enem',
         'path_image',
         'tipo_img',
-        'agendamento_id'
+        'agendamento_id',
+        'nota_vestibular_redacao'
     ];
 
 
