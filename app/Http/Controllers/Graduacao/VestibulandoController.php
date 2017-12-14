@@ -147,7 +147,8 @@ class VestibulandoController extends Controller
                 'fac_semestres.nome as nomeSemestre',
                 'vest_agendamento.id as idData',
                 \DB::raw('IF(fac_alunos.id, "TRANSFERIDO", "NÃO TRANSFERIDO") as transferencia'),
-                \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao')
+                \DB::raw('IF(fac_vestibulandos.enem, "ENEM", "FICHA 19") as formaAvaliacao'),
+                'fac_vestibulandos.nota_vestibular_redacao'
             ]);
 
         #Editando a grid
@@ -186,10 +187,10 @@ class VestibulandoController extends Controller
                         case 2  : $query->where('curso2.id', '=', $cursoSearch); break;
                         case 3  : $query->where('curso3.id', '=', $cursoSearch); break;
                         default : $query->where(function ($where) use ($cursoSearch) {
-                                    $where->orWhere('curso1.id', '=', $cursoSearch)
-                                        ->orWhere('curso2.id', '=', $cursoSearch)
-                                        ->orWhere('curso3.id', '=', $cursoSearch);
-                                    });
+                            $where->orWhere('curso1.id', '=', $cursoSearch)
+                                ->orWhere('curso2.id', '=', $cursoSearch)
+                                ->orWhere('curso3.id', '=', $cursoSearch);
+                        });
                     }
                 }
 
@@ -197,7 +198,7 @@ class VestibulandoController extends Controller
                 if ($request->has('globalSearch')) {
                     # recuperando o valor da requisição
                     $search = $request->get('globalSearch');
-                   
+
                     #condição
                     $query->where(function ($where) use ($search) {
                         $where->orWhere('pessoas.nome', 'like', "%$search%")
@@ -237,6 +238,25 @@ class VestibulandoController extends Controller
 
                 # retorno
                 return $html;
+            })
+            ->addColumn('resultado', function ($row) {
+                $resultado = "";
+
+                if($row->formaAvaliacao == "FICHA 19") {
+                    if($row->nota_vestibular_redacao > 0) {
+                        $resultado = "Candidato Aprovado";
+                    } else {
+                        $resultado = "Candidato Reprovado";
+                    }
+                } else {
+                    if($row->media_enem >= 900) {
+                        $resultado = "Candidato Aprovado";
+                    } else {
+                        $resultado = "Candidato Reprovado";
+                    }
+                }
+
+                return $resultado;
             })->make(true);
     }
 
@@ -560,7 +580,7 @@ class VestibulandoController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-            
+
             #Executando a ação
             $mensagem = $this->service->updateInclusao($data, $id);
 
@@ -739,7 +759,7 @@ class VestibulandoController extends Controller
 
             # Verificando se houve registro
             if(count($rows) == 0) {
-               throw new \Exception('Nenhum Vestibulando foi encontrado');
+                throw new \Exception('Nenhum Vestibulando foi encontrado');
             }
 
             # Retorno

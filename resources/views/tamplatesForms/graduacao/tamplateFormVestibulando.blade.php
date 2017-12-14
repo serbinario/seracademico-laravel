@@ -504,6 +504,9 @@
                             <li role="presentation" id="liEnem">
                                 <a href="#enem" id="aEnem" aria-controls="enem" role="tab" data-toggle="tab">Enem</a>
                             </li>
+                            <li role="presentation" id="liEnem">
+                                <a href="#redacao" id="aRedacao" aria-controls="enem" role="tab" data-toggle="tab">Redação</a>
+                            </li>
                         </ul>
                         <!-- End Nav tabs -->
 
@@ -568,10 +571,8 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div role="tabpanel" class="tab-pane" id="enem">
                                 <br>
-
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         {!! Form::label('ano_enem', 'Ano ') !!}
@@ -611,7 +612,15 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div role="tabpanel" class="tab-pane" id="redacao">
+                                <br>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        {!! Form::label('nota_vestibular_redacao', 'Nota') !!}
+                                        {!! Form::text('nota_vestibular_redacao', Session::getOldInput('nota_vestibular_redacao'), array('class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+                            </div>
                             <div role="tabpanel" class="tab-pane" id="comprovantes">
                                 <br>
                                 <div class="form-group col-md-4">
@@ -1536,6 +1545,4 @@
         {{--}--}}
         {{--});--}}
     </script>
-
 @stop
-

@@ -51,7 +51,6 @@
             </div>
         </div>
         <div class="ibox-content">
-
             @if(Session::has('message'))
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -67,7 +66,6 @@
                     @endforeach
                 </div>
             @endif
-
             <div class="row">
                 <div class="col-md-12">
                     <form id="search-form" class="form-inline" role="form" method="GET">
@@ -175,16 +173,16 @@
                                 '<thead>' +
                                     '<tr>' +
                                         '<th>Média Enem</th>' +
-                                        '<th>Média Ficha 19</th>' +
+                                        '<th>Redação (vestibular agendado)</th>' +
                                     '</tr>' +
                                 '</thead>' +
                                 '<tbody>' +
                                     '<tr>' +
                                         '<td>' + d.media_enem+ '</td>' +
-                                        '<td>' + d.media_ficha+ '</td>' +
+                                        '<td>' + d.nota_vestibular_redacao + '</td>' +
                                     '</tr>' +
                                     '<tr>' +
-                                        '<td style="text-align: center;" colspan="2">' + ((d.media_enem >= 900) ? 'Candidato aprovado' : 'Candidato reprovado') + '</td>' +
+                                        '<td style="text-align: center;" colspan="2">' + d.resultado + '</td>' +
                                     '</tr>' +
                                 '</tbody>' +
                             '</table>' +
