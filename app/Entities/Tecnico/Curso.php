@@ -81,6 +81,33 @@ class Curso extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function inscrioes()
+    {
+        return $this->belongsToMany(Inscricao::class, 'pos_incricoes', 'curso_id', 'incricao_id')
+            ->withPivot(['id']);
+    }
+
+    /**
+     * @param Model $parent
+     * @param array $attributes
+     * @param string $table
+     * @param bool $exists
+     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
+     */
+    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    {
+        # Pivot para Curso
+        if ($parent instanceof Inscricao) {
+            return new PivotInscritoCurso($parent, $attributes, $table, $exists);
+        }
+
+        # Retorno do novo pivot
+        return parent::newPivot($parent, $attributes, $table, $exists);
+    }
+
+    /**
      *
      * @return \DateTime
      */

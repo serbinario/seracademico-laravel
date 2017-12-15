@@ -117,6 +117,7 @@
                         <table id="aluno-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th>Detalhe</th>
                                 <th>Nome</th>
                                 <th>Matrícula</th>
                                 <th>Data Matrícula</th>
@@ -130,6 +131,7 @@
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Detalhe</th>
                                 <th>Nome</th>
                                 <th>Matrícula</th>
                                 <th>Data Matrícula</th>
@@ -217,6 +219,48 @@
     {{--Fabio--}}
     <script type="text/javascript" src="{{ asset('/js/tecnico/aluno/documentos/modal_aluno_documento.js') }}"></script>
     <script type="text/javascript">
+
+        function format(d) {
+            return  '<div class="row">' +
+                '<div class="col-md-4">' +
+                '<h3>Cursos selecionados</h3>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '</div>'+
+                '<div class="row">' +
+                '<div class="col-md-12">' +
+                '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                '<thead>' +
+                '<tr>' +
+                '<th style="width: 5%">Opção</th>' +
+                '<th>Curso</th>' +
+                '<th style="width: 20%">Turno</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<td style="width: 5%">1º</td>' +
+                '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
+                '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td style="width: 5%">2º</td>' +
+                '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
+                '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td style="width: 5%">3º</td>' +
+                '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
+                '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>' +
+                '</div>' +
+                '</div>';
+        }
+
+
         var table = $('#aluno-grid').DataTable({
             processing: true,
             serverSide: true,
@@ -234,6 +278,12 @@
                 }
             },
             columns: [
+                {
+                    "className":      'details-control',
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ''
+                },
                 {data: 'nome', name: 'pessoas.nome'},
                 {data: 'matricula', name: 'pos_alunos.matricula'},
                 {data: 'data_matricula', name: 'pos_alunos.data_matricula'},
@@ -251,6 +301,40 @@
             table.draw();
             e.preventDefault();
         });
+
+        // array de detalhes da grid
+        var detailRows = [];
+
+        // evento para criação dos detalhes da grid
+        $('#aluno-grid tbody').on( 'click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+            var idx = $.inArray( tr.attr('id'), detailRows );
+
+            if ( row.child.isShown() ) {
+                tr.removeClass( 'details' );
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice( idx, 1 );
+            }
+            else {
+                tr.addClass( 'details' );
+                row.child( format( row.data() ) ).show();
+
+                // Add to the 'open' array
+                if ( idx === -1 ) {
+                    detailRows.push( tr.attr('id') );
+                }
+            }
+        } );
+
+        // On each draw, loop over the `detailRows` array and show any child rows
+        table.on( 'draw', function () {
+            $.each( detailRows, function ( i, id ) {
+                $('#'+id+' td.details-control').trigger( 'click' );
+            } );
+        } );
 
         // Id do aluno corrente
         var idAluno, idAlunoTurma, idAlunoCurso;
