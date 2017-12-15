@@ -616,8 +616,8 @@
                                 <br>
                                 <div class="row">
                                     <div class="form-group col-md-3">
-                                        {!! Form::label('nota_vestibular_redacao ', 'Nota') !!}
-                                        {!! Form::text('nota_vestibular_redacao ', Session::getOldInput('nota_vestibular_redacao '), array('class' => 'form-control')) !!}
+                                        {!! Form::label('nota_vestibular_redacao', 'Nota') !!}
+                                        {!! Form::text('nota_vestibular_redacao', Session::getOldInput('nota_vestibular_redacao'), array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                             </div>
