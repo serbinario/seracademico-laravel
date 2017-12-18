@@ -8,7 +8,7 @@ use Seracademico\Repositories\Biblioteca\ExemplarRepository;
 use Seracademico\Entities\Biblioteca\Exemplar;
 //use Carbon\Carbon;
 
-class ExemplarService
+class ExemplarMonoDiTeService
 {
     /**
      * @var ExemplarRepository
@@ -59,8 +59,6 @@ class ExemplarService
         $relacionamentos = [
             'acervo.exemplares',
             'acervo.tipoAcervo',
-            'acervo.colecao',
-            'acervo.genero',
             'acervo.situacao',
             'acervo.corredor',
             'acervo.estante',
@@ -162,10 +160,7 @@ class ExemplarService
     public function detalheAcervo($id)
     {
         $relacionamentos = [
-            'acervo.primeiraEntrada.responsaveis',
-            'acervo.colecao',
-            'acervo.serie',
-            'acervo.tipoAcervo'
+            'acervo.primeiraEntrada.responsaveis'
         ];
 
         $exemplar = $this->repository->with($relacionamentos)->find($id);

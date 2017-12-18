@@ -105,13 +105,13 @@ class ConsultaController extends Controller
 
         if($this->data['busca_por'] == '2') {
             $campoLike = 'bib_arcevos.titulo';
-        } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '1') {
+        } else if ($this->data['busca_por'] == '3' && ($this->data['tipo_obra'] == '1' || $this->data['tipo_obra'] == '3')) {
             $campoLike = 'bib_arcevos.assunto';
         } else if ($this->data['busca_por'] == '4') {
             $campoLike = 'responsaveis.nome';
         } else if ($this->data['busca_por'] == '3' && $this->data['tipo_obra'] == '2') {
             $campoLike = 'bib_exemplares.assunto_p';
-        } else if ($this->data['busca_por'] == '5' && $this->data['tipo_obra'] == '1') {
+        } else if ($this->data['busca_por'] == '5' && ($this->data['tipo_obra'] == '1' || $this->data['tipo_obra'] == '3')) {
             $campoLike = 'bib_arcevos.palavras_chaves';
         } else if ($this->data['busca_por'] == '5' && $this->data['tipo_obra'] == '2') {
             $campoLike = 'bib_exemplares.palavras_chaves';
@@ -133,7 +133,13 @@ class ConsultaController extends Controller
                 ->orWhere('responsaveis.sobrenome', 'like', "%{$this->data['busca']}%")
                 ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
-                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
+                ->select(
+                    'responsaveis.*',
+                    'bib_arcevos.*',
+                    'bib_arcevos.id as id_acervo',
+                    'bib_exemplares.*',
+                    'bib_tipos_acervos.nome as tipo_acervo',
+                    'bib_tipos_acervos.tipo as tipo_acervo_id')
                 ->paginate(10);
 
         } else {
@@ -156,7 +162,13 @@ class ConsultaController extends Controller
                 })
                 ->groupBy('bib_arcevos.id')
                 ->orderBy('bib_arcevos.titulo','DESC')
-                ->select('responsaveis.*', 'bib_arcevos.*', 'bib_arcevos.id as id_acervo', 'bib_exemplares.*')
+                ->select('responsaveis.*',
+                    'bib_arcevos.*',
+                    'bib_arcevos.id as id_acervo',
+                    'bib_exemplares.*',
+                    'bib_tipos_acervos.nome as tipo_acervo',
+                    'bib_tipos_acervos.tipo as tipo_acervo_id'
+                    )
                 ->paginate(10);
 
         }

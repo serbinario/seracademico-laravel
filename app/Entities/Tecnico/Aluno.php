@@ -68,7 +68,8 @@ class Aluno extends Model implements Transformable
         'login',
         'anotacao',
         'cpf_responsavel',
-        'rg_responsavel'
+        'rg_responsavel',
+        'incricao_id'
     ];
 
     /**

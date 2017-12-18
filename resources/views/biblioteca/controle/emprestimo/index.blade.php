@@ -49,6 +49,7 @@
                                 <th>Situação</th>
                                 <th>Emprestimo</th>
                                 <th>Código de barra</th>
+                                <th>Tipo</th>
                                 <th>Acão</th>
                             </tr>
                             </thead>
@@ -64,6 +65,7 @@
                                 <th>Situação</th>
                                 <th>Emprestimo</th>
                                 <th>Código de barra</th>
+                                <th>Tipo</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </tfoot>

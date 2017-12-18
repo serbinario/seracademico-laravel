@@ -28,7 +28,7 @@
                     </div>
                     <hr class="hr-dashline">
                     <div class="row">
-                        <div class="input-field col s5 m3">
+                        <div class="input-field col s5 m2">
                             <select name="busca_por" class="form-control">
                                 <option value="1" selected>Todos os campos</option>
                                 <option value="2">Título</option>
@@ -45,11 +45,12 @@
                         <div class="col s5 m2" >
                             <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                         </div>
-                        <div class="col s5 m2" style="margin-top: 3px;">
+                        <div class="col s5 m3" style="margin-top: 3px;">
                             {{--{!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}--}}
                             <select name="tipo_obra" class="form-control">
                                 <option value="1">Livro</option>
                                 <option value="2">Revista</option>
+                                <option value="3">Monografias/Dissertações/Teses</option>
                             </select>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
                                     <li class="tab col s3"><a class="active" href="#test1">Detalhes</a></li>
                                     <li class="tab col s3"><a href="#test2">Exemplares</a></li>
                                     <li class="tab col s3"><a href="#test4">Referência</a></li>
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <li class="tab col s3"><a href="#test5">Sumário/Palavras chaves</a></li>
                                     @endif
                                 </ul>
@@ -93,7 +94,7 @@
                                                 <div class="col s8">{{$exemplar['isbn']}}</div>
                                             </div>
                                         </a>
-                                    @else
+                                    @elseif($exemplar['acervo']['tipo_periodico'] == '2')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>ISSN</b></div>
@@ -107,7 +108,7 @@
                                             <div class="col s8">{{$exemplar['acervo']['cdd']}}</div>
                                         </div>
                                     </a>
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Cutter</b></div>
@@ -141,7 +142,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                    @else
+                                    @elseif($exemplar['acervo']['tipo_periodico'] == '2')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Edição</b></div>
@@ -149,6 +150,16 @@
                                                     {{$exemplar['acervo']['numero_chamada']}} /
                                                     @if($exemplar['vol_periodico'])v. {{$exemplar['vol_periodico']}}. @endif
                                                     @if($exemplar['num_periodico'])n. {{$exemplar['num_periodico']}}. @endif
+                                                    @if($exemplar['ano']){{$exemplar['ano']}}. @endif
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @elseif($exemplar['acervo']['tipo_periodico'] == '3')
+                                        <a class="collection-item">
+                                            <div class="row">
+                                                <div class="col s4"><b>Publcação</b></div>
+                                                <div class="col s8">
+                                                    {{$exemplar['acervo']['numero_chamada']}} /
                                                     @if($exemplar['ano']){{$exemplar['ano']}}. @endif
                                                 </div>
                                             </div>
@@ -176,7 +187,7 @@
                                             @endif
                                         </div>
                                     </a>
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Ent. princ.</b></div>
@@ -233,7 +244,7 @@
                                             <div class="col s8">{{$exemplar['numero_pag']}}p. @if($exemplar['ilustracoes_id'] == '1') : il.@endif</div>
                                         </div>
                                     </a>
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Notas</b></div>
@@ -248,7 +259,7 @@
                                             </div>
                                         </a>
                                     @endif
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Assunto</b></div>
@@ -263,7 +274,7 @@
                                             </div>
                                         </a>
                                     @endif
-                                    @if($exemplar['acervo']['tipo_periodico'] == '1')
+                                    @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
                                                 <div class="col s4"><b>Ent. sec.</b></div>
@@ -331,7 +342,7 @@
                                             <th>Tombo</th>
                                             @if($exemplar['acervo']['tipo_periodico'] == '1')
                                                 <th>Edição</th>
-                                            @else
+                                            @elseif($exemplar['acervo']['tipo_periodico'] == '2')
                                                 <th>Volume</th>
                                                 <th>Número</th>
                                             @endif
@@ -568,7 +579,17 @@
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')
                                     @if($exemplar['acervo']['periodicidade']){{$exemplar['acervo']['periodicidade']}}. @endif
                                 @endif
-                                @endif @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
+                                @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '2')
+                                    @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
+                                @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '3')
+                                    @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}f.@endif
+                                @endif
+                                @if($exemplar['acervo']['tipo_periodico'] == '3')
+                                    {{ $exemplar['acervo']['tipoAcervo']['nome'] }} {{ $exemplar['acervo']['resumo'] }}.
+                                    @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: {{$exemplar['ano']}}.@endif
+                                @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                     @if($exemplar['ilustracoes_id'] == '1'), il.@endif
                                 @endif
@@ -577,17 +598,17 @@
                                 @elseif($exemplar['acervo']['serie_id'] && !$exemplar['acervo']['colecao_id'])
                                     ({{ $exemplar['acervo']['serie']['nome'] }}).
                                 @elseif($exemplar['acervo']['serie_id'] && $exemplar['acervo']['colecao_id'])
-                                    ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }}).@else, @endif
+                                    ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }}). @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
-                                    @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
-                                @else
-                                    @if($exemplar['issn'])ISSN {{$exemplar['issn']}}. @endif
+                                    ,@if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                @elseif($exemplar['acervo']['tipo_periodico'] == '2')
+                                    ,@if($exemplar['issn'])ISSN {{$exemplar['issn']}}. @endif
                                 @endif
                             </div>
 
                             {{--Termina referência--}}
 
-                            @if($exemplar['acervo']['tipo_periodico'] == '1')
+                            @if($exemplar['acervo']['tipo_periodico'] == '1' || $exemplar['acervo']['tipo_periodico'] == '3')
 
                                 <div id="test5" class="col s12">
                                 <div class="collection">

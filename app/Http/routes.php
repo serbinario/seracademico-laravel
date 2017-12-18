@@ -226,6 +226,39 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\AgendamentoAlunoController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\AgendamentoAlunoController@delete']);
             });
+
+            Route::group(['prefix' => 'inscricao', 'as' => 'inscricao.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\InscricaoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\InscricaoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\InscricaoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\InscricaoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\InscricaoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\InscricaoController@update']);
+                Route::get('delete/{id}', ['as' => 'edit', 'uses' => 'Tecnico\InscricaoController@delete']);
+                Route::get('getByValidDate', ['as' => 'getValidDate', 'uses' => 'Tecnico\InscricaoController@getByValidDate']);
+
+                /*Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
+                    Route::get('relatorio1', ['as' => 'relatorio1', 'uses' => 'Graduacao\VestibularController@relatorio1']);
+                    Route::get('relatorio2', ['as' => 'relatorio2', 'uses' => 'Graduacao\VestibularController@relatorio2']);
+                    //Route::get('printQuantidadesGerais', ['as' => 'printQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@printQuantidadesGerais']);
+                    Route::get('viewReportQuantidadesGerais', ['as' => 'viewReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@viewReportQuantidadesGerais']);
+                    Route::get('getReportQuantidadesGerais/{id}', ['as' => 'getReportQuantidadesGerais', 'uses' => 'Graduacao\VestibularController@getReportQuantidadesGerais']);
+                });*/
+
+                Route::group(['prefix' => 'curso', 'as' => 'curso.'], function () {
+                    Route::get('grid/{idInscricao}', ['as' => 'grid', 'uses' => 'Tecnico\InscricaoCursoController@grid']);
+                    Route::post('delete', ['as' => 'delete', 'uses' => 'Tecnico\InscricaoCursoController@delete']);
+                    Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\InscricaoCursoController@store']);
+
+                    Route::group(['prefix' => 'turno', 'as' => 'turno.'], function () {
+                        Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Tecnico\InscricaoCursoTurnoController@getLoadFields']);
+                        Route::get('grid/{idInscricaoCurso}', ['as' => 'grid', 'uses' => 'Tecnico\InscricaoCursoTurnoController@grid']);
+                        Route::post('delete', ['as' => 'delete', 'uses' => 'Tecnico\InscricaoCursoTurnoController@delete']);
+                        Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\InscricaoCursoTurnoController@store']);
+                        Route::post('getTurnosByCurso', ['as' => 'getTurnosByCurso', 'uses' => 'Tecnico\InscricaoCursoTurnoController@getTurnosByCurso']);
+                    });
+                });
+            });
         });
         //FIM TÉCNICO
 
@@ -1522,6 +1555,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('storeExemplarP', ['as' => 'storeExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@store']);
             Route::post('updateExemplarP/{id}', ['as' => 'updateExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@update']);
             Route::get('deleteExemplarP/{id}', ['as' => 'deleteExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@delete']);
+
+
+            ## acervos e exemplares monografia/dissertação/teses
+            Route::get('indexAcervoMonoDiTe', ['as' => 'indexAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@index']);
+            Route::get('createAcervoMonoDiTe', ['as' => 'createAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@create']);
+            Route::get('gridAcervoMonoDiTe', ['as' => 'gridAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@grid']);
+            Route::get('editAcervoMonoDiTe/{id}', ['as' => 'editAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@edit']);
+            Route::post('storeAcervoMonoDiTe', ['as' => 'storeAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@store']);
+            Route::post('updateAcervoMonoDiTe/{id}', ['as' => 'updateAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@update']);
+            Route::get('deleteAcervoMonoDiTe/{id}', ['as' => 'deleteAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@delete']);
+
+            Route::get('indexExemplarMonoDiTe', ['as' => 'indexExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@index']);
+            Route::get('createExemplarMonoDiTe', ['as' => 'createExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@create']);
+            Route::get('gridExemplarMonoDiTe', ['as' => 'gridExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@grid']);
+            Route::get('editExemplarMonoDiTe/{id}', ['as' => 'editExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@edit']);
+            Route::post('storeExemplarMonoDiTe', ['as' => 'storeExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@store']);
+            Route::post('updateExemplarMonoDiTe/{id}', ['as' => 'updateExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@update']);
+            Route::get('deleteExemplarMonoDiTe/{id}', ['as' => 'deleteExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@delete']);
+
+            ## acervos e exemplares monografia/dissertação/teses fim rotas
 
             Route::get('indexParametro', ['as' => 'indexParametro', 'uses' => 'Biblioteca\BibParametroController@index']);
             Route::get('gridParametro', ['as' => 'gridParametro', 'uses' => 'Biblioteca\BibParametroController@grid']);
