@@ -1556,6 +1556,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::post('updateExemplarP/{id}', ['as' => 'updateExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@update']);
             Route::get('deleteExemplarP/{id}', ['as' => 'deleteExemplarP', 'uses' => 'Biblioteca\ExemplarPeriodicoController@delete']);
 
+
+            ## acervos e exemplares monografia/dissertação/teses
+            Route::get('indexAcervoMonoDiTe', ['as' => 'indexAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@index']);
+            Route::get('createAcervoMonoDiTe', ['as' => 'createAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@create']);
+            Route::get('gridAcervoMonoDiTe', ['as' => 'gridAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@grid']);
+            Route::get('editAcervoMonoDiTe/{id}', ['as' => 'editAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@edit']);
+            Route::post('storeAcervoMonoDiTe', ['as' => 'storeAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@store']);
+            Route::post('updateAcervoMonoDiTe/{id}', ['as' => 'updateAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@update']);
+            Route::get('deleteAcervoMonoDiTe/{id}', ['as' => 'deleteAcervoMonoDiTe', 'uses' => 'Biblioteca\ArcevoMonoDiTeController@delete']);
+
+            Route::get('indexExemplarMonoDiTe', ['as' => 'indexExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@index']);
+            Route::get('createExemplarMonoDiTe', ['as' => 'createExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@create']);
+            Route::get('gridExemplarMonoDiTe', ['as' => 'gridExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@grid']);
+            Route::get('editExemplarMonoDiTe/{id}', ['as' => 'editExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@edit']);
+            Route::post('storeExemplarMonoDiTe', ['as' => 'storeExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@store']);
+            Route::post('updateExemplarMonoDiTe/{id}', ['as' => 'updateExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@update']);
+            Route::get('deleteExemplarMonoDiTe/{id}', ['as' => 'deleteExemplarMonoDiTe', 'uses' => 'Biblioteca\ExemplarMonoDiTeController@delete']);
+
+            ## acervos e exemplares monografia/dissertação/teses fim rotas
+
             Route::get('indexParametro', ['as' => 'indexParametro', 'uses' => 'Biblioteca\BibParametroController@index']);
             Route::get('gridParametro', ['as' => 'gridParametro', 'uses' => 'Biblioteca\BibParametroController@grid']);
             Route::get('editParametro/{id}', ['as' => 'editParametro', 'uses' => 'Biblioteca\BibParametroController@edit']);

@@ -78,6 +78,7 @@ class EmprestarController extends Controller
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('bib_emprestimo', 'bib_emprestimo.id', '=', 'bib_exemplares.emprestimo_id')
             ->join('bib_situacao', 'bib_situacao.id', '=', 'bib_exemplares.situacao_id')
+            ->join('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
             ->where('bib_exemplares.exemp_principal', '!=', '1')
             ->where('bib_exemplares.situacao_id', '!=', '5')
             ->where('bib_exemplares.situacao_id', '!=', '4')
@@ -87,6 +88,7 @@ class EmprestarController extends Controller
                 'bib_arcevos.cutter',
                 'bib_arcevos.cdd',
                 'bib_arcevos.id as acervo_id',
+                'bib_tipos_acervos.nome as tipo_acervo',
                 'bib_exemplares.edicao',
                 'bib_situacao.nome as nome_sit',
                 'bib_situacao.id as id_sit',

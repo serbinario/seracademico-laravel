@@ -28,6 +28,7 @@ var table = $('#sala-grid').DataTable({
         {data: 'nome_sit', name: 'bib_emprestimo.nome'},
         {data: 'nome_emp', name: 'bib_emprestimo.nome'},
         {data: 'codigo_barra', name: 'bib_exemplares.codigo_barra'},
+        {data: 'tipo_acervo', name: 'bib_tipos_acervos.nome'},
         {data: 'action', name: 'action', orderable: false, searchable: false}
     ]
 });

@@ -51,6 +51,16 @@
                     {!! Form::text('quantidade', Session::getOldInput('quantidade')  , array('class' => 'form-control numberFor')) !!}
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    {!! Form::label('taxa_id', 'Taxa *') !!}
+                    @if(isset($model->taxa))
+                        {!! Form::select('taxa_id', $loadFields['financeiro\\taxa'] , $model->taxa->id, array('class' => 'form-control')) !!}
+                    @else
+                        {!! Form::select('taxa_id', $loadFields['financeiro\\taxa'] , null, array('class' => 'form-control')) !!}
+                    @endif
+                </div>
+            </div>
         </div>
 
 	</div>
