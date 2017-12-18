@@ -92,24 +92,6 @@ class Curso extends Model implements Transformable
     }
 
     /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     * @return \Illuminate\Database\Eloquent\Relations\Pivot|Disciplina
-     */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
-    {
-        # Pivot para Vestibular
-        if ($parent instanceof Vestibular) {
-            return new PivotVestibularCurso($parent, $attributes, $table, $exists);
-        }
-
-        # Retorno do novo pivot
-        return parent::newPivot($parent, $attributes, $table, $exists);
-    }
-
-    /**
      *
      * @return \DateTime
      */

@@ -192,6 +192,12 @@ class AlunoService
         #Atualizando no banco de dados
         $aluno = $this->repository->update($data, $id);
 
+        if(!$aluno['matricula']) {
+            $arrayMatricula = $this->tratamentoMatricula($data);
+            $aluno['matricula'] = $arrayMatricula['matricula'];
+            $aluno->save();
+        }
+
         #Verificando se foi atualizado no banco de dados
         if(!$aluno) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
