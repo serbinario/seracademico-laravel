@@ -279,6 +279,7 @@
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexAcervo') }}"><i class="flaticon-interface-1"></i> Livros</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.indexAcervoP') }}"><i class="flaticon-interface"></i> Revistas</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexAcervoMonoDiTe') }}"><i class="flaticon-interface"></i> Monografia / Dissertações / Teses</a></li>
                             </ul>
                         </li>
                         <li>
@@ -286,6 +287,7 @@
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexExemplar') }}"><i class="flaticon-interface-1"></i> Livros</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.indexExemplarP') }}"><i class="flaticon-interface"></i> Revistas</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexExemplarMonoDiTe') }}"><i class="flaticon-interface"></i> Monografia / Dissertações / Teses</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ route('indexConsulta') }}" target="__blank"><i class="flaticon-book-with-magnifying-glass"></i> Consulta</a></li>

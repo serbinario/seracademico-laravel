@@ -121,7 +121,10 @@
     Assumir inteira responsabilidade de quaisquer materiais que façam parte do acervo da biblioteca, sejam estes livros,
     revistas, monografias, teses, referências ( livro de consulta ), CDs, DVDs, outros, quando de posse destes; 2 )
     Se danificar ou extraviar qualquer material do acervo da biblioteca,
-    <b>o usuário terá que repor o mesmo, entregando o material novo e com nota fiscal</b>
+    <b>o usuário terá que repor o referido item, entregando o material novo e com nota fiscal. Quando a obra possuir
+        qualificação e quantidade específica, tornando-se infugível, o usuário deverá devolver a obra de igual qualidade
+        e quantidade, estas que assumam a identidade e as características do material extraviado.
+        3) O aluno tem o compromisso de informar, caso mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível</b>
 </p>
 
 <h5><b>EMPRÉSTIMO</b></h5>
@@ -157,17 +160,18 @@
     são para consulta exclusiva na biblioteca (consulta especial);</b><br />
     2)	A consulta especial é aquela da qual o usuário só poderá consultar o livro na Biblioteca ou áreas da Faculdade,
     tendo o compromisso de devolver o livro antes que encerre o expediente,
-    ou então terá que pagar uma multa de <b>R$ 20,00 (vinte reais) p/ dia e p/ livro.</b>
+    ou então terá que pagar uma multa de <b>R$ 10,00 (vinte reais) p/ dia e p/ livro.</b>
 </p>
 
 <h5><b>MULTA</b></h5>
 
 <p class="termos">
     O usuário: aluno de graduação, aluno de pós-graduação, professor e funcionário que não devolver ou renovar o livro na data prevista,
-    pagará multa <b> de R$ 5,00 (cinco reais )</b> por livro/dia de atraso, incluindo sábados, domingos e feriados, reajustada anualmente,
-    a partir de 2017. <b>Só serão abonadas as multas em caso de doença mediante apresentação de atestado médico;</b><br />
+    pagará multa <b> de R$ 2,50 (cinco reais )</b> por livro/dia de atraso, incluindo sábados, domingos e feriados, reajustada anualmente,
+    a partir de 2018. <b>Só serão abonadas as multas em caso de doença mediante apresentação de atestado médico;</b><br />
     1)	O usuário que estiver em débito e/ou pendência com a biblioteca, ou qualquer outro setor acadêmico,
-    não poderá fazer empréstimo de livros, matrícula, trancamento, licença, outros.
+    não poderá fazer empréstimo de livros, matrícula, trancamento, licença, outros Os que abandonarem o curso e não
+    devolverem o livro será cobrado em protesto.
 </p >
 
 <h5><b>RESERVA</b></h5>

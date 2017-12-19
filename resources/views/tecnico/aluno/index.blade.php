@@ -387,6 +387,24 @@
             $("#modal-aluno-documento").modal({show:true});
         });
 
+        // Evento para abrir o modal do financeiro
+        $(document).on("click", "#btnModalFinanceiro", function () {
+            // Recuperando os dados do aluno selecionado
+            var rowTable = $(this).parents('tr');
+            idAluno = table.row(rowTable).data().id;
+            var nomeAluno   = table.row(rowTable).data().nome;
+            var matricula   = table.row(rowTable).data().matricula;
+            var codigoCurso = table.row(rowTable).data().codigoCurso;
+
+            // prenchendo o titulo do nome do aluno
+            $('#finMatricula').text(matricula);
+            $('#finNomeAluno').text(nomeAluno);
+            $('#finCurso').text(codigoCurso);
+
+            runFinanceiro(idAluno);
+        });
+
+
         // Geriamento dos relatórios avançadas
         $(document).on('change', '#report_id', function () {
             // Recuperando o id do relatório

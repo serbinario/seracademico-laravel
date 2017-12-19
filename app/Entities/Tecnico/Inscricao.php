@@ -26,8 +26,8 @@ class Inscricao extends Model implements Transformable
 		'data_fim',
 		'quantidade',
 		'tipo_nivel_sistema_id',
-        'taxa_id',
-        'ativo'
+        'ativo',
+        'taxa_id'
 	];
 
     /**

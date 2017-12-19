@@ -227,7 +227,7 @@ class AlunoFinanceiroController extends Controller
 
             return response()->json(['status' => 200, 'boleto' => $boleto]);
         } catch (\Throwable $e) {
-            return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
+            return response()->json(['msg' => $e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine(), 'status' => 500]);
         }
     }
 

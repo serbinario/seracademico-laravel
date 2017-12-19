@@ -21,7 +21,7 @@
                     </div>
                     <hr class="hr-dashline">
                     <div class="row">
-                        <div class="input-field col s5 m3">
+                        <div class="input-field col s5 m2">
                             <select name="busca_por" class="form-control">
                                 <option value="1" selected>Todos os campos</option>
                                 <option value="2">Título</option>
@@ -38,11 +38,12 @@
                         <div class="col s5 m2" >
                             <button type="submit" class="waves-effect waves-light btn" style="margin-top: 12px;"><i class="material-icons left">search</i> Buscar</button>
                         </div>
-                        <div class="col s5 m2" style="margin-top: 3px;">
+                        <div class="col s5 m3" style="margin-top: 3px;">
                             {{--{!! Form::select('tipo_obra', $loadFields['biblioteca\tipoacervo'], null,array('class' => 'form-control')) !!}--}}
                             <select name="tipo_obra" class="form-control">
                                 <option value="1">Livro</option>
                                 <option value="2">Revista</option>
+                                <option value="3">Monografias/Dissertações/Teses</option>
                             </select>
                         </div>
                     </div>
