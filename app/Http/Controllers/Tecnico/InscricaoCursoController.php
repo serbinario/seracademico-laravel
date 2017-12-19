@@ -76,6 +76,7 @@ class InscricaoCursoController extends Controller
     /**
      * @param Request $request
      * @return mixed
+     * djfhdh
      */
     public function delete(Request $request)
     {
