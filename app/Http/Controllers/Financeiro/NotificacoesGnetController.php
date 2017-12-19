@@ -58,8 +58,8 @@ class NotificacoesGnetController extends Controller
             if (is_a($debito->debitante, Aluno::class)) {
                 if ($boleto->statusGnet->codigo == 'paid') {
                     $debitante = $debito->debitante;
-                    $debitante->terceiro_passo = true;
-                    $debitante->save();
+                   // $debitante->terceiro_passo = true;
+                   // $debitante->save();
 
                     $this->sendMail($debitante->id);
                 }
