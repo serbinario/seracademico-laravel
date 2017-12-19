@@ -2,10 +2,12 @@
 
 namespace Seracademico\Services\Tecnico;
 
+use Carbon\Carbon;
 use Seracademico\Entities\Tecnico\Aluno;
 use Seracademico\Entities\Tecnico\AlunoFrequencia;
 use Seracademico\Entities\Tecnico\AlunoNota;
 use Seracademico\Entities\Tecnico\Curriculo;
+use Seracademico\Repositories\Financeiro\ContaBancariaRepository;
 use Seracademico\Repositories\Tecnico\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
 use Seracademico\Repositories\PessoaRepository;
@@ -31,19 +33,26 @@ class AlunoService
     private $pessoaRepository;
 
     /**
+     * @var ContaBancariaRepository
+     */
+    private $contaBancariaRepository;
+
+    /**
      * AlunoService constructor.
-     *
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param PessoaRepository $pessoaRepository
+     * @param ContaBancariaRepository $contaBancariaRepository
      */
     public function __construct(AlunoRepository $repository,
                                 EnderecoRepository $enderecoRepository,
-                                PessoaRepository $pessoaRepository)
+                                PessoaRepository $pessoaRepository,
+                                ContaBancariaRepository $contaBancariaRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaRepository   = $pessoaRepository;
+        $this->contaBancariaRepository = $contaBancariaRepository;
     }
 
     /**
@@ -496,5 +505,35 @@ class AlunoService
 
         # retorno
         return $now->format('Y') . $numberSemestre . $newInscricao;
+    }
+
+    /**
+     * @param Aluno $aluno
+     * @param string $addDiasVencimento
+     * @return mixed
+     */
+    public function formatDebitoInscricao(Aluno $aluno, $addDiasVencimento = "")
+    {
+        $inscricao = $aluno->inscricao;
+        $taxaInscricao = $inscricao->taxa;
+        $contaBancaria = $this->contaBancariaRepository->getContaBancariaPadrao();
+
+        $now = new Carbon();
+
+        if (is_numeric($addDiasVencimento)) {
+            $now->addDays($addDiasVencimento);
+        } else {
+            $now->day($taxaInscricao->dia_vencimento);
+        }
+
+        $dados['data_vencimento'] = $now->format('d/m/Y');
+        $dados['mes_referencia'] = $now->format('m');
+        $dados['ano_referencia'] = $now->format('Y');
+        $dados['taxa_id'] = $taxaInscricao->id;
+        $dados['valor_debito'] = $taxaInscricao->valor;
+        $dados['conta_bancaria_id'] = $contaBancaria->id;
+        $dados['pago'] = 0;
+
+        return $dados;
     }
 }

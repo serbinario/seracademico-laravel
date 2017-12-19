@@ -7,6 +7,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
 use Seracademico\Repositories\Tecnico\AlunoRepository;
 use Seracademico\Services\Financeiro\DebitoService;
+use Seracademico\Services\Tecnico\AlunoService;
 use Yajra\Datatables\Datatables;
 
 class AlunoFinanceiroController extends Controller
@@ -26,21 +27,29 @@ class AlunoFinanceiroController extends Controller
      */
     private $alunoRepository;
 
+    /**
+     * @var AlunoService
+     */
+    private $service;
+
 
     /**
      * AlunoFinanceiroController constructor.
      * @param DebitoRepository $debitoRepository
      * @param DebitoService $debitoService
      * @param AlunoRepository $alunoRepository
+     * @param AlunoService $service
      */
     public function __construct(
         DebitoRepository $debitoRepository,
         DebitoService $debitoService,
-        AlunoRepository $alunoRepository)
+        AlunoRepository $alunoRepository,
+        AlunoService $service)
     {
         $this->debitoRepository = $debitoRepository;
         $this->debitoService = $debitoService;
         $this->alunoRepository = $alunoRepository;
+        $this->service = $service;
     }
 
 
@@ -211,16 +220,10 @@ class AlunoFinanceiroController extends Controller
     public function storeDebitoInscricaoByPortal(Request $request)
     {
         try {
-            $vestibulando = $this->repository->find($request->get('id'));
-            $dadosDebito = $this->service->formatDebitoInscricao($vestibulando, 3);
-            $debito = $this->debitoService->store($vestibulando, $dadosDebito);
-            $debito->pago = 1;
-            $debito->save();
-            $vestibulando->terceiro_passo = true;
-            $vestibulando->save();
-
-            //$boleto = $this->debitoService->gerarBoleto($debito->id);
-            $boleto = [];
+            $aluno = $this->alunoRepository->find($request->get('id'));
+            $dadosDebito = $this->service->formatDebitoInscricao($aluno, 3);
+            $debito = $this->debitoService->store($aluno, $dadosDebito);
+            $boleto = $this->debitoService->gerarBoleto($debito->id);
 
             return response()->json(['status' => 200, 'boleto' => $boleto]);
         } catch (\Throwable $e) {
@@ -235,13 +238,12 @@ class AlunoFinanceiroController extends Controller
     public function getBoletoVestibulandoByPortal(Request $request)
     {
         try {
-            $vestibulando = $this->repository->find($request->get('id'));
-            $debito = $vestibulando->debitos->last();
-            /* $boleto = $debito->boleto;
-             $status = $boleto->statusGnet;
-             $responseBoleto = array_merge($boleto->toArray(), $status->toArray());
-             */
-            $responseBoleto = [];
+            $aluno = $this->alunoRepository->find($request->get('id'));
+            $debito = $aluno->debitos->last();
+            $boleto = $debito->boleto;
+            $status = $boleto->statusGnet;
+            $responseBoleto = array_merge($boleto->toArray(), $status->toArray());
+
             return response()->json(['status' => 200, 'boleto' => $responseBoleto]);
         } catch (\Throwable $e) {
             return response()->json(['msg' => $e->getMessage(), 'status' => 500]);

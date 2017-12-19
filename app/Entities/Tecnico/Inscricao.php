@@ -5,6 +5,7 @@ namespace Seracademico\Entities\Tecnico;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Financeiro\Taxa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
 class Inscricao extends Model implements Transformable
@@ -25,6 +26,7 @@ class Inscricao extends Model implements Transformable
 		'data_fim',
 		'quantidade',
 		'tipo_nivel_sistema_id',
+        'taxa_id',
         'ativo'
 	];
 
@@ -75,6 +77,14 @@ class Inscricao extends Model implements Transformable
     public function inscritos()
     {
         return $this->hasMany(Aluno::class, 'incricao_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function taxa()
+    {
+        return $this->belongsTo(Taxa::class, 'taxa_id');
     }
 
     /**
