@@ -3,6 +3,7 @@ namespace Seracademico\Http\Controllers\Financeiro;
 
 use Illuminate\Http\Request;
 use Seracademico\Entities\Graduacao\Vestibulando;
+use Seracademico\Entities\Tecnico\Aluno;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Financeiro\BoletoService;
 use Seracademico\Services\Financeiro\GerencianetService;
@@ -45,6 +46,16 @@ class NotificacoesGnetController extends Controller
             $debito = $boleto->debito;
 
             if (is_a($debito->debitante, Vestibulando::class)) {
+                if ($boleto->statusGnet->codigo == 'paid') {
+                    $debitante = $debito->debitante;
+                    $debitante->terceiro_passo = true;
+                    $debitante->save();
+
+                    $this->sendMail($debitante->id);
+                }
+            }
+
+            if (is_a($debito->debitante, Aluno::class)) {
                 if ($boleto->statusGnet->codigo == 'paid') {
                     $debitante = $debito->debitante;
                     $debitante->terceiro_passo = true;
