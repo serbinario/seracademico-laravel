@@ -1903,9 +1903,9 @@ Route::group(['prefix' => 'tecnico/financeiro', 'as' => 'aluno.financeiro.'], fu
         'as' => 'storeDebitoInscricaoByPortal',
         'uses' => 'Tecnico\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
     ]);
-    Route::get('getBoletoVestibulandoByPortal', [
-        'as' => 'getBoletoVestibulandoByPortal',
-        'uses' => 'Tecnico\AlunoFinanceiroController@getBoletoVestibulandoByPortal'
+    Route::get('getBoletoByPortal', [
+        'as' => 'getBoletoByPortal',
+        'uses' => 'Tecnico\AlunoFinanceiroController@getBoletoByPortal'
     ]);
 });
 

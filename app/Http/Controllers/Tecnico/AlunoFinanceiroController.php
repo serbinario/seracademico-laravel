@@ -235,7 +235,7 @@ class AlunoFinanceiroController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getBoletoVestibulandoByPortal(Request $request)
+    public function getBoletoByPortal(Request $request)
     {
         try {
             $aluno = $this->alunoRepository->find($request->get('id'));
