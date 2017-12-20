@@ -28,7 +28,7 @@ class InscricaoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Financeiro\\Taxa',
+        'Financeiro\\Taxa|byNivel,4',
     ];
 
     /**

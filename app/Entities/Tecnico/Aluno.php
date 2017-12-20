@@ -197,6 +197,14 @@ class Aluno extends Model implements Transformable
      */
     public function debitos()
     {
-        return $this->morphMany(Debito::class, "debotante");
+        return $this->morphMany(Debito::class, "debitante");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function inscricao()
+    {
+        return $this->belongsTo(Inscricao::class, 'incricao_id');
     }
 }

@@ -1897,4 +1897,16 @@ Route::group(['prefix' => 'vestibulando/financeiro', 'as' => 'vestibulando.finan
     ]);
 });
 
+# Rotas de acesso para operações financeiras do portal
+Route::group(['prefix' => 'tecnico/financeiro', 'as' => 'aluno.financeiro.'], function () {
+    Route::post('storeDebitoInscricaoByPortal', [
+        'as' => 'storeDebitoInscricaoByPortal',
+        'uses' => 'Tecnico\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
+    ]);
+    Route::get('getBoletoByPortal', [
+        'as' => 'getBoletoByPortal',
+        'uses' => 'Tecnico\AlunoFinanceiroController@getBoletoByPortal'
+    ]);
+});
+
 

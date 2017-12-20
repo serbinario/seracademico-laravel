@@ -54,14 +54,14 @@ class MatriculaAlunoController extends Controller
 
             #Criando a consulta
             $alunos = \DB::table('fac_alunos')
-                ->join('fin_debitos', function ($join) {
+                /*->join('fin_debitos', function ($join) {
                     $join->on('fin_debitos.id', '=',
                         \DB::raw(
                             '(SELECT fin_debitos.id FROM fin_debitos inner join fin_taxas on fin_taxas.id = fin_debitos.taxa_id
                             where fin_debitos.debitante_id = fac_alunos.id and fin_taxas.tipo_taxa_id = 2
                             ORDER BY fin_debitos.id DESC LIMIT 1)')
                     )->where('fin_debitos.debitante_type', '=', Aluno::class);
-                })
+                })*/
                 ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
                 ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_alunos.turno_id')
                 ->join('fac_alunos_semestres', function ($join) {
