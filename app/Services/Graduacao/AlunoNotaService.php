@@ -149,13 +149,11 @@ class AlunoNotaService
             ->lists('fac_alunos_notas.id');
       
         # Validando o registro obtido
-        if(!(count($row) == 1)) {
-            throw new \Exception('Notas e Frequências inválidas!');
+        if(count($row) == 1) {
+            # Recuperando o model de alunoNota e deletando em cascata
+            $alunoNota = $this->repository->find($row[0]);
+            $alunoNota->delete();
         }
-
-        # Recuperando o model de alunoNota e deletando em cascata
-        $alunoNota = $this->repository->find($row[0]);
-        $alunoNota->delete();
 
         #retorno
         return true;

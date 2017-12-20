@@ -727,7 +727,7 @@ class MatriculaAlunoController extends Controller
                 ->lists('fac_horarios.id');
 
             # Validando os horários
-            if (!count($horarios) > 0) {
+            if (count($horarios) == 0) {
                 throw new \Exception('Horários não encontrados');
             }
 
