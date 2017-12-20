@@ -653,6 +653,7 @@ class TurmaService
         $idTurma = $data['idTurma'];
         $idDia   = $data['idDia'];
         $idHora  = $data['idHora'];
+        $idTurno  = $data['idTurno'];
 
         # Recuperando a turma e a disciplina
         $objTurma   = $this->repository->find($idTurma);
@@ -660,9 +661,11 @@ class TurmaService
             ->select(['fac_turmas_disciplinas.disciplina_id', 'fac_horarios.id'])
             ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
             ->where('fac_turmas.id', $idTurma)
             ->where('fac_horarios.dia_id', $idDia)
             ->where('fac_horarios.hora_id', $idHora)
+            ->where('fac_turnos.id', $idTurno)
             ->get();
 
 

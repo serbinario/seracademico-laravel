@@ -46,12 +46,14 @@ class HorarioTurmaController extends Controller
             ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
             ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
             ->join('fac_turmas', 'fac_turmas.id', '=', 'fac_turmas_disciplinas.turma_id')
+            ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_turmas.turno_id')
             ->where('fac_turmas.id', $idTurma)
             ->groupBy('fac_horas.id')
             ->orderBy('fac_horas.hora_inicial')
             ->select([
                 'fac_horarios.id',
                 'fac_horas.id as hora',
+                'fac_turnos.id as idTurno',
                 \DB::raw('DATE_FORMAT(fac_horas.hora_inicial, "%k:%i") as codigoHora'),
                 'fac_turmas.id as idTurma',
                 'fac_disciplinas.id as idDisciplinaHorario'
@@ -239,12 +241,6 @@ class HorarioTurmaController extends Controller
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
-
-            #tratando as rules
-            //$this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->turmaService->updateHorario($data, $id);
