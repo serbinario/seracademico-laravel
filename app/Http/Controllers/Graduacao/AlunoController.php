@@ -108,6 +108,7 @@ class AlunoController extends Controller
                     );
                 })
                 ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
+                ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_alunos.turno_id')
                 ->select([
                     'fac_alunos.id',
                     'pessoas.nome',
@@ -115,6 +116,7 @@ class AlunoController extends Controller
                          SUBSTR(pessoas.cpf,4,3), ".", SUBSTR(pessoas.cpf,7,3), "-", SUBSTR(pessoas.cpf,10,2)), pessoas.cpf) AS cpf'),
                     'fac_alunos.matricula',
                     'pessoas.celular',
+                    'fac_turnos.nome as turno',
                     'fac_semestres.id as idSemestre',
                     'fac_semestres.nome as semestre',
                     'fac_alunos_semestres.periodo',
