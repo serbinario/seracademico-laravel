@@ -192,6 +192,7 @@ class AlunoFinanceiroController extends Controller
     }
 
     /**
+     * @param $debito
      * @param $aluno
      */
     private function updateSituacaoPeloDebito($debito, $aluno)
