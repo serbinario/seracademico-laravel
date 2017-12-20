@@ -9,7 +9,8 @@ $(document).on('click', '#btnRemoverHorario', function (event) {
     var data = {
         'idHora' : idHora,
         'idDia' : idDia,
-        'idTurma' : idTurma
+        'idTurma' : idTurma,
+        'idTurno': idTurno
     };
 
     // fazendo a consulta ajax

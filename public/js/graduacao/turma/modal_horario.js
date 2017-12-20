@@ -50,10 +50,12 @@ $(document).on('click', '#horario-grid tbody tr td', function () {
 
         // Recuperando os valores úteis
         idHora = tableHorario.row($(this).parent().index()).data().hora;
+        idTurno = tableHorario.row($(this).parents('tr')).data().idTurno
         idDia  = $(this).index();
     } else {
         idDisciplinaHorario = 0;
         idHora = undefined;
         idDia  = undefined;
+        idTurno  = undefined;
     }
 });
