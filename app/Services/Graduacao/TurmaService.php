@@ -667,7 +667,7 @@ class TurmaService
             ->where('fac_horarios.hora_id', $idHora)
             ->where('fac_turnos.id', $idTurno)
             ->get();
-        dd($resultId);
+        var_dump($resultId);exit;
 
         # Verificando se foi encontrada uma turma e disciplina
         if(!$objTurma && count($resultId) == 0) {
