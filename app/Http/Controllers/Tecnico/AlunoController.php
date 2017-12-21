@@ -109,6 +109,12 @@ class AlunoController extends Controller
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                ->leftJoin('fac_cursos as curso1', 'curso1.id', '=', 'pos_alunos.opcao_curso_um')
+                ->leftJoin('fac_cursos as curso2', 'curso2.id', '=', 'pos_alunos.opcao_curso_dois')
+                ->leftJoin('fac_cursos as curso3', 'curso3.id', '=', 'pos_alunos.opcao_curso_tres')
+                ->leftJoin('fac_turnos as turno1', 'turno1.id', '=', 'pos_alunos.opcao_turno_um')
+                ->leftJoin('fac_turnos as turno2', 'turno2.id', '=', 'pos_alunos.opcao_turno_dois')
+                ->leftJoin('fac_turnos as turno3', 'turno3.id', '=', 'pos_alunos.opcao_turno_tres')
                 ->join('pos_tipos_alunos', 'pos_tipos_alunos.id', '=', 'pos_alunos.tipo_aluno_id')
                 ->where('pos_tipos_alunos.id', 3)
                 ->select([
@@ -124,7 +130,13 @@ class AlunoController extends Controller
                     'fac_situacao.nome as nomeSituacao',
                     'fac_cursos.codigo as codigoCurso',
                     'fac_cursos.nome as nomeCurso',
-                    'fac_turmas.codigo as codigoTurma'
+                    'fac_turmas.codigo as codigoTurma',
+                    'curso1.nome as nomeCurso1',
+                    'curso2.nome as nomeCurso2',
+                    'curso3.nome as nomeCurso3',
+                    'turno1.nome as nomeTurno1',
+                    'turno2.nome as nomeTurno2',
+                    'turno3.nome as nomeTurno3',
                 ]);
 
             #Editando a grid
@@ -165,11 +177,17 @@ class AlunoController extends Controller
                 ->addColumn('action', function ($aluno) {
                     $html = "";
 
+                    $alunos = $this->service->find($aluno->id);
+
                     $html .= '<div class="fixed-action-btn horizontal">';
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
-                    $html .=        '<li><a class="btn-floating" href="delete/' . $aluno->id . '" title="Excluir aluno"><i class="material-icons">delete</i></a></li>';
+
+                    //if(count($alunos->curriculos()) <= 0) {
+                        $html .=        '<li><a class="btn-floating" href="delete/' . $aluno->id . '" title="Excluir aluno"><i class="material-icons">delete</i></a></li>';
+                   // }
+
                     $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Financeiro do Aluno" id="btnModalFinanceiro"><i class="material-icons">attach_money</i></a></li>';

@@ -242,7 +242,7 @@ class AlunoService
         $aluno = $this->repository->find($id);
 
         \DB::table('tec_documentos')->where('aluno_id', $id)->delete();
-        \DB::table('fin_debitos')->where('debitante_id', $id)->delete();
+        \DB::table('pos_agendamento_alunos')->where('aluno_id', $id)->delete();
 
         // Pegando todos os débitos do aluno
         $debitos = \DB::table('fin_debitos')->where('debitante_id', $id)->get();
@@ -254,6 +254,33 @@ class AlunoService
 
         // Excluindo os débitos
         \DB::table('fin_debitos')->where('debitante_id', $id)->delete();
+
+        #############################################
+        $curso = \DB::table('pos_alunos_cursos')->where('aluno_id', $id)->first();
+
+        if($curso) {
+
+            \DB::table('pos_alunos_situacoes')->where('pos_aluno_curso_id', $curso->id)->delete();
+
+            $turma = \DB::table('pos_alunos_turmas')->where('pos_aluno_curso_id', $curso->id)->first();
+
+            if($turma) {
+
+                $nota = \DB::table('pos_alunos_notas')->where('pos_aluno_turma_id', $turma->id)->first();
+
+                if($nota) {
+                    \DB::table('pos_alunos_frequencias')->where('pos_aluno_nota_id', $nota->id)->delete();
+                    \DB::table('pos_alunos_notas')->where('pos_aluno_turma_id', $turma->id)->delete();
+                }
+
+            }
+
+            \DB::table('pos_alunos_turmas')->where('pos_aluno_curso_id', $curso->id)->delete();
+            \DB::table('pos_alunos_cursos')->where('aluno_id', $id)->delete();
+
+        }
+        #############################################
+
 
         #deletando o vstibulando
         $result = $this->repository->delete($id);
