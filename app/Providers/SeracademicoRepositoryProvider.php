@@ -968,5 +968,27 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Tecnico\InscricaoRepository::class,
             \Seracademico\Repositories\Tecnico\InscricaoRepositoryEloquent::class
         );
+
+        // Emais
+
+        $this->app->bind(
+            \Seracademico\Repositories\Emais\AlunoRepository::class,
+            \Seracademico\Repositories\Emais\AlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Emais\ModalidadeAlunoRepository::class,
+            \Seracademico\Repositories\Emais\ModalidadeAlunoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Emais\ModalidadeRepository::class,
+            \Seracademico\Repositories\Emais\ModalidadeRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Emais\MateriaRepository::class,
+            \Seracademico\Repositories\Emais\MateriaRepositoryEloquent::class
+        );
     }
 }

@@ -232,6 +232,53 @@ class AlunoService
     }
 
     /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+        #deletando o vstibulando
+        $aluno = $this->repository->find($id);
+
+        \DB::table('tec_documentos')->where('aluno_id', $id)->delete();
+
+        // Pegando todos os débitos do aluno
+        $debitos = \DB::table('fin_debitos')->where('debitante_id', $id)->get();
+
+        // excluindo os boletos dos débitos
+        foreach ($debitos as $debito) {
+            \DB::table('fin_boletos')->where('debito_id', $debito->id)->delete();
+        }
+
+        // Excluindo os débitos
+        \DB::table('fin_debitos')->where('debitante_id', $id)->delete();
+
+        #deletando o vstibulando
+        $result = $this->repository->delete($id);
+
+        $pessoa = \DB::table('pessoas')->where('id', $aluno->pessoa_id)->select()->first();
+
+        \DB::table('pessoas')->where('id', $pessoa->id)->delete();
+        \DB::table('enderecos')->where('id', $pessoa->enderecos_id)->delete();
+
+        // Deletando o registro de contato do vestibulando
+        if ($aluno->contato_id) {
+            $contato = \DB::table('pessoas')->where('id', $aluno->contato_id)->select()->first();
+
+            \DB::table('pessoas')->where('id', $contato->id)->delete();
+        }
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
+        }
+
+        #retorno
+        return true;
+    }
+
+    /**
      * Método responsável por gerenciar os cadastros e edições das
      * entidades de pessoa e endereço do aluno.
      *

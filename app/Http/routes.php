@@ -340,6 +340,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
         });
 
+
+        // rotas do Emais
+        Route::group(['prefix' => 'emais', 'as' => 'emais.'], function () {
+
+            Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Emais\AlunoController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Emais\AlunoController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Emais\AlunoController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Emais\AlunoController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Emais\AlunoController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Emais\AlunoController@update']);
+            });
+
+        });
+
         //Rotas de Doutorado
         Route::group(['prefix' => 'mestrado', 'as' => 'mestrado.'], function () {
 
