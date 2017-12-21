@@ -242,6 +242,7 @@ class AlunoService
         $aluno = $this->repository->find($id);
 
         \DB::table('tec_documentos')->where('aluno_id', $id)->delete();
+        \DB::table('pos_agendamento_alunos')->where('aluno_id', $id)->delete();
 
         // Pegando todos os débitos do aluno
         $debitos = \DB::table('fin_debitos')->where('debitante_id', $id)->get();
