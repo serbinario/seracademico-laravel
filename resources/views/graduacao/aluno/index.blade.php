@@ -109,6 +109,7 @@
                                 <th>Período</th>
                                 <th>Curso</th>
                                 <th>Currículo</th>
+                                <th>Turno</th>
                                 <th>Situação</th>
                                 <th>Acão</th>
                             </tr>
@@ -123,6 +124,7 @@
                                 <th>Período</th>
                                 <th>Curso</th>
                                 <th>Currículo</th>
+                                <th>Turno</th>
                                 <th>Situação</th>
                                 <th style="width: 5%">Acão</th>
                             </tr>
@@ -242,6 +244,7 @@
                 {data: 'periodo', name: 'fac_alunos_semestres.periodo'},
                 {data: 'codigoCurso', name: 'fac_cursos.codigo'},
                 {data: 'codigoCurriculo', name: 'fac_curriculos.codigo'},
+                {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'nomeSituacao', name: 'fac_situacao.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
