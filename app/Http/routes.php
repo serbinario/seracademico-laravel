@@ -353,6 +353,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Emais\AlunoController@update']);
             });
 
+            Route::group(['prefix' => 'modalidade', 'as' => 'modalidade.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Emais\ModalidadeController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Emais\ModalidadeController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Emais\ModalidadeController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Emais\ModalidadeController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Emais\ModalidadeController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Emais\ModalidadeController@update']);
+            });
+
+            Route::group(['prefix' => 'materia', 'as' => 'materia.'], function () {
+                Route::get('index', ['as' => 'index', 'uses' => 'Emais\MateriaController@index']);
+                Route::get('grid', ['as' => 'grid', 'uses' => 'Emais\MateriaController@grid']);
+                Route::get('create', ['as' => 'create', 'uses' => 'Emais\MateriaController@create']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Emais\MateriaController@store']);
+                Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Emais\MateriaController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Emais\MateriaController@update']);
+            });
+
         });
 
         //Rotas de Doutorado

@@ -14,5 +14,6 @@ class Materia extends Model implements Transformable
 
     protected $fillable = [
         'nome',
+        'valor'
     ];
 }
