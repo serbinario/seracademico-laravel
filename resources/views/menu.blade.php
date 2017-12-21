@@ -223,6 +223,21 @@
                 </li>
                 @endrole
 
+                @role('tecnico|admin')
+                <li>
+                    <a href="javascript:void(0)"><i class="material-icons">school</i> <span class="nav-label">Emais</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="javascript:void(0)"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ route('seracademico.emais.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                @endrole
+
                 @role('financeiro|admin')
                 <li><a href="javascript:void(0)"><i class="material-icons">card_travel</i> Financeiro <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level collapse">

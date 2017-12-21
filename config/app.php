@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -78,7 +79,9 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    //'key' => env('APP_KEY', 'SomeRandomString'),
+
+    'key' =>'x1qieCI0fdY0Jb7tIQcJ88pQUQAQeXJt',
 
     //'cipher' => MCRYPT_RIJNDAEL_128,//'AES-256-CBC',
 

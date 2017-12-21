@@ -169,6 +169,7 @@ class AlunoController extends Controller
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                     $html .=    '<ul>';
                     $html .=        '<li><a class="btn-floating" href="edit/' . $aluno->id . '" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
+                    $html .=        '<li><a class="btn-floating" href="delete/' . $aluno->id . '" title="Excluir aluno"><i class="material-icons">delete</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Histório do Aluno" id="link_modal_curso_turma"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Currículo do Aluno" id="btnModalCurriculo"><i class="material-icons">chrome_reader_mode</i></a></li>';
                     $html .=        '<li><a class="btn-floating" title="Financeiro do Aluno" id="btnModalFinanceiro"><i class="material-icons">attach_money</i></a></li>';
@@ -394,6 +395,23 @@ class AlunoController extends Controller
             return response($model->path_image) ->header('Content-Type', 'image/jpeg');
         } else {
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->service->delete($id);
+
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
+        } catch (\Throwable $e) { dd($e);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 }
