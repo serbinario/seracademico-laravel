@@ -232,6 +232,8 @@
                             <a href="javascript:void(0)"><i class="material-icons">style</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.emais.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                <li><a href="{{ route('seracademico.emais.modalidade.index') }}"><i class="fa fa-users"></i>Modalidades</a></li>
+                                <li><a href="{{ route('seracademico.emais.materia.index') }}"><i class="fa fa-users"></i>Matérias</a></li>
                             </ul>
                         </li>
                     </ul>

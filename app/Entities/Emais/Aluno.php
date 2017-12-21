@@ -32,8 +32,8 @@ class Aluno extends Model implements Transformable
     }
 
     /**
- * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
- */
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
     public function modalidades()
     {
         return $this->belongsToMany(Modalidade::class, 'pre_alunos_modalidades', 'pre_aluno_id', "pre_modalidade_id")
