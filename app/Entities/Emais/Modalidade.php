@@ -14,6 +14,7 @@ class Modalidade extends Model implements Transformable
 
     protected $fillable = [
         'nome',
+        'valor'
     ];
 
     public function modalidades()

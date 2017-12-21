@@ -6,58 +6,41 @@ use Illuminate\Http\Request;
 
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
-use Seracademico\Repositories\Emais\ModalidadeRepository;
-use Seracademico\Repositories\Graduacao\MateriaRepository;
-use Seracademico\Services\Emais\AlunoService;
+use Seracademico\Repositories\Emais\MateriaRepository;
+use Seracademico\Services\Emais\MateriaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
-use Seracademico\Validators\Emais\AlunoValidator;
+use Seracademico\Validators\Emais\MateriaValidator;
 
-class AlunoController extends Controller
+class MateriaController extends Controller
 {
     /**
-    * @var AlunoService
+    * @var MateriaService
     */
     private $service;
 
     /**
-    * @var AlunoValidator
+    * @var MateriaValidator
     */
     private $validator;
 
-    /**
-     * @var ModalidadeRepository
-     */
-    private $repositoryModalidade;
 
     /**
     * @var array
     */
     private $loadFields = [
-        'Emais\\Turno',
-        'Emais\\Modalidade',
-        'Sexo',
-        'Estado'
     ];
 
     /**
-     * AlunoController constructor.
-     * @param AlunoService $service
-     * @param AlunoValidator $validator
-     * @param ModalidadeRepository $modalidadeRepository
-     * @param MateriaRepository $materiaRepository
-     */
-    public function __construct(
-        AlunoService $service,
-        AlunoValidator $validator,
-        ModalidadeRepository $modalidadeRepository,
-        MateriaRepository $materiaRepository)
+    * @param MateriaService $service
+    * @param MateriaValidator $validator
+    */
+    public function __construct(MateriaService $service,
+                                MateriaValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
-        $this->repositoryModalidade =  $modalidadeRepository;
-        $this->materiaRepository =  $materiaRepository;
     }
 
     /**
@@ -65,7 +48,7 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        return view('emais.index');
+        return view('emais.materia.index');
     }
 
     /**
@@ -74,15 +57,11 @@ class AlunoController extends Controller
     public function grid()
     {
         #Criando a consulta
-        $rows = \DB::table('pre_alunos')
-            ->join('pessoas', 'pessoas.id', '=', 'pre_alunos.pessoa_id')
-            ->join('pre_turnos', 'pre_turnos.id', '=', 'pre_alunos.turno_id')
+        $rows = \DB::table('pre_materias')
             ->select([
-                'pre_alunos.id',
-                'pessoas.nome',
-                'pre_turnos.nome as turno',
-                'pre_alunos.tel_celular',
-                \DB::raw('DATE_FORMAT(pre_alunos.created_at, "%d/%m/%Y") as data_criacao'),
+                'id',
+                'nome',
+                'valor',
             ]);
 
         #Editando a grid
@@ -95,7 +74,6 @@ class AlunoController extends Controller
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Inscrição"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating" title="Financeiro do Aluno" id="btnModalFinanceiro"><i class="material-icons">attach_money</i></a></li>
                         ';
 
             # Verificando a possibilida de deleção
@@ -118,11 +96,9 @@ class AlunoController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
-        $modalidades = $this->repositoryModalidade->all();
-        $materias = $this->materiaRepository->all();
 
         #Retorno para view
-        return view('emais.create', compact('loadFields', 'modalidades', 'materias'));
+        return view('emais.materia.create', compact('loadFields'));
     }
 
     /**
@@ -136,7 +112,7 @@ class AlunoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+         //   $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
             $this->service->store($data);
@@ -159,16 +135,13 @@ class AlunoController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-            //dd($model['modalidades'][0]);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
-            $modalidades = $this->repositoryModalidade->all();
-            $materias = $this->materiaRepository->all();
 
             #retorno para view
-            return view('emais.edit', compact('model', 'loadFields', 'modalidades', 'materias'));
-        } catch (\Throwable $e) {dd($e);
+            return view('emais.materia.edit', compact('model'));
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -202,10 +175,10 @@ class AlunoController extends Controller
             $data = $request->all();
 
             #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
+           // $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
 
             #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+           // $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             #Executando a ação
             $this->service->update($data, $id);

@@ -5,6 +5,7 @@ namespace Seracademico\Entities\Emais;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Seracademico\Entities\Financeiro\Debito;
 use Seracademico\Entities\Pessoa;
 use Seracademico\Uteis\SerbinarioDateFormat;
 
@@ -31,8 +32,8 @@ class Aluno extends Model implements Transformable
     }
 
     /**
- * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
- */
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
     public function modalidades()
     {
         return $this->belongsToMany(Modalidade::class, 'pre_alunos_modalidades', 'pre_aluno_id', "pre_modalidade_id")
@@ -46,5 +47,13 @@ class Aluno extends Model implements Transformable
     {
         return $this->belongsToMany(Materia::class, 'pre_alunos_materias', 'pre_aluno_id', "pre_materia_id")
             ->withPivot([ 'pre_aluno_id', 'pre_materia_id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function debitos()
+    {
+        return $this->morphMany(Debito::class, 'debitante');
     }
 }

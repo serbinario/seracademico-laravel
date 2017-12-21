@@ -18,6 +18,20 @@
         table.dataTable tbody th, table.dataTable tbody td {
             padding: 2px 10px;
         }
+
+        .carregamento{
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 )
+            url("{{ asset('/img/pre-loader/gears_200x200.gif') }}")
+            50% 50%
+            no-repeat;
+        }
     </style>
 @stop
 
@@ -85,9 +99,22 @@
         </div>
     </div>
 
+    <div class="carregamento"></div>
 @stop
 
+@include('emais.financeiro.modal_debitos')
+@include('emais.financeiro.modal_create_debito')
+@include('emais.financeiro.modal_edit_debito')
+@include('emais.financeiro.modal_info_debito')
+
 @section('javascript')
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/modal_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/modal_create_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/modal_edit_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/modal_info_debito.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/emais/aluno/financeiro/valida_campos_debitos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         var table = $('#aluno-grid').DataTable({
             processing: true,
@@ -101,6 +128,18 @@
                 /*{data: 'ativo', name: 'ativo'},*/
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        // Evento para abrir o modal do financeiro
+        $(document).on("click", "#btnModalFinanceiro", function () {
+            // Recuperando os dados do aluno selecionado
+            var rowTable = $(this).parents('tr');
+            idAluno = table.row(rowTable).data().id;
+            var nomeAluno   = table.row(rowTable).data().nome;
+
+            $('#finNomeAluno').text(nomeAluno);
+
+            runFinanceiro(idAluno);
         });
     </script>
 @stop
