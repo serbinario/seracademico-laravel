@@ -42,13 +42,17 @@ class AlunoController extends Controller
     ];
 
     /**
-    * @param AlunoService $service
-    * @param AlunoValidator $validator
-    */
-    public function __construct(AlunoService $service,
-                                AlunoValidator $validator,
-                                ModalidadeRepository $modalidadeRepository,
-                                MateriaRepository $materiaRepository)
+     * AlunoController constructor.
+     * @param AlunoService $service
+     * @param AlunoValidator $validator
+     * @param ModalidadeRepository $modalidadeRepository
+     * @param MateriaRepository $materiaRepository
+     */
+    public function __construct(
+        AlunoService $service,
+        AlunoValidator $validator,
+        ModalidadeRepository $modalidadeRepository,
+        MateriaRepository $materiaRepository)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
@@ -91,7 +95,7 @@ class AlunoController extends Controller
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                         <ul>
                             <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Inscrição"><i class="material-icons">edit</i></a></li>
-                            <li><a class="btn-floating green" href="#" id="btnAdicionarCursos" title="Adicionar Cursos ao inscrição"><i class="material-icons">add_to_photos</i></a></li>
+                            <li><a class="btn-floating" title="Financeiro do Aluno" id="btnModalFinanceiro"><i class="material-icons">attach_money</i></a></li>
                         ';
 
             # Verificando a possibilida de deleção

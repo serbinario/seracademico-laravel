@@ -351,6 +351,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::post('store', ['as' => 'store', 'uses' => 'Emais\AlunoController@store']);
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Emais\AlunoController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Emais\AlunoController@update']);
+
+                # Rotas para o financeiro do aluno do emais
+                Route::group(['prefix' => 'financeiro', 'as' => 'financeiro.'], function () {
+                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Emais\AlunoFinanceiroController@getLoadFields']);
+                    Route::get('gridDebitos/{id}', ['as' => 'gridDebitos', 'uses' => 'Emais\AlunoFinanceiroController@gridDebitos']);
+                    Route::post('storeDebito/{id}', ['as' => 'storeDebito', 'uses' => 'Emais\AlunoFinanceiroController@storeDebito']);
+                    Route::get('getDebito/{idDebito}', ['as' => 'getDebito', 'uses' => 'Emais\AlunoFinanceiroController@getDebito']);
+                    Route::get('editDebito/{idDebito}', ['as' => 'editDebito', 'uses' => 'Emais\AlunoFinanceiroController@editDebito']);
+                    Route::post('updateDebito/{idDebito}', ['as' => 'updateDebito', 'uses' => 'Emais\AlunoFinanceiroController@updateDebito']);
+                    Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'Emais\AlunoFinanceiroController@gerarBoleto']);
+                    Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Emais\AlunoFinanceiroController@infoDebito']);
+                    Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Emais\AlunoFinanceiroController@gridCarnes']);
+                });
             });
 
         });
