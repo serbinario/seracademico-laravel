@@ -76,11 +76,9 @@ class AlunoController extends Controller
         #Criando a consulta
         $rows = \DB::table('pre_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'pre_alunos.pessoa_id')
-            ->join('pre_turnos', 'pre_turnos.id', '=', 'pre_alunos.turno_id')
             ->select([
                 'pre_alunos.id',
                 'pessoas.nome',
-                'pre_turnos.nome as turno',
                 'pre_alunos.tel_celular',
                 \DB::raw('DATE_FORMAT(pre_alunos.created_at, "%d/%m/%Y") as data_criacao'),
             ]);

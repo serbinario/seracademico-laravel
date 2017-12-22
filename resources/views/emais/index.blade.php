@@ -75,7 +75,6 @@
                             <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Turno</th>
                                 <th>Telefone celular</th>
                                 <th>Data criação</th>
                                 <th style="width: 5%;">Acão</th>
@@ -85,7 +84,6 @@
                             <tfoot>
                             <tr>
                                 <th>Nome</th>
-                                <th>Turno</th>
                                 <th>Telefone celular</th>
                                 <th>Data criação</th>
                                 {{--<th>Situação</th>--}}
@@ -122,7 +120,6 @@
             ajax: "{!! route('seracademico.emais.aluno.grid') !!}",
             columns: [
                 {data: 'nome', name: 'pessoas.nome'},
-                {data: 'turno', name: 'pre_turnos.nome'},
                 {data: 'tel_celular', name: 'pre_alunos.tel_celular'},
                 {data: 'data_criacao', name: 'pre_alunos.created_at'},
                 /*{data: 'ativo', name: 'ativo'},*/
