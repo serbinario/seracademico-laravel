@@ -35,7 +35,6 @@ class AlunoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Emais\\Turno',
         'Emais\\Modalidade',
         'Sexo',
         'Estado'
