@@ -78,7 +78,7 @@ class AlunoController extends Controller
             ->select([
                 'pre_alunos.id',
                 'pessoas.nome',
-                'pre_turnos.nome as turno',
+              //  'pre_turnos.nome as turno',
                 'pre_alunos.tel_celular',
                 \DB::raw('DATE_FORMAT(pre_alunos.created_at, "%d/%m/%Y") as data_criacao'),
             ]);
