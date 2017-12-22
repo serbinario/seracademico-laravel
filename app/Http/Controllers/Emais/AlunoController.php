@@ -35,7 +35,6 @@ class AlunoController extends Controller
     * @var array
     */
     private $loadFields = [
-        'Emais\\Turno',
         'Emais\\Modalidade',
         'Sexo',
         'Estado'
@@ -76,7 +75,6 @@ class AlunoController extends Controller
         #Criando a consulta
         $rows = \DB::table('pre_alunos')
             ->join('pessoas', 'pessoas.id', '=', 'pre_alunos.pessoa_id')
-            ->leftJoin('pre_turnos', 'pre_turnos.id', '=', 'pre_alunos.turno_id')
             ->select([
                 'pre_alunos.id',
                 'pessoas.nome',
