@@ -1486,7 +1486,7 @@
                     }
 
                     // Carregando a sede
-                    @if(isset($aluno->curriculos->last()->pivot))
+                    @if(isset($aluno) && isset($aluno->curriculos->last()->pivot))
                         @if(isset($aluno->curriculos) && isset($aluno->curriculos->last()->pivot->turmas->last()->sede->id))
                             $('#sede_id option').remove();
                             $('#sede_id').append('<option value="{{$aluno->curriculos->last()->pivot->turmas->last()->sede->id ?? ''}}">'+
