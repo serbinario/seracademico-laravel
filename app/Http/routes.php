@@ -1949,9 +1949,23 @@ Route::group(['prefix' => 'tecnico/financeiro', 'as' => 'aluno.financeiro.'], fu
         'as' => 'storeDebitoInscricaoByPortal',
         'uses' => 'Tecnico\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
     ]);
+
     Route::get('getBoletoByPortal', [
         'as' => 'getBoletoByPortal',
         'uses' => 'Tecnico\AlunoFinanceiroController@getBoletoByPortal'
+    ]);
+});
+
+# Rotas de acesso para operações financeiras do portal
+Route::group(['prefix' => 'emais/financeiro', 'as' => 'aluno.financeiro.'], function () {
+    Route::post('storeDebitoInscricaoByPortal', [
+        'as' => 'storeDebitoInscricaoByPortal',
+        'uses' => 'Emais\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
+    ]);
+
+    Route::get('getBoletoByPortal', [
+        'as' => 'getBoletoByPortal',
+        'uses' => 'Emais\AlunoFinanceiroController@getBoletoByPortal'
     ]);
 });
 

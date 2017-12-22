@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Seracademico\Entities\Emais\Aluno;
 use Seracademico\Repositories\Emais\AlunoRepository;
 use Seracademico\Repositories\EnderecoRepository;
+use Seracademico\Repositories\Financeiro\ContaBancariaRepository;
+use Seracademico\Repositories\Financeiro\TaxaRepository;
 use Seracademico\Repositories\PessoaRepository;
 use Seracademico\Services\TraitService;
 
@@ -29,18 +31,35 @@ class AlunoService
     private $pessoaRepository;
 
     /**
+     * @var TaxaRepository
+     */
+    private $taxaRepository;
+
+    /**
+     * @var ContaBancariaRepository
+     */
+    private $contaBancariaRepository;
+
+    /**
      * AlunoService constructor.
      * @param AlunoRepository $repository
      * @param EnderecoRepository $enderecoRepository
      * @param PessoaRepository $pessoaRepository
+     * @param TaxaRepository $taxaRepository
+     * @param ContaBancariaRepository $contaBancariaRepository
      */
-    public function __construct(AlunoRepository $repository,
-                                EnderecoRepository $enderecoRepository,
-                                PessoaRepository $pessoaRepository)
+    public function __construct(
+        AlunoRepository $repository,
+        EnderecoRepository $enderecoRepository,
+        PessoaRepository $pessoaRepository,
+        TaxaRepository $taxaRepository,
+        ContaBancariaRepository $contaBancariaRepository)
     {
         $this->repository         = $repository;
         $this->enderecoRepository = $enderecoRepository;
         $this->pessoaRepository   = $pessoaRepository;
+        $this->taxaRepository = $taxaRepository;
+        $this->contaBancariaRepository = $contaBancariaRepository;
     }
 
     /**
@@ -264,11 +283,39 @@ class AlunoService
      * @param Aluno $aluno
      * @param string $addDiasVencimento
      * @return mixed
+     * @throws \Exception
      */
     public function formatDebitoInscricao(Aluno $aluno, $addDiasVencimento = "")
     {
-        $inscricao = $aluno->inscricao;
-        $taxaInscricao = $inscricao->taxa;
+        $taxas = $this->taxaRepository->findWhere(['tipo_nivel_sistema_id' => 6]);
+
+        if (count($taxas) == 0) {
+            throw new \Exception('Taxa do inscrição do e+ não foi encontrada');
+        }
+
+        $modalidades = $aluno->modalidades;
+        $valorDebito = 0;
+
+        $modalidadeEnem = $modalidades->filter(function($item) { return $item->id == 1;})->first();
+        $modalidadeIsoladas = $modalidades->filter(function($item) { return $item->id == 2;})->first();
+
+        if ($modalidadeEnem) {
+           $valorDebito += $modalidadeEnem->valor;
+        }
+
+        if ($modalidadeIsoladas) {
+            $materias = $aluno->materias;
+
+            if (count($materias) == 0) {
+                throw new \Exception('Nenhuma matéria de isoloada foi encontrada');
+            }
+
+            foreach ($materias as $materia) {
+                $valorDebito += $materia->valor;
+            }
+        }
+
+        $taxaInscricao = $taxas->last();
         $contaBancaria = $this->contaBancariaRepository->getContaBancariaPadrao();
 
         $now = new Carbon();
@@ -283,7 +330,7 @@ class AlunoService
         $dados['mes_referencia'] = $now->format('m');
         $dados['ano_referencia'] = $now->format('Y');
         $dados['taxa_id'] = $taxaInscricao->id;
-        $dados['valor_debito'] = $taxaInscricao->valor;
+        $dados['valor_debito'] = $valorDebito;
         $dados['conta_bancaria_id'] = $contaBancaria->id;
         $dados['pago'] = 0;
 

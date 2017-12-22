@@ -16,9 +16,4 @@ class Modalidade extends Model implements Transformable
         'nome',
         'valor'
     ];
-
-    public function modalidades()
-    {
-        return $this->hasMany(ModalidadeAluno::class, 'pre_modalidade_id', 'id');
-    }
 }
