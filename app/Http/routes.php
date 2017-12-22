@@ -1949,6 +1949,7 @@ Route::group(['prefix' => 'tecnico/financeiro', 'as' => 'aluno.financeiro.'], fu
         'as' => 'storeDebitoInscricaoByPortal',
         'uses' => 'Tecnico\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
     ]);
+
     Route::get('getBoletoByPortal', [
         'as' => 'getBoletoByPortal',
         'uses' => 'Tecnico\AlunoFinanceiroController@getBoletoByPortal'
@@ -1961,6 +1962,7 @@ Route::group(['prefix' => 'emais/financeiro', 'as' => 'aluno.financeiro.'], func
         'as' => 'storeDebitoInscricaoByPortal',
         'uses' => 'Emais\AlunoFinanceiroController@storeDebitoInscricaoByPortal'
     ]);
+
     Route::get('getBoletoByPortal', [
         'as' => 'getBoletoByPortal',
         'uses' => 'Emais\AlunoFinanceiroController@getBoletoByPortal'
