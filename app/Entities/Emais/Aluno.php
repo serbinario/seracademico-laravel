@@ -17,7 +17,6 @@ class Aluno extends Model implements Transformable
 
     protected $fillable = [
         'pessoa_id',
-        'turno_id',
         'tel_res',
         'tel_celular',
         'tel_outro',

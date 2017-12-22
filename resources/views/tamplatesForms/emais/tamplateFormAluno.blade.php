@@ -76,12 +76,6 @@
                             {!! Form::text('pessoa[email]', Session::getOldInput('pessoa[email]'), array('class' => 'form-control')) !!}
                         </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <div class="fg-line">
-                            {!! Form::label('turno_id', 'Turno ') !!}
-                            {!! Form::select('turno_id', $loadFields['emais\\turno'], Session::getOldInput('turno_id'), array('class' => 'form-control')) !!}
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
