@@ -240,54 +240,91 @@ class AlunoFinanceiroController extends Controller
      * @param $idAluno
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMensalidade(Request $request, $idAluno)
+    public function getDadosDebito(Request $request, $idAluno)
     {
         try {
             $taxa = $this->taxaRepository->find($request->get('idTaxa'));
-
-            if ($taxa->tipoTaxa->nome !== 'Mensalidade') {
-                throw new \Exception('Taxa infornada não é uma mensalidade');
-            }
-
             $retorno = ['valor'  => 0, 'taxa' => $taxa];
-            $semestreAtivo =  ParametroMatriculaFacade::getSemestreVigente();
-            $aluno = $this->alunoRepository->find($idAluno);
-            $cursoAtivo = $aluno->curriculos()->get()->last()->curso;
-            $precoAtivo = $cursoAtivo->precosCursos()->get()
-                ->filter(function ($preco) use ($semestreAtivo, $aluno) {
-                    return $preco->turno_id == $aluno->turno_id
-                        && $preco->semestre_id == $semestreAtivo->id;
-            })->first();
 
-            $disciplinas = \DB::table('fac_alunos')
-                ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-                ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
-                ->join('fac_horarios', 'fac_horarios.id', '=', 'fac_alunos_semestres_horarios.horario_id')
-                ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
-                ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
-                ->where('fac_alunos.id', $aluno->id)
-                ->where('fac_alunos_semestres.semestre_id', $semestreAtivo->id)
-                ->select([
-                    'fac_disciplinas.qtd_credito'
-                ])->get();
-
-
-            if ($precoAtivo->tipo->nome == 'Crédito') {
-                $configuracaoAtiva = $precoAtivo->precosDisciplaCurso()->get()->last();
-                $valorCredito = $configuracaoAtiva->preco;
-                $quantidadeCredito = $configuracaoAtiva->qtd_disciplinas;
-                $qtdCreditoDisciplinas = 0;
-
-                foreach ($disciplinas as $disciplina) {
-                    $qtdCreditoDisciplinas += $disciplina->qtd_credito;
-                }
-
-                $retorno['valor'] = (float) (((int) $qtdCreditoDisciplinas / $quantidadeCredito) * $valorCredito);
-            }
+            $this->processarMensalidade($retorno, $taxa, $idAluno);
+            $this->processarBeneficios($retorno, $taxa);
 
             return response()->json(['success' => true, 'dados' => $retorno]);
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
+    }
+
+    private function processarMensalidade(&$retorno, $taxa, $idAluno)
+    {
+        if ($taxa->tipoTaxa->nome !== 'Mensalidade') {
+            return false;
+        }
+
+        $semestreAtivo =  ParametroMatriculaFacade::getSemestreVigente();
+        $aluno = $this->alunoRepository->find($idAluno);
+        $cursoAtivo = $aluno->curriculos()->get()->last()->curso;
+
+        $precoAtivo = $cursoAtivo->precosCursos()->get()
+            ->filter(function ($preco) use ($semestreAtivo, $aluno) {
+                return $preco->turno_id == $aluno->turno_id
+                    && $preco->semestre_id == $semestreAtivo->id;
+            })
+            ->first();
+
+        $disciplinas = \DB::table('fac_alunos')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_alunos_semestres_horarios', 'fac_alunos_semestres_horarios.aluno_semestre_id', '=', 'fac_alunos_semestres.id')
+            ->join('fac_horarios', 'fac_horarios.id', '=', 'fac_alunos_semestres_horarios.horario_id')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
+            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_turmas_disciplinas.disciplina_id')
+            ->where('fac_alunos.id', $aluno->id)
+            ->where('fac_alunos_semestres.semestre_id', $semestreAtivo->id)
+            ->select([
+                'fac_disciplinas.qtd_credito'
+            ])->get();
+
+        if (isset($precoAtivo) && $precoAtivo->tipo->nome == 'Crédito') {
+            $configuracaoAtiva = $precoAtivo->precosDisciplaCurso()->get()->last();
+            $valorCredito = $configuracaoAtiva->preco;
+            $quantidadeCredito = $configuracaoAtiva->qtd_disciplinas;
+            $qtdCreditoDisciplinas = 0;
+
+            foreach ($disciplinas as $disciplina) {
+                $qtdCreditoDisciplinas += $disciplina->qtd_credito;
+            }
+
+            $retorno['valor'] = (float) (((int) $qtdCreditoDisciplinas / $quantidadeCredito) * $valorCredito);
+        }
+
+        return $retorno;
+    }
+
+    private function processarBeneficios(&$retorno, $taxa)
+    {
+        $beneficios = $taxa->beneficios;
+
+        if (count($beneficios) == 0) {
+            return false;
+        }
+
+        $valorTaxa = $taxa->valor;
+        $valorDesconto = 0;
+
+        foreach ($beneficios as $beneficio) {
+            $valorBeneficio = $beneficio->valor;
+            $tipoValor = $beneficio->tipoValor->codigo;
+
+            if ($tipoValor == 'V') {
+                $valorDesconto += $valorBeneficio;
+            }
+
+            if ($tipoValor == 'P') {
+                $valorDesconto += ($valorTaxa * intval($valorBeneficio)) / 100;
+            }
+        }
+
+        $retorno['valor'] = $retorno['valor'] == 0 ? $taxa->valor : $retorno['valor'];
+        $retorno['valor'] -= $valorDesconto;
     }
 }

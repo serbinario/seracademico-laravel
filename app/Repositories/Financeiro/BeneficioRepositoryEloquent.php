@@ -24,18 +24,6 @@ class BeneficioRepositoryEloquent extends BaseRepository implements BeneficioRep
         return Beneficio::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return BeneficioValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria
