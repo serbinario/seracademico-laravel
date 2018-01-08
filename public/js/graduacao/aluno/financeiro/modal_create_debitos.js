@@ -168,7 +168,7 @@ function processamentoTaxa(idTaxa, preencheCamposTaxa) {
 
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/graduacao/aluno/financeiro/getMensalidade/' + idAluno,
+        url: '/index.php/seracademico/graduacao/aluno/financeiro/getDadosDebito/' + idAluno,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -180,11 +180,31 @@ function processamentoTaxa(idTaxa, preencheCamposTaxa) {
                 ? taxa.dia_vencimento
                 : now.getDate()) + "/" + (now.getMonth() + 1) + "/" + now.getFullYear();
 
-            $('#valor_taxa').val(dados.valor);
-            $('#valor_debito').val(dados.valor);
+            $('#valor_taxa').val(dados.valor ? dados.valor : dados.taxa.valor);
+            $('#valor_debito').val(dados.valor ? dados.valor : dados.taxa.valor);
             $('#data_vencimento').val(dataVencimento);
         } else {
             getInfoTaxa(idTaxa, preencheCamposTaxa);
         }
     });
 }
+
+$(document).on('change', '#pago', function () {
+    var valor = $(this).find('option:selected').val();
+
+    if (valor == 1) {
+        $("label[for=gerar_carne]").css('visibility', 'hidden');
+        $("#gerar_carne").hide();
+        $("#gerar_carne option").prop('selected', false);
+
+        $("label[for=quantidade]").css('visibility', 'hidden');
+        $("#quantidade").hide();
+        $("#quantidade").val(null);
+    } else {
+        $("label[for=gerar_carne]").css('visibility', 'visible');
+        $("#gerar_carne").show();
+
+        $("label[for=quantidade]").css('visibility', 'visible');
+        $("#quantidade").show();
+    }
+});

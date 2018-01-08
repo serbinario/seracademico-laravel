@@ -8,7 +8,7 @@ $(document).on("click", "#btnEditBeneficio", function () {
 
     // Carregando a grid de debitos
     if(TableTaxasOfBeneficioEditar) {
-        loadTableTaxasOfBeneficioEditar().ajax.url("/index.php/seracademico/financeiro/aluno/beneficio/gridTaxas/" + idBeneficio).load();
+        loadTableTaxasOfBeneficioEditar().ajax.url("/index.php/seracademico/financeiro/beneficio/gridTaxas/" + idBeneficio).load();
     } else {
         loadTableTaxasOfBeneficioEditar();
     }
@@ -25,7 +25,7 @@ function loadTableTaxasOfBeneficioEditar() {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/financeiro/aluno/beneficio/gridTaxas/" + idBeneficio,
+        ajax: "/index.php/seracademico/financeiro/beneficio/gridTaxas/" + idBeneficio,
         columns: [
             {data: 'codigo', name: 'codigo'},
             {data: 'nome', name: 'nome'},
@@ -54,7 +54,7 @@ function loadFieldsBeneficioEditar()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/getLoadFields',
+        url: '/index.php/seracademico/financeiro/beneficio/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -73,7 +73,7 @@ function builderHtmlFieldsBeneficioEditar (dados) {
     // Fazendo a requisição para recuperar os dados do curriculoDisciplina
     jQuery.ajax({
         type: 'GET',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/edit/' + idBeneficio,
+        url: '/index.php/seracademico/financeiro/beneficio/edit/' + idBeneficio,
         datatype: 'json'
     }).done(function (retorno) {
         if (retorno.success) {
@@ -158,7 +158,7 @@ $('#btnUpdateBeneficio').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/update/' + idBeneficio,
+        url: '/index.php/seracademico/financeiro/beneficio/update/' + idBeneficio,
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -224,7 +224,7 @@ $('#btnAddTaxaEditar').on( 'click', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/attachTaxa/' + idBeneficio,
+        url: '/index.php/seracademico/financeiro/beneficio/attachTaxa/' + idBeneficio,
         data: {'taxas' : [taxaId]},
         datatype: 'json'
     }).done(function (retorno) {
@@ -248,7 +248,7 @@ $(document).on( 'click', '#btnDestroyBeneficioEditar', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/detachTaxa/' + idBeneficio,
+        url: '/index.php/seracademico/financeiro/beneficio/detachTaxa/' + idBeneficio,
         data: {'taxas' : [taxaId]},
         datatype: 'json'
     }).done(function (retorno) {
@@ -277,7 +277,7 @@ function loadFeldsTaxas() {
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/getLoadFields',
+        url: '/index.php/seracademico/financeiro/beneficio/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição

@@ -1,6 +1,6 @@
 // Evento quando o modal fechar
 $('#modal-beneficios').on('hidden.bs.modal', function () {
-    loadTableBeneficios(0).ajax.url("/index.php/seracademico/financeiro/aluno/beneficio/grid/" + 0).load();
+    loadTableBeneficios(0).ajax.url("/index.php/seracademico/financeiro/beneficio/grid/" + 0).load();
 })
 
 // Função para carregar a grid
@@ -14,7 +14,7 @@ function loadTableBeneficios (idAluno) {
         bLengthChange: false,
         bFilter: false,
         autoWidth: false,
-        ajax: "/index.php/seracademico/financeiro/aluno/beneficio/grid/" + idAluno,
+        ajax: "/index.php/seracademico/financeiro/beneficio/grid/" + idAluno,
         columns: [
              {
                  "className":      'details-control',
@@ -23,6 +23,7 @@ function loadTableBeneficios (idAluno) {
                  "defaultContent": ''
              },
             {data: 'nome', name: 'fin_tipos_beneficios.nome'},
+            {data: 'tipoValor', name: 'fin_tipo_valores.nome'},
             {data: 'valor', name: 'fin_Beneficios.valor'},
             {data: 'data_inicio', name: 'fin_Beneficios.data_inicio'},
             {data: 'data_fim', name: 'fin_Beneficios.data_fim'},
@@ -108,7 +109,7 @@ function formatBeneficios(dados) {
 function runBeneficio(idAluno) {
     // Carregando a grid de debitos
     if(tableBeneficios) {
-        loadTableBeneficios(idAluno).ajax.url("/index.php/seracademico/financeiro/aluno/beneficio/grid/" + idAluno).load();
+        loadTableBeneficios(idAluno).ajax.url("/index.php/seracademico/financeiro/beneficio/grid/" + idAluno).load();
     } else {
         loadTableBeneficios(idAluno);
     }
@@ -125,7 +126,7 @@ $(document).on('click', '#btnDestroyBeneficio', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'DELETE',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/destroy/' + idBeneficio,
+        url: '/index.php/seracademico/financeiro/beneficio/destroy/' + idBeneficio,
         datatype: 'json'
     }).done(function (retorno) {
         tableBeneficios.ajax.reload();

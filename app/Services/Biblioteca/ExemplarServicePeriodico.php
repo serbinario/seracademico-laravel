@@ -161,13 +161,15 @@ class ExemplarServicePeriodico
 
     /**
      * @param array $data
-     * @return array
+     * @return Exemplar
+     * @throws \Exception
      */
     public function store(array $data) : Exemplar
     {
 
         $data = $this->tratamentoDatas($data);
         $data = $this->tratamentoCampos($data);
+        $data = $this->tratarLinkRevista($data);
 
         //recupera o acervo
         $acervo = $this->repoAcervo->find($data['arcevos_id']);
@@ -190,7 +192,7 @@ class ExemplarServicePeriodico
 
         if($acervo['exemplar_ref'] == '1') {
             for($i = 0; $i < $qtdExemplar; $i++) {
-                if($i == 0){
+                if ($i == 0){
                     $data['exemp_principal'] = '1';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
@@ -218,8 +220,8 @@ class ExemplarServicePeriodico
                 }
             }
         } else {
-            for($i = 0; $i < $qtdExemplar; $i++) {
-                if($i == 0){
+            for ($i = 0; $i < $qtdExemplar; $i++) {
+                if ($i == 0){
                     $data['exemp_principal'] = '1';
                     $data['emprestimo_id'] = '2';
                     $data['situacao_id'] = '3';
@@ -249,7 +251,7 @@ class ExemplarServicePeriodico
         }
 
         #Verificando se foi criado no banco de dados
-        if(!$exemplar) {
+        if (!$exemplar) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
@@ -260,13 +262,15 @@ class ExemplarServicePeriodico
     /**
      * @param array $data
      * @param int $id
-     * @return mixed
+     * @return Exemplar
+     * @throws \Exception
      */
     public function update(array $data, int $id) : Exemplar
     {
 
         $data = $this->tratamentoDatas($data);
         $data = $this->tratamentoCampos($data);
+        $data = $this->tratarLinkRevista($data);
 
         $codigo = $data['codigo'];
         $ano    = $data['ano_tombo'];
@@ -284,6 +288,23 @@ class ExemplarServicePeriodico
 
         #Retorno
         return $exemplar;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function tratarLinkRevista($data)
+    {
+        // Remover o http do link caso tenha
+        $link = str_replace("http://", "", $data['link']);
+
+        // Concatena o http no link editado
+        $link = "http://" . $link;
+
+        $data['link'] = $link;
+
+        return $data;
     }
 
     /**

@@ -1206,7 +1206,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::get('gerarBoleto/{idDebito}', ['as' => 'gerarBoleto', 'uses' => 'Graduacao\AlunoFinanceiroController@gerarBoleto']);
                     Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@infoDebito']);
                     Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Graduacao\AlunoFinanceiroController@gridCarnes']);
-                    Route::get('getMensalidade/{id}', ['as' => 'getMensalidade', 'uses' => 'Graduacao\AlunoFinanceiroController@getMensalidade']);
+                    Route::get('getDadosDebito/{id}', ['as' => 'getDadosDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@getDadosDebito']);
                 });
             });
 
@@ -1718,12 +1718,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('indexRelatorioDeEmprestimos', ['as' => 'indexRelatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeEmprestimos']);
             Route::get('relatorioDeEmprestimos', ['as' => 'relatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@relatorioDeEmprestimos']);
 
+            Route::get('indexRelatorioDeDevolucao', ['as' => 'indexRelatorioDeDevolucao', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeDevolucao']);
+            Route::get('relatorioDeDevolucao', ['as' => 'relatorioDeDevolucao', 'uses' => 'Biblioteca\RelatorioController@relatorioDeDevolucao']);
+
             Route::get('indexEditBiblioteca', ['as' => 'indexEditBiblioteca', 'uses' => 'Biblioteca\RelatorioController@indexEditBiblioteca']);
             Route::get('editBiblioteca', ['as' => 'editBiblioteca', 'uses' => 'Biblioteca\RelatorioController@editBiblioteca']);
             
         });
 
-        //Rotas para componentes de segurança
+        // Rotas para componentes de segurança
         Route::group(['prefix' => 'portal', 'as' => 'portal.'], function () {
             Route::get('indexPortal', ['as' => 'indexPortal', 'uses' => 'Portal\PortalController@index']);
             Route::post('login', ['as' => 'login', 'uses' => 'Portal\PortalController@login']);
@@ -1736,7 +1739,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('boleto', ['as' => 'boleto', 'uses' => 'Portal\PortalController@Boleto']);
         });
 
-        //Rotas para componentes de segurança
+        // Rotas para componentes de segurança
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);
@@ -1855,29 +1858,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             });
 
             # Rotas para aluno | será removido
-            Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
+            Route::group(['prefix' => 'beneficio' , 'as' => 'beneficio.'], function () {
                 Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);
-                Route::get('gridDebitosAbertos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridDebitosAbertos']);
-                Route::get('gridFechamentos/{idAluno}', ['as' => 'gridDebitosAbertos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridFechamentos']);
-                Route::get('gridBoletos/{idAluno}', ['as' => 'gridBoletos', 'uses' => 'Financeiro\AlunoFinanceiroController@gridBoletos']);
-                Route::post('storeDebitoAberto', ['as' => 'storeDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeDebitoAberto']);
-                Route::post('storeFechamento', ['as' => 'storeFechamento', 'uses' => 'Financeiro\AlunoFinanceiroController@storeFechamento']);
-                Route::post('getDebitoAberto/{id}', ['as' => 'getDebitoAberto', 'uses' => 'Financeiro\AlunoFinanceiroController@getDebitoAberto']);
-                Route::get('gerarBoleto/{id}', ['as' => 'gerarBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@gerarBoleto']);
-                Route::post('storeBoleto', ['as' => 'storeBoleto', 'uses' => 'Financeiro\AlunoFinanceiroController@storeBoleto']);
-
-                Route::group(['prefix' => 'beneficio' , 'as' => 'beneficio.'], function () {
-                    Route::get('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Financeiro\AlunoFinanceiroController@getLoadFields']);
-                    Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@grid']);
-                    Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\BeneficioController@store']);
-                    Route::delete('destroy/{id}', ['as' => 'destroy', 'uses' => 'Financeiro\BeneficioController@destroy']);
-                    Route::get('edit/{id}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@edit']);
-                    Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BeneficioController@update']);
-                    Route::get('gridTaxas/{idBeneficio}', ['as' => 'gridTaxas', 'uses' => 'Financeiro\BeneficioController@gridTaxas']);
-                    Route::post('attachTaxa/{idBeneficio}', ['as' => 'storeTaxa', 'uses' => 'Financeiro\BeneficioController@attachTaxa']);
-                    Route::post('detachTaxa/{idBeneficio}', ['as' => 'detachTaxa', 'uses' => 'Financeiro\BeneficioController@detachTaxa']);
-                    Route::get('getIn', ['as' => 'getIn', 'uses' => 'Financeiro\BeneficioController@getIn']);
-                });
+                Route::get('grid/{idAluno}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@grid']);
+                Route::post('store', ['as' => 'store', 'uses' => 'Financeiro\BeneficioController@store']);
+                Route::delete('destroy/{id}', ['as' => 'destroy', 'uses' => 'Financeiro\BeneficioController@destroy']);
+                Route::get('edit/{id}', ['as' => 'grid', 'uses' => 'Financeiro\BeneficioController@edit']);
+                Route::post('update/{id}', ['as' => 'update', 'uses' => 'Financeiro\BeneficioController@update']);
+                Route::get('gridTaxas/{idBeneficio}', ['as' => 'gridTaxas', 'uses' => 'Financeiro\BeneficioController@gridTaxas']);
+                Route::post('attachTaxa/{idBeneficio}', ['as' => 'storeTaxa', 'uses' => 'Financeiro\BeneficioController@attachTaxa']);
+                Route::post('detachTaxa/{idBeneficio}', ['as' => 'detachTaxa', 'uses' => 'Financeiro\BeneficioController@detachTaxa']);
+                Route::get('getIn', ['as' => 'getIn', 'uses' => 'Financeiro\BeneficioController@getIn']);
             });
         });
 

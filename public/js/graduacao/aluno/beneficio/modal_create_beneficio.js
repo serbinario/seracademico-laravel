@@ -27,7 +27,7 @@ function loadFieldsBeneficio()
     jQuery.ajax({
         type: 'GET',
         data: dados,
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/getLoadFields',
+        url: '/index.php/seracademico/financeiro/beneficio/getLoadFields',
         datatype: 'json'
     }).done(function (retorno) {
         // Verificando o retorno da requisição
@@ -128,7 +128,7 @@ $('#btnSaveBeneficio').click(function() {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/financeiro/aluno/beneficio/store',
+        url: '/index.php/seracademico/financeiro/beneficio/store',
         data: dados,
         datatype: 'json'
     }).done(function (retorno) {
@@ -216,7 +216,7 @@ $(document).on('click', '#btnDeleteHistorico', function () {
     // Requisição ajax
     jQuery.ajax({
         type: 'POST',
-        url: '/index.php/seracademico/graduacao/aluno/historico/delete/' + idAlunoSemestre,
+        url: '/index.php/seracademico/graduacao/historico/delete/' + idAlunoSemestre,
         datatype: 'json'
     }).done(function (retorno) {
         table.ajax.reload();

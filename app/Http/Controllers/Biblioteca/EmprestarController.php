@@ -83,7 +83,8 @@ class EmprestarController extends Controller
             ->where('bib_exemplares.situacao_id', '!=', '5')
             ->where('bib_exemplares.situacao_id', '!=', '4')
             ->where('bib_exemplares.situacao_id', '!=', '2')
-            ->select('bib_exemplares.id as id',
+            ->select(
+                'bib_exemplares.id',
                 'bib_arcevos.titulo',
                 'bib_arcevos.cutter',
                 'bib_arcevos.cdd',
@@ -101,7 +102,7 @@ class EmprestarController extends Controller
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
-            $html       = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
+            $html = '<a class="btn-floating add" href="" title="Editar disciplina"><i class="fa fa-plus"></i></a></li>';
 
             # Retorno
             return $html;
@@ -143,7 +144,7 @@ class EmprestarController extends Controller
             return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -517,7 +518,7 @@ class EmprestarController extends Controller
             #Retorno para a view
             return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
             //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -649,7 +650,7 @@ class EmprestarController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Pagamento confirmado com sucesso!");
             //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -674,7 +675,7 @@ class EmprestarController extends Controller
             #Retorno para a view
             return redirect()->back()->with("message", "Pagamento confirmado com sucesso!");
             //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
