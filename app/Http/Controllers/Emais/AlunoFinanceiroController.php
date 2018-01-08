@@ -6,6 +6,7 @@ use Seracademico\Entities\Emais\Aluno;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
 use Seracademico\Repositories\Emais\AlunoRepository;
+use Seracademico\Services\Emais\AlunoService;
 use Seracademico\Services\Financeiro\DebitoService;
 use Yajra\Datatables\Datatables;
 
@@ -26,21 +27,29 @@ class AlunoFinanceiroController extends Controller
      */
     private $alunoRepository;
 
+    /**
+     * @var AlunoService
+     */
+    private $service;
+
 
     /**
      * AlunoFinanceiroController constructor.
      * @param DebitoRepository $debitoRepository
      * @param DebitoService $debitoService
      * @param AlunoRepository $alunoRepository
+     * @param AlunoService $alunoService
      */
     public function __construct(
         DebitoRepository $debitoRepository,
         DebitoService $debitoService,
-        AlunoRepository $alunoRepository)
+        AlunoRepository $alunoRepository,
+        AlunoService $alunoService)
     {
         $this->debitoRepository = $debitoRepository;
         $this->debitoService = $debitoService;
         $this->alunoRepository = $alunoRepository;
+        $this->service = $alunoService;
     }
 
 
@@ -201,6 +210,43 @@ class AlunoFinanceiroController extends Controller
             return response()->json(['success' => true, 'debito' => $debito]);
         } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function storeDebitoInscricaoByPortal(Request $request)
+    {
+        try {
+            $aluno = $this->alunoRepository->find($request->get('id'));
+            $dadosDebito = $this->service->formatDebitoInscricao($aluno, 3);
+            $debito = $this->debitoService->store($aluno, $dadosDebito);
+            $boleto = $this->debitoService->gerarBoleto($debito->id);
+
+            return response()->json(['status' => 200, 'boleto' => $boleto]);
+        } catch (\Throwable $e) {
+            return response()->json(['msg' => $e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine(), 'status' => 500]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getBoletoByPortal(Request $request)
+    {
+        try {
+            $aluno = $this->alunoRepository->find($request->get('id'));
+            $debito = $aluno->debitos->last();
+            $boleto = $debito->boleto;
+            $status = $boleto->statusGnet;
+            $responseBoleto = array_merge($boleto->toArray(), $status->toArray());
+
+            return response()->json(['status' => 200, 'boleto' => $responseBoleto]);
+        } catch (\Throwable $e) {
+            return response()->json(['msg' => $e->getMessage(), 'status' => 500]);
         }
     }
 }

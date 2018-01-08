@@ -60,11 +60,13 @@ class BeneficioController extends Controller
         $rows = \DB::table('fin_beneficios')
             ->join('fin_tipos_beneficios', 'fin_tipos_beneficios.id', '=', 'fin_beneficios.tipo_beneficio_id')
             ->join('fac_alunos', 'fac_alunos.id', '=', 'fin_beneficios.aluno_id')
+            ->join('fin_tipo_valores', 'fin_tipo_valores.id', '=', 'fin_beneficios.tipo_id')
             ->where('fac_alunos.id', $idAluno)
             ->select([
                 'fin_beneficios.id',
                 'fin_tipos_beneficios.nome',
                 'fin_beneficios.valor',
+                'fin_tipo_valores.nome as tipoValor',
                 'fin_beneficios.data_inicio',
                 'fin_beneficios.data_fim'
             ]);

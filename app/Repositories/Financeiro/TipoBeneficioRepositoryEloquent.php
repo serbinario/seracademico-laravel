@@ -24,18 +24,6 @@ class TipoBeneficioRepositoryEloquent extends BaseRepository implements TipoBene
         return TipoBeneficio::class;
     }
 
-    /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
-    public function validator()
-    {
-
-         return TipoBeneficioValidator::class;
-    }
-
-
 
     /**
      * Boot up the repository, pushing criteria

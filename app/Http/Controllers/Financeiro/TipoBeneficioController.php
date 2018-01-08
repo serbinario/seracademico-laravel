@@ -60,11 +60,11 @@ class TipoBeneficioController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('fin_tipos_beneficios')
-            ->join('fin_incidencia', 'fin_incidencia.id', '=', 'fin_tipos_beneficios.incidencia_id')
-            ->join('fin_tipo_valores', 'fin_tipo_valores.id', '=', 'fin_tipos_beneficios.tipo_id')
-            ->join('fin_data_vencimento as data_nascimento_inicial ', 'data_nascimento_inicial.id', '=', 'fin_tipos_beneficios.dia_inicial_id')
-            ->join('fin_data_vencimento as data_nascimento_final', 'data_nascimento_final.id', '=', 'fin_tipos_beneficios.dia_final_id')
-            ->join('fin_tipo_dia', 'fin_tipo_dia.id', '=', 'fin_tipos_beneficios.tipo_dia_id')
+            ->leftJoin('fin_incidencia', 'fin_incidencia.id', '=', 'fin_tipos_beneficios.incidencia_id')
+            ->leftJoin('fin_tipo_valores', 'fin_tipo_valores.id', '=', 'fin_tipos_beneficios.tipo_id')
+            ->leftJoin('fin_data_vencimento as data_nascimento_inicial ', 'data_nascimento_inicial.id', '=', 'fin_tipos_beneficios.dia_inicial_id')
+            ->leftJoin('fin_data_vencimento as data_nascimento_final', 'data_nascimento_final.id', '=', 'fin_tipos_beneficios.dia_final_id')
+            ->leftJoin('fin_tipo_dia', 'fin_tipo_dia.id', '=', 'fin_tipos_beneficios.tipo_dia_id')
 
 //            $rows = \DB::table('pessoas')
 //                ->join('fac_vestibulandos', 'fac_vestibulandos.id', '=' 'pessoas.vestibulando_id')

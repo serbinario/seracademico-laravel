@@ -43,6 +43,7 @@
                             <tr>
                                 <th>Detalhe</th>
                                 <th>Benefício</th>
+                                <th>Tipo Valor</th>
                                 <th>Valor</th>
                                 <th>Inicio</th>
                                 <th>Fim</th>
