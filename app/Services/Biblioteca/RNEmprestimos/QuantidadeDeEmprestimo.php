@@ -31,7 +31,7 @@ class QuantidadeDeEmprestimo
     {
         # Pegas os parâmetros para saber a quantidade de exemplares por tipo de pessoa
         $qtdEmprestimos = \DB::table('bib_parametros')->select('bib_parametros.*')
-            ->whereIn('bib_parametros.codigo',['003', '007', '009'] )->get();
+            ->whereIn('bib_parametros.codigo',['003', '007', '009', '013'] )->get();
 
         //Pega a quantidade de emprestimo da pessoa
         $validarQtdEmprestimo = \DB::table('bib_emprestimos')
@@ -49,13 +49,26 @@ class QuantidadeDeEmprestimo
             return $this->next->getResult($dados, $data, $return);
         }
         
-        if ($validarQtdEmprestimo && $dados['tipo_pessoa'] == '1' && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[0]->valor) { # Aluno Graduação
+        if ($validarQtdEmprestimo && $dados['tipo_pessoa'] == '1'
+            && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[0]->valor) { # Aluno Graduação
+
             $return[1] = "Limite de até {$qtdEmprestimos[0]->valor} empréstimos foi atingido";
+
         } else if ($validarQtdEmprestimo && ($dados['tipo_pessoa'] == '2' || $dados['tipo_pessoa'] == '3')
             && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[2]->valor) {  # Aluno pós-graduação, mestrado, doutorado
+
             $return[1] = "Limite de até {$qtdEmprestimos[2]->valor} empréstimos foi atingido";
-        } else if ($validarQtdEmprestimo && $dados['tipo_pessoa'] == '4' && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[1]->valor) { # Professores
+
+        } else if ($validarQtdEmprestimo && $dados['tipo_pessoa'] == '5'
+            && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[1]->valor) { # Professores
+
             $return[1] = "Limite de até {$qtdEmprestimos[1]->valor} empréstimos foi atingido";
+
+        } else if ($validarQtdEmprestimo && $dados['tipo_pessoa'] == '4'
+            && $validarQtdEmprestimo->qtd >= $qtdEmprestimos[3]->valor) { # Técnico
+
+            $return[1] = "Limite de até {$qtdEmprestimos[3]->valor} empréstimos foi atingido";
+
         } else {
             return $this->next->getResult($dados, $data, $return);
         }

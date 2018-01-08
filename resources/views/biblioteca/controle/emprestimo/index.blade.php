@@ -101,7 +101,8 @@
                                 <option value="1">Graduação</option>
                                 <option value="2">Pós-graduação</option>
                                 <option value="3">Mestrado</option>
-                                <option value="4">Professor</option>
+                                <option value="4">Técnico</option>
+                                <option value="5">Professor</option>
                             </select>
                         </div>
                         <div class="form-group col-md-5">

@@ -323,6 +323,7 @@
                                 <li><a href="{{ route('seracademico.biblioteca.indexRelatorioLivrosPorCurso') }}"><i class="flaticon-interface-1"></i> Livros por curso</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeAtividades') }}"><i class="flaticon-interface-1"></i> De Atividades</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeEmprestimos') }}"><i class="flaticon-interface-1"></i> De Empréstimos</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.indexRelatorioDeDevolucao') }}"><i class="flaticon-interface-1"></i> De Devoluções</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.indexEditBiblioteca') }}"><i class="flaticon-interface-1"></i> Biblioteca</a></li>
                             </ul>
                         </li>

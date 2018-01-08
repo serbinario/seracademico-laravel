@@ -158,7 +158,7 @@ class ExemplarController extends Controller
 
             #retorno para view
             return view('biblioteca.exemplar.edit', compact('model', 'loadFields', 'acervo'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -196,7 +196,7 @@ class ExemplarController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -213,7 +213,7 @@ class ExemplarController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

@@ -412,7 +412,7 @@ class UtilController extends Controller
                 $qb->select('pessoas.id as pessoa_id',
                     'pessoas.nome as nome',
                     'fac_alunos.id as id_graduacao');
-            } else if ($parametro == '2' || $parametro == '3') {
+            } else if ($parametro == '2' || $parametro == '3' || $parametro == '4') {
                 $qb = $this->wherePosMestrado($parametro, $qb);
                 $qb->join(\DB::raw('pos_alunos'), function ($join) {
                     $join->on('pos_alunos.pessoa_id', '=', 'pessoas.id')
@@ -422,7 +422,7 @@ class UtilController extends Controller
                 $qb->select('pessoas.id as pessoa_id',
                     'pessoas.nome as nome',
                     'pos_alunos.id as id_pos');
-            } else if ($parametro == '4') {
+            } else if ($parametro == '5') {
                 $qb = $this->whereProfessor($qb);
                 $qb->join(\DB::raw('fac_professores'), function ($join) {
                     $join->on('fac_professores.pessoa_id', '=', 'pessoas.id')
@@ -470,13 +470,13 @@ class UtilController extends Controller
                         "text" => $item->nome,
                         'id_graduacao' => $item->id_graduacao,
                     ];
-                } else if ($parametro == '2' || $parametro == '3') {
+                } else if ($parametro == '2' || $parametro == '3' || $parametro == '4') {
                     $result[] = [
                         "id" => $item->pessoa_id,
                         "text" => $item->nome,
                         'id_pos' => $item->id_pos
                     ];
-                } else if ($parametro == '4') {
+                } else if ($parametro == '5') {
                     $result[] = [
                         "id" => $item->pessoa_id,
                         "text" => $item->nome,
@@ -563,7 +563,7 @@ class UtilController extends Controller
                 ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
                 ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
-                ->where('pos_alunos.tipo_aluno_id', null)
+                //->where('pos_alunos.tipo_aluno_id', null)
                 ->whereRaw('pos_alunos.pessoa_id = pessoas.id');
         });
 

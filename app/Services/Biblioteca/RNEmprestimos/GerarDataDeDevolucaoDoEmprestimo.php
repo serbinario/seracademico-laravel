@@ -21,7 +21,7 @@ class GerarDataDeDevolucaoDoEmprestimo
     {
         # Pegas os parâmetros para saber a quantidade de dias para empréstimo por tipo de pessoa
         $qtdDias = \DB::table('bib_parametros')->select('bib_parametros.valor')
-            ->whereIn('bib_parametros.codigo', ['001', '002', '006', '008'])->get();
+            ->whereIn('bib_parametros.codigo', ['001', '002', '006', '008', '012'])->get();
 
         // Variáveis
         $tipoPessoa = isset($dados['tipo_pessoa']) ? $dados['tipo_pessoa'] : "";
@@ -35,6 +35,8 @@ class GerarDataDeDevolucaoDoEmprestimo
             } else if ($tipoPessoa == '2' || $tipoPessoa == '3') {
                 $dia = $qtdDias[3]->valor - 1;
             } else if ($tipoPessoa == '4') {
+                $dia = $qtdDias[4]->valor;
+            } else if ($tipoPessoa == '5') {
                 $dia = $qtdDias[2]->valor;
             }
         } else if ($dados['tipo_emprestimo'] == '2' || $emprestimoEspecial == '1') {

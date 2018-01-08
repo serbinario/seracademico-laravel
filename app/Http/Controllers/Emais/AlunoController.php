@@ -142,7 +142,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -156,7 +156,6 @@ class AlunoController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
-            //dd($model['modalidades'][0]);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
@@ -165,7 +164,7 @@ class AlunoController extends Controller
 
             #retorno para view
             return view('emais.edit', compact('model', 'loadFields', 'modalidades', 'materias'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -182,7 +181,7 @@ class AlunoController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -211,7 +210,7 @@ class AlunoController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
