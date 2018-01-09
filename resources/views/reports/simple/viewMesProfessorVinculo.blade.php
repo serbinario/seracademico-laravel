@@ -29,11 +29,11 @@
             <strong>{{ $dados['body'][count($dados['body'])-1]->carga_horaria }}</strong> horas, em
             {{ strftime('%B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}.
         </p>
-        <div style="text-align: center; font-size: 18px; margin-top: 55px;">
+        <div style="text-align: center; font-size: 18px; margin-top: 45px;">
             <p>
                 O referido é verdadeiro e dou fé.
             </p>
-            <p style="margin-top: 75px;">
+            <p style="margin-top: 60px;">
                 <strong>Recife, {{ strftime('%d de %B de %Y', strtotime($dados['body'][count($dados['body'])-1]->data)) }}</strong>
             </p>
         </div>
@@ -41,14 +41,14 @@
 
     <div class="assinatura" style="font-size: 18px">
         <p>
-            <h1><img  src="{{ asset('img/assinatura_luciana.png') }}" alt="" style="margin-left: 20%; width: 330px; height: auto;"></h1>
+            <h1><img  src="{{ asset('img/assinatura_dr_daniel.png') }}" alt="" style="margin-left: 39%; width: 140px; height: auto;"></h1>
         </p>
-        <p style="position: absolute; top: 80px; margin-left: 27%;">
+        {{--<p style="position: absolute; top: 80px; margin-left: 27%;">
             ___________________________________
         </p>
         <p style="position: absolute; top: 80px; margin-left: 45%;">
             Direção
-        </p>
+        </p>--}}
     </div>
 
     <div class="rodape" style="text-align: center; font-size: 18px">
