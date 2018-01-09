@@ -68,28 +68,19 @@
 <body>
 
 <div class="cabecalho">
-    <table>
-        <td>
-            <h1>
-                <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
-            </h1>
-        </td>
-        <td>
-            <h1 style="margin-left: 375px; margin-top: 15px;">
-                <img width="130" src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="unigrendal">
-            </h1>
-        </td>
-    </table>
+    <h1>
+        <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
+    </h1>
     <div class="subtitulo">
         <h2>HISTÓRICO ESCOLAR</h2>
     </div>
 </div>
 
 <?php
-    $aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
-    $aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
-    $timeInicial = $aulaInicial->getTimestamp();
-    $timeFinal   = $aulaFinal->getTimestamp();
+$aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+$aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
+$timeInicial = $aulaInicial->getTimestamp();
+$timeFinal   = $aulaFinal->getTimestamp();
 ?>
 
 <div class="corpo">
