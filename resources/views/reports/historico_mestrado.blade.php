@@ -68,10 +68,18 @@
 <body>
 
 <div class="cabecalho">
-    <h1>
-        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
-    </h1>
-
+    <table>
+        <td>
+            <h1>
+                <img width="200" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
+            </h1>
+        </td>
+        <td>
+            <h1 style="margin-left: 230px;">
+                <img width="200" src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="unigrendal">
+            </h1>
+        </td>
+    </table>
     <div class="subtitulo">
         <h2>HISTÓRICO ESCOLAR</h2>
     </div>

@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Seracademico\Console\Commands\Inspire::class,
+        \Seracademico\Console\Commands\Inspire::class
     ];
 
     /**
@@ -24,7 +24,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+
+        $schedule->call(function () {
+            # Enviando o email de geração do boleto
+            \Mail::send('emailteste', [],
+                function ($email) {
+                    $email->from('enviar@alpha.rec.br', 'Alpha');
+                    $email->subject('Inscrição Cuso Técnico Faculdade Alpha');
+                    $email->to('fabinhobarreto2@gmail.com', 'Alpha Educação e Treinamentos');
+                });
+        })->everyMinute();
     }
 }
