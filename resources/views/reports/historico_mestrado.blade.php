@@ -71,12 +71,12 @@
     <table>
         <td>
             <h1>
-                <img width="200" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
+                <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
             </h1>
         </td>
         <td>
-            <h1 style="margin-left: 230px;">
-                <img width="200" src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="unigrendal">
+            <h1 style="margin-left: 375px; margin-top: 15px;">
+                <img width="130" src="{{ asset('img/afastamento-mestrado/header.png') }}" alt="unigrendal">
             </h1>
         </td>
     </table>
