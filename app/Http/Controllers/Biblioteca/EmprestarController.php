@@ -261,18 +261,20 @@ class EmprestarController extends Controller
                 }
             })
             ->addColumn('action', function ($row) {
-                
 
                 $html = '<div class="fixed-action-btn horizontal">';
                 $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
                 $html .= '<ul>';
-
 
                 if(!$row->data_devolucao_real) {
                     $html .= '<li><a class="btn-floating excluir" href="confirmarDevolucao/'.$row->id.'" title="Devolver"><i class="material-icons">done</i></a></li>';
                     if($row->tipo_emprestimo == '1' && strtotime($row->devolucao) >= strtotime($this->data)) {
                             $html .= '<li><a class="btn-floating renovar" href="renovacao/'.$row->id.'" title="Renovar"><i class="material-icons">restore</i></a></li>';
                     }
+                }
+
+                if($row->status_devolucao == 0 && strtotime($row->devolucao) < strtotime($this->data)) {
+                    $html .= '<li><a class="btn-floating carta" target="_blank" href="cartanotificacaoatraso/'.$row->id.'" title="Carta"><i class="material-icons">restore</i></a></li>';
                 }
 
                 if($row->status_devolucao == 1 && $row->status_pagamento == '0') {
@@ -370,7 +372,7 @@ class EmprestarController extends Controller
                 }
 
                 if($row->status_devolucao == '1' && $row->status_pagamento == '0') {
-                    $html .= '<li><a class="btn-floating baixa-pagamento-aluno" href="baixaPagamentoPorAluno/'.$row->pessoa_id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
+                    $html .= '<li><a class="btn-floating baixa-pagamento-aluno" href="baixaPagamento/'.$row->pessoa_id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
                 }
 
                 $html .= '</ul></div>';
@@ -517,7 +519,6 @@ class EmprestarController extends Controller
 
             #Retorno para a view
             return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
-            //return redirect()->back()->with("message", "Devolução realizada com sucesso!");
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -678,5 +679,45 @@ class EmprestarController extends Controller
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function cartaNotificacaoAtraso($id)
+    {
+        // Consultando os empréstimos em atraso
+        $emprestimo = \DB::table('bib_emprestimos')
+            ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->where('bib_emprestimos.id', $id)
+            ->select([
+                'bib_emprestimos.id',
+                'pessoas.nome',
+                'pessoas.email',
+            ])->first();
+
+        // Consultando os exemplares adquiridos no empréstimo
+        $exemplares = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->join('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
+            ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->where('bib_emprestimos.status', '=', '1')
+            ->where('bib_emprestimos.id', '=', $id)
+            ->select([
+                'bib_arcevos.titulo',
+                'bib_arcevos.cutter',
+                'bib_arcevos.subtitulo',
+                'bib_arcevos.titulo',
+                'bib_arcevos.numero_chamada',
+                'bib_exemplares.edicao',
+                \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                'bib_tipos_acervos.nome as tipo_acervo'
+            ])->get();
+
+        return \PDF::loadView('biblioteca.controle.emprestimo.cartaNotificacaoAtraso',
+            compact('emprestimo', 'exemplares'))->stream();
+
     }
 }

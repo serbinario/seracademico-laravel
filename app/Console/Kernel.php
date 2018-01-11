@@ -4,6 +4,7 @@ namespace Seracademico\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Seracademico\Console\Commands\SendEmailAlertaBiblioteca;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Seracademico\Console\Commands\Inspire::class
+        \Seracademico\Console\Commands\Inspire::class,
+        SendEmailAlertaBiblioteca::class
     ];
 
     /**
@@ -24,15 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
-        $schedule->call(function () {
-            # Enviando o email de geração do boleto
-            \Mail::send('emailteste', [],
-                function ($email) {
-                    $email->from('enviar@alpha.rec.br', 'Alpha');
-                    $email->subject('Inscrição Cuso Técnico Faculdade Alpha');
-                    $email->to('fabinhobarreto2@gmail.com', 'Alpha Educação e Treinamentos');
-                });
-        })->everyMinute();
+        $schedule->command('send:emailalertabiblioteca')
+            ->everyMinute();
     }
 }
