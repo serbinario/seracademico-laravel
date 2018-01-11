@@ -252,7 +252,7 @@
                                             </div>
                                         </a>
                                     @else
-                                        <a class="collection-item">
+                                        <a class="collection-item" href="{{ $exemplar['link'] }}" target="_blank">
                                             <div class="row">
                                                 <div class="col s4"><b>Link</b></div>
                                                 <div class="col s8">{{$exemplar['link']}}</div>
