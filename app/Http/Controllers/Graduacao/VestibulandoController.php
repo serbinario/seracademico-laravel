@@ -126,6 +126,7 @@ class VestibulandoController extends Controller
             ->leftJoin('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
             ->leftJoin('vest_agendamento', 'vest_agendamento.id', '=', 'fac_vestibulandos.agendamento_id')
             ->groupBy('fac_vestibulandos.id')
+            ->orderBy('fac_alunos.id', 'asc')
             ->select([
                 'fac_vestibulandos.id',
                 'fac_vestibulandos.media_enem as media_enem',
@@ -257,7 +258,17 @@ class VestibulandoController extends Controller
                 }
 
                 return $resultado;
-            })->make(true);
+            })
+            ->setRowClass(function ($row) {
+                $vestibulando = $this->repository->find($row->id);
+                $debitos = $vestibulando->debitos;
+                $debitoMatricula = $debitos->filter(function ($debito) {
+                    return $debito->taxa->tipoTaxa->id == 1;
+                });
+
+                return count($debitoMatricula) > 0 ? '' : 'row_sem_debito';
+            })
+            ->make(true);
     }
 
     /**
