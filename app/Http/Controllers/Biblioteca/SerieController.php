@@ -98,7 +98,7 @@ class SerieController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -115,7 +115,7 @@ class SerieController extends Controller
 
             #retorno para view
             return view('biblioteca.serie.edit', compact('model'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -141,7 +141,7 @@ class SerieController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

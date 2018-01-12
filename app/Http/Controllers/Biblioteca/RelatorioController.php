@@ -151,7 +151,7 @@ class RelatorioController extends Controller
 
             $livros = $livros->get();
 
-            // Pegando os autores e outros pesponsáveis de cada livro
+            // Pegando os autores e outros pesponsï¿½veis de cada livro
             foreach($livros as $ch => $livro) {
 
                 // Autores
@@ -164,7 +164,7 @@ class RelatorioController extends Controller
                         'responsaveis.tipo_reponsavel_id'
                     ])->get();
 
-                // Outros responsáveis
+                // Outros responsï¿½veis
                 $outros = \DB::table('segunda_entrada')
                     ->join('responsaveis', 'responsaveis.id', '=', 'segunda_entrada.responsaveis_id')
                     ->where('segunda_entrada.arcevos_id', '=', $livro->id)
@@ -188,7 +188,7 @@ class RelatorioController extends Controller
                         \DB::raw('COUNT(bib_exemplares.id) as qtdExemplares'),
                     ])->first();
 
-                // Organizando os autores, outros responsáveis e quantidade de exemplares por livro
+                // Organizando os autores, outros responsï¿½veis e quantidade de exemplares por livro
                 $arrayTempLivros = (array) $livros[$ch];
                 $livros[$ch] = (object) array_merge($arrayTempLivros, [
                     'autores' => $autores,
@@ -202,7 +202,7 @@ class RelatorioController extends Controller
             $arrayTemp = (array) $cursos[$chave];
             $cursos[$chave] = (object) array_merge($arrayTemp, ['livros' => $livros]);
 
-            // Tirando os cursos que não possuem livros na consulta realizada
+            // Tirando os cursos que nï¿½o possuem livros na consulta realizada
             if(count($livros) <= 0) {
                 unset($cursos[$chave]);
             }
@@ -349,6 +349,48 @@ class RelatorioController extends Controller
         $emprestimos = $emprestimos->get();
 
         return \PDF::loadView('reports.biblioteca.relatorioDeEmprestimos', compact('emprestimos', 'requisicao'))->setOrientation('landscape')->stream();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexRelatorioDeDevolucao()
+    {
+        return view('biblioteca.relatorios.relatorio_devolucao');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function relatorioDeDevolucao(Request $request)
+    {
+
+        $requisicao = $request->request->all();
+
+        $dataIni = SerbinarioDateFormat::toUsa($requisicao['data_inicial']);
+        $dataFim = SerbinarioDateFormat::toUsa($requisicao['data_final']);
+
+        $emprestimos = \DB::table('bib_emprestimos_exemplares')
+            ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->where('bib_emprestimos.status_devolucao', 1)
+            ->select([
+                'pessoas.identidade',
+                'pessoas.nome',
+                \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as registro'),
+                'bib_arcevos.titulo',
+                \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+            ]);
+
+        if($dataIni && $dataIni) {
+            $emprestimos->whereBetween('bib_emprestimos.data', array($dataIni, $dataFim));
+        };
+
+        $emprestimos = $emprestimos->get();
+
+        return \PDF::loadView('reports.biblioteca.relatorioDeDevolucao', compact('emprestimos', 'requisicao'))->setOrientation('landscape')->stream();
     }
 
     /**

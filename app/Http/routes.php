@@ -1648,6 +1648,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('confirmarDevolucao/{id}', ['as' => 'confirmarDevolucao', 'uses' => 'Biblioteca\EmprestarController@confirmarDevolucao']);
             Route::get('confirmarDevolucaoPorAluno/{id}', ['as' => 'confirmarDevolucaoPorAluno', 'uses' => 'Biblioteca\EmprestarController@confirmarDevolucaoPorAluno']);
             Route::get('renovacao/{id}', ['as' => 'renovacao', 'uses' => 'Biblioteca\EmprestarController@renovacao']);
+            Route::get('cartanotificacaoatraso/{id}', ['as' => 'cartanotificacaoatraso', 'uses' => 'Biblioteca\EmprestarController@cartaNotificacaoAtraso']);
             Route::post('findWhereEmprestimo', ['as' => 'findWhereEmprestimo', 'uses' => 'Biblioteca\EmprestarController@findWhereEmprestimo']);
             Route::post('confirmarEmprestimo', ['as' => 'confirmarEmprestimo', 'uses' => 'Biblioteca\EmprestarController@confirmarEmprestimo']);
             Route::get('deleteEmprestimo/{id}/{id2}', ['as' => 'deleteEmprestimo', 'uses' => 'Biblioteca\EmprestarController@deleteEmprestimo']);
@@ -1718,12 +1719,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('indexRelatorioDeEmprestimos', ['as' => 'indexRelatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeEmprestimos']);
             Route::get('relatorioDeEmprestimos', ['as' => 'relatorioDeEmprestimos', 'uses' => 'Biblioteca\RelatorioController@relatorioDeEmprestimos']);
 
+            Route::get('indexRelatorioDeDevolucao', ['as' => 'indexRelatorioDeDevolucao', 'uses' => 'Biblioteca\RelatorioController@indexRelatorioDeDevolucao']);
+            Route::get('relatorioDeDevolucao', ['as' => 'relatorioDeDevolucao', 'uses' => 'Biblioteca\RelatorioController@relatorioDeDevolucao']);
+
             Route::get('indexEditBiblioteca', ['as' => 'indexEditBiblioteca', 'uses' => 'Biblioteca\RelatorioController@indexEditBiblioteca']);
             Route::get('editBiblioteca', ['as' => 'editBiblioteca', 'uses' => 'Biblioteca\RelatorioController@editBiblioteca']);
             
         });
 
-        //Rotas para componentes de segurança
+        // Rotas para componentes de segurança
         Route::group(['prefix' => 'portal', 'as' => 'portal.'], function () {
             Route::get('indexPortal', ['as' => 'indexPortal', 'uses' => 'Portal\PortalController@index']);
             Route::post('login', ['as' => 'login', 'uses' => 'Portal\PortalController@login']);
@@ -1736,7 +1740,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('boleto', ['as' => 'boleto', 'uses' => 'Portal\PortalController@Boleto']);
         });
 
-        //Rotas para componentes de segurança
+        // Rotas para componentes de segurança
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('index', ['as' => 'index', 'uses' => 'UserController@index']);
             Route::get('grid', ['as' => 'grid', 'uses' => 'UserController@grid']);

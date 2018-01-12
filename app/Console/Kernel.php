@@ -4,6 +4,7 @@ namespace Seracademico\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Seracademico\Console\Commands\SendEmailAlertaBiblioteca;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Seracademico\Console\Commands\Inspire::class,
+        SendEmailAlertaBiblioteca::class
     ];
 
     /**
@@ -24,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->command('send:emailalertabiblioteca')
+            ->everyMinute();
     }
 }

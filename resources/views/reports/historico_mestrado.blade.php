@@ -69,19 +69,18 @@
 
 <div class="cabecalho">
     <h1>
-        <img width="200" src="{{ asset('img/dd.jpg') }}" alt="FASUP">
+        <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
     </h1>
-
     <div class="subtitulo">
         <h2>HISTÓRICO ESCOLAR</h2>
     </div>
 </div>
 
 <?php
-    $aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
-    $aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
-    $timeInicial = $aulaInicial->getTimestamp();
-    $timeFinal   = $aulaFinal->getTimestamp();
+$aulaInicial = \DateTime::createFromFormat('Y-m-d', $turma->aula_inicio);
+$aulaFinal   = \DateTime::createFromFormat('Y-m-d', $turma->aula_final);
+$timeInicial = $aulaInicial->getTimestamp();
+$timeFinal   = $aulaFinal->getTimestamp();
 ?>
 
 <div class="corpo">

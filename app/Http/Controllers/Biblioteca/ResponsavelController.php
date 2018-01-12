@@ -115,7 +115,7 @@ class ResponsavelController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -138,7 +138,7 @@ class ResponsavelController extends Controller
 
             #retorno para view
             return view('biblioteca.responsavel.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -169,7 +169,7 @@ class ResponsavelController extends Controller
             return redirect()->back()->with("message", "Alteração realizada com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -186,7 +186,7 @@ class ResponsavelController extends Controller
 
             #Retorno para a view
             return redirect()->back()->with("message", "Remoção realizada com sucesso!");
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
@@ -211,7 +211,7 @@ class ResponsavelController extends Controller
             return array('msg' => 'Cadastro realizado com sucesso!');
         } catch (ValidatorException $e) {
             return $this->validator->errors();
-        } catch (\Throwable $e) { dd($e);
+        } catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
