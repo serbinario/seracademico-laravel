@@ -34,6 +34,12 @@
             top: 0;
             display: none;
         }
+
+        .row_sem_debito {
+            background-color: #69aaa6 !important;
+            color: #FFF;
+            font-weight: bold;
+        }
     </style>
 @stop
 
