@@ -42,6 +42,9 @@ class AlunoDocumentoController extends Controller
                 case "26" :
                     $this->contrato($idAluno);
                     break;
+                case "27" :
+                    $this->declaracaoMatricula($idAluno);
+                    break;
             }
 
             # Retorno
@@ -72,6 +75,10 @@ class AlunoDocumentoController extends Controller
                 case "26" :
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.contrato_graduacao";
+                    break;
+                case "27" :
+                    $result = $this->declaracaoMatricula($idAluno);
+                    $nameView = "reports.graduacao.declaracao_matricula";
                     break;
             }
 
@@ -105,6 +112,21 @@ class AlunoDocumentoController extends Controller
         }*/
 
         # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function declaracaoMatricula($id)
+    {
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+        $aluno = $result['aluno'];
+        $pivotSemestre = $aluno->semestres()->get()->last()->pivot;
+        $result['semestre']['periodo'] = $pivotSemestre->periodo;
+        $result['turno'] = $aluno->turno;
+//dd($result);
         return $result;
     }
 
