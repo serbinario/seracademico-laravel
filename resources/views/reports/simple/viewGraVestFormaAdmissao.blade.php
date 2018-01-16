@@ -1,8 +1,9 @@
+
 <html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Vestibulandos</title>
+    <title>VESTIBULANDOS POR FORMA DE ADMISSÃO - GRADUAÇÃO</title>
     <style type="text/css">
         table tbody th, table tbody td {
             padding: 2px 2px;
@@ -31,27 +32,30 @@
     <table id="report_vestibulando" width="100%" border="1" cellspacing="0" style="border: 1px solid lightgray;" >
         <thead>
         <tr style="background-color: #2F5286; color: white;">
-            <th>Nome</th>
-            <th>Inscrição</th>
-            {{--<th>Telefones</th>--}}
-            <th>CPF</th>
-            <th>Vestibular</th>
-            <th>Financeiro</th>
+            <th>Vestibulando</th>
+            <th>Curso</th>
+            <th>Turno</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($rows as $row)
-            <tr >
-                <td><b>{{ $row->nome }}</b></td>
-                <td style="text-align: center;">{{ $row->inscricao }}</td>
-                {{--<td>{{ $row->celular  }}</td>--}}
-                <td style="text-align: center;">{{ $row->cpf }}</td>
-                <td style="text-align: center;">{{ $row->vestibular }}</td>
-                <td style="text-align: center;">{{ $row->financeiro }}</td>
+        @foreach($dados['body'] as $vestibulando)
+            <tr>
+                <td><b>{{$vestibulando->nome}}</b></td>
+                <td style="text-align: center;">{{$vestibulando->curso}}</td>
+                @if($vestibulando->turno == 1)
+                        <td style="text-align: center;">Manhã</td>
+                    @elseif($vestibulando->turno == 2)
+                        <td style="text-align: center;">Tarde</td>
+                    @elseif($vestibulando->turno == 3)
+                        <td style="text-align: center;">Noite</td>
+                    @else
+                        <td style="text-align: center;">Integral</td>
+                @endif
             </tr>
         @endforeach
         </tbody>
     </table>
+
 </div>
 </body>
 </html>

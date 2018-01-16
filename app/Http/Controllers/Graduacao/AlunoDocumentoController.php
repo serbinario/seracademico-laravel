@@ -126,7 +126,7 @@ class AlunoDocumentoController extends Controller
         $pivotSemestre = $aluno->semestres()->get()->last()->pivot;
         $result['semestre']['periodo'] = $pivotSemestre->periodo;
         $result['turno'] = $aluno->turno;
-//dd($result);
+
         return $result;
     }
 
