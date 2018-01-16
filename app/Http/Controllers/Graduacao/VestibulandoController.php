@@ -49,7 +49,8 @@ class VestibulandoController extends Controller
         'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
-        'LinguaExtrangeira'
+        'LinguaExtrangeira',
+        'SimpleReport|byCrud,20'
     ];
 
     /**
