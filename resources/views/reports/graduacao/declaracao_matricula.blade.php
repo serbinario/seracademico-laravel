@@ -1,3 +1,4 @@
+{{dd($curso)}}
 <html>
 <head>
     <meta charset="UTF-8" />

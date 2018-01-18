@@ -37,7 +37,8 @@ class CursoController extends Controller
     * @param CursoService $service
     * @param CursoValidator $validator
     */
-    public function __construct(CursoService $service, CursoValidator $validator)
+    public function __construct(CursoService $service,
+                                CursoValidator $validator)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
