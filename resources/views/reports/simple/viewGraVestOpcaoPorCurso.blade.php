@@ -1,8 +1,9 @@
+
 <html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>VESTIBULANDOS POR FORMA DE ADMISSÃO - GRADUAÇÃO</title>
+    <title>VESTIBULANDOS POR OPÇÃO DE CURSO - GRADUAÇÃO</title>
     <style type="text/css">
         table tbody th, table tbody td {
             padding: 2px 2px;
@@ -32,7 +33,6 @@
         <thead>
         <tr style="background-color: #2F5286; color: white;">
             <th>Vestibulando</th>
-            <th>Curso</th>
             <th>Turno</th>
         </tr>
         </thead>
@@ -40,7 +40,6 @@
         @foreach($dados['body'] as $vestibulando)
             <tr>
                 <td><b>{{$vestibulando->nome}}</b></td>
-                <td style="text-align: center;">{{$vestibulando->curso}}</td>
                 @if($vestibulando->turno == 1)
                         <td style="text-align: center;">Manhã</td>
                     @elseif($vestibulando->turno == 2)
@@ -72,7 +71,7 @@
         </tr>--}}
         </thead>
         <tbody>
-        {{----}}
+            {{----}}
         </tbody>
     </table>
 </div>

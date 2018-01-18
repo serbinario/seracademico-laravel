@@ -10,4 +10,8 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CursoRepository extends RepositoryInterface
 {
+    /**
+     * @return mixed
+     */
+    public function cursos();
 }
