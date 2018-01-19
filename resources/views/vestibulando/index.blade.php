@@ -34,6 +34,12 @@
             top: 0;
             display: none;
         }
+
+        .row_sem_debito {
+            background-color: #69aaa6 !important;
+            color: #FFF;
+            font-weight: bold;
+        }
     </style>
 @stop
 
@@ -137,6 +143,31 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Relatórios Avançados
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            {!! Form::select('relatorios', ( ['' => 'Selecione um relatório'] + $loadFields['simplereport']->toArray()),
+                                             Session::getOldInput('relatorios'), array('class' => 'form-control', 'id' => 'report_id')) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     @include('vestibulando.modal_notas')
@@ -146,6 +177,8 @@
     @include('vestibulando.financeiro.modal_create_debito')
     @include('vestibulando.financeiro.modal_edit_debito')
     @include('vestibulando.financeiro.modal_info_debito')
+    @include('reports.simple.modals.modal_report_vestibulando_forma_admissao')
+    @include('reports.simple.modals.modal_report_vestibulando_opcao_curso')
 @stop
 
 @section('javascript')
@@ -158,65 +191,67 @@
     <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/modal_info_debito.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/valida_campos_debitos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/gerar_boleto.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_vestibulando_forma_admissao.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_vestibulando_opcao_curso.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe
         function format(d) {
             return  '<div class="row">' +
-                        '<div class="col-md-4">' +
-                            '<h3>Forma de avaliação : ' + d.formaAvaliacao + '</h3>' +
-                        '</div>' +
+                    '<div class="col-md-4">' +
+                    '<h3>Forma de avaliação : ' + d.formaAvaliacao + '</h3>' +
+                    '</div>' +
                     '</div>' +
                     '<div class="row">' +
-                        '<div class="col-md-12">' +
-                            '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
-                                '<thead>' +
-                                    '<tr>' +
-                                        '<th>Média Enem</th>' +
-                                        '<th>Redação (vestibular agendado)</th>' +
-                                    '</tr>' +
-                                '</thead>' +
-                                '<tbody>' +
-                                    '<tr>' +
-                                        '<td>' + d.media_enem+ '</td>' +
-                                        '<td>' + d.nota_vestibular_redacao + '</td>' +
-                                    '</tr>' +
-                                    '<tr>' +
-                                        '<td style="text-align: center;" colspan="2">' + d.resultado + '</td>' +
-                                    '</tr>' +
-                                '</tbody>' +
-                            '</table>' +
-                        '</div>' +
+                    '<div class="col-md-12">' +
+                    '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>Média Enem</th>' +
+                    '<th>Redação (vestibular agendado)</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + d.media_enem+ '</td>' +
+                    '<td>' + d.nota_vestibular_redacao + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td style="text-align: center;" colspan="2">' + d.resultado + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>' +
                     '</div>'+
                     '<div class="row">' +
-                        '<div class="col-md-12">' +
-                            '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
-                                '<thead>' +
-                                    '<tr>' +
-                                        '<th style="width: 5%">Opção</th>' +
-                                        '<th>Curso</th>' +
-                                        '<th style="width: 20%">Turno</th>' +
-                                    '</tr>' +
-                                '</thead>' +
-                                '<tbody>' +
-                                    '<tr>' +
-                                        '<td style="width: 5%">1º</td>' +
-                                        '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
-                                        '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
-                                    '</tr>' +
-                                    '<tr>' +
-                                        '<td style="width: 5%">2º</td>' +
-                                        '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
-                                        '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
-                                    '</tr>' +
-                                    '<tr>' +
-                                        '<td style="width: 5%">3º</td>' +
-                                        '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
-                                        '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
-                                    '</tr>' +
-                                '</tbody>' +
-                            '</table>' +
-                        '</div>' +
+                    '<div class="col-md-12">' +
+                    '<table id="vestibulando-grid" class="display table table-bordered" cellspacing="0" width="100%">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th style="width: 5%">Opção</th>' +
+                    '<th>Curso</th>' +
+                    '<th style="width: 20%">Turno</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td style="width: 5%">1º</td>' +
+                    '<td>' + (d.nomeCurso1 ? d.nomeCurso1 : 'Não Selecionado') + '</td>' +
+                    '<td style="width: 20%">' + (d.nomeTurno1 ? d.nomeTurno1 : 'Não Selecionado') + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td style="width: 5%">2º</td>' +
+                    '<td>' + (d.nomeCurso2 ? d.nomeCurso2 : 'Não Selecionado') + '</td>' +
+                    '<td style="width: 20%">' + (d.nomeTurno2 ? d.nomeTurno2 : 'Não Selecionado') + '</td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td style="width: 5%">3º</td>' +
+                    '<td>' + (d.nomeCurso3 ? d.nomeCurso3 : 'Não Selecionado') + '</td>' +
+                    '<td style="width: 20%">' + (d.nomeTurno3 ? d.nomeTurno3 : 'Não Selecionado') + '</td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>' +
                     '</div>';
         }
 
@@ -235,6 +270,7 @@
                     d.globalSearch = $('input[name=globalSearch]').val();
                     d.cursoSearch = $('select[name=cursoSearch] option:selected').val();
                     d.opcaoCurso = $('select[name=opcaoSearch] option:selected').val();
+                    d.dataAvaliacaoSearch = $('select[name=dataAvaliacaoSearch] option:selected').val();
                 }
             },
             columns: [
@@ -358,20 +394,20 @@
                     if(retorno.dados.length == 0) {
                         @if((Auth::check() && Auth::user()->is('admin')))
                             swal({
-                                title: "Período de inscrições encerrado, deseja continuar ?",
-                                text: "",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Sim, desejo continuar!",
-                                closeOnConfirm: false
-                            }, function() {
-                                // redirecionamento
-                                location.href = $("#btnAddVestibulando").prop('href');
-                            });
+                                    title: "Período de inscrições encerrado, deseja continuar ?",
+                                    text: "",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Sim, desejo continuar!",
+                                    closeOnConfirm: false
+                                }, function() {
+                                    // redirecionamento
+                                    location.href = $("#btnAddVestibulando").prop('href');
+                                });
                         @else
                             // usuário comum
-                            swal("Período de inscrições encerrado!");
+                        swal("Período de inscrições encerrado!");
                         @endif
                     } else {
                         // redirecionamento
@@ -405,5 +441,36 @@
             // Redirecionando para a página de relatório
             window.open('/index.php/seracademico/vestibulando/reportFilter?' + dados ,'_blank');
         });
+
+        // Geriamento dos relatórios avançadas
+        $(document).on('change', '#report_id', function () {
+            // Recuperando o id do relatório
+            var reportId = $('#report_id').val();
+
+            // Validando o id do relatório
+            if(!reportId) {
+                return false;
+            }
+
+            // Fazendo a requisição ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: '/index.php/seracademico/report/getFunction/' + reportId,
+                datatype: 'json'
+            }).done(function (retorno) {
+                // Verificando o retorno da requisição
+                if(retorno.success) {
+                    execute(new Function(retorno.dados.function));
+                } else {
+                    // Retorno tenha dado erro
+                    swal(retorno.msg, "Click no botão abaixo!", "error");
+                }
+            });
+        });
+
+        // Função utilizada para executar o callback
+        function execute(callback) {
+            callback();
+        }
     </script>
 @stop

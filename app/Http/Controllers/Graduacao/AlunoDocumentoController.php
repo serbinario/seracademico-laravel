@@ -42,6 +42,9 @@ class AlunoDocumentoController extends Controller
                 case "26" :
                     $this->contrato($idAluno);
                     break;
+                case "27" :
+                    $this->declaracaoMatricula($idAluno);
+                    break;
             }
 
             # Retorno
@@ -72,6 +75,10 @@ class AlunoDocumentoController extends Controller
                 case "26" :
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.contrato_graduacao";
+                    break;
+                case "27" :
+                    $result = $this->declaracaoMatricula($idAluno);
+                    $nameView = "reports.graduacao.declaracao_matricula";
                     break;
             }
 
@@ -105,6 +112,21 @@ class AlunoDocumentoController extends Controller
         }*/
 
         # retorno dos dados
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function declaracaoMatricula($id)
+    {
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+        $aluno = $result['aluno'];
+        $pivotSemestre = $aluno->semestres()->get()->last()->pivot;
+        $result['semestre']['periodo'] = $pivotSemestre->periodo;
+        $result['turno'] = $aluno->turno;
+
         return $result;
     }
 
@@ -154,16 +176,16 @@ class AlunoDocumentoController extends Controller
     private function getCursoAtivoDoAluno($idAluno)
     {
         # Retorno o resultado da consulta
-        return  \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+        return  \DB::table('fac_alunos_cursos')
+            ->join('fac_curriculos', 'fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $idAluno)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->where('fac_alunos_cursos.aluno_id', '=', $idAluno)
+            ->orderBy('fac_alunos_cursos.id', 'DESC')
             ->limit(1)
             ->select([
                 'fac_curriculos.*',
                 'fac_cursos.*',
-                'pos_alunos_cursos.id as idCurso'
+                'fac_alunos_cursos.id as idCurso'
             ])->first();
     }
 
@@ -186,43 +208,4 @@ class AlunoDocumentoController extends Controller
                 'fac_turmas.*'
             ])->first();
     }
-
-    /**
-     * @param $tipoDoc
-     * @param $idAluno
-     * @return mixed
-     */
-    /*public function checkDocumento($tipoDoc, $idAluno)
-    {
-        try {
-            $this->documentoHelper->obtemDocumento($tipoDoc);
-
-            # Retorno
-            return response()->json(['success' => true]);
-        } catch (\Throwable $e) {
-            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
-        }
-    }*/
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*public function gerarDocumento($tipoDoc, $idAluno)
-    {
-        # Setando a localidade da aplicação
-        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-        date_default_timezone_set('America/Sao_Paulo');
-
-        try {
-            $documento = $this->documentoHelper->obtemDocumento($tipoDoc);
-            $resultado = $documento->processaDocumento($idAluno, []);
-
-            # Retorno do arquivo pdf
-            return \PDF::loadView($resultado['nomeDaView'], $resultado)->stream();
-        } catch (\Throwable $e) {
-            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
-        }
-    }*/
 }

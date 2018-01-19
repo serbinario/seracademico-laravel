@@ -14,6 +14,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\VestibulandoService;
 use Seracademico\Validators\Graduacao\VestibulandoValidator;
 use Seracademico\Repositories\Graduacao\VestibulandoRepository;
+use Seracademico\Repositories\Graduacao\CursoRepository;
 use Seracademico\Repositories\Vestibular\VestibularAgendamentoRepository;
 use Yajra\Datatables\Datatables;
 
@@ -28,6 +29,11 @@ class VestibulandoController extends Controller
      * @var VestibulandoValidator
      */
     private $validator;
+
+    /**
+     * @var CursoRepository
+     */
+    private $cursoRepository;
 
     /**
      * @var array
@@ -49,7 +55,8 @@ class VestibulandoController extends Controller
         'Graduacao\\Curso|ativo,1',
         'Turno',
         'Sala',
-        'LinguaExtrangeira'
+        'LinguaExtrangeira',
+        'SimpleReport|byCrud,20'
     ];
 
     /**
@@ -65,12 +72,14 @@ class VestibulandoController extends Controller
         VestibulandoService $service,
         VestibulandoValidator $validator,
         VestibulandoRepository $repository,
-        VestibularAgendamentoRepository $agendamentoRepository)
+        VestibularAgendamentoRepository $agendamentoRepository,
+        CursoRepository $cursoRepository)
     {
         $this->service    = $service;
         $this->validator  = $validator;
         $this->repository  = $repository;
         $this->agendamentoRepository  = $agendamentoRepository;
+        $this->cursoRepository  = $cursoRepository;
     }
 
     /**
@@ -91,11 +100,13 @@ class VestibulandoController extends Controller
         $loadFields = $this->service->load($arrayLoadFields);
         $datas = $this->agendamentoRepository->buscarDatas();
 
+        $selectCursos = $this->cursoRepository->cursos();
+
         # Recuperando o vestibular ativo
         $vestibularAtivo = ParametroVestibularFacade::getAtivo();
 
         # Retorno
-        return view('vestibulando.index', compact('loadFields', 'vestibularAtivo', 'datas'));
+        return view('vestibulando.index', compact('loadFields', 'vestibularAtivo', 'datas', 'selectCursos'));
     }
 
     /**
@@ -126,6 +137,7 @@ class VestibulandoController extends Controller
             ->leftJoin('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
             ->leftJoin('vest_agendamento', 'vest_agendamento.id', '=', 'fac_vestibulandos.agendamento_id')
             ->groupBy('fac_vestibulandos.id')
+            ->orderBy('fac_alunos.id', 'asc')
             ->select([
                 'fac_vestibulandos.id',
                 'fac_vestibulandos.media_enem as media_enem',
@@ -257,7 +269,17 @@ class VestibulandoController extends Controller
                 }
 
                 return $resultado;
-            })->make(true);
+            })
+            ->setRowClass(function ($row) {
+                $vestibulando = $this->repository->find($row->id);
+                $debitos = $vestibulando->debitos;
+                $debitoMatricula = $debitos->filter(function ($debito) {
+                    return $debito->taxa->tipoTaxa->id == 1;
+                });
+
+                return count($debitoMatricula) > 0 ? '' : 'row_sem_debito';
+            })
+            ->make(true);
     }
 
     /**
