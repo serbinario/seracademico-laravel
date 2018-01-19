@@ -10,28 +10,24 @@
 
         .logoTimbrado {
             position: relative;
-            margin-top: -70px;
-            margin-left: -5px;
+            margin-top: -50px;
+            margin-left: -15px;
         }
 
         .tituloTimbrado {
             position: relative;
             margin-top: -175px;
-            left: 215px;
+            left: 190px;
             color: #273176;
-            font-size: 15px;
+            font-size: 12px;
             text-align: justify;
-        }
-
-        .blocoTimbrado {
-            display: block;
         }
 
         .rodapeTimbrado {
             /*position: absolute;*/
-            margin-top: 546px;
+            /*margin-top: 546px;*/
             color: #273176;
-            font-size: 20px;
+            font-size: 12px;
             text-align: center;
         }
 
@@ -42,33 +38,35 @@
             font-size: 20px;
         }
         .corpo {
-            font-size: 20px;
+            font-size: 16px;
         }
 
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
 <body>
-<div class="logoTimbrado">
-    <img style="width: 250px; height: auto;" src="{{asset('img/logo_alpha_faculdade-01.png')}}">
+<div>
+    <div class="logoTimbrado">
+        <img style="width: 220px; height: auto;" src="{{asset('img/logo_alpha_faculdade-01.png')}}">
+    </div>
+    <div style="color: #273176; position: absolute; left: 155px; top: 40px; font-size: 12px;">
+        20570
+    </div>
+    <div style="width: 490px; height: 80px;">
+        <p class="tituloTimbrado"><br><br>
+            Portaria Normativa de Credenciamento da Faculdade ALPHA nº 1.248 de 29 de setembro de 2017,
+            Portaria nº 1.062, de 06 de outubro de 2017 sobre autorização dos Cursos: Bacharelado em
+            Administração, Licenciatura em Pedagogia, Tecnólogos em Gestão de Recursos Humanos e Análise de
+            Desenvolvimento de Sistemas.
+        </p>
+    </div>
 </div>
-<div class="blocoTimbrado">
-    <p class="tituloTimbrado">
-        Portaria Normativa de Credenciamento da Faculdade ALPHA nº 1.248 de 29 de setembro de 2017, <br>
-        Portaria nº 1.062, de 06 de outubro de 2017 sobre autorização dos Cursos: Bacharelado em <br>
-        Administração, Licenciatura em Pedagogia, Tecnólogos em Gestão de Recursos Humanos e Análise de
-        Desenvolvimento de Sistemas.
-    </p>
-</div>
-
-<div style="margin-top: 45px;">
+<div style="margin-top: 55px;">
     <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
-
 <div class="titulo">
-    <h3>D E C L A R A Ç Ã O &nbsp; D E &nbsp; M A T R Í C U L A</h3>
+    <h4>D E C L A R A Ç Ã O &nbsp; D E &nbsp; M A T R Í C U L A</h4>
 </div>
-
 <div class="corpo">
     <p style="text-indent:80px; line-height: 50px;">
         Declaramos para os devidos fins que o aluno <b>{{ isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" }}</b>,
@@ -88,11 +86,9 @@
         Secretário Geral da Faculdade e Depositário do Acervo Acadêmico
     </div>
 </div>
-
-<div style="margin-top: 100px;">
+<div style="margin-top: 140px;">
     <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
-
 <div class="rodapeTimbrado">
     Rua Gervásio Pires, 286, Santo Amaro, Recife – PE – CEP: 50.050-415<br>
     CNPJ: 15.708.483/0001-50<br>
