@@ -102,15 +102,15 @@
 
 <table class="table" width="100%" style="background-color: #f1f1f1">
     <tr>
-        <td><b>Nome:</b> {{$dados->nome}}</td>
-        <td><b>Telefone:</b> {{$dados->celular}}</td>
+        <td><b>Nome:</b> @if(isset($dados->nome)) {{$dados->nome}} @endif</td>
+        <td><b>Telefone:</b> @if(isset($dados->celular)) {{$dados->celular}} @endif</td>
     </tr>
     <tr>
-        <td colspan="2"><b>Endereço:</b> {{$dados->logradouro}}</td>
+        <td colspan="2"><b>Endereço:</b> @if(isset($dados->logradouro)) {{$dados->logradouro}} @endif </td>
     </tr>
     <tr>
         <td><b>Código da matrícula:</b>  @if(isset($dados->matricula)) {{$dados->matricula}} @endif</td>
-        <td><b>E-mail:</b>  {{$dados->email}}</td>
+        <td><b>E-mail:</b>  @if(isset($dados->email)) {{$dados->email}} @endif </td>
     </tr>
 </table>
 
@@ -156,7 +156,7 @@
 <h5><b>CONSULTA</b></h5>
 
 <p class="termos">
-    1)	Revista, jornais, CDs, DVDs, livros de referência (dicionários, enciclopédias) e livros <b>com tarja vermelha,
+    1)	Revista, Monografias, Teses, Dissertações, jornais, CDs, DVDs, livros de referência (dicionários, enciclopédias) e livros <b>com tarja vermelha,
     são para consulta exclusiva na biblioteca (consulta especial);</b><br />
     2)	A consulta especial é aquela da qual o usuário só poderá consultar o livro na Biblioteca ou áreas da Faculdade,
     tendo o compromisso de devolver o livro antes que encerre o expediente,
@@ -167,8 +167,8 @@
 
 <p class="termos">
     O usuário: aluno de graduação, aluno de pós-graduação, professor e funcionário que não devolver ou renovar o livro na data prevista,
-    pagará multa <b> de R$ 2,50 (cinco reais )</b> por livro/dia de atraso, incluindo sábados, domingos e feriados, reajustada anualmente,
-    a partir de 2018. <b>Só serão abonadas as multas em caso de doença mediante apresentação de atestado médico;</b><br />
+    pagará multa <b> de R$ 3.00 (três reais)</b> por livro/dia de atraso, incluindo sábados, domingos e feriados, reajustada anualmente,
+    a partir de 2019. <b>Só serão abonadas as multas em caso de doença mediante apresentação de atestado médico e/ou de acompanhamento;</b><br />
     1)	O usuário que estiver em débito e/ou pendência com a biblioteca, ou qualquer outro setor acadêmico,
     não poderá fazer empréstimo de livros, matrícula, trancamento, licença, outros Os que abandonarem o curso e não
     devolverem o livro será cobrado em protesto.
@@ -179,7 +179,8 @@
 <p class="termos">
     O usuário só poderá fazer reserva, quando todos os exemplares dos livros desejados estiverem fora da biblioteca.
     Se o usuário estiver com o livro emprestado, não poderá fazer reserva deste; A quantidade dos livros para reserva,
-    será a mesma do empréstimo e suas categorias correlatas (aluno de graduação, pós-graduação, professor e funcionário).
+    será a mesma do empréstimo e suas categorias correlatas (aluno de graduação, pós-graduação, mestrado, doutorado,
+    tecnólogo, técnico, professor e funcionário).
 </p>
 
 

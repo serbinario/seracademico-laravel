@@ -182,6 +182,8 @@
                                             <div class="col s4"><b>Título</b></div>
                                             @if($exemplar['acervo']['tipo_periodico'] == '1')
                                                 <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}} </b></div>
+                                            @elseif($exemplar['acervo']['tipo_periodico'] == '3')
+                                                    <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}: {{$exemplar['acervo']['subtitulo']}} </b></div>
                                             @elseif($exemplar['acervo']['tipo_periodico'] == '2')
                                                 <div class="col s8"><b>{{$exemplar['acervo']['titulo']}}@if($exemplar['acervo']['subtitulo']): {{$exemplar['acervo']['subtitulo']}} @endif</b></div>
                                             @endif
@@ -288,14 +290,16 @@
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 6) {echo ' (Orient.) ';} ?>et al
                                                             @else
                                                                 <?php echo $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'] ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Org.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                                                 <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>
+                                                                <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 6) {echo ' (Orient.) ';} ?>et al
                                                             @endif
                                                         @else
                                                             @foreach($exemplar['acervo']['segundaEntrada'] as $chave => $autor)
@@ -308,6 +312,7 @@
                                                                     <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>
                                                                     <br />
                                                                 @else
                                                                     <b>{{$chave + 1}}</b>.
@@ -317,6 +322,7 @@
                                                                     <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
                                                                     <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                                    <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>
                                                                     <br />
                                                                 @endif
                                                             @endforeach
@@ -428,7 +434,8 @@
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 3) {echo ' (Trad.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 4) {echo ' (Edit.) ';} ?>
-                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>et al.
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 5) {echo ' (Colab.) ';} ?>
+                                            <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 6) {echo ' (Orient.) ';} ?>et al.
                                         @else
                                             <span style="text-transform: uppercase"><?php echo ucwords(mb_strtolower($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'])) ?></span><?php if (strrchr($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'], ".") == ".") { echo "";} else {echo ".";} ?>
                                         @endif
@@ -444,7 +451,8 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                            <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -457,7 +465,8 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                            <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -470,7 +479,8 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                            <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -484,7 +494,8 @@
                                                                 <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                                 <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                                 <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                                <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                                <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                                <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                             @else
                                                                 <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                                 <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -496,7 +507,8 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                            <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -508,7 +520,8 @@
                                                             <?php if($autor['tipo_autor_id'] == 2) {echo ' (Coord.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 3) {echo ' (Trad.)';} ?>
                                                             <?php if($autor['tipo_autor_id'] == 4) {echo ' (Edit.)';} ?>
-                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
+                                                            <?php if($autor['tipo_autor_id'] == 5) {echo ' (Colab.)';} ?>
+                                                            <?php if($autor['tipo_autor_id'] == 6) {echo ' (Orient.)';} ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
                                                         @else
                                                             <span style="text-transform: uppercase">{{$autor['responsaveis']['sobrenome']}}</span>,
                                                             <?php echo $autor['responsaveis']['nome']; ?>@if(count($exemplar['acervo']['segundaEntrada']) == $count ).@else;@endif
@@ -600,9 +613,9 @@
                                 @elseif($exemplar['acervo']['serie_id'] && $exemplar['acervo']['colecao_id'])
                                     ({{ $exemplar['acervo']['serie']['nome'] }}) ({{ $exemplar['acervo']['colecao']['nome'] }}). @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
-                                    ,@if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
+                                    @if($exemplar['isbn'])ISBN {{$exemplar['isbn']}}. @endif
                                 @elseif($exemplar['acervo']['tipo_periodico'] == '2')
-                                    ,@if($exemplar['issn'])ISSN {{$exemplar['issn']}}. @endif
+                                    @if($exemplar['issn'])ISSN {{$exemplar['issn']}}. @endif
                                 @endif
                             </div>
 

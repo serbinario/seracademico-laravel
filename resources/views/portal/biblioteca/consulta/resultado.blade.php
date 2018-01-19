@@ -110,9 +110,9 @@
                                 <div class="col s6">
                                     <p class="labels-cc"><b>Nº de chamada</b><br/>
                                         {{ $f->cdd }} @if($f->edicao) / {{ $f->edicao }} @endif
-                                        @if($f->vol_periodico)v. {{$f->vol_periodico}}. @endif
-                                        @if($f->num_periodico)n. {{$f->num_periodico}}. @endif
-                                        @if($f->ano){{$f->ano}}.
+                                        @if($f->vol_periodico)v. {{$f->vol_periodico}} @endif
+                                        @if($f->num_periodico)n. {{$f->num_periodico}} @endif
+                                        @if($f->ano) / {{$f->ano}}
                                           @endif
                                     </p>
                                 </div>
@@ -120,9 +120,9 @@
                                 <div class="col s12">
                                     <p class="labels-cc"><b>Nº de chamada</b><br/>
                                         {{ $f->cdd }} @if($f->edicao) / {{ $f->edicao }} @endif
-                                        @if($f->vol_periodico)v. {{$f->vol_periodico}}. @endif
-                                        @if($f->num_periodico)n. {{$f->num_periodico}}. @endif
-                                        @if($f->ano){{$f->ano}}.
+                                        @if($f->vol_periodico)v. {{$f->vol_periodico}} @endif
+                                        @if($f->num_periodico)n. {{$f->num_periodico}} @endif
+                                        @if($f->ano) / {{$f->ano}}
                                         @endif
                                     </p>
                                 </div>
