@@ -6,6 +6,7 @@ use Seracademico\Entities\Biblioteca\PrimeiraEntrada;
 use Seracademico\Entities\Biblioteca\SegundaEntrada;
 use Seracademico\Repositories\Biblioteca\ArcevoRepository;
 use Seracademico\Entities\Biblioteca\Arcevo;
+use Seracademico\Repositories\Biblioteca\ExemplarRepository;
 use Seracademico\Repositories\Biblioteca\PrimeiraEntradaRepository;
 use Seracademico\Repositories\Biblioteca\ResponsavelRepository;
 use Seracademico\Repositories\Biblioteca\SegundaEntradaRepository;
@@ -35,15 +36,23 @@ class ArcevoService
     private $responsavelRepository;
 
     /**
+     * @var ExemplarRepository
+     */
+    private $exemplarRepository;
+
+    /**
      * @param ArcevoRepository $repository
      */
-    public function __construct(ArcevoRepository $repository, SegundaEntradaRepository $segundaRepository,
-                                PrimeiraEntradaRepository $primeiraRepository, ResponsavelRepository $responsavelRepository)
+    public function __construct(ArcevoRepository $repository,
+                                SegundaEntradaRepository $segundaRepository,
+                                PrimeiraEntradaRepository $primeiraRepository,
+                                ResponsavelRepository $responsavelRepository, ExemplarRepository $exemplarRepository)
     {
         $this->repository = $repository;
         $this->segundaRepository = $segundaRepository;
         $this->primeiraRepository = $primeiraRepository;
         $this->responsavelRepository = $responsavelRepository;
+        $this->exemplarRepository = $exemplarRepository;
     }
 
     /**
@@ -242,13 +251,16 @@ class ArcevoService
         $entradas = [
             'tipo_autor_id' => "",
             'responsaveis_id' => "",
-            'arcevos_id'=> ""
+            'arcevos_id' => ""
         ];
 
         $data['numero_chamada'] = $data['cdd'] . " " . $data['cutter'];
 
         #Atualizando no banco de dados
         $arcevo = $this->repository->update($data, $id);
+
+        // Alterando o staus dos exemplares do acordo com o do acervo
+        $this->alterarStatusExemplar($arcevo);
 
         if(isset($data['cursos'])){
             $arcevo->cursos()->detach();
@@ -308,6 +320,22 @@ class ArcevoService
 
         #Retorno
         return $arcevo;
+    }
+
+    /**
+     * @param $acervo
+     */
+    protected function alterarStatusExemplar($acervo)
+    {
+        $exemplares = $this->exemplarRepository->findWhere(['arcevos_id' => $acervo->id, 'exemp_principal' => '0']);
+
+        foreach ($exemplares as $exemplar) {
+            if($exemplar->situacao_id != 4 && $exemplar->situacao_id != 5) {
+                $exemplar->situacao_id = $acervo->situacao_id;
+                $exemplar->save();
+            }
+
+        }
     }
 
     /**

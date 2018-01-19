@@ -12,7 +12,7 @@ class TipoAcervo extends Model implements Transformable
 
     protected $table    = 'bib_tipos_acervos';
 
-    protected $fillable = [ 
+    protected $fillable = [
 		'nome',
         'tipo'
 	];
