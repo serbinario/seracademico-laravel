@@ -1,4 +1,3 @@
-{{dd($curso)}}
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -12,15 +11,20 @@
         .logoTimbrado {
             position: relative;
             margin-top: -70px;
-            margin-left: -29px;
+            margin-left: -5px;
         }
 
         .tituloTimbrado {
             position: relative;
-            margin-top: -193px;
+            margin-top: -175px;
             left: 215px;
             color: #273176;
-            font-size: 20px;
+            font-size: 15px;
+            text-align: justify;
+        }
+
+        .blocoTimbrado {
+            display: block;
         }
 
         .rodapeTimbrado {
@@ -32,7 +36,7 @@
         }
 
         .titulo {
-            margin-top: 100px;
+            margin-top: 150px;
             margin-bottom: 100px;
             text-align: center;
             font-size: 20px;
@@ -46,14 +50,19 @@
 </head>
 <body>
 <div class="logoTimbrado">
-    <img style="width: 250px; height: auto" src="{{asset('img/logo_alpha_faculdade-01.png')}}">
+    <img style="width: 250px; height: auto;" src="{{asset('img/logo_alpha_faculdade-01.png')}}">
 </div>
-<div class="tituloTimbrado">
-    Portaria Normativa de Credenciamento da Faculdade ALPHA nº 1.248 <br>
-    de 29 de setembro de 2017, Portaria nº 1.062, de 06 de outubro de 2017 <br>
-    sobre autorização dos Cursos: Bacharelado em Administração,<br>
-    Licenciatura em Pedagogia, Tecnólogos em Gestão de Recursos Humanos <br>
-    e Análise de Desenvolvimento de Sistemas.
+<div class="blocoTimbrado">
+    <p class="tituloTimbrado">
+        Portaria Normativa de Credenciamento da Faculdade ALPHA nº 1.248 de 29 de setembro de 2017, <br>
+        Portaria nº 1.062, de 06 de outubro de 2017 sobre autorização dos Cursos: Bacharelado em <br>
+        Administração, Licenciatura em Pedagogia, Tecnólogos em Gestão de Recursos Humanos e Análise de
+        Desenvolvimento de Sistemas.
+    </p>
+</div>
+
+<div style="margin-top: 45px;">
+    <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 
 <div class="titulo">
@@ -61,11 +70,11 @@
 </div>
 
 <div class="corpo">
-    <p style="text-indent:80px;">
-        Declaramos para os devidos fins que o aluno {{ isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" }},
-        matrícula {{$aluno['matricula']}}, CPF {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }},
+    <p style="text-indent:80px; line-height: 50px;">
+        Declaramos para os devidos fins que o aluno <b>{{ isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" }}</b>,
+        matrícula <b>{{$aluno['matricula']}}</b>, <b>CPF {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }}</b>,
         encontra-se regularmente matriculado no Campus Recife, no Turno da {{ $turno->nome }}, com carga horária
-        equivalente ao {{ $semestre['periodo'] }}º Período do CURSO DE {{ isset($curso->nome) ? $curso->nome : "" }}
+        equivalente ao {{ $semestre['periodo'] }}º Período do <b>CURSO DE {{ isset($curso->nome) ? $curso->nome : "" }}</b>
         desta Faculdade.
     </p>
 
@@ -78,6 +87,10 @@
         Dorivaldo Ramos Bezerra Junior<br>
         Secretário Geral da Faculdade e Depositário do Acervo Acadêmico
     </div>
+</div>
+
+<div style="margin-top: 100px;">
+    <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 
 <div class="rodapeTimbrado">

@@ -114,7 +114,7 @@ class SimpleReport implements Report
             foreach ($filters as $chave => $value) {
                 $chave = str_replace(',', '.', $chave);
 
-                if (strcmp($filter->field, $chave) == 0 && !empty($value)) {
+                if (strcmp($filter->field, $chave) == 0 && $value != "") {
                     $where .= empty($where) && $this->sql[0]->where != 1
                         ? " WHERE {$chave} = {$value}"
                         : " AND {$chave} = {$value}";
@@ -151,7 +151,7 @@ class SimpleReport implements Report
             foreach ($filters as $chave => $value) {
                 $chave = str_replace(',', '.', $chave);
 
-                if (strcmp($filter->field, $chave) == 0 && !empty($value)) {
+                if (strcmp($filter->field, $chave) == 0 && !$value != "") {
                     $where .= empty($where) && $this->sql[0]->where != 1
                         ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
                 }

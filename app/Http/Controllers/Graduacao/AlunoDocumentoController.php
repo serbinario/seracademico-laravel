@@ -176,16 +176,16 @@ class AlunoDocumentoController extends Controller
     private function getCursoAtivoDoAluno($idAluno)
     {
         # Retorno o resultado da consulta
-        return  \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+        return  \DB::table('fac_alunos_cursos')
+            ->join('fac_curriculos', 'fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
             ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $idAluno)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
+            ->where('fac_alunos_cursos.aluno_id', '=', $idAluno)
+            ->orderBy('fac_alunos_cursos.id', 'DESC')
             ->limit(1)
             ->select([
                 'fac_curriculos.*',
                 'fac_cursos.*',
-                'pos_alunos_cursos.id as idCurso'
+                'fac_alunos_cursos.id as idCurso'
             ])->first();
     }
 
