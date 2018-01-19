@@ -24,7 +24,7 @@
                 <img alt="image" width="100%" src="{{ asset('/img/logo-alpha.png')}}"/>
             </td>
             <td width="55%"><br>
-                <h1 style="text-align: center;color: #082652; ">Lista de Livros por Curso</h1>
+                <h1 style="text-align: center;color: #082652; ">Lista de Acervo por Curso</h1>
             </td>
             <td width="15%">
                 <img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>
@@ -39,6 +39,7 @@
             <thead>
             <tr style="background-color: #2F5286; color: white;">
                     @if(isset($requisicao['titulo_ch'])) <th>Título</th> @endif
+                    @if(isset($requisicao['subtitulo_ch'])) <th>Subtítulo</th> @endif
                     @if(isset($requisicao['autor_ch'])) <th>Autor(s)</th> @endif
                     @if(isset($requisicao['outro_ch'])) <th>Outros responsáveis</th> @endif
                     @if(isset($requisicao['cdd_ch'])) <th>CDD</th> @endif
@@ -57,6 +58,7 @@
                 @foreach($curso->livros as $livro)
                     <tr>
                         @if(isset($requisicao['titulo_ch'])) <td>{{$livro->titulo}}</td> @endif
+                        @if(isset($requisicao['subtitulo_ch'])) <td>{{$livro->subtitulo}}</td> @endif
                         @if(isset($requisicao['autor_ch']))
                                 <td>
                                     @foreach($livro->autores as $autor)

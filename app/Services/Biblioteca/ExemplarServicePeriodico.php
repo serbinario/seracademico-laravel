@@ -397,6 +397,7 @@ class ExemplarServicePeriodico
     {
          #tratando as datas
          $data['data_aquisicao'] = $data['data_aquisicao'] ? $this->convertDate($data['data_aquisicao'], 'en') : "";
+        $data['data_catagolacao'] = $data['data_catagolacao'] ? $this->convertDate($data['data_catagolacao'], 'en') : "";
 
          #retorno
          return $data;
@@ -431,10 +432,12 @@ class ExemplarServicePeriodico
     public function getDateFormatPtBr($entity)
     {
         #validando as datas
-        $entity->data_aquisicao   = $entity->data_aquisicao == '0000-00-00' ? "" : $entity->data_aquisicao;
+        //$entity->data_aquisicao   = $entity->data_aquisicao == '0000-00-00' ? "" : $entity->data_aquisicao;
+        //$entity->data_catagolacao = $entity->data_catagolacao == '0000-00-00' ? "" : $entity->data_catagolacao;
 
         #tratando as datas
-        $entity->data_aquisicao   = date('d/m/Y', strtotime($entity->data_aquisicao));
+        $entity->data_aquisicao   = $entity->data_aquisicao ? date('d/m/Y', strtotime($entity->data_aquisicao)) : "";
+        $entity->data_catagolacao = $entity->data_catagolacao ?  date('d/m/Y', strtotime($entity->data_catagolacao)) : "";
         //$aluno->data_exame_nacional_um   = date('d/m/Y', strtotime($aluno->data_exame_nacional_um));
         //$aluno->data_exame_nacional_dois = date('d/m/Y', strtotime($aluno->data_exame_nacional_dois));
 

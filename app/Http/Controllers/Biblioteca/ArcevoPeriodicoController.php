@@ -102,9 +102,10 @@ class ArcevoPeriodicoController extends Controller
     {
         #Carregando os dados para o cadastro
         $loadFields = $this->service->load($this->loadFields);
+        $cursos =   $this->service->loadCursos();
 
         #Retorno para view
-        return view('biblioteca.acervoPeriodico.create', compact('loadFields'));
+        return view('biblioteca.acervoPeriodico.create', compact('loadFields', 'cursos'));
     }
 
     /**
@@ -151,9 +152,11 @@ class ArcevoPeriodicoController extends Controller
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
+            $cursos =   $this->service->loadCursos();
 
             #retorno para view
-            return view('biblioteca.acervoPeriodico.edit', compact('model', 'segundaEntrada', 'primeiraEntrada','loadFields'));
+            return view('biblioteca.acervoPeriodico.edit',
+                compact('model', 'segundaEntrada', 'primeiraEntrada','loadFields', 'cursos'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

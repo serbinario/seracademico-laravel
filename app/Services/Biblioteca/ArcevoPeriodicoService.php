@@ -78,6 +78,38 @@ class ArcevoPeriodicoService
     }
 
     /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function find2($id) {
+
+        $relacionamentos = [
+            'tipoAcervo',
+            'colecao',
+            'genero',
+            'situacao',
+            'corredor',
+            'estante',
+            'exemplares',
+            'cursos',
+            'primeiraEntrada.responsaveis',
+            'segundaEntrada'
+        ];
+
+        #Recuperando o registro no banco de dados
+        $arcevo = $this->repository->with($relacionamentos)->find($id);
+
+        #Verificando se o registro foi encontrado
+        if(!$arcevo) {
+            throw new \Exception('Empresa não encontrada!');
+        }
+
+        #retorno
+        return $arcevo;
+    }
+
+    /**
      * @return mixed
      * @throws \Exception
      */
@@ -110,7 +142,11 @@ class ArcevoPeriodicoService
 
         #Salvando o registro pincipal
         $arcevo =  $this->repository->create($data);
-        
+
+        if(isset($data['cursos'])){
+            $arcevo->cursos()->attach($data['cursos']);
+        }
+
         #Verificando se foi criado no banco de dados
         if(!$arcevo) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
@@ -157,11 +193,15 @@ class ArcevoPeriodicoService
      */
     public function delete(int $id)
     {
+
+        $acervo = $this->find2($id);
+        $acervo->cursos()->detach();
+
         #deletando o curso
-        $result = $this->repository->delete($id);
+        $acervo = $this->repository->delete($id);
 
         # Verificando se a execução foi bem sucessida
-        if(!$result) {
+        if(!$acervo) {
             throw new \Exception('Ocorreu um erro ao tentar remover o responsável!');
         }
 
@@ -303,6 +343,34 @@ class ArcevoPeriodicoService
         #Retorno
         return $data;
     }
-    
+
+    /**
+     * @return array
+     */
+    public function loadCursos()
+    {
+        $cursosGraduacao = \DB::table('fac_cursos')
+            ->whereIn('fac_cursos.tipo_curso_id', [1,2,5])
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosPosGraduacao = \DB::table('fac_cursos')
+            ->whereIn('fac_cursos.tipo_curso_id', [3,4])
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosMestrado = \DB::table('fac_cursos')
+            ->where('fac_cursos.tipo_curso_id', 6)
+            ->select('id', 'nome')
+            ->get();
+
+        $cursosTecnico = \DB::table('fac_cursos')
+            ->where('fac_cursos.tipo_curso_id', 7)
+            ->select('id', 'nome')
+            ->get();
+
+        return ['graduacao' => $cursosGraduacao, 'pos' => $cursosPosGraduacao,
+            'mestrado' => $cursosMestrado, 'tecnico' => $cursosTecnico];
+    }
     
 }

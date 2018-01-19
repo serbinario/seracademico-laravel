@@ -4,6 +4,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Principais
                     dados</a></li>
+            <li role="presentation"><a href="#curso" aria-controls="curso" role="tab" data-toggle="tab">Cursos</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -73,6 +74,68 @@
                     </div>
                 </div>
             </div>
+            <div role="tabpanel" class="tab-pane" id="curso">
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-graduacao', 'Graduação/Tecnólogo') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-graduacao">
+                                    @foreach($cursos['graduacao'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-graduacao">
+                                    @foreach($cursos['graduacao'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-posgraduacao', 'Pós-Graduação/Curso Extensão') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-posgraduacao">
+                                    @foreach($cursos['pos'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-posgraduacao">
+                                    @foreach($cursos['pos'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('curso-mestrado', 'Mestrado') !!}
+                            @if(isset($model->id))
+                                <select class="form-control cursos" multiple="multiple" name="cursos[]" id="curso-mestrado">
+                                    @foreach($cursos['mestrado'] as $value)
+                                        <option value="{{ $value->id }}"
+                                                @foreach($model->cursos->lists('id') as $c) @if($value->id == $c) selected="selected" @endif @endforeach>{{$value->nome}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="form-control cursos" name="cursos[]" multiple id="curso-mestrado">
+                                    @foreach($cursos['mestrado'] as $value)
+                                        <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -91,3 +154,72 @@
         </div>
     </div>
 </div>
+@section('javascript')
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.cursos').multiselect({
+                buttonClass: 'btn-default',
+                nonSelectedText: 'Selecione um Curso'
+            });
+
+            //Generico para os selects2
+            function formatRepo(repo) {
+                if (repo.loading) return repo.text;
+
+                var markup = '<option value="' + repo.id + '">' + repo.name + '</option>';
+                return markup;
+            }
+
+            //Generico para os selects2
+            function formatRepoSelection(repo) {
+
+                return repo.name || repo.text
+            }
+
+            //consulta via select2 segunda entrada 1
+            $("#autor-1").select2({
+                placeholder: 'Selecione um responsável',
+                allowClear: true,
+                minimumInputLength: 1,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection,
+                width: 400,
+                ajax: {
+                    type: 'POST',
+                    url: "/index.php/seracademico/util/select2personalizado",
+                    dataType: 'json',
+                    delay: 250,
+                    crossDomain: true,
+                    data: function (params) {
+                        return {
+                            'search': params.term, // search term
+                            'tableName': 'responsaveis',
+                            'fieldName': 'nome',
+                            'page': params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    }
+                }
+            });
+        });
+    </script>
+@stop

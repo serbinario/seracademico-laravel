@@ -192,6 +192,8 @@ class ConsultaController extends Controller
         $exemplar = $data['exemplar'];
         $exemplares = $data['exemplares'];
 
+        //dd($exemplar);
+
         return view('portal.biblioteca.consulta.detalhe', compact('loadFields', 'exemplar', 'exemplares'));
 
     }
