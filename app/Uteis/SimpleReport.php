@@ -149,9 +149,10 @@ class SimpleReport implements Report
         # Percorrendo os filtros
         foreach($this->filters as $filter) {
             foreach ($filters as $chave => $value) {
+
                 $chave = str_replace(',', '.', $chave);
 
-                if (strcmp($filter->field, $chave) == 0 && !$value != "") {
+                if (strcmp($filter->field, $chave) == 0 && $value != "") {
                     $where .= empty($where) && $this->sql[0]->where != 1
                         ? " WHERE {$chave} = {$value}" : " AND {$chave} = {$value}";
                 }
