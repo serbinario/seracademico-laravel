@@ -155,7 +155,6 @@ class RelatorioController extends Controller
             }
 
             $livros = $livros->get();
-            dd($livros);
 
             // Pegando os autores e outros pespons�veis de cada livro
             foreach($livros as $ch => $livro) {
