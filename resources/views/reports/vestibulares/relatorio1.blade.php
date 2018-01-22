@@ -10,7 +10,6 @@
         }
     </style>
 </head>
-
 <body>
 <div class="row">
     <table width="100%">
@@ -29,32 +28,30 @@
 </div>
 <hr>
 <div class="row">
-
-        <table id="report_vestibulando" width="100%" border="1" cellspacing="0" style="border: 1px solid lightgray;" >
-            <thead>
-            <tr style="background-color: #2F5286; color: white;">
-                <th>Nome</th>
-                <th>Inscrição</th>
-                {{--<th>Telefones</th>--}}
-                <th>CPF</th>
-                <th>Vestibular</th>
-                <th>Financeiro</th>
+    <table id="report_vestibulando" width="100%" border="1" cellspacing="0" style="border: 1px solid lightgray;" >
+        <thead>
+        <tr style="background-color: #2F5286; color: white;">
+            <th>Nome</th>
+            <th>Inscrição</th>
+            {{--<th>Telefones</th>--}}
+            <th>CPF</th>
+            <th>Vestibular</th>
+            <th>Financeiro</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($rows as $row)
+            <tr >
+                <td><b>{{ $row->nome }}</b></td>
+                <td style="text-align: center;">{{ $row->inscricao }}</td>
+                {{--<td>{{ $row->celular  }}</td>--}}
+                <td style="text-align: center;">{{ $row->cpf }}</td>
+                <td style="text-align: center;">{{ $row->vestibular }}</td>
+                <td style="text-align: center;">{{ $row->financeiro }}</td>
             </tr>
-            </thead>
-            <tbody>
-            @foreach($rows as $row)
-                <tr >
-                    <td><b>{{ $row->nome }}</b></td>
-                    <td style="text-align: center;">{{ $row->inscricao }}</td>
-                    {{--<td>{{ $row->celular  }}</td>--}}
-                    <td style="text-align: center;">{{ $row->cpf }}</td>
-                    <td style="text-align: center;">{{ $row->vestibular }}</td>
-                    <td style="text-align: center;">{{ $row->financeiro }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
+        @endforeach
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

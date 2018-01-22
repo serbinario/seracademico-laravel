@@ -4,7 +4,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <div class="col-sm-6 col-md-9">
-                <h4><i class="material-icons">card_travel</i> Relatórios de livros por cursos</h4>
+                <h4><i class="material-icons">card_travel</i> Relatórios de acervo por cursos</h4>
             </div>
             <div class="col-sm-6 col-md-3">
 
@@ -66,6 +66,13 @@
                                 {!! Form::select('outro_responsavel', array(), Session::getOldInput('outro_responsavel'), array('class' => 'form-control', 'id' => 'outro_responsavel')) !!}
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('tipo_acervo', 'Tipo Acervo') !!}
+                                {!! Form::select('tipo_acervo', $loadFields['biblioteca\tipoacervo'],
+                                    Session::getOldInput('tipo_acervo'), array('class' => 'form-control')) !!}
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -120,6 +127,12 @@
                             <div class="checkbox checkbox-primary">
                                 <input type="checkbox" checked name="titulo_ch" value="1" class="form-control">
                                 {!! Form::label('titulo_ch', "Título", false) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="checkbox checkbox-primary">
+                                <input type="checkbox" checked name="subtitulo_ch" value="1" class="form-control">
+                                {!! Form::label('subtitulo_ch', "Subtítulo", false) !!}
                             </div>
                         </div>
                         <div class="col-md-1">

@@ -31,7 +31,8 @@ class RelatorioController extends Controller
      */
     private $loadFields = [
         'PosGraduacao\Curso',
-        'Biblioteca\Genero'
+        'Biblioteca\Genero',
+        'Biblioteca\TipoAcervo'
     ];
 
     /**
@@ -88,7 +89,7 @@ class RelatorioController extends Controller
                 ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'bib_arcevos_cursos.cursos_id')
                 ->leftJoin('bib_editoras', 'bib_editoras.id', '=', 'bib_exemplares.editoras_id')
                 ->leftJoin('bib_genero', 'bib_genero.id', '=', 'bib_arcevos.genero_id')
-                ->where('bib_tipos_acervos.tipo', '=', '1')
+                //->where('bib_tipos_acervos.tipo', '=', '1')
                 ->where('bib_exemplares.exemp_principal', '=', '1')
                 ->where('fac_cursos.id', '=', $curso->id)
                 ->groupBy('bib_arcevos.id')
@@ -120,6 +121,10 @@ class RelatorioController extends Controller
                     'bib_editoras.nome as editora',
                     'bib_genero.nome as area'
                 ]);
+
+            if($request->has('tipo_acervo') && $request->get('tipo_acervo') != "") {
+                $livros->where('bib_tipos_acervos.tipo', '=', $request->get('tipo_acervo'));
+            }
 
             if($request->has('area') && $request->get('area') != "") {
                 $livros->where('bib_genero.id', '=', $request->get('area'));
@@ -333,6 +338,7 @@ class RelatorioController extends Controller
             ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->join('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
             ->where('bib_emprestimos.status_devolucao', 0)
             ->select([
                 'pessoas.identidade',
@@ -340,6 +346,7 @@ class RelatorioController extends Controller
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as registro'),
                 'bib_arcevos.titulo',
                 \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                'bib_tipos_acervos.nome as tipo_acervo'
             ]);
 
         if($dataIni && $dataIni) {
@@ -375,6 +382,7 @@ class RelatorioController extends Controller
             ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
             ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
             ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+            ->join('bib_tipos_acervos', 'bib_tipos_acervos.id', '=', 'bib_arcevos.tipos_acervos_id')
             ->where('bib_emprestimos.status_devolucao', 1)
             ->select([
                 'pessoas.identidade',
@@ -382,6 +390,7 @@ class RelatorioController extends Controller
                 \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as registro'),
                 'bib_arcevos.titulo',
                 \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                'bib_tipos_acervos.nome as tipo_acervo'
             ]);
 
         if($dataIni && $dataIni) {

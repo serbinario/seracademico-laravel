@@ -27,6 +27,12 @@
                             {!! Form::text('issn', Session::getOldInput('issn')  , array('class' => 'form-control')) !!}
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('data_catagolacao', 'Data Catalogação') !!}
+                            {!! Form::text('data_catagolacao', Session::getOldInput('data_catagolacao'), array('class' => 'form-control datepicker date ')) !!}
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -177,7 +183,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            {!! Form::label('vol_periodico', 'Volume') !!}
+                            {!! Form::label('vol_periodico', 'Volume/Ano') !!}
                             {!! Form::text('vol_periodico', Session::getOldInput('vol_periodico')  , array('class' => 'form-control numberFive')) !!}
                         </div>
                     </div>

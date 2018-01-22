@@ -46,6 +46,7 @@
                 <th>Registro</th>
                 <th>Título</th>
                 <th>Empréstimo</th>
+                <th>Tipo acervo</th>
             </tr>
             </thead>
             <tbody>
@@ -56,6 +57,7 @@
                     <td>{{$emprestimo->registro}}</td>
                     <td>{{$emprestimo->titulo}}</td>
                     <td>{{$emprestimo->data}}</td>
+                    <td>{{$emprestimo->tipo_acervo}}</td>
                 </tr>
             @endforeach
             </tbody>

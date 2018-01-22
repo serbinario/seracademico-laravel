@@ -17,7 +17,8 @@ class Release extends Model implements Transformable
         'data',
         'descricao',
         'tipo_id',
-        'desenvolvedor_id'
+        'desenvolvedor_id',
+        'sistema_id'
     ];
 
     /**
