@@ -73,7 +73,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         {!! Form::label('password', 'Senha') !!}
-                                        {!! Form::password('password', '', array('class' => 'form-control')) !!}
+                                        {!! Form::password('password', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-1">
