@@ -36,7 +36,7 @@ Pelo presente Instrumento Particular:<br>
 </div>
 
 <div class="termos">
-    b)	Por outro lado (ALUNO OU RESPONSÁVEL LEGAL), devidamente qualificado no anverso da última folha deste Contrato,
+    b)	Por outro lado {{$aluno['pessoa']['nome']}}, devidamente qualificado no anverso da última folha deste Contrato,
     doravante denominado CONTRATANTE, o qual teve seu REQUERIMENTO DE ADESÃO AO CONTRATO DE MATRÍCULA devidamente DEFERIDO,
     sendo o mesmo, parte integrante do presente CONTRATO, tem entre si, justa e contratada a PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS,
     regida pelas cláusulas do presente instrumento.
