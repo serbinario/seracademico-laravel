@@ -1908,6 +1908,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::group(['prefix' => 'cursoFormacao', 'as' => 'cursoFormacao.'], function () {
             Route::post('storeCursoFormacao', ['as' => 'storeCursoFormacao', 'uses' => 'CursoFormacaoController@storeCursoFormacao']);
         });
+
+        include_once 'helpdesk.php';
     });
 
 });

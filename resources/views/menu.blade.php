@@ -351,6 +351,7 @@
                 </li>
                 <li>
                     <a href="{{ route('seracademico.releasenote.index') }}"><i class="flaticon-settings"></i>Sobre</a>
+                    <a href="{{ route('seracademico.helpdesk.chamados.index') }}"><i class="material-icons">headset_mic</i> Chamados</a>
                 </li>
                 @endrole
             </ul>
