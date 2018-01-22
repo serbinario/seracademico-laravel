@@ -13,7 +13,6 @@ use Seracademico\Repositories\ReleaseRepository;
 use Seracademico\Validators\ReleaseValidator;
 use Seracademico\Services\ReleasesService;
 
-
 class ReleasesController extends Controller
 {
     /**
