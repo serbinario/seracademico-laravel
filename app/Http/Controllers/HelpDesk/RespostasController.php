@@ -45,7 +45,8 @@ class RespostasController extends Controller
 
         return Datatables::of($rows)
             ->addColumn('action', function ($row) {
-                $html = '<a href="javascript:void(0)" id="btnDestroyResposta" title="Excluir" class="btn"><i class="material-icons">delete</i></a>';
+                $html = '<a href="javascript:void(0)" id="btnDestroyResposta" 
+                            title="Excluir" class="btn"><i class="material-icons">delete</i></a>';
                 return $html;
             })
             ->addColumn('label_status', function ($row) {
