@@ -52,12 +52,12 @@
                     <li role="presentation" class="active">
                         <a href="#datas" aria-controls="dados" data-toggle="tab"><i class="material-icons">event</i> Datas</a>
                     </li>
-                    <li role="presentation">
+                    {{--<li role="presentation">
                         <a href="#valores" aria-controls="contato" role="tab" data-toggle="tab"><i class="fa fa-money"></i> Valores </a>
                     </li>
                     <li role="presentation">
                         <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
-                    </li>
+                    </li>--}}
                     <li role="presentation">
                         <a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">label</i> Sala de Aula</a>
                     </li>
@@ -100,7 +100,7 @@
                     {{--FIM Datas--}}
 
                     {{--Aba Valores--}}
-                    <div role="tabpanel" class="tab-pane" id="valores">
+                    {{--<div role="tabpanel" class="tab-pane" id="valores">
                         <br/>
 
                         <div class="row">
@@ -137,11 +137,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                     {{--FIM Aba Valores--}}
 
                     {{--Aba Vagas--}}
-                    <div role="tabpanel" class="tab-pane" id="vagas">
+                    {{--<div role="tabpanel" class="tab-pane" id="vagas">
                         <br/>
                         <div class="row">
                             <div class="col-md-2">
@@ -167,8 +167,7 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
+                    </div>--}}
                     {{--FIM Aba Vagas --}}
 
                     {{--Aba Salas--}}
