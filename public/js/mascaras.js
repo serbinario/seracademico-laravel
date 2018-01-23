@@ -23,7 +23,7 @@ $(document).ready(function(){
     $('.moneyReal').maskMoney({prefix:'R$ ', allowZero: true, allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 
     //CNPJ
-    $('.cnpj').mask('00.000.000.0000-00');
+    $('.cnpj').mask('00.000.000/0000-00');
 
     //Telefone
     $('.phone').mask('(00)0000.0000');
