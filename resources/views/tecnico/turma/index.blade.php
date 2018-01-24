@@ -53,7 +53,6 @@
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Val. Turma</th>
                                 <th style="width: 5%;">Acão</th>
                             </tr>
                             </thead>
@@ -66,7 +65,6 @@
                                 <th>Turno</th>
                                 <th>Abertura</th>
                                 <th>Fechamento</th>
-                                <th>Val. Turma</th>
                                 <th >Acão</th>
                             </tr>
                             </tfoot>
@@ -156,7 +154,7 @@
                 {data: 'turno', name: 'fac_turnos.nome'},
                 {data: 'aula_inicio', name: 'fac_turmas.aula_inicio'},
                 {data: 'aula_final', name: 'fac_turmas.aula_final'},
-                {data: 'valor_turma', name: 'fac_turmas.valor_turma'},
+//                {data: 'valor_turma', name: 'fac_turmas.valor_turma'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
