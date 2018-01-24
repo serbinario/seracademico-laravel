@@ -159,11 +159,10 @@ class AlunoService
         $img    = isset($data['img']) ? $data['img'] : "";
 
         $this->tratamentoCampos($data);
-        dd('asd');
         $arrayMatricula = $this->tratamentoMatricula($data);
         $data = $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
-
+        dd('asd');
         # Recuperando a pessoa pelo cpf
         $objPessoa = [];
         $endereco  = null;
@@ -684,6 +683,8 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
+        $this->repository->model->lockForUpdate();
+
         # Recuperando o último aluno cadastrado
         $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
 
@@ -705,11 +706,11 @@ class AlunoService
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
         $newInscricao = $now->format('Y') . $numberSemestre . $newInscricao;
 
-        $result = $this->repository->findWhere(['matricula' => $newInscricao]);
+        //$result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
-        if (count($result) > 0) {
-            $this->gerarMatricula();
-        }
+        //if (count($result) > 0) {
+        //    $this->gerarMatricula();
+        //}
 
         # retorno
         return $newInscricao;
