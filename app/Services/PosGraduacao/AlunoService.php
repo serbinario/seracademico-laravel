@@ -159,8 +159,8 @@ class AlunoService
         $img    = isset($data['img']) ? $data['img'] : "";
 
         $this->tratamentoCampos($data);
-        $arrayMatricula = $this->tratamentoMatricula($data);
         dd('asd');
+        $arrayMatricula = $this->tratamentoMatricula($data);
         $data = $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
