@@ -221,10 +221,10 @@ class AlunoController extends Controller
             $data = $request->all();
 
             #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            //$this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             #Executando a ação
-            $this->service->store($data);
+            //$this->service->store($data);
 
             #Retorno para a view
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
