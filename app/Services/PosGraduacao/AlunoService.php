@@ -160,8 +160,8 @@ class AlunoService
 
         $this->tratamentoCampos($data);
         $arrayMatricula = $this->tratamentoMatricula($data);
-        $data = $this->remocaoEspacos($data);
         dd('asd');
+        $data = $this->remocaoEspacos($data);
         $this->loginPortalAluno($data, $arrayMatricula['matricula']);
 
         # Recuperando a pessoa pelo cpf
