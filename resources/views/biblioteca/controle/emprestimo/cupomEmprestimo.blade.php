@@ -1,34 +1,51 @@
 <html>
 <head>
-
+<style type="text/css">
+    .texto {
+        font-size: 11px;
+    }
+    p {
+        margin-top: 8px;
+    }
+    h5 {
+        margin-bottom: -8px;
+    }
+    table, table th, table td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-size: 11px;
+    }
+</style>
 </head>
 <body>
     @if($result)
-        <center>RECIBO DE EMPRÉSTIMO</center>
-        <hr style="width: 100%">
-        <table style="width: 100%">
-            <tr>
-                <td>Aluno: {{$result->pessoa->nome}}</td>
-                <td>Identidade: {{$result->pessoa->identidade}}</td>
-            </tr>
-            <tr>
-                <td>Telefone: {{$result->pessoa->celular}}</td>
-            </tr>
-            <tr>
-                <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>
-                <td>Emprestado em: {{$data->format('d/m/Y')}}</td>
-                <td>Devolver em: {{$data2->format('d/m/Y')}}</td>
-            </tr>
-            <tr>
-                <td>Código: {{$result->codigo}}</td>
-            </tr>
-            <tr>
-                <td>1º Via Biblioteca</td>
-                <td><center>__________________________<br />Assinatura</center></td>
-            </tr>
-        </table>
-        Livros Emprestados:
-        <table style="width: 100%" border="1">
+        <h5>RECIBO DE EMPRÉSTIMO</h5>
+        <p>----------------------------------------------</p>
+        <span class="texto">
+            Aluno: {{$result->pessoa->nome}}
+        </span><br />
+        <span class="texto">
+            RG: {{$result->pessoa->identidade}}
+        </span><br />
+        <span class="texto">
+            Telefone: {{$result->pessoa->celular}}
+        </span><br />
+        <span class="texto">
+            <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>
+                Emprestado em: {{$data->format('d/m/Y')}}<br />
+                Devolver em: {{$data2->format('d/m/Y')}}
+        </span><br />
+        <span class="texto">
+            Código: {{$result->codigo}}
+        </span><br />
+        <span class="texto">
+            Código: {{$result->codigo}}
+        </span>
+        <p>----------------------------------------------</p>
+        <span class="texto">
+           ACERVOS EMPRESTADOS:
+        </span><br /><br />
+        <table style="width: 18%" border="1">
             <thead>
                 <tr>
                     <th>Título</th>
@@ -49,5 +66,10 @@
             </tbody>
         </table>
     @endif
+    <br />
+    <span class="texto">
+            1º Via Biblioteca<br /><br />
+            ____________________________________________<br />Assinatura
+    </span>
 </body>
 </html>

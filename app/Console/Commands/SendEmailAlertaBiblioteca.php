@@ -75,7 +75,7 @@ class SendEmailAlertaBiblioteca extends Command implements SelfHandling
                 function ($email) use ($emprestimo) {
                     $email->from('biblioteca@alpha.rec.br', 'Alpha');
                     $email->subject('Notificação de atraso de empréstimos - Biblioteca Faculdade Alpha');
-                    $email->to('fabinhobarreto2@gmail.com', 'Alpha Educação e Treinamentos');
+                    $email->to($emprestimo->email, 'Alpha Educação e Treinamentos');
                 });
 
         }
