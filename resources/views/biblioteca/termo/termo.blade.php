@@ -57,11 +57,11 @@
 
         body {
             font-family: arial;
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .termos {
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .table, .table th, .table td {
@@ -117,27 +117,27 @@
 <h5><b>NORMAS</b></h5>
 
 <p class="termos">
-    O Usuário ao se cadastrar, terá que cumprir as seguintes normas: 1)
-    Assumir inteira responsabilidade de quaisquer materiais que façam parte do acervo da biblioteca, sejam estes livros,
-    revistas, monografias, teses, referências ( livro de consulta ), CDs, DVDs, outros, quando de posse destes; 2 )
-    Se danificar ou extraviar qualquer material do acervo da biblioteca,
-    <b>o usuário terá que repor o referido item, entregando o material novo e com nota fiscal. Quando a obra possuir
-        qualificação e quantidade específica, tornando-se infugível, o usuário deverá devolver a obra de igual qualidade
-        e quantidade, estas que assumam a identidade e as características do material extraviado.
-        3) O aluno tem o compromisso de informar, caso mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível</b>
+    O Usuário ao se cadastrar, terá que cumprir as seguintes normas: 1) Assumir inteira responsabilidade de quaisquer materiais
+    que façam parte do acervo da biblioteca, sejam estes livros, revistas, monografias, dissertações, teses, referências (livro de
+    consulta ), CDs, DVDs, outros, quando de posse destes; 2 ) Se danificar ou extraviar qualquer material do acervo da biblioteca,
+    <b>o usuário terá que repor o referido item  entregando o material novo e com nota fiscal.</b>  Quando a obra possuir
+    qualificações e quantidade específica tornando-se infungível, o usuário deverá devolver a obra de igual qualidade e quantidade,
+    estas que assumam a identidade e as características do material extraviado <b>3) O aluno tem o compromisso de informar, caso
+    mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível.</b>
+
 </p>
 
 <h5><b>EMPRÉSTIMO</b></h5>
 
 <p class="termos">
-    1)	Apenas os livros sairão para empréstimo (até que esteja inserido no programa e até a presente data);<br />
-    2)	O usuário que não for aluno da ALPHA, não poderá pegar livros para empréstimo e nem consulta;<br />
-    3)	Aluno da graduação poderá pegar até 02 (dois) livros, durante 08 (oito) dias;<br />
-    4)	Professor poderá pegar até 03 (três) livros, durante 12 (doze) dias;<br />
-    5)	Aluno de pós-graduação poderá pegar 03 (três) livros e a consulta será apenas do livro na biblioteca;<br />
-    6)	Funcionário poderá pegar até 03 (três) livros, durante 12 (doze) dias;<br />
-    7)	O aluno que desistir ou trancar o curso, não poderá pegar livros para empréstimo (terá que devolver caso tenha algum emprestado);<br />
-    8)	O empréstimo não poderá ser realizado por terceiros;
+    1)  Os livros sairão para empréstimo (mas as revistas, monografias, dissertações e teses só para consulta especial);<br />
+    2)  Aluno dos cursos técnicos poderá pegar até 02 (dois) livros, durante 3 (três) dias. O usuário que não for aluno da
+        ALPHA, não poderá pegar livros para empréstimo e nem consulta;<br />
+    3)	Aluno da graduação poderá pegar até 02 (dois) livros, durante 08 (oito) dias; <br />
+    4)	Aluno de pós-graduação, mestrado e doutorado poderá pegar 03 (três) livros e a consulta será apenas na biblioteca;<br />
+    5)	Funcionário poderá pegar até 03 (três) livros, durante 8 (oito) dias;<br />
+    6)	Professor poderá pegar até 03 (três) livros, durante 10 (dez) dias;<br />
+    7)	O empréstimo não poderá ser realizado por terceiros;
 </p>
 
 <h5><b>RENOVAÇÃO</b></h5>
@@ -156,7 +156,7 @@
 <h5><b>CONSULTA</b></h5>
 
 <p class="termos">
-    1)	Revista, Monografias, Teses, Dissertações, jornais, CDs, DVDs, livros de referência (dicionários, enciclopédias) e livros <b>com tarja vermelha,
+    1)	Revista, Monografias, Teses, Dissertações, Jornais, DVDs, livros de referência (dicionários, enciclopédias) e livros <b>com tarja vermelha,
     são para consulta exclusiva na biblioteca (consulta especial);</b><br />
     2)	A consulta especial é aquela da qual o usuário só poderá consultar o livro na Biblioteca ou áreas da Faculdade,
     tendo o compromisso de devolver o livro antes que encerre o expediente,
@@ -166,7 +166,7 @@
 <h5><b>MULTA</b></h5>
 
 <p class="termos">
-    O usuário: aluno de graduação, aluno de pós-graduação, professor e funcionário que não devolver ou renovar o livro na data prevista,
+    O usuário: alunos dos cursos técnico, tecnólogo, graduação, pós-graduação, mestrado, doutorado, funcionário e professor que não devolver ou renovar o livro na data prevista,
     pagará multa <b> de R$ 3.00 (três reais)</b> por livro/dia de atraso, incluindo sábados, domingos e feriados, reajustada anualmente,
     a partir de 2019. <b>Só serão abonadas as multas em caso de doença mediante apresentação de atestado médico e/ou de acompanhamento;</b><br />
     1)	O usuário que estiver em débito e/ou pendência com a biblioteca, ou qualquer outro setor acadêmico,
