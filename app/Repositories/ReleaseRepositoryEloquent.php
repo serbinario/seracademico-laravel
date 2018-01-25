@@ -39,7 +39,7 @@ class ReleaseRepositoryEloquent extends BaseRepository implements ReleaseReposit
     public function desenvolvedores()
     {
         $desenvolvedores = [
-            '' => 'Selecione um vagabundo'
+            '' => 'Desenvolvedor'
         ];
         $query = \DB::table('desenvolvedores')
             ->select([

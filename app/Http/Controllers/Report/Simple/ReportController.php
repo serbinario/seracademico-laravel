@@ -82,7 +82,7 @@ class ReportController extends Controller
 
         # Recuperando o serviço de pdf / dompdf
         $PDF = App::make('dompdf.wrapper');
-        //dd($dadosParaRelatorio);
+
         # Carregando a página
         $PDF->loadView("reports.simple.{$view}", ['dados' => $dadosParaRelatorio, 'request' => $dadosDaRequisicao]);
 

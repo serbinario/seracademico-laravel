@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
     <title>SerAcadêmico - Gestão Acadêmica</title>
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -139,7 +140,7 @@
                 </li>
                 @endif
 
-                @role('graduacao|admin')
+                @role('recepcao|graduacao|admin')
                 <li>
                     <a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Graduação</span> <span
                                 class="fa arrow"></span></a>
@@ -147,9 +148,15 @@
                         <li>
                             <a href="javascript:void(0)"><i class="flaticon-test"></i> Vestibular <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
+                                @role('graduacao|admin')
                                 <li><a href="{{ route('seracademico.materia.index') }}"><i class="flaticon-passed-exam"></i> Matérias</a></li>
                                 <li><a href="{{ route('seracademico.vestibular.index') }}"><i class="flaticon-exam-1"></i> Vestibulares</a></li>
+                                @endrole
+
+                                @role('recepcao|graduacao|admin')
                                 <li><a href="{{ route('seracademico.vestibulando.index') }}"><i class="flaticon-employment-test"></i> Vestibulando</a></li>
+                                @endrole
+
 
                                 <li>
                                     <a href="javascript:void(0)"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
@@ -163,12 +170,19 @@
                             </ul>
                         </li>
 
-
+                        @role('recepcao|graduacao|admin')
                         <li><a href="javascript:void(0)"><i class="material-icons">markunread_mailbox</i> Secretaria <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
+                                @role('graduacao|admin')
                                 <li><a href="{{ route('seracademico.posgraduacao.professor.index') }}"><i class="flaticon-teacher-at-the-blackboard"></i> Professor</a></li>
                                 <li><a href="{{ route('seracademico.matricula.index') }}"><i class="flaticon-male-university-graduate-silhouette-with-the-cap"></i>Matricular Aluno</a></li>
+                                @endrole
+
+                                @role('recepcao|graduacao|admin')
                                 <li><a href="{{ route('seracademico.graduacao.aluno.index') }}"><i class="fa fa-users"></i>Alunos</a></li>
+                                @endrole
+
+                                @role('graduacao|admin')
                                 <li><a href="{{ route('seracademico.graduacao.disciplina.index') }}"><i class="material-icons">collections_bookmark</i> Disciplinas</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curso.index') }}"><i class="flaticon-book-4"></i> Cursos</a></li>
                                 <li><a href="{{ route('seracademico.graduacao.curriculo.index') }}"><i class="material-icons">library_books</i> Currículos</a></li>
@@ -182,8 +196,10 @@
                                         {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
                                     </ul>
                                 </li>
+                                @endrole
                             </ul>
                         </li>
+                        @endrole
 
                         {{--<li>
                             <a href="javascript:void(0)">Tesouraria <span class="fa arrow"></span></a>
@@ -351,6 +367,7 @@
                 </li>
                 <li>
                     <a href="{{ route('seracademico.releasenote.index') }}"><i class="flaticon-settings"></i>Sobre</a>
+                    <a href="{{ route('seracademico.helpdesk.chamados.index') }}"><i class="material-icons">headset_mic</i> Chamados</a>
                 </li>
                 @endrole
             </ul>

@@ -21,7 +21,17 @@
                     @endif
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="form-group">
+                    {!! Form::label('sistema_id', 'Sistema') !!}
+                    @if(isset($model))
+                        {!! Form::select('sistema_id', $model->sistema_id, array('class' => 'form-control')) !!}
+                    @else
+                        {!! Form::select('sistema_id', ['' => 'Selecione sistema', '1' => 'SerAcadêmico', '2' => 'Portal do Vestibulando', '3' => 'Portal do Aluno'], Session::getOldInput('sistema_id'), array('class' => 'form-control')) !!}
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('desenvolvedor_id', 'Responsável') !!}
                     @if(isset($model))
@@ -33,7 +43,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     {!! Form::label('descricao', 'Descrição') !!}
                     @if(isset($model))

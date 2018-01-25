@@ -990,5 +990,15 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\Emais\MateriaRepository::class,
             \Seracademico\Repositories\Emais\MateriaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\HelpDesk\ChamadoRepository::class,
+            \Seracademico\Repositories\HelpDesk\ChamadoRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            \Seracademico\Repositories\HelpDesk\RespostaRepository::class,
+            \Seracademico\Repositories\HelpDesk\RespostaRepositoryEloquent::class
+        );
     }
 }

@@ -171,7 +171,7 @@ class ProfessorService
 
         # Regras de negócios
         $this->tratamentoCampos($data);
-        $this->tratamentoDatas($data);
+        //$this->tratamentoDatas($data);
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
@@ -215,7 +215,7 @@ class ProfessorService
         $data['password'] = $newPassword;
 
         #Atualizando no banco de dados
-        $professor = $this->repository->update($this->tratamentoDatas($data), $id);
+        //$professor = $this->repository->update($this->tratamentoDatas($data), $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $professor->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
 

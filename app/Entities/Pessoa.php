@@ -89,7 +89,10 @@ class Pessoa extends Model implements Transformable, GnetCustomer
         'ativo',
         'instituicao_escolar_id',
         'ano_conclusao_medio',
-        'outra_escola'
+        'outra_escola',
+        'cnpj',
+        'nome_empresa',
+        'curriculo_latter'
     ];
 
     /**
