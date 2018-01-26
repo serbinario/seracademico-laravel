@@ -123,9 +123,7 @@
         // Pega o arquivo a ser feito upload
         var formData = new FormData();
         $('#file').change(function (event) {
-            //formData  = new FormData();
             formData.append('file', event.target.files[0]); // para apenas 1 arquivo
-            //var name = event.target.files[0].content.name; // para capturar o nome do arquivo com sua extenção
         });
 
         //Evento do click no botão adicionar disciplina

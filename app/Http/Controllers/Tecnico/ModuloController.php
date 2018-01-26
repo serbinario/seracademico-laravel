@@ -202,7 +202,7 @@ class ModuloController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating indigo removerMaterial" href="#" title="Excluir Material"><i class="material-icons">delete</i></a></li>
-                        <li><a class=" btn-floating green downloadFile" href="#" title="Baixar Material"><i class="material-icons">add_to_photos</i></a></li>
+                        <li><a class=" btn-floating green downloadFile" href="#" title="Baixar Material"><i class="material-icons">cloud_download</i></a></li>
                     </ul>
                     </div>';
         })->make(true);
