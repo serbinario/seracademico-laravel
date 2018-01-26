@@ -76,6 +76,8 @@
     </div>
 @stop
 
+@include('tecnico.modulo.modal_adicionar_material')
+
 @section('javascript')
     <script type="text/javascript">
         /*Datatable da grid principal*/
@@ -89,6 +91,112 @@
                 {data: 'nome', name: 'tec_modulos.nome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
+        });
+
+        //Variável que armazenará o id do módulo
+        var idModulo = 0;
+        var table2;
+
+        /*Responsável em abrir modal*/
+        $(document).on("click", '.grid-materiais', function () {
+            $("#modal-material").modal({show: true, keyboard: true});
+            idModulo = table.row($(this).parents('tr').index()).data().id;
+
+            /*Datatable da grid Modal*/
+            table2 = $('#material-grid').DataTable({
+                retrieve: true,
+                processing: true,
+                serverSide: true,
+                iDisplayLength: 5,
+                bLengthChange: false,
+                ajax: "/seracademico/tecnico/modulo/gridByModulo/" + idModulo,
+                columns: [
+                    {data: 'nome', name: 'nome'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+
+            //Carregando a datatable
+            table2.ajax.url("/seracademico/tecnico/modulo/gridByModulo/" + idModulo).load();
+        });
+
+        // Pega o arquivo a ser feito upload
+        var formData = new FormData();
+        $('#file').change(function (event) {
+            //formData  = new FormData();
+            formData.append('file', event.target.files[0]); // para apenas 1 arquivo
+            //var name = event.target.files[0].content.name; // para capturar o nome do arquivo com sua extenção
+        });
+
+        //Evento do click no botão adicionar disciplina
+        $(document).on('click', '#addMaterial', function (event) {
+
+            var nome  = $('#nome').val();
+
+            // Verificando preenchimento dos campos disciplina e modulo
+            if (!nome) {
+                sweetAlert("Oops...", "Há campos obrigatórios que não foram preenchidos", "error");
+                return false;
+            }
+
+            //Setando os valores para envio do fomulario
+            formData.append('nome', nome);
+            formData.append('modulo_id', idModulo);
+
+            jQuery.ajax({
+                type: 'POST',
+                url: '{{ route('seracademico.tecnico.modulo.adicionarMateriais')  }}',
+                data: formData,
+                datatype: 'json',
+                processData: false,
+                contentType: false
+            }).done(function (json) {
+                if(json['msg']) {
+                    swal("Material(s) adicionado(s) com sucesso!", "Click no botão abaixo!", "success");
+                } else {
+                    swal(json['msg'], "Click no botão abaixo!", "success");
+                }
+
+                table2.ajax.reload();
+
+                $('#nome').val("");
+                $('#file').val("");
+            });
+        });
+
+        //Evento de remover o telefone
+        $(document).on('click', '.removerMaterial', function (event) {
+
+            event.preventDefault();
+
+            var idMaterial = table2.row($(this).parents('tr').index()).data().id;
+
+            // Requisição Ajax
+            jQuery.ajax({
+                type: 'GET',
+                url: "/seracademico/tecnico/modulo/removerMateriais/" + idMaterial,
+                datatype: 'json'
+            }).done(function (json) {
+                if(json['msg']) {
+                    swal("Material removido com sucesso!", "Click no botão abaixo!", "success");
+                } else {
+                    swal(json['msg'], "Click no botão abaixo!", "success");
+                }
+
+                table2.ajax.reload();
+            });
+        });
+
+        //Evento de remover o telefone
+        $(document).on('click', '.downloadFile', function (event) {
+
+            event.preventDefault();
+
+            var path = table2.row($(this).parents('tr').index()).data().path;
+
+            var caminho = "{{ asset('uploads/tecnico/modulos/materiais') }}" + "/" + path;
+
+            window.open(caminho);
         });
     </script>
 @stop

@@ -546,11 +546,12 @@
 
                     <div class="form-group col-md-2">
                         {!! Form::label('turno_id', 'Turno') !!}
-                        @if(isset($aluno->id))
+                       {{-- @if(isset($aluno->id))
                             {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
                         @else
-                            {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
-                        @endif
+
+                        @endif--}}
+                        {!! Form::select('turno_id', $loadFields['turno'], null, array('class' => 'form-control')) !!}
                     </div>
 
                     <div class="form-group col-md-4">
