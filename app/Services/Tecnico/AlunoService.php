@@ -155,19 +155,10 @@ class AlunoService
      */
     public function loginPortalAluno(&$data, $numeroMatricula)
     {
-        //tratamento de senha
-        $newPassword = "";
+        #tratando a senha
+        $data['password'] = \bcrypt($numeroMatricula);
 
-        if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }
-
-        //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
-
-        //setando número de matricula como login do portal do aluno
+        #setando número de matricula como login do portal do aluno
         $data['login'] = $numeroMatricula;
     }
 
@@ -186,26 +177,23 @@ class AlunoService
         $this->tratamentoDePessoaEEndereco($data);
         $this->tratamentoCurso($data);
 
-        //encriptando senha
-        $newPassword = "";
+        # Recuperando o vestibulando
+        $aluno = $this->repository->find($id);
 
-        if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }
-
-        //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
-
-        #Atualizando no banco de dados
-        $aluno = $this->repository->update($data, $id);
-
-        if(!$aluno['matricula']) {
-            $arrayMatricula = $this->tratamentoMatricula($data);
-            $aluno['matricula'] = $arrayMatricula['matricula'];
+        // validando se possui matrícuça
+        if(!$aluno->matricula) {
+            $arrayMatricula  = $this->tratamentoMatricula($data);
+            $aluno->matricula = $arrayMatricula['matricula'];
             $aluno->save();
         }
+
+        // valida se possui login e senha
+        if (!$aluno->password) {
+            $this->loginPortalAluno($data, $aluno->matricula);
+        }
+
+        #Atualizando no banco de dados
+        $aluno    = $this->repository->update($data, $id);
 
         #Verificando se foi atualizado no banco de dados
         if(!$aluno) {
@@ -558,6 +546,8 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
+        //$this->repository->model->lockForUpdate();
+
         # Recuperando o último aluno cadastrado
         $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
 
@@ -577,9 +567,16 @@ class AlunoService
         # para nova inscrição
         $lastIncricao = (int) (substr($lastIncricao, -4));
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
+        $newInscricao = $now->format('Y') . $numberSemestre . $newInscricao;
+
+        //$result = $this->repository->findWhere(['matricula' => $newInscricao]);
+
+        //if (count($result) > 0) {
+        //    $this->gerarMatricula();
+        //}
 
         # retorno
-        return $now->format('Y') . $numberSemestre . $newInscricao;
+        return $newInscricao;
     }
 
     /**

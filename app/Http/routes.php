@@ -205,6 +205,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\ModuloController@edit']);
                 Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\ModuloController@update']);
                 Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ModuloController@delete']);
+
+                Route::post('adicionarMateriais', ['as' => 'adicionarMateriais', 'uses' => 'Tecnico\ModuloController@adicionarMateriais']);
+                Route::get('removerMateriais/{id}', ['as' => 'removerMateriais', 'uses' => 'Tecnico\ModuloController@removerMateriais']);
+                Route::get('gridByModulo/{id}', ['as' => 'gridByModulo', 'uses' => 'Tecnico\ModuloController@gridByModulo']);
             });
 
             Route::group(['prefix' => 'agendamento', 'middleware' => 'auth', 'as' => 'agendamento.'], function () {
