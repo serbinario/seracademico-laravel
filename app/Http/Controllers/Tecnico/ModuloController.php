@@ -107,6 +107,7 @@ class ModuloController extends Controller
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
+                        <li><a class="grid-materiais btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Materiais ao Módulo"><i class="material-icons">add_to_photos</i></a></li>
                     </ul>
                     </div>';
         })->make(true);
@@ -174,5 +175,76 @@ class ModuloController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function gridByModulo($id)
+    {
+        #Criando a consulta
+        $rows = \DB::table('tec_materiais')
+            ->join('tec_modulos', 'tec_modulos.id', '=', 'tec_materiais.modulo_id')
+            ->where('modulo_id', $id)
+            ->select([
+                'tec_materiais.id',
+                'tec_materiais.nome',
+                'tec_materiais.path'
+            ]);
+
+        #Editando a grid
+        return Datatables::of($rows)->addColumn('action', function ($row) {
+
+            return '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
+                    <ul>
+                        <li><a class="btn-floating indigo removerMaterial" href="#" title="Excluir Material"><i class="material-icons">delete</i></a></li>
+                        <li><a class=" btn-floating green downloadFile" href="#" title="Baixar Material"><i class="material-icons">cloud_download</i></a></li>
+                    </ul>
+                    </div>';
+        })->make(true);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function adicionarMateriais(Request $request)
+    {
+        try {
+            #Recuperando os dados da requisição
+            $data = $request->all();
+
+            #Executando a ação
+            $this->service->adicionarMateriais($data);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['msg' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function removerMateriais($id)
+    {
+        try {
+
+            #Executando a ação
+            $this->service->removerMateriais($id);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['msg' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['msg' => $e->getMessage()]);
+        }
     }
 }

@@ -1000,5 +1000,10 @@ class SeracademicoRepositoryProvider extends ServiceProvider
             \Seracademico\Repositories\HelpDesk\RespostaRepository::class,
             \Seracademico\Repositories\HelpDesk\RespostaRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Seracademico\Repositories\Tecnico\MaterialRepository::class,
+            \Seracademico\Repositories\Tecnico\MaterialRepositoryEloquent::class
+        );
     }
 }
