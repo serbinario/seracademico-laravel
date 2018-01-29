@@ -367,7 +367,8 @@ class AlunoController extends Controller
                     'fac_curriculos.codigo as codigoCurriculo',
                     'fac_situacao.nome as nomeSituacao',
                     'fac_cursos.codigo as codigoCurso'
-                ]);
+                ])
+                ->orderBy('pessoas.nome');
 
             # Filtrando por semestre
             if ($request->has('semestre')) {

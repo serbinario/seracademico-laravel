@@ -174,13 +174,18 @@ class Turma extends Model implements Transformable
      */
     public function alunosCursos()
     {
-        return $this->belongsToMany(PivotAlunoCurso::class, "pos_alunos_turmas", "turma_id", "pos_aluno_curso_id")
+        return $this->belongsToMany(
+            PivotAlunoCurso::class,
+            "pos_alunos_turmas",
+            "turma_id",
+            "pos_aluno_curso_id")
             ->withPivot([
                 'id',
                 'pos_aluno_curso_id',
                 'turma_id',
             ]);
     }
+
 
     /**
      * @param Model $parent

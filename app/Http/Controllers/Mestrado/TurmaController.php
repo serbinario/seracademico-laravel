@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller;
 use Seracademico\Http\Requests;
+use Seracademico\Repositories\Mestrado\TurmaRepository;
 use Seracademico\Services\Mestrado\TurmaService;
 use Yajra\Datatables\Datatables;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -37,13 +38,23 @@ class TurmaController extends Controller
     ];
 
     /**
-    * @param TurmaService $service
-    * @param TurmaValidator $validator
-    */
-    public function __construct(TurmaService $service, TurmaValidator $validator)
+     * @var TurmaRepository
+     */
+    private $turmaRepository;
+
+    /**
+     * @param TurmaService $service
+     * @param TurmaValidator $validator
+     * @param TurmaRepository $turmaRepository
+     */
+    public function __construct(
+        TurmaService $service,
+        TurmaValidator $validator,
+        TurmaRepository $turmaRepository)
     {
         $this->service   =  $service;
         $this->validator =  $validator;
+        $this->turmaRepository = $turmaRepository;
     }
 
     /**
@@ -87,18 +98,34 @@ class TurmaController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            return '<div class="fixed-action-btn horizontal">
+            $turma = $this->service->find($row->id);
+
+            $html =  '<div class="fixed-action-btn horizontal">
                     <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
                     <ul>
                         <li><a class="btn-floating green" id="btnModalPlanoEnsino"  title="Planos de Ensino"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                         <li><a class="btn-floating green" id="btnModalDiarioAula"  title="Diários de Aulas"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>                                
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
-                        <li><a class="modal-calendario btn-floating green" data-id="'.$row->id.'" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
+                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>';
+
+
+            $disciplinasComCalendario = $turma->disciplinas->filter(function ($disciplina) {
+                return count($disciplina->pivot->calendarios) > 0;
+            });
+
+            $alunos = $this->turmaRepository->getAlunosByIdTurma($turma->id);
+
+            if (count($disciplinasComCalendario) == 0 && count($alunos) == 0) {
+                $html .= '<li><a class="btn-floating indigo" href="delete/'.$row->id.'" title="Excluir da turma"><i class="material-icons">delete</i></a></li>';
+            }
+
+            $html .=   '<li><a class="modal-calendario btn-floating green" data-id="'.$row->id.'" href="#" title="Calendário da turma"><i class="material-icons">date_range</i></a></li>
                         <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">spellcheck</i></a></li>
                         <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">playlist_add_check</i></a></li>
                         <li><a class="btn-floating green" id="modal-alunos" href="#" title="Gerenciamento de Alunos"><i class="material-icons">supervisor_account</i></a></li>
                     </ul>
                     </div>';
+
+            return $html;
 
         })->make(true);
     }
@@ -188,6 +215,26 @@ class TurmaController extends Controller
             return redirect()->back()->with('message', $e->getMessage());
         }
     }
+
+    /**
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            $turma = $this->turmaRepository->find($id);
+            $turma->disciplinas()->detach();
+            $this->turmaRepository->delete($id);
+
+            return redirect()->back()->with("message", "Turma excluída com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
 
     /**
      * @param $idCurso
