@@ -65,19 +65,19 @@ class TurmaService
     {
         #Aplicação das regras de negócios
         $this->tratamentoDoCurso($data);
-        $this->tratamentoMoedas($data);
+        //$this->tratamentoMoedas($data);
         $data['tipo_nivel_sistema_id'] = 4;
 
         #Salvando o registro pincipal
         $turma =  $this->repository->create($data);
-        //dd($turma);
+
         #Verificando se foi criado no banco de dados
         if(!$turma) {
             throw new \Exception('Ocorreu um erro ao cadastrar!');
         }
 
         #Aplicação das regras de negócios
-        $this->tratamentoDisciplinas($turma);
+        //$this->tratamentoDisciplinas($turma);
 
         #Retorno
         return $turma;
@@ -92,8 +92,8 @@ class TurmaService
     public function update(array $data, int $id) : Turma
     {
         # Aplicação das regras de negócios
-        $this->tratamentoDoCurso($data, $id);
-        $this->tratamentoMoedas($data);
+        //$this->tratamentoDoCurso($data, $id);
+        //$this->tratamentoMoedas($data);
 
         $data['tipo_nivel_sistema_id'] = 4;
 
@@ -379,7 +379,6 @@ class TurmaService
                  se quiser continuar com a operação deverá deletar os calendários criados para esse curso!");
             }
         }
-
 
         #retorno
         return true;
