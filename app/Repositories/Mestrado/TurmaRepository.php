@@ -10,4 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface TurmaRepository extends RepositoryInterface
 {
+    public function getAlunosByIdTurma($id);
 }
