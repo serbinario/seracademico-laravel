@@ -184,14 +184,14 @@
                                                 {!! Form::label('pessoa[cpf]', 'CPF') !!}
                                                 {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]')  , array('id' => 'cpf', 'class' => 'form-control cpf')) !!}
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            {{--<div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[cnpj]', 'CNPJ') !!}
                                                 @if(isset($model->cnpj))
                                                     {!! Form::text('pessoa[cnpj]', $model->cnpj, array('class' => 'form-control cnpj')) !!}
                                                 @else
                                                     {!! Form::text('pessoa[cnpj]', Session::getOldInput('pessoa[cnpj]'), array('class' => 'form-control cnpj')) !!}
                                                 @endif
-                                            </div>
+                                            </div>--}}
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[empresa_nome]', 'Nome da Empresa') !!}
                                                 @if(isset($model->curriculo_latter))
@@ -200,14 +200,16 @@
                                                     {!! Form::text('pessoa[empresa_nome]', Session::getOldInput('pessoa[empresa_nome]'), array('class' => 'form-control')) !!}
                                                 @endif
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                {!! Form::label('pessoa[curriculo_latter]', 'Link Currículo Latters') !!}
-                                                <a href="{{$model->curriculo_latter}}" target="_blank">Visitar currículo latter</a>
-                                                {{--@if(isset($model->curriculo_latter))
-                                                    <a href="{{$model->curriculo_latter}}" target="_blank">Visitar currículo latter</a>
+                                            <div class="form-group col-md-4">
+                                                @if(isset($model->pessoa->curriculo_latter))
+                                                    <br />
+                                                    {!! Form::label('pessoa[curriculo_latter]', 'Link Currículo Latters') !!}
+                                                    <br />
+                                                    <a href="{{$model->pessoa->curriculo_latter}}" target="_blank">Visitar currículo latter</a>
                                                 @else
+                                                    {!! Form::label('pessoa[curriculo_latter]', 'Link Currículo Latters') !!}
                                                     {!! Form::text('pessoa[curriculo_latter]', Session::getOldInput('pessoa[curriculo_latter]'), array('class' => 'form-control')) !!}
-                                                @endif--}}
+                                                @endif
                                             </div>
                                             {{--<div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[titulo_eleitoral]', 'Titulo Eleitoral') !!}
@@ -826,7 +828,7 @@
         }
 
         //Validações javascript
-        $('#formProfessor').bootstrapValidator({
+        /*$('#formProfessor').bootstrapValidator({
             fields: {
                 'img': {
                     validators: {
@@ -837,10 +839,11 @@
                     }
                 },
             },
-        });
+        });*/
 
         //Carregando as cidades
         $(document).on('change', "#estado", function () {
+            console.log('ewewe');
             //Removendo as cidades
             $('#cidade option').remove();
 
@@ -862,9 +865,6 @@
                     url: '{{ route('seracademico.util.search')  }}',
                     data: dados,
                     datatype: 'json',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                    },
                 }).done(function (json) {
                     var option = "";
 

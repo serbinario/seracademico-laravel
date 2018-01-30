@@ -434,7 +434,6 @@ class ReservaController extends Controller
                 // Inserindo quantidade de exemplares disponível em cada registro de acervo
                 $arrayTemp = (array) $acervos[$chave];
                 $acervos[$chave] = (object) array_merge($arrayTemp, ['qtdExemplares' => $qtdExemplares->qtdExemplares]);
-
             }
 
             # Retorno
