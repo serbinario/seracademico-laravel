@@ -179,7 +179,7 @@ class ModuloService
 
         #removendo a arquivo antigo
         if($material->path != null) {
-            File::delete($this->destinationPath ."/". $material->path);
+            File::delete($this->destinationPath . $material->path);
         }
 
         # Verificando se a execução foi bem sucessida

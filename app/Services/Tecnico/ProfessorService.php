@@ -66,7 +66,7 @@ class ProfessorService
 
         #Recuperando o registro no banco de dados
         $professor = $this->repository->with($relacionamentos)->find($id);
-        //dd($professor->endereco->cep);
+
         #Verificando se o registro foi encontrado
         if(!$professor) {
             throw new \Exception('Empresa não encontrada!');
@@ -91,7 +91,7 @@ class ProfessorService
         $this->tratamentoImagem($data);
 
         #injetando senha de acesso ao portal do aluno no array principal
-        $this->loginPortalAluno($data);
+        $this->loginPortalProfessor($data, $data['pessoa']['cpf']);
 
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
@@ -114,9 +114,10 @@ class ProfessorService
         #setando as chaves estrageiras
         $data['pessoa_id'] = $pessoa->id;
         $data['tipo_nivel_sistema_id'] = 4;
+        $data['primeiro_acesso'] = 0;
 
         #Salvando o registro pincipal
-        $professor =  $this->repository->create($this->tratamentoDatas($data));
+        $professor =  $this->repository->create($data);
 
         //Validando se a imagem vem da webcam ou não, e salvando no banco
         if($imgCam && !$img) {
@@ -153,9 +154,15 @@ class ProfessorService
     /**
      * @param $data
      */
-    public function loginPortalAluno(&$data) {
+    public function loginPortalProfessor(&$data, $cpf)
+    {
+        $cpf = str_replace(array('.', '-'), "", $cpf);
+
         #tratando a senha
-        $data['password'] = \bcrypt($data['password']);
+        $data['password'] = \bcrypt($cpf);
+
+        #setando número de matricula como login do portal do aluno
+        $data['login'] = $cpf;
     }
 
     /**
@@ -171,10 +178,11 @@ class ProfessorService
 
         # Regras de negócios
         $this->tratamentoCampos($data);
-        //$this->tratamentoDatas($data);
 
         # Recuperando o vestibulando
         $professor = $this->repository->find($id);
+
+        $this->loginPortalProfessor($data, $professor->pessoa->cpf);
 
         # Regras de negócios
         $this->tratamentoImagem($data, $professor);
@@ -202,23 +210,10 @@ class ProfessorService
 
         }
 
-        //encriptando senha
-        $newPassword = "";
-
-        if(empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $newPassword = \bcrypt($data['password']);
-        }
-
-        //inserindo senha encriptada no array principal
-        $data['password'] = $newPassword;
-
         #Atualizando no banco de dados
-        //$professor = $this->repository->update($this->tratamentoDatas($data), $id);
+        $professor = $this->repository->update($data, $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $professor->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
-
 
         #Verificando se foi atualizado no banco de dados
         if(!$professor || !$endereco) {
@@ -369,19 +364,6 @@ class ProfessorService
         }
 
         #Retorno
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function tratamentoDatas(array $data) : array
-    {
-        #tratando as datas
-        $data['data_admissao']   = $data['data_admissao'] != "" ? Carbon::createFromFormat("d/m/Y", $data['data_admissao']) : "";
-
-        #retorno
         return $data;
     }
 
