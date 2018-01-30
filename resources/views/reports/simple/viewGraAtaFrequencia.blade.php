@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Ata de Frequência - GRADUAÇÃO</title>
+    <title>Ata de Assinatura - GRADUAÇÃO</title>
     <style type="text/css">
         html, body {
             height: 100%;
@@ -83,33 +83,29 @@
 
 <div id="body">
     <?php
-        $objDate = $dados['filtersBody'][5] ?? "";
-
-        if (!empty($objDate)) {
-            $objDate = \DateTime::createFromFormat('Y-m-d', $objDate);
-        }
+        $objDate = new \DateTime("now");
     ?>
     <br>
 
     <table id="tableHeader" border="1">
         <tbody>
         <tr>
-            <td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""}}</td>
-            <td>{{ $dados['filtersBody'][2] ?? ""  }} - {{ $dados['filtersBody'][1] ?? ""  }}</td>
+            {{--<td>Unidade de estudos direcionados: {{ $dados['filtersBody'][6] ?? ""}}</td>--}}
+            <td colspan="2">Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
         </tr>
         <tr>
-            <td>Disciplina: {{ $dados['filtersBody'][0] ?? ""}}</td>
-            <td>Professor: {{ $dados['filtersBody'][4] ?? ""}}</td>
+            <td>Turma: {{ $dados['filtersBody'][2] ?? ""  }} - {{ $dados['filtersBody'][1] ?? ""  }}</td>
+            <td>Professor: {{ $dados['body'][0]->professor ?? ""}}</td>
         </tr>
         <tr>
             <td>Data: {{ !empty($objDate) ? $objDate->format('d/m/Y') : ""}}</td>
-            <td>Período: {{ $request['turno'] }}</td>
+            <td></td>
+            {{--<td>Período: {{ $request['turno'] }}</td>--}}
         </tr>
-        {{--{{dd($dados)}}--}}
         </tbody>
     </table>
 
-    <h4 style="text-align: center">Ata de Frequência</h4>
+    <h4 style="text-align: center">Ata de Assinatura</h4>
 
     <table id="tableBody" border="1">
         <thead>
@@ -122,19 +118,11 @@
 
         <tbody>
         <?php $count = 0; ?>
-        @foreach($dados['body'] as $bordy)
+        @foreach($dados['body'] as $body)
             <tr>
                 <td>{{++$count}}.</td>
-
-                <!-- Percorrendo as colunas que tem reflexo no banco sfdsfsdfs-->
-                @foreach($bordy as $key => $value)
-                    <td>{{ $value }}</td>
-                @endforeach
-
-                <!-- Percorrendo as colunas que não tem reflexo no banco -->
-                @for($i = 0; $i < (count($dados['headers'])) - count(get_object_vars($dados['body'][0] ?? [])); $i++)
-                    <td></td>
-                @endfor
+                <td>{{ $body->matricula . ' - ' . $body->nome }}</td>
+                <td></td>
             </tr>
         @endforeach
         </tbody>
