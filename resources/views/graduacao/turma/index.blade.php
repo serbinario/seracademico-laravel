@@ -153,6 +153,7 @@
     @include('graduacao.turma.planoEnsino.modal_plano_ensino')
     @include('reports.simple.modals.modal_report_gra_turma_ata_assinatura')
     @include('reports.simple.modals.modal_report_graduacao_aluno_ata_aniversariantes')
+    @include('reports.simple.modals.modal_report_gra_aluno_caderneta')
     {{--@include('turma.modal_editar_calendario')--}}
     {{--@include('turma.modal_incluir_disciplinas')--}}
 @stop
@@ -177,6 +178,7 @@
     <script type="text/javascript" src="{{ asset('/js/graduacao/turma/planoEnsino/modal_plano_ensino.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_turma_ata_assinatura.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_turma_ata_aniversariantes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_caderneta.js') }}"></script>
     <script type="text/javascript">
         var table = $('#turma-grid').DataTable({
             processing: true,

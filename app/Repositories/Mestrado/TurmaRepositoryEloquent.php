@@ -31,4 +31,21 @@ class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getAlunosByIdTurma($id)
+    {
+        $result = \DB::table('pos_alunos')
+            ->join('pos_alunos_cursos', 'pos_alunos_cursos.aluno_id', '=', 'pos_alunos.id')
+            ->join('pos_alunos_turmas', 'pos_alunos_turmas.pos_aluno_curso_id', '=', 'pos_alunos_cursos.id')
+            ->groupBy('pos_alunos.id')
+            ->where('pos_alunos_turmas.turma_id', $id)
+            ->select(['pos_alunos.id'])
+            ->get();
+
+        return $result;
+    }
 }
