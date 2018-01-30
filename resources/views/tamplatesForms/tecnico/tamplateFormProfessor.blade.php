@@ -194,7 +194,7 @@
                                             </div>--}}
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[empresa_nome]', 'Nome da Empresa') !!}
-                                                @if(isset($model->nome_empresa))
+                                                @if(isset($model->curriculo_latter))
                                                     {!! Form::text('pessoa[empresa_nome]', $model->nome_empresa, array('class' => 'form-control')) !!}
                                                 @else
                                                     {!! Form::text('pessoa[empresa_nome]', Session::getOldInput('pessoa[empresa_nome]'), array('class' => 'form-control')) !!}
