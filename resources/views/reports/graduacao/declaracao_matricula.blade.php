@@ -38,7 +38,7 @@
             font-size: 15px;
         }
         .corpo {
-            font-size: 16px;
+            font-size: 14px;
         }
 
     </style>
