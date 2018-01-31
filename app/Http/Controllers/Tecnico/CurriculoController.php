@@ -127,6 +127,7 @@ class CurriculoController extends Controller
                     'fac_curriculos.id as idCurriculo',
                     'fac_disciplinas.id',
                     'fac_disciplinas.nome',
+                    'fac_disciplinas.carga_horaria',
                     'fac_disciplinas.qtd_falta',
                     'fac_tipo_disciplinas.nome as tipo_disciplina',
                     'fac_tipo_avaliacoes.nome as tipo_avaliacao',
