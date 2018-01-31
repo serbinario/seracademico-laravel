@@ -2,7 +2,7 @@
 <head>
 <style type="text/css">
     .texto {
-        font-size: 11px;
+        font-size: 18px;
     }
     p {
         margin-top: 8px;
@@ -13,7 +13,7 @@
     table, table th, table td {
         border: 1px solid black;
         border-collapse: collapse;
-        font-size: 11px;
+        font-size: 18px;
     }
 </style>
 </head>

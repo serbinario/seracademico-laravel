@@ -55,7 +55,7 @@
                     @foreach($modulo->disciplinas as $disciplina)
                         <tr>
                             <td>{{$disciplina->nome}}</td>
-                            <td>{{$disciplina->carga_horaria}}</td>
+                            <td>{{$disciplina->carga_horaria}} horas</td>
                             <td>{{$disciplina->qtd_falta}}</td>
                             <td>{{$disciplina->tipo_disciplina}}</td>
                         </tr>
