@@ -250,4 +250,10 @@ Route::group(['prefix' => 'tecnico', 'middleware' => 'auth', 'as' => 'tecnico.']
             });
         });
     });
+
+    Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function(){
+        Route::get('modulos_disciplinas', ['as' => 'modulos_disciplinas', 'uses' => 'Tecnico\RelatorioController@indexModulosDisciplinas']);
+        Route::get('report_modulos_disciplinas', ['as' => 'report_modulos_disciplinas', 'uses' => 'Tecnico\RelatorioController@modulosDisciplinas']);
+    });
+
 });

@@ -235,6 +235,15 @@
                                 <li><a href="{{ route('seracademico.tecnico.inscricao.index') }}"><i class="material-icons">line_weight</i>Inscrições</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="flaticon-exam-2"></i> Relatórios <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse">
+                                <li><a href="{{ route('seracademico.tecnico.relatorios.modulos_disciplinas') }}">
+                                        <i class="flaticon-employment-test"></i> Módulos / Disciplinas</a>
+                                </li>
+                                {{--<li><a targt="_blank" href="{{ route('seracademico.vestibular.relatorios.relatorio2') }}"><i class="material-icons">collections_bookmark</i> Relatório 2</a></li>--}}
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 @endrole
