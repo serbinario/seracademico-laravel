@@ -302,7 +302,11 @@ Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduaca
             Route::get('gridConteudos/{idPlanoAula}', ['as' => 'gridConteudos', 'uses' => 'Graduacao\PlanoAulaController@gridConteudos']);
             Route::post('attachConteudo/{idPlanoAula}', ['as' => 'attachConteudo', 'uses' => 'Graduacao\PlanoAulaController@attachConteudo']);
             Route::post('detachConteudo/{idPlanoAula}', ['as' => 'detachConteudo', 'uses' => 'Graduacao\PlanoAulaController@detachConteudo']);
-
         });
+    });
+
+    Route::group(['prefix' => 'relatorios', 'as' => 'relatorios.'], function () {
+        Route::get('quantitativoAlunos', ['as' => 'quantitativoAlunos', 'uses' => 'Graduacao\AlunoController@quantitativoAlunos']);
+        Route::get('getDadosReportQuantitativoAlunos/{idVestibular}', ['as' => 'getDadosReportQuantitativoAlunos', 'uses' => 'Graduacao\AlunoController@getDadosReportQuantitativoAlunos']);
     });
 });
