@@ -160,6 +160,7 @@
                 ajax: "/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo,
                 columns: [
                     {data: 'nome', name: 'fac_disciplinas.nome'},
+                    {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
                     {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
                     {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
                     {data: 'modulo', name: 'tec_modulos.nome'},
