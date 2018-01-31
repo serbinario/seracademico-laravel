@@ -24,6 +24,7 @@
         }
 
         .rodapeTimbrado {
+            margin-top: 7%;
             /*position: absolute;*/
             /*margin-top: 546px;*/
             color: #273176;
