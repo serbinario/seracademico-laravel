@@ -45,7 +45,7 @@
         <span class="texto">
            ACERVOS EMPRESTADOS:
         </span><br /><br />
-        <table style="width: 18%" border="1">
+        <table style="width: 29%" border="1">
             <thead>
                 <tr>
                     <th>Título</th>
