@@ -39,9 +39,6 @@
         <span class="texto">
             Código: {{$result->codigo}}
         </span><br />
-        <span class="texto">
-            Código: {{$result->codigo}}
-        </span>
         <p>----------------------------------------------</p>
         <span class="texto">
            ACERVOS EMPRESTADOS:
