@@ -193,7 +193,10 @@ class EmprestarController extends Controller
 
         $result = $emprestimo;
 
-        return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
+        return \PDF::loadView('biblioteca.controle.emprestimo.cupomEmprestimo',
+            compact('result'))->stream();
+
+        //return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
     }
 
     /**
