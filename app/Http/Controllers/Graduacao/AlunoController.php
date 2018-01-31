@@ -427,4 +427,58 @@ class AlunoController extends Controller
             return response(base64_decode($model->path_image )) ->header('Content-Type', 'image/jpeg');
         }
     }
+
+    public function quantitativoAlunos()
+    {
+        $loadFields = $this->service->load(['Graduacao\\Vestibular']);
+        return view('graduacao.aluno.reportQuantitativoAlunos', compact('loadFields'));
+    }
+
+    public function getDadosReportQuantitativoAlunos($idVestibular)
+    {
+        try {
+            $results = \DB::table('fac_vestibulares')
+                ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.vestibular_id', '=', 'fac_vestibulares.id')
+                ->join('fac_vestibular_curso_turno', 'fac_vestibular_curso_turno.vestibular_curso_id', '=', 'fac_vestibulares_cursos.id')
+                ->join('fac_vestibulandos', function ($join) {
+                    $join->on('fac_vestibulandos.vestibular_id', '=', 'fac_vestibulares.id')
+                        ->on('fac_vestibulandos.primeira_opcao_curso_id', '=', 'fac_vestibulares_cursos.curso_id')
+                        ->on('fac_vestibulandos.primeira_opcao_turno_id', '=', 'fac_vestibular_curso_turno.turno_id');
+                })
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+                ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_vestibular_curso_turno.turno_id')
+                ->join('fac_alunos', 'fac_alunos.vestibulando_id', '=', 'fac_vestibulandos.id')
+                ->where('fac_vestibulares.id', $idVestibular)
+                ->groupBy(['fac_cursos.nome', 'fac_turnos.nome'])
+                ->select([
+                    'fac_cursos.codigo as curso',
+                    'fac_turnos.nome as turno',
+                    \DB::raw('count(fac_vestibulandos.id) as vestibulandos')
+                ])
+                ->get();
+
+            $formattedDataResult = [];
+            $formattedLabelResult = [];
+            $total = 0;
+            $count = 0;
+
+            foreach ($results as $result) {
+                $total += $result->vestibulandos;
+                $cursoTurno = $result->curso . '/'. $result->turno;
+                $formattedDataResult[] = [$count, $result->vestibulandos];
+                $formattedLabelResult[] = [$count, $cursoTurno];
+                $count++;
+            }
+
+            $formattedResult = [
+                'data' => $formattedDataResult,
+                'label' => $formattedLabelResult,
+                'total' => $total
+            ];
+
+            return response()->json(['success' => true,'dados' => $formattedResult]);
+        }catch (\Throwable $e) {
+            return response()->json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
 }
