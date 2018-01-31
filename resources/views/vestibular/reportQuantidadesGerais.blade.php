@@ -28,6 +28,11 @@
             </div>
             <br><br>
             <div class="row">
+                <div class="col-md-2 col-md-offset-10">
+                    <strong>Total: </strong> <span id="total">0</span>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <div class="flot-chart" style="height: 300px">
                         <div class="flot-chart-content" id="flot-bar-chart"></div>
@@ -112,6 +117,7 @@
                         //var dados = [['Pagos', json.dados.pagos], ['Não Pagos', json.dados.nPagos], ['Totais', json.dados.totais]];
                         //reportPie(json.dados);
                         reportBar(json.dados);
+                        $('#total').text(json.dados.total);
                     }
                 }
             });
@@ -123,7 +129,7 @@
             var dataset = [{ label: "Quantidade de vestibulandos", data: data, color: "#5482FF" }];
             var ticks = dados.label;
 
-            $.plot("#flot-bar-chart", dataset, {
+            var p = $.plot("#flot-bar-chart", dataset, {
                 colors: ["#1ab394"],
                 series: {
                     bars: {
@@ -166,10 +172,17 @@
                     position: "nw"
                 }
             });
-        };
 
-
-
+            $.each(p.getData()[0].data, function(i, el){
+                var o = p.pointOffset({x: el[0], y: el[1]});
+                $('<div class="data-point-label">' + el[1] + '</div>').css( {
+                    position: 'absolute',
+                    left: o.left + 3,
+                    top: o.top - 20,
+                    display: 'none',
+                }).appendTo(p.getPlaceholder()).fadeIn('slow');
+            });
+        }
 
         /*function labelFormatter(label, series) {
             return "<div style='font-size:8pt; text-align:center; padding:3px; color:" + series.color +";'>"
