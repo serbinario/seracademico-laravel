@@ -68,7 +68,7 @@
     <h4>D E C L A R A Ç Ã O &nbsp; D E &nbsp; M A T R Í C U L A</h4>
 </div>
 <div class="corpo">
-    <p style="text-indent:80px; line-height: 50px;">
+    <p style="text-indent:80px; line-height: 50px; text-align: justify;">
         Declaramos para os devidos fins que o aluno <b>{{ isset($aluno['pessoa']) ? $aluno['pessoa']['nome'] : "" }}</b>,
         matrícula <b>{{$aluno['matricula']}}</b>, <b>CPF {{ isset($aluno['pessoa']['cpf']) ? $aluno['pessoa']['cpf'] : "" }}</b>,
         encontra-se regularmente matriculado no Campus Recife, no Turno da {{ $turno->nome }}, com carga horária
@@ -80,10 +80,11 @@
         Recife, {{ strftime('%d de %B de %Y', strtotime((new \DateTime("now"))->format("Y-m-d"))) }}
     </div>
 
-    <div style="text-align: center; margin-top: 50px;">
+    <div style="font-size: 11px; text-align: center; margin-top: 50px;">
         _______________________________<br>
         Dorivaldo Ramos Bezerra Junior<br>
-        Secretário Geral da Faculdade e Depositário do Acervo Acadêmico
+        Secretário Geral da Faculdade e<br>
+        Depositário do Acervo Acadêmico
     </div>
 </div>
 <div style="margin-top: 140px;">
