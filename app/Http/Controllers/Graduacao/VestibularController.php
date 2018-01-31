@@ -291,9 +291,11 @@ class VestibularController extends Controller
 
             $formattedDataResult = [];
             $formattedLabelResult = [];
+            $total = 0;
             $count = 0;
 
             foreach ($results as $result) {
+                $total += $result->vestibulandos;
                 $cursoTurno = $result->curso . '/'. $result->turno;
                 $formattedDataResult[] = [$count, $result->vestibulandos];
                 $formattedLabelResult[] = [$count, $cursoTurno];
@@ -302,7 +304,8 @@ class VestibularController extends Controller
 
             $formattedResult = [
                 'data' => $formattedDataResult,
-                'label' => $formattedLabelResult
+                'label' => $formattedLabelResult,
+                'total' => $total
             ];
 
             return response()->json(['success' => true,'dados' => $formattedResult]);
