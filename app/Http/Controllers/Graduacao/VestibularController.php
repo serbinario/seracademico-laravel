@@ -206,7 +206,7 @@ class VestibularController extends Controller
      */
     public function relatorio1(Request $request)
     {
-        /*#Criando a consulta
+        #Criando a consulta
         $vestibulandos = \DB::table('fac_vestibulandos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
@@ -236,7 +236,7 @@ class VestibularController extends Controller
                 'fac_vestibulares.nome as vestibular',
                 'fin_tipos_taxas.id as idTipoTaxa',
                 \DB::raw('IF(fac_vestibulandos_financeiros.pago, "Pago", "Não Pago") as financeiro')
-            ])->get();*/
+            ])->get();
 
 
         return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $vestibulandos])->stream();
@@ -257,7 +257,6 @@ class VestibularController extends Controller
      */
     public function viewReportQuantidadesGerais()
     {
-        # Carregando as classes necessárias
         $loadFields = $this->service->load(['Graduacao\\Vestibular']);
 
         # Retorno para a view
@@ -271,46 +270,44 @@ class VestibularController extends Controller
     public function getReportQuantidadesGerais($id)
     {
         try {
-            # Vestibulando págos
-            $pagos = \DB::table('fac_vestibulandos')
-                ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulandos.vestibular_id')
-                ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
+            $results = \DB::table('fac_vestibulares')
+                ->join('fac_vestibulares_cursos', 'fac_vestibulares_cursos.vestibular_id', '=', 'fac_vestibulares.id')
+                ->join('fac_vestibular_curso_turno', 'fac_vestibular_curso_turno.vestibular_curso_id', '=', 'fac_vestibulares_cursos.id')
+                ->join('fac_vestibulandos', function ($join) {
+                    $join->on('fac_vestibulandos.vestibular_id', '=', 'fac_vestibulares.id')
+                        ->on('fac_vestibulandos.primeira_opcao_curso_id', '=', 'fac_vestibulares_cursos.curso_id')
+                        ->on('fac_vestibulandos.primeira_opcao_turno_id', '=', 'fac_vestibular_curso_turno.turno_id');
+                })
+                ->join('fac_cursos', 'fac_cursos.id', '=', 'fac_vestibulares_cursos.curso_id')
+                ->join('fac_turnos', 'fac_turnos.id', '=', 'fac_vestibular_curso_turno.turno_id')
                 ->where('fac_vestibulares.id', $id)
-                ->where('fac_vestibulandos_financeiros.pago', '=', 1)
+                ->groupBy(['fac_cursos.nome', 'fac_turnos.nome'])
                 ->select([
-                    \DB::raw('count(fac_vestibulandos.id) as pagos')
-                ])->get();
+                    'fac_cursos.codigo as curso',
+                    'fac_turnos.nome as turno',
+                    \DB::raw('count(fac_vestibulandos.id) as vestibulandos')
+                ])
+                ->get();
 
-            # Vestibulando não págos
-            $nPagos = \DB::table('fac_vestibulandos')
-                ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulandos.vestibular_id')
-                ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-                ->where('fac_vestibulares.id', $id)
-                ->where('fac_vestibulandos_financeiros.pago', '=', 0)
-                ->select([
-                    \DB::raw('count(fac_vestibulandos.id) as nPagos')
-                ])->get();
+            $formattedDataResult = [];
+            $formattedLabelResult = [];
+            $count = 0;
 
-            # Todos os vestibulandos
-            $totais = \DB::table('fac_vestibulandos')
-                ->join('fac_vestibulares', 'fac_vestibulares.id', '=', 'fac_vestibulandos.vestibular_id')
-                ->join('fac_vestibulandos_financeiros', 'fac_vestibulandos_financeiros.vestibulando_id', '=', 'fac_vestibulandos.id')
-                ->where('fac_vestibulares.id', $id)
-                ->select([
-                    \DB::raw('count(fac_vestibulandos.id) as totais')
-                ])->get();
+            foreach ($results as $result) {
+                $cursoTurno = $result->curso . '/'. $result->turno;
+                $formattedDataResult[] = [$count, $result->vestibulandos];
+                $formattedLabelResult[] = [$count, $cursoTurno];
+                $count++;
+            }
 
-            # Array de retorno
-            $arrayResult = [
-                'pagos' => isset($pagos[0]) ? $pagos[0]->pagos : 0,
-                'nPagos' => isset($nPagos[0]) ? $nPagos[0]->nPagos : 0,
-                'totais' => isset($totais[0]) ? $totais[0]->totais : 0,
+            $formattedResult = [
+                'data' => $formattedDataResult,
+                'label' => $formattedLabelResult
             ];
 
-            #Retorno para a view
-            return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $arrayResult]);
+            return response()->json(['success' => true,'dados' => $formattedResult]);
         }catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+            return response()->json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 
