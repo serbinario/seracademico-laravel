@@ -32,10 +32,10 @@
         }
 
         .titulo {
-            margin-top: 150px;
-            margin-bottom: 100px;
+            margin-top: 130px;
+            margin-bottom: 70px;
             text-align: center;
-            font-size: 20px;
+            font-size: 15px;
         }
         .corpo {
             font-size: 16px;
