@@ -3,7 +3,7 @@
     <meta charset="utf-8">
 <style type="text/css">
     .texto {
-        font-size: 28px;
+        font-size: 32px;
     }
     p {
         margin-top: 8px;
@@ -14,7 +14,7 @@
     table, table th, table td {
         border: 1px solid black;
         border-collapse: collapse;
-        font-size: 26px;
+        font-size: 30px;
     }
 </style>
 </head>
