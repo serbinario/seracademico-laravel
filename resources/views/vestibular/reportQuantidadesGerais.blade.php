@@ -13,9 +13,11 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::open(['route'=>'seracademico.graduacao.curriculo.reportById', 'method' => "POST", 'id' => 'reportQtdGerais', 'class' => 'form-inline']) !!}
+                    {!! Form::open(['route'=>'seracademico.graduacao.curriculo.reportById', 'method' => "POST",
+                        'id' => 'reportQtdGerais', 'class' => 'form-inline']) !!}
                         <div class="form-group">
-                            {!! Form::select('vestibular_id', (['' => 'Selecione um Vestibular'] + $loadFields['graduacao\\vestibular']->toArray()), null, array('class' => 'form-control', 'id' => 'vestibular_id')) !!}
+                            {!! Form::select('vestibular_id', (['' => 'Selecione um Vestibular'] + $loadFields['graduacao\\vestibular']->toArray()),
+                                null, array('class' => 'form-control', 'id' => 'vestibular_id')) !!}
                         </div>
 
                         <div class="form-group">
@@ -26,17 +28,17 @@
             </div>
             <br><br>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="flot-chart">
+                <div class="col-md-12">
+                    <div class="flot-chart" style="height: 300px">
                         <div class="flot-chart-content" id="flot-bar-chart"></div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+               {{-- <div class="col-md-6">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>
@@ -44,24 +46,62 @@
 
 @section('javascript')
     <script type="text/javascript">
-             // Evento para carregar o relatório
-        $('#reportQtdGerais').submit(function (event) {
-            // Cancelando a propagação do método
-            event.preventDefault();
+        var previousPoint = null, previousLabel = null;
 
-            // Recuperando o id do currículo
+        $.fn.UseTooltip = function () {
+            $(this).bind("plothover", function (event, pos, item) {
+                if (item) {
+                    if ((previousLabel != item.series.label) || (previousPoint != item.dataIndex)) {
+                        previousPoint = item.dataIndex;
+                        previousLabel = item.series.label;
+                        $("#tooltip").remove();
+
+                        var x = item.datapoint[0];
+                        var y = item.datapoint[1];
+
+                        var color = item.series.color;
+
+                        //console.log(item.series.xaxis.ticks[x].label);
+
+                        showTooltip(item.pageX,
+                            item.pageY,
+                            color,
+                            "<strong>" + item.series.label + "</strong><br>" + item.series.xaxis.ticks[x].label + " : <strong>" + y + "</strong>");
+                    }
+                } else {
+                    $("#tooltip").remove();
+                    previousPoint = null;
+                }
+            });
+        };
+
+        function showTooltip(x, y, color, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css({
+                position: 'absolute',
+                display: 'none',
+                top: y - 40,
+                left: x - 120,
+                border: '2px solid ' + color,
+                padding: '3px',
+                'font-size': '9px',
+                'border-radius': '5px',
+                'background-color': '#fff',
+                'font-family': 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                opacity: 0.9
+            }).appendTo("body").fadeIn(200);
+        }
+
+        $("#flot-bar-chart").UseTooltip();
+
+        $('#reportQtdGerais').submit(function (event) {
+            event.preventDefault();
             var vestibularId = $('#vestibular_id').find('option:selected').val();
 
-            // Verificando se o currículo foi passado
             if(!vestibularId) {
                 swal('Você deve informar um vestibular', '', 'error');
                 return false;
             }
 
-            // Redirecionando
-           // window.open('/index.php/seracademico/graduacao/curriculo/reportById/' + curriculoId,'_blank');
-
-            // Requisição ajax
             jQuery.ajax({
                 type: 'GET',
                 url: '/index.php/seracademico/vestibular/relatorios/getReportQuantidadesGerais/' + vestibularId,
@@ -70,28 +110,26 @@
                 if(json.success) {
                     if(json.success) {
                         //var dados = [['Pagos', json.dados.pagos], ['Não Pagos', json.dados.nPagos], ['Totais', json.dados.totais]];
-                        reportPie(json.dados);
+                        //reportPie(json.dados);
                         reportBar(json.dados);
                     }
                 }
             });
         });
 
-        // Função para formatar a label
-        function labelFormatter(label, series) {
-            return "<div style='font-size:8pt; text-align:center; padding:3px; color:" + series.color +";'>" + label + "<br/>" + series.data[0][1] + "</div>"
-        }
 
-        // Função para carregar o gráfico de barras
         function reportBar(dados) {
-            var data = [ ["Pgos", dados.pagos], ["Não Pagos", dados.nPagos], ["Totais", dados.totais] ];
+            var data = dados.data;
+            var dataset = [{ label: "Quantidade de vestibulandos", data: data, color: "#5482FF" }];
+            var ticks = dados.label;
 
-            $.plot("#flot-bar-chart", [ data ], {
+            $.plot("#flot-bar-chart", dataset, {
                 colors: ["#1ab394"],
                 series: {
                     bars: {
                         show: true,
-                        barWidth: 0.6,
+                        barWidth: 0.5,
+                        align: "center",
                         fill: true,
                         fillColor: {
                             colors: [{
@@ -103,23 +141,41 @@
                     }
                 },
                 xaxis: {
-                    mode: "categories",
-                    tickLength: 0
+                    axisLabel: "World Cities",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10,
+                    ticks: ticks
+                },
+                yaxis: {
+                    axisLabel: "Quantidade",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 3,
                 },
                 grid: {
-                    color: "#999999",
                     hoverable: true,
-                    clickable: true,
-                    tickColor: "#D4D4D4",
-                    borderWidth:0
+                    borderWidth: 1,
+                    backgroundColor: { colors: ["#ffffff", "#EDF5FF"] }
                 },
                 legend: {
-                    show: false
-                },
+                    noColumns: 0,
+                    labelBoxBorderColor: "#000000",
+                    position: "nw"
+                }
             });
         };
 
-        // função para carregar o gráfico de pizza
+
+
+
+        /*function labelFormatter(label, series) {
+            return "<div style='font-size:8pt; text-align:center; padding:3px; color:" + series.color +";'>"
+                + label + "<br/>" + series.data[0][1] + "</div>"
+        }
+
         function reportPie(dados) {
             var data = [{
                 label: "Pagos",
@@ -158,6 +214,6 @@
                     defaultTheme: false
                 }
             });
-        }
+        }*/
     </script>
 @stop
