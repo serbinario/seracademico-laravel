@@ -32,6 +32,7 @@
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>Carga Horária</th>
                                         <th style="width: 5%;">Qtd. Faltas</th>
                                         <th style="width: 10%;">Tipo da disciplina</th>
                                         <th style="width: 10%;">Modulo</th>
@@ -41,6 +42,7 @@
                                     <tfoot>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>Carga Horária</th>
                                         <th style="width: 5%;">Qtd. Faltas</th>
                                         <th style="width: 10%;">Tipo da disciplina</th>
                                         <th style="width: 10%;">Modulo</th>
