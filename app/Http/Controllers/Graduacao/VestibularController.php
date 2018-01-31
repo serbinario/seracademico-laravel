@@ -206,7 +206,7 @@ class VestibularController extends Controller
      */
     public function relatorio1(Request $request)
     {
-        #Criando a consulta
+        /*#Criando a consulta
         $vestibulandos = \DB::table('fac_vestibulandos')
             ->join('pessoas', 'pessoas.id', '=', 'fac_vestibulandos.pessoa_id')
             ->join('fac_vestibulares', 'fac_vestibulares.id', '=' , 'fac_vestibulandos.vestibular_id')
@@ -236,7 +236,7 @@ class VestibularController extends Controller
                 'fac_vestibulares.nome as vestibular',
                 'fin_tipos_taxas.id as idTipoTaxa',
                 \DB::raw('IF(fac_vestibulandos_financeiros.pago, "Pago", "Não Pago") as financeiro')
-            ])->get();
+            ])->get();*/
 
 
         return \PDF::loadView('reports.vestibulares.relatorio1', ['rows' => $vestibulandos])->stream();
