@@ -24,7 +24,6 @@
         }
 
         .rodapeTimbrado {
-            margin-top: 7%;
             /*position: absolute;*/
             /*margin-top: 546px;*/
             color: #273176;
@@ -88,7 +87,7 @@
         Depositário do Acervo Acadêmico
     </div>
 </div>
-<div style="margin-top: 140px;">
+<div style="margin-top: 160px;">
     <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 <div class="rodapeTimbrado">
