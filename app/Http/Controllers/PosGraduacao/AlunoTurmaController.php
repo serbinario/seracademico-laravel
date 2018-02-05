@@ -232,6 +232,12 @@ class AlunoTurmaController extends Controller
 
             # Iterando quanda turma para remover as notas
             foreach($curriculo->pivot->turmas()->get() as $turma) {
+                $notas = $turma->pivot->notas;
+
+                foreach ($notas as $nota) {
+                    $nota->frequencias()->delete();
+                }
+
                 $turma->pivot->notas()->delete();
             }
             
@@ -245,7 +251,7 @@ class AlunoTurmaController extends Controller
 
             # Retorno
             return \Illuminate\Support\Facades\Response::json(['success' => true,'msg' => "Curso removido com sucesso!"]);
-        }  catch (\Throwable $e) {dd($e->getMessage());
+        }  catch (\Throwable $e) {print_r($e->getMessage());
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
 
