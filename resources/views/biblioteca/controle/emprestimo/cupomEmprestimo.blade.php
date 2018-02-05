@@ -23,21 +23,21 @@
         <h3>RECIBO DE EMPRÉSTIMO</h3>
         <p>----------------------------------------------</p>
         <span class="texto">
-            Aluno: {{$result->pessoa->nome}}
+            {{ $result->pessoa->nome }}
         </span><br />
         <span class="texto">
-            RG: {{$result->pessoa->identidade}}
+            RG: {{ $result->pessoa->identidade }}
         </span><br />
         <span class="texto">
-            Telefone: {{$result->pessoa->celular}}
+            Telefone: {{ $result->pessoa->celular }}
         </span><br />
         <span class="texto">
             <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>
-                Emprestado em: {{$data->format('d/m/Y')}}<br />
-                Devolver em: {{$data2->format('d/m/Y')}}
+                Emprestado em: {{ $data->format('d/m/Y') }}<br />
+                Devolver em: {{ $data2->format('d/m/Y') }}
         </span><br />
         <span class="texto">
-            Código: {{$result->codigo}}
+            Código: {{ $result->codigo }}
         </span><br />
         <p>----------------------------------------------</p>
         <span class="texto">
@@ -55,10 +55,10 @@
             <tbody>
                 @foreach($result->emprestimoExemplar as $exemplar)
                     <tr>
-                        <td>{{$exemplar->acervo->titulo}}</td>
-                        <td>{{$exemplar->acervo->cutter}}</td>
-                        <td>{{$exemplar->acervo->cdd}}</td>
-                        <td>{{$exemplar->codigo}}</td>
+                        <td>{{ $exemplar->acervo->titulo }}</td>
+                        <td>{{ $exemplar->acervo->cutter }}</td>
+                        <td>{{ $exemplar->acervo->cdd }}</td>
+                        <td>{{ $exemplar->codigo }}</td>
                     </tr>
                 @endforeach
             </tbody>
