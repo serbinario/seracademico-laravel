@@ -683,7 +683,7 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
-        //$this->repository->model->lockForUpdate();
+        Aluno::lockForUpdate();
 
         # Recuperando o último aluno cadastrado
         $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
