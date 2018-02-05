@@ -695,7 +695,7 @@ class AlunoService
         $numberMonth    = date('m');
         $numberSemestre = $numberMonth >= 8 ? 2 : 1;
 
-        # Verificando se o vestibular possui vestibulando
+        # Verificando se é a primeira matrícula
         if(!$lastIncricao) {
             return $now->format('Y') . $numberSemestre . '0001';
         }
@@ -706,7 +706,7 @@ class AlunoService
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
         $newInscricao = $now->format('Y') . $numberSemestre . $newInscricao;
 
-        //$result = $this->repository->findWhere(['matricula' => $newInscricao]);
+        $result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
         //if (count($result) > 0) {
         //    $this->gerarMatricula();
