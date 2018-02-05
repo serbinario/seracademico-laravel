@@ -686,7 +686,8 @@ class AlunoService
         Aluno::lockForUpdate();
 
         # Recuperando o último aluno cadastrado
-        $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+        //$aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+        $aluno = Aluno::orderBy(\DB::raw('SUBSTRING(matricula, -4)'), 'desc')->first();
 
         # Recuperando a matrícula
         $lastIncricao = $aluno->matricula;
@@ -706,11 +707,11 @@ class AlunoService
         $newInscricao = str_pad(($lastIncricao + 1), 4, "0", STR_PAD_LEFT) ;
         $newInscricao = $now->format('Y') . $numberSemestre . $newInscricao;
 
-        $result = $this->repository->findWhere(['matricula' => $newInscricao]);
+        //$result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
-        if (count($result) > 0) {
-            return $this->gerarMatricula();
-        }
+        //if (count($result) > 0) {
+        //    return $this->gerarMatricula();
+        //}
 
         # retorno
         return $newInscricao;
