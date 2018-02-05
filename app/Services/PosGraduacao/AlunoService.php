@@ -708,9 +708,9 @@ class AlunoService
 
         $result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
-        //if (count($result) > 0) {
-        //    $this->gerarMatricula();
-        //}
+        if (count($result) > 0) {
+            return $this->gerarMatricula();
+        }
 
         # retorno
         return $newInscricao;
