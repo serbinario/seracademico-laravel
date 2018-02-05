@@ -683,7 +683,7 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
-        //$this->repository->model->lockForUpdate();
+        Aluno::lockForUpdate();
 
         # Recuperando o último aluno cadastrado
         $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
@@ -708,9 +708,9 @@ class AlunoService
 
         $result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
-        //if (count($result) > 0) {
-        //    $this->gerarMatricula();
-        //}
+        if (count($result) > 0) {
+            return $this->gerarMatricula();
+        }
 
         # retorno
         return $newInscricao;
