@@ -1,5 +1,7 @@
 <?php
 
+Route::get("matricula", "PosGraduacao\AlunoController@refreshMatriculas");
+
 Route::get("", ['middleware' => 'auth', 'uses' => 'DefaultController@index']);
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
