@@ -512,16 +512,16 @@ class AlunoController extends Controller
             ->where(\DB::raw("DATE_FORMAT(pos_alunos.created_at, '%Y')"), 2018)
             ->get();
 
-        dd(count($results));
-
         $count = 0;
         foreach ($results as $result) {
             $aluno = $this->service->find($result->id);
             $matricula = str_pad(($count + 1), 4, "0", STR_PAD_LEFT);
             $aluno->matricula = '20181' . $matricula;
-            echo $aluno->matricula . '<br>';
-            //$aluno->save();
+            //echo $aluno->matricula . '<br>';
+            $aluno->save();
             $count++;
         }
+
+        echo 'pronto';
     }
 }
