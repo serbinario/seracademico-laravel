@@ -512,6 +512,8 @@ class AlunoController extends Controller
             ->where(\DB::raw("DATE_FORMAT(pos_alunos.created_at, '%Y')"), 2018)
             ->get();
 
+        dd(count($results));
+
         $count = 0;
         foreach ($results as $result) {
             $aluno = $this->service->find($result->id);
