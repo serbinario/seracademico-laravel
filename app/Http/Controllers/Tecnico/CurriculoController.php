@@ -4,6 +4,7 @@ namespace Seracademico\Http\Controllers\Tecnico;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Http\Requests;
 use Seracademico\Services\Tecnico\CurriculoService;
@@ -67,8 +68,7 @@ class CurriculoController extends Controller
             ->select([
                 'id',
                 'nome'
-            ])
-            ->get();
+            ])->get();
 
         foreach ($modulos as $modulo) {
             $arrayModulos[$modulo->id] = $modulo->nome;
@@ -101,13 +101,26 @@ class CurriculoController extends Controller
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
-                        <li><a class="grid-curricular btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Disciplinas ao Currículo"><i class="material-icons">add_to_photos</i></a></li>
-                    </ul>
-                    </div>';
+            $curriculo = $this->service->find($row->id);
+
+            $html = "";
+
+            $html .= '<div class="fixed-action-btn horizontal">
+                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
+
+            $html .= '<li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>';
+
+            //$html .= '<li><a class="grid-modulos btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Módulos"><i class="material-icons">add_to_photos</i></a></li>';
+
+            //if(count($curriculo->modulos) > 0) {
+                $html .= '<li><a class="grid-curricular btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Disciplinas ao Currículo">
+                            <i class="material-icons">add_to_photos</i></a></li>';
+            //}
+
+            $html .= '</ul></div>';
+
+            return $html;
+
         })->make(true);
     }
 
@@ -320,6 +333,27 @@ class CurriculoController extends Controller
             return \Illuminate\Support\Facades\Response::json(['success' => true,'dados' => $rows]);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json(['success' => false,'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $idCurriculo
+     * @return mixed
+     */
+    public function getModuloByCurriculo($idCurriculo)
+    {
+        try {
+
+            $rows = \DB::table('tec_modulos')
+                ->where('curriculo_id', $idCurriculo)
+                ->select([
+                    'id',
+                    'nome'
+                ])->get();
+
+            return Response::json(['success' => true,'dados' => $rows]);
+        } catch (\Throwable $e) {
+            return Response::json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
 }

@@ -450,8 +450,13 @@ class EmprestarController extends Controller
                     'bib_emprestimos_exemplares.valor_multa',
                 ])->get();
 
+            //dd($emprestimo);
+
             #Retorno para a view
-            return view('biblioteca.controle.emprestimo.cupomDevolucao', compact('emprestimo', 'exemplares'));
+            return \PDF::loadView('biblioteca.controle.emprestimo.cupomDevolucao',
+                compact('emprestimo', 'exemplares'))->stream();
+
+            //return view('biblioteca.controle.emprestimo.cupomDevolucao', compact('emprestimo', 'exemplares'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
@@ -501,7 +506,11 @@ class EmprestarController extends Controller
                 ])->get();
 
             #Retorno para a view
-            return view('biblioteca.controle.emprestimo.cupomDevolucaoPorAluno', compact('emprestimo', 'exemplares', 'totalMulta'));
+
+            return \PDF::loadView('biblioteca.controle.emprestimo.cupomDevolucaoPorAluno',
+                compact('emprestimo', 'exemplares', 'totalMulta'))->stream();
+
+            //return view('biblioteca.controle.emprestimo.cupomDevolucaoPorAluno', compact('emprestimo', 'exemplares', 'totalMulta'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }

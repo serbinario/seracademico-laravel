@@ -125,7 +125,7 @@ class DisciplinaController extends Controller
             return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
         } catch (ValidatorException $e) {
             return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {print_r($e->getMessage()); exit;
+        } catch (\Throwable $e) {print_r($e->getMessage());
             return redirect()->back()->with('message', $e->getMessage());
         }
     }

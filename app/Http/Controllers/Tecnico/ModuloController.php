@@ -69,18 +69,14 @@ class ModuloController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
-
             #Executando a ação
             $this->service->store($data);
 
-            #Retorno para a view
-            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) {dd($e); exit;
-            return redirect()->back()->with('message', $e->getMessage());
+            #retorno sucesso
+            return response()->json(['success' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
+        } catch (\Throwable $e) {
+            #retorno falido
+            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
         }
     }
 
@@ -90,26 +86,38 @@ class ModuloController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function grid()
+    public function grid($id)
     {
         #Criando a consulta
         $rows = \DB::table('tec_modulos')
+            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'tec_modulos.curriculo_id')
+            ->where('fac_curriculos.id', $id)
             ->select([
-                'id',
-                'nome',
-                'codigo'
+                'tec_modulos.id',
+                'tec_modulos.nome',
+                'tec_modulos.codigo'
             ]);
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
 
-            return '<div class="fixed-action-btn horizontal">
-                    <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>
-                    <ul>
-                        <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar Currículo"><i class="material-icons">edit</i></a></li>
-                        <li><a class="grid-materiais btn-floating green" data-id="'.$row->id.'" href="#" title="Adicionar Materiais ao Módulo"><i class="material-icons">add_to_photos</i></a></li>
-                    </ul>
-                    </div>';
+            $modulo = $this->repository->find($row->id);
+
+            $html = "";
+
+            $html .= '<div class="fixed-action-btn horizontal">
+                        <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
+
+            $html .= '<li><a class="btn-floating editar-modulo" href="#" title="Editar Módulo"><i class="material-icons">edit</i></a></li>';
+
+            if(count($modulo->disciplinas) <= 0 ) {
+                $html .= '<li><a class="btn-floating delete-modulo" href="#" title="Deletar Módulo"><i class="material-icons">delete</i></a></li>';
+            }
+
+
+            $html .= '</ul></div>';
+
+            return $html;
         })->make(true);
     }
 
@@ -125,13 +133,10 @@ class ModuloController extends Controller
             #Recuperando a empresa
             $model = $this->service->find($id);
 
-            #Carregando os dados para o cadastro
-            $loadFields = $this->service->load($this->loadFields);
-
-            #retorno para view
-            return view('tecnico.modulo.edit', compact('model', 'loadFields'));
-        } catch (\Throwable $e) {dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['success' => true, 'content' => $model]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['success' => false, 'content' => $e->getMessage()]);
         }
     }
 
@@ -148,21 +153,14 @@ class ModuloController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
-            #tratando as rules
-            $this->validator->replaceRules(ValidatorInterface::RULE_UPDATE, ":id", $id);
-
-            #Validando a requisição
-            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
-
             #Executando a ação
             $this->service->update($data, $id);
 
-            #Retorno para a view
-            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
-        } catch (ValidatorException $e) {
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        } catch (\Throwable $e) { dd($e);
-            return redirect()->back()->with('message', $e->getMessage());
+            #retorno sucesso
+            return response()->json(['success' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
+        } catch (\Throwable $e) {
+            #retorno falido
+            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
         }
     }
 
@@ -174,7 +172,16 @@ class ModuloController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            #Executando a ação
+            $this->service->destroy($id);
+
+            # Retorno
+            return \Illuminate\Support\Facades\Response::json(['msg' => true]);
+        } catch (\Throwable $e) {
+            return \Illuminate\Support\Facades\Response::json(['msg' => $e->getMessage()]);
+        }
     }
 
     /**

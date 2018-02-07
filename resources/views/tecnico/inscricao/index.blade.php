@@ -126,7 +126,7 @@
             idInscricao = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
 
             // Carregando a grid de Cursos
-            runTableCurso(idInscricao);
+            runTableDisciplinas(idInscricao);
 
             // Estado inicial dos botões de adicionar
             $("#btnAdicionarCursoTurno").attr("disabled", true);

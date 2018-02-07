@@ -15,5 +15,15 @@ class Modulo extends Model implements Transformable
     protected $fillable = [
         'nome',
         'codigo',
+        'curriculo_id'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function disciplinas()
+    {
+        return $this->belongsToMany(Disciplina::class, 'tec_modulos_disciplinas', 'modulo_id', 'disciplina_id')
+            ->withPivot(['id', 'modulo_id', 'disciplina_id']);
+    }
 }

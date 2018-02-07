@@ -105,6 +105,7 @@ Route::group(['prefix' => 'tecnico', 'middleware' => 'auth', 'as' => 'tecnico.']
         Route::post('removerDisciplina', ['as' => 'removerDisciplina', 'uses' => 'Tecnico\CurriculoController@removerDisciplina']);
         Route::get('getByCurso/{idCurso}', ['as' => 'getByCurso', 'uses' => 'Tecnico\CurriculoController@getByCurso']);
         Route::get('gridByCurriculo/{id}', ['as' => 'gridByCurriculo', 'uses' => 'Tecnico\CurriculoController@gridByCurriculo']);
+        Route::get('get_modulo_by_curriculo/{idCurriculo}', ['as' => 'getByCurso', 'uses' => 'Tecnico\CurriculoController@getModuloByCurriculo']);
     });
 
     Route::group(['prefix' => 'turma', 'as' => 'turma.'], function () {
@@ -186,12 +187,12 @@ Route::group(['prefix' => 'tecnico', 'middleware' => 'auth', 'as' => 'tecnico.']
 
     Route::group(['prefix' => 'modulo', 'middleware' => 'auth', 'as' => 'modulo.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'Tecnico\ModuloController@index']);
-        Route::get('grid', ['as' => 'grid', 'uses' => 'Tecnico\ModuloController@grid']);
+        Route::get('grid/{id}', ['as' => 'grid', 'uses' => 'Tecnico\ModuloController@grid']);
         Route::get('create', ['as' => 'create', 'uses' => 'Tecnico\ModuloController@create']);
         Route::post('store', ['as' => 'store', 'uses' => 'Tecnico\ModuloController@store']);
         Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'Tecnico\ModuloController@edit']);
         Route::post('update/{id}', ['as' => 'update', 'uses' => 'Tecnico\ModuloController@update']);
-        Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ModuloController@delete']);
+        Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'Tecnico\ModuloController@destroy']);
 
         Route::post('adicionarMateriais', ['as' => 'adicionarMateriais', 'uses' => 'Tecnico\ModuloController@adicionarMateriais']);
         Route::get('removerMateriais/{id}', ['as' => 'removerMateriais', 'uses' => 'Tecnico\ModuloController@removerMateriais']);
