@@ -115,12 +115,15 @@
 
     @include('reports.simple.modals.modal_report_tecnico_curriculo_disciplina')
     @include('tecnico.curriculo.modal_adicionar_disciplina')
+    @include('tecnico.curriculo.modal_adicionar_modulos')
     {{--@include('tecnico.curriculo.modal_inserir_adicionar_disciplina')
     @include('tecnico.curriculo.modal_editar_adicionar_disciplina')--}}
 @stop
 
 @section('javascript')
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_tecnico_curriculo_disciplina.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/curriculos/modal_disciplinas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/tecnico/curriculos/modal_modulos.js') }}"></script>
     <script type="text/javascript">
         /*Datatable da grid principal*/
         var table = $('#curriculo-grid').DataTable({
@@ -134,153 +137,40 @@
                 {data: 'codigo_curso', name: 'fac_cursos.codigo'},
                 {data: 'curso', name: 'fac_cursos.nome'},
                 {data: 'ano', name: 'fac_curriculos.ano'},
-//                {data: 'valido_inicio', name: 'fac_curriculos.valido_inicio'},
-//                {data: 'valido_fim', name: 'fac_curriculos.valido_fim'},
                 {data: 'ativo', name: 'fac_curriculos.ativo'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
-        //Variável que armazenará o id do currículo
+        //declaração de variáveis úteis
         var idCurriculo = 0;
-        var table2;
+        var nomeModulo;
 
-        /*Responsável em abrir modal*/
-        $(document).on("click", '.grid-curricular', function () {
-            $("#modal-grade-curricular").modal({show: true, keyboard: true});
+        // Ouvinte para evento de click no link de adicionar disciplinas
+        $(document).on('click', '.grid-curricular', function () {
+            // Recuperando o id do vestibular
             idCurriculo = table.row($(this).parents('tr').index()).data().id;
 
-            /*Datatable da grid Modal*/
-            table2 = $('#disciplina-grid').DataTable({
-                retrieve: true,
-                processing: true,
-                serverSide: true,
-                iDisplayLength: 5,
-                bLengthChange: false,
-                ajax: "/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo,
-                columns: [
-                    {data: 'nome', name: 'fac_disciplinas.nome'},
-                    {data: 'carga_horaria', name: 'fac_disciplinas.carga_horaria'},
-                    {data: 'qtd_falta', name: 'fac_disciplinas.qtd_falta'},
-                    {data: 'tipo_disciplina', name: 'fac_tipo_disciplinas.nome'},
-                    {data: 'modulo', name: 'tec_modulos.nome'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
-                ]
-            });
+            // Carregando a grid de Cursos
+            runTableDisciplinas(idCurriculo);
 
-            //Carregando a datatable
-            table2.ajax.url("/index.php/seracademico/tecnico/curriculo/gridByCurriculo/" + idCurriculo).load();
+            // Carregando a modal
+            $("#modal-grade-curricular").modal({show: true, keyboard: true});
         });
 
-        //consulta via select2
-        $("#select-disciplina").select2({
-            placeholder: 'Selecione uma ou mais disciplinas',
-            width: 600,
-            ajax: {
-                type: 'POST',
-                url: "{{ route('seracademico.util.select2')  }}",
-                dataType: 'json',
-                delay: 250,
-                crossDomain: true,
-                data: function (params) {
-                    return {
-                        'search':         params.term, // search term
-                        'tableName':      'fac_disciplinas',
-                        'fieldName':      'nome',
-                        'page':           params.page || 1,
-                        'tableNotIn':     'fac_curriculo_disciplina',
-                        'columnWhere' :   'curriculo_id',
-                        'columnNotWhere': 'id',
-                        'culmnNotGet':    'disciplina_id',
-                        'valueWhere':     4,
-                        'fieldWhere':     'tipo_nivel_sistema_id',
-                        'valueNotWhere':    idCurriculo
-                    };
-                },
-                headers: {
-                    'X-CSRF-TOKEN' : '{{  csrf_token() }}'
-                },
-                processResults: function (data, params) {
+        // Ouvinte para evento de click no link de adicionar modulos
+        $(document).on('click', '.grid-modulos', function () {
+            // Recuperando o id do vestibular
+            idCurriculo = table.row($(this).parents('tr').index()).data().id;
+            nomeModulo = table.row($(this).parents('tr').index()).data().nome;
 
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
+            $('#nModulo').text(nomeModulo);
 
-                    return {
-                        results: data.data,
-                        pagination: {
-                            more: data.more
-                        }
-                    };
-                }
-            }
-        });
+            // Carregando a grid de Cursos
+            runTableModulos(idCurriculo);
 
-        //Evento do click no botão adicionar disciplina
-        $(document).on('click', '#addDisciplina', function (event) {
-            var array   = $('#select-disciplina').select2('data');
-            var modulo  = $('#modulo_id').val();
-
-            // Verificando preenchimento dos campos disciplina e modulo
-            if (!array.length > 0 || modulo == 0) {
-                sweetAlert("Oops...", "Por favor, selecione a disciplina e um modulo", "error");
-                return false;
-            }
-
-            var arrayId = [];
-
-            for (var i = 0; i < array.length; i++) {
-                arrayId[i] = array[i].id
-            }
-
-            //Setando o o json para envio
-            var dados = {
-                'idCurriculo' : idCurriculo,
-                'idDisciplinas' : arrayId,
-                'modulo_id' : modulo
-            };
-
-            jQuery.ajax({
-                type: 'POST',
-                url: '{{ route('seracademico.tecnico.curriculo.adicionarDisciplinas')  }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
-                data: dados,
-                datatype: 'json'
-            }).done(function (json) {
-                $('#select-disciplina').select2("val", "");
-                swal("Disciplina(s) adicionada(s) com sucesso!", "Click no botão abaixo!", "success");
-                table2.ajax.reload();
-            });
-        });
-
-        //Evento de remover a disciplina
-        $(document).on('click', '.removerDisciplina', function () {
-            idCurriculo  = table2.row($(this).parent().parent().parent().parent().parent().index()).data().idCurriculo;
-            idDisciplina = table2.row($(this).parent().parent().parent().parent().parent().index()).data().id;
-
-            //Setando o o json para envio
-            var dados = {
-                'idCurriculo'  : idCurriculo,
-                'idDisciplina' : idDisciplina,
-            };
-
-            jQuery.ajax({
-                type: 'POST',
-                url: '{{ route('seracademico.tecnico.curriculo.removerDisciplina')  }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{{  csrf_token() }}'
-                },
-                data: dados,
-                datatype: 'json'
-            }).done(function (retorno) {
-                $('#select-disciplina').select2("val", "");
-                swal("Disciplina removida com sucesso!", "Click no botão abaixo!", "success");
-                table2.ajax.reload();
-            });
+            // Carregando a modal
+            $("#modal-modulos").modal({show: true, keyboard: true});
         });
 
         // Geriamento dos relatórios avançadas

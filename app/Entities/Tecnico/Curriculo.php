@@ -93,6 +93,14 @@ class Curriculo extends Model implements Transformable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function modulos()
+    {
+        return $this->hasMany(Modulo::class, 'curriculo_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function alunos()
