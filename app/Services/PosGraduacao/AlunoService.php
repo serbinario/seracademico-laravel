@@ -683,10 +683,11 @@ class AlunoService
         # Recuperando a data atual
         $now = new \DateTime("now");
 
-        //$this->repository->model->lockForUpdate();
+        Aluno::lockForUpdate();
 
         # Recuperando o último aluno cadastrado
-        $aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+        //$aluno  = $this->repository->orderBy('created_at', 'desc')->first();
+        $aluno = Aluno::orderBy(\DB::raw('SUBSTRING(matricula, -4)'), 'desc')->first();
 
         # Recuperando a matrícula
         $lastIncricao = $aluno->matricula;
@@ -695,7 +696,7 @@ class AlunoService
         $numberMonth    = date('m');
         $numberSemestre = $numberMonth >= 8 ? 2 : 1;
 
-        # Verificando se o vestibular possui vestibulando
+        # Verificando se é a primeira matrícula
         if(!$lastIncricao) {
             return $now->format('Y') . $numberSemestre . '0001';
         }
@@ -709,7 +710,7 @@ class AlunoService
         //$result = $this->repository->findWhere(['matricula' => $newInscricao]);
 
         //if (count($result) > 0) {
-        //    $this->gerarMatricula();
+        //    return $this->gerarMatricula();
         //}
 
         # retorno

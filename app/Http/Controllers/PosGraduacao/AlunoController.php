@@ -52,12 +52,19 @@ class AlunoController extends Controller
         'PosGraduacao\\TipoPretensao',
         'PosGraduacao\\Curso|byCurriculoAtivo,1'
     ];
+    /**
+     * @var AlunoRepository
+     */
+    private $repository;
 
     /**
+     * AlunoController constructor.
      * @param AlunoService $service
+     * @param AlunoValidator $validator
      */
-    public function __construct(AlunoService $service, AlunoValidator $validator)
-    {
+    public function __construct(
+        AlunoService $service,
+        AlunoValidator $validator){
         $this->service    = $service;
         $this->validator  = $validator;
     }
@@ -491,5 +498,30 @@ class AlunoController extends Controller
             dd($e->getMessage());
 //            return \Illuminate\Support\Facades\Response::json(['error' => $e->getMessage()]);
         }
+    }
+
+
+    public function refreshMatriculas()
+    {
+        $results = \DB::table('pos_alunos')
+            ->select([
+                'id',
+                'matricula',
+                'created_at'
+            ])
+            ->where(\DB::raw("DATE_FORMAT(pos_alunos.created_at, '%Y')"), 2018)
+            ->get();
+
+        $count = 0;
+        foreach ($results as $result) {
+            $aluno = $this->service->find($result->id);
+            $matricula = str_pad(($count + 1), 4, "0", STR_PAD_LEFT);
+            $aluno->matricula = '20181' . $matricula;
+            //echo $aluno->matricula . '<br>';
+            $aluno->save();
+            $count++;
+        }
+
+        echo 'pronto';
     }
 }

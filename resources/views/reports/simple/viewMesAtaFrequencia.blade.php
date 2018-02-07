@@ -20,7 +20,7 @@
         }
 
         #body {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .percentFive {
@@ -43,7 +43,6 @@
             font-size: 12px;
             font-weight: bold;
             border-collapse: collapse;
-            page-break-inside: auto
         }
 
         table#tableHeader {
@@ -58,28 +57,17 @@
             width: 100%;
         }
 
-        table#tableBody {
-            margin-bottom: 5%;
-        }
-
-        tr {
-            page-break-inside: avoid;
-            page-break-after: auto
-        }
-
         td {
             padding-bottom: 1.0%;
             padding-left: 1.0%;
             padding-top: 0.5%;
         }
 
-        thead {
-            display: table-header-group
-        }
-
-        tfoot {
-            display: table-footer-group
-        }
+        /**** Estilos da table em duas páginas *****/
+        table#tableBody { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
     </style>
 </head>
 

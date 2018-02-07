@@ -556,11 +556,7 @@
 
                     <div class="form-group col-md-4">
                         {!! Form::label('forma_admissao_id', 'Forma de admissão') !!}
-                        @if(isset($aluno->id))
-                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
-                        @else
-                            {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
-                        @endif
+                        {!! Form::select('forma_admissao_id', $loadFields['formaadmissao'], null, array('class' => 'form-control')) !!}
                     </div>
                 </div>
             </div>
