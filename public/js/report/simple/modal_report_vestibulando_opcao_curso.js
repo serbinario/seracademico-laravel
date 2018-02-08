@@ -46,5 +46,5 @@ $('#btnGerarRelatorioOpcaoPorCurso').click(function() {
 
     // Executando o relatório e abrindo em outra aba
     window.open("/index.php/seracademico/report/"
-        + reportId + "?fac_vestibulandos,enem="+curso, '_blank');
+        + reportId + "?fac_vestibulandos,primeira_opcao_curso_id="+curso, '_blank');
 });
