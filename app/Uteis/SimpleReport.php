@@ -56,7 +56,6 @@ class SimpleReport implements Report
         $width  = array_column($this->fields, 'largura');
         $head   = array_column($this->fields, 'name');
         $fHead  = array_column($this->filters, 'name');
-
         # Recuperando o corpo dos filtros
         $filtersBody = count($this->filterBody($filters)) > 0 ? $this->filterBody($filters)[0] : [];
 
@@ -71,7 +70,9 @@ class SimpleReport implements Report
             'filtersHeaders' => $fHead,
             'filtersBody' => array_values((array) $filtersBody)
         ];
-        
+
+
+
         # retorno
         return $report;
     }
@@ -158,7 +159,7 @@ class SimpleReport implements Report
                 }
             }
         }
-
+        
         # Executando o sql principal
         return \DB::select($sql . $where. " {$this->sql[0]->groupBy}");
     }

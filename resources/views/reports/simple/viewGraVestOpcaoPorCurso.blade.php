@@ -20,6 +20,11 @@
             </td>
             <td width="55%"><br>
                 <h1 style="text-align: center;color: #082652; ">Lista de Vestibulandos</h1>
+                @if(count($dados['body']) > 0)
+                    <p style="text-align: center;color: #082652; font-size: 15px">
+                         {{ $dados['body'][0]->curso }}
+                    </p>
+                @endif
             </td>
             <td width="15%">
                 <img alt="image" width="100%" src="{{ asset('/img/seracad.png')}}"/>
@@ -39,7 +44,9 @@
         <tbody>
         @foreach($dados['body'] as $vestibulando)
             <tr>
-                <td><b>{{$vestibulando->nome}}</b></td>
+                <td>
+                    <b>{{$vestibulando->nome}}</b>
+                </td>
                 @if($vestibulando->turno == 1)
                         <td style="text-align: center;">Manhã</td>
                     @elseif($vestibulando->turno == 2)
