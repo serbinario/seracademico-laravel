@@ -51,7 +51,7 @@
 
         #imagem-quatro {
             width: 155px;
-            margin-left: 7%;
+            margin-left: 13%;
         }
         
         #header h1 {
@@ -91,8 +91,8 @@
 
 <div id="header">
     <img id="imagem-um" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo">
-    <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">
-    <img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">
+   {{-- <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">--}}
+    {{--<img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">--}}
     <img id="imagem-quatro" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo">
 
     <h1>FICHA DE INSCRIÇÃO MESTRADO</h1>

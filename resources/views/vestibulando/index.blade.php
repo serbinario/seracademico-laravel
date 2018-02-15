@@ -179,6 +179,7 @@
     @include('vestibulando.financeiro.modal_info_debito')
     @include('reports.simple.modals.modal_report_vestibulando_forma_admissao')
     @include('reports.simple.modals.modal_report_vestibulando_opcao_curso')
+    @include('reports.simple.modals.modal_report_vestibulando_contatos')
 @stop
 
 @section('javascript')
@@ -193,6 +194,7 @@
     <script type="text/javascript" src="{{ asset('/js/vestibulando/financeiro/gerar_boleto.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_vestibulando_forma_admissao.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_vestibulando_opcao_curso.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_vestibulando_contatos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/financeiro/helpers.js') }}"></script>
     <script type="text/javascript">
         // função para criação da linha de detalhe

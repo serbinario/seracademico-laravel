@@ -174,6 +174,7 @@ class AlunoService
         }
 
         # Verificando se a pessoa já existe
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
@@ -306,6 +307,7 @@ class AlunoService
         }
 
         #Atualizando no banco de dados
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         $aluno    = $this->repository->update($data, $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);

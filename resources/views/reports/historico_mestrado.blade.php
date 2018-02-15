@@ -68,9 +68,9 @@
 <body>
 
 <div class="cabecalho">
-    <h1>
+    {{--<h1>
         <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
-    </h1>
+    </h1>--}}
     <div class="subtitulo">
         <h2>HISTÓRICO ESCOLAR</h2>
     </div>

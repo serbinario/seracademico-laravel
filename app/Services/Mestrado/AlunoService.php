@@ -305,6 +305,7 @@ class AlunoService
         $endereco = null;
         $objPessoa = null;
         $resultPessoa = [];
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
 
         # Verificando se o cpf foi informado
         if($data['pessoa']['cpf']) {

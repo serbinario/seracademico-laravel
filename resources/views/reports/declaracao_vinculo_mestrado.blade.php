@@ -7,7 +7,7 @@
     <style type="text/css">
         body {
             font-size: 14px;
-            background-image: url("{{ asset('img/vinculo-mestrado/image3.png') }}");
+           /* background-image: url("{{ asset('img/vinculo-mestrado/image3.png') }}");*/
             background-repeat: no-repeat;
             background-position: center;
             background-size: 80%;
@@ -56,9 +56,9 @@
 
 <body>
     <div class="cabecalho">
-        <h1>
+       {{-- <h1>
             <img width="200" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="">
-        </h1>
+        </h1>--}}
 
         <h2>
           CARTA DE ACEITE
@@ -92,11 +92,11 @@
         </p>
     </div>
 
-    <div class="assinatura" style="margin-left: 5%;">
+    {{--<div class="assinatura" style="margin-left: 5%;">
         <p>
             <h1><img  src="{{ asset('img/vinculo-mestrado/assinatura.png') }}" alt=""></h1>
         </p>
-    </div>
+    </div>--}}
 
     <div class="rodape" style="margin-left: 6%;">
         <p>

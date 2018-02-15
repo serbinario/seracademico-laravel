@@ -197,6 +197,7 @@ class VestibulandoService
 
         # [RFV003-RN012] - Documento de Requisitos
         # Verificando se a pessoa já existe
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
@@ -290,6 +291,7 @@ class VestibulandoService
         }
 
         #Atualizando no banco de dados
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         $vestibulando = $this->repository->update($data, $id);
         $pessoa       = $this->pessoaRepository->update($data['pessoa'], $vestibulando->pessoa->id);
 
