@@ -114,6 +114,7 @@ class AlunoService
         # Recuperando a pessoa pelo cpf
         $objPessoa = $this->pessoaRepository->with('endereco.bairro.cidade.estado')->findWhere(['cpf' => $data['pessoa']['cpf']]);
         $endereco  = null;
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
 
         # Verificando se a pesso já existe
         if(count($objPessoa) > 0) {
@@ -238,6 +239,7 @@ class AlunoService
         $data['password'] = $newPassword;*/
 
         #Atualizando no banco de dados
+        $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         $aluno    = $this->repository->update($data, $id);
         $pessoa   = $this->pessoaRepository->update($data['pessoa'], $aluno->pessoa->id);
         $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);

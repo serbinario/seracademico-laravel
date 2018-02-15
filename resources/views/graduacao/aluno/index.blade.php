@@ -183,6 +183,7 @@
     @include('reports.simple.modals.modal_report_gra_aluno_por_vestibular')
     @include('reports.simple.modals.modal_report_gra_aluno_por_periodo')
     @include('reports.simple.modals.modal_report_gra_aluno_por_turno')
+    @include('reports.simple.modals.modal_report_gra_aluno_matriculado_contatos')
     @include('graduacao.aluno.financeiro.modal_debitos')
     @include('graduacao.aluno.financeiro.modal_create_debito')
     @include('graduacao.aluno.financeiro.modal_edit_debito')
@@ -212,6 +213,7 @@
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_por_vestibular.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_por_periodo.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_por_turno.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_matriculado_contatos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_trancado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_graduado.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/report/simple/modal_report_gra_aluno_ativo.js') }}"></script>

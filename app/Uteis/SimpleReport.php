@@ -159,7 +159,7 @@ class SimpleReport implements Report
                 }
             }
         }
-        
+
         # Executando o sql principal
         return \DB::select($sql . $where. " {$this->sql[0]->groupBy}");
     }

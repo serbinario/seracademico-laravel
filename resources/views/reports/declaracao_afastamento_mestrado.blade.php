@@ -41,7 +41,7 @@
 </head>
 
 <body>
-    <div class="cabecalho">
+   {{-- <div class="cabecalho">
         <table style="font-size: 15px;">
             <tr>
                 <td>
@@ -62,7 +62,7 @@
         </table>
 
         <hr>
-    </div>
+    </div>--}}
 
     <div class="conteudo">
         <div id="conteudo_1">
