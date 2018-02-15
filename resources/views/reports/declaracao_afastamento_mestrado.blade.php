@@ -114,12 +114,12 @@
         </div>
     </div>
 
-    <div class="rodape" style="margin-top: 85%;">
+    {{--<div class="rodape" style="margin-top: 85%;">
         <hr style="color: #bfbfbf">
         <hr>
         <p style="margin-bottom: 0;"><b>Gabinete do Comitê Acadêmico de Ensino e Pesquisa - MERCOSUL</b></p>
         <p style="margin-top: 0;">American Express Argentina S.A., Arenales, 1210 CABA, Argentina<br></p>
         <p><b>www.unigrendal.com.br	|	info@unigrendal.com.br</b></p>
-    </div>
+    </div>--}}
 </body>
 </html>
