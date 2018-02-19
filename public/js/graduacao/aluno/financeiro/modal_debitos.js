@@ -76,12 +76,29 @@ function runFinanceiro(idAluno) {
 $(document).on('click', '#btnExcluirDebito', function () {
     var idDebito = tableDebitos.row($(this).parent().parent().parent().index()).data().id;
 
-    jQuery.ajax({
-        type: 'GET',
-        url: '/index.php/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
-        datatype: 'json'
-    }).done(function (retorno) {
-        tableDebitos.ajax.reload();
-        swal(retorno.msg, "Click no botão abaixo!", "success");
-    });
+    swal({
+            title: "Você tem certeza?",
+            text: "Você não poderá reverter esta ação!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Sim, Tenho certeza!',
+            cancelButtonText: "Não, Desejo cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm) {
+            if (isConfirm) {
+                jQuery.ajax({
+                    type: 'GET',
+                    url: '/index.php/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
+                    datatype: 'json'
+                }).done(function (retorno) {
+                    tableDebitos.ajax.reload();
+                    swal(retorno.msg, "Click no botão abaixo!", "success");
+                });
+            } else {
+                swal("Cancelado", "Esclusão não realizada :)", "error");
+            }
+        });
 });
