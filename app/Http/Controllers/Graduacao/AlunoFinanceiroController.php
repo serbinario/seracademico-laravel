@@ -92,7 +92,10 @@ class AlunoFinanceiroController extends Controller
                 ->addSelect('fin_carnes.gnet_carnet_id');
 
             return DataTables::of($consulta)
-                ->addColumn('action', function () {
+                ->addColumn('action', function ($row) {
+
+                    $debito = $this->debitoRepository->find($row->id);
+
                     $html = "";
                     $html .= '<div class="fixed-action-btn horizontal">';
                     $html .=    '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
@@ -100,6 +103,11 @@ class AlunoFinanceiroController extends Controller
                     $html .= '       <li><a class="btn-floating" id="btnEditarDebito" title="Editar aluno"><i class="material-icons">edit</i></a></li>';
                     $html .= '       <li><a class="btn-floating" id="btnGerarBoleto" title="Gerar boleto"><i class="material-icons">account_balance_wallet</i></a></li>';
                     $html .= '       <li><a class="btn-floating" id="btnInfoDebito" title="Visualizar informações do débito"><i class="material-icons">search</i></a></li>';
+
+                    if (!$debito->boleto) {
+                        $html .= '<li><a class="btn-floating" id="btnExcluirDebito" title="Excluir débito"><i class="material-icons">delete</i></a></li>';
+                    }
+
                     $html .= '  </ul>';
                     $html .= '</div>';
                     return $html;
@@ -236,6 +244,23 @@ class AlunoFinanceiroController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        try {
+            #Executando a ação
+            $this->debitoService->delete($id);
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'msg' => "Remoção realizada com sucesso"]);
+        } catch (\Throwable $e) { dd($e);
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
      * @param Request $request
      * @param $idAluno
      * @return \Illuminate\Http\JsonResponse
@@ -247,7 +272,7 @@ class AlunoFinanceiroController extends Controller
             $retorno = ['valor'  => 0, 'taxa' => $taxa];
 
             $this->processarMensalidade($retorno, $taxa, $idAluno);
-            $this->processarBeneficios($retorno, $taxa);
+            //$this->processarBeneficios($retorno, $taxa);
 
             return response()->json(['success' => true, 'dados' => $retorno]);
         } catch (\Throwable $e) {
@@ -326,5 +351,7 @@ class AlunoFinanceiroController extends Controller
 
         $retorno['valor'] = $retorno['valor'] == 0 ? $taxa->valor : $retorno['valor'];
         $retorno['valor'] -= $valorDesconto;
+
+       // var_dump($retorno['valor']);exit();
     }
 }

@@ -104,6 +104,7 @@ class SemestreAlunoController extends Controller
             ->select([
                 'fac_horarios.id',
                 'fac_horas.id as hora',
+                \DB::raw('CONCAT(DATE_FORMAT(fac_horas.hora_inicial, "%k:%i"), " - ", DATE_FORMAT(fac_horas.hora_final, "%k:%i")) as horario'),
                 'fac_horas.nome as codigoHora',
                 'fac_alunos.id as idAluno',
                 'fac_semestres.id as idSemestre'
