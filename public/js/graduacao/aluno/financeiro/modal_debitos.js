@@ -78,7 +78,7 @@ $(document).on('click', '#btnExcluirDebito', function () {
 
     jQuery.ajax({
         type: 'GET',
-        url: '/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
+        url: '/index.php/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
         datatype: 'json'
     }).done(function (retorno) {
         tableDebitos.ajax.reload();
