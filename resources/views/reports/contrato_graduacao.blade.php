@@ -17,11 +17,61 @@
         .centro {
             text-align: center;
         }
+
+        .logoTimbrado {
+            position: relative;
+            margin-top: -50px;
+            margin-left: -15px;
+        }
+
+        .tituloTimbrado {
+            position: relative;
+            margin-top: -175px;
+            left: 190px;
+            color: #273176;
+            font-size: 12px;
+            text-align: justify;
+        }
+
+        .rodapeTimbrado {
+            /*position: absolute;*/
+            /*margin-top: 546px;*/
+            color: #273176;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .titulo {
+            /*margin-top: 130px;
+            margin-bottom: 70px;*/
+            text-align: center;
+            font-size: 15px;
+        }
     </style>
     <link href="" rel="stylesheet" media="print">
 </head>
 <body>
 
+<div>
+    <div class="logoTimbrado">
+        <img style="width: 220px; height: auto;" src="{{asset('img/logo_alpha_faculdade-01.png')}}">
+    </div>
+    <div style="color: #273176; position: absolute; left: 155px; top: 40px; font-size: 12px;">
+        20570
+    </div>
+    <div style="width: 490px; height: 80px;">
+        <p class="tituloTimbrado"><br><br>
+            Portaria Normativa de Credenciamento da Faculdade ALPHA nº 1.248 de 29 de setembro de 2017,
+            Portaria nº 1.062, de 06 de outubro de 2017 sobre autorização dos Cursos: Bacharelado em
+            Administração, Licenciatura em Pedagogia, Tecnólogos em Gestão de Recursos Humanos e Análise de
+            Desenvolvimento de Sistemas.
+        </p>
+    </div>
+</div>
+<div style="margin-top: 55px;">
+    <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
+</div>
+<br />
 <div class="centro">
     CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS COM CLÁUSULA DE INSTITUIÇÃO DE ARBITRAGEM, EM QUE, CASO O CONTRATANTE,
     FACULTATIVAMENTE CONCORDE COM A SUA INSTITUIÇÃO, HAVERÁ DECLARAÇÃO EXPRESSA DE SUA ANUÊNCIA.
@@ -193,7 +243,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    CONTRATANTE - _______________________  CONTRATADA: ______________________
+    CONTRATANTE - _______________________  &emsp; CONTRATADA: ______________________
 </div>
 
 <div class="termos">
@@ -366,11 +416,11 @@ CONSIDERANDO que:<br>
     batas para uso em laboratórios, etc., são de inteira responsabilidade do CONTRATANTE, e por ele deve ser adquirido.
 </div>
 
-<div class="termos">
+{{--<div class="termos">
     42º Não estão incluídos neste Contrato os materias para aulas práticas dos alunos dos cursos de saúde a exemplo dos
     Cursos de Odontologia e Medicina, que deverão ser adquiridos e trazidos pelo Aluno, a exemplo de luvas, seringas, kit´s
     de odontologia, alicates, materiais cirúrgicos, moldes, resinas, etc.
-</div>
+</div>--}}
 
 <div class="termos">
     43º Taxas Internas – Reserva-se a CONTRATADA o direito de cobrar pelo fornecimento de quaisquer serviços e ou documentos,
@@ -420,7 +470,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    49º - Não procedendo o CONTRATANTE a quitação de seus educacionais nos respectivos vencimentos, fica a CONTRATADA
+    49º - Não procedendo o CONTRATANTE a quitação de seus serviços educacionais nos respectivos vencimentos, fica a CONTRATADA
     autorizada a emitir duplicatas de prestação de serviços, de acordo com os valores devidos, no valor total das parcelas
     em atraso, com os acréscimos legais e ora pactuados, valendo a assinatura do presente Contrato como concordância com
     aquelas, e para todos os efeitos legais, encaminhando após 30 (trinta dias) do vencimento do Departamento jurídico para
@@ -483,7 +533,7 @@ CONSIDERANDO que:<br>
     ou por formulários distintos daqueles exigidos formalmente pela contratada.
 </div>
 
-<div class="termos">
+{{--<div class="termos">
     57º Do uso obrigatório de equipamento de proteção – Os alunos dos cursos dos núcleos de Saúde e de Gastronomia da
     CONTRATADA, ou cursos que dependem do uso de laboratórios, não poderão ter acesso aos laboratórios sem os equipamentos
     adequados de proteção, tais como: roupas adequadas, bata, luvas, equipamentos de proteção individual, sapatos fechados
@@ -494,7 +544,7 @@ CONSIDERANDO que:<br>
     58º Da aquisição de equipamento de proteção – Os equipamentos de proteção individual e assemelhados, quando necessários
     às atividades acadêmicas, devidamente recomendados pelos professores responsáveis, deverão ser adquiridos pelo CONTRATANTE,
     sem nenhum ônus para a CONTRATADA.
-</div>
+</div>--}}
 
 <div class="termos">
     59º Da responsabilidade Objetiva do CONTRATANTE (e do aluno) quanto ao uso dos equipamentos de proteção – O CONTRATANTE
@@ -566,12 +616,12 @@ CONSIDERANDO que:<br>
     pagamento das parcelas, tendo em vista a oferta do serviço colocado à sua disposição pela CONTRATADA.
 </div>
 
-<div class="termos">
+{{--<div class="termos">
     69º Do prazo de arquivamento das provas/trabalho – As atas de assinatura de prova/trabalho e de recebimento destas,
     serão arquivadas até 30 (trinta) dias do fechamento formal do semestre letivo em que foram confeccionadas.
     Findo este prazo, as provas/trabalhos serão inutilizadas e/ou doados a instituição que os possa aproveitar em beneficio
     de grupos necessitados.
-</div>
+</div>--}}
 
 <div class="termos">
     70º Das necessidades especiais – Na hipótese do Aluno ser portador de necessidades especiais, nos termos dos artigos
@@ -652,7 +702,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    CONTRATANTE					CONTRATADA
+    CONTRATANTE					 CONTRATADA
 </div>
 
 80 – QUALIFICAÇÃO CONTRATANTE E ALUNO<br>
@@ -660,7 +710,7 @@ CONSIDERANDO que:<br>
 <div class="termos">
     Declaração do CONTRATANTE, em observância ao disposto no Art. 46, da Lei 8.078/90, declara expressamente o CONTRATANTE
     que, em virtude de ter lido todas as cláusulas constantes deste contrato, está ciente de todas elas, aceitando-as
-    expressamente e de ter recebido cópia deste contrato devidamente assinado pelas partes e pelas testemunhas.<br>
+    expressamente e de ter recebido cópia deste contrato devidamente assinado pelas partes e pelas testemunhas.<br> <br>
     Recife, _____ de ____________ de _______
 </div><br>
 
