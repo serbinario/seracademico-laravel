@@ -577,27 +577,27 @@
                         <!-- Fim Certidão de Nascimento ou Casamento -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[titulo_eleitor_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[titulo_eleitor_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('pessoa[titulo_eleitor_doc_obrigatorio]', 'Título de eleitor', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Histórico Graduação Autenticado -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[histo_gradu_autentic_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[histo_gradu_autentic_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('pessoa[histo_gradu_autentic_obrigatorio]', 'Histórico Graduação Autenticado', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Histórico Graduação Autenticado -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alistamento militar ou reservista', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                     </div>
@@ -607,11 +607,11 @@
                     <div class="col-md-6">
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[diploma_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[diploma_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('pessoa[diploma_doc_obrigatorio]', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
 
@@ -633,19 +633,19 @@
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('curriculo_doc_obrigatorio', 0) !!}
                             {!! Form::checkbox('curriculo_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('curriculo_doc_obrigatorio', 'Currículo com comprovação ', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
+                        {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('carta_intencao_doc_obrigatorio', 0) !!}
                             {!! Form::checkbox('carta_intencao_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
                             {!! Form::label('carta_intencao_doc_obrigatorio', 'Carta de intenção ', false) !!}
-                        </div>
+                        </div>--}}
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                     </div>
