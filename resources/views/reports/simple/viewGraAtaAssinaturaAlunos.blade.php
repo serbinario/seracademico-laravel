@@ -103,18 +103,18 @@
         </p>
     </div>
 </div>
-<div style="margin-top: -300px;">
+<div style="margin-top: -55px;">
     <img style="width: 100%;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 <div class="titulo">
     <h4>ATA DE FREQUÊNCIA</h4>
 </div>
-<div class="titulo">
-    <h4>{{ $dados['filtersBody'][2] ?? ""  }} - {{ $dados['filtersBody'][3] ?? ""  }}</h4>
+<div class="titulo" style="margin-top: -50px">
+    <p>{{ $dados['filtersBody'][2] ?? ""  }} - {{$dados['filtersBody'][0] ?? ""  }} - {{$dados['filtersBody'][1] ?? ""  }}  - {{ $dados['filtersBody'][3] ?? ""  }}</p>
 </div>
 <div class="corpo">
 
-    <div style="text-align: left; margin-top: 50px;">
+    <div style="text-align: left; margin-top: 15px;">
         Recife, {{ strftime('%d de %B de %Y', strtotime((new \DateTime("now"))->format("Y-m-d"))) }}
     </div>
 
