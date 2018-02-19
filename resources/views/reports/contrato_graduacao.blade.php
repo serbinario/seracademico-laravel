@@ -423,13 +423,13 @@ CONSIDERANDO que:<br>
 </div>--}}
 
 <div class="termos">
-    43º Taxas Internas – Reserva-se a CONTRATADA o direito de cobrar pelo fornecimento de quaisquer serviços e ou documentos,
+    42º Taxas Internas – Reserva-se a CONTRATADA o direito de cobrar pelo fornecimento de quaisquer serviços e ou documentos,
     de acordo com a tabela constante do Anexo II deste Contrato, e em caso de omissão na presente tabela, de acordo com as
     tabelas afixadas nos quadros de avisos da CONTRATADA, distribuídos nos corredores da FACULDADE.
 </div>
 
 <div class="termos">
-    44º Serão isentos de pagamento de valores os processos de análise administrativa e as apresentações de Aproveitamento de
+    43º Serão isentos de pagamento de valores os processos de análise administrativa e as apresentações de Aproveitamento de
     Disciplinas, quando os programas das disciplinas forem entregues na Secretaria, no ato do ingresso do Aluno na IES.
     Os programas que forem entregues após a matrícula do aluno, estão sujeitos a todo o processo administrativo de análise
     por parte do corpo docente da IES, o que acarretará a cobrança por tais serviços prestados, conforme a tabela descrita
@@ -437,7 +437,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    45º TRANSFERÊNCIAS – Para transferência do Aluno de outra IES são necessários:
+    44º TRANSFERÊNCIAS – Para transferência do Aluno de outra IES são necessários:
     a) guia em papel timbrado, devidamente identificado, informando a transferência do vínculo existente com a IES;
     b) histórico escolar contendo todas as disciplinas cursadas, aprovadas ou não e as que faltam cursar;
     c) cópia de autorização do curso, expedida pelo Ministério da Educação;
@@ -446,14 +446,14 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    46º - Da devolução de valores e das informações necessárias – Concorda e aceita o CONTRATANTE que em caso de requerimento
+    45º - Da devolução de valores e das informações necessárias – Concorda e aceita o CONTRATANTE que em caso de requerimento
     solicitando devolução de valores de qualquer natureza, feitos em requerimentos próprios perante a CONTRATADA
     desde que, aprovado expressamente pela CONTRATADA, o CONTRATANTE deve informar no próprio requerimento, número de conta
     bancária para recebimento dos valores deferidos, o que se fará no prazo máximo de 15 dias úteis do deferimento.
 </div>
 
 <div class="termos">
-    47º - Variações do valor contratual – Os valores dos serviços educacionais fixados neste Contrato poderão ser objeto de
+    46º - Variações do valor contratual – Os valores dos serviços educacionais fixados neste Contrato poderão ser objeto de
     reajuste pela aplicação do IGP-M ou por qualquer outro índice oficial a ser escolhido pela CONTRATADA, e ao seu critério,
     quando houver alteração nas políticas econômicas e/ou salarial, acordo, convenção ou dissídio coletivo ou Lei referente a
     salários do pessoal docente e auxiliar, bem como pela incidência de tributos e/ou contribuição previdenciária advindos de
@@ -461,7 +461,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    48º - Inadimplemento – Em caso de falta de pagamento na data do vencimento, o valor da parcela será acrescido de multa
+    47º - Inadimplemento – Em caso de falta de pagamento na data do vencimento, o valor da parcela será acrescido de multa
     de 2% (dois por cento), cláusula penal moratória, além de juros de 1% (um por cento) ao mês, atualização monetária, com
     a aplicação da variação do IGP-M ou, na sua ausência, índice similar e legalmente previsto, desde a data do vencimento
     até sua liquidação, bem como honorários advocatícios correspondentes a 20% (vinte por cento) sobre o valor da dívida,
@@ -470,7 +470,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    49º - Não procedendo o CONTRATANTE a quitação de seus serviços educacionais nos respectivos vencimentos, fica a CONTRATADA
+    48º - Não procedendo o CONTRATANTE a quitação de seus serviços educacionais nos respectivos vencimentos, fica a CONTRATADA
     autorizada a emitir duplicatas de prestação de serviços, de acordo com os valores devidos, no valor total das parcelas
     em atraso, com os acréscimos legais e ora pactuados, valendo a assinatura do presente Contrato como concordância com
     aquelas, e para todos os efeitos legais, encaminhando após 30 (trinta dias) do vencimento do Departamento jurídico para
@@ -478,12 +478,12 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    50º - O CONTRATANTE, neste ato, fica ciente e concorda EXPRESSAMENTE, que em caso de inadimplência, perderá todo e
+    49º - O CONTRATANTE, neste ato, fica ciente e concorda EXPRESSAMENTE, que em caso de inadimplência, perderá todo e
     qualquer desconto de que seja eventualmente beneficiário.
 </div>
 
 <div class="termos">
-    51º - Da negativação em SPC e/ou SERASA e das cobranças – Em caso de inadimplemento, a CONTRATADA poderá ainda:
+    50º - Da negativação em SPC e/ou SERASA e das cobranças – Em caso de inadimplemento, a CONTRATADA poderá ainda:
     A) NEGATIVAR o devedor em cadastro ou serviços legalmente constituídos e destinados à proteção de tal cobrança;
     B) Promover a cobrança através de advogados ou de empresas especializadas, sendo o CONTRATANTE responsável pelo
     pagamento de todas as despesas decorrentes de tal cobrança extrajudicial, inclusive honorários advocatícios
@@ -496,7 +496,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    52º - A CONTRATADA terá direito a recursar a rematrícula, ou a matrícula em qualquer outro curso por ela mantida, ou a
+    51º - A CONTRATADA terá direito a recursar a rematrícula, ou a matrícula em qualquer outro curso por ela mantida, ou a
     inscrição em atividade desenvolvida pela IES, mantida pela ALPHA EDUCAÇÃO e TRENAMENTO, quando o CONTRATANTE:
     1. Estiver inadimplente, inclusive em relação à vinculação anterior, independentemente da origem e da espécie do débito
     e da manutenção do direito de cobrança das dívidas contraídas;
@@ -505,20 +505,20 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    53º - Direito ao uso da imagem – O CONTRATANTE, neste ato, autoriza expressamente a CONTRATADA, a título gratuito, o
+    52º - Direito ao uso da imagem – O CONTRATANTE, neste ato, autoriza expressamente a CONTRATADA, a título gratuito, o
     direito de uso de sua imagem, ou sendo o caso do beneficiário (ALUNO) do qual é responsável legal, para figurar,
     individualmente ou coletivamente, em campanhas institucionais ou publicitárias da CONTRATADA, para todos os efeitos
     legais, em qualquer caso observada a moral e os bons costumes.
 </div>
 
 <div class="termos">
-    54º - Do trancamento, desistência e Cancelamento do Curso – Para o cancelamento de matrícula, desistência e trancamento
+    53º - Do trancamento, desistência e Cancelamento do Curso – Para o cancelamento de matrícula, desistência e trancamento
     do Curso, o CONTRATANTE, deverá estar quite com todas as parcelas vencidas do presente Contrato, além de ter o dever de
     pagar o valor da parcela do mês do requerimento, bem como pagar outros débitos eventualmente existentes para com a CONTRATADA.
 </div>
 
 <div class="termos">
-    55º - Por se tratar de ato solene, a exemplo da matrícula do Aluno, o requerimento de trancamento, desistência e
+    54º - Por se tratar de ato solene, a exemplo da matrícula do Aluno, o requerimento de trancamento, desistência e
     cancelamento do curso apenas poderá ser feito de forma presencial, na sede da CONTRATADA, junto ao atendimento pessoal,
     no prazo do calendário acadêmico, caso em que o CONTRATANTE (aluno ou responsável financeiro), preencherá requerimento
     padrão, com assinatura cuja autenticidade deverá ser atestada no ato, ou deverá estar com assinatura com firma reconhecida
@@ -527,7 +527,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    56º À exceção do requerimento de que trata a cláusula anterior, que obrigatoriamente deverá ser feito de forma presencial,
+    55º À exceção do requerimento de que trata a cláusula anterior, que obrigatoriamente deverá ser feito de forma presencial,
     todos os demais requerimentos do CONTRATANTE deverão ser formalizados por meio de formulários próprios disponíveis na
     secretaria da FACULDADE ou on-line, no Portal do Aluno. Não serão aceitas de forma alguma solicitações tácitas, verbais
     ou por formulários distintos daqueles exigidos formalmente pela contratada.
@@ -547,7 +547,7 @@ CONSIDERANDO que:<br>
 </div>--}}
 
 <div class="termos">
-    59º Da responsabilidade Objetiva do CONTRATANTE (e do aluno) quanto ao uso dos equipamentos de proteção – O CONTRATANTE
+    56º Da responsabilidade Objetiva do CONTRATANTE (e do aluno) quanto ao uso dos equipamentos de proteção – O CONTRATANTE
     (e o Aluno) assume(m) inteira responsabilidade por danos que venha(m) a sofrer ou causar fora ou dentro do estabelecimento
     da CONTRATADA, em razão das seguintes situações: a) Inobservância de normas de segurança, das recomendações, instruções
     e alertas de professores, instrutores e funcionários técnicos administrativos, ou pela não utilização e/ou utilização
@@ -557,14 +557,14 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    60º Obtenção de insumos e materiais para práticas acadêmicas – O CONTRATANTE tem ciência e concorda expressamente que
+    57º Obtenção de insumos e materiais para práticas acadêmicas – O CONTRATANTE tem ciência e concorda expressamente que
     todos os insumos e materiais de uso pessoal do Aluno, a exemplo de alimentos para o curso de gastronomia, e luvas para
     o curso de saúde, ENTRE OUTROS, serão adquiridos diretamente pelo Aluno (CONTRATANTE) ou por meio de uma taxa, paga à
     INSTITUIÇÃO DE ENSINO SUPERIOR (IES).
 </div>
 
 <div class="termos">
-    61º Declarações e Informações do Contratante – Responsabiliza-se o CONTRATANTE pelas informações pessoais fornecidas à
+    58º Declarações e Informações do Contratante – Responsabiliza-se o CONTRATANTE pelas informações pessoais fornecidas à
     CONTRATADA, bem como se compromete a atualizá-las em caso de alteração.
 </div>
 
@@ -578,12 +578,12 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    63º Sanções Disciplinares - A CONTRATADA poderá aplicar procedimentos disciplinares ao Aluno, nos termos do seu Regimento,
+    59º Sanções Disciplinares - A CONTRATADA poderá aplicar procedimentos disciplinares ao Aluno, nos termos do seu Regimento,
     do Código de Ética, bem como na legislação pertinente à espécie.
 </div>
 
 <div class="termos">
-    64º - Responsabilidade Civil – Em caso de dano material ao patrimônio da CONTRATADA, o CONTRATANTE, além da sanção
+    60º - Responsabilidade Civil – Em caso de dano material ao patrimônio da CONTRATADA, o CONTRATANTE, além da sanção
     disciplinar aplicável, está obrigado ao ressarcimento dos danos causados. O CONTRATANTE é responsável pela integridade
     física (conservação) de todos os livros recebidos a título de mútuo na biblioteca da CONTRATADA; está ciente que arcará
     com a reposição dos mesmos em caso de extravio ou através de indenização por danos materiais, mau uso e deformações
@@ -594,25 +594,25 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    65º O CONTRATANTE tem ciência e concorda expressamente que os livros de consulta ou acervo de reserva não podem ser
+    61º O CONTRATANTE tem ciência e concorda expressamente que os livros de consulta ou acervo de reserva não podem ser
     retirados da Biblioteca, e servem, exclusivamente, para consultas no local. Em caso de descumprimento do presente,
     fica o CONTRATANTE obrigado ao pagamento de uma multa diária na forma do Anexo II deste instrumento.
 </div>
 
 <div class="termos">
-    66º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciências e concorda expressamente que a CONTRATADA não
+    62º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciências e concorda expressamente que a CONTRATADA não
     tem nenhum tipo de responsabilidade por objetos de uso pessoal, a exemplo de celulares, jóais, relógios, câmeras fotográficas,
     laptops, notebooks, ipods e outros adornos e ou acessórios pertencentes ao CONTRATANTE e que seu uso dentro ou fora das
     instalações da CONTRATADA, é de sua inteira e total responsabilidade.
 </div>
 
 <div class="termos">
-    67º Para acesso às instalações da CONTRATADA, o Aluno deverá comprovar a sua condição. Para tanto, deverá apresentar
+    63º Para acesso às instalações da CONTRATADA, o Aluno deverá comprovar a sua condição. Para tanto, deverá apresentar
     comprovante de vínculo com a IES e ou outro meio de identificação definido pela CONTRATADA.
 </div>
 
 <div class="termos">
-    68º O não comparecimento do Aluno aos atos escolares ora contratados ou à apresentação de documentos não o exime do
+    64º O não comparecimento do Aluno aos atos escolares ora contratados ou à apresentação de documentos não o exime do
     pagamento das parcelas, tendo em vista a oferta do serviço colocado à sua disposição pela CONTRATADA.
 </div>
 
@@ -624,13 +624,13 @@ CONSIDERANDO que:<br>
 </div>--}}
 
 <div class="termos">
-    70º Das necessidades especiais – Na hipótese do Aluno ser portador de necessidades especiais, nos termos dos artigos
+    65º Das necessidades especiais – Na hipótese do Aluno ser portador de necessidades especiais, nos termos dos artigos
     58 e 59 da lei 9.394/96, obriga-se o CONTRATANTE a informar expressamente e por escrito essa condição específica à
     CONTRATADA no ato da assinatura do presente Contrato.
 </div>
 
 <div class="termos">
-    71º A prestação dos serviços adicionais à pessoa portadora de necessidades especiais e/ou deficiente, será prestada de
+    66º A prestação dos serviços adicionais à pessoa portadora de necessidades especiais e/ou deficiente, será prestada de
     acordo com os seus interesses e efetiva verificação da necessidade. Caso o CONTRATANTE (Aluno), venha a se tornar portador
     de necessidades especiais, no decorrer do semestre letivo, obriga-se ainda o CONTRATANTE não se responsabilizar pelo
     insuficiente desempenho do Aluno em razão da omissão do CONTRATANTE, a quem caberá toda a responsabilidade pela conduta
@@ -638,13 +638,13 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    72º A CONTRATADA não se responsabilizará pelo insuficiente desempenho do Aluno em razão de omissão do CONTRATANTE em
+    67º A CONTRATADA não se responsabilizará pelo insuficiente desempenho do Aluno em razão de omissão do CONTRATANTE em
     informar que o Aluno é portador de necessidades especiais, pois nesse caso, não haverá a prestação de serviço de
     atendimento individual e/ou especializado ao Aluno.
 </div>
 
 <div class="termos">
-    73º Obriga-se também o CONTRATANTE a informar, no ato da assinatura do presente Contrato, que o Aluno é portador de
+    68º Obriga-se também o CONTRATANTE a informar, no ato da assinatura do presente Contrato, que o Aluno é portador de
     doença e/ou deficiência que o impeça de praticar esportes ou atividades recreativas, ou, ainda, portador de alegrias ou
     doenças que o impeçam de manipular certos materiais, principalmente nos cursos de saúde. Caso o CONTRATANTE não informe
     da doença e ou deficiência que impeça o Aluno de praticar esportes ou atividades recreativas, e/ou das alergias ou doenças
@@ -653,13 +653,13 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    74 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos seqüenciais ofertados pela IES, são de complementação
+    69 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos seqüenciais ofertados pela IES, são de complementação
     de estudos com destinação coletiva, sendo regulamentados pelo Ministério da Educação, de acordo com o Art. 44 da LDB:
     sendo que conforme regulamentação específica, não serão emitidos diplomas e sim certificados de conclusão.
 </div>
 
 <div class="termos">
-    75 – Dos espaços para estacionamento – Tem ciência o CONTRATANTE que a CONTRATADA não disponibiliza espaços gratuitos
+    70 – Dos espaços para estacionamento – Tem ciência o CONTRATANTE que a CONTRATADA não disponibiliza espaços gratuitos
     para estacionamento. É cientificado, ainda, ao CONTRATANTE, que todos os espaços para estacionamentos são administrados
     por empresas terceirizadas, e que, para essas empresas garantirem a integridade física dos veículos são obrigados a
     contratar mão de obra especializada e empresas de seguros, e para tanto as mesmas cobram pelo serviço prestado, ficando
@@ -667,7 +667,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    76 – O  CONTRATANTE fica desde já cientificado que não faz parte deste contrato o estacionamento eventualmente localizado
+    71 – O  CONTRATANTE fica desde já cientificado que não faz parte deste contrato o estacionamento eventualmente localizado
     no mesmo prédio da IES. Este serviço é oferecido e dirigido por empresa terceirizada, motivo pelo qual todo e qualquer
     assunto ou contrato relativo ao estacionamento deve ser tratado direta e necessariamente com a empresa terceirizada, da
     mesma forma que a IES não é responsável e não assumirá qualquer responsabilidade decorrente de eventuais danos, furtos,
@@ -675,7 +675,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    77 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que na hipótese de inclusão de disciplina, de qualquer
+    72 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que na hipótese de inclusão de disciplina, de qualquer
     natureza, além das previstas na grade curricular para o respectivo semestre letivo do curso ou no caso de inclusão, que
     resulte no aumento de disciplina em relação ao semestre anterior, caso o (Ministério da Educação/Fundo Nacional de
     Desenvolvimento da Educação – FNDE), não aceite o acréscimo do valor dessa inclusão no financiamento (FIES), os encargos
@@ -685,14 +685,14 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    78 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que nos casos de ingresso do CONTRATANTE, na IES
+    73 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que nos casos de ingresso do CONTRATANTE, na IES
     CONTRATADA, por meio de transferência de outra IES, na hipótese de o – Ministério da Educação / Fundo Nacional de
     Desenvolvimento da Educação – FNDE – não autorizar o valor do aditamento de transferência do Financiamento Estudantil em
     sua integridade, a diferença dos encargos financeiros será de inteira responsabilidade do CONTRATANTE.
 </div>
 
 <div class="termos">
-    79 – Pactuação Facultativa de Compromisso Arbitral nos Termos da Lei 9.307/96, subscrita por iniciativa do contratante:
+    74 – Pactuação Facultativa de Compromisso Arbitral nos Termos da Lei 9.307/96, subscrita por iniciativa do contratante:
     fica de logo estabelecido, em caráter definitivo, que qualquer litígio originário ou relacionado com o presente contrato,
     e com as renovações semestrais da prestação de serviços educacionais, será definitivamente resolvido por arbitragem,
     de acordo com o regulamento de arbitragem de qualquer tribunal arbitral com sede no mesmo município onde seja realizada
