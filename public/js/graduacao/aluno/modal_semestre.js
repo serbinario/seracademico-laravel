@@ -13,7 +13,7 @@ function loadTableHorario (idAluno, idSemestre) {
         bPaginate: false,
         ajax: "/index.php/seracademico/graduacao/aluno/semestre/gridHorario/"  + idAluno + "/" + idSemestre,
         columns: [
-            {data: 'codigoHora', name: 'fac_horas.nome', orderable: false, searchable: false},
+            {data: 'horario', name: 'horario', orderable: false, searchable: false},
             {data: 'domingo', name: 'domingo', orderable: false, searchable: false},
             {data: 'segunda', name: 'segunda', orderable: false, searchable: false},
             {data: 'terca', name: 'terca', orderable: false, searchable: false},

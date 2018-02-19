@@ -112,6 +112,29 @@ class DebitoService
         return $debito;
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(int $id)
+    {
+
+        // Deletar o extrato
+        \DB::table('fin_extratos')->where('debito_id', $id)->delete();
+
+        #deletando o curso
+        $result = $this->repository->delete($id);
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o curso!');
+        }
+
+        #retorno
+        return true;
+    }
+
 
     /**
      * @param $idDebito

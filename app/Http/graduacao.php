@@ -109,6 +109,7 @@ Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduaca
             Route::get('infoDebito/{idDebito}', ['as' => 'infoDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@infoDebito']);
             Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Graduacao\AlunoFinanceiroController@gridCarnes']);
             Route::get('getDadosDebito/{id}', ['as' => 'getDadosDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@getDadosDebito']);
+            Route::get('deleteDebito/{id}', ['as' => 'deleteDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@delete']);
         });
     });
 

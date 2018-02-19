@@ -71,3 +71,17 @@ function runFinanceiro(idAluno) {
     // carregando a modal
     $("#modal-debitos").modal({show:true});
 }
+
+// Evento para o click no botão de remover disciplina
+$(document).on('click', '#btnExcluirDebito', function () {
+    var idDebito = tableDebitos.row($(this).parent().parent().parent().index()).data().id;
+
+    jQuery.ajax({
+        type: 'GET',
+        url: '/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
+        datatype: 'json'
+    }).done(function (retorno) {
+        tableDebitos.ajax.reload();
+        swal(retorno.msg, "Click no botão abaixo!", "success");
+    });
+});
