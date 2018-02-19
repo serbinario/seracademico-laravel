@@ -41,6 +41,10 @@
             font-size: 14px;
         }
 
+        .numero {
+            width: 4%;
+        }
+
         .percentFive {
             width: 10%;
         }
@@ -123,6 +127,7 @@
     <table id="tableBody" border="1">
         <thead>
         <tr>
+            <th class="numero">Nº</th>
             <th class="percentFive">Matrícula</th>
             <th class="percentSixty">Nome</th>
             <th class="percentThirtyFive">Assinatura</th>
@@ -133,6 +138,7 @@
         <?php $count = 0; ?>
         @foreach($dados['body'] as $body)
             <tr>
+                <td>{{++$count}}.</td>
                 <td>{{ $body->matricula }}.</td>
                 <td>{{ $body->nome }}</td>
                 <td></td>
