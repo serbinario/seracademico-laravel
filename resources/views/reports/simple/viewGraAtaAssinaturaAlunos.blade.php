@@ -142,7 +142,7 @@
     </table>
 
 </div>
-<div style="margin-top: 300px;">
+<div style="margin-top: 100px;">
     <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 <div class="rodapeTimbrado">
