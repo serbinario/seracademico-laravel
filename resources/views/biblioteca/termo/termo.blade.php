@@ -123,7 +123,8 @@
     <b>o usuário terá que repor o referido item  entregando o material novo e com nota fiscal.</b>  Quando a obra possuir
     qualificações e quantidade específica tornando-se infungível, o usuário deverá devolver a obra de igual qualidade e quantidade,
     estas que assumam a identidade e as características do material extraviado <b>3) O aluno tem o compromisso de informar, caso
-    mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível.</b>
+    mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível; 4) De zelar e respeitar o ambiente e
+    cumpriras normas e avisos quando estiver usufruindo do mesmo</b>
 
 </p>
 
