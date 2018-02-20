@@ -58,9 +58,9 @@
                     <li role="presentation">
                         <a href="#vagas" aria-controls="ensMedio" role="tab" data-toggle="tab"><i class="material-icons">event_seat</i> Vagas</a>
                     </li>--}}
-                    <li role="presentation">
+                   {{-- <li role="presentation">
                         <a href="#sala" aria-controls="documentosObrig" role="tab" data-toggle="tab"><i class="material-icons">label</i> Sala de Aula</a>
-                    </li>
+                    </li>--}}
                 </ul>
                 <!-- End Nav tabs -->
 
@@ -71,7 +71,7 @@
                     <div role="tabpanel" class="tab-pane active" id="datas">
                         <br/>
                         <div class="row">
-                            <div class="col-md-2">
+                            {{--<div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('matricula_inicio', 'Matrícula (Início)') !!}
                                     {!! Form::text('matricula_inicio', Session::getOldInput('matricula_inicio'), array('class' => 'form-control datepicker date')) !!}
@@ -82,7 +82,7 @@
                                     {!! Form::label('matricula_fim', 'Matrícula (Fim)') !!}
                                     {!! Form::text('matricula_fim', Session::getOldInput('matricila_fim'), array('class' => 'form-control datepicker date')) !!}
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="col-md-2">
                                 <div class="form-group">
                                     {!! Form::label('aula_inicio', 'Aula (Início)') !!}
@@ -171,7 +171,7 @@
                     {{--FIM Aba Vagas --}}
 
                     {{--Aba Salas--}}
-                    <div role="tabpanel" class="tab-pane" id="sala">
+                    {{--<div role="tabpanel" class="tab-pane" id="sala">
                         <br/>
                         <div class="row">
                             <div class="col-md-2">
@@ -195,7 +195,7 @@
 
 
 
-                    </div>
+                    </div>--}}
                     {{--FIM Aba Vagas --}}
                 </div>
                 <!-- FIM Tab panes -->

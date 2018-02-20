@@ -90,8 +90,6 @@ class ModuloController extends Controller
     {
         #Criando a consulta
         $rows = \DB::table('tec_modulos')
-            ->join('fac_curriculos', 'fac_curriculos.id', '=', 'tec_modulos.curriculo_id')
-            ->where('fac_curriculos.id', $id)
             ->select([
                 'tec_modulos.id',
                 'tec_modulos.nome',

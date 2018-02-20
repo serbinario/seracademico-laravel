@@ -100,9 +100,6 @@
                 <a href="#abaMatricula" aria-controls="abaMatricula" role="tab" data-toggle="tab">Matrícula</a>
             </li>
             <li role="presentation">
-                <a href="#monografia" aria-controls="monografia" role="tab" data-toggle="tab">Monografia</a>
-            </li>
-            <li role="presentation">
                 <a href="#anotacao" aria-controls="anotacao" role="tab" data-toggle="tab">Anotações</a>
             </li>
         </ul>
@@ -140,12 +137,12 @@
                                     {!! Form::select('pessoa[cores_racas_id]', $loadFields['corraca'], Session::getOldInput('pessoa[cores_racas_id]'),array('class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="form-group col-md-2">
+                            {{--<div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[tipos_sanguinios_id]', 'Tipo Sanguíneo') !!}
                                     {!! Form::select('pessoa[tipos_sanguinios_id]', $loadFields['tiposanguinio'] , Session::getOldInput('pessoa[tipos_sanguinios_id]'), array('class' => 'form-control')) !!}
                                 </div>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
@@ -633,6 +630,14 @@
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
                         <!-- Título de Eleitor e último comprovante de votação -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[fixa19_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[fixa19_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[fixa19_doc_obrigatorio]', 'Fixa 19 ', false) !!}
+                        </div>
+                        <!-- Fim Título de Eleitor e último comprovante de votação -->
+
+                        <!-- Título de Eleitor e último comprovante de votação -->
                         {{--<div class="checkbox checkbox-primary">
                             {!! Form::hidden('curriculo_doc_obrigatorio', 0) !!}
                             {!! Form::checkbox('curriculo_doc_obrigatorio', 1, null, array('class' => 'form-control')) !!}
@@ -707,163 +712,6 @@
             </div>
             {{-- Fim aba Mtrícula--}}
 
-            {{-- Aba Monografia --}}
-            <div role="tabpanel" class="tab-pane" id="monografia">
-                </br>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#monografiaGerais" aria-controls="monografiaGerais" role="tab" data-toggle="tab">Monografia / Gerais</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#monografiaBanca" aria-controls="monografiaBanca" role="tab" data-toggle="tab">Monografia Banca Examinadora</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#formatura" aria-controls="formatura" role="tab" data-toggle="tab">Formatura</a>
-                    </li>
-                </ul>
-
-                {{-- Inicio Monografia/gerais --}}
-                </br>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="monografiaGerais">
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('titulo', 'Título') !!}
-                                    {!! Form::text('titulo', Session::getOldInput('titulo'), array('class' => 'form-control', 'placeholder' => 'Informe um título')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('nota_final', 'Nota Final') !!}
-                                    {!! Form::text('nota_final', Session::getOldInput('nota_final'), array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('media', 'Média') !!}
-                                    {!! Form::text('media', Session::getOldInput('media'), array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('media_conceito', 'Média Conceito') !!}
-                                    {!! Form::select('media_conceito', ['' => 'Selecione', '1' => 'CUMPRIO', '2' => 'NÃO CUMPRIO'], null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('defendeu', 'Defendeu') !!}
-                                    {!! Form::select('defendeu', ['' => 'Selecione', '1' => 'Sim', '2' => 'Não'], null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_orientador_id', 'Professor Orientador') !!}
-                                    {!! Form::select('professor_orientador_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('defesa', 'Defesa') !!}
-                                    {!! Form::text('defesa', Session::getOldInput(''), array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Fim Monografia/gerais --}}
-
-                    {{-- Inicio Monografia/gerais --}}
-                    </br>
-                    <div role="tabpanel" class="tab-pane" id="monografiaBanca">
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_1_id', 'Professor 01') !!}
-                                    {!! Form::select('professor_banca_1_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_1_id', 'Instituição 01') !!}
-                                    {!! Form::select('inst_ensino_banca_1_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_2_id', 'Professor 02') !!}
-                                    {!! Form::select('professor_banca_2_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_2_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_2_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_3_id', 'Professor 03') !!}
-                                    {!! Form::select('professor_banca_3_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_3_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_3_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('professor_banca_4_id', 'Professor 04') !!}
-                                    {!! Form::select('professor_banca_4_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <div class="fg-line">
-                                    {!! Form::label('inst_ensino_banca_4_id', 'Instituição 02') !!}
-                                    {!! Form::select('inst_ensino_banca_4_id', array(), null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Fim Monografia/gerais --}}
-
-                    {{-- Fim Monografia/gerais --}}
-                    <div role="tabpanel" class="tab-pane" id="formatura">
-                        <div class="row">
-                            <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('data_conclusao', 'Data Conclusão') !!}
-                                    {!! Form::text('data_conclusao', Session::getOldInput('data_conclusao'), array('class' => 'form-control datepicker')) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <div class="fg-line">
-                                    {!! Form::label('data_colacao', 'Data Colação') !!}
-                                    {!! Form::text('data_colacao', Session::getOldInput('data_colacao'), array('class' => 'form-control datepicker')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Fim Monografia/gerais --}}
-                </div>
-                </div>
-                {{-- Fim Monografia--}}
                 {{-- Início anotações--}}
                 <div role="tabpanel" class="tab-pane" id="anotacao">
                     </br>

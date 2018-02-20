@@ -81,12 +81,12 @@ class DisciplinaController extends Controller
                             <ul>
                             <li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar disciplina"><i class="material-icons">edit</i></a></li>';
 
-            /*# Verificando se existe vinculo com o currículo e turma
+            # Verificando se existe vinculo com o currículo e turma
             if(count($disciplina->curriculos) == 0 && count($disciplina->turmas) == 0) {
                 $html .= '<li><a class="btn-floating" href="delete/'.$row->id.'" title="Excluir disciplina"><i class="material-icons">delete</i></a></li>                        
                             </ul>
                            </div>';
-            }*/
+            }
 
             # Retorno
             return $html;

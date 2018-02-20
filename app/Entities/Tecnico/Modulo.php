@@ -23,7 +23,7 @@ class Modulo extends Model implements Transformable
      */
     public function disciplinas()
     {
-        return $this->belongsToMany(Disciplina::class, 'tec_modulos_disciplinas', 'modulo_id', 'disciplina_id')
+        return $this->belongsToMany(Disciplina::class, 'fac_curriculo_disciplina', 'modulo_id', 'disciplina_id')
             ->withPivot(['id', 'modulo_id', 'disciplina_id']);
     }
 }

@@ -180,18 +180,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[cpf]', 'CPF') !!}
                                                 {!! Form::text('pessoa[cpf]', Session::getOldInput('pessoa[cpf]')  , array('id' => 'cpf', 'class' => 'form-control cpf')) !!}
                                             </div>
-                                            {{--<div class="form-group col-md-3">
+                                           <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[cnpj]', 'CNPJ') !!}
-                                                @if(isset($model->cnpj))
-                                                    {!! Form::text('pessoa[cnpj]', $model->cnpj, array('class' => 'form-control cnpj')) !!}
-                                                @else
-                                                    {!! Form::text('pessoa[cnpj]', Session::getOldInput('pessoa[cnpj]'), array('class' => 'form-control cnpj')) !!}
-                                                @endif
-                                            </div>--}}
+                                               {!! Form::text('pessoa[cnpj]', Session::getOldInput('pessoa[cnpj]')  , array('id' => 'cnpj', 'class' => 'form-control cnpj')) !!}
+                                            </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[empresa_nome]', 'Nome da Empresa') !!}
                                                 @if(isset($model->curriculo_latter))
@@ -376,15 +372,15 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 {!! Form::label('pessoa[telefone_fixo]', 'Telefone Fixo') !!}
-                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]')  , array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[telefone_fixo]', Session::getOldInput('pessoa[telefone_fixo]')  , array('class' => 'form-control phone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[celular]', 'Celular') !!}
-                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]')  , array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[celular]', Session::getOldInput('pessoa[celular]')  , array('class' => 'form-control celPhone')) !!}
                                             </div>
                                             <div class="form-group col-md-2">
                                                 {!! Form::label('pessoa[celular2]', 'Celular 2') !!}
-                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]')  , array('class' => 'form-control')) !!}
+                                                {!! Form::text('pessoa[celular2]', Session::getOldInput('pessoa[celular2]')  , array('class' => 'form-control celPhone')) !!}
                                             </div>
                                         </div>
                                     </div>
