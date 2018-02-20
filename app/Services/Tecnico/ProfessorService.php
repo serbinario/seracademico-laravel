@@ -94,7 +94,12 @@ class ProfessorService
         $this->loginPortalProfessor($data, $data['pessoa']['cpf']);
 
         # Recuperando a pessoa pelo cpf
-        $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
+        if(!empty($data['pessoa']['cpf'])) {
+            $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cpf' => empty($data['pessoa']['cpf']) ?? 0]);
+        } else {
+            $objPessoa = $this->pessoaRepository->with('pessoa.endereco.bairro.cidade.estado')->findWhere(['cnpj' => empty($data['pessoa']['cnpj']) ?? 0]);
+        }
+
         $endereco  = null;
 
         # Verificando se a pesso já existe
