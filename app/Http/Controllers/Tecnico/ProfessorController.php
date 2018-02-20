@@ -141,6 +141,7 @@ class ProfessorController extends Controller
         try {
             #Recuperando a empresa
             $model = $this->service->find($id);
+            //dd($model);
 
             #Carregando os dados para o cadastro
             $loadFields = $this->service->load($this->loadFields);
