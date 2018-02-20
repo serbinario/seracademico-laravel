@@ -120,6 +120,15 @@ $(document).ready(function(){
     });
 
     //##### Submeter formulário
+    $('#formProfessor').submit(function() {
+        $('.cpf').unmask();
+        $('.cnpj').unmask();
+        $('.phone').unmask();
+        $('.cep').unmask();
+        $('.celPhone').unmask();
+    });
+
+    //##### Submeter formulário
     $('#formVestibulando').submit(function() {
         $('.cpf').unmask();
         $('.phone').unmask();
