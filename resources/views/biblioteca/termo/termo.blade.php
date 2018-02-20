@@ -119,7 +119,7 @@
 <p class="termos">
     O Usuário ao se cadastrar, terá que cumprir as seguintes normas: 1) Assumir inteira responsabilidade de quaisquer materiais
     que façam parte do acervo da biblioteca, sejam estes livros, revistas, monografias, dissertações, teses, referências (livro de
-    consulta ), CDs, DVDs, outros, quando de posse destes; 2 ) Se danificar ou extraviar qualquer material do acervo da biblioteca,
+    consulta ), DVDs, outros, quando de posse destes; 2 ) Se danificar ou extraviar qualquer material do acervo da biblioteca,
     <b>o usuário terá que repor o referido item  entregando o material novo e com nota fiscal.</b>  Quando a obra possuir
     qualificações e quantidade específica tornando-se infungível, o usuário deverá devolver a obra de igual qualidade e quantidade,
     estas que assumam a identidade e as características do material extraviado <b>3) O aluno tem o compromisso de informar, caso

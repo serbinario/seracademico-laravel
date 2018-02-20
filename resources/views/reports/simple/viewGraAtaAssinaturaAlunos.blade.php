@@ -152,7 +152,7 @@
     <img style="width: 100%; height: auto;" src="{{asset('img/linha_declaracao_declaracao.png')}}">
 </div>
 <div class="rodapeTimbrado">
-    Rua Gervásio Pires, 286, Santo Amaro, Recife – PE – CEP: 50.050-415<br>
+    Rua Gervásio Pires, 826, Santo Amaro, Recife – PE – CEP: 50.050-415<br>
     CNPJ: 15.708.483/0001-50<br>
     Fones: (81) 3071.7249 / 3039.0362 / 9.9516.2229 / 9.8446.0808<br>
     contato@alpha.rec.br  www.alpha.rec.br
