@@ -17,7 +17,7 @@ function loadTableDebitos (idAluno) {
             {data: 'valor_debito', name: 'fin_debitos.valor_debito'},
             {data: 'situacaoBoleto', name: 'fin_status_gnet.nome'},
             {data: 'gnet_carnet_id', name: 'fin_carnes.gnet_carnet_id'},
-            {data: 'pago', name: 'fin_debitos.pago'},
+            {data: 'status', name: 'fin_debitos.pago', orderable: false, searchable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
