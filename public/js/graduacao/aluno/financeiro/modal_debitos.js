@@ -41,7 +41,8 @@ function loadTableCarnes (idAluno) {
             {data: 'qtd_parcelas', name: 'qtd_parcelas', orderable: false, searchable: false},
             {data: 'nomeTaxa', name: 'nomeTaxa'},
             {data: 'valorTaxa', name: 'fin_taxas.valor'},
-            {data: 'link', name: 'link', orderable: false, searchable: false}
+            {data: 'link', name: 'link', orderable: false, searchable: false},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -94,6 +95,38 @@ $(document).on('click', '#btnExcluirDebito', function () {
                     url: '/index.php/seracademico/graduacao/aluno/financeiro/deleteDebito/' + idDebito,
                     datatype: 'json'
                 }).done(function (retorno) {
+                    tableDebitos.ajax.reload();
+                    swal(retorno.msg, "Click no botão abaixo!", "success");
+                });
+            } else {
+                swal("Cancelado", "Esclusão não realizada :)", "error");
+            }
+        });
+});
+
+// Evento para o click no botão de remover disciplina
+$(document).on('click', '#btnExcluirCarne', function () {
+    var idCarne = tableCarnes.row($(this).parent().parent().parent().index()).data().carne_id;
+
+    swal({
+            title: "Você tem certeza?",
+            text: "Você não poderá reverter esta ação!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Sim, Tenho certeza!',
+            cancelButtonText: "Não, Desejo cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm) {
+            if (isConfirm) {
+                jQuery.ajax({
+                    type: 'GET',
+                    url: '/index.php/seracademico/graduacao/aluno/financeiro/deleteCarne/' + idCarne,
+                    datatype: 'json'
+                }).done(function (retorno) {
+                    tableCarnes.ajax.reload();
                     tableDebitos.ajax.reload();
                     swal(retorno.msg, "Click no botão abaixo!", "success");
                 });

@@ -110,6 +110,7 @@ Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduaca
             Route::get('gridCarnes/{id}', ['as' => 'gridCarnes', 'uses' => 'Graduacao\AlunoFinanceiroController@gridCarnes']);
             Route::get('getDadosDebito/{id}', ['as' => 'getDadosDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@getDadosDebito']);
             Route::get('deleteDebito/{id}', ['as' => 'deleteDebito', 'uses' => 'Graduacao\AlunoFinanceiroController@delete']);
+            Route::get('deleteCarne/{id}', ['as' => 'deleteCarne', 'uses' => 'Graduacao\AlunoFinanceiroController@deleteCarne']);
         });
     });
 

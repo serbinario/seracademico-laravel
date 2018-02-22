@@ -3,6 +3,7 @@ namespace Seracademico\Services\Financeiro;
 
 use Seracademico\Events\DebitoStored;
 use Seracademico\Events\DebitoUpdated;
+use Seracademico\Repositories\Financeiro\CarneRepository;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
 use Seracademico\Services\TraitService;
 
@@ -25,6 +26,11 @@ class DebitoService
      */
     private $gerencianetService;
 
+    /**
+     * @var CarneRepository
+     */
+    private $carneRepository;
+
 
     /**
      * DebitoService constructor.
@@ -34,6 +40,7 @@ class DebitoService
      */
     public function __construct(
         DebitoRepository $repository,
+        CarneRepository $carneRepository,
         BoletoService $boletoService,
         GerencianetService $gerencianetService
     )
@@ -41,6 +48,7 @@ class DebitoService
         $this->repository = $repository;
         $this->boletoService = $boletoService;
         $this->gerencianetService = $gerencianetService;
+        $this->carneRepository = $carneRepository;
     }
 
 
@@ -125,6 +133,40 @@ class DebitoService
 
         #deletando o curso
         $result = $this->repository->delete($id);
+
+        # Verificando se a execução foi bem sucessida
+        if(!$result) {
+            throw new \Exception('Ocorreu um erro ao tentar remover o curso!');
+        }
+
+        #retorno
+        return true;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteCarne(int $id)
+    {
+        // Pegando todos os debitos relacioandos ao carnê
+         $debitos = \DB::table('fin_debitos')
+             ->where('carne_id', $id)
+             ->select(['id'])->get();
+
+         // Deletando todos os extratos ligados aos dêbito
+         foreach($debitos as $debito) {
+             // Deletar o extrato
+             \DB::table('fin_extratos')->where('debito_id', $debito->id)->delete();
+             \DB::table('fin_boletos')->where('debito_id', $debito->id)->delete();
+         }
+
+         // Deletando todos os débitos do carnê
+        \DB::table('fin_debitos')->where('carne_id', $id)->delete();
+
+        #deletando o curso
+        $result = $this->carneRepository->delete($id);
 
         # Verificando se a execução foi bem sucessida
         if(!$result) {
