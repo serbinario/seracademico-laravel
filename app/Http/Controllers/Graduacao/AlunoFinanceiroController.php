@@ -142,8 +142,6 @@ class AlunoFinanceiroController extends Controller
                     return '<a target="_blank" href="'. $row->gnet_link .'">Visualizar carnê em outra página</a>';
                 })->addColumn('action', function ($row) {
 
-                    //$debito = $this->debitoRepository->find($row->id);
-
                     $html = "";
                     $html .= '<div class="fixed-action-btn horizontal">';
                     $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
