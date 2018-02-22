@@ -89,7 +89,8 @@ class AlunoFinanceiroController extends Controller
                 ->leftJoin('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
                 ->leftJoin('fin_status_gnet', 'fin_boletos.gnet_status_id', '=', 'fin_status_gnet.id')
                 ->addSelect(\DB::raw("IF(fin_status_gnet.nome!='', fin_status_gnet.nome, 'Não gerado') as situacaoBoleto"))
-                ->addSelect('fin_carnes.gnet_carnet_id');
+                ->addSelect('fin_carnes.gnet_carnet_id')
+                ->addSelect('fin_debitos.mes_referencia');
 
             return DataTables::of($consulta)
                 ->addColumn('action', function ($row) {
@@ -125,6 +126,7 @@ class AlunoFinanceiroController extends Controller
     public function gridCarnes(Request $request, $id)
     {
         try {
+
             $consulta = $this->debitoRepository
                 ->obtemConsultaDebitosPorDebitante($id,Aluno::class)
                 ->join('fin_carnes', 'fin_debitos.carne_id', '=', 'fin_carnes.id')
