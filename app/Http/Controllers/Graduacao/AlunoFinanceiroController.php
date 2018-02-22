@@ -131,12 +131,27 @@ class AlunoFinanceiroController extends Controller
                 ->addSelect(\DB::raw('count(fin_debitos.id) as qtd_parcelas'))
                 ->addSelect('fin_carnes.gnet_carnet_id')
                 ->addSelect('fin_carnes.gnet_link')
+                ->addSelect('fin_carnes.id as carne_id')
                 ->addSelect(\DB::raw("DATE_FORMAT(fin_carnes.created_at, '%d/%m/%Y') as data_criacao"))
                 ->groupBy('fin_carnes.id', 'fin_taxas.id');
 
             return DataTables::of($consulta)
                 ->addColumn('link', function ($row) {
                     return '<a target="_blank" href="'. $row->gnet_link .'">Visualizar carnê em outra página</a>';
+                })->addColumn('action', function ($row) {
+
+                    //$debito = $this->debitoRepository->find($row->id);
+
+                    $html = "";
+                    $html .= '<div class="fixed-action-btn horizontal">';
+                    $html .= '<a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a>';
+                    $html .= '<ul>';
+
+                    $html .= '<li><a class="btn-floating" id="btnExcluirCarne" title="Excluir carnê"><i class="material-icons">delete</i></a></li>';
+
+                    $html .= '</ul>';
+                    $html .= '</div>';
+                    return $html;
                 })->make(true);
         } catch (\Throwable $e) {
             abort(500, $e->getMessage());
@@ -256,6 +271,24 @@ class AlunoFinanceiroController extends Controller
             #Retorno para a view
             return response()->json(['success' => true, 'msg' => "Remoção realizada com sucesso"]);
         } catch (\Throwable $e) { dd($e);
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteCarne($id)
+    {
+        try {
+
+            #Executando a ação
+            $this->debitoService->deleteCarne($id);
+
+            #Retorno para a view
+            return response()->json(['success' => true, 'msg' => "Remoção realizada com sucesso"]);
+        } catch (\Throwable $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }

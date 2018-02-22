@@ -76,6 +76,7 @@
                                         <th>Taxa</th>
                                         <th>Valor</th>
                                         <th style="width: 30%">Link</th>
+                                        <th style="width: 5%">Ação</th>
                                     </tr>
                                     </thead>
                                 </table>
