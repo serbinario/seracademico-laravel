@@ -13,6 +13,7 @@ function loadTableDebitos (idAluno) {
         columns: [
             {data: 'nomeTaxa', name: 'fin_taxas.nome'},
             {data: 'data_vencimento', name: 'fin_debitos.data_vencimento'},
+            {data: 'mes_referencia', name: 'fin_debitos.mes_referencia'},
             {data: 'valor_debito', name: 'fin_debitos.valor_debito'},
             {data: 'situacaoBoleto', name: 'fin_status_gnet.nome'},
             {data: 'gnet_carnet_id', name: 'fin_carnes.gnet_carnet_id'},
