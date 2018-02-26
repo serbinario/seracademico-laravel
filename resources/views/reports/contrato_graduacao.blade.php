@@ -1,3 +1,53 @@
+<?php
+// leitura das datas automaticamente
+
+function data($dia, $mes, $ano, $semana) {
+
+    /*$dia = date('d');
+    $mes = date('m');
+    $ano = date('Y');
+    $semana = date('w');*/
+//$cidade = "Digite aqui sua cidade";
+
+// configuração mes
+
+    switch ($mes){
+
+        case 1: $mes = "Janeiro"; break;
+        case 2: $mes = "Fevereiro"; break;
+        case 3: $mes = "Março"; break;
+        case 4: $mes = "Abril"; break;
+        case 5: $mes = "Maio"; break;
+        case 6: $mes = "Junho"; break;
+        case 7: $mes = "Julho"; break;
+        case 8: $mes = "Agosto"; break;
+        case 9: $mes = "Setembro"; break;
+        case 10: $mes = "Outubro"; break;
+        case 11: $mes = "Novembro"; break;
+        case 12: $mes = "Dezembro"; break;
+
+    }
+
+
+// configuração semana
+
+    switch ($semana) {
+
+        case 0: $semana = "Domingo"; break;
+        case 1: $semana = "Segunda Feira"; break;
+        case 2: $semana = "Terça Feira"; break;
+        case 3: $semana = "Quarta Feira"; break;
+        case 4: $semana = "Quinta Feira"; break;
+        case 5: $semana = "Sexta Feira"; break;
+        case 6: $semana = "Sábado"; break;
+
+    }
+
+    echo ("$semana, $dia de $mes de $ano");
+}
+//Agora basta imprimir na tela...
+//echo ("$cidade, $semana, $dia de $mes de $ano");
+?>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -9,8 +59,12 @@
             font-size: 22px;
         }
 
+        td {
+            font-size: 22px;
+        }
+
         .termos{
-            text-align: justify;
+         text-align: justify;
             margin-bottom: 20px;
         }
 
@@ -81,7 +135,7 @@ Pelo presente Instrumento Particular:<br>
 
 <div class="termos">
     a) De um lado ALPHA SISTEMA EDUCACIONAL E TREINAMENTO LTDA ME, com sede na Rua Gervásio Pires, 286, Santo Amaro,
-    Recife - PE - CEP 50.050-415, mantenedora de FACULDADE ALPHA, inscrita no CNPJ/MF sob o nº 15.708.483/0001-50,
+    Recife - PE - CEP 50.050-415, mantenedora da FACULDADE ALPHA, inscrita no CNPJ/MF sob o nº 15.708.483/0001-50,
     lotada no mesmo endereço, neste ato, representada pela Professora Luciana Teixeira Vitor, doravante denominada CONTRATADA;
 </div>
 
@@ -124,7 +178,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    Cláusula 3º - O Regimento Interno e o Manual do Aluno encontra-se disponíveis no site da instituição e na biblioteca,
+    Cláusula 3º - O Regimento Interno e o Manual do Aluno encontram-se disponíveis no site da instituição e na biblioteca,
     e deles o CONTRATANTE declara expressamente ter conhecimento.
 </div>
 
@@ -138,7 +192,7 @@ CONSIDERANDO que:<br>
     orientações do Ministério da Educação, e sua eficácia está condicionada ao pagamento da primeira parcela deste Contrato e
     ao adimplemento integral de todos os valores em abertos pactuados entre o CONTRATANTE e a CONTRATADA. A assinatura de novo
     contrato de prestação de serviços educacionais somente se efetivará mediante verificação de pleno cumprimento do presente
-    Contrato, e de contratos anteriores entre as partas.
+    Contrato, e de contratos anteriores entre as partes.
 </div>
 
 <div class="termos">
@@ -182,7 +236,7 @@ CONSIDERANDO que:<br>
 
 <div class="termos">
     11º - O CONTRATANTE tem ciência que para a avaliação pedagógica do Aluno, faz-se necessária a realização de avaliações
-    (conforme regimento interno da INSTITUIÇÃO. Nos casos em que o aluno não realizar essas avaliações, oferecidas dentro do
+    (conforme regimento interno da INSTITUIÇÃO). Nos casos em que o aluno não realizar essas avaliações, oferecidas dentro do
     período letivo regular e não apresentar justificativas em tempo hábil, tempo esse, que é definido no Manual Interno do
     Docente e do Discente da CONTRATADA, o mesmo não poderá ofertar reclamações em desfavor dos professores ou da CONTRATADA.
 </div>
@@ -252,7 +306,7 @@ CONSIDERANDO que:<br>
     sendo os 30% (trinta por cento) restantes, utilizados para cobrir despesas com o pagamento da parcela inicial,
     tais como tributos e despesas administrativas, devendo, entretanto, formular requerimento neste sentido, indicando a
     conta em que deve ser creditado tal valor. Se for conta de titularidade diferente, o requerimento indicando a conta
-    deverá, obrigatoriamente, estar com firma reconhecida, e ser indicados os dados completos do beneficiário.
+    deverá, obrigatoriamente, estar com firma reconhecida, e serem indicados os dados completos do beneficiário.
 </div>
 
 <div class="termos">
@@ -279,7 +333,7 @@ CONSIDERANDO que:<br>
 <div class="termos">
     24º - Os serviços ora contratados têm preços diferenciados, conforme a data do seu pagamento, aceitando a CONTRATADA que,
     a cada parcela, por mera liberalidade dela, possa o CONTRATANTE migrar de uma para outra modalidade do pagamento parcelado,
-    vigindo, pois, em cada pagamento, o valor da parcela corresponde ao Contrato das diferentes datas de pagamento, conforme
+    vigendo, pois, em cada pagamento, o valor da parcela corresponde ao Contrato das diferentes datas de pagamento, conforme
     o item 17º e o Anexo I deste Contrato.
 </div>
 
@@ -297,12 +351,12 @@ CONSIDERANDO que:<br>
     26º - DO NÃO PAGAMENTO EM CORRESPONDENTE BANCÁRIO – As partes acordam que NÃO poderá haver pagamentos das parcelas deste
     Contrato em Correspondentes bancários, tais como: SERVICEPAG, MULT BANK, LEMON BANK, BANCO MATRIZ, bem como em farmácias,
     redes de supermercados e similares; haja vista o grande número de parcelas pagas nesses locais que não são identificados
-    pela CONTRATADA, gerando transtornos e constrangimentos para as partas. Fica, ainda, expressamente vedado, o pagamento de
+    pela CONTRATADA, gerando transtornos e constrangimentos para as partes. Fica, ainda, expressamente vedado, o pagamento de
     qualquer das parcelas da semestralidade a prepostos ou funcionários da contratada, ressalvado o disposto no item 22º e 49º.
 </div>
 
 <div class="termos">
-    27º - Na hipótese de o CONTRATANTE obter financiamento das parcelas contratadas, seja de qual forma for, como o Progama
+    27º - Na hipótese de o CONTRATANTE obter financiamento das parcelas contratadas, seja de qual forma for, como o Programa
     de Financiamento Estudantil do Ministério da Educação - FIES, inclusive mediante concessão de bolsa parcial ou total de
     estudos do Programa Universidade para Todos – PROUNI, ou qualquer outro tipo de bolsas, nas datas de seus respectivos
     vencimentos, até a cessação do gozo do benefício obtido, nos moldes do item 17º deste instrumento contratual.
@@ -311,24 +365,24 @@ CONSIDERANDO que:<br>
 <div class="termos">
     28º - Está o CONTRATANTE ciente de que, caso no decorrer do seu curso, perca ele o direito a qualquer benefício de
     Financiamento Estudantil ou de Bolsa de Estudos, por qualquer motivo, estará obrigado a pagar as parcelas relativas à
-    prestação de séricos educacionais que não tenham sido alcançadas por financiamento estudantil ou por bolsa de estudos,
+    prestação de serviços educacionais que não tenham sido alcançadas por financiamento estudantil ou por bolsa de estudos,
     nas respectivas datas de vencimento.
 </div>
 
 <div class="termos">
     29º - Especificamente para o caso do FIES, ofertado pelo Fundo Nacional de Desenvolvimento da Educação – FNDE, a legislação
-    (Portaria MEC nº 15/2011 e subseqüentes) e os contratos relativos àquele financiamento prevêem várias hipóteses que
+    (Portaria MEC nº 15/2011 e subseqüentes) e os contratos relativos àquele financiamento preveem várias hipóteses que
     “constituem impedimento à manutenção do financiamento”, dentre  elas “a não obtenção de aproveitamento acadêmico em pelo
     menos 75% das disciplinas cursadas pelo estudante no último período letivo financiado pelo FIES”, também conhecida como
     “rendimento insatisfatório”. Nesta hipótese, acaso o CONTRATANTE venha a renovar a matrícula estando ciente de que o Aluno
-    não abteve rendimento satisfatório, fica expressamente informado de que terá que arcar, sem uso do financiamento, isto é,
+    não obteve rendimento satisfatório, fica expressamente informado de que terá que arcar, sem uso do financiamento, isto é,
     de forma direta, mensalmente, com as parcelas da semestralidade de seu curso, nos moldes do item 17º.
 </div>
 
 <div class="termos">
     30º - Exclusivamente na hipótese do item anterior, uma vez que a renovação de matrícula para os alunos que já sejam beneficiários
     do FIES se dá independentemente do pagamento da primeira parcela da semestralidade (matrícula – que será futuramente
-    coberta pelo financiamento estudantil), e, por via de conseqüência, como a renovação do contrato de prestação de serviços
+    coberta pelo financiamento estudantil), e, por via de consequência, como a renovação do contrato de prestação de serviços
     educacionais se dá anteriormente à abertura do período de aditamento do FIES, fica expressamente consignado que, encerrado
     o prazo para o aditamento do FIES e esgotadas as possibilidades de renovação excepcional do Financiamento Estudantil junto
     ao Fundo Nacional de Desenvolvimento da Educação – FNDE, inviabilizando, por qualquer motivo, a continuidade do seu
@@ -411,9 +465,9 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    41º O CONTRATANTE está ciente e concorda expressamente que todos os matérias indicados e solicitados pelos docentes para
+    41º O CONTRATANTE está ciente e concorda expressamente que todos os materiais indicados e solicitados pelos docentes para
     estudos curriculares, tais como livros, cópias de textos (ressalvados os que fazem parte do acervo da biblioteca da CONTRATADA),
-    batas para uso em laboratórios, etc., são de inteira responsabilidade do CONTRATANTE, e por ele deve ser adquirido.
+    batas para uso em laboratórios, etc., são de inteira responsabilidade do CONTRATANTE, e por ele devem ser <adquiridos></adquiridos>.
 </div>
 
 {{--<div class="termos">
@@ -497,7 +551,7 @@ CONSIDERANDO que:<br>
 
 <div class="termos">
     51º - A CONTRATADA terá direito a recursar a rematrícula, ou a matrícula em qualquer outro curso por ela mantida, ou a
-    inscrição em atividade desenvolvida pela IES, mantida pela ALPHA EDUCAÇÃO e TRENAMENTO, quando o CONTRATANTE:
+    inscrição em atividade desenvolvida pela IES, mantida pela ALPHA EDUCAÇÃO e TREINAMENTO, quando o CONTRATANTE:
     1. Estiver inadimplente, inclusive em relação à vinculação anterior, independentemente da origem e da espécie do débito
     e da manutenção do direito de cobrança das dívidas contraídas;
     2. Não cumprir as determinações contidas no calendário acadêmico e no Regimento Geral da IES;
@@ -600,8 +654,8 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    62º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciências e concorda expressamente que a CONTRATADA não
-    tem nenhum tipo de responsabilidade por objetos de uso pessoal, a exemplo de celulares, jóais, relógios, câmeras fotográficas,
+    62º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciência e concorda expressamente que a CONTRATADA não
+    tem nenhum tipo de responsabilidade por objetos de uso pessoal, a exemplo de celulares, jóias, relógios, câmeras fotográficas,
     laptops, notebooks, ipods e outros adornos e ou acessórios pertencentes ao CONTRATANTE e que seu uso dentro ou fora das
     instalações da CONTRATADA, é de sua inteira e total responsabilidade.
 </div>
@@ -645,7 +699,7 @@ CONSIDERANDO que:<br>
 
 <div class="termos">
     68º Obriga-se também o CONTRATANTE a informar, no ato da assinatura do presente Contrato, que o Aluno é portador de
-    doença e/ou deficiência que o impeça de praticar esportes ou atividades recreativas, ou, ainda, portador de alegrias ou
+    doença e/ou deficiência que o impeça de praticar esportes ou atividades recreativas, ou, ainda, portador de alergias ou
     doenças que o impeçam de manipular certos materiais, principalmente nos cursos de saúde. Caso o CONTRATANTE não informe
     da doença e ou deficiência que impeça o Aluno de praticar esportes ou atividades recreativas, e/ou das alergias ou doenças
     que impeçam o Aluno de manipular certos materiais, não se responsabilizará a CONTRATADA por qualquer evento ocorrido em
@@ -653,7 +707,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    69 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos seqüenciais ofertados pela IES, são de complementação
+    69 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos sequenciais ofertados pela IES, são de complementação
     de estudos com destinação coletiva, sendo regulamentados pelo Ministério da Educação, de acordo com o Art. 44 da LDB:
     sendo que conforme regulamentação específica, não serão emitidos diplomas e sim certificados de conclusão.
 </div>
@@ -677,7 +731,7 @@ CONSIDERANDO que:<br>
 <div class="termos">
     72 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que na hipótese de inclusão de disciplina, de qualquer
     natureza, além das previstas na grade curricular para o respectivo semestre letivo do curso ou no caso de inclusão, que
-    resulte no aumento de disciplina em relação ao semestre anterior, caso o (Ministério da Educação/Fundo Nacional de
+    resulte no aumento de disciplina em relação ao semestre anterior, caso o MEC (Ministério da Educação/Fundo Nacional de
     Desenvolvimento da Educação – FNDE), não aceite o acréscimo do valor dessa inclusão no financiamento (FIES), os encargos
     financeiros relativos à diferença do valor não acatado serão de responsabilidade do CONTRATANTE. Caso o CONTRATANTE seja
     pagante, bolsista ou beneficiário de qualquer programa de Financiamento Estudantil, será responsável financeiramente por
@@ -702,7 +756,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    CONTRATANTE					 CONTRATADA
+    CONTRATANTE	CONTRATADA
 </div>
 
 80 – QUALIFICAÇÃO CONTRATANTE E ALUNO<br>
@@ -711,13 +765,22 @@ CONSIDERANDO que:<br>
     Declaração do CONTRATANTE, em observância ao disposto no Art. 46, da Lei 8.078/90, declara expressamente o CONTRATANTE
     que, em virtude de ter lido todas as cláusulas constantes deste contrato, está ciente de todas elas, aceitando-as
     expressamente e de ter recebido cópia deste contrato devidamente assinado pelas partes e pelas testemunhas.<br> <br>
-    Recife, _____ de ____________ de _______
+    Recife, <?php $data = new DateTime('now'); data($data->format('d'), $data->format('m'), $data->format('Y'), $data->format('w')); ?>
 </div><br>
 
-<div>CONTRATANTE</div>
+<div class="termos">
+    <table style="width: 100%;">
+        <tr>
+            <td>CONTRATANTE</td>
+            <td>CONTRATADA</td>
+        </tr>
+    </table>
+</div>
 
-<div style="position: relative; top:-37px; left: 300px; margin-top: 20px;">CONTRATADA</div>
+{{--<div>CONTRATANTE</div>
 
+<div style="position: relative; top:-37px; left: 300px; margin-top: 20px;">CONTRATADA</div>--}}
+<br /><br /><br />
 <div class="termos">
     TESTEMUNHAS
 </div>
