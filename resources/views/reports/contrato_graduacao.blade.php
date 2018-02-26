@@ -56,11 +56,11 @@ function data($dia, $mes, $ano, $semana) {
     <style type="text/css" class="init">
         body {
             font-family: arial;
-            font-size: 22px;
+            font-size: 15px;
         }
 
         td {
-            font-size: 22px;
+            font-size: 15px;
         }
 
         .termos{
