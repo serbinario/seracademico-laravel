@@ -210,20 +210,21 @@
         <tr>
             <td style="width: 50%; font-size: 11px;">
                 <center> ___________________________________________________<br>
-                Documento do usuário</center>
+                Documento do usuário
+                </center>
             </td>
             <td style="width: 50%; font-size: 11px;">
                 <center>
                     <br />___________________________________________________<br>
 
-                    Miriam P. W. de Medeiros<br />
+                    Miriam P. W. de Medeiros <br />
                     Bibliotecária CRB-4/1183
                 </center>
             </td>
         </tr>
     </table>
 </center>
-<br /><br />
+<br />
 
 <center>
     <span>
