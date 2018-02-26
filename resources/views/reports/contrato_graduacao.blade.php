@@ -623,7 +623,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    62º O CONTRATANTE assume total responsabilidade quanto às declarações prestadas neste Contrato e no ato de matrícula,
+    59º O CONTRATANTE assume total responsabilidade quanto às declarações prestadas neste Contrato e no ato de matrícula,
     relativas à aptidão legal do Aluno para a frequência na série e graus indicados, quando for o caso, concordando, desde
     já, que a não entrega dos documentos legais comprobatórios das declarações prestadas, até 30 (trinta) dias corridos,
     contados do início das aulas, acarretará o automático cancelamento da matrícula na vaga aberta ao aluno, rescindindo-se
@@ -632,12 +632,12 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    59º Sanções Disciplinares - A CONTRATADA poderá aplicar procedimentos disciplinares ao Aluno, nos termos do seu Regimento,
+    60º Sanções Disciplinares - A CONTRATADA poderá aplicar procedimentos disciplinares ao Aluno, nos termos do seu Regimento,
     do Código de Ética, bem como na legislação pertinente à espécie.
 </div>
 
 <div class="termos">
-    60º - Responsabilidade Civil – Em caso de dano material ao patrimônio da CONTRATADA, o CONTRATANTE, além da sanção
+    61º - Responsabilidade Civil – Em caso de dano material ao patrimônio da CONTRATADA, o CONTRATANTE, além da sanção
     disciplinar aplicável, está obrigado ao ressarcimento dos danos causados. O CONTRATANTE é responsável pela integridade
     física (conservação) de todos os livros recebidos a título de mútuo na biblioteca da CONTRATADA; está ciente que arcará
     com a reposição dos mesmos em caso de extravio ou através de indenização por danos materiais, mau uso e deformações
@@ -648,25 +648,25 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    61º O CONTRATANTE tem ciência e concorda expressamente que os livros de consulta ou acervo de reserva não podem ser
+    62º O CONTRATANTE tem ciência e concorda expressamente que os livros de consulta ou acervo de reserva não podem ser
     retirados da Biblioteca, e servem, exclusivamente, para consultas no local. Em caso de descumprimento do presente,
     fica o CONTRATANTE obrigado ao pagamento de uma multa diária na forma do Anexo II deste instrumento.
 </div>
 
 <div class="termos">
-    62º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciência e concorda expressamente que a CONTRATADA não
+    63º Da exclusão de responsabilidade – O CONTRATANTE (Aluno) tem ciência e concorda expressamente que a CONTRATADA não
     tem nenhum tipo de responsabilidade por objetos de uso pessoal, a exemplo de celulares, jóias, relógios, câmeras fotográficas,
     laptops, notebooks, ipods e outros adornos e ou acessórios pertencentes ao CONTRATANTE e que seu uso dentro ou fora das
     instalações da CONTRATADA, é de sua inteira e total responsabilidade.
 </div>
 
 <div class="termos">
-    63º Para acesso às instalações da CONTRATADA, o Aluno deverá comprovar a sua condição. Para tanto, deverá apresentar
+    64º Para acesso às instalações da CONTRATADA, o Aluno deverá comprovar a sua condição. Para tanto, deverá apresentar
     comprovante de vínculo com a IES e ou outro meio de identificação definido pela CONTRATADA.
 </div>
 
 <div class="termos">
-    64º O não comparecimento do Aluno aos atos escolares ora contratados ou à apresentação de documentos não o exime do
+    65º O não comparecimento do Aluno aos atos escolares ora contratados ou à apresentação de documentos não o exime do
     pagamento das parcelas, tendo em vista a oferta do serviço colocado à sua disposição pela CONTRATADA.
 </div>
 
@@ -678,13 +678,13 @@ CONSIDERANDO que:<br>
 </div>--}}
 
 <div class="termos">
-    65º Das necessidades especiais – Na hipótese do Aluno ser portador de necessidades especiais, nos termos dos artigos
+    66º Das necessidades especiais – Na hipótese do Aluno ser portador de necessidades especiais, nos termos dos artigos
     58 e 59 da lei 9.394/96, obriga-se o CONTRATANTE a informar expressamente e por escrito essa condição específica à
     CONTRATADA no ato da assinatura do presente Contrato.
 </div>
 
 <div class="termos">
-    66º A prestação dos serviços adicionais à pessoa portadora de necessidades especiais e/ou deficiente, será prestada de
+    67º A prestação dos serviços adicionais à pessoa portadora de necessidades especiais e/ou deficiente, será prestada de
     acordo com os seus interesses e efetiva verificação da necessidade. Caso o CONTRATANTE (Aluno), venha a se tornar portador
     de necessidades especiais, no decorrer do semestre letivo, obriga-se ainda o CONTRATANTE não se responsabilizar pelo
     insuficiente desempenho do Aluno em razão da omissão do CONTRATANTE, a quem caberá toda a responsabilidade pela conduta
@@ -692,13 +692,13 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    67º A CONTRATADA não se responsabilizará pelo insuficiente desempenho do Aluno em razão de omissão do CONTRATANTE em
+    68º A CONTRATADA não se responsabilizará pelo insuficiente desempenho do Aluno em razão de omissão do CONTRATANTE em
     informar que o Aluno é portador de necessidades especiais, pois nesse caso, não haverá a prestação de serviço de
     atendimento individual e/ou especializado ao Aluno.
 </div>
 
 <div class="termos">
-    68º Obriga-se também o CONTRATANTE a informar, no ato da assinatura do presente Contrato, que o Aluno é portador de
+    69º Obriga-se também o CONTRATANTE a informar, no ato da assinatura do presente Contrato, que o Aluno é portador de
     doença e/ou deficiência que o impeça de praticar esportes ou atividades recreativas, ou, ainda, portador de alergias ou
     doenças que o impeçam de manipular certos materiais, principalmente nos cursos de saúde. Caso o CONTRATANTE não informe
     da doença e ou deficiência que impeça o Aluno de praticar esportes ou atividades recreativas, e/ou das alergias ou doenças
@@ -707,13 +707,13 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    69 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos sequenciais ofertados pela IES, são de complementação
+    70 – Dos Cursos Sequencias – O Contratante, tem ciência que os cursos sequenciais ofertados pela IES, são de complementação
     de estudos com destinação coletiva, sendo regulamentados pelo Ministério da Educação, de acordo com o Art. 44 da LDB:
     sendo que conforme regulamentação específica, não serão emitidos diplomas e sim certificados de conclusão.
 </div>
 
 <div class="termos">
-    70 – Dos espaços para estacionamento – Tem ciência o CONTRATANTE que a CONTRATADA não disponibiliza espaços gratuitos
+    71 – Dos espaços para estacionamento – Tem ciência o CONTRATANTE que a CONTRATADA não disponibiliza espaços gratuitos
     para estacionamento. É cientificado, ainda, ao CONTRATANTE, que todos os espaços para estacionamentos são administrados
     por empresas terceirizadas, e que, para essas empresas garantirem a integridade física dos veículos são obrigados a
     contratar mão de obra especializada e empresas de seguros, e para tanto as mesmas cobram pelo serviço prestado, ficando
@@ -721,7 +721,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    71 – O  CONTRATANTE fica desde já cientificado que não faz parte deste contrato o estacionamento eventualmente localizado
+    72 – O  CONTRATANTE fica desde já cientificado que não faz parte deste contrato o estacionamento eventualmente localizado
     no mesmo prédio da IES. Este serviço é oferecido e dirigido por empresa terceirizada, motivo pelo qual todo e qualquer
     assunto ou contrato relativo ao estacionamento deve ser tratado direta e necessariamente com a empresa terceirizada, da
     mesma forma que a IES não é responsável e não assumirá qualquer responsabilidade decorrente de eventuais danos, furtos,
@@ -729,7 +729,7 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    72 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que na hipótese de inclusão de disciplina, de qualquer
+    73 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que na hipótese de inclusão de disciplina, de qualquer
     natureza, além das previstas na grade curricular para o respectivo semestre letivo do curso ou no caso de inclusão, que
     resulte no aumento de disciplina em relação ao semestre anterior, caso o MEC (Ministério da Educação/Fundo Nacional de
     Desenvolvimento da Educação – FNDE), não aceite o acréscimo do valor dessa inclusão no financiamento (FIES), os encargos
@@ -739,14 +739,14 @@ CONSIDERANDO que:<br>
 </div>
 
 <div class="termos">
-    73 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que nos casos de ingresso do CONTRATANTE, na IES
+    74 – O CONTRATANTE fica ciente, e aceita neste ato expressamente, que nos casos de ingresso do CONTRATANTE, na IES
     CONTRATADA, por meio de transferência de outra IES, na hipótese de o – Ministério da Educação / Fundo Nacional de
     Desenvolvimento da Educação – FNDE – não autorizar o valor do aditamento de transferência do Financiamento Estudantil em
     sua integridade, a diferença dos encargos financeiros será de inteira responsabilidade do CONTRATANTE.
 </div>
 
 <div class="termos">
-    74 – Pactuação Facultativa de Compromisso Arbitral nos Termos da Lei 9.307/96, subscrita por iniciativa do contratante:
+    75 – Pactuação Facultativa de Compromisso Arbitral nos Termos da Lei 9.307/96, subscrita por iniciativa do contratante:
     fica de logo estabelecido, em caráter definitivo, que qualquer litígio originário ou relacionado com o presente contrato,
     e com as renovações semestrais da prestação de serviços educacionais, será definitivamente resolvido por arbitragem,
     de acordo com o regulamento de arbitragem de qualquer tribunal arbitral com sede no mesmo município onde seja realizada
@@ -759,7 +759,7 @@ CONSIDERANDO que:<br>
     CONTRATANTE	CONTRATADA
 </div>
 
-80 – QUALIFICAÇÃO CONTRATANTE E ALUNO<br>
+76 – QUALIFICAÇÃO CONTRATANTE E ALUNO<br>
 
 <div class="termos">
     Declaração do CONTRATANTE, em observância ao disposto no Art. 46, da Lei 8.078/90, declara expressamente o CONTRATANTE
