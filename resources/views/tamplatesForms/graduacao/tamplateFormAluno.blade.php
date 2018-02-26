@@ -427,17 +427,17 @@
                             </div>
 
                             <div class="form-group col-md-2">
-                                {!! Form::label('pessoas[ano_conclusao_medio]', 'Ano Conclusão') !!}
-                                {!! Form::text('pessoas[ano_conclusao_medio]', Session::getOldInput('pessoas[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[ano_conclusao_medio]', 'Ano Conclusão') !!}
+                                {!! Form::text('pessoa[ano_conclusao_medio]', Session::getOldInput('pessoa[ano_conclusao_medio]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
-                                {!! Form::label('pessoas[outra_escola]', 'Outra Instituição') !!}
-                                {!! Form::text('pessoas[outra_escola]', Session::getOldInput('pessoas[outra_escola]'), array('class' => 'form-control')) !!}
+                                {!! Form::label('pessoa[outra_escola]', 'Outra Instituição') !!}
+                                {!! Form::text('pessoa[outra_escola]', Session::getOldInput('pessoa[outra_escola]'), array('class' => 'form-control')) !!}
                             </div>
                         </div>
-                    </div>
+                    </div>  07394488462
                 </div>
             </div>
 
@@ -477,14 +477,6 @@
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
-                        <!-- Histórico Graduação Autenticado -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[histo_gradu_autentic_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[histo_gradu_autentic_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[histo_gradu_autentic_obrigatorio]', 'Histórico Graduação Autenticado', false) !!}
-                        </div>
-                        <!-- Fim Histórico Graduação Autenticado -->
-
                     </div>
                     {{--Fim da Primeria coluna--}}
 
@@ -495,15 +487,7 @@
                         <div class="checkbox checkbox-primary">
                             {!! Form::hidden('pessoa[reservista_doc_obrigatorio]', 0) !!}
                             {!! Form::checkbox('pessoa[reservista_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alaistamento militar ou reservista', false) !!}
-                        </div>
-                        <!-- Fim Título de Eleitor e último comprovante de votação -->
-
-                        <!-- Título de Eleitor e último comprovante de votação -->
-                        <div class="checkbox checkbox-primary">
-                            {!! Form::hidden('pessoa[diploma_doc_obrigatorio]', 0) !!}
-                            {!! Form::checkbox('pessoa[diploma_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
-                            {!! Form::label('pessoa[diploma_doc_obrigatorio]', 'Diploma de graduação (cópia autenticada) ou certidão de conclusão com comprovante de entrada na tramitação do diploma', false) !!}
+                            {!! Form::label('pessoa[reservista_doc_obrigatorio]', 'Atestado de alistamento militar ou reservista', false) !!}
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
@@ -525,6 +509,13 @@
                         </div>
                         <!-- Fim Título de Eleitor e último comprovante de votação -->
 
+                        <!-- Histórico Graduação Autenticado -->
+                        <div class="checkbox checkbox-primary">
+                            {!! Form::hidden('pessoa[fixa19_doc_obrigatorio]', 0) !!}
+                            {!! Form::checkbox('pessoa[fixa19_doc_obrigatorio]', 1, null, array('class' => 'form-control')) !!}
+                            {!! Form::label('pessoa[fixa19_doc_obrigatorio]', 'Fixa 19 Original', false) !!}
+                        </div>
+                        <!-- Fim Histórico Graduação Autenticado -->
                     </div>
                     {{--Fim da Segunda coluna--}}
                 </div>
