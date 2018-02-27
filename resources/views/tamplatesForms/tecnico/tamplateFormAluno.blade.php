@@ -125,12 +125,12 @@
                                     {!! Form::select('pessoa[grau_instrucoes_id]', $loadFields['grauinstrucao'], Session::getOldInput('pessoa[grau_instrucoes_id]'),array('class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="form-group col-md-2 col-sm-2">
+                            {{--<div class="form-group col-md-2 col-sm-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[profissoes_id]', 'Profissão ') !!}
                                     {!! Form::select('pessoa[profissoes_id]', (['' => 'Selecione uma Profissão'] + $loadFields['profissao']->toArray()), Session::getOldInput('pessoa[profissoes_id]'),array('class' => 'form-control')) !!}
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="form-group col-md-2">
                                 <div class="fg-line">
                                     {!! Form::label('pessoa[cores_racas_id]', 'Cor/Raça') !!}

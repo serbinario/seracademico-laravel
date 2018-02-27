@@ -56,13 +56,13 @@ class Curso extends Model implements Transformable
         'coordenador_id'
     ];
 
-//    /*
-//     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-//     */
-//    public function curriculos()
-//    {
-//        return $this->hasMany(Curriculo::class);
-//    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function curriculos()
+    {
+        return $this->hasMany(Curriculo::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
