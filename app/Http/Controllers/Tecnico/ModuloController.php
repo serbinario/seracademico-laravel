@@ -72,11 +72,12 @@ class ModuloController extends Controller
             #Executando a ação
             $this->service->store($data);
 
-            #retorno sucesso
-            return response()->json(['success' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Cadastro realizado com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
-            #retorno falido
-            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
@@ -106,10 +107,10 @@ class ModuloController extends Controller
             $html .= '<div class="fixed-action-btn horizontal">
                         <a class="btn-floating btn-main"><i class="large material-icons">dehaze</i></a><ul>';
 
-            $html .= '<li><a class="btn-floating editar-modulo" href="#" title="Editar Módulo"><i class="material-icons">edit</i></a></li>';
+            $html .= '<li><a class="btn-floating" href="edit/'.$row->id.'" title="Editar módulo"><i class="material-icons">edit</i></a></li>';
 
             if(count($modulo->disciplinas) <= 0 ) {
-                $html .= '<li><a class="btn-floating delete-modulo" href="#" title="Deletar Módulo"><i class="material-icons">delete</i></a></li>';
+                $html .= '<li><a class="btn-floating" href="delete/'.$row->id.'" title="Excluir módulo"><i class="material-icons">delete</i></a></li>';
             }
 
 
@@ -131,11 +132,12 @@ class ModuloController extends Controller
             #Recuperando a empresa
             $model = $this->service->find($id);
 
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json(['success' => true, 'content' => $model]);
+            #retorno para view
+            return view('tecnico.modulo.edit', compact('model', 'loadFields'));
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['success' => false, 'content' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
+
     }
 
     /**
@@ -154,11 +156,12 @@ class ModuloController extends Controller
             #Executando a ação
             $this->service->update($data, $id);
 
-            #retorno sucesso
-            return response()->json(['success' => true, 'msg' => "Disciplinas adicionadas com sucesso!"]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Alteração realizada com sucesso!");
+        } catch (ValidatorException $e) {
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         } catch (\Throwable $e) {
-            #retorno falido
-            return response()->json(['sucess' => false, 'msg' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 
@@ -175,10 +178,10 @@ class ModuloController extends Controller
             #Executando a ação
             $this->service->destroy($id);
 
-            # Retorno
-            return \Illuminate\Support\Facades\Response::json(['msg' => true]);
+            #Retorno para a view
+            return redirect()->back()->with("message", "Remoção realizada com sucesso!");
         } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json(['msg' => $e->getMessage()]);
+            return redirect()->back()->with('message', $e->getMessage());
         }
     }
 

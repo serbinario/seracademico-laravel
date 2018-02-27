@@ -292,7 +292,7 @@ CONSIDERANDO que:<br>
     18º. Embora assinado o presente Contrato e atendidos os aspectos formais de sua constituição, o início da sua vigência
     fica subordinado à aprovação do aluno no processo seletivo e ao pagamento do valor da matrícula, de modo que, se o aluno
     NÃO vier a ser aprovado no processo seletivo ou o CONTRATANTE NÃO efetue o pagamento da matrícula, a presente avença NÃO
-    cria qualquer obrigação para a CONTRATADA, nem gera, sequer, expectativa de direito para o CONTRTANTE, NÃO produzindo pois,
+    cria qualquer obrigação para a CONTRATADA, nem gera, sequer, expectativa de direito para o CONTRATANTE, NÃO produzindo pois,
     qualquer efeito, sendo tido como inexistente.
 </div>
 
