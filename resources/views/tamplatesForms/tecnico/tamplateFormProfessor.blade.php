@@ -196,7 +196,8 @@
                                                     {!! Form::text('pessoa[empresa_nome]', Session::getOldInput('pessoa[empresa_nome]'), array('class' => 'form-control')) !!}
                                                 @endif
                                             </div>
-                                            <div class="form-group col-md-4">
+
+					    <div class="form-group col-md-4">
                                                 @if(isset($model->pessoa->curriculo_latter))
                                                     <br />
                                                     {!! Form::label('pessoa[curriculo_latter]', 'Link Currículo Latters') !!}
