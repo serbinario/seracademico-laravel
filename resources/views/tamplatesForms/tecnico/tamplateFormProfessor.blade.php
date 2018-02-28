@@ -118,7 +118,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                {!! Form::label('pessoa[nacionalidade]', 'Nascionalidade') !!}
+                                {!! Form::label('pessoa[nacionalidade]', 'Nacionalidade') !!}
                                 {!! Form::text('pessoa[nacionalidade]', Session::getOldInput('nacionalidade')  , array('class' => 'form-control')) !!}
                             </div>
                             <div class="form-group col-md-3">
