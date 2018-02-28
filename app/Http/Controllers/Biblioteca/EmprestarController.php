@@ -530,7 +530,10 @@ class EmprestarController extends Controller
             }
 
             #Retorno para a view
-            return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
+
+            return \PDF::loadView('biblioteca.controle.emprestimo.cupomEmprestimo',
+                compact('result'))->stream();
+            //return view('biblioteca.controle.emprestimo.cupomEmprestimo', compact('result'));
         } catch (\Throwable $e) {
             return redirect()->back()->with('message', $e->getMessage());
         }
