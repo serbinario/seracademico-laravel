@@ -84,12 +84,12 @@
 </head>
 
 <body>
-<div id="header">
+{{--<div id="header">
     <img style="margin-left: 5%" width="100" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo">
     <img width="100" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">
     <img style="margin-top: 1.3%" width="90" height="90" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">
     <img style="margin-top: 2%" width="150" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo">
-</div>
+</div>--}}
 
 <!-- Lógica do período-->
 <?php
