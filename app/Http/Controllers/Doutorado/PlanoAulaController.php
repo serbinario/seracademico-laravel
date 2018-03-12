@@ -1,6 +1,6 @@
 <?php
 
-namespace Seracademico\Http\Controllers\Mestrado;
+namespace Seracademico\Http\Controllers\Doutorado;
 
 use Illuminate\Http\Request;
 use Seracademico\Http\Controllers\Controller;
