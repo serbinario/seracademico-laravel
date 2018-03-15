@@ -75,6 +75,8 @@
 
 <div class="cabecalho">
     <img id="imagem-logo" src="{{ asset('img/contrato-mestrado/image5.jpg') }}" alt="Logo">
+
+    
     {{--<h1>
         <img width="130" src="{{ asset('img/vinculo-mestrado/image1.png') }}" alt="unigrendal">
     </h1>--}}
