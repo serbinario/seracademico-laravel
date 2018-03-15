@@ -34,24 +34,26 @@
             padding: 1%;
         }
 
-        #imagem-um {
+      /*  #imagem-um {
             width: 90px;
             margin-left: 7%;
         }
+*/
+       /*  #imagem-dois {
+           width: 70px;
+           margin-left: 13%;
+       } */
 
-        #imagem-dois {
-            width: 70px;
-            margin-left: 13%;
-        }
-
-        #imagem-tres {
+    /*    #imagem-tres {
             width: 60px;
             margin-left: 13%;
-        }
+        }*/
 
-        #imagem-quatro {
-            width: 155px;
-            margin-left: 13%;
+        #imagem-logo {
+            width:30%; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         #header h1 {
@@ -90,10 +92,12 @@
 <body>
 
 <div id="header">
-    <img id="imagem-um" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo">
-   {{-- <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">--}}
-    {{--<img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">--}}
-    <img id="imagem-quatro" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo">
+    <br>
+    <img id="imagem-logo" src="{{ asset('img/contrato-mestrado/image5.jpg') }}" alt="Logo">
+<!-- <img id="imagem-um" src="{{ asset('img/contrato-mestrado/image4.png') }}" alt="Logo"> -->
+ <!--  {{-- <img id="imagem-tres" src="{{ asset('img/contrato-mestrado/image2.jpeg') }}" alt="Logo">--}}
+  {{--<img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">--}}
+  <img id="imagem-quatro" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo"> -->
 
     <h1>FICHA DE INSCRIÇÃO MESTRADO</h1>
 </div>
