@@ -301,7 +301,9 @@ class AlunoTurmaService
             if ($ajax) {
                 if(count($expressao) > 0) {
                     switch (count($expressao)) {
+
                         case 1 :
+                            //dd("count($nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo'])");
                             #Recuperando o registro e armazenando no array
                             $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
                             break;

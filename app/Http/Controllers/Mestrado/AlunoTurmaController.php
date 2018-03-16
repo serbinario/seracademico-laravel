@@ -188,6 +188,7 @@ class AlunoTurmaController extends Controller
     public function getLoadFields(Request $request)
     {
         try {
+
             return $this->service->load($request->get("models"), true);
         } catch (\Throwable $e) {
             return \Illuminate\Support\Facades\Response::json([

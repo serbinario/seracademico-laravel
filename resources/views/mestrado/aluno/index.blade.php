@@ -311,7 +311,11 @@
         });
 
 
-        // Evento para abrir o modal de cursos/turmas
+        /*
+        Evento para abrir o modal de Documentos
+        Depende: modal_aluno_documento.js
+                 modal_aluno_documento.blade.php
+        */
         $(document).on("click", "#aluno_documentos", function () {
             idAluno = table.row($(this).parents('tr')).data().id;
 

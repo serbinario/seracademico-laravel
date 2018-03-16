@@ -65,6 +65,8 @@ class AlunoDocumentoController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * Passa os parametros $tipoDoc que e o id do tipo documento, exemplo Mestrado
+     * e o id do aluno
      */
     public function gerarDocumento($tipoDoc, $idAluno)
     {
@@ -102,6 +104,10 @@ class AlunoDocumentoController extends Controller
                 case "24" :
                     $result = $this->gradeCurricular($idAluno);
                     $nameView = "reports.grade_curricular_mestrado";
+                    break;
+                case "28" :
+                    $result = $this->aditamento($idAluno);
+                    $nameView = "reports.aditamento_mestrado";
                     break;
             }
 
@@ -380,5 +386,21 @@ class AlunoDocumentoController extends Controller
             ->where('fac_curriculo_disciplina.disciplina_id', $idDisciplina)
             ->where('fac_curriculo_disciplina.curriculo_id', $idCurriculo)
             ->lists('carga_horaria_total');
+    }
+
+    private function aditamento($id)
+    {
+        # Recuperando os dados padrões para esse documento
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+
+        # Validação de dados necessários para geração desse documento
+        if (!$result['turma']->aula_inicio || !$result['turma']->aula_final || !$result['turma']->qtd_parcelas ||
+            !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
+            throw new \Exception("Para gerar o contrato é necessário ter
+                        as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+        }
+
+        # retorno dos dados
+        return $result;
     }
 }
