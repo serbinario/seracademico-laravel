@@ -156,7 +156,7 @@
                 <td>Local Nasc: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
             </tr>
             <tr>
-                <td colspan="4">Curso: </td>
+                <td colspan="4">Curso: {{ isset($curso->nome) ? $curso->nome : ""  }}</td>
             </tr>
         </table>
     </div>
@@ -344,19 +344,6 @@
         As partes escolhem como domicílio forense a cidade do Recife, para dirimir quaisquer conflitos extrajudiciais ou judiciais.
 
     </p>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
