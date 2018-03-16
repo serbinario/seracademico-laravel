@@ -302,7 +302,7 @@
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Setimo:</b> [Sem alteraçoes]
+        <b>Parágrafo Sétimo:</b> [Sem alteraçoes]
     </p>
 
     <p class="titulo_paragrafo">
@@ -310,7 +310,7 @@
     </p>
 
     <p class="titulo_paragrafo">
-        Cláusula Setima: [sem alterações].
+        Cláusula Sétima: [sem alterações].
     </p>
 
     <p class="subparagrafo">
@@ -326,7 +326,7 @@
     </p>
 
     <p class="titulo_paragrafo">
-        Cláusula Setima: [sem alterações].
+        Cláusula Sétima: [sem alterações].
     </p>
     <p class="paragrafo">
     A emissão dos diplomas internacionais ocorrerá em até 150 (cento e cinquenta) dias úteis e o prazo para entrega do
