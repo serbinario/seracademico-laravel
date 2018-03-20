@@ -127,10 +127,6 @@ class AlunoDocumentoController extends Controller
                 case "10" :
                     $result = $this->historico($idAluno);
                     $nameView = "reports.historico_fasup";
-                case "29" :
-                    $result = $this->contrato($idAluno);
-                    $nameView = "reports.stritoSenso_pos_graduacao";
-
 
                     # Recuperando o serviço de pdf / dompdf
                     $PDF = App::make('dompdf.wrapper');

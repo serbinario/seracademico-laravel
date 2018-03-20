@@ -110,6 +110,9 @@ class AlunoDocumentoController extends Controller
                     $nameView = "reports.aditamento_mestrado";
                     break;
             }
+               case "29" :
+                    $result = $this->contrato($idAluno);
+                    $nameView = "reports.stritoSenso_pos_graduacao";
 
             # Verificando foi vinculado a um curso e turma
             if (!$result['curso'] && !$result['turma']) {
