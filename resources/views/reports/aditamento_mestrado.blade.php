@@ -50,6 +50,7 @@
             margin-left: 2%;
         }
         .paragrafo {
+            margin-top: 20px;
             text-indent: 3em;
         }
         .uppercase {
@@ -59,6 +60,7 @@
             text-align: justify;
         }
         .subparagrafo {
+            margin-top: 20px;
             text-align: justify;
             margin-left: 10%;
             width: 90%;
@@ -361,7 +363,7 @@
                 </table>
 
                 <table style="">
-                    <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
+                    <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado_novo_cnpj.png') }}" alt=""></td></tr>
                 </table>
             </h1>
         </div>
