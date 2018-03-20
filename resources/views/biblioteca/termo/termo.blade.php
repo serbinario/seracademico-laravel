@@ -161,7 +161,7 @@
     são para consulta exclusiva na biblioteca (consulta especial);</b><br />
     2)	A consulta especial é aquela da qual o usuário só poderá consultar o livro na Biblioteca ou áreas da Faculdade,
     tendo o compromisso de devolver o livro antes que encerre o expediente,
-    ou então terá que pagar uma multa de <b>R$ 10,00 (vinte reais) p/ dia e p/ livro.</b>
+    ou então terá que pagar uma multa de <b>R$ 10,00 (dez reais) p/ dia e p/ livro.</b>
 </p>
 
 <h5><b>MULTA</b></h5>
