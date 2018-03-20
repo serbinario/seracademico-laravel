@@ -35,23 +35,23 @@ class AlunoDocumentoController extends Controller
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
                 case "5" :
-                    $this->contrato($idAluno);
-                    break;
+                $this->contrato($idAluno);
+                break;
                 case "6" :
-                    $this->declaracaoVinculo($idAluno);
-                    break;
+                $this->declaracaoVinculo($idAluno);
+                break;
                 case "7" :
-                    $this->declaracaoAfastamento($idAluno);
-                    break;
+                $this->declaracaoAfastamento($idAluno);
+                break;
                 case "8" :
-                    $this->inscricao($idAluno);
-                    break;
+                $this->inscricao($idAluno);
+                break;
                 case "11" :
-                    $this->historico($idAluno);
-                    break;
+                $this->historico($idAluno);
+                break;
                 case "24" :
-                    $this->gradeCurricular($idAluno);
-                    break;
+                $this->gradeCurricular($idAluno);
+                break;
             }
 
             # Retorno
@@ -82,37 +82,37 @@ class AlunoDocumentoController extends Controller
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
                 case "5" :
-                    $result = $this->contrato($idAluno);
-                    $nameView = "reports.contrato_mestrado";
-                    break;
+                $result = $this->contrato($idAluno);
+                $nameView = "reports.contrato_mestrado";
+                break;
                 case "6" :
-                    $result = $this->declaracaoVinculo($idAluno);
-                    $nameView = "reports.declaracao_vinculo_mestrado";
-                    break;
+                $result = $this->declaracaoVinculo($idAluno);
+                $nameView = "reports.declaracao_vinculo_mestrado";
+                break;
                 case "7" :
-                    $result = $this->declaracaoAfastamento($idAluno);
-                    $nameView = "reports.declaracao_afastamento_mestrado";
-                    break;
+                $result = $this->declaracaoAfastamento($idAluno);
+                $nameView = "reports.declaracao_afastamento_mestrado";
+                break;
                 case "8" :
-                    $result = $this->inscricao($idAluno);
-                    $nameView = "reports.inscricao_mestrado";
-                    break;
+                $result = $this->inscricao($idAluno);
+                $nameView = "reports.inscricao_mestrado";
+                break;
                 case "11" :
-                    $result = $this->historico($idAluno);
-                    $nameView = "reports.historico_mestrado";
-                    break;
+                $result = $this->historico($idAluno);
+                $nameView = "reports.historico_mestrado";
+                break;
                 case "24" :
-                    $result = $this->gradeCurricular($idAluno);
-                    $nameView = "reports.grade_curricular_mestrado";
-                    break;
+                $result = $this->gradeCurricular($idAluno);
+                $nameView = "reports.grade_curricular_mestrado";
+                break;
                 case "28" :
-                    $result = $this->aditamento($idAluno);
-                    $nameView = "reports.aditamento_mestrado";
-                    break;
+                $result = $this->aditamento($idAluno);
+                $nameView = "reports.aditamento_mestrado";
+                break;
+                case "29" :
+                $result = $this->contrato($idAluno);
+                $nameView = "reports.stritoSenso_pos_graduacao";
             }
-               case "29" :
-                    $result = $this->contrato($idAluno);
-                    $nameView = "reports.stritoSenso_pos_graduacao";
 
             # Verificando foi vinculado a um curso e turma
             if (!$result['curso'] && !$result['turma']) {
@@ -140,12 +140,12 @@ class AlunoDocumentoController extends Controller
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final || !$result['turma']->qtd_parcelas ||
             !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
             throw new \Exception("Para gerar o contrato é necessário ter
-                        as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
-        }
+                as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+    }
 
         # retorno dos dados
-        return $result;
-    }
+    return $result;
+}
 
     /**
      * @param $id
@@ -160,7 +160,7 @@ class AlunoDocumentoController extends Controller
         # Verificando se o aluno possui as informações necessárias
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
             throw new \Exception("Para gerar o contrato é necessário ter as seguintes
-                     informações em turmas: aula inicial e aula final");
+               informações em turmas: aula inicial e aula final");
         }
 
         # retorno dos dados
@@ -180,7 +180,7 @@ class AlunoDocumentoController extends Controller
         # Verificando se o aluno possui as informações necessárias
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
             throw new \Exception("Para gerar o contrato é necessário ter as seguintes
-                     informações em turmas: aula inicial e aula final");
+               informações em turmas: aula inicial e aula final");
         }
 
         # retorno dos dados
@@ -200,7 +200,7 @@ class AlunoDocumentoController extends Controller
         # Verificando se o aluno possui as informações necessárias
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
             throw new \Exception("Para gerar o contrato é necessário ter as seguintes
-                     informações em turmas: aula inicial e aula final");
+               informações em turmas: aula inicial e aula final");
         }
 
         # retorno dos dados
@@ -219,11 +219,11 @@ class AlunoDocumentoController extends Controller
 
         # Recuperando as notas do aluno
         $notasDoAluno = $result['aluno']->curriculos->last()
-            ->pivot->turmas->last()
-            ->pivot->notas()
-            ->with('disciplina', 'turma', 'frequencias.calendario.professor.pessoa',
-                'frequencias.calendario.professor.titulacao')
-            ->get();
+        ->pivot->turmas->last()
+        ->pivot->notas()
+        ->with('disciplina', 'turma', 'frequencias.calendario.professor.pessoa',
+            'frequencias.calendario.professor.titulacao')
+        ->get();
 
         #Adicionando as notas ao array de resultado
         $result['notas'] = $notasDoAluno->toArray();
@@ -236,8 +236,8 @@ class AlunoDocumentoController extends Controller
             );
 
             $nota['disciplina']['carga_horaria_total'] = count($carga_horaria_curriculo) > 0
-                ? $carga_horaria_curriculo[0]
-                : $nota['disciplina']['carga_horaria'];
+            ? $carga_horaria_curriculo[0]
+            : $nota['disciplina']['carga_horaria'];
 
             $nota['disciplina']['professor'] = $nota['frequencias'][0]['calendario']['professor']['pessoa']['nome'] ?? "";
             $nota['disciplina']['data'] = $nota['frequencias'][0]['calendario']['data_final'] ?? "";
@@ -247,7 +247,7 @@ class AlunoDocumentoController extends Controller
         # Verificando se o aluno possui as informações necessárias
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
             throw new \Exception("Para gerar o contrato é necessário ter as seguintes
-                     informações em turmas: aula inicial e aula final");
+               informações em turmas: aula inicial e aula final");
         }
 
         # retorno dos dados
@@ -271,11 +271,11 @@ class AlunoDocumentoController extends Controller
         /*if (!$result['turma']->aula_inicio || !$result['turma']->aula_final) {
             throw new \Exception("Para gerar o contrato é necessário ter as seguintes
                      informações em turmas: aula inicial e aula final");
-        }*/
+                 }*/
 
         # retorno dos dados
-        return $result;
-    }
+                 return $result;
+             }
 
     /**
      *
@@ -283,18 +283,18 @@ class AlunoDocumentoController extends Controller
     public function getDadosGradeCurricular($id)
     {
         $query = \DB::table('fac_curriculos')
-            ->join('fac_curriculo_disciplina', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
-            ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_curriculo_disciplina.disciplina_id')
-            ->join('pos_alunos_cursos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
-            ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
-            ->select([
-                'fac_curriculos.id',
-                'fac_curriculos.codigo',
-                'fac_disciplinas.nome',
-                'fac_disciplinas.carga_horaria'
-            ])
-            ->where('pos_alunos.id', $id)
-            ->get();
+        ->join('fac_curriculo_disciplina', 'fac_curriculos.id', '=', 'fac_curriculo_disciplina.curriculo_id')
+        ->join('fac_disciplinas', 'fac_disciplinas.id', '=', 'fac_curriculo_disciplina.disciplina_id')
+        ->join('pos_alunos_cursos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+        ->join('pos_alunos', 'pos_alunos.id', '=', 'pos_alunos_cursos.aluno_id')
+        ->select([
+            'fac_curriculos.id',
+            'fac_curriculos.codigo',
+            'fac_disciplinas.nome',
+            'fac_disciplinas.carga_horaria'
+        ])
+        ->where('pos_alunos.id', $id)
+        ->get();
 
         return $query;
     }
@@ -345,18 +345,18 @@ class AlunoDocumentoController extends Controller
     private function getCursoAtivoDoAluno($idAluno)
     {
        # Retorno o resultado da consulta
-       return  \DB::table('pos_alunos_cursos')
-            ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('pos_alunos_cursos.aluno_id', '=', $idAluno)
-            ->orderBy('pos_alunos_cursos.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_curriculos.*',
-                'fac_cursos.*',
-                'pos_alunos_cursos.id as idCurso'
-            ])->first();
-    }
+     return  \DB::table('pos_alunos_cursos')
+     ->join('fac_curriculos', 'pos_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+     ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+     ->where('pos_alunos_cursos.aluno_id', '=', $idAluno)
+     ->orderBy('pos_alunos_cursos.id', 'DESC')
+     ->limit(1)
+     ->select([
+        'fac_curriculos.*',
+        'fac_cursos.*',
+        'pos_alunos_cursos.id as idCurso'
+    ])->first();
+ }
 
     /**
      * @param $idCurso
@@ -369,13 +369,13 @@ class AlunoDocumentoController extends Controller
     {
         #Retorna o resultado da consulta
         return \DB::table('pos_alunos_turmas')
-            ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-            ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $idCurso)
-            ->orderBy('pos_alunos_turmas.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_turmas.*'
-            ])->first();
+        ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+        ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $idCurso)
+        ->orderBy('pos_alunos_turmas.id', 'DESC')
+        ->limit(1)
+        ->select([
+            'fac_turmas.*'
+        ])->first();
     }
 
     /**
@@ -386,9 +386,9 @@ class AlunoDocumentoController extends Controller
     private function getCargaHorariaDoCurriculo($idDisciplina, $idCurriculo)
     {
         return \DB::table('fac_curriculo_disciplina')
-            ->where('fac_curriculo_disciplina.disciplina_id', $idDisciplina)
-            ->where('fac_curriculo_disciplina.curriculo_id', $idCurriculo)
-            ->lists('carga_horaria_total');
+        ->where('fac_curriculo_disciplina.disciplina_id', $idDisciplina)
+        ->where('fac_curriculo_disciplina.curriculo_id', $idCurriculo)
+        ->lists('carga_horaria_total');
     }
 
     private function aditamento($id)
@@ -400,10 +400,10 @@ class AlunoDocumentoController extends Controller
         if (!$result['turma']->aula_inicio || !$result['turma']->aula_final || !$result['turma']->qtd_parcelas ||
             !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
             throw new \Exception("Para gerar o contrato é necessário ter
-                        as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
-        }
+                as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
+    }
 
         # retorno dos dados
-        return $result;
-    }
+    return $result;
+}
 }
