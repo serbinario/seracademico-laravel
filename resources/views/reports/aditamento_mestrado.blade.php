@@ -100,7 +100,7 @@
     </p>
 </div>
 
-<div class="conteudo">]
+<div class="conteudo">
     <br>
     <p>
         O presente ADITAMENTO refere-se ao contrato já firmado entre as partes abaixo qualificadas, denominado de
@@ -164,7 +164,7 @@
         </table>
     </div>
 
-    <p>
+    <br><p>
         <b>CLÁUSULA PRIMEIRA - DO OBJETO DO PRESENTE ADITAMENTO</b>
     </p><br>
 
