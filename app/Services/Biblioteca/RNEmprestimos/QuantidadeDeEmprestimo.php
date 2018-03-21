@@ -37,6 +37,7 @@ class QuantidadeDeEmprestimo
         $validarQtdEmprestimo = \DB::table('bib_emprestimos')
             ->join('bib_emprestimos_exemplares', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
             ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+            ->where('bib_emprestimos.status_devolucao', '=', '0')
             ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
             ->where('bib_exemplares.situacao_id', '=', '5')
             ->groupBy('bib_emprestimos.pessoas_id')
