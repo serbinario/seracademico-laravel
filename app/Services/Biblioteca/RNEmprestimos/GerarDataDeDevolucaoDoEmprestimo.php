@@ -68,8 +68,7 @@ class GerarDataDeDevolucaoDoEmprestimo
                 ->select('data_feriado')->first();
 
             // Validando o retorno da consulta e se a data para empréstimo não será para ser entregue no mesmo dia
-            if(($validarDataPorDiaLetivoEmprestimo || $validarDataPorDiaLetivo) && $dados['tipo_emprestimo'] == '1' && $emprestimoEspecial == '0'
-               && ($tipoPessoa == '1' || $tipoPessoa == '4')) {
+            if(($validarDataPorDiaLetivoEmprestimo || $validarDataPorDiaLetivo) && $dados['tipo_emprestimo'] == '1' && $emprestimoEspecial == '0') {
 
                 $dia = $dia + 1;
                 #Gerando uma nova data para devolução
