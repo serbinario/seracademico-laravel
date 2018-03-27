@@ -5,6 +5,7 @@ namespace Seracademico\Http\Controllers\Graduacao;
 use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Services\Graduacao\Documento\DocumentoHelper;
+use Seracademico\Repositories\ItemParametroRepository;
 
 class AlunoDocumentoController extends Controller
 {
@@ -18,15 +19,20 @@ class AlunoDocumentoController extends Controller
      */
     private $documentoHelper;
 
+    private $itensRepository;
+
     /**
      * AlunoDocumentoController constructor.
      * @param AlunoService $service
      * @param DocumentoHelper $documentoHelper
      */
-    public function __construct(AlunoService $service, DocumentoHelper $documentoHelper)
+    public function __construct(AlunoService $service, DocumentoHelper $documentoHelper,ItemParametroRepository $itensRepository)
     {
         $this->service = $service;
         $this->documentoHelper = $documentoHelper;
+        $this->itensRepository = $itensRepository;
+
+
     }
 
     /**
@@ -40,11 +46,11 @@ class AlunoDocumentoController extends Controller
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
                 case "26" :
-                    $this->contrato($idAluno);
-                    break;
+                $this->contrato($idAluno);
+                break;
                 case "27" :
-                    $this->declaracaoMatricula($idAluno);
-                    break;
+                $this->declaracaoMatricula($idAluno);
+                break;
             }
 
             # Retorno
@@ -73,13 +79,17 @@ class AlunoDocumentoController extends Controller
             # Escolhendo o tipo de documento
             switch ($tipoDoc) {
                 case "26" :
-                    $result = $this->contrato($idAluno);
-                    $nameView = "reports.contrato_graduacao";
-                    break;
+                $result = $this->contrato($idAluno);
+                $nameView = "reports.contrato_graduacao";
+                break;
                 case "27" :
-                    $result = $this->declaracaoMatricula($idAluno);
-                    $nameView = "reports.graduacao.declaracao_matricula";
-                    break;
+                $result = $this->declaracaoMatricula($idAluno);
+                $nameView = "reports.graduacao.declaracao_matricula";
+                break;
+                case "30" :
+                $result = $this->declaracaoAvaliacao($idAluno);
+                $nameView = "reports.graduacao.declaracao_Avaliacao";
+                break;
             }
 
             # Verificando foi vinculado a um curso e turma
@@ -109,16 +119,34 @@ class AlunoDocumentoController extends Controller
             !$result['turma']->duracao_meses || !$result['turma']->valor_turma) {
             throw new \Exception("Para gerar o contrato é necessário ter
                         as seguintes informações em turmas: aula inicial, aula final, quantidade de parcelas, duração de mêses e valor da turma");
-        }*/
+                    }*/
 
         # retorno dos dados
-        return $result;
-    }
+                    return $result;
+                }
 
     /**
      * @param $id
      * @return array
      */
+    public function declaracaoAvaliacao($id)
+    {
+        
+        /*dd($inicio,$fim);*/
+        $result = $this->getDadosPadraoParaGerarDocumento($id);
+        $aluno = $result['aluno'];
+        $pivotSemestre = $aluno->semestres()->get()->last()->pivot;
+        $result['semestre']['periodo'] = $pivotSemestre->periodo;
+        $result['turno'] = $aluno->turno;
+        $itensParametroInicio = $this->itensRepository->find(5);
+        $itensParametroFim = $this->itensRepository->find(6);
+        $result['inicio'] = $itensParametroInicio->valor;
+        $result['fim'] = $itensParametroFim->valor;
+
+
+/*dd($result);*/
+        return $result;
+    }
     public function declaracaoMatricula($id)
     {
         $result = $this->getDadosPadraoParaGerarDocumento($id);
@@ -177,16 +205,16 @@ class AlunoDocumentoController extends Controller
     {
         # Retorno o resultado da consulta
         return  \DB::table('fac_alunos_cursos')
-            ->join('fac_curriculos', 'fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
-            ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
-            ->where('fac_alunos_cursos.aluno_id', '=', $idAluno)
-            ->orderBy('fac_alunos_cursos.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_curriculos.*',
-                'fac_cursos.*',
-                'fac_alunos_cursos.id as idCurso'
-            ])->first();
+        ->join('fac_curriculos', 'fac_alunos_cursos.curriculo_id', '=', 'fac_curriculos.id')
+        ->join('fac_cursos', 'fac_curriculos.curso_id', '=', 'fac_cursos.id')
+        ->where('fac_alunos_cursos.aluno_id', '=', $idAluno)
+        ->orderBy('fac_alunos_cursos.id', 'DESC')
+        ->limit(1)
+        ->select([
+            'fac_curriculos.*',
+            'fac_cursos.*',
+            'fac_alunos_cursos.id as idCurso'
+        ])->first();
     }
 
     /**
@@ -200,12 +228,12 @@ class AlunoDocumentoController extends Controller
     {
         #Retorna o resultado da consulta
         return \DB::table('pos_alunos_turmas')
-            ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
-            ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $idCurso)
-            ->orderBy('pos_alunos_turmas.id', 'DESC')
-            ->limit(1)
-            ->select([
-                'fac_turmas.*'
-            ])->first();
+        ->join('fac_turmas', 'pos_alunos_turmas.turma_id', '=', 'fac_turmas.id')
+        ->where('pos_alunos_turmas.pos_aluno_curso_id', '=', $idCurso)
+        ->orderBy('pos_alunos_turmas.id', 'DESC')
+        ->limit(1)
+        ->select([
+            'fac_turmas.*'
+        ])->first();
     }
 }

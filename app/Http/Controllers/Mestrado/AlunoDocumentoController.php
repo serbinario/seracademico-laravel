@@ -111,7 +111,7 @@ class AlunoDocumentoController extends Controller
                 break;
                 case "29" :
                 $result = $this->contrato($idAluno);
-                $nameView = "reports.stritoSenso_pos_graduacao";
+                $nameView = "reports.stritoSenso_mestrado";
             }
 
             # Verificando foi vinculado a um curso e turma
