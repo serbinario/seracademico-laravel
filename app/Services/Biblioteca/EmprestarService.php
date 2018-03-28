@@ -200,7 +200,8 @@ class EmprestarService
         $date = new \DateTime('now');
         $dataFormat = $date->format('Y-m-d');
         $codigo = $date->format('YmdHis');
-        
+
+       // dd($codigo);
         $data['data'] = $dataFormat;
         $data['codigo'] = $codigo;
         $data['status'] = '0';
@@ -222,9 +223,9 @@ class EmprestarService
             //dd($data);
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         }
-        dd($data);
+        //dd($data);
         //Alterando a situação do emprestimo para emprestado
-        dd($data);
+        //dd($data);
         $exemplar = $this->repoExemplar->find($data['id']);
         $exemplar->situacao_id = '5';
 
@@ -245,12 +246,14 @@ class EmprestarService
      * @return mixed
      */
     public function renovacao($id) {
-        /*$this->devolucao($id);*/
+
+        $this->devolucao($id);
 
         $emprestimo = $this->repository->find($id);
 
-        
+
         $dataObj   = new \DateTime('now');
+
         $dia       = 0;
 
         # Pegas os parâmetros para saber a quantidade de dias de empréstimo por tipo de pessoa
@@ -298,33 +301,38 @@ class EmprestarService
         $dataAtual = new \DateTime('now');
         $dataFormat = $dataAtual->format('Y-m-d');        
 
-        unset($emprestimo['id']);
 
         $emprestimo->data_devolucao = $data;
         $emprestimo->data = $dataFormat;
         $data = [
-            'data'=>$emprestimo->data,
-            'codigo'=>$emprestimo->codigo,
-            'data_devolucao'=> $emprestimo->data_devolucao,
-            'pessoas_id'=>$emprestimo->pessoas_id,
-            'tipo_emprestimo'=>$emprestimo->tipo_emprestimo,
-            'status'=>'1',
-            'users_id'=>$emprestimo->users_id,
-            'status_devolucao'=>$emprestimo->status_devolucao,
-            'emprestimo_especial'=>$emprestimo->emprestimo_especial,
-            'tipo_pessoa'=>$emprestimo->tipo_pessoa,
-            'valor_multa'=> $emprestimo->valor_multa,
-            'status_pagamento'=>$emprestimo->status_pagamento
+            'data'              =>  $emprestimo->data,
+            'codigo'            =>  $dataObj->format('YmdHis'),
+            'data_devolucao'    =>  $emprestimo->data_devolucao,
+            'pessoas_id'        =>  $emprestimo->pessoas_id,
+            'tipo_emprestimo'   =>  $emprestimo->tipo_emprestimo,
+            'status'            =>  '1',
+            'users_id'          =>  $emprestimo->users_id,
+            'status_devolucao'  =>  $emprestimo->status_devolucao,
+            'emprestimo_especial'=> $emprestimo->emprestimo_especial,
+            'tipo_pessoa'       =>  $emprestimo->tipo_pessoa,
+            'valor_multa'       =>  $emprestimo->valor_multa,
+            'status_pagamento'  =>  $emprestimo->status_pagamento
         ];
 
-        $this->repository->create($data);
+        $emprestar = $this->repository->create($data);
+
+        $exemplares = $emprestimo->emprestimoExemplar;
+
+        foreach ($exemplares as $exemplar){
+            $emprestar->emprestimoExemplar()->attach([$exemplar->id]);
+        }
 
         /*$emprestimo->save();*/
-       
+
         /*$exemplar->save();*/
 
 
-        return $emprestimo;
+        return $emprestar;
     }
 
 
