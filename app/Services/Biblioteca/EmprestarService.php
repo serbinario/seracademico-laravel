@@ -247,11 +247,12 @@ class EmprestarService
      */
     public function renovacao($id) {
 
-        $this->devolucao($id);
+        // Passa o id do emprestimo e seta colo devolvido
+        //$this->devolucao($id);
 
         $emprestimo = $this->repository->find($id);
 
-
+       // dd($emprestimo);
         $dataObj   = new \DateTime('now');
 
         $dia       = 0;
@@ -304,6 +305,7 @@ class EmprestarService
 
         $emprestimo->data_devolucao = $data;
         $emprestimo->data = $dataFormat;
+
         $data = [
             'data'              =>  $emprestimo->data,
             'codigo'            =>  $dataObj->format('YmdHis'),
@@ -327,10 +329,85 @@ class EmprestarService
             $emprestar->emprestimoExemplar()->attach([$exemplar->id]);
         }
 
-        /*$emprestimo->save();*/
+        return $emprestar;
+    }
 
-        /*$exemplar->save();*/
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renovacao2($id) {
+
+        $emprestimo = $this->repository->find($id);
+        // Passa o id do emprestimo e seta colo devolvido
+        $this->devolucao($id);
+
+
+
+         //dd($emprestimo->toArray());
+        $dataObj   = new \DateTime('now');
+
+        $dia       = 0;
+
+        # Pegas os parâmetros para saber a quantidade de dias de empréstimo por tipo de pessoa
+        $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')
+            ->whereIn('bib_parametros.codigo', ['002', '006', '008'])->get();
+
+        //Validando se algum dos livros emprestados está sem reserva
+        foreach ($emprestimo->emprestimoExemplar as $exemplar) {
+
+
+            $validarReserva = \DB::table('bib_reservas_exemplares')
+                ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+                ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_exemplares.id', '=', $exemplar->id)
+                ->where('bib_reservas_exemplares.status', '=', '0')
+                ->select([
+                    'bib_exemplares.id'
+                ])->first();
+
+            if($validarReserva) {
+                return false;
+            }
+
+        }
+
+        # Gerando a data de devolução conforme a situação de emprestimo do livro
+        if($emprestimo->tipo_emprestimo == '1' && $emprestimo->emprestimo_especial == '0') {
+            if($emprestimo->tipo_pessoa == '1') {
+                $dia = $dias[0]->valor;
+            } else if ($emprestimo->tipo_pessoa == '2' || $emprestimo->tipo_pessoa == '3') {
+                $dia = $dias[2]->valor - 1;
+            } else if ($emprestimo->tipo_pessoa == '4') {
+                $dia = $dias[1]->valor;
+            }
+        } else if ($emprestimo->tipo_emprestimo == '2' || $emprestimo->emprestimo_especial == '1') {
+            $query = \DB::table('bib_parametros')->select('bib_parametros.valor')->where('bib_parametros.codigo', '=', '001')->get();
+            $dia = $query[0]->valor - 1;
+        }
+
+
+
+        $dataObj->add(new \DateInterval("P{$dia}D"));
+        $data = $dataObj->format('Y-m-d');
+        $dataAtual = new \DateTime('now');
+        $dataFormat = $dataAtual->format('Y-m-d');
+
+        $emprestimo->codigo = $dataObj->format('YmdHis');
+        $emprestimo->data_devolucao = $data;
+        $emprestimo->data = $dataFormat;
+
+        //Salva o novo emprestimo
+        $emprestar = $this->repository->create($emprestimo->toArray());
+
+        //Retorna todos os exemplares
+        $exemplares = $emprestimo->emprestimoExemplar;
+
+        foreach ($exemplares as $exemplar){
+            $emprestar->emprestimoExemplar()->attach([$exemplar->id]);
+        }
 
         return $emprestar;
     }

@@ -523,7 +523,7 @@ class EmprestarController extends Controller
     {
         try {
             #Executando a ação
-            $result = $this->service->renovacao($id);
+            $result = $this->service->renovacao2($id);
 
             if(!$result){
                 return redirect()->back()->with("error", "Não será possível a renovação, pois há livros em reserva!");
