@@ -41,9 +41,9 @@ class EmprestarService
      * @param DebitoService $debitoService
      */
     public function __construct(EmprestarRepository $repository,
-                                ExemplarRepository $repoExemplar,
-                                EmprestimoExemplarRepository $emprestimoExemplar,
-                                DebitoService $debitoService)
+        ExemplarRepository $repoExemplar,
+        EmprestimoExemplarRepository $emprestimoExemplar,
+        DebitoService $debitoService)
     {
         $this->repository   = $repository;
         $this->repoExemplar = $repoExemplar;
@@ -107,25 +107,25 @@ class EmprestarService
 
         #Recuperando o registro no banco de dados
         $emprestar = \DB::table('bib_emprestimos')
-            ->join('bib_emprestimos_exemplares', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
-            ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
-            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-            ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
-            ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
-            ->where('bib_emprestimos.status', '=', '0')
-            ->select([
-                'bib_arcevos.titulo',
-                'bib_arcevos.cutter',
-                'bib_arcevos.subtitulo',
-                'bib_exemplares.edicao',
-                \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
-                'bib_emprestimos.id as emprestimo_id',
-                'bib_emprestimos_exemplares.id',
-                'bib_emprestimos.tipo_pessoa',
-                'bib_emprestimos.emprestimo_especial',
-                'pessoas.id as pessoa_id',
-                'pessoas.nome as pessoa_nome',
-            ])->get();
+        ->join('bib_emprestimos_exemplares', 'bib_emprestimos_exemplares.emprestimo_id', '=', 'bib_emprestimos.id')
+        ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+        ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+        ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+        ->where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
+        ->where('bib_emprestimos.status', '=', '0')
+        ->select([
+            'bib_arcevos.titulo',
+            'bib_arcevos.cutter',
+            'bib_arcevos.subtitulo',
+            'bib_exemplares.edicao',
+            \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+            'bib_emprestimos.id as emprestimo_id',
+            'bib_emprestimos_exemplares.id',
+            'bib_emprestimos.tipo_pessoa',
+            'bib_emprestimos.emprestimo_especial',
+            'pessoas.id as pessoa_id',
+            'pessoas.nome as pessoa_nome',
+        ])->get();
 
         #retorno
         return $emprestar;
@@ -221,6 +221,7 @@ class EmprestarService
         }
 
         //Alterando a situação do emprestimo para emprestado
+        dd($data);
         $exemplar = $this->repoExemplar->find($data['id']);
         $exemplar->situacao_id = '5';
         $exemplar->save();
@@ -240,28 +241,31 @@ class EmprestarService
      * @return mixed
      */
     public function renovacao($id) {
+        /*$this->devolucao($id);*/
 
         $emprestimo = $this->repository->find($id);
-        $dataObj   = \DateTime::createFromFormat('Y-m-d H:i:s', $emprestimo->data_devolucao);
+
+        
+        $dataObj   = new \DateTime('now');
         $dia       = 0;
 
         # Pegas os parâmetros para saber a quantidade de dias de empréstimo por tipo de pessoa
         $dias = \DB::table('bib_parametros')->select('bib_parametros.valor')
-            ->whereIn('bib_parametros.codigo', ['002', '006', '008'])->get();
+        ->whereIn('bib_parametros.codigo', ['002', '006', '008'])->get();
 
         //Validando se algum dos livros emprestados está sem reserva
         foreach ($emprestimo->emprestimoExemplar as $exemplar) {
 
 
             $validarReserva = \DB::table('bib_reservas_exemplares')
-                ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
-                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
-                ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
-                ->where('bib_exemplares.id', '=', $exemplar->id)
-                ->where('bib_reservas_exemplares.status', '=', '0')
-                ->select([
-                    'bib_exemplares.id'
-                ])->first();
+            ->join('bib_reservas', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
+            ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_reservas_exemplares.arcevos_id')
+            ->join('bib_exemplares', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+            ->where('bib_exemplares.id', '=', $exemplar->id)
+            ->where('bib_reservas_exemplares.status', '=', '0')
+            ->select([
+                'bib_exemplares.id'
+            ])->first();
 
             if($validarReserva) {
                 return false;
@@ -286,13 +290,34 @@ class EmprestarService
 
 
         $dataObj->add(new \DateInterval("P{$dia}D"));
-
         $data = $dataObj->format('Y-m-d');
+        $dataAtual = new \DateTime('now');
+        $dataFormat = $dataAtual->format('Y-m-d');        
 
-
+        unset($emprestimo['id']);
 
         $emprestimo->data_devolucao = $data;
-        $emprestimo->save();
+        $emprestimo->data = $dataFormat;
+        $data = [
+            'data'=>$emprestimo->data,
+            'codigo'=>$emprestimo->codigo,
+            'data_devolucao'=> $emprestimo->data_devolucao,
+            'pessoas_id'=>$emprestimo->pessoas_id,
+            'tipo_emprestimo'=>$emprestimo->tipo_emprestimo,
+            'status'=>'1',
+            'users_id'=>$emprestimo->users_id,
+            'status_devolucao'=>$emprestimo->status_devolucao,
+            'emprestimo_especial'=>$emprestimo->emprestimo_especial,
+            'tipo_pessoa'=>$emprestimo->tipo_pessoa,
+            'valor_multa'=> $emprestimo->valor_multa,
+            'status_pagamento'=>$emprestimo->status_pagamento
+        ];
+
+        $this->repository->create($data);
+
+        /*$emprestimo->save();*/
+       
+        /*$exemplar->save();*/
 
 
         return $emprestimo;
@@ -313,8 +338,8 @@ class EmprestarService
         $data = $dataObj->format('Y-m-d');
 
         $parametros = \DB::table('fin_parametros')
-            ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
-            ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
+        ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
+        ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
 
         $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
         $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
@@ -398,8 +423,8 @@ class EmprestarService
         $data = $dataObj->format('Y-m-d');
 
         $parametros = \DB::table('fin_parametros')
-            ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
-            ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
+        ->join('fin_taxas', 'fin_taxas.id', '=', 'fin_parametros.taxa_id')
+        ->whereIn('fin_parametros.codigo', ['001', '002'])->select(['fin_taxas.valor'])->get();
 
         $valorConsulta   = isset($parametros[0]) ? $parametros[0]->valor : "";
         $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
@@ -492,8 +517,8 @@ class EmprestarService
 
         // Buscando o registro de pivot de empréstimo e exemplar
         $idExemplar = \DB::table('bib_emprestimos_exemplares')
-            ->where('id', '=', $id2)
-            ->select('bib_emprestimos_exemplares.exemplar_id')
+        ->where('id', '=', $id2)
+        ->select('bib_emprestimos_exemplares.exemplar_id')
         ->first();
 
         // Buscando o exemplar
@@ -509,22 +534,22 @@ class EmprestarService
 
         // Deletando o registro de pivot de empréstimo e exemplar
         \DB::table('bib_emprestimos_exemplares')
-            ->where('id', '=', $id2)
-            ->where('emprestimo_id', '=', $id)
-            ->delete();
+        ->where('id', '=', $id2)
+        ->where('emprestimo_id', '=', $id)
+        ->delete();
         
         #Buscando o empréstimo
         $emprestimo = $this->find($id);
 
         // Validando se o empréstimo ainda tem algum exemplar contido nele
         // Caso não tenha o registro de empréstimo também será deletado
-       if(count($emprestimo->emprestimoExemplar) <= 1) {
-           \DB::delete('delete from bib_emprestimos where id = ?', [$id]);
-       }
+        if(count($emprestimo->emprestimoExemplar) <= 1) {
+         \DB::delete('delete from bib_emprestimos where id = ?', [$id]);
+     }
 
         #retorno
-        return true;
-    }
+     return true;
+ }
 
     /**
      * @param array $models
@@ -533,38 +558,38 @@ class EmprestarService
     public function load(array $models) : array
     {
          #Declarando variáveis de uso
-         $result    = [];
-         $expressao = [];
+       $result    = [];
+       $expressao = [];
 
          #Criando e executando as consultas
-         foreach ($models as $model) {
+       foreach ($models as $model) {
             # separando as strings
-            $explode   = explode("|", $model);
+        $explode   = explode("|", $model);
 
             # verificando a condição
-            if(count($explode) > 1) {
-                $model     = $explode[0];
-                $expressao = explode(",", $explode[1]);
-            }
+        if(count($explode) > 1) {
+            $model     = $explode[0];
+            $expressao = explode(",", $explode[1]);
+        }
 
             #qualificando o namespace
-            $nameModel = "\\Seracademico\\Entities\\$model";
+        $nameModel = "\\Seracademico\\Entities\\$model";
 
-            if(count($expressao) > 1) {
+        if(count($expressao) > 1) {
                 #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
-            } else {
+            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->lists('nome', 'id');
+        } else {
                 #Recuperando o registro e armazenando no array
-                $result[strtolower($model)] = $nameModel::lists('nome', 'id');
-            }
+            $result[strtolower($model)] = $nameModel::lists('nome', 'id');
+        }
 
             # Limpando a expressão
-            $expressao = [];
-         }
+        $expressao = [];
+    }
 
          #retorno
-         return $result;
-    }
+    return $result;
+}
 
     /**
      * @param $data
@@ -572,7 +597,7 @@ class EmprestarService
      */
     private function tratamentoCamposData($data)
     {
-        
+
         # Tratamento de campos de chaves estrangeira
         foreach ($data as $key => $value) {
             $explodeKey = explode("_", $key);
