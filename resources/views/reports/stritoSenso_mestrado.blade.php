@@ -580,7 +580,7 @@
             </table>
 
             <table style="">
-                <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado.png') }}" alt=""></td></tr>
+                <tr><td><img src="{{ asset('img/assinatura_luciana_mestrado_novo_cnpj.png') }}" alt=""></td></tr>
             </table>
         </h1>
     </div>

@@ -95,6 +95,13 @@ class AlunoDocumentoController extends Controller
                     $result = $this->historico($idAluno);
                     $nameView = "reports.historico_mestrado";
                     break;
+                    case "32" :
+                    $result = $this->contrato($idAluno);
+                    $nameView = "reports.aditamento_mestrado";
+                    break;
+                case "31" :
+                    $result = $this->contrato($idAluno);
+                    $nameView = "reports.stritoSenso_mestrado";
             }
 
             # Verificando foi vinculado a um curso e turma
