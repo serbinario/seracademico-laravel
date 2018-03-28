@@ -157,7 +157,7 @@ class EmprestarService
     {
         $dados     = $request;
         $dataObj   = new \DateTime('now');
-        $dataObj->setTimezone( new \DateTimeZone('BRT') );
+        $dataObj->setTimezone( new \DateTimeZone('UTC') );
         
         # Array para retorno da requisição ajax
         $return = [
@@ -167,7 +167,7 @@ class EmprestarService
             'emprestimos'
         ];
 
-        // Regras de nogócio para validação do empréstimo
+        // Regras de negócio para validação do empréstimo
         if($resultChain = EmprestimosChainOfResponsibility::processChain($dados, $dataObj, $return)) {
             return $resultChain;
         }
@@ -213,16 +213,20 @@ class EmprestarService
 
         #Salvando o registro pincipal (caso aja um registro já sendo usado, não será feito um novo registro)
         if(count($emprestimo) <= 0) {
+            //dd($data);
             $emprestar =  $this->repository->create($data);
+
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         } else {
             $emprestar = $emprestimo[0];
+            //dd($data);
             $emprestar->emprestimoExemplar()->attach([$data['id']]);
         }
-
+        dd($data);
         //Alterando a situação do emprestimo para emprestado
         $exemplar = $this->repoExemplar->find($data['id']);
         $exemplar->situacao_id = '5';
+
         $exemplar->save();
 
         #Verificando se foi criado no banco de dados
