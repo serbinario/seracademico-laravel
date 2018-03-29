@@ -410,8 +410,8 @@ class UtilController extends Controller
                 });
                 $qb->orWhere('fac_alunos.matricula', 'like', "%$searchValue%");
                 $qb->select('pessoas.id as pessoa_id',
-                    'pessoas.nome as nome',
-                    'fac_alunos.id as id_graduacao');
+                    'pessoas.nome as nome', 'pessoas.cpf as cpf',
+                    'fac_alunos.id as id_graduacao', 'fac_alunos.matricula as matricula');
             } else if ($parametro == '2' || $parametro == '3' || $parametro == '4') {
                 $qb = $this->wherePosMestrado($parametro, $qb);
                 $qb->join(\DB::raw('pos_alunos'), function ($join) {
@@ -420,7 +420,7 @@ class UtilController extends Controller
                 });
                 $qb->orWhere('pos_alunos.matricula', 'like', "%$searchValue%");
                 $qb->select('pessoas.id as pessoa_id',
-                    'pessoas.nome as nome',
+                    'pessoas.nome as nome', 'pessoas.cpf as cpf', 'pos_alunos.matricula as matricula',
                     'pos_alunos.id as id_pos');
             } else if ($parametro == '5') {
                 $qb = $this->whereProfessor($qb);
@@ -429,7 +429,7 @@ class UtilController extends Controller
                     ;
                 });
                 $qb->select('pessoas.id as pessoa_id',
-                    'pessoas.nome as nome',
+                    'pessoas.nome as nome', 'pessoas.cpf as cpf',
                     'fac_professores.id as id_professor');
             }
 
@@ -455,25 +455,29 @@ class UtilController extends Controller
             #executando a consulta e recuperando os dados
             $resultTotal = $qb->get();
 
+
             $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
             $qb->skip($pageValue);
             $qb->take(100);
 
             $resultItems = $qb->get();
-
             #criando o array de retorno
             foreach ($resultItems as $item) {
                 if($parametro == '1') {
                     $result[] = [
                         "id" => $item->pessoa_id,
-                        "text" => $item->nome,
+                        "text" => $item->nome . " CPF. " . $item->cpf . " MAT. " . $item->matricula,
+                        "matricula" => $item->matricula,
+                        "cpf" => $item->cpf,
                         'id_graduacao' => $item->id_graduacao,
                     ];
                 } else if ($parametro == '2' || $parametro == '3' || $parametro == '4') {
                     $result[] = [
                         "id" => $item->pessoa_id,
-                        "text" => $item->nome,
+                        "text" => $item->nome . " CPF. " . $item->cpf . " MAT. " . $item->matricula,
+                        "matricula" => $item->matricula,
+                        "cpf" => $item->cpf,
                         'id_pos' => $item->id_pos
                     ];
                 } else if ($parametro == '5') {
@@ -485,7 +489,7 @@ class UtilController extends Controller
                 } else {
                     $result[] = [
                         "id" => $item->pessoa_id,
-                        "text" => $item->nome
+                        "text" => $item->nome,
                     ];
                 }
             }
@@ -510,7 +514,7 @@ class UtilController extends Controller
     private function whereGraduacao($query)
     {
         $query->whereExists(function ($query) {
-            $query->select(\DB::raw("fac_alunos.id"))
+            $query->select(\DB::raw("fac_alunos.id", "fac_alunos.matricula"))
                 ->from('fac_alunos')
                 ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
                 ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
