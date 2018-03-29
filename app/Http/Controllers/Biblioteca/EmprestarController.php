@@ -428,7 +428,7 @@ class EmprestarController extends Controller
                 ->select([
                     'pessoas.nome',
                     'pessoas.celular',
-                    'pessoas.identidade',
+                    'pessoas.cpf',
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
                     \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),

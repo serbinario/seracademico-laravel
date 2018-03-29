@@ -340,7 +340,7 @@ class EmprestarService
     public function renovacao2($id) {
 
         $emprestimo = $this->repository->find($id);
-        // Passa o id do emprestimo e seta colo devolvido
+        // Passa o id do emprestimo e seta como devolvido
         $this->devolucao($id);
 
 

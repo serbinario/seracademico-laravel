@@ -26,7 +26,7 @@
             {{ $emprestimo->nome }}
         </span><br />
     <span class="texto">
-            RG: {{ $emprestimo->identidade }}
+            CPF: {{ $emprestimo->cpf }}
         </span><br />
     <span class="texto">
             Telefone: {{ $emprestimo->celular }}
@@ -36,9 +36,9 @@
         Devolver em: {{ $emprestimo->data_devolucao }} <br />
         Devolvido em: {{ $emprestimo->data_devolucao_real }}
         </span><br />
-    <span class="texto">
+    <!-- <span class="texto">
             Código: {{ $emprestimo->codigo }}
-    </span><br />
+    </span><br /> -->
     <span class="texto">
             Multa por atraso: {{ $emprestimo->valor_multa }}
     </span>

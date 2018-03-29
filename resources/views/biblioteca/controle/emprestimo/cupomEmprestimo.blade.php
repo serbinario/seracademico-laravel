@@ -20,24 +20,27 @@
 </head>
 <body>
     @if($result)
+    <?php //dd($result);?>
         <h3>RECIBO DE EMPRÉSTIMO</h3>
         <p>----------------------------------------------</p>
         <span class="texto">
             {{ $result->pessoa->nome }}
         </span><br />
         <span class="texto">
-            RG: {{ $result->pessoa->identidade }}
+            CPF: {{ $result->pessoa->cpf }}
         </span><br />
         <span class="texto">
             Telefone: {{ $result->pessoa->celular }}
         </span><br />
+        <?php //if($result->tipo_pessoa != 5):?>
+            <!-- <span class="texto">
+                Matricula: {{ $result->pessoa->matricula }}
+            </span><br /> -->
+        <?php //endif;?>
         <span class="texto">
             <?php $data = new \DateTime($result->data);  $data2 = new \DateTime($result->data_devolucao);?>
                 Emprestado em: {{ $data->format('d/m/Y') }}<br />
                 Devolver em: {{ $data2->format('d/m/Y') }}
-        </span><br />
-        <span class="texto">
-            Código: {{ $result->codigo }}
         </span><br />
         <p>----------------------------------------------</p>
         <span class="texto">
