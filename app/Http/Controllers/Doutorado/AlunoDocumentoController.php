@@ -89,7 +89,7 @@ class AlunoDocumentoController extends Controller
                     break;
                 case "22" :
                     $result = $this->inscricao($idAluno);
-                    $nameView = "reports.inscricao_mestrado";
+                    $nameView = "reports.inscricao_doutorado";
                     break;
                 case "23" :
                     $result = $this->historico($idAluno);
