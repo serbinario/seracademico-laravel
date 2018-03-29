@@ -284,6 +284,17 @@ class EmprestarController extends Controller
                     $html .= '<li><a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
                 }
 
+                if($row->status_devolucao == 1) {
+                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomDevolucao/'.$row->id.'" title="Recibo Devoluçao"><i class="material-icons">thumb_up</i></a></li>';
+                }
+
+                if($row->status_devolucao == 0) {
+                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomEmprestimo/'.$row->id.'" title="Recibo Emprestimo"><i class="material-icons">thumb_up</i></a></li>';
+                }
+
+
+
+
 
                 $html .= '</ul></div>';
 
@@ -442,6 +453,69 @@ class EmprestarController extends Controller
                 ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
                 ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
                 ->where('bib_emprestimos.id', '=', $result->id)
+                ->select([
+                    'bib_arcevos.titulo',
+                    'bib_arcevos.cutter',
+                    'bib_arcevos.cdd',
+                    \DB::raw('CONCAT (SUBSTRING(bib_exemplares.codigo, 4, 4), "/", SUBSTRING(bib_exemplares.codigo, -4, 4)) as tombo'),
+                    'bib_emprestimos_exemplares.valor_multa',
+                ])->get();
+
+            //dd($emprestimo);
+
+            #Retorno para a view
+            return \PDF::loadView('biblioteca.controle.emprestimo.cupomDevolucao',
+                compact('emprestimo', 'exemplares'))->stream();
+
+            //return view('biblioteca.controle.emprestimo.cupomDevolucao', compact('emprestimo', 'exemplares'));
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function imprimirCupomEmprestimo($id)
+    {
+
+       $result = $this->service->find($id);
+
+        return \PDF::loadView('biblioteca.controle.emprestimo.cupomEmprestimo',
+            compact('result'))->stream();
+
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function imprimirCupomDevolucao($id)
+    {
+        try {
+
+            //Pegando o empréstimo
+            $emprestimo = \DB::table('bib_emprestimos')
+                ->join('pessoas', 'pessoas.id', '=', 'bib_emprestimos.pessoas_id')
+                ->where('bib_emprestimos.id', '=', $id)
+                ->select([
+                    'pessoas.nome',
+                    'pessoas.celular',
+                    'pessoas.cpf',
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data,"%d/%m/%Y") as data'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao,"%d/%m/%Y") as data_devolucao'),
+                    \DB::raw('DATE_FORMAT(bib_emprestimos.data_devolucao_real,"%d/%m/%Y") as data_devolucao_real'),
+                    'bib_emprestimos.codigo',
+                    'bib_emprestimos.valor_multa',
+                ])->first();
+
+            //Pegando os exemplares
+            $exemplares = \DB::table('bib_emprestimos_exemplares')
+                ->join('bib_emprestimos', 'bib_emprestimos.id', '=', 'bib_emprestimos_exemplares.emprestimo_id')
+                ->join('bib_exemplares', 'bib_exemplares.id', '=', 'bib_emprestimos_exemplares.exemplar_id')
+                ->join('bib_arcevos', 'bib_arcevos.id', '=', 'bib_exemplares.arcevos_id')
+                ->where('bib_emprestimos.id', '=', $id)
                 ->select([
                     'bib_arcevos.titulo',
                     'bib_arcevos.cutter',

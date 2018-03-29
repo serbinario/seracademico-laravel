@@ -103,6 +103,12 @@ Route::group(['prefix' => 'biblioteca', 'as' => 'biblioteca.'], function () {
     Route::post('confirmarEmprestimo', ['as' => 'confirmarEmprestimo', 'uses' => 'Biblioteca\EmprestarController@confirmarEmprestimo']);
     Route::get('deleteEmprestimo/{id}/{id2}', ['as' => 'deleteEmprestimo', 'uses' => 'Biblioteca\EmprestarController@deleteEmprestimo']);
 
+    //Cupom de devoluçao
+    Route::get('imprimirCupomDevolucao/{id}', ['as' => 'imprimirCupomDevolucao', 'uses' => 'Biblioteca\EmprestarController@imprimirCupomDevolucao']);
+
+    //Cupom de Emprestimo
+    Route::get('imprimirCupomEmprestimo/{id}', ['as' => 'imprimirCupomEmprestimo', 'uses' => 'Biblioteca\EmprestarController@imprimirCupomEmprestimo']);
+
     //baixa pagamento
     Route::get('baixaPagamento/{id}', ['as' => 'baixaPagamento', 'uses' => 'Biblioteca\EmprestarController@baixaPagamento']);
     Route::get('baixaPagamentoPorAluno/{id}', ['as' => 'baixaPagamentoPorAluno', 'uses' => 'Biblioteca\EmprestarController@baixaPagamentoPorAluno']);
