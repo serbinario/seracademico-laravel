@@ -190,7 +190,7 @@
     o contrato continuará em vigor e a Contratante deverá pagar todas as parcelas previstas no ato da inscrição,
     podendo a primeira parte Contratada tomar medidas cabíveis de cobrança.
 </p>--}}
-<br /><br />
+<br />
 
 <center>
     <table border="0" style="border: none; width: 100%">
@@ -213,13 +213,14 @@
                 Documento do usuário
                 </center>
             </td>
-            <td style="width: 50%; font-size: 11px;">
-                <center>
-                    <br />___________________________________________________<br>
-
-                    Miriam P. W. de Medeiros <br />
-                    Bibliotecária CRB-4/1183
-                </center>
+            <td style=" padding: 20px;width: 50%; font-size: 11px;">
+                <img src="{{ asset('biblioteca/img/assinatura_termo_biblioteca.png') }}" alt="">
+              <!--   <center>
+                  <br />___________________________________________________<br>
+              
+                  Miriam P. W. de Medeiros <br />
+                  Bibliotecária CRB-4/1183
+              </center> -->
             </td>
         </tr>
     </table>
