@@ -24,9 +24,9 @@ Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduaca
         Route::get('contrato/{id}', ['as' => 'contrato', 'uses' => 'ProfessorController@contrato']);
         Route::get('getImg/{id}', ['as' => 'getImg', 'uses' => 'ProfessorController@getImg']);
     });
-
     Route::group(['prefix' => 'aluno', 'as' => 'aluno.'], function () {
         Route::get('index', ['as' => 'index', 'uses' => 'Graduacao\AlunoController@index']);
+         Route::get('teste', ['as' => 'teste', 'uses' => 'Graduacao\AlunoController@teste']);
         Route::get('grid', ['as' => 'grid', 'uses' => 'Graduacao\AlunoController@grid']);
         Route::get('search', ['as' => 'search', 'uses' => 'Graduacao\AlunoController@search']);
         Route::get('create', ['as' => 'create', 'uses' => 'Graduacao\AlunoController@create']);
