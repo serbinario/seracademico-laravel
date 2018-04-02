@@ -12,6 +12,7 @@ use Seracademico\Http\Controllers\Controller;
 use Seracademico\Services\Graduacao\AlunoService;
 use Seracademico\Validators\Graduacao\AlunoValidator;
 use Yajra\Datatables\Datatables;
+use Seracademico\Entities\PosGraduacao\Aluno as PosAluno;
 
 class AlunoController extends Controller
 {
@@ -483,7 +484,7 @@ class AlunoController extends Controller
     }
     public function teste()
     {
-        $alunos = Aluno::whereNull('login')->get();
+        $alunos = PosAluno::where('login','<>','matricula')->get();
          foreach ($alunos as $aluno) {
             $aluno->login = $aluno->matricula;
             $aluno->save();
