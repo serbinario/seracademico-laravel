@@ -124,6 +124,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->declaracao_vinculo_alpha($idAluno);
                     $nameView = "reports.declaracao_vinculo_alpha_pos_graduacao";
                     break;
+                case "33" :
+                    $result = $this->declaracao_vinculo_alpha($idAluno);
+                    $nameView = "reports.declaracao_vinculo_alpha_pos_graduacao_noite";
+                    break;
                 case "10" :
                     $result = $this->historico($idAluno);
                     $nameView = "reports.historico_fasup";
