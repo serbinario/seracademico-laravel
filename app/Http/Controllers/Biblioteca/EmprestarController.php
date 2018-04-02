@@ -277,19 +277,19 @@ class EmprestarController extends Controller
                 }
 
                 if($row->status_devolucao == 0 && strtotime($row->devolucao) < strtotime($this->data)) {
-                    $html .= '<li><a class="btn-floating carta" target="_blank" href="cartanotificacaoatraso/'.$row->id.'" title="Carta"><i class="material-icons">restore</i></a></li>';
+                    $html .= '<li><a class="btn-floating carta" target="_blank" href="cartanotificacaoatraso/'.$row->id.'" title="Carta de Atraso"><i class="material-icons">email</i></a></li>';
                 }
 
                 if($row->status_devolucao == 1 && $row->status_pagamento == '0') {
-                    $html .= '<li><a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Baixa pagamento"><i class="material-icons">thumb_up</i></a></li>';
+                    $html .= '<li><a class="btn-floating baixa-pagamento" href="baixaPagamento/'.$row->id.'" title="Dar Baixa no Pagamento da Multa"><i class="material-icons">attach_money</i></a></li>';
                 }
 
                 if($row->status_devolucao == 1) {
-                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomDevolucao/'.$row->id.'" title="Recibo Devoluçao"><i class="material-icons">thumb_up</i></a></li>';
+                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomDevolucao/'.$row->id.'" title="Reemprimir Cupom de Devolução"><i class="material-icons">description</i></a></li>';
                 }
 
                 if($row->status_devolucao == 0) {
-                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomEmprestimo/'.$row->id.'" title="Recibo Emprestimo"><i class="material-icons">thumb_up</i></a></li>';
+                    $html .= '<li><a class="btn-floating" target="_blank" href="imprimirCupomEmprestimo/'.$row->id.'" title="Reemprimir Cupom de Emprestimo"><i class="material-icons">description</i></a></li>';
                 }
 
 
