@@ -481,4 +481,15 @@ class AlunoController extends Controller
             return response()->json(['success' => false,'msg' => $e->getMessage()]);
         }
     }
+    public function teste()
+    {
+        $alunos = Aluno::whereNull('login')->get();
+         foreach ($alunos as $aluno) {
+            $aluno->login = $aluno->matricula;
+            $aluno->save();
+        }
+        foreach ($alunos as $aluno) {
+            echo $aluno->matricula."&nbsp".$aluno->login."<br>";
+        }
+    }
 }
