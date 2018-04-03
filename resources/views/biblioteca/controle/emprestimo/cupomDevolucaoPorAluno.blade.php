@@ -16,6 +16,9 @@
             <td>Telefone: {{$emprestimo->celular}}</td>
         </tr>
         <tr>
+            <td>Codigo: {{$emprestimo->codigo}}</td>
+        </tr>
+        <tr>
             <?php /*$data = new \DateTime($emprestimo->data);  $data2 = new \DateTime($emprestimo->data_devolucao);
             $data3 = new \DateTime($emprestimo->data_devolucao_real);*/?>
             <td>Devolvido em: {{$emprestimo->data_devolucao_real}}</td>
