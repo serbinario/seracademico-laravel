@@ -110,3 +110,19 @@ Route::group(['prefix' => 'emais/financeiro', 'as' => 'aluno.financeiro.'], func
         'uses' => 'Emais\AlunoFinanceiroController@getBoletoByPortal'
     ]);
 });
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+ \DB::listen(function($sql, $bindings, $time) {
+
+if (App::environment()=="local"){
+$xsql = explode("?", $sql);
+$nsql = "";
+for ($i=0; $i < count($xsql)-1; $i++) {
+$nsql .= $xsql[$i] . $bindings[$i];
+}
+$view_log = new Logger("SQL");
+$view_log->pushHandler(
+new StreamHandler(storage_path().'/logs/sql.log')
+ );
+$view_log->addInfo($nsql?:$sql);
+}});

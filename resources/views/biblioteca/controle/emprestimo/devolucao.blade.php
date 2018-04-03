@@ -68,8 +68,8 @@
             @endif
 
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Devolução individual</a></li>
-                <li role="presentation"><a href="#aluno" aria-controls="aluno" role="tab" data-toggle="tab">Devolução por aluno</a></li>
+                <li role="presentation" class="active"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Devolução por Empréstimo</a></li>
+                <li role="presentation"><a href="#aluno" aria-controls="aluno" role="tab" data-toggle="tab">Devolução por Pessoa</a></li>
             </ul>
 
             <div class="tab-content">

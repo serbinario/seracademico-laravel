@@ -244,8 +244,7 @@ class EmprestarController extends Controller
                     'bib_emprestimos.data_devolucao as devolucao',
                     'bib_emprestimos.status_pagamento',
                     'bib_emprestimos.status_devolucao'
-                ]);
-        
+                ]);        
         #Editando a grid
         return Datatables::of($rows)
             ->filter(function ($query) use ($request) {
@@ -341,7 +340,6 @@ class EmprestarController extends Controller
             ->groupBy('pessoas.id')
             ->where('bib_emprestimos.status', '=', '1')
             ->where('bib_emprestimos.status_devolucao', '=', '0')
-            ->orWhere('bib_emprestimos.status_pagamento', '=', '1')
             ->select([
                 'pessoas.id as pessoa_id',
                 'pessoas.nome',

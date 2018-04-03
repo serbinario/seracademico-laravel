@@ -3,10 +3,11 @@
 
 </head>
 <body>
-@if($emprestimo)
+    @if($emprestimo)
     <center>RECIBO DE EMPRÉSTIMO</center>
     <hr style="width: 100%">
     <table style="width: 100%">
+        <meta charset="UTF-8">
         <tr>
             <td>Aluno: {{$emprestimo->nome}}</td>
             <td>Identidade: {{$emprestimo->identidade}}</td>
@@ -30,19 +31,19 @@
     Livros Emprestados: <br /><br />
     <table style="width: 100%" border="1">
         <thead>
-        <tr>
-            <th>Código</th>
-            <th>Título</th>
-            <th>Cutter</th>
-            <th>CDD</th>
-            <th>Tombo</th>
-            <th>Data</th>
-            <th>Data de devolução</th>
-            <th>Multa</th>
-        </tr>
+            <tr>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Cutter</th>
+                <th>CDD</th>
+                <th>Tombo</th>
+                <th>Data</th>
+                <th>Data de devolução</th>
+                <th>Multa</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach($exemplares as $exemplar)
+            @foreach($exemplares as $exemplar)
             <tr>
                 <td>{{$exemplar->codigo}}</td>
                 <td>{{$exemplar->titulo}}</td>
@@ -53,9 +54,9 @@
                 <td>{{$exemplar->data_devolucao}}</td>
                 <td>{{$exemplar->valor_multa}}</td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
-@endif
+    @endif
 </body>
 </html>
