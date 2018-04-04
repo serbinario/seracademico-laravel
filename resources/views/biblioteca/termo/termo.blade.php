@@ -57,7 +57,7 @@
 
         body {
             font-family: arial;
-            font-size: 10px;
+            font-size: 14px;
         }
 
         .termos {
@@ -126,7 +126,7 @@
     mude de endereço, telefone ou e-mail e atualizar seus dados o mais breve possível; 4) De zelar e respeitar o ambiente e
     cumpriras normas e avisos quando estiver usufruindo do mesmo</b>
 
-</p>
+</p><br>
 
 <h5><b>EMPRÉSTIMO</b></h5>
 
@@ -139,20 +139,20 @@
     5)	Funcionário poderá pegar até 03 (três) livros, durante 8 (oito) dias;<br />
     6)	Professor poderá pegar até 03 (três) livros, durante 10 (dez) dias;<br />
     7)	O empréstimo não poderá ser realizado por terceiros;
-</p>
+</p><br>
 
 <h5><b>RENOVAÇÃO</b></h5>
 
 <p class="termos">
     1)	O usuário poderá renovar o livro quantas vezes quiser, desde que o livro não esteja na reserva.
     A renovação só será feita na biblioteca e também não poderá ser realizada por terceiros.
-</p>
+</p><br>
 
 <h5><b>DEVOLUÇÃO</b></h5>
 
 <p class="termos">
     1)	A devolução poderá ser feita por terceiros.
-</p>
+</p><br>
 
 <h5><b>CONSULTA</b></h5>
 
@@ -162,7 +162,7 @@
     2)	A consulta especial é aquela da qual o usuário só poderá consultar o livro na Biblioteca ou áreas da Faculdade,
     tendo o compromisso de devolver o livro antes que encerre o expediente,
     ou então terá que pagar uma multa de <b>R$ 10,00 (dez reais) p/ dia e p/ livro.</b>
-</p>
+</p><br>
 
 <h5><b>MULTA</b></h5>
 
@@ -173,7 +173,7 @@
     1)	O usuário que estiver em débito e/ou pendência com a biblioteca, ou qualquer outro setor acadêmico,
     não poderá fazer empréstimo de livros, matrícula, trancamento, licença, outros Os que abandonarem o curso e não
     devolverem o livro será cobrado em protesto.
-</p >
+</p ><br>
 
 <h5><b>RESERVA</b></h5>
 
@@ -182,7 +182,7 @@
     Se o usuário estiver com o livro emprestado, não poderá fazer reserva deste; A quantidade dos livros para reserva,
     será a mesma do empréstimo e suas categorias correlatas (aluno de graduação, pós-graduação, mestrado, doutorado,
     tecnólogo, técnico, professor e funcionário).
-</p>
+</p><br>
 
 
 {{--<p>
@@ -228,10 +228,15 @@
 <br />
 
 <center>
-    <span>
-        _________________________________________________<br />
+    <div><p>
+        <h1><img  src="{{ asset('img/assinatura_luciana.png') }}" alt="" style="width: 270px; height: auto;position: relative; top: -41px;"></h1>
+    </p>
+    <p style="position: absolute;top: 1370px;left: 180px;">
+       _____________________________________________<br />
         Luciana Vítor – Diretora da Alpha Faculdade
-    </span>
+    </p>
+        
+    </div>
 </center>
 
 
