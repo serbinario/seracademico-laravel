@@ -213,14 +213,13 @@
                 Documento do usuário
                 </center>
             </td>
-            <td style=" padding: 20px;width: 290px; font-size: 11px;">
-                <img src="{{ asset('biblioteca/img/assinatura_miriam_biblioteca.jpeg') }}" alt="">
-              <!--   <center>
+            <td style=" padding: 20px;width: 50%; font-size: 11px;">
+                <center>
                   <br />___________________________________________________<br>
               
                   Miriam P. W. de Medeiros <br />
                   Bibliotecária CRB-4/1183
-              </center> -->
+              </center>
             </td>
         </tr>
     </table>
