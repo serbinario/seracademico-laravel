@@ -213,8 +213,8 @@
                 Documento do usuário
                 </center>
             </td>
-            <td style=" padding: 20px;width: 50%; font-size: 11px;">
-                <img src="{{ asset('biblioteca/img/assinatura_termo_biblioteca.png') }}" alt="">
+            <td style=" padding: 20px;width: 290px; font-size: 11px;">
+                <img src="{{ asset('biblioteca/img/assinatura_miriam_biblioteca.jpeg') }}" alt="">
               <!--   <center>
                   <br />___________________________________________________<br>
               
