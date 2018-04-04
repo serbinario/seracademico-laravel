@@ -228,12 +228,9 @@
 <br />
 
 <center>
-    <div><p>
-        <h1><img  src="{{ asset('img/assinatura_luciana.png') }}" alt="" style="width: 270px; height: auto;position: relative; top: -41px;"></h1>
-    </p>
-    <p style="position: absolute;top: 1370px;left: 180px;">
-       _____________________________________________<br />
-        Luciana Vítor – Diretora da Alpha Faculdade
+    <div>
+    <p style="position: absolute;top: 1360px;left: 180px;">
+       <img  src="{{ asset('img/assinatura_luciana_termo_biblioteca.png') }}" alt="" style="width: 330px; height: auto;position: relative; top: -41px;">
     </p>
         
     </div>
