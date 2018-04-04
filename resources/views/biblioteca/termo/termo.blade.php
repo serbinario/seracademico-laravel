@@ -229,7 +229,7 @@
 
 <center>
     <div>
-    <p style="position: absolute;top: 1360px;left: 180px;">
+    <p style="position: absolute;top: 1400px;left: 180px;">
        <img  src="{{ asset('img/assinatura_luciana_termo_biblioteca.png') }}" alt="" style="width: 330px; height: auto;position: relative; top: -41px;">
     </p>
         
