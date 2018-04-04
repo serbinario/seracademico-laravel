@@ -588,7 +588,7 @@
                                 @endif
                                 @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>, &nbsp; @endif
                                 @if($exemplar['editora']['nome'])<?php echo $exemplar['editora']['nome'] ?>, @endif
-                                @if($exemplar['ano']){{$exemplar['ano']}}.
+                                @if($exemplar['ano']){{$exemplar['ano']}}. &nbsp;
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')
                                     @if($exemplar['acervo']['periodicidade']){{$exemplar['acervo']['periodicidade']}}. @endif
                                 @endif
