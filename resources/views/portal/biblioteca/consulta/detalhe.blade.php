@@ -157,7 +157,7 @@
                                     @elseif($exemplar['acervo']['tipo_periodico'] == '3')
                                         <a class="collection-item">
                                             <div class="row">
-                                                <div class="col s4"><b>Publcação</b></div>
+                                                <div class="col s4"><b>Publicação</b></div>
                                                 <div class="col s8">
                                                     {{$exemplar['acervo']['numero_chamada']}} /
                                                     @if($exemplar['ano']){{$exemplar['ano']}}. @endif
@@ -428,7 +428,7 @@
                                 @elseif(count($exemplar['acervo']['segundaEntrada']) > 0)
                                     @if($exemplar['acervo']['etial_outros'] == '1')
                                         @if($exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == '1' || $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['tipo_reponsavel_id'] == "")
-                                            <span style="text-transform: uppercase">{{$exemplar['acervo']['primeiraEntrada'][0]['responsaveis']['sobrenome']}}</span>,
+                                            <span style="text-transform: uppercase">{{$exemplar['acervo']['segundaEntrada'][0]['responsaveis']['sobrenome']}}</span>,
                                             <?php echo $exemplar['acervo']['segundaEntrada'][0]['responsaveis']['nome'] ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 1) {echo ' (Org.) ';} ?>
                                             <?php if($exemplar['acervo']['segundaEntrada'][0]['tipo_autor_id'] == 2) {echo ' (Coord.) ';} ?>
@@ -586,7 +586,7 @@
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')
                                     v. {{$exemplar['vol_periodico']}}, n. {{$exemplar['num_periodico']}},
                                 @endif
-                                @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: @endif
+                                @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>, &nbsp; @endif
                                 @if($exemplar['editora']['nome'])<?php echo $exemplar['editora']['nome'] ?>, @endif
                                 @if($exemplar['ano']){{$exemplar['ano']}}.
                                 @if($exemplar['acervo']['tipo_periodico'] == '2')
@@ -597,11 +597,12 @@
                                     @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}p.@endif
                                 @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '3')
-                                    @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}f.@endif
+                                    @if($exemplar['numero_pag']){{$exemplar['numero_pag']}}f.
+                                    &nbsp;:&nbsp;@endif
                                 @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '3')
                                     {{ $exemplar['acervo']['tipoAcervo']['nome'] }} {{ $exemplar['acervo']['resumo'] }}.
-                                    @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>: {{$exemplar['ano']}}.@endif
+                                    @if($exemplar['local'])<?php echo ucwords(mb_strtolower($exemplar['local'])) ?>,&nbsp; {{$exemplar['ano']}}.@endif
                                 @endif
                                 @if($exemplar['acervo']['tipo_periodico'] == '1')
                                     @if($exemplar['ilustracoes_id'] == '1'), il.@endif

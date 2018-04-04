@@ -12,7 +12,7 @@
        display: block; 
        margin: 0;   
    }
-</style>
+    </style>
 </head>
 
 <body>
