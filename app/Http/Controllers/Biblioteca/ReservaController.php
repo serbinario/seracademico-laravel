@@ -112,7 +112,7 @@ class ReservaController extends Controller
         })->addColumn('qtdReservas', function ($row) {
 
             $date = new \DateTime('now');
-            $date->setTimezone( new \DateTimeZone('BRT') );
+            $date->setTimezone( new \DateTimeZone('UTC') );
             $data = $date->format('Y-m-d H:i:s');
 
             $query = \DB::table('bib_reservas_exemplares')
