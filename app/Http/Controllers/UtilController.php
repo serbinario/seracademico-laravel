@@ -599,4 +599,9 @@ class UtilController extends Controller
         return $query;
     }
 
+    public autoPreencherAssunto($cdd){
+        dd('batata');
+
+    } 
+
 }

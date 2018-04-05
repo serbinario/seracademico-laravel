@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $('#formAcervo').bootstrapValidator({
         excluded: [':disabled'],
         feedbackIcons: {
@@ -44,4 +44,28 @@ $(document).ready(function () {
             }
         }
     });
+});
+*/
+
+$('#cdd').focusout(function(event) {
+    console.log("batata");
+    var dados = {
+        'cdd' : 'a',
+    };
+     
+     $.ajax({
+                url: "/index.php/seracademico/util/autoPreencherAssunto/",
+                data: {
+                    dados: dados,
+                },
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    /*swal(data['msg'], "Click no botão abaixo!", "success");
+                    $('#nome').val("");
+                    $('#sobrenome').val("");*/
+                    //location.href = "/serbinario/calendario/index/";
+                }
+            });
+$('#assunto').val('batata');
 });
