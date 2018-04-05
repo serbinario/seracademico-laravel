@@ -49,23 +49,27 @@
 
 $('#cdd').focusout(function(event) {
     console.log("batata");
-    var dados = {
+    var id = {
         'cdd' : 'a',
     };
-     
-     $.ajax({
-                url: "/index.php/seracademico/util/autoPreencherAssunto/",
-                data: {
-                    dados: dados,
-                },
-                dataType: "json",
-                type: "GET",
-                success: function (data) {
-                    /*swal(data['msg'], "Click no botão abaixo!", "success");
-                    $('#nome').val("");
-                    $('#sobrenome').val("");*/
-                    //location.href = "/serbinario/calendario/index/";
-                }
-            });
+
+
+    jQuery.ajax({
+        type: 'GET',
+        url: "/index.php/seracademico/util/autoPreencherAssunto",
+        headers: {
+        'X-CSRF-TOKEN': '{{  csrf_token() }}'
+    },
+    data: id,
+        datatype: 'json'
+    }).done(function (json) {
+
+    $('#assunto').val('json.aaa');
+    });
+
+
+
+
+
 $('#assunto').val('batata');
 });

@@ -599,8 +599,10 @@ class UtilController extends Controller
         return $query;
     }
 
-    public autoPreencherAssunto($cdd){
-        dd('batata');
+    public function autoPreencherAssunto(Request $request){
+        //dd($request->all());
+
+        return \Illuminate\Support\Facades\Response::json(['aaa' => 'asd']);
 
     } 
 
