@@ -138,7 +138,7 @@ $dataEmissao = new \DateTime('now');
                 de {!! isset($curso->carga_horaria) ? $curso->carga_horaria : "" !!} horas/aula, iniciado no dia
                 {{ strftime('%d de %B de %Y', strtotime($turma->aula_inicio)) }}
                 com previsão de término no dia {{ strftime('%d de %B de %Y', strtotime($turma->aula_final)) }}.
-                Aulas aos sábados de 15 em 15 dias, das 18:00 às 22:00 horas.
+                Aulas durante a semana de 15 em 15 dias, das 18:00 às 22:00 horas.
             </div>
             <div>
                 O referido é verdadeiro e dou fé.
