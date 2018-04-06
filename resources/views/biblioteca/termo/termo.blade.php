@@ -94,7 +94,7 @@
 <div class="canto">
     <img style="width: 145px; height: 120px" src="{{asset('/img/logo_biblioteca_alpha.png')}}">
 </div>
-<br /><br /><br /><br /><br /><br />
+<br /><br /><br />
 <center><h3>BIBLIOTECA SUELANDRE GONSALVES LIMA<br />
         TERMO DE COMPROMISSO<br />
         USUÁRIO DA BIBLIOTECA </h3>
@@ -114,7 +114,7 @@
     </tr>
 </table>
 
-<h5><b>NORMAS</b></h5>
+<br><h5><b>NORMAS</b></h5><br>
 
 <p class="termos">
     O Usuário ao se cadastrar, terá que cumprir as seguintes normas: 1) Assumir inteira responsabilidade de quaisquer materiais
@@ -173,7 +173,7 @@
     1)	O usuário que estiver em débito e/ou pendência com a biblioteca, ou qualquer outro setor acadêmico,
     não poderá fazer empréstimo de livros, matrícula, trancamento, licença, outros Os que abandonarem o curso e não
     devolverem o livro será cobrado em protesto.
-</p ><br>
+</p ><br><br>
 
 <h5><b>RESERVA</b></h5>
 
@@ -206,29 +206,34 @@
 </center><br />
 
 <center>
-    <table border="0" style="border: none; width: 100%">
+    <table border="0" style="border: none; width: 100%;text-align: center;">
         <tr>
             <td style="width: 50%; font-size: 11px;">
                 <center> ___________________________________________________<br>
                 Documento do usuário
                 </center>
             </td>
+
             <td style=" padding: 20px;width: 50%; font-size: 11px;">
-                <center>
                   <br />___________________________________________________<br>
               
                   Miriam P. W. de Medeiros <br />
                   Bibliotecária CRB-4/1183
-              </center>
             </td>
         </tr>
     </table>
 </center>
 <br />
+ <div>
+    <p style="position: absolute;top: 1244px;left: 400px; z-index: -1">
+       <img  src="{{ asset('biblioteca/img/assinatura_miriam_biblioteca.png') }}" alt="" style="width: 330px; height: auto;position: relative; top: -41px;">
+    </p>
+        
+    </div>
 
 <center>
     <div>
-    <p style="position: absolute;top: 1400px;left: 180px;">
+    <p style="position: absolute;top: 1330px;left: 180px;">
        <img  src="{{ asset('img/assinatura_luciana_termo_biblioteca.png') }}" alt="" style="width: 330px; height: auto;position: relative; top: -41px;">
     </p>
         
