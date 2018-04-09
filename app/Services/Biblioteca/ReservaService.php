@@ -131,7 +131,7 @@ class ReservaService
     {
 
         $date = new \DateTime('now');
-        $date->setTimezone( new \DateTimeZone('BRT') );
+        $date->setTimezone( new \DateTimeZone('UTC') );
         $dataFormat = $date->format('Y-m-d H:i:s');
 
         // Preenchendo os dados da reserva

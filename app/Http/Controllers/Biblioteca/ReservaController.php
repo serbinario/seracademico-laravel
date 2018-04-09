@@ -144,7 +144,7 @@ class ReservaController extends Controller
     {
 
         $date = new \DateTime('now');
-        $date->setTimezone( new \DateTimeZone('BRT') );
+        $date->setTimezone( new \DateTimeZone('UTC') );
         $data = $date->format('Y-m-d H:i:s');
 
         $query = \DB::table('bib_reservas_exemplares')
@@ -169,7 +169,7 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        $req = $request->request->all();
+        $req = $request->all();
 
         $data = $this->service->store($req);
 
@@ -336,7 +336,7 @@ class ReservaController extends Controller
         })->addColumn('acervos', function ($row) {
 
             $date = new \DateTime('now');
-            $date->setTimezone( new \DateTimeZone('BRT') );
+            $date->setTimezone( new \DateTimeZone('UTC') );
             $data = $date->format('Y-m-d H:i:s');
 
             // Recuperando todos os acervos da reserva
