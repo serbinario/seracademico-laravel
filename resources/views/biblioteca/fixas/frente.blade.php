@@ -1,7 +1,7 @@
 <?php
 // leitura das datas automaticamente
 
-        function data($dia, $mes, $ano, $semana) {
+function data($dia, $mes, $ano, $semana) {
 
             /*$dia = date('d');
             $mes = date('m');
@@ -49,101 +49,116 @@
 //Agora basta imprimir na tela...
 //echo ("$cidade, $semana, $dia de $mes de $ano");
 
-?>
+        ?>
 
-<html>
+        <html>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title></title>
-    <style type="text/css" class="init">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+            <title></title>
+            <style type="text/css" class="init">
 
-        body {
-            font-family: arial;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        table , tr , td {
-            font-size: small;
-        }
-    </style>
-    <link href="" rel="stylesheet" media="screen">
-</head>
+            body {
+                font-family: arial;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            table , tr , td {
+                font-size: small;
+            }
+        </style>
+        <link href="" rel="stylesheet" media="screen">
+    </head>
 
-<body>
+    <body>
 
-<center><h4>ALPHA BIBLIOTECA / PLANILHA PARA AUTOMAÇÃO DE BIBLIOTECA</h4></center>
+        <center><h4>ALPHA BIBLIOTECA / PLANILHA PARA AUTOMAÇÃO DE BIBLIOTECA</h4></center>
 
-<table style="width: 100%">
-    <tr>
-        <td colspan="4">
-            <sup><b>Título</b></sup> <br /> {{$result->acervo->titulo}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <sup><b>Subtítulo</b></sup> <br /> {{$result->acervo->subtitulo}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <sup><b>Assunto</b></sup> <br /> {{$result->acervo->assunto}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <sup><b>Cursos</b></sup> <br />
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <sup><b>Volume</b></sup> <br /> {{$result->acervo->volume}}
-        </td>
-        <td>
-            <sup><b>Cutter</b></sup> <br /> {{$result->acervo->cutter}}
-        </td>
-        <td>
-            <sup><b>CDD</b></sup> <br /> {{$result->acervo->cdd}}
-        </td>
-        <td>
-            <sup><b>Tipo de acervo</b></sup> <br /> {{$result->acervo->tipoAcervo->nome}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <sup><b>Coleção/Série</b></sup> <br /> @if($result->acervo->colecao) {{$result->acervo->colecao->nome}} @endif
-        </td>
-        <td colspan="3">
-            <sup><b>Situação</b></sup> <br /> {{$result->acervo->situacao->nome}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <sup><b>Estante/Corredor</b></sup> <br />
-            @if($result->acervo->estante) {{$result->acervo->estante->nome}} / @endif
-            @if($result->acervo->corredor) {{$result->acervo->corredor->nome}} @endif
-        </td>
-        <td colspan="2">
-            <sup><b>Este livro serve para todos os cursos</b></sup> <br /> @if($result->acervo->uso_global == true) Sim @else Não @endif
-        </td>
-        <td>
-            <sup><b>Exemplar de referência (Apenas consulta)</b></sup> <br /> @if($result->acervo->exemplar_ref == true) Sim @else Não @endif
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <sup><b>Palavras-chave</b></sup> <br />  {{$result->acervo->palavras_chaves}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <sup><b>Notas</b></sup> <br />  {{$result->acervo->resumo}}
-        </td>
-    </tr>
-</table>
+        <table style="width: 100%">
+            <tr>
+                <td colspan="4">
+                    <sup><b>Título</b></sup> <br /> {{$result->acervo->titulo}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <sup><b>Subtítulo</b></sup> <br /> {{$result->acervo->subtitulo}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <sup><b>Assunto</b></sup> <br /> {{$result->acervo->assunto}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <sup><b>Cursos</b></sup> <br />           
+                    <?php 
+                    $flag  = 0;
+                    foreach($result->acervo->cursos as $curso){
+                        if($flag == 0){
+                            echo $curso['nome'];
+                            $flag ++;
 
-</body>
-</html>
+                        }else{
+                            echo ", ".$curso['nome'];
+                        }
+                        
+
+                    }
+                    echo '.';
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <sup><b>Volume</b></sup> <br /> {{$result->acervo->volume}}
+                </td>
+                <td>
+                    <sup><b>Cutter</b></sup> <br /> {{$result->acervo->cutter}}
+                </td>
+                <td>
+                    <sup><b>CDD</b></sup> <br /> {{$result->acervo->cdd}}
+                </td>
+                <td>
+                    <sup><b>Tipo de acervo</b></sup> <br /> {{$result->acervo->tipoAcervo->nome}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <sup><b>Coleção/Série</b></sup> <br /> @if($result->acervo->colecao) {{$result->acervo->colecao->nome}} @endif
+                </td>
+                <td colspan="3">
+                    <sup><b>Situação</b></sup> <br /> {{$result->acervo->situacao->nome}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <sup><b>Estante/Corredor</b></sup> <br />
+                    @if($result->acervo->estante) {{$result->acervo->estante->nome}} / @endif
+                    @if($result->acervo->corredor) {{$result->acervo->corredor->nome}} @endif
+                </td>
+                <td colspan="2">
+                    <sup><b>Este livro serve para todos os cursos</b></sup> <br /> @if($result->acervo->uso_global == true) Sim @else Não @endif
+                </td>
+                <td>
+                    <sup><b>Exemplar de referência (Apenas consulta)</b></sup> <br /> @if($result->acervo->exemplar_ref == true) Sim @else Não @endif
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <sup><b>Palavras-chave</b></sup> <br />  {{$result->acervo->palavras_chaves}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <sup><b>Notas</b></sup> <br />  {{$result->acervo->resumo}}
+                </td>
+            </tr>
+        </table>
+
+    </body>
+    </html>
