@@ -56,7 +56,7 @@ $('#cdd').focusout(function(event) {
 
     $assunto = jQuery.ajax({
         type: 'GET',
-        url: "/index.php/seracademico/util/autoPreencherAssunto",
+        url: "/index.php/seracademico/util/autoPreencherAssuntoCdd",
         headers: {
             'X-CSRF-TOKEN': '{{  csrf_token() }}'
         },
@@ -81,7 +81,7 @@ $('#assunto').focusout(function(event) {
 
  jQuery.ajax({
         type: 'GET',
-        url: "/index.php/seracademico/util/autoPreencherAssunto",
+        url: "/index.php/seracademico/util/autoPreencherAssuntoCdd",
         headers: {
             'X-CSRF-TOKEN': '{{  csrf_token() }}'
         },

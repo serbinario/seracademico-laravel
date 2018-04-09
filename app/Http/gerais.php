@@ -131,7 +131,7 @@ Route::group(['prefix' => 'tipoVencimento', 'as' => 'tipoVencimento.'], function
 Route::group(['prefix' => 'util', 'as' => 'util.'], function () {
     # Refatorando os métodos do select2
     Route::post('simpleQuery', ['as' => 'simpleQuery', 'uses' => 'Select2Controller@simpleQuery']);
-    Route::get('autoPreencherAssunto', ['as' => 'autoPreencherAssunto', 'uses' => 'UtilController@autoPreencherAssunto']);
+    Route::get('autoPreencherAssuntoCdd', ['as' => 'autoPreencherAssuntoCdd', 'uses' => 'UtilController@autoPreencherAssuntoCdd']);
 
     # Métodos antigos. OBS : DESCONTINUAR AOS POUCOS
     Route::post('search', ['as' => 'search', 'uses' => 'UtilController@search']);

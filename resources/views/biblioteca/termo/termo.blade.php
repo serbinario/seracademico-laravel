@@ -208,17 +208,14 @@
 <center>
     <table border="0" style="border: none; width: 100%;text-align: center;">
         <tr>
-            <td style="width: 50%; font-size: 11px;">
-                <center> ___________________________________________________<br>
+            <td style="width: 50%; font-size: 11px; position: relative; top: 7px;">
+                <center><br> ___________________________________________________<br>
                 Documento do usuário
                 </center>
             </td>
 
             <td style=" padding: 20px;width: 50%; font-size: 11px;">
                   <br />___________________________________________________<br>
-              
-                  Miriam P. W. de Medeiros <br />
-                  Bibliotecária CRB-4/1183
             </td>
         </tr>
     </table>

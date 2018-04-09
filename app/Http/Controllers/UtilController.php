@@ -599,7 +599,7 @@ class UtilController extends Controller
         return $query;
     }
 
-    public function autoPreencherAssunto(Request $request){
+    public function autoPreencherAssuntoCdd(Request $request){
 
         if(isset($request->cdd)){
             $query = DB::table('bib_arcevos')->select('assunto')->where('cdd','=', "$request->cdd")->first();
