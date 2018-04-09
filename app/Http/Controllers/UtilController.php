@@ -600,9 +600,15 @@ class UtilController extends Controller
     }
 
     public function autoPreencherAssunto(Request $request){
-        //dd($request->all());
 
-        return \Illuminate\Support\Facades\Response::json(['aaa' => 'asd']);
+        $query->\DB::table('bib_arcevos')->select('assunto')->where('cdd', $request->cdd)->get();
+
+
+        dd($query);
+
+
+
+        return \Illuminate\Support\Facades\Response::json($query);
 
     } 
 
