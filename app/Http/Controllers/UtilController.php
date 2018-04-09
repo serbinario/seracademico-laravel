@@ -97,52 +97,52 @@ class UtilController extends Controller
                 $arrayId   = [];
                 foreach ($dadosNoIn as $rowNotIN) {
                    $arrayId[] =  $rowNotIN->$culmnNotGet;
-                }
+               }
 
-                $qb->whereNotIn($columnNotWhere, $arrayId);
-            }
+               $qb->whereNotIn($columnNotWhere, $arrayId);
+           }
 
             #executando a consulta e recuperando os dados
-            $resultTotal = $qb->get();
+           $resultTotal = $qb->get();
 
-            $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
+           $pageValue = $pageValue == 1 ? 0 : ($pageValue * 5) - 5;
 
-            $qb->skip($pageValue);
-            $qb->take(100);
+           $qb->skip($pageValue);
+           $qb->take(100);
 
-            $resultItems = $qb->get();
+           $resultItems = $qb->get();
 
-            if(isset($columnSelect) && $columnSelect != null) {
+           if(isset($columnSelect) && $columnSelect != null) {
                 #criando o array de retorno
-                foreach($resultItems as $item) {
-                    $result[] = [
-                        "id" => $item->id,
-                        "text" => $item->$columnSelect
-                    ];
-                }
-            } else {
-                #criando o array de retorno
-                foreach($resultItems as $item) {
-                    $result[] = [
-                        "id" => $item->id,
-                        "text" => $item->$fieldName
-                    ];
-                }
+            foreach($resultItems as $item) {
+                $result[] = [
+                    "id" => $item->id,
+                    "text" => $item->$columnSelect
+                ];
             }
+        } else {
+                #criando o array de retorno
+            foreach($resultItems as $item) {
+                $result[] = [
+                    "id" => $item->id,
+                    "text" => $item->$fieldName
+                ];
+            }
+        }
 
-            $resultRetorno = [
-                'data' => $result,
-                'more' => ($pageValue + 5) < count($resultTotal)
-            ];
+        $resultRetorno = [
+            'data' => $result,
+            'more' => ($pageValue + 5) < count($resultTotal)
+        ];
 
             #retorno
-            return $resultRetorno;
-        } catch (\Throwable $e) {
-            return \Illuminate\Support\Facades\Response::json([
-                'error' => $e->getMessage()
-            ]);
-        }
+        return $resultRetorno;
+    } catch (\Throwable $e) {
+        return \Illuminate\Support\Facades\Response::json([
+            'error' => $e->getMessage()
+        ]);
     }
+}
 
     /**
      * @param Request $request
@@ -290,7 +290,7 @@ class UtilController extends Controller
                 'bib_arcevos.'.$columnSelect . ' as ' . $columnSelect,
                 'bib_arcevos.subtitulo as subtitulo',
                 \DB::raw('CONCAT (responsaveis.sobrenome, ", ", responsaveis.nome) as autor')
-                ]);
+            ]);
             $qb->leftJoin(\DB::raw('(SELECT arcevos_id, id, responsaveis_id FROM primeira_entrada GROUP BY arcevos_id)entrada'), function ($join) {
                 $join->on('entrada.arcevos_id', '=', 'bib_arcevos.id');
             });
@@ -381,7 +381,7 @@ class UtilController extends Controller
            #Validando os parametros
            /*if($searchValue == null || $tableName == null || $fieldName == null || $pageValue == null) {
                 throw new \Exception('Parametros inválidos');
-           }*/
+            }*/
 
             #preparando a consulta
             /*$qb = DB::table($tableName)->select('id', 'nome');
@@ -515,19 +515,19 @@ class UtilController extends Controller
     {
         $query->whereExists(function ($query) {
             $query->select(\DB::raw("fac_alunos.id", "fac_alunos.matricula"))
-                ->from('fac_alunos')
-                ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
-                ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
-                ->join('fac_alunos_situacoes', function ($join) {
-                    $join->on(
-                        'fac_alunos_situacoes.id', '=',
-                        \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
-                            where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
-                    );
-                })
-                ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
-                ->whereRaw('fac_alunos.pessoa_id = pessoas.id')
-                ->where('fac_situacao.id', '=', '2');
+            ->from('fac_alunos')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.aluno_id', '=', 'fac_alunos.id')
+            ->join('fac_semestres', 'fac_semestres.id', '=', 'fac_alunos_semestres.semestre_id')
+            ->join('fac_alunos_situacoes', function ($join) {
+                $join->on(
+                    'fac_alunos_situacoes.id', '=',
+                    \DB::raw('(SELECT situacao_secundaria.id FROM fac_alunos_situacoes as situacao_secundaria 
+                        where situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1)')
+                );
+            })
+            ->join('fac_situacao', 'fac_situacao.id', '=', 'fac_alunos_situacoes.situacao_id')
+            ->whereRaw('fac_alunos.pessoa_id = pessoas.id')
+            ->where('fac_situacao.id', '=', '2');
         });
 
         return $query;
@@ -541,34 +541,34 @@ class UtilController extends Controller
         $query->whereExists(function ($query) {
             $query->select(
                 \DB::raw("pos_alunos.id"))
-                ->from('pos_alunos')
-                ->leftJoin('pos_alunos_cursos', function ($join) {
-                    $join->on(
-                        'pos_alunos_cursos.id', '=',
-                        \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
+            ->from('pos_alunos')
+            ->leftJoin('pos_alunos_cursos', function ($join) {
+                $join->on(
+                    'pos_alunos_cursos.id', '=',
+                    \DB::raw('(SELECT curso_atual.id FROM pos_alunos_cursos as curso_atual
                         where curso_atual.aluno_id = pos_alunos.id ORDER BY curso_atual.id DESC LIMIT 1)')
-                    );
-                })
-                ->leftJoin('pos_alunos_turmas', function ($join) {
-                    $join->on(
-                        'pos_alunos_turmas.id', '=',
-                        \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
+                );
+            })
+            ->leftJoin('pos_alunos_turmas', function ($join) {
+                $join->on(
+                    'pos_alunos_turmas.id', '=',
+                    \DB::raw('(SELECT turma_atual.id FROM pos_alunos_turmas as turma_atual
                         where turma_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY turma_atual.id DESC LIMIT 1)')
-                    );
-                })
-                ->leftJoin('pos_alunos_situacoes', function ($join) {
-                    $join->on(
-                        'pos_alunos_situacoes.id', '=',
-                        \DB::raw('(SELECT situacao_atual.id FROM pos_alunos_situacoes as situacao_atual
+                );
+            })
+            ->leftJoin('pos_alunos_situacoes', function ($join) {
+                $join->on(
+                    'pos_alunos_situacoes.id', '=',
+                    \DB::raw('(SELECT situacao_atual.id FROM pos_alunos_situacoes as situacao_atual
                         where situacao_atual.pos_aluno_curso_id = pos_alunos_cursos.id ORDER BY situacao_atual.id DESC LIMIT 1)')
-                    );
-                })
-                ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
-                ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
-                ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
-                ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
+                );
+            })
+            ->leftJoin('fac_turmas', 'fac_turmas.id', '=', 'pos_alunos_turmas.turma_id')
+            ->leftJoin('fac_situacao', 'fac_situacao.id', '=', 'pos_alunos_situacoes.situacao_id')
+            ->leftJoin('fac_curriculos', 'fac_curriculos.id', '=', 'pos_alunos_cursos.curriculo_id')
+            ->leftJoin('fac_cursos', 'fac_cursos.id', '=', 'fac_curriculos.curso_id')
                 //->where('pos_alunos.tipo_aluno_id', null)
-                ->whereRaw('pos_alunos.pessoa_id = pessoas.id');
+            ->whereRaw('pos_alunos.pessoa_id = pessoas.id');
         });
 
         /*if($tipo == '2') {
@@ -587,8 +587,8 @@ class UtilController extends Controller
     {
         $query->whereExists(function ($query) {
             $query->select(\DB::raw("fac_professores.id"))
-                ->from('fac_professores')
-                ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id');
+            ->from('fac_professores')
+            ->join('pessoas', 'fac_professores.pessoa_id', '=', 'pessoas.id');
                 //->whereRaw('fac_professores.pessoa_id = pessoas.id');
                // ->join('tipo_nivel_sistema', 'fac_professores.tipo_nivel_sistema_id', '=', 'tipo_nivel_sistema.id');
                 //->where('tipo_nivel_sistema.id', '=' , 1)
@@ -601,15 +601,25 @@ class UtilController extends Controller
 
     public function autoPreencherAssunto(Request $request){
 
-        $query->\DB::table('bib_arcevos')->select('assunto')->where('cdd', $request->cdd)->get();
+        if(isset($request->cdd)){
+            $query = DB::table('bib_arcevos')->select('assunto')->where('cdd','=', "$request->cdd")->first();
+        }else{
+            $query = DB::table('bib_arcevos')->select('cdd')->where('assunto','=', "$request->assunto")->first();
+        }
 
 
-        dd($query);
+           return \Illuminate\Support\Facades\Response::json($query);
+
+       } 
+
+/*  public function autoPreencherCdd(Request $request){
+
+        $query = DB::table('bib_arcevos')->select('cdd')->where('assunto','=', "$request->assunto")->first();
 
 
 
-        return \Illuminate\Support\Facades\Response::json($query);
+     return \Illuminate\Support\Facades\Response::json($query);
 
-    } 
+ } */
 
 }

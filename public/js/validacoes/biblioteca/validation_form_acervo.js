@@ -48,28 +48,49 @@
 */
 
 $('#cdd').focusout(function(event) {
-    console.log("batata");
+    var cdd = $("#cdd").val();
     var id = {
-        'cdd' : 'a',
+        'cdd' : cdd,
     };
 
 
-    jQuery.ajax({
+    $assunto = jQuery.ajax({
         type: 'GET',
         url: "/index.php/seracademico/util/autoPreencherAssunto",
         headers: {
-        'X-CSRF-TOKEN': '{{  csrf_token() }}'
-    },
-    data: id,
+            'X-CSRF-TOKEN': '{{  csrf_token() }}'
+        },
+        data: id,
         datatype: 'json'
     }).done(function (json) {
+        console.log(json);
 
-    $('#assunto').val('json.aaa');
+        $('#assunto').val(json.assunto);
     });
 
+});
 
 
 
+$('#assunto').focusout(function(event) {
+    var assunto = $("#assunto").val();
+    var id = {
+        'assunto' : assunto,
+    };
 
-$('#assunto').val('batata');
+
+ jQuery.ajax({
+        type: 'GET',
+        url: "/index.php/seracademico/util/autoPreencherAssunto",
+        headers: {
+            'X-CSRF-TOKEN': '{{  csrf_token() }}'
+        },
+        data: id,
+        datatype: 'json'
+    }).done(function (json) {
+        console.log(json);
+
+        $('#cdd').val(json.cdd);
+    });
+
 });
