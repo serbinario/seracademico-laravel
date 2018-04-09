@@ -79,7 +79,7 @@ class ReservaController extends Controller
                 'bib_arcevos.subtitulo as subtitulo'
                 )
             ->groupBy('bib_exemplares.edicao', 'bib_exemplares.ano', 'bib_arcevos.id')
-            ->having(\DB::raw('sum(bib_exemplares.situacao_id) = count(*) * 5'), '=', '1');
+            ->having(\DB::raw('sum(bib_exemplares.situacao_id)'), '=', \DB::raw('(COUNT(*) * 5)'));
 
         #Editando a grid
         return Datatables::of($rows)->addColumn('action', function ($row) {
