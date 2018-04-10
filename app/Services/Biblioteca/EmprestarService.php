@@ -519,6 +519,7 @@ class EmprestarService
         $valorNormal     = isset($parametros[1]) ? $parametros[1]->valor : "";
         $multaTotal      = 0;
         $idEmprestimos   = [];
+        $flag = 0;
 
         foreach ($emprestimos as $chave => $emprestimo) {
 
@@ -556,6 +557,7 @@ class EmprestarService
                     $exemplar->save();
                 }
 
+
                 $multaTotal = $multaTotal + $multa;
                 $emprestimo->valor_multa = $multa;
 
@@ -570,7 +572,11 @@ class EmprestarService
             // Setando data e status de devolução
             $emprestimo->data_devolucao_real = $data;
             $emprestimo->status_devolucao = '1';
-            $emprestimo->status_pagamento = $multaTotal ? '1' : '0';
+            if($multaTotal != 0){
+                $emprestimo->status_pagamento = 0;
+            }else{
+                $emprestimo->status_pagamento = 1;
+            }
             $emprestimo->save();
 
             // Alterando o status dos exemplares a serem devolvidos
