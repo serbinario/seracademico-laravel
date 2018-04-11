@@ -13,12 +13,12 @@ $(document).ready(function () {
         var reservaId = d['id'];
         var emprestimoEspecial = d['emprestimo_especial'];
         var qtdExempEmprestado = 0;
-        var url = '/seracademico/biblioteca/saveEmprestimo';
+        var url = 'index.php/seracademico/biblioteca/saveEmprestimo';
         var tipoPessoa = d['tipo_pessoa'];
         var qtdEmprestimoAtual = d['qtdEmprestimos']['qtdEmprestimoAtual'];
         var qtdEmprestimoMaximo = d['qtdEmprestimos']['qtdEmprestimoMaximo'];
 
-        var html = "<form action='"+url+"' id='form' method='post' target='_blank'>";
+        var html = "<form action='"+url+"' id='form' method='get' target='_blank'>";
         html += "<table class='table table-bordered'>";
         html += "<thead>" +
             "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td>" +

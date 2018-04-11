@@ -448,7 +448,6 @@ class ReservaController extends Controller
      */
     public function saveEmprestimo(Request $request)
     {
-        dd($request);
         try {
             #Recuperando os dados da requisição
             $data = $request->all();
