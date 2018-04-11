@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     function format(d) {
 
+        var seTemCheckbox = false;
         var acervo = d['acervos'];
         var tipoEmprestimo = d['tipo_emprestimo'];
         var pessoaId = d['pessoas_id'];
@@ -61,6 +62,7 @@ $(document).ready(function () {
                 
                 html += "<td><input class='acervo' type='checkbox' name='id[]' value='"+acervo[i]['acervo_id']+"'></td>";
                 html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['edicao']+"'>";
+                seTemCheckbox = true;
             }
 
             html += "</tr>";
@@ -73,7 +75,7 @@ $(document).ready(function () {
         html += "<input type='hidden' name='emprestimoEspecial' value='"+emprestimoEspecial+"'>";
         html += "<input type='hidden' name='tipo_pessoa' value='"+tipoPessoa+"'>";
 
-        if(qtdExempEmprestado < acervo.length) {
+        if(seTemCheckbox) {
             html += "<input type='submit' class='btn btn-primary' value='Confirmar'>";
         }
 

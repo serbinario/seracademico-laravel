@@ -31,12 +31,10 @@ class EmprestimoEmAtraso
         //validando se a pessoa possui empréstimo em atraso
         $emprestimoAtraso = \DB::table('bib_emprestimos')->
         where('bib_emprestimos.pessoas_id', '=', $dados['pessoas_id'])
-            ->whereDate('bib_emprestimos.data_devolucao', '<', $data)
             ->where('bib_emprestimos.status_devolucao', '=', '0')
-            ->orWhere('bib_emprestimos.status_pagamento', '=', '1')
             ->select('bib_emprestimos.*')
             ->first();
-
+            
         if (!$emprestimoAtraso) {
             return $this->next->getResult($dados, $data, $return);
         }
