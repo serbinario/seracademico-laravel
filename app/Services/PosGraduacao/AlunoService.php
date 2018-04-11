@@ -178,7 +178,14 @@ class AlunoService
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
-            $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+            if(!!$pessoa->endereco->id){
+                $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
+            }else {
+            #Criando o endereco e pessoa
+            $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+        }
+
+            
         } else {
             #Criando o endereco e pessoa
             $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
