@@ -173,17 +173,18 @@ class AlunoService
                 ->findWhere(['cpf' => $data['pessoa']['cpf']]);
         }
 
+
         # Verificando se a pessoa já existe
         $data['pessoa']['nome'] = mb_strtoupper($data['pessoa']['nome']);
         if(count($objPessoa) > 0) {
             #aAlterando a pessoa e o endereço
             $pessoa   = $this->pessoaRepository->update($data['pessoa'], $objPessoa[0]->id);
-            if(!!$pessoa->endereco->id){
+            if(!!$pessoa->endereco){
                 $endereco = $this->enderecoRepository->update($data['pessoa']['endereco'], $pessoa->endereco->id);
             }else {
             #Criando o endereco e pessoa
-            $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
-        }
+                $endereco = $this->enderecoRepository->create($data['pessoa']['endereco']);
+            }
 
             
         } else {
@@ -194,6 +195,8 @@ class AlunoService
             $data['pessoa']['enderecos_id'] = $endereco->id;
             $pessoa  = $this->pessoaRepository->create($data['pessoa']);
         }
+
+        //dd($objPessoa);
 
         $this->tratamentoCurso($data, $pessoa);
 
@@ -572,7 +575,7 @@ class AlunoService
         }
 
         # recuperando o currículo
-        $curriculo = Curriculo::byCurso($data['curso_id']);
+        $curriculo = \Seracademico\Entities\PosGraduacao\Curriculo::byCurso($data['curso_id']);
 
         # Verificando se o currículo foi encontrado
         if(!$curriculo || count($curriculo) == 0) {
