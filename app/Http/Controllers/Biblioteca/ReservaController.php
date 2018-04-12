@@ -289,7 +289,13 @@ class ReservaController extends Controller
 
             # Retorno
             return $html;
-        })->addColumn('qtdEmprestimos', function ($row) {
+        })
+            ->filter(function ($query) use ($request) {
+            if ($request->has('status')) {
+                $query->where('bib_reservas_exemplares.status', '<>', "{$request->get('status')}");
+            }
+        })
+            ->addColumn('qtdEmprestimos', function ($row) {
 
 
             # Variáveis

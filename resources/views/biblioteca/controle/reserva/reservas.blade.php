@@ -66,6 +66,27 @@
                 </div>
             @endif
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="search-form" class="form-inline" role="form" method="GET">
+
+                            <div class="form-check form-check-inline">
+                                <input name='status' class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
+                                <label class="form-check-label" for="inlineCheckbox1">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name='status' class="form-check-input" type="radio" id="inlineCheckbox2" value="0">
+                                <label class="form-check-label" for="inlineCheckbox2">2</label>
+                            </div>
+
+                            <div class="form-group">
+                                <input  id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</input>
+                                <button id="reportAluno" class="btn-sm btn-primary">Relatório</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive no-padding">

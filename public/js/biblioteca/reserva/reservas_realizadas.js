@@ -88,7 +88,12 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         order: [[ 1, "asc" ]],
-        ajax: '/index.php/seracademico/biblioteca/gridReservados',
+        ajax: {
+            url: '/index.php/seracademico/biblioteca/gridReservados',
+            data: function (d) {
+                d.status = $('input[name=status]:checked').val();
+            }
+        },
         columns: [
             {
                 "className":      'details-control',
@@ -121,6 +126,11 @@ $(document).ready(function () {
             tr.addClass('shown');
         }
     });
+
+    $('#search-form').on('submit', function(e) {
+        table.draw();
+        e.preventDefault();
+    });
 });
 
 $(document).on('submit', '#form', function (event) {
@@ -138,3 +148,4 @@ $(document).on('submit', '#form', function (event) {
         location.reload();
     }
 });
+
