@@ -70,18 +70,11 @@
                     <div class="col-md-12">
                         <form id="search-form" class="form-inline" role="form" method="GET">
 
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline" style="color: #333;">
                                 <input name='status' class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
-                                <label class="form-check-label" for="inlineCheckbox1">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="inlineCheckbox1">Pendentes</label>
                                 <input name='status' class="form-check-input" type="radio" id="inlineCheckbox2" value="0">
-                                <label class="form-check-label" for="inlineCheckbox2">2</label>
-                            </div>
-
-                            <div class="form-group">
-                                <input  id="pesquisar" class="btn-sm btn-primary" type="submit">Pesquisar</input>
-                                <button id="reportAluno" class="btn-sm btn-primary">Relatório</button>
+                                <label class="form-check-label" for="inlineCheckbox2">Histórico</label>
                             </div>
                         </form>
                     </div>

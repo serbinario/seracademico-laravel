@@ -2,7 +2,7 @@
  * Created by Fabio Aguiar on 20/03/2017.
  */
 
-$(document).ready(function () {
+ $(document).ready(function () {
 
     function format(d) {
 
@@ -21,9 +21,9 @@ $(document).ready(function () {
         var html = "<form action='"+url+"' id='form' method='get' target='_blank'>";
         html += "<table class='table table-bordered'>";
         html += "<thead>" +
-            "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td>" +
-            "<td>Situação da fila</td><td>Empréstimos ativos</td><td>Selecionar</td></tr>" +
-            "</thead>";
+        "<tr><td>Título</td><td>Subtitulo</td><td>Número de chamada</td><td>Exemplares disponíveis</td>" +
+        "<td>Situação da fila</td><td>Empréstimos ativos</td><td>Selecionar</td></tr>" +
+        "</thead>";
 
         for (var i = 0; i < acervo.length; i++) {
 
@@ -58,8 +58,8 @@ $(document).ready(function () {
             if(acervo[i]['qtdExemplares'] == 0 || acervo[i]['status'] == '1' || acervo[i]['status_fila'] == '2'){
                 html += "<td></td>";
             } else if (acervo[i]['qtdExemplares'] > 0 && acervo[i]['status'] == '0' && acervo[i]['status_fila'] == '1' 
-                        && qtdEmprestimoAtual < qtdEmprestimoMaximo) {
-                
+                && qtdEmprestimoAtual < qtdEmprestimoMaximo) {
+
                 html += "<td><input class='acervo' type='checkbox' name='id[]' value='"+acervo[i]['acervo_id']+"'></td>";
                 html += "<input type='hidden' name='edicao[]' value='"+acervo[i]['edicao']+"'>";
                 seTemCheckbox = true;
@@ -95,18 +95,18 @@ $(document).ready(function () {
             }
         },
         columns: [
-            {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           'pessoas.nome',
-                "defaultContent": ''
-            },
-            {data: 'codigo', name: 'bib_reservas.codigo'},
-            {data: 'data', name: 'bib_reservas.data'},
-            {data: 'data_vencimento', name: 'bib_reservas.data_vencimento'},
-            {data: 'nome', name: 'pessoas.nome'},
-            {data: 'identidade', name: 'pessoas.identidade'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+        {
+            "className":      'details-control',
+            "orderable":      false,
+            "data":           'pessoas.nome',
+            "defaultContent": ''
+        },
+        {data: 'codigo', name: 'bib_reservas.codigo'},
+        {data: 'data', name: 'bib_reservas.data'},
+        {data: 'data_vencimento', name: 'bib_reservas.data_vencimento'},
+        {data: 'nome', name: 'pessoas.nome'},
+        {data: 'identidade', name: 'pessoas.identidade'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#search-form').on('submit', function(e) {
+    $('input[type=radio][name=status]').change(function() {
         table.draw();
         e.preventDefault();
     });
