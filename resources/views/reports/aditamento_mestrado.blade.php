@@ -1,6 +1,7 @@
 <html>
 <head>
     {{--Documento personalizado em 04/09/2017 @felipe--}}
+    {{--Documento personalizado em 19/04/2018 @Gustavo--}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Contrato - Mestrado</title>
@@ -214,10 +215,9 @@
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Segundo:</b> A <b>Contratante</b> se compromete a elaborar e publicar 01 (hum) artigo por ano acadêmico em
-        períodico acadêmico indexado no QUALIS/CAPES.
+        <b>Parágrafo Segundo:</b> A <b>Contratante</b> se compromete a elaborar e publicar 01 (hum) artigo por ano acadêmico em períodico acadêmico indexado no QUALIS/CAPES.
         A referida indexação da revista pode ser consultada através da Plataforma SUCUPIRA, no endereço eletrônico:
-        https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf
+        <span style="color: blue; text-decoration: underline;padding-right: 25px;">https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf</span>
     </p>
 
     <p class="subparagrafo">
@@ -237,7 +237,9 @@
         acerca do valor a ser pago ao referido despachante em momento anterior à sua viagem, prazo jamais menor
         que 30 (trinta) dias, e num valor nunca excedente a um salário mínimo e meio.<br>
         <b>b.</b> Quanto à estada no País estrangeiro, esta ocorrerá às expensas do próprio aluno,
-        assim como quaisquer valores referentes à sua viagem.
+        assim como quaisquer valores referentes à sua viagem.<br>
+        <b>c.</b>O aluno é expressamente alertado da necessidade de viagem ao exterior e que os custos de suas viagens serão pagos às suas expensas. Contudo, caso o aluno pague suas mensalidades em dia, a Alpha se responsabiliza
+        integralmente pelas passagens aéreas ao exterior.
     </p>
 
     <p class="subparagrafo">
@@ -250,14 +252,14 @@
         Cláusula Quarta: [sem alterações].
     </p>
 
+<!-- 
+    <p class="titulo_paragrafo">
+        Cláusula Quinta:
+    </p> -->
+
 
     <p class="titulo_paragrafo">
         Cláusula Quinta:
-    </p>
-
-
-    <p class="titulo_paragrafo">
-        Cláusula Terceira:
     </p>
     <p class="paragrafo">
         O presente instrumento poderá ser rescindido nas seguintes hipóteses:
@@ -265,8 +267,8 @@
 
     <p class="subparagrafo">
         a. [sem alterações].<br>
-        b. Através do requerimento expresso da Contratante, assistido ou representado, quando for o caso de trancamento de matrícula,
-        sendo em qualquer caso, condição obrigatória de sua eﬁcácia a comunicação da desistência da primeira parte Contratada, e o
+        b. Através do requerimento expresso da <b>Contratante</b>, assistido ou representado, quando for o caso de trancamento de matrícula,
+        sendo em qualquer caso, condição obrigatória de sua eﬁcácia a comunicação da desistência da primeira parte <b>Contratada</b>, e o
         pagamento de multa no valor de R$50,00 referente a taxa de trancamento, quando o CONTRATANTE poderá retornar ao curso em
         até 24 (vinte e quatro) meses, fazendo o pagamento da rematrícula.<br>
         c. Observado pela coordenação, bem como orientador, o plágio no trabalho de tese ou dissertação, ou que seja investigado ou
@@ -288,7 +290,7 @@
         <b>Parágrafo Terceiro:</b>Ocorrendo a desistência unilateral do contrato, com comunicação escrita de 30 (trinta) dias
         antes de vencer a parcela seguinte, o Contratado ﬁca autorizado a cobrar ou reter 10% (dez por cento) do saldo
         total do plano ﬁnanceiro escolhido.
-        <br>a. Se, suspendendo-se o contrato pelo prazo de 24(vinte e quatro) meses, o aluno não regressar ao
+        <br> &emsp; a. Se, suspendendo-se o contrato pelo prazo de 24(vinte e quatro) meses, o aluno não regressar ao
         curso, dará causa à desistência unilateral, podendo ser cobrado do valor referido no parágrafo terceiro.
 
     </p>
@@ -305,7 +307,7 @@
     </p>
 
     <p class="subparagrafo">
-        <b>Parágrafo Sétimo:</b> [Sem alteraçoes]
+        <b>Parágrafo Sétimo:</b> A inadimplência contratual por um período superior a 60 (sessenta dias).
     </p>
 
     <p class="titulo_paragrafo">
@@ -329,7 +331,7 @@
     </p>
 
     <p class="titulo_paragrafo">
-        Cláusula Sétima: [sem alterações].
+        Cláusula Oitava:
     </p>
     <p class="paragrafo">
     A emissão dos diplomas internacionais ocorrerá em até 150 (cento e cinquenta) dias úteis e o prazo para entrega do
@@ -341,7 +343,7 @@
     </p>
 
     <p class="titulo_paragrafo">
-        Cláusula Décima: [sem alterações].
+        Cláusula Décima:
     </p>
     <p class="paragrafo">
         As partes escolhem como domicílio forense a cidade do Recife, para dirimir quaisquer conflitos extrajudiciais ou judiciais.

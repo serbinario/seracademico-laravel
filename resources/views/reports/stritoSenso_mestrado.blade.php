@@ -1,11 +1,11 @@
 <html>
 <head>
     {{--Documento personalizado em 04/09/2017 @felipe--}}
-    {{--Documento personalizado em 16/03/2018 @Gustavo--}}
+    {{--Documento personalizado em 19/04/2018 @Gustavo--}}
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Contrato - Mestrado</title>
+    <title>Strito Senso - Mestrado</title>
     <style type="text/css">
     body {
         font-family: Arial, Helvetica, AppleGothic, sans-serif;
@@ -96,16 +96,16 @@
 
     <div class="cabecalho" style="font-size: 15px;">
         <p>
-           CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR (MODALIDADE ON- LINE)
-       </p>
-   </div>
+         CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR (MODALIDADE ON- LINE)
+     </p>
+ </div>
 
-   <div class="conteudo">
+ <div class="conteudo">
     <p>
-       Pelo presente instrumento particular de <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, celebrado pela <b>UNIVERSIDAD INTERAMERICANA</b>, criada pela Lei Nacional Paraguaya n. 4.200, com RUC 80071652-3, representada pelo <b>Dr. HUGO CÉSAR GÓMEZ SOLÍS</b>, paraguaio, portador do RG 625.806, como primeira parte, <b>EMPRESA ALPHA SISTEMA EDUCACIONAL E TREINAMENTOS LTDA-ME</b>, Pessoa Jurídica de Direito Privado, inscrita no CNPJ 15708483/0001-50, como segunda parte, instituições de direito privado, autorizadas à gerencia de Seminários Culturais, Fóruns de Debates, Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem, Mini Cursos Livres e Seminários Culturais, com endereço profissional à Rua Gervásio Pires, 826, Boa Vista, Recife, PE, CEP 50050-070, Brasil, neste ato reconhecidas como <b> Contratadas</b> e pessoa natural de direito, residente no Estado Brasileiro, cidadã em pleno gozo de seus direitos cíveis, abaixo qualificada e reconhecida como <b>Contratante:</b>
-   </p>
+     Pelo presente instrumento particular de <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, celebrado pela <b>UNIVERSIDAD INTERAMERICANA</b>, criada pela Lei Nacional Paraguaya n. 4.200, com RUC 80071652-3, representada pelo <b>Dr. HUGO CÉSAR GÓMEZ SOLÍS</b>, paraguaio, portador do RG 625.806, como primeira parte, <b>EMPRESA ALPHA SISTEMA EDUCACIONAL E TREINAMENTOS LTDA-ME</b>, Pessoa Jurídica de Direito Privado, inscrita no CNPJ 15708483/0001-50, como segunda parte, instituições de direito privado, autorizadas à gerencia de Seminários Culturais, Fóruns de Debates, Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem, Mini Cursos Livres e Seminários Culturais, com endereço profissional à Rua Gervásio Pires, 826, Boa Vista, Recife, PE, CEP 50050-070, Brasil, neste ato reconhecidas como <b> Contratadas</b> e pessoa natural de direito, residente no Estado Brasileiro, cidadã em pleno gozo de seus direitos cíveis, abaixo qualificada e reconhecida como <b>Contratante:</b>
+ </p>
 
-   <div class="informacoes_pessoas">
+ <div class="informacoes_pessoas">
     <table class="table" style="font-size: 14px;">
         <tr>
             <td colspan="4">Nome: {{$aluno['pessoa']['nome']}}</td>
@@ -150,9 +150,9 @@
             <td>Local Nasc: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
         </tr>
         <tr>
-           <td colspan="4">Curso: {{ isset($curso->nome) ? $curso->nome : ""  }}</td>
-       </tr>
-   </table>
+         <td colspan="4">Curso: {{ isset($curso->nome) ? $curso->nome : ""  }}</td>
+     </tr>
+ </table>
 </div>
 
 <p>
@@ -162,9 +162,8 @@
 <p class="paragrafo">
     O objeto do presente <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO DE CENTRO
     DE APOIO A ESTUDANTES BRASILEIROS NO EXTERIOR</b>, é a prestação de serviços das <b>Contratadas</b> a <b>Contratante</b>,
-    visando a administração de centros de apoio à pesquisadores admitidos na <b>Grendal College and University
-    dos USA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
-    Workshops Educacionais, Seminários</b> de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem,tomando como base o modelo internacional sul-americano de integralização de créditos, fortemente amparado por organismos internacionais, bem como assessorá-la a nacionalizar os documentos estrangeiros no Estado Brasileiro sob segunda contratação entre Contratadas e Contratante.
+    visando a administração de centros de apoio à pesquisadores admitidos na <b>UNIVERSIDAD INTERAMERICANA</b>, ofertando a estes recurso e gerência a execução de <b>Seminários Culturais, Fóruns de Debates,
+    Workshops Educacionais, Seminários de Qualificação de Projetos, Ambientes Virtuais de Ensino Aprendizagem, Mini Cursos Livres e Seminários</b>, tomando como base o modelo internacional sul-americano de integralização de créditos, fortemente amparado por organismos internacionais, bem como assessorá-la a nacionalizar os documentos estrangeiros no Estado Brasileiro sob segunda contratação entre Contratadas e Contratante.
 </p>
 
 <div style="margin-top: 65px;">
@@ -194,123 +193,15 @@
     <tbody>
         <tr>
             <td>Matrícula</td>
-            <td>R$ 500,00</td>
-        </tr>
-        <tr>
-            <td>Nº de Mensalidades:30(trinta)</td>
             <td>R$ 600,00</td>
         </tr>
-    </tbody>
-</table>
-
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
-    <thead>
-        <tr>
-            <th>Diplomação</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>U$ 1500,00</td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    b. ADMIISTRAÇÃO DE EMPRESA, ADMINISTRAÇÃO EM GESTÃO HOSPITALAR e DIREITO INTERNACIONAL PÚBLICO:
-</p>
-
-
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
-    <thead>
-        <tr>
-            <th style="width: 80%">Descrição</th>
-            <th>Valor</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Matrícula</td>
-            <td>R$ 500,00</td>
-        </tr>
         <tr>
             <td>Nº de Mensalidades:30(trinta)</td>
-            <td>R$ 600,00</td>
+            <td>R$ 750,00</td>
         </tr>
     </tbody>
 </table>
 
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
-    <thead>
-        <tr>
-            <th>Diplomação</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>U$ 1800,00</td>
-        </tr>
-    </tbody>
-</table>
-<p><b>2. DOUTORADOS</b></p>
-
-<p>
-    a. INTERNACIONAL EM SAÚDE PÚBLICA
-</p>
-
-
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
-    <thead>
-        <tr>
-            <th style="width: 80%">Descrição</th>
-            <th>Valor</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Matrícula</td>
-            <td>R$ 500,00</td>
-        </tr>
-        <tr>
-            <td>Nº de Mensalidades:30(trinta)</td>
-            <td>R$ 700,00</td>
-        </tr>
-    </tbody>
-</table>
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
-    <thead>
-        <tr>
-            <th>Diplomação</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>U$ 2300,00</td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    b. CIÊNCIAS DA EDUCAÇÃO:
-</p>
-
-
-<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
-    <thead>
-        <tr>
-            <th style="width: 80%">Descrição</th>
-            <th>Valor</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Matrícula</td>
-            <td>R$ 500,00</td>
-        </tr>
-        <tr>
-            <td>Nº de Mensalidades:30(trinta)</td>
-            <td>R$ 700,00</td>
-        </tr>
-    </tbody>
-</table>
 <table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
     <thead>
         <tr>
@@ -322,9 +213,15 @@
             <td>U$ 2000,00</td>
         </tr>
     </tbody>
+    <tbody>
+       <tr>
+        <td>OBS: Pagamento das mensalidades até o vencimento terá R$ 50,00
+        de desconto</td>
+    </tr>
+</tbody>
 </table>
 <p>
-    c. ADMINISTRAÇÃO DE EMPRESAS
+    b. ADMINISTRAÇÃO DE EMPRESA, ADMINISTRAÇÃO EM GESTÃO HOSPITALAR e DIREITO INTERNACIONAL PÚBLICO:
 </p>
 
 
@@ -338,11 +235,55 @@
     <tbody>
         <tr>
             <td>Matrícula</td>
-            <td>R$ 500,00</td>
+            <td>R$ 600,00</td>
         </tr>
         <tr>
             <td>Nº de Mensalidades:30(trinta)</td>
-            <td>R$ 700,00</td>
+            <td>R$ 750,00</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
+    <thead>
+        <tr>
+            <th>Diplomação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>U$ 2500,00</td>
+        </tr>
+    </tbody>
+    <tbody>
+       <tr>
+        <td>OBS: Pagamento das mensalidades até o vencimento terá R$ 50,00
+        de desconto</td>
+    </tr>
+</tbody>
+</table>
+<p><b>2. DOUTORADOS</b></p>
+
+<p>
+    a. INTERNACIONAL EM SAÚDE PÚBLICA, CIÊNCIAS AMBIENTAIS
+</p>
+
+
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
+    <thead>
+        <tr>
+            <th style="width: 80%">Descrição</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Matrícula</td>
+            <td>R$ 600,00</td>
+        </tr>
+        <tr>
+            <td>Nº de Mensalidades:30(trinta)</td>
+            <td>R$ 850,00</td>
         </tr>
     </tbody>
 </table>
@@ -354,9 +295,97 @@
     </thead>
     <tbody>
         <tr>
-            <td>U$ 2100,00</td>
+            <td>U$ 3000,00</td>
         </tr>
     </tbody>
+    <tbody>
+       <tr>
+        <td>OBS: Pagamento das mensalidades até o vencimento terá R$ 50,00
+        de desconto</td>
+    </tr>
+</tbody>
+</table>
+<p>
+    b. DOUTORADO EM CIÊNCIAS DA EDUCAÇÃO:
+</p>
+
+
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
+    <thead>
+        <tr>
+            <th style="width: 80%">Descrição</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Matrícula</td>
+            <td>R$ 600,00</td>
+        </tr>
+        <tr>
+            <td>Nº de Mensalidades:30(trinta)</td>
+            <td>R$ 850,00</td>
+        </tr>
+    </tbody>
+</table>
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
+    <thead>
+        <tr>
+            <th>Diplomação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>U$ 3000,00</td>
+        </tr>
+    </tbody>
+    <tbody>
+       <tr>
+        <td>OBS: Pagamento das mensalidades até o vencimento terá R$ 50,00
+        de desconto</td>
+    </tr>
+</tbody>
+</table>
+<p>
+    c. DOUTORADO EM ADMINISTRAÇÃO DE EMPRESAS
+</p>
+
+
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" width="45%">
+    <thead>
+        <tr>
+            <th style="width: 80%">Descrição</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Matrícula</td>
+            <td>R$ 600,00</td>
+        </tr>
+        <tr>
+            <td>Nº de Mensalidades:30(trinta)</td>
+            <td>R$ 850,00</td>
+        </tr>
+    </tbody>
+</table>
+<table class="tabela-de-descricao" style="font-size: 12px;" cellspacing="0" style="margin-top: 3%" width="45%">
+    <thead>
+        <tr>
+            <th>Diplomação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>U$ 3000,00</td>
+        </tr>
+    </tbody>
+    <tbody>
+       <tr>
+        <td>OBS: Pagamento das mensalidades até o vencimento terá R$ 50,00
+        de desconto</td>
+    </tr>
+</tbody>
 </table>
 
 
@@ -375,7 +404,7 @@
 </p>
 
 <p class="paragrafo">
-   A <b>Contratante</b> declara expressamente estar ciente dos termos da presente contratação, <b> a qual foi por ela firmada de livre e espontânea vontade</b>, sendo <b>sua  a  opção  pelo  ensino semipresencial ou blend learning</b>. Que também toma ciência da possibilidade da necessidade de serem realizadas viagens ao exterior para fins de submeter-se aos trâmites burocráticos de imigração, estudos e a apresentação de sua tese no Paraguay. De toda forma, <b>possui total e completa ciência dos procedimentos de nacionalização e convalidação de seus títulos emitidos  no exterior</b>, por intermédio de diplomação junto a programas baseados em experiências acadêmicas, bem como tem ciência, que sua participação no <b>CENTRO DE APOIO A ESTUDANTES BRASILEIROS</b> não configura aulas e/ou qualquer atividade regulamentada no Brasil, mas sim oferta de subsídios à educação realizada a distância, ou presencialmente no Paraguay.
+ A <b>Contratante</b> declara expressamente estar ciente dos termos da presente contratação, <b> a qual foi por ela firmada de livre e espontânea vontade</b>, sendo <b>sua  a  opção  pelo  ensino semipresencial ou blend learning</b>. Que também toma ciência da possibilidade da necessidade de serem realizadas viagens ao exterior para fins de submeter-se aos trâmites burocráticos de imigração, estudos e a apresentação de sua tese no Paraguay. De toda forma, <b>possui total e completa ciência dos procedimentos de nacionalização e convalidação de seus títulos emitidos  no exterior</b>, por intermédio de diplomação junto a programas baseados em experiências acadêmicas, bem como tem ciência, que sua participação no <b>CENTRO DE APOIO A ESTUDANTES BRASILEIROS</b> não configura aulas e/ou qualquer atividade regulamentada no Brasil, mas sim oferta de subsídios à educação realizada a distância, ou presencialmente no Paraguay.
 </p>
 
 <p class="paragrafo">
@@ -389,14 +418,14 @@
 </p>
 
 <p class="paragrafo">
- <span><b>Parágrafo Terceiro:</b></span>A <b>Contratante</b> se compromete a pagar o preço ajustado pela prestação dos serviços ora contratados, no valor e na
- forma prevista no presente contrato, estando ciente que em caso de inadimplência <b>terá seus dados incluídos nos
- serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
- administrativa e/ou acadêmica, fica eleito o foro de sua comarca de origem.
+   <span><b>Parágrafo Terceiro:</b></span>A <b>Contratante</b> se compromete a pagar o preço ajustado pela prestação dos serviços ora contratados, no valor e na
+   forma prevista no presente contrato, estando ciente que em caso de inadimplência <b>terá seus dados incluídos nos
+   serviços de proteção ao crédito</b> no <b>Estado Brasileiro</b>, bem como em caso de desacordo e/ou dissonância comercial,
+   administrativa e/ou acadêmica, fica eleito o foro de sua comarca de origem.
 </p>
 <p class="paragrafo">
- <span><b>Parágrafo Quarto:</b></span>
- Pagamentos em atraso após dois dias úteis serão corrigidos monetariamente pelo IGPM/FGV, acrescido de multa de 2% (dois por cento), além de juros moratórios de 1% (um por cento) ao mês, e pro rata / dia na fração do mês, podendo a cobrança passar a ser feita, neste caso, por advogado ou por empresa especializada em cobrança, quando então, tais valores serão também acrescidos de honorários advocatícios de 10% (dez por cento) em caso de acerto amigável ou 20% (vinte por cento) se for judicial, além das demais despesas decorrentes da exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
+   <span><b>Parágrafo Quarto:</b></span>
+   Pagamentos em atraso após dois dias úteis serão corrigidos monetariamente pelo IGPM/FGV, acrescido de multa de 2% (dois por cento), além de juros moratórios de 1% (um por cento) ao mês, e pro rata / dia na fração do mês, podendo a cobrança passar a ser feita, neste caso, por advogado ou por empresa especializada em cobrança, quando então, tais valores serão também acrescidos de honorários advocatícios de 10% (dez por cento) em caso de acerto amigável ou 20% (vinte por cento) se for judicial, além das demais despesas decorrentes da exigibilidade dos valores inadimplidos, seja administrativa ou judicialmente.
 </p>
 
 <p class="paragrafo">
@@ -405,7 +434,12 @@
 <p class="paragrafo">
     <span><b>Parágrafo Sexto:</b></span> Quanto à viagem ao exterior:
     <br><b>a.</b> Quanto ao pagamento do procedimento de imigração e documentações acadêmicas, o aluno tem ciência que pagará uma taxa administrativa ao despachante no Paraguai, para tanto, o aluno será informado acerca do valor a ser pago ao referido despachante em momento anterior à sua viagem, prazo jamais menor que 30 (trinta) dias, e num valor nunca excedente a um salário mínimo e meio. 
-    <br><b>b</b>. Quanto à estada no País estrangeiro, esta ocorrerá às expensas do próprio aluno, assim como quaisquer valores referentes à sua viagem. 
+    <br><b>b</b>. Quanto à estada no País estrangeiro, esta ocorrerá às expensas do próprio aluno, assim como quaisquer valores referentes à sua viagem, desde que não preencha o predisposto no parágrafo quinto, deste caput. 
+    <br> <b>c</b>. A viagem que trata esta cláusula não excederá ao valor total de 02(duas) ao longo de todo o curso.
+</p>
+<p class="paragrafo">
+    <span><b>Parágrafo Sétimo:</b></span> Havendo a necessidade de refazer algum dos seminários, o aluno pagará 50% (cinquenta por
+    cento) da mensalidade referente ao(s) módulo(s) devidamente requeridos por meio de protocolo acadêmico. 
 </p>
 
 <div style='margin-top: 40px;'>
