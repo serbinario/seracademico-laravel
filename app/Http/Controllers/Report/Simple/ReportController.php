@@ -74,7 +74,12 @@ class ReportController extends Controller
 
         if($idReport == 22) {
             $dadosParaRelatorio = $this->relatorioCadernetaFrequencia->obtemDados($dadosDaRequisicao);
-        } else {
+        }elseif($idReport == 54) {
+            $dadosParaRelatorio = $this->report->generate($idReport, $dadosDaRequisicao);
+            $dadosParaRelatorio += $this->qtddPorSexo();          
+        }else {
+
+
             # Recuperando os dados do relatório
             $dadosParaRelatorio = $this->report->generate($idReport, $dadosDaRequisicao);
         }
@@ -146,16 +151,16 @@ class ReportController extends Controller
                     switch (count($expressao)) {
                         case 1 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                        break;
                         case 2 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                        break;
                         case 3 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->get(['nome', 'id', 'codigo']);
+                        break;
                     }
 
                 } else {
@@ -167,16 +172,16 @@ class ReportController extends Controller
                     switch (count($expressao)) {
                         case 1 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}()->orderBy('nome', 'asc')->lists('nome', 'id');
+                        break;
                         case 2 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1])->orderBy('nome', 'asc')->lists('nome', 'id');
+                        break;
                         case 3 :
                             #Recuperando o registro e armazenando no array
-                            $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
-                            break;
+                        $result[strtolower($model)] = $nameModel::{$expressao[0]}($expressao[1], $expressao[2])->orderBy('nome', 'asc')->lists('nome', 'id');
+                        break;
                     }
                 } else {
                     #Recuperando o registro e armazenando no array
@@ -190,5 +195,25 @@ class ReportController extends Controller
 
         #retorno
         return $result;
+    }
+
+    public function qtddPorSexo(){
+
+       $results =
+            \DB::select(
+                \DB::raw("SELECT sexos.nome AS Sexo, COUNT(*) AS Quantidade
+           FROM `fac_alunos` INNER JOIN `pessoas` ON `pessoas`.`id` = `fac_alunos`.`pessoa_id` 
+           INNER JOIN sexos ON sexos.id = pessoas.sexos_id
+           INNER JOIN `fac_alunos_semestres` ON `fac_alunos_semestres`.`aluno_id` = `fac_alunos`.`id` 
+           INNER JOIN `fac_semestres` ON `fac_semestres`.`id` = `fac_alunos_semestres`.`semestre_id` 
+           INNER JOIN `fac_alunos_situacoes` ON `fac_alunos_situacoes`.`id` = 
+           (SELECT situacao_secundaria.id FROM fac_alunos_situacoes AS situacao_secundaria 
+           WHERE situacao_secundaria.aluno_semestre_id = fac_alunos_semestres.id ORDER BY situacao_secundaria.id DESC LIMIT 1) 
+           INNER JOIN `fac_situacao` ON `fac_situacao`.`id` = `fac_alunos_situacoes`.`situacao_id` WHERE fac_situacao.nome = 'Ativo' GROUP BY sexos.nome")
+
+            );
+        return $results;
+
+
     }
 }
