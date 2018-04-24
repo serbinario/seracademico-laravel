@@ -14,7 +14,7 @@
             width: 80%;
             margin: 0 auto;
             margin-bottom: 3%;
-            font-size: 15px;
+            font-size: 14px;
         }
         .cabecalho p {
             text-align: center;
@@ -32,10 +32,12 @@
         .table {
             width: 100%;
             background-color: #D3D3D3;
+            border-collapse: collapse;
         }
         .table td {
-            padding: 1%;
             border: 1px solid;
+            height: 9px;
+            border-collapse: collapse;
         }
         .rodape hr{
             border-color: black;
@@ -51,7 +53,6 @@
             margin-left: 2%;
         }
         .paragrafo {
-            margin-top: 20px;
             text-indent: 3em;
         }
         .uppercase {
@@ -61,7 +62,7 @@
             text-align: justify;
         }
         .subparagrafo {
-            margin-top: 20px;
+            margin:2px 2px;
             text-align: justify;
             margin-left: 10%;
             width: 90%;
@@ -102,7 +103,6 @@
 </div>
 
 <div class="conteudo">
-    <br>
     <p>
         O presente ADITAMENTO refere-se ao contrato já firmado entre as partes abaixo qualificadas, denominado de
         <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL E MANUTENÇÃO
@@ -113,7 +113,7 @@
         Seminários Culturais, com endereço proﬁssional à Rua Gervásio Pires, 826, Boa Vista, Recife, PE, CEP 50050-070,
         Brasil, neste ato reconhecidas como Contratadas e pessoa natural de direito, residente no Estado Brasileiro,
         cidadã em pleno gozo de seus direitos cíveis, abaixo qualiﬁcada e reconhecida como <b>Contratante</b>:
-    </p><br>
+    </p>
 
     <div class="informacoes_pessoas">
         <table class="table" style="font-size: 14px;">
@@ -167,7 +167,7 @@
 
     <br><p>
         <b>CLÁUSULA PRIMEIRA - DO OBJETO DO PRESENTE ADITAMENTO</b>
-    </p><br>
+    </p>
 
     <p class="paragrafo">
         Este aditamento refere-se à alteração da CONTRATANTE, denominada de PRIMEIRA PARTE, no referido contrato acima,
@@ -176,7 +176,7 @@
         Nacional Paraguaya n. 4.200, com RUC 80071652-3, representada pelo Dr. <b>HUGO CÉSAR GÓMEZ SOLÍS</b>, paraguaio,
         portador do RG 625.806, com sede na Rua Victor Haedo, esquina com  Rua Hernandaria, Centro, cidade de
         Assunção, Paraguai.
-    </p><br>
+    </p>
 
     <p>
         <b>CLÁUSULA SEGUNDA – DAS RESPONSABILIDADES DAS PARTES</b>
