@@ -40,7 +40,7 @@
         <h2 style="text-align: center; margin-top: 100px;">
             <b>DECLARAÇÃO</b>
         </h2>
-        <p style="font-size: 18px; text-align: justify;">
+        <p style="font-size: 15px; text-align: justify;">
             Declaramos para fins de comprovação que o (a) Professor (a)
             Convidado (a)
             <strong>{{ $dados['body'][count($dados['body'])-1]->professor }}</strong>, CPF:
