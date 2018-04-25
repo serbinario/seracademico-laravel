@@ -69,7 +69,7 @@
                     </tbody>
                 </table>
 
-                <table border="1" style=" border-collapse: collapse;">
+                <table border="1" style=" border-collapse: collapse; margin-top: 30px">
                     <tr>
                         <th>Masculino</th>
                         <th>Feminino</th>
