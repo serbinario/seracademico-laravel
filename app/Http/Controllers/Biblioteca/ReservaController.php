@@ -406,9 +406,9 @@ class ReservaController extends Controller
                 }
 
                 // Caso a reserva tenha sua data de vencimento expirada, a mesma recebe status 2 sendo removida da fila
-                if ((strtotime($acervo->data_vencimento) < strtotime($data))) {
+                /*if ((strtotime($acervo->data_vencimento) < strtotime($data))) {
                     \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
-                }
+                }*/
 
             }
 
