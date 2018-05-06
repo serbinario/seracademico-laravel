@@ -177,6 +177,24 @@ class DebitoService
         return true;
     }
 
+    /*
+    * Retorna uma transaçao de um carne
+    */
+
+    public function detailCarnet($idDebito)
+    {
+        return $this->gerencianetService->detailCarnet($idDebito);
+    }
+
+    /*
+     * Retorna uma transaçao
+     */
+    public function detailCharge($idDebito)
+    {
+        return $this->gerencianetService->detailCharge($idDebito);
+    }
+
+
 
     /**
      * @param $idDebito
@@ -185,6 +203,7 @@ class DebitoService
      */
     public function gerarBoleto($idDebito)
     {
+        //dd($idDebito);
         $debito = $this->repository->find($idDebito);
         $debitante = $debito->debitante;
         $pessoa = $debitante->pessoa;
@@ -198,13 +217,17 @@ class DebitoService
         }
 
         $boleto = $this->boletoService->obtemModel();
+
         $boleto->gnet_nome = $debito->taxa->nome;
         $boleto->gnet_quantidade = 1;
         $boleto->gnet_valor = $debito->valor_debito;
         $boleto->vencimento = $debito->data_vencimento;
         $boleto->debito_id = $debito->id;
 
+
+        //Inicializa a transaçao do gerencianet
         $retornoGnet = $this->gerencianetService->setFormOfPayment($pessoa, $boleto);
+        dd($retornoGnet);
         $status = $this->boletoService->obtemStatusPelo($retornoGnet['data']['status']);
 
         $boleto->gnet_charge = $retornoGnet['data']['charge_id'];

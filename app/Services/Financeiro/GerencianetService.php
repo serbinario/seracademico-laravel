@@ -99,6 +99,28 @@ class GerencianetService
         return array_merge($charge, $resultPay);
     }
 
+    /*
+     * retorna informações de carnê existente)
+     */
+    public function detailCarnet($params){
+
+        $params = ['id' => $params];
+        return $this->apiGerencianet->detailCarnet($params, []);
+
+    }
+
+    /*
+     * retorna informações de Boleto existente)
+     */
+    public function detailCharge($params){
+
+        $params = ['id' => $params];
+        return $this->apiGerencianet->detailCharge($params, []);
+
+    }
+
+
+
     /**
      * @param GnetCustomer $pessoa
      * @param array $data

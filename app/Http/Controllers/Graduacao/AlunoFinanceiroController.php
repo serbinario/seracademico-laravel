@@ -228,6 +228,13 @@ class AlunoFinanceiroController extends Controller
     }
 
 
+    public function detailCarnet($idDebito)
+    {
+
+        $this->debitoService->detailCarnet($idDebito);
+    }
+
+
     /**
      * @param $idDebito
      * @return \Illuminate\Http\JsonResponse
