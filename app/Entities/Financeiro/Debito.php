@@ -26,7 +26,8 @@ class Debito extends Model implements Transformable
     /**
      * @var array
      */
-    protected $fillable = [ 
+    protected $fillable = [
+        'id',
 		'taxa_id',
 		'valor_debito',
         'data_vencimento',
