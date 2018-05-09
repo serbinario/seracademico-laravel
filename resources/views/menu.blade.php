@@ -346,8 +346,8 @@
                             <ul class="nav nav-third-level">
                                 <li><a href="{{ route('seracademico.biblioteca.indexEmprestimo') }}"><i class="flaticon-book-2"></i> Emprestimo</a></li>
                                 <li><a href="{{ route('seracademico.biblioteca.viewDevolucaoEmprestimo') }}"><i class="flaticon-book-1"></i> Devolução</a></li>
-                                <li><a href="{{ route('seracademico.biblioteca.indexReserva') }}"><i class="flaticon-commerce"></i> Reservar</a></li>
-                                <li><a href="{{ route('seracademico.biblioteca.reservados') }}"><i class="flaticon-read"></i> Reservas</a></li>
+                                <!-- <li><a href="{{ route('seracademico.biblioteca.indexReserva') }}"><i class="flaticon-commerce"></i> Reservar</a></li>
+                                <li><a href="{{ route('seracademico.biblioteca.reservados') }}"><i class="flaticon-read"></i> Reservas</a></li> -->
                             </ul>
                         </li>
                         <li>

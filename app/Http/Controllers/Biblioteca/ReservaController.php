@@ -264,7 +264,6 @@ class ReservaController extends Controller
      */
     public function gridReservados(Request $request)
     {
-
         #Criando a consulta
         $rows = Reserva::join('pessoas', 'pessoas.id', '=', 'bib_reservas.pessoas_id')
             ->join('bib_reservas_exemplares', 'bib_reservas.id', '=', 'bib_reservas_exemplares.reserva_id')
@@ -408,7 +407,23 @@ class ReservaController extends Controller
                 // Caso a reserva tenha sua data de vencimento expirada, a mesma recebe status 2 sendo removida da fila
                 /*if ((strtotime($acervo->data_vencimento) < strtotime($data))) {
                     \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
-                }*/
+                }*/ 
+                // Caso a reserva tenha sua data de vencimento expirada, a mesma recebe status 2 sendo removida da fila
+
+                /*$dia_semana = date(strtotime($data_devolucao_livro),"w");
+                // se não for uma sexta ou sabado e a data de devolução do livro +1 dia já passou reserva é cancelada
+                if((strtotime("+1 days",$data_devolucao_livro) < strtotime($data)) && !($dia_semana == 5 || $dia_semana == 6){
+                    \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
+                }
+                // se for uma sexta e a data de devolução do livro +3 dias já passou reserva é cancelada
+                else if((strtotime("+3 days",$data_devolucao_livro) < strtotime($data)) && $dia_semana == 5 ){
+                    \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
+                }
+                // se for um sabado e a data de devolução do livro +2 dias já passou reserva é cancelada
+                else if((strtotime("+2 days",$data_devolucao_livro) < strtotime($data)) && $dia_semana == 6){
+                    \DB::table('bib_reservas_exemplares')->where('id', $acervo->id)->update(['status_fila' => 2, 'status' => 1]);
+                }
+                   */
 
             }
 
