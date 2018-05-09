@@ -10,6 +10,7 @@ use Seracademico\Entities\Financeiro\Debito;
 use Seracademico\Repositories\Financeiro\DebitoRepository;
 use Seracademico\Services\Financeiro\DebitoService;
 use Seracademico\Services\Financeiro\GerencianetService;
+use Illuminate\Support\Collection as collect;
 
 class AtualizaTransacoesGerencianet extends Command implements SelfHandling
 {
@@ -49,62 +50,57 @@ class AtualizaTransacoesGerencianet extends Command implements SelfHandling
      */
     public function handle()
     {
-        $dataAtual=(new \DateTime())->format('Y-m-d');
-        /*$debito = $this->debitoRepository->findWhere(['data_vencimento','<', $dataAtual],['']);*/
+        $dataAtual = (new \DateTime())->format('Y-m-d');
 
-        $debitos = Debito::where('data_vencimento','<', $dataAtual)->get();
-
+       $debitos = Debito::where('data_vencimento','<', $dataAtual)
+           //So os boletos aguardando pagamento
+           ->where('fin_boletos.gnet_status_id','=', '2')
+           //->where('fin_boletos.id','=', '548')
+           ->join('fin_boletos', 'fin_debitos.id', '=', 'fin_boletos.debito_id')
+           ->select('fin_debitos.id')
+           ->get();
 
         foreach($debitos as $debito) {
-            echo "\n Boleto: ".$debito->id;
             $boleto = $debito->boleto;
 
+            echo "\n Debito: ".$debito->id . " Boleto" . $boleto->id;
+
             $gnet_charge = $boleto->gnet_charge;
-            /*$statusBoleto = $this->getCharge( $gnet_charge);*/
+            $statusBoleto = $this->getCharge( $gnet_charge);
 
+            if($statusBoleto) {
 
-
-            /*if($statusBoleto) {
-                dd($boleto->id);
-                if ($statusBoleto->status == "unpaid") {
+                //dd($statusBoleto['data']['status']);
+                if ($statusBoleto['data']['status'] == "unpaid") {
                     $boleto->gnet_status_id = 4;
 
-                } else if ($statusBoleto->status == "paid") {
+                } else if ($statusBoleto['data']['status'] == "paid") {
                     $debito->pago = 1;
                     $boleto->gnet_status_id = 3;
-                } else if ($statusBoleto->status == "waiting") {
+                } else if ($statusBoleto['data']['status'] == "waiting") {
                     $boleto->gnet_status_id = 2;
 
-                } else if ($statusBoleto->status == "refunded") {
+                } else if ($statusBoleto['data']['status'] == "refunded") {
                     $boleto->gnet_status_id = 5;
 
-                } else if ($statusBoleto->status == "contested") {
+                } else if ($statusBoleto['data']['status'] == "contested") {
                     $boleto->gnet_status_id = 6;
 
-                } else if ($statusBoleto->status == "canceled") {
+                } else if ($statusBoleto['data']['status'] == "canceled") {
                     $boleto->gnet_status_id = 7;
 
-                } else if ($statusBoleto->status == "new") {
+                } else if ($statusBoleto['data']['status'] == "new") {
                     $boleto->gnet_status_id = 1;
                 }
 
                 $debito->save();
                 $boleto->save();
-            }*/
+                //dd($statusBoleto);
+            }
 
         }
 
 
-
-
-       /* //Consulta o boleto
-        $statusBoleto = $this->debitoService->detailCharge($gnet_charge);
-        dd($statusBoleto);
-        $boleto->gnet_status_id = 3;
-        $boleto->save();
-        dd("ddd");
-        $charge = $this->argument('charge');
-        dd($this->debitoService->detailCarnet($charge));*/
 
     }
 
