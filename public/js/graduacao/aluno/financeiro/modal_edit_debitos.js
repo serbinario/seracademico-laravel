@@ -9,7 +9,8 @@ function loadFieldsDebitoEditar()
         'models' : [
             'Financeiro\\Taxa',
             'Financeiro\\ContaBancaria',
-            'Financeiro\\FormaPagamento'
+            'Financeiro\\FormaPagamento',
+            'Financeiro\\LocalPagamento'
         ]
     };
 
@@ -37,6 +38,7 @@ function builderHtmlFieldsDebitoEditar (dados) {
         if (retorno.success) {
             var htmlTaxa = "";
             var htmlContaBancaria = "";
+            var htmlLocalPagamento = "<option value=''>Selecione um local de pagamento</option>";
             var htmlFormaPagamento = "<option value=''>Selecione uma forma de pagamento</option>";
 
             for (var i = 0; i < dados['financeiro\\taxa'].length; i++) {
@@ -53,13 +55,19 @@ function builderHtmlFieldsDebitoEditar (dados) {
                 htmlFormaPagamento += "<option value='" + dados['financeiro\\formapagamento'][i].id + "'>"
                     + dados['financeiro\\formapagamento'][i].nome + "</option>";
             }
-
+            for (var i = 0; i < dados['financeiro\\localpagamento'].length; i++) {
+                htmlLocalPagamento += "<option value='" + dados['financeiro\\localpagamento'][i].id + "'>"
+                    + dados['financeiro\\localpagamento'][i].nome + "</option>";
+            }
+          
             $("#taxa_id_editar option").remove();
             $("#taxa_id_editar").append(htmlTaxa);
             $("#conta_bancaria_id_editar option").remove();
             $("#conta_bancaria_id_editar").append(htmlContaBancaria);
             $("#forma_pagamento_id_editar option").remove();
             $("#forma_pagamento_id_editar").append(htmlFormaPagamento);
+            $("#local_pagamento_id option").remove();
+            $("#local_pagamento_id").append(htmlLocalPagamento);
 
             // Setando os valores do model no formulário
             $('#taxa_id_editar option[value=' + retorno.data.taxa_id  +']').attr('selected', true);
