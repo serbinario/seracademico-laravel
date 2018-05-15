@@ -38,6 +38,7 @@ class Debito extends Model implements Transformable
         'debitante_type',
         'forma_pagamento_id',
         'conta_bancaria_id',
+        'local_pagamento_id',
         'carne_id',
         'pago'
 	];
