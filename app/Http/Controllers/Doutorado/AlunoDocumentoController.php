@@ -48,10 +48,6 @@ class AlunoDocumentoController extends Controller
                 case "23" :
                     $this->historico($idAluno);
                     break;
-                case "34" :
-                $result = $this->inscricao($idAluno);
-                $nameView = "reports.inscricao_mestrado_atenas";
-                break;
             }
 
             # Retorno
@@ -108,13 +104,13 @@ class AlunoDocumentoController extends Controller
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.aditamento_mestrado";
                 case "34" :
-                $result = $this->inscricao($idAluno);
-                $nameView = "reports.inscricao_mestrado_atenas";
-                break;
+                    $result = $this->inscricao($idAluno);
+                    $nameView = "reports.inscricao_mestrado_atenas";
+                    break;
                 case "36" :
-                $result = $this->inscricao($idAluno);
-                $nameView = "reports.inscricao_grupo_clarentiano";
-                break;
+                    $result = $this->inscricao($idAluno);
+                    $nameView = "reports.inscricao_grupo_clarentiano";
+                    break;
                     
             }
 

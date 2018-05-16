@@ -100,7 +100,6 @@
             border-left: 0px;
             border-bottom: 0px;
             border-color:#bfbfbf; 
-            float: right;
             z-index: -3;
             display: inline-block;
         }
@@ -168,7 +167,7 @@
         <h2 style="margin-left: 30px;"><b>DADOS PESSOAIS:</b></h2>
         <?php $sexo = $aluno['pessoa']['sexo']['nome']?>
 
-        <table class="table" style="margin-top: 0; margin-bottom: 2%; margin-bottom: 70px;">
+        <table class="table" style="width: 700px; margin-top: 0; margin-bottom: 2%; margin-bottom: 70px;">
             <tr>
                 <td colspan="6">NomeCompleto: {{ $aluno['pessoa']['nome'] }}</td>
             </tr>
@@ -226,58 +225,52 @@
         </table>
     </div>
     <h2>SERVIÇOS DESEJADOS:</h2>
-    <table class="table" style="margin-top: 0; margin-bottom: 2%; text-align: center;">
+    <table class="table" style="width: 700px;margin-top: 0; margin-bottom: 2%; text-align: center;">
         <tr>
-            <td colspan="2"><pre>       (     ) Pós-graduação para mestrado             </pre></td>
-            <td colspan="2"><pre>       (     ) Mestrado para Doutorado           </pre></td>
-            <td colspan="2"><pre>       (     ) Revalidação Graduação           </pre></td>
+            <td colspan="2"><pre>(     ) Pós-graduação para mestrado</pre></td>
+            <td colspan="2"><pre>(     ) Mestrado para Doutorado</pre></td>
+            <td colspan="2"><pre>(     ) Revalidação Graduação</pre></td>
         </tr>
         <tr>
-            <td colspan="3"><pre> (     ) Reconhecimento de Titulo  Mestrado    </pre></td>
-            <td colspan="3"><pre> (     ) Reconhecimento de Titulo de Doutorado    </pre></td>
+            <td colspan="3"><pre>(     ) Reconhecimento de Titulo  Mestrado</pre></td>
+            <td colspan="3"><pre>(     ) Reconhecimento de Titulo de Doutorado</pre></td>
         </tr>               
 
     </table>
 
 
-    <table class="table" style="margin-top: 40px; margin-bottom: 2%; text-align: justify;">
+    <table class="table" style="width: 700px;margin-top: 40px; margin-bottom: 2%; text-align: justify;">
         <tr>
-            <td colspan="6" ><pre> Mestrado de Interesse:                                                                                                                                                                                            </pre></td>
+            <td><pre> Mestrado de Interesse:</pre></td>
         </tr>
         <tr>
-            <td colspan="6" ><pre> Área de pesquisa:</pre></td>
+            <td><pre> Área de pesquisa:</pre></td>
         </tr>
         <tr>
-             <td colspan="6" ><pre> Pólo:</pre></td>
+             <td><pre> Pólo:</pre></td>
         </tr>
 
     </table>
 
 
-     <table class="table" style="margin-top: 50px; margin-bottom: 2%; text-align: justify;">
+     <table class="table" style="width:700px;margin-top: 50px; margin-bottom: 2%; text-align: justify;">
         <tr>
             <td colspan="3" ><pre>Cor/Raça:</pre></td>
-            <td colspan="3" ><pre>            Ensino Médio Instituição       (      ) Privada (      ) Pública</pre></td>
+            <td colspan="3" ><pre>Ensino Médio Instituição        (      ) Privada    (       ) Pública</pre></td>
+ </tr>
+<tr>
+<td colspan="4" > Graduação em: </td>
+<td colspan="2" style="width: 20%;" > Ano de Conclusão:</td>
         </tr>
         <tr>
-            <td colspan="4" > Graduação em: </td>
-            <td colspan="2" style="width: 20%;" > Ano de Conclusão:</td>
+<td colspan="6" ><pre>Possui necessidades especiais: (     ) Sim(     ) Não </pre> </td>
         </tr>
         <tr>
-            <td colspan="6" ><pre>Possui necessidades especiais: (     ) Sim              (     ) Não </pre> </td>
-        </tr>
-        <tr>
-             <td colspan="6" ><pre> Se sim, quais:                                                                                                                                                                                                             </pre></td>
+             <td colspan="6" ><pre> Se sim, quais:</pre></td>
         </tr><tr>
              <td colspan="6" ><pre> Captador:</pre></td>
         </tr>
 
-    </table>
-     
-
-
-    <table  class="table" style="margin-top: 50px; margin-bottom: 2%; text-align: justify;">
-        
     </table>
 </div>
 
