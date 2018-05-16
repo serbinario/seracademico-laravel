@@ -24,7 +24,7 @@
             margin-top: 5%;
             margin-right: 5%;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             border: 0.5px solid;
             border-collapse: collapse;    
         }
