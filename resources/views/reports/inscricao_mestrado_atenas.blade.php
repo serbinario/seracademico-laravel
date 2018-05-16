@@ -157,7 +157,7 @@
   {{--<img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">--}}
   <img id="imagem-quatro" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo"> -->
 
-    <center><h1>FICHA DE INSCRIÇÃO</h1></center>
+    <center><h1><pre>FICHA DE INSCRIÇÃO</pre></h1></center>
 </div>
 <img id="imagem-logo" src="{{ asset('img/logo_atenas_college.png') }}" alt="Logo">
 <div id="body">
@@ -274,12 +274,12 @@
     </table>
 </div>
 
-<div style="font-size: 15px;"><b>
+<div style="font-size: 15px; text-align:center;"><b>
     <span style="display:block;">___________________,____/_______.</span>
-    <span style="position:absolute; left:120px; bottom: 200px;"><pre>________________________________________
-                Assinatura Do Candidato(a)</pre></span>
-     <span style="position:absolute; right:30px; bottom: 200px;"><pre>________________________________________
-                 Funcionário Responsável</pre></span>
+    <span style="position:absolute; left:120px; bottom: 250px;"><pre>________________________________________
+    Assinatura Do Candidato(a)</pre></span>
+     <span style="position:absolute; right:30px; bottom: 250px;"><pre>________________________________________
+    Funcionário Responsável</pre></span>
 
 </b></div>
 <footer style=" text-align:justify;color:grey; position:absolute; bottom:0; left:320px;">
