@@ -103,7 +103,7 @@ class AlunoDocumentoController extends Controller
                 case "31" :
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.aditamento_mestrado";
-                case "34" :
+                case "38" :
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_mestrado_atenas";
                     break;

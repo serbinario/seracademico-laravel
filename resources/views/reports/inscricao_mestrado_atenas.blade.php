@@ -157,7 +157,7 @@
   {{--<img id="imagem-dois" src="{{ asset('img/contrato-mestrado/image1.png') }}" alt="Logo">--}}
   <img id="imagem-quatro" src="{{ asset('img/contrato-mestrado/image3.jpeg') }}" alt="Logo"> -->
 
-    <center><h1><pre>FICHA DE INSCRIÇÃO</pre></h1></center>
+    <center><h1 style="top: 50px;"><pre>FICHA DE INSCRIÇÃO</pre></h1></center>
 </div>
 <img id="imagem-logo" src="{{ asset('img/logo_atenas_college.png') }}" alt="Logo">
 <div id="body">
