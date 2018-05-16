@@ -112,6 +112,15 @@ class AlunoDocumentoController extends Controller
                 case "29" :
                 $result = $this->contrato($idAluno);
                 $nameView = "reports.stritoSenso_mestrado";
+                case "35" :
+                $result = $this->inscricao($idAluno);
+                $nameView = "reports.inscricao_mestrado_atenas";
+                break;
+                case "37" :
+                $result = $this->inscricao($idAluno);
+                $nameView = "reports.inscricao_grupo_clarentiano";
+                break;
+
             }
 
             # Verificando foi vinculado a um curso e turma

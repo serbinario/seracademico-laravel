@@ -74,7 +74,7 @@
 <body>
 
 <div class="cabecalho">
-    <img id="imagem-logo" src="{{ asset('img/contrato-mestrado/image5.jpg') }}" alt="Logo">
+    {{--<img id="imagem-logo" src="{{ asset('img/contrato-mestrado/image5.jpg') }}" alt="Logo">--}}
 
     
     {{--<h1>
