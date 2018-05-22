@@ -8,10 +8,9 @@
     <style>
 
     .borda{
-       height: 915px;
+       height: 916px;
        border: 5px solid black;
        padding: 10px 50px;
-       display: block; 
        margin: 0;  
    }
     .background{
