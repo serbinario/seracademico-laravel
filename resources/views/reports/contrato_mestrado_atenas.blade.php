@@ -181,8 +181,7 @@
                     <td colspan="6"><pre>Forma de Pagamento:  (   ) À vista                (   ) Boleto</pre></td>
                 </tr>
                 <tr>
-                    <td colspan="6"><pre>Taxa de Defesa da Dissertação, Diplomação e apostilamento do país de origem da
-                     Universidade US$ 500,00</pre></td>
+                    <td colspan="6">Taxa de Defesa da Dissertação, Diplomação e apostilamento do país de origem da Universidade US$ 500,00.</td>
                 </tr>
             </table>
 
