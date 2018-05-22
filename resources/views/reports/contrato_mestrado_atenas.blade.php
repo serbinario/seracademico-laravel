@@ -26,7 +26,8 @@
             font-size: 14px;
             border: 0.5px solid;
             border-collapse: collapse; 
-            width: 700px;   
+            width: 700px; 
+            max-width: 700px;  
         }
         p{
             font-size: 14px;
@@ -36,10 +37,6 @@
             border: 0.5px solid;
 
         }
-        .table tr{
-            width: 100%;
-        }
-
         .table td {
             padding: 1px;
 
@@ -184,7 +181,8 @@
                     <td colspan="6"><pre>Forma de Pagamento:  (   ) À vista                (   ) Boleto</pre></td>
                 </tr>
                 <tr>
-                    <td colspan="6"><pre>Taxa de Defesa da Dissertação, Diplomação e apostilamento do país de origem da Universidade US$ 500,00</pre></td>
+                    <td colspan="6"><pre>Taxa de Defesa da Dissertação, Diplomação e apostilamento do país de origem da
+                     Universidade US$ 500,00</pre></td>
                 </tr>
             </table>
 
