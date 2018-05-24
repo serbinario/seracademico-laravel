@@ -85,9 +85,13 @@ class AlunoDocumentoController extends Controller
                 $result = $this->contrato($idAluno);
                 $nameView = "reports.contrato_mestrado_atenas";
                 break;
-                case "40" :
+                case "41" :
                 $result = $this->contrato($idAluno);
                 $nameView = "reports.contrato_mestrado_atenas_2";
+                break;
+                case "42" :
+                $result = $this->contrato($idAluno);
+                $nameView = "reports.contrato_mestrado_int_atenas";
                 break;
                 case "6" :
                 $result = $this->declaracaoVinculo($idAluno);
