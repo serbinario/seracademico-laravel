@@ -69,9 +69,7 @@ class TurmaNotaController extends Controller
                 'fac_situacao_nota.nome as nomeSituacao',
                 'fac_alunos_frequencias.total_falta'
             ])
-            ->where('fac_turmas.id', '=', $idTurma)->toSql();
-            dd($rows);
-
+            ->where('fac_turmas.id', '=', $idTurma);
         #Editando a grid
         return Datatables::of($rows)
             ->filter(function ($query) use ($request) {
