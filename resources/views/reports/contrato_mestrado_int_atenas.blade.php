@@ -91,6 +91,12 @@
             z-index: -11;
             width: 900px;
         }
+        #background5{
+            position: absolute;
+            top:5312px;
+            z-index: -11;
+            width: 900px;
+        }
         #header{
             padding-right:30px;
 
@@ -149,285 +155,349 @@
                             <td colspan="1"><spam class="title-table"> UF:</spam><br>{!! isset($aluno['pessoa']['endereco']['bairro']['cidade']['estado']) ? $aluno['pessoa']['endereco']['bairro']['cidade']['estado']['prefixo'] : "" !!} </td>
                         </tr>
                         <tr>
-                            <td colspan="1"><spam class="title-table"> TEL.COM.:</td>
-                                <td colspan="1"><spam class="title-table"> TEL.RES.:</spam><br>{!! isset($aluno['pessoa']['telefone_fixo']) ? $aluno['pessoa']['telefone_fixo'] : "" !!} </td>
-                                <td colspan="2"><spam class="title-table"> TEL.CEL.:</spam><br>{!! isset($aluno['pessoa']['celular2']) ? $aluno['pessoa']['celular2'] : "" !!} </td>
-                                <td colspan="2"><spam class="title-table"> WHATZAP:</spam><br>{!! isset($aluno['pessoa']['celular']) ? $aluno['pessoa']['celular'] : "" !!}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"><spam class="title-table"> PROFISSÃO:</td>
-                                    <td colspan="3"><spam class="title-table"> E-MAIL:</spam><br>{!! isset($aluno['pessoa']['email']) ? $aluno['pessoa']['email'] : "" !!} </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><spam class="title-table"> NOME DO PAI:</spam><br>{!! isset($aluno['pessoa']['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" !!} </td>
-                                    <td colspan="3"><spam class="title-table"> NOME DA MÃE:</spam><br>{!! isset($aluno['pessoa']['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" !!} </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6"><spam class="title-table"> SERVIÇO:</spam><br> <b>CONTRATO DE PRESTAÇÂO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL PARA INTEGRALIZAÇÃO
-                                    DE CRÉDITOS ACADÊMICOS DE MESTRADO INTERNACIONAL.</b></td>
-                                </tr>
-                            </table>
-                        </div>    
-                    </div>
-                </div>  
-                <center>
-                    <span id=endpage> <br><br><br><br><br><br><br><br>ATENAS COLLEGE <br><br>
-
-                    WhatsApp (11) 95290-8507 </span>
-                </center> 
-                <img  id="background2" src="{{ asset('/img/fundo_atenas.jpg') }}">
-                <div class="page" id= "page2" style="margin-left: 16%;">
-
-                    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px; ">
-                        <b><u>CONTRATADA:</u></b><br><br><br>
-                        A ATENAS COLLEGE, instituição de direito privado, devidamente registrada no Estado da
-                        Delaware, Estados Unidos da América, sob a razão social de ATENAS COLLEGE CORP,
-                        mantenedora da ATENAS COLLEGE, devidamente registrada no Estado de Dalaware, sobre
-                        número de identificação (ID Number) 37-1838647, neste ato representado pelo seu Diretor
-                        Presidente Sr. Marcelo Barbosa Santos, devidamente registrado no Brasil e inscrito no CPF
-                        número 669.788.901-20, e no RG nº 1.758.132/DF.<br>
-                        Decidem celebrar o presente CONTRATO DE ASSESSORIA para a INTEGRALIZAÇÃO DE
-                        CRÉDITOS ACADÊMICOS NA ATENAS COLLEGE. As partes possuidoras de capacidade
-                        jurídica resolvem celebrar o presente contrato, com o objetivo de formalizar os serviços
-                        educacionais, em observância com a lei nº. 10.406/02, Decreto nº. 5.622/2005 e demais
-                        legislações pertinentes em vigor, nos termos adiante firmados, mediante as cláusulas e
-                        condições a seguir especificadas:<br>
-                        CLÁUSULA PRIMEIRA – DO OBJETO DO CONTRATO<br>
-                        O presente instrumento tem por objeto a integralização de créditos de programas de pósgraduação
-                        Stricto Sensu outorgado ao CONTRATANTE pela ATENAS COLLEGE, em título
-                        de Mestrado, contemplando a assessoria, análise do projeto de pesquisa, grade curricular da
-                        IES emitente dos créditos, análise ou desenvolvimento da dissertação, desenvolvimento de
-                        pareceres técnicos a adequação necessária à integralização, bem como, o DEFERIMENTO À
-                        INTEGRALIZAÇÃO;<br>
-                        Parágrafo Primeiro – A CONTRATADA neste ato assessora o CONTRANTE no processo de
-                        integralização dos créditos acadêmicos do Programa INTEGRALIZAÇÃO DE CRÉDITOS
-                        ACADÊMICOS da ATENAS COLLEGE que o CONTRATANTE adquiriu através de programas
-                        realizados em outras IES, conforme documentação enviada.<br>
-                        Parágrafo Segundo – O CONTRATANTE declara expressamente estar ciente dos termos da
-                        presente contratação, “a qual foi por ele firmada de livre e espontânea vontade. Possui
-                        total e completo conhecimento dos procedimentos de nacionalização e reconhecimento
-                        de seus títulos emitidos no exterior junto a universidades brasileiras, e reconhece que a
-                        CONTRATADA não é responsável por esse serviço, reafirmando sua completa ciência
-                        sobre os processos de reconhecimento de títulos, estando sob suas responsabilidades”.<br>
-                        CLÁUSULA SEGUNDA – DAS OBRIGAÇÕES<br>
-                        Parágrafo Primeiro – O CONTRATADO fica responsável em nomear uma equipe técnica, tão
-                        logo assinem este instrumento, a qual fará a interface com a CONTRATANTE, com o objetivo
-                        de desenvolver um cronograma de trabalho, o qual possibilite a criação de um fluxo de
-                        documentos necessários para o desenvolvimento dos trabalhos que são objetos deste
-                        instrumento;<br>
-                        Parágrafo Segundo – O cronograma a que se refere o parágrafo primeiro da cláusula segunda
-                        deverá ser concluído até 05 dias após a assinatura deste instrumento, devendo em comum
-                        acordo entre a CONTRATANTE e o CONTRATADO, ficar estabelecido os responsáveis pelas
-                        atividades, documentos necessários, datas a serem cumpridas, entre outros itens necessários
-                        para o bom andamento dos trabalhos;<br>
-                        Parágrafo Terceiro – O CONTRATADO obriga-se a entregar em no máximo 05 (cinco)
-                        dias uteis à CONTRATANTE, parecer técnico referente aos documentos recebidos para
-                        integralização do título, solicitando documentos que por ventura estejam faltando, ou
-                        insuficientes. <br>
-                        Parágrafo Quarto – Os documentos devolvidos pelo CONTRATADO à CONTRATANTE,
-                        que não tenham condições de prosseguir para a integralização, não serão objeto de
-                        quaisquer custos financeiros para a contratante.
-                        Parágrafo Quinto – O CONTRATADO compromete-se a realizar a integralização dos
-                        títulos pela ATENAS COLLEGE.<br>
-                        Parágrafo Sexto – O CONTRATADO obriga-se a manter o sigilo e confidencialidade
-                        sobre todos os documentos que estiverem sob sua responsabilidade, comprometendo-se
-                        a não utilizar nenhuma informação ou dados em qualquer que sejam as circunstâncias
-                        fora do objeto deste instrumento;<br>
-                        Parágrafo Sétimo – O CONTRATADO compromete-se a não utilizar nenhum dado
-                        pessoal do CONTRATANTE sem autorização prévia por escrito;<br>
-                        Parágrafo Oitavo – O CONTRATADO assume desde já toda a responsabilidade pelo
-                        título que não for integralizado por falta de comprovação dos créditos ou falta de produção
-                        acadêmica ou até mesmo por não ser aprovado em banca examinadora, ou seja, pela
-                        titulação que se comprometer a integralizar e que por qualquer razão não tenha obtido
-                        sucesso na integralização, assumindo em especial toda e qualquer ação judicial ou
-                        extrajudicial indenizatória que por ventura a CONTRATANTE venha a sofrer em razão do
-                        não cumprimento do presente contrato;<br>
-                    </div>
-                </div>
-                <center>
-                    <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
-
-                    WhatsApp (11) 95290-8507 </span>
-                </center> 
-
-                <img  id="background3" src="{{ asset('/img/fundo_atenas.jpg') }}">
-                <div class="page" id= "page3" style="margin-left: 16%;">
-
-                    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
-                     CLÁUSULA TERCEIRA – DAS OBRIGAÇÕES DO CONTRATANTE<br>
-                     Parágrafo Primeiro – O CONTRATANTE será o único e exclusivo responsável pelo curso
-                     estrangeiro no qual foi certificado, responsabilizando-se pelo conteúdo do mesmo.
-                     Parágrafo Segundo – Os documentos que o CONTRATANTE deverá entregar ao
-                     CONTRATADO para que se cumpra com o objeto deste instrumento são:<br>
-                     <ul>
-                        <li>
-                           Carteira de Identidade ou Identidade Funcional (dentro do prazo de validade);
-                       </li>
-                       <li>
-                           CPF;
-                       </li>
-                       <li>
-                           Certidão de Nascimento ou Casamento;
-                       </li>
-                       <li>
-                           Comprovante de Residência atualizado com no máximo 90 (noventa) dias;
-                       </li>
-                       <li>
-                           Curriculum Vitae;
-                       </li>
-                       <li>
-                           Diploma de Graduação;
-                       </li>
-                       <li>
-                           Histórico Acadêmico ou Documento Equivalente;
-                       </li>
-                       <li>
-                           Certificado de pós-graduação Lato Sensu;
-                       </li>
-                       <li>
-                           Documentação comprobatório de créditos emitidos por IES que deu origem a
-                           requisição de Integralização de Créditos (declaração de conclusão do programa de
-                           mestrado, ou mesmo declaração de cumprimento de disciplinas, cópia do Diploma de
-                           Mestrado e ementário ou histórico do programa de mestrado).
-                       </li><br>
-                       Parágrafo Terceiro – O CONTRATANTE compromete-se a manter as atividades que
-                       constam no objeto deste instrumento, para que o CONTRATADO cumpra com o processo
-                       de integralização dos créditos;<br>
-                       CLÁUSULA QUARTA – DA FORMA DE PAGAMENTO<br>
-                       Parágrafo Primeiro – A CONTRATATANTE pagará ao CONTRATADO o valor de R$
-                       Parágrafo Segundo – A CONTRATATANTE, após realizar o pagamento, deverá
-                       encaminhar o comprovante digitalizado para o seguinte correio eletrônico:
-                       contact@atenascollege.university, juntamente do formulário devidamente preenchido,
-                       constante na primeira página deste contrato.<br>
-                       CLÁUSULA QUINTA – DA RESCISÃO<br>
-                       a. Através do requerimento expresso do CONTRATANTE, assistido ou representado,
-                       quando for o caso, do pedido de rescisão contratual, sendo em qualquer caso, condição
-                       obrigatória de sua eficácia a comunicação da desistência à ATENAS COLLEGE, e o
-                       pagamento dos valores avençados neste instrumento (PAGAMENTO DE MULTA DE 10%
-                       DO VALOR TOTAL DO CONTRATO) até da efetiva rescisão;<br>
-                       b. Quando por decisão da CONTRATADA houver a rescisão compulsória deste contrato,
-                       pela exclusão do CONTRATANTE em decorrência de descumprimento das normas
-                       internas, devidamente apresentadas com base no próprio contrato fornecido pela
-                       CONTRATADA no ato da assinatura do mesmo;<br>
-                       Parágrafo Primeiro – O pedido de rescisão unilateral do Contrato de Prestação de
-                       Serviços feito pelo CONTRATANTE deverá ser fundamentado e protocolado na ATENAS
-                       COLLEGE, não dispensando o CONTRATANTE da quitação do pagamento referente ao
-                       serviço de integralização, assim como outras despesas eventualmente ocasionadas pelo
-                       CONTRATANTE, até a data da solicitação da rescisão do contrato.<br>
-                       Parágrafo Segundo – O compromisso ora assumido pelo CONTRATANTE com a
-                       CONTRATADA é global e abrange a totalidade das obrigações ora pactuadas, e sua falta
-                       por impontualidade nos pagamentos não o isentam de responder integralmente por todas
-                       as obrigações aqui assumidas, e constituem causa de rescisão unilateral pela
-                       CONTRATADA, da presente contratação.<br>
-                       Parágrafo Terceiro – Ocorrendo a desistência unilateral do contrato de prestação de
-                       serviço, com comunicação escrita 30 dias antes de vencer a parcela seguinte, a
-                       CONTRATADA fica autorizada a cobrar 10% (dez por cento) do saldo total do plano
-                       financeiro escolhido.<br>
-                       Parágrafo Quarto – No caso de rescisão do contrato, o CONTRATANTE, deverá estar
-                       em dia com seus pagamentos e comunicar por escrito a CONTRATADA no prazo máximo
-                       de 30 dias antes do vencimento da parcela a vencer.<br>
-                       Parágrafo Quinto – Na hipótese de mora no pagamento das mensalidades, o
-                       CONTRATANTE pagará multa de 2% e juros moratórios de 12% a.a., mais correção
-                       monetária pelo INPC, pro-rata dies.<br>
-                       Parágrafo Sexto – Caso o pedido de desistência previsto nesta cláusula não seja
-                       formalizado, este contrato continuará em vigor e o CONTRATANTE deverá pagar todas
-                       as parcelas previstas no ato da assinatura deste instrumento, podendo a CONTRATADA
-                       tomar medidas cabíveis de cobrança. Nesta hipótese, além da cláusula penal prevista no
-                       item “a”, incidirão sobre o saldo devedor atualizado os encargos do parágrafo anterior.CLÁUSULA SEXTA – SOLICITAÇÕES DE DOCUMENTOS
-                       O CONTRATANTE que solicitar certidões ou outros documentos à ATENAS COLLEGE deverá pagar
-                       por cada documento solicitado, tomando como base os valores estipulados em tabela elaborada e
-                       informada pela CONTRATADA, os quais se destinam a custear as despesas decorrentes da emissão
-                       e envio dos mesmos.<br>
-                   </ul>
-               </div>
-           </div>
-           <center>
-               <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
-
-               WhatsApp (11) 95290-8507 </span> 
-           </center> 
-           <img  id="background4" src="{{ asset('/img/fundo_atenas.jpg') }}">
-           <div class="page" id= "page4" style="margin-left: 16%;">
-            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
-               CLÁUSULA SÉTIMA – DA MANUTENÇÃO DO CADASTRO
-               Sempre que o CONTRATANTE mudar de endereço deverá comunicar de imediato por escrito a
-               CONTRATADA, sob pena de terem-se como válidas e eficazes todas as correspondências enviadas
-               pela CONTRATADA para endereço anterior, constante deste contrato, até a conclusão do processo
-               de integralização.<br>
-               Parágrafo Primeiro – O CONTRATANTE deverá possuir um endereço eletrônico permanente para
-               contato com a CONTRATADA. É de total responsabilidade do (a) aluno (a) adquirir e informar um
-               endereço eletrônico a CONTRATADA não importando os meios pelos quais irá adquiri-lo e informá-
-               lo.<br>
-               Parágrafo Segundo – O CONTRATANTE deverá responder a todas as mensagens enviadas em
-               seu endereço eletrônico, no prazo máximo de 72 horas.<br>
-               CLÁUSULA OITAVA – DOS DOCUMENTOS SOLICITADOS
-               O CONTRATANTE deverá apresentar todos os documentos solicitados pela CONTRATADA, dentro
-               do prazo estipulado, a fim de ser admitido no processo de Integralização de Créditos em nível de
-               Mestrado.<br>
-               Parágrafo Único – O CONTRATANTE deverá apresentar os documentos solicitados no checklist da
-               CLÁUSULA TERCEIRA deste contrato pela CONTRATADA dentro do prazo de 5 (cinco) dias uteis
-               a contar da data de assinatura deste.<br>
-               CLÁUSULA NONA – DA INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS
-               O CONTRATANTE declara ter ciência de que a assessoria visa auxiliá-lo no processo de
-               INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS, o qual compreende:
-               a. A Convalidação dos Créditos Acadêmicos pela ATENAS COLLEGE, após avaliação e aprovação
-               pela Secretaria Pedagógica.<br>
-               b. A entrega de todos os documentos do aluno ao final do Programa de Mestrado, devidamente
-               apostilado na Flórida.<br>
-               CLÁUSULA DÉCIMA – DA APROVAÇÃO NO PROGRAMA DE MESTRADO
-               O CONTRATANTE deve ter ciência que para receber o diploma deverá ter sua dissertação aprovada
-               em banca examinadora pela ATENAS COLLEGE, através da avaliação da dissertação de acordo
-               com orientação da CONTRATADA.<br>
-               Parágrafo Primeiro – O CONTRATANTE deve ter ciência que após concluído o processo de
-               INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS, os documentos passarão por legalização junto
-               aos órgãos regulamentadores, para somente após o trâmite final receber o Diploma.<br>
-               Parágrafo segundo – A CONTRATADA reserva-se ao direito de não finalizar o processo, caso o
-               CONTRATANTE desatenda às exigências estabelecidas neste contrato.<br>
-               Parágrafo Terceiro – A CONTRATADA compromete-se a encaminhar os documentos
-               imediatamente quando os mesmos estiverem disponíveis. <br><br>
-               ATENAS COLLEGE<br>
-               WhatsApp (11) 95290-8507<br><br>
-               CLÁUSULA DÉCIMA PRIMEIRA – DO FORO<br>
-               Fica eleito o foro da Cidade de Delaware, Estados Unidos da América, para dirimir todas as
-               questões referentes à execução do presente instrumento, após esgotadas todas as instâncias
-               administrativas.<br>
-               E, por estarem de pleno acordo, os contratantes assinam o presente convênio, em 02 (duas)
-               vias de igual teor e forma, na presença das testemunhas abaixo, para todos os seus jurídicos
-               e legais efeitos. <br><br>
-
-               <center><pre>Delaware (USA),  {{ strftime('%d de %B de %Y', strtotime('today')) }}</pre></center>
-               <center>
-                   <b> <br>_____________________________________<br>
-                       CONTRATADO<br>
-                       Marcelo Barbosa Santos<br>
-                       ATENAS COLLEGE<br><br></b>
-                   </center>
-                   <center>
-                    <b>_____________________________________<br>
-                        CONTRATANTE<br></b>
-                    </center>
-                    <div style="float: left;">
-                        <b>TESTEMUNHAS:<br><br>
-                            _____________________________________<br>
-                            Nome:<br>
-                            _____________________________________<br>
-                        CPF Nº:</b>
-                    </div>
-                    <div style="float: right;">
-                        <br><br>
-                        <b>_____________________________________<br>
-                            Nome:<br>
-                            _____________________________________<br>
-                        CPF Nº:</b>
-                    </div>
-
-                </div>
+                            <td colspan="1"><spam class="title-table"> TEL.COM.:</spam></td>
+                            <td colspan="1"><spam class="title-table"> TEL.RES.:</spam><br>{!! isset($aluno['pessoa']['telefone_fixo']) ? $aluno['pessoa']['telefone_fixo'] : "" !!} </td>
+                            <td colspan="2"><spam class="title-table"> TEL.CEL.:</spam><br>{!! isset($aluno['pessoa']['celular2']) ? $aluno['pessoa']['celular2'] : "" !!} </td>
+                            <td colspan="2"><spam class="title-table"> WHATZAP:</spam><br>{!! isset($aluno['pessoa']['celular']) ? $aluno['pessoa']['celular'] : "" !!}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><spam class="title-table"> PROFISSÃO:</spam></td>
+                            <td colspan="3"><spam class="title-table"> E-MAIL:</spam><br>{!! isset($aluno['pessoa']['email']) ? $aluno['pessoa']['email'] : "" !!} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><spam class="title-table"> NOME DO PAI:</spam><br>{!! isset($aluno['pessoa']['nome_pai']) ? $aluno['pessoa']['nome_pai'] : "" !!} </td>
+                            <td colspan="3"><spam class="title-table"> NOME DA MÃE:</spam><br>{!! isset($aluno['pessoa']['nome_mae']) ? $aluno['pessoa']['nome_mae'] : "" !!} </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><spam class="title-table"> SERVIÇO:</spam><br> <b>CONTRATO DE PRESTAÇÂO DE SERVIÇOS DE ASSESSORIA EDUCACIONAL PARA INTEGRALIZAÇÃO
+                            DE CRÉDITOS ACADÊMICOS DE MESTRADO INTERNACIONAL.</b></td>
+                        </tr>
+                    </table>
+                </div>    
             </div>
-            <center>
-               <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+        </div>  
+        <center>
+            <span id=endpage> <br><br><br><br><br><br><br><br>ATENAS COLLEGE <br><br>
 
-               WhatsApp (11) 95290-8507 </span> 
-           </center>
+            WhatsApp (11) 95290-8507 </span>
+        </center> 
+        <img  id="background2" src="{{ asset('/img/fundo_atenas.jpg') }}">
+        <div class="page" id= "page2" style="margin-left: 16%;">
 
-       </body>
-       </html>
+            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px; ">
+                <b><u>CONTRATADA:</u></b><br><br><br>
+                <b>A ATENAS COLLEGE</b>, instituição de direito privado, devidamente registrada no Estado da
+                Delaware, Estados Unidos da América, sob a razão social de <b>ATENAS COLLEGE CORP</b>,
+                mantenedora da <b>ATENAS COLLEGE</b>, devidamente registrada no Estado de Dalaware, sobre
+                número de identificação (ID Number) 37-1838647, neste ato representado pelo seu Diretor
+                Presidente Sr. Marcelo Barbosa Santos, devidamente registrado no Brasil e inscrito no CPF
+                número 669.788.901-20, e no RG nº 1.758.132/DF.<br><br>
+
+                Decidem celebrar o presente <b>CONTRATO DE ASSESSORIA para a INTEGRALIZAÇÃO DE
+                CRÉDITOS ACADÊMICOS NA ATENAS COLLEGE</b>. As partes possuidoras de capacidade
+                jurídica resolvem celebrar o presente contrato, com o objetivo de formalizar os serviços
+                educacionais, em observância com a lei nº. 10.406/02, Decreto nº. 5.622/2005 e demais
+                legislações pertinentes em vigor, nos termos adiante firmados, mediante as cláusulas e
+                condições a seguir especificadas:<br><br><br>
+
+
+                <b>CLÁUSULA PRIMEIRA – DO OBJETO DO CONTRATO</b><br><br>
+
+                O presente instrumento tem por objeto a integralização de créditos de programas de pósgraduação
+                Stricto Sensu outorgado ao <b>CONTRATANTE</b> pela <b>ATENAS COLLEGE</b>, em título
+                de <b>Mestrado</b>, contemplando a assessoria, análise do projeto de pesquisa, grade curricular da
+                IES emitente dos créditos, análise ou desenvolvimento da dissertação, desenvolvimento de
+                pareceres técnicos a adequação necessária à integralização, bem como, o <b>DEFERIMENTO À
+                INTEGRALIZAÇÃO</b>;<br><br>
+
+                <b>Parágrafo Primeiro</b> – A <b>CONTRATADA</b> neste ato assessora o <b>CONTRANTE</b> no processo de
+                integralização dos créditos acadêmicos do Programa <b>INTEGRALIZAÇÃO DE CRÉDITOS
+                ACADÊMICOS da ATENAS COLLEGE</b> que o <b>CONTRATANTE</b> adquiriu através de programas
+                realizados em outras IES, conforme documentação enviada.<br><br>
+
+                <b>Parágrafo Segundo</b> – O <b>CONTRATANTE</b> declara expressamente estar ciente dos termos da
+                presente contratação, “<b>a qual foi por ele firmada de livre e espontânea vontade. Possui
+                    total e completo conhecimento dos procedimentos de nacionalização e reconhecimento
+                    de seus títulos emitidos no exterior junto a universidades brasileiras, e reconhece que a
+                    CONTRATADA não é responsável por esse serviço, reafirmando sua completa ciência
+                sobre os processos de reconhecimento de títulos, estando sob suas responsabilidades</b>”.<br><br><br>
+
+
+                <b>CLÁUSULA SEGUNDA – DAS OBRIGAÇÕES</b><br><br>
+
+                <b>Parágrafo Primeiro</b> – O <b>CONTRATADO</b> fica responsável em nomear uma equipe técnica, tão
+                logo assinem este instrumento, a qual fará a interface com a <b>CONTRATANTE</b>, com o objetivo
+                de desenvolver um cronograma de trabalho, o qual possibilite a criação de um fluxo de
+                documentos necessários para o desenvolvimento dos trabalhos que são objetos deste
+                instrumento;<br><br>
+
+                <b>Parágrafo Segundo</b> – O cronograma a que se refere o parágrafo primeiro da cláusula segunda
+                deverá ser concluído até 05 dias após a assinatura deste instrumento, devendo em comum
+                acordo entre a <b>CONTRATANTE</b> e o <b>CONTRATADO</b>, ficar estabelecido os responsáveis pelas
+                atividades, documentos necessários, datas a serem cumpridas, entre outros itens necessários
+                para o bom andamento dos trabalhos;<br><br>
+
+                <b>Parágrafo Terceiro</b> – O <b>CONTRATADO</b> obriga-se a entregar em no máximo 05 (cinco)
+                dias uteis à <b>CONTRATANTE</b>, parecer técnico referente aos documentos recebidos para
+                integralização do título, solicitando documentos que por ventura estejam faltando, ou
+                insuficientes. <br><br>
+
+                <b>Parágrafo Quarto</b> – Os documentos devolvidos pelo <b>CONTRATADO</b> à <b>CONTRATANTE</b>,
+                que não tenham condições de prosseguir para a integralização, não serão objeto de
+                quaisquer custos financeiros para a contratante.<br><br>
+
+                <b>Parágrafo Quinto</b> – O <b>CONTRATADO</b> compromete-se a realizar a integralização dos
+                títulos pela <b>ATENAS COLLEGE</b>.<br><br>
+            </div>
+        </div>
+        <center>
+            <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+
+            WhatsApp (11) 95290-8507 </span>
+        </center> 
+
+        <img  id="background3" src="{{ asset('/img/fundo_atenas.jpg') }}">
+        <div class="page" id= "page3" style="margin-left: 16%;">
+
+            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+               <b>Parágrafo Sexto</b> – O <b>CONTRATADO</b> obriga-se a manter o sigilo e confidencialidade
+               sobre todos os documentos que estiverem sob sua responsabilidade, comprometendo-se
+               a não utilizar nenhuma informação ou dados em qualquer que sejam as circunstâncias
+               fora do objeto deste instrumento;<br><br>
+
+               <b>Parágrafo Sétimo</b> – O <b>CONTRATADO</b> compromete-se a não utilizar nenhum dado
+               pessoal do <b>CONTRATANTE</b> sem autorização prévia por escrito;<br><br>
+
+               <b>Parágrafo Oitavo</b> – O <b>CONTRATADO</b> assume desde já toda a responsabilidade pelo
+               título que não for integralizado por falta de comprovação dos créditos ou falta de produção
+               acadêmica ou até mesmo por não ser aprovado em banca examinadora, ou seja, pela
+               titulação que se comprometer a integralizar e que por qualquer razão não tenha obtido
+               sucesso na integralização, assumindo em especial toda e qualquer ação judicial ou
+               extrajudicial indenizatória que por ventura a <b>CONTRATANTE</b> venha a sofrer em razão do
+               não cumprimento do presente contrato;<br><br><br>
+
+
+               <b>CLÁUSULA TERCEIRA – DAS OBRIGAÇÕES DO CONTRATANTE</b><br><br>
+
+               <b>Parágrafo Primeiro</b> – O <b>CONTRATANTE</b> será o único e exclusivo responsável pelo curso
+               estrangeiro no qual foi certificado, responsabilizando-se pelo conteúdo do mesmo.
+               Parágrafo Segundo – Os documentos que o <b>CONTRATANTE</b> deverá entregar ao
+               <b>CONTRATADO</b> para que se cumpra com o objeto deste instrumento são:<br><br>
+
+               <ul>
+                <li>
+                 Carteira de Identidade ou Identidade Funcional (dentro do prazo de validade);
+             </li>
+             <li>
+                 CPF;
+             </li>
+             <li>
+                 Certidão de Nascimento ou Casamento;
+             </li>
+             <li>
+                 Comprovante de Residência atualizado com no máximo 90 (noventa) dias;
+             </li>
+             <li>
+                 <i>Curriculum Vitae</i>;
+             </li>
+             <li>
+                 Diploma de Graduação;
+             </li>
+             <li>
+                 Histórico Acadêmico ou Documento Equivalente;
+             </li>
+             <li>
+                 Certificado de pós-graduação Lato Sensu;
+             </li>
+             <li>
+                 Documentação comprobatório de créditos emitidos por IES que deu origem a
+                 requisição de Integralização de Créditos (declaração de conclusão do programa de
+                 mestrado, ou mesmo declaração de cumprimento de disciplinas, cópia do Diploma de
+                 Mestrado e ementário ou histórico do programa de mestrado).
+             </li>
+         </ul><br><br>
+
+         <b>Parágrafo Terceiro</b> – O <b>CONTRATANTE</b> compromete-se a manter as atividades que
+         constam no objeto deste instrumento, para que o <b>CONTRATADO</b> cumpra com o processo
+         de integralização dos créditos;<br><br><br>
+
+         <b>CLÁUSULA QUARTA – DA FORMA DE PAGAMENTO</b><br><br>
+
+         <b>Parágrafo Primeiro</b> – A <b>CONTRATATANTE</b> pagará ao <b>CONTRATADO</b> o valor de <b>R$</b><br><br>
+
+         <b>Parágrafo Segundo</b> – A<b> CONTRATATANTE</b>, após realizar o pagamento, deverá
+         encaminhar o comprovante digitalizado para o seguinte correio eletrônico:
+         contact@atenascollege.university, juntamente do formulário devidamente preenchido,
+         constante na primeira página deste contrato.<br><br><br>
+
+
+         <b>CLÁUSULA QUINTA – DA RESCISÃO</b><br><br>
+
+         a. Através do requerimento expresso do <b>CONTRATANTE</b>, assistido ou representado,
+         quando for o caso, do pedido de rescisão contratual, sendo em qualquer caso, condição
+         obrigatória de sua eficácia a comunicação da desistência à <b>ATENAS COLLEGE</b>, e o
+         pagamento dos valores avençados neste instrumento (<b>PAGAMENTO DE MULTA DE 10%
+         DO VALOR TOTAL DO CONTRATO</b>) até da efetiva rescisão;<br>
+         b. Quando por decisão da <b>CONTRATADA</b> houver a rescisão compulsória deste contrato,
+         pela exclusão do <b>CONTRATANTE</b> em decorrência de descumprimento das normas
+         internas, devidamente apresentadas com base no próprio contrato fornecido pela
+         <b>CONTRATADA</b> no ato da assinatura do mesmo;<br><br>
+     </ul>
+ </div>
+</div>
+<center>
+ <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+
+ WhatsApp (11) 95290-8507 </span> 
+</center> 
+<img  id="background4" src="{{ asset('/img/fundo_atenas.jpg') }}">
+<div class="page" id= "page4" style="margin-left: 16%;">
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+     <b>Parágrafo Primeiro</b> – O pedido de rescisão unilateral do <b>Contrato de Prestação de
+     Serviços</b> feito pelo <b>CONTRATANTE</b> deverá ser fundamentado e protocolado na <b>ATENAS
+     COLLEGE</b>, não dispensando o <b>CONTRATANTE</b>, da quitação do pagamento referente ao
+     serviço de integralização, assim como outras despesas eventualmente ocasionadas pelo
+     <b>CONTRATANTE</b>, até a data da solicitação da rescisão do contrato.<br><br>
+
+     <b>Parágrafo Segundo</b> – O compromisso ora assumido pelo <b>CONTRATANTE</b> com a
+     <b>CONTRATADA</b> é global e abrange a totalidade das obrigações ora pactuadas, e sua falta
+     por impontualidade nos pagamentos não o isentam de responder integralmente por todas
+     as obrigações aqui assumidas, e constituem causa de rescisão unilateral pela
+     <b>CONTRATADA</b>, da presente contratação.<br><br>
+
+     <b>Parágrafo Terceiro</b> – Ocorrendo a desistência unilateral do contrato de prestação de
+     serviço, com comunicação escrita <b>30 dias</b> antes de vencer a parcela seguinte, a
+     <b>CONTRATADA</b> fica autorizada a cobrar 10% (dez por cento) do saldo total do plano
+     financeiro escolhido.<br><br>
+
+     <b>Parágrafo Quarto</b> – No caso de rescisão do contrato, o <b>CONTRATANTE</b>, deverá estar
+     em dia com seus pagamentos e comunicar por escrito a <b>CONTRATADA</b> no prazo máximo
+     de 30 dias antes do vencimento da parcela a vencer.<br><br>
+
+     <b>Parágrafo Quinto</b> – Na hipótese de mora no pagamento das mensalidades, o
+     <b>CONTRATANTE</b> pagará multa de 2% e juros moratórios de 12% a.a., mais correção
+     monetária pelo INPC, pro-rata dies.<br><br>
+
+     <b>Parágrafo Sexto</b> – Caso o pedido de desistência previsto nesta cláusula não seja
+     formalizado, este contrato continuará em vigor e o <b>CONTRATANTE</b> deverá pagar todas
+     as parcelas previstas no ato da assinatura deste instrumento, podendo a <b>CONTRATADA</b>
+     tomar medidas cabíveis de cobrança. Nesta hipótese, além da cláusula penal prevista no
+     item “a”, incidirão sobre o saldo devedor atualizado os encargos do parágrafo anterior.<br><br><br>
+
+
+     <b>CLÁUSULA SEXTA – SOLICITAÇÕES DE DOCUMENTOS</b><br><br>
+
+     O <b>CONTRATANTE</b> que solicitar certidões ou outros documentos à <b>ATENAS COLLEGE</b> deverá pagar
+     por cada documento solicitado, tomando como base os valores estipulados em tabela elaborada e
+     informada pela <b>CONTRATADA</b>, os quais se destinam a custear as despesas decorrentes da emissão
+     e envio dos mesmos.<br><br><br>
+
+     <b>CLÁUSULA SÉTIMA – DA MANUTENÇÃO DO CADASTRO</b><br><br>
+
+     Sempre que o <b>CONTRATANTE</b> mudar de endereço deverá comunicar de imediato por escrito a
+     <b>CONTRATADA</b>, sob pena de terem-se como válidas e eficazes todas as correspondências enviadas
+     pela <b>CONTRATADA</b> para endereço anterior, constante deste contrato, até a conclusão do processo
+     de integralização.<br><br>
+
+     <b>Parágrafo Primeiro</b> – O <b>CONTRATANTE</b> deverá possuir um endereço eletrônico permanente para
+     contato com a <b>CONTRATADA</b>. É de total responsabilidade do (a) aluno (a) adquirir e informar um
+     endereço eletrônico a <b>CONTRATADA</b> não importando os meios pelos quais irá adquiri-lo e informá-
+     lo.<br><br>
+
+     <b>Parágrafo Segundo</b> – O <b>CONTRATANTE</b> deverá responder a todas as mensagens enviadas em
+     seu endereço eletrônico, no prazo máximo de 72 horas.<br><br><br>
+
+
+     <b>CLÁUSULA OITAVA – DOS DOCUMENTOS SOLICITADOS</b><br><br>
+
+     O <b>CONTRATANTE</b> deverá apresentar todos os documentos solicitados pela <b>CONTRATADA</b>, dentro
+     do prazo estipulado, a fim de ser admitido no processo de Integralização de Créditos em nível de
+     Mestrado.<br><br>
+
+     <b>Parágrafo Único</b> – O <b>CONTRATANTE</b> deverá apresentar os documentos solicitados no checklist da
+     <b>CLÁUSULA TERCEIRA</b> deste contrato pela <b>CONTRATADA</b> dentro do prazo de <b>5 (cinco)</b> dias uteis
+     a contar da data de assinatura deste.<br><br><br>
+ </div>
+</div>
+<center>
+ <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+
+ WhatsApp (11) 95290-8507 </span> 
+</center>
+<img  id="background5" src="{{ asset('/img/fundo_atenas.jpg') }}">
+<div class="page" id= "page4" style="margin-left: 16%;">
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+
+     <b>CLÁUSULA NONA – DA INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS</b><br><br>
+
+     O <b>CONTRATANTE</b> declara ter ciência de que a assessoria visa auxiliá-lo no processo de
+     <b>INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS, o qual compreende</b>:<br>
+
+     a. A Convalidação dos Créditos Acadêmicos pela <b>ATENAS COLLEGE</b>, após avaliação e aprovação
+     pela Secretaria Pedagógica.<br>
+     b. A entrega de todos os documentos do aluno ao final do Programa de Mestrado, devidamente
+     apostilado na Flórida.<br><br><br>
+
+     <b>CLÁUSULA DÉCIMA – DA APROVAÇÃO NO PROGRAMA DE MESTRADO</b><br><br>
+
+     O <b>CONTRATANTE</b> deve ter ciência que para receber o diploma deverá ter sua dissertação aprovada
+     em banca examinadora pela ATENAS COLLEGE, através da avaliação da dissertação de acordo
+     com orientação da <b>CONTRATADA</b>.<br><br>
+
+     <b>Parágrafo Primeiro</b> – O <b>CONTRATANTE</b> deve ter ciência que após concluído o processo de
+     INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS, os documentos passarão por legalização junto
+     aos órgãos regulamentadores, para somente após o trâmite final receber o Diploma.<br><br>
+
+     <b>Parágrafo segundo</b> – A <b>CONTRATADA</b> reserva-se ao direito de não finalizar o processo, caso o
+     <b>CONTRATANTE</b> desatenda às exigências estabelecidas neste contrato.<br><br>
+
+     <b>Parágrafo Terceiro</b> – A <b>CONTRATADA</b> compromete-se a encaminhar os documentos
+     imediatamente quando os mesmos estiverem disponíveis.<br><br><br>
+
+
+     <b>CLÁUSULA DÉCIMA PRIMEIRA – DO FORO</b><br><br>
+
+     Fica eleito o foro da Cidade de Delaware, Estados Unidos da América, para dirimir todas as
+     questões referentes à execução do presente instrumento, após esgotadas todas as instâncias
+     administrativas.<br><br>
+
+     E, por estarem de pleno acordo, os contratantes assinam o presente convênio, em 02 (duas)
+     vias de igual teor e forma, na presença das testemunhas abaixo, para todos os seus jurídicos
+     e legais efeitos. <br><br>
+
+     <center><pre>DELAWARE (USA),  {{ strftime('%d de %B de %Y', strtotime('today')) }}</pre></center>
+     <center>
+         <b> <br><br><br>_____________________________________<br>
+             CONTRATADO<br>
+             Marcelo Barbosa Santos<br>
+             ATENAS COLLEGE<br><br><br></b>
+         </center>
+         <center>
+            <b>_____________________________________<br>
+                CONTRATANTE<br><br></b>
+            </center>
+            <div style="float: left;">
+                <b>TESTEMUNHAS:<br><br>
+                    1._____________________________________<br>
+                    Nome:<br>
+                    _____________________________________<br>
+                CPF Nº:</b>
+            </div>
+            <div style="float: right;">
+                <br><br>
+                <b>2._____________________________________<br>
+                    Nome:<br>
+                    _____________________________________<br>
+                CPF Nº:</b>
+            </div>
+
+        </div>
+    </div>
+    <center>
+     <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+
+     WhatsApp (11) 95290-8507 </span>
+ </center>
+
+</body>
+</html>
