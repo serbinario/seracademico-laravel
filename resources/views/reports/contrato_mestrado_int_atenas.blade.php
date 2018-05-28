@@ -62,11 +62,40 @@
             width: 700px;
             border-bottom: 0.5px;
         }
-        #endpage{
-            margin-top:200px;
+        .endpage{
             color: grey;
             font-weight: bold;
             text-align: center;
+        }
+        #endpage1{
+            position: absolute;
+            top: 1250px;
+            left:30%;
+            right:30%;
+        }
+        #endpage2{
+            position: absolute;
+            top: 2570px;
+            left:30%;
+            right:30%;
+        }
+        #endpage3{
+            position: absolute;
+            top: 3900px;
+            left:30%;
+            right:30%;
+        }
+        #endpage4{
+            position: absolute;
+            top: 5200px;
+            left:30%;
+            right:30%;
+        }
+        #endpage5{
+            position: absolute;
+            top: 6550px;
+            left:30%;
+            right:30%;
         }
         #background{
             position: absolute;
@@ -106,6 +135,9 @@
             width: 100%;
         }
         #page2{
+            margin-top: 50px;
+        }
+        #page5{
             margin-top: 50px;
         }
         .assinaturas{
@@ -177,14 +209,14 @@
             </div>
         </div>  
         <center>
-            <span id=endpage> <br><br><br><br><br><br><br><br>ATENAS COLLEGE <br><br>
+            <span class="endpage" id=endpage1>ATENAS COLLEGE <br><br>
 
             WhatsApp (11) 95290-8507 </span>
         </center> 
         <img  id="background2" src="{{ asset('/img/fundo_atenas.jpg') }}">
         <div class="page" id= "page2" style="margin-left: 16%;">
 
-            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px; ">
+            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:260px; ">
                 <b><u>CONTRATADA:</u></b><br><br><br>
                 <b>A ATENAS COLLEGE</b>, instituição de direito privado, devidamente registrada no Estado da
                 Delaware, Estados Unidos da América, sob a razão social de <b>ATENAS COLLEGE CORP</b>,
@@ -251,7 +283,7 @@
             </div>
         </div>
         <center>
-            <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+            <span class="endpage" id=endpage2>ATENAS COLLEGE <br><br>
 
             WhatsApp (11) 95290-8507 </span>
         </center> 
@@ -259,7 +291,7 @@
         <img  id="background3" src="{{ asset('/img/fundo_atenas.jpg') }}">
         <div class="page" id= "page3" style="margin-left: 16%;">
 
-            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+            <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:670px; ">
                <b>Parágrafo Sexto</b> – O <b>CONTRATADO</b> obriga-se a manter o sigilo e confidencialidade
                sobre todos os documentos que estiverem sob sua responsabilidade, comprometendo-se
                a não utilizar nenhuma informação ou dados em qualquer que sejam as circunstâncias
@@ -346,13 +378,13 @@
  </div>
 </div>
 <center>
- <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+ <span class="endpage" id=endpage3>ATENAS COLLEGE <br><br>
 
  WhatsApp (11) 95290-8507 </span> 
 </center> 
 <img  id="background4" src="{{ asset('/img/fundo_atenas.jpg') }}">
 <div class="page" id= "page4" style="margin-left: 16%;">
-    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:1083px; ">
      <b>Parágrafo Primeiro</b> – O pedido de rescisão unilateral do <b>Contrato de Prestação de
      Serviços</b> feito pelo <b>CONTRATANTE</b> deverá ser fundamentado e protocolado na <b>ATENAS
      COLLEGE</b>, não dispensando o <b>CONTRATANTE</b>, da quitação do pagamento referente ao
@@ -420,13 +452,13 @@
  </div>
 </div>
 <center>
- <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+ <span class="endpage" id=endpage4>ATENAS COLLEGE <br><br>
 
  WhatsApp (11) 95290-8507 </span> 
 </center>
 <img  id="background5" src="{{ asset('/img/fundo_atenas.jpg') }}">
-<div class="page" id= "page4" style="margin-left: 16%;">
-    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
+<div class="page" id= "page5" style="margin-left: 16%;">
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:1450px; ">
 
      <b>CLÁUSULA NONA – DA INTEGRALIZAÇÃO DE CRÉDITOS ACADÊMICOS</b><br><br>
 
@@ -494,7 +526,7 @@
         </div>
     </div>
     <center>
-     <span id=endpage>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br> <br>ATENAS COLLEGE <br><br>
+     <span class="endpage" id=endpage5>ATENAS COLLEGE <br><br>
 
      WhatsApp (11) 95290-8507 </span>
  </center>
