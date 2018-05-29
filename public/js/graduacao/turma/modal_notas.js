@@ -3,6 +3,14 @@ $(document).on('click', '#btnCloseModalNotas', function () {
     $('#disciplinaSearch option').remove();
 });
 
+$(document).on( 'focusout', '.alteravel', function( event ) {
+
+    var elem = document.getElementsByClassName("uni1");
+    console.log(elem);
+
+
+});
+
 // Função para carregar a grid
 var tableNotas;
 function loadTableNotas (idTurma) {
@@ -75,21 +83,21 @@ function loadFieldsNotasNew (idTurma) {
             for(var i = 0; i < result.notas.length; i++) {
 
                 // Criando as options
-                htmlNotas += "<tr>"
-                +"<td>"+result.notas[i].nomePessoa+"</td>"
-                +"<td>"+result.notas[i].nota_unidade_1+"</td>"
-                +"<td>"+result.notas[i].nota_unidade_2+"</td>"
-                +"<td>"+result.notas[i].nota_2_chamada+"</td>"
-                +"<td>"+result.notas[i].nota_final+"</td>"
-                +"<td>"+result.notas[i].nota_media+"</td>"
-                +"<td>"+result.notas[i].total_falta+"</td>"
-                +"<td>"+result.notas[i].nomeSituacao+"</td>"
-                +"</tr>";
+                htmlNotas += '<tr>'
+                +'<td>'+result.notas[i].nomePessoa+'</td>'
+                +'<td><input class=\"uni1 alteravel\" id=\"'+result.notas[i].id +'\" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
+                +'<td><input class=\"uni2 alteravel\" value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
+                +'<td><input class=\"2chamada alteravel\" value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
+                +'<td><input class=\"final alteravel\" value=\"'+result.notas[i].nota_final+'\"></td>'
+                +'<td>'+result.notas[i].nota_media+'</td>'
+                +'<td>'+result.notas[i].total_falta+'</td>'
+                +'<td>'+result.notas[i].nomeSituacao+'</td>'
+                +'</tr>';
             }
 
             // Preenchendo o select
             //$("#disciplinaSearch option").remove();
-            $("#alunos-notas-grid").append(htmlNotas);
+            $("#notas-grid").append(htmlNotas);
 
         }});
 }

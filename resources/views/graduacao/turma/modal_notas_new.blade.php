@@ -48,7 +48,7 @@
                         {{--<button class="btn btn-primary pull-right" id="btnIncluirDisciplinas" style="margin-bottom: 3%;">Incluir disciplinas</button>--}}
 
 
-                        <table id="alunos-notas-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="notas-grid" class="display table table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th style="width: 40%">Nome</th>
@@ -60,17 +60,6 @@
                                     <th>Faltas</th>
                                     <th>Situação</th>
                                     <th>Ação</th>
-                                </tr> 
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>     
                             </thead>
                         </table>
