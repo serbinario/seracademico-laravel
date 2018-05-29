@@ -147,6 +147,7 @@
     @include('graduacao.turma.modal_editar_notas')
     @include('graduacao.turma.modal_frequencias')
     @include('graduacao.turma.modal_editar_frequencias')
+    @include('graduacao.turma.modal_notas_new')
     @include('graduacao.turma.diarioAula.modal_diario_aula')
     @include('graduacao.turma.diarioAula.modal_create_diario_aula')
     @include('graduacao.turma.diarioAula.modal_edit_diario_aula')
@@ -270,6 +271,28 @@
 
             //Executando as grids
             runTableNotas(idTurma);
+        });
+         $(document).on("click", '#btnNotasNew', function () {
+            // declaração de variáveis locais
+            var nomeCurso, codCurriculo, semestre;
+
+            //Recuperando o id da turma selecionada
+            idTurma      = table.row($(this).parent().parent().parent().parent().parent().index()).data().id;
+            periodo      = table.row($(this).parent().parent().parent().parent().parent().index()).data().periodo;
+            codigo       = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigo;
+            nomeCurso    = table.row($(this).parent().parent().parent().parent().parent().index()).data().nome;
+            codCurriculo = table.row($(this).parent().parent().parent().parent().parent().index()).data().codigoCurriculo;
+            semestre     = table.row($(this).parent().parent().parent().parent().parent().index()).data().semestre;
+
+            // setando a descrição
+            $('#tnTurma').text(codigo);
+            $('#tnPeriodo').text(periodo);
+            $('#tnCurriculo').text(codCurriculo);
+            $('#tnCurso').text(nomeCurso);
+            $('#tnSemestre').text(semestre);
+
+            //Executando as grids
+            runTableNotas_new(idTurma);
         });
 
         /*Responsável em abrir modal de frequencias*/

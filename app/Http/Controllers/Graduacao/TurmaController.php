@@ -142,7 +142,8 @@ class TurmaController extends Controller
                                 <li><a class="btn-floating green" id="modal-horario" href="#" title="Calendário da turma"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                                 <li><a class="btn-floating green" id="modal-notas" href="#" title="Notas da turma"><i class="material-icons">spellcheck</i></a></li>
                                 <li><a class="btn-floating green" id="modal-frequencias" href="#" title="Frequências da turma"><i class="material-icons">playlist_add_check</i></a></li>
-                                <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>';
+                                <li><a class="btn-floating indigo" href="edit/'.$row->id.'" title="Editar da turma"><i class="material-icons">edit</i></a></li>
+                                <li><a class="btn-floating green" id="btnNotasNew"  title="Notas da Turma"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>';
     
     
                 # Recuperando a turma da linha atual

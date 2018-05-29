@@ -89,6 +89,43 @@ class TurmaNotaController extends Controller
         })->make(true);
     }
 
+
+
+    public function notasDaTurma(Request $request, $idTurma)
+    {
+        #Criando a consulta
+        $rows = \DB::table('fac_disciplinas')
+            ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
+            ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
+            ->join('fac_alunos_notas', function ($join) {
+                $join->on('fac_alunos_notas.disciplina_id', '=', 'fac_disciplinas.id')
+                    ->on('fac_alunos_notas.turma_id', '=', 'fac_turmas.id');
+            })
+            ->leftJoin('fac_alunos_frequencias', 'fac_alunos_frequencias.aluno_nota_id', '=', 'fac_alunos_notas.id')
+            ->leftJoin('fac_situacao_nota', 'fac_situacao_nota.id', '=', 'fac_alunos_notas.situacao_id')
+            ->join('fac_alunos_semestres', 'fac_alunos_semestres.id', '=', 'fac_alunos_notas.aluno_semestre_id')
+            ->join('fac_alunos', 'fac_alunos.id', '=', 'fac_alunos_semestres.aluno_id')
+            ->join('pessoas', 'pessoas.id', '=', 'fac_alunos.pessoa_id')
+            ->select([
+                'fac_disciplinas.id',
+                'fac_disciplinas.id as idDiciplina',
+                'fac_alunos_notas.id as idAlunoNota',
+                'fac_alunos_semestres.id as idAlunoSemestre',
+                'fac_alunos.id as idAluno',
+                'pessoas.nome as nomePessoa',
+                'fac_alunos_notas.nota_unidade_1',
+                'fac_alunos_notas.nota_unidade_2',
+                'fac_alunos_notas.nota_2_chamada',
+                'fac_alunos_notas.nota_final',
+                'fac_alunos_notas.nota_media',
+                'fac_situacao_nota.nome as nomeSituacao',
+                'fac_alunos_frequencias.total_falta'
+            ])
+            ->where('fac_turmas.id', '=', $idTurma)->get();
+            return response()->json([ 'notas' => $rows ]);
+        
+    }
+
     /**
      * @param Request $request
      * @return mixed
