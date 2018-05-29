@@ -3,13 +3,20 @@ $(document).on('click', '#btnCloseModalNotas', function () {
     $('#disciplinaSearch option').remove();
 });
 
-$(document).on( 'focusout', '.alteravel', function( event ) {
 
-    var elem = document.getElementsByClassName("uni1");
-    console.log(elem);
+$(document).on( 'focusout', 'td', function( event ) {
+
+    var idAluno = $(this).parent()[0].id
+    var valor = $(this)[0].firstChild.value
+    var coluna = $(this).attr("class")
+    console.log( 'idAluno: ' +  idAluno + ' Valor: ' + valor + ' Coluna: ' + coluna );
+
+    //console.log($(this))
+
 
 
 });
+
 
 // Função para carregar a grid
 var tableNotas;
@@ -55,6 +62,7 @@ function loadFieldsNotasNew (idTurma) {
     $.ajax({url: "/index.php/seracademico/graduacao/turma/notas/notasDaTurma/" + idTurma, 
 
         success: function(result){
+        console.log(result.notas);
             /*    <th style="width: 40%">Nome</th>
                                     <th>1º Unid.</th>
                                     <th>2º Unid.</th>
@@ -76,19 +84,18 @@ function loadFieldsNotasNew (idTurma) {
                                     <td></td>
                                     <td></td>
                                     </tr> */
-                                    console.log(result.notas);
                                     var htmlNotas = "";
 
             // Percorrendo o array de disciplina
             for(var i = 0; i < result.notas.length; i++) {
 
                 // Criando as options
-                htmlNotas += '<tr>'
+                htmlNotas += '<tr id=\"' +result.notas[i].idAluno  +'">'
                 +'<td>'+result.notas[i].nomePessoa+'</td>'
-                +'<td><input class=\"uni1 alteravel\" id=\"'+result.notas[i].id +'\" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
-                +'<td><input class=\"uni2 alteravel\" value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
-                +'<td><input class=\"2chamada alteravel\" value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
-                +'<td><input class=\"final alteravel\" value=\"'+result.notas[i].nota_final+'\"></td>'
+                +'<td class="uni1"><input  id=\"'+result.notas[i].idAluno +'\" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
+                +'<td class="uni2"><input value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
+                +'<td class="2chamada" ><input  value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
+                +'<td class="final alteravel"><input  value=\"'+result.notas[i].nota_final+'\"></td>'
                 +'<td>'+result.notas[i].nota_media+'</td>'
                 +'<td>'+result.notas[i].total_falta+'</td>'
                 +'<td>'+result.notas[i].nomeSituacao+'</td>'
@@ -125,7 +132,7 @@ function runTableNotas_new(idTurma) {
         tableNotas.ajax.url( "/index.php/seracademico/graduacao/turma/notas/grid/" + idTurma).load();
     } else {
         // Carregamento da grids
-        loadTableNotas(idTurma);
+        //loadTableNotas(idTurma);
     }
 
     // Carregamento os campos necessários
