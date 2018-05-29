@@ -47,32 +47,51 @@ function loadFieldsNotasNew (idTurma) {
     $.ajax({url: "/index.php/seracademico/graduacao/turma/notas/notasDaTurma/" + idTurma, 
 
         success: function(result){
-
-          /* if(retorno) {
-            // Html de disciplinas
-            var htmlDisciplina = "<option value=''>Selecione uma Disciplina</option>";
+            /*    <th style="width: 40%">Nome</th>
+                                    <th>1º Unid.</th>
+                                    <th>2º Unid.</th>
+                                    <th>2º Chamada</th>
+                                    <th>Final</th>
+                                    <th>Média</th>
+                                    <th>Faltas</th>
+                                    <th>Situação</th>
+                                    <th>Ação</th>
+                                </tr> 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    </tr> */
+                                    console.log(result.notas);
+                                    var htmlNotas = "";
 
             // Percorrendo o array de disciplina
-            for(var i = 0; i < retorno['graduacao\\disciplina'].length; i++) {
+            for(var i = 0; i < result.notas.length; i++) {
+
                 // Criando as options
-                htmlDisciplina += "<option value='" + retorno['graduacao\\disciplina'][i].id + "'>"  + retorno['graduacao\\disciplina'][i].nome + "</option>";
+                htmlNotas += "<tr>"
+                +"<td>"+result.notas[i].nomePessoa+"</td>"
+                +"<td>"+result.notas[i].nota_unidade_1+"</td>"
+                +"<td>"+result.notas[i].nota_unidade_2+"</td>"
+                +"<td>"+result.notas[i].nota_2_chamada+"</td>"
+                +"<td>"+result.notas[i].nota_final+"</td>"
+                +"<td>"+result.notas[i].nota_media+"</td>"
+                +"<td>"+result.notas[i].total_falta+"</td>"
+                +"<td>"+result.notas[i].nomeSituacao+"</td>"
+                +"</tr>";
             }
-            console.log(htmlDisciplina);
 
             // Preenchendo o select
-            $("#disciplinaSearch option").remove();
-            $("#disciplinaSearch").append(htmlDisciplina);
-        } else {
-            // Retorno caso não tenha currículo em uma turma ou algum erro
-            swal(retorno.msg, "Click no botão abaixo!", "error");
-            $('#modal-alunos-notas').modal('toggle');
-        }
-    });*/
+            //$("#disciplinaSearch option").remove();
+            $("#alunos-notas-grid").append(htmlNotas);
 
-
-}});
-    // retorno
-    return tableNotas;
+        }});
 }
 
 // Função para executar a grid
@@ -138,7 +157,6 @@ function loadFieldsNotas()
                 // Criando as options
                 htmlDisciplina += "<option value='" + retorno['graduacao\\disciplina'][i].id + "'>"  + retorno['graduacao\\disciplina'][i].nome + "</option>";
             }
-            console.log(htmlDisciplina);
 
             // Preenchendo o select
             $("#disciplinaSearch option").remove();

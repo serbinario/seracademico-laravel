@@ -143,7 +143,7 @@
     @include('graduacao.turma.modal_disciplina_store')
     @include('graduacao.turma.modal_horario_store')
     @include('graduacao.turma.modal_horario_update')
-    @include('graduacao.turma.modal_notas')
+    {{--@include('graduacao.turma.modal_notas')--}}
     @include('graduacao.turma.modal_editar_notas')
     @include('graduacao.turma.modal_frequencias')
     @include('graduacao.turma.modal_editar_frequencias')
