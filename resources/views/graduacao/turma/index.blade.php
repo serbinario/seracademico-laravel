@@ -250,7 +250,7 @@
         });
 
         /*Responsável em abrir modal de notas*/
-        $(document).on("click", '#modal-notas', function () {
+        /*$(document).on("click", '#modal-notas', function () {
             // declaração de variáveis locais
             var nomeCurso, codCurriculo, semestre;
 
@@ -271,7 +271,7 @@
 
             //Executando as grids
             runTableNotas(idTurma);
-        });
+        });*/
          $(document).on("click", '#btnNotasNew', function () {
             // declaração de variáveis locais
             var nomeCurso, codCurriculo, semestre;
@@ -292,7 +292,7 @@
             $('#tnSemestre').text(semestre);
 
             //Executando as grids
-            runTableNotas_new(idTurma);
+            runTableNotas(idTurma);
         });
 
         /*Responsável em abrir modal de frequencias*/

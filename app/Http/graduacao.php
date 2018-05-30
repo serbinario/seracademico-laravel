@@ -246,7 +246,7 @@ Route::group(['prefix' => 'graduacao', 'middleware' => 'auth', 'as' => 'graduaca
             Route::post('getLoadFields', ['as' => 'getLoadFields', 'uses' => 'Graduacao\TurmaNotaController@getLoadFields']);
             Route::get('notasDaTurma/{idTurma}', ['as' => 'notasDaTurma', 'uses' => 'Graduacao\TurmaNotaController@notasDaTurma']);
             Route::get('edit/{idAlunoNota}', ['as' => 'edit', 'uses' => 'Graduacao\TurmaNotaController@editNota']);
-            Route::post('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Graduacao\TurmaNotaController@updateNota']);
+            Route::any('update/{idAlunoNota}', ['as' => 'update', 'uses' => 'Graduacao\TurmaNotaController@updateNota']);
         });
 
         Route::group(['prefix' => 'frequencias', 'as' => 'frequencias.'], function () {

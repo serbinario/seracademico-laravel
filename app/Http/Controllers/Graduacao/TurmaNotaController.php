@@ -182,6 +182,17 @@ class TurmaNotaController extends Controller
             #Recuperando os dados da requisição
             $data = $request->all();
 
+            //Verifica se a requisiçao foi do tipo json
+            //Obs.: so funciona pelo ajax se o metodo for GET, com POS nao funciona
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json'))
+            {
+                $data = [
+                    $data['coluna'] => $data['valor']
+                ];
+
+            }
+
+
             #Executando a ação
             $this->alunoNotaService->update($data, $id);
 

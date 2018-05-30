@@ -6,138 +6,51 @@ $(document).on('click', '#btnCloseModalNotas', function () {
 
 $(document).on( 'focusout', 'td', function( event ) {
 
-    var idAluno = $(this).parent()[0].id
+    var idAlunoNota = $(this).parent()[0].id
     var valor = $(this)[0].firstChild.value
     var coluna = $(this).attr("class")
-    console.log( 'idAluno: ' +  idAluno + ' Valor: ' + valor + ' Coluna: ' + coluna );
+    console.log( 'id Registro: ' +  idAlunoNota + ' Valor: ' + valor + ' Coluna: ' + coluna );
 
-    //console.log($(this))
+    // Definindo os models
+    var dados =  {
+        'valor' : valor,
+        'coluna' : coluna
+    };
+
+    // Fazendo a requisição ajax
+    jQuery.ajax({
+        type: 'GET',
+        data: dados,
+        contentType: "application/json; charset=utf-8",
+        url: '/index.php/seracademico/graduacao/turma/notas/update/' + idAlunoNota,
+        //TurmaNotaController
+        datatype: 'json'
+    }).done(function (retorno) {
+
+    });
 
 
 
 });
 
-
 // Função para carregar a grid
 var tableNotas;
-function loadTableNotas (idTurma) {
-    tableNotas = $('#alunos-notas-grid').DataTable({
-        processing: true,
-        serverSide: true,
-        retrieve: true,
-        iDisplayLength: 5,
-        bLengthChange: false,
-        bFilter: false,
-        bPaginate: false,
-        ajax: {
-            url: "/index.php/seracademico/graduacao/turma/notas/grid/" + idTurma,
-            data: function (d) {
-                d.disciplina = $('select[name=disciplinaSearch] option:selected').val();
-            }
-        },
-        columns: [
-        {data: 'nomePessoa', name: 'pessoas.nome'},
-        {data: 'nota_unidade_1', name: 'fac_alunos_notas.nota_unidade_1'},
-        {data: 'nota_unidade_2', name: 'fac_alunos_notas.nota_unidade_2'},
-        {data: 'nota_2_chamada', name: 'fac_alunos_notas.nota_2_chamada'},
-        {data: 'nota_final', name: 'fac_alunos_notas.nota_final'},
-        {data: 'nota_media', name: 'fac_alunos_notas.nota_media'},
-        {data: 'total_falta', name: 'fac_alunos_frequencias.total_falta'},
-        {data: 'nomeSituacao', name: 'fac_situacao_nota.nome'},
-        {data: 'action', name: 'action'}
-        ]
-    });
 
-    // Função do submit do search da grid principal
-    $('#search-form').on('submit', function(e) {
-        tableNotas.draw();
-        e.preventDefault();
-    });
 
-    // retorno
-    return tableNotas;
-}
-function loadFieldsNotasNew (idTurma) {
 
-    $.ajax({url: "/index.php/seracademico/graduacao/turma/notas/notasDaTurma/" + idTurma, 
-
-        success: function(result){
-        console.log(result.notas);
-            /*    <th style="width: 40%">Nome</th>
-                                    <th>1º Unid.</th>
-                                    <th>2º Unid.</th>
-                                    <th>2º Chamada</th>
-                                    <th>Final</th>
-                                    <th>Média</th>
-                                    <th>Faltas</th>
-                                    <th>Situação</th>
-                                    <th>Ação</th>
-                                </tr> 
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    </tr> */
-                                    var htmlNotas = "";
-
-            // Percorrendo o array de disciplina
-            for(var i = 0; i < result.notas.length; i++) {
-
-                // Criando as options
-                htmlNotas += '<tr id=\"' +result.notas[i].idAluno  +'">'
-                +'<td>'+result.notas[i].nomePessoa+'</td>'
-                +'<td class="uni1"><input  id=\"'+result.notas[i].idAluno +'\" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
-                +'<td class="uni2"><input value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
-                +'<td class="2chamada" ><input  value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
-                +'<td class="final alteravel"><input  value=\"'+result.notas[i].nota_final+'\"></td>'
-                +'<td>'+result.notas[i].nota_media+'</td>'
-                +'<td>'+result.notas[i].total_falta+'</td>'
-                +'<td>'+result.notas[i].nomeSituacao+'</td>'
-                +'</tr>';
-            }
-
-            // Preenchendo o select
-            //$("#disciplinaSearch option").remove();
-            $("#notas-grid").append(htmlNotas);
-
-        }});
-}
-
-// Função para executar a grid
 function runTableNotas(idTurma) {
-    if (tableNotas) {
-        tableNotas.ajax.url( "/index.php/seracademico/graduacao/turma/notas/grid/" + idTurma).load();
-    } else {
-        // Carregamento da grids
-        loadTableNotas(idTurma);
-    }
-
-    // Carregamento os campos necessários
-    loadFieldsNotas();
-
-
-    // Configurações do modal
-    $("#modal-notas-alunos").find('.modal-dialog').css("width", "97%");
-    $("#modal-notas-alunos").find('.modal-dialog').css("max-height", "97%");
-    $("#modal-notas-alunos").modal({show: true, keyboard: true});
-}
-function runTableNotas_new(idTurma) {
-    if (tableNotas) {
-        tableNotas.ajax.url( "/index.php/seracademico/graduacao/turma/notas/grid/" + idTurma).load();
-    } else {
+   // if (tableNotas) {
+        //tableNotas.ajax.url( "/index.php/seracademico/graduacao/turma/notas/grid/" + idTurma).load();
+   // } else {
         // Carregamento da grids
         //loadTableNotas(idTurma);
-    }
+    //}
+    //Carrega as disiciplinas
+    loadFieldsDisciplinas();
 
     // Carregamento os campos necessários
-    loadFieldsNotasNew(idTurma);
-    loadFieldsNotas();
+    loadFieldsNotas(idTurma);
+
 
 
     // Configurações do modal
@@ -145,7 +58,7 @@ function runTableNotas_new(idTurma) {
 }
 
 // carregando todos as Disciplinas 
-function loadFieldsNotas()
+function loadFieldsDisciplinas()
 {
     // Definindo os models
     var dados =  {
@@ -183,3 +96,32 @@ function loadFieldsNotas()
         }
     });
 };
+
+function loadFieldsNotas(idTurma) {
+
+    $.ajax({url: "/index.php/seracademico/graduacao/turma/notas/notasDaTurma/" + idTurma,
+
+        success: function(result){
+            var htmlNotas = "";
+
+            // Percorrendo o array de disciplina
+            for(var i = 0; i < result.notas.length; i++) {
+                // Criando as options
+                htmlNotas += '<tr id=\"' +result.notas[i].idAlunoNota  +'">'
+                    +'<td>'+result.notas[i].nomePessoa+'</td>'
+                    +'<td class="nota_unidade_1"><input value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
+                    +'<td class="nota_unidade_2"><input value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
+                    +'<td class="nota_2_chamada" ><input  value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
+                    +'<td class="nota_final"><input  value=\"'+result.notas[i].nota_final+'\"></td>'
+                    +'<td>'+result.notas[i].nota_media+'</td>'
+                    +'<td>'+result.notas[i].total_falta+'</td>'
+                    +'<td>'+result.notas[i].nomeSituacao+'</td>'
+                    +'</tr>';
+            }
+
+            // Preenchendo o select
+            //$("#disciplinaSearch option").remove();
+            $("#notas-grid").append(htmlNotas);
+
+        }});
+}
