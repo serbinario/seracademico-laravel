@@ -49,10 +49,10 @@
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>1º Unid.</th>
-                                    <th>2º Unid.</th>
-                                    <th>2º Chamada</th>
-                                    <th>Final</th>
+                                    <th style="width: 7%">1º Unid.</th>
+                                    <th style="width: 7%">2º Unid.</th>
+                                    <th style="width: 7%">2º Chamada</th>
+                                    <th style="width: 7%">Final</th>
                                     <th>Média</th>
                                     <th>Faltas</th>
                                     <th>Situação</th>
