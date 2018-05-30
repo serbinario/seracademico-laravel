@@ -1,3 +1,9 @@
+//Tive que colocar a mascara dentro do click, pois como o tbody
+//e gerando dinamicamente, tem que ser aplicado a mascara depois que for carregado
+$( document ).on( "click", "tbody", function() {
+   $('.nota').mask('09.9', {reverse: true, maxlength: false});
+});
+
 // Evento para fechar modal
 $(document).on('click', '#btnCloseModalNotas', function () {
     $('#disciplinaSearch option').remove();
@@ -95,6 +101,7 @@ function loadFieldsDisciplinas()
             // Retorno caso não tenha currículo em uma turma ou algum erro
             swal(retorno.msg, "Click no botão abaixo!", "error");
             $('#modal-alunos-notas').modal('toggle');
+            //$('.nota').mask('09.9', {reverse: true, maxlength: false});
         }
     });
 };
@@ -125,10 +132,10 @@ function loadFieldsNotas(idTurma, idDisciplina) {
             // Criando as options
             htmlNotas += '<tr id=\"' +result.notas[i].idAlunoNota  +'">'
                 +'<td>'+result.notas[i].nomePessoa+'</td>'
-                +'<td class="nota_unidade_1"><input style="width: 100%" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
-                +'<td class="nota_unidade_2"><input style="width: 100%" value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
-                +'<td class="nota_2_chamada"><input style="width: 100%" value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
-                +'<td class="nota_final"><input  style="width: 100%" value=\"'+result.notas[i].nota_final+'\"></td>'
+                +'<td class="nota_unidade_1"><input class="nota" style="width: 100%" value=\"'+result.notas[i].nota_unidade_1+'\"></td>'
+                +'<td class="nota_unidade_2"><input class="nota" style="width: 100%" value=\"'+result.notas[i].nota_unidade_2+'\"></td>'
+                +'<td class="nota_2_chamada"><input class="nota" style="width: 100%" value=\"'+result.notas[i].nota_2_chamada+'\"></td>'
+                +'<td class="nota_final"><input  class="nota" style="width: 100%" value=\"'+result.notas[i].nota_final+'\"></td>'
                 +'<td>'+result.notas[i].nota_media+'</td>'
                 +'<td>'+result.notas[i].total_falta+'</td>'
                 +'<td>'+result.notas[i].nomeSituacao+'</td>'
