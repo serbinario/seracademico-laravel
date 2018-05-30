@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" id="btnCloseModalNotas" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title"><i class="material-icons">spellcheck</i> Gerenciamento de batatas</h4>
+                <h4 class="modal-title"><i class="material-icons">spellcheck</i> Gerenciamento de Notas</h4>
             </div>
             <div class="modal-body" style="alignment-baseline: central">
                 <!-- Linha de descrição -->
@@ -36,9 +36,6 @@
                             <div class="form-group">
                                 {!! Form::select('disciplinaSearch', [], null, array('class' => 'form-control', 'id' => 'disciplinaSearch')) !!}
                             </div>
-                            <div class="form-group">
-                                <button class="btn-sm btn-primary" type="submit">Pesquisar</button>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -48,10 +45,10 @@
                         {{--<button class="btn btn-primary pull-right" id="btnIncluirDisciplinas" style="margin-bottom: 3%;">Incluir disciplinas</button>--}}
 
 
-                        <table id="notas-grid" class="display table table-bordered" cellspacing="0" width="100%">
+                        <table id="notas-grid" class="display table table-bordered table-responsive" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th style="width: 40%">Nome</th>
+                                    <th>Nome</th>
                                     <th>1º Unid.</th>
                                     <th>2º Unid.</th>
                                     <th>2º Chamada</th>
@@ -59,7 +56,6 @@
                                     <th>Média</th>
                                     <th>Faltas</th>
                                     <th>Situação</th>
-                                    <th>Ação</th>
                                 </tr>     
                             </thead>
                         </table>

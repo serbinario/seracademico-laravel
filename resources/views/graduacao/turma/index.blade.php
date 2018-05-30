@@ -291,6 +291,9 @@
             $('#tnCurso').text(nomeCurso);
             $('#tnSemestre').text(semestre);
 
+             // Remove toda a tbody
+             $("#notas-grid tbody").remove();
+
             //Executando as grids
             runTableNotas(idTurma);
         });

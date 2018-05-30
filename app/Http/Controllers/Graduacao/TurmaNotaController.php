@@ -93,8 +93,9 @@ class TurmaNotaController extends Controller
 
     public function notasDaTurma(Request $request, $idTurma)
     {
+        $fieldsSearch = $request->all();
         #Criando a consulta
-        $rows = \DB::table('fac_disciplinas')
+        $query = \DB::table('fac_disciplinas')
             ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.disciplina_id', '=', 'fac_disciplinas.id')
             ->join('fac_turmas', 'fac_turmas_disciplinas.turma_id', '=', 'fac_turmas.id')
             ->join('fac_alunos_notas', function ($join) {
@@ -121,8 +122,18 @@ class TurmaNotaController extends Controller
                 'fac_situacao_nota.nome as nomeSituacao',
                 'fac_alunos_frequencias.total_falta'
             ])
-            ->where('fac_turmas.id', '=', $idTurma)->get();
-            return response()->json([ 'notas' => $rows ]);
+            ->where('fac_turmas.id', '=', $idTurma);
+
+            if ($request->has('idDisciplina')) {
+                $query->where('fac_alunos_notas.disciplina_id', '=', $request->get('idDisciplina'));
+            }
+
+            $query->orderBy('pessoas.nome');
+            $result = $query->get();
+
+            //dd($query);
+
+            return response()->json([ 'notas' => $result ]);
         
     }
 
