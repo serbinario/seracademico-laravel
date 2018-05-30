@@ -1,4 +1,21 @@
-<!-- Modal principal de disciplinas $loadFields['graduacao\\vestibular']->toArray() -->
+
+<style type="text/css">
+#notas-grid{
+    font-weight: bold;
+}
+    
+#notas-grid tr:nth-child(even),tr:nth-child(even) input {
+background-color:#79CEC8;
+color:white;
+} 
+input, select:focus{ 
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+
+} 
+</style>
+
 <div id="modal_notas_new" class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 90%;">
         <div class="modal-content">
@@ -29,7 +46,6 @@
                         <span><strong>Semestre: </strong><p id="tnSemestre"></p></span>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <form id="search-form" class="form-inline" role="form" method="GET">
