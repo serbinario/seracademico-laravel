@@ -748,6 +748,7 @@ class TurmaService
         # Recuperando o objeto de horário
         $horario = $this->horarioDisciplinaTurmaRepository->find($id);
 
+        //dd($horario);
         # Recuperando o id da turma
         $queryTurma = \DB::table('fac_turmas_disciplinas')
             ->where('id', $horario->turma_disciplina_id)
@@ -764,6 +765,8 @@ class TurmaService
 
         # Validando se o professor foi informado
         if((isset($data['professor_id']) && is_numeric($data['professor_id']))) {
+            //dd($data['professor_id']);
+            //dd($horario->professor_id);
             # Query para busca de choque de horários
             $rowsHorarios = \DB::table('fac_horarios')
                 ->join('fac_turmas_disciplinas', 'fac_turmas_disciplinas.id', '=', 'fac_horarios.turma_disciplina_id')
@@ -780,7 +783,7 @@ class TurmaService
                 ->join('pessoas', 'pessoas.id', '=', 'fac_professores.pessoa_id')
                 ->where('fac_dias.id', $horario->dia->id)
                 ->where('fac_horas.id', $horario->hora->id)
-                ->where('fac_professores.id', $horario->professor->id)
+                ->where('fac_professores.id', $horario->professor_id)
                 ->where('fac_turmas.id', '!=', $turma->id)
                 ->select([
                     'fac_horarios.id',
