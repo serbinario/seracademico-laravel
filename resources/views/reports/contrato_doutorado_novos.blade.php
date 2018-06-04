@@ -227,7 +227,7 @@
 <img  id="background2" src="{{ asset('/img/fundo_atenas.jpg') }}">
 <div class="page" id= "page2" style="margin-left: 16%;">
 
-    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px; "<br> <br>>
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px;"> <br><br>
         4. A formulação e divulgação das diretrizes e orientações técnicas relativas à prestação dos serviços de ensino são de inteira responsabilidade da CONTRATADA, especialmente no que tange à avaliação do rendimento escolar do CONTRATANTE, à fixação de carga horária e grade curricular, à indicação de atividades curriculares, razão pela qual, a CONTRATADA poderá, a qualquer tempo, realizar alterações nas atividades aqui mencionadas, alterações estas que serão previamente informados ao CONTRATANTE pelos canais de comunicação disponíveis para tanto. <br> <br>
 
         5. São obrigações do CONTRATANTE: <br>
@@ -253,7 +253,7 @@
 <img  id="background3" src="{{ asset('/img/fundo_atenas.jpg') }}">
 <div class="page" id= "page3" style="margin-left: 16%;">
 
-    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; "><br><br>
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
         g) O atraso no pagamento de qualquer parcela, por mais de 30 (trinta) dias, torna vencido integralmente o contrato, podendo o contratado, se quiser, rescindi-lo de pleno direito (com fundamento no art. 5º da Lei 9.870, de 23 de novembro de 1999), extingue para o contratante o direito de frequências às aulas, a liberação dos materiais didáticos para download, o trancamento de matrícula, a transferência entre cursos, entre outros. O atraso no pagamento de 3 (três) parcelas consecutivas, ou não, acarretará no vencimento das demais parcelas contratadas.<br>
         h) Não estão incluídos no valor deste CONTRATO: o fornecimento de materiais acadêmicos indicados e/ou solicitados pelos docentes para estudos curriculares; material didático, apostilas, cópias reprográficas e demais materiais utilizados em clínicas, laboratórios ou aulas práticas; serviços especiais de reforço de matérias, seminários, monografias; taxas e emolumentos; transporte escolar bem como fornecimento de material pessoal e didático de uso individual do CONTRATANTE. <br>
         i) Que no caso de perda ou o não recebimento do carnê ou dos boletos bancários em tempo hábil, o CONTRATANTE deverá solicitar ao setor financeiro do CONTRATADO e não poderá alegar o não recebimento dos boletos como escusa para o não pagamento pontual, uma vez que a data mensal de vencimento das parcelas é de conhecimento do próprio CONTRATANTE. <br>
@@ -276,7 +276,6 @@
 <img  id="background4" src="{{ asset('/img/fundo_atenas.jpg') }}">
 <div class="page" id= "page4" style="margin-left: 16%;">
     <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:150px; ">
-        <br><br>
         8. Fica reservado à CONTRATADA o direito de não oferecer o curso escolhido pelo CONTRATANTE no QUADRO DE CONTRATAÇÃO caso não se atinja um número mínimo de alunos efetivamente matriculados acadêmica e financeiramente. Nesta hipótese, o CONTRATANTE deverá optar por aguardar o início de uma nova turma ou resilir o CONTRATO, hipótese em que deverá apresentar formalmente o pedido de devolução da taxa de inscrição já paga, devolução esta que se efetivará no prazo de até 30 dias úteis após a data da apresentação do pedido de devolução à CONTRATADA. <br><br>
 
         9. Será facultado à CONTRATADA rescindir o presente CONTRATO pela prática comprovada de atos de indisciplina por parte do CONTRATANTE, ou de atos previstos do Regimento Interno da CONTRATADA, sendo devidas as mensalidades até a data da efetiva expulsão do CONTRATANTE. <br><br>

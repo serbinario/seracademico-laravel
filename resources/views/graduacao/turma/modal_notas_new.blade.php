@@ -4,7 +4,7 @@
     font-weight: bold;
 }
     
-#notas-grid tr:nth-child(even),tr:nth-child(even) input {
+#notas-grid tr:nth-child(even),#notas-grid tr:nth-child(even) input {
 background-color:#79CEC8;
 color:white;
 } 
