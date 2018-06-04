@@ -3,7 +3,7 @@
     {{--Documento Personalizado em 04/06/2018 @Gustavo--}}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Contrato Antigos Doutorado</title>
+    <title>Contrato Novos Doutorado</title>
 
     <style type="text/css">
     #body {
@@ -131,7 +131,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">Estado Civil: {{ isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" }}</td>
-                        <td colspan="3">Nascionalidade: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
+                       <td colspan="3">Nacionalidade: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['nacionalidade'] : "" }}</td>
 
                     </tr>
                     <tr>

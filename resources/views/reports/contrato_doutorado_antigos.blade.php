@@ -131,7 +131,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">Estado Civil: {{ isset($aluno['pessoa']['estadoCivil']) ? $aluno['pessoa']['estadoCivil']['nome'] : "" }}</td>
-                        <td colspan="3">Nascionalidade: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['naturalidade'] : "" }}</td>
+                        <td colspan="3">Nacionalidade: {{ isset($aluno['pessoa']['naturalidade']) ? $aluno['pessoa']['nacionalidade'] : "" }}</td>
 
                     </tr>
                     <tr>
