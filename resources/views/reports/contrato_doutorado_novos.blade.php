@@ -227,7 +227,7 @@
 <img  id="background2" src="{{ asset('/img/fundo_atenas.jpg') }}">
 <div class="page" id= "page2" style="margin-left: 16%;">
 
-    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px;"> <br><br>
+    <div style="width: 700px;text-align: justify; font-size: 14px;position: relative; top:100px;">
         4. A formulação e divulgação das diretrizes e orientações técnicas relativas à prestação dos serviços de ensino são de inteira responsabilidade da CONTRATADA, especialmente no que tange à avaliação do rendimento escolar do CONTRATANTE, à fixação de carga horária e grade curricular, à indicação de atividades curriculares, razão pela qual, a CONTRATADA poderá, a qualquer tempo, realizar alterações nas atividades aqui mencionadas, alterações estas que serão previamente informados ao CONTRATANTE pelos canais de comunicação disponíveis para tanto. <br> <br>
 
         5. São obrigações do CONTRATANTE: <br>
