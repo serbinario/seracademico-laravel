@@ -111,6 +111,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->inscricao($idAluno);
                     $nameView = "reports.inscricao_grupo_clarentiano";
                     break;
+                case "43" :
+                    $result = $this->contrato($idAluno);
+                    $nameView = "reports.contrato_doutorado_antigos";
+                    break;
                     
             }
 
