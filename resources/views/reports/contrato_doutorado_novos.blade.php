@@ -169,7 +169,7 @@
                     <td colspan="3">{{ isset($aluno['pessoa']['celular2']) ? $aluno['pessoa']['celular2'] : "" }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6">Curso:</td>
+                    <td colspan="6">Curso: {{ isset($curso->nome) ? $curso->nome : "" }}</td>
                 </tr>
                 <tr>
                     <td colspan="6"><pre>Duração estimada: {{isset($turma->duracao_meses)? $turma->duracao_meses : ""}} Meses</pre></td>

@@ -119,6 +119,10 @@ class AlunoDocumentoController extends Controller
                     $result = $this->contrato($idAluno);
                     $nameView = "reports.contrato_doutorado_novos";
                     break;
+                case "45" :
+                    $result = $this->contrato($idAluno);
+                    $nameView = "reports.contrato_doutorado_integralizacao_antigos";
+                    break;
                     
             }
 
